@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "animated-number",
+  "title": "Animated Number",
+  "description": "Number that springs up to its value when it scrolls into view, formatted with Intl.NumberFormat.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "@qinyang/theme"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/animated-number.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  motion,\n  useInView,\n  useMotionValue,\n  useReducedMotion,\n  useSpring,\n  useTransform,\n} from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype AnimatedNumberProps = Omit<React.HTMLAttributes<HTMLSpanElement>, \"children\"> & {\n  value: number\n  /** Where the count starts on first reveal. */\n  from?: number\n  /** Locale for Intl.NumberFormat (defaults to the runtime locale). */\n  locale?: string\n  /** Intl.NumberFormat options: currency, percent, compact, fraction digits... */\n  format?: Intl.NumberFormatOptions\n  /** Wait until the number scrolls into view before counting. */\n  startOnView?: boolean\n  /** Spring settings; defaults settle in roughly a second. */\n  stiffness?: number\n  damping?: number\n}\n\nfunction AnimatedNumber({\n  value,\n  from = 0,\n  locale,\n  format,\n  startOnView = true,\n  stiffness = 70,\n  damping = 20,\n  className,\n  ...props\n}: AnimatedNumberProps) {\n  const ref = React.useRef<HTMLSpanElement>(null)\n  const inView = useInView(ref, { once: true, amount: 0.5 })\n  const reduce = useReducedMotion()\n\n  const formatter = React.useMemo(\n    () => new Intl.NumberFormat(locale, format),\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n    [locale, JSON.stringify(format)]\n  )\n\n  const target = useMotionValue(from)\n  const spring = useSpring(target, { stiffness, damping, restDelta: 0.001 })\n  const display = useTransform(spring, (v) => formatter.format(v))\n\n  React.useEffect(() => {\n    if (startOnView && !inView) return\n    if (reduce) spring.jump(value)\n    target.set(value)\n  }, [value, inView, startOnView, reduce, spring, target])\n\n  return (\n    <span\n      ref={ref}\n      data-slot=\"animated-number\"\n      className={cn(\"inline-block tabular-nums\", className)}\n      {...props}\n    >\n      <span className=\"sr-only\">{formatter.format(value)}</span>\n      <motion.span aria-hidden>{display}</motion.span>\n    </span>\n  )\n}\n\nexport { AnimatedNumber, type AnimatedNumberProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

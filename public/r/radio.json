@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio",
+  "title": "Radio",
+  "description": "RadioGroup and Radio with inset wells and a raised primary dot that glides to the selected option.",
+  "dependencies": [
+    "@base-ui/react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "@qinyang/theme"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/radio.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { LayoutGroup, motion, useReducedMotion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst RadioGroupContext = React.createContext<string | null>(null)\n\n/** Groups radios; the selected dot glides from one radio to the next. */\nfunction RadioGroup<Value>({ className, ...props }: RadioGroupPrimitive.Props<Value>) {\n  const id = React.useId()\n  return (\n    <RadioGroupContext.Provider value={id}>\n      <LayoutGroup id={id}>\n        <RadioGroupPrimitive\n          data-slot=\"radio-group\"\n          className={cn(\"flex flex-col gap-3\", className)}\n          {...props}\n        />\n      </LayoutGroup>\n    </RadioGroupContext.Provider>\n  )\n}\n\nfunction Radio<Value>({ className, ...props }: RadioPrimitive.Root.Props<Value>) {\n  const groupId = React.useContext(RadioGroupContext)\n  const reduce = useReducedMotion()\n\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio\"\n      className={cn(\n        \"peer group/radio relative inline-flex size-[18px] shrink-0 cursor-pointer items-center justify-center rounded-full bg-muted shadow-well outline-none\",\n        \"transition-[scale] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] active:scale-[0.88] motion-reduce:transition-none motion-reduce:active:scale-100\",\n        \"focus-visible:ring-3 focus-visible:ring-ring data-invalid:shadow-[inset_0_0_0_1px_var(--destructive)] data-disabled:cursor-not-allowed data-disabled:opacity-50\",\n        className\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator data-slot=\"radio-indicator\" className=\"flex items-center justify-center\">\n        <motion.span\n          layoutId={groupId ? `${groupId}-dot` : undefined}\n          initial={groupId ? false : { scale: 0 }}\n          animate={{ scale: 1 }}\n          transition={reduce ? { duration: 0 } : { type: \"spring\", stiffness: 420, damping: 32, mass: 0.6 }}\n          className=\"block size-2.5 rounded-full bg-primary shadow-primary\"\n        />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  )\n}\n\nexport { RadioGroup, Radio }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
