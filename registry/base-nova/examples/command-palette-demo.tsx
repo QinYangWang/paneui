@@ -42,10 +42,9 @@ export default function CommandPaletteDemo() {
       <Button variant="secondary" onClick={() => setOpen(true)} className="w-64 justify-start text-muted-foreground">
         <SearchIcon data-icon="inline-start" />
         Search or jump to…
-        <kbd className="ml-auto rounded-md bg-muted px-1.5 py-0.5 font-mono text-[10px] shadow-chip">⌘K</kbd>
       </Button>
-      <p className="text-xs text-muted-foreground">{last ? `Ran “${last}”` : "Press ⌘K anywhere on the page"}</p>
-      <CommandPalette items={items} open={open} onOpenChange={setOpen} onSelect={(item) => setLast(item.label)} />
+      <p className="text-xs text-muted-foreground">{last ? `Ran “${last}”` : "Pick a command to run it"}</p>
+      <CommandPalette items={items} hotkey={false} open={open} onOpenChange={setOpen} onSelect={(item) => setLast(item.label)} />
     </div>
   )
 }

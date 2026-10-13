@@ -1,49 +1,78 @@
 import Link from "next/link"
 
 import { ArrowRightIcon } from "@/components/icons"
+import { categoryIcons, categorySlug } from "@/components/docs/category-icons"
 import { demos } from "@/components/docs/demos"
-import { getGroups } from "@/lib/docs"
+import { getGroups, getItems } from "@/lib/docs"
+import { Badge } from "@/registry/base-nova/ui/badge"
+import { Button } from "@/registry/base-nova/ui/button"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/registry/base-nova/ui/card"
 
 const wide = new Set(["chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
 export default function Gallery() {
   const groups = getGroups()
+  const total = getItems().length
   return (
     <div className="flex flex-col gap-14">
-      <section className="flex flex-col gap-3">
+      <section className="flex flex-col items-start gap-4">
+        <Badge variant="primary" size="sm">
+          {total} components · Base UI · Tailwind 4
+        </Badge>
         <h1 className="text-4xl font-semibold tracking-tight">Soft, tactile components.</h1>
         <p className="max-w-xl text-lg text-muted-foreground">
           Copy-paste React components on Base UI, Tailwind 4 and Motion, with a light touch of skeuomorphism. Install any
           of them with the shadcn CLI.
         </p>
+        <Button nativeButton={false} render={<Link href="/docs" />}>
+          Get started
+          <ArrowRightIcon data-icon="inline-end" />
+        </Button>
       </section>
-      {groups.map((g) => (
-        <section key={g.category} className="flex flex-col gap-5">
-          <h2 className="text-sm font-medium text-muted-foreground">{g.category}</h2>
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-            {g.items.map((item) => {
-              const Demo = demos[item.name]
-              return (
-                <div
-                  key={item.name}
-                  className={`group flex flex-col overflow-hidden rounded-3xl bg-card shadow-surface ${wide.has(item.name) ? "lg:col-span-2" : ""}`}
-                >
-                  <div className="flex min-h-64 flex-1 items-center justify-center bg-background/40 p-8 shadow-[inset_0_-1px_0_var(--border)]">
-                    {Demo ? <Demo /> : null}
-                  </div>
-                  <Link href={`/docs/${item.name}`} className="flex items-center justify-between gap-4 px-5 py-4">
-                    <div className="min-w-0">
-                      <div className="font-medium">{item.title}</div>
-                      <div className="truncate text-sm text-muted-foreground">{item.description}</div>
+      {groups.map((g) => {
+        const Icon = categoryIcons[g.category]
+        return (
+          <section key={g.category} id={categorySlug(g.category)} className="flex scroll-mt-20 flex-col gap-5">
+            <h2 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
+              {Icon && (
+                <span className="grid size-8 place-items-center rounded-xl bg-secondary text-muted-foreground shadow-raised">
+                  <Icon size={16} />
+                </span>
+              )}
+              {g.category}
+              <Badge size="sm">{g.items.length}</Badge>
+            </h2>
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+              {g.items.map((item) => {
+                const Demo = demos[item.name]
+                return (
+                  <Card
+                    key={item.name}
+                    className={`group/gallery gap-0 rounded-3xl py-0 ${wide.has(item.name) ? "xl:col-span-2" : ""}`}
+                  >
+                    <div className="flex min-h-64 flex-1 items-center justify-center overflow-hidden bg-background/40 p-6 shadow-[inset_0_-1px_0_var(--border)] sm:p-8">
+                      {Demo ? <Demo /> : null}
                     </div>
-                    <ArrowRightIcon size={16} className="shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
-                  </Link>
-                </div>
-              )
-            })}
-          </div>
-        </section>
-      ))}
+                    <Link
+                      href={`/docs/${item.name}`}
+                      className="outline-none focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset"
+                    >
+                      <CardHeader className="grid-cols-[1fr_auto] items-center py-4">
+                        <CardTitle className="font-medium">{item.title}</CardTitle>
+                        <ArrowRightIcon
+                          size={16}
+                          className="col-start-2 row-span-2 shrink-0 text-muted-foreground transition-transform group-hover/gallery:translate-x-0.5 group-hover/gallery:text-foreground"
+                        />
+                        <CardDescription className="truncate text-sm">{item.description}</CardDescription>
+                      </CardHeader>
+                    </Link>
+                  </Card>
+                )
+              })}
+            </div>
+          </section>
+        )
+      })}
     </div>
   )
 }

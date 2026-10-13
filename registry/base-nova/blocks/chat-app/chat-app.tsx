@@ -241,6 +241,8 @@ type ChatAppProps = {
   autoPlayPrompt?: string
   /** Shell width (px) below which the sidebar folds to its rail. */
   collapseSidebarBelow?: number
+  /** ⌘/Ctrl + this key focuses the sidebar search. `null` disables it (e.g. when the page owns ⌘K). */
+  searchHotkey?: string | null
   className?: string
 }
 
@@ -255,6 +257,7 @@ function ChatApp({
   respond = defaultRespond,
   autoPlayPrompt,
   collapseSidebarBelow = 640,
+  searchHotkey = "k",
   className,
 }: ChatAppProps) {
   const [turns, setTurns] = React.useState<Turn[]>([])
@@ -412,6 +415,7 @@ function ChatApp({
         open={sidebarOpen}
         onOpenChange={setSidebarOpen}
         title="Agent"
+        searchHotkey={searchHotkey}
         renamable
         actions={(open) =>
           open ? (

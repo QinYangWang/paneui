@@ -154,7 +154,8 @@ function VoiceOrb({
       const R0 = Math.min(w, h) * 0.3
       const lv = s.level
       const breath = Math.sin(t * 1.3) * s.breathe
-      const R = R0 * (1 + breath + lv * 0.12)
+      // Clamp: a deep breath on a tiny canvas could push the radius below 0 and make createRadialGradient throw.
+      const R = Math.max(1, R0 * (1 + breath + lv * 0.12))
 
       // Silhouette: a circle with a few slow harmonics, louder when the voice is.
       const amp = s.wobble + lv * 0.055
@@ -178,7 +179,7 @@ function VoiceOrb({
       path.closePath()
 
       // Outer glow.
-      const glowR = Math.min(R * (1.55 + lv * 0.25), Math.min(w, h) * 0.5)
+      const glowR = Math.max(R * 0.6, Math.min(R * (1.55 + lv * 0.25), Math.min(w, h) * 0.5))
       const glow = ctx.createRadialGradient(cx, cy, R * 0.6, cx, cy, glowR)
       glow.addColorStop(0, rgba(base, 0.28 * s.glow + lv * 0.2))
       glow.addColorStop(1, rgba(base, 0))

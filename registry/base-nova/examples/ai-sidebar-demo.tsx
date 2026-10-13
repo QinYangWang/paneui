@@ -57,6 +57,7 @@ export default function AISidebarDemo() {
         defaultExpandedIds={["travel", "dashboard"]}
         title="Agent"
         renamable
+        searchHotkey={null}
         actions={(open) =>
           open ? (
             <Button variant="secondary" size="sm" className="w-full justify-start">

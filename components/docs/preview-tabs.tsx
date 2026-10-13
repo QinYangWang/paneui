@@ -15,7 +15,7 @@ export function PreviewTabs({ name, code }: { name: string; code: React.ReactNod
         <TabsTab value="code">Code</TabsTab>
       </TabsList>
       <TabsPanel value="preview">
-        <div className="flex min-h-80 items-center justify-center rounded-2xl bg-card/40 p-10 shadow-[inset_0_0_0_1px_var(--border)]">
+        <div className="flex min-h-80 items-center justify-center rounded-2xl bg-card/40 p-5 sm:p-10 shadow-[inset_0_0_0_1px_var(--border)]">
           {Demo ? <Demo /> : null}
         </div>
       </TabsPanel>
