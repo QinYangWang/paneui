@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Geist, Geist_Mono } from "next/font/google"
 
 import { Sidebar } from "@/components/docs/sidebar"
+import { ThemeToggle, themeScript } from "@/components/docs/theme-toggle"
 import { getGroups } from "@/lib/docs"
 import { ToastProvider } from "@/registry/base-nova/ui/toast"
 import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const groups = getGroups().map((g) => ({ category: g.category, items: g.items.map(({ name, title }) => ({ name, title })) }))
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ToastProvider>
         <TooltipProvider>
@@ -33,11 +37,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/docs" className="hover:text-foreground">Docs</Link>
               <Link href="/" className="hover:text-foreground">Components</Link>
               <Link href="/docs/icons" className="hover:text-foreground">Icons</Link>
+              <ThemeToggle className="ml-1" />
             </nav>
           </div>
         </header>
         <div className="mx-auto flex max-w-7xl gap-10 px-6">
-          <aside className="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-52 shrink-0 overflow-y-auto py-8 md:block">
+          <aside className="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-52 shrink-0 overflow-y-auto overscroll-contain py-8 scrollbar-hover md:block">
             <Sidebar groups={groups} />
           </aside>
           <main className="min-w-0 flex-1 py-10">{children}</main>

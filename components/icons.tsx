@@ -506,6 +506,13 @@ export const StopIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const MonitorIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.1" y="3.6" width="11.8" height="8.2" rx="2" />
+    <path {...line} d="M9 11.8v2.4M6.6 14.4h4.8" />
+  </Icon>
+);
+
 export const SunIcon = (p: IconProps) => (
   <Icon {...p}>
     <circle {...puff} cx="9" cy="9" r="2.4" />

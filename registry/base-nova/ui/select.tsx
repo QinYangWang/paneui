@@ -73,7 +73,7 @@ function SelectContent({
           <SelectPrimitive.ScrollUpArrow className="top-0 z-10 flex h-6 w-full cursor-default items-center justify-center rounded-t-2xl bg-popover text-muted-foreground">
             <ChevronUpIcon size={14} />
           </SelectPrimitive.ScrollUpArrow>
-          <SelectPrimitive.List className="max-h-(--available-height) scroll-py-6 overflow-y-auto p-1.5">{children}</SelectPrimitive.List>
+          <SelectPrimitive.List className="max-h-(--available-height) scroll-py-6 overflow-y-auto p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{children}</SelectPrimitive.List>
           <SelectPrimitive.ScrollDownArrow className="bottom-0 z-10 flex h-6 w-full cursor-default items-center justify-center rounded-b-2xl bg-popover text-muted-foreground">
             <ChevronDownIcon size={14} />
           </SelectPrimitive.ScrollDownArrow>
