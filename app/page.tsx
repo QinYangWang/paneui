@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import * as Icons from "@/components/icons"
+import { ApprovalCard, ChatDemo, ControlsDemo, TaskDemo } from "./demos"
 import { RecommendationCard } from "@/registry/base-nova/blocks/recommendation-card/recommendation-card"
 import { Badge, BadgeAvatar } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
@@ -33,6 +34,22 @@ export default function Home() {
 
       <Section title="Recommendation Card">
         <RecommendationCard />
+      </Section>
+
+      <Section title="Chat + Prompt Bar">
+        <ChatDemo />
+      </Section>
+
+      <Section title="Approval Card">
+        <ApprovalCard />
+      </Section>
+
+      <Section title="Task Rows (click to cycle status)">
+        <TaskDemo />
+      </Section>
+
+      <Section title="Tabs, Switch, Dialog">
+        <ControlsDemo />
       </Section>
 
       <Section title="Buttons">

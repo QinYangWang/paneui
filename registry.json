@@ -208,6 +208,138 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Toggle with a springy raised thumb in an inset track.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Segmented pill tabs with a sliding raised indicator.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Modal with soft scale-in, blurred backdrop and close button.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "prompt-bar",
+      "type": "registry:block",
+      "title": "Prompt Bar",
+      "description": "Auto-growing prompt input with attach, voice, and an animated send/stop button.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/button",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/prompt-bar/prompt-bar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "chat",
+      "type": "registry:block",
+      "title": "Chat",
+      "description": "Chat thread with spring-in bubbles and a typing indicator.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/chat/chat.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "approval-card",
+      "type": "registry:block",
+      "title": "Approval Card",
+      "description": "Approve or decline an agent action, with animated result and undo.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/card",
+        "@qinyang/badge",
+        "@qinyang/button",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/approval-card/approval-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "task-row",
+      "type": "registry:block",
+      "title": "Task Row",
+      "description": "Background task row with animated status marks (queued, running, done, failed).",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/task-row/task-row.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
