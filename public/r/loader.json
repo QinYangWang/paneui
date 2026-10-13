@@ -16,5 +16,8 @@
       "type": "registry:ui"
     }
   ],
+  "meta": {
+    "category": "Display"
+  },
   "type": "registry:ui"
 }

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-magnetic",
+  "title": "Button Magnetic",
+  "description": "Our Button wrapped in Magnetic, with the label leaning slightly further than the surface for a layered pull.",
+  "dependencies": [
+    "@base-ui/react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "@qinyang/theme",
+    "@qinyang/button",
+    "@qinyang/magnetic"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/button-magnetic.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/registry/base-nova/ui/button\"\nimport { Magnetic, type MagneticProps } from \"@/registry/base-nova/ui/magnetic\"\n\ntype MagneticButtonProps = React.ComponentProps<typeof Button> & {\n  /** Fraction of the cursor offset the button follows. */\n  strength?: number\n  /** Pull zone around the button, in px. */\n  range?: number\n  /** Extra lean applied to the label on top of the button's own pull, for depth. */\n  labelStrength?: number\n  /** Class for the outer magnetic wrapper (layout, margins). */\n  wrapperClassName?: string\n  spring?: MagneticProps[\"spring\"]\n}\n\n/** Our Button, pulled toward the cursor; the label leans a little further for a layered feel. */\nfunction MagneticButton({\n  strength = 0.3,\n  range = 28,\n  labelStrength = 0.12,\n  wrapperClassName,\n  spring,\n  disabled,\n  children,\n  className,\n  ...props\n}: MagneticButtonProps) {\n  return (\n    <Magnetic\n      strength={strength}\n      range={range}\n      spring={spring}\n      disabled={disabled}\n      className={wrapperClassName}\n    >\n      <Button\n        data-slot=\"button-magnetic\"\n        disabled={disabled}\n        className={cn(className)}\n        {...props}\n      >\n        <Magnetic\n          strength={labelStrength}\n          range={range}\n          disabled={disabled || labelStrength === 0}\n          className=\"pointer-events-none items-center\"\n        >\n          <span className=\"inline-flex items-center gap-1.5\">{children}</span>\n        </Magnetic>\n      </Button>\n    </Magnetic>\n  )\n}\n\nexport { MagneticButton, type MagneticButtonProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Forms"
+  },
+  "type": "registry:ui"
+}

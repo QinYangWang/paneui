@@ -137,6 +137,24 @@ export const MoreVerticalIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const GripVerticalIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle {...puff} cx="6.6" cy="4.4" r=".55" />
+    <circle {...puff} cx="11.4" cy="4.4" r=".55" />
+    <circle {...puff} cx="6.6" cy="9" r=".55" />
+    <circle {...puff} cx="11.4" cy="9" r=".55" />
+    <circle {...puff} cx="6.6" cy="13.6" r=".55" />
+    <circle {...puff} cx="11.4" cy="13.6" r=".55" />
+  </Icon>
+);
+
+export const UndoIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M6.6 4.4L3.8 7.2 6.6 10" />
+    <path {...line} d="M4 7.2h6.2a3.4 3.4 0 010 6.8H7.6" />
+  </Icon>
+);
+
 export const SearchIcon = (p: IconProps) => (
   <Icon {...p}>
     <circle {...line} strokeWidth={1.7} cx="8" cy="8" r="4.8" />

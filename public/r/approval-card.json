@@ -19,5 +19,8 @@
       "type": "registry:component"
     }
   ],
+  "meta": {
+    "category": "Blocks"
+  },
   "type": "registry:block"
 }

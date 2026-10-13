@@ -139,6 +139,9 @@
             "display": "none"
           }
         }
+      },
+      "meta": {
+        "category": "Foundations"
       }
     },
     {
@@ -151,7 +154,10 @@
           "path": "components/icons.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Foundations"
+      }
     },
     {
       "name": "button",
@@ -170,7 +176,10 @@
           "path": "registry/base-nova/ui/button.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "badge",
@@ -189,7 +198,10 @@
           "path": "registry/base-nova/ui/badge.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Display"
+      }
     },
     {
       "name": "card",
@@ -204,7 +216,10 @@
           "path": "registry/base-nova/ui/card.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Display"
+      }
     },
     {
       "name": "input",
@@ -222,7 +237,10 @@
           "path": "registry/base-nova/ui/input.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "textarea",
@@ -237,7 +255,10 @@
           "path": "registry/base-nova/ui/textarea.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "label",
@@ -249,7 +270,10 @@
           "path": "registry/base-nova/ui/label.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "checkbox",
@@ -267,7 +291,10 @@
           "path": "registry/base-nova/ui/checkbox.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "radio",
@@ -286,7 +313,10 @@
           "path": "registry/base-nova/ui/radio.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "stepper",
@@ -306,7 +336,10 @@
           "path": "registry/base-nova/ui/stepper.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "slider",
@@ -324,7 +357,10 @@
           "path": "registry/base-nova/ui/slider.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "popover",
@@ -343,7 +379,10 @@
           "path": "registry/base-nova/ui/popover.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
     },
     {
       "name": "context-menu",
@@ -363,7 +402,10 @@
           "path": "registry/base-nova/ui/context-menu.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
     },
     {
       "name": "drawer",
@@ -383,7 +425,10 @@
           "path": "registry/base-nova/ui/drawer.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
     },
     {
       "name": "bottom-sheet",
@@ -402,7 +447,10 @@
           "path": "registry/base-nova/ui/bottom-sheet.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
     },
     {
       "name": "alert",
@@ -421,7 +469,10 @@
           "path": "registry/base-nova/ui/alert.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Display"
+      }
     },
     {
       "name": "collapsible",
@@ -440,7 +491,10 @@
           "path": "registry/base-nova/ui/collapsible.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Display"
+      }
     },
     {
       "name": "accordion",
@@ -459,7 +513,10 @@
           "path": "registry/base-nova/ui/accordion.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Display"
+      }
     },
     {
       "name": "breadcrumb",
@@ -479,7 +536,10 @@
           "path": "registry/base-nova/ui/breadcrumb.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
     },
     {
       "name": "dock",
@@ -499,7 +559,10 @@
           "path": "registry/base-nova/ui/dock.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
     },
     {
       "name": "text-reveal",
@@ -517,7 +580,10 @@
           "path": "registry/base-nova/ui/text-reveal.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Text"
+      }
     },
     {
       "name": "text-shimmer",
@@ -533,7 +599,10 @@
           "path": "registry/base-nova/ui/text-shimmer.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Text"
+      }
     },
     {
       "name": "text-scramble",
@@ -551,7 +620,10 @@
           "path": "registry/base-nova/ui/text-scramble.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Text"
+      }
     },
     {
       "name": "number-ticker",
@@ -569,7 +641,10 @@
           "path": "registry/base-nova/ui/number-ticker.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Text"
+      }
     },
     {
       "name": "animated-number",
@@ -587,7 +662,10 @@
           "path": "registry/base-nova/ui/animated-number.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Text"
+      }
     },
     {
       "name": "marquee",
@@ -603,7 +681,10 @@
           "path": "registry/base-nova/ui/marquee.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Text"
+      }
     },
     {
       "name": "combobox",
@@ -622,7 +703,10 @@
           "path": "registry/base-nova/ui/combobox.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "color-selector",
@@ -641,7 +725,10 @@
           "path": "registry/base-nova/ui/color-selector.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "loader",
@@ -659,7 +746,10 @@
           "path": "registry/base-nova/ui/loader.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Display"
+      }
     },
     {
       "name": "multi-select",
@@ -680,7 +770,917 @@
           "path": "registry/base-nova/ui/multi-select.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "button-stateful",
+      "type": "registry:ui",
+      "title": "Button Stateful",
+      "description": "Our Button that moves idle \u2192 loading \u2192 success / error, blur-swapping its icon and label while its width springs to fit each state.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/button-stateful.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "magnetic",
+      "type": "registry:ui",
+      "title": "Magnetic",
+      "description": "Wrapper that pulls any element toward a nearby cursor and springs it home on leave, for fine pointers only and off under reduced motion.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/magnetic.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "button-magnetic",
+      "type": "registry:ui",
+      "title": "Button Magnetic",
+      "description": "Our Button wrapped in Magnetic, with the label leaning slightly further than the surface for a layered pull.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button",
+        "@qinyang/magnetic"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/button-magnetic.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "button-metallic",
+      "type": "registry:ui",
+      "title": "Button Metallic",
+      "description": "Neutral card-coloured button framed by a drifting chrome rim mixed from theme tokens, with a reflection that travels across it on a loop and on hover.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/button-metallic.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "hold-action-button",
+      "type": "registry:ui",
+      "title": "Hold Action Button",
+      "description": "Press-and-hold confirm button whose wavy liquid fill rises vertically or horizontally, drains if released early, and works with a held Space or Enter.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/hold-action-button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "slide-action-button",
+      "type": "registry:ui",
+      "title": "Slide Action Button",
+      "description": "Inset track with a draggable thumb that confirms when slid to the end (with an optional pending state for async work) and springs back otherwise; keyboard-operable as a slider.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/text-shimmer"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/slide-action-button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "expanding-arrow-button",
+      "type": "registry:ui",
+      "title": "Expanding Arrow Button",
+      "description": "Raised pill with an accent tile that sweeps across the button into a fading trail of dotted chevrons on hover or keyboard focus.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/expanding-arrow-button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "expandable-control",
+      "type": "registry:ui",
+      "title": "Expandable Control",
+      "description": "Click-to-expand controls: an icon button that grows to reveal its label and a chip that reveals a trailing action, both morphing width on a spring.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/expandable-control.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "text-cascade",
+      "type": "registry:ui",
+      "title": "Text Cascade",
+      "description": "Standalone text that rolls letter by letter, left to right, through a soft blur whenever its value changes, gliding to the new width.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/text-cascade.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Text"
+      }
+    },
+    {
+      "name": "action-swap-blur",
+      "type": "registry:ui",
+      "title": "Action Swap Blur",
+      "description": "Copy-button style control whose label and icon dissolve into the next state with blur, fade and scale, with optional auto-reset.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button",
+        "@qinyang/text-cascade"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/action-swap-blur.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Text"
+      }
+    },
+    {
+      "name": "action-swap-roll",
+      "type": "registry:ui",
+      "title": "Action Swap Roll",
+      "description": "Button whose next label and icon roll up from below through a soft blur as the old ones lift away.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/action-swap-blur"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/action-swap-roll.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Text"
+      }
+    },
+    {
+      "name": "action-swap-cascade",
+      "type": "registry:ui",
+      "title": "Action Swap Cascade",
+      "description": "Button whose label swaps with a letter-by-letter slot roll between states while the icon rolls as one piece.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/action-swap-blur"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/action-swap-cascade.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Text"
+      }
+    },
+    {
+      "name": "digit-swap",
+      "type": "registry:ui",
+      "title": "Digit Swap",
+      "description": "Fixed-slot digits and mask glyphs that roll only where they change, with auto/up/down direction and stagger from either end.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/digit-swap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Text"
+      }
+    },
+    {
+      "name": "chromatic-text-reveal",
+      "type": "registry:ui",
+      "title": "Chromatic Text Reveal",
+      "description": "Fixed prefix with a cycling final word that sweeps in while its split red, green and blue channels converge into the text colour.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/chromatic-text-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Text"
+      }
+    },
+    {
+      "name": "animated-badge",
+      "type": "registry:ui",
+      "title": "Animated Badge",
+      "description": "Status badge on our badge look whose glyph and label roll between idle, loading, success, warning, error and info, with an optional ping pulse and three sizes.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/badge",
+        "@qinyang/action-swap-blur"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/animated-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "select-morph",
+      "type": "registry:ui",
+      "title": "Select Morph",
+      "description": "Select whose pill trigger unfolds into the option list as one surface, folding back on close, built on Base UI Select.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/select-morph.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "popover-morph",
+      "type": "registry:ui",
+      "title": "Popover Morph",
+      "description": "Popover whose panel grows out of the trigger's own shape and colour and folds back into it, built on Base UI Popover.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/popover-morph.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
+    },
+    {
+      "name": "morphing-modal",
+      "type": "registry:ui",
+      "title": "Morphing Modal",
+      "description": "Single dialog surface with inner views that springs to each view's height as you navigate, with direction-aware transitions and back navigation.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/morphing-modal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
+    },
+    {
+      "name": "center-morph-modal",
+      "type": "registry:ui",
+      "title": "Center Morph Modal",
+      "description": "Modal whose surface unfolds from a small seed at its centre out to its edges, with content settling in behind, built on Base UI Dialog.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/center-morph-modal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
+    },
+    {
+      "name": "shared-layout-bg",
+      "type": "registry:ui",
+      "title": "Shared Layout Background",
+      "description": "Raised hover pill that glides between items via shared layout, follows keyboard focus, and blurs in and out as the pointer enters and leaves the group.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/shared-layout-bg.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Responsive frame locked to a ratio that springs smoothly between ratios, with a cover-cropped image part that scales without stretching.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/aspect-ratio.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:ui",
+      "title": "Tilt Card",
+      "description": "Card that tilts toward the cursor in 3D with a pointer-tracked glare and optional parallax layers, switched off for touch and reduced motion.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/tilt-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "wheel-picker",
+      "type": "registry:ui",
+      "title": "Wheel Picker",
+      "description": "iOS-style picker wheel: a 3D drum driven by a real scroll container, so it gets native momentum and scroll-snap detents, plus mouse drag and full keyboard control; compose several in a WheelPickerGroup for times and dates.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/wheel-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "arc-picker",
+      "type": "registry:ui",
+      "title": "Arc Picker",
+      "description": "Radial text picker whose labels ride a curve bowed toward the top, bottom, left or right, moved by wheel, drag with momentum or arrow keys, with a well pill that stretches to the selected label.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/arc-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "Composable colour picker whose raised trigger chip morphs open into a saturation/brightness area with hue and opacity sliders, a hex field and presets.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/color-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "date-range-picker",
+      "type": "registry:ui",
+      "title": "Date Range Picker",
+      "description": "Composable date range picker (Root, Trigger, Content, Calendar, Grid, Presets, Summary, Clear) with animated month navigation, hover range preview and keyboard grid navigation, built on Intl and Date with no date library.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/popover"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/date-range-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "sortable-stack",
+      "type": "registry:ui",
+      "title": "Sortable Stack",
+      "description": "Drag-to-reorder stack of raised rows on motion Reorder, dragged from a grip handle, with keyboard reordering, screen-reader announcements and a one-step undo.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/sortable-stack.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "range-slider-inline",
+      "type": "registry:ui",
+      "title": "Range Slider Inline",
+      "description": "Base UI slider with a raised fill growing inside an inset well, the label and value printed on the track, ten stop markers and a slim thumb that parts around the text.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/range-slider-inline.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "range-slider-fluid",
+      "type": "registry:ui",
+      "title": "Range Slider Fluid",
+      "description": "Thumbless Base UI slider pill whose primary fill glides behind a rounded liquid cap while the label flips colour wherever the fill covers it.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/range-slider-fluid.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "range-slider-wave",
+      "type": "registry:ui",
+      "title": "Range Slider Wave",
+      "description": "Equalizer-style Base UI slider whose bars rise into a springy crest around the handle and fall back as it passes.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/range-slider-wave.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "range-slider-bubble",
+      "type": "registry:ui",
+      "title": "Range Slider Bubble",
+      "description": "Base UI slider whose value bubble pops out of the thumb on grab or keyboard focus, leaning and squashing with drag velocity before settling upright.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/range-slider-bubble.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "range-slider-ruler",
+      "type": "registry:ui",
+      "title": "Range Slider Ruler",
+      "description": "Ruler slider with a fixed needle and a scale that scrolls underneath, coasting on a flick and snapping to the nearest tick, with full keyboard support.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/range-slider-ruler.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "pull-to-refresh",
+      "type": "registry:ui",
+      "title": "Pull to Refresh",
+      "description": "Scroll container with rubber-band pull, a threshold arrow that winds up and turns primary, async onRefresh and our loader while it runs.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/loader"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/pull-to-refresh.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "smooth-scroll",
+      "type": "registry:ui",
+      "title": "Smooth Scroll",
+      "description": "Lenis-powered SmoothScroll provider that eases the window or its own scroll container, with a useSmoothScroll hook exposing offset, progress, velocity and scrollTo.",
+      "dependencies": [
+        "lenis",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/smooth-scroll.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "scroll-progress",
+      "type": "registry:ui",
+      "title": "Scroll Progress",
+      "description": "Scroll-driven progress indicator as an edge bar (fixed, sticky or absolute) or a raised ring with an optional percentage, spring-smoothed and exposed as a progressbar.",
+      "dependencies": [
+        "motion",
+        "lenis"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/smooth-scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/scroll-progress.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "parallax",
+      "type": "registry:ui",
+      "title": "Parallax",
+      "description": "Wrapper that drifts its children at a speed factor while they cross the viewport, in the window or any scroll container, resting in place when centred.",
+      "dependencies": [
+        "motion",
+        "lenis"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/smooth-scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/parallax.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "scroll-to",
+      "type": "registry:ui",
+      "title": "Scroll To",
+      "description": "Button that eases to a px offset, selector or element through the nearest SmoothScroll, falling back to native smooth scrolling, and can move focus to the target.",
+      "dependencies": [
+        "@base-ui/react",
+        "lenis",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button",
+        "@qinyang/smooth-scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/scroll-to.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "scroll-reveal",
+      "type": "registry:ui",
+      "title": "Scroll Reveal",
+      "description": "Reveals content with a spring slide and blur as it enters view, from any side, once or every time it re-enters.",
+      "dependencies": [
+        "motion",
+        "lenis"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/smooth-scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/scroll-reveal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "cylinder-carousel",
+      "type": "registry:ui",
+      "title": "Cylinder Carousel",
+      "description": "Looping 3D carousel that lays items on the inside wall of a cylinder, rolled by drag with flick momentum, horizontal wheel, arrow keys or buttons, snapping on a spring.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/cylinder-carousel.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
+    },
+    {
+      "name": "morphing-lightbox",
+      "type": "registry:ui",
+      "title": "Morphing Lightbox",
+      "description": "Thumbnail grid whose images morph out of their thumbnails into a full viewer and back, with gallery navigation, swipe, keyboard control and captions.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/morphing-lightbox.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
+    },
+    {
+      "name": "shader-background",
+      "type": "registry:ui",
+      "title": "Shader Background",
+      "description": "Animated WebGL background in mesh-gradient, grain, warp, waves and dot-orbit variants, coloured from props or theme tokens and paused offscreen or under reduced motion.",
+      "dependencies": [
+        "@paper-design/shaders-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/shader-background.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Motion"
+      }
     },
     {
       "name": "recommendation-card",
@@ -697,7 +1697,10 @@
           "path": "registry/base-nova/blocks/recommendation-card/recommendation-card.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
     },
     {
       "name": "switch",
@@ -715,7 +1718,10 @@
           "path": "registry/base-nova/ui/switch.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "tabs",
@@ -733,7 +1739,10 @@
           "path": "registry/base-nova/ui/tabs.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
     },
     {
       "name": "dialog",
@@ -752,7 +1761,10 @@
           "path": "registry/base-nova/ui/dialog.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
     },
     {
       "name": "menu",
@@ -771,7 +1783,10 @@
           "path": "registry/base-nova/ui/menu.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
     },
     {
       "name": "tooltip",
@@ -790,7 +1805,10 @@
           "path": "registry/base-nova/ui/tooltip.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
     },
     {
       "name": "select",
@@ -809,7 +1827,10 @@
           "path": "registry/base-nova/ui/select.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "toast",
@@ -828,7 +1849,10 @@
           "path": "registry/base-nova/ui/toast.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
     },
     {
       "name": "prompt-bar",
@@ -847,7 +1871,10 @@
           "path": "registry/base-nova/blocks/prompt-bar/prompt-bar.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
     },
     {
       "name": "chat",
@@ -865,7 +1892,10 @@
           "path": "registry/base-nova/blocks/chat/chat.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
     },
     {
       "name": "approval-card",
@@ -886,7 +1916,10 @@
           "path": "registry/base-nova/blocks/approval-card/approval-card.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
     },
     {
       "name": "task-row",
@@ -905,7 +1938,10 @@
           "path": "registry/base-nova/blocks/task-row/task-row.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
     },
     {
       "name": "otp-input",
@@ -924,7 +1960,10 @@
           "path": "registry/base-nova/blocks/otp-input/otp-input.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
     },
     {
       "name": "command-palette",
@@ -944,7 +1983,10 @@
           "path": "registry/base-nova/blocks/command-palette/command-palette.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
     }
   ]
 }

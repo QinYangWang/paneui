@@ -18,5 +18,8 @@
       "type": "registry:ui"
     }
   ],
+  "meta": {
+    "category": "Navigation"
+  },
   "type": "registry:ui"
 }

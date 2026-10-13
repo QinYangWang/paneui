@@ -5,7 +5,7 @@ import path from "node:path"
 
 import registry from "@/registry.json"
 
-export type Category = "Foundations" | "Components" | "Blocks"
+export type Category = (typeof ORDER)[number]
 
 export type DocItem = {
   name: string
@@ -18,11 +18,12 @@ export type DocItem = {
   files: string[]
 }
 
-const ORDER: Category[] = ["Foundations", "Components", "Blocks"]
+export const ORDER = ["Foundations", "Forms", "Overlays", "Display", "Navigation", "Text", "Motion", "Data", "Agents", "Charts", "Blocks"] as const
 
-function categoryOf(type: string): Category {
+function categoryOf(type: string, meta?: { category?: string }): Category {
+  if (meta?.category && (ORDER as readonly string[]).includes(meta.category)) return meta.category as Category
   if (type === "registry:block") return "Blocks"
-  if (type === "registry:ui") return "Components"
+  if (type === "registry:ui") return "Display"
   return "Foundations"
 }
 
@@ -39,7 +40,7 @@ export function getItems(): DocItem[] {
         title: i.title ?? i.name,
         description: i.description ?? "",
         type: i.type,
-        category: categoryOf(i.type),
+        category: categoryOf(i.type, (i as { meta?: { category?: string } }).meta),
         dependencies: i.dependencies ?? [],
         registryDependencies: i.registryDependencies ?? [],
         files: i.name === "theme" ? ["app/globals.css"] : (i.files ?? []).map((f) => f.path),
@@ -50,7 +51,7 @@ export function getItems(): DocItem[] {
 
 export function getGroups() {
   const items = getItems()
-  return ORDER.map((category) => ({ category, items: items.filter((i) => i.category === category) }))
+  return ORDER.map((category) => ({ category, items: items.filter((i) => i.category === category) })).filter((g) => g.items.length > 0)
 }
 
 export function getItem(name: string) {

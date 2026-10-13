@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "parallax",
+  "title": "Parallax",
+  "description": "Wrapper that drifts its children at a speed factor while they cross the viewport, in the window or any scroll container, resting in place when centred.",
+  "dependencies": [
+    "motion",
+    "lenis"
+  ],
+  "registryDependencies": [
+    "@qinyang/theme",
+    "@qinyang/smooth-scroll"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/parallax.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSmoothScrollContainer } from \"@/registry/base-nova/ui/smooth-scroll\"\n\nconst driftSpring = { stiffness: 160, damping: 32, mass: 0.4 }\n\ntype ParallaxProps = Omit<React.ComponentProps<typeof motion.div>, \"ref\" | \"style\" | \"children\"> & {\n  children?: React.ReactNode\n  style?: React.CSSProperties\n  /**\n   * Drift per px scrolled while the element crosses the viewport. Positive\n   * values lag behind the scroll (reads as farther away), negative values run\n   * ahead (closer). 0.1–0.4 reads best. The element sits in its normal spot\n   * when centred.\n   */\n  speed?: number\n  axis?: \"x\" | \"y\"\n  /**\n   * Scroll container. Defaults to the nearest contained SmoothScroll, then\n   * the window.\n   */\n  container?: React.RefObject<HTMLElement | null>\n  /** Spring-smooth the drift. Off automatically under reduced motion. */\n  spring?: boolean\n}\n\nfunction Parallax({\n  speed = 0.2,\n  axis = \"y\",\n  container,\n  spring = true,\n  className,\n  style,\n  children,\n  ...props\n}: ParallaxProps) {\n  const reduce = useReducedMotion() ?? false\n  const contextContainer = useSmoothScrollContainer()\n  const scrollContainer = container ?? contextContainer ?? undefined\n  const ref = React.useRef<HTMLDivElement>(null)\n  const travel = useMotionValue(0)\n  const speedRef = React.useRef(speed)\n  speedRef.current = speed\n\n  // Total distance scrolled while the element crosses the viewport.\n  React.useEffect(() => {\n    const el = ref.current\n    if (!el) return\n    const measure = () => {\n      const viewport = scrollContainer?.current?.clientHeight ?? window.innerHeight\n      travel.set(viewport + el.offsetHeight)\n    }\n    measure()\n    const observer = new ResizeObserver(measure)\n    observer.observe(el)\n    if (scrollContainer?.current) observer.observe(scrollContainer.current)\n    window.addEventListener(\"resize\", measure)\n    return () => {\n      observer.disconnect()\n      window.removeEventListener(\"resize\", measure)\n    }\n  }, [scrollContainer, travel])\n\n  const { scrollYProgress } = useScroll({\n    target: ref,\n    container: scrollContainer,\n    offset: [\"start end\", \"end start\"],\n  })\n  const drift = useTransform([scrollYProgress, travel], ([p, t]: number[]) => (p - 0.5) * t * speedRef.current)\n  const smoothed = useSpring(drift, driftSpring)\n  const value = spring ? smoothed : drift\n\n  return (\n    <motion.div\n      ref={ref}\n      data-slot=\"parallax\"\n      style={{ ...style, ...(reduce ? {} : axis === \"x\" ? { x: value } : { y: value }) }}\n      className={cn(\"will-change-transform\", className)}\n      {...props}\n    >\n      {children}\n    </motion.div>\n  )\n}\n\nexport { Parallax, type ParallaxProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Motion"
+  },
+  "type": "registry:ui"
+}

@@ -18,5 +18,8 @@
       "type": "registry:ui"
     }
   ],
+  "meta": {
+    "category": "Overlays"
+  },
   "type": "registry:ui"
 }

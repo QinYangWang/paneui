@@ -135,5 +135,8 @@
       }
     }
   },
+  "meta": {
+    "category": "Foundations"
+  },
   "type": "registry:theme"
 }
