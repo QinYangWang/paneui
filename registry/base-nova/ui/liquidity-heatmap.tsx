@@ -214,6 +214,7 @@ function LiquidityHeatmap({
                   height={plotH}
                   rx={10}
                   initial={reduce ? false : { width: 0 }}
+                  width={plotW}
                   animate={{ width: plotW }}
                   transition={reduce ? { duration: 0 } : { duration: 0.9, ease: CHART_EASE }}
                 />
@@ -257,7 +258,7 @@ function LiquidityHeatmap({
                     strokeLinecap="round"
                     className="stroke-background"
                     strokeOpacity={0.7}
-                    initial={reduce ? false : { pathLength: 0 }}
+                    initial={reduce ? false : { pathLength: 0, d: traceD }}
                     animate={{ pathLength: 1, d: traceD }}
                     transition={reduce ? { duration: 0 } : { pathLength: { duration: 1.1, ease: CHART_EASE }, d: transition }}
                   />
@@ -268,7 +269,7 @@ function LiquidityHeatmap({
                     strokeLinejoin="round"
                     strokeLinecap="round"
                     className="stroke-foreground"
-                    initial={reduce ? false : { pathLength: 0 }}
+                    initial={reduce ? false : { pathLength: 0, d: traceD }}
                     animate={{ pathLength: 1, d: traceD }}
                     transition={reduce ? { duration: 0 } : { pathLength: { duration: 1.1, ease: CHART_EASE }, d: transition }}
                   />

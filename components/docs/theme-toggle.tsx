@@ -8,6 +8,9 @@ import { cn } from "@/lib/utils"
 
 type Mode = "light" | "system" | "dark"
 const KEY = "theme"
+/** Same event the registry ThemeToggle fires after it changes the theme. */
+const EVENT = "theme-change"
+const isMode = (v: unknown): v is Mode => v === "light" || v === "system" || v === "dark"
 
 /** Runs before paint (inlined in <head>) so the page never flashes the wrong theme. */
 export const themeScript = `(function(){try{var m=localStorage.getItem("${KEY}")||"system";var d=m==="dark"||(m==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);var e=document.documentElement;e.classList.toggle("dark",d);e.style.colorScheme=d?"dark":"light"}catch(_){}})()`
@@ -32,7 +35,27 @@ export function ThemeToggle({ className }: { className?: string }) {
   const [mode, setMode] = React.useState<Mode | null>(null)
 
   React.useEffect(() => {
-    setMode((localStorage.getItem(KEY) as Mode) || "system")
+    const stored = localStorage.getItem(KEY)
+    setMode(isMode(stored) ? stored : "system")
+    // Another toggle on this page (e.g. the registry ThemeToggle in a demo) changed the theme.
+    const onThemeChange = (e: Event) => {
+      const detail = (e as CustomEvent<{ theme?: unknown; storageKey?: string }>).detail
+      if (detail?.storageKey && detail.storageKey !== KEY) return
+      if (isMode(detail?.theme)) setMode(detail.theme)
+    }
+    // Another tab changed the stored theme.
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== KEY) return
+      const m = isMode(e.newValue) ? e.newValue : "system"
+      setMode(m)
+      apply(m)
+    }
+    window.addEventListener(EVENT, onThemeChange)
+    window.addEventListener("storage", onStorage)
+    return () => {
+      window.removeEventListener(EVENT, onThemeChange)
+      window.removeEventListener("storage", onStorage)
+    }
   }, [])
 
   React.useEffect(() => {
@@ -45,8 +68,13 @@ export function ThemeToggle({ className }: { className?: string }) {
 
   const choose = (m: Mode) => {
     setMode(m)
-    localStorage.setItem(KEY, m)
+    try {
+      localStorage.setItem(KEY, m)
+    } catch {
+      // storage can be unavailable (private mode, sandboxed iframes)
+    }
     apply(m)
+    window.dispatchEvent(new CustomEvent(EVENT, { detail: { theme: m, storageKey: KEY } }))
   }
 
   const index = Math.max(0, options.findIndex((o) => o.mode === mode))

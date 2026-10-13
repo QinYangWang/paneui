@@ -488,7 +488,7 @@ function PriceTargetFanHistory({ className }: { className?: string }) {
       <motion.path
         d={area}
         fill={`url(#${gradId})`}
-        initial={reduce ? false : { opacity: 0 }}
+        initial={reduce ? false : { opacity: 0, d: area }}
         animate={{ opacity: 1, d: area }}
         transition={reduce ? { duration: 0 } : { duration: 0.6, ease: CHART_EASE, delay: 0.4 }}
       />
@@ -499,7 +499,7 @@ function PriceTargetFanHistory({ className }: { className?: string }) {
         strokeLinejoin="round"
         strokeLinecap="round"
         style={{ stroke: color }}
-        initial={reduce ? false : { pathLength: 0 }}
+        initial={reduce ? false : { pathLength: 0, d: line }}
         animate={{ pathLength: 1, d: line }}
         transition={reduce ? { duration: 0 } : { duration: 1, ease: CHART_EASE }}
       />
@@ -554,7 +554,9 @@ function PriceTargetFanTargets({ className }: { className?: string }) {
             <motion.line
               x1={nowX}
               y1={nowY}
-              initial={reduce ? false : { x2: nowX, y2: nowY }}
+              x2={hx}
+              y2={ty}
+              initial={reduce ? false : { x1: nowX, y1: nowY, x2: nowX, y2: nowY, opacity: dim ? 0.3 : 1 }}
               animate={{ x1: nowX, y1: nowY, x2: hx, y2: ty, opacity: dim ? 0.3 : 1 }}
               transition={reduce ? { duration: 0 } : { ...transition, delay: 0.6 + i * 0.06, opacity: { duration: 0.2 } }}
               strokeWidth={activeKey === t.key ? 2 : 1.5}
@@ -567,6 +569,8 @@ function PriceTargetFanTargets({ className }: { className?: string }) {
               strokeWidth={2}
               className="stroke-background"
               style={{ fill: t.color }}
+              cx={hx}
+              cy={ty}
               initial={reduce ? false : { cx: nowX, cy: nowY, opacity: 0 }}
               animate={{ cx: hx, cy: ty, opacity: dim ? 0.4 : 1 }}
               transition={reduce ? { duration: 0 } : { ...transition, delay: 0.6 + i * 0.06 }}
@@ -632,6 +636,7 @@ function PriceTargetFanNow({ className }: { className?: string }) {
         <motion.circle
           r={5}
           className="fill-foreground/20"
+          initial={{ r: 5, opacity: 0.6 }}
           animate={{ r: [5, 12], opacity: [0.6, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
         />

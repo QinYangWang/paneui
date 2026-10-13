@@ -24,7 +24,8 @@ export default function DynamicIslandDemo() {
   const [view, setView] = React.useState<string>("music")
   return (
     <div className="flex w-full max-w-md flex-col items-center gap-6">
-      <div className="flex h-48 w-full items-start justify-center pt-2">
+      {/* Tallest view (music) is ~161px; leave room for the spring overshoot and drop shadow. */}
+      <div className="flex h-52 w-full items-start justify-center pt-2">
         <DynamicIsland view={view}>
           <DynamicIslandView id="timer" label="Timer, 5 minutes">
             <IslandTimer seconds={300} />

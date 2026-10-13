@@ -89,7 +89,8 @@ export function DynamicIsland({ view = null, tone = "ink", className, children }
             : "bg-popover bg-linear-to-b from-white/5 to-transparent text-popover-foreground shadow-surface"
         )}
       >
-        <div ref={contentRef} className="relative w-max shrink-0">
+        {/* self-start: never stretch to the shell, or the measured height would just echo the animated height. */}
+        <div ref={contentRef} className="relative w-max shrink-0 self-start">
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
               key={key}

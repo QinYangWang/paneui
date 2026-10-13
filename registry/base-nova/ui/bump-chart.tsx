@@ -235,7 +235,7 @@ function BumpChart({
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     style={{ stroke: row.color }}
-                    initial={reduce ? false : { pathLength: 0, opacity: 0 }}
+                    initial={reduce ? false : { d, pathLength: 0, opacity: 0, strokeWidth: isHi ? 4.5 : 3 }}
                     animate={{ d, pathLength: 1, opacity: dim ? 0.18 : 1, strokeWidth: isHi ? 4.5 : 3 }}
                     transition={
                       reduce

@@ -21,6 +21,11 @@ const STYLE_ID = "theme-toggle-vt"
 const VT_CSS = `:root[${VT_ATTR}]::view-transition-old(root),:root[${VT_ATTR}]::view-transition-new(root){animation:none;mix-blend-mode:normal}:root[${VT_ATTR}]::view-transition-old(root){z-index:0}:root[${VT_ATTR}]::view-transition-new(root){z-index:1}`
 const NO_TRANSITIONS_CSS = "*,*::before,*::after{transition:none!important}"
 
+/** Window event fired after the theme changes, so other toggles (or your own code) can stay in sync. */
+const THEME_CHANGE_EVENT = "theme-change"
+
+type ThemeChangeDetail = { theme: Theme; storageKey: string }
+
 function ensureStyle() {
   if (document.getElementById(STYLE_ID)) return
   const style = document.createElement("style")
@@ -45,6 +50,9 @@ function applyTheme(theme: Theme, storageKey: string) {
   // Force a style recalc before re-enabling transitions.
   void window.getComputedStyle(root).opacity
   requestAnimationFrame(() => requestAnimationFrame(() => mute.remove()))
+  window.dispatchEvent(
+    new CustomEvent<ThemeChangeDetail>(THEME_CHANGE_EVENT, { detail: { theme, storageKey } })
+  )
 }
 
 const readTheme = (): Theme => (document.documentElement.classList.contains("dark") ? "dark" : "light")
@@ -180,5 +188,5 @@ function ThemeToggle({ className, storageKey, duration, onThemeChange, iconSize 
   )
 }
 
-export { ThemeToggle, useThemeToggle }
-export type { Theme, ThemeToggleProps }
+export { THEME_CHANGE_EVENT, ThemeToggle, useThemeToggle }
+export type { Theme, ThemeChangeDetail, ThemeToggleProps }
