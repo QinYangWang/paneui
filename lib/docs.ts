@@ -27,7 +27,8 @@ function categoryOf(type: string): Category {
 }
 
 export const REGISTRY_NAME = registry.name
-export const REGISTRY_URL = `${registry.homepage}/r/{name}.json`
+export const SITE_URL = process.env.SITE_URL || registry.homepage
+export const REGISTRY_URL = `${SITE_URL}/r/{name}.json`
 
 export function getItems(): DocItem[] {
   return registry.items
