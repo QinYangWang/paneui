@@ -4,7 +4,7 @@ import { ArrowRightIcon } from "@/components/icons"
 import { demos } from "@/components/docs/demos"
 import { getGroups } from "@/lib/docs"
 
-const wide = new Set(["chat", "prompt-bar", "recommendation-card", "task-row"])
+const wide = new Set(["chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
 export default function Gallery() {
   const groups = getGroups()

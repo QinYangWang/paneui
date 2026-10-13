@@ -1683,6 +1683,902 @@
       }
     },
     {
+      "name": "chart-utils",
+      "type": "registry:ui",
+      "title": "Chart Utils",
+      "description": "Shared chart helpers: token-based palette (chart-1..5 with semantic fallbacks), linear/band scales, ResizeObserver sizing, seeded PRNG, formatters, springy ChartNumber, in-chart tooltip shell and raised legend pills.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/chart-utils.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "bounce-sidebar",
+      "type": "registry:ui",
+      "title": "Bounce Sidebar",
+      "description": "Vertical sidebar nav whose raised active dot hops between destinations along a curved, distance-aware spring path in its own inset gutter.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/bounce-sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "animated-sidebar",
+      "type": "registry:ui",
+      "title": "Animated Sidebar",
+      "description": "Composable app sidebar (Provider, Sidebar, Header, Content, Group, Item, Sub, Footer, Trigger, Inset) with a gliding active pill that morphs through nested navigation and a spring fold into an icon rail with tooltips.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/animated-sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "file-tree",
+      "type": "registry:ui",
+      "title": "File Tree",
+      "description": "Declarative file and folder primitives rendered as an ARIA tree with springing rows and branch guides, a gliding raised selection, and full keyboard navigation with typeahead.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/file-tree.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "preview-rail",
+      "type": "registry:ui",
+      "title": "Preview Rail",
+      "description": "Navigation rail of compact ticks that swell into a pyramid around the pointed or focused tick while a preview card glides alongside to reveal its label and description.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/preview-rail.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Virtualized data table for 10k+ rows with click-to-sort headers, checkbox row selection with shift-click ranges, drag-to-resize and drag-to-reorder columns, and rows and columns that glide into new positions.",
+      "dependencies": [
+        "@tanstack/react-virtual",
+        "motion",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/checkbox",
+        "@qinyang/loader"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Data"
+      }
+    },
+    {
+      "name": "table-editable",
+      "type": "registry:ui",
+      "title": "Table Editable",
+      "description": "Spreadsheet-style table that edits cells in place, walks the grid with arrow keys, and inserts or deletes rows and columns from border handles and + pills with a smooth re-layout.",
+      "dependencies": [
+        "@tanstack/react-virtual",
+        "motion",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/table",
+        "@qinyang/menu"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/table-editable.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Data"
+      }
+    },
+    {
+      "name": "table-async",
+      "type": "registry:ui",
+      "title": "Table Async",
+      "description": "Table that loads pages on demand: skeleton rows on first load, infinite scroll as the virtualized list nears its end, a loading footer, retry on failure and an end-of-list note.",
+      "dependencies": [
+        "@tanstack/react-virtual",
+        "motion",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/table",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/table-async.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Data"
+      }
+    },
+    {
+      "name": "voice-orb",
+      "type": "registry:ui",
+      "title": "Voice Orb",
+      "description": "Breathing liquid canvas orb for voice interfaces whose silhouette and inner highlights react to an audio level, number, MotionValue or caller-owned AnalyserNode, with idle, listening, thinking and speaking rhythms.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/voice-orb.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "message-bubble",
+      "type": "registry:ui",
+      "title": "Message Bubble",
+      "description": "Single conversational bubble with tones, start/end alignment, joined corners when grouped, an expandable long-content section and render-prop support for link or button bubbles.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/message-bubble.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "title": "Message",
+      "description": "Composable conversation primitives: Message rows aligned by sender, MessageAvatar, auto-grouped MessageContent bubbles, MessageHeader, MessageMeta, hover-revealed MessageActions, typing indicator and day markers.",
+      "dependencies": [
+        "motion",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button",
+        "@qinyang/tooltip",
+        "@qinyang/message-bubble"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/message.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "message-scroller",
+      "type": "registry:ui",
+      "title": "Message Scroller",
+      "description": "Conversation viewport that glides with streamed output at the live edge, releases as soon as the reader scrolls up, and offers a 'jump to latest' pill that turns into 'New messages' when content arrives below.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/message-scroller.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "agent-code-block",
+      "type": "registry:ui",
+      "title": "Agent Code Block",
+      "description": "Shiki-highlighted code surface for agent output that streams without flicker, with line numbers, highlighted lines, a filename header, a live caret that follows the newest line and a copy button.",
+      "dependencies": [
+        "shiki",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/agent-code-block.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "file-diff",
+      "type": "registry:ui",
+      "title": "File Diff",
+      "description": "Collapsible unified-diff view of one file change with live +/\u2212 counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion",
+        "shiki"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/agent-code-block",
+        "@qinyang/collapsible",
+        "@qinyang/loader"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/file-diff.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "tool-result",
+      "type": "registry:ui",
+      "title": "Tool Result",
+      "description": "Execution disclosure for an agent tool call, with live status, ticking duration, Shiki-highlighted terminal output or request/response, copy and retry, collapsing once it finishes.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion",
+        "shiki"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/action-swap-roll"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/tool-result.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "citations",
+      "type": "registry:ui",
+      "title": "Citations",
+      "description": "Inline numbered citation markers with a Base UI PreviewCard hover preview, linked through a CitationGroup to a collapsible, progressively animated reference list.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/citations.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "streaming-response",
+      "type": "registry:ui",
+      "title": "Streaming Response",
+      "description": "Stable assistant reply surface that renders streamed markdown-ish text with a caret, then reveals copy, regenerate and thumbs feedback actions plus an expandable sources list.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/citations",
+        "@qinyang/tool-result"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/streaming-response.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "image-generation",
+      "type": "registry:ui",
+      "title": "Image Generation",
+      "description": "Fixed-frame generated-image surface that moves from queued through a grain and blur refinement reveal to a sharp result with prompt, copy, regenerate and download actions.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/tool-result"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/image-generation.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "tool-approval",
+      "type": "registry:ui",
+      "title": "Tool Approval",
+      "description": "Human-in-the-loop permission card with tool name, risk level and arguments preview, offering Allow once, Always allow or Deny, with a remembered, revocable state.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/badge",
+        "@qinyang/button",
+        "@qinyang/tool-result"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/tool-approval.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "agent-activity",
+      "type": "registry:ui",
+      "title": "Agent Activity",
+      "description": "One adaptive activity stream for an agent run that groups reasoning, web searches, tool calls and steps on a timeline, with live shimmering status and collapsing groups.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/text-shimmer",
+        "@qinyang/citations",
+        "@qinyang/tool-result"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/agent-activity.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "reasoning-text",
+      "type": "registry:ui",
+      "title": "Reasoning Text",
+      "description": "Shimmering reasoning copy with a terminal ASCII spinner that cycles phrases by blur swap, letter cascade or scramble.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/text-shimmer",
+        "@qinyang/text-cascade",
+        "@qinyang/text-scramble"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/reasoning-text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "thinking-shimmer",
+      "type": "registry:ui",
+      "title": "Thinking Shimmer",
+      "description": "A quiet shimmering status line for the agent's current step that settles into plain text when the work is done.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/text-shimmer"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/thinking-shimmer.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "agent-progress",
+      "type": "registry:ui",
+      "title": "Agent Progress",
+      "description": "Compact working readout: a pulsing 3\u00d73 activity glyph, an action verb and a live tabular timer that can pause, resume or be controlled.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/agent-progress.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "todo-list",
+      "type": "registry:ui",
+      "title": "Todo List",
+      "description": "Collapsible agent task plan with morphing pending, in-progress, done and failed marks, a rolling completion count and compact per-step meta.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/digit-swap"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/todo-list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "ai-sidebar",
+      "type": "registry:ui",
+      "title": "AI Sidebar",
+      "description": "Collapsible AI workspace sidebar with folders, projects, files and bookmarks, an icon rail, \u2318K search with highlighted matches, tree keyboard navigation and inline rename.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/ai-sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "treemap",
+      "type": "registry:ui",
+      "title": "Treemap",
+      "description": "Squarified treemap in plain SVG with one level of grouping, tiles that spring to new positions when data changes, value/share tooltips and a group-highlighting legend.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/treemap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "candlestick-chart",
+      "type": "registry:ui",
+      "title": "Candlestick Chart",
+      "description": "OHLC candles with a volume pane, animated last-price line and a crosshair with price/time readouts, keyboard inspectable and built for live-updating data.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/candlestick-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "donut-chart",
+      "type": "registry:ui",
+      "title": "Donut Chart",
+      "description": "Ring of rounded, gapped segments in an inset track with a centre readout and legend that highlight together on hover or focus.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/donut-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "volume-profile",
+      "type": "registry:ui",
+      "title": "Volume Profile",
+      "description": "Volume-by-price histogram that bins trades into rows, marks the point of control and value area (VAH/VAL), splits buy/sell volume and shows row tooltips plus a summary.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/volume-profile.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "status-bar",
+      "type": "registry:ui",
+      "title": "Status Bar",
+      "description": "Uptime-style status history of rounded bars with a live status header, uptime percentage, period tooltips and a counted legend.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/status-bar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "composition-chart",
+      "type": "registry:ui",
+      "title": "Composition Chart",
+      "description": "Normalised 100% composition over periods as stacked bars or morphing smooth areas, with period tooltips and a legend that toggles and highlights series.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/composition-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "funnel-chart",
+      "type": "registry:ui",
+      "title": "Funnel Chart",
+      "description": "Vertical or horizontal funnel of S-curved stages that morph with the data, with conversion labels and animated-number tooltips for value, share and drop-off.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/funnel-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "liquidity-heatmap",
+      "type": "registry:ui",
+      "title": "Liquidity Heatmap",
+      "description": "Resting liquidity across price bands and time as a heat grid that reveals left to right, with an animated traded-price trace, last-price marker, keyboard-inspectable depth tooltips and a thin-to-deep legend.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/liquidity-heatmap.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "bump-chart",
+      "type": "registry:ui",
+      "title": "Bump Chart",
+      "description": "Rankings over time drawn as smooth S-curve paths that draw in and re-route on data change, with numbered rank dots, change-vs-previous tooltips, hover/keyboard highlighting and click-to-pin legend pills.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/bump-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "order-book",
+      "type": "registry:ui",
+      "title": "Order Book",
+      "description": "Composable bid/ask ladder (Header, Side, Spread, Balance, DepthSummary) with cumulative depth bars, size-change flashes, springy last price and spread in bps, bid/sell volume balance and hover-to-total depth; built for live snapshots.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/order-book.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "heat-calendar",
+      "type": "registry:ui",
+      "title": "Heat Calendar",
+      "description": "GitHub-style activity calendar on UTC dates with composable Grid, Tooltip, Summary and Legend parts, single-hue intensity levels, and controlled drag/keyboard range selection that totals the span.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/heat-calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "returns-calendar",
+      "type": "registry:ui",
+      "title": "Returns Calendar",
+      "description": "Monthly returns calendar with a years \u00d7 months grid (diverging tints, compounded year totals) or a year-cards view with mini monthly bars, tooltips (best/worst, YTD) and controlled month-range or whole-year selection with compounded totals.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/returns-calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "price-target-fan",
+      "type": "registry:ui",
+      "title": "Price Target Fan",
+      "description": "Composable price history plus analyst target fan (Header, Plot, Axes, History, Targets, Now, Cursor, Tooltip): low/average/high projections that open from a pulsing now marker, with pointer/keyboard scrubbing across history and the projected path.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/price-target-fan.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "theme-toggle",
+      "type": "registry:ui",
+      "title": "Theme Toggle",
+      "description": "Light/dark button that repaints the page through the View Transition API with a circular reveal from the click point, falling back to an instant swap.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/theme-toggle.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
       "name": "recommendation-card",
       "type": "registry:block",
       "title": "Recommendation Card",
@@ -1981,6 +2877,703 @@
       "files": [
         {
           "path": "registry/base-nova/blocks/command-palette/command-palette.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "chat-app",
+      "type": "registry:block",
+      "title": "Chat App",
+      "description": "A complete agent workspace: AI sidebar, a conversation where each turn reasons, runs a live plan and streams its reply, and a prompt bar with stop, driven by a scripted fake agent.",
+      "dependencies": [
+        "motion",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/chat",
+        "@qinyang/prompt-bar",
+        "@qinyang/ai-sidebar",
+        "@qinyang/todo-list",
+        "@qinyang/reasoning-text",
+        "@qinyang/agent-progress"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/chat-app/chat-app.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "notification-stack",
+      "type": "registry:block",
+      "title": "Notification Stack",
+      "description": "Compact notification cards stacked into a peeking summary that spring apart into a readable, dismissible list on hover, focus or tap.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/notification-stack/notification-stack.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "dynamic-island",
+      "type": "registry:block",
+      "title": "Dynamic Island",
+      "description": "iOS-style pill that springs its real width and height between live-activity views (idle, timer, music, call, ride) with blur crossfades.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/dynamic-island/dynamic-island.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "bloom-menu",
+      "type": "registry:block",
+      "title": "Bloom Menu",
+      "description": "Trigger button that morphs open into a menu panel blooming iris-out from its centre, with a radially staggered, arrow-key navigable grid of actions.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/bloom-menu/bloom-menu.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "feedback-widget",
+      "type": "registry:block",
+      "title": "Feedback Widget",
+      "description": "Corner trigger that morphs into a feedback popup with message and mood picker, then animates through sending, success and retry states.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button-stateful"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/feedback-widget/feedback-widget.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "expandable-action-bar",
+      "type": "registry:block",
+      "title": "Expandable Action Bar",
+      "description": "Toolbar of compact icon actions that expand into labelled controls on hover or keyboard focus, with a gliding active highlight, badges and shortcut hints.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/expandable-action-bar/expandable-action-bar.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "overflow-actions",
+      "type": "registry:block",
+      "title": "Overflow Actions",
+      "description": "Connected pill rail of primary actions whose toggle springs the rail open to reveal extra controls, with staggered blur-in and an Escape to fold.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/overflow-actions/overflow-actions.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "morphing-search",
+      "type": "registry:block",
+      "title": "Morphing Search",
+      "description": "A search field or compact icon that morphs into a results surface with grouped, highlighted matches, full keyboard navigation and an opt-in \u2318/Ctrl shortcut.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/morphing-search/morphing-search.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "morphing-search-chips",
+      "type": "registry:block",
+      "title": "Morphing Search Chips",
+      "description": "Docked search bar that springs wider on focus and unfolds a recent-searches chip panel from its edge, turning picked terms into removable chips with filtered suggestions.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/morphing-search-chips/morphing-search-chips.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "expandable-tabs",
+      "type": "registry:block",
+      "title": "Expandable Tabs",
+      "description": "Icon tab bar whose active tab expands into a labelled pill while the panel above morphs its height and slides content in from the direction you moved.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/expandable-tabs/expandable-tabs.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "morphing-tabs",
+      "type": "registry:block",
+      "title": "Morphing Tabs",
+      "description": "Drag- or keyboard-reorderable tabs whose selected tab joins a content surface that glides between tabs and morphs to each panel's height.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/morphing-tabs/morphing-tabs.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "swipeable-list",
+      "type": "registry:block",
+      "title": "Swipeable List",
+      "description": "Mobile-style rows that swipe left or right to reveal tinted action rails, commit the edge action on a full swipe, and open from the keyboard with the arrow keys.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/swipeable-list/swipeable-list.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "project-folder",
+      "type": "registry:block",
+      "title": "Project Folder",
+      "description": "A folder whose file sheets fan out on hover or keyboard focus and fly into a focus-managed folder view dialog, then retrace their path when it closes.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/project-folder/project-folder.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "card-folder",
+      "type": "registry:block",
+      "title": "Card Folder",
+      "description": "A landscape payment card tucked into a stitched pocket that compresses into its seam as the card lifts forward, with a blur-swap details reveal, copy and overflow actions.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/card-folder/card-folder.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "infinite-masonry",
+      "type": "registry:block",
+      "title": "Infinite Masonry",
+      "description": "Responsive virtualized masonry that measures variable-height cards with @tanstack/react-virtual lanes, reveals new items and loads more as the viewport nears the end.",
+      "dependencies": [
+        "@tanstack/react-virtual",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/infinite-masonry/infinite-masonry.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "attachment-upload",
+      "type": "registry:block",
+      "title": "Attachment Upload",
+      "description": "Mixed attachment workspace with a collapsing dropzone, staggered file, image and link rows, animated upload progress, retry, removal and shared-layout image previews.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/attachment-upload/attachment-upload.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:block",
+      "title": "File Upload",
+      "description": "Drag-and-drop upload queue with springy progress rows, queued/uploading/uploaded/failed states, retry and removal, driven by a pluggable upload function.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/file-upload/file-upload.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "availability-scheduler",
+      "type": "registry:block",
+      "title": "Availability Scheduler",
+      "description": "Weekly availability editor where each day springs between available and unavailable, time ranges slide in and out as you add or remove them, times pick from a scrollable select, overlaps are flagged and a copy menu clones a day's hours to all days, weekdays or chosen days.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/switch",
+        "@qinyang/select",
+        "@qinyang/menu"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/availability-scheduler/availability-scheduler.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "knockout-bracket",
+      "type": "registry:block",
+      "title": "Knockout Bracket",
+      "description": "Single-elimination bracket paged one round at a time: the leftmost round stacks evenly, later rounds centre between their feeders, and cards, elbow connectors, headers and stage height spring into each new layout, with scores, penalties, result chips and an optional third-place match.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/knockout-bracket/knockout-bracket.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "knockout-wheel",
+      "type": "registry:block",
+      "title": "Knockout Wheel",
+      "description": "A knockout tournament drawn radially, with the champion at the hub, each round as a ring and the teams on the rim; nodes spring in ring by ring, hovering or focusing a team isolates its path, and tooltips give each result.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/knockout-wheel/knockout-wheel.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "signup-form",
+      "type": "registry:block",
+      "title": "Sign-up Form",
+      "description": "Composed sign-up form that flags a field once it is left, clears the error the moment it is fixed, shows a length-weighted password strength meter with a reveal toggle, accepts server field errors and walks the submit button through loading, success and error.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/input",
+        "@qinyang/checkbox",
+        "@qinyang/button",
+        "@qinyang/button-stateful"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/signup-form/signup-form.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "not-found-glitch",
+      "type": "registry:block",
+      "title": "404 Glitch",
+      "description": "404 page whose digits scramble through random glyphs before resolving, replaying with a red/cyan chromatic split on hover.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/not-found-glitch/not-found-glitch.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "not-found-magnetic",
+      "type": "registry:block",
+      "title": "404 Magnetic",
+      "description": "404 page where each digit of the code is its own Magnetic wrapper, leaning toward the cursor and springing back when it leaves.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button",
+        "@qinyang/magnetic"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/not-found-magnetic/not-found-magnetic.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "not-found-spotlight",
+      "type": "registry:block",
+      "title": "404 Spotlight",
+      "description": "404 page on a recessed panel where a cursor-tracked spotlight reveals a bright copy of the code over a dim base.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/not-found-spotlight/not-found-spotlight.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "not-found-stacked",
+      "type": "registry:block",
+      "title": "404 Stacked",
+      "description": "404 page with the code on a card over a hidden stack that fans out on a spring on hover, focus or tap.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/not-found-stacked/not-found-stacked.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "not-found-terminal",
+      "type": "registry:block",
+      "title": "404 Terminal",
+      "description": "404 page as a terminal session that types a failed cd into the missing path, prints the 404 status and idles on a blinking caret.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/not-found-terminal/not-found-terminal.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "swap",
+      "type": "registry:block",
+      "title": "Swap",
+      "description": "Cross-chain token swap widget with chain and token selectors in a morphing in-card picker, a spinning flip button, slippage settings and live quote states (empty, quoting, ready, insufficient balance) driving a stateful swap button.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button-stateful"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/swap/swap.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "prediction-market-card",
+      "type": "registry:block",
+      "title": "Prediction Market Card",
+      "description": "Compact market listing with binary or multi-outcome rows, probability bars, odds buttons that roll to a Buy action on hover or focus, payout multiplier tooltips, a volume sparkline and a watchlist toggle.",
+      "dependencies": [
+        "motion",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/action-swap-blur",
+        "@qinyang/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/prediction-market-card/prediction-market-card.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "prediction-market",
+      "type": "registry:block",
+      "title": "Prediction Market",
+      "description": "Buy/sell trade ticket with an outcome radio group, rolling-digit amount entry, quick-add chips, a number-ticker payout and placing/filled/error trade states with a shake on invalid orders.",
+      "dependencies": [
+        "motion",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/tabs",
+        "@qinyang/number-ticker",
+        "@qinyang/button-stateful"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/prediction-market/prediction-market.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "wallet-card",
+      "type": "registry:block",
+      "title": "Wallet Card",
+      "description": "Wallet overview whose account switcher and search morph open from their triggers, with a rolling number-ticker balance, privacy toggle, change pill, quick actions and an optional holdings list.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/number-ticker"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/wallet-card/wallet-card.tsx",
           "type": "registry:component"
         }
       ],

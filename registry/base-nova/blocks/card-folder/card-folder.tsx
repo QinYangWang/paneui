@@ -1,0 +1,244 @@
+"use client"
+
+import * as React from "react"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+
+import { CopyIcon, EyeIcon, EyeOffIcon, MoreHorizontalIcon } from "@/components/icons"
+import { cn } from "@/lib/utils"
+
+export interface CardFolderProps {
+  /** Label above the pocket, e.g. "Business card". */
+  title: string
+  /** Name printed on the card face. */
+  holder?: string
+  /** Brand or issuer printed top-left on the card. */
+  brand?: string
+  cardNumber: string
+  expiry: string
+  cvv: string
+  /** Replace the default card art (rendered behind the details). */
+  card?: React.ReactNode
+  open?: boolean
+  defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
+  detailsVisible?: boolean
+  defaultDetailsVisible?: boolean
+  onDetailsVisibleChange?: (visible: boolean) => void
+  /** Overflow action (e.g. open a menu). Hidden when omitted. */
+  onAction?: () => void
+  actionLabel?: string
+  /** Called with the full number when the copy button is pressed. Hidden when omitted. */
+  onCopy?: (cardNumber: string) => void
+  disabled?: boolean
+  className?: string
+  cardClassName?: string
+}
+
+const SPRING = { type: "spring", stiffness: 340, damping: 26, mass: 0.9 } as const
+const iconButton =
+  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-50"
+
+function useControllable<T>(value: T | undefined, defaultValue: T, onChange?: (v: T) => void) {
+  const [internal, setInternal] = React.useState(defaultValue)
+  const current = value !== undefined ? value : internal
+  const set = (next: T) => {
+    if (value === undefined) setInternal(next)
+    onChange?.(next)
+  }
+  return [current, set] as const
+}
+
+function groups(number: string) {
+  return number.replace(/\D/g, "").match(/.{1,4}/g) ?? []
+}
+
+function Swap({ visible, shown, hidden, className }: { visible: boolean; shown: string; hidden: string; className?: string }) {
+  const reduce = useReducedMotion()
+  return (
+    <span className={cn("relative inline-grid", className)}>
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={visible ? "shown" : "hidden"}
+          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 6, filter: "blur(4px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6, filter: "blur(4px)" }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          className="col-start-1 row-start-1 whitespace-nowrap"
+        >
+          {visible ? shown : hidden}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  )
+}
+
+function DefaultArt() {
+  return (
+    <span
+      aria-hidden
+      className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_0%,color-mix(in_oklch,var(--primary),white_30%),transparent_60%),linear-gradient(135deg,color-mix(in_oklch,var(--primary),black_10%),color-mix(in_oklch,var(--primary),black_55%))]"
+    >
+      <span className="absolute -right-10 -bottom-16 size-48 rounded-full border-[18px] border-white/8" />
+      <span className="absolute -right-2 -bottom-24 size-48 rounded-full border-[18px] border-white/6" />
+    </span>
+  )
+}
+
+export function CardFolder({
+  title,
+  holder,
+  brand = "Debit",
+  cardNumber,
+  expiry,
+  cvv,
+  card,
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
+  detailsVisible: detailsProp,
+  defaultDetailsVisible = false,
+  onDetailsVisibleChange,
+  onAction,
+  actionLabel = "More options",
+  onCopy,
+  disabled = false,
+  className,
+  cardClassName,
+}: CardFolderProps) {
+  const reduce = useReducedMotion()
+  const [open, setOpen] = useControllable(openProp, defaultOpen, onOpenChange)
+  const [details, setDetails] = useControllable(detailsProp, defaultDetailsVisible, onDetailsVisibleChange)
+  const parts = groups(cardNumber)
+  const last4 = parts.at(-1) ?? ""
+  const masked = [...parts.slice(0, -1).map(() => "••••"), last4].join(" ")
+  const full = parts.join(" ")
+
+  return (
+    <div data-slot="card-folder" data-open={open || undefined} className={cn("flex w-80 flex-col gap-2", className)}>
+      <div className="flex items-center justify-between gap-2 px-1">
+        <div className="flex min-w-0 flex-col">
+          <span className="truncate text-sm font-medium">{title}</span>
+          <span className="text-xs text-muted-foreground tabular-nums">
+            {brand} ·· {last4}
+          </span>
+        </div>
+        <div className="flex items-center">
+          {onCopy && (
+            <button
+              type="button"
+              className={iconButton}
+              disabled={disabled}
+              onClick={() => onCopy(parts.join(""))}
+              aria-label="Copy card number"
+            >
+              <CopyIcon size={15} />
+            </button>
+          )}
+          <button
+            type="button"
+            className={iconButton}
+            disabled={disabled}
+            aria-pressed={details}
+            aria-label={details ? "Hide card details" : "Show card details"}
+            onClick={() => setDetails(!details)}
+          >
+            {details ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
+          </button>
+          {onAction && (
+            <button type="button" className={iconButton} disabled={disabled} onClick={onAction} aria-label={actionLabel}>
+              <MoreHorizontalIcon size={16} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        disabled={disabled}
+        aria-expanded={open}
+        aria-label={open ? `Tuck ${title} into its pocket` : `Pull ${title} out of its pocket`}
+        onClick={() => setOpen(!open)}
+        className="group/pocket relative h-60 w-full cursor-pointer rounded-[1.75rem] outline-none focus-visible:ring-3 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {/* Inside of the pocket */}
+        <span aria-hidden className="absolute inset-x-0 top-10 bottom-0 rounded-[1.75rem] bg-muted shadow-well" />
+
+        {/* The card */}
+        <motion.span
+          className={cn(
+            "absolute top-5 left-1/2 block aspect-[1.586] w-[17.5rem] overflow-hidden rounded-2xl text-left text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_1px_2px_rgb(0_0_0/0.25)]",
+            cardClassName
+          )}
+          initial={false}
+          animate={
+            reduce
+              ? undefined
+              : {
+                  y: open ? -10 : 0,
+                  scale: open ? 1.035 : 1,
+                  boxShadow: open
+                    ? "inset 0 1px 0 rgb(255 255 255 / 0.3), 0 18px 32px -12px rgb(0 0 0 / 0.45)"
+                    : "inset 0 1px 0 rgb(255 255 255 / 0.3), 0 1px 2px rgb(0 0 0 / 0.25)",
+                }
+          }
+          transition={{ ...SPRING, delay: open ? 0.04 : 0 }}
+          style={{ x: "-50%" }}
+        >
+          {card ?? <DefaultArt />}
+          <span className="relative flex size-full flex-col justify-between p-4 [text-shadow:0_1px_1px_rgb(0_0_0/0.25)]">
+            <span className="flex items-start justify-between">
+              <span className="text-sm font-semibold tracking-wide">{brand}</span>
+              <span aria-hidden className="h-6 w-8 rounded-md bg-linear-to-br from-amber-200 to-amber-400 shadow-[inset_0_0_0_1px_rgb(0_0_0/0.15)]" />
+            </span>
+            <span className="flex flex-col gap-2">
+              <Swap
+                visible={details}
+                shown={full}
+                hidden={masked}
+                className="font-mono text-[1.05rem] tracking-[0.12em] tabular-nums"
+              />
+              <span className="flex items-end justify-between gap-3 text-[0.7rem] uppercase">
+                <span className="truncate opacity-85">{holder}</span>
+                <span className="flex gap-3 font-mono tabular-nums">
+                  <span className="flex flex-col">
+                    <span className="text-[0.55rem] opacity-60">Exp</span>
+                    {expiry}
+                  </span>
+                  <span className="flex flex-col">
+                    <span className="text-[0.55rem] opacity-60">CVV</span>
+                    <Swap visible={details} shown={cvv} hidden={"•".repeat(cvv.length || 3)} />
+                  </span>
+                </span>
+              </span>
+            </span>
+          </span>
+        </motion.span>
+
+        {/* Front of the pocket: compresses into its bottom seam as the card lifts */}
+        <motion.span
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 z-10 block overflow-hidden rounded-[1.75rem] bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised"
+          initial={false}
+          animate={{ height: open ? 52 : 150 }}
+          transition={reduce ? { duration: 0.15 } : SPRING}
+        >
+          <span className="absolute inset-x-6 top-0 h-px bg-white/25" />
+          <span className="absolute inset-2 rounded-[1.35rem] border-[1.5px] border-dashed border-foreground/15" />
+          <span className="absolute inset-x-0 bottom-0 flex h-[52px] items-center justify-center text-xs font-medium text-muted-foreground">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.span
+                key={open ? "tuck" : "pull"}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.18 }}
+              >
+                {open ? "Tap to tuck away" : "Tap to pull out"}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+        </motion.span>
+      </button>
+    </div>
+  )
+}

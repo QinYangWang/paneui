@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "thinking-shimmer",
+  "title": "Thinking Shimmer",
+  "description": "A quiet shimmering status line for the agent's current step that settles into plain text when the work is done.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@qinyang/theme",
+    "@qinyang/text-shimmer"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/thinking-shimmer.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { TextShimmer } from \"@/registry/base-nova/ui/text-shimmer\"\n\ntype ThinkingShimmerProps = React.HTMLAttributes<HTMLSpanElement> & {\n  /** While true the line shimmers; set false to settle it into plain muted text. */\n  active?: boolean\n  /** Seconds per shimmer sweep. */\n  duration?: number\n  /** Leading soft pulse dot. */\n  dot?: boolean\n}\n\n/**\n * The quiet status line under an agent's turn (\"Thinking…\", \"Searching the web…\").\n * Shimmers while the work runs and settles to plain text when it's done.\n */\nfunction ThinkingShimmer({\n  active = true,\n  duration = 2,\n  dot = false,\n  className,\n  children = \"Thinking…\",\n  ...props\n}: ThinkingShimmerProps) {\n  return (\n    <span\n      role=\"status\"\n      aria-live=\"polite\"\n      aria-busy={active || undefined}\n      data-slot=\"thinking-shimmer\"\n      data-active={active || undefined}\n      className={cn(\"inline-flex items-center gap-2 text-sm font-medium text-muted-foreground\", className)}\n      {...props}\n    >\n      {dot && (\n        <span aria-hidden className=\"relative inline-flex size-2 shrink-0\">\n          {active && (\n            <span className=\"absolute inset-0 animate-ping rounded-full bg-primary/50 motion-reduce:animate-none\" />\n          )}\n          <span\n            className={cn(\n              \"relative size-2 rounded-full transition-colors duration-300\",\n              active ? \"bg-primary\" : \"bg-muted-foreground/50\"\n            )}\n          />\n        </span>\n      )}\n      {active ? <TextShimmer duration={duration}>{children}</TextShimmer> : <span>{children}</span>}\n    </span>\n  )\n}\n\nexport { ThinkingShimmer, type ThinkingShimmerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Agents"
+  },
+  "type": "registry:ui"
+}

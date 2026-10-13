@@ -155,6 +155,20 @@ export const UndoIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const PhoneIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...puff} d="M4.3 3.6l1.7-.4c.5-.1 1 .2 1.2.6l.9 2.1c.2.4.1.9-.3 1.2l-1.1.9a7.2 7.2 0 003.3 3.3l.9-1.1c.3-.4.8-.5 1.2-.3l2.1.9c.4.2.7.7.6 1.2l-.4 1.7c-.1.5-.6.8-1.1.8C7.6 14.4 3.6 10.4 3.5 4.7c0-.5.3-1 .8-1.1z" />
+  </Icon>
+);
+
+export const CarIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...puff} d="M4.5 8.1l1.1-2.7c.3-.7.9-1.1 1.6-1.1h3.6c.7 0 1.3.4 1.6 1.1l1.1 2.7c.8.3 1.4 1.1 1.4 2v1.8c0 .4-.3.7-.7.7H3.8c-.4 0-.7-.3-.7-.7v-1.8c0-.9.6-1.7 1.4-2z" />
+    <rect {...puff} x="4.4" y="12.8" width="1.8" height="1.6" rx=".6" />
+    <rect {...puff} x="11.8" y="12.8" width="1.8" height="1.6" rx=".6" />
+  </Icon>
+);
+
 export const SearchIcon = (p: IconProps) => (
   <Icon {...p}>
     <circle {...line} strokeWidth={1.7} cx="8" cy="8" r="4.8" />
