@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google"
 
 import { Sidebar } from "@/components/docs/sidebar"
 import { getGroups } from "@/lib/docs"
+import { ToastProvider } from "@/registry/base-nova/ui/toast"
+import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
 
 import "./globals.css"
 
@@ -20,6 +22,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ToastProvider>
+        <TooltipProvider>
         <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
           <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
             <Link href="/" className="font-semibold tracking-tight">
@@ -38,6 +42,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </aside>
           <main className="min-w-0 flex-1 py-10">{children}</main>
         </div>
+        </TooltipProvider>
+        </ToastProvider>
       </body>
     </html>
   )
