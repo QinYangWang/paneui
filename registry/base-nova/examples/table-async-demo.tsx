@@ -55,11 +55,15 @@ function makePage(page: number): LogEvent[] {
 /** Pretend API: ~0.9s per page, 8 pages. */
 function fetchEvents(page: number, signal: AbortSignal): Promise<AsyncPage<LogEvent>> {
   return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => resolve({ rows: makePage(page), hasMore: page < PAGES - 1 }), page === 0 ? 1400 : 900)
-    signal.addEventListener("abort", () => {
+    const onAbort = () => {
       clearTimeout(timer)
       reject(new DOMException("Aborted", "AbortError"))
-    })
+    }
+    const timer = setTimeout(() => {
+      signal.removeEventListener("abort", onAbort)
+      resolve({ rows: makePage(page), hasMore: page < PAGES - 1 })
+    }, page === 0 ? 1400 : 900)
+    signal.addEventListener("abort", onAbort, { once: true })
   })
 }
 

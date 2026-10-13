@@ -31,6 +31,7 @@ function Slider<Value extends number | readonly number[]>({
   showValue,
   getThumbLabel,
   orientation = "horizontal",
+  thumbAlignment = "edge",
   ...props
 }: SliderProps<Value>) {
   const initial = (value ?? defaultValue ?? min) as number | readonly number[]
@@ -41,6 +42,10 @@ function Slider<Value extends number | readonly number[]>({
   }, [value])
 
   const vertical = orientation === "vertical"
+  // With `edge` alignment the thumb's centre travels from half a thumb (10px)
+  // inside one end of the track to half a thumb inside the other, so ticks use
+  // the same inset to sit exactly under the thumb at every step, min/max included.
+  const thumbInset = thumbAlignment === "center" ? "0px" : "0.625rem"
   const span = max - min || 1
   const low = values.length > 1 ? Math.min(...values) : min
   const high = Math.max(...values)
@@ -61,6 +66,7 @@ function Slider<Value extends number | readonly number[]>({
       max={max}
       step={step}
       orientation={orientation}
+      thumbAlignment={thumbAlignment}
       onValueChange={(next, details) => {
         setValues(toArray(next as number | readonly number[]))
         onValueChange?.(next, details)
@@ -96,7 +102,7 @@ function Slider<Value extends number | readonly number[]>({
                 aria-hidden
                 data-slot="slider-tick"
                 data-active={active || undefined}
-                style={vertical ? { bottom: `${pct}%` } : { left: `${pct}%` }}
+                style={{ [vertical ? "bottom" : "left"]: `calc(${thumbInset} + (100% - 2 * ${thumbInset}) * ${pct / 100})` }}
                 className={cn(
                   "pointer-events-none absolute size-1 rounded-full bg-foreground/20 transition-colors duration-150 data-active:bg-primary-foreground/70",
                   vertical ? "left-1/2 -translate-x-1/2 translate-y-1/2" : "top-1/2 -translate-x-1/2 -translate-y-1/2"

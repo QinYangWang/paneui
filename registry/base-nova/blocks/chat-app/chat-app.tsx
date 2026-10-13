@@ -136,15 +136,17 @@ const nextId = (p: string) => `${p}-${++uid}`
 const sleep = (ms: number, signal: AbortSignal) =>
   new Promise<void>((resolve, reject) => {
     if (signal.aborted) return reject(new DOMException("Aborted", "AbortError"))
-    const id = window.setTimeout(resolve, ms)
-    signal.addEventListener(
-      "abort",
-      () => {
-        window.clearTimeout(id)
-        reject(new DOMException("Aborted", "AbortError"))
-      },
-      { once: true }
-    )
+    const onAbort = () => {
+      window.clearTimeout(id)
+      reject(new DOMException("Aborted", "AbortError"))
+    }
+    // Drop the abort listener once the wait is over, so a long streamed reply
+    // doesn't pile up one closure per token on the signal.
+    const id = window.setTimeout(() => {
+      signal.removeEventListener("abort", onAbort)
+      resolve()
+    }, ms)
+    signal.addEventListener("abort", onAbort, { once: true })
   })
 
 /* ─────────────────────────────── Turns ─────────────────────────────── */

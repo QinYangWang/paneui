@@ -845,28 +845,6 @@
       }
     },
     {
-      "name": "button-metallic",
-      "type": "registry:ui",
-      "title": "Button Metallic",
-      "description": "Neutral card-coloured button framed by a drifting chrome rim mixed from theme tokens, with a reflection that travels across it on a loop and on hover.",
-      "dependencies": [
-        "@base-ui/react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/button-metallic.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
       "name": "hold-action-button",
       "type": "registry:ui",
       "title": "Hold Action Button",

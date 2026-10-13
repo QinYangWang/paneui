@@ -74,11 +74,18 @@ function MorphSelectContent({
           data-slot="morph-select-content"
           className={cn(
             "group/morph flex w-(--anchor-width) flex-col overflow-hidden rounded-2xl bg-popover text-popover-foreground shadow-surface outline-none data-[side=top]:flex-col-reverse",
-            "[--morph-closed:inset(0_0_calc(100%_-_var(--anchor-height))_0_round_var(--radius-2xl))] data-[side=top]:[--morph-closed:inset(calc(100%_-_var(--anchor-height))_0_0_0_round_var(--radius-2xl))]",
-            "[clip-path:inset(0_round_var(--radius-2xl))] transition-[clip-path,background-color,box-shadow] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            // The clip must sit *outside* the box: a clip flush with the border box
+            // cuts off the ring and drop shadow (both drawn outside it), which left
+            // the open menu borderless. Open, the clip reaches 40px out (concentric
+            // radius r + 40px) so ring + shadow show in full; closed, it hugs the
+            // trigger 2px out on three sides and cuts at the trigger's height on the
+            // fourth, so the ring stays continuous around the morphing shape.
+            "[--morph-open:inset(-40px_round_calc(var(--radius-2xl)_+_40px))]",
+            "[--morph-closed:inset(-2px_-2px_calc(100%_-_var(--anchor-height))_-2px_round_calc(var(--radius-2xl)_+_2px))] data-[side=top]:[--morph-closed:inset(calc(100%_-_var(--anchor-height))_-2px_-2px_-2px_round_calc(var(--radius-2xl)_+_2px))]",
+            "[clip-path:var(--morph-open)] transition-[clip-path,background-color,box-shadow] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]",
             "data-starting-style:bg-secondary data-starting-style:shadow-raised data-starting-style:[clip-path:var(--morph-closed)]",
             "data-ending-style:bg-secondary data-ending-style:shadow-raised data-ending-style:duration-300 data-ending-style:[clip-path:var(--morph-closed)]",
-            "motion-reduce:transition-opacity motion-reduce:data-starting-style:opacity-0 motion-reduce:data-starting-style:[clip-path:inset(0_round_var(--radius-2xl))] motion-reduce:data-ending-style:opacity-0 motion-reduce:data-ending-style:[clip-path:inset(0_round_var(--radius-2xl))]",
+            "motion-reduce:transition-opacity motion-reduce:data-starting-style:opacity-0 motion-reduce:data-starting-style:[clip-path:var(--morph-open)] motion-reduce:data-ending-style:opacity-0 motion-reduce:data-ending-style:[clip-path:var(--morph-open)]",
             className
           )}
           {...props}

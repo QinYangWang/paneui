@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { ArrowRightIcon } from "@/components/icons"
 import { categoryIcons, categorySlug } from "@/components/docs/category-icons"
-import { demos } from "@/components/docs/demos"
+import { LazyDemo } from "@/components/docs/lazy-demo"
 import { getGroups, getItems } from "@/lib/docs"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
@@ -29,7 +29,7 @@ export default function Gallery() {
           <ArrowRightIcon data-icon="inline-end" />
         </Button>
       </section>
-      {groups.map((g) => {
+      {groups.map((g, gi) => {
         const Icon = categoryIcons[g.category]
         return (
           <section key={g.category} id={categorySlug(g.category)} className="flex scroll-mt-20 flex-col gap-5">
@@ -43,16 +43,14 @@ export default function Gallery() {
               <Badge size="sm">{g.items.length}</Badge>
             </h2>
             <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
-              {g.items.map((item) => {
-                const Demo = demos[item.name]
+              {g.items.map((item, index) => {
                 return (
                   <Card
                     key={item.name}
                     className={`group/gallery gap-0 rounded-3xl py-0 ${wide.has(item.name) ? "xl:col-span-2" : ""}`}
                   >
-                    <div className="flex min-h-64 flex-1 items-center justify-center overflow-hidden bg-background/40 p-6 shadow-[inset_0_-1px_0_var(--border)] sm:p-8">
-                      {Demo ? <Demo /> : null}
-                    </div>
+                    {/* Demos mount near the viewport and unmount when far away; see LazyDemo. */}
+                    <LazyDemo name={item.name} eager={gi === 0 && index < 4} />
                     <Link
                       href={`/docs/${item.name}`}
                       className="outline-none focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset"

@@ -77,7 +77,10 @@ function SlideActionButton({
     setPercent((p) => (p === next ? p : next))
   })
 
-  const fillWidth = useTransform(x, (v) => v + THUMB + PAD)
+  // The fill wraps the thumb: it spans the leading pad, the travelled distance,
+  // the thumb and the trailing pad, so its rounded cap (radius THUMB/2 + PAD) is
+  // concentric with the thumb, and at x = max it is exactly the track's width.
+  const fillWidth = useTransform(x, (v) => v + THUMB + PAD * 2)
   const labelOpacity = useTransform(x, (v) => (max ? Math.max(0, 1 - v / (max * 0.55)) : 1))
   const labelShift = useTransform(x, (v) => (reduce ? 0 : v * 0.15))
 

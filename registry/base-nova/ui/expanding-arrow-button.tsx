@@ -54,7 +54,12 @@ function ExpandingArrowButton({
       <span
         aria-hidden
         className={cn(
-          "absolute inset-y-1.5 left-1.5 z-10 w-11 overflow-hidden rounded-[14px] bg-primary bg-linear-to-b from-white/16 to-transparent text-primary-foreground shadow-primary",
+          "absolute inset-y-1.5 left-1.5 z-10 w-11 overflow-hidden rounded-[14px] bg-primary bg-linear-to-b from-white/16 to-transparent text-primary-foreground",
+          // Border drawn *inside* the tile (inset ring + top highlight), like the
+          // face's own hairline, so the tile's visible edge sits exactly on its box:
+          // inset (56 - 44) / 2 = 6px on every side, radius 20 - 6 = 14px, concentric
+          // with the button. The ring darkens whatever accent colour is set.
+          "shadow-[inset_0_1px_0_0_rgb(255_255_255/0.28),inset_0_0_0_1px_rgb(0_0_0/0.16),0_1px_2px_rgb(15_18_25/0.18)] dark:shadow-[inset_0_1px_0_0_rgb(255_255_255/0.22),inset_0_0_0_1px_rgb(0_0_0/0.28),0_1px_2px_rgb(0_0_0/0.4)]",
           "transition-[width] duration-500 motion-reduce:duration-0",
           EASE,
           "group-hover/arrow:w-[calc(100%-0.75rem)] group-focus-visible/arrow:w-[calc(100%-0.75rem)]",

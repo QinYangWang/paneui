@@ -155,8 +155,23 @@ function SmoothScroll({
     const wrapper = wrapperRef.current
     const content = contentRef.current
     if (!root && (!wrapper || !content)) return
-    const instance = new Lenis({
+    const horizontal = orientation === "horizontal"
+    const instance: Lenis = new Lenis({
       ...(root ? {} : { wrapper: wrapper!, content: content!, eventsTarget: wrapper! }),
+      // A contained instance would otherwise swallow every wheel event over it,
+      // even at its ends, so the page stops scrolling under the pointer. At an
+      // end, pushing outward, hand the event back to the browser so it chains
+      // to the page like a native scroller does.
+      virtualScroll: root
+        ? undefined
+        : ({ deltaX, deltaY }) => {
+            const delta = horizontal ? deltaX || deltaY : deltaY
+            const { limit, animatedScroll } = instance
+            if (limit <= 0) return false
+            if (delta < 0 && animatedScroll <= 0.5) return false
+            if (delta > 0 && animatedScroll >= limit - 0.5) return false
+            return true
+          },
       autoRaf: true,
       lerp: duration === undefined ? lerp : 0,
       duration,
@@ -227,7 +242,8 @@ function SmoothScroll({
         data-slot="smooth-scroll"
         data-smooth={api.smooth ? "" : undefined}
         className={cn(
-          "relative overscroll-contain outline-none [scroll-behavior:auto]",
+          // no overscroll containment: at its ends the wheel/touch chains to the page
+          "relative outline-none [scroll-behavior:auto]",
           orientation === "horizontal" ? "overflow-x-auto overflow-y-hidden" : "overflow-x-hidden overflow-y-auto",
           className
         )}

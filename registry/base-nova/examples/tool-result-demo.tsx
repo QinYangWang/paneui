@@ -34,15 +34,19 @@ export default function ToolResultDemo() {
     setLines(1)
     setStatus("running")
     let i = 1
+    let done: number | undefined
     const id = window.setInterval(() => {
       i += 1
       setLines(i)
       if (i >= LOG.length) {
         window.clearInterval(id)
-        window.setTimeout(() => setStatus("success"), 400)
+        done = window.setTimeout(() => setStatus("success"), 400)
       }
     }, 260)
-    return () => window.clearInterval(id)
+    return () => {
+      window.clearInterval(id)
+      window.clearTimeout(done)
+    }
   }, [run])
 
   const output = LOG.slice(0, lines).join("\n")

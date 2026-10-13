@@ -48,7 +48,6 @@ import LoaderDemo from "@/registry/base-nova/examples/loader-demo"
 import ButtonStatefulDemo from "@/registry/base-nova/examples/button-stateful-demo"
 import MagneticDemo from "@/registry/base-nova/examples/magnetic-demo"
 import ButtonMagneticDemo from "@/registry/base-nova/examples/button-magnetic-demo"
-import ButtonMetallicDemo from "@/registry/base-nova/examples/button-metallic-demo"
 import HoldActionButtonDemo from "@/registry/base-nova/examples/hold-action-button-demo"
 import SlideActionButtonDemo from "@/registry/base-nova/examples/slide-action-button-demo"
 import ExpandingArrowButtonDemo from "@/registry/base-nova/examples/expanding-arrow-button-demo"
@@ -205,7 +204,6 @@ export const demos: Record<string, React.ComponentType> = {
   "button-stateful": ButtonStatefulDemo,
   "magnetic": MagneticDemo,
   "button-magnetic": ButtonMagneticDemo,
-  "button-metallic": ButtonMetallicDemo,
   "hold-action-button": HoldActionButtonDemo,
   "slide-action-button": SlideActionButtonDemo,
   "expanding-arrow-button": ExpandingArrowButtonDemo,

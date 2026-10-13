@@ -455,7 +455,11 @@ function SidebarSub({ className, children, ...props }: Omit<React.ComponentProps
       animate={shown ? "open" : "closed"}
       variants={reduce ? undefined : SUB_VARIANTS}
       style={reduce ? { height: shown ? "auto" : 0, opacity: shown ? 1 : 0 } : undefined}
-      className={cn("relative ml-[21px] flex min-w-0 list-none flex-col gap-0.5 overflow-hidden border-l border-border pl-2", className)}
+      // overflow-hidden is needed for the height fold, but it would clip the
+      // pill's ring + shadow flush at the row edge. -mr-2/pr-2 pushes the clip
+      // edge out into SidebarContent's px-2 gutter so rows keep the same right
+      // edge as top-level items while their shadow stays fully visible.
+      className={cn("relative -mr-2 ml-[21px] flex min-w-0 list-none flex-col gap-0.5 overflow-hidden border-l border-border pr-2 pl-2", className)}
       {...props}
     >
       {/* spacer keeps the first row clear of the parent */}

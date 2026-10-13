@@ -45,6 +45,8 @@ const TONES = {
 // Vertical: liquid below the line. Horizontal: liquid left of the line.
 const WAVE_X = "M0 6 Q12.5 0 25 6 T50 6 T75 6 T100 6 T125 6 T150 6 T175 6 T200 6 V12 H0 Z"
 const WAVE_Y = "M6 0 Q12 12.5 6 25 T6 50 T6 75 T6 100 T6 125 T6 150 T6 175 T6 200 H0 V0 Z"
+// The wave strip is 10px; its first ~5px (behind the crest line) are always solid.
+const WAVE_OVERLAP = 3
 
 function HoldActionButton({
   children,
@@ -128,9 +130,15 @@ function HoldActionButton({
     []
   )
 
-  const clip = useTransform(progress, (p) =>
-    vertical ? `inset(${(1 - p) * 100}% 0 0 0)` : `inset(0 ${(1 - p) * 100}% 0 0)`
-  )
+  // The liquid's clip edge and the wave's trailing edge land on fractional
+  // pixels every frame; two anti-aliased edges meeting there let the light face
+  // show through as a flickering hairline. Run the liquid WAVE_OVERLAP px past
+  // the edge, under the wave's always-solid band, so there is no seam to see.
+  const clip = useTransform(progress, (p) => {
+    if (p <= 0) return vertical ? "inset(100% 0 0 0)" : "inset(0 100% 0 0)"
+    const at = `calc(${(1 - p) * 100}% - ${WAVE_OVERLAP}px)`
+    return vertical ? `inset(${at} 0 0 0)` : `inset(0 ${at} 0 0)`
+  })
   const edge = useTransform(progress, (p) => `${p * 100}%`)
   const waveOpacity = useTransform(progress, [0, 0.02, 0.97, 1], [0, 1, 1, 0])
 
@@ -206,7 +214,7 @@ function HoldActionButton({
       }}
       onContextMenu={(event) => event.preventDefault()}
       className={cn(
-        "group/hold relative isolate inline-grid h-14 min-w-64 cursor-pointer touch-none place-items-center overflow-hidden rounded-2xl bg-secondary bg-linear-to-b from-white/6 to-transparent px-6 text-[0.95rem] font-medium text-secondary-foreground shadow-raised outline-none select-none [-webkit-touch-callout:none]",
+        "group/hold relative isolate inline-grid h-14 min-w-64 cursor-pointer touch-none place-items-center overflow-hidden rounded-2xl bg-secondary px-6 text-[0.95rem] font-medium text-secondary-foreground shadow-raised outline-none select-none [-webkit-touch-callout:none]",
         "transition-[box-shadow,transform] duration-150 hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring data-[phase=holding]:scale-[0.985] motion-reduce:data-[phase=holding]:scale-100",
         "disabled:pointer-events-none disabled:opacity-50",
         className
@@ -220,7 +228,7 @@ function HoldActionButton({
         aria-hidden
         style={{ clipPath: clip }}
         className={cn(
-          "pointer-events-none absolute inset-0 grid place-items-center bg-linear-to-b from-white/14 to-transparent",
+          "pointer-events-none absolute inset-0 grid place-items-center",
           TONES[tone].fill
         )}
       >
@@ -254,6 +262,13 @@ function HoldActionButton({
           <path d={vertical ? WAVE_X : WAVE_Y} />
         </motion.svg>
       </motion.span>
+
+      {/* One sheen over face, liquid and wave alike, so the wave (a plain fill)
+          and the liquid behind it are exactly the same colour: no band at the edge. */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-linear-to-b from-white/8 to-transparent"
+      />
 
       <span id={hintId} className="sr-only">
         {hint}
