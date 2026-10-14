@@ -2,14 +2,14 @@
 
 import * as React from "react"
 
-import { CalendarIcon, ChatIcon, FolderIcon, HomeIcon, MailIcon, SearchIcon, SettingsIcon, TrashIcon } from "@/components/icons"
+import { CalendarDaysIcon, ChatIcon, FolderIcon, HomeIcon, InboxIcon, NavigationIcon, SettingsIcon, TrashIcon } from "@/components/icons"
 import { Dock, DockGroup, DockItem, DockSeparator } from "@/registry/base-nova/ui/dock"
 
 const apps = [
   { id: "home", label: "Home", icon: HomeIcon },
-  { id: "search", label: "Search", icon: SearchIcon },
-  { id: "mail", label: "Mail", icon: MailIcon },
-  { id: "calendar", label: "Calendar", icon: CalendarIcon },
+  { id: "maps", label: "Maps", icon: NavigationIcon },
+  { id: "mail", label: "Mail", icon: InboxIcon },
+  { id: "calendar", label: "Calendar", icon: CalendarDaysIcon },
   { id: "messages", label: "Messages", icon: ChatIcon },
 ]
 

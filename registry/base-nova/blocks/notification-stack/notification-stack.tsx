@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion, type Transition } from "moti
 
 import { ArrowUpRightIcon, BellIcon, ChevronDownIcon, XIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 export type NotificationTone = "default" | "primary" | "success" | "warning" | "destructive"
 
@@ -41,13 +42,13 @@ const GAP = 8
 const STACK_DEPTH = 3
 const FALLBACK_HEIGHT = 68
 
-const toneClass: Record<NotificationTone, string> = {
-  default: "bg-muted text-muted-foreground shadow-well",
-  primary: "bg-primary/12 text-primary",
-  success: "bg-success/14 text-success",
-  warning: "bg-warning/18 text-warning",
-  destructive: "bg-destructive/12 text-destructive",
-}
+const chipTone = {
+  default: "neutral",
+  primary: "primary",
+  success: "success",
+  warning: "warning",
+  destructive: "destructive",
+} as const satisfies Record<NotificationTone, string>
 
 /** Measures each card's natural content height so the stack can spring between layouts. */
 function useHeights(ids: string[]) {
@@ -255,14 +256,7 @@ export function NotificationStack({
                     className="flex items-start gap-3 p-3.5"
                   >
                     {item.icon && (
-                      <span
-                        className={cn(
-                          "inline-flex size-9 shrink-0 items-center justify-center rounded-xl [&_svg]:size-4.5",
-                          toneClass[item.tone ?? "default"]
-                        )}
-                      >
-                        {item.icon}
-                      </span>
+                      <IconChip tone={chipTone[item.tone ?? "default"]}>{item.icon}</IconChip>
                     )}
                     <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                       <span className="flex items-baseline justify-between gap-3">

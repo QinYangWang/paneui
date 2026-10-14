@@ -7,6 +7,7 @@ import { getGroups, getItems } from "@/lib/docs"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/registry/base-nova/ui/card"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 const wide = new Set(["chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
@@ -35,9 +36,9 @@ export default function Gallery() {
           <section key={g.category} id={categorySlug(g.category)} className="flex scroll-mt-20 flex-col gap-5">
             <h2 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
               {Icon && (
-                <span className="grid size-8 place-items-center rounded-xl bg-secondary text-muted-foreground shadow-raised">
-                  <Icon size={16} />
-                </span>
+                <IconChip>
+                  <Icon />
+                </IconChip>
               )}
               {g.category}
               <Badge size="sm">{g.items.length}</Badge>

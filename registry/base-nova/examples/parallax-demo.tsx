@@ -1,4 +1,5 @@
 import { CloudIcon, MoonIcon, StarIcon, SunIcon } from "@/components/icons"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { Parallax } from "@/registry/base-nova/ui/parallax"
 import { SmoothScroll } from "@/registry/base-nova/ui/smooth-scroll"
 
@@ -23,9 +24,9 @@ export default function ParallaxDemo() {
             </Parallax>
             <Parallax speed={-0.1}>
               <div className="relative flex items-center gap-3 rounded-2xl bg-card bg-linear-to-b from-white/6 to-transparent px-4 py-3 shadow-raised">
-                <span className="flex size-9 items-center justify-center rounded-full bg-muted shadow-well">
-                  <Icon className="size-4 text-primary" />
-                </span>
+                <IconChip tone="primary">
+                  <Icon />
+                </IconChip>
                 <div>
                   <p className="text-sm font-medium">{title}</p>
                   <p className="text-xs text-muted-foreground tabular-nums">{time}</p>

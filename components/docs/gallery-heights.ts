@@ -35,6 +35,7 @@ export const galleryHeights: Record<string, number> = {
   "funnel-chart": 396,
   "heat-calendar": 298,
   "image-generation": 451,
+  "icon-chip": 364,
   "infinite-masonry": 544,
   "knockout-bracket": 693,
   "knockout-wheel": 464,

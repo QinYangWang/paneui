@@ -6,6 +6,7 @@ import ButtonDemo from "@/registry/base-nova/examples/button-demo"
 import CardDemo from "@/registry/base-nova/examples/card-demo"
 import ChatDemo from "@/registry/base-nova/examples/chat-demo"
 import DialogDemo from "@/registry/base-nova/examples/dialog-demo"
+import IconChipDemo from "@/registry/base-nova/examples/icon-chip-demo"
 import IconsDemo from "@/registry/base-nova/examples/icons-demo"
 import InputDemo from "@/registry/base-nova/examples/input-demo"
 import LabelDemo from "@/registry/base-nova/examples/label-demo"
@@ -158,6 +159,7 @@ import WalletCardDemo from "@/registry/base-nova/examples/wallet-card-demo"
 export const demos: Record<string, React.ComponentType> = {
   theme: ThemeDemo,
   icons: IconsDemo,
+  "icon-chip": IconChipDemo,
   button: ButtonDemo,
   badge: BadgeDemo,
   card: CardDemo,

@@ -8,11 +8,21 @@ import { cn } from "@/lib/utils"
 
 /*
  * A select whose trigger grows into the option list. The popup is laid over the
- * trigger (negative side offset) and starts clipped to the trigger's exact box,
- * then unclips to its full height, so the pill itself appears to unfold into
- * the menu and fold back on close. Its first row mirrors the trigger, which is
- * what makes the hand-off seamless. Built on Base UI Select, so keyboard
- * navigation, typeahead, focus and ARIA come for free.
+ * trigger (negative side offset) and starts as a box with the trigger's exact
+ * size, radius and raised shadow, then its real height animates to the measured
+ * content height (and back on close). Because the ring and shadow are drawn by
+ * the box itself, the border stays continuous at every frame of the morph. Its
+ * first row mirrors the trigger, which is what makes the hand-off seamless.
+ * Built on Base UI Select, so keyboard navigation, typeahead, focus and ARIA
+ * come for free. The box uses overflow-clip (not hidden) so Base UI scrolling the
+ * selected item into view cannot scroll the morphing box itself.
+ *
+ * Geometry: `--morph-h` is the content's natural height (ResizeObserver). The
+ * popup animates `height` between `--anchor-height` and `--morph-h`, and an
+ * opposite margin makes up the difference so the positioner keeps a constant
+ * size: the anchored edge never moves and Floating UI never flips mid-morph.
+ * When the popup opens upward (data-side=top) the margin sits on top and the
+ * content is bottom-aligned, so the box grows up out of the trigger.
  */
 
 const MorphSelect = SelectPrimitive.Root
@@ -50,6 +60,29 @@ function MorphSelectTrigger({ className, children, ...props }: SelectPrimitive.T
   )
 }
 
+/**
+ * The popup's natural-height content. Publishes its measured height as
+ * `--morph-h` on the popup so the box can animate its real height to it.
+ */
+function MorphContent({ children }: { children: React.ReactNode }) {
+  const ref = React.useRef<HTMLDivElement>(null)
+  React.useLayoutEffect(() => {
+    const el = ref.current
+    const popup = el?.parentElement
+    if (!el || !popup) return
+    const publish = () => popup.style.setProperty("--morph-h", `${el.offsetHeight}px`)
+    publish()
+    const ro = new ResizeObserver(publish)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+  return (
+    <div ref={ref} className="flex shrink-0 flex-col group-data-[side=top]/morph:flex-col-reverse">
+      {children}
+    </div>
+  )
+}
+
 function MorphSelectContent({
   className,
   children,
@@ -73,43 +106,40 @@ function MorphSelectContent({
         <SelectPrimitive.Popup
           data-slot="morph-select-content"
           className={cn(
-            "group/morph flex w-(--anchor-width) flex-col overflow-hidden rounded-2xl bg-popover text-popover-foreground shadow-surface outline-none data-[side=top]:flex-col-reverse",
-            // The clip must sit *outside* the box: a clip flush with the border box
-            // cuts off the ring and drop shadow (both drawn outside it), which left
-            // the open menu borderless. Open, the clip reaches 40px out (concentric
-            // radius r + 40px) so ring + shadow show in full; closed, it hugs the
-            // trigger 2px out on three sides and cuts at the trigger's height on the
-            // fourth, so the ring stays continuous around the morphing shape.
-            "[--morph-open:inset(-40px_round_calc(var(--radius-2xl)_+_40px))]",
-            "[--morph-closed:inset(-2px_-2px_calc(100%_-_var(--anchor-height))_-2px_round_calc(var(--radius-2xl)_+_2px))] data-[side=top]:[--morph-closed:inset(calc(100%_-_var(--anchor-height))_-2px_-2px_-2px_round_calc(var(--radius-2xl)_+_2px))]",
-            "[clip-path:var(--morph-open)] transition-[clip-path,background-color,box-shadow] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]",
-            "data-starting-style:bg-secondary data-starting-style:shadow-raised data-starting-style:[clip-path:var(--morph-closed)]",
-            "data-ending-style:bg-secondary data-ending-style:shadow-raised data-ending-style:duration-300 data-ending-style:[clip-path:var(--morph-closed)]",
-            "motion-reduce:transition-opacity motion-reduce:data-starting-style:opacity-0 motion-reduce:data-starting-style:[clip-path:var(--morph-open)] motion-reduce:data-ending-style:opacity-0 motion-reduce:data-ending-style:[clip-path:var(--morph-open)]",
+            "group/morph flex h-(--morph-h) w-(--anchor-width) flex-col overflow-clip rounded-2xl bg-popover text-popover-foreground shadow-surface outline-none data-[side=top]:justify-end",
+            "transition-[height,margin,background-color,box-shadow] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            // closed geometry: trigger-sized box; the margin keeps the positioner at full size
+            "data-starting-style:h-(--anchor-height) data-starting-style:bg-secondary data-starting-style:shadow-raised",
+            "data-ending-style:h-(--anchor-height) data-ending-style:bg-secondary data-ending-style:shadow-raised data-ending-style:duration-300",
+            "data-[side=bottom]:data-starting-style:mb-[calc(var(--morph-h)_-_var(--anchor-height))] data-[side=bottom]:data-ending-style:mb-[calc(var(--morph-h)_-_var(--anchor-height))]",
+            "data-[side=top]:data-starting-style:mt-[calc(var(--morph-h)_-_var(--anchor-height))] data-[side=top]:data-ending-style:mt-[calc(var(--morph-h)_-_var(--anchor-height))]",
+            "motion-reduce:transition-opacity motion-reduce:data-starting-style:m-0 motion-reduce:data-starting-style:h-(--morph-h) motion-reduce:data-starting-style:opacity-0 motion-reduce:data-ending-style:m-0 motion-reduce:data-ending-style:h-(--morph-h) motion-reduce:data-ending-style:opacity-0",
             className
           )}
           {...props}
         >
-          {/* Mirrors the trigger row; clicks fall through to the trigger beneath, which closes the menu. */}
-          <div aria-hidden className={cn(ROW, "pointer-events-none shrink-0")}>
-            {header ?? <SelectPrimitive.Value className="flex-1 truncate text-left data-placeholder:text-muted-foreground" />}
-            <ChevronDownIcon className="text-muted-foreground transition-transform duration-300 rotate-180 group-data-ending-style/morph:rotate-0 group-data-starting-style/morph:rotate-0" />
-          </div>
-          <div
-            aria-hidden
-            className="mx-3 h-px shrink-0 bg-border transition-opacity duration-300 group-data-ending-style/morph:opacity-0 group-data-starting-style/morph:opacity-0"
-          />
-          <SelectPrimitive.List
-            className={cn(
-              "max-h-[min(18rem,calc(var(--available-height)_-_var(--anchor-height)))] overflow-y-auto p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-              "transition-[opacity,translate,filter] delay-75 duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              "group-data-starting-style/morph:-translate-y-1.5 group-data-starting-style/morph:opacity-0 group-data-starting-style/morph:blur-[3px]",
-              "group-data-ending-style/morph:opacity-0 group-data-ending-style/morph:blur-[2px] group-data-ending-style/morph:delay-0 group-data-ending-style/morph:duration-150",
-              "motion-reduce:translate-0 motion-reduce:blur-none"
-            )}
-          >
-            {children}
-          </SelectPrimitive.List>
+          <MorphContent>
+            {/* Mirrors the trigger row; clicks fall through to the trigger beneath, which closes the menu. */}
+            <div aria-hidden className={cn(ROW, "pointer-events-none shrink-0")}>
+              {header ?? <SelectPrimitive.Value className="flex-1 truncate text-left data-placeholder:text-muted-foreground" />}
+              <ChevronDownIcon className="text-muted-foreground transition-transform duration-300 rotate-180 group-data-ending-style/morph:rotate-0 group-data-starting-style/morph:rotate-0" />
+            </div>
+            <div
+              aria-hidden
+              className="mx-3 h-px shrink-0 bg-border transition-opacity duration-300 group-data-ending-style/morph:opacity-0 group-data-starting-style/morph:opacity-0"
+            />
+            <SelectPrimitive.List
+              className={cn(
+                "max-h-[min(18rem,calc(var(--available-height)_-_var(--anchor-height)))] overflow-y-auto p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+                "transition-[opacity,translate,filter] delay-75 duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                "group-data-starting-style/morph:-translate-y-1.5 group-data-starting-style/morph:opacity-0 group-data-starting-style/morph:blur-[3px]",
+                "group-data-ending-style/morph:opacity-0 group-data-ending-style/morph:blur-[2px] group-data-ending-style/morph:delay-0 group-data-ending-style/morph:duration-150",
+                "motion-reduce:translate-0 motion-reduce:blur-none"
+              )}
+            >
+              {children}
+            </SelectPrimitive.List>
+          </MorphContent>
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
     </SelectPrimitive.Portal>

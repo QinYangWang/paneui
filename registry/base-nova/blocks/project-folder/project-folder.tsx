@@ -6,6 +6,7 @@ import { LayoutGroup, motion, useReducedMotion } from "motion/react"
 
 import { ArrowUpRightIcon, FolderIcon, XIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 export type ProjectFolderFile = {
   id: string
@@ -190,9 +191,9 @@ export function ProjectFolder({
                   transition={{ duration: 0.22, delay: 0.05 }}
                   className="flex items-start gap-3 pr-10"
                 >
-                  <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-2xl bg-primary bg-linear-to-b from-white/20 to-transparent text-primary-foreground shadow-primary">
-                    <FolderIcon size={19} />
-                  </span>
+                  <IconChip size="lg" tone="solid">
+                    <FolderIcon />
+                  </IconChip>
                   <div className="flex min-w-0 flex-col">
                     <DialogPrimitive.Title className="truncate text-lg leading-snug font-semibold tracking-tight">
                       {title}

@@ -8,6 +8,7 @@ import { CheckIcon, ChevronDownIcon, ShieldIcon, UndoIcon, WarningIcon, XIcon } 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { AGENT_EASE, CodeHighlight, type CodeLanguage } from "@/registry/base-nova/ui/tool-result"
 
 type ToolApprovalDecision = "once" | "always" | "deny"
@@ -137,14 +138,9 @@ function ToolApproval({
       {...props}
     >
       <div className="flex items-start gap-3 p-3.5 pb-2.5">
-        <span
-          aria-hidden
-          className={cn(
-            "grid size-8 shrink-0 place-items-center rounded-full bg-muted bg-linear-to-b from-white/6 to-transparent shadow-chip transition-colors duration-300 [&_svg]:size-4",
-            pending && (risk === "high" ? "text-destructive" : "text-warning"),
-            decision === "deny" && "text-muted-foreground",
-            (decision === "once" || decision === "always") && "text-success"
-          )}
+        <IconChip
+          tone={pending ? (risk === "high" ? "destructive" : "warning") : decision === "deny" ? "neutral" : "success"}
+          className="transition-[background-color,color,box-shadow] duration-300"
         >
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.span
@@ -164,7 +160,7 @@ function ToolApproval({
               )}
             </motion.span>
           </AnimatePresence>
-        </span>
+        </IconChip>
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
             <span className="font-semibold tracking-tight">{pending ? title : DECISION_COPY[decision]}</span>

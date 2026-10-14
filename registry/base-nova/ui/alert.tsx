@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion, type HTMLMotionProps } from 
 
 import { AlertCircleIcon, CheckCircleIcon, InfoIcon, WarningIcon, XIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 type AlertVariant = "default" | "info" | "success" | "warning" | "destructive"
 
@@ -31,13 +32,13 @@ const tintClass: Record<AlertVariant, string> = {
   destructive: "bg-destructive/8",
 }
 
-const chipClass: Record<AlertVariant, string> = {
-  default: "bg-muted text-muted-foreground shadow-chip",
-  info: "bg-primary/14 text-primary",
-  success: "bg-success/16 text-success",
-  warning: "bg-warning/20 text-warning",
-  destructive: "bg-destructive/14 text-destructive",
-}
+const chipTone = {
+  default: "neutral",
+  info: "primary",
+  success: "success",
+  warning: "warning",
+  destructive: "destructive",
+} as const satisfies Record<AlertVariant, string>
 
 const defaultIcon: Record<AlertVariant, React.ComponentType<{ className?: string }>> = {
   default: InfoIcon,
@@ -149,18 +150,9 @@ function AlertIcon({ className, children, ...props }: React.ComponentProps<"span
   const { variant } = useAlert()
   const Icon = defaultIcon[variant]
   return (
-    <span
-      data-slot="alert-icon"
-      aria-hidden
-      className={cn(
-        "flex size-7 shrink-0 items-center justify-center rounded-full [&_svg]:size-4 [&_svg]:shrink-0",
-        chipClass[variant],
-        className
-      )}
-      {...props}
-    >
+    <IconChip data-slot="alert-icon" tone={chipTone[variant]} className={className} {...props}>
       {children ?? <Icon />}
-    </span>
+    </IconChip>
   )
 }
 

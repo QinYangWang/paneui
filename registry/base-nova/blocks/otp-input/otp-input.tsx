@@ -166,9 +166,9 @@ function OTPInput({
             >
               <svg viewBox="0 0 18 18" fill="none" className="size-4">
                 <motion.path
-                  d="M4.6 9.4l2.9 2.9 5.9-6.1"
+                  d="M4.4 9.6l3 3 6.2-6.4"
                   stroke="currentColor"
-                  strokeWidth={2.2}
+                  strokeWidth={2}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   initial={{ pathLength: reduce ? 1 : 0 }}

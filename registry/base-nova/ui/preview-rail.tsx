@@ -4,6 +4,7 @@ import * as React from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 /*
  * A navigation rail of compact ticks. Pointing at the rail grows the ticks
@@ -60,9 +61,7 @@ function DefaultPreview({ item }: { item: PreviewRailItem }) {
   return (
     <div className="flex items-start gap-2.5">
       {item.icon && (
-        <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-muted text-muted-foreground shadow-well [&_svg]:size-4">
-          {item.icon}
-        </span>
+        <IconChip className="-mt-0.5">{item.icon}</IconChip>
       )}
       <div className="min-w-0">
         <p className="text-sm font-medium text-popover-foreground">{item.label}</p>

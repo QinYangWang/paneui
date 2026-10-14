@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/registry/base-nova/ui/card"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 type Status = "pending" | "approved" | "declined"
 
@@ -34,7 +35,9 @@ export function ApprovalCard({
     <Card className={cn("w-full max-w-sm", className)}>
       <CardHeader>
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <ShieldIcon size={16} className="text-primary" />
+          <IconChip size="sm" tone="primary">
+            <ShieldIcon />
+          </IconChip>
           Needs your approval
         </div>
         <CardTitle className="text-lg">{title}</CardTitle>

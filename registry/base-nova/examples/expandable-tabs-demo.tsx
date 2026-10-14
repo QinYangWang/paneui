@@ -1,4 +1,4 @@
-import { BellIcon, CalendarIcon, HomeIcon, SettingsIcon } from "@/components/icons"
+import { BellIcon, CalendarDaysIcon, HomeIcon, SettingsIcon } from "@/components/icons"
 import { ExpandableTabs } from "@/registry/base-nova/blocks/expandable-tabs/expandable-tabs"
 
 function Row({ title, meta }: { title: string; meta: string }) {
@@ -25,7 +25,7 @@ const items = [
   {
     id: "calendar",
     label: "Calendar",
-    icon: <CalendarIcon />,
+    icon: <CalendarDaysIcon />,
     content: (
       <div className="divide-y divide-border/60">
         <Row title="Design review" meta="14:00" />

@@ -10,6 +10,7 @@ import { PromptBar } from "@/registry/base-nova/blocks/prompt-bar/prompt-bar"
 import { AgentProgress, formatElapsed } from "@/registry/base-nova/ui/agent-progress"
 import { AISidebar, type SidebarResource } from "@/registry/base-nova/ui/ai-sidebar"
 import { Button } from "@/registry/base-nova/ui/button"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { ReasoningText } from "@/registry/base-nova/ui/reasoning-text"
 import { TodoList, type TodoItem } from "@/registry/base-nova/ui/todo-list"
 
@@ -213,9 +214,9 @@ function AssistantTurn({ turn }: { turn: Extract<Turn, { role: "assistant" }> })
 function EmptyState({ onPick }: { onPick: (s: string) => void }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
-      <span className="grid size-12 place-items-center rounded-2xl bg-card bg-linear-to-b from-white/6 to-transparent text-primary shadow-raised">
-        <BotIcon size={24} />
-      </span>
+      <IconChip size="xl" className="text-primary">
+        <BotIcon />
+      </IconChip>
       <div className="flex flex-col gap-1">
         <p className="text-lg font-semibold">What should we work on?</p>
         <p className="text-sm text-muted-foreground">Ask anything, or start from one of these.</p>

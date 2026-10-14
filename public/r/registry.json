@@ -160,6 +160,28 @@
       }
     },
     {
+      "name": "icon-chip",
+      "type": "registry:ui",
+      "title": "Icon Chip",
+      "description": "The house frame for title and header icons: a raised squircle in four sizes with neutral, tinted and solid tones, so every card header reads as one icon family.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/icon-chip.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Foundations"
+      }
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
@@ -322,7 +344,7 @@
       "name": "stepper",
       "type": "registry:ui",
       "title": "Stepper",
-      "description": "Numeric \u2212 value + stepper on Base UI NumberField with rolling digits, raised buttons and disabled ends at min and max.",
+      "description": "Numeric − value + stepper on Base UI NumberField with rolling digits, raised buttons and disabled ends at min and max.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -462,7 +484,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/icon-chip"
       ],
       "files": [
         {
@@ -779,7 +802,7 @@
       "name": "button-stateful",
       "type": "registry:ui",
       "title": "Button Stateful",
-      "description": "Our Button that moves idle \u2192 loading \u2192 success / error, blur-swapping its icon and label while its width springs to fit each state.",
+      "description": "Our Button that moves idle → loading → success / error, blur-swapping its icon and label while its width springs to fit each state.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1757,7 +1780,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/icon-chip"
       ],
       "files": [
         {
@@ -1965,7 +1989,7 @@
       "name": "file-diff",
       "type": "registry:ui",
       "title": "File Diff",
-      "description": "Collapsible unified-diff view of one file change with live +/\u2212 counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
+      "description": "Collapsible unified-diff view of one file change with live +/− counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
       "dependencies": [
         "@base-ui/react",
         "motion",
@@ -2001,7 +2025,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/action-swap-roll"
+        "@qinyang/action-swap-roll",
+        "@qinyang/icon-chip"
       ],
       "files": [
         {
@@ -2097,7 +2122,8 @@
         "@qinyang/icons",
         "@qinyang/badge",
         "@qinyang/button",
-        "@qinyang/tool-result"
+        "@qinyang/tool-result",
+        "@qinyang/icon-chip"
       ],
       "files": [
         {
@@ -2183,7 +2209,7 @@
       "name": "agent-progress",
       "type": "registry:ui",
       "title": "Agent Progress",
-      "description": "Compact working readout: a pulsing 3\u00d73 activity glyph, an action verb and a live tabular timer that can pause, resume or be controlled.",
+      "description": "Compact working readout: a pulsing 3×3 activity glyph, an action verb and a live tabular timer that can pause, resume or be controlled.",
       "dependencies": [
         "motion"
       ],
@@ -2228,7 +2254,7 @@
       "name": "ai-sidebar",
       "type": "registry:ui",
       "title": "AI Sidebar",
-      "description": "Collapsible AI workspace sidebar with folders, projects, files and bookmarks, an icon rail, \u2318K search with highlighted matches, tree keyboard navigation and inline rename.",
+      "description": "Collapsible AI workspace sidebar with folders, projects, files and bookmarks, an icon rail, ⌘K search with highlighted matches, tree keyboard navigation and inline rename.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2494,7 +2520,7 @@
       "name": "returns-calendar",
       "type": "registry:ui",
       "title": "Returns Calendar",
-      "description": "Monthly returns calendar with a years \u00d7 months grid (diverging tints, compounded year totals) or a year-cards view with mini monthly bars, tooltips (best/worst, YTD) and controlled month-range or whole-year selection with compounded totals.",
+      "description": "Monthly returns calendar with a years × months grid (diverging tints, compounded year totals) or a year-cards view with mini monthly bars, tooltips (best/worst, YTD) and controlled month-range or whole-year selection with compounded totals.",
       "dependencies": [
         "motion"
       ],
@@ -2783,7 +2809,8 @@
         "@qinyang/card",
         "@qinyang/badge",
         "@qinyang/button",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/icon-chip"
       ],
       "files": [
         {
@@ -2843,7 +2870,7 @@
       "name": "command-palette",
       "type": "registry:block",
       "title": "Command Palette",
-      "description": "\u2318K palette with fuzzy search, grouped results, a gliding active row, keyboard navigation and shortcut hints.",
+      "description": "⌘K palette with fuzzy search, grouped results, a gliding active row, keyboard navigation and shortcut hints.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2880,7 +2907,8 @@
         "@qinyang/ai-sidebar",
         "@qinyang/todo-list",
         "@qinyang/reasoning-text",
-        "@qinyang/agent-progress"
+        "@qinyang/agent-progress",
+        "@qinyang/icon-chip"
       ],
       "files": [
         {
@@ -2902,7 +2930,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/icon-chip"
       ],
       "files": [
         {
@@ -3031,7 +3060,7 @@
       "name": "morphing-search",
       "type": "registry:block",
       "title": "Morphing Search",
-      "description": "A search field or compact icon that morphs into a results surface with grouped, highlighted matches, full keyboard navigation and an opt-in \u2318/Ctrl shortcut.",
+      "description": "A search field or compact icon that morphs into a results surface with grouped, highlighted matches, full keyboard navigation and an opt-in ⌘/Ctrl shortcut.",
       "dependencies": [
         "motion"
       ],
@@ -3148,7 +3177,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/icon-chip"
       ],
       "files": [
         {

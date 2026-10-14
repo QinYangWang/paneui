@@ -1,3 +1,24 @@
+/*
+ * qinyang/ui icon set. Puffy, single-colour icons on an 18x18 grid.
+ *
+ * Drawing rules: ~2.5px padding; filled shapes use `puff` (stroke 1.5, round
+ * join, fill currentColor), open glyphs use `line` (stroke 1.6, round caps and
+ * joins); currentColor only; path/circle/rect only, no transforms, masks,
+ * clips or <g> styling; knockouts via fillRule="evenodd" with the hole drawn
+ * 0.75px larger per side; envelope/calendar/info-type objects are outlined
+ * rings; every detail must survive at 14px.
+ *
+ * Usage system (full version in notes/icon-usage.md):
+ * - One family per group. Icons shown side by side (nav, rail, dock, tabs,
+ *   palette, a feed of cards) are all solid puff shapes or all line glyphs.
+ *   Navigation uses the solid family (InboxIcon, CalendarDaysIcon,
+ *   TerminalSquareIcon instead of the ring/line Mail, Calendar, Terminal).
+ * - Nav / sidebar / palette icons: 16px, muted; active = foreground; bare.
+ * - Title / header / card icons sit in an IconChip (@qinyang/icon-chip): a
+ *   raised squircle, sm 24 / default 32 / lg 40 / xl 48, tone neutral,
+ *   primary, success, warning, destructive or solid.
+ * - Inline icons inherit size and colour from their button, badge or text.
+ */
 import type { SVGProps } from "react";
 
 type IconProps = Omit<SVGProps<SVGSVGElement>, "children"> & { size?: number };
@@ -645,5 +666,85 @@ export const BotIcon = (p: IconProps) => (
       fillRule="evenodd"
       d="M5.4 6.4h7.2c.9 0 1.6.7 1.6 1.6v4.4c0 .9-.7 1.6-1.6 1.6H5.4c-.9 0-1.6-.7-1.6-1.6V8c0-.9.7-1.6 1.6-1.6zM6.9 8.65a1.45 1.45 0 100 2.9 1.45 1.45 0 000-2.9zM11.1 8.65a1.45 1.45 0 100 2.9 1.45 1.45 0 000-2.9z"
     />
+  </Icon>
+);
+
+export const TerminalSquareIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...puff}
+      fillRule="evenodd"
+      d="M5.2 3.4h7.6a1.8 1.8 0 011.8 1.8v7.6a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V5.2a1.8 1.8 0 011.8-1.8zM7 5.3l2.1 2.1a1.55 1.55 0 010 2.2L7 11.7a1.55 1.55 0 01-2.2-2.2l1-1-1-1A1.55 1.55 0 017 5.3zM9.6 9.85h2.6a1.55 1.55 0 010 3.1H9.6a1.55 1.55 0 010-3.1z"
+    />
+  </Icon>
+);
+
+export const ShapesIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...puff} d="M9 3.6l2.7 4.1H6.3z" />
+    <rect {...puff} x="3.4" y="11.2" width="3.4" height="3.4" rx=".8" />
+    <circle {...puff} cx="12.1" cy="12.5" r="2.1" />
+  </Icon>
+);
+
+export const NavigationIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...puff} d="M14.2 3.8L9.8 14.2l-1.2-4.8-4.8-1.2z" />
+  </Icon>
+);
+
+export const ServerIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...puff}
+      fillRule="evenodd"
+      d="M5 3.4h8a1.6 1.6 0 011.6 1.6v.9a1.6 1.6 0 01-1.6 1.6H5a1.6 1.6 0 01-1.6-1.6V5A1.6 1.6 0 015 3.4zM6 3.8a1.65 1.65 0 100 3.3 1.65 1.65 0 000-3.3zM5 10.5h8a1.6 1.6 0 011.6 1.6v.9a1.6 1.6 0 01-1.6 1.6H5a1.6 1.6 0 01-1.6-1.6v-.9a1.6 1.6 0 011.6-1.6zM6 10.9a1.65 1.65 0 100 3.3 1.65 1.65 0 000-3.3z"
+    />
+  </Icon>
+);
+
+export const InboxIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...puff}
+      fillRule="evenodd"
+      d="M5.2 3.6h7.6a1.8 1.8 0 011.8 1.8v7.2a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V5.4a1.8 1.8 0 011.8-1.8zM5.4 4.6h7.2a1 1 0 011 1v4.8h-1.9l-.7 1.7H7l-.7-1.7H4.4V5.6a1 1 0 011-1z"
+    />
+  </Icon>
+);
+
+export const CalendarDaysIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M6.4 3v1.6M11.6 3v1.6" />
+    <path
+      {...puff}
+      fillRule="evenodd"
+      d="M5.2 4.6h7.6a1.8 1.8 0 011.8 1.8v6.4a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V6.4a1.8 1.8 0 011.8-1.8zM5.6 8.1h6.8a.7.7 0 01.7.7v4.1a.7.7 0 01-.7.7H5.6a.7.7 0 01-.7-.7V8.8a.7.7 0 01.7-.7z"
+    />
+    <circle {...puff} cx="7.4" cy="10.85" r=".75" />
+  </Icon>
+);
+
+/* ───────────────────────── Brand marks (puff) ───────────────────────── */
+
+/** The qinyang/ui mark: a soft rounded square with a "q" knocked out. */
+export const QinyangLogoIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...puff}
+      fillRule="evenodd"
+      d="M5.2 3.4h7.6a1.8 1.8 0 011.8 1.8v7.6a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V5.2a1.8 1.8 0 011.8-1.8zM9 4h3.95v8.45a1.55 1.55 0 01-3.1 0v-.64A3.95 3.95 0 119 4zM9 7.1a.85.85 0 100 1.7.85.85 0 000-1.7z"
+    />
+  </Icon>
+);
+
+/** GitHub's octocat, simplified to a single puffy silhouette with its tail. */
+export const GithubIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...puff}
+      d="M5.3 3.4c.6 0 1.6.7 2.1 1.2a8.4 8.4 0 013.2 0c.5-.5 1.5-1.2 2.1-1.2.3.8.4 1.8.2 2.6.6.7.9 1.5.9 2.4 0 2.2-1.3 3.3-3.3 3.6.3.4.4.9.4 1.5v1.1H7.1v-1.1c0-.6.1-1.1.4-1.5-2-.3-3.3-1.4-3.3-3.6 0-.9.3-1.7.9-2.4-.2-.8-.1-1.8.2-2.6z"
+    />
+    <path {...line} d="M7.1 14.1c-1.3 0-2-.4-2.5-1.1" />
   </Icon>
 );

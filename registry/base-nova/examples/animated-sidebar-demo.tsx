@@ -7,8 +7,8 @@ import {
   ChartIcon,
   FolderIcon,
   HomeIcon,
-  MailIcon,
-  SearchIcon,
+  InboxIcon,
+  NavigationIcon,
   SettingsIcon,
   SparklesIcon,
   UsersIcon,
@@ -29,9 +29,10 @@ import {
   SidebarSubItem,
   SidebarTrigger,
 } from "@/registry/base-nova/ui/animated-sidebar"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 const projects = ["Atlas", "Beacon", "Comet"]
-const titles: Record<string, string> = { home: "Home", inbox: "Inbox", search: "Search", insights: "Insights", team: "Team", settings: "Settings" }
+const titles: Record<string, string> = { home: "Home", inbox: "Inbox", explore: "Explore", insights: "Insights", team: "Team", settings: "Settings" }
 
 export default function AnimatedSidebarDemo() {
   const [active, setActive] = React.useState("project:Beacon")
@@ -41,10 +42,10 @@ export default function AnimatedSidebarDemo() {
     <SidebarProvider className="h-[26rem] w-full max-w-2xl gap-3">
       <Sidebar>
         <SidebarHeader>
-          <div className="flex h-9 items-center gap-2.5 px-[9px]">
-            <span className="grid size-[26px] shrink-0 place-items-center rounded-lg bg-primary bg-linear-to-b from-white/20 to-transparent text-primary-foreground shadow-primary [&_svg]:size-4">
+          <div className="flex h-9 items-center gap-2.5 px-[10px]">
+            <IconChip size="sm" tone="solid">
               <SparklesIcon />
-            </span>
+            </IconChip>
             <SidebarHideCollapsed className="flex min-w-0 flex-col leading-tight">
               <span className="truncate text-sm font-semibold">Northwind</span>
               <span className="truncate text-xs text-muted-foreground">Pro workspace</span>
@@ -55,8 +56,8 @@ export default function AnimatedSidebarDemo() {
           <SidebarGroup>
             <SidebarMenu>
               <SidebarItem icon={<HomeIcon />} label="Home" isActive={active === "home"} onClick={() => setActive("home")} />
-              <SidebarItem icon={<MailIcon />} label="Inbox" badge={8} isActive={active === "inbox"} onClick={() => setActive("inbox")} />
-              <SidebarItem icon={<SearchIcon />} label="Search" isActive={active === "search"} onClick={() => setActive("search")} />
+              <SidebarItem icon={<InboxIcon />} label="Inbox" badge={8} isActive={active === "inbox"} onClick={() => setActive("inbox")} />
+              <SidebarItem icon={<NavigationIcon />} label="Explore" isActive={active === "explore"} onClick={() => setActive("explore")} />
             </SidebarMenu>
           </SidebarGroup>
           <SidebarGroup>

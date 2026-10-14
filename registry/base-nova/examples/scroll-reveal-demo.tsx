@@ -1,10 +1,11 @@
-import { BellIcon, CalendarIcon, CartIcon, HeartIcon, MailIcon, StarIcon } from "@/components/icons"
+import { BellIcon, CalendarDaysIcon, CartIcon, EditIcon, HeartIcon, StarIcon } from "@/components/icons"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { ScrollReveal } from "@/registry/base-nova/ui/scroll-reveal"
 import { SmoothScroll } from "@/registry/base-nova/ui/smooth-scroll"
 
 const UPDATES = [
-  { icon: CalendarIcon, title: "Dinner booked", body: "Friday, 7:30pm, table for four." },
-  { icon: MailIcon, title: "Reply drafted", body: "Your note to the landlord is ready to review." },
+  { icon: CalendarDaysIcon, title: "Dinner booked", body: "Friday, 7:30pm, table for four." },
+  { icon: EditIcon, title: "Reply drafted", body: "Your note to the landlord is ready to review." },
   { icon: CartIcon, title: "Groceries on the way", body: "Arriving between 6 and 7pm." },
   { icon: HeartIcon, title: "Flowers sent", body: "Delivered to Mum with your card message." },
   { icon: BellIcon, title: "Renewal flagged", body: "Your streaming plan renews in three days." },
@@ -19,9 +20,9 @@ export default function ScrollRevealDemo() {
         {UPDATES.map(({ icon: Icon, title, body }, i) => (
           <ScrollReveal key={title} once={false} from={i % 2 ? "right" : "left"} amount={0.6}>
             <div className="flex items-center gap-3 rounded-2xl bg-card bg-linear-to-b from-white/6 to-transparent p-4 shadow-raised">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted shadow-well">
-                <Icon className="size-4 text-primary" />
-              </span>
+              <IconChip tone="primary">
+                <Icon />
+              </IconChip>
               <div>
                 <p className="text-sm font-medium">{title}</p>
                 <p className="text-sm text-muted-foreground">{body}</p>

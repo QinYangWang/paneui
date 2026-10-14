@@ -377,7 +377,7 @@ function SidebarItem({
           <>
             {showPill && <ActivePill reduce={sidebar.reduce} pillId={sidebar.pillId} />}
             {icon && (
-              <span aria-hidden className="relative grid size-[18px] shrink-0 place-items-center [&_svg]:size-[18px]">
+              <span aria-hidden className="relative grid size-[18px] shrink-0 place-items-center [&_svg]:size-4">
                 {icon}
                 {childActive && collapsed && !isActive && (
                   <span className="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-primary" />

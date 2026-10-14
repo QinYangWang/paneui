@@ -20,6 +20,7 @@ import {
 } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { ActionSwapRollText } from "@/registry/base-nova/ui/action-swap-roll"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 /* -------------------------------------------------------------------------- */
 /* Shared agent helpers (also used by tool-approval, streaming-response,      */
@@ -374,15 +375,9 @@ function ToolResult({
         data-slot="tool-result-trigger"
         className="group/tool-result flex min-h-11 w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left outline-none select-none focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset"
       >
-        <span
-          aria-hidden
-          className={cn(
-            "grid size-7 shrink-0 place-items-center rounded-full bg-muted bg-linear-to-b from-white/6 to-transparent shadow-chip [&_svg]:size-3.5",
-            status === "error" ? "text-destructive" : "text-muted-foreground"
-          )}
-        >
+        <IconChip size="sm" tone={status === "error" ? "destructive" : "neutral"}>
           {icon ?? <KindIcon />}
-        </span>
+        </IconChip>
         <span className="flex min-w-0 flex-1 items-baseline gap-2">
           <span className="min-w-0 truncate font-medium">{title}</span>
           <span className="hidden min-w-0 shrink truncate font-mono text-[11px] text-muted-foreground sm:inline">{tool}</span>

@@ -28,9 +28,9 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
       >
         <svg viewBox="0 0 18 18" fill="none" aria-hidden className="size-[18px]">
-          {/* Check: dash offset 1 → 0 draws it on; retracts quickly on uncheck. */}
+          {/* Same path and round caps/joins as CheckIcon; heavier stroke for the filled box. Dash offset 1 → 0 draws it on; retracts quickly on uncheck. */}
           <path
-            d="M4.6 9.4l2.9 2.9 5.9-6.1"
+            d="M4.4 9.6l3 3 6.2-6.4"
             pathLength={1}
             stroke="currentColor"
             strokeWidth={2}

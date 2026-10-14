@@ -2,13 +2,13 @@
 
 import * as React from "react"
 
-import { BellIcon, CalendarIcon, ChartIcon, HomeIcon, MailIcon, SettingsIcon, UsersIcon } from "@/components/icons"
+import { BellIcon, CalendarDaysIcon, ChartIcon, HomeIcon, InboxIcon, SettingsIcon, UsersIcon } from "@/components/icons"
 import { BounceSidebar } from "@/registry/base-nova/ui/bounce-sidebar"
 
 const items = [
   { id: "overview", label: "Overview", icon: <HomeIcon /> },
-  { id: "inbox", label: "Inbox", icon: <MailIcon />, meta: 12 },
-  { id: "calendar", label: "Calendar", icon: <CalendarIcon /> },
+  { id: "inbox", label: "Inbox", icon: <InboxIcon />, meta: 12 },
+  { id: "calendar", label: "Calendar", icon: <CalendarDaysIcon /> },
   { id: "team", label: "Team", icon: <UsersIcon /> },
   { id: "reports", label: "Reports", icon: <ChartIcon /> },
   { id: "alerts", label: "Alerts", icon: <BellIcon />, meta: 3 },
