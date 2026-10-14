@@ -52,7 +52,8 @@ function chipKey(value: unknown, index: number): React.Key {
 
 /**
  * Inset well holding the chosen values as removable raised chips, with the
- * search input trailing them. Backspace in an empty input removes the last chip.
+ * search input trailing them. Chips sit 4px inside the rounded-lg well, so they
+ * take rounded-sm (10 − 4 = 6px) and the same 1px hairline as the well. Backspace in an empty input removes the last chip.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- chip values are the Combobox item type; callers annotate their own callbacks
 type ChipValue = any
@@ -97,12 +98,12 @@ function MultiSelectTrigger({
                 >
                   <ComboboxPrimitive.Chip
                     data-slot="multi-select-chip"
-                    className="flex h-7 max-w-48 items-center gap-1 rounded-full bg-card pr-1 pl-2.5 text-ui-sm font-medium shadow-chip outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50"
+                    className="flex h-6 max-w-48 items-center gap-1 rounded-sm bg-card pr-0.5 pl-2 text-ui-sm font-medium shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50"
                   >
                     <span className="truncate">{renderChip(value)}</span>
                     <ComboboxPrimitive.ChipRemove
                       aria-label="Remove"
-                      className="flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                      className="flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-[4px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                     >
                       <XIcon size={12} />
                     </ComboboxPrimitive.ChipRemove>
@@ -113,14 +114,14 @@ function MultiSelectTrigger({
             <ComboboxPrimitive.Input
               data-slot="multi-select-input"
               placeholder={selected.length ? undefined : placeholder}
-              className="h-7 min-w-16 flex-1 bg-transparent px-2 text-base outline-none placeholder:text-muted-foreground md:text-ui"
+              className="h-6 min-w-16 flex-1 bg-transparent px-2 text-base outline-none placeholder:text-muted-foreground md:text-ui"
             />
           </>
         )}
       </ComboboxPrimitive.Value>
       <ComboboxPrimitive.Trigger
         aria-label="Show options"
-        className="absolute top-1.5 right-1.5 flex size-6 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+        className="absolute top-1 right-1 flex size-6 cursor-pointer items-center justify-center rounded-sm text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
       >
         <ChevronsUpDownIcon size={16} />
       </ComboboxPrimitive.Trigger>

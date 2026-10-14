@@ -41,6 +41,13 @@ export type ExpandableActionBarProps = {
 
 const LABEL: Transition = { type: "spring", stiffness: 400, damping: 34, mass: 0.7 }
 const GLIDE: Transition = { type: "spring", stiffness: 460, damping: 36, mass: 0.6 }
+/** Gap between icon and label, px. */
+const LABEL_GAP = 6
+/**
+ * The badge is pinned 8px past the icon's right edge (`-right-2`) and grows leftward, so it always
+ * overhangs by exactly 8px whatever its width. A badged item pushes its label out by that much more.
+ */
+const BADGE_OVERHANG = 8
 
 const sizes = {
   // Concentric radii: bar radius = item radius + bar padding.
@@ -185,7 +192,7 @@ export function ExpandableActionBar({
               <span className="relative inline-flex items-center justify-center">
                 {item.icon}
                 {item.badge != null && (
-                  <span className="absolute -top-1.5 -right-2 inline-flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-primary px-1 text-[0.6rem] leading-none font-semibold text-primary-foreground tabular-nums shadow-primary">
+                  <span className="absolute -top-1.5 -right-2 inline-flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-primary px-1 text-ui-2xs leading-none font-semibold text-primary-foreground tabular-nums shadow-primary">
                     {item.badge}
                   </span>
                 )}
@@ -194,7 +201,12 @@ export function ExpandableActionBar({
                 initial={false}
                 animate={
                   expanded
-                    ? { width: "auto", opacity: 1, marginLeft: 6, filter: "blur(0px)" }
+                    ? {
+                        width: "auto",
+                        opacity: 1,
+                        marginLeft: LABEL_GAP + (item.badge != null ? BADGE_OVERHANG : 0),
+                        filter: "blur(0px)",
+                      }
                     : { width: 0, opacity: 0, marginLeft: 0, filter: reduce ? "blur(0px)" : "blur(3px)" }
                 }
                 transition={reduce ? { duration: 0 } : LABEL}

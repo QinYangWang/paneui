@@ -83,7 +83,7 @@ function TextCascade({
   return (
     <motion.span
       data-slot="text-cascade"
-      className={cn("relative -my-[0.1em] inline-block py-[0.1em] align-bottom whitespace-pre", className)}
+      className={cn("relative -my-[0.1em] inline-block py-[0.1em] align-baseline whitespace-pre", className)}
       style={{ clipPath: "inset(0 -100vw)", ...style }}
       initial={false}
       animate={animateWidth && width != null ? { width } : undefined}

@@ -85,7 +85,7 @@ BreadcrumbTrail (renders all of the above from items)`,
     },
     {
       name: "BreadcrumbPage",
-      description: "The current page as a raised chip, with `aria-current=\"page\"`.",
+      description: "The current page as plain foreground text (no chip), with `aria-current=\"page\"`.",
       extends: "span",
       props: [],
     },

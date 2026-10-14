@@ -39,7 +39,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "Rows slide and unblur in as folders open, branch guides draw down, and the selection pill glides between rows. Under reduced motion rows only fade and the pill jumps.",
+      body: "Rows slide and unblur in as folders open, indent guides draw down, and the selection fill glides between rows. Under reduced motion rows only fade and the fill jumps.",
     },
   ],
   api: [
@@ -56,7 +56,7 @@ export default {
         { name: "defaultExpanded", type: "string[]", default: "[]", description: "Folders open on first render." },
         { name: "onExpandedChange", type: "(expanded: string[]) => void", description: "Called when folders open or close." },
         { name: "onOpenFile", type: "(node: FileTreeNode) => void", description: "Called when a file (not a folder) is activated with Enter or a click." },
-        { name: "indent", type: "number", default: "16", description: "Indent per level, px." },
+        { name: "indent", type: "number", default: "8", description: "Indent per level, px (VS Code explorer default)." },
         { name: "label", type: "string", default: `"Files"`, description: "Accessible name of the tree." },
       ],
       dataAttributes: [

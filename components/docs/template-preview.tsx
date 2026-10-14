@@ -5,6 +5,8 @@ import * as React from "react"
 import { ExternalLinkIcon } from "@/components/icons"
 import { Button } from "@/registry/base-nova/ui/button"
 
+import { applyRootTheme, readRootTheme } from "./theme-sync"
+
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 /** Templates are previewed at a desktop viewport and scaled down to fit the card. */
 const VIEWPORT = 1440
@@ -13,9 +15,14 @@ const VIEWPORT = 1440
  * Live, scaled-down preview of a full-page template in an iframe, plus an
  * "Open full page" link. The iframe renders at 1440px wide and is scaled with
  * a CSS transform to the frame's measured width.
+ *
+ * The iframe is same-origin, so theme and accent are mirrored straight from
+ * this page's <html> onto the iframe's <html> the moment they change (and on
+ * every load), rather than waiting for the embedded page to re-read storage.
  */
 export function TemplatePreview({ name, path = `/templates/${name}/`, height = 440 }: { name: string; path?: string; height?: number }) {
   const ref = React.useRef<HTMLDivElement>(null)
+  const frameRef = React.useRef<HTMLIFrameElement>(null)
   const [scale, setScale] = React.useState(0)
   const src = `${BASE_PATH}${path}`
 
@@ -27,6 +34,23 @@ export function TemplatePreview({ name, path = `/templates/${name}/`, height = 4
     return () => ro.disconnect()
   }, [])
 
+  const syncTheme = React.useCallback(() => {
+    try {
+      const doc = frameRef.current?.contentDocument
+      if (doc?.documentElement && doc.head) applyRootTheme(doc, readRootTheme(document.documentElement))
+    } catch {
+      // cross-origin frame (custom basePath host): it follows via storage events instead
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (scale <= 0) return
+    syncTheme()
+    const mo = new MutationObserver(syncTheme)
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-accent"] })
+    return () => mo.disconnect()
+  }, [scale, syncTheme])
+
   return (
     <div className="flex w-full flex-col gap-3">
       <div
@@ -37,7 +61,9 @@ export function TemplatePreview({ name, path = `/templates/${name}/`, height = 4
       >
         {scale > 0 && (
           <iframe
+            ref={frameRef}
             src={src}
+            onLoad={syncTheme}
             title={`${name} template preview`}
             loading="lazy"
             tabIndex={-1}

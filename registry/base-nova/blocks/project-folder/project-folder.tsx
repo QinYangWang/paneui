@@ -107,14 +107,18 @@ export function ProjectFolder({
           onFocus={(e) => e.currentTarget.matches(":focus-visible") && setOpen(true)}
           onBlur={() => setOpen(false)}
           onClick={() => setExpanded(true)}
-          className="group/folder relative block h-52 w-full cursor-pointer rounded-3xl text-left outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-60"
+          className="group/folder relative block h-52 w-full cursor-pointer rounded-3xl text-left outline-none [--folder-back:color-mix(in_oklch,var(--primary),black_22%)] focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {/* Back panel with tab */}
-          <span
-            aria-hidden
-            className="absolute inset-x-0 top-3 bottom-0 rounded-3xl bg-[color-mix(in_oklch,var(--primary),black_22%)] shadow-raised"
-          >
-            <span className="absolute -top-3 left-0 h-6 w-24 rounded-t-2xl bg-[color-mix(in_oklch,var(--primary),black_22%)]" />
+          {/*
+           * Back panel with tab. The tab owns the top-left corner, so the panel's own corner is square
+           * there (a rounded one left a notch below the tab). Both tab corners are no taller than its
+           * 14px rise (14px left, 10px right), so each curve ends above the panel's top edge instead of
+           * stepping into it, and a concave 8px fillet joins the tab's right edge to the panel top.
+           * No hairline ring: the tab could not carry it, so the outline broke where they meet.
+           */}
+          <span aria-hidden className="absolute inset-x-0 top-3.5 bottom-0 rounded-3xl rounded-tl-none bg-(--folder-back)">
+            <span className="absolute -top-3.5 left-0 h-7 w-24 rounded-tl-xl rounded-tr-lg bg-(--folder-back)" />
+            <span className="absolute -top-2 left-24 size-2 bg-[radial-gradient(circle_at_100%_0,transparent_0.5rem,var(--folder-back)_calc(0.5rem+0.5px))]" />
           </span>
 
           {/* Sheets */}

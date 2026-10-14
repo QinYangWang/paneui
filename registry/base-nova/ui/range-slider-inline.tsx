@@ -5,8 +5,14 @@ import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 
 import { cn } from "@/lib/utils"
 
-/** Gap between the well edge and the first/last stop, in px (matches `px-4` minus the `inset-1`). */
-const EDGE = 12
+/**
+ * Inner-box x of the thumb at min/max, in px (the control's `px-2.5` minus the `inset-1`).
+ * The fill is the thumb plus EDGE, so at max it reaches the inner box's right edge and
+ * sits 4px from the well on both ends.
+ */
+const EDGE = 6
+/** Inner-box x where the label/readout text starts (the text row's `px-4`), 8px clear of the thumb at min/max. */
+const TEXT = 16
 const STOPS = 10
 
 type RangeSliderInlineProps = Omit<
@@ -28,8 +34,8 @@ type RangeSliderInlineProps = Omit<
 
 /**
  * Inline slider: a raised fill grows inside an inset well, with the label and
- * value printed on the track itself. The thumb is a slim bar that parts around
- * the text as it passes, and ten stop markers hide where they would sit under it.
+ * value printed on the track itself. The thumb is one slim bar that fades out while it
+ * passes over the text, and ten stop markers hide where they would sit under it.
  */
 function RangeSliderInline({
   className,
@@ -81,8 +87,8 @@ function RangeSliderInline({
   // Pixel geometry inside the inner box (the well minus its 4px inset).
   const usable = Math.max(0, geo.width - EDGE * 2)
   const thumbX = EDGE + p * usable
-  const labelZone: [number, number] = [EDGE - 4, EDGE + geo.label + 4]
-  const readoutZone: [number, number] = [geo.width - EDGE - geo.readout - 4, geo.width - EDGE + 4]
+  const labelZone: [number, number] = [TEXT - 4, TEXT + geo.label + 4]
+  const readoutZone: [number, number] = [geo.width - TEXT - geo.readout - 4, geo.width - TEXT + 4]
   const inZone = (x: number, [a, b]: [number, number], pad = 0) => geo.width > 0 && x >= a - pad && x <= b + pad
   const parted = inZone(thumbX, labelZone) || inZone(thumbX, readoutZone)
 
@@ -123,7 +129,7 @@ function RangeSliderInline({
       <SliderPrimitive.Control
         data-slot="range-slider-inline-control"
         className={cn(
-          "relative flex h-11 w-full cursor-pointer items-center rounded-2xl bg-muted px-4 shadow-well outline-none",
+          "relative flex h-11 w-full cursor-pointer items-center rounded-2xl bg-muted px-2.5 shadow-well outline-none",
           "has-focus-visible:ring-2 has-focus-visible:ring-ring/50 data-disabled:cursor-not-allowed"
         )}
       >
@@ -131,7 +137,7 @@ function RangeSliderInline({
         <div ref={boxRef} aria-hidden className="pointer-events-none absolute inset-1">
           <div
             data-slot="range-slider-inline-fill"
-            style={{ width: `calc(${EDGE + 6}px + ${p} * (100% - ${EDGE * 2}px))` }}
+            style={{ width: `calc(${EDGE * 2}px + ${p} * (100% - ${EDGE * 2}px))` }}
             className={cn(
               "absolute inset-y-0 left-0 rounded-xl bg-card shadow-raised",
               "transition-[width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-dragging/ris:transition-none motion-reduce:transition-none"
@@ -140,8 +146,9 @@ function RangeSliderInline({
           {showStops
             ? stops.map((stop, i) => {
                 const x = EDGE + (i / (STOPS - 1)) * usable
+                // Stops also stay hidden in the margin outside the text, so none sit at the very ends.
                 const hidden =
-                  inZone(x, labelZone, 3) || inZone(x, readoutZone, 3) || Math.abs(x - thumbX) < 7
+                  inZone(x, [0, labelZone[1]], 3) || inZone(x, [readoutZone[0], geo.width], 3) || Math.abs(x - thumbX) < 7
                 return (
                   <span
                     key={i}
@@ -156,7 +163,7 @@ function RangeSliderInline({
                 )
               })
             : null}
-          <div className="absolute inset-0 flex items-center justify-between px-3 text-ui font-medium">
+          <div className="absolute inset-0 flex items-center justify-between px-4 text-ui font-medium">
             <span ref={labelRef} className="truncate text-foreground">
               {label}
             </span>
@@ -177,19 +184,15 @@ function RangeSliderInline({
               "transition-[inset-inline-start] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-dragging/ris:transition-none motion-reduce:transition-none"
             )}
           >
-            {/* Two halves of one bar: they slide apart to clear the text underneath. */}
-            {(["top-0", "bottom-0"] as const).map((edge) => (
-              <span
-                key={edge}
-                aria-hidden
-                className={cn(
-                  "absolute left-1/2 w-1 -translate-x-1/2 rounded-full bg-primary",
-                  "h-1/2 transition-[height,scale] duration-250 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-data-parted/thumb:h-1.5 motion-reduce:transition-none",
-                  "group-data-dragging/ris:scale-x-125",
-                  edge
-                )}
-              />
-            ))}
+            {/* One bar; it fades out while it crosses the label or readout. */}
+            <span
+              aria-hidden
+              className={cn(
+                "absolute top-1/2 left-1/2 h-5 w-1 -translate-1/2 rounded-full bg-primary",
+                "transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                "group-data-dragging/ris:scale-x-125 group-data-parted/thumb:scale-y-50 group-data-parted/thumb:opacity-0"
+              )}
+            />
           </SliderPrimitive.Thumb>
         </SliderPrimitive.Track>
       </SliderPrimitive.Control>

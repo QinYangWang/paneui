@@ -63,7 +63,7 @@ export default {
         },
         { name: "label", type: "string", default: `"Donut chart"`, description: "Accessible name of the chart." },
         { name: "thickness", type: "number", default: "22", description: "Ring thickness in viewBox units." },
-        { name: "gap", type: "number", default: "4", description: "Gap between segments in viewBox units." },
+        { name: "gap", type: "number", default: "4", description: "Gap between segments in viewBox units. Ends are rounded when every segment is long enough for round caps; otherwise all ends are square, so small segments never overlap their neighbours." },
         {
           name: "formatValue",
           type: "(value: number) => string",

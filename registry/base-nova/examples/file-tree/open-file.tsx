@@ -10,7 +10,7 @@ export default function FileTreeOpenFile() {
   return (
     <div className="flex w-72 flex-col gap-2">
       <div className="rounded-2xl bg-card p-2 shadow-surface">
-        <FileTree label="Site" indent={20} defaultExpanded={["public", "pages"]} onOpenFile={(node) => setOpened(node.name)}>
+        <FileTree label="Site" defaultExpanded={["public", "pages"]} onOpenFile={(node) => setOpened(node.name)}>
           <FileTreeFolder value="pages" name="pages">
             <FileTreeFile value="index.html" name="index.html" icon={<CodeIcon />} />
             <FileTreeFile value="about.html" name="about.html" icon={<CodeIcon />} />

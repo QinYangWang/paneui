@@ -102,7 +102,7 @@ function MessageBubbleGroup({
       <div
         data-slot="message-bubble-group"
         data-align={side}
-        className={cn("flex min-w-0 flex-col gap-0.5", side === "end" ? "items-end" : "items-start", className)}
+        className={cn("flex min-w-0 flex-col gap-1", side === "end" ? "items-end" : "items-start", className)}
         {...props}
       />
     </MessageBubbleGroupContext.Provider>

@@ -27,7 +27,7 @@ type DonutSegment = {
 type PlacedSegment = DonutSegment & {
   color: string
   share: number
-  /** Arc start / length in px along the ring, already shortened for round caps and gaps. */
+  /** Arc start / length along the ring (viewBox units), already trimmed for caps and the pad gap. */
   start: number
   length: number
 }
@@ -53,30 +53,45 @@ type DonutChartProps = Omit<React.ComponentProps<"div">, "children"> & {
   onActiveChange?: (id: string | null) => void
 }
 
+/** Extra stroke the hovered segment grows by (half of it lands past each edge). */
+const ACTIVE_GROW = 6
+
 function placeSegments(
   segments: readonly DonutSegment[],
   circumference: number,
   thickness: number,
   gap: number
-): PlacedSegment[] {
+): { placed: PlacedSegment[]; round: boolean } {
   const valid = segments.filter((s) => Number.isFinite(s.value) && s.value > 0)
   const total = valid.reduce((a, s) => a + s.value, 0)
-  if (!total) return []
-  // Round caps reach thickness/2 past each end, so trim that plus the gap.
-  const trim = valid.length > 1 ? thickness + gap : 0
+  if (!total) return { placed: [], round: false }
+  const spans = valid.map((s) => (s.value / total) * circumference)
+  const single = valid.length === 1
+  // A round cap reaches half the stroke width past each end of its dash (and
+  // ACTIVE_GROW / 2 more on the hovered segment), so round-capped dashes are
+  // trimmed by the stroke width plus a gap that is never smaller than that
+  // extra reach. Round caps are only used when every segment is long enough to
+  // absorb the trim; otherwise all segments use butt caps, whose ends stop
+  // exactly at the pad, so neighbours can never overlap.
+  const capTrim = thickness + Math.max(gap, ACTIVE_GROW / 2 + 1)
+  const round = !single && spans.every((span) => span - capTrim >= thickness * 0.5)
+  const trim = single ? 0 : round ? capTrim : gap
   let cursor = 0
-  return valid.map((s) => {
-    const span = (s.value / total) * circumference
-    const placed: PlacedSegment = {
+  const placed = valid.map((s, i) => {
+    const span = spans[i]
+    const length = Math.max(0, span - trim)
+    const seg: PlacedSegment = {
       ...s,
       color: s.color ?? chartColor(segments.indexOf(s)),
       share: s.value / total,
-      start: cursor + trim / 2,
-      length: Math.max(0.001, span - trim),
+      // Centre whatever is left of a tiny segment inside its own span.
+      start: cursor + (span - length) / 2,
+      length,
     }
     cursor += span
-    return placed
+    return seg
   })
+  return { placed, round }
 }
 
 function DonutChart({
@@ -101,7 +116,7 @@ function DonutChart({
   const transition = useChartTransition()
   const radius = (VIEW - thickness - 12) / 2
   const circumference = 2 * Math.PI * radius
-  const placed = React.useMemo(
+  const { placed, round } = React.useMemo(
     () => placeSegments(segments, circumference, thickness, gap),
     [segments, circumference, thickness, gap]
   )
@@ -165,7 +180,7 @@ function DonutChart({
                 r={radius}
                 fill="none"
                 strokeWidth={thickness}
-                strokeLinecap="round"
+                strokeLinecap={round ? "round" : "butt"}
                 tabIndex={0}
                 role="img"
                 aria-label={`${s.label}: ${formatValue(s.value)}, ${formatPercent(s.share)}${s.description ? `. ${s.description}` : ""}`}
@@ -175,16 +190,17 @@ function DonutChart({
                   reduce
                     ? false
                     : {
-                        strokeDasharray: `0.001 ${circumference}`,
+                        strokeDasharray: `0 ${circumference}`,
                         strokeDashoffset: -s.start,
                         strokeWidth: thickness,
                         opacity: 0,
                       }
                 }
                 animate={{
+                  // The gap part of the dash is a full circumference, so the dash never repeats.
                   strokeDasharray: `${s.length} ${circumference}`,
                   strokeDashoffset: -s.start,
-                  strokeWidth: isActive ? thickness + 6 : thickness,
+                  strokeWidth: isActive ? thickness + ACTIVE_GROW : thickness,
                   opacity: dim ? 0.4 : 1,
                 }}
                 transition={{ ...transition, delay: reduce ? 0 : i * 0.04 }}

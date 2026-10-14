@@ -83,6 +83,10 @@ function StatusBar({
   const [activeId, setActiveId] = useActiveId(activeIdProp, defaultActiveId, onActiveChange)
   const reduce = useReducedMotion()
   const transition = useChartTransition()
+  // The left-to-right stagger is for the entrance only. Kept on every animate,
+  // it made hover lag by up to 0.5s on the right-hand bars, so the dim wave
+  // trailed behind the pointer instead of tracking it.
+  const [entered, setEntered] = React.useState(false)
 
   const fallback: StatusBarStatus = { label: "Unknown", color: "var(--muted-foreground)", weight: null }
   const rows = data.map((datum) => ({ datum, status: statuses[datum.status] ?? fallback }))
@@ -106,6 +110,21 @@ function StatusBar({
     for (const d of data) m.set(d.status, (m.get(d.status) ?? 0) + 1)
     return m
   }, [data])
+
+  React.useEffect(() => {
+    if (entered || size.width <= 0) return
+    const t = window.setTimeout(() => setEntered(true), reduce ? 0 : 900)
+    return () => window.clearTimeout(t)
+  }, [entered, size.width, reduce])
+
+  const indexAtPointer = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Measure at event time, so scroll and resize never leave stale offsets.
+    const box = e.currentTarget.getBoundingClientRect()
+    if (!n || box.width <= 0) return null
+    // Map through the live box width, in case it differs from the last measured size.
+    const x = ((e.clientX - box.left) / box.width) * width
+    return band.indexAt(x)
+  }
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (!n) return
@@ -160,15 +179,14 @@ function StatusBar({
         onBlur={() => setActiveId(null)}
         onPointerLeave={() => setActiveId(null)}
         onPointerMove={(e) => {
-          const box = ref.current?.getBoundingClientRect()
-          if (!box || !n) return
-          const id = rows[band.indexAt(e.clientX - box.left)].datum.id
+          const i = indexAtPointer(e)
+          if (i == null) return
+          const id = rows[i].datum.id
           if (id !== activeId) setActiveId(id)
         }}
         onPointerDown={(e) => {
-          const box = ref.current?.getBoundingClientRect()
-          if (!box || !n) return
-          setActiveId(rows[band.indexAt(e.clientX - box.left)].datum.id)
+          const i = indexAtPointer(e)
+          if (i != null) setActiveId(rows[i].datum.id)
         }}
         className="relative w-full touch-pan-y rounded-lg outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         style={{ height }}
@@ -187,7 +205,7 @@ function StatusBar({
                     scaleY: isActive ? 1 : dim ? 0.86 : 1,
                     opacity: dim ? 0.55 : 1,
                   }}
-                  transition={{ ...transition, delay: reduce ? 0 : Math.min(i * 0.008, 0.5) }}
+                  transition={{ ...transition, delay: reduce || entered ? 0 : Math.min(i * 0.008, 0.5) }}
                   y={0}
                   width={bw}
                   height={height}

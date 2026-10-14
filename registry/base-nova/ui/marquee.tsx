@@ -47,43 +47,54 @@ function Marquee({
       <div
         data-slot="marquee"
         data-orientation={vertical ? "vertical" : "horizontal"}
-        className={cn(
-          "group/marquee flex overflow-hidden",
-          vertical ? "flex-col" : "flex-row",
-          fade &&
-            (vertical
-              ? "[mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]"
-              : "[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"),
-          className
-        )}
-        style={{ "--marquee-gap": gap, gap, ...style } as React.CSSProperties}
+        // min-h-0 / min-w-0: with no overflow clip on the root, it must still shrink to the box its parent gives it.
+        className={cn("group/marquee flex min-h-0 min-w-0", vertical ? "flex-col" : "flex-row", className)}
+        style={{ "--marquee-gap": gap, ...style } as React.CSSProperties}
         {...props}
       >
-        {Array.from({ length: copies }, (_, copy) => (
-          <div
-            key={copy}
-            data-slot="marquee-track"
-            aria-hidden={copy > 0 || undefined}
-            inert={copy > 0 || undefined}
-            className={cn(
-              "flex shrink-0 items-center justify-around",
-              vertical ? "flex-col" : "flex-row",
-              pauseOnHover &&
-                "group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused]"
-            )}
-            style={{
-              gap,
-              // Longhands, so the hover class can still set animation-play-state.
-              animationName: vertical ? "qy-marquee-y" : "qy-marquee-x",
-              animationDuration: `${duration}s`,
-              animationTimingFunction: "linear",
-              animationIterationCount: "infinite",
-              animationDirection: reverse ? "reverse" : "normal",
-            }}
-          >
-            {children}
-          </div>
-        ))}
+        {/*
+          The viewport clips and fades, not the root: a border, ring or shadow on
+          the root (or on the items) stays visible. The cross-axis padding gives
+          the items' hairline rings room so overflow-hidden does not shave them.
+        */}
+        <div
+          data-slot="marquee-viewport"
+          className={cn(
+            "flex min-h-0 min-w-0 flex-1 overflow-hidden",
+            vertical ? "flex-col px-1" : "flex-row py-1",
+            fade &&
+              (vertical
+                ? "[mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]"
+                : "[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]")
+          )}
+          style={{ gap }}
+        >
+          {Array.from({ length: copies }, (_, copy) => (
+            <div
+              key={copy}
+              data-slot="marquee-track"
+              aria-hidden={copy > 0 || undefined}
+              inert={copy > 0 || undefined}
+              className={cn(
+                "flex shrink-0 items-center justify-around",
+                vertical ? "flex-col" : "flex-row",
+                pauseOnHover &&
+                  "group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused]"
+              )}
+              style={{
+                gap,
+                // Longhands, so the hover class can still set animation-play-state.
+                animationName: vertical ? "qy-marquee-y" : "qy-marquee-x",
+                animationDuration: `${duration}s`,
+                animationTimingFunction: "linear",
+                animationIterationCount: "infinite",
+                animationDirection: reverse ? "reverse" : "normal",
+              }}
+            >
+              {children}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   )

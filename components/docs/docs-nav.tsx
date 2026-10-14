@@ -14,7 +14,7 @@ import {
 } from "@/registry/base-nova/ui/animated-sidebar"
 import { cn } from "@/lib/utils"
 
-import { categoryIcons, GalleryIcon, InstallIcon } from "./category-icons"
+import { categoryIcons, ComponentsIcon, InstallIcon } from "./category-icons"
 
 export type NavGroup = { category: string; items: { name: string; title: string; description: string }[] }
 
@@ -63,7 +63,7 @@ export function DocsNav({ groups, pathname, className }: { groups: NavGroup[]; p
       <SidebarGroup>
         <SidebarGroupLabel>Getting started</SidebarGroupLabel>
         <SidebarMenu>
-          <SidebarItem icon={<GalleryIcon />} label="Gallery" isActive={pathname === "/"} render={<Link href="/" />} />
+          <SidebarItem icon={<ComponentsIcon />} label="Components" isActive={pathname === "/"} render={<Link href="/" />} />
           <SidebarItem
             icon={<InstallIcon />}
             label="Installation"

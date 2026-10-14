@@ -12,7 +12,7 @@ const actions = [
 export default function TooltipDemo() {
   return (
     <TooltipProvider>
-      <div className="flex gap-2 rounded-full bg-muted/60 p-1.5 shadow-well">
+      <div className="flex gap-1 rounded-xl bg-muted/60 p-1 shadow-well">
         {actions.map(({ label, kbd, icon: Icon }) => (
           <Tooltip key={label}>
             <TooltipTrigger render={<Button variant="secondary" size="icon" aria-label={label} />}>

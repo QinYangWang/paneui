@@ -178,7 +178,7 @@ function MorphingTabs({
           aria-label={ariaLabel}
           aria-orientation="horizontal"
           data-slot="morphing-tabs-rail"
-          className="relative z-10 flex items-end gap-1 overflow-x-auto overflow-y-hidden px-5 pt-1 [scrollbar-width:none]"
+          className="relative z-10 flex items-end gap-1 overflow-x-auto overflow-y-hidden px-6 pt-1 [scrollbar-width:none]"
         >
           {order.map((id) => {
             const item = byId.get(id)
@@ -212,11 +212,22 @@ function MorphingTabs({
                     aria-hidden
                     layoutId="morphing-tabs-surface"
                     transition={reduceMotion ? { duration: 0 } : SURFACE}
-                    className="absolute inset-0 rounded-t-xl bg-card"
+                    className="absolute inset-0 rounded-t-xl bg-card shadow-raised"
                   >
-                    {/* Soft concave feet so the tab flows into the panel below. */}
-                    <span className="absolute bottom-0 -left-2 size-2 bg-[radial-gradient(circle_at_0_0,transparent_0.5rem,var(--card)_calc(0.5rem+0.5px))]" />
-                    <span className="absolute -right-2 bottom-0 size-2 bg-[radial-gradient(circle_at_100%_0,transparent_0.5rem,var(--card)_calc(0.5rem+0.5px))]" />
+                    {/*
+                     * Concave feet flow the tab into the panel and carry its hairline: each is an 8px
+                     * corner clipped from a 14px circle whose ring is the same shadow-raised hairline (--skeuo-raised, the var behind it)
+                     * (radius 7-8px, so it meets the tab's side ring and the panel's top ring exactly)
+                     * and whose 12px card-coloured spread fills the corner outside the arc. The tab's
+                     * own bottom ring falls outside the rail and is clipped, so the outline reads as
+                     * one continuous border from tab to panel.
+                     */}
+                    <span className="absolute bottom-0 -left-2 size-2 overflow-hidden">
+                      <span className="absolute -top-[7px] -left-[7px] size-3.5 rounded-full shadow-[var(--skeuo-raised),0_0_0_12px_var(--card)]" />
+                    </span>
+                    <span className="absolute -right-2 bottom-0 size-2 overflow-hidden">
+                      <span className="absolute -top-[7px] -right-[7px] size-3.5 rounded-full shadow-[var(--skeuo-raised),0_0_0_12px_var(--card)]" />
+                    </span>
                   </motion.span>
                 )}
                 <div className="relative flex items-center">
@@ -280,7 +291,7 @@ function MorphingTabs({
           transition={reduceMotion ? { duration: 0 } : SURFACE}
           data-slot="morphing-tabs-content"
           className={cn(
-            "relative -mt-px overflow-hidden rounded-xl bg-card text-card-foreground shadow-raised",
+            "relative overflow-hidden rounded-xl bg-card text-card-foreground shadow-raised",
             contentClassName
           )}
         >

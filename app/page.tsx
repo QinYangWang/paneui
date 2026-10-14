@@ -1,17 +1,19 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 
 import { ArrowRightIcon } from "@/components/icons"
-import { categoryIcons, categorySlug } from "@/components/docs/category-icons"
+import { categorySlug } from "@/components/docs/category-icons"
 import { LazyDemo } from "@/components/docs/lazy-demo"
 import { getGroups, getItems } from "@/lib/docs"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@/registry/base-nova/ui/card"
-import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 const wide = new Set(["saas-dashboard", "agent-workspace", "landing", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
-export default function Gallery() {
+export const metadata: Metadata = { title: "Components" }
+
+export default function ComponentsPage() {
   const groups = getGroups()
   const total = getItems().length
   return (
@@ -31,15 +33,9 @@ export default function Gallery() {
         </Button>
       </section>
       {groups.map((g, gi) => {
-        const Icon = categoryIcons[g.category]
         return (
           <section key={g.category} id={categorySlug(g.category)} className="flex scroll-mt-20 flex-col gap-5">
             <h2 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
-              {Icon && (
-                <IconChip>
-                  <Icon />
-                </IconChip>
-              )}
               {g.category}
               <Badge size="sm">{g.items.length}</Badge>
             </h2>

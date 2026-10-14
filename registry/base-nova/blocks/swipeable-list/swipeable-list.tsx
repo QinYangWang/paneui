@@ -58,14 +58,26 @@ type SwipeableListProps = {
 }
 
 const toneClass: Record<SwipeTone, string> = {
-  neutral: "bg-card text-secondary-foreground",
+  neutral: "bg-muted text-foreground",
   primary: "bg-primary text-primary-foreground",
   success: "bg-success text-white",
   warning: "bg-warning text-black/80",
   destructive: "bg-destructive text-white",
 }
 
-const SNAP = { type: "spring", duration: 0.42, bounce: 0.18 } as const
+/*
+ * Release/settle spring: softer and slightly heavier than a snap so the row glides into place, and it
+ * starts from the drag's own velocity (see snapTo) so letting go never jerks.
+ */
+const SNAP = { type: "spring", stiffness: 340, damping: 30, mass: 0.9, restDelta: 0.5 } as const
+const ICON = { type: "spring", stiffness: 420, damping: 26, mass: 0.6 } as const
+/**
+ * The rails reach this far (px) under the sliding surface. Without the overlap the rail edge and the
+ * surface edge are two antialiased lines at fractional x, and the page shows through between them as
+ * a hairline that flickers while dragging; the overlap also fills the surface's rounded leading
+ * corners with the action colour instead of a gap.
+ */
+const TUCK = 18
 
 type RowProps = {
   item: SwipeableListItem
@@ -90,11 +102,12 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
   // The click that ends a drag must not toggle the row.
   const dragged = React.useRef(false)
 
-  const leftRail = useTransform(x, (v) => Math.max(0, v))
-  const rightRail = useTransform(x, (v) => Math.max(0, -v))
+  const leftRail = useTransform(x, (v) => (v > 0 ? v + TUCK : 0))
+  const rightRail = useTransform(x, (v) => (v < 0 ? TUCK - v : 0))
 
   const snapTo = React.useCallback(
-    (target: number) => animate(x, target, reduceMotion ? { duration: 0 } : SNAP),
+    (target: number) =>
+      animate(x, target, reduceMotion ? { duration: 0 } : { ...SNAP, velocity: x.getVelocity() }),
     [reduceMotion, x]
   )
 
@@ -171,8 +184,10 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
         style={{ width: side === "left" ? leftRail : rightRail }}
         className={cn("absolute inset-y-0 flex overflow-hidden", side === "left" ? "left-0" : "right-0 flex-row-reverse")}
       >
-        {(side === "left" ? actions : [...actions].reverse()).map((action) => {
+        {(side === "left" ? actions : [...actions].reverse()).map((action, i, list) => {
           const hidden = isArmed && action.id !== edgeId
+          // The innermost button (last child on both sides) also fills the strip tucked under the surface.
+          const tuck = i === list.length - 1 ? TUCK : 0
           return (
             <button
               key={action.id}
@@ -185,15 +200,20 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
                 "transition-[flex-grow,opacity,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset disabled:opacity-50",
                 "[&_svg]:size-4.5",
                 toneClass[action.tone ?? "neutral"],
-                isArmed && action.id === edgeId ? "grow" : "grow-0",
+                // The edge action soaks up any over-drag so no empty rail ever shows behind it.
+                action.id === edgeId ? "grow" : "grow-0",
                 hidden && "opacity-0"
               )}
-              style={{ width: hidden ? 0 : actionWidth, minWidth: hidden ? 0 : undefined }}
+              style={{
+                width: hidden ? 0 : actionWidth + tuck,
+                minWidth: hidden ? 0 : undefined,
+                [side === "left" ? "paddingRight" : "paddingLeft"]: hidden ? 0 : tuck,
+              }}
             >
               <motion.span
                 className="flex"
                 animate={reduceMotion ? undefined : { scale: isArmed && action.id === edgeId ? 1.15 : 1 }}
-                transition={SNAP}
+                transition={ICON}
               >
                 {action.icon}
               </motion.span>
@@ -211,7 +231,9 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
     .join(", ")
 
   return (
-    <div ref={rowRef} role="listitem" data-slot="swipeable-list-item" className="relative isolate overflow-hidden rounded-2xl bg-muted shadow-well">
+    // The hairline lives on the row, not the sliding surface: an outer ring on the surface was clipped by
+    // this overflow-hidden at rest and drawn over the rail mid-drag, so a border blinked in and out.
+    <div ref={rowRef} role="listitem" data-slot="swipeable-list-item" className="relative isolate overflow-hidden rounded-2xl shadow-raised">
       {rail("left", left)}
       {rail("right", right)}
       <motion.div
@@ -221,7 +243,7 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
         drag={hasActions ? "x" : false}
         dragDirectionLock
         dragConstraints={{ left: -rightWidth, right: leftWidth }}
-        dragElastic={{ left: right.length ? 0.6 : 0.08, right: left.length ? 0.6 : 0.08 }}
+        dragElastic={{ left: right.length ? 0.5 : 0.06, right: left.length ? 0.5 : 0.06 }}
         dragMomentum={false}
         onDragStart={() => {
           dragged.current = true
@@ -233,8 +255,8 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
         style={{ x }}
         data-slot="swipeable-list-surface"
         className={cn(
-          "relative z-10 flex touch-pan-y items-center gap-3 rounded-2xl bg-card px-3.5 py-3 text-card-foreground shadow-raised outline-none select-none",
-          "focus-visible:ring-2 focus-visible:ring-ring/50",
+          "relative z-10 flex touch-pan-y items-center gap-3 rounded-2xl bg-card px-3.5 py-3 text-card-foreground outline-none select-none will-change-transform",
+          "focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset",
           hasActions && "cursor-grab active:cursor-grabbing",
           item.disabled && "opacity-60"
         )}

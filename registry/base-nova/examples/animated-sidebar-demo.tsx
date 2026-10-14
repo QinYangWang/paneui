@@ -10,7 +10,6 @@ import {
   InboxIcon,
   NavigationIcon,
   SettingsIcon,
-  SparklesIcon,
   UsersIcon,
 } from "@/components/icons"
 import {
@@ -29,7 +28,6 @@ import {
   SidebarSubItem,
   SidebarTrigger,
 } from "@/registry/base-nova/ui/animated-sidebar"
-import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 const projects = ["Atlas", "Beacon", "Comet"]
 const titles: Record<string, string> = { home: "Home", inbox: "Inbox", explore: "Explore", insights: "Insights", team: "Team", settings: "Settings" }
@@ -42,10 +40,14 @@ export default function AnimatedSidebarDemo() {
     <SidebarProvider className="h-104 w-full max-w-2xl gap-3">
       <Sidebar>
         <SidebarHeader>
-          <div className="flex h-9 items-center gap-2.5 px-2.5">
-            <IconChip size="sm" tone="solid">
-              <SparklesIcon />
-            </IconChip>
+          <div className="flex h-9 items-center gap-2.5 px-2">
+            {/* Workspace avatar: 28px initials tile, centred on the 60px rail like the item icons. */}
+            <span
+              aria-hidden
+              className="grid size-7 shrink-0 place-items-center rounded-lg bg-primary text-ui-sm font-semibold text-primary-foreground shadow-primary select-none"
+            >
+              N
+            </span>
             <SidebarHideCollapsed className="flex min-w-0 flex-col leading-tight">
               <span className="truncate text-sm font-semibold">Northwind</span>
               <span className="truncate text-xs text-muted-foreground">Pro workspace</span>

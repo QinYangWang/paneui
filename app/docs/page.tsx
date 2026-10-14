@@ -88,7 +88,7 @@ export default function Installation() {
 
       <div className="flex justify-end border-t border-border pt-6">
         <Button variant="secondary" nativeButton={false} render={<Link href="/" />}>
-          Browse the gallery
+          Browse components
           <ArrowRightIcon data-icon="inline-end" />
         </Button>
       </div>

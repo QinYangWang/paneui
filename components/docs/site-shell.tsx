@@ -11,7 +11,7 @@ import { Button } from "@/registry/base-nova/ui/button"
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/registry/base-nova/ui/drawer"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
-import { categoryIcons, GalleryIcon, InstallIcon } from "./category-icons"
+import { categoryIcons, ComponentsIcon, InstallIcon } from "./category-icons"
 import { DocsNav, normalizePath, type NavGroup } from "./docs-nav"
 import { ThemeControls } from "./theme-controls"
 
@@ -36,7 +36,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
   const items = React.useMemo<CommandPaletteItem[]>(() => {
     const go = (href: string) => () => router.push(href)
     return [
-      { id: "/", label: "Gallery", group: "Getting started", icon: GalleryIcon, keywords: ["home", "all"], onSelect: go("/") },
+      { id: "/", label: "Components", group: "Getting started", icon: ComponentsIcon, keywords: ["home", "all", "gallery"], onSelect: go("/") },
       { id: "/docs", label: "Installation", group: "Getting started", icon: InstallIcon, keywords: ["setup", "registry", "cli"], onSelect: go("/docs") },
       ...groups.flatMap((g) =>
         g.items.map((i) => ({

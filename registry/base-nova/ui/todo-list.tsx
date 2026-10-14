@@ -65,7 +65,10 @@ function TodoStatusMark({ status, className }: { status: TodoStatus; className?:
         )}
       />
       {status === "in-progress" && (
-        <motion.circle
+        // A CSS keyframe spin, not a Motion `animate`: the mark is rendered
+        // inside `<AnimatePresence initial={false}>`, which blocks a child's
+        // first animation, so a Motion rotate snapped to 360° and froze.
+        <circle
           cx="10"
           cy="10"
           r="8"
@@ -73,9 +76,7 @@ function TodoStatusMark({ status, className }: { status: TodoStatus; className?:
           strokeWidth="1.8"
           strokeLinecap="round"
           strokeDasharray="14 50.3"
-          className="stroke-primary"
-          animate={reduce ? { opacity: [1, 0.4, 1] } : { rotate: 360 }}
-          transition={reduce ? { duration: 1.4, repeat: Infinity } : { duration: 0.9, ease: "linear", repeat: Infinity }}
+          className="origin-center animate-spin stroke-primary [animation-duration:0.9s] [transform-box:fill-box] motion-reduce:animate-pulse"
         />
       )}
       <motion.path

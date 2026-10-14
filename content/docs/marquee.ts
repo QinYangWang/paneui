@@ -65,7 +65,7 @@ export default {
       ],
       dataAttributes: [
         { name: "data-orientation", description: `"horizontal" or "vertical", from \`direction\`.` },
-        { name: "data-slot", description: `"marquee" on the root, "marquee-track" on each copy.` },
+        { name: "data-slot", description: `"marquee" on the root (unclipped, so a border or ring on it stays visible), "marquee-viewport" on the inner element that clips and fades, "marquee-track" on each copy.` },
       ],
     },
   ],

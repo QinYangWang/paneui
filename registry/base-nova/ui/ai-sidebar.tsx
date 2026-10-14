@@ -232,11 +232,11 @@ function ResourceTree({ label, items, query, expanded, onToggle, activeId, onAct
                 onDoubleClick={() => onRename && !item.disabled && setEditingId(item.id)}
                 style={{ paddingLeft: 6 + depth * 14 }}
                 className={cn(
-                  "group/item relative mx-1 my-px flex h-8 cursor-pointer items-center gap-1.5 rounded-xl pr-2 text-ui outline-none select-none",
-                  "transition-[background-color,box-shadow,color] duration-150 focus-visible:ring-2 focus-visible:ring-ring/50",
+                  "group/item relative mx-1 my-px flex h-8 cursor-pointer items-center gap-1.5 rounded-lg pr-2 text-ui outline-none select-none",
+                  "transition-[background-color,color] duration-150 focus-visible:ring-2 focus-visible:ring-ring/50",
                   active
-                    ? "bg-card font-medium text-foreground shadow-raised"
-                    : "text-foreground/85 hover:bg-muted",
+                    ? "bg-foreground/6 font-medium text-foreground"
+                    : "text-foreground/85 hover:bg-secondary",
                   item.disabled && "pointer-events-none opacity-50"
                 )}
               >
@@ -600,7 +600,7 @@ function AISidebar({
       )}
 
       {/* Body */}
-      <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto pb-2">
+      <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {open ? (
           <motion.div
             key="open"
@@ -663,8 +663,8 @@ function AISidebar({
                         } else activate(item)
                       }}
                       className={cn(
-                        "grid size-8 cursor-pointer place-items-center rounded-lg outline-none transition-[background-color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring/50 disabled:opacity-50",
-                        active ? "bg-card shadow-raised" : "hover:bg-muted"
+                        "grid size-8 cursor-pointer place-items-center rounded-lg outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 disabled:opacity-50",
+                        active ? "bg-foreground/6" : "hover:bg-secondary"
                       )}
                     >
                       <ResourceIcon kind={item.kind} />

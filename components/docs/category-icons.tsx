@@ -20,7 +20,7 @@ import {
 type IconComponent = React.ComponentType<{ className?: string; size?: number }>
 
 /**
- * One icon per docs category (sidebar rail, command palette, gallery headings).
+ * One icon per docs category (sidebar rail, command palette).
  * They render side by side, so all of them are solid puff shapes of the same
  * optical weight; no outlined ring or open line glyph belongs in this set.
  */
@@ -39,7 +39,7 @@ export const categoryIcons: Record<string, IconComponent> = {
   Blocks: GridIcon,
 }
 
-export const GalleryIcon: IconComponent = HomeIcon
+export const ComponentsIcon: IconComponent = HomeIcon
 export const InstallIcon: IconComponent = TerminalSquareIcon
 
 export const categorySlug = (category: string) => category.toLowerCase().replace(/\s+/g, "-")

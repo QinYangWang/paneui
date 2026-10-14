@@ -27,7 +27,7 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "The fill and thumb ease to clicked or keyed values over 300ms and track the pointer directly while dragging; the thumb's two halves part around the label and readout. With reduced motion everything moves instantly.",
+      body: "The fill and thumb ease to clicked or keyed values over 300ms and track the pointer directly while dragging; the thumb is a single bar that fades out while it crosses the label or readout. At min and max the fill sits the same 4px inside the well on both ends. With reduced motion everything moves instantly.",
     },
     {
       title: "Related",

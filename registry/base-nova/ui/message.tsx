@@ -110,7 +110,7 @@ function MessageContent({ className, ...props }: React.ComponentProps<"div">) {
     <MessageBubbleGroup
       data-slot="message-content"
       align={side}
-      className={cn("max-w-[min(80%,36rem)] gap-0.5", className)}
+      className={cn("max-w-[min(80%,36rem)] gap-1", className)}
       {...props}
     />
   )
@@ -122,7 +122,7 @@ function MessageHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="message-header"
       className={cn(
-        "mb-1 flex items-center gap-1.5 px-1 text-ui-sm font-medium text-muted-foreground group-data-[from=user]/message:flex-row-reverse",
+        "mb-0.5 flex items-center gap-1.5 px-1 text-ui-sm font-medium text-muted-foreground group-data-[from=user]/message:flex-row-reverse",
         className
       )}
       {...props}
@@ -136,7 +136,7 @@ function MessageMeta({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="message-meta"
       className={cn(
-        "mt-1 flex items-center gap-1.5 px-1 text-ui-xs text-muted-foreground tabular-nums group-data-[from=user]/message:flex-row-reverse [&_svg]:size-3",
+        "mt-0.5 flex items-center gap-1.5 px-1 text-ui-xs text-muted-foreground tabular-nums group-data-[from=user]/message:flex-row-reverse [&_svg]:size-3",
         className
       )}
       {...props}
@@ -160,7 +160,7 @@ function MessageActions({
       data-slot="message-actions"
       data-visible={visible || undefined}
       className={cn(
-        "mt-1 flex items-center gap-0.5 transition-opacity duration-200 group-data-[from=user]/message:flex-row-reverse",
+        "mt-0.5 flex items-center gap-0.5 transition-opacity duration-200 group-data-[from=user]/message:flex-row-reverse",
         !visible &&
           "opacity-0 group-hover/message:opacity-100 group-focus-within/message:opacity-100 pointer-coarse:opacity-100",
         className

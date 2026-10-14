@@ -55,7 +55,7 @@ function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProp
   })
 }
 
-/** The current page: a raised chip, marked aria-current. */
+/** The current page: plain foreground text (no chip), marked aria-current. */
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
@@ -65,7 +65,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
       aria-current="page"
       className={cn(
         crumbClass,
-        "bg-card font-medium text-foreground shadow-raised",
+        "font-medium text-foreground",
         className
       )}
       {...props}

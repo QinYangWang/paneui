@@ -304,8 +304,9 @@ function MonthsGrid() {
       style={{ gridTemplateColumns: "2.75rem repeat(12, minmax(0, 1fr)) 3.75rem" }}
     >
       <div role="row" className="contents">
-        <span role="columnheader" className="sr-only">
-          Year
+        {/* Takes the row-header column: an sr-only (absolute) header would drop out of the grid and shift every cell one column left. */}
+        <span role="columnheader">
+          <span className="sr-only">Year</span>
         </span>
         {MONTHS.map((m) => (
           <span

@@ -9,9 +9,11 @@ import { cn } from "@/lib/utils"
 /*
  * File / folder primitives. <FileTreeFolder> and <FileTreeFile> are
  * declarative: <FileTree> reads them into one flattened, keyboard-navigable
- * collection (WAI-ARIA tree pattern, roving tabindex, typeahead). Rows spring
- * in and out as folders open, branch guides draw down from their parent, and
- * the selection is one raised pill that glides between rows.
+ * collection (WAI-ARIA tree pattern, roving tabindex, typeahead). Density and
+ * geometry follow the VS Code explorer: 22px rows, 8px indent per level, a
+ * 16px twistie with a 12px chevron, and a thin indent guide under each open
+ * folder's twistie. Rows spring in and out as folders open and the selection
+ * is one fill that glides between rows.
  */
 
 type FileTreeNode = {
@@ -81,6 +83,8 @@ function siblingsOf(nodes: FileTreeNode[], value: string): FileTreeNode[] | null
 const SPRING = { type: "spring", stiffness: 420, damping: 34, mass: 0.6 } as const
 const POP = { type: "spring", stiffness: 520, damping: 26, mass: 0.5 } as const
 const EASE = [0.22, 1, 0.36, 1] as const
+/** Left padding of a depth-0 row, px. */
+const PAD = 4
 
 type FileTreeProps = Omit<React.ComponentProps<"div">, "children" | "defaultValue" | "onChange"> & {
   children?: React.ReactNode
@@ -94,7 +98,7 @@ type FileTreeProps = Omit<React.ComponentProps<"div">, "children" | "defaultValu
   onExpandedChange?: (expanded: string[]) => void
   /** Called when a file (not a folder) is activated with Enter or a click. */
   onOpenFile?: (node: FileTreeNode) => void
-  /** Indent per level, px. */
+  /** Indent per level, px (VS Code explorer default: 8). */
   indent?: number
   label?: string
 }
@@ -109,7 +113,7 @@ function FileTree({
   defaultExpanded = [],
   onExpandedChange,
   onOpenFile,
-  indent = 16,
+  indent = 8,
   label = "Files",
   className,
   ...props
@@ -263,9 +267,10 @@ function FileTree({
                 setFocused(node.value)
                 activate(row)
               }}
-              style={{ paddingLeft: 8 + row.depth * indent }}
+              style={{ paddingLeft: PAD + row.depth * indent }}
               className={cn(
-                "group/file-tree-item relative flex h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-xl pr-2 text-muted-foreground outline-none select-none",
+                "group/file-tree-item relative flex h-[22px] shrink-0 cursor-pointer items-center gap-1 rounded-sm pr-2 text-muted-foreground outline-none select-none",
+                "focus-visible:ring-inset",
                 "transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
                 isSelected && "font-medium text-foreground",
                 node.disabled && "cursor-not-allowed hover:text-muted-foreground",
@@ -277,14 +282,14 @@ function FileTree({
                   layoutId={pillId}
                   aria-hidden
                   transition={reduce ? { duration: 0 } : SPRING}
-                  className="absolute inset-0 rounded-lg bg-secondary"
+                  className="absolute inset-0 rounded-sm bg-secondary"
                 />
               )}
               {!isSelected && (
-                <span aria-hidden className="absolute inset-0 rounded-lg transition-colors group-hover/file-tree-item:bg-muted/60" />
+                <span aria-hidden className="absolute inset-0 rounded-sm transition-colors group-hover/file-tree-item:bg-muted/60" />
               )}
 
-              {/* branch guides, one per ancestor level */}
+              {/* indent guides, one per ancestor level, under that ancestor's chevron */}
               {Array.from({ length: row.depth }, (_, d) => (
                 <motion.span
                   key={d}
@@ -292,8 +297,8 @@ function FileTree({
                   initial={reduce ? false : { scaleY: 0 }}
                   animate={{ scaleY: 1 }}
                   transition={{ duration: reduce ? 0 : 0.28, ease: EASE }}
-                  style={{ left: 8 + d * indent + 7 }}
-                  className="absolute -top-px -bottom-px z-10 w-px origin-top bg-border"
+                  style={{ left: PAD + d * indent + 7 }}
+                  className="absolute inset-y-0 z-10 w-px origin-top bg-foreground/10"
                 />
               ))}
 
@@ -303,7 +308,7 @@ function FileTree({
                 animate={{ rotate: isOpen ? 90 : 0 }}
                 transition={reduce ? { duration: 0 } : POP}
                 className={cn(
-                  "relative z-10 grid size-4 shrink-0 place-items-center text-muted-foreground [&_svg]:size-3.5",
+                  "relative z-10 grid size-4 shrink-0 place-items-center text-muted-foreground [&_svg]:size-3",
                   !isFolder && "invisible"
                 )}
               >

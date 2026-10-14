@@ -37,7 +37,7 @@ export function PromptBar({
         submit()
       }}
       className={cn(
-        "flex w-full flex-col gap-2 rounded-[1.75rem] bg-card p-2 shadow-surface transition-shadow focus-within:shadow-[var(--skeuo-surface),0_0_0_3px_var(--ring)]",
+        "flex w-full flex-col gap-2 rounded-2xl bg-card p-2 shadow-raised transition-shadow focus-within:ring-2 focus-within:ring-ring/50",
         className
       )}
     >
