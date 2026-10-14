@@ -1,0 +1,90 @@
+import { Chart } from "./chart"
+
+export const meta = { title: "Round trip" }
+
+# Heading one
+
+## Heading two
+
+### Heading three
+
+#### Heading four
+
+A paragraph with **bold**, _italic_, <u>underline</u>, ~~strike~~, `inline code`, a [link](https://ui.qinyang.wang "Docs") and <mark>a highlight</mark>.
+Colours: <span style={{ color: "var(--chart-4)" }}>blue text</span> and <mark style={{ backgroundColor: "var(--chart-8)" }}>yellow wash</mark>, **_bold italic_ text** and a [**bold link**](https://example.com).\
+After a hard break, an expression {props.name} and an inline <Badge tone="success">component</Badge>.
+
+- Bulleted item
+- Another item
+  - Nested item
+
+1. First
+2. Second
+3. Third
+
+A paragraph between lists.
+
+5. Starts at five
+6. Six
+
+- [ ] Open task
+- [x] Done task
+
+> A quote with **bold** text.
+>
+> Second quote paragraph.
+
+<Callout type="warning" icon="💡">
+  Callouts hold blocks, so they can have **marks**
+
+  - and lists
+</Callout>
+
+<Callout type="info">
+  Plain info callout.
+</Callout>
+
+<details open>
+  <summary>Toggle **summary**</summary>
+
+  Hidden content inside the toggle.
+</details>
+
+<details>
+  <summary>Closed toggle</summary>
+
+  More content.
+</details>
+
+```tsx
+export function Hello() {
+  return <p>Hello</p>
+}
+```
+
+```
+plain code
+```
+
+---
+
+![Alt text](https://picsum.photos/600/300 "Image title")
+
+| Name   |  Status | Notes          |
+| :----- | ------: | -------------- |
+| Editor |   ready | **bold** cell  |
+| Email  |   draft | `code` cell    |
+
+<Chart data={[1, 2, 3]} />
+
+{/* a comment expression */}
+
+<Tabs>
+  <Tab label="One">
+    Unknown components stay raw.
+  </Tab>
+</Tabs>
+
+Footnote reference[^1].
+
+[^1]: The footnote text.

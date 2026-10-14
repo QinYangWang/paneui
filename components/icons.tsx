@@ -367,6 +367,231 @@ export const LoaderIcon = (p: IconProps) => (
   </Icon>
 );
 
+/* Editor glyphs (round 6: notion-editor, email-editor) */
+
+export const BoldIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} strokeWidth={1.9} d="M5.8 4.2h3.7a2.3 2.3 0 010 4.6H5.8zM5.8 8.8h4.3a2.5 2.5 0 010 5H5.8z" />
+  </Icon>
+);
+
+export const ItalicIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M8.2 4.2h5M4.8 13.8h5M10.7 4.2L7.3 13.8" />
+  </Icon>
+);
+
+export const UnderlineIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M5.6 3.8v4.6a3.4 3.4 0 006.8 0V3.8M4.4 14.2h9.2" />
+  </Icon>
+);
+
+export const StrikethroughIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M12 5.4c-.5-.9-1.5-1.6-3-1.6-1.8 0-3 1-3 2.3 0 .8.4 1.4 1.2 1.8M3.8 9h10.4M6 12.4c.5 1 1.6 1.8 3.2 1.8 1.8 0 3-1 3-2.4 0-.3 0-.6-.2-.9" />
+  </Icon>
+);
+
+export const HighlighterIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M11.2 3.9l2.9 2.9-5.2 5.2-2.9-2.9zM6 9.1l-1.3 1.3 2.9 2.9 1.3-1.3M4.7 10.4L3.6 13.4l1 1 3-1.1" />
+  </Icon>
+);
+
+export const BaselineIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M5.4 11.6L9 3.8l3.6 7.8M6.6 9h4.8M4 14.2h10" />
+  </Icon>
+);
+
+export const Heading1Icon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M3.2 4.6v8.8M8.8 4.6v8.8M3.2 9h5.6M11.8 7.4l2-1.2v7.2" />
+  </Icon>
+);
+
+export const Heading2Icon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M3.2 4.6v8.8M8.8 4.6v8.8M3.2 9h5.6M11.6 7.3a1.6 1.6 0 012.8 1c0 1.6-2.8 2.6-2.8 5h2.9" />
+  </Icon>
+);
+
+export const Heading3Icon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M3.2 4.6v8.8M8.8 4.6v8.8M3.2 9h5.6M11.6 6.4h2.8l-1.7 2.4a1.9 1.9 0 11-1.3 3.6" />
+  </Icon>
+);
+
+export const ListOrderedIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M8 5.4h6.2M8 9h6.2M8 12.6h6.2M3.8 4.4l1-.6v3.4M3.6 10.6a1 1 0 011.8.6c0 .9-1.8 1.4-1.8 2.6h1.9" />
+  </Icon>
+);
+
+export const ListTodoIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.4" y="3.8" width="3.8" height="3.8" rx="1.1" />
+    <path {...line} d="M3.8 12.3l1.2 1.2 2.2-2.4M9.8 5.7h4.4M9.8 12.3h4.4" />
+  </Icon>
+);
+
+export const QuoteIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M4.2 4.2v9.6M7.8 5.8h6M7.8 9h6M7.8 12.2h4" />
+  </Icon>
+);
+
+export const TypeIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M4.4 5.4V4.2h9.2v1.2M9 4.2v9.6M7.2 13.8h3.6" />
+  </Icon>
+);
+
+export const TableIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.3" y="3.8" width="11.4" height="10.4" rx="2" />
+    <path {...line} d="M3.3 7.6h11.4M7.6 7.6v6.6" />
+  </Icon>
+);
+
+export const ListCollapseIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M3.8 4.4l2.4 2-2.4 2M8.8 6.4h5.4M8.8 11.6h5.4M6.2 11.6h.01" />
+  </Icon>
+);
+
+export const SquareCodeIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.3" y="3.3" width="11.4" height="11.4" rx="2" />
+    <path {...line} d="M7.6 7.1L5.9 9l1.7 1.9M10.4 7.1L12.1 9l-1.7 1.9" />
+  </Icon>
+);
+
+export const CalloutIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.1" y="4.1" width="11.8" height="9.8" rx="2" />
+    <circle {...puff} cx="6.3" cy="7.4" r=".75" />
+    <path {...line} d="M8.6 7.4h3.6M6.1 10.6h6.1" />
+  </Icon>
+);
+
+export const AlignLeftIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M3.8 4.6h10.4M3.8 7.5h6.4M3.8 10.5h10.4M3.8 13.4h6.4" />
+  </Icon>
+);
+
+export const AlignCenterIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M3.8 4.6h10.4M5.8 7.5h6.4M3.8 10.5h10.4M5.8 13.4h6.4" />
+  </Icon>
+);
+
+export const AlignRightIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M3.8 4.6h10.4M7.8 7.5h6.4M3.8 10.5h10.4M7.8 13.4h6.4" />
+  </Icon>
+);
+
+export const SmartphoneIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="5.2" y="2.9" width="7.6" height="12.2" rx="2" />
+    <path {...line} d="M8.2 12.6h1.6" />
+  </Icon>
+);
+
+export const Columns2Icon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.3" y="3.8" width="11.4" height="10.4" rx="2" />
+    <path {...line} d="M9 3.8v10.4" />
+  </Icon>
+);
+
+export const Rows2Icon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.3" y="3.8" width="11.4" height="10.4" rx="2" />
+    <path {...line} d="M3.3 9h11.4" />
+  </Icon>
+);
+
+export const PanelBottomIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.3" y="3.8" width="11.4" height="10.4" rx="2" />
+    <path {...line} d="M3.3 10.8h11.4" />
+  </Icon>
+);
+
+export const RectangleHorizontalIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="2.9" y="5.6" width="12.2" height="6.8" rx="2.2" />
+    <path {...line} d="M6.8 9h4.4" />
+  </Icon>
+);
+
+export const MoveVerticalIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M9 3.6v10.8M6.8 5.8L9 3.6l2.2 2.2M6.8 12.2L9 14.4l2.2-2.2" />
+  </Icon>
+);
+
+export const BracesIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M6.6 3.8h-.5c-.9 0-1.5.6-1.5 1.5v1.9c0 .8-.4 1.4-1.1 1.8.7.4 1.1 1 1.1 1.8v1.9c0 .9.6 1.5 1.5 1.5h.5M11.4 3.8h.5c.9 0 1.5.6 1.5 1.5v1.9c0 .8.4 1.4 1.1 1.8-.7.4-1.1 1-1.1 1.8v1.9c0 .9-.6 1.5-1.5 1.5h-.5" />
+  </Icon>
+);
+
+export const GitBranchIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle {...line} cx="12.2" cy="5.6" r="1.7" />
+    <path {...line} d="M5.6 3.8v10.4M12.2 7.3a4.6 4.6 0 01-4.6 4.6h-2" />
+  </Icon>
+);
+
+export const CircleDotIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle {...line} cx="9" cy="9" r="5.6" />
+    <circle {...puff} cx="9" cy="9" r="1.5" />
+  </Icon>
+);
+
+export const GitPullRequestIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle {...line} cx="5.4" cy="4.9" r="1.5" />
+    <circle {...line} cx="5.4" cy="13.1" r="1.5" />
+    <circle {...line} cx="12.6" cy="13.1" r="1.5" />
+    <path {...line} d="M5.4 6.4v5.2M12.6 11.6V7.7a1.8 1.8 0 00-1.8-1.8H8.4M9.9 4.4L8.4 5.9l1.5 1.5" />
+  </Icon>
+);
+
+
+
+export const PanelRightIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="3.3" y="3.8" width="11.4" height="10.4" rx="2" />
+    <path {...line} d="M10.6 4v10" />
+  </Icon>
+);
+
+export const CornerDownRightIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M4.8 4.4v4a2.2 2.2 0 002.2 2.2h6.6M11 7.9l2.7 2.7-2.7 2.7" />
+  </Icon>
+);
+
+export const AsteriskIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M9 3.6v10.8M4.3 6.3l9.4 5.4M4.3 11.7l9.4-5.4" />
+  </Icon>
+);
+
+export const ApertureIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle {...line} cx="9" cy="9" r="5.8" />
+    <path {...line} d="M10.34 6.68L13.67 12.45M7.66 6.68L14.32 6.68M6.32 9L9.65 3.23M7.66 11.32L4.33 5.55M10.34 11.32L3.68 11.32M11.68 9L8.35 14.77" />
+  </Icon>
+);
+
 /* ───────────────────────── Solid shapes (puff) ───────────────────────── */
 
 export const HeartIcon = (p: IconProps) => (
@@ -732,6 +957,26 @@ export const CalendarDaysIcon = (p: IconProps) => (
       d="M5.2 4.6h7.6a1.8 1.8 0 011.8 1.8v6.4a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V6.4a1.8 1.8 0 011.8-1.8zM5.6 8.1h6.8a.7.7 0 01.7.7v4.1a.7.7 0 01-.7.7H5.6a.7.7 0 01-.7-.7V8.8a.7.7 0 01.7-.7z"
     />
     <circle {...puff} cx="7.4" cy="10.85" r=".75" />
+  </Icon>
+);
+
+export const HistoryIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...puff}
+      fillRule="evenodd"
+      d="M9 3.4a5.6 5.6 0 110 11.2A5.6 5.6 0 019 3.4zM8.6 5.3h.8c.52 0 .95.43.95.95v2.4h1.6c.52 0 .95.43.95.95v.1c0 .52-.43.95-.95.95H8.6a.95.95 0 01-.95-.95V6.25c0-.52.43-.95.95-.95z"
+    />
+  </Icon>
+);
+
+export const ClipboardListIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...puff}
+      fillRule="evenodd"
+      d="M6 3.4h6c1 0 1.8.8 1.8 1.8v7.6c0 1-.8 1.8-1.8 1.8H6c-1 0-1.8-.8-1.8-1.8V5.2c0-1 .8-1.8 1.8-1.8zM7.5 5.9h3a1.3 1.3 0 010 2.6h-3a1.3 1.3 0 010-2.6zM7.5 9.5h3a1.3 1.3 0 010 2.6h-3a1.3 1.3 0 010-2.6z"
+    />
   </Icon>
 );
 

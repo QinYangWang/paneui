@@ -114,3 +114,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## maily.to (feature reference for `email-editor`) and Tiptap (runtime dependency)
+
+The block set of `email-editor` (logo, button variants, variables, image, alignment, divider,
+spacer, footer, section, columns, repeat, show-if) follows the feature list of maily.to,
+https://github.com/arikchakma/maily.to, MIT License, Copyright (c) Arik Chakma. No maily source
+code was copied; the editor is written from scratch on this project's notion-editor base.
+
+`notion-editor` and `email-editor` depend at runtime on Tiptap's open-source packages
+(https://github.com/ueberdosis/tiptap, MIT License; no Tiptap Pro extensions), lowlight and
+highlight.js (BSD-3-Clause), the unified / remark packages (MIT) and React Email
+(`@react-email/components`, `@react-email/render`, MIT). They are npm dependencies, not vendored.
