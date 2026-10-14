@@ -2278,11 +2278,11 @@
       "name": "file-diff",
       "type": "registry:ui",
       "title": "File Diff",
-      "description": "Collapsible unified-diff view of one file change with live +/− counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
+      "description": "Collapsible diff view (unified or split) built on @pierre/diffs of one file change with live +/− counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
       "dependencies": [
         "@base-ui/react",
-        "motion",
-        "shiki"
+        "@pierre/diffs",
+        "motion"
       ],
       "registryDependencies": [
         "@qinyang/theme",
@@ -2690,28 +2690,6 @@
       "files": [
         {
           "path": "registry/base-nova/ui/heat-calendar.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Charts"
-      }
-    },
-    {
-      "name": "returns-calendar",
-      "type": "registry:ui",
-      "title": "Returns Calendar",
-      "description": "Monthly returns calendar with a years × months grid (diverging tints, compounded year totals) or a year-cards view with mini monthly bars, tooltips (best/worst, YTD) and controlled month-range or whole-year selection with compounded totals.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/returns-calendar.tsx",
           "type": "registry:ui"
         }
       ],

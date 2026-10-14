@@ -13,6 +13,7 @@ import {
   ImageIcon,
   PlusIcon,
   RefreshIcon,
+  UploadIcon,
   XIcon,
 } from "@/components/icons"
 import { cn } from "@/lib/utils"
@@ -158,7 +159,11 @@ function Thumb({ item, layout }: { item: AttachmentItem; layout: boolean }) {
   return (
     <motion.span
       layoutId={layout ? `attachment-preview-${item.id}` : undefined}
-      className="relative block size-full overflow-hidden rounded-[inherit] bg-cover bg-center"
+      className={cn(
+        "relative block size-full overflow-hidden rounded-[inherit] bg-cover bg-center",
+        // Real photos get the 1px inset image outline (better-ui); generated gradients need none.
+        item.previewUrl && "outline-1 -outline-offset-1 outline-foreground/10"
+      )}
       style={{
         backgroundImage: item.previewUrl ? `url("${item.previewUrl}")` : attachmentGradient(item.name),
       }}
@@ -191,10 +196,10 @@ function StatusMark({ status }: { status: AttachmentStatus }) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.3, opacity: 0 }}
           transition={{ type: "spring", stiffness: 520, damping: 22 }}
-          className="inline-flex size-5 items-center justify-center rounded-full bg-success text-white"
+          className="inline-flex size-4 items-center justify-center rounded-full bg-success/14 text-success"
           aria-label="Uploaded"
         >
-          <CheckIcon size={12} />
+          <CheckIcon size={10} />
         </motion.span>
       )}
       {status === "error" && (
@@ -207,7 +212,7 @@ function StatusMark({ status }: { status: AttachmentStatus }) {
           className="inline-flex text-destructive"
           aria-label="Failed"
         >
-          <AlertCircleIcon size={17} />
+          <AlertCircleIcon size={14} />
         </motion.span>
       )}
     </AnimatePresence>
@@ -260,8 +265,7 @@ function AttachmentRow({
       }
       transition={{ type: "spring", stiffness: 380, damping: 32, delay }}
       className={cn(
-        "group/row relative flex items-center gap-3 overflow-hidden frame-inner frame-p-2 pr-1.5 transition-colors",
-        status === "error" ? "bg-destructive/6" : "hover:bg-muted/60"
+        "group/row relative flex items-center gap-3 overflow-hidden frame-inner frame-p-2 pr-1.5 transition-colors duration-150 hover:bg-secondary"
       )}
     >
       {item.kind === "image" ? (
@@ -269,15 +273,15 @@ function AttachmentRow({
           type="button"
           onClick={() => onPreview(item)}
           aria-label={`Preview ${item.name}`}
-          className="relative size-11 shrink-0 cursor-zoom-in rounded-inner shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="relative size-11 shrink-0 cursor-zoom-in rounded-inner outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {!previewing && <Thumb item={item} layout={!reduce} />}
         </button>
       ) : (
         <span
           className={cn(
-            "inline-flex size-11 shrink-0 items-center justify-center rounded-inner bg-muted shadow-well",
-            status === "error" ? "text-destructive" : "text-muted-foreground"
+            "inline-flex size-11 shrink-0 items-center justify-center rounded-inner transition-colors",
+            status === "error" ? "bg-destructive/8 text-destructive" : "bg-muted text-muted-foreground"
           )}
         >
           {item.kind === "link" ? <GlobeIcon size={18} /> : <FileIcon size={18} />}
@@ -314,7 +318,7 @@ function AttachmentRow({
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(progress)}
-            className="relative mt-0.5 h-1 w-full overflow-hidden rounded-full bg-muted shadow-well"
+            className="relative mt-0.5 h-1 w-full overflow-hidden rounded-full bg-foreground/8"
           >
             <motion.div
               className="absolute inset-y-0 left-0 rounded-full bg-primary"
@@ -500,7 +504,7 @@ export function AttachmentUpload({
             <AttachIcon size={16} className="text-muted-foreground" />
             {label}
             {items.length > 0 && (
-              <span className="rounded-full bg-muted px-1.5 text-ui-sm leading-5 text-muted-foreground tabular-nums shadow-well">
+              <span className="text-ui-sm text-muted-foreground tabular-nums">
                 {items.length}
               </span>
             )}
@@ -535,26 +539,30 @@ export function AttachmentUpload({
             setDragging(false)
             if (!inactive) addFiles(e.dataTransfer.files)
           }}
+          onClick={() => !inactive && inputRef.current?.click()}
           transition={{ type: "spring", stiffness: 420, damping: 36 }}
           className={cn(
-            "relative flex rounded-inner bg-background dark:bg-input/32 shadow-well transition-colors",
-            "outline-2 -outline-offset-6 outline-transparent outline-dashed",
-            compact ? "items-center gap-3 px-3 py-2.5" : "flex-col items-center gap-2.5 px-6 py-8 text-center",
-            dragging && "bg-primary/8 outline-primary/50",
-            inactive && "opacity-60"
+            // Borderless well: a soft fill, the card's hairline is the only edge. A dashed
+            // hairline appears only while files are dragged over it.
+            "relative flex bg-muted transition-[background-color,outline-color] duration-150 ease-out",
+            "outline-1 -outline-offset-1 outline-transparent outline-dashed",
+            // compact: p-1.5 inset, so the Add button follows the well concentrically (14 − 6 = 8px)
+            compact
+              ? "frame-inner frame-p-1.5 items-center gap-2.5 pl-3"
+              : "rounded-inner flex-col items-center gap-2 px-6 py-8 text-center",
+            inactive ? "opacity-64" : "cursor-pointer hover:bg-foreground/6",
+            dragging && "bg-primary/6 outline-primary/40 hover:bg-primary/6"
           )}
         >
           <motion.span
             layout={!reduce}
-            animate={reduce ? undefined : { y: dragging ? -3 : 0, rotate: dragging ? -8 : 0 }}
+            animate={reduce ? undefined : { y: dragging ? -3 : 0 }}
             className={cn(
-              "inline-flex shrink-0 items-center justify-center bg-card shadow-raised",
-              // compact: 10px into the dropzone, so concentric with it (14 − 10 ≈ rounded-sm)
-              compact ? "size-8 rounded-sm" : "size-11 rounded-xl",
+              "inline-flex shrink-0 items-center justify-center transition-colors duration-150",
               dragging ? "text-primary" : "text-muted-foreground"
             )}
           >
-            <AttachIcon size={compact ? 16 : 20} />
+            <UploadIcon size={compact ? 16 : 22} />
           </motion.span>
           <motion.div layout={!reduce ? "position" : false} className="flex min-w-0 flex-1 flex-col">
             <span className="text-ui font-medium">{dragging ? "Release to attach" : full ? "Attachment limit reached" : title}</span>
@@ -582,8 +590,15 @@ export function AttachmentUpload({
             layout={!reduce ? "position" : false}
             type="button"
             disabled={inactive}
-            onClick={() => inputRef.current?.click()}
-            className="inline-flex h-8 shrink-0 cursor-pointer items-center gap-1 rounded-lg bg-card pr-3.5 pl-2.5 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none"
+            onClick={(e) => {
+              e.stopPropagation()
+              inputRef.current?.click()
+            }}
+            className={cn(
+              "inline-flex shrink-0 cursor-pointer items-center gap-1 pr-3 pl-2 text-ui font-medium text-foreground transition-colors duration-150 ease-out outline-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none",
+              // empty state: a quiet secondary fill, still no ring of its own
+              compact ? "h-8 rounded-inner" : "mt-1 h-8 rounded-lg bg-foreground/6 hover:bg-foreground/10"
+            )}
           >
             <PlusIcon size={14} />
             {compact ? "Add" : "Choose files"}

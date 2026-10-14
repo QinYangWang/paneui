@@ -100,7 +100,6 @@ import CompositionChartDemo from "@/registry/base-nova/examples/composition-char
 import FunnelChartDemo from "@/registry/base-nova/examples/funnel-chart-demo"
 import ChartUtilsDemo from "@/registry/base-nova/examples/chart-utils-demo"
 import HeatCalendarDemo from "@/registry/base-nova/examples/heat-calendar-demo"
-import ReturnsCalendarDemo from "@/registry/base-nova/examples/returns-calendar-demo"
 import NotificationStackDemo from "@/registry/base-nova/examples/notification-stack-demo"
 import FeedbackWidgetDemo from "@/registry/base-nova/examples/feedback-widget-demo"
 import ExpandableActionBarDemo from "@/registry/base-nova/examples/expandable-action-bar-demo"
@@ -232,7 +231,6 @@ export const demos: Record<string, React.ComponentType> = {
   "funnel-chart": FunnelChartDemo,
   "chart-utils": ChartUtilsDemo,
   "heat-calendar": HeatCalendarDemo,
-  "returns-calendar": ReturnsCalendarDemo,
   "notification-stack": NotificationStackDemo,
   "feedback-widget": FeedbackWidgetDemo,
   "expandable-action-bar": ExpandableActionBarDemo,

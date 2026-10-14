@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons"
 import { categorySlug } from "@/components/docs/category-icons"
 import { IconGrid } from "@/components/docs/icon-grid"
+import { IconSkill } from "@/components/docs/icon-skill"
 import { Inline } from "@/components/docs/doc-inline"
 import { DocToc, type TocEntry } from "@/components/docs/doc-toc"
 import { InstallCommand, PackageInstall } from "@/components/docs/install-command"
@@ -162,7 +163,12 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
       id: `note-${n.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
       title: n.title,
     })),
-    ...(name === "icons" ? [{ id: "all-icons", title: "All icons" }] : []),
+    ...(name === "icons"
+      ? [
+          { id: "make-your-own-icons", title: "Make your own icons" },
+          { id: "all-icons", title: "All icons" },
+        ]
+      : []),
     ...(doc && (doc.api.length > 0 || doc.baseUi) ? [{ id: "api-reference", title: "API Reference" }] : []),
   ]
   const isTemplate = item.category === "Templates"
@@ -327,6 +333,22 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
             </p>
           </section>
         ))}
+
+        {name === "icons" && (
+          <section className="flex flex-col gap-3">
+            <H2 id="make-your-own-icons">Make your own icons</H2>
+            <p className="text-pretty text-muted-foreground">
+              Need a glyph the set doesn&apos;t have? Install the <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puffy-icons</code>{" "}
+              agent skill and ask your coding agent for it. The skill carries the drawing rules (18×18 grid, the{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puff</code> and{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">line</code> primitives,
+              knockouts), reference icons, a preview script to check the result at 14px, and how to add it to your{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>.
+              Works with Claude Code, Codex, Cursor and any agent that reads Agent Skills.
+            </p>
+            <IconSkill skill={readSource("skills/puffy-icons/SKILL.md")} />
+          </section>
+        )}
 
         {name === "icons" && (
           <section className="flex flex-col gap-3">

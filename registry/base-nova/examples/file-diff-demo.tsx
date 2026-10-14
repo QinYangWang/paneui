@@ -50,7 +50,7 @@ export default function FileDiffDemo() {
 
   return (
     <div className="flex w-full max-w-xl flex-col gap-3">
-      <FileDiff filename="components/booking-form.tsx" lines={lines} status={streaming ? "streaming" : "complete"} />
+      <FileDiff filename="components/booking-form.tsx" lines={lines} status={streaming ? "streaming" : "complete"} diffStyleToggle />
       <FileDiff
         filename="lib/slots.ts"
         defaultOpen={false}

@@ -60,7 +60,6 @@ import d_pull_to_refresh from "./pull-to-refresh"
 import d_radio from "./radio"
 import d_range_slider_inline from "./range-slider-inline"
 import d_reasoning_text from "./reasoning-text"
-import d_returns_calendar from "./returns-calendar"
 import d_scroll_progress from "./scroll-progress"
 import d_scroll_reveal from "./scroll-reveal"
 import d_scroll_to from "./scroll-to"
@@ -154,7 +153,6 @@ export const docsContent: Record<string, ComponentDoc> = {
   "radio": d_radio,
   "range-slider-inline": d_range_slider_inline,
   "reasoning-text": d_reasoning_text,
-  "returns-calendar": d_returns_calendar,
   "scroll-progress": d_scroll_progress,
   "scroll-reveal": d_scroll_reveal,
   "scroll-to": d_scroll_to,

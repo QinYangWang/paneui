@@ -47,7 +47,6 @@ export const galleryHeights: Record<string, number> = {
   "project-folder": 344,
   "pull-to-refresh": 384,
   "recommendation-card": 256,
-  "returns-calendar": 498,
   "scroll-progress": 384,
   "scroll-reveal": 384,
   "scroll-to": 384,
