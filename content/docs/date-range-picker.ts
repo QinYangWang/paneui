@@ -56,7 +56,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other pickers: [Wheel Picker](/docs/wheel-picker), [Arc Picker](/docs/arc-picker), [Color Picker](/docs/color-picker).",
+      body: "Other pickers: [Wheel Picker](/docs/wheel-picker), [Color Picker](/docs/color-picker).",
     },
   ],
   api: [

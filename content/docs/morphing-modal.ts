@@ -58,7 +58,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other morphing surfaces: [Select Morph](/docs/select-morph), [Popover Morph](/docs/popover-morph), [Center Morph Modal](/docs/center-morph-modal), [Morphing Lightbox](/docs/morphing-lightbox), [Morphing Search](/docs/morphing-search), [Morphing Search Chips](/docs/morphing-search-chips), [Morphing Tabs](/docs/morphing-tabs).",
+      body: "Other morphing surfaces: [Select Morph](/docs/select-morph), [Popover Morph](/docs/popover-morph), [Morphing Search](/docs/morphing-search), [Morphing Tabs](/docs/morphing-tabs).",
     },
   ],
   api: [

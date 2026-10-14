@@ -47,7 +47,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Same API with another animation: [Action Swap Roll](/docs/action-swap-roll) and [Action Swap Cascade](/docs/action-swap-cascade).",
+      body: "Same API with another animation: [Action Swap Roll](/docs/action-swap-roll).",
     },
   ],
   api: [

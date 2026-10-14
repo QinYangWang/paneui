@@ -29,7 +29,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Reads [Smooth Scroll](/docs/smooth-scroll) by default. See also [Parallax](/docs/parallax), [Scroll To](/docs/scroll-to), [Scroll Reveal](/docs/scroll-reveal).",
+      body: "Reads [Smooth Scroll](/docs/smooth-scroll) by default. See also [Scroll To](/docs/scroll-to), [Scroll Reveal](/docs/scroll-reveal).",
     },
   ],
   api: [

@@ -41,7 +41,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other pickers: [Arc Picker](/docs/arc-picker), [Color Picker](/docs/color-picker), [Date Range Picker](/docs/date-range-picker).",
+      body: "Other pickers: [Color Picker](/docs/color-picker), [Date Range Picker](/docs/date-range-picker).",
     },
   ],
   api: [

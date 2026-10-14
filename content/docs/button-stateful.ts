@@ -36,7 +36,7 @@ export default {
     },
     {
       title: "Related",
-      body: "[Button](/docs/button), [Magnetic Button](/docs/button-magnetic). With reduced motion faces cross-fade and the width changes instantly.",
+      body: "[Button](/docs/button). With reduced motion faces cross-fade and the width changes instantly.",
     },
   ],
   api: [

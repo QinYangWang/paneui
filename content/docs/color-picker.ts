@@ -59,7 +59,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other pickers: [Wheel Picker](/docs/wheel-picker), [Arc Picker](/docs/arc-picker), [Date Range Picker](/docs/date-range-picker).",
+      body: "Other pickers: [Wheel Picker](/docs/wheel-picker), [Date Range Picker](/docs/date-range-picker).",
     },
   ],
   api: [

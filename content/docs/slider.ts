@@ -38,7 +38,7 @@ export default {
     },
     {
       title: "Related",
-      body: "For styled range pickers see [Range Slider Bubble](/docs/range-slider-bubble), [Range Slider Fluid](/docs/range-slider-fluid), [Range Slider Inline](/docs/range-slider-inline), [Range Slider Ruler](/docs/range-slider-ruler) and [Range Slider Wave](/docs/range-slider-wave).",
+      body: "For a styled range picker see [Range Slider Inline](/docs/range-slider-inline).",
     },
   ],
   api: [

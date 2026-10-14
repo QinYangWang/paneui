@@ -31,7 +31,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other range sliders: [Range Slider Fluid](/docs/range-slider-fluid), [Range Slider Wave](/docs/range-slider-wave), [Range Slider Bubble](/docs/range-slider-bubble), [Range Slider Ruler](/docs/range-slider-ruler).",
+      body: "For a plain single or two-thumb slider, use [Slider](/docs/slider).",
     },
   ],
   api: [

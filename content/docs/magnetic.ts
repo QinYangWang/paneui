@@ -31,7 +31,7 @@ export default {
     },
     {
       title: "Related",
-      body: "[Magnetic Button](/docs/button-magnetic) applies this to a Button with a layered label.",
+      body: "Wrap a [Button](/docs/button), or any other element, to make it lean toward the cursor.",
     },
   ],
   api: [

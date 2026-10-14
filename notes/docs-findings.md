@@ -25,6 +25,8 @@ Groups A–E fixed: composition-chart/status-bar prop collisions, price-target-f
 - Dialog close button scrolls away with long content.
 - animated-sidebar + ai-sidebar on the same key both fire (separate stacks).
 - onFill() duplicated in treemap/candlestick/funnel → move to chart-utils.
-- Out-of-range springs: cylinder-carousel glide, animated-sidebar mass 0.8, range-slider-wave BAR_SPRING damping 19.
+- Out-of-range spring: animated-sidebar WIDTH_SPRING mass 0.8.
 - tool-approval: parent resetting "always" doesn't clear rememberKey (document).
 - tool-result and agent-code-block duplicate highlighter.
+
+## Removed 2026-10-14 (user approved): button-magnetic arc-picker range-slider-wave range-slider-fluid range-slider-bubble range-slider-ruler color-selector tilt-card animated-badge bounce-sidebar action-swap-cascade chromatic-text-reveal cylinder-carousel parallax center-morph-modal morphing-lightbox voice-orb thinking-shimmer liquidity-heatmap order-book bump-chart price-target-fan volume-profile not-found-glitch not-found-magnetic not-found-spotlight not-found-stacked knockout-bracket knockout-wheel prediction-market prediction-market-card wallet-card swap bloom-menu dynamic-island morphing-search-chips infinite-masonry

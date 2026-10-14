@@ -29,7 +29,7 @@ export default {
     },
     {
       title: "Related",
-      body: "[Text Shimmer](/docs/text-shimmer), [Text Scramble](/docs/text-scramble), [Text Reveal](/docs/text-reveal). [Action Swap Cascade](/docs/action-swap-cascade) uses it inside a button.",
+      body: "[Text Shimmer](/docs/text-shimmer), [Text Scramble](/docs/text-scramble), [Text Reveal](/docs/text-reveal). [Reasoning Text](/docs/reasoning-text) uses it for streamed labels.",
     },
   ],
   api: [

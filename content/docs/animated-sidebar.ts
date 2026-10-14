@@ -70,7 +70,7 @@ export default {
     },
     {
       title: "Related",
-      body: "[Bounce Sidebar](/docs/bounce-sidebar), [AI Sidebar](/docs/ai-sidebar).",
+      body: "[AI Sidebar](/docs/ai-sidebar).",
     },
   ],
   api: [

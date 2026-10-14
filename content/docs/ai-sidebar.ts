@@ -42,7 +42,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other sidebars: [Animated Sidebar](/docs/animated-sidebar) and [Bounce Sidebar](/docs/bounce-sidebar).",
+      body: "Other sidebars: [Animated Sidebar](/docs/animated-sidebar).",
     },
   ],
   api: [

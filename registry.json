@@ -1221,28 +1221,6 @@
       }
     },
     {
-      "name": "color-selector",
-      "type": "registry:ui",
-      "title": "Color Selector",
-      "description": "Row of colour swatches as an accessible radio group, with a selection ring that glides between them on a spring.",
-      "dependencies": [
-        "@base-ui/react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/color-selector.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
       "name": "loader",
       "type": "registry:ui",
       "title": "Loader",
@@ -1330,30 +1308,6 @@
       ],
       "meta": {
         "category": "Motion"
-      }
-    },
-    {
-      "name": "button-magnetic",
-      "type": "registry:ui",
-      "title": "Button Magnetic",
-      "description": "Our Button wrapped in Magnetic, with the label leaning slightly further than the surface for a layered pull.",
-      "dependencies": [
-        "@base-ui/react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button",
-        "@qinyang/magnetic"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/button-magnetic.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
       }
     },
     {
@@ -1510,28 +1464,6 @@
       }
     },
     {
-      "name": "action-swap-cascade",
-      "type": "registry:ui",
-      "title": "Action Swap Cascade",
-      "description": "Button whose label swaps with a letter-by-letter slot roll between states while the icon rolls as one piece.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/action-swap-blur"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/action-swap-cascade.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Text"
-      }
-    },
-    {
       "name": "digit-swap",
       "type": "registry:ui",
       "title": "Digit Swap",
@@ -1550,51 +1482,6 @@
       ],
       "meta": {
         "category": "Text"
-      }
-    },
-    {
-      "name": "chromatic-text-reveal",
-      "type": "registry:ui",
-      "title": "Chromatic Text Reveal",
-      "description": "Fixed prefix with a cycling final word that sweeps in while its split red, green and blue channels converge into the text colour.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/chromatic-text-reveal.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Text"
-      }
-    },
-    {
-      "name": "animated-badge",
-      "type": "registry:ui",
-      "title": "Animated Badge",
-      "description": "Status badge on our badge look whose glyph and label roll between idle, loading, success, warning, error and info, with an optional ping pulse and three sizes.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/badge",
-        "@qinyang/action-swap-blur"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/animated-badge.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Display"
       }
     },
     {
@@ -1665,28 +1552,6 @@
       }
     },
     {
-      "name": "center-morph-modal",
-      "type": "registry:ui",
-      "title": "Center Morph Modal",
-      "description": "Modal whose surface unfolds from a small seed at its centre out to its edges, with content settling in behind, built on Base UI Dialog.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/center-morph-modal.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Overlays"
-      }
-    },
-    {
       "name": "shared-layout-bg",
       "type": "registry:ui",
       "title": "Shared Layout Background",
@@ -1730,27 +1595,6 @@
       }
     },
     {
-      "name": "tilt-card",
-      "type": "registry:ui",
-      "title": "Tilt Card",
-      "description": "Card that tilts toward the cursor in 3D with a pointer-tracked glare and optional parallax layers, switched off for touch and reduced motion.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/tilt-card.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Display"
-      }
-    },
-    {
       "name": "wheel-picker",
       "type": "registry:ui",
       "title": "Wheel Picker",
@@ -1764,27 +1608,6 @@
       "files": [
         {
           "path": "registry/base-nova/ui/wheel-picker.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
-      "name": "arc-picker",
-      "type": "registry:ui",
-      "title": "Arc Picker",
-      "description": "Radial text picker whose labels ride a curve bowed toward the top, bottom, left or right, moved by wheel, drag with momentum or arrow keys, with a well pill that stretches to the selected label.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/arc-picker.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1881,93 +1704,6 @@
       }
     },
     {
-      "name": "range-slider-fluid",
-      "type": "registry:ui",
-      "title": "Range Slider Fluid",
-      "description": "Thumbless Base UI slider pill whose primary fill glides behind a rounded liquid cap while the label flips colour wherever the fill covers it.",
-      "dependencies": [
-        "@base-ui/react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/range-slider-fluid.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
-      "name": "range-slider-wave",
-      "type": "registry:ui",
-      "title": "Range Slider Wave",
-      "description": "Equalizer-style Base UI slider whose bars rise into a springy crest around the handle and fall back as it passes.",
-      "dependencies": [
-        "@base-ui/react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/range-slider-wave.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
-      "name": "range-slider-bubble",
-      "type": "registry:ui",
-      "title": "Range Slider Bubble",
-      "description": "Base UI slider whose value bubble pops out of the thumb on grab or keyboard focus, leaning and squashing with drag velocity before settling upright.",
-      "dependencies": [
-        "@base-ui/react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/range-slider-bubble.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
-      "name": "range-slider-ruler",
-      "type": "registry:ui",
-      "title": "Range Slider Ruler",
-      "description": "Ruler slider with a fixed needle and a scale that scrolls underneath, coasting on a flick and snapping to the nearest tick, with full keyboard support.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/range-slider-ruler.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
       "name": "pull-to-refresh",
       "type": "registry:ui",
       "title": "Pull to Refresh",
@@ -2036,29 +1772,6 @@
       }
     },
     {
-      "name": "parallax",
-      "type": "registry:ui",
-      "title": "Parallax",
-      "description": "Wrapper that drifts its children at a speed factor while they cross the viewport, in the window or any scroll container, resting in place when centred.",
-      "dependencies": [
-        "motion",
-        "lenis"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/smooth-scroll"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/parallax.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Motion"
-      }
-    },
-    {
       "name": "scroll-to",
       "type": "registry:ui",
       "title": "Scroll To",
@@ -2107,50 +1820,6 @@
       }
     },
     {
-      "name": "cylinder-carousel",
-      "type": "registry:ui",
-      "title": "Cylinder Carousel",
-      "description": "Looping 3D carousel that lays items on the inside wall of a cylinder, rolled by drag with flick momentum, horizontal wheel, arrow keys or buttons, snapping on a spring.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/cylinder-carousel.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Motion"
-      }
-    },
-    {
-      "name": "morphing-lightbox",
-      "type": "registry:ui",
-      "title": "Morphing Lightbox",
-      "description": "Thumbnail grid whose images morph out of their thumbnails into a full viewer and back, with gallery navigation, swipe, keyboard control and captions.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/morphing-lightbox.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Overlays"
-      }
-    },
-    {
       "name": "shader-background",
       "type": "registry:ui",
       "title": "Shader Background",
@@ -2191,27 +1860,6 @@
       ],
       "meta": {
         "category": "Charts"
-      }
-    },
-    {
-      "name": "bounce-sidebar",
-      "type": "registry:ui",
-      "title": "Bounce Sidebar",
-      "description": "Vertical sidebar nav whose raised active dot hops between destinations along a curved, distance-aware spring path in its own inset gutter.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/bounce-sidebar.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Navigation"
       }
     },
     {
@@ -2358,27 +2006,6 @@
       ],
       "meta": {
         "category": "Data"
-      }
-    },
-    {
-      "name": "voice-orb",
-      "type": "registry:ui",
-      "title": "Voice Orb",
-      "description": "Breathing liquid canvas orb for voice interfaces whose silhouette and inner highlights react to an audio level, number, MotionValue or caller-owned AnalyserNode, with idle, listening, thinking and speaking rhythms.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/voice-orb.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Agents"
       }
     },
     {
@@ -2675,26 +2302,6 @@
       }
     },
     {
-      "name": "thinking-shimmer",
-      "type": "registry:ui",
-      "title": "Thinking Shimmer",
-      "description": "A quiet shimmering status line for the agent's current step that settles into plain text when the work is done.",
-      "dependencies": [],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/text-shimmer"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/thinking-shimmer.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Agents"
-      }
-    },
-    {
       "name": "agent-progress",
       "type": "registry:ui",
       "title": "Agent Progress",
@@ -2830,28 +2437,6 @@
       }
     },
     {
-      "name": "volume-profile",
-      "type": "registry:ui",
-      "title": "Volume Profile",
-      "description": "Volume-by-price histogram that bins trades into rows, marks the point of control and value area (VAH/VAL), splits buy/sell volume and shows row tooltips plus a summary.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/volume-profile.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Charts"
-      }
-    },
-    {
       "name": "status-bar",
       "type": "registry:ui",
       "title": "Status Bar",
@@ -2918,72 +2503,6 @@
       }
     },
     {
-      "name": "liquidity-heatmap",
-      "type": "registry:ui",
-      "title": "Liquidity Heatmap",
-      "description": "Resting liquidity across price bands and time as a heat grid that reveals left to right, with an animated traded-price trace, last-price marker, keyboard-inspectable depth tooltips and a thin-to-deep legend.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/liquidity-heatmap.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Charts"
-      }
-    },
-    {
-      "name": "bump-chart",
-      "type": "registry:ui",
-      "title": "Bump Chart",
-      "description": "Rankings over time drawn as smooth S-curve paths that draw in and re-route on data change, with numbered rank dots, change-vs-previous tooltips, hover/keyboard highlighting and click-to-pin legend pills.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/bump-chart.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Charts"
-      }
-    },
-    {
-      "name": "order-book",
-      "type": "registry:ui",
-      "title": "Order Book",
-      "description": "Composable bid/ask ladder (Header, Side, Spread, Balance, DepthSummary) with cumulative depth bars, size-change flashes, springy last price and spread in bps, bid/sell volume balance and hover-to-total depth; built for live snapshots.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/order-book.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Charts"
-      }
-    },
-    {
       "name": "heat-calendar",
       "type": "registry:ui",
       "title": "Heat Calendar",
@@ -3020,28 +2539,6 @@
       "files": [
         {
           "path": "registry/base-nova/ui/returns-calendar.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Charts"
-      }
-    },
-    {
-      "name": "price-target-fan",
-      "type": "registry:ui",
-      "title": "Price Target Fan",
-      "description": "Composable price history plus analyst target fan (Header, Plot, Axes, History, Targets, Now, Cursor, Tooltip): low/average/high projections that open from a pulsing now marker, with pointer/keyboard scrubbing across history and the projected path.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/price-target-fan.tsx",
           "type": "registry:ui"
         }
       ],
@@ -3433,50 +2930,6 @@
       }
     },
     {
-      "name": "dynamic-island",
-      "type": "registry:block",
-      "title": "Dynamic Island",
-      "description": "iOS-style pill that springs its real width and height between live-activity views (idle, timer, music, call, ride) with blur crossfades.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/dynamic-island/dynamic-island.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "bloom-menu",
-      "type": "registry:block",
-      "title": "Bloom Menu",
-      "description": "Trigger button that morphs open into a menu panel blooming iris-out from its centre, with a radially staggered, arrow-key navigable grid of actions.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/bloom-menu/bloom-menu.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
       "name": "feedback-widget",
       "type": "registry:block",
       "title": "Feedback Widget",
@@ -3560,28 +3013,6 @@
       "files": [
         {
           "path": "registry/base-nova/blocks/morphing-search/morphing-search.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "morphing-search-chips",
-      "type": "registry:block",
-      "title": "Morphing Search Chips",
-      "description": "Docked search bar that springs wider on focus and unfolds a recent-searches chip panel from its edge, turning picked terms into removable chips with filtered suggestions.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/morphing-search-chips/morphing-search-chips.tsx",
           "type": "registry:component"
         }
       ],
@@ -3702,29 +3133,6 @@
       }
     },
     {
-      "name": "infinite-masonry",
-      "type": "registry:block",
-      "title": "Infinite Masonry",
-      "description": "Responsive virtualized masonry that measures variable-height cards with @tanstack/react-virtual lanes, reveals new items and loads more as the viewport nears the end.",
-      "dependencies": [
-        "@tanstack/react-virtual",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/infinite-masonry/infinite-masonry.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
       "name": "attachment-upload",
       "type": "registry:block",
       "title": "Attachment Upload",
@@ -3797,53 +3205,6 @@
       }
     },
     {
-      "name": "knockout-bracket",
-      "type": "registry:block",
-      "title": "Knockout Bracket",
-      "description": "Single-elimination bracket paged one round at a time: the leftmost round stacks evenly, later rounds centre between their feeders, and cards, elbow connectors, headers and stage height spring into each new layout, with scores, penalties, result chips and an optional third-place match.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/knockout-bracket/knockout-bracket.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "knockout-wheel",
-      "type": "registry:block",
-      "title": "Knockout Wheel",
-      "description": "A knockout tournament drawn radially, with the champion at the hub, each round as a ring and the teams on the rim; nodes spring in ring by ring, hovering or focusing a team isolates its path, and tooltips give each result.",
-      "dependencies": [
-        "@base-ui/react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/tooltip"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/knockout-wheel/knockout-wheel.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
       "name": "signup-form",
       "type": "registry:block",
       "title": "Sign-up Form",
@@ -3871,95 +3232,6 @@
       }
     },
     {
-      "name": "not-found-glitch",
-      "type": "registry:block",
-      "title": "404 Glitch",
-      "description": "404 page whose digits scramble through random glyphs before resolving, replaying with a red/cyan chromatic split on hover.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/not-found-glitch/not-found-glitch.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "not-found-magnetic",
-      "type": "registry:block",
-      "title": "404 Magnetic",
-      "description": "404 page where each digit of the code is its own Magnetic wrapper, leaning toward the cursor and springing back when it leaves.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button",
-        "@qinyang/magnetic"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/not-found-magnetic/not-found-magnetic.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "not-found-spotlight",
-      "type": "registry:block",
-      "title": "404 Spotlight",
-      "description": "404 page on a recessed panel where a cursor-tracked spotlight reveals a bright copy of the code over a dim base.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/not-found-spotlight/not-found-spotlight.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "not-found-stacked",
-      "type": "registry:block",
-      "title": "404 Stacked",
-      "description": "404 page with the code on a card over a hidden stack that fans out on a spring on hover, focus or tap.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/not-found-stacked/not-found-stacked.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
       "name": "not-found-terminal",
       "type": "registry:block",
       "title": "404 Terminal",
@@ -3974,103 +3246,6 @@
       "files": [
         {
           "path": "registry/base-nova/blocks/not-found-terminal/not-found-terminal.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "swap",
-      "type": "registry:block",
-      "title": "Swap",
-      "description": "Cross-chain token swap widget with chain and token selectors in a morphing in-card picker, a spinning flip button, slippage settings and live quote states (empty, quoting, ready, insufficient balance) driving a stateful swap button.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button-stateful"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/swap/swap.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "prediction-market-card",
-      "type": "registry:block",
-      "title": "Prediction Market Card",
-      "description": "Compact market listing with binary or multi-outcome rows, probability bars, odds buttons that roll to a Buy action on hover or focus, payout multiplier tooltips, a volume sparkline and a watchlist toggle.",
-      "dependencies": [
-        "motion",
-        "@base-ui/react"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/action-swap-blur",
-        "@qinyang/tooltip"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/prediction-market-card/prediction-market-card.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "prediction-market",
-      "type": "registry:block",
-      "title": "Prediction Market",
-      "description": "Buy/sell trade ticket with an outcome radio group, rolling-digit amount entry, quick-add chips, a number-ticker payout and placing/filled/error trade states with a shake on invalid orders.",
-      "dependencies": [
-        "motion",
-        "@base-ui/react"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/tabs",
-        "@qinyang/number-ticker",
-        "@qinyang/button-stateful"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/prediction-market/prediction-market.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
-      "name": "wallet-card",
-      "type": "registry:block",
-      "title": "Wallet Card",
-      "description": "Wallet overview whose account switcher and search morph open from their triggers, with a rolling number-ticker balance, privacy toggle, change pill, quick actions and an optional holdings list.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/number-ticker"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/wallet-card/wallet-card.tsx",
           "type": "registry:component"
         }
       ],

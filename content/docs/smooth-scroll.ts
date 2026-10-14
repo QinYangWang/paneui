@@ -31,7 +31,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Scroll-driven parts read this provider: [Scroll Progress](/docs/scroll-progress), [Parallax](/docs/parallax), [Scroll To](/docs/scroll-to), [Scroll Reveal](/docs/scroll-reveal).",
+      body: "Scroll-driven parts read this provider: [Scroll Progress](/docs/scroll-progress), [Scroll To](/docs/scroll-to), [Scroll Reveal](/docs/scroll-reveal).",
     },
   ],
   api: [

@@ -26,7 +26,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Uses the container from [Smooth Scroll](/docs/smooth-scroll). See also [Scroll Progress](/docs/scroll-progress), [Parallax](/docs/parallax), [Scroll To](/docs/scroll-to).",
+      body: "Uses the container from [Smooth Scroll](/docs/smooth-scroll). See also [Scroll Progress](/docs/scroll-progress), [Scroll To](/docs/scroll-to).",
     },
   ],
   api: [

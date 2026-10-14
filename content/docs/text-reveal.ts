@@ -39,7 +39,7 @@ export default {
     },
     {
       title: "Related",
-      body: "[Text Shimmer](/docs/text-shimmer), [Text Scramble](/docs/text-scramble), [Text Cascade](/docs/text-cascade) and [Chromatic Text Reveal](/docs/chromatic-text-reveal).",
+      body: "[Text Shimmer](/docs/text-shimmer), [Text Scramble](/docs/text-scramble), [Text Cascade](/docs/text-cascade).",
     },
   ],
   api: [

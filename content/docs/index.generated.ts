@@ -3,40 +3,30 @@ import type { ComponentDoc } from "@/lib/doc-types"
 
 import d_accordion from "./accordion"
 import d_action_swap_blur from "./action-swap-blur"
-import d_action_swap_cascade from "./action-swap-cascade"
 import d_action_swap_roll from "./action-swap-roll"
 import d_agent_activity from "./agent-activity"
 import d_agent_code_block from "./agent-code-block"
 import d_agent_progress from "./agent-progress"
 import d_ai_sidebar from "./ai-sidebar"
 import d_alert from "./alert"
-import d_animated_badge from "./animated-badge"
 import d_animated_number from "./animated-number"
 import d_animated_sidebar from "./animated-sidebar"
-import d_arc_picker from "./arc-picker"
 import d_aspect_ratio from "./aspect-ratio"
 import d_badge from "./badge"
 import d_bottom_sheet from "./bottom-sheet"
-import d_bounce_sidebar from "./bounce-sidebar"
 import d_breadcrumb from "./breadcrumb"
-import d_bump_chart from "./bump-chart"
 import d_button from "./button"
-import d_button_magnetic from "./button-magnetic"
 import d_button_stateful from "./button-stateful"
 import d_candlestick_chart from "./candlestick-chart"
 import d_card from "./card"
-import d_center_morph_modal from "./center-morph-modal"
 import d_chart_utils from "./chart-utils"
 import d_checkbox from "./checkbox"
-import d_chromatic_text_reveal from "./chromatic-text-reveal"
 import d_citations from "./citations"
 import d_collapsible from "./collapsible"
 import d_color_picker from "./color-picker"
-import d_color_selector from "./color-selector"
 import d_combobox from "./combobox"
 import d_composition_chart from "./composition-chart"
 import d_context_menu from "./context-menu"
-import d_cylinder_carousel from "./cylinder-carousel"
 import d_date_range_picker from "./date-range-picker"
 import d_dialog from "./dialog"
 import d_digit_swap from "./digit-swap"
@@ -54,7 +44,6 @@ import d_icon_chip from "./icon-chip"
 import d_image_generation from "./image-generation"
 import d_input from "./input"
 import d_label from "./label"
-import d_liquidity_heatmap from "./liquidity-heatmap"
 import d_loader from "./loader"
 import d_magnetic from "./magnetic"
 import d_marquee from "./marquee"
@@ -62,23 +51,15 @@ import d_menu from "./menu"
 import d_message from "./message"
 import d_message_bubble from "./message-bubble"
 import d_message_scroller from "./message-scroller"
-import d_morphing_lightbox from "./morphing-lightbox"
 import d_morphing_modal from "./morphing-modal"
 import d_multi_select from "./multi-select"
 import d_number_ticker from "./number-ticker"
-import d_order_book from "./order-book"
-import d_parallax from "./parallax"
 import d_popover from "./popover"
 import d_popover_morph from "./popover-morph"
 import d_preview_rail from "./preview-rail"
-import d_price_target_fan from "./price-target-fan"
 import d_pull_to_refresh from "./pull-to-refresh"
 import d_radio from "./radio"
-import d_range_slider_bubble from "./range-slider-bubble"
-import d_range_slider_fluid from "./range-slider-fluid"
 import d_range_slider_inline from "./range-slider-inline"
-import d_range_slider_ruler from "./range-slider-ruler"
-import d_range_slider_wave from "./range-slider-wave"
 import d_reasoning_text from "./reasoning-text"
 import d_returns_calendar from "./returns-calendar"
 import d_scroll_progress from "./scroll-progress"
@@ -106,55 +87,41 @@ import d_text_scramble from "./text-scramble"
 import d_text_shimmer from "./text-shimmer"
 import d_textarea from "./textarea"
 import d_theme_toggle from "./theme-toggle"
-import d_thinking_shimmer from "./thinking-shimmer"
-import d_tilt_card from "./tilt-card"
 import d_toast from "./toast"
 import d_todo_list from "./todo-list"
 import d_tool_approval from "./tool-approval"
 import d_tool_result from "./tool-result"
 import d_tooltip from "./tooltip"
 import d_treemap from "./treemap"
-import d_voice_orb from "./voice-orb"
-import d_volume_profile from "./volume-profile"
 import d_wheel_picker from "./wheel-picker"
 
 export const docsContent: Record<string, ComponentDoc> = {
   "accordion": d_accordion,
   "action-swap-blur": d_action_swap_blur,
-  "action-swap-cascade": d_action_swap_cascade,
   "action-swap-roll": d_action_swap_roll,
   "agent-activity": d_agent_activity,
   "agent-code-block": d_agent_code_block,
   "agent-progress": d_agent_progress,
   "ai-sidebar": d_ai_sidebar,
   "alert": d_alert,
-  "animated-badge": d_animated_badge,
   "animated-number": d_animated_number,
   "animated-sidebar": d_animated_sidebar,
-  "arc-picker": d_arc_picker,
   "aspect-ratio": d_aspect_ratio,
   "badge": d_badge,
   "bottom-sheet": d_bottom_sheet,
-  "bounce-sidebar": d_bounce_sidebar,
   "breadcrumb": d_breadcrumb,
-  "bump-chart": d_bump_chart,
   "button": d_button,
-  "button-magnetic": d_button_magnetic,
   "button-stateful": d_button_stateful,
   "candlestick-chart": d_candlestick_chart,
   "card": d_card,
-  "center-morph-modal": d_center_morph_modal,
   "chart-utils": d_chart_utils,
   "checkbox": d_checkbox,
-  "chromatic-text-reveal": d_chromatic_text_reveal,
   "citations": d_citations,
   "collapsible": d_collapsible,
   "color-picker": d_color_picker,
-  "color-selector": d_color_selector,
   "combobox": d_combobox,
   "composition-chart": d_composition_chart,
   "context-menu": d_context_menu,
-  "cylinder-carousel": d_cylinder_carousel,
   "date-range-picker": d_date_range_picker,
   "dialog": d_dialog,
   "digit-swap": d_digit_swap,
@@ -172,7 +139,6 @@ export const docsContent: Record<string, ComponentDoc> = {
   "image-generation": d_image_generation,
   "input": d_input,
   "label": d_label,
-  "liquidity-heatmap": d_liquidity_heatmap,
   "loader": d_loader,
   "magnetic": d_magnetic,
   "marquee": d_marquee,
@@ -180,23 +146,15 @@ export const docsContent: Record<string, ComponentDoc> = {
   "message": d_message,
   "message-bubble": d_message_bubble,
   "message-scroller": d_message_scroller,
-  "morphing-lightbox": d_morphing_lightbox,
   "morphing-modal": d_morphing_modal,
   "multi-select": d_multi_select,
   "number-ticker": d_number_ticker,
-  "order-book": d_order_book,
-  "parallax": d_parallax,
   "popover": d_popover,
   "popover-morph": d_popover_morph,
   "preview-rail": d_preview_rail,
-  "price-target-fan": d_price_target_fan,
   "pull-to-refresh": d_pull_to_refresh,
   "radio": d_radio,
-  "range-slider-bubble": d_range_slider_bubble,
-  "range-slider-fluid": d_range_slider_fluid,
   "range-slider-inline": d_range_slider_inline,
-  "range-slider-ruler": d_range_slider_ruler,
-  "range-slider-wave": d_range_slider_wave,
   "reasoning-text": d_reasoning_text,
   "returns-calendar": d_returns_calendar,
   "scroll-progress": d_scroll_progress,
@@ -224,15 +182,11 @@ export const docsContent: Record<string, ComponentDoc> = {
   "text-shimmer": d_text_shimmer,
   "textarea": d_textarea,
   "theme-toggle": d_theme_toggle,
-  "thinking-shimmer": d_thinking_shimmer,
-  "tilt-card": d_tilt_card,
   "toast": d_toast,
   "todo-list": d_todo_list,
   "tool-approval": d_tool_approval,
   "tool-result": d_tool_result,
   "tooltip": d_tooltip,
   "treemap": d_treemap,
-  "voice-orb": d_voice_orb,
-  "volume-profile": d_volume_profile,
   "wheel-picker": d_wheel_picker,
 }

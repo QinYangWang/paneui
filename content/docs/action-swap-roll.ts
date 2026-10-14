@@ -39,7 +39,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Same API with another animation: [Action Swap Blur](/docs/action-swap-blur) (which holds the shared engine) and [Action Swap Cascade](/docs/action-swap-cascade).",
+      body: "Same API with another animation: [Action Swap Blur](/docs/action-swap-blur) (which holds the shared engine).",
     },
   ],
   api: [

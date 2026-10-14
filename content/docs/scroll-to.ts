@@ -29,7 +29,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Scrolls through [Smooth Scroll](/docs/smooth-scroll). See also [Scroll Progress](/docs/scroll-progress), [Parallax](/docs/parallax), [Scroll Reveal](/docs/scroll-reveal).",
+      body: "Scrolls through [Smooth Scroll](/docs/smooth-scroll). See also [Scroll Progress](/docs/scroll-progress), [Scroll Reveal](/docs/scroll-reveal).",
     },
   ],
   api: [
