@@ -240,8 +240,8 @@ function MorphingTabs({
                     }}
                     onKeyDown={(event) => onKeyDown(event, id)}
                     className={cn(
-                      "flex h-9 cursor-pointer items-center gap-1.5 rounded-t-xl pl-3 text-sm font-medium whitespace-nowrap text-muted-foreground outline-none select-none",
-                      "transition-colors duration-200 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40",
+                      "flex h-9 cursor-pointer items-center gap-1.5 rounded-t-xl pl-3 text-ui font-medium whitespace-nowrap text-muted-foreground outline-none select-none",
+                      "transition-colors duration-200 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40",
                       "data-active:text-card-foreground [&_svg]:size-4 [&_svg]:shrink-0",
                       onClose ? "pr-1.5" : "pr-3",
                       reorderable && "active:cursor-grabbing"
@@ -280,7 +280,7 @@ function MorphingTabs({
           transition={reduceMotion ? { duration: 0 } : SURFACE}
           data-slot="morphing-tabs-content"
           className={cn(
-            "relative -mt-px overflow-hidden rounded-2xl bg-card text-card-foreground shadow-surface",
+            "relative -mt-px overflow-hidden rounded-xl bg-card text-card-foreground shadow-raised",
             contentClassName
           )}
         >
@@ -303,7 +303,7 @@ function MorphingTabs({
                   animate="center"
                   exit="exit"
                   transition={reduceMotion ? { duration: 0.12 } : { type: "spring", duration: 0.4, bounce: 0 }}
-                  className="p-5 outline-none focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset"
+                  className="p-5 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
                 >
                   {active.content}
                 </motion.div>
@@ -313,7 +313,7 @@ function MorphingTabs({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="p-5 text-sm text-muted-foreground"
+                  className="p-5 text-ui text-muted-foreground"
                 >
                   No tab selected.
                 </motion.p>

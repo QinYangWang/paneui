@@ -24,7 +24,7 @@ export function Landing() {
     <div className="flex min-h-svh flex-col bg-background">
       <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/80 backdrop-blur">
         <Container className="flex h-full items-center gap-6">
-          <a href="#" className="flex items-center gap-2.5 rounded-full font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring">
+          <a href="#" className="flex items-center gap-2.5 rounded-full font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
             <IconChip size="sm" tone="solid">
               <BotIcon />
             </IconChip>

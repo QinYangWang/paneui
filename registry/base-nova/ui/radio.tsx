@@ -33,9 +33,8 @@ function Radio<Value>({ className, ...props }: RadioPrimitive.Root.Props<Value>)
     <RadioPrimitive.Root
       data-slot="radio"
       className={cn(
-        "peer group/radio relative inline-flex size-[18px] shrink-0 cursor-pointer items-center justify-center rounded-full bg-muted shadow-well outline-none",
-        "transition-[scale] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] active:scale-[0.88] motion-reduce:transition-none motion-reduce:active:scale-100",
-        "focus-visible:ring-3 focus-visible:ring-ring data-invalid:shadow-[inset_0_0_0_1px_var(--destructive)] data-disabled:cursor-not-allowed data-disabled:opacity-50",
+        "peer group/radio relative inline-flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-full bg-background shadow-well outline-none dark:bg-input/32",
+                "focus-visible:ring-2 focus-visible:ring-ring/50 data-invalid:shadow-[inset_0_0_0_1px_var(--destructive)] data-disabled:cursor-not-allowed data-disabled:opacity-64",
         className
       )}
       {...props}
@@ -46,7 +45,7 @@ function Radio<Value>({ className, ...props }: RadioPrimitive.Root.Props<Value>)
           initial={groupId ? false : { scale: 0 }}
           animate={{ scale: 1 }}
           transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 32, mass: 0.6 }}
-          className="block size-2.5 rounded-full bg-primary shadow-primary"
+          className="block size-2 rounded-full bg-primary"
         />
       </RadioPrimitive.Indicator>
     </RadioPrimitive.Root>

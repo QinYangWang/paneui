@@ -162,15 +162,15 @@ function SignupForm({
       noValidate
       onSubmit={submit}
       className={cn(
-        "flex w-full max-w-sm flex-col gap-5 rounded-3xl bg-card p-6 shadow-surface",
+        "flex w-full max-w-sm flex-col gap-5 rounded-2xl bg-card p-5 shadow-raised",
         className
       )}
       {...props}
     >
       {(title || description) && (
         <div className="flex flex-col gap-1">
-          {title && <h2 className="text-lg font-semibold tracking-tight">{title}</h2>}
-          {description && <p className="text-sm text-muted-foreground">{description}</p>}
+          {title && <h2 className="text-lg font-semibold">{title}</h2>}
+          {description && <p className="text-ui text-muted-foreground">{description}</p>}
         </div>
       )}
 
@@ -197,7 +197,7 @@ function SignupForm({
               aria-label={reveal ? "Hide password" : "Show password"}
               aria-pressed={reveal}
               disabled={done}
-              className="absolute top-1/2 right-1.5 flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring [&_svg]:size-4"
+              className="absolute top-1/2 right-1.5 flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-4"
             >
               <AnimatePresence initial={false} mode="popLayout">
                 <motion.span
@@ -229,14 +229,14 @@ function SignupForm({
                 </span>
               ))}
             </div>
-            <span className="w-24 text-right text-xs text-muted-foreground">
+            <span className="w-24 text-right text-ui-sm text-muted-foreground">
               {values.password ? `${STRENGTH[score].label} password` : `${minPasswordLength}+ characters`}
             </span>
           </div>
         </FieldShell>
 
         <div className="flex flex-col gap-1.5">
-          <label className="flex cursor-pointer items-start gap-2.5 text-sm text-muted-foreground select-none">
+          <label className="flex cursor-pointer items-start gap-2.5 text-ui text-muted-foreground select-none">
             <Checkbox
               ref={refs.terms}
               checked={values.terms}
@@ -262,7 +262,7 @@ function SignupForm({
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden"
             >
-              <span className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2 text-xs text-destructive [&_svg]:size-4">
+              <span className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2 text-ui-sm text-destructive [&_svg]:size-4">
                 <AlertCircleIcon />
                 {formError}
               </span>
@@ -281,7 +281,7 @@ function SignupForm({
         >
           {submitLabel}
         </StatefulButton>
-        {footer && <div className="text-center text-xs text-muted-foreground">{footer}</div>}
+        {footer && <div className="text-center text-ui-sm text-muted-foreground">{footer}</div>}
       </div>
     </form>
   )
@@ -300,7 +300,7 @@ function FieldShell({
 }) {
   return (
     <div className="flex flex-col gap-1.5" data-invalid={error ? "" : undefined}>
-      <label htmlFor={id} className="text-sm font-medium">
+      <label htmlFor={id} className="text-ui font-medium">
         {label}
       </label>
       {children}
@@ -321,7 +321,7 @@ function FieldError({ id, error }: { id: string; error?: string }) {
           animate={{ opacity: 1, height: "auto", y: 0 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0, y: -4 }}
           transition={{ type: "spring", stiffness: 460, damping: 36 }}
-          className="overflow-hidden text-xs text-destructive"
+          className="overflow-hidden text-ui-sm text-destructive"
         >
           {error}
         </motion.p>

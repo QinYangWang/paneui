@@ -54,9 +54,9 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
   const shortcut = mac ? "⌘K" : "Ctrl K"
 
   return (
-    <SidebarProvider shortcut={null} className="min-h-svh flex-col">
-      <header className="sticky top-0 z-40 h-14 shrink-0 border-b border-border bg-background/80 backdrop-blur">
-        <div className="flex h-full items-center gap-2 px-3 sm:px-4">
+    <SidebarProvider shortcut={null} className="min-h-svh flex-col bg-shell">
+      <header className="sticky top-0 z-40 h-12 shrink-0 bg-shell">
+        <div className="flex h-full items-center gap-1.5 px-2.5 sm:px-3">
           <Tooltip>
             <TooltipTrigger render={<SidebarTrigger className="max-lg:hidden" />} />
             <TooltipContent side="bottom">Toggle sidebar</TooltipContent>
@@ -66,9 +66,9 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
           </Button>
           <Link
             href="/"
-            className="flex items-center gap-2 rounded-full py-1 pr-2 pl-1 font-semibold tracking-tight outline-none focus-visible:ring-3 focus-visible:ring-ring"
+            className="flex items-center gap-2 rounded-md py-1 pr-2 pl-1 text-ui font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            <QinyangLogoIcon size={22} className="text-foreground" />
+            <QinyangLogoIcon size={20} className="text-foreground" />
             qinyang/ui
           </Link>
 
@@ -80,12 +80,11 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
               aria-label="Search components"
               aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
               // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a 240px field (sm+)
-              className="w-9 justify-center px-0 text-muted-foreground sm:w-60 sm:justify-start sm:px-3"
+              className="w-8 justify-center px-0 text-muted-foreground sm:w-56 sm:justify-start sm:px-2.5"
             >
               <SearchIcon />
               <span className="hidden sm:inline">Search components…</span>
-              {/* eslint-disable-next-line shadcn/no-arbitrary-values -- 10px keycap label; no text token below text-xs yet */}
-              <kbd className="ml-auto hidden rounded-md bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground shadow-chip sm:inline">
+              <kbd className="ml-auto hidden rounded-sm bg-card px-1.5 py-px font-sans text-ui-xs text-muted-foreground shadow-chip sm:inline">
                 {shortcut}
               </kbd>
             </Button>
@@ -111,11 +110,12 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
       </header>
 
       <div className="flex min-w-0 flex-1">
-        {/* eslint-disable-next-line shadcn/no-arbitrary-values -- viewport height minus the h-14 sticky header */}
-        <Sidebar variant="sidebar" aria-label="Docs" className="sticky top-14 h-[calc(100svh-3.5rem)] self-start max-lg:hidden">
+        {/* eslint-disable-next-line shadcn/no-arbitrary-values, shadcn/no-restyle -- viewport height minus the h-12 band; the rail sidebar sits on the shell band with no seam (the inset panel draws the edge) */}
+        <Sidebar variant="sidebar" aria-label="Docs" panelClassName="border-r-0" className="sticky top-12 h-[calc(100svh-3rem)] self-start max-lg:hidden">
           <DocsNav groups={groups} pathname={pathname} />
         </Sidebar>
-        <main className="min-w-0 flex-1 px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+        {/* Codex rail: the content is an inset panel on the shell band (see the shell-inset utility). */}
+        <main className="shell-inset min-w-0 flex-1 px-5 py-8 max-lg:ml-0.75 sm:px-8 lg:px-10 lg:py-10">
           <div className="mx-auto w-full max-w-5xl">{children}</div>
         </main>
       </div>

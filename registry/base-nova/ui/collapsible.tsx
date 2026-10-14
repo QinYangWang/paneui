@@ -23,7 +23,7 @@ function CollapsibleTrigger({
     <CollapsiblePrimitive.Trigger
       data-slot="collapsible-trigger"
       className={cn(
-        "group/collapsible-trigger inline-flex h-9 cursor-pointer items-center gap-2 rounded-lg px-3 text-sm font-medium text-foreground transition-[background-color,scale] duration-150 ease-out outline-none select-none hover:bg-accent focus-visible:ring-3 focus-visible:ring-ring active:scale-96 data-disabled:pointer-events-none data-disabled:opacity-50 data-panel-open:bg-muted/60 [&_svg]:size-4 [&_svg]:shrink-0",
+        "group/collapsible-trigger inline-flex h-8 cursor-pointer items-center gap-2 rounded-lg px-2.5 text-ui font-medium text-foreground transition-[background-color,scale] duration-150 ease-out outline-none select-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-50 data-panel-open:bg-muted/60 [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

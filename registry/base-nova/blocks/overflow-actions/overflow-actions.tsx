@@ -41,12 +41,12 @@ const SHELL: Transition = { type: "spring", stiffness: 240, damping: 22, mass: 0
 
 const sizes = {
   // Concentric radii: rail radius = item radius + rail padding.
-  sm: { rail: "gap-1 rounded-lg p-1", action: "h-8 min-w-8 gap-1.5 rounded-sm px-3 text-xs [&_svg]:size-3.5", toggle: "size-8 rounded-sm [&_svg]:size-3.5" },
-  md: { rail: "gap-1.5 rounded-xl p-1.5", action: "h-9 min-w-9 gap-2 rounded-md px-3.5 text-sm [&_svg]:size-4", toggle: "size-9 rounded-md [&_svg]:size-4" },
+  sm: { rail: "gap-1 rounded-lg p-1", action: "h-8 min-w-8 gap-1.5 rounded-sm px-3 text-ui-sm [&_svg]:size-3.5", toggle: "size-8 rounded-sm [&_svg]:size-3.5" },
+  md: { rail: "gap-1.5 rounded-xl p-1.5", action: "h-9 min-w-9 gap-2 rounded-md px-3.5 text-ui [&_svg]:size-4", toggle: "size-9 rounded-md [&_svg]:size-4" },
 }
 
 const actionClass =
-  "relative inline-flex shrink-0 cursor-pointer items-center justify-center font-medium whitespace-nowrap outline-none transition-[background-color,color,box-shadow,scale] duration-150 ease-out select-none active:scale-96 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset data-disabled:pointer-events-none data-disabled:opacity-45"
+  "relative inline-flex shrink-0 cursor-pointer items-center justify-center font-medium whitespace-nowrap outline-none transition-[background-color,color,box-shadow,scale] duration-150 ease-out select-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset data-disabled:pointer-events-none data-disabled:opacity-45"
 
 export function OverflowActions({
   primaryActions,
@@ -97,7 +97,7 @@ export function OverflowActions({
           ? "text-destructive hover:bg-destructive/10"
           : fromOverflow
             ? "text-muted-foreground hover:bg-accent hover:text-foreground"
-            : "bg-secondary text-secondary-foreground shadow-raised hover:bg-accent hover:shadow-raised-hover"
+            : "bg-card text-secondary-foreground shadow-raised hover:bg-accent hover:shadow-raised-hover"
       )}
     >
       {item.icon}

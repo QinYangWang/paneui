@@ -29,7 +29,7 @@ const MorphSelect = SelectPrimitive.Root
 const MorphSelectGroup = SelectPrimitive.Group
 
 /** Shared row geometry for the trigger and the popup's mirrored header. */
-const ROW = "flex h-10 w-full items-center gap-2 pr-3 pl-4 text-sm font-medium [&_svg]:size-4 [&_svg]:shrink-0"
+const ROW = "flex h-8 w-full items-center gap-2 pr-2.5 pl-3 text-ui [&_svg]:size-3.5 [&_svg]:shrink-0"
 
 function MorphSelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
   return (
@@ -47,7 +47,7 @@ function MorphSelectTrigger({ className, children, ...props }: SelectPrimitive.T
       data-slot="morph-select-trigger"
       className={cn(
         ROW,
-        "min-w-44 cursor-pointer rounded-xl bg-secondary shadow-raised transition-[box-shadow,background-color,opacity] duration-200 outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50",
+        "min-w-44 cursor-pointer rounded-xl bg-card shadow-raised transition-[box-shadow,background-color,opacity] duration-200 outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-50",
         className
       )}
       {...props}
@@ -109,8 +109,8 @@ function MorphSelectContent({
             "group/morph flex h-(--morph-h) w-(--anchor-width) flex-col overflow-clip rounded-xl bg-popover text-popover-foreground shadow-surface outline-none data-[side=top]:justify-end",
             "transition-[height,margin,background-color,box-shadow] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]",
             // closed geometry: trigger-sized box; the margin keeps the positioner at full size
-            "data-starting-style:h-(--anchor-height) data-starting-style:bg-secondary data-starting-style:shadow-raised",
-            "data-ending-style:h-(--anchor-height) data-ending-style:bg-secondary data-ending-style:shadow-raised data-ending-style:duration-300",
+            "data-starting-style:h-(--anchor-height) data-starting-style:bg-card data-starting-style:shadow-raised",
+            "data-ending-style:h-(--anchor-height) data-ending-style:bg-card data-ending-style:shadow-raised data-ending-style:duration-300",
             "data-[side=bottom]:data-starting-style:mb-[calc(var(--morph-h)_-_var(--anchor-height))] data-[side=bottom]:data-ending-style:mb-[calc(var(--morph-h)_-_var(--anchor-height))]",
             "data-[side=top]:data-starting-style:mt-[calc(var(--morph-h)_-_var(--anchor-height))] data-[side=top]:data-ending-style:mt-[calc(var(--morph-h)_-_var(--anchor-height))]",
             "motion-reduce:transition-opacity motion-reduce:data-starting-style:m-0 motion-reduce:data-starting-style:h-(--morph-h) motion-reduce:data-starting-style:opacity-0 motion-reduce:data-ending-style:m-0 motion-reduce:data-ending-style:h-(--morph-h) motion-reduce:data-ending-style:opacity-0",
@@ -151,7 +151,7 @@ function MorphSelectItem({ className, children, ...props }: SelectPrimitive.Item
     <SelectPrimitive.Item
       data-slot="morph-select-item"
       className={cn(
-        "relative flex h-8.5 cursor-default items-center gap-2 rounded-md pr-8 pl-2.5 text-sm outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent [&_svg]:size-4 [&_svg]:shrink-0",
+        "relative flex h-8.5 cursor-default items-center gap-2 rounded-md pr-8 pl-2.5 text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}
@@ -168,7 +168,7 @@ function MorphSelectLabel({ className, ...props }: SelectPrimitive.GroupLabel.Pr
   return (
     <SelectPrimitive.GroupLabel
       data-slot="morph-select-label"
-      className={cn("px-2.5 pt-1.5 pb-1 text-xs font-medium text-muted-foreground", className)}
+      className={cn("px-2.5 pt-1.5 pb-1 text-ui-sm font-medium text-muted-foreground", className)}
       {...props}
     />
   )

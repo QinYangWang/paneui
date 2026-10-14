@@ -34,7 +34,7 @@ export function ApprovalCard({
   return (
     <Card className={cn("w-full max-w-sm", className)}>
       <CardHeader>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2 text-ui text-muted-foreground">
           <IconChip size="sm" tone="primary">
             <ShieldIcon />
           </IconChip>
@@ -43,7 +43,7 @@ export function ApprovalCard({
         <CardTitle className="text-lg">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <dl className="flex flex-col gap-0.5 rounded-2xl bg-muted/60 p-1 shadow-well">
+        <dl className="flex flex-col gap-0.5 rounded-2xl bg-background dark:bg-input/32 p-1 shadow-well">
           {details.map((d) => (
             <div key={d.label} className="flex items-center justify-between rounded-xl px-3 py-2">
               <dt className="text-muted-foreground">{d.label}</dt>

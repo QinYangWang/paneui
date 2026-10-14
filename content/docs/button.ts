@@ -19,7 +19,7 @@ export default {
     {
       id: "sizes",
       title: "Sizes",
-      description: "`xs`, `sm`, `default` and `lg` share the 8px radius; `xs` drops to 6px.",
+      description: "`xs` (24px), `sm` (28px), `default` (32px) and `lg` (36px) share the 10px radius; `xs` drops to 6px.",
     },
     {
       id: "with-icon",

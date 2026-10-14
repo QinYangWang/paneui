@@ -163,7 +163,7 @@ function ScrollProgressRing({
         />
       </svg>
       {showValue && (
-        <motion.span className="relative text-[0.65rem] font-semibold text-foreground tabular-nums" aria-hidden>
+        <motion.span className="relative text-ui-2xs font-semibold text-foreground tabular-nums" aria-hidden>
           {percent}
         </motion.span>
       )}

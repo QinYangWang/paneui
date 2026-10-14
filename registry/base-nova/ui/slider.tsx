@@ -118,14 +118,14 @@ function Slider<Value extends number | readonly number[]>({
               data-slot="slider-thumb"
               className={cn(
                 "group/thumb block size-5 rounded-full bg-card shadow-raised outline-none",
-                "transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 data-dragging:scale-115 has-focus-visible:ring-3 has-focus-visible:ring-ring motion-reduce:transition-none"
+                "transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 data-dragging:scale-115 has-focus-visible:ring-2 has-focus-visible:ring-ring/50 motion-reduce:transition-none"
               )}
             >
               {showValue ? (
                 <SliderPrimitive.Value
                   data-slot="slider-value"
                   className={cn(
-                    "pointer-events-none absolute rounded-md bg-popover px-2 py-0.5 text-xs font-medium whitespace-nowrap text-popover-foreground tabular-nums shadow-surface",
+                    "pointer-events-none absolute rounded-md bg-popover px-2 py-0.5 text-ui-sm font-medium whitespace-nowrap text-popover-foreground tabular-nums shadow-surface",
                     "transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
                     vertical
                       ? "top-1/2 left-full ml-2 origin-left -translate-y-1/2"

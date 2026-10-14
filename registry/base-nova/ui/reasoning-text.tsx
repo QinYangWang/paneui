@@ -167,7 +167,7 @@ function ReasoningText({
       aria-live="polite"
       data-slot="reasoning-text"
       data-mode={mode}
-      className={cn("inline-flex items-center gap-2 text-sm font-medium text-muted-foreground", className)}
+      className={cn("inline-flex items-center gap-2 text-ui font-medium text-muted-foreground", className)}
       {...props}
     >
       {indicator === undefined ? <AsciiSpinner kind={spinner} /> : indicator}

@@ -15,7 +15,7 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
   return (
     <ol
       data-slot="breadcrumb-list"
-      className={cn("flex flex-wrap items-center gap-0.5 text-sm break-words text-muted-foreground", className)}
+      className={cn("flex flex-wrap items-center gap-0.5 text-ui break-words text-muted-foreground", className)}
       {...props}
     />
   )
@@ -48,7 +48,7 @@ function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProp
       ...props,
       className: cn(
         crumbClass,
-        "cursor-pointer hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring",
+        "cursor-pointer hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       ),
     },
@@ -65,7 +65,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
       aria-current="page"
       className={cn(
         crumbClass,
-        "bg-secondary font-medium text-foreground shadow-raised",
+        "bg-card font-medium text-foreground shadow-raised",
         className
       )}
       {...props}
@@ -124,7 +124,7 @@ function BreadcrumbEllipsis({
         aria-label={label}
         className={cn(
           iconBox,
-          "cursor-pointer transition-[background-color,color,box-shadow] duration-150 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring data-popup-open:bg-secondary data-popup-open:text-foreground data-popup-open:shadow-raised"
+          "cursor-pointer transition-[background-color,color,box-shadow] duration-150 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary data-popup-open:text-foreground"
         )}
       >
         <MoreHorizontalIcon />

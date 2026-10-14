@@ -10,12 +10,12 @@
     "light": {
       "primary": "oklch(0.55 0.18 290)",
       "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.55 0.18 290 / 45%)"
+      "ring": "oklch(0.55 0.18 290)"
     },
     "dark": {
       "primary": "oklch(0.64 0.16 290)",
       "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.64 0.16 290 / 50%)"
+      "ring": "oklch(0.64 0.16 290)"
     }
   },
   "meta": {

@@ -214,8 +214,8 @@ function HoldActionButton({
       }}
       onContextMenu={(event) => event.preventDefault()}
       className={cn(
-        "group/hold relative isolate inline-grid h-14 min-w-64 cursor-pointer touch-none place-items-center overflow-hidden rounded-2xl bg-secondary px-6 text-[0.95rem] font-medium text-secondary-foreground shadow-raised outline-none select-none [-webkit-touch-callout:none]",
-        "transition-[box-shadow,transform] duration-150 hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring data-[phase=holding]:scale-[0.985] motion-reduce:data-[phase=holding]:scale-100",
+        "group/hold relative isolate inline-grid h-14 min-w-64 cursor-pointer touch-none place-items-center overflow-hidden rounded-2xl bg-card px-6 text-ui-lg font-medium text-secondary-foreground shadow-raised outline-none select-none [-webkit-touch-callout:none]",
+        "transition-[box-shadow,transform] duration-150 hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-[phase=holding]:scale-[0.985] motion-reduce:data-[phase=holding]:scale-100",
         "disabled:pointer-events-none disabled:opacity-50",
         className
       )}

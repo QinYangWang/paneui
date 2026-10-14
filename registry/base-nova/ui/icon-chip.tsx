@@ -19,7 +19,7 @@ const iconChipVariants = cva(
   {
     variants: {
       tone: {
-        neutral: "bg-secondary text-muted-foreground shadow-raised",
+        neutral: "bg-card text-muted-foreground shadow-raised",
         primary: "bg-primary/12 text-primary shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary)_24%,transparent)]",
         success: "bg-success/12 text-success shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--success)_24%,transparent)]",
         warning: "bg-warning/14 text-warning shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--warning)_26%,transparent)]",

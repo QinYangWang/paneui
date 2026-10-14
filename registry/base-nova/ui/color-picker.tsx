@@ -188,7 +188,7 @@ function ColorPickerTrigger({
       data-slot="color-picker-trigger"
       disabled={disabled}
       className={cn(
-        "inline-flex h-9 cursor-pointer items-center gap-2 rounded-lg bg-secondary py-1 pr-3.5 pl-1 text-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,opacity,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex h-8 cursor-pointer items-center gap-2 rounded-lg bg-card py-1 pr-3 pl-1 text-ui font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,opacity,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
         !showHex && "pr-1",
         className
       )}
@@ -197,7 +197,7 @@ function ColorPickerTrigger({
       {children ?? (
         <>
           <ColorPickerSwatch className="size-7" />
-          {showHex ? <span className="font-mono text-[0.8rem] tabular-nums uppercase">{hex}</span> : null}
+          {showHex ? <span className="font-mono text-ui-sm tabular-nums uppercase">{hex}</span> : null}
           <span className="sr-only">{`, current colour ${hex}${hsva.a < 1 ? `, ${Math.round(hsva.a * 100)}% opacity` : ""}`}</span>
         </>
       )}
@@ -236,7 +236,7 @@ function ColorPickerContent({
             ({ "--morph-r0": triggerRadius, ...(typeof style === "function" ? style(state) : style) }) as React.CSSProperties
           }
           className={cn(
-            "flex w-64 flex-col gap-3 rounded-2xl bg-popover p-3 text-sm text-popover-foreground shadow-surface outline-none",
+            "flex w-64 flex-col gap-3 rounded-2xl bg-popover p-3 text-ui text-popover-foreground shadow-surface outline-none",
             // Morph: rest shape keeps the shadow; start/end shape is the trigger chip.
             "[clip-path:inset(-24px_round_44px)] transition-[clip-path,opacity] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-250",
             "data-[side=bottom]:data-starting-style:[clip-path:inset(0_calc(100%_-_var(--anchor-width))_calc(100%_-_var(--anchor-height))_0_round_var(--morph-r0))]",
@@ -337,7 +337,7 @@ function ColorPickerArea({
         data-dragging={dragging || undefined}
         className={cn(
           "absolute size-5 -translate-x-1/2 -translate-y-1/2 rounded-full outline-none",
-          "shadow-[0_0_0_2.5px_white,0_0_0_3px_rgb(0_0_0/0.2),0_2px_6px_rgb(0_0_0/0.35)] focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "shadow-[0_0_0_2.5px_white,0_0_0_3px_rgb(0_0_0/0.2),0_2px_6px_rgb(0_0_0/0.35)] focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2",
           // Loupe: the thumb lifts and magnifies while dragging.
           "transition-[scale,translate,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] data-dragging:-translate-y-[calc(50%+14px)] data-dragging:scale-[1.8] data-dragging:shadow-[0_0_0_2px_white,0_0_0_2.5px_rgb(0_0_0/0.2),0_8px_18px_-4px_rgb(0_0_0/0.45)] motion-reduce:transition-none motion-reduce:data-dragging:translate-y-[-50%] motion-reduce:data-dragging:scale-110"
         )}
@@ -400,7 +400,7 @@ function ChannelSlider({
         >
           <SliderPrimitive.Thumb
             getAriaLabel={() => label}
-            className="block size-4.5 rounded-full shadow-[0_0_0_2.5px_white,0_0_0_3px_rgb(0_0_0/0.2),0_2px_5px_rgb(0_0_0/0.3)] outline-none transition-[scale] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 data-dragging:scale-115 has-focus-visible:ring-3 has-focus-visible:ring-ring has-focus-visible:ring-offset-2 motion-reduce:transition-none"
+            className="block size-4.5 rounded-full shadow-[0_0_0_2.5px_white,0_0_0_3px_rgb(0_0_0/0.2),0_2px_5px_rgb(0_0_0/0.3)] outline-none transition-[scale] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 data-dragging:scale-115 has-focus-visible:ring-2 has-focus-visible:ring-ring/50 has-focus-visible:ring-offset-2 motion-reduce:transition-none"
             style={{ background: thumbColor }}
           />
         </SliderPrimitive.Track>
@@ -479,7 +479,7 @@ function ColorPickerHexInput({
     <label
       data-slot="color-picker-hex"
       className={cn(
-        "flex h-8 min-w-0 flex-1 items-center gap-1 rounded-xl bg-muted/60 px-2.5 font-mono text-[0.8rem] shadow-well transition-[box-shadow,background-color] focus-within:bg-background focus-within:ring-3 focus-within:ring-ring",
+        "flex h-8 min-w-0 flex-1 items-center gap-1 rounded-xl bg-background dark:bg-input/32 px-2.5 font-mono text-ui-sm shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50",
         className
       )}
     >
@@ -578,7 +578,7 @@ function ColorPickerPreset({
         if (rgba && !e.defaultPrevented) setHsva(rgbaToHsva(rgba, hsva), true)
       }}
       className={cn(
-        "size-6 cursor-pointer rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)] transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] outline-none hover:scale-110 focus-visible:ring-3 focus-visible:ring-ring aria-pressed:shadow-[0_0_0_2px_var(--popover),0_0_0_3.5px_var(--foreground)] disabled:opacity-50 motion-reduce:transition-none",
+        "size-6 cursor-pointer rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)] transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring/50 aria-pressed:shadow-[0_0_0_2px_var(--popover),0_0_0_3.5px_var(--foreground)] disabled:opacity-50 motion-reduce:transition-none",
         className
       )}
       style={{ background: rgba ? `linear-gradient(${rgbaCss(rgba)}, ${rgbaCss(rgba)}), ${CHECKER}` : undefined }}

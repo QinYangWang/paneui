@@ -183,13 +183,13 @@ function FileDiff({
       data-slot="file-diff"
       data-status={status}
       aria-busy={streaming || undefined}
-      className={cn("overflow-hidden rounded-2xl bg-code text-[13px] shadow-surface", className)}
+      className={cn("overflow-hidden rounded-xl bg-code text-ui shadow-raised", className)}
       {...props}
     >
       <div className="flex h-11 items-center gap-1 pr-1.5 pl-1.5">
         <CollapsiblePrimitive.Trigger
           data-slot="file-diff-trigger"
-          className="group/trigger flex h-8 min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-md px-2 text-left outline-none select-none hover:bg-muted/70 focus-visible:ring-3 focus-visible:ring-ring"
+          className="group/trigger flex h-8 min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-md px-2 text-left outline-none select-none hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           <ChevronDownIcon
             className={cn(
@@ -201,11 +201,11 @@ function FileDiff({
           ) : (
             <FileIcon className="size-4 shrink-0 text-muted-foreground" />
           )}
-          <span className="min-w-0 flex-1 truncate font-mono text-xs">
+          <span className="min-w-0 flex-1 truncate font-mono text-ui-sm">
             <span className="text-muted-foreground">{dir}</span>
             <span className="font-medium text-foreground">{base}</span>
           </span>
-          <span className="flex shrink-0 items-center gap-1.5 font-mono text-xs tabular-nums">
+          <span className="flex shrink-0 items-center gap-1.5 font-mono text-ui-sm tabular-nums">
             {additions > 0 && <span className="text-success">+{additions}</span>}
             {deletions > 0 && <span className="text-destructive">−{deletions}</span>}
             <span className="sr-only">

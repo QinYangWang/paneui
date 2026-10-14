@@ -20,8 +20,8 @@ function Card({
       data-size={size}
       data-variant={variant}
       className={cn(
-        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-2xl bg-card py-(--card-spacing) text-sm text-card-foreground shadow-surface [--card-spacing:--spacing(5)] data-[size=sm]:[--card-spacing:--spacing(3.5)]",
-        "data-[variant=inset]:gap-0 data-[variant=inset]:bg-muted data-[variant=inset]:p-1 data-[variant=inset]:shadow-raised dark:data-[variant=inset]:bg-background",
+        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-ui text-card-foreground shadow-raised [--card-spacing:--spacing(4)] data-[size=sm]:[--card-spacing:--spacing(3)]",
+        "data-[variant=inset]:gap-0 data-[variant=inset]:rounded-2xl data-[variant=inset]:bg-muted data-[variant=inset]:p-1 data-[variant=inset]:shadow-raised dark:data-[variant=inset]:bg-background",
         className
       )}
       {...props}
@@ -60,7 +60,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("text-base leading-snug font-semibold tracking-tight group-data-[size=sm]/card:text-sm", className)}
+      className={cn("text-ui-lg leading-snug font-semibold group-data-[size=sm]/card:text-ui", className)}
       {...props}
     />
   )
@@ -70,7 +70,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-sm leading-relaxed text-pretty text-muted-foreground", className)}
+      className={cn("text-ui leading-relaxed text-pretty text-muted-foreground", className)}
       {...props}
     />
   )

@@ -62,16 +62,16 @@ export function TaskRow({
       data-status={status}
       onClick={onClick}
       className={cn(
-        "group/task flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-[background-color,box-shadow] outline-none hover:bg-card hover:shadow-raised focus-visible:ring-3 focus-visible:ring-ring",
+        "group/task flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-[background-color,box-shadow] outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       )}
     >
       <StatusMark status={status} />
       <span className="flex min-w-0 flex-1 flex-col">
-        <span className={cn("truncate text-[0.95rem] font-medium", status === "done" && "text-muted-foreground")}>{title}</span>
-        {detail && <span className="truncate text-sm text-muted-foreground">{detail}</span>}
+        <span className={cn("truncate text-ui-lg font-medium", status === "done" && "text-muted-foreground")}>{title}</span>
+        {detail && <span className="truncate text-ui text-muted-foreground">{detail}</span>}
       </span>
-      <span className="text-sm text-muted-foreground tabular-nums">{statusText[status]}</span>
+      <span className="text-ui text-muted-foreground tabular-nums">{statusText[status]}</span>
       <ChevronRightIcon size={16} className="text-muted-foreground transition-transform group-hover/task:translate-x-0.5" />
     </button>
   )

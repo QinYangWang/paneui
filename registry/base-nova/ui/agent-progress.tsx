@@ -63,7 +63,7 @@ function AgentProgress({
       aria-label={`${label}${running ? ", in progress" : ""}`}
       data-slot="agent-progress"
       data-running={running || undefined}
-      className={cn("inline-flex items-center gap-2.5 text-sm text-muted-foreground", className)}
+      className={cn("inline-flex items-center gap-2.5 text-ui text-muted-foreground", className)}
       {...props}
     >
       <span aria-hidden className={cn("grid size-4 shrink-0 grid-cols-3 gap-[2px]", running ? "text-primary" : "text-muted-foreground/60")}>
@@ -84,13 +84,13 @@ function AgentProgress({
         ))}
       </span>
       <span className="font-medium text-foreground">{label}</span>
-      <span aria-hidden className="font-mono text-[0.8rem] text-muted-foreground tabular-nums">
+      <span aria-hidden className="font-mono text-ui-sm text-muted-foreground tabular-nums">
         {formatElapsed(value)}
       </span>
       {meta != null && (
         <>
           <span aria-hidden className="text-muted-foreground/50">·</span>
-          <span className="text-[0.8rem] tabular-nums">{meta}</span>
+          <span className="text-ui-sm tabular-nums">{meta}</span>
         </>
       )}
     </span>

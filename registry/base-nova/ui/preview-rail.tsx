@@ -64,7 +64,7 @@ function DefaultPreview({ item }: { item: PreviewRailItem }) {
         <IconChip className="-mt-0.5">{item.icon}</IconChip>
       )}
       <div className="min-w-0">
-        <p className="text-sm font-medium text-popover-foreground">{item.label}</p>
+        <p className="text-ui font-medium text-popover-foreground">{item.label}</p>
         {item.description && <div className="mt-0.5 text-xs/5 text-muted-foreground">{item.description}</div>}
       </div>
     </div>
@@ -182,7 +182,7 @@ function PreviewRail({
               "aria-current": isSelected ? (item.href ? ("page" as const) : ("location" as const)) : undefined,
               style: horizontal ? { width: itemSize } : { height: itemSize },
               className: cn(
-                "relative flex shrink-0 cursor-pointer rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring",
+                "relative flex shrink-0 cursor-pointer rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                 horizontal ? "h-full items-end justify-center pb-1" : "w-full items-center pl-1",
                 item.disabled && "pointer-events-none opacity-40"
               ),

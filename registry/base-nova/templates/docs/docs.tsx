@@ -62,7 +62,7 @@ export function DocsTemplate() {
           <Button variant="ghost" size="icon-sm" className="lg:hidden" aria-label="Open navigation" onClick={() => setNavOpen(true)}>
             <MenuIcon />
           </Button>
-          <a href="#" className="flex items-center gap-2.5 rounded-full font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring">
+          <a href="#" className="flex items-center gap-2.5 rounded-full font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
             <IconChip size="sm" tone="solid">
               <BotIcon />
             </IconChip>
@@ -187,7 +187,7 @@ function PagerLink({ dir, label, section }: { dir: "prev" | "next"; label: strin
     <a
       href="#"
       className={
-        "group flex flex-col gap-1 rounded-2xl bg-card px-4 py-3.5 shadow-raised transition-shadow duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring " +
+        "group flex flex-col gap-1 rounded-2xl bg-card px-4 py-3.5 shadow-raised transition-shadow duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 " +
         (next ? "items-end text-end sm:col-start-2" : "items-start")
       }
     >

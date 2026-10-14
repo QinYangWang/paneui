@@ -139,7 +139,7 @@ function CandlestickChart({
       {showReadout && shown && (
         <div
           aria-live="polite"
-          className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-xs text-muted-foreground tabular-nums"
+          className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-ui-sm text-muted-foreground tabular-nums"
         >
           <span className="text-2xl font-semibold tracking-tight text-foreground">
             {formatPrice(hovered ? shown.close : lastValue)}
@@ -183,7 +183,7 @@ function CandlestickChart({
         onPointerDown={updateFromPointer}
         onPointerLeave={() => setHover(null)}
         onBlur={() => setHover(null)}
-        className="relative w-full touch-pan-y rounded-xl outline-none select-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="relative w-full touch-pan-y rounded-xl outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50"
         style={{ height }}
       >
         {width > 0 && (
@@ -203,7 +203,7 @@ function CandlestickChart({
                   x={plotW + 8}
                   y={y(t)}
                   dominantBaseline="middle"
-                  className="fill-muted-foreground text-[10px] tabular-nums"
+                  className="fill-muted-foreground text-ui-2xs tabular-nums"
                 >
                   {formatPrice(t)}
                 </text>
@@ -300,7 +300,7 @@ function CandlestickChart({
                   y={0}
                   textAnchor="middle"
                   dominantBaseline="central"
-                  className="fill-white text-[10px] font-semibold tabular-nums"
+                  className="fill-white text-ui-2xs font-semibold tabular-nums"
                   style={{ fill: onFill(lastUp ? UP : DOWN) }}
                 >
                   {formatPrice(lastValue)}
@@ -342,7 +342,7 @@ function CandlestickChart({
                       y={hover.y}
                       textAnchor="middle"
                       dominantBaseline="central"
-                      className="fill-background text-[10px] font-semibold tabular-nums"
+                      className="fill-background text-ui-2xs font-semibold tabular-nums"
                     >
                       {formatPrice(y.invert(hover.y))}
                     </text>
@@ -355,7 +355,7 @@ function CandlestickChart({
                     y={8.5}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    className="fill-background text-[10px] font-medium tabular-nums"
+                    className="fill-background text-ui-2xs font-medium tabular-nums"
                   >
                     {formatTime(hovered.time)}
                   </text>
@@ -365,7 +365,7 @@ function CandlestickChart({
 
             {/* first / last time labels */}
             {!hover && candles.length > 1 && (
-              <g className="fill-muted-foreground text-[10px] tabular-nums">
+              <g className="fill-muted-foreground text-ui-2xs tabular-nums">
                 <text x={0} y={plotH + 13}>
                   {formatTime(candles[0].time)}
                 </text>

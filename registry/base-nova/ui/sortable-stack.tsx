@@ -223,7 +223,7 @@ function SortableStackItem({
         whileDrag={reduce ? undefined : { scale: 1.025 }}
         style={{ position: "relative", ...style }}
         className={cn(
-          "flex items-center gap-2 rounded-2xl bg-card py-2 pr-3 pl-1.5 text-sm text-card-foreground shadow-raised transition-shadow duration-200 select-none",
+          "flex items-center gap-2 rounded-2xl bg-card py-2 pr-3 pl-1.5 text-ui text-card-foreground shadow-raised transition-shadow duration-200 select-none",
           "data-dragging:z-10 data-dragging:shadow-surface",
           className
         )}
@@ -265,7 +265,7 @@ function SortableStackHandle({ className, onPointerDown, onKeyDown, children, ..
         move(item.id, m)
       }}
       className={cn(
-        "inline-flex h-8 w-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-lg text-muted-foreground transition-[background-color,color] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-40",
+        "inline-flex h-8 w-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-lg text-muted-foreground transition-[background-color,color] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-40",
         item.dragging && "cursor-grabbing bg-muted text-foreground",
         className
       )}
@@ -296,7 +296,7 @@ function SortableStackUndo({ className, children, onClick, ...props }: React.Com
         if (!e.defaultPrevented) undo()
       }}
       className={cn(
-        "inline-flex h-8 cursor-pointer items-center gap-1.5 self-start rounded-lg bg-secondary px-2.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96",
+        "inline-flex h-8 cursor-pointer items-center gap-1.5 self-start rounded-lg bg-card px-2.5 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50",
         "pointer-events-none translate-y-1 scale-95 opacity-0 transition-[opacity,translate,scale,box-shadow] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] data-visible:pointer-events-auto data-visible:translate-y-0 data-visible:scale-100 data-visible:opacity-100 motion-reduce:transition-opacity",
         className
       )}

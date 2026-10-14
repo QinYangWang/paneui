@@ -71,7 +71,7 @@ function DrawerContent({
         <DialogPrimitive.Portal keepMounted>
           <DialogPrimitive.Backdrop
             data-slot="drawer-backdrop"
-            className="fixed inset-0 z-50 bg-black/30 backdrop-blur-[3px]"
+            className="fixed inset-0 z-50 bg-black/30"
             render={<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={FADE} />}
           />
           <DialogPrimitive.Popup
@@ -97,7 +97,7 @@ function DrawerContent({
               <DialogPrimitive.Close
                 data-slot="drawer-close"
                 aria-label="Close"
-                className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+                className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 <XIcon size={16} />
               </DialogPrimitive.Close>
@@ -117,7 +117,7 @@ function DrawerBody({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="drawer-body"
-      className={cn("min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pb-6 text-sm", className)}
+      className={cn("min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pb-6 text-ui", className)}
       {...props}
     />
   )
@@ -137,7 +137,7 @@ function DrawerTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
     <DialogPrimitive.Title
       data-slot="drawer-title"
-      className={cn("text-lg leading-snug font-semibold tracking-tight", className)}
+      className={cn("text-lg leading-snug font-semibold", className)}
       {...props}
     />
   )
@@ -147,7 +147,7 @@ function DrawerDescription({ className, ...props }: DialogPrimitive.Description.
   return (
     <DialogPrimitive.Description
       data-slot="drawer-description"
-      className={cn("text-sm leading-relaxed text-muted-foreground", className)}
+      className={cn("text-ui leading-relaxed text-muted-foreground", className)}
       {...props}
     />
   )

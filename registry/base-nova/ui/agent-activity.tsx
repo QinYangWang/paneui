@@ -142,12 +142,12 @@ function RowStatus({ status }: { status?: AgentActivityItemStatus }) {
 function ActivityRow({ item }: { item: AgentActivityItem }) {
   const reduce = useReducedMotion()
   if (item.type === "reasoning") {
-    return <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{item.text}</p>
+    return <p className="text-ui leading-relaxed text-muted-foreground">{item.text}</p>
   }
   if (item.type === "search") {
     return (
       <div className="flex flex-col gap-1.5">
-        <div className="flex min-w-0 items-center gap-1.5 text-[0.8125rem]">
+        <div className="flex min-w-0 items-center gap-1.5 text-ui">
           <SearchIcon className="size-3.5 shrink-0 text-muted-foreground" />
           {item.status === "active" ? (
             <TextShimmer className="min-w-0 truncate">{item.query}</TextShimmer>
@@ -173,7 +173,7 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
                     target="_blank"
                     rel="noreferrer noopener"
                     title={typeof r.title === "string" ? r.title : undefined}
-                    className="inline-flex h-6 max-w-48 items-center gap-1.5 rounded-full bg-muted pr-2 pl-0.5 text-[11px] text-muted-foreground shadow-chip outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+                    className="inline-flex h-6 max-w-48 items-center gap-1.5 rounded-full bg-muted pr-2 pl-0.5 text-ui-xs text-muted-foreground shadow-chip outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
                     <CitationFavicon source={r} className="size-5 rounded-full shadow-none" />
                     <span className="truncate">{r.domain ?? (typeof r.title === "string" ? r.title : "Source")}</span>
@@ -190,12 +190,12 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
     const Icon = ACTION_ICON[item.action] ?? CodeIcon
     return (
       <div className="flex flex-col gap-0.5">
-        <div className="flex min-w-0 items-center gap-1.5 text-[0.8125rem]">
+        <div className="flex min-w-0 items-center gap-1.5 text-ui">
           <Icon className="size-3.5 shrink-0 text-muted-foreground" />
           <span className="shrink-0 text-muted-foreground">{actionVerb(item.action, item.status === "active")}</span>
-          <span className="min-w-0 truncate font-mono text-xs text-foreground/85">{item.target}</span>
+          <span className="min-w-0 truncate font-mono text-ui-sm text-foreground/85">{item.target}</span>
           {item.additions || item.deletions ? (
-            <span className="shrink-0 font-mono text-[11px] tabular-nums">
+            <span className="shrink-0 font-mono text-ui-xs tabular-nums">
               {item.additions ? <span className="text-success">+{item.additions}</span> : null}
               {item.additions && item.deletions ? " " : null}
               {item.deletions ? <span className="text-destructive">−{item.deletions}</span> : null}
@@ -205,13 +205,13 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
             <RowStatus status={item.status} />
           </span>
         </div>
-        {item.detail ? <div className="pl-5 text-xs text-muted-foreground">{item.detail}</div> : null}
+        {item.detail ? <div className="pl-5 text-ui-sm text-muted-foreground">{item.detail}</div> : null}
       </div>
     )
   }
   return (
     <div className="flex flex-col gap-0.5">
-      <div className="flex min-w-0 items-center gap-2 text-[0.8125rem]">
+      <div className="flex min-w-0 items-center gap-2 text-ui">
         <span
           aria-hidden
           className={cn(
@@ -230,7 +230,7 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
           <span className={cn(item.status ? "text-foreground/85" : "text-muted-foreground")}>{item.label}</span>
         )}
       </div>
-      {item.detail ? <div className="pl-5.5 text-xs text-muted-foreground">{item.detail}</div> : null}
+      {item.detail ? <div className="pl-5.5 text-ui-sm text-muted-foreground">{item.detail}</div> : null}
     </div>
   )
 }
@@ -259,7 +259,7 @@ function ActivityGroupView({
     <CollapsiblePrimitive.Root open={open} onOpenChange={onOpenChange} className="relative flex flex-col" render={<li />}>
       {/* timeline rail */}
       {!last ? <span aria-hidden className="absolute top-7 bottom-0 left-[0.6875rem] w-px bg-border" /> : null}
-      <CollapsiblePrimitive.Trigger className="group/activity-group -ml-1 flex h-7 w-fit max-w-full cursor-pointer items-center gap-2 rounded-md pr-2 pl-1 text-left text-[0.8125rem] outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring">
+      <CollapsiblePrimitive.Trigger className="group/activity-group -ml-1 flex h-7 w-fit max-w-full cursor-pointer items-center gap-2 rounded-md pr-2 pl-1 text-left text-ui outline-none select-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50">
         <span
           aria-hidden
           className={cn(
@@ -377,12 +377,12 @@ function AgentActivity({
         if (!working) setOpen(next)
       }}
       aria-busy={working}
-      className={cn("flex w-full flex-col text-sm", className)}
+      className={cn("flex w-full flex-col text-ui", className)}
       {...props}
     >
       <CollapsiblePrimitive.Trigger
         disabled={working}
-        className="group/activity -ml-1.5 flex h-8 w-fit max-w-full cursor-pointer items-center gap-2 rounded-md px-1.5 text-left outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring data-disabled:cursor-default data-disabled:hover:bg-transparent"
+        className="group/activity -ml-1.5 flex h-8 w-fit max-w-full cursor-pointer items-center gap-2 rounded-md px-1.5 text-left outline-none select-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:cursor-default data-disabled:hover:bg-transparent"
       >
         <span role="status" className="flex min-w-0 items-center gap-2">
           {working ? (
@@ -396,7 +396,7 @@ function AgentActivity({
               )}
             </span>
           )}
-          <span className="shrink-0 font-mono text-[11px] text-muted-foreground tabular-nums">
+          <span className="shrink-0 font-mono text-ui-xs text-muted-foreground tabular-nums">
             {working ? formatDuration(seconds) : detail}
           </span>
         </span>

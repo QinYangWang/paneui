@@ -3,12 +3,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Visual direction: native desktop, after Synara / Codex (MIT, see THIRD_PARTY_NOTICES.md).
+ * System UI font on a 13px scale, translucent black/white fills for secondary/muted/accent,
+ * 5–6% hairlines, near-flat elevation and a 0.625rem radius with multiplier steps.
+ */
 @theme inline {
   --color-background: var(--background);
   --color-code: var(--code);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono:
+    var(--font-jetbrains-mono, "JetBrains Mono"), "JetBrains Mono", "SF Mono", "SFMono-Regular", Menlo,
+    Consolas, "Liberation Mono", monospace;
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -32,13 +39,18 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  /* App chrome: the window band/sidebar tone and the hairline of the inset content panel. */
+  --color-shell: var(--shell);
+  --color-shell-border: var(--shell-border);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-shell: calc(var(--radius) * 1.3);
 
-  /* Elevation tokens: hairline rings + faint drops (flat system). */
+  /* Elevation tokens: near-flat hairlines. Names kept from the old skeuomorphic set. */
   --shadow-raised: var(--skeuo-raised);
   --shadow-raised-hover: var(--skeuo-raised-hover);
   --shadow-pressed: var(--skeuo-pressed);
@@ -48,29 +60,42 @@
   --shadow-chip: var(--skeuo-chip);
 }
 
+/* Native 13px type scale: text-ui is the default UI size (Synara appTypography, base 13). */
+@theme {
+  --text-ui-2xs: 0.625rem;
+  --text-ui-2xs--line-height: 0.875rem;
+  --text-ui-xs: 0.6875rem;
+  --text-ui-xs--line-height: 0.875rem;
+  --text-ui-sm: 0.75rem;
+  --text-ui-sm--line-height: 1rem;
+  --text-ui: 0.8125rem;
+  --text-ui--line-height: 1.125rem;
+  --text-ui-lg: 0.875rem;
+  --text-ui-lg--line-height: 1.25rem;
+}
+
 :root {
-  /* Flat, neutral system after jakub.kr / oklch.fyi: chroma-0 grays, hairline rings, barely-there drops. */
-  --radius: 0.5rem;
-  --background: oklch(0.991 0 0);
-  --foreground: oklch(0.2435 0 0);
+  --radius: 0.625rem;
+  --background: oklch(0.9911 0 0); /* #fcfcfc */
+  --foreground: oklch(0.269 0 0); /* neutral-800 */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2435 0 0);
+  --card-foreground: oklch(0.269 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2435 0 0);
+  --popover-foreground: oklch(0.269 0 0);
   --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(1 0 0);
-  --secondary-foreground: oklch(0.2435 0 0);
-  --muted: oklch(0.9731 0 0);
-  --muted-foreground: oklch(0.5417 0 0);
-  --accent: oklch(0.9551 0 0);
-  --accent-foreground: oklch(0.2435 0 0);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0 0 0 / 3%);
+  --secondary-foreground: oklch(0.269 0 0);
+  --muted: oklch(0 0 0 / 4%);
+  --muted-foreground: oklch(0.5155 0 0); /* neutral-500 mixed 10% toward black */
+  --accent: oklch(0 0 0 / 4%);
+  --accent-foreground: oklch(0.269 0 0);
   --destructive: oklch(0.58 0.2 27);
   --success: oklch(0.6 0.14 152);
   --warning: oklch(0.74 0.14 72);
-  --border: oklch(0 0 0 / 8%);
-  --input: oklch(0 0 0 / 10%);
-  --ring: oklch(0.556 0 0 / 40%);
+  --border: oklch(0 0 0 / 5%);
+  --input: oklch(0 0 0 / 6%);
+  --ring: oklch(0.708 0 0); /* neutral-400 */
   /* Charts keep their own hues so data stays readable whatever the accent. */
   --chart-1: oklch(0.57 0.15 258);
   --chart-2: oklch(0.6 0.14 152);
@@ -80,42 +105,42 @@
   --code: oklch(0.9731 0 0);
   --scrollbar: oklch(0 0 0 / 16%);
   --scrollbar-hover: oklch(0 0 0 / 28%);
+  /* Shell band = surface 97% + black; inset panel hairline black/10%. */
+  --shell: oklch(0.9685 0 0);
+  --shell-border: oklch(0 0 0 / 10%);
 
-  /* Elevation. Names kept from the old skeuomorphic set so every component follows. */
-  --skeuo-raised:
-    0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px -1px oklch(0 0 0 / 6%), 0 2px 4px 0 oklch(0 0 0 / 4%);
-  --skeuo-raised-hover:
-    0 0 0 1px oklch(0 0 0 / 8%), 0 1px 2px -1px oklch(0 0 0 / 8%), 0 2px 4px 0 oklch(0 0 0 / 6%);
+  /* Elevation: one hairline ring, at most a 1-2px drop (Synara icon chip); popups get a soft lift. */
+  --skeuo-raised: 0 0 0 1px oklch(0 0 0 / 8%), 0 1px 2px oklch(0 0 0 / 5%);
+  --skeuo-raised-hover: 0 0 0 1px oklch(0 0 0 / 12%), 0 1px 2px oklch(0 0 0 / 6%);
   --skeuo-pressed: 0 0 0 1px oklch(0 0 0 / 8%);
-  --skeuo-primary:
-    0 0 0 1px color-mix(in oklch, var(--primary), black 10%), 0 1px 2px -1px oklch(0 0 0 / 12%);
+  --skeuo-primary: 0 1px 2px oklch(0 0 0 / 8%);
   --skeuo-well: inset 0 0 0 1px oklch(0 0 0 / 8%);
   --skeuo-surface:
-    0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px -1px oklch(0 0 0 / 6%), 0 8px 24px -12px oklch(0 0 0 / 10%);
-  --skeuo-chip: 0 0 0 1px oklch(0 0 0 / 6%);
+    0 0 0 1px oklch(0 0 0 / 6%), 0 2px 6px -2px oklch(0 0 0 / 6%), 0 12px 28px -8px oklch(0 0 0 / 14%);
+  --skeuo-chip: 0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px oklch(0 0 0 / 5%);
 }
 
 .dark {
-  --background: oklch(0.173 0 0);
-  --foreground: oklch(0.9491 0 0);
-  --card: oklch(0.1776 0 0);
-  --card-foreground: oklch(0.9491 0 0);
-  --popover: oklch(0.2134 0 0);
-  --popover-foreground: oklch(0.9491 0 0);
-  --primary: oklch(0.922 0 0);
+  --background: oklch(0.1638 0 0); /* #0e0e0e */
+  --foreground: oklch(0.97 0 0); /* neutral-100 */
+  --card: oklch(0.1749 0 0); /* background 99% + white */
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.1749 0 0);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.97 0 0);
   --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.2134 0 0);
-  --secondary-foreground: oklch(0.9491 0 0);
-  --muted: oklch(0.2134 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.252 0 0);
-  --accent-foreground: oklch(0.9491 0 0);
+  --secondary: oklch(1 0 0 / 4%);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(1 0 0 / 4%);
+  --muted-foreground: oklch(0.6032 0 0); /* neutral-500 mixed 10% toward white */
+  --accent: oklch(1 0 0 / 4%);
+  --accent-foreground: oklch(0.97 0 0);
   --destructive: oklch(0.64 0.19 25);
   --success: oklch(0.7 0.15 152);
   --warning: oklch(0.8 0.14 75);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.708 0 0 / 40%);
+  --border: oklch(1 0 0 / 4%);
+  --input: oklch(1 0 0 / 5%);
+  --ring: oklch(0.556 0 0); /* neutral-500 */
   --chart-1: oklch(0.6 0.145 256);
   --chart-2: oklch(0.7 0.15 152);
   --chart-3: oklch(0.8 0.14 75);
@@ -124,14 +149,17 @@
   --code: oklch(0.1496 0 0);
   --scrollbar: oklch(1 0 0 / 14%);
   --scrollbar-hover: oklch(1 0 0 / 24%);
+  /* Shell band = surface 95% + white; inset panel hairline white/9%. */
+  --shell: oklch(0.218 0 0);
+  --shell-border: oklch(1 0 0 / 9%);
 
-  --skeuo-raised: 0 0 0 1px oklch(1 0 0 / 8%);
-  --skeuo-raised-hover: 0 0 0 1px oklch(1 0 0 / 13%);
+  --skeuo-raised: 0 0 0 1px oklch(1 0 0 / 7%);
+  --skeuo-raised-hover: 0 0 0 1px oklch(1 0 0 / 12%);
   --skeuo-pressed: 0 0 0 1px oklch(1 0 0 / 6%);
-  --skeuo-primary: 0 0 0 1px oklch(1 0 0 / 12%);
-  --skeuo-well: inset 0 0 0 1px oklch(1 0 0 / 8%);
-  --skeuo-surface: 0 0 0 1px oklch(1 0 0 / 8%), 0 8px 24px -12px oklch(0 0 0 / 50%);
-  --skeuo-chip: 0 0 0 1px oklch(1 0 0 / 7%);
+  --skeuo-primary: 0 0 0 0 transparent;
+  --skeuo-well: inset 0 0 0 1px oklch(1 0 0 / 7%);
+  --skeuo-surface: 0 0 0 1px oklch(1 0 0 / 7%), 0 16px 40px -12px oklch(0 0 0 / 60%);
+  --skeuo-chip: 0 0 0 1px oklch(1 0 0 / 6%);
 }
 
 /*
@@ -141,52 +169,52 @@
 html[data-accent="blue"] {
   --primary: oklch(0.57 0.15 258);
   --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.57 0.15 258 / 45%);
+  --ring: oklch(0.57 0.15 258);
 }
 html[data-accent="blue"].dark {
   --primary: oklch(0.6 0.145 256);
   --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.6 0.145 256 / 50%);
+  --ring: oklch(0.6 0.145 256);
 }
 html[data-accent="green"] {
   --primary: oklch(0.56 0.13 155);
   --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.56 0.13 155 / 45%);
+  --ring: oklch(0.56 0.13 155);
 }
 html[data-accent="green"].dark {
   --primary: oklch(0.64 0.14 155);
   --primary-foreground: oklch(0.2 0.03 155);
-  --ring: oklch(0.64 0.14 155 / 50%);
+  --ring: oklch(0.64 0.14 155);
 }
 html[data-accent="orange"] {
   --primary: oklch(0.62 0.17 45);
   --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.62 0.17 45 / 45%);
+  --ring: oklch(0.62 0.17 45);
 }
 html[data-accent="orange"].dark {
   --primary: oklch(0.7 0.16 52);
   --primary-foreground: oklch(0.2 0.04 52);
-  --ring: oklch(0.7 0.16 52 / 50%);
+  --ring: oklch(0.7 0.16 52);
 }
 html[data-accent="rose"] {
   --primary: oklch(0.58 0.19 12);
   --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.58 0.19 12 / 45%);
+  --ring: oklch(0.58 0.19 12);
 }
 html[data-accent="rose"].dark {
   --primary: oklch(0.65 0.18 12);
   --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.65 0.18 12 / 50%);
+  --ring: oklch(0.65 0.18 12);
 }
 html[data-accent="violet"] {
   --primary: oklch(0.55 0.18 290);
   --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.55 0.18 290 / 45%);
+  --ring: oklch(0.55 0.18 290);
 }
 html[data-accent="violet"].dark {
   --primary: oklch(0.64 0.16 290);
   --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.64 0.16 290 / 50%);
+  --ring: oklch(0.64 0.16 290);
 }
 
 @layer base {
@@ -201,7 +229,9 @@ html[data-accent="violet"].dark {
     color-scheme: dark;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
+    /* Let the system UI font use its own optical tracking. */
+    letter-spacing: normal;
   }
 
   /* Scrollbars: thin, rounded, token-colored pill thumb on a transparent track. */
@@ -265,6 +295,19 @@ html[data-accent="violet"].dark {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/*
+ * Codex rail layout: the window band and sidebar sit on `bg-shell`; the content is an inset panel
+ * with a 0.5px hairline (one device pixel on Retina), a 1.3x radius and a 3px gap to the
+ * window's right and bottom edges.
+ */
+@utility shell-inset {
+  background-color: var(--background);
+  border: 0.5px solid var(--shell-border);
+  border-radius: calc(var(--radius) * 1.3);
+  margin-inline-end: 3px;
+  margin-bottom: 3px;
 }
 
 /* Shiki dual themes (defaultColor: false). */

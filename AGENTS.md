@@ -19,6 +19,8 @@ style. `pnpm lint` enforces most of them (`@shadcn/lint`, rules in the
 | `components/docs/**` | Docs shell (nav, gallery, install command) | consumer |
 | `app/globals.css` | The theme: every token below | — |
 | `notes/icon-usage.md` | Icon usage system | — |
+| `notes/synara-native-style.md` | Native desktop style reference (Synara/Codex values) | — |
+| `THIRD_PARTY_NOTICES.md` | MIT notice for Synara | — |
 
 Import library code as `@/registry/base-nova/ui/<file>` or `@/registry/base-nova/blocks/<name>/<file>`.
 **Library** files own their appearance (no `no-restyle`; arbitrary values only warn).
@@ -32,32 +34,46 @@ component only if the design really needs a new treatment.
 
 - **Colors**: `background`, `foreground`, `card`, `popover`, `primary`, `secondary`,
   `muted`, `muted-foreground`, `accent`, `destructive`, `success`, `warning`,
-  `border`, `input`, `ring`, `code`, `chart-1`…`chart-5` (each `*-foreground` where defined). Washes use
+  `border`, `input`, `ring`, `code`, `chart-1`…`chart-5`, `shell`, `shell-border` (each `*-foreground` where defined). Washes use
   opacity modifiers (`bg-success/12`, `ring-primary/20`). Never palette colors
   (`bg-zinc-100`), hex, or `[#…]`. `white`/`black` only for text on colored fills
   (`text-white` on destructive) and scrims (`bg-black/40`).
-- **Visual direction (flat, since 2026-10-14)**: after jakub.kr / oklch.fyi. Chroma-0
-  neutral grays. No gradient sheens, inset highlights, text-shadows or glows on controls.
-  Research: `notes/flat-tokens-research.md`.
+- **Visual direction: native desktop, after Synara / Codex (since 2026-10-14)**. Replaces the
+  earlier flat look as the only style (no switch). Values from Synara's `index.css` and
+  `components/ui` (MIT, see `THIRD_PARTY_NOTICES.md`); summary in `notes/synara-native-style.md`.
+  Background `#fcfcfc` / `#0e0e0e`, card/popover white / background 99% + white, foreground
+  neutral-800 / neutral-100. `secondary`, `muted`, `accent` are **translucent fills** (black 3–4% /
+  white 4%), not surfaces: use them for hover/selected/track fills, and `bg-card` / `bg-popover` /
+  `bg-background` for anything opaque (raised controls, triggers, floating panels, morph shells).
+  `border` black 5% / white 4%, `input` black 6% / white 5%, `ring` neutral-400 / neutral-500
+  (used at `/50`). No gradient sheens, inset highlights, text-shadows or glows. Charts stay
+  coloured (Synara's grayscale charts were not adopted). App chrome: `bg-shell` (window band and
+  rail sidebar, surface 97% + black / 95% + white) and the `shell-inset` utility (content panel:
+  0.5px `shell-border` hairline, `rounded-shell`, 3px gap to the right and bottom window edges).
 - **Primary is neutral (since 2026-10-14)**: near-black `oklch(0.205 0 0)` with white
-  text in light, near-white `oklch(0.922 0 0)` with near-black text in dark; `ring` is a
-  translucent gray. So never pair `bg-primary` with `text-white`: use
+  text in light, near-white `oklch(0.97 0 0)` (neutral-100) with near-black text in dark; `ring` is
+  neutral-400 / neutral-500, used at `/50`. So never pair `bg-primary` with `text-white`: use
   `text-primary-foreground`, and check primary fills/text in dark mode (primary is white
   there). Accent presets (blue, green, orange, rose, violet) override `primary`,
-  `primary-foreground` and `ring` via `html[data-accent="…"]` blocks in `globals.css`
+  `primary-foreground` and an opaque `ring` (used at `/50` like the neutral one) via `html[data-accent="…"]` blocks in `globals.css`
   (light and `.dark`), switched by the docs header and persisted in
   `localStorage["accent"]`; each ships as a `theme-<name>` registry item. Charts never use
   `primary`: they use `chart-1`…`chart-5` (blue, green, amber, red, violet), which stay
   coloured under every accent.
-- **Elevation**: `shadow-raised` (resting control/card: 1px hairline ring + faint drop)
-  → `hover:shadow-raised-hover` (ring a step darker) and/or `hover:bg-accent`;
-  `shadow-surface` (popovers, menus, floating panels); `shadow-well` (inset hairline for
-  fields and tracks); `shadow-chip` (kbd, small chips); `shadow-primary` (filled primary).
-  Dark mode elevation is the hairline ring only. `shadow-pressed` is a flat ring; press
-  is expressed with scale, not shadow.
-- **Radius**: base `--radius` 0.5rem → `rounded-sm/md/lg/xl/2xl` = 4/6/8/12/16px.
-  Buttons, inputs, select/combobox triggers, tab lists: `rounded-lg`; items inside a
-  padded container `rounded-md`; menus/popups `rounded-xl`; cards `rounded-xl`/`2xl`. Two-layer cards: `<Card variant="inset">` + `<CardPanel>` (tinted frame, p-1, raised panel) for presented content (demos, media, code, featured plans) only; dense dashboard cards stay default.
+- **Elevation (near-flat)**: `shadow-raised` (resting control/card: 1px hairline ring + 0 1px 2px
+  black/5%, Synara's icon chip) → `hover:shadow-raised-hover` (ring a step darker);
+  `shadow-surface` (popovers, menus, dialogs, floating panels only: hairline + soft lift);
+  `shadow-well` (inset hairline for fields and tracks); `shadow-chip` (kbd, small chips);
+  `shadow-primary` (filled primary, a 1-2px drop, none in dark). Resting cards, tables and code
+  blocks use `shadow-raised`, never `shadow-surface`. Dark mode elevation is the hairline ring
+  only. Hover on rows, menu items, ghost/outline buttons and nav is a fill (`bg-secondary`), not a ring.
+- **Focus**: `focus-visible:ring-2 focus-visible:ring-ring/50`.
+- **Radius**: base `--radius` 0.625rem with Synara's multipliers → `rounded-sm/md/lg/xl/2xl/3xl`
+  = 6/8/10/14/18/22px (`rounded-shell` 13px for the rail inset panel).
+  Buttons, inputs, select/combobox triggers, tab lists, menu/select rows: `rounded-lg`; xs
+  buttons `rounded-sm`, checkboxes 4px; tab indicators inside a `p-0.5` list `rounded-md`;
+  menus/popups `rounded-xl` (`p-1`, concentric with `rounded-lg` rows); cards, tables, code
+  blocks `rounded-xl`; two-layer inset cards and big panels `rounded-2xl`; dialogs `rounded-3xl`. Two-layer cards: `<Card variant="inset">` + `<CardPanel>` (tinted frame, p-1, raised panel) for presented content (demos, media, code, featured plans) only; dense dashboard cards stay default.
   Keep radii concentric (outer = inner + padding). `rounded-full` only for inherently
   round things: avatars, dots, switches and slider thumbs, badges/tags, icon-only
   circular buttons, progress bars.
@@ -66,13 +82,26 @@ component only if the design really needs a new treatment.
 
 ## Typography
 
-Geist Sans (`font-sans`) for UI, Geist Mono (`font-mono`) for code, keys and numbers in
-terminals. Scale: `text-xs` meta/captions/badges · `text-sm` default UI and body ·
-`text-base` reading copy and card titles · `text-lg`–`text-2xl` section/page headings ·
-`text-3xl`+ hero only. Titles `font-semibold tracking-tight`; labels and buttons
-`font-medium`. Secondary text is `text-muted-foreground`, never a grey palette color.
-Consumers use the scale only; off-scale sizes (`text-[11px]`) are library-only and are
-flagged as token candidates.
+System UI font (`font-sans`: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui) with
+`letter-spacing: normal` (no negative tracking at UI sizes); JetBrains Mono → SF Mono → Menlo
+(`font-mono`) for code, keys and terminals. **Native 13px scale** (Synara `appTypography`):
+`text-ui-2xs` 10 · `text-ui-xs` 11 (meta, shortcuts, counts) · `text-ui-sm` 12 (captions,
+badges, small controls, tooltips) · `text-ui` 13 (default UI: buttons, inputs, menus, nav,
+body inside components) · `text-ui-lg` 14 (lg controls, card titles). Library components use
+the `text-ui*` sizes; Tailwind's `text-sm`–`text-2xl` stay for reading copy and page/section
+headings in consumers, `text-3xl`+ for hero only. Titles `font-semibold` (`tracking-tight`
+only from `text-xl` up); labels and buttons `font-medium`. Secondary text is
+`text-muted-foreground`. `lib/utils.ts` extends tailwind-merge so `text-ui*` merge as font
+sizes (shipped as `@qinyang/utils`, a dependency of `@qinyang/theme`). Never `text-[10px]`/`text-[11px]`.
+
+## Density
+
+Synara's desktop density: buttons `h-8` default, `sm` h-7, `xs`/`icon-xs` h-6, `lg` h-9, `icon` 32,
+`icon-sm` 28; inputs, select/combobox triggers `h-8` (`sm` h-7), `px-2.5`; menu/select/combobox
+rows `min-h-6.5` (26px) `px-2` `rounded-lg`, popup padding `p-1`, separators `mx-2 my-1`; tooltips
+`px-2 py-1 text-ui-sm`; sidebar rows `h-8` (sub rows `h-7`) with `text-ui`, icons
+`text-muted-foreground`, hover `bg-secondary`, active `bg-foreground/6`; checkbox/radio 16px,
+switch 32×20. Disabled is `opacity-64`.
 
 ## Spacing rhythm
 
@@ -111,8 +140,10 @@ or margin on the child, not padding on a component.
   `transition-colors`, `transition-transform`), never `transition-all`.
 - Every movement, scale or blur is gated: `useReducedMotion()` / `motion-reduce:` /
   `motion-safe:`, falling back to an opacity cross-fade.
-- Press is `active:scale-96` (150ms ease-out, `scale` in the transition list) on
-  Button and every custom pressable; large surfaces may use `scale-98`.
+- **No press scale on standard controls** (Button, triggers, toggles, nav rows, checkbox, radio):
+  native controls answer with a fill change, as in Synara. Press scale is kept only where the
+  motion is the component's point (expanding-arrow-button, expandable-control, card-folder,
+  message-bubble, hold/slide action buttons). Popups enter from `scale-98` + opacity.
 
 ## Light and dark
 
@@ -138,8 +169,8 @@ Jakub Krehel's skills are installed in `.agents/skills/`. Load the relevant one 
 Where our tokens and components above don't already decide, adopt their exact values as
 house rules:
 
-- **Press**: custom pressables scale to `0.96` over `150ms` `ease-out`
-  (`enabled:active:scale-96`); disabled never scales; never below 0.96.
+- **Press**: no press scale on standard controls (see Motion); motion-showcase pressables
+  may scale to `0.96` over `150ms` `ease-out`, disabled never scales.
 - **Concentric radii**: outer radius = inner radius + padding (+ border) on nested
   surfaces with an even inset ≤ 24px; beyond that, keep each surface's own token.
 - **Text wrapping**: `text-balance` on headings and titles, `text-pretty` on body
@@ -178,3 +209,9 @@ line only, with a reason. List them with `rg "eslint-disable.*shadcn/"`; each is
 
 ## Component docs pages
 Every registry:ui item has `content/docs/<name>.ts` (type `ComponentDoc` in lib/doc-types.ts: usage, composition, examples, notes, api) and examples in `registry/base-nova/examples/<name>/<id>.tsx`. After adding or renaming one run `pnpm docs:gen` (regenerates content/docs/index.generated.ts and components/docs/examples.generated.tsx; commit both). API tables list only props the library adds or changes; the rest is `extends` with a Base UI link. Examples render client-only.
+
+## Attribution
+
+The visual style follows Synara (https://github.com/Emanuele-web04/synara), MIT License,
+Copyright (c) 2026 T3 Tools Inc. and Copyright (c) 2026 Emanuele Di Pietro. Full notice in
+`THIRD_PARTY_NOTICES.md`; keep it when moving more values from that source.

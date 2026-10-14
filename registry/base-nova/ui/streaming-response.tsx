@@ -141,14 +141,14 @@ function ResponseMarkdown({
   const blocks = React.useMemo(() => parseBlocks(text), [text])
   const tail = caret ? <StreamingCaret /> : null
   return (
-    <div data-slot="response-markdown" className={cn("flex flex-col gap-3 text-[0.95rem] leading-relaxed text-foreground/90", className)}>
+    <div data-slot="response-markdown" className={cn("flex flex-col gap-3 text-ui-lg leading-relaxed text-foreground/90", className)}>
       {blocks.length === 0 && tail ? <p>{tail}</p> : null}
       {blocks.map((block, bi) => {
         const last = bi === blocks.length - 1
         const k = `b${bi}`
         if (block.type === "h")
           return (
-            <h3 key={k} className="pt-1 text-base font-semibold tracking-tight text-foreground">
+            <h3 key={k} className="pt-1 text-base font-semibold text-foreground">
               {renderInline(block.text, sources, k)}
               {last && tail}
             </h3>
@@ -256,7 +256,7 @@ function StreamingResponse({
 
   const body =
     children !== undefined ? (
-      <div className="text-[0.95rem] leading-relaxed text-foreground/90">
+      <div className="text-ui-lg leading-relaxed text-foreground/90">
         {children}
         {streaming ? <StreamingCaret /> : null}
       </div>
@@ -286,7 +286,7 @@ function StreamingResponse({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25, ease: AGENT_EASE }}
               role="alert"
-              className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2 text-sm text-destructive shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--destructive)_22%,transparent)]"
+              className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2 text-ui text-destructive shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--destructive)_22%,transparent)]"
             >
               <AlertCircleIcon className="size-4 shrink-0" />
               <span className="flex-1">{errorMessage}</span>
@@ -294,7 +294,7 @@ function StreamingResponse({
                 <button
                   type="button"
                   onClick={onRetry}
-                  className="inline-flex h-7 cursor-pointer items-center gap-1 rounded-full px-2.5 text-xs font-medium outline-none hover:bg-destructive/12 focus-visible:ring-3 focus-visible:ring-ring"
+                  className="inline-flex h-7 cursor-pointer items-center gap-1 rounded-full px-2.5 text-ui-sm font-medium outline-none hover:bg-destructive/12 focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <RefreshIcon className="size-3.5" />
                   Retry

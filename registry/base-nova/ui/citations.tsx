@@ -160,7 +160,7 @@ function CitationFavicon({
       aria-hidden
       data-slot="citation-favicon"
       className={cn(
-        "relative grid size-5 shrink-0 place-items-center overflow-hidden rounded-md bg-muted text-[10px] font-semibold text-muted-foreground uppercase shadow-chip [&>svg]:size-3",
+        "relative grid size-5 shrink-0 place-items-center overflow-hidden rounded-md bg-muted text-ui-2xs font-semibold text-muted-foreground uppercase shadow-chip [&>svg]:size-3",
         className
       )}
     >
@@ -266,7 +266,7 @@ function Citation({
           }
         }}
         className={cn(
-          "relative -top-[0.15em] mx-0.5 inline-flex h-[1.35em] min-w-[1.35em] cursor-pointer items-center justify-center rounded-full bg-muted px-1 align-baseline font-sans text-[0.68em] leading-none font-semibold text-muted-foreground tabular-nums no-underline shadow-chip transition-[color,background-color,box-shadow] duration-150 outline-none hover:bg-primary/14 hover:text-primary focus-visible:ring-3 focus-visible:ring-ring data-popup-open:bg-primary/14 data-popup-open:text-primary",
+          "relative -top-[0.15em] mx-0.5 inline-flex h-[1.35em] min-w-[1.35em] cursor-pointer items-center justify-center rounded-full bg-muted px-1 align-baseline font-sans text-[0.68em] leading-none font-semibold text-muted-foreground tabular-nums no-underline shadow-chip transition-[color,background-color,box-shadow] duration-150 outline-none hover:bg-primary/14 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-primary/14 data-popup-open:text-primary",
           className
         )}
         {...props}
@@ -278,30 +278,30 @@ function Citation({
           <PreviewCardPrimitive.Popup
             data-slot="citation-preview"
             className={cn(
-              "flex w-72 max-w-[calc(100vw-1rem)] origin-(--transform-origin) flex-col gap-2 rounded-2xl bg-popover p-3.5 text-sm text-popover-foreground shadow-surface outline-none",
+              "flex w-72 max-w-[calc(100vw-1rem)] origin-(--transform-origin) flex-col gap-2 rounded-2xl bg-popover p-3.5 text-ui text-popover-foreground shadow-surface outline-none",
               "transition-[opacity,scale,translate] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-120",
-              "data-starting-style:translate-y-1 data-starting-style:scale-95 data-starting-style:opacity-0 data-ending-style:scale-97 data-ending-style:opacity-0",
+              "data-starting-style:translate-y-1 data-starting-style:scale-98 data-starting-style:opacity-0 data-ending-style:scale-97 data-ending-style:opacity-0",
               "motion-reduce:data-starting-style:translate-y-0 motion-reduce:data-starting-style:scale-100"
             )}
           >
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2 text-ui-sm text-muted-foreground">
               <CitationFavicon source={source} favicon={favicon} />
               <span className="min-w-0 flex-1 truncate">{domain ?? "Source"}</span>
               {index != null ? <span className="font-mono tabular-nums">[{index}]</span> : null}
             </div>
-            <div className="leading-snug font-semibold tracking-tight">{source.title}</div>
+            <div className="leading-snug font-semibold">{source.title}</div>
             {source.snippet ? (
-              <p className="line-clamp-3 text-[0.8rem] leading-relaxed text-muted-foreground">{source.snippet}</p>
+              <p className="line-clamp-3 text-ui-sm leading-relaxed text-muted-foreground">{source.snippet}</p>
             ) : null}
             {source.meta || source.url ? (
-              <div className="flex items-center justify-between gap-2 pt-0.5 text-xs text-muted-foreground">
+              <div className="flex items-center justify-between gap-2 pt-0.5 text-ui-sm text-muted-foreground">
                 <span className="truncate">{source.meta}</span>
                 {source.url ? (
                   <a
                     href={source.url}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="inline-flex shrink-0 items-center gap-0.5 rounded-full px-1.5 py-0.5 font-medium text-primary outline-none hover:bg-primary/10 focus-visible:ring-3 focus-visible:ring-ring"
+                    className="inline-flex shrink-0 items-center gap-0.5 rounded-full px-1.5 py-0.5 font-medium text-primary outline-none hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
                     Open
                     <ArrowUpRightIcon className="size-3" />
@@ -356,15 +356,15 @@ function CitationList({
                 id={safeId(prefix, source.id)}
                 data-highlighted={active || undefined}
                 {...(source.url ? { href: source.url, target: "_blank", rel: "noreferrer noopener" } : {})}
-                className="group/citation-row flex scroll-m-4 items-center gap-2.5 rounded-xl px-2 py-1.5 transition-[background-color,box-shadow] duration-300 outline-none hover:bg-muted/70 focus-visible:ring-3 focus-visible:ring-ring data-highlighted:bg-primary/10 data-highlighted:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary)_30%,transparent)]"
+                className="group/citation-row flex scroll-m-4 items-center gap-2.5 rounded-xl px-2 py-1.5 transition-[background-color,box-shadow] duration-300 outline-none hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring/50 data-highlighted:bg-primary/10 data-highlighted:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary)_30%,transparent)]"
               >
-                <span className="w-4 shrink-0 text-right font-mono text-[11px] text-muted-foreground tabular-nums">{i + 1}</span>
+                <span className="w-4 shrink-0 text-right font-mono text-ui-xs text-muted-foreground tabular-nums">{i + 1}</span>
                 <CitationFavicon source={source} favicon={favicon} />
                 <span className="flex min-w-0 flex-1 flex-col sm:flex-row sm:items-baseline sm:gap-2">
-                  <span className="truncate text-sm font-medium text-foreground/90 group-hover/citation-row:text-foreground">
+                  <span className="truncate text-ui font-medium text-foreground/90 group-hover/citation-row:text-foreground">
                     {source.title}
                   </span>
-                  {domain ? <span className="truncate text-xs text-muted-foreground">{domain}</span> : null}
+                  {domain ? <span className="truncate text-ui-sm text-muted-foreground">{domain}</span> : null}
                 </span>
                 {source.url ? (
                   <ArrowUpRightIcon className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover/citation-row:opacity-100 group-focus-visible/citation-row:opacity-100" />
@@ -416,12 +416,12 @@ function Citations({
       data-slot="citations"
       open={open}
       onOpenChange={(next) => setOpen(next)}
-      className={cn("flex w-full flex-col text-sm", className)}
+      className={cn("flex w-full flex-col text-ui", className)}
     >
-      <CollapsiblePrimitive.Trigger className="group/citations -ml-1 inline-flex h-8 w-fit cursor-pointer items-center gap-2 rounded-lg pr-2.5 pl-1.5 text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 data-panel-open:text-foreground">
+      <CollapsiblePrimitive.Trigger className="group/citations -ml-1 inline-flex h-8 w-fit cursor-pointer items-center gap-2 rounded-lg pr-2.5 pl-1.5 text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-panel-open:text-foreground">
         <CitationStack sources={sources} favicon={favicon} />
         <span className="font-medium">{title}</span>
-        <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] leading-none font-semibold tabular-nums shadow-chip">
+        <span className="rounded-full bg-muted px-1.5 py-0.5 text-ui-2xs leading-none font-semibold tabular-nums shadow-chip">
           {sources.length}
         </span>
         <ChevronDownIcon className="size-3.5 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/citations:rotate-180 motion-reduce:transition-none" />
@@ -436,7 +436,7 @@ function Citations({
 /** Small "N sources" chip, e.g. for a toolbar. */
 function CitationCount({ count, className }: { count: number; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-1 text-xs text-muted-foreground", className)}>
+    <span className={cn("inline-flex items-center gap-1 text-ui-sm text-muted-foreground", className)}>
       <BookmarkIcon className="size-3.5" />
       {count} {count === 1 ? "source" : "sources"}
     </span>

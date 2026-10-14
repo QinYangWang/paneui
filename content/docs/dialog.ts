@@ -95,7 +95,7 @@ export default {
     },
     {
       name: "DialogContent",
-      description: "Portal, blurred backdrop, a padded viewport and the centred popup (max-width 28rem, max-height the viewport minus 1rem each side, scrolls with `overscroll-contain` when taller).",
+      description: "Portal, dimmed backdrop, a padded viewport and the centred popup (max-width 28rem, max-height the viewport minus 1rem each side, scrolls with `overscroll-contain` when taller).",
       extends: "Base UI Dialog.Popup",
       extendsHref: "https://base-ui.com/react/components/dialog#popup",
       props: [

@@ -156,7 +156,7 @@ function MorphingModalContent({
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop
         data-slot="morphing-modal-backdrop"
-        className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
+        className="fixed inset-0 z-50 bg-black/40 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
       />
       <DialogPrimitive.Popup
         data-slot="morphing-modal-content"
@@ -196,7 +196,7 @@ function MorphingModalContent({
           <DialogPrimitive.Close
             data-slot="morphing-modal-close"
             aria-label="Close"
-            className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+            className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <XIcon size={16} />
           </DialogPrimitive.Close>
@@ -254,7 +254,7 @@ function MorphingModalTitle({ className, ...props }: DialogPrimitive.Title.Props
   return (
     <DialogPrimitive.Title
       data-slot="morphing-modal-title"
-      className={cn("text-lg leading-8 font-semibold tracking-tight", className)}
+      className={cn("text-lg leading-8 font-semibold", className)}
       {...props}
     />
   )
@@ -264,7 +264,7 @@ function MorphingModalDescription({ className, ...props }: DialogPrimitive.Descr
   return (
     <DialogPrimitive.Description
       data-slot="morphing-modal-description"
-      className={cn("text-[0.95rem] leading-relaxed text-muted-foreground", className)}
+      className={cn("text-ui-lg leading-relaxed text-muted-foreground", className)}
       {...props}
     />
   )
@@ -284,7 +284,7 @@ function MorphingModalBack({ className, onClick, ...props }: React.ComponentProp
         if (!e.defaultPrevented) back()
       }}
       className={cn(
-        "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring",
+        "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       )}
       {...props}
@@ -311,7 +311,7 @@ function MorphingModalLink({
         if (!e.defaultPrevented) push(to)
       }}
       className={cn(
-        "flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left text-sm font-medium transition-[background-color,box-shadow] duration-150 outline-none hover:bg-secondary hover:shadow-raised focus-visible:ring-3 focus-visible:ring-ring [&_svg]:size-4 [&_svg]:shrink-0",
+        "flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left text-ui font-medium transition-[background-color,box-shadow] duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

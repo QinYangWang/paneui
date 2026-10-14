@@ -156,7 +156,7 @@ function SlideActionButton({
       <motion.span
         aria-hidden
         style={{ opacity: phase === "idle" ? labelOpacity : 1, x: phase === "idle" ? labelShift : 0 }}
-        className="pointer-events-none absolute inset-0 grid place-items-center pl-10 text-sm font-medium"
+        className="pointer-events-none absolute inset-0 grid place-items-center pl-10 text-ui font-medium"
       >
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
@@ -198,7 +198,7 @@ function SlideActionButton({
         whileTap={reduce || disabled ? undefined : { scale: 0.96 }}
         className={cn(
           "relative grid shrink-0 cursor-grab touch-pan-y place-items-center rounded-full bg-primary text-primary-foreground shadow-primary outline-none active:cursor-grabbing",
-          "focus-visible:ring-3 focus-visible:ring-ring [&_svg]:size-4.5",
+          "focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-4.5",
           (disabled || phase !== "idle") && "cursor-default active:cursor-default"
         )}
       >

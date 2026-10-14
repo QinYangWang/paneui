@@ -25,7 +25,7 @@ function TooltipContent({
         <TooltipPrimitive.Popup
           data-slot="tooltip-content"
           className={cn(
-            "flex origin-(--transform-origin) items-center gap-1.5 rounded-lg bg-popover px-2.5 py-1.5 text-xs font-medium text-popover-foreground shadow-surface transition-[opacity,scale,translate] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-90 data-ending-style:opacity-0 data-instant:duration-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=bottom]:data-starting-style:-translate-y-1 data-[side=top]:data-starting-style:translate-y-1",
+            "flex origin-(--transform-origin) items-center gap-1.5 rounded-lg bg-popover px-2 py-1 text-ui-sm text-popover-foreground shadow-surface transition-[opacity,scale,translate] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-98 data-ending-style:opacity-0 data-instant:duration-0 data-starting-style:scale-98 data-starting-style:opacity-0 data-[side=bottom]:data-starting-style:-translate-y-1 data-[side=top]:data-starting-style:translate-y-1",
             className
           )}
           {...props}
@@ -42,7 +42,7 @@ function TooltipKbd({ className, ...props }: React.ComponentProps<"kbd">) {
     <kbd
       data-slot="tooltip-kbd"
       className={cn(
-        "-mr-1 rounded-sm bg-muted px-1.5 py-px font-mono text-[10px] text-muted-foreground shadow-chip",
+        "-mr-1 rounded-sm bg-muted px-1.5 py-px font-mono text-ui-2xs text-muted-foreground shadow-chip",
         className
       )}
       {...props}

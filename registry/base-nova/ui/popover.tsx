@@ -32,9 +32,9 @@ function PopoverContent({
         <PopoverPrimitive.Popup
           data-slot="popover-content"
           className={cn(
-            "relative flex w-72 max-w-[calc(100vw-1rem)] origin-(--transform-origin) flex-col gap-3 rounded-2xl bg-popover p-4 text-sm text-popover-foreground shadow-surface outline-none",
+            "relative flex w-64 max-w-[calc(100vw-1rem)] origin-(--transform-origin) flex-col gap-2.5 rounded-xl bg-popover p-3 text-ui text-popover-foreground shadow-surface outline-none",
             "transition-[opacity,scale,translate] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-150",
-            "data-starting-style:scale-90 data-starting-style:opacity-0 data-ending-style:scale-95 data-ending-style:opacity-0",
+            "data-starting-style:scale-98 data-starting-style:opacity-0 data-ending-style:scale-98 data-ending-style:opacity-0",
             "data-[side=bottom]:data-starting-style:-translate-y-1 data-[side=top]:data-starting-style:translate-y-1 data-[side=left]:data-starting-style:translate-x-1 data-[side=right]:data-starting-style:-translate-x-1",
             "motion-reduce:data-starting-style:scale-100 motion-reduce:data-starting-style:translate-0",
             className
@@ -54,7 +54,7 @@ function PopoverTitle({ className, ...props }: PopoverPrimitive.Title.Props) {
   return (
     <PopoverPrimitive.Title
       data-slot="popover-title"
-      className={cn("text-base leading-snug font-semibold tracking-tight text-balance", className)}
+      className={cn("text-ui font-semibold leading-snug text-balance", className)}
       {...props}
     />
   )
@@ -64,7 +64,7 @@ function PopoverDescription({ className, ...props }: PopoverPrimitive.Descriptio
   return (
     <PopoverPrimitive.Description
       data-slot="popover-description"
-      className={cn("text-sm leading-relaxed text-muted-foreground", className)}
+      className={cn("text-ui leading-snug text-muted-foreground", className)}
       {...props}
     />
   )
@@ -86,7 +86,7 @@ function PopoverCloseButton({ className, ...props }: PopoverPrimitive.Close.Prop
       data-slot="popover-close-button"
       aria-label="Close"
       className={cn(
-        "absolute top-3 right-3 inline-flex size-7 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring",
+        "absolute top-2 right-2 inline-flex size-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       )}
       {...props}

@@ -185,7 +185,7 @@ function CompositionChart({
               : clamp(Math.round(((px - axisW) / Math.max(1, plotW)) * (n - 1)), 0, n - 1)
           if (i !== hoverIndex) setHoverIndex(i)
         }}
-        className="relative w-full touch-pan-y rounded-xl outline-none select-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="relative w-full touch-pan-y rounded-xl outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50"
         style={{ height }}
       >
         {width > 0 && (
@@ -211,7 +211,7 @@ function CompositionChart({
                     y={y(t)}
                     textAnchor="end"
                     dominantBaseline="middle"
-                    className="fill-muted-foreground text-[10px] tabular-nums"
+                    className="fill-muted-foreground text-ui-2xs tabular-nums"
                   >
                     {t * 100}%
                   </text>
@@ -318,7 +318,7 @@ function CompositionChart({
                   y={plotH + 15}
                   textAnchor={mode === "area" && i === 0 ? "start" : mode === "area" && i === n - 1 ? "end" : "middle"}
                   className={cn(
-                    "text-[10px] tabular-nums transition-colors",
+                    "text-ui-2xs tabular-nums transition-colors",
                     hoverIndex === i ? "fill-foreground" : "fill-muted-foreground"
                   )}
                 >

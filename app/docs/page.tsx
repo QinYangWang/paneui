@@ -21,7 +21,7 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
   return (
     <section className="flex flex-col gap-3">
       <h2 className="flex items-center gap-3 text-lg font-semibold">
-        <span className="grid size-7 shrink-0 place-items-center rounded-full bg-secondary text-sm tabular-nums shadow-raised">{n}</span>
+        <span className="grid size-7 shrink-0 place-items-center rounded-full bg-card text-ui tabular-nums shadow-raised">{n}</span>
         {title}
       </h2>
       <div className="flex flex-col gap-3 sm:pl-10">{children}</div>
@@ -69,7 +69,10 @@ export default function Installation() {
       </Step>
 
       <Step n={2} title="Install the theme">
-        <p className="text-muted-foreground">The depth tokens (raised, pressed, well…) and the icon set every component relies on.</p>
+        <p className="text-muted-foreground">
+          The native desktop tokens every component relies on (system UI font on a 13px scale, translucent fills,
+          hairline elevation), a <code className="font-mono">cn</code> helper that knows the text-ui sizes, and the icon set.
+        </p>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme @${REGISTRY_NAME}/icons`} />
         <p className="text-muted-foreground">
           The primary colour is neutral: near-black in light mode, near-white in dark. For a coloured accent, add one

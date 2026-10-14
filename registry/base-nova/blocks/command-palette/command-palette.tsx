@@ -252,7 +252,7 @@ function CommandPalette({
         >
           <DialogPrimitive.Title className="sr-only">Command palette</DialogPrimitive.Title>
           <div className="p-2 pb-0">
-            <label className="flex h-11 items-center gap-2.5 rounded-2xl bg-muted/60 px-3.5 shadow-well transition-[background-color] focus-within:bg-background">
+            <label className="flex h-11 items-center gap-2.5 rounded-2xl bg-background dark:bg-input/32 px-3.5 shadow-well transition-[background-color]">
               <SearchIcon className="size-4 shrink-0 text-muted-foreground" />
               <input
                 ref={inputRef}
@@ -268,10 +268,10 @@ function CommandPalette({
                 aria-label="Search commands"
                 autoComplete="off"
                 spellCheck={false}
-                className="h-full min-w-0 flex-1 bg-transparent text-[0.95rem] outline-none placeholder:text-muted-foreground"
+                className="h-full min-w-0 flex-1 bg-transparent text-ui-lg outline-none placeholder:text-muted-foreground"
               />
               {hotkey && (
-                <kbd className="hidden rounded-md bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground shadow-chip sm:inline">
+                <kbd className="hidden rounded-md bg-background px-1.5 py-0.5 font-mono text-ui-2xs text-muted-foreground shadow-chip sm:inline">
                   esc
                 </kbd>
               )}
@@ -288,7 +288,7 @@ function CommandPalette({
               className="min-h-0 flex-1 scroll-py-2 overflow-y-auto overscroll-contain p-2"
             >
               {rows.length === 0 ? (
-                <div className="flex flex-col items-center gap-2 px-4 py-10 text-center text-sm text-muted-foreground">
+                <div className="flex flex-col items-center gap-2 px-4 py-10 text-center text-ui text-muted-foreground">
                   <SearchIcon className="size-5 opacity-60" />
                   {emptyMessage}
                 </div>
@@ -297,7 +297,7 @@ function CommandPalette({
                   const headingId = `${uid}-group-${g}`
                   return (
                     <div key={group.heading} role="group" aria-labelledby={headingId} className="not-first:mt-1.5">
-                      <div id={headingId} className="px-3 pt-1.5 pb-1 text-xs font-medium text-muted-foreground">
+                      <div id={headingId} className="px-3 pt-1.5 pb-1 text-ui-sm font-medium text-muted-foreground">
                         {group.heading}
                       </div>
                       {group.list.map((match) => {
@@ -318,13 +318,13 @@ function CommandPalette({
                             onPointerMove={() => !item.disabled && active !== i && setActive(i)}
                             onPointerDown={(e) => e.preventDefault()}
                             onClick={() => choose(match)}
-                            className="relative flex h-10 cursor-default items-center gap-3 rounded-xl px-3 text-sm select-none aria-disabled:opacity-45"
+                            className="relative flex h-8 cursor-default items-center gap-2.5 rounded-lg px-2.5 text-ui select-none aria-disabled:opacity-45"
                           >
                             {isActive && (
                               <motion.span
                                 layoutId="command-palette-active"
                                 aria-hidden
-                                className="absolute inset-0 rounded-xl bg-secondary shadow-raised"
+                                className="absolute inset-0 rounded-lg bg-secondary"
                                 transition={
                                   reduce ? { duration: 0 } : { type: "spring", stiffness: 600, damping: 42, mass: 0.6 }
                                 }
@@ -343,7 +343,7 @@ function CommandPalette({
                                 <Highlight text={item.label} indices={match.indices} />
                               </span>
                               {item.description && (
-                                <span className="truncate text-xs text-muted-foreground">{item.description}</span>
+                                <span className="truncate text-ui-sm text-muted-foreground">{item.description}</span>
                               )}
                             </span>
                             {item.shortcut && (
@@ -351,7 +351,7 @@ function CommandPalette({
                                 {item.shortcut.map((key) => (
                                   <kbd
                                     key={key}
-                                    className="inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-muted px-1 font-mono text-[10px] text-muted-foreground shadow-chip"
+                                    className="inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-muted px-1 font-mono text-ui-2xs text-muted-foreground shadow-chip"
                                   >
                                     {key}
                                   </kbd>
@@ -372,7 +372,7 @@ function CommandPalette({
             <div
               data-slot="command-palette-footer"
               aria-hidden
-              className="flex items-center gap-4 border-t border-border px-4 py-2.5 text-[11px] text-muted-foreground"
+              className="flex items-center gap-4 border-t border-border px-4 py-2.5 text-ui-xs text-muted-foreground"
             >
               <FooterHint keys={["↑", "↓"]}>Navigate</FooterHint>
               <FooterHint keys={["↵"]}>Open</FooterHint>
@@ -409,7 +409,7 @@ function FooterHint({ keys, children }: { keys: string[]; children: React.ReactN
       {keys.map((k) => (
         <kbd
           key={k}
-          className="inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-muted px-1 font-mono text-[10px] shadow-chip"
+          className="inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-muted px-1 font-mono text-ui-2xs shadow-chip"
         >
           {k}
         </kbd>

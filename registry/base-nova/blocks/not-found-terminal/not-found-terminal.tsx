@@ -30,7 +30,7 @@ function NotFoundCopy({
     <>
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-xl font-semibold tracking-tight text-balance">{title}</h1>
-        <p className="max-w-sm text-sm text-pretty text-muted-foreground">{description}</p>
+        <p className="max-w-sm text-ui text-pretty text-muted-foreground">{description}</p>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2.5">
         <a href={homeHref} className={buttonVariants({ size: "lg" })}>
@@ -141,17 +141,17 @@ function NotFoundTerminal({
       {...props}
     >
       <style>{`@keyframes nf-caret{0%,100%{opacity:1}50%{opacity:0}}`}</style>
-      <div className="w-full max-w-md overflow-hidden rounded-2xl bg-card text-left shadow-surface">
+      <div className="w-full max-w-md overflow-hidden rounded-xl bg-card text-left shadow-raised">
         <div className="flex h-9 items-center gap-1.5 border-b border-border/70 px-3.5">
           <span className="size-2.5 rounded-full bg-destructive/80" />
           <span className="size-2.5 rounded-full bg-warning/80" />
           <span className="size-2.5 rounded-full bg-success/80" />
-          <span className="flex-1 pr-10 text-center text-xs text-muted-foreground">{windowTitle}</span>
+          <span className="flex-1 pr-10 text-center text-ui-sm text-muted-foreground">{windowTitle}</span>
         </div>
         <p className="sr-only">
           {script.map((l) => (l.kind === "cmd" ? `$ ${l.text}. ` : `${l.text}. `))}
         </p>
-        <pre aria-hidden className="min-h-[9.5rem] overflow-x-auto bg-muted/40 px-4 py-3.5 font-mono text-[13px] leading-6 whitespace-pre-wrap break-all shadow-well">
+        <pre aria-hidden className="min-h-[9.5rem] overflow-x-auto bg-muted/40 px-4 py-3.5 font-mono text-ui leading-6 whitespace-pre-wrap break-all shadow-well">
           {rows.map((row, i) =>
             row === null ? null : row.kind === "cmd" ? (
               <div key={i}>

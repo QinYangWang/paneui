@@ -76,7 +76,7 @@ function MultiSelectTrigger({
       ref={anchorRef}
       data-slot="multi-select-trigger"
       className={cn(
-        "relative flex min-h-9 w-full min-w-56 flex-wrap items-center gap-1 rounded-lg bg-muted/60 py-1 pr-8 pl-1 shadow-well transition-[box-shadow,background-color] focus-within:bg-background focus-within:ring-3 focus-within:ring-ring",
+        "relative flex min-h-8 w-full min-w-56 flex-wrap items-center gap-1 rounded-lg bg-background dark:bg-input/32 py-1 pr-8 pl-1 shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50",
         className
       )}
       {...props}
@@ -97,7 +97,7 @@ function MultiSelectTrigger({
                 >
                   <ComboboxPrimitive.Chip
                     data-slot="multi-select-chip"
-                    className="flex h-7 max-w-48 items-center gap-1 rounded-full bg-secondary pr-1 pl-2.5 text-xs font-medium shadow-chip outline-none focus-visible:ring-3 focus-visible:ring-ring data-disabled:opacity-50"
+                    className="flex h-7 max-w-48 items-center gap-1 rounded-full bg-card pr-1 pl-2.5 text-ui-sm font-medium shadow-chip outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50"
                   >
                     <span className="truncate">{renderChip(value)}</span>
                     <ComboboxPrimitive.ChipRemove
@@ -113,14 +113,14 @@ function MultiSelectTrigger({
             <ComboboxPrimitive.Input
               data-slot="multi-select-input"
               placeholder={selected.length ? undefined : placeholder}
-              className="h-7 min-w-16 flex-1 bg-transparent px-2 text-base outline-none placeholder:text-muted-foreground md:text-sm"
+              className="h-7 min-w-16 flex-1 bg-transparent px-2 text-base outline-none placeholder:text-muted-foreground md:text-ui"
             />
           </>
         )}
       </ComboboxPrimitive.Value>
       <ComboboxPrimitive.Trigger
         aria-label="Show options"
-        className="absolute top-1.5 right-1.5 flex size-6 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+        className="absolute top-1.5 right-1.5 flex size-6 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
       >
         <ChevronsUpDownIcon size={16} />
       </ComboboxPrimitive.Trigger>
@@ -149,7 +149,7 @@ function MultiSelectContent({
         <ComboboxPrimitive.Popup
           data-slot="multi-select-content"
           className={cn(
-            "relative flex max-h-[min(var(--available-height),22rem)] w-(--anchor-width) min-w-48 origin-(--transform-origin) flex-col overflow-hidden rounded-xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
+            "relative flex max-h-[min(var(--available-height),22rem)] w-(--anchor-width) min-w-48 origin-(--transform-origin) flex-col overflow-hidden rounded-xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0",
             className
           )}
           {...props}
@@ -167,7 +167,7 @@ function MultiSelectItem({ className, children, ...props }: ComboboxPrimitive.It
     <ComboboxPrimitive.Item
       data-slot="multi-select-item"
       className={cn(
-        "group/item relative flex h-8 cursor-default items-center gap-2.5 rounded-md px-2.5 text-sm outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent",
+        "group/item relative flex h-8 cursor-default items-center gap-2.5 rounded-md px-2.5 text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent",
         className
       )}
       {...props}

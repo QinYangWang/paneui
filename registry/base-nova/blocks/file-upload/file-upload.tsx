@@ -160,7 +160,7 @@ function StatusBadge({ status }: { status: FileUploadStatus }) {
           exit={{ opacity: 0, y: -4, filter: "blur(2px)" }}
           transition={{ duration: 0.2, ease: EASE }}
           className={cn(
-            "inline-flex items-center gap-1 text-xs font-medium",
+            "inline-flex items-center gap-1 text-ui-sm font-medium",
             status === "queued" && "text-muted-foreground",
             status === "uploading" && "text-primary",
             status === "success" && "text-success",
@@ -217,19 +217,19 @@ function FileUploadRow({
 
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <div className="flex items-baseline justify-between gap-3">
-          <span className="truncate text-sm font-medium" title={item.name}>
+          <span className="truncate text-ui font-medium" title={item.name}>
             {item.name}
           </span>
           <StatusBadge status={status} />
         </div>
         {status === "error" ? (
-          <span className="truncate text-xs text-destructive/90">
+          <span className="truncate text-ui-sm text-destructive/90">
             {item.error ?? "Upload failed"} · {formatBytes(item.size)}
           </span>
         ) : (
           <div className="flex items-center gap-2.5">
             <UploadProgress status={status} progress={progress} />
-            <span className="w-24 shrink-0 text-right text-xs text-muted-foreground tabular-nums">
+            <span className="w-24 shrink-0 text-right text-ui-sm text-muted-foreground tabular-nums">
               {status === "uploading"
                 ? `${Math.round(progress)}% · ${formatBytes(item.size)}`
                 : formatBytes(item.size)}
@@ -245,7 +245,7 @@ function FileUploadRow({
             onClick={() => onRetry(item)}
             disabled={disabled}
             aria-label={`Retry ${item.name}`}
-            className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50"
+            className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
           >
             <RefreshIcon size={15} />
           </button>
@@ -255,7 +255,7 @@ function FileUploadRow({
           onClick={() => onRemove(item)}
           disabled={disabled}
           aria-label={status === "uploading" ? `Cancel ${item.name}` : `Remove ${item.name}`}
-          className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50"
+          className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
         >
           <XIcon size={15} />
         </button>
@@ -419,7 +419,7 @@ export function FileUpload({
         animate={reduce ? undefined : { scale: dragging ? 1.015 : 1 }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
         className={cn(
-          "relative flex flex-col items-center gap-3 rounded-3xl bg-muted/60 px-6 py-7 text-center shadow-well transition-colors",
+          "relative flex flex-col items-center gap-3 rounded-3xl bg-background dark:bg-input/32 px-6 py-7 text-center shadow-well transition-colors",
           "outline-2 -outline-offset-8 outline-transparent outline-dashed",
           dragging && "bg-primary/8 outline-primary/50",
           inactive && "opacity-60"
@@ -436,8 +436,8 @@ export function FileUpload({
           <UploadIcon size={20} />
         </motion.span>
         <div className="flex flex-col gap-0.5">
-          <span className="text-sm font-medium">{dragging ? "Release to add" : full ? "Upload limit reached" : title}</span>
-          <span className="text-xs text-muted-foreground">
+          <span className="text-ui font-medium">{dragging ? "Release to add" : full ? "Upload limit reached" : title}</span>
+          <span className="text-ui-sm text-muted-foreground">
             {description}
             {maxFileSize !== undefined && ` · up to ${formatBytes(maxFileSize)}`}
           </span>
@@ -460,14 +460,14 @@ export function FileUpload({
           type="button"
           disabled={inactive}
           onClick={() => inputRef.current?.click()}
-          className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-secondary px-3.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none"
+          className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-card px-3.5 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none"
         >
           {browseLabel}
         </button>
       </motion.div>
 
       {items.length > 0 && (
-        <div className="flex items-center justify-between px-1 text-xs text-muted-foreground">
+        <div className="flex items-center justify-between px-1 text-ui-sm text-muted-foreground">
           <span>
             {items.length} file{items.length === 1 ? "" : "s"}
           </span>

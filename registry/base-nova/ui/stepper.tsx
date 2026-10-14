@@ -89,7 +89,7 @@ function Stepper({
             onBlur={() => setEditing(false)}
             className={cn(
               "absolute inset-0 w-full bg-transparent text-center font-medium tabular-nums outline-none selection:bg-primary/25",
-              sm ? "text-sm" : "text-base",
+              sm ? "text-ui" : "text-base",
               editing ? "text-foreground" : "text-transparent caret-transparent"
             )}
           />
@@ -98,7 +98,7 @@ function Stepper({
             aria-hidden
             className={cn(
               "pointer-events-none flex items-center justify-center overflow-hidden px-1 font-medium tabular-nums text-foreground transition-opacity duration-150",
-              sm ? "h-6 text-sm" : "h-7 text-base",
+              sm ? "h-6 text-ui" : "h-7 text-base",
               editing && "opacity-0"
             )}
           >
@@ -141,9 +141,9 @@ function Stepper({
 
 function stepButton(sm: boolean) {
   return cn(
-    "inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md bg-secondary text-foreground shadow-raised outline-none select-none",
-    "transition-[scale,box-shadow,background-color,opacity,color] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover active:scale-96 motion-reduce:active:scale-100",
-    "focus-visible:ring-3 focus-visible:ring-ring",
+    "inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md bg-card text-foreground shadow-raised outline-none select-none",
+    "transition-[scale,box-shadow,background-color,opacity,color] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover",
+    "focus-visible:ring-2 focus-visible:ring-ring/50",
     "data-disabled:pointer-events-none data-disabled:bg-transparent data-disabled:bg-none data-disabled:text-muted-foreground/60 data-disabled:shadow-none",
     sm ? "size-6 [&_svg]:size-3.5" : "size-8 [&_svg]:size-4"
   )

@@ -107,7 +107,7 @@ export function ProjectFolder({
           onFocus={(e) => e.currentTarget.matches(":focus-visible") && setOpen(true)}
           onBlur={() => setOpen(false)}
           onClick={() => setExpanded(true)}
-          className="group/folder relative block h-52 w-full cursor-pointer rounded-3xl text-left outline-none focus-visible:ring-3 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-60"
+          className="group/folder relative block h-52 w-full cursor-pointer rounded-3xl text-left outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {/* Back panel with tab */}
           <span
@@ -149,8 +149,8 @@ export function ProjectFolder({
           >
             <span className="flex items-end justify-between gap-3">
               <span className="flex min-w-0 flex-col">
-                <span className="truncate text-[0.95rem] font-semibold">{title}</span>
-                <span className="truncate text-xs text-primary-foreground/75">
+                <span className="truncate text-ui-lg font-semibold">{title}</span>
+                <span className="truncate text-ui-sm text-primary-foreground/75">
                   {description ? `${description} · ` : ""}
                   {total} {itemLabel}
                 </span>
@@ -169,7 +169,7 @@ export function ProjectFolder({
 
       <DialogPrimitive.Root open={expanded} onOpenChange={(next) => setExpanded(next)}>
         <DialogPrimitive.Portal>
-          <DialogPrimitive.Backdrop className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
+          <DialogPrimitive.Backdrop className="fixed inset-0 z-50 bg-black/40 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
           <DialogPrimitive.Popup
             className="fixed inset-0 z-50 flex justify-center overflow-y-auto p-4 outline-none"
             onClick={(e) => e.target === e.currentTarget && setExpanded(false)}
@@ -194,10 +194,10 @@ export function ProjectFolder({
                     <FolderIcon />
                   </IconChip>
                   <div className="flex min-w-0 flex-col">
-                    <DialogPrimitive.Title className="truncate text-lg leading-snug font-semibold tracking-tight">
+                    <DialogPrimitive.Title className="truncate text-lg leading-snug font-semibold">
                       {title}
                     </DialogPrimitive.Title>
-                    <DialogPrimitive.Description className="text-sm text-muted-foreground">
+                    <DialogPrimitive.Description className="text-ui text-muted-foreground">
                       {description ? `${description} · ` : ""}
                       {total} {itemLabel}
                     </DialogPrimitive.Description>
@@ -205,7 +205,7 @@ export function ProjectFolder({
                 </motion.div>
                 <DialogPrimitive.Close
                   aria-label="Close folder"
-                  className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+                  className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <XIcon size={16} />
                 </DialogPrimitive.Close>
@@ -226,8 +226,8 @@ export function ProjectFolder({
                     )
                     const label = (
                       <span className="flex min-w-0 flex-col px-0.5">
-                        <span className="truncate text-sm font-medium">{file.name}</span>
-                        {file.meta && <span className="truncate text-xs text-muted-foreground">{file.meta}</span>}
+                        <span className="truncate text-ui font-medium">{file.name}</span>
+                        {file.meta && <span className="truncate text-ui-sm text-muted-foreground">{file.meta}</span>}
                       </span>
                     )
                     return (
@@ -236,7 +236,7 @@ export function ProjectFolder({
                           <button
                             type="button"
                             onClick={() => onFileSelect(file)}
-                            className="flex w-full cursor-pointer flex-col gap-2 rounded-2xl p-1.5 text-left transition-colors outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring"
+                            className="flex w-full cursor-pointer flex-col gap-2 rounded-2xl p-1.5 text-left transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50"
                           >
                             {thumb}
                             {label}

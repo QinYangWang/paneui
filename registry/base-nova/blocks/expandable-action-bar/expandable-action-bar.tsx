@@ -44,8 +44,8 @@ const GLIDE: Transition = { type: "spring", stiffness: 460, damping: 36, mass: 0
 
 const sizes = {
   // Concentric radii: bar radius = item radius + bar padding.
-  sm: { bar: "gap-0.5 rounded-lg p-1", item: "h-7 min-w-7 rounded-sm px-1.5 text-xs", icon: "[&_svg]:size-3.5", radius: "rounded-sm" },
-  md: { bar: "gap-1 rounded-xl p-1.5", item: "h-9 min-w-9 rounded-md px-2.5 text-sm", icon: "[&_svg]:size-4", radius: "rounded-md" },
+  sm: { bar: "gap-0.5 rounded-lg p-1", item: "h-7 min-w-7 rounded-sm px-1.5 text-ui-sm", icon: "[&_svg]:size-3.5", radius: "rounded-sm" },
+  md: { bar: "gap-1 rounded-xl p-1.5", item: "h-9 min-w-9 rounded-md px-2.5 text-ui", icon: "[&_svg]:size-4", radius: "rounded-md" },
 }
 
 export function ExpandableActionBar({
@@ -169,7 +169,7 @@ export function ExpandableActionBar({
                 onAction?.(item)
               }}
               className={cn(
-                "relative inline-flex shrink-0 cursor-pointer items-center justify-center font-medium whitespace-nowrap text-muted-foreground outline-none transition-[color,scale] duration-150 ease-out select-none active:scale-96 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-45",
+                "relative inline-flex shrink-0 cursor-pointer items-center justify-center font-medium whitespace-nowrap text-muted-foreground outline-none transition-[color,scale] duration-150 ease-out select-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-45",
                 s.item,
                 s.icon
               )}
@@ -202,7 +202,7 @@ export function ExpandableActionBar({
               >
                 {item.label}
                 {item.shortcut && (
-                  <kbd className="inline-flex h-4.5 items-center rounded-md bg-background/60 px-1 font-sans text-[0.65rem] text-muted-foreground shadow-chip">
+                  <kbd className="inline-flex h-4.5 items-center rounded-md bg-background/60 px-1 font-sans text-ui-2xs text-muted-foreground shadow-chip">
                     {item.shortcut}
                   </kbd>
                 )}

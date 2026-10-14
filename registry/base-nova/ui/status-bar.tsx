@@ -129,7 +129,7 @@ function StatusBar({
       {...props}
     >
       {showHeader && (
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2 text-ui">
           {latest && (
             <span className="relative flex size-2.5">
               {!reduce && latest.status.weight === 1 && (
@@ -144,7 +144,7 @@ function StatusBar({
           <span className="font-medium text-foreground">{title ?? label}</span>
           {latest && <span className="text-muted-foreground">{latest.status.label}</span>}
           {uptime !== null && (
-            <span className="ml-auto text-xs font-medium text-muted-foreground tabular-nums">
+            <span className="ml-auto text-ui-sm font-medium text-muted-foreground tabular-nums">
               <span className="text-foreground">{(uptime * 100).toFixed(2)}%</span> uptime
             </span>
           )}
@@ -170,7 +170,7 @@ function StatusBar({
           if (!box || !n) return
           setActiveId(rows[band.indexAt(e.clientX - box.left)].datum.id)
         }}
-        className="relative w-full touch-pan-y rounded-lg outline-none select-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="relative w-full touch-pan-y rounded-lg outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         style={{ height }}
       >
         {width > 0 && (
@@ -224,7 +224,7 @@ function StatusBar({
       </div>
 
       {(startLabel || endLabel) && (
-        <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+        <div className="flex items-center gap-3 text-ui-xs text-muted-foreground">
           <span>{startLabel ?? `${n} periods ago`}</span>
           <span className="h-px flex-1 bg-border" />
           <span>{endLabel}</span>
@@ -232,7 +232,7 @@ function StatusBar({
       )}
 
       {showLegend && (
-        <ul aria-label={`${label} legend`} className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
+        <ul aria-label={`${label} legend`} className="flex flex-wrap gap-x-3 gap-y-1 text-ui-sm text-muted-foreground">
           {Object.entries(statuses)
             .filter(([key]) => counts.has(key))
             .map(([key, s]) => (

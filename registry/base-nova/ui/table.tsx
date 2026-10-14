@@ -227,7 +227,7 @@ function skeletonWidth(row: number, col: number) {
 /* -------------------------------------------------------------------------- */
 
 const headerLabelClass =
-  "group/label flex h-full min-w-0 flex-1 items-center gap-1.5 rounded-lg px-3 text-xs font-medium tracking-wide text-muted-foreground uppercase outline-none select-none focus-visible:ring-3 focus-visible:ring-ring data-[reorderable=true]:cursor-grab data-[dragging=true]:cursor-grabbing"
+  "group/label flex h-full min-w-0 flex-1 items-center gap-1.5 rounded-lg px-3 text-ui-sm font-medium tracking-wide text-muted-foreground uppercase outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 data-[reorderable=true]:cursor-grab data-[dragging=true]:cursor-grabbing"
 
 function SortIndicator({ direction }: { direction: SortDirection | null }) {
   if (!direction) {
@@ -284,7 +284,7 @@ function TableSkeletonRow({
 /** Default band shown under the rows while the next page loads. */
 function TableLoadingFooter({ label = "Loading more…" }: { label?: React.ReactNode }) {
   return (
-    <div role="status" className="flex h-full items-center justify-center gap-2.5 text-sm text-muted-foreground">
+    <div role="status" className="flex h-full items-center justify-center gap-2.5 text-ui text-muted-foreground">
       <Loader size="sm" label="Loading more rows" />
       {label}
     </div>
@@ -684,7 +684,7 @@ function Table<T>({
     <div
       data-slot="table"
       className={cn(
-        "relative w-full overflow-hidden rounded-2xl bg-card text-sm text-card-foreground shadow-surface",
+        "relative w-full overflow-hidden rounded-xl bg-card text-ui text-card-foreground shadow-raised",
         className
       )}
     >
@@ -697,7 +697,7 @@ function Table<T>({
         aria-multiselectable={role === "grid" && selectable ? true : undefined}
         aria-busy={loading || undefined}
         tabIndex={role === "table" ? 0 : undefined}
-        className="relative overflow-auto overscroll-contain outline-none focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset"
+        className="relative overflow-auto overscroll-contain outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
         style={{ height }}
       >
         <div className="relative min-w-full" style={{ width: contentWidth }}>
@@ -745,7 +745,7 @@ function Table<T>({
                     className={cn(
                       "group/header absolute inset-y-0 left-0 flex items-center hover:z-10 focus-within:z-10",
                       cellMotion(column.key),
-                      isDragging && "z-30 hover:z-30 rounded-xl bg-secondary shadow-raised-hover",
+                      isDragging && "z-30 hover:z-30 rounded-xl bg-card shadow-raised-hover",
                       column.headerClassName
                     )}
                     style={{ width, transform: `translateX(${columnX(column.key)}px)` }}
@@ -847,7 +847,7 @@ function Table<T>({
                 ))}
               </div>
             ) : rows.length === 0 ? (
-              <div role="row" className="sticky left-0 flex h-full items-center justify-center p-8 text-sm text-muted-foreground" style={{ width: viewportWidth || "100%" }}>
+              <div role="row" className="sticky left-0 flex h-full items-center justify-center p-8 text-ui text-muted-foreground" style={{ width: viewportWidth || "100%" }}>
                 <div role={cellRole}>{emptyState}</div>
               </div>
             ) : (
@@ -917,7 +917,7 @@ function Table<T>({
                             "absolute inset-y-0 left-0 flex min-w-0 items-center px-3 tabular-nums",
                             alignClass(column.align),
                             cellMotion(column.key),
-                            isDragging && "z-20 bg-secondary/90 shadow-raised",
+                            isDragging && "z-20 bg-card/90 shadow-raised",
                             column.className
                           )}
                           style={{ width: widths[column.key] ?? 0, transform: `translateX(${columnX(column.key)}px)` }}

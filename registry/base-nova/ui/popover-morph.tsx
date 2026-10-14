@@ -21,7 +21,7 @@ function MorphPopoverTrigger({ className, ...props }: PopoverPrimitive.Trigger.P
     <PopoverPrimitive.Trigger
       data-slot="morph-popover-trigger"
       className={cn(
-        "inline-flex h-9 cursor-pointer items-center gap-2 rounded-lg bg-secondary px-3.5 text-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:shadow-raised-hover active:scale-96 focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+        "inline-flex h-8 cursor-pointer items-center gap-2 rounded-lg bg-card px-3 text-ui font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}
@@ -58,15 +58,15 @@ function MorphPopoverContent({
           data-slot="morph-popover-content"
           style={{ "--morph-r0": triggerRadius } as React.CSSProperties}
           className={cn(
-            "group/morph relative flex w-72 min-w-(--anchor-width) max-w-[calc(100vw-1rem)] flex-col gap-3 rounded-2xl bg-popover p-4 text-sm text-popover-foreground shadow-surface outline-none",
+            "group/morph relative flex w-72 min-w-(--anchor-width) max-w-[calc(100vw-1rem)] flex-col gap-3 rounded-2xl bg-popover p-4 text-ui text-popover-foreground shadow-surface outline-none",
             // insets of the trigger's box inside the panel, per side/alignment
             "[--mt:0px] [--mb:calc(100%_-_var(--anchor-height))] [--ml:0px] [--mr:calc(100%_-_var(--anchor-width))]",
             "data-[side=top]:[--mt:calc(100%_-_var(--anchor-height))] data-[side=top]:[--mb:0px]",
             "data-[align=end]:[--ml:calc(100%_-_var(--anchor-width))] data-[align=end]:[--mr:0px]",
             "data-[align=center]:[--ml:calc((100%_-_var(--anchor-width))_/_2)] data-[align=center]:[--mr:calc((100%_-_var(--anchor-width))_/_2)]",
             "[clip-path:inset(0_round_var(--radius-2xl))] transition-[clip-path,background-color,box-shadow,opacity] [transition-duration:450ms,450ms,450ms,180ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
-            "data-starting-style:bg-secondary data-starting-style:opacity-0 data-starting-style:shadow-raised data-starting-style:[clip-path:inset(var(--mt)_var(--mr)_var(--mb)_var(--ml)_round_var(--morph-r0))]",
-            "data-ending-style:bg-secondary data-ending-style:opacity-0 data-ending-style:shadow-raised data-ending-style:duration-300 data-ending-style:[clip-path:inset(var(--mt)_var(--mr)_var(--mb)_var(--ml)_round_var(--morph-r0))]",
+            "data-starting-style:bg-card data-starting-style:opacity-0 data-starting-style:shadow-raised data-starting-style:[clip-path:inset(var(--mt)_var(--mr)_var(--mb)_var(--ml)_round_var(--morph-r0))]",
+            "data-ending-style:bg-card data-ending-style:opacity-0 data-ending-style:shadow-raised data-ending-style:duration-300 data-ending-style:[clip-path:inset(var(--mt)_var(--mr)_var(--mb)_var(--ml)_round_var(--morph-r0))]",
             "motion-reduce:duration-150 motion-reduce:data-starting-style:[clip-path:inset(0_round_var(--radius-2xl))] motion-reduce:data-ending-style:[clip-path:inset(0_round_var(--radius-2xl))]",
             className
           )}
@@ -93,7 +93,7 @@ function MorphPopoverTitle({ className, ...props }: PopoverPrimitive.Title.Props
   return (
     <PopoverPrimitive.Title
       data-slot="morph-popover-title"
-      className={cn("text-[0.95rem] leading-snug font-semibold tracking-tight", className)}
+      className={cn("text-ui-lg leading-snug font-semibold", className)}
       {...props}
     />
   )
@@ -103,7 +103,7 @@ function MorphPopoverDescription({ className, ...props }: PopoverPrimitive.Descr
   return (
     <PopoverPrimitive.Description
       data-slot="morph-popover-description"
-      className={cn("text-sm leading-relaxed text-muted-foreground", className)}
+      className={cn("text-ui leading-relaxed text-muted-foreground", className)}
       {...props}
     />
   )
@@ -125,7 +125,7 @@ function MorphPopoverCloseButton({ className, ...props }: PopoverPrimitive.Close
       data-slot="morph-popover-close-button"
       aria-label="Close"
       className={cn(
-        "absolute top-3 right-3 inline-flex size-7 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring",
+        "absolute top-3 right-3 inline-flex size-7 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       )}
       {...props}

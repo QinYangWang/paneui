@@ -30,10 +30,10 @@ function ChatBubble({
       transition={{ type: "spring", stiffness: 420, damping: 32 }}
       style={{ transformOrigin: isUser ? "bottom right" : "bottom left" }}
       className={cn(
-        "max-w-[80%] rounded-[1.25rem] px-4 py-2.5 text-[0.95rem] leading-relaxed",
+        "max-w-[80%] rounded-[1.25rem] px-4 py-2.5 text-ui-lg leading-relaxed",
         isUser
           ? "self-end rounded-br-md bg-primary text-primary-foreground shadow-primary"
-          : "self-start rounded-bl-md bg-secondary text-secondary-foreground shadow-raised",
+          : "self-start rounded-bl-md bg-card text-secondary-foreground shadow-raised",
         className
       )}
     >
@@ -48,7 +48,7 @@ function ChatTyping({ className }: { className?: string }) {
     <div
       data-slot="chat-typing"
       aria-label="Typing"
-      className={cn("flex h-10 w-16 items-center justify-center gap-1 self-start rounded-[1.25rem] rounded-bl-md bg-secondary shadow-raised", className)}
+      className={cn("flex h-10 w-16 items-center justify-center gap-1 self-start rounded-[1.25rem] rounded-bl-md bg-card shadow-raised", className)}
     >
       {[0, 1, 2].map((i) => (
         <motion.span

@@ -33,7 +33,7 @@ export function TemplatePreview({ name, path = `/templates/${name}/`, height = 4
         ref={ref}
         // Frame height is a prop and the scale is measured, so both are runtime values.
         style={{ "--frame-h": `${height}px` } as React.CSSProperties}
-        className="relative h-(--frame-h) w-full overflow-hidden rounded-2xl bg-background shadow-surface"
+        className="relative h-(--frame-h) w-full overflow-hidden rounded-xl bg-background shadow-raised"
       >
         {scale > 0 && (
           <iframe

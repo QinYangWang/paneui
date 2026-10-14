@@ -269,7 +269,7 @@ function DateRangePickerTrigger({
       data-slot="date-range-picker-trigger"
       data-placeholder={!text || undefined}
       className={cn(
-        "inline-flex h-9 min-w-56 cursor-pointer items-center gap-2 rounded-lg bg-secondary px-3 text-sm text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50 data-popup-open:bg-accent",
+        "inline-flex h-8 min-w-56 cursor-pointer items-center gap-2 rounded-lg bg-card px-2.5 text-ui text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 data-popup-open:bg-accent",
         className
       )}
       {...props}
@@ -298,7 +298,7 @@ function DateRangePickerContent({ className, align = "start", ...props }: React.
 /* ─────────────────────────── calendar ─────────────────────────── */
 
 const navButton =
-  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-35"
+  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-35"
 
 /** Header (month names + prev/next) and one grid per visible month. */
 function DateRangePickerCalendar({ className, ...props }: React.ComponentProps<"div">) {
@@ -343,7 +343,7 @@ function DateRangePickerCalendar({ className, ...props }: React.ComponentProps<"
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: reduce ? 0 : direction * -8 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                className="flex h-8 items-center justify-center text-sm font-semibold tracking-tight"
+                className="flex h-8 items-center justify-center text-ui font-semibold"
               >
                 {titleFmt.format(m)}
               </motion.div>
@@ -436,7 +436,7 @@ function DateRangePickerGrid({
       ref={ref}
       role="grid"
       data-slot="date-range-picker-grid"
-      className={cn("flex flex-col gap-0.5 text-sm", className)}
+      className={cn("flex flex-col gap-0.5 text-ui", className)}
       onPointerLeave={() => setHovered(undefined)}
       {...props}
     >
@@ -446,7 +446,7 @@ function DateRangePickerGrid({
             key={d.getDay()}
             role="columnheader"
             aria-label={weekdayFmt.format(d)}
-            className="flex h-7 items-center justify-center text-xs font-medium text-muted-foreground"
+            className="flex h-7 items-center justify-center text-ui-sm font-medium text-muted-foreground"
           >
             {weekdayNarrow.format(d)}
           </div>
@@ -518,7 +518,7 @@ function DateRangePickerGrid({
                       onKeyDown={(e) => onKeyDown(e, d)}
                       className={cn(
                         "relative z-10 inline-flex size-9 cursor-pointer items-center justify-center rounded-full tabular-nums outline-none transition-[background-color,color,box-shadow,scale] duration-150",
-                        "hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring active:scale-95",
+                        "hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50",
                         "data-outside:text-muted-foreground/60 data-in-range:hover:bg-primary/12",
                         "data-preview-end:shadow-[inset_0_0_0_1.5px_var(--primary)] data-preview-end:hover:bg-primary/12",
                         "data-selected:bg-primary data-selected:font-semibold data-selected:text-primary-foreground data-selected:shadow-primary data-selected:hover:bg-primary",
@@ -571,7 +571,7 @@ function DateRangePickerSummary({
     <p
       aria-live="polite"
       data-slot="date-range-picker-summary"
-      className={cn("text-sm text-muted-foreground tabular-nums", range.to && "text-foreground", className)}
+      className={cn("text-ui text-muted-foreground tabular-nums", range.to && "text-foreground", className)}
       {...props}
     >
       {text}
@@ -601,7 +601,7 @@ function DateRangePickerClear({ className, children = "Clear", onClick, ...props
         if (!e.defaultPrevented) clear()
       }}
       className={cn(
-        "inline-flex h-8 cursor-pointer items-center rounded-lg px-3 text-[0.8rem] font-medium text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40",
+        "inline-flex h-8 cursor-pointer items-center rounded-lg px-3 text-ui-sm font-medium text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40",
         className
       )}
       {...props}
@@ -651,7 +651,7 @@ function DateRangePickerPreset({
         }
       }}
       className={cn(
-        "inline-flex h-8 cursor-pointer items-center rounded-lg px-3 text-left text-[0.8rem] font-medium whitespace-nowrap text-muted-foreground transition-[background-color,color,box-shadow] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring",
+        "inline-flex h-8 cursor-pointer items-center rounded-lg px-3 text-left text-ui-sm font-medium whitespace-nowrap text-muted-foreground transition-[background-color,color,box-shadow] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         "aria-pressed:bg-card aria-pressed:text-foreground aria-pressed:shadow-raised",
         className
       )}

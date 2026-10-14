@@ -13,11 +13,11 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        "peer group/checkbox relative inline-flex size-[18px] shrink-0 cursor-pointer items-center justify-center rounded-[6px] bg-muted text-primary-foreground shadow-well outline-none",
-        "transition-[background-color,box-shadow,scale] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] active:scale-[0.86] motion-reduce:transition-none motion-reduce:active:scale-100",
-        "focus-visible:ring-3 focus-visible:ring-ring",
+        "peer group/checkbox relative inline-flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-[4px] bg-background text-primary-foreground shadow-well outline-none dark:bg-input/32",
+        "transition-[background-color,box-shadow] duration-150 ease-out motion-reduce:transition-none",
+        "focus-visible:ring-2 focus-visible:ring-ring/50",
         "data-checked:bg-primary data-checked:shadow-primary data-indeterminate:bg-primary data-indeterminate:shadow-primary",
-        "data-invalid:shadow-[inset_0_0_0_1px_var(--destructive)] data-disabled:cursor-not-allowed data-disabled:opacity-50",
+        "data-invalid:shadow-[inset_0_0_0_1px_var(--destructive)] data-disabled:cursor-not-allowed data-disabled:opacity-64",
         className
       )}
       {...props}
@@ -27,7 +27,7 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         data-slot="checkbox-indicator"
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
       >
-        <svg viewBox="0 0 18 18" fill="none" aria-hidden className="size-[18px]">
+        <svg viewBox="0 0 18 18" fill="none" aria-hidden className="size-4">
           {/* Same path and round caps/joins as CheckIcon; heavier stroke for the filled box. Dash offset 1 → 0 draws it on; retracts quickly on uncheck. */}
           <path
             d="M4.4 9.6l3 3 6.2-6.4"

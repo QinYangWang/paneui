@@ -166,7 +166,7 @@ function TodoList({
     >
       <CollapsiblePrimitive.Trigger
         data-slot="todo-list-trigger"
-        className="group/todo flex w-full cursor-pointer items-center gap-2.5 rounded-2xl px-3.5 py-2.5 text-left outline-none select-none focus-visible:ring-3 focus-visible:ring-ring"
+        className="group/todo flex w-full cursor-pointer items-center gap-2.5 rounded-2xl px-3.5 py-2.5 text-left outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50"
       >
         <span className="relative grid size-5 shrink-0 place-items-center">
           <AnimatePresence initial={false} mode="popLayout">
@@ -196,12 +196,12 @@ function TodoList({
           </AnimatePresence>
         </span>
         <span className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate text-sm font-medium">{title}</span>
+          <span className="truncate text-ui font-medium">{title}</span>
           <AnimatePresence initial={false}>
             {!open && current && (
               <motion.span
                 key="current"
-                className="truncate text-xs text-muted-foreground"
+                className="truncate text-ui-sm text-muted-foreground"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
@@ -213,7 +213,7 @@ function TodoList({
           </AnimatePresence>
         </span>
         {failed > 0 && (
-          <span className="rounded-full bg-destructive/12 px-1.5 py-0.5 text-[0.7rem] font-medium text-destructive tabular-nums">
+          <span className="rounded-full bg-destructive/12 px-1.5 py-0.5 text-ui-xs font-medium text-destructive tabular-nums">
             {failed} failed
           </span>
         )}
@@ -222,7 +222,7 @@ function TodoList({
         </span>
         <span
           aria-hidden
-          className="flex items-center rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground shadow-well tabular-nums"
+          className="flex items-center rounded-full bg-muted px-2 py-0.5 text-ui-sm font-medium text-muted-foreground shadow-well tabular-nums"
         >
           <DigitSwap value={done} direction="auto" />
           <span className="opacity-60">/{total}</span>
@@ -264,7 +264,7 @@ function TodoList({
                   <span className="flex min-w-0 flex-1 flex-col">
                     <span
                       className={cn(
-                        "text-sm leading-5 transition-colors duration-300",
+                        "text-ui leading-5 transition-colors duration-300",
                         status === "pending" && "text-muted-foreground",
                         status === "in-progress" && "font-medium text-foreground",
                         status === "done" && "text-muted-foreground line-through decoration-muted-foreground/40",
@@ -274,12 +274,12 @@ function TodoList({
                       {item.title}
                       <span className="sr-only">, {STATUS_LABEL[status]}</span>
                     </span>
-                    {item.detail != null && <span className="text-xs text-muted-foreground">{item.detail}</span>}
+                    {item.detail != null && <span className="text-ui-sm text-muted-foreground">{item.detail}</span>}
                   </span>
                   {item.meta != null && (
                     <span
                       className={cn(
-                        "shrink-0 pt-0.5 text-xs text-muted-foreground tabular-nums",
+                        "shrink-0 pt-0.5 text-ui-sm text-muted-foreground tabular-nums",
                         status === "failed" && "text-destructive"
                       )}
                     >

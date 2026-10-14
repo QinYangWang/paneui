@@ -67,7 +67,7 @@ function OTPInput({
   return (
     <div data-slot="otp-input" className={cn("inline-flex flex-col gap-2.5", className)}>
       {label ? (
-        <span id={labelId} className="text-sm font-medium text-foreground">
+        <span id={labelId} className="text-ui font-medium text-foreground">
           {label}
         </span>
       ) : null}
@@ -184,7 +184,7 @@ function OTPInput({
         <p
           aria-live="polite"
           className={cn(
-            "text-sm",
+            "text-ui",
             status === "error" ? "text-destructive" : status === "success" ? "text-success" : "text-muted-foreground"
           )}
         >

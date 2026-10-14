@@ -138,7 +138,7 @@ function AsyncTable<T>({ loadPage, resetKey, endMessage, onStatusChange, ref, ..
   if (status === "loading" && rows.length > 0) footer = <TableLoadingFooter />
   else if (status === "error") {
     footer = (
-      <div role="alert" className="flex h-full items-center justify-center gap-3 text-sm text-muted-foreground">
+      <div role="alert" className="flex h-full items-center justify-center gap-3 text-ui text-muted-foreground">
         Couldn&apos;t load more rows.
         <Button size="xs" variant="secondary" onClick={rows.length ? retry : reload}>
           <RefreshIcon />
@@ -153,7 +153,7 @@ function AsyncTable<T>({ loadPage, resetKey, endMessage, onStatusChange, ref, ..
       ) : endMessage !== undefined ? (
         endMessage
       ) : (
-        <div className="flex h-full items-center justify-center gap-1.5 text-xs text-muted-foreground">
+        <div className="flex h-full items-center justify-center gap-1.5 text-ui-sm text-muted-foreground">
           <CheckCircleIcon className="size-3.5 text-success" />
           All {rows.length.toLocaleString("en-US")} rows loaded
         </div>

@@ -35,7 +35,7 @@ export default {
     {
       id: "sizes",
       title: "Sizes",
-      description: "`SelectTrigger` comes in `sm` (32px) and `default` (36px).",
+      description: "`SelectTrigger` comes in `sm` (28px) and `default` (32px).",
     },
     {
       id: "with-icons",
@@ -88,7 +88,7 @@ export default {
       extends: "Base UI Select.Trigger",
       extendsHref: "https://base-ui.com/react/components/select#trigger",
       props: [
-        { name: "size", type: `"default" | "sm"`, default: `"default"`, description: "Height: 36px or 32px." },
+        { name: "size", type: `"default" | "sm"`, default: `"default"`, description: "Height: 32px or 28px." },
       ],
       dataAttributes: [
         { name: "data-popup-open", description: "Present while the list is open." },

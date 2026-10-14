@@ -203,7 +203,7 @@ function SheetSurface({
     <>
       <DialogPrimitive.Backdrop
         data-slot="bottom-sheet-backdrop"
-        className="fixed inset-0 z-50 bg-black/30 backdrop-blur-[2px]"
+        className="fixed inset-0 z-50 bg-black/30"
         render={
           reduce ? (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={FADE} />
@@ -287,7 +287,7 @@ function BottomSheetBody({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="bottom-sheet-body"
-      className={cn("min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pb-6 text-sm", className)}
+      className={cn("min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pb-6 text-ui", className)}
       {...props}
     />
   )
@@ -307,7 +307,7 @@ function BottomSheetTitle({ className, ...props }: DialogPrimitive.Title.Props) 
   return (
     <DialogPrimitive.Title
       data-slot="bottom-sheet-title"
-      className={cn("text-lg leading-snug font-semibold tracking-tight", className)}
+      className={cn("text-lg leading-snug font-semibold", className)}
       {...props}
     />
   )
@@ -317,7 +317,7 @@ function BottomSheetDescription({ className, ...props }: DialogPrimitive.Descrip
   return (
     <DialogPrimitive.Description
       data-slot="bottom-sheet-description"
-      className={cn("text-sm leading-relaxed text-muted-foreground", className)}
+      className={cn("text-ui leading-relaxed text-muted-foreground", className)}
       {...props}
     />
   )

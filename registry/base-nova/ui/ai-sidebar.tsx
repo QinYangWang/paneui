@@ -232,8 +232,8 @@ function ResourceTree({ label, items, query, expanded, onToggle, activeId, onAct
                 onDoubleClick={() => onRename && !item.disabled && setEditingId(item.id)}
                 style={{ paddingLeft: 6 + depth * 14 }}
                 className={cn(
-                  "group/item relative mx-1 my-px flex h-8 cursor-pointer items-center gap-1.5 rounded-xl pr-2 text-sm outline-none select-none",
-                  "transition-[background-color,box-shadow,color] duration-150 focus-visible:ring-3 focus-visible:ring-ring",
+                  "group/item relative mx-1 my-px flex h-8 cursor-pointer items-center gap-1.5 rounded-xl pr-2 text-ui outline-none select-none",
+                  "transition-[background-color,box-shadow,color] duration-150 focus-visible:ring-2 focus-visible:ring-ring/50",
                   active
                     ? "bg-card font-medium text-foreground shadow-raised"
                     : "text-foreground/85 hover:bg-muted",
@@ -267,7 +267,7 @@ function ResourceTree({ label, items, query, expanded, onToggle, activeId, onAct
                   </span>
                 )}
                 {item.meta != null && !editing && (
-                  <span className="shrink-0 text-xs text-muted-foreground tabular-nums">{item.meta}</span>
+                  <span className="shrink-0 text-ui-sm text-muted-foreground tabular-nums">{item.meta}</span>
                 )}
                 {onRename && !editing && !item.disabled && (
                   <button
@@ -314,7 +314,7 @@ function RenameField({ initial, onDone }: { initial: string; onDone: (value: str
         if (e.key === "Escape") finish(null)
       }}
       onBlur={() => finish(value.trim())}
-      className="h-6 min-w-0 flex-1 rounded-lg bg-background px-1.5 text-sm shadow-well outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="h-6 min-w-0 flex-1 rounded-lg bg-background px-1.5 text-ui shadow-well outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
     />
   )
 }
@@ -511,7 +511,7 @@ function AISidebar({
       animate={{ width: open ? width : "3.5rem" }}
       transition={reduce ? { duration: 0 } : WIDTH_SPRING}
       className={cn(
-        "relative flex h-full shrink-0 flex-col overflow-hidden bg-secondary/60 text-sm",
+        "relative flex h-full shrink-0 flex-col overflow-hidden bg-card/60 text-ui",
         className
       )}
       onFocusCapture={(e) => {
@@ -526,14 +526,14 @@ function AISidebar({
     >
       {/* Header */}
       <div className={cn("flex h-12 shrink-0 items-center gap-2 px-2.5", !open && "justify-center px-0")}>
-        {open && <div className="min-w-0 flex-1 truncate pl-1 text-[0.95rem] font-semibold">{title}</div>}
+        {open && <div className="min-w-0 flex-1 truncate pl-1 text-ui-lg font-semibold">{title}</div>}
         <RailTip label={open ? "Collapse sidebar" : "Expand sidebar"} enabled>
           <button
             type="button"
             aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
             aria-expanded={open}
             onClick={() => setOpen(!open)}
-            className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
+            className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <SidebarIcon size={17} />
           </button>
@@ -546,7 +546,7 @@ function AISidebar({
       {searchable && (
         <div className={cn("shrink-0 px-2.5 pb-2", !open && "flex justify-center px-0")}>
           {open ? (
-            <label className="flex h-8 items-center gap-2 rounded-xl bg-muted/70 px-2.5 shadow-well focus-within:bg-background focus-within:ring-3 focus-within:ring-ring">
+            <label className="flex h-8 items-center gap-2 rounded-xl bg-muted/70 px-2.5 shadow-well focus-within:ring-2 focus-within:ring-ring/50">
               <SearchIcon size={14} className="shrink-0 text-muted-foreground" />
               <input
                 ref={searchRef}
@@ -558,7 +558,7 @@ function AISidebar({
                 }}
                 placeholder="Search"
                 aria-label="Search workspace"
-                className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden"
+                className="min-w-0 flex-1 bg-transparent text-ui outline-none placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden"
               />
               {query ? (
                 <button
@@ -574,7 +574,7 @@ function AISidebar({
                 </button>
               ) : (
                 searchHotkey && (
-                  <kbd className="rounded-sm bg-background px-1.5 font-mono text-[10px] text-muted-foreground shadow-chip">
+                  <kbd className="rounded-sm bg-background px-1.5 font-mono text-ui-2xs text-muted-foreground shadow-chip">
                     {modKey}
                     {searchHotkey.toUpperCase()}
                   </kbd>
@@ -590,7 +590,7 @@ function AISidebar({
                   setOpen(true)
                   requestAnimationFrame(() => searchRef.current?.focus())
                 }}
-                className="grid size-8 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+                className="grid size-8 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 <SearchIcon size={16} />
               </button>
@@ -639,7 +639,7 @@ function AISidebar({
               </Section>
             )}
             {q && !filtered.length && !filteredBookmarks.length && (
-              <p className="px-4 py-6 text-center text-sm text-muted-foreground">
+              <p className="px-4 py-6 text-center text-ui text-muted-foreground">
                 Nothing matches “{query.trim()}”.
               </p>
             )}
@@ -663,7 +663,7 @@ function AISidebar({
                         } else activate(item)
                       }}
                       className={cn(
-                        "grid size-9 cursor-pointer place-items-center rounded-xl outline-none transition-[background-color,box-shadow] focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-50",
+                        "grid size-8 cursor-pointer place-items-center rounded-lg outline-none transition-[background-color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring/50 disabled:opacity-50",
                         active ? "bg-card shadow-raised" : "hover:bg-muted"
                       )}
                     >
@@ -690,7 +690,7 @@ function hasDescendant(item: SidebarResource, id: string | null): boolean {
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div data-slot="ai-sidebar-section" className="flex flex-col">
-      <div className="px-3.5 pb-1 text-[0.7rem] font-semibold tracking-wide text-muted-foreground uppercase">{label}</div>
+      <div className="px-3.5 pb-1 text-ui-xs font-semibold tracking-wide text-muted-foreground uppercase">{label}</div>
       {children}
     </div>
   )

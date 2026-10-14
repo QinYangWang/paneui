@@ -180,11 +180,11 @@ export function NotificationStack({
           aria-expanded={expanded}
           aria-controls={listId}
           onClick={() => setExpanded(!expanded)}
-          className="-ml-1 inline-flex h-8 items-center gap-2 rounded-lg px-2 text-sm font-medium transition-colors outline-none hover:bg-accent focus-visible:ring-3 focus-visible:ring-ring"
+          className="-ml-1 inline-flex h-8 items-center gap-2 rounded-lg px-2 text-ui font-medium transition-colors outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           <BellIcon size={16} className="text-muted-foreground" />
           {label}
-          <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[0.7rem] font-semibold text-primary-foreground tabular-nums shadow-primary">
+          <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-ui-xs font-semibold text-primary-foreground tabular-nums shadow-primary">
             {items.length}
           </span>
           <ChevronDownIcon
@@ -204,7 +204,7 @@ export function NotificationStack({
               animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, x: 6, filter: "blur(3px)" }}
               transition={{ duration: 0.18 }}
-              className="inline-flex h-7 items-center gap-1 rounded-md px-2.5 text-xs font-medium text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+              className="inline-flex h-7 items-center gap-1 rounded-md px-2.5 text-ui-sm font-medium text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               View all
               <ArrowUpRightIcon size={13} />
@@ -214,7 +214,7 @@ export function NotificationStack({
       </div>
 
       {items.length === 0 ? (
-        <div className="flex h-16 items-center justify-center rounded-2xl bg-muted/60 text-sm text-muted-foreground shadow-well">
+        <div className="flex h-16 items-center justify-center rounded-2xl bg-background dark:bg-input/32 text-ui text-muted-foreground shadow-well">
           {emptyLabel}
         </div>
       ) : (
@@ -245,7 +245,7 @@ export function NotificationStack({
                   style={{ zIndex: visible.length - i, transformOrigin: "50% 100%" }}
                   className={cn(
                     "absolute inset-x-0 top-0 overflow-hidden rounded-2xl bg-card text-card-foreground shadow-raised",
-                    behind && "bg-secondary"
+                    behind && "bg-card"
                   )}
                 >
                   <motion.div
@@ -260,13 +260,13 @@ export function NotificationStack({
                     )}
                     <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                       <span className="flex items-baseline justify-between gap-3">
-                        <span className="truncate text-sm leading-snug font-medium">{item.title}</span>
+                        <span className="truncate text-ui leading-snug font-medium">{item.title}</span>
                         {item.time && (
-                          <span className="shrink-0 text-xs text-muted-foreground tabular-nums">{item.time}</span>
+                          <span className="shrink-0 text-ui-sm text-muted-foreground tabular-nums">{item.time}</span>
                         )}
                       </span>
                       {item.description && (
-                        <span className="line-clamp-2 text-[0.8rem] leading-relaxed text-muted-foreground">
+                        <span className="line-clamp-2 text-ui-sm leading-relaxed text-muted-foreground">
                           {item.description}
                         </span>
                       )}
@@ -276,7 +276,7 @@ export function NotificationStack({
                         type="button"
                         aria-label="Dismiss notification"
                         onClick={() => onDismiss(item.id)}
-                        className="-mt-0.5 -mr-1 inline-flex size-6 shrink-0 items-center justify-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+                        className="-mt-0.5 -mr-1 inline-flex size-6 shrink-0 items-center justify-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                       >
                         <XIcon size={13} />
                       </button>
@@ -302,7 +302,7 @@ export function NotificationStack({
               type="button"
               onClick={onViewAll}
               disabled={!onViewAll}
-              className="mt-2 flex h-9 w-full items-center justify-center rounded-xl text-xs font-medium text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring disabled:pointer-events-none"
+              className="mt-2 flex h-8 w-full items-center justify-center rounded-lg text-ui-sm font-medium text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none"
             >
               +{overflow} more
             </button>

@@ -7,12 +7,27 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "Theme",
-      "description": "Flat OKLCH tokens: neutral grays, a neutral black/white primary (accent presets: theme-blue, theme-green, theme-orange, theme-rose, theme-violet), a five-hue chart palette (chart-1..5), radius and hairline elevation shadows (raised, pressed, primary, well, surface, chip) for light and dark, plus code surface and scrollbar tokens with thin rounded scrollbars and scrollbar-thin/-hover/-none utilities, plus reading tokens (max-w-reading 68ch, max-w-page, image outline) and a prose-qy long-form typography utility.",
+      "description": "Native desktop tokens after Synara/Codex: system UI font (-apple-system/Segoe UI) on a 13px type scale (text-ui-2xs/xs/sm/ui/lg = 10/11/12/13/14px), translucent black/white fills for secondary/muted/accent, 5-6% hairline borders, a neutral black/white primary (accent presets: theme-blue, theme-green, theme-orange, theme-rose, theme-violet), a five-hue chart palette (chart-1..5), a 0.625rem radius with multiplier steps (sm .6x, md .8x, xl 1.4x, 2xl 1.8x, shell 1.3x), near-flat elevation shadows (raised, pressed, primary, well, surface, chip), shell/shell-border app-chrome tokens and a shell-inset utility for the rail layout, code surface and scrollbar tokens with thin rounded scrollbars and scrollbar-thin/-hover/-none utilities, reading tokens (max-w-reading 68ch, max-w-page, image outline) and a prose-qy long-form typography utility. Installs @qinyang/utils (cn that knows the text-ui sizes).",
       "cssVars": {
         "theme": {
+          "color-code": "var(--code)",
+          "font-sans": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif",
+          "font-mono": "var(--font-jetbrains-mono, \"JetBrains Mono\"), \"JetBrains Mono\", \"SF Mono\", \"SFMono-Regular\", Menlo, Consolas, \"Liberation Mono\", monospace",
           "color-success": "var(--success)",
           "color-warning": "var(--warning)",
-          "radius-2xl": "calc(var(--radius) + 8px)",
+          "color-chart-1": "var(--chart-1)",
+          "color-chart-2": "var(--chart-2)",
+          "color-chart-3": "var(--chart-3)",
+          "color-chart-4": "var(--chart-4)",
+          "color-chart-5": "var(--chart-5)",
+          "color-shell": "var(--shell)",
+          "color-shell-border": "var(--shell-border)",
+          "radius-sm": "calc(var(--radius) * 0.6)",
+          "radius-md": "calc(var(--radius) * 0.8)",
+          "radius-xl": "calc(var(--radius) * 1.4)",
+          "radius-2xl": "calc(var(--radius) * 1.8)",
+          "radius-3xl": "calc(var(--radius) * 2.2)",
+          "radius-shell": "calc(var(--radius) * 1.3)",
           "shadow-raised": "var(--skeuo-raised)",
           "shadow-raised-hover": "var(--skeuo-raised-hover)",
           "shadow-pressed": "var(--skeuo-pressed)",
@@ -20,38 +35,42 @@
           "shadow-well": "var(--skeuo-well)",
           "shadow-surface": "var(--skeuo-surface)",
           "shadow-chip": "var(--skeuo-chip)",
-          "color-code": "var(--code)",
+          "text-ui-2xs": "0.625rem",
+          "text-ui-2xs--line-height": "0.875rem",
+          "text-ui-xs": "0.6875rem",
+          "text-ui-xs--line-height": "0.875rem",
+          "text-ui-sm": "0.75rem",
+          "text-ui-sm--line-height": "1rem",
+          "text-ui": "0.8125rem",
+          "text-ui--line-height": "1.125rem",
+          "text-ui-lg": "0.875rem",
+          "text-ui-lg--line-height": "1.25rem",
           "container-reading": "68ch",
           "container-page": "76rem",
-          "radius": "0.5rem",
-          "color-chart-1": "var(--chart-1)",
-          "color-chart-2": "var(--chart-2)",
-          "color-chart-3": "var(--chart-3)",
-          "color-chart-4": "var(--chart-4)",
-          "color-chart-5": "var(--chart-5)"
+          "radius": "0.625rem"
         },
         "light": {
-          "radius": "0.5rem",
-          "background": "oklch(0.991 0 0)",
-          "foreground": "oklch(0.2435 0 0)",
+          "radius": "0.625rem",
+          "background": "oklch(0.9911 0 0)",
+          "foreground": "oklch(0.269 0 0)",
           "card": "oklch(1 0 0)",
-          "card-foreground": "oklch(0.2435 0 0)",
+          "card-foreground": "oklch(0.269 0 0)",
           "popover": "oklch(1 0 0)",
-          "popover-foreground": "oklch(0.2435 0 0)",
+          "popover-foreground": "oklch(0.269 0 0)",
           "primary": "oklch(0.205 0 0)",
-          "primary-foreground": "oklch(0.985 0 0)",
-          "secondary": "oklch(1 0 0)",
-          "secondary-foreground": "oklch(0.2435 0 0)",
-          "muted": "oklch(0.9731 0 0)",
-          "muted-foreground": "oklch(0.5417 0 0)",
-          "accent": "oklch(0.9551 0 0)",
-          "accent-foreground": "oklch(0.2435 0 0)",
+          "primary-foreground": "oklch(1 0 0)",
+          "secondary": "oklch(0 0 0 / 3%)",
+          "secondary-foreground": "oklch(0.269 0 0)",
+          "muted": "oklch(0 0 0 / 4%)",
+          "muted-foreground": "oklch(0.5155 0 0)",
+          "accent": "oklch(0 0 0 / 4%)",
+          "accent-foreground": "oklch(0.269 0 0)",
           "destructive": "oklch(0.58 0.2 27)",
           "success": "oklch(0.6 0.14 152)",
           "warning": "oklch(0.74 0.14 72)",
-          "border": "oklch(0 0 0 / 8%)",
-          "input": "oklch(0 0 0 / 10%)",
-          "ring": "oklch(0.556 0 0 / 40%)",
+          "border": "oklch(0 0 0 / 5%)",
+          "input": "oklch(0 0 0 / 6%)",
+          "ring": "oklch(0.708 0 0)",
           "chart-1": "oklch(0.57 0.15 258)",
           "chart-2": "oklch(0.6 0.14 152)",
           "chart-3": "oklch(0.74 0.14 72)",
@@ -60,36 +79,38 @@
           "code": "oklch(0.9731 0 0)",
           "scrollbar": "oklch(0 0 0 / 16%)",
           "scrollbar-hover": "oklch(0 0 0 / 28%)",
-          "skeuo-raised": "0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px -1px oklch(0 0 0 / 6%), 0 2px 4px 0 oklch(0 0 0 / 4%)",
-          "skeuo-raised-hover": "0 0 0 1px oklch(0 0 0 / 8%), 0 1px 2px -1px oklch(0 0 0 / 8%), 0 2px 4px 0 oklch(0 0 0 / 6%)",
+          "shell": "oklch(0.9685 0 0)",
+          "shell-border": "oklch(0 0 0 / 10%)",
+          "skeuo-raised": "0 0 0 1px oklch(0 0 0 / 8%), 0 1px 2px oklch(0 0 0 / 5%)",
+          "skeuo-raised-hover": "0 0 0 1px oklch(0 0 0 / 12%), 0 1px 2px oklch(0 0 0 / 6%)",
           "skeuo-pressed": "0 0 0 1px oklch(0 0 0 / 8%)",
-          "skeuo-primary": "0 0 0 1px color-mix(in oklch, var(--primary), black 10%), 0 1px 2px -1px oklch(0 0 0 / 12%)",
+          "skeuo-primary": "0 1px 2px oklch(0 0 0 / 8%)",
           "skeuo-well": "inset 0 0 0 1px oklch(0 0 0 / 8%)",
-          "skeuo-surface": "0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px -1px oklch(0 0 0 / 6%), 0 8px 24px -12px oklch(0 0 0 / 10%)",
-          "skeuo-chip": "0 0 0 1px oklch(0 0 0 / 6%)",
+          "skeuo-surface": "0 0 0 1px oklch(0 0 0 / 6%), 0 2px 6px -2px oklch(0 0 0 / 6%), 0 12px 28px -8px oklch(0 0 0 / 14%)",
+          "skeuo-chip": "0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px oklch(0 0 0 / 5%)",
           "image-outline": "oklch(0 0 0 / 0.1)"
         },
         "dark": {
-          "background": "oklch(0.173 0 0)",
-          "foreground": "oklch(0.9491 0 0)",
-          "card": "oklch(0.1776 0 0)",
-          "card-foreground": "oklch(0.9491 0 0)",
-          "popover": "oklch(0.2134 0 0)",
-          "popover-foreground": "oklch(0.9491 0 0)",
-          "primary": "oklch(0.922 0 0)",
+          "background": "oklch(0.1638 0 0)",
+          "foreground": "oklch(0.97 0 0)",
+          "card": "oklch(0.1749 0 0)",
+          "card-foreground": "oklch(0.97 0 0)",
+          "popover": "oklch(0.1749 0 0)",
+          "popover-foreground": "oklch(0.97 0 0)",
+          "primary": "oklch(0.97 0 0)",
           "primary-foreground": "oklch(0.205 0 0)",
-          "secondary": "oklch(0.2134 0 0)",
-          "secondary-foreground": "oklch(0.9491 0 0)",
-          "muted": "oklch(0.2134 0 0)",
-          "muted-foreground": "oklch(0.7 0 0)",
-          "accent": "oklch(0.252 0 0)",
-          "accent-foreground": "oklch(0.9491 0 0)",
+          "secondary": "oklch(1 0 0 / 4%)",
+          "secondary-foreground": "oklch(0.97 0 0)",
+          "muted": "oklch(1 0 0 / 4%)",
+          "muted-foreground": "oklch(0.6032 0 0)",
+          "accent": "oklch(1 0 0 / 4%)",
+          "accent-foreground": "oklch(0.97 0 0)",
           "destructive": "oklch(0.64 0.19 25)",
           "success": "oklch(0.7 0.15 152)",
           "warning": "oklch(0.8 0.14 75)",
-          "border": "oklch(1 0 0 / 8%)",
-          "input": "oklch(1 0 0 / 10%)",
-          "ring": "oklch(0.708 0 0 / 40%)",
+          "border": "oklch(1 0 0 / 4%)",
+          "input": "oklch(1 0 0 / 5%)",
+          "ring": "oklch(0.556 0 0)",
           "chart-1": "oklch(0.6 0.145 256)",
           "chart-2": "oklch(0.7 0.15 152)",
           "chart-3": "oklch(0.8 0.14 75)",
@@ -98,13 +119,15 @@
           "code": "oklch(0.1496 0 0)",
           "scrollbar": "oklch(1 0 0 / 14%)",
           "scrollbar-hover": "oklch(1 0 0 / 24%)",
-          "skeuo-raised": "0 0 0 1px oklch(1 0 0 / 8%)",
-          "skeuo-raised-hover": "0 0 0 1px oklch(1 0 0 / 13%)",
+          "shell": "oklch(0.218 0 0)",
+          "shell-border": "oklch(1 0 0 / 9%)",
+          "skeuo-raised": "0 0 0 1px oklch(1 0 0 / 7%)",
+          "skeuo-raised-hover": "0 0 0 1px oklch(1 0 0 / 12%)",
           "skeuo-pressed": "0 0 0 1px oklch(1 0 0 / 6%)",
-          "skeuo-primary": "0 0 0 1px oklch(1 0 0 / 12%)",
-          "skeuo-well": "inset 0 0 0 1px oklch(1 0 0 / 8%)",
-          "skeuo-surface": "0 0 0 1px oklch(1 0 0 / 8%), 0 8px 24px -12px oklch(0 0 0 / 50%)",
-          "skeuo-chip": "0 0 0 1px oklch(1 0 0 / 7%)",
+          "skeuo-primary": "0 0 0 0 transparent",
+          "skeuo-well": "inset 0 0 0 1px oklch(1 0 0 / 7%)",
+          "skeuo-surface": "0 0 0 1px oklch(1 0 0 / 7%), 0 16px 40px -12px oklch(0 0 0 / 60%)",
+          "skeuo-chip": "0 0 0 1px oklch(1 0 0 / 6%)",
           "image-outline": "oklch(1 0 0 / 0.1)"
         }
       },
@@ -132,6 +155,9 @@
               "scrollbar-width": "thin",
               "scrollbar-color": "var(--scrollbar) transparent"
             }
+          },
+          "body": {
+            "letter-spacing": "normal"
           }
         },
         "@utility scrollbar-thin": {
@@ -335,10 +361,40 @@
             "font-size": "0.8em",
             "padding": "0.1em 0.4em"
           }
+        },
+        "@utility shell-inset": {
+          "background-color": "var(--background)",
+          "border": "0.5px solid var(--shell-border)",
+          "border-radius": "calc(var(--radius) * 1.3)",
+          "margin-inline-end": "3px",
+          "margin-bottom": "3px"
         }
       },
       "meta": {
         "category": "Foundations"
+      },
+      "registryDependencies": [
+        "@qinyang/utils"
+      ]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "cn helper",
+      "description": "cn() = clsx + tailwind-merge, extended so the theme's text-ui-2xs … text-ui-lg sizes merge as font sizes (not colours).",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
       }
     },
     {
@@ -353,12 +409,12 @@
         "light": {
           "primary": "oklch(0.57 0.15 258)",
           "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.57 0.15 258 / 45%)"
+          "ring": "oklch(0.57 0.15 258)"
         },
         "dark": {
           "primary": "oklch(0.6 0.145 256)",
           "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.6 0.145 256 / 50%)"
+          "ring": "oklch(0.6 0.145 256)"
         }
       },
       "meta": {
@@ -378,12 +434,12 @@
         "light": {
           "primary": "oklch(0.56 0.13 155)",
           "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.56 0.13 155 / 45%)"
+          "ring": "oklch(0.56 0.13 155)"
         },
         "dark": {
           "primary": "oklch(0.64 0.14 155)",
           "primary-foreground": "oklch(0.2 0.03 155)",
-          "ring": "oklch(0.64 0.14 155 / 50%)"
+          "ring": "oklch(0.64 0.14 155)"
         }
       },
       "meta": {
@@ -403,12 +459,12 @@
         "light": {
           "primary": "oklch(0.62 0.17 45)",
           "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.62 0.17 45 / 45%)"
+          "ring": "oklch(0.62 0.17 45)"
         },
         "dark": {
           "primary": "oklch(0.7 0.16 52)",
           "primary-foreground": "oklch(0.2 0.04 52)",
-          "ring": "oklch(0.7 0.16 52 / 50%)"
+          "ring": "oklch(0.7 0.16 52)"
         }
       },
       "meta": {
@@ -428,12 +484,12 @@
         "light": {
           "primary": "oklch(0.58 0.19 12)",
           "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.58 0.19 12 / 45%)"
+          "ring": "oklch(0.58 0.19 12)"
         },
         "dark": {
           "primary": "oklch(0.65 0.18 12)",
           "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.65 0.18 12 / 50%)"
+          "ring": "oklch(0.65 0.18 12)"
         }
       },
       "meta": {
@@ -453,12 +509,12 @@
         "light": {
           "primary": "oklch(0.55 0.18 290)",
           "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.55 0.18 290 / 45%)"
+          "ring": "oklch(0.55 0.18 290)"
         },
         "dark": {
           "primary": "oklch(0.64 0.16 290)",
           "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.64 0.16 290 / 50%)"
+          "ring": "oklch(0.64 0.16 290)"
         }
       },
       "meta": {
@@ -814,7 +870,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Flat button with primary, secondary, outline, ghost and destructive variants, hairline elevation and a 0.96 press.",
+      "description": "Native desktop button (32px, 13px label) with primary, secondary, outline, ghost, destructive and link variants; flat fills, hover is a fill change.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -930,7 +986,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Inset-well checkbox that fills primary and draws its check on, with an indeterminate dash and a springy press.",
+      "description": "16px inset-well checkbox that fills primary and draws its check on, with an indeterminate dash.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1062,7 +1118,7 @@
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
-      "description": "Side panel that springs in from the left or right over a blurred backdrop, with header, body and footer parts.",
+      "description": "Side panel that springs in from the left or right over a dimmed backdrop, with header, body and footer parts.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2709,7 +2765,7 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "Toggle with a springy thumb in a flat track.",
+      "description": "Compact 32×20 toggle with a sliding thumb on a translucent track.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -2751,7 +2807,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Modal with soft scale-in, blurred backdrop and close button.",
+      "description": "Modal with a soft scale-in, dimmed backdrop and close button.",
       "dependencies": [
         "@base-ui/react"
       ],

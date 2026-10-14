@@ -19,7 +19,7 @@ const confidenceLabel: Record<Confidence, string> = {
 function ConfidenceMeter({ value }: { value: Confidence }) {
   const level = confidenceLevel[value]
   return (
-    <div data-slot="confidence-meter" className="flex items-center gap-2.5 text-[0.95rem] text-muted-foreground">
+    <div data-slot="confidence-meter" className="flex items-center gap-2.5 text-ui-lg text-muted-foreground">
       <span className="flex items-center gap-0.75" aria-hidden>
         {[1, 2, 3].map((i) => (
           <span

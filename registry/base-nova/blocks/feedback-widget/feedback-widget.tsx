@@ -180,7 +180,7 @@ export function FeedbackWidget({
                   aria-haspopup="dialog"
                   aria-expanded={false}
                   onClick={() => setStatus("open")}
-                  className="inline-flex h-10 items-center gap-2 rounded-[20px] px-4 text-sm font-medium whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset [&_svg]:size-4"
+                  className="inline-flex h-10 items-center gap-2 rounded-[20px] px-4 text-ui font-medium whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset [&_svg]:size-4"
                 >
                   <ChatIcon />
                   {label}
@@ -199,7 +199,7 @@ export function FeedbackWidget({
                   }}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span id={titleId} className="text-[0.95rem] font-semibold tracking-tight">
+                    <span id={titleId} className="text-ui-lg font-semibold">
                       {title}
                     </span>
                     <button
@@ -207,7 +207,7 @@ export function FeedbackWidget({
                       aria-label="Close feedback"
                       disabled={busy}
                       onClick={() => close()}
-                      className="-mr-1.5 inline-flex size-7 items-center justify-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-40"
+                      className="-mr-1.5 inline-flex size-7 items-center justify-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:opacity-40"
                     >
                       <XIcon size={14} />
                     </button>
@@ -229,7 +229,7 @@ export function FeedbackWidget({
                       }
                     }}
                     rows={3}
-                    className="min-h-24 w-full resize-none rounded-xl bg-muted/60 px-3 py-2.5 text-sm shadow-well outline-none placeholder:text-muted-foreground focus-visible:bg-background focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-60"
+                    className="min-h-24 w-full resize-none rounded-xl bg-background dark:bg-input/32 px-3 py-2.5 text-ui shadow-well outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:opacity-60"
                   />
                   <div className="flex items-center justify-between gap-3">
                     <RadioGroup
@@ -245,7 +245,7 @@ export function FeedbackWidget({
                           value={m.value}
                           aria-label={m.label}
                           title={m.label}
-                          className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-base outline-none grayscale-[0.7] transition-[transform,filter,box-shadow,background-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-110 hover:grayscale-0 focus-visible:ring-3 focus-visible:ring-ring data-checked:scale-110 data-checked:bg-card data-checked:shadow-raised data-checked:grayscale-0 data-disabled:pointer-events-none"
+                          className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-base outline-none grayscale-[0.7] transition-[transform,filter,box-shadow,background-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-110 hover:grayscale-0 focus-visible:ring-2 focus-visible:ring-ring/50 data-checked:scale-110 data-checked:bg-card data-checked:shadow-raised data-checked:grayscale-0 data-disabled:pointer-events-none"
                         >
                           <span aria-hidden>{m.emoji}</span>
                         </Radio.Root>
@@ -269,7 +269,7 @@ export function FeedbackWidget({
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="-mt-1 overflow-hidden text-xs text-destructive"
+                        className="-mt-1 overflow-hidden text-ui-sm text-destructive"
                       >
                         Couldn&apos;t send that. Check your connection and retry.
                       </motion.p>
@@ -301,8 +301,8 @@ export function FeedbackWidget({
                       <CheckIcon size={22} />
                     </motion.span>
                   </span>
-                  <span className="text-sm font-semibold">{successTitle}</span>
-                  <span className="text-xs text-muted-foreground">{successDescription}</span>
+                  <span className="text-ui font-semibold">{successTitle}</span>
+                  <span className="text-ui-sm text-muted-foreground">{successDescription}</span>
                 </div>
               )}
             </motion.div>

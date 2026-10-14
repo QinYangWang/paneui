@@ -124,7 +124,7 @@ function RangeSliderInline({
         data-slot="range-slider-inline-control"
         className={cn(
           "relative flex h-11 w-full cursor-pointer items-center rounded-2xl bg-muted px-4 shadow-well outline-none",
-          "has-focus-visible:ring-3 has-focus-visible:ring-ring data-disabled:cursor-not-allowed"
+          "has-focus-visible:ring-2 has-focus-visible:ring-ring/50 data-disabled:cursor-not-allowed"
         )}
       >
         {/* Inner box: fill, stops and text all live in the same 4px-inset frame. */}
@@ -156,7 +156,7 @@ function RangeSliderInline({
                 )
               })
             : null}
-          <div className="absolute inset-0 flex items-center justify-between px-3 text-sm font-medium">
+          <div className="absolute inset-0 flex items-center justify-between px-3 text-ui font-medium">
             <span ref={labelRef} className="truncate text-foreground">
               {label}
             </span>

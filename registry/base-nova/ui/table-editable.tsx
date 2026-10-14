@@ -293,7 +293,7 @@ function EditableTable({
             }
           }}
           className={cn(
-            "absolute inset-1 min-w-0 rounded-lg bg-background px-2 text-sm text-foreground shadow-well ring-2 ring-primary/45 outline-none",
+            "absolute inset-1 min-w-0 rounded-lg bg-background px-2 text-ui text-foreground shadow-well ring-2 ring-primary/45 outline-none",
             alignRight && "text-right tabular-nums"
           )}
         />
@@ -360,7 +360,7 @@ function EditableTable({
             if (e.key === "Enter") commitRename()
             if (e.key === "Escape") setRenaming(null)
           }}
-          className="mx-1 h-7 min-w-0 flex-1 rounded-lg bg-background px-2 text-xs font-medium text-foreground shadow-well ring-2 ring-primary/45 outline-none"
+          className="mx-1 h-7 min-w-0 flex-1 rounded-lg bg-background px-2 text-ui-sm font-medium text-foreground shadow-well ring-2 ring-primary/45 outline-none"
         />
       )
     }
@@ -398,8 +398,8 @@ function EditableTable({
             aria-label={`${ctx.column.header} column options`}
             className={cn(
               "absolute right-2 flex size-6 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none",
-              "opacity-0 transition-[opacity,background-color,box-shadow] duration-150 group-hover/header:opacity-100 hover:bg-secondary hover:shadow-raised",
-              "focus-visible:opacity-100 focus-visible:ring-3 focus-visible:ring-ring data-popup-open:bg-secondary data-popup-open:opacity-100 data-popup-open:shadow-raised"
+              "opacity-0 transition-[opacity,background-color,box-shadow] duration-150 group-hover/header:opacity-100 hover:bg-secondary",
+              "focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary data-popup-open:opacity-100"
             )}
           >
             <ChevronDownIcon className="size-3.5" />
@@ -445,8 +445,8 @@ function EditableTable({
                 aria-label={`Row ${dataIndex + 1} options`}
                 className={cn(
                   "flex h-6 w-4 cursor-pointer items-center justify-center rounded-md text-muted-foreground outline-none",
-                  "opacity-0 transition-[opacity,background-color,box-shadow] duration-150 group-hover/row:opacity-100 hover:bg-secondary hover:shadow-raised",
-                  "focus-visible:opacity-100 focus-visible:ring-3 focus-visible:ring-ring data-popup-open:bg-secondary data-popup-open:opacity-100 data-popup-open:shadow-raised"
+                  "opacity-0 transition-[opacity,background-color,box-shadow] duration-150 group-hover/row:opacity-100 hover:bg-secondary",
+                  "focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary data-popup-open:opacity-100"
                 )}
               >
                 <GripVerticalIcon className="size-3.5" />
@@ -502,7 +502,7 @@ function EditableTable({
           <button
             type="button"
             onClick={() => insertRow(0)}
-            className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-secondary px-2.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
+            className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-card px-2.5 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <PlusIcon className="size-3.5" />
             Add the first row
@@ -514,7 +514,7 @@ function EditableTable({
           <button
             type="button"
             onClick={() => insertRow(rows.length)}
-            className="flex h-full w-full cursor-pointer items-center gap-2 px-3 text-sm text-muted-foreground outline-none transition-colors duration-150 hover:bg-muted/45 hover:text-foreground focus-visible:bg-muted/45 focus-visible:text-foreground"
+            className="flex h-full w-full cursor-pointer items-center gap-2 px-3 text-ui text-muted-foreground outline-none transition-colors duration-150 hover:bg-muted/45 hover:text-foreground focus-visible:bg-muted/45 focus-visible:text-foreground"
           >
             <PlusIcon className="size-4" />
             New row
@@ -538,7 +538,7 @@ function InsertPill({
       aria-label={label}
       className={cn(
         "absolute z-30 flex size-4 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground shadow-primary outline-none",
-        "scale-50 opacity-0 transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-125 focus-visible:scale-100 focus-visible:opacity-100 focus-visible:ring-3 focus-visible:ring-ring motion-reduce:transition-none",
+        "scale-50 opacity-0 transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-125 focus-visible:scale-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50 motion-reduce:transition-none",
         className
       )}
       {...props}

@@ -36,7 +36,7 @@ export interface CardFolderProps {
 
 const SPRING = { type: "spring", stiffness: 340, damping: 26, mass: 0.9 } as const
 const iconButton =
-  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50"
+  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 active:scale-96 disabled:pointer-events-none disabled:opacity-50"
 
 function useControllable<T>(value: T | undefined, defaultValue: T, onChange?: (v: T) => void) {
   const [internal, setInternal] = React.useState(defaultValue)
@@ -117,8 +117,8 @@ export function CardFolder({
     <div data-slot="card-folder" data-open={open || undefined} className={cn("flex w-80 flex-col gap-2", className)}>
       <div className="flex items-center justify-between gap-2 px-1">
         <div className="flex min-w-0 flex-col">
-          <span className="truncate text-sm font-medium">{title}</span>
-          <span className="text-xs text-muted-foreground tabular-nums">
+          <span className="truncate text-ui font-medium">{title}</span>
+          <span className="text-ui-sm text-muted-foreground tabular-nums">
             {brand} ·· {last4}
           </span>
         </div>
@@ -158,7 +158,7 @@ export function CardFolder({
         aria-expanded={open}
         aria-label={open ? `Tuck ${title} into its pocket` : `Pull ${title} out of its pocket`}
         onClick={() => setOpen(!open)}
-        className="group/pocket relative h-60 w-full cursor-pointer rounded-[1.75rem] outline-none focus-visible:ring-3 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-60"
+        className="group/pocket relative h-60 w-full cursor-pointer rounded-[1.75rem] outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {/* Inside of the pocket */}
         <span aria-hidden className="absolute inset-x-0 top-10 bottom-0 rounded-[1.75rem] bg-muted shadow-well" />
@@ -187,7 +187,7 @@ export function CardFolder({
           {card ?? <DefaultArt />}
           <span className="relative flex size-full flex-col justify-between p-4">
             <span className="flex items-start justify-between">
-              <span className="text-sm font-semibold tracking-wide">{brand}</span>
+              <span className="text-ui font-semibold tracking-wide">{brand}</span>
               <span aria-hidden className="h-6 w-8 rounded-md bg-warning/90" />
             </span>
             <span className="flex flex-col gap-2">
@@ -197,7 +197,7 @@ export function CardFolder({
                 hidden={masked}
                 className="font-mono text-[1.05rem] tracking-[0.12em] tabular-nums"
               />
-              <span className="flex items-end justify-between gap-3 text-[0.7rem] uppercase">
+              <span className="flex items-end justify-between gap-3 text-ui-xs uppercase">
                 <span className="truncate opacity-85">{holder}</span>
                 <span className="flex gap-3 font-mono tabular-nums">
                   <span className="flex flex-col">
@@ -217,13 +217,13 @@ export function CardFolder({
         {/* Front of the pocket: compresses into its bottom seam as the card lifts */}
         <motion.span
           aria-hidden
-          className="absolute inset-x-0 bottom-0 z-10 block overflow-hidden rounded-[1.75rem] bg-secondary shadow-raised"
+          className="absolute inset-x-0 bottom-0 z-10 block overflow-hidden rounded-[1.75rem] bg-card shadow-raised"
           initial={false}
           animate={{ height: open ? 52 : 150 }}
           transition={reduce ? { duration: 0.15 } : SPRING}
         >
           <span className="absolute inset-2 rounded-[1.35rem] border-[1.5px] border-dashed border-foreground/15" />
-          <span className="absolute inset-x-0 bottom-0 flex h-[52px] items-center justify-center text-xs font-medium text-muted-foreground">
+          <span className="absolute inset-x-0 bottom-0 flex h-[52px] items-center justify-center text-ui-sm font-medium text-muted-foreground">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
                 key={open ? "tuck" : "pull"}

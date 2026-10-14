@@ -20,7 +20,7 @@ function DialogContent({
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop
         data-slot="dialog-backdrop"
-        className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
+        className="fixed inset-0 z-50 bg-black/40 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
       />
       <DialogPrimitive.Viewport
         data-slot="dialog-viewport"
@@ -29,7 +29,7 @@ function DialogContent({
         <DialogPrimitive.Popup
           data-slot="dialog-content"
           className={cn(
-            "relative flex max-h-full w-full max-w-md flex-col gap-4 overflow-y-auto overscroll-contain rounded-3xl bg-popover p-6 text-popover-foreground shadow-surface transition-[opacity,scale,translate] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none data-ending-style:scale-96 data-ending-style:opacity-0 data-starting-style:translate-y-2 data-starting-style:scale-96 data-starting-style:opacity-0 motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:translate-y-0 motion-reduce:data-starting-style:scale-100",
+            "relative flex max-h-full w-full max-w-md flex-col gap-3 overflow-y-auto overscroll-contain rounded-3xl bg-popover p-5 text-popover-foreground shadow-surface transition-[opacity,scale,translate] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:translate-y-2 data-starting-style:scale-98 data-starting-style:opacity-0 motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:translate-y-0 motion-reduce:data-starting-style:scale-100",
             className
           )}
           {...props}
@@ -43,7 +43,7 @@ function DialogContent({
               <DialogPrimitive.Close
                 data-slot="dialog-close"
                 aria-label="Close"
-                className="-mt-2 -mr-2 inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-popover text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+                className="-mt-1.5 -mr-1.5 inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-popover text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 <XIcon size={16} />
               </DialogPrimitive.Close>
@@ -56,7 +56,7 @@ function DialogContent({
 }
 
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="dialog-header" className={cn("flex flex-col gap-1.5 pr-8", className)} {...props} />
+  return <div data-slot="dialog-header" className={cn("flex flex-col gap-1 pr-8", className)} {...props} />
 }
 
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
@@ -69,7 +69,7 @@ function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn("text-lg leading-snug font-semibold tracking-tight", className)}
+      className={cn("text-lg leading-tight font-semibold", className)}
       {...props}
     />
   )
@@ -79,7 +79,7 @@ function DialogDescription({ className, ...props }: DialogPrimitive.Description.
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("text-sm leading-relaxed text-pretty text-muted-foreground", className)}
+      className={cn("text-ui leading-snug text-pretty text-muted-foreground", className)}
       {...props}
     />
   )

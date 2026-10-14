@@ -67,7 +67,7 @@ export interface AttachmentUploadProps {
 
 const EASE = [0.22, 1, 0.36, 1] as const
 const iconButton =
-  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50"
+  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
 
 function formatBytes(bytes?: number) {
   if (bytes === undefined || !Number.isFinite(bytes) || bytes <= 0) return ""
@@ -269,7 +269,7 @@ function AttachmentRow({
           type="button"
           onClick={() => onPreview(item)}
           aria-label={`Preview ${item.name}`}
-          className="relative size-11 shrink-0 cursor-zoom-in rounded-xl shadow-raised outline-none focus-visible:ring-3 focus-visible:ring-ring"
+          className="relative size-11 shrink-0 cursor-zoom-in rounded-xl shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {!previewing && <Thumb item={item} layout={!reduce} />}
         </button>
@@ -291,19 +291,19 @@ function AttachmentRow({
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              className="truncate text-sm font-medium underline-offset-4 outline-none hover:underline focus-visible:underline"
+              className="truncate text-ui font-medium underline-offset-4 outline-none hover:underline focus-visible:underline"
             >
               {item.name}
             </a>
           ) : (
-            <span className="truncate text-sm font-medium" title={item.name}>
+            <span className="truncate text-ui font-medium" title={item.name}>
               {item.name}
             </span>
           )}
           <StatusMark status={status} />
         </div>
         <span
-          className={cn("truncate text-xs tabular-nums", status === "error" ? "text-destructive" : "text-muted-foreground")}
+          className={cn("truncate text-ui-sm tabular-nums", status === "error" ? "text-destructive" : "text-muted-foreground")}
         >
           {meta}
         </span>
@@ -496,16 +496,16 @@ export function AttachmentUpload({
         )}
       >
         <div className="flex items-center justify-between gap-2 px-1.5 pt-0.5">
-          <div className="flex items-center gap-2 text-sm font-medium">
+          <div className="flex items-center gap-2 text-ui font-medium">
             <AttachIcon size={16} className="text-muted-foreground" />
             {label}
             {items.length > 0 && (
-              <span className="rounded-full bg-muted px-1.5 text-xs leading-5 text-muted-foreground tabular-nums shadow-well">
+              <span className="rounded-full bg-muted px-1.5 text-ui-sm leading-5 text-muted-foreground tabular-nums shadow-well">
                 {items.length}
               </span>
             )}
           </div>
-          <span className="text-xs text-muted-foreground tabular-nums" aria-hidden>
+          <span className="text-ui-sm text-muted-foreground tabular-nums" aria-hidden>
             {uploading > 0 ? `Uploading ${uploading}…` : items.length > 0 ? "All synced" : ""}
           </span>
         </div>
@@ -537,7 +537,7 @@ export function AttachmentUpload({
           }}
           transition={{ type: "spring", stiffness: 420, damping: 36 }}
           className={cn(
-            "relative flex rounded-2xl bg-muted/60 shadow-well transition-colors",
+            "relative flex rounded-2xl bg-background dark:bg-input/32 shadow-well transition-colors",
             "outline-2 -outline-offset-6 outline-transparent outline-dashed",
             compact ? "items-center gap-3 px-3 py-2.5" : "flex-col items-center gap-2.5 px-6 py-8 text-center",
             dragging && "bg-primary/8 outline-primary/50",
@@ -556,9 +556,9 @@ export function AttachmentUpload({
             <AttachIcon size={compact ? 16 : 20} />
           </motion.span>
           <motion.div layout={!reduce ? "position" : false} className="flex min-w-0 flex-1 flex-col">
-            <span className="text-sm font-medium">{dragging ? "Release to attach" : full ? "Attachment limit reached" : title}</span>
+            <span className="text-ui font-medium">{dragging ? "Release to attach" : full ? "Attachment limit reached" : title}</span>
             {!compact && (
-              <span className="text-xs text-muted-foreground">
+              <span className="text-ui-sm text-muted-foreground">
                 {description}
                 {maxFileSize !== undefined && ` · up to ${formatBytes(maxFileSize)} each`}
               </span>
@@ -582,7 +582,7 @@ export function AttachmentUpload({
             type="button"
             disabled={inactive}
             onClick={() => inputRef.current?.click()}
-            className="inline-flex h-8 shrink-0 cursor-pointer items-center gap-1 rounded-lg bg-secondary pr-3.5 pl-2.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none"
+            className="inline-flex h-8 shrink-0 cursor-pointer items-center gap-1 rounded-lg bg-card pr-3.5 pl-2.5 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none"
           >
             <PlusIcon size={14} />
             {compact ? "Add" : "Choose files"}
@@ -615,7 +615,7 @@ export function AttachmentUpload({
 
       <DialogPrimitive.Root open={preview !== null} onOpenChange={(open) => !open && setPreviewId(null)}>
         <DialogPrimitive.Portal>
-          <DialogPrimitive.Backdrop className="fixed inset-0 z-50 bg-black/45 backdrop-blur-[2px] transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
+          <DialogPrimitive.Backdrop className="fixed inset-0 z-50 bg-black/45 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0" />
           <DialogPrimitive.Popup
             className="fixed inset-0 z-50 flex items-center justify-center p-6 outline-none"
             onClick={(e) => e.target === e.currentTarget && setPreviewId(null)}
@@ -633,8 +633,8 @@ export function AttachmentUpload({
                 >
                   <div className="flex min-w-0 items-center gap-2">
                     <ImageIcon size={16} className="shrink-0 text-muted-foreground" />
-                    <DialogPrimitive.Title className="truncate text-sm font-medium">{preview.name}</DialogPrimitive.Title>
-                    <span className="shrink-0 text-xs text-muted-foreground">{formatBytes(preview.size)}</span>
+                    <DialogPrimitive.Title className="truncate text-ui font-medium">{preview.name}</DialogPrimitive.Title>
+                    <span className="shrink-0 text-ui-sm text-muted-foreground">{formatBytes(preview.size)}</span>
                   </div>
                   <DialogPrimitive.Close aria-label="Close preview" className={iconButton}>
                     <XIcon size={15} />

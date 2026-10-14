@@ -41,7 +41,7 @@ export default {
     {
       id: "sizes",
       title: "Sizes",
-      description: "`ComboboxInput` and `ComboboxTrigger` take `size` `\"sm\"` (32px) or `\"default\"` (36px).",
+      description: "`ComboboxInput` and `ComboboxTrigger` take `size` `\"sm\"` (28px) or `\"default\"` (32px).",
     },
     {
       id: "input-options",
@@ -83,7 +83,7 @@ export default {
       extends: "Base UI Combobox.Input",
       extendsHref: `${BASE}#input`,
       props: [
-        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height: 32px or 36px." },
+        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height: 28px or 32px." },
         { name: "showSearchIcon", type: "boolean", default: "true", description: "Show the leading search icon." },
         {
           name: "showClear",
@@ -103,7 +103,7 @@ export default {
       description: "Raised button showing the chosen value, like `SelectTrigger`. Put `ComboboxValue` inside.",
       extends: "Base UI Combobox.Trigger",
       extendsHref: `${BASE}#trigger`,
-      props: [{ name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height: 32px or 36px." }],
+      props: [{ name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height: 28px or 32px." }],
       dataAttributes: [{ name: "data-popup-open", description: "Present while the list is open." }],
     },
     {

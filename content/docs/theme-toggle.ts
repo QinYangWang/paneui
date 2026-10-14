@@ -35,7 +35,7 @@ export default {
   api: [
     {
       name: "ThemeToggle",
-      description: "Round 36px button that flips the `.dark` class on `<html>`.",
+      description: "Round 32px button that flips the `.dark` class on `<html>`.",
       extends: "button",
       props: [
         { name: "iconSize", type: "number", default: "16", description: "Sun / moon icon size in px." },

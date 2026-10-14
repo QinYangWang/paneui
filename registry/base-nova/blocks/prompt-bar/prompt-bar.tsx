@@ -53,7 +53,7 @@ export function PromptBar({
             submit()
           }
         }}
-        className="field-sizing-content max-h-48 min-h-10 w-full resize-none bg-transparent px-3 pt-2 text-[0.95rem] outline-none placeholder:text-muted-foreground"
+        className="field-sizing-content max-h-48 min-h-10 w-full resize-none bg-transparent px-3 pt-2 text-ui-lg outline-none placeholder:text-muted-foreground"
       />
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">

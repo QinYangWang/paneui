@@ -368,7 +368,7 @@ function HeatCalendarGrid({ className, children }: { className?: string; childre
             <span
               key={`${m.week}-${m.label}`}
               aria-hidden
-              className="absolute top-0 text-[10px] text-muted-foreground"
+              className="absolute top-0 text-ui-2xs text-muted-foreground"
               style={{ left: geo.labelW + m.week * geo.pitch }}
             >
               {m.label}
@@ -379,7 +379,7 @@ function HeatCalendarGrid({ className, children }: { className?: string; childre
             <span
               key={d}
               aria-hidden
-              className="absolute left-0 text-[10px] leading-none text-muted-foreground"
+              className="absolute left-0 text-ui-2xs leading-none text-muted-foreground"
               style={{ top: geo.monthH + d * geo.pitch + (cellSize - 10) / 2 }}
             >
               {fmtWeekday.format(days[d]?.time ?? 0)}
@@ -451,7 +451,7 @@ function HeatCalendarGrid({ className, children }: { className?: string; childre
                       onBlur={() => setHot(null)}
                       onKeyDown={(e) => onKeyDown(e, day)}
                       className={cn(
-                        "relative cursor-pointer rounded-[4px] outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        "relative cursor-pointer rounded-[4px] outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                         day.level === 0 && "shadow-well"
                       )}
                       style={{
@@ -531,7 +531,7 @@ function HeatCalendarLegend({ className, ...props }: React.ComponentProps<"div">
     <div
       data-slot="heat-calendar-legend"
       aria-hidden
-      className={cn("flex items-center gap-1 text-[10px] text-muted-foreground", className)}
+      className={cn("flex items-center gap-1 text-ui-2xs text-muted-foreground", className)}
       {...props}
     >
       <span className="mr-1">Less</span>
@@ -571,7 +571,7 @@ function HeatCalendarSummary({ className, ...props }: React.ComponentProps<"div"
         <button
           type="button"
           onClick={() => setSelection(null)}
-          className="ml-1 rounded-md bg-secondary px-2 py-0.5 text-[11px] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:scale-96"
+          className="ml-1 rounded-md bg-card px-2 py-0.5 text-ui-xs font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           Clear
         </button>
@@ -588,7 +588,7 @@ function HeatCalendarSummary({ className, ...props }: React.ComponentProps<"div"
     <div
       data-slot="heat-calendar-summary"
       aria-live="polite"
-      className={cn("flex min-h-6 flex-wrap items-center gap-1.5 text-xs text-muted-foreground tabular-nums", className)}
+      className={cn("flex min-h-6 flex-wrap items-center gap-1.5 text-ui-sm text-muted-foreground tabular-nums", className)}
       {...props}
     >
       {content}

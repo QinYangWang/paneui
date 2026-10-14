@@ -22,7 +22,7 @@ export default function Gallery() {
         </Badge>
         <h1 className="text-4xl font-semibold tracking-tight">Quiet, precise components.</h1>
         <p className="max-w-xl text-lg text-muted-foreground">
-          Copy-paste React components on Base UI, Tailwind 4 and Motion, with neutral OKLCH tokens and hairline depth. Install any
+          Copy-paste React components on Base UI, Tailwind 4 and Motion, in a native desktop style: system type, hairline borders, quiet fills. Install any
           of them with the shadcn CLI.
         </p>
         <Button nativeButton={false} render={<Link href="/docs" />}>
@@ -57,7 +57,7 @@ export default function Gallery() {
                     </CardPanel>
                     <Link
                       href={`/docs/${item.name}`}
-                      className="outline-none focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset"
+                      className="outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
                     >
                       <CardHeader className="grid-cols-[1fr_auto] items-center py-3">
                         <CardTitle className="font-medium">{item.title}</CardTitle>

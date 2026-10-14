@@ -184,7 +184,7 @@ function CodeCopyButton({
         copy(typeof value === "function" ? value() : value)
       }}
       className={cn(
-        "relative grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 data-copied:text-success",
+        "relative grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-copied:text-success",
         className
       )}
       data-copied={copied || undefined}
@@ -291,7 +291,7 @@ function AgentCodeBlock({
       data-streaming={streaming || undefined}
       aria-busy={streaming || undefined}
       className={cn(
-        "group/code relative overflow-hidden rounded-2xl bg-code text-[13px] text-foreground shadow-surface",
+        "group/code relative overflow-hidden rounded-xl bg-code text-ui text-foreground shadow-raised",
         className
       )}
       {...props}
@@ -301,15 +301,15 @@ function AgentCodeBlock({
           data-slot="agent-code-block-header"
           className="flex h-10 items-center gap-2 border-b border-border pr-1.5 pl-4"
         >
-          <span className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">{filename}</span>
+          <span className="min-w-0 flex-1 truncate font-mono text-ui-sm text-muted-foreground">{filename}</span>
           {streaming && (
-            <span className="inline-flex items-center gap-1.5 text-[0.7rem] font-medium text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5 text-ui-xs font-medium text-muted-foreground">
               <span className="size-1.5 animate-pulse rounded-full bg-primary" />
               Writing
             </span>
           )}
           {lang !== "text" && (
-            <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-[0.65rem] text-muted-foreground shadow-chip">
+            <span className="rounded-full bg-muted px-2 py-0.5 font-mono text-ui-2xs text-muted-foreground shadow-chip">
               {lang}
             </span>
           )}

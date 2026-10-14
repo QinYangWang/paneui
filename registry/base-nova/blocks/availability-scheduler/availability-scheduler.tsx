@@ -143,7 +143,7 @@ function AvailabilityScheduler({
     <div
       data-slot="availability-scheduler"
       className={cn(
-        "w-full max-w-xl rounded-2xl bg-card p-2 shadow-surface",
+        "w-full max-w-xl rounded-2xl bg-card p-2 shadow-raised",
         className
       )}
       {...props}
@@ -242,7 +242,7 @@ function DayRow({
       role="group"
       aria-labelledby={labelId}
     >
-      <label className="flex h-9 w-36 shrink-0 cursor-pointer items-center gap-3 text-sm font-medium select-none">
+      <label className="flex h-9 w-36 shrink-0 cursor-pointer items-center gap-3 text-ui font-medium select-none">
         <Switch
           checked={data.enabled}
           onCheckedChange={(checked) =>
@@ -267,7 +267,7 @@ function DayRow({
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, y: -4, filter: "blur(3px)" }}
               transition={ROW}
-              className="flex h-9 items-center text-sm text-muted-foreground"
+              className="flex h-9 items-center text-ui text-muted-foreground"
             >
               Unavailable
             </motion.p>
@@ -345,7 +345,7 @@ function DayRow({
                     exit={{ opacity: 0, height: 0 }}
                     transition={ROW}
                     role="alert"
-                    className="overflow-hidden text-xs text-destructive"
+                    className="overflow-hidden text-ui-sm text-destructive"
                   >
                     <span className="block pt-2">These hours overlap.</span>
                   </motion.li>

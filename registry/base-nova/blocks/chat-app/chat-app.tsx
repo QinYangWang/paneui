@@ -185,7 +185,7 @@ function AssistantTurn({ turn }: { turn: Extract<Turn, { role: "assistant" }> })
               key="done"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-xs text-muted-foreground tabular-nums"
+              className="text-ui-sm text-muted-foreground tabular-nums"
             >
               {turn.phase === "stopped" ? "Stopped after " : "Worked for "}
               {formatElapsed(turn.elapsed ?? 0)}
@@ -219,7 +219,7 @@ function EmptyState({ onPick }: { onPick: (s: string) => void }) {
       </IconChip>
       <div className="flex flex-col gap-1">
         <p className="text-lg font-semibold">What should we work on?</p>
-        <p className="text-sm text-muted-foreground">Ask anything, or start from one of these.</p>
+        <p className="text-ui text-muted-foreground">Ask anything, or start from one of these.</p>
       </div>
       <div className="flex flex-wrap justify-center gap-2">
         {SUGGESTIONS.map((s) => (
@@ -404,7 +404,7 @@ function ChatApp({
     <div
       ref={rootRef}
       data-slot="chat-app"
-      className={cn("flex h-full min-h-0 w-full overflow-hidden rounded-[1.75rem] bg-background shadow-surface", className)}
+      className={cn("flex h-full min-h-0 w-full overflow-hidden rounded-2xl bg-background shadow-raised", className)}
     >
       <AISidebar
         items={items}
@@ -436,14 +436,14 @@ function ChatApp({
 
       <section aria-label="Conversation" className="flex min-w-0 flex-1 flex-col">
         <header className="flex h-12 shrink-0 items-center gap-3 border-b border-border/60 px-4">
-          <h2 className="min-w-0 flex-1 truncate text-sm font-semibold">{chatTitle}</h2>
+          <h2 className="min-w-0 flex-1 truncate text-ui font-semibold">{chatTitle}</h2>
           <AnimatePresence initial={false}>
             {busy && (
               <motion.span
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
+                className="rounded-full bg-primary/10 px-2.5 py-0.5 text-ui-sm font-medium text-primary"
               >
                 Running
               </motion.span>

@@ -106,7 +106,7 @@ function CodeHighlight({ code, language = "bash", wrap = false, className, ...pr
     <pre
       data-slot="code-highlight"
       className={cn(
-        "m-0 font-mono text-xs leading-5 text-foreground/85",
+        "m-0 font-mono text-ui-sm leading-5 text-foreground/85",
         wrap ? "break-words whitespace-pre-wrap" : "overflow-x-auto whitespace-pre scrollbar-thin",
         className
       )}
@@ -211,7 +211,7 @@ function AgentIconButton({ className, label, pressed, ...props }: React.Componen
       title={label}
       aria-pressed={pressed}
       className={cn(
-        "inline-grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow,scale] duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-90 disabled:pointer-events-none disabled:opacity-50 aria-pressed:bg-muted aria-pressed:text-foreground aria-pressed:shadow-chip motion-reduce:active:scale-100 [&_svg]:size-3.5",
+        "inline-grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow,scale] duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-pressed:bg-muted aria-pressed:text-foreground aria-pressed:shadow-chip [&_svg]:size-3.5",
         className
       )}
       {...props}
@@ -372,30 +372,30 @@ function ToolResult({
       aria-busy={running}
       {...props}
       className={cn(
-        "w-full overflow-hidden rounded-2xl bg-card text-sm text-card-foreground shadow-raised",
+        "w-full overflow-hidden rounded-2xl bg-card text-ui text-card-foreground shadow-raised",
         className
       )}
     >
       <CollapsiblePrimitive.Trigger
         data-slot="tool-result-trigger"
-        className="group/tool-result flex min-h-11 w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left outline-none select-none focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset"
+        className="group/tool-result flex min-h-11 w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
       >
         <IconChip size="sm" tone={status === "error" ? "destructive" : "neutral"}>
           {icon ?? <KindIcon />}
         </IconChip>
         <span className="flex min-w-0 flex-1 items-baseline gap-2">
           <span className="min-w-0 truncate font-medium">{title}</span>
-          <span className="hidden min-w-0 shrink truncate font-mono text-[11px] text-muted-foreground sm:inline">{tool}</span>
+          <span className="hidden min-w-0 shrink truncate font-mono text-ui-xs text-muted-foreground sm:inline">{tool}</span>
         </span>
-        {meta ? <span className="shrink-0 font-mono text-[11px] text-muted-foreground">{meta}</span> : null}
+        {meta ? <span className="shrink-0 font-mono text-ui-xs text-muted-foreground">{meta}</span> : null}
         {showDuration ? (
-          <span className="shrink-0 font-mono text-[11px] text-muted-foreground tabular-nums">
+          <span className="shrink-0 font-mono text-ui-xs text-muted-foreground tabular-nums">
             {formatDuration(shownDuration)}
           </span>
         ) : null}
         <span
           role="status"
-          className={cn("inline-flex shrink-0 items-center gap-1 text-xs font-medium", STATUS_TONE[status])}
+          className={cn("inline-flex shrink-0 items-center gap-1 text-ui-sm font-medium", STATUS_TONE[status])}
         >
           <ToolStatusIcon status={status} />
           <ActionSwapRollText value={status}>{STATUS_LABEL[status]}</ActionSwapRollText>
@@ -429,7 +429,7 @@ function ToolResult({
                     <RefreshIcon />
                   </AgentIconButton>
                 ) : null}
-                <span className="ml-auto pr-1.5 text-[11px] text-muted-foreground">
+                <span className="ml-auto pr-1.5 text-ui-xs text-muted-foreground">
                   {running ? "Streaming output…" : `${STATUS_LABEL[status]} in ${formatDuration(shownDuration)}`}
                 </span>
               </div>
@@ -483,8 +483,8 @@ function ToolResultRequest({
   const ok = statusCode != null && statusCode < 400
   return (
     <div data-slot="tool-result-request" className={cn("flex flex-col gap-2.5", className)}>
-      <div className="flex min-w-0 items-center gap-2 font-mono text-xs">
-        <span className={cn("rounded-md px-1.5 py-0.5 text-[10px] font-semibold", METHOD_TONE[method.toUpperCase()] ?? "bg-muted text-muted-foreground")}>
+      <div className="flex min-w-0 items-center gap-2 font-mono text-ui-sm">
+        <span className={cn("rounded-md px-1.5 py-0.5 text-ui-2xs font-semibold", METHOD_TONE[method.toUpperCase()] ?? "bg-muted text-muted-foreground")}>
           {method.toUpperCase()}
         </span>
         <span className="min-w-0 flex-1 truncate text-foreground/85">{url}</span>
@@ -494,7 +494,7 @@ function ToolResultRequest({
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.25, ease: AGENT_EASE }}
             className={cn(
-              "shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-semibold",
+              "shrink-0 rounded-md px-1.5 py-0.5 text-ui-2xs font-semibold",
               ok ? "bg-success/12 text-success" : "bg-destructive/12 text-destructive"
             )}
           >

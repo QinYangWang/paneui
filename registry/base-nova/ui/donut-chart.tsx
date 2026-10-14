@@ -219,7 +219,7 @@ function DonutChart({
               animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, y: -4, filter: "blur(2px)" }}
               transition={{ duration: 0.18, ease: CHART_EASE }}
-              className="flex max-w-[70%] items-center gap-1.5 truncate text-xs font-medium text-muted-foreground"
+              className="flex max-w-[70%] items-center gap-1.5 truncate text-ui-sm font-medium text-muted-foreground"
             >
               {active && <ChartSwatch color={active.color} />}
               {active?.label ?? totalLabel}
@@ -233,7 +233,7 @@ function DonutChart({
           <motion.span
             animate={{ opacity: active ? 1 : 0 }}
             transition={{ duration: 0.15 }}
-            className="text-xs text-muted-foreground tabular-nums"
+            className="text-ui-sm text-muted-foreground tabular-nums"
           >
             {active ? `${formatPercent(active.share)} of ${totalLabel.toLowerCase()}` : "\u00a0"}
           </motion.span>
@@ -243,7 +243,7 @@ function DonutChart({
       {showLegend && (
         <ul
           aria-label={`${label} legend`}
-          className="flex w-full flex-col gap-1 rounded-2xl bg-muted/60 p-1.5 shadow-well"
+          className="flex w-full flex-col gap-1 rounded-2xl bg-background dark:bg-input/32 p-1.5 shadow-well"
         >
           {placed.map((s) => {
             const isActive = s.id === activeId
@@ -257,7 +257,7 @@ function DonutChart({
                   onFocus={() => setActiveId(s.id)}
                   onBlur={() => setActiveId(null)}
                   className={cn(
-                    "relative flex w-full items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                    "relative flex w-full items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-left text-ui outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                     active && !isActive && "opacity-55",
                     "transition-opacity duration-200"
                   )}
@@ -266,14 +266,14 @@ function DonutChart({
                     <motion.span
                       layoutId={`${baseId}-legend-hl`}
                       transition={transition}
-                      className="absolute inset-0 -z-0 rounded-xl bg-secondary shadow-raised"
+                      className="absolute inset-0 -z-0 rounded-xl bg-card shadow-raised"
                     />
                   )}
                   <ChartSwatch color={s.color} className="relative" />
                   <span className="relative flex min-w-0 flex-1 flex-col">
                     <span className="truncate text-foreground">{s.label}</span>
                     {s.description && (
-                      <span className="truncate text-xs text-muted-foreground">{s.description}</span>
+                      <span className="truncate text-ui-sm text-muted-foreground">{s.description}</span>
                     )}
                   </span>
                   <span className="relative text-muted-foreground tabular-nums">

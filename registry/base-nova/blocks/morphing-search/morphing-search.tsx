@@ -235,7 +235,7 @@ function MorphingSearch({
         ref={rootRef}
         data-slot="morphing-search"
         data-open={open || undefined}
-        className={cn("relative inline-flex", iconOnly ? "size-9" : "h-9 w-64", className)}
+        className={cn("relative inline-flex", iconOnly ? "size-8" : "h-8 w-64", className)}
       >
         {/* Closed trigger. The root keeps its size while open, so the layout never jumps. */}
         {!open && (
@@ -251,7 +251,7 @@ function MorphingSearch({
             onClick={() => setOpen(true)}
             style={{ borderRadius: 999 }}
             className={cn(
-              "flex size-full cursor-pointer items-center gap-2 bg-muted/70 text-sm text-muted-foreground shadow-well outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring",
+              "flex size-full cursor-pointer items-center gap-2 bg-muted/70 text-ui text-muted-foreground shadow-well outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
               iconOnly ? "justify-center" : "px-3"
             )}
           >
@@ -262,7 +262,7 @@ function MorphingSearch({
               <>
                 <span className="flex-1 truncate text-left">{placeholder}</span>
                 {shortcutLabel && (
-                  <kbd className="rounded-md bg-secondary px-1.5 py-0.5 font-sans text-[0.7rem] text-muted-foreground shadow-chip">
+                  <kbd className="rounded-md bg-card px-1.5 py-0.5 font-sans text-ui-xs text-muted-foreground shadow-chip">
                     {shortcutLabel}
                   </kbd>
                 )}
@@ -303,13 +303,13 @@ function MorphingSearch({
                   placeholder={placeholder}
                   autoComplete="off"
                   spellCheck={false}
-                  className="h-full min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+                  className="h-full min-w-0 flex-1 bg-transparent text-ui text-foreground outline-none placeholder:text-muted-foreground"
                 />
                 <button
                   type="button"
                   aria-label={query ? "Clear search" : "Close search"}
                   onClick={() => (query ? (setQuery(""), inputRef.current?.focus()) : close())}
-                  className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+                  className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <XIcon size={13} />
                 </button>
@@ -329,13 +329,13 @@ function MorphingSearch({
                   className="max-h-80 overflow-y-auto overscroll-contain p-1.5"
                 >
                   {groups.length === 0 ? (
-                    <div role="presentation" className="px-3 py-6 text-center text-sm text-muted-foreground">
+                    <div role="presentation" className="px-3 py-6 text-center text-ui text-muted-foreground">
                       {emptyMessage}
                     </div>
                   ) : (
                     groups.map((group) => (
                       <div key={group.label} role="group" aria-labelledby={`${uid}-g-${group.label}`} className="not-first:mt-1.5">
-                        <div id={`${uid}-g-${group.label}`} className="px-2.5 pt-1.5 pb-1 text-[0.7rem] font-medium tracking-wide text-muted-foreground uppercase">
+                        <div id={`${uid}-g-${group.label}`} className="px-2.5 pt-1.5 pb-1 text-ui-xs font-medium tracking-wide text-muted-foreground uppercase">
                           {group.label}
                         </div>
                         {group.items.map((item) => {
@@ -355,7 +355,7 @@ function MorphingSearch({
                               onPointerDown={(event) => event.preventDefault()}
                               onClick={() => choose(item)}
                               className={cn(
-                                "relative flex cursor-pointer items-center gap-2.5 rounded-xl px-2.5 py-2 text-sm aria-disabled:cursor-default aria-disabled:opacity-50",
+                                "relative flex cursor-pointer items-center gap-2.5 rounded-xl px-2.5 py-2 text-ui aria-disabled:cursor-default aria-disabled:opacity-50",
                                 "[&_svg]:size-4 [&_svg]:shrink-0"
                               )}
                             >
@@ -363,7 +363,7 @@ function MorphingSearch({
                                 <motion.span
                                   layoutId={`${surfaceId}-highlight`}
                                   transition={reduceMotion ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0.1 }}
-                                  className="absolute inset-0 rounded-xl bg-secondary shadow-raised"
+                                  className="absolute inset-0 rounded-lg bg-secondary"
                                 />
                               )}
                               {item.icon && <span className="relative flex text-muted-foreground">{item.icon}</span>}
@@ -372,7 +372,7 @@ function MorphingSearch({
                                   <Highlight text={item.title} query={query} />
                                 </span>
                                 {item.description && (
-                                  <span className="block truncate text-xs text-muted-foreground">{item.description}</span>
+                                  <span className="block truncate text-ui-sm text-muted-foreground">{item.description}</span>
                                 )}
                               </span>
                             </div>
@@ -382,7 +382,7 @@ function MorphingSearch({
                     ))
                   )}
                 </div>
-                <div className="flex items-center gap-3 border-t border-border/60 px-3.5 py-2 text-[0.7rem] text-muted-foreground">
+                <div className="flex items-center gap-3 border-t border-border/60 px-3.5 py-2 text-ui-xs text-muted-foreground">
                   <span>
                     <kbd className="font-sans">↑↓</kbd> navigate
                   </span>

@@ -58,7 +58,7 @@ export default {
     },
     {
       name: "MorphPopoverTrigger",
-      description: "A raised secondary button (36px, `rounded-lg`) that presses to 0.96.",
+      description: "A raised trigger (32px, `rounded-lg`).",
       extends: "Base UI Popover.Trigger",
       extendsHref: `${BASE}#trigger`,
       props: [],

@@ -222,8 +222,8 @@ function Sidebar({
         className={cn(
           "flex h-full w-full flex-col overflow-hidden text-foreground",
           variant === "floating"
-            ? "rounded-2xl bg-card shadow-surface"
-            : cn("bg-background", side === "left" ? "border-r border-border" : "border-l border-border"),
+            ? "rounded-xl bg-card shadow-surface"
+            : cn("bg-shell", side === "left" ? "border-r border-border" : "border-l border-border"),
           panelClassName
         )}
       >
@@ -267,7 +267,7 @@ function SidebarGroupLabel({ className, children, ...props }: React.ComponentPro
   return (
     <div
       data-slot="sidebar-group-label"
-      className={cn("relative flex h-7 items-center px-3 text-[11px] font-medium tracking-wide text-muted-foreground uppercase", className)}
+      className={cn("relative flex h-7 items-center px-3 text-ui-sm text-muted-foreground", className)}
       {...props}
     >
       <span
@@ -309,7 +309,7 @@ function ActivePill({ reduce, pillId }: { reduce: boolean; pillId: string }) {
       aria-hidden
       layoutId={pillId}
       transition={reduce ? { duration: 0 } : PILL_SPRING}
-      className="absolute inset-0 rounded-xl bg-secondary shadow-raised"
+      className="absolute inset-0 rounded-lg bg-foreground/6"
     />
   )
 }
@@ -416,10 +416,10 @@ function SidebarItem({
           } else setOpen(!open)
         },
         className: cn(
-          "group/sidebar-item relative flex h-9 w-full min-w-0 cursor-pointer items-center gap-2.5 rounded-xl px-[13px] text-sm font-medium outline-none select-none",
-          "text-muted-foreground transition-[color,background-color,scale] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-foreground active:scale-[0.98]",
-          "focus-visible:ring-3 focus-visible:ring-ring",
-          !showPill && "hover:bg-muted/60",
+          "group/sidebar-item relative flex h-8 w-full min-w-0 cursor-pointer items-center gap-2 rounded-lg px-[13px] text-ui outline-none select-none",
+          "text-foreground transition-[color,background-color] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "focus-visible:ring-2 focus-visible:ring-ring/50",
+          !showPill && "hover:bg-secondary",
           showPill && "text-foreground",
           disabled && "pointer-events-none opacity-45",
           "[&_svg]:shrink-0",
@@ -433,7 +433,7 @@ function SidebarItem({
           <>
             {showPill && <ActivePill reduce={sidebar.reduce} pillId={sidebar.pillId} />}
             {icon && (
-              <span aria-hidden className="relative grid size-[18px] shrink-0 place-items-center [&_svg]:size-4">
+              <span aria-hidden className="relative grid size-[18px] shrink-0 place-items-center text-muted-foreground group-data-active/sidebar-item:text-foreground [&_svg]:size-4">
                 {icon}
                 {childActive && collapsed && !isActive && (
                   <span className="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-primary" />
@@ -448,7 +448,7 @@ function SidebarItem({
                 initial={false}
                 animate={{ opacity: collapsed ? 0 : 1 }}
                 transition={{ duration: sidebar.reduce ? 0 : 0.15 }}
-                className="relative shrink-0 rounded-full bg-muted px-1.5 text-[11px] leading-5 text-muted-foreground tabular-nums shadow-well"
+                className="relative shrink-0 rounded-full px-1.5 text-ui-xs leading-5 text-muted-foreground/70 tabular-nums"
               >
                 {badge}
               </motion.span>
@@ -556,9 +556,9 @@ function SidebarSubItem({ isActive = false, href, disabled, icon, render, classN
         ...{ "data-active": isActive || undefined },
         onClick: (e: React.MouseEvent) => disabled && e.preventDefault(),
         className: cn(
-          "relative flex h-8 w-full min-w-0 cursor-pointer items-center gap-2 rounded-xl px-2.5 text-[13px] outline-none select-none",
-          "text-muted-foreground transition-[color,background-color,scale] duration-150 hover:text-foreground active:scale-[0.98] focus-visible:ring-3 focus-visible:ring-ring",
-          isActive ? "font-medium text-foreground" : "hover:bg-muted/60",
+          "relative flex h-7 w-full min-w-0 cursor-pointer items-center gap-2 rounded-lg px-2.5 text-ui outline-none select-none",
+          "text-foreground/85 transition-[color,background-color] duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+          isActive ? "text-foreground" : "hover:bg-secondary",
           disabled && "pointer-events-none opacity-45",
           "[&_svg]:size-4 [&_svg]:shrink-0",
           className
@@ -604,7 +604,7 @@ function SidebarTrigger({ className, onClick, children, ...props }: React.Compon
         if (!e.defaultPrevented) toggle()
       }}
       className={cn(
-        "inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-secondary text-muted-foreground shadow-raised outline-none transition-[box-shadow,background-color,color,scale] duration-150 ease-out hover:bg-accent hover:text-foreground hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 [&_svg]:size-4",
+        "inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground outline-none transition-[background-color,color] duration-150 ease-out hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-4",
         className
       )}
       {...props}

@@ -293,7 +293,7 @@ function WheelPicker({
       data-slot="wheel-picker"
       data-disabled={disabled || undefined}
       className={cn(
-        "relative isolate min-w-16 flex-1 text-[0.95rem] select-none [-webkit-touch-callout:none] data-disabled:opacity-50",
+        "relative isolate min-w-16 flex-1 text-ui-lg select-none [-webkit-touch-callout:none] data-disabled:opacity-50",
         !group && "rounded-2xl bg-card px-1.5 shadow-raised",
         className
       )}
@@ -340,7 +340,7 @@ function WheelPicker({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         className={cn(
-          "absolute inset-0 snap-y snap-mandatory overflow-y-scroll overscroll-contain rounded-2xl outline-none [scrollbar-width:none] focus-visible:ring-3 focus-visible:ring-ring [&::-webkit-scrollbar]:hidden",
+          "absolute inset-0 snap-y snap-mandatory overflow-y-scroll overscroll-contain rounded-2xl outline-none [scrollbar-width:none] focus-visible:ring-2 focus-visible:ring-ring/50 [&::-webkit-scrollbar]:hidden",
           disabled ? "pointer-events-none overflow-hidden" : "cursor-grab active:cursor-grabbing"
         )}
         style={{ paddingBlock: pad }}

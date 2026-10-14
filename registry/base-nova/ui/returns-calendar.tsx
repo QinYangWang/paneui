@@ -225,7 +225,7 @@ function useAnchor() {
 }
 
 const cellBase =
-  "relative flex items-center justify-center rounded-lg text-[11px] font-medium tabular-nums outline-none transition-[box-shadow,opacity] duration-200 focus-visible:ring-2 focus-visible:ring-ring"
+  "relative flex items-center justify-center rounded-lg text-ui-xs font-medium tabular-nums outline-none transition-[box-shadow,opacity] duration-200 focus-visible:ring-2 focus-visible:ring-ring/50"
 
 function ReturnsCalendarGrid({ className, children }: { className?: string; children?: React.ReactNode }) {
   const { view, containerRef, setHot, label } = useReturnsCalendar()
@@ -311,7 +311,7 @@ function MonthsGrid() {
           <span
             key={m}
             role="columnheader"
-            className="pb-0.5 text-center text-[10px] font-medium text-muted-foreground"
+            className="pb-0.5 text-center text-ui-2xs font-medium text-muted-foreground"
           >
             <span className="sm:hidden" aria-hidden>
               {m[0]}
@@ -319,7 +319,7 @@ function MonthsGrid() {
             <span className="max-sm:sr-only">{m}</span>
           </span>
         ))}
-        <span role="columnheader" className="pb-0.5 text-center text-[10px] font-medium text-muted-foreground">
+        <span role="columnheader" className="pb-0.5 text-center text-ui-2xs font-medium text-muted-foreground">
           Year
         </span>
       </div>
@@ -329,7 +329,7 @@ function MonthsGrid() {
           !!selectedRange && selectedRange[0] <= row.year * 12 && selectedRange[1] >= row.year * 12 + 11
         return (
           <div role="row" key={row.year} className="contents">
-            <span role="rowheader" className="flex items-center text-xs font-medium text-muted-foreground tabular-nums">
+            <span role="rowheader" className="flex items-center text-ui-sm font-medium text-muted-foreground tabular-nums">
               {row.year}
             </span>
             {row.returns.map((v, m) => {
@@ -406,7 +406,7 @@ function MonthsGrid() {
               }
               className={cn(
                 cellBase,
-                "h-8 cursor-pointer bg-secondary font-semibold shadow-raised transition-[box-shadow,background-color] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover disabled:cursor-default"
+                "h-8 cursor-pointer bg-card font-semibold shadow-raised transition-[box-shadow,background-color] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover disabled:cursor-default"
               )}
               style={{
                 color: row.total == null ? undefined : row.total >= 0 ? UP : DOWN,
@@ -461,7 +461,7 @@ function YearsGrid() {
             onFocus={(e) => setHot({ kind: "year", year: row.year, ...anchor(e.currentTarget) })}
             onBlur={() => setHot(null)}
             onClick={(e) => pick(row.year, e.shiftKey)}
-            className="relative flex cursor-pointer flex-col gap-2 overflow-hidden rounded-2xl bg-card p-3 text-left shadow-raised outline-none transition-[box-shadow,scale] duration-150 ease-out hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:scale-99"
+            className="relative flex cursor-pointer flex-col gap-2 overflow-hidden rounded-2xl bg-card p-3 text-left shadow-raised outline-none transition-[box-shadow,scale] duration-150 ease-out hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
             style={{ boxShadow: selected ? "inset 0 0 0 1.5px var(--foreground)" : undefined }}
           >
             <span
@@ -470,8 +470,8 @@ function YearsGrid() {
               style={{ background: tint(row.total, yearRange, [6, 30]) }}
             />
             <span className="relative flex items-baseline justify-between gap-2">
-              <span className="text-xs font-medium text-muted-foreground tabular-nums">{row.year}</span>
-              <span className="text-sm font-semibold tabular-nums" style={{ color: row.total == null ? undefined : up ? UP : DOWN }}>
+              <span className="text-ui-sm font-medium text-muted-foreground tabular-nums">{row.year}</span>
+              <span className="text-ui font-semibold tabular-nums" style={{ color: row.total == null ? undefined : up ? UP : DOWN }}>
                 {row.total == null ? "—" : `${signed(row.total, digits)}%`}
               </span>
             </span>
@@ -498,7 +498,7 @@ function YearsGrid() {
                 )
               })}
             </span>
-            <span className="relative text-[10px] text-muted-foreground tabular-nums">
+            <span className="relative text-ui-2xs text-muted-foreground tabular-nums">
               {row.returns.filter((v) => v != null && v >= 0).length} up · {row.returns.filter((v) => v != null && v < 0).length} down
             </span>
           </motion.button>
@@ -562,7 +562,7 @@ function ReturnsCalendarTooltip({
               label={data.kind === "month" ? "Return" : "Compounded"}
               value={`${signed(data.value, digits)}%`}
             />
-            {data.note && <div className="pt-1 text-[11px] text-muted-foreground">{data.note}</div>}
+            {data.note && <div className="pt-1 text-ui-xs text-muted-foreground">{data.note}</div>}
           </>
         ))}
     </ChartTooltip>
@@ -599,7 +599,7 @@ function ReturnsCalendarSummary({ className, ...props }: React.ComponentProps<"d
       data-slot="returns-calendar-summary"
       aria-live="polite"
       className={cn(
-        "flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-2xl bg-muted px-3 py-2 text-xs text-muted-foreground shadow-well tabular-nums",
+        "flex flex-wrap items-center gap-x-4 gap-y-1.5 rounded-2xl bg-muted px-3 py-2 text-ui-sm text-muted-foreground shadow-well tabular-nums",
         className
       )}
       {...props}
@@ -624,7 +624,7 @@ function ReturnsCalendarSummary({ className, ...props }: React.ComponentProps<"d
         <button
           type="button"
           onClick={() => setSelection(null)}
-          className="ml-auto rounded-md bg-secondary px-2 py-0.5 text-[11px] font-medium text-secondary-foreground shadow-raised outline-none transition-[box-shadow,background-color,scale] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:scale-96"
+          className="ml-auto rounded-md bg-card px-2 py-0.5 text-ui-xs font-medium text-secondary-foreground shadow-raised outline-none transition-[box-shadow,background-color,scale] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           Clear
         </button>

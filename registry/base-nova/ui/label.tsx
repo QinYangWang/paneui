@@ -9,7 +9,7 @@ function Label({ className, ...props }: React.ComponentProps<"label">) {
     <label
       data-slot="label"
       className={cn(
-        "flex items-center gap-2 text-sm leading-none font-medium select-none",
+        "flex items-center gap-2 text-ui leading-none font-medium select-none",
         // Inside a group marked data-disabled="true" (e.g. a disabled field row).
         "group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50",
         // Label after its control: native inputs use :disabled, Base UI controls

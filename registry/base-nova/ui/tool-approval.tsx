@@ -155,7 +155,7 @@ function ToolApproval({
       data-slot="tool-approval"
       data-decision={decision ?? "pending"}
       className={cn(
-        "w-full overflow-hidden rounded-2xl bg-card text-sm text-card-foreground shadow-raised",
+        "w-full overflow-hidden rounded-2xl bg-card text-ui text-card-foreground shadow-raised",
         pending && "ring-1 ring-warning/35",
         className
       )}
@@ -187,19 +187,19 @@ function ToolApproval({
         </IconChip>
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="font-semibold tracking-tight">{pending ? title : DECISION_COPY[decision]}</span>
+            <span className="font-semibold">{pending ? title : DECISION_COPY[decision]}</span>
             <Badge size="sm" variant={pending ? riskInfo.variant : decision === "deny" ? "outline" : "success"}>
               {pending ? riskInfo.label : decision === "always" ? "Remembered" : decision === "once" ? "This run" : "Blocked"}
             </Badge>
           </div>
-          <code className="truncate font-mono text-xs text-muted-foreground">{tool}</code>
+          <code className="truncate font-mono text-ui-sm text-muted-foreground">{tool}</code>
           {description && pending ? <p className="pt-1 leading-relaxed text-muted-foreground">{description}</p> : null}
         </div>
       </div>
 
       {argsText ? (
         <CollapsiblePrimitive.Root open={argsOpen} onOpenChange={setArgsOpen} className="px-3.5">
-          <CollapsiblePrimitive.Trigger className="group/args -ml-1.5 inline-flex h-7 cursor-pointer items-center gap-1 rounded-md px-1.5 text-xs font-medium text-muted-foreground outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring">
+          <CollapsiblePrimitive.Trigger className="group/args -ml-1.5 inline-flex h-7 cursor-pointer items-center gap-1 rounded-md px-1.5 text-ui-sm font-medium text-muted-foreground outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50">
             {argsOpen ? "Hide arguments" : "Show arguments"}
             <ChevronDownIcon className="size-3.5 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/args:rotate-180 motion-reduce:transition-none" />
           </CollapsiblePrimitive.Trigger>
@@ -242,7 +242,7 @@ function ToolApproval({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25, ease: AGENT_EASE }}
-              className="flex min-h-8 items-center gap-2 text-xs text-muted-foreground"
+              className="flex min-h-8 items-center gap-2 text-ui-sm text-muted-foreground"
             >
               <span className="flex-1">
                 {decision === "always"

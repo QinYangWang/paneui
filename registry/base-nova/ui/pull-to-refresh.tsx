@@ -255,7 +255,7 @@ function PullToRefresh({
             </>
           )}
         </motion.span>
-        <span className="text-xs font-medium text-muted-foreground">{text}</span>
+        <span className="text-ui-sm font-medium text-muted-foreground">{text}</span>
       </motion.div>
 
       <span role="status" aria-live="polite" className="sr-only">

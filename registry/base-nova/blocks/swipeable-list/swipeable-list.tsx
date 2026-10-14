@@ -58,7 +58,7 @@ type SwipeableListProps = {
 }
 
 const toneClass: Record<SwipeTone, string> = {
-  neutral: "bg-secondary text-secondary-foreground",
+  neutral: "bg-card text-secondary-foreground",
   primary: "bg-primary text-primary-foreground",
   success: "bg-success text-white",
   warning: "bg-warning text-black/80",
@@ -181,8 +181,8 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
               disabled={action.disabled}
               onClick={() => void commit(action, side)}
               className={cn(
-                "relative flex shrink-0 cursor-pointer flex-col items-center justify-center gap-1 overflow-hidden text-[0.7rem] font-medium outline-none",
-                "transition-[flex-grow,opacity,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset disabled:opacity-50",
+                "relative flex shrink-0 cursor-pointer flex-col items-center justify-center gap-1 overflow-hidden text-ui-xs font-medium outline-none",
+                "transition-[flex-grow,opacity,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset disabled:opacity-50",
                 "[&_svg]:size-4.5",
                 toneClass[action.tone ?? "neutral"],
                 isArmed && action.id === edgeId ? "grow" : "grow-0",
@@ -234,7 +234,7 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
         data-slot="swipeable-list-surface"
         className={cn(
           "relative z-10 flex touch-pan-y items-center gap-3 rounded-2xl bg-card px-3.5 py-3 text-card-foreground shadow-raised outline-none select-none",
-          "focus-visible:ring-3 focus-visible:ring-ring",
+          "focus-visible:ring-2 focus-visible:ring-ring/50",
           hasActions && "cursor-grab active:cursor-grabbing",
           item.disabled && "opacity-60"
         )}
@@ -245,10 +245,10 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
           <>
             {item.leading && <div className="flex shrink-0">{item.leading}</div>}
             <div className="min-w-0 flex-1">
-              <div className="truncate text-sm font-medium">{item.title}</div>
-              {item.description && <div className="truncate text-[0.8rem] text-muted-foreground">{item.description}</div>}
+              <div className="truncate text-ui font-medium">{item.title}</div>
+              {item.description && <div className="truncate text-ui-sm text-muted-foreground">{item.description}</div>}
             </div>
-            {item.meta && <div className="shrink-0 self-start text-xs text-muted-foreground tabular-nums">{item.meta}</div>}
+            {item.meta && <div className="shrink-0 self-start text-ui-sm text-muted-foreground tabular-nums">{item.meta}</div>}
           </>
         )}
       </motion.div>

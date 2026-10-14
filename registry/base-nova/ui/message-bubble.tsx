@@ -26,11 +26,11 @@ function useMessageSide(align?: MessageSide): MessageSide {
 }
 
 const messageBubbleVariants = cva(
-  "relative w-fit max-w-full rounded-[1.25rem] px-4 py-2.5 text-[0.95rem] leading-relaxed wrap-break-word transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none focus-visible:ring-3 focus-visible:ring-ring [&_a]:underline [&_a]:underline-offset-2",
+  "relative w-fit max-w-full rounded-[1.25rem] px-4 py-2.5 text-ui-lg leading-relaxed wrap-break-word transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none focus-visible:ring-2 focus-visible:ring-ring/50 [&_a]:underline [&_a]:underline-offset-2",
   {
     variants: {
       tone: {
-        default: "bg-secondary text-secondary-foreground shadow-raised",
+        default: "bg-card text-secondary-foreground shadow-raised",
         primary:
           "bg-primary text-primary-foreground shadow-primary [&_a]:text-primary-foreground",
         muted: "bg-muted text-foreground shadow-well",
@@ -41,7 +41,7 @@ const messageBubbleVariants = cva(
       },
       size: {
         default: "",
-        sm: "rounded-2xl px-3 py-1.5 text-sm",
+        sm: "rounded-2xl px-3 py-1.5 text-ui",
       },
     },
     defaultVariants: { tone: "default", size: "default" },
@@ -165,7 +165,7 @@ function MessageBubbleCollapsible({
           aria-expanded={expanded}
           aria-controls={id}
           onClick={() => setExpanded((v) => !v)}
-          className="mt-1 inline-flex w-fit cursor-pointer items-center gap-1 rounded-full text-xs font-medium opacity-75 outline-none hover:opacity-100 focus-visible:ring-3 focus-visible:ring-ring"
+          className="mt-1 inline-flex w-fit cursor-pointer items-center gap-1 rounded-full text-ui-sm font-medium opacity-75 outline-none hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {expanded ? lessLabel : moreLabel}
           <ChevronDownIcon

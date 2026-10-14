@@ -18,7 +18,7 @@ function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (
     <AccordionPrimitive.Root
       data-slot="accordion"
-      className={cn("flex w-full flex-col gap-1 rounded-[1.25rem] bg-muted/60 p-1 shadow-well", className)}
+      className={cn("flex w-full flex-col gap-1 rounded-[1.25rem] bg-background dark:bg-input/32 p-1 shadow-well", className)}
       {...props}
     />
   )
@@ -49,7 +49,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "group/accordion-trigger flex min-h-11 flex-1 cursor-pointer items-center gap-3 rounded-2xl px-3 py-2 text-left text-sm font-medium text-foreground transition-[background-color] duration-150 outline-none select-none hover:not-data-panel-open:bg-card/50 focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50",
+          "group/accordion-trigger flex min-h-11 flex-1 cursor-pointer items-center gap-3 rounded-2xl px-3 py-2 text-left text-ui font-medium text-foreground transition-[background-color] duration-150 outline-none select-none hover:not-data-panel-open:bg-card/50 focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-50",
           className
         )}
         {...props}
@@ -58,7 +58,7 @@ function AccordionTrigger({
           <span
             data-slot="accordion-icon"
             aria-hidden
-            className="flex size-7 shrink-0 items-center justify-center rounded-full bg-secondary text-muted-foreground shadow-raised transition-colors duration-200 group-data-panel-open/accordion-trigger:text-primary [&_svg]:size-4"
+            className="flex size-7 shrink-0 items-center justify-center rounded-full bg-card text-muted-foreground shadow-raised transition-colors duration-200 group-data-panel-open/accordion-trigger:text-primary [&_svg]:size-4"
           >
             {icon}
           </span>
@@ -90,7 +90,7 @@ function AccordionPanel({ className, children, ...props }: AccordionPrimitive.Pa
       <div
         data-slot="accordion-content"
         className={cn(
-          "px-3 pb-3 text-[0.8rem] leading-5 text-muted-foreground transition-[opacity,translate] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-ending-style/accordion-panel:-translate-y-1.5 group-data-ending-style/accordion-panel:opacity-0 group-data-starting-style/accordion-panel:-translate-y-1.5 group-data-starting-style/accordion-panel:opacity-0 motion-reduce:transition-none",
+          "px-3 pb-3 text-ui-sm leading-5 text-muted-foreground transition-[opacity,translate] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-ending-style/accordion-panel:-translate-y-1.5 group-data-ending-style/accordion-panel:opacity-0 group-data-starting-style/accordion-panel:-translate-y-1.5 group-data-starting-style/accordion-panel:opacity-0 motion-reduce:transition-none",
           className
         )}
       >

@@ -3,31 +3,31 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+// Native desktop density (after Synara's button.tsx): 32px default, 13px label, flat fills,
+// hover is a fill change only. No press scale: native controls do not shrink.
 const buttonVariants = cva(
-  "group/button relative inline-flex shrink-0 cursor-pointer items-center justify-center rounded-lg text-sm font-medium whitespace-nowrap transition-[box-shadow,background-color,color,scale] duration-150 ease-out outline-none select-none focus-visible:ring-3 focus-visible:ring-ring active:not-aria-[haspopup]:scale-96 disabled:pointer-events-none disabled:opacity-50 aria-invalid:ring-3 aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button relative inline-flex shrink-0 cursor-pointer items-center justify-center rounded-lg text-ui font-medium whitespace-nowrap transition-[box-shadow,background-color,color,opacity] duration-150 ease-out outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-64 aria-invalid:ring-2 aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='opacity-'])]:opacity-80",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90",
+        default: "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-raised hover:bg-accent hover:shadow-raised-hover dark:hover:bg-accent",
+          "bg-secondary text-secondary-foreground hover:bg-foreground/6 aria-expanded:bg-foreground/6",
         outline:
-          "bg-transparent text-foreground shadow-[inset_0_0_0_1px_var(--input)] hover:bg-accent",
-        ghost: "text-foreground hover:bg-accent aria-expanded:bg-accent",
-        destructive:
-          "bg-destructive text-white shadow-[0_0_0_1px_color-mix(in_oklch,var(--destructive),black_10%)] hover:bg-destructive/90",
+          "bg-transparent text-foreground shadow-[inset_0_0_0_1px_var(--input)] hover:bg-secondary aria-expanded:bg-secondary",
+        ghost: "text-foreground hover:bg-secondary aria-expanded:bg-secondary",
+        destructive: "bg-destructive text-white hover:bg-destructive/90",
         link: "rounded-md text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 gap-1.5 px-3.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
-        xs: "h-6 gap-1 rounded-md px-2 text-xs [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-8 gap-1.5 px-2.5 text-[0.8rem] [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-10 gap-2 px-4 text-[0.95rem]",
-        icon: "size-9",
-        "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
+        default: "h-8 gap-1.5 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5",
+        xs: "h-6 gap-1 rounded-sm px-2 text-ui-xs [&_svg:not([class*='size-'])]:size-3.5",
+        sm: "h-7 gap-1.5 px-2.5 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-9 gap-2 px-3.5 text-ui-lg",
+        icon: "size-8",
+        "icon-xs": "size-6 rounded-sm [&_svg:not([class*='size-'])]:size-3.5",
+        "icon-sm": "size-7",
+        "icon-lg": "size-9",
       },
     },
     defaultVariants: {

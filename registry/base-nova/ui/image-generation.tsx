@@ -166,14 +166,14 @@ function ImageGeneration({
         {/* Error */}
         {status === "error" ? (
           <div className="absolute inset-0 grid place-items-center p-6 text-center">
-            <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex flex-col items-center gap-2 text-ui text-muted-foreground">
               <AlertCircleIcon className="size-5 text-destructive" />
               {errorText}
               {onRetry ? (
                 <button
                   type="button"
                   onClick={onRetry}
-                  className="mt-1 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-secondary px-3 text-xs font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
+                  className="mt-1 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-card px-3 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <RefreshIcon className="size-3.5" />
                   {retryLabel}
@@ -193,7 +193,7 @@ function ImageGeneration({
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: reduce ? 0 : 4, filter: "blur(2px)" }}
               transition={{ duration: 0.25, ease: AGENT_EASE }}
-              className="inline-flex h-6 items-center gap-1.5 rounded-full bg-popover/85 px-2 text-[11px] font-medium text-popover-foreground shadow-chip backdrop-blur-md [&_svg]:size-3"
+              className="inline-flex h-6 items-center gap-1.5 rounded-full bg-popover/85 px-2 text-ui-xs font-medium text-popover-foreground shadow-chip backdrop-blur-md [&_svg]:size-3"
             >
               {complete ? (
                 <CheckIcon className="text-success" />
@@ -232,8 +232,8 @@ function ImageGeneration({
       {prompt || meta || complete ? (
         <figcaption className="flex items-start gap-2 px-0.5">
           <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-            {prompt ? <p className="line-clamp-2 text-sm leading-snug text-foreground/90">{prompt}</p> : null}
-            {meta ? <p className="text-xs text-muted-foreground">{meta}</p> : null}
+            {prompt ? <p className="line-clamp-2 text-ui leading-snug text-foreground/90">{prompt}</p> : null}
+            {meta ? <p className="text-ui-sm text-muted-foreground">{meta}</p> : null}
           </div>
           <motion.div
             className="flex shrink-0 items-center"

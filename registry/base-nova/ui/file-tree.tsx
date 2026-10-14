@@ -225,7 +225,7 @@ function FileTree({
       role="tree"
       aria-label={label}
       data-slot="file-tree"
-      className={cn("flex min-w-0 flex-col text-sm", className)}
+      className={cn("flex min-w-0 flex-col text-ui", className)}
       {...props}
     >
       <AnimatePresence initial={false}>
@@ -266,7 +266,7 @@ function FileTree({
               style={{ paddingLeft: 8 + row.depth * indent }}
               className={cn(
                 "group/file-tree-item relative flex h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-xl pr-2 text-muted-foreground outline-none select-none",
-                "transition-colors duration-150 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring",
+                "transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
                 isSelected && "font-medium text-foreground",
                 node.disabled && "cursor-not-allowed hover:text-muted-foreground",
                 node.className
@@ -277,11 +277,11 @@ function FileTree({
                   layoutId={pillId}
                   aria-hidden
                   transition={reduce ? { duration: 0 } : SPRING}
-                  className="absolute inset-0 rounded-xl bg-secondary shadow-raised"
+                  className="absolute inset-0 rounded-lg bg-secondary"
                 />
               )}
               {!isSelected && (
-                <span aria-hidden className="absolute inset-0 rounded-xl transition-colors group-hover/file-tree-item:bg-muted/60" />
+                <span aria-hidden className="absolute inset-0 rounded-lg transition-colors group-hover/file-tree-item:bg-muted/60" />
               )}
 
               {/* branch guides, one per ancestor level */}
@@ -335,7 +335,7 @@ function FileTree({
               <span data-slot="file-tree-label" className="relative z-10 min-w-0 flex-1 truncate">
                 {node.name}
               </span>
-              {node.meta != null && <span className="relative z-10 shrink-0 text-xs text-muted-foreground">{node.meta}</span>}
+              {node.meta != null && <span className="relative z-10 shrink-0 text-ui-sm text-muted-foreground">{node.meta}</span>}
             </motion.div>
           )
         })}

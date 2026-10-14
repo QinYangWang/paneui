@@ -130,7 +130,7 @@ function Alert({
               <div
                 data-slot="alert-surface"
                 className={cn(
-                  "relative isolate flex w-full items-start gap-3 overflow-hidden rounded-2xl bg-card p-3.5 text-sm text-card-foreground shadow-raised",
+                  "relative isolate flex w-full items-start gap-3 overflow-hidden rounded-2xl bg-card p-3.5 text-ui text-card-foreground shadow-raised",
                   contentClassName
                 )}
               >
@@ -164,14 +164,14 @@ function AlertContent({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="alert-title" className={cn("leading-5 font-medium tracking-tight", className)} {...props} />
+  return <div data-slot="alert-title" className={cn("leading-5 font-medium", className)} {...props} />
 }
 
 function AlertDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-description"
-      className={cn("text-[0.8rem] leading-5 text-muted-foreground [&_a]:underline [&_a]:underline-offset-3", className)}
+      className={cn("text-ui-sm leading-5 text-muted-foreground [&_a]:underline [&_a]:underline-offset-3", className)}
       {...props}
     />
   )
@@ -197,7 +197,7 @@ function AlertClose({ className, onClick, children, ...props }: React.ComponentP
         if (!e.defaultPrevented) dismiss()
       }}
       className={cn(
-        "-mt-0.5 -mr-1 flex size-7 shrink-0 cursor-pointer items-center justify-center self-start rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 [&_svg]:size-3.5",
+        "-mt-0.5 -mr-1 flex size-7 shrink-0 cursor-pointer items-center justify-center self-start rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-3.5",
         className
       )}
       {...props}

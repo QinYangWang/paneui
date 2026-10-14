@@ -20,7 +20,7 @@ export function BlogHeader({ homeHref }: { homeHref: string }) {
   return (
     <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/80 backdrop-blur">
       <Container className="flex h-full items-center gap-4">
-        <Link href={homeHref} className="flex items-center gap-2.5 rounded-full font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring">
+        <Link href={homeHref} className="flex items-center gap-2.5 rounded-full font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
           <Avatar name={author.name} size="sm" />
           {author.name}
         </Link>

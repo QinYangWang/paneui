@@ -55,10 +55,10 @@ function ToastList() {
       <ToastPrimitive.Content className="flex items-start gap-3 overflow-hidden p-4 pr-10 transition-opacity duration-300 data-behind:opacity-0 data-expanded:opacity-100 [&_svg]:size-4.5 [&_svg]:shrink-0">
         {toast.type && typeIcon[toast.type] && <span className="mt-px flex">{typeIcon[toast.type]}</span>}
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-          <ToastPrimitive.Title className="text-sm font-medium" />
-          <ToastPrimitive.Description className="text-sm text-muted-foreground" />
+          <ToastPrimitive.Title className="text-ui font-medium" />
+          <ToastPrimitive.Description className="text-ui text-muted-foreground" />
           {toast.actionProps && (
-            <ToastPrimitive.Action className="mt-2 inline-flex h-7 w-fit cursor-pointer items-center rounded-md bg-secondary px-2.5 text-xs font-medium shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover active:scale-96" />
+            <ToastPrimitive.Action className="mt-2 inline-flex h-7 w-fit cursor-pointer items-center rounded-md bg-card px-2.5 text-ui-sm font-medium shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover" />
           )}
         </div>
         <ToastPrimitive.Close

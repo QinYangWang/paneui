@@ -167,7 +167,7 @@ function ThemeToggle({ className, storageKey, duration, onThemeChange, iconSize 
         }
       }}
       className={cn(
-        "relative inline-flex size-9 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-secondary text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50",
+        "relative inline-flex size-8 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-card text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
         className
       )}
       {...props}

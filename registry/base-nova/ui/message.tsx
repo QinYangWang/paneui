@@ -88,7 +88,7 @@ function MessageAvatar({
       data-slot="message-avatar"
       aria-hidden={placeholder || undefined}
       className={cn(
-        "relative mb-0.5 grid size-8 shrink-0 place-items-center overflow-hidden rounded-full bg-secondary text-xs font-semibold text-muted-foreground shadow-raised [&_img]:size-full [&_img]:object-cover [&_svg]:size-4",
+        "relative mb-0.5 grid size-8 shrink-0 place-items-center overflow-hidden rounded-full bg-card text-ui-sm font-semibold text-muted-foreground shadow-raised [&_img]:size-full [&_img]:object-cover [&_svg]:size-4",
         placeholder && "invisible",
         className
       )}
@@ -122,7 +122,7 @@ function MessageHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="message-header"
       className={cn(
-        "mb-1 flex items-center gap-1.5 px-1 text-xs font-medium text-muted-foreground group-data-[from=user]/message:flex-row-reverse",
+        "mb-1 flex items-center gap-1.5 px-1 text-ui-sm font-medium text-muted-foreground group-data-[from=user]/message:flex-row-reverse",
         className
       )}
       {...props}
@@ -136,7 +136,7 @@ function MessageMeta({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="message-meta"
       className={cn(
-        "mt-1 flex items-center gap-1.5 px-1 text-[0.7rem] text-muted-foreground tabular-nums group-data-[from=user]/message:flex-row-reverse [&_svg]:size-3",
+        "mt-1 flex items-center gap-1.5 px-1 text-ui-xs text-muted-foreground tabular-nums group-data-[from=user]/message:flex-row-reverse [&_svg]:size-3",
         className
       )}
       {...props}
@@ -206,7 +206,7 @@ function MessageTyping({ label = "Typing", className, ...props }: React.Componen
       aria-label={label}
       data-slot="message-typing"
       className={cn(
-        "flex h-10 w-16 items-center justify-center gap-1 self-start rounded-[1.25rem] rounded-bl-md bg-secondary shadow-raised",
+        "flex h-10 w-16 items-center justify-center gap-1 self-start rounded-[1.25rem] rounded-bl-md bg-card shadow-raised",
         className
       )}
       {...props}
@@ -230,7 +230,7 @@ function MessageMarker({ className, children, ...props }: React.ComponentProps<"
       role="separator"
       data-slot="message-marker"
       className={cn(
-        "flex items-center gap-3 text-[0.7rem] font-medium text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border",
+        "flex items-center gap-3 text-ui-xs font-medium text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border",
         className
       )}
       {...props}

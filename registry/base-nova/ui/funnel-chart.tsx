@@ -177,12 +177,12 @@ function FunnelChart({
               <li
                 key={s.id}
                 className={cn(
-                  "flex flex-col justify-center text-sm transition-opacity duration-200",
+                  "flex flex-col justify-center text-ui transition-opacity duration-200",
                   active && active.id !== s.id && "opacity-50"
                 )}
               >
                 <span className="truncate font-medium text-foreground">{s.label}</span>
-                <span className="text-xs text-muted-foreground tabular-nums">
+                <span className="text-ui-sm text-muted-foreground tabular-nums">
                   {s.index === 0 ? "Start" : `${formatPercent(s.ofPrevious, 0)} of previous`}
                 </span>
               </li>
@@ -273,7 +273,7 @@ function FunnelChart({
                     transition={transition}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    className="pointer-events-none fill-white text-[11px] font-semibold tabular-nums"
+                    className="pointer-events-none fill-white text-ui-xs font-semibold tabular-nums"
                     style={{ fill: onFill(s.color) }}
                   >
                     {v}%
@@ -332,8 +332,8 @@ function FunnelChart({
                   active && active.id !== s.id && "opacity-50"
                 )}
               >
-                <ChartNumber value={s.value} format={formatValue} className="text-sm font-semibold text-foreground" />
-                <span className="text-xs text-muted-foreground tabular-nums">{formatPercent(s.ofFirst)}</span>
+                <ChartNumber value={s.value} format={formatValue} className="text-ui font-semibold text-foreground" />
+                <span className="text-ui-sm text-muted-foreground tabular-nums">{formatPercent(s.ofFirst)}</span>
               </li>
             ))}
           </ol>
@@ -350,10 +350,10 @@ function FunnelChart({
                   active && active.id !== s.id && "opacity-50"
                 )}
               >
-                <div className="truncate text-xs font-medium text-muted-foreground">{s.label}</div>
-                <ChartNumber value={s.value} format={formatValue} className="text-sm font-semibold text-foreground" />
+                <div className="truncate text-ui-sm font-medium text-muted-foreground">{s.label}</div>
+                <ChartNumber value={s.value} format={formatValue} className="text-ui font-semibold text-foreground" />
                 {s.index > 0 && (
-                  <div className="text-[11px] text-muted-foreground tabular-nums">
+                  <div className="text-ui-xs text-muted-foreground tabular-nums">
                     {formatPercent(s.ofPrevious, 0)} step
                   </div>
                 )}

@@ -144,7 +144,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                 <Link
                   key={p.slug}
                   href={hrefs.post}
-                  className="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-surface outline-none focus-visible:ring-3 focus-visible:ring-ring"
+                  className="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-surface outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <CoverArt variant={p.cover} className="aspect-video" />
                   <div className="flex flex-col gap-2 p-5">
