@@ -3530,9 +3530,11 @@
       "name": "avatar-generator",
       "type": "registry:ui",
       "title": "Avatar Generator",
-      "description": "Deterministic kawaii avatars drawn in code from a seed, after the Seline logo (black hair, white face, blushed cheeks), hand-inked by default (seeded wobble, pen-pressure strokes, open loops) or smooth vector lines: male/female/any hairstyles, eyes, mouth, top, skin tone and accessory parts, plus an editor with seed shuffle, gender and style toggles, part pickers, SVG download and JSX copy.",
+      "description": "Deterministic avatars from a seed in DiceBear's Notionists style (art by Zoish, CC0; DiceBear, MIT), cropped so faces read at 20–32px: male/female/any hair from a curated long/short split, no beard for female, optional glasses, tint/circle/transparent/hex backgrounds and collision-free SVG ids, plus an editor with seed shuffle, gender toggle, part pickers (hair, eyes, brows, mouth, glasses, beard, top, gesture), SVG download and JSX copy.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "@dicebear/core@^9.4.3",
+        "@dicebear/notionists@^9.4.3"
       ],
       "registryDependencies": [
         "@qinyang/theme",

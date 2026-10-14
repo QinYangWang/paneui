@@ -1,16 +1,16 @@
 import { GeneratedAvatar } from "@/registry/base-nova/ui/generated-avatar"
 
 const variants = [
-  { label: "Sketch (default)", props: {} },
-  { label: "Smooth", props: { variant: "smooth" as const } },
+  { label: "Default", props: {} },
   { label: "Accessories", props: { accessories: true } },
-  { label: "Glasses", props: { selections: { eyes: "glasses" } } },
-  { label: "Skin tone", props: { selections: { skin: "tan" } } },
-  { label: "No blush", props: { blush: false } },
+  { label: "Glasses", props: { selections: { glasses: "variant05" } } },
+  { label: "Gesture", props: { selections: { gesture: "waveLongArm" } } },
   { label: "Circle", props: { background: "circle" } },
-  { label: "Picked parts", props: { selections: { hair: "bun", eyes: "happy", mouth: "open", top: "collar" } } },
-  { label: "Colours", props: { colors: { hair: "#5B3A29", background: "#EAF2FB" } } },
+  { label: "Picked parts", props: { selections: { hair: "variant46", eyes: "variant02", lips: "variant03", body: "variant12" } } },
+  { label: "Background", props: { colors: { background: "#EAF2FB" } } },
+  { label: "Hex background", props: { background: "#FDEFD8" } },
   { label: "Transparent", props: { background: "none" } },
+  { label: "Male + beard", props: { gender: "male" as const, selections: { hair: "variant52", beard: "variant02" } } },
 ]
 
 export default function AvatarGeneratorOptions() {

@@ -23,7 +23,7 @@ After changing radii or padding on nested surfaces, also run `pnpm audit:radius`
 | `notes/synara-native-style.md` | Native desktop style reference (Synara/Codex values) | — |
 | `notes/radius-audit.md` | Nested-radius audit triage (open findings by owner) | — |
 | `scripts/audit-radius.mjs` (+ `.config.mjs`) | `pnpm audit:radius`: browser audit of nested radii | — |
-| `THIRD_PARTY_NOTICES.md` | MIT notices for Synara (style) and BoardUI (colours) | — |
+| `THIRD_PARTY_NOTICES.md` | Notices for Synara (style), BoardUI (colours), @pierre/diffs, DiceBear + Notionists (avatars) | — |
 
 Import library code as `@/registry/base-nova/ui/<file>` or `@/registry/base-nova/blocks/<name>/<file>`.
 **Library** files own their appearance (no `no-restyle`; arbitrary values only warn).

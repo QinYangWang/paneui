@@ -6,10 +6,10 @@ export default {
 import { AvatarGenerator } from "@/components/ui/avatar-generator"`,
     code: `<GeneratedAvatar seed={user.id} gender="female" size="lg" title={user.name} />`,
   },
-  composition: `GeneratedAvatar        Avatar frame + drawing
+  composition: `GeneratedAvatar        Avatar frame + Notionists drawing
 GeneratedAvatarImage   bare <svg>, e.g. inside AvatarFallback
 createGeneratedAvatar  no React: SVG string, data URI, resolved parts
-AvatarGenerator        editor: seed, gender, style, part pickers, download, copy`,
+AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
   examples: [
     {
       id: "by-seed",
@@ -20,75 +20,77 @@ AvatarGenerator        editor: seed, gender, style, part pickers, download, copy
       id: "gender",
       title: "Male and Female",
       description:
-        "`gender` limits hair to one presentation: `male` draws buzz, side part, messy or curly short; `female` draws bob, long straight, bun, ponytail or wavy. Eyes, mouths, tops and skin are shared, and the bow is female-only. `any` (the default) picks from every hairstyle.",
+        "`gender` limits hair to a hand-picked split of the Notionists styles: `female` draws long hair, bobs, buns, ponytails and headscarves (22 styles); `male` draws short cuts, quiffs and spikes (35 styles) and allows a beard. `female` never gets a beard. `any` (the default) picks from all 64, including the unisex curls, cap, paper hat and head wrap.",
     },
     {
       id: "options",
       title: "Options",
       description:
-        "`variant=\"smooth\"` swaps the hand-inked default for clean vector lines; `accessories` lets the seed add a beanie, bow or cowlick; `selections` pins any part (eyes, mouth, top, skin tone); `blush`, `background` (`tint`, `circle`, `none` or a hex) and `colors` fine-tune the drawing.",
+        "`accessories` lets the seed add glasses; `selections` pins any part (`hair`, `eyes`, `brows`, `lips`, `nose`, `glasses`, `beard`, `body`, `gesture`), with `\"none\"` to turn off glasses, beard or gesture; `background` is `tint`, `circle`, `none` or a hex, and `colors.background` recolours the tint.",
     },
     {
       id: "generator",
       title: "Generator",
       description:
-        "`AvatarGenerator` is the editor: type or shuffle a seed, pick a gender, a style (sketch or smooth) and parts, then download the SVG or copy the JSX. `onValueChange` hands you the state to store.",
+        "`AvatarGenerator` is the editor: type or shuffle a seed, pick a gender and parts, then download the SVG or copy the JSX. `onValueChange` hands you the state to store.",
     },
   ],
   notes: [
     {
-      title: "Sketch and smooth",
-      body: "The default `sketch` variant inks every line by hand, in code: each outline becomes a pen stroke that is thin where it lands and lifts and fuller on curves, every edge gets a seeded low-frequency wobble, closed shapes overshoot or stop short of where they started, faces are slightly lopsided, hair ends flick out and carries a few sheen strands, and eyes and cheeks are uneven blobs. The wobble comes from the seed, so the same seed draws the identical SVG on the server and the client. Under 40px `GeneratedAvatar` switches to `detail=\"simple\"` (no strands, a calmer hand) so small avatars stay crisp; set `detail` yourself to override, or when using `GeneratedAvatarImage` / `createGeneratedAvatar` at small sizes. `variant=\"smooth\"` draws the same parts as clean vector paths.",
+      title: "Artwork and licence",
+      body: "The drawings are [Notionists](https://heyzoish.gumroad.com/l/notionists) by Zoish, released under CC0 1.0 (public domain, no attribution required, credited anyway), rendered with [DiceBear](https://www.dicebear.com/styles/notionists/) (`@dicebear/core` and `@dicebear/notionists`, MIT). Both packages install with the component; nothing is fetched at runtime. DiceBear's `<metadata>` block is stripped from the output; the credit lives here and in `THIRD_PARTY_NOTICES.md`.",
     },
     {
       title: "Parts",
-      body: "Every avatar is drawn in code on one 64×64 grid with one stroke weight, after Seline's logo: black hair mass, white face, black outline, pink cheeks, dot eyes. Slots: hair (`buzz`, `side-part`, `messy`, `curly`, `bob`, `long`, `bun`, `ponytail`, `wavy`), eyes (`dots`, `happy`, `sleepy`, `glasses`), mouth (`smile`, `none`, `flat`, `open`, `cat`), top (`crew`, `turtleneck`, `collar`), skin (`white`, `porcelain`, `peach`, `tan`, `brown`, `deep`) and accessory (`none`, `beanie`, `bow`, `cowlick`). The seed never changes skin; it stays white unless you pick a tone. No artwork package, nothing fetched at runtime.",
+      body: "Part names are DiceBear's: hair `variant01`…`variant63` plus `hat`, eyes `variant01`…`05`, brows `01`…`13`, lips `01`…`30`, nose `01`…`20`, glasses `01`…`11`, beard `01`…`12`, body (the top) `01`…`25`, and gesture `waveLongArms`, `waveLongArm`, `wavePointLongArms`, `waveOkLongArms`, `pointLongArm`, `okLongArm`, `handPhone`. Use `getAvatarParts(slot, gender)` for the list with labels. Gestures are off unless picked; DiceBear's `point`, `ok` and `hand` are left out because the closer crop hides the hand.",
+    },
+    {
+      title: "Small sizes and ids",
+      body: "Notionists is drawn as a bust; the avatar is zoomed in (DiceBear `scale` 135, `translateY` 8) so the face still reads at `xs`/`sm` (20–24px). Every id inside the SVG (the clip mask, some tops) is prefixed: `GeneratedAvatar` and `GeneratedAvatarImage` use React's `useId`, `createGeneratedAvatar` a hash of the options (or your `idPrefix`), so any number of avatars, identical ones included, can share a page without one borrowing another's mask, and the markup is the same on the server and the client.",
     },
     {
       title: "Storing an avatar",
-      body: "Store the seed when the avatar can be regenerated from the user. When the user edits it, store `{ seed, gender, selections, accessories, variant }` from `onValueChange`. Adding parts in a later version can change seed-only picks, so pin explicit `selections` for avatars that must never change.",
+      body: "Store the seed when the avatar can be regenerated from the user. When the user edits it, store `{ seed, gender, selections, accessories }` from `onValueChange`. A future DiceBear release that adds parts can change seed-only picks, so pin explicit `selections` for avatars that must never change.",
     },
     {
       title: "Dark mode",
-      body: "The default `tint` background stays light in both themes so black hair never disappears into a dark page. Use `background=\"none\"` only on light surfaces.",
+      body: "The line art is black on white faces, so the default `tint` background stays light in both themes. Use `background=\"none\"` only on light surfaces.",
     },
   ],
   api: [
     {
       name: "GeneratedAvatar",
-      description: "A seeded avatar inside the library's `Avatar` frame. Children (e.g. `AvatarStatus`) render on top.",
+      description: "A seeded Notionists avatar inside the library's `Avatar` frame. Children (e.g. `AvatarStatus`) render on top.",
       extends: "Avatar",
       props: [
         { name: "seed", type: "string", required: true, description: "Any stable string." },
-        { name: "gender", type: `"male" | "female" | "any"`, default: `"any"`, description: "Which hairstyles (and accessories) the seed picks from." },
+        { name: "gender", type: `"male" | "female" | "any"`, default: `"any"`, description: "Which hairstyles the seed picks from; `female` also turns beards off." },
         { name: "size", type: `"xs" | "sm" | "md" | "lg" | "xl" | number`, default: `"md"`, description: "An Avatar size or a pixel size. Inside an `AvatarGroup` it follows the group." },
         { name: "shape", type: `"circle" | "rounded"`, default: `"circle"`, description: "Passed to `Avatar`." },
-        { name: "variant", type: `"sketch" | "smooth"`, default: `"sketch"`, description: "Hand-inked pen lines, or clean vector lines." },
-        { name: "detail", type: `"full" | "simple"`, description: "Sketch only. `simple` drops hair strands and calms the wobble. Defaults to `simple` under 40px, else `full`." },
-        { name: "accessories", type: "boolean", default: "false", description: "Let the seed pick a beanie, bow or cowlick. Off keeps the clean look." },
-        { name: "blush", type: "boolean", default: "true", description: "Pink cheeks." },
+        { name: "accessories", type: "boolean", default: "false", description: "Let the seed add glasses (about one in three). Off keeps the clean look." },
         { name: "background", type: `"tint" | "circle" | "none" | string`, default: `"tint"`, description: "Warm light grey square, the same tint as a disc, transparent, or a hex colour." },
-        { name: "selections", type: `{ hair?, eyes?, mouth?, top?, skin?, accessory?: string }`, description: "Explicit part per slot by name (`{ hair: \"bun\", eyes: \"glasses\" }`). Overrides the seed; the Parts note lists the names." },
-        { name: "colors", type: `{ hair?, stroke?, skin?, blush?, background?: string }`, description: "Hex colours: hair, outline and features, skin (overrides the tone), cheeks, background tint." },
+        { name: "selections", type: `{ hair?, eyes?, brows?, lips?, nose?, glasses?, beard?, body?, gesture?: string }`, description: "Explicit part per slot by name (`{ hair: \"variant46\", glasses: \"none\" }`). Overrides the seed; the Parts note lists the names." },
+        { name: "colors", type: `{ background?: string }`, description: "Hex colour for the background tint." },
+        { name: "idPrefix", type: "string", description: "Prefix for ids inside the SVG. Defaults to one from `useId` (a hash of the options in `createGeneratedAvatar`)." },
         { name: "title", type: "string", description: "Accessible name. Without it the avatar is decorative." },
       ],
     },
     {
       name: "GeneratedAvatarImage",
-      description: "The drawing alone as an `<svg>` that fills its box. Same options as `GeneratedAvatar` minus size and shape; `detail` defaults to `full` since it can't see its size.",
+      description: "The drawing alone as an `<svg>` that fills its box. Same options as `GeneratedAvatar` minus size and shape.",
       extends: "svg",
       props: [],
     },
     {
       name: "createGeneratedAvatar",
-      description: "Framework-free builder. Returns `{ selections, viewBox, content, toString(size?), toDataUri(size?) }`.",
-      props: [{ name: "options", type: "GeneratedAvatarOptions", required: true, description: "Same options as `GeneratedAvatar` (seed, gender, variant, detail, accessories, blush, background, selections, colors). `detail` defaults to `full` here." }],
+      description: "Framework-free builder. Returns `{ selections, viewBox, content, toString(size?), toDataUri(size?) }`; `selections` is the part each slot ended up with (`\"none\"` for an empty optional slot).",
+      props: [{ name: "options", type: "GeneratedAvatarOptions", required: true, description: "Same options as `GeneratedAvatar` (seed, gender, accessories, background, selections, colors)." }],
     },
     {
       name: "getAvatarParts",
-      description: "The parts a slot offers for a gender, for building your own pickers. Only hair and accessories differ by gender.",
+      description: "The parts a slot offers for a gender, for building your own pickers. Only hair differs by gender (and beard is empty for `female`); glasses, beard and gesture start with `none`.",
       props: [
-        { name: "slot", type: `"hair" | "eyes" | "mouth" | "top" | "skin" | "accessory"`, required: true, description: "Returns `{ name, label, gender? }[]`." },
+        { name: "slot", type: `"hair" | "eyes" | "brows" | "lips" | "nose" | "glasses" | "beard" | "body" | "gesture"`, required: true, description: "Returns `{ name, label, gender? }[]`." },
         { name: "gender", type: `"male" | "female" | "any"`, default: `"any"`, description: "" },
       ],
     },
@@ -99,8 +101,7 @@ AvatarGenerator        editor: seed, gender, style, part pickers, download, copy
       props: [
         { name: "defaultSeed", type: "string", default: `"qinyang"`, description: "Initial seed." },
         { name: "defaultGender", type: `"male" | "female" | "any"`, default: `"any"`, description: "Initial gender." },
-        { name: "defaultVariant", type: `"sketch" | "smooth"`, default: `"sketch"`, description: "Initial style." },
-        { name: "onValueChange", type: "(state: { seed, gender, selections, accessories, variant }) => void", description: "Called on every change; store it to redraw the same avatar with `GeneratedAvatar`." },
+        { name: "onValueChange", type: "(state: { seed, gender, selections, accessories }) => void", description: "Called on every change; store it to redraw the same avatar with `GeneratedAvatar`." },
       ],
     },
   ],

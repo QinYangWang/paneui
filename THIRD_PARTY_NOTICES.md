@@ -72,3 +72,45 @@ SOFTWARE.
 licensed under the Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
 It is installed from npm as a dependency and not vendored or modified; the package ships no
 NOTICE file. Its full license text is in `node_modules/@pierre/diffs/LICENSE.md`.
+
+## DiceBear and Notionists (generated avatars)
+
+`registry/base-nova/ui/generated-avatar.tsx` (and the `avatar-generator` registry item) draws its
+avatars with DiceBear's Notionists style. Both packages are installed from npm as dependencies
+(`@dicebear/core`, `@dicebear/notionists`) and not vendored or modified; the component crops the
+output, swaps in its own background, prefixes the SVG ids and strips DiceBear's `<metadata>`.
+The library no longer ships any avatar artwork of its own.
+
+### Artwork: Notionists by Zoish (CC0 1.0)
+
+Source: Notionists, https://heyzoish.gumroad.com/l/notionists
+Designer: Zoish, https://bio.link/heyzoish
+License: CC0 1.0 Universal (public domain dedication),
+https://creativecommons.org/publicdomain/zero/1.0/
+No attribution is required; it is credited here and on the Avatar Generator docs page.
+
+### Code: DiceBear (MIT)
+
+https://www.dicebear.com, https://github.com/dicebear/dicebear
+
+MIT License
+
+Copyright (c) 2024 Florian Körner
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
