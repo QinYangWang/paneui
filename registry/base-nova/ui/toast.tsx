@@ -49,7 +49,7 @@ function ToastList() {
         "data-ending-style:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y)_+_150%))]",
         "transition-[transform,opacity,height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] data-swiping:duration-0",
         "after:absolute after:top-full after:left-0 after:h-[calc(var(--gap)_+_1px)] after:w-full after:content-['']",
-        "rounded-2xl bg-popover bg-linear-to-b from-white/4 to-transparent text-popover-foreground shadow-surface"
+        "rounded-xl bg-popover text-popover-foreground shadow-surface"
       )}
     >
       <ToastPrimitive.Content className="flex items-start gap-3 overflow-hidden p-4 pr-10 transition-opacity duration-300 data-behind:opacity-0 data-expanded:opacity-100 [&_svg]:size-4.5 [&_svg]:shrink-0">
@@ -58,7 +58,7 @@ function ToastList() {
           <ToastPrimitive.Title className="text-sm font-medium" />
           <ToastPrimitive.Description className="text-sm text-muted-foreground" />
           {toast.actionProps && (
-            <ToastPrimitive.Action className="mt-2 inline-flex h-7 w-fit cursor-pointer items-center rounded-full bg-secondary px-3 text-xs font-medium shadow-raised transition-shadow hover:shadow-raised-hover active:shadow-pressed" />
+            <ToastPrimitive.Action className="mt-2 inline-flex h-7 w-fit cursor-pointer items-center rounded-md bg-secondary px-2.5 text-xs font-medium shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover active:scale-96" />
           )}
         </div>
         <ToastPrimitive.Close

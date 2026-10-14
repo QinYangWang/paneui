@@ -43,8 +43,9 @@ const LABEL: Transition = { type: "spring", stiffness: 400, damping: 34, mass: 0
 const GLIDE: Transition = { type: "spring", stiffness: 460, damping: 36, mass: 0.6 }
 
 const sizes = {
-  sm: { bar: "gap-0.5 p-1", item: "h-7 min-w-7 px-1.5 text-xs", icon: "[&_svg]:size-3.5" },
-  md: { bar: "gap-1 p-1.5", item: "h-9 min-w-9 px-2.5 text-sm", icon: "[&_svg]:size-4" },
+  // Concentric radii: bar radius = item radius + bar padding.
+  sm: { bar: "gap-0.5 rounded-lg p-1", item: "h-7 min-w-7 rounded-sm px-1.5 text-xs", icon: "[&_svg]:size-3.5", radius: "rounded-sm" },
+  md: { bar: "gap-1 rounded-xl p-1.5", item: "h-9 min-w-9 rounded-md px-2.5 text-sm", icon: "[&_svg]:size-4", radius: "rounded-md" },
 }
 
 export function ExpandableActionBar({
@@ -145,7 +146,7 @@ export function ExpandableActionBar({
         scheduleCollapse()
       }}
       className={cn(
-        "inline-flex items-center rounded-full bg-card bg-linear-to-b from-white/5 to-transparent text-card-foreground shadow-raised",
+        "inline-flex items-center bg-card text-card-foreground shadow-raised",
         s.bar,
         className
       )}
@@ -168,7 +169,7 @@ export function ExpandableActionBar({
                 onAction?.(item)
               }}
               className={cn(
-                "relative inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full font-medium whitespace-nowrap text-muted-foreground outline-none transition-colors duration-150 select-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-45",
+                "relative inline-flex shrink-0 cursor-pointer items-center justify-center font-medium whitespace-nowrap text-muted-foreground outline-none transition-[color,scale] duration-150 ease-out select-none active:scale-96 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-45",
                 s.item,
                 s.icon
               )}
@@ -178,7 +179,7 @@ export function ExpandableActionBar({
                   layoutId="active"
                   aria-hidden
                   transition={reduce ? { duration: 0 } : GLIDE}
-                  className="absolute inset-0 rounded-full bg-muted shadow-well"
+                  className={cn("absolute inset-0 bg-accent", s.radius)}
                 />
               )}
               <span className="relative inline-flex items-center justify-center">

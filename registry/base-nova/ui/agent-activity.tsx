@@ -173,7 +173,7 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
                     target="_blank"
                     rel="noreferrer noopener"
                     title={typeof r.title === "string" ? r.title : undefined}
-                    className="inline-flex h-6 max-w-48 items-center gap-1.5 rounded-full bg-muted bg-linear-to-b from-white/5 to-transparent pr-2 pl-0.5 text-[11px] text-muted-foreground shadow-chip outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+                    className="inline-flex h-6 max-w-48 items-center gap-1.5 rounded-full bg-muted pr-2 pl-0.5 text-[11px] text-muted-foreground shadow-chip outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
                   >
                     <CitationFavicon source={r} className="size-5 rounded-full shadow-none" />
                     <span className="truncate">{r.domain ?? (typeof r.title === "string" ? r.title : "Source")}</span>
@@ -259,7 +259,7 @@ function ActivityGroupView({
     <CollapsiblePrimitive.Root open={open} onOpenChange={onOpenChange} className="relative flex flex-col" render={<li />}>
       {/* timeline rail */}
       {!last ? <span aria-hidden className="absolute top-7 bottom-0 left-[0.6875rem] w-px bg-border" /> : null}
-      <CollapsiblePrimitive.Trigger className="group/activity-group -ml-1 flex h-7 w-fit max-w-full cursor-pointer items-center gap-2 rounded-full pr-2 pl-1 text-left text-[0.8125rem] outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring">
+      <CollapsiblePrimitive.Trigger className="group/activity-group -ml-1 flex h-7 w-fit max-w-full cursor-pointer items-center gap-2 rounded-md pr-2 pl-1 text-left text-[0.8125rem] outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring">
         <span
           aria-hidden
           className={cn(
@@ -382,7 +382,7 @@ function AgentActivity({
     >
       <CollapsiblePrimitive.Trigger
         disabled={working}
-        className="group/activity -ml-1.5 flex h-8 w-fit max-w-full cursor-pointer items-center gap-2 rounded-full px-1.5 text-left outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring data-disabled:cursor-default data-disabled:hover:bg-transparent"
+        className="group/activity -ml-1.5 flex h-8 w-fit max-w-full cursor-pointer items-center gap-2 rounded-md px-1.5 text-left outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring data-disabled:cursor-default data-disabled:hover:bg-transparent"
       >
         <span role="status" className="flex min-w-0 items-center gap-2">
           {working ? (

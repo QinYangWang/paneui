@@ -102,7 +102,7 @@ function ScrollProgressBar({
       <motion.div
         data-slot="scroll-progress-indicator"
         style={{ scaleX: value }}
-        className="h-full origin-left rounded-r-full bg-primary shadow-[0_0_8px_color-mix(in_oklch,var(--primary),transparent_50%)]"
+        className="h-full origin-left rounded-r-full bg-primary"
       />
     </div>
   )
@@ -137,7 +137,7 @@ function ScrollProgressRing({
       data-variant="ring"
       style={{ width: size, height: size }}
       className={cn(
-        "relative inline-flex shrink-0 items-center justify-center rounded-full bg-card bg-linear-to-b from-white/6 to-transparent text-primary shadow-raised",
+        "relative inline-flex shrink-0 items-center justify-center rounded-full bg-card text-primary shadow-raised",
         className
       )}
     >

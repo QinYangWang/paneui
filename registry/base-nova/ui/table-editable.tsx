@@ -503,7 +503,7 @@ function EditableTable({
           <button
             type="button"
             onClick={() => insertRow(0)}
-            className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent px-3.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed"
+            className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-secondary px-2.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
           >
             <PlusIcon className="size-3.5" />
             Add the first row

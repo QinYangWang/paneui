@@ -107,7 +107,7 @@ function RangeSliderBubble({
         >
           <SliderPrimitive.Indicator
             data-slot="range-slider-bubble-indicator"
-            className="rounded-full bg-primary shadow-[inset_0_1px_0_rgb(255_255_255/0.25),inset_0_0_0_1px_color-mix(in_oklch,var(--primary),black_18%)]"
+            className="rounded-full bg-primary"
           />
           <SliderPrimitive.Thumb
             data-slot="range-slider-bubble-thumb"
@@ -116,7 +116,7 @@ function RangeSliderBubble({
             onFocus={(e) => setFocusVisible(e.currentTarget.matches(":focus-visible"))}
             onBlur={() => setFocusVisible(false)}
             className={cn(
-              "group/thumb block size-5 rounded-full bg-linear-to-b from-white to-[oklch(0.93_0_0)] shadow-[inset_0_1px_0_rgb(255_255_255),0_0_0_0.5px_rgb(0_0_0/0.12),0_1px_2px_rgb(0_0_0/0.3),0_2px_4px_-1px_rgb(0_0_0/0.2)] outline-none",
+              "group/thumb block size-5 rounded-full bg-card shadow-raised outline-none",
               "transition-[scale] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 data-dragging:scale-125 has-focus-visible:ring-3 has-focus-visible:ring-ring motion-reduce:transition-none"
             )}
           >
@@ -140,8 +140,7 @@ function RangeSliderBubble({
                     <motion.span
                       style={reduce ? undefined : { rotate, scaleX, scaleY, originY: 1 }}
                       className={cn(
-                        "relative block rounded-xl bg-primary px-2.5 py-1 text-sm font-medium whitespace-nowrap text-primary-foreground tabular-nums shadow-primary",
-                        "before:absolute before:inset-0 before:rounded-[inherit] before:bg-linear-to-b before:from-white/15 before:to-transparent"
+                        "relative block rounded-xl bg-primary px-2.5 py-1 text-sm font-medium whitespace-nowrap text-primary-foreground tabular-nums shadow-primary"
                       )}
                     >
                       {formatValue(current)}

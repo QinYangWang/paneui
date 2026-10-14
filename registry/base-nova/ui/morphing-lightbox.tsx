@@ -373,7 +373,7 @@ function ViewerButton({
       type="button"
       aria-label={label}
       className={cn(
-        "pointer-events-auto inline-flex size-10 cursor-pointer items-center justify-center rounded-full bg-card bg-linear-to-b from-white/6 to-transparent text-foreground shadow-raised transition-[box-shadow,opacity] duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-40",
+        "pointer-events-auto inline-flex size-10 cursor-pointer items-center justify-center rounded-full bg-card text-foreground shadow-raised transition-[box-shadow,background-color,opacity,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-40",
         className
       )}
       {...props}

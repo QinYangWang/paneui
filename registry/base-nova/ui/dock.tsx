@@ -85,7 +85,7 @@ function Dock({
           }}
           style={{ height: size + 16, ...style }}
           className={cn(
-            "inline-flex w-fit items-end gap-1.5 rounded-[1.375rem] bg-popover/85 bg-linear-to-b from-white/6 to-transparent px-2 pb-2 text-popover-foreground shadow-surface backdrop-blur-xl",
+            "inline-flex w-fit items-end gap-1.5 rounded-[1.375rem] bg-popover/85 px-2 pb-2 text-popover-foreground shadow-surface backdrop-blur-xl",
             className
           )}
           {...props}
@@ -154,7 +154,7 @@ function DockItem({ label, active, className, children, render, ...props }: Dock
           aria-current={active ? "page" : undefined}
           render={render}
           className={cn(
-            "group/dock-item relative isolate flex size-full cursor-pointer items-center justify-center rounded-[32%] text-foreground/80 transition-[background-color,color,box-shadow] duration-150 outline-none select-none hover:bg-muted/70 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-50 data-active:text-foreground [&_svg]:size-[46%] [&_svg]:shrink-0",
+            "group/dock-item relative isolate flex size-full cursor-pointer items-center justify-center rounded-[32%] text-foreground/80 transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-muted/70 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50 data-active:text-foreground [&_svg]:size-[46%] [&_svg]:shrink-0",
             className
           )}
           {...props}
@@ -164,7 +164,7 @@ function DockItem({ label, active, className, children, render, ...props }: Dock
               aria-hidden
               layoutId={pillId}
               transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32, mass: 0.6 }}
-              className="absolute inset-0 -z-10 rounded-[32%] bg-secondary bg-linear-to-b from-white/8 to-transparent shadow-raised"
+              className="absolute inset-0 -z-10 rounded-[32%] bg-secondary shadow-raised"
             />
           )}
           {children}

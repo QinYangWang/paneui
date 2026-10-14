@@ -166,7 +166,7 @@ function Sidebar({
         className={cn(
           "flex h-full w-full flex-col overflow-hidden text-foreground",
           variant === "floating"
-            ? "rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent shadow-surface"
+            ? "rounded-2xl bg-card shadow-surface"
             : cn("bg-background", side === "left" ? "border-r border-border" : "border-l border-border"),
           panelClassName
         )}
@@ -253,7 +253,7 @@ function ActivePill({ reduce, pillId }: { reduce: boolean; pillId: string }) {
       aria-hidden
       layoutId={pillId}
       transition={reduce ? { duration: 0 } : PILL_SPRING}
-      className="absolute inset-0 rounded-xl bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised"
+      className="absolute inset-0 rounded-xl bg-secondary shadow-raised"
     />
   )
 }
@@ -548,7 +548,7 @@ function SidebarTrigger({ className, onClick, children, ...props }: React.Compon
         if (!e.defaultPrevented) toggle()
       }}
       className={cn(
-        "inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent text-muted-foreground shadow-raised outline-none transition-[box-shadow,color] duration-150 hover:text-foreground hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed [&_svg]:size-4",
+        "inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-secondary text-muted-foreground shadow-raised outline-none transition-[box-shadow,background-color,color,scale] duration-150 ease-out hover:bg-accent hover:text-foreground hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 [&_svg]:size-4",
         className
       )}
       {...props}

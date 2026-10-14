@@ -67,7 +67,7 @@ export interface AttachmentUploadProps {
 
 const EASE = [0.22, 1, 0.36, 1] as const
 const iconButton =
-  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-50"
+  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50"
 
 function formatBytes(bytes?: number) {
   if (bytes === undefined || !Number.isFinite(bytes) || bytes <= 0) return ""
@@ -163,9 +163,6 @@ function Thumb({ item, layout }: { item: AttachmentItem; layout: boolean }) {
         backgroundImage: item.previewUrl ? `url("${item.previewUrl}")` : attachmentGradient(item.name),
       }}
     >
-      {!item.previewUrl && (
-        <span className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgb(255_255_255/0.45),transparent_45%)]" />
-      )}
       <AnimatePresence>
         {(status === "uploading" || status === "queued") && (
           <motion.span
@@ -194,7 +191,7 @@ function StatusMark({ status }: { status: AttachmentStatus }) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.3, opacity: 0 }}
           transition={{ type: "spring", stiffness: 520, damping: 22 }}
-          className="inline-flex size-5 items-center justify-center rounded-full bg-success text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_1px_2px_rgb(0_0_0/0.25)]"
+          className="inline-flex size-5 items-center justify-center rounded-full bg-success text-white"
           aria-label="Uploaded"
         >
           <CheckIcon size={12} />
@@ -494,7 +491,7 @@ export function AttachmentUpload({
       <div
         data-slot="attachment-upload"
         className={cn(
-          "flex w-full flex-col gap-3 rounded-3xl bg-card bg-linear-to-b from-white/4 to-transparent p-3 shadow-raised",
+          "flex w-full flex-col gap-3 rounded-3xl bg-card p-3 shadow-raised",
           className
         )}
       >
@@ -551,7 +548,7 @@ export function AttachmentUpload({
             layout={!reduce}
             animate={reduce ? undefined : { y: dragging ? -3 : 0, rotate: dragging ? -8 : 0 }}
             className={cn(
-              "inline-flex shrink-0 items-center justify-center rounded-xl bg-card bg-linear-to-b from-white/8 to-transparent shadow-raised",
+              "inline-flex shrink-0 items-center justify-center rounded-xl bg-card shadow-raised",
               compact ? "size-8" : "size-11",
               dragging ? "text-primary" : "text-muted-foreground"
             )}
@@ -585,7 +582,7 @@ export function AttachmentUpload({
             type="button"
             disabled={inactive}
             onClick={() => inputRef.current?.click()}
-            className="inline-flex h-8 shrink-0 cursor-pointer items-center gap-1 rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent pr-3.5 pl-2.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-shadow outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none"
+            className="inline-flex h-8 shrink-0 cursor-pointer items-center gap-1 rounded-lg bg-secondary pr-3.5 pl-2.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none"
           >
             <PlusIcon size={14} />
             {compact ? "Add" : "Choose files"}

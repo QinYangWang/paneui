@@ -91,7 +91,7 @@ function ColorSwatch({
     >
       <span
         aria-hidden
-        className="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgb(255_255_255/0.3),inset_0_0_0_1px_rgb(0_0_0/0.12),0_1px_2px_rgb(0_0_0/0.25)] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/swatch:scale-105 group-active/swatch:scale-95 group-data-checked/swatch:scale-[0.8]"
+        className="absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/swatch:scale-105 group-active/swatch:scale-95 group-data-checked/swatch:scale-[0.8]"
         style={{ backgroundColor: color ?? value }}
       />
       <span

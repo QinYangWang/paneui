@@ -186,10 +186,10 @@ function FileDiff({
       className={cn("overflow-hidden rounded-2xl bg-code text-[13px] shadow-surface", className)}
       {...props}
     >
-      <div className="flex h-11 items-center gap-1 bg-linear-to-b from-white/4 to-transparent pr-1.5 pl-1.5">
+      <div className="flex h-11 items-center gap-1 pr-1.5 pl-1.5">
         <CollapsiblePrimitive.Trigger
           data-slot="file-diff-trigger"
-          className="group/trigger flex h-8 min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-full px-2 text-left outline-none select-none hover:bg-muted/70 focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed"
+          className="group/trigger flex h-8 min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-md px-2 text-left outline-none select-none hover:bg-muted/70 focus-visible:ring-3 focus-visible:ring-ring"
         >
           <ChevronDownIcon
             className={cn(

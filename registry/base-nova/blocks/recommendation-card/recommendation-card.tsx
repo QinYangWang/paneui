@@ -27,8 +27,8 @@ function ConfidenceMeter({ value }: { value: Confidence }) {
             className={cn(
               "h-3.5 w-1.25 rounded-full",
               i <= level
-                ? "bg-success shadow-[inset_0_1px_0_rgb(255_255_255/0.3)]"
-                : "bg-muted shadow-[inset_0_1px_1px_rgb(0_0_0/0.25)]"
+                ? "bg-success"
+                : "bg-muted shadow-well"
             )}
           />
         ))}

@@ -131,8 +131,8 @@ function ToolApproval({
       data-slot="tool-approval"
       data-decision={decision ?? "pending"}
       className={cn(
-        "w-full overflow-hidden rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent text-sm text-card-foreground shadow-raised",
-        pending && "shadow-[var(--skeuo-raised),0_0_0_1px_color-mix(in_oklch,var(--warning)_35%,transparent)]",
+        "w-full overflow-hidden rounded-2xl bg-card text-sm text-card-foreground shadow-raised",
+        pending && "ring-1 ring-warning/35",
         className
       )}
       {...props}
@@ -175,7 +175,7 @@ function ToolApproval({
 
       {argsText ? (
         <CollapsiblePrimitive.Root open={argsOpen} onOpenChange={setArgsOpen} className="px-3.5">
-          <CollapsiblePrimitive.Trigger className="group/args -ml-1.5 inline-flex h-7 cursor-pointer items-center gap-1 rounded-full px-1.5 text-xs font-medium text-muted-foreground outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring">
+          <CollapsiblePrimitive.Trigger className="group/args -ml-1.5 inline-flex h-7 cursor-pointer items-center gap-1 rounded-md px-1.5 text-xs font-medium text-muted-foreground outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring">
             {argsOpen ? "Hide arguments" : "Show arguments"}
             <ChevronDownIcon className="size-3.5 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/args:rotate-180 motion-reduce:transition-none" />
           </CollapsiblePrimitive.Trigger>

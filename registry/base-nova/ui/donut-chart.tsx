@@ -265,7 +265,7 @@ function DonutChart({
                     <motion.span
                       layoutId={`${baseId}-legend-hl`}
                       transition={transition}
-                      className="absolute inset-0 -z-0 rounded-xl bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised"
+                      className="absolute inset-0 -z-0 rounded-xl bg-secondary shadow-raised"
                     />
                   )}
                   <ChartSwatch color={s.color} className="relative" />

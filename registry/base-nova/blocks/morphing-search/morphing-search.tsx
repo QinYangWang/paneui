@@ -363,7 +363,7 @@ function MorphingSearch({
                                 <motion.span
                                   layoutId={`${surfaceId}-highlight`}
                                   transition={reduceMotion ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0.1 }}
-                                  className="absolute inset-0 rounded-xl bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised"
+                                  className="absolute inset-0 rounded-xl bg-secondary shadow-raised"
                                 />
                               )}
                               {item.icon && <span className="relative flex text-muted-foreground">{item.icon}</span>}

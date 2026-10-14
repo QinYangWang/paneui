@@ -271,7 +271,7 @@ function FunnelChart({
                     transition={transition}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    className="pointer-events-none fill-white text-[11px] font-semibold tabular-nums [text-shadow:0_1px_1px_rgb(0_0_0/0.25)]"
+                    className="pointer-events-none fill-white text-[11px] font-semibold tabular-nums"
                   >
                     {v}%
                   </motion.text>

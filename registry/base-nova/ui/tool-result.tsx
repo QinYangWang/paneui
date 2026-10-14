@@ -211,7 +211,7 @@ function AgentIconButton({ className, label, pressed, ...props }: React.Componen
       title={label}
       aria-pressed={pressed}
       className={cn(
-        "inline-grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow,scale] duration-150 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-90 active:shadow-pressed disabled:pointer-events-none disabled:opacity-50 aria-pressed:bg-muted aria-pressed:text-foreground aria-pressed:shadow-chip motion-reduce:active:scale-100 [&_svg]:size-3.5",
+        "inline-grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow,scale] duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-90 disabled:pointer-events-none disabled:opacity-50 aria-pressed:bg-muted aria-pressed:text-foreground aria-pressed:shadow-chip motion-reduce:active:scale-100 [&_svg]:size-3.5",
         className
       )}
       {...props}
@@ -367,7 +367,7 @@ function ToolResult({
       aria-busy={running}
       {...props}
       className={cn(
-        "w-full overflow-hidden rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent text-sm text-card-foreground shadow-raised",
+        "w-full overflow-hidden rounded-2xl bg-card text-sm text-card-foreground shadow-raised",
         className
       )}
     >

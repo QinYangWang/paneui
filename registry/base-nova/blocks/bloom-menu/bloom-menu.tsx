@@ -133,7 +133,7 @@ export function BloomMenu({
         transition={reduce ? { duration: 0.15 } : MORPH}
         style={{ borderRadius: 20 }}
         className={cn(
-          "absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-popover bg-linear-to-b from-white/5 to-transparent text-popover-foreground transition-shadow duration-200",
+          "absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-popover text-popover-foreground transition-shadow duration-200",
           open ? "shadow-surface" : "shadow-raised hover:shadow-raised-hover"
         )}
       >
@@ -196,7 +196,7 @@ export function BloomMenu({
                       style={{ height: CELL }}
                       className="group flex flex-col items-center justify-center gap-2 rounded-xl text-xs font-medium text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-45"
                     >
-                      <span className="inline-flex size-9 items-center justify-center rounded-xl bg-card bg-linear-to-b from-white/6 to-transparent text-foreground shadow-raised transition-transform duration-200 group-hover:-translate-y-0.5 group-active:translate-y-0 group-active:shadow-pressed [&_svg]:size-4.5">
+                      <span className="inline-flex size-9 items-center justify-center rounded-xl bg-card text-foreground shadow-raised transition-transform duration-200 group-hover:-translate-y-0.5 group-active:translate-y-0 group-active:scale-96 [&_svg]:size-4.5">
                         {item.icon}
                       </span>
                       {item.label}

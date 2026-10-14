@@ -71,7 +71,7 @@ export default function InfiniteMasonryDemo() {
       minColumnWidth={170}
       endState={`All ${LIMIT} shots loaded`}
       renderItem={(s) => (
-        <article className="group overflow-hidden rounded-2xl bg-card bg-linear-to-b from-white/5 to-transparent shadow-raised transition-shadow hover:shadow-raised-hover">
+        <article className="group overflow-hidden rounded-2xl bg-card shadow-raised transition-shadow hover:shadow-raised-hover">
           <div
             className="relative w-full"
             style={{

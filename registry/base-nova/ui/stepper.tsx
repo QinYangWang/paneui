@@ -67,7 +67,7 @@ function Stepper({
       <NumberFieldPrimitive.Group
         data-slot="stepper-group"
         className={cn(
-          "group/stepper inline-flex items-center gap-1 rounded-full bg-muted p-1 shadow-well data-disabled:opacity-50",
+          "group/stepper inline-flex items-center gap-1 rounded-lg bg-muted p-1 shadow-well data-disabled:opacity-50",
           sm ? "h-8" : "h-10"
         )}
       >
@@ -135,8 +135,8 @@ function Stepper({
 
 function stepButton(sm: boolean) {
   return cn(
-    "inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent text-foreground shadow-raised outline-none select-none",
-    "transition-[scale,box-shadow,opacity,color] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:shadow-raised-hover active:scale-90 active:shadow-pressed motion-reduce:active:scale-100",
+    "inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md bg-secondary text-foreground shadow-raised outline-none select-none",
+    "transition-[scale,box-shadow,background-color,opacity,color] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover active:scale-96 motion-reduce:active:scale-100",
     "focus-visible:ring-3 focus-visible:ring-ring",
     "data-disabled:pointer-events-none data-disabled:bg-transparent data-disabled:bg-none data-disabled:text-muted-foreground/60 data-disabled:shadow-none",
     sm ? "size-6 [&_svg]:size-3.5" : "size-8 [&_svg]:size-4"

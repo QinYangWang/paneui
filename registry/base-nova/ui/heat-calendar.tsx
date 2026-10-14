@@ -571,7 +571,7 @@ function HeatCalendarSummary({ className, ...props }: React.ComponentProps<"div"
         <button
           type="button"
           onClick={() => setSelection(null)}
-          className="ml-1 rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent px-2 py-0.5 text-[11px] font-medium text-secondary-foreground shadow-raised outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:shadow-pressed"
+          className="ml-1 rounded-md bg-secondary px-2 py-0.5 text-[11px] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:scale-96"
         >
           Clear
         </button>

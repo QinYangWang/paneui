@@ -355,7 +355,7 @@ function CarouselButton({ label, onClick, children }: { label: string; onClick: 
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="inline-flex size-9 cursor-pointer items-center justify-center rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent text-secondary-foreground shadow-raised transition-[box-shadow,transform] duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:translate-y-px active:shadow-pressed"
+      className="inline-flex size-9 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
     >
       {children}
     </button>

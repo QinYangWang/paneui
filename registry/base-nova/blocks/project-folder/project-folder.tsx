@@ -141,23 +141,22 @@ export function ProjectFolder({
           {/* Front flap */}
           <motion.span
             aria-hidden
-            className="absolute inset-x-0 bottom-0 z-20 flex h-[68%] flex-col justify-end rounded-3xl bg-primary bg-linear-to-b from-white/22 to-transparent p-4 text-primary-foreground shadow-primary"
+            className="absolute inset-x-0 bottom-0 z-20 flex h-[68%] flex-col justify-end rounded-3xl bg-primary p-4 text-primary-foreground shadow-primary"
             style={{ transformOrigin: "50% 100%" }}
             initial={false}
             animate={reduce ? undefined : { rotateX: fanned ? -22 : 0, y: fanned ? 2 : 0 }}
             transition={SPRING}
           >
-            <span className="pointer-events-none absolute inset-x-4 top-0 h-px bg-white/35" />
             <span className="flex items-end justify-between gap-3">
               <span className="flex min-w-0 flex-col">
-                <span className="truncate text-[0.95rem] font-semibold [text-shadow:0_1px_0_rgb(0_0_0/0.15)]">{title}</span>
+                <span className="truncate text-[0.95rem] font-semibold">{title}</span>
                 <span className="truncate text-xs text-primary-foreground/75">
                   {description ? `${description} · ` : ""}
                   {total} {itemLabel}
                 </span>
               </span>
               <motion.span
-                className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white/15 shadow-[inset_0_1px_0_rgb(255_255_255/0.25)]"
+                className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-foreground/15"
                 animate={reduce ? undefined : { scale: fanned ? 1 : 0.85, opacity: fanned ? 1 : 0.7 }}
                 transition={SPRING}
               >

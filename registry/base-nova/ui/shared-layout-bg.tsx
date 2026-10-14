@@ -106,7 +106,7 @@ function SharedLayoutBgItem({
                 layoutId={layoutId}
                 transition={reduce ? { duration: 0 } : PILL_SPRING}
                 className={cn(
-                  "block size-full rounded-xl bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised",
+                  "block size-full rounded-xl bg-secondary shadow-raised",
                   pillClassName
                 )}
               />

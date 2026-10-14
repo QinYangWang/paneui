@@ -167,7 +167,7 @@ function OrderBook({
         role="group"
         aria-label={label}
         className={cn(
-          "flex w-full min-w-0 flex-col gap-1 rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent p-2 text-card-foreground shadow-raised",
+          "flex w-full min-w-0 flex-col gap-1 rounded-2xl bg-card p-2 text-card-foreground shadow-raised",
           className
         )}
         {...props}

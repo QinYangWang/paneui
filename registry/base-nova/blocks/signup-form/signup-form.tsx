@@ -162,7 +162,7 @@ function SignupForm({
       noValidate
       onSubmit={submit}
       className={cn(
-        "flex w-full max-w-sm flex-col gap-5 rounded-3xl bg-card bg-linear-to-b from-white/4 to-transparent p-6 shadow-surface",
+        "flex w-full max-w-sm flex-col gap-5 rounded-3xl bg-card p-6 shadow-surface",
         className
       )}
       {...props}

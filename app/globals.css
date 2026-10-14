@@ -33,7 +33,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  /* Skeuomorphic depth tokens: soft raised surfaces, pressed states, inset wells. */
+  /* Elevation tokens: hairline rings + faint drops (flat system). */
   --shadow-raised: var(--skeuo-raised);
   --shadow-raised-hover: var(--skeuo-raised-hover);
   --shadow-pressed: var(--skeuo-pressed);
@@ -44,94 +44,78 @@
 }
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.975 0.002 260);
-  --foreground: oklch(0.2 0.006 260);
+  /* Flat, neutral system after jakub.kr / oklch.fyi: chroma-0 grays, hairline rings, barely-there drops. */
+  --radius: 0.5rem;
+  --background: oklch(0.991 0 0);
+  --foreground: oklch(0.2435 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.006 260);
+  --card-foreground: oklch(0.2435 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.006 260);
-  --primary: oklch(0.64 0.18 252);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.985 0.001 260);
-  --secondary-foreground: oklch(0.22 0.006 260);
-  --muted: oklch(0.955 0.003 260);
-  --muted-foreground: oklch(0.52 0.01 260);
-  --accent: oklch(0.955 0.003 260);
-  --accent-foreground: oklch(0.22 0.006 260);
-  --destructive: oklch(0.6 0.21 25);
-  --success: oklch(0.62 0.16 150);
-  --warning: oklch(0.75 0.15 70);
-  --border: oklch(0.2 0.006 260 / 9%);
-  --input: oklch(0.2 0.006 260 / 11%);
-  --ring: oklch(0.64 0.18 252 / 55%);
-  --code: oklch(0.985 0.002 260);
-  --scrollbar: oklch(0.2 0.006 260 / 18%);
-  --scrollbar-hover: oklch(0.2 0.006 260 / 32%);
+  --popover-foreground: oklch(0.2435 0 0);
+  --primary: oklch(0.57 0.15 258);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(1 0 0);
+  --secondary-foreground: oklch(0.2435 0 0);
+  --muted: oklch(0.9731 0 0);
+  --muted-foreground: oklch(0.5417 0 0);
+  --accent: oklch(0.9551 0 0);
+  --accent-foreground: oklch(0.2435 0 0);
+  --destructive: oklch(0.58 0.2 27);
+  --success: oklch(0.6 0.14 152);
+  --warning: oklch(0.74 0.14 72);
+  --border: oklch(0 0 0 / 8%);
+  --input: oklch(0 0 0 / 10%);
+  --ring: oklch(0.57 0.15 258 / 45%);
+  --code: oklch(0.9731 0 0);
+  --scrollbar: oklch(0 0 0 / 16%);
+  --scrollbar-hover: oklch(0 0 0 / 28%);
 
+  /* Elevation. Names kept from the old skeuomorphic set so every component follows. */
   --skeuo-raised:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.9), 0 0 0 1px rgb(15 18 25 / 0.08),
-    0 1px 2px rgb(15 18 25 / 0.08), 0 2px 6px -2px rgb(15 18 25 / 0.08);
+    0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px -1px oklch(0 0 0 / 6%), 0 2px 4px 0 oklch(0 0 0 / 4%);
   --skeuo-raised-hover:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.9), 0 0 0 1px rgb(15 18 25 / 0.11),
-    0 2px 4px rgb(15 18 25 / 0.08), 0 4px 10px -3px rgb(15 18 25 / 0.1);
-  --skeuo-pressed: inset 0 1px 2px rgb(15 18 25 / 0.12), 0 0 0 1px rgb(15 18 25 / 0.1);
+    0 0 0 1px oklch(0 0 0 / 8%), 0 1px 2px -1px oklch(0 0 0 / 8%), 0 2px 4px 0 oklch(0 0 0 / 6%);
+  --skeuo-pressed: 0 0 0 1px oklch(0 0 0 / 8%);
   --skeuo-primary:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.3), inset 0 -1px 0 0 rgb(0 0 0 / 0.12),
-    0 0 0 1px color-mix(in oklch, var(--primary), black 18%),
-    0 1px 2px rgb(15 18 25 / 0.2), 0 4px 10px -4px color-mix(in oklch, var(--primary) 70%, transparent);
-  --skeuo-well:
-    inset 0 1px 2px rgb(15 18 25 / 0.07), inset 0 0 0 1px rgb(15 18 25 / 0.1),
-    0 1px 0 rgb(255 255 255 / 0.8);
+    0 0 0 1px color-mix(in oklch, var(--primary), black 10%), 0 1px 2px -1px oklch(0 0 0 / 12%);
+  --skeuo-well: inset 0 0 0 1px oklch(0 0 0 / 8%);
   --skeuo-surface:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.9), 0 0 0 1px rgb(15 18 25 / 0.07),
-    0 1px 2px rgb(15 18 25 / 0.05), 0 12px 32px -16px rgb(15 18 25 / 0.18);
-  --skeuo-chip: inset 0 1px 0 0 rgb(255 255 255 / 0.8), 0 0 0 1px rgb(15 18 25 / 0.08);
+    0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px -1px oklch(0 0 0 / 6%), 0 8px 24px -12px oklch(0 0 0 / 10%);
+  --skeuo-chip: 0 0 0 1px oklch(0 0 0 / 6%);
 }
 
 .dark {
-  --background: oklch(0.175 0.004 270);
-  --foreground: oklch(0.96 0 0);
-  --card: oklch(0.215 0.004 270);
-  --card-foreground: oklch(0.96 0 0);
-  --popover: oklch(0.235 0.004 270);
-  --popover-foreground: oklch(0.96 0 0);
-  --primary: oklch(0.68 0.17 250);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.205 0.004 270);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.255 0.004 270);
-  --muted-foreground: oklch(0.66 0.006 270);
-  --accent: oklch(0.27 0.004 270);
-  --accent-foreground: oklch(0.96 0 0);
-  --destructive: oklch(0.68 0.19 22);
-  --success: oklch(0.72 0.17 150);
-  --warning: oklch(0.8 0.15 75);
+  --background: oklch(0.173 0 0);
+  --foreground: oklch(0.9491 0 0);
+  --card: oklch(0.1776 0 0);
+  --card-foreground: oklch(0.9491 0 0);
+  --popover: oklch(0.2134 0 0);
+  --popover-foreground: oklch(0.9491 0 0);
+  --primary: oklch(0.6 0.145 256);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.2134 0 0);
+  --secondary-foreground: oklch(0.9491 0 0);
+  --muted: oklch(0.2134 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.252 0 0);
+  --accent-foreground: oklch(0.9491 0 0);
+  --destructive: oklch(0.64 0.19 25);
+  --success: oklch(0.7 0.15 152);
+  --warning: oklch(0.8 0.14 75);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.68 0.17 250 / 55%);
-  --code: oklch(0.155 0.004 270);
+  --ring: oklch(0.6 0.145 256 / 50%);
+  --code: oklch(0.1496 0 0);
   --scrollbar: oklch(1 0 0 / 14%);
-  --scrollbar-hover: oklch(1 0 0 / 26%);
+  --scrollbar-hover: oklch(1 0 0 / 24%);
 
-  --skeuo-raised:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.06), 0 0 0 1px rgb(255 255 255 / 0.09),
-    0 1px 2px rgb(0 0 0 / 0.4), 0 2px 6px -2px rgb(0 0 0 / 0.35);
-  --skeuo-raised-hover:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.08), 0 0 0 1px rgb(255 255 255 / 0.13),
-    0 2px 4px rgb(0 0 0 / 0.4), 0 4px 10px -3px rgb(0 0 0 / 0.4);
-  --skeuo-pressed: inset 0 1px 3px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.07);
-  --skeuo-primary:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.28), inset 0 -1px 0 0 rgb(0 0 0 / 0.15),
-    0 0 0 1px color-mix(in oklch, var(--primary), black 25%),
-    0 1px 2px rgb(0 0 0 / 0.4), 0 4px 12px -4px color-mix(in oklch, var(--primary) 55%, transparent);
-  --skeuo-well:
-    inset 0 1px 2px rgb(0 0 0 / 0.35), inset 0 0 0 1px rgb(255 255 255 / 0.08),
-    0 1px 0 rgb(255 255 255 / 0.03);
-  --skeuo-surface:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.05), 0 0 0 1px rgb(255 255 255 / 0.07),
-    0 1px 2px rgb(0 0 0 / 0.3), 0 16px 40px -20px rgb(0 0 0 / 0.7);
-  --skeuo-chip: inset 0 1px 0 0 rgb(255 255 255 / 0.06), 0 0 0 1px rgb(255 255 255 / 0.08);
+  --skeuo-raised: 0 0 0 1px oklch(1 0 0 / 8%);
+  --skeuo-raised-hover: 0 0 0 1px oklch(1 0 0 / 13%);
+  --skeuo-pressed: 0 0 0 1px oklch(1 0 0 / 6%);
+  --skeuo-primary: 0 0 0 1px oklch(1 0 0 / 12%);
+  --skeuo-well: inset 0 0 0 1px oklch(1 0 0 / 8%);
+  --skeuo-surface: 0 0 0 1px oklch(1 0 0 / 8%), 0 8px 24px -12px oklch(0 0 0 / 50%);
+  --skeuo-chip: 0 0 0 1px oklch(1 0 0 / 7%);
 }
 
 @layer base {
@@ -146,7 +130,7 @@
     color-scheme: dark;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
 
   /* Scrollbars: thin, rounded, token-colored pill thumb on a transparent track. */

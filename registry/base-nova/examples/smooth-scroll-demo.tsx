@@ -44,7 +44,7 @@ export default function SmoothScrollDemo() {
       <Readout />
       <div className="flex flex-col gap-3 px-4">
         {DAYS.map(({ day, note }) => (
-          <div key={day} className="rounded-2xl bg-card bg-linear-to-b from-white/6 to-transparent p-4 shadow-raised">
+          <div key={day} className="rounded-2xl bg-card p-4 shadow-raised">
             <p className="text-sm font-medium">{day}</p>
             <p className="mt-1 text-sm text-muted-foreground">{note}</p>
           </div>

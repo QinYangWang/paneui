@@ -272,7 +272,7 @@ function TableSkeletonRow({
       {cells.map((width, c) => (
         <div key={c} className="shrink-0 px-3" style={{ width }}>
           <div
-            className="h-2.5 animate-pulse rounded-full bg-muted shadow-well motion-reduce:animate-none"
+            className="h-2.5 animate-pulse rounded-full bg-muted motion-reduce:animate-none"
             style={{ width: `${skeletonWidth(index, c)}%`, animationDelay: `${(index % 6) * 90}ms` }}
           />
         </div>
@@ -705,7 +705,7 @@ function Table<T>({
           <div
             ref={headerRef}
             role="rowgroup"
-            className="sticky top-0 z-20 bg-card bg-linear-to-b from-white/4 to-transparent shadow-[0_1px_0_var(--border)]"
+            className="sticky top-0 z-20 bg-card shadow-[0_1px_0_var(--border)]"
             style={{ height: headerHeight }}
           >
             <div role="row" aria-rowindex={1} className="relative h-full">
@@ -745,7 +745,7 @@ function Table<T>({
                     className={cn(
                       "group/header absolute inset-y-0 left-0 flex items-center hover:z-10 focus-within:z-10",
                       cellMotion(column.key),
-                      isDragging && "z-30 hover:z-30 rounded-xl bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised-hover",
+                      isDragging && "z-30 hover:z-30 rounded-xl bg-secondary shadow-raised-hover",
                       column.headerClassName
                     )}
                     style={{ width, transform: `translateX(${columnX(column.key)}px)` }}

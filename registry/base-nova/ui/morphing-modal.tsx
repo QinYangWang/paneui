@@ -148,7 +148,7 @@ function MorphingModalContent({
       <DialogPrimitive.Popup
         data-slot="morphing-modal-content"
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl bg-popover bg-linear-to-b from-white/4 to-transparent text-popover-foreground shadow-surface outline-none",
+          "fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl bg-popover text-popover-foreground shadow-surface outline-none",
           "transition-[opacity,scale,translate] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-96 data-ending-style:opacity-0 data-ending-style:duration-200 data-starting-style:translate-y-[calc(-50%+12px)] data-starting-style:scale-96 data-starting-style:opacity-0",
           "motion-reduce:data-starting-style:translate-y-[-50%] motion-reduce:data-starting-style:scale-100 motion-reduce:data-ending-style:scale-100",
           className

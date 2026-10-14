@@ -184,7 +184,7 @@ function CodeCopyButton({
         copy(typeof value === "function" ? value() : value)
       }}
       className={cn(
-        "relative grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow] duration-150 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed data-copied:text-success",
+        "relative grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 data-copied:text-success",
         className
       )}
       data-copied={copied || undefined}
@@ -299,7 +299,7 @@ function AgentCodeBlock({
       {filename !== undefined && (
         <div
           data-slot="agent-code-block-header"
-          className="flex h-10 items-center gap-2 border-b border-border bg-linear-to-b from-white/4 to-transparent pr-1.5 pl-4"
+          className="flex h-10 items-center gap-2 border-b border-border pr-1.5 pl-4"
         >
           <span className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">{filename}</span>
           {streaming && (

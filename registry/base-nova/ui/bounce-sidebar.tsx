@@ -144,7 +144,7 @@ function BounceSidebar({
             data-slot="bounce-sidebar-dot"
             style={{ width: DOT, height: DOT, opacity: 0 }}
             className={cn(
-              "absolute top-0 left-[10px] rounded-full bg-primary bg-linear-to-b from-white/30 to-transparent shadow-primary",
+              "absolute top-0 left-[10px] rounded-full bg-primary shadow-primary",
               dotClassName
             )}
           />

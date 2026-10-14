@@ -133,7 +133,7 @@ function CitationFavicon({
       aria-hidden
       data-slot="citation-favicon"
       className={cn(
-        "relative grid size-5 shrink-0 place-items-center overflow-hidden rounded-md bg-muted bg-linear-to-b from-white/6 to-transparent text-[10px] font-semibold text-muted-foreground uppercase shadow-chip [&>svg]:size-3",
+        "relative grid size-5 shrink-0 place-items-center overflow-hidden rounded-md bg-muted text-[10px] font-semibold text-muted-foreground uppercase shadow-chip [&>svg]:size-3",
         className
       )}
     >
@@ -226,7 +226,7 @@ function Citation({ sourceId, source: sourceProp, index: indexProp, delay = 250,
           }
         }}
         className={cn(
-          "relative -top-[0.15em] mx-0.5 inline-flex h-[1.35em] min-w-[1.35em] cursor-pointer items-center justify-center rounded-full bg-muted bg-linear-to-b from-white/6 to-transparent px-1 align-baseline font-sans text-[0.68em] leading-none font-semibold text-muted-foreground tabular-nums no-underline shadow-chip transition-[color,background-color,box-shadow] duration-150 outline-none hover:bg-primary/14 hover:text-primary focus-visible:ring-3 focus-visible:ring-ring data-popup-open:bg-primary/14 data-popup-open:text-primary",
+          "relative -top-[0.15em] mx-0.5 inline-flex h-[1.35em] min-w-[1.35em] cursor-pointer items-center justify-center rounded-full bg-muted px-1 align-baseline font-sans text-[0.68em] leading-none font-semibold text-muted-foreground tabular-nums no-underline shadow-chip transition-[color,background-color,box-shadow] duration-150 outline-none hover:bg-primary/14 hover:text-primary focus-visible:ring-3 focus-visible:ring-ring data-popup-open:bg-primary/14 data-popup-open:text-primary",
           className
         )}
         {...props}
@@ -238,7 +238,7 @@ function Citation({ sourceId, source: sourceProp, index: indexProp, delay = 250,
           <PreviewCardPrimitive.Popup
             data-slot="citation-preview"
             className={cn(
-              "flex w-72 max-w-[calc(100vw-1rem)] origin-(--transform-origin) flex-col gap-2 rounded-2xl bg-popover bg-linear-to-b from-white/4 to-transparent p-3.5 text-sm text-popover-foreground shadow-surface outline-none",
+              "flex w-72 max-w-[calc(100vw-1rem)] origin-(--transform-origin) flex-col gap-2 rounded-2xl bg-popover p-3.5 text-sm text-popover-foreground shadow-surface outline-none",
               "transition-[opacity,scale,translate] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-120",
               "data-starting-style:translate-y-1 data-starting-style:scale-95 data-starting-style:opacity-0 data-ending-style:scale-97 data-ending-style:opacity-0",
               "motion-reduce:data-starting-style:translate-y-0 motion-reduce:data-starting-style:scale-100"
@@ -374,7 +374,7 @@ function Citations({
       onOpenChange={(next) => setOpen(next)}
       className={cn("flex w-full flex-col text-sm", className)}
     >
-      <CollapsiblePrimitive.Trigger className="group/citations -ml-1 inline-flex h-8 w-fit cursor-pointer items-center gap-2 rounded-full pr-2.5 pl-1.5 text-muted-foreground transition-[background-color,color,box-shadow] duration-150 outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed data-panel-open:text-foreground">
+      <CollapsiblePrimitive.Trigger className="group/citations -ml-1 inline-flex h-8 w-fit cursor-pointer items-center gap-2 rounded-lg pr-2.5 pl-1.5 text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 data-panel-open:text-foreground">
         <CitationStack sources={sources} />
         <span className="font-medium">{title}</span>
         <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] leading-none font-semibold tabular-nums shadow-chip">

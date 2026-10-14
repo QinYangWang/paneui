@@ -105,7 +105,7 @@ function RangeSliderWave({
                 className={cn(
                   "h-full flex-1 origin-center rounded-full transition-colors duration-150",
                   filled
-                    ? "bg-primary shadow-[inset_0_1px_0_rgb(255_255_255/0.25)]"
+                    ? "bg-primary"
                     : "bg-muted-foreground/30"
                 )}
                 initial={false}

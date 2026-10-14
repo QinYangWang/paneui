@@ -41,7 +41,7 @@ export default function DynamicIslandDemo() {
           </DynamicIslandView>
         </DynamicIsland>
       </div>
-      <div role="group" aria-label="Live activity" className="inline-flex gap-1 rounded-full bg-muted p-1 shadow-well">
+      <div role="group" aria-label="Live activity" className="inline-flex gap-1 rounded-lg bg-muted p-1 shadow-well">
         {views.map((v) => (
           <button
             key={v.id}
@@ -49,9 +49,9 @@ export default function DynamicIslandDemo() {
             aria-pressed={view === v.id}
             onClick={() => setView(v.id)}
             className={cn(
-              "h-7 rounded-full px-3 text-xs font-medium text-muted-foreground outline-none transition-[background-color,color,box-shadow] focus-visible:ring-3 focus-visible:ring-ring",
+              "h-7 rounded-md px-3 text-xs font-medium text-muted-foreground outline-none transition-[background-color,color,box-shadow] focus-visible:ring-3 focus-visible:ring-ring",
               view === v.id
-                ? "bg-card bg-linear-to-b from-white/6 to-transparent text-foreground shadow-raised"
+                ? "bg-card text-foreground shadow-raised"
                 : "hover:text-foreground"
             )}
           >

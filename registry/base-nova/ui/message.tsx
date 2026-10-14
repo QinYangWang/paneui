@@ -88,7 +88,7 @@ function MessageAvatar({
       data-slot="message-avatar"
       aria-hidden={placeholder || undefined}
       className={cn(
-        "relative mb-0.5 grid size-8 shrink-0 place-items-center overflow-hidden rounded-full bg-secondary bg-linear-to-b from-white/8 to-transparent text-xs font-semibold text-muted-foreground shadow-raised [&_img]:size-full [&_img]:object-cover [&_svg]:size-4",
+        "relative mb-0.5 grid size-8 shrink-0 place-items-center overflow-hidden rounded-full bg-secondary text-xs font-semibold text-muted-foreground shadow-raised [&_img]:size-full [&_img]:object-cover [&_svg]:size-4",
         placeholder && "invisible",
         className
       )}
@@ -206,7 +206,7 @@ function MessageTyping({ label = "Typing", className, ...props }: React.Componen
       aria-label={label}
       data-slot="message-typing"
       className={cn(
-        "flex h-10 w-16 items-center justify-center gap-1 self-start rounded-[1.25rem] rounded-bl-md bg-secondary bg-linear-to-b from-white/5 to-transparent shadow-raised",
+        "flex h-10 w-16 items-center justify-center gap-1 self-start rounded-[1.25rem] rounded-bl-md bg-secondary shadow-raised",
         className
       )}
       {...props}

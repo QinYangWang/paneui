@@ -165,7 +165,7 @@ function AssistantTurn({ turn }: { turn: Extract<Turn, { role: "assistant" }> })
       className="flex max-w-[88%] flex-col gap-2.5 self-start"
     >
       <div className="flex h-6 items-center gap-2 pl-1">
-        <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary bg-linear-to-b from-white/14 to-transparent text-primary-foreground shadow-primary">
+        <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground shadow-primary">
           <SparklesIcon size={13} />
         </span>
         <AnimatePresence mode="popLayout" initial={false}>

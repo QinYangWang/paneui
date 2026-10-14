@@ -135,7 +135,7 @@ function UploadProgress({ status, progress }: { status: FileUploadStatus; progre
     >
       <motion.div
         className={cn(
-          "absolute inset-y-0 left-0 rounded-full bg-linear-to-b from-white/20 to-transparent",
+          "absolute inset-y-0 left-0 rounded-full",
           status === "error" ? "bg-destructive" : status === "success" ? "bg-success" : "bg-primary"
         )}
         initial={false}
@@ -143,7 +143,7 @@ function UploadProgress({ status, progress }: { status: FileUploadStatus; progre
         transition={{ type: "spring", stiffness: 180, damping: 26, mass: 0.6 }}
       />
       {status === "uploading" && (
-        <div className="pointer-events-none absolute inset-0 animate-pulse bg-linear-to-r from-transparent via-white/15 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 animate-pulse bg-linear-to-r from-transparent via-background/25 to-transparent" />
       )}
     </div>
   )
@@ -201,7 +201,7 @@ function FileUploadRow({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={reduce ? { opacity: 0 } : { opacity: 0, x: -12, scale: 0.98, transition: { duration: 0.18 } }}
       transition={{ type: "spring", stiffness: 420, damping: 34 }}
-      className="flex items-center gap-3 rounded-2xl bg-card bg-linear-to-b from-white/5 to-transparent p-2.5 pr-2 shadow-raised"
+      className="flex items-center gap-3 rounded-2xl bg-card p-2.5 pr-2 shadow-raised"
     >
       <span
         className={cn(
@@ -245,7 +245,7 @@ function FileUploadRow({
             onClick={() => onRetry(item)}
             disabled={disabled}
             aria-label={`Retry ${item.name}`}
-            className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-50"
+            className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50"
           >
             <RefreshIcon size={15} />
           </button>
@@ -255,7 +255,7 @@ function FileUploadRow({
           onClick={() => onRemove(item)}
           disabled={disabled}
           aria-label={status === "uploading" ? `Cancel ${item.name}` : `Remove ${item.name}`}
-          className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-50"
+          className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50"
         >
           <XIcon size={15} />
         </button>
@@ -429,7 +429,7 @@ export function FileUpload({
           animate={reduce ? undefined : { y: dragging ? -4 : 0 }}
           transition={{ type: "spring", stiffness: 500, damping: 22 }}
           className={cn(
-            "inline-flex size-11 items-center justify-center rounded-2xl bg-card bg-linear-to-b from-white/8 to-transparent shadow-raised",
+            "inline-flex size-11 items-center justify-center rounded-2xl bg-card shadow-raised",
             dragging ? "text-primary" : "text-muted-foreground"
           )}
         >
@@ -460,7 +460,7 @@ export function FileUpload({
           type="button"
           disabled={inactive}
           onClick={() => inputRef.current?.click()}
-          className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent px-3.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,transform] outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:translate-y-px active:shadow-pressed disabled:pointer-events-none"
+          className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-secondary px-3.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none"
         >
           {browseLabel}
         </button>

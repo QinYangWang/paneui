@@ -85,8 +85,8 @@ export function DynamicIsland({ view = null, tone = "ink", className, children }
         className={cn(
           "relative flex justify-center overflow-hidden",
           tone === "ink"
-            ? "bg-black text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.08),0_0_0_1px_rgb(255_255_255/0.06),0_10px_30px_-12px_rgb(0_0_0/0.6)]"
-            : "bg-popover bg-linear-to-b from-white/5 to-transparent text-popover-foreground shadow-surface"
+            ? "bg-black text-white shadow-surface ring-1 ring-foreground/10"
+            : "bg-popover text-popover-foreground shadow-surface"
         )}
       >
         {/* self-start: never stretch to the shell, or the measured height would just echo the animated height. */}
@@ -115,7 +115,7 @@ export function DynamicIsland({ view = null, tone = "ink", className, children }
 function IslandIdle() {
   return (
     <div style={PILL} className="flex items-center justify-end pr-3.5" aria-hidden>
-      <span className="size-2.5 rounded-full bg-current/15 shadow-[inset_0_0_0_2px_rgb(0_0_0/0.25)]" />
+      <span className="size-2.5 rounded-full bg-current/15" />
     </div>
   )
 }
@@ -211,7 +211,7 @@ export function IslandMusic({
   return (
     <div className="flex w-[340px] flex-col gap-3 p-4">
       <div className="flex items-center gap-3">
-        <span className="size-12 shrink-0 rounded-xl shadow-[inset_0_0_0_1px_rgb(255_255_255/0.12)]" style={{ background: cover }} />
+        <span className="size-12 shrink-0 rounded-xl ring-1 ring-current/10 ring-inset" style={{ background: cover }} />
         <span className="flex min-w-0 flex-1 flex-col">
           <span className="truncate text-sm font-semibold">{title}</span>
           <span className="truncate text-xs opacity-60">{artist}</span>
@@ -233,7 +233,7 @@ export function IslandMusic({
           type="button"
           aria-label={playing ? "Pause" : "Play"}
           onClick={() => setPlaying((p) => !p)}
-          className="inline-flex size-10 items-center justify-center rounded-full outline-none hover:bg-current/10 focus-visible:ring-3 focus-visible:ring-ring active:scale-95"
+          className="inline-flex size-10 items-center justify-center rounded-full transition-[background-color,scale] duration-150 ease-out outline-none hover:bg-current/10 focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
         >
           {playing ? <PauseIcon size={22} /> : <PlayIcon size={22} />}
         </button>
@@ -260,7 +260,7 @@ export function IslandCall({
 }: IslandCallProps) {
   return (
     <div className="flex w-[340px] items-center gap-3 p-3 pl-3.5">
-      <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-primary to-success text-sm font-semibold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)]">
+      <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
         {initials}
       </span>
       <span className="flex min-w-0 flex-1 flex-col">
@@ -271,7 +271,7 @@ export function IslandCall({
         type="button"
         aria-label="Decline"
         onClick={onDecline}
-        className="inline-flex size-10 items-center justify-center rounded-full bg-destructive text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)] outline-none focus-visible:ring-3 focus-visible:ring-ring active:scale-95"
+        className="inline-flex size-10 items-center justify-center rounded-full bg-destructive text-white transition-[background-color,scale] duration-150 ease-out outline-none hover:bg-destructive/90 focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
       >
         <XIcon size={18} />
       </button>
@@ -279,7 +279,7 @@ export function IslandCall({
         type="button"
         aria-label="Accept"
         onClick={onAccept}
-        className="inline-flex size-10 items-center justify-center rounded-full bg-success text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)] outline-none focus-visible:ring-3 focus-visible:ring-ring active:scale-95"
+        className="inline-flex size-10 items-center justify-center rounded-full bg-success text-white transition-[background-color,scale] duration-150 ease-out outline-none hover:bg-success/90 focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
       >
         <PhoneIcon size={18} />
       </button>
@@ -327,7 +327,7 @@ export function IslandRide({ eta = 3, car = "White Toyota Prius", plate = "8KJ·
             <CarIcon size={14} />
           </span>
         </motion.span>
-        <span className="absolute right-0 size-2.5 rounded-full bg-current shadow-[0_0_0_3px_rgb(0_0_0/0.25)]" />
+        <span className="absolute right-0 size-2.5 rounded-full bg-current ring-3 ring-current/25" />
       </div>
       <span className="flex items-center gap-1.5 text-xs opacity-60">
         <ClockIcon size={13} />

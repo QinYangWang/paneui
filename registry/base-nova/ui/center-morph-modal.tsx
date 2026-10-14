@@ -42,7 +42,7 @@ function CenterMorphModalContent({
       <DialogPrimitive.Popup
         data-slot="center-morph-modal-content"
         className={cn(
-          "group/morph fixed top-1/2 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded-3xl bg-popover bg-linear-to-b from-white/4 to-transparent p-6 text-popover-foreground shadow-surface outline-none",
+          "group/morph fixed top-1/2 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded-3xl bg-popover p-6 text-popover-foreground shadow-surface outline-none",
           "[--morph-open:inset(0_round_var(--radius-3xl,1.5rem))] [--morph-seed:inset(calc(50%_-_1.25rem)_calc(50%_-_1.25rem)_round_var(--radius-3xl,1.5rem))]",
           "[clip-path:var(--morph-open)] transition-[clip-path,opacity,box-shadow] [transition-duration:550ms,220ms,550ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
           "data-starting-style:opacity-0 data-starting-style:shadow-none data-starting-style:[clip-path:var(--morph-seed)]",

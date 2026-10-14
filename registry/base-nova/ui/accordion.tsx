@@ -29,7 +29,7 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
     <AccordionPrimitive.Item
       data-slot="accordion-item"
       className={cn(
-        "rounded-2xl transition-[background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-open:bg-card data-open:bg-linear-to-b data-open:from-white/6 data-open:to-transparent data-open:shadow-raised",
+        "rounded-2xl transition-[background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-open:bg-card data-open:shadow-raised",
         className
       )}
       {...props}
@@ -58,7 +58,7 @@ function AccordionTrigger({
           <span
             data-slot="accordion-icon"
             aria-hidden
-            className="flex size-7 shrink-0 items-center justify-center rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent text-muted-foreground shadow-raised transition-colors duration-200 group-data-panel-open/accordion-trigger:text-primary [&_svg]:size-4"
+            className="flex size-7 shrink-0 items-center justify-center rounded-full bg-secondary text-muted-foreground shadow-raised transition-colors duration-200 group-data-panel-open/accordion-trigger:text-primary [&_svg]:size-4"
           >
             {icon}
           </span>

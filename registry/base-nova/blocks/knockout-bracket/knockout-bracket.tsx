@@ -270,7 +270,7 @@ function MatchCard({ match, roundName }: { match: BracketMatch; roundName: strin
     <div
       role="group"
       aria-label={describe(match, roundName)}
-      className="flex flex-col justify-center gap-1 rounded-2xl bg-card bg-linear-to-b from-white/5 to-transparent px-3 py-2 shadow-raised"
+      className="flex flex-col justify-center gap-1 rounded-2xl bg-card px-3 py-2 shadow-raised"
       style={{ height: CARD_H }}
     >
       <SideRow side={match.home} state={match.winner ? (match.winner === "home" ? "won" : "lost") : "open"} />
@@ -315,7 +315,7 @@ function Crest({ team }: { team: BracketTeam | null }) {
   return (
     <span
       aria-hidden
-      className="flex size-5 shrink-0 items-center justify-center rounded-full text-[8px] font-bold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_0_0_0.5px_rgb(0_0_0/0.15)] text-shadow-[0_1px_0_rgb(0_0_0/0.2)]"
+      className="flex size-5 shrink-0 items-center justify-center rounded-full text-[8px] font-bold text-white shadow-chip"
       style={{ background: team.color ?? `oklch(0.62 0.15 ${hue(team.name)})` }}
     >
       {(team.short ?? initials(team.name)).slice(0, 3)}

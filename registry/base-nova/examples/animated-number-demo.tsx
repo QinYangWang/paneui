@@ -12,7 +12,7 @@ export default function AnimatedNumberDemo() {
       {STATS.map((s) => (
         <div
           key={s.label}
-          className="flex flex-col gap-1 rounded-2xl bg-card bg-linear-to-b from-white/6 to-transparent px-4 py-3 shadow-raised"
+          className="flex flex-col gap-1 rounded-2xl bg-card px-4 py-3 shadow-raised"
         >
           <AnimatedNumber
             value={s.value}

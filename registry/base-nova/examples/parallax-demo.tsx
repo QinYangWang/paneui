@@ -23,7 +23,7 @@ export default function ParallaxDemo() {
               <StarIcon className="size-6 text-primary/60" />
             </Parallax>
             <Parallax speed={-0.1}>
-              <div className="relative flex items-center gap-3 rounded-2xl bg-card bg-linear-to-b from-white/6 to-transparent px-4 py-3 shadow-raised">
+              <div className="relative flex items-center gap-3 rounded-2xl bg-card px-4 py-3 shadow-raised">
                 <IconChip tone="primary">
                   <Icon />
                 </IconChip>

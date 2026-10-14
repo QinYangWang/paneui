@@ -26,13 +26,13 @@ function useMessageSide(align?: MessageSide): MessageSide {
 }
 
 const messageBubbleVariants = cva(
-  "relative w-fit max-w-full rounded-[1.25rem] px-4 py-2.5 text-[0.95rem] leading-relaxed wrap-break-word transition-[box-shadow,background-color,transform] duration-150 outline-none focus-visible:ring-3 focus-visible:ring-ring [&_a]:underline [&_a]:underline-offset-2",
+  "relative w-fit max-w-full rounded-[1.25rem] px-4 py-2.5 text-[0.95rem] leading-relaxed wrap-break-word transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none focus-visible:ring-3 focus-visible:ring-ring [&_a]:underline [&_a]:underline-offset-2",
   {
     variants: {
       tone: {
-        default: "bg-secondary bg-linear-to-b from-white/5 to-transparent text-secondary-foreground shadow-raised",
+        default: "bg-secondary text-secondary-foreground shadow-raised",
         primary:
-          "bg-primary bg-linear-to-b from-white/12 to-transparent text-primary-foreground shadow-primary [&_a]:text-primary-foreground",
+          "bg-primary text-primary-foreground shadow-primary [&_a]:text-primary-foreground",
         muted: "bg-muted text-foreground shadow-well",
         outline: "bg-transparent text-foreground shadow-[inset_0_0_0_1px_var(--border)]",
         destructive:
@@ -80,7 +80,7 @@ function MessageBubble({ className, tone, size, align, tail = true, render, ...p
               ? "[[data-slot=message-bubble]+&]:rounded-tr-md"
               : "[[data-slot=message-bubble]+&]:rounded-tl-md"),
           interactive &&
-            "cursor-pointer text-left no-underline select-none hover:brightness-[1.03] active:translate-y-px active:shadow-pressed",
+            "cursor-pointer text-left no-underline select-none active:scale-98",
           className
         ),
       },

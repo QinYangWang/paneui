@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "radio",
   "title": "Radio",
-  "description": "RadioGroup and Radio with inset wells and a raised primary dot that glides to the selected option.",
+  "description": "RadioGroup and Radio with a primary dot that glides to the selected option.",
   "dependencies": [
     "@base-ui/react",
     "motion"

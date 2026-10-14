@@ -151,7 +151,7 @@ function ImageGeneration({
         {status === "generating" || status === "refining" ? (
           <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
             <div
-              className="absolute inset-x-0 h-full bg-linear-to-b from-transparent via-white/18 to-transparent"
+              className="absolute inset-x-0 h-full bg-linear-to-b from-transparent via-foreground/8 to-transparent"
               style={{ animation: `qy-sweep ${status === "refining" ? 2.6 : 1.8}s cubic-bezier(0.45,0,0.55,1) infinite` }}
             />
           </div>
@@ -167,7 +167,7 @@ function ImageGeneration({
                 <button
                   type="button"
                   onClick={onRetry}
-                  className="mt-1 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent px-3 text-xs font-medium text-secondary-foreground shadow-raised outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed"
+                  className="mt-1 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-secondary px-3 text-xs font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
                 >
                   <RefreshIcon className="size-3.5" />
                   Try again
@@ -210,7 +210,7 @@ function ImageGeneration({
         <div
           aria-hidden
           className={cn(
-            "absolute inset-x-3 bottom-2.5 h-1 overflow-hidden rounded-full bg-black/10 transition-opacity duration-500 dark:bg-white/10",
+            "absolute inset-x-3 bottom-2.5 h-1 overflow-hidden rounded-full bg-foreground/10 transition-opacity duration-500",
             !working && "opacity-0"
           )}
         >

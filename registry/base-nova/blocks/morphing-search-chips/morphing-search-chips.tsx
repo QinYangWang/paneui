@@ -229,7 +229,7 @@ function MorphingSearchChips({
                         transition={reduceMotion ? { duration: 0 } : { ...UNFOLD, delay: Math.min(i, 8) * 0.025 }}
                         onPointerMove={() => i !== cursor && setCursor(i)}
                         onClick={() => commit(row.label)}
-                        className="inline-flex h-7 cursor-pointer items-center gap-1.5 rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent px-2.5 text-xs text-secondary-foreground shadow-chip transition-shadow data-active:shadow-raised-hover data-active:ring-2 data-active:ring-ring/50"
+                        className="inline-flex h-7 cursor-pointer items-center gap-1.5 rounded-full bg-secondary px-2.5 text-xs text-secondary-foreground shadow-chip transition-shadow data-active:shadow-raised-hover data-active:ring-2 data-active:ring-ring/50"
                       >
                         <ClockIcon size={12} className="text-muted-foreground" />
                         {row.label}
@@ -293,7 +293,7 @@ function MorphingSearchChips({
             animate={{ opacity: 1, scale: 1 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
             transition={t(GROW)}
-            className="inline-flex h-7 max-w-40 items-center gap-1 rounded-full bg-primary/12 pr-1 pl-2.5 text-xs font-medium text-foreground shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary),transparent_70%)]"
+            className="inline-flex h-7 max-w-40 items-center gap-1 rounded-full bg-primary/12 pr-1 pl-2.5 text-xs font-medium text-foreground ring-1 ring-primary/30 ring-inset"
           >
             <span className="truncate">{chip}</span>
             <button

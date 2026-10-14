@@ -197,7 +197,7 @@ function SlideActionButton({
         style={{ x, width: THUMB, height: THUMB }}
         whileTap={reduce || disabled ? undefined : { scale: 0.96 }}
         className={cn(
-          "relative grid shrink-0 cursor-grab touch-pan-y place-items-center rounded-full bg-primary bg-linear-to-b from-white/14 to-transparent text-primary-foreground shadow-primary outline-none active:cursor-grabbing",
+          "relative grid shrink-0 cursor-grab touch-pan-y place-items-center rounded-full bg-primary text-primary-foreground shadow-primary outline-none active:cursor-grabbing",
           "focus-visible:ring-3 focus-visible:ring-ring [&_svg]:size-4.5",
           (disabled || phase !== "idle") && "cursor-default active:cursor-default"
         )}

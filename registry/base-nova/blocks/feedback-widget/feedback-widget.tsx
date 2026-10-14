@@ -159,7 +159,7 @@ export function FeedbackWidget({
         transition={spring}
         style={{ borderRadius: 20, transformOrigin: left ? "bottom left" : "bottom right" }}
         className={cn(
-          "relative overflow-hidden bg-popover bg-linear-to-b from-white/5 to-transparent text-popover-foreground transition-shadow duration-200",
+          "relative overflow-hidden bg-popover text-popover-foreground transition-shadow duration-200",
           isOpen ? "shadow-surface" : "shadow-raised hover:shadow-raised-hover"
         )}
       >
@@ -296,7 +296,7 @@ export function FeedbackWidget({
                       initial={reduce ? false : { scale: 0.3, rotate: -30 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: "spring", stiffness: 480, damping: 18 }}
-                      className="inline-flex size-11 items-center justify-center rounded-full bg-success text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_1px_2px_rgb(0_0_0/0.25)]"
+                      className="inline-flex size-11 items-center justify-center rounded-full bg-success text-white"
                     >
                       <CheckIcon size={22} />
                     </motion.span>

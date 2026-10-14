@@ -270,7 +270,7 @@ function PreviewRail({
                     // Tailwind's translate is the CSS `translate` property, so it
                     // composes with motion's transform instead of fighting it
                     horizontal ? "-translate-x-1/2" : "-translate-y-1/2",
-                    "w-64 overflow-hidden rounded-2xl bg-popover bg-linear-to-b from-white/5 to-transparent p-3 text-popover-foreground shadow-surface",
+                    "w-64 overflow-hidden rounded-2xl bg-popover p-3 text-popover-foreground shadow-surface",
                     previewClassName
                   )}
                 >

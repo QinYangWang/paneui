@@ -112,14 +112,13 @@ function RangeSliderFluid({
         </div>
 
         <motion.div aria-hidden className="pointer-events-none absolute inset-0" style={{ clipPath }}>
-          <div className="absolute inset-0 bg-primary shadow-[inset_0_1px_0_rgb(255_255_255/0.25),inset_0_-1px_0_rgb(0_0_0/0.12)]" />
-          <div className="absolute inset-0 bg-linear-to-b from-white/14 to-transparent" />
+          <div className="absolute inset-0 bg-primary" />
           <div className="absolute inset-0 flex items-center justify-between gap-3 px-5 text-sm font-medium text-primary-foreground">
             {row}
           </div>
           <motion.span
             style={{ left: capLeft }}
-            className="absolute inset-y-1.5 w-3 -translate-x-[calc(100%+2px)] rounded-full bg-linear-to-r from-transparent to-white/25"
+            className="absolute inset-y-1.5 w-3 -translate-x-[calc(100%+2px)] rounded-full bg-primary-foreground/30"
           />
         </motion.div>
 

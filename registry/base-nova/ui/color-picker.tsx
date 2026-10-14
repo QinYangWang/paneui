@@ -162,7 +162,7 @@ function ColorPickerTrigger({
       data-slot="color-picker-trigger"
       disabled={disabled}
       className={cn(
-        "inline-flex h-9 cursor-pointer items-center gap-2 rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent py-1 pr-3.5 pl-1 text-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,opacity] duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex h-9 cursor-pointer items-center gap-2 rounded-lg bg-secondary py-1 pr-3.5 pl-1 text-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,opacity,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50",
         !showHex && "pr-1",
         className
       )}
@@ -201,7 +201,7 @@ function ColorPickerContent({
         <PopoverPrimitive.Popup
           data-slot="color-picker-content"
           className={cn(
-            "flex w-64 flex-col gap-3 rounded-2xl bg-popover bg-linear-to-b from-white/4 to-transparent p-3 text-sm text-popover-foreground shadow-surface outline-none",
+            "flex w-64 flex-col gap-3 rounded-2xl bg-popover p-3 text-sm text-popover-foreground shadow-surface outline-none",
             // Morph: rest shape keeps the shadow; start/end shape is the trigger chip.
             "[clip-path:inset(-24px_round_44px)] transition-[clip-path,opacity] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-250",
             "data-[side=bottom]:data-starting-style:[clip-path:inset(0_calc(100%_-_var(--anchor-width))_calc(100%_-_var(--anchor-height))_0_round_calc(var(--anchor-height)/2))]",
@@ -263,7 +263,7 @@ function ColorPickerArea({
       data-disabled={disabled || undefined}
       className={cn(
         "relative h-40 w-full cursor-crosshair touch-none rounded-xl select-none data-disabled:pointer-events-none data-disabled:opacity-50",
-        "after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[inset_0_0_0_1px_rgb(0_0_0/0.08),inset_0_1px_2px_rgb(0_0_0/0.12)]",
+        "after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-well",
         className
       )}
       style={{
@@ -353,7 +353,7 @@ function ChannelSlider({
     >
       <SliderPrimitive.Control className="relative flex h-5 w-full cursor-pointer items-center">
         <SliderPrimitive.Track
-          className="relative h-3 w-full rounded-full shadow-[inset_0_0_0_1px_rgb(0_0_0/0.08),inset_0_1px_2px_rgb(0_0_0/0.15)]"
+          className="relative h-3 w-full rounded-full shadow-well"
           style={{ background: checker ? `${track}, ${CHECKER}` : track }}
         >
           <SliderPrimitive.Thumb
@@ -486,7 +486,7 @@ function ColorPickerSwatch({ className, style, ...props }: React.ComponentProps<
       aria-hidden
       data-slot="color-picker-swatch"
       className={cn(
-        "relative inline-block size-8 shrink-0 overflow-hidden rounded-full shadow-[inset_0_0_0_1px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.25)]",
+        "relative inline-block size-8 shrink-0 overflow-hidden rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)]",
         className
       )}
       style={{ background: `linear-gradient(${rgbaCss(hsvaToRgba(hsva))}, ${rgbaCss(hsvaToRgba(hsva))}), ${CHECKER}`, ...style }}
@@ -530,7 +530,7 @@ function ColorPickerPreset({
         if (rgba && !e.defaultPrevented) setHsva(rgbaToHsva(rgba, hsva), true)
       }}
       className={cn(
-        "size-6 cursor-pointer rounded-full shadow-[inset_0_0_0_1px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.3)] transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] outline-none hover:scale-110 focus-visible:ring-3 focus-visible:ring-ring aria-pressed:shadow-[0_0_0_2px_var(--popover),0_0_0_3.5px_var(--foreground)] disabled:opacity-50 motion-reduce:transition-none",
+        "size-6 cursor-pointer rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)] transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] outline-none hover:scale-110 focus-visible:ring-3 focus-visible:ring-ring aria-pressed:shadow-[0_0_0_2px_var(--popover),0_0_0_3.5px_var(--foreground)] disabled:opacity-50 motion-reduce:transition-none",
         className
       )}
       style={{ background: rgba ? `linear-gradient(${rgbaCss(rgba)}, ${rgbaCss(rgba)}), ${CHECKER}` : undefined }}

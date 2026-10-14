@@ -110,14 +110,14 @@ function ChainLogo({ chain, size = 16, className }: { chain: SwapChain; size?: n
       aria-hidden
       data-slot="swap-chain-logo"
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full font-semibold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_0_0_1.5px_var(--card)]",
+        "inline-flex shrink-0 items-center justify-center rounded-full font-semibold text-white ring-2 ring-card",
         className
       )}
       style={{
         width: size,
         height: size,
         fontSize: size * 0.55,
-        backgroundImage: `linear-gradient(to bottom, color-mix(in oklch, ${chain.color}, white 18%), ${chain.color})`,
+        backgroundColor: chain.color,
       }}
     >
       {chain.glyph ?? chain.name[0]}
@@ -139,12 +139,12 @@ function TokenLogo({
   return (
     <span aria-hidden data-slot="swap-token-logo" className={cn("relative inline-flex shrink-0", className)}>
       <span
-        className="inline-flex items-center justify-center rounded-full font-bold tracking-tight text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35),inset_0_-1px_0_rgb(0_0_0/0.15)]"
+        className="inline-flex items-center justify-center rounded-full font-bold tracking-tight text-white shadow-chip"
         style={{
           width: size,
           height: size,
           fontSize: size * (token.symbol.length > 3 ? 0.3 : 0.36),
-          backgroundImage: `linear-gradient(to bottom, color-mix(in oklch, ${token.color}, white 20%), ${token.color})`,
+          backgroundColor: token.color,
         }}
       >
         {token.symbol.slice(0, 4)}
@@ -199,7 +199,7 @@ function SwapField({
           {side === "from" ? "You pay" : "You receive"}
         </label>
         <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-          <ChainLogo chain={chain} size={12} className="shadow-none" />
+          <ChainLogo chain={chain} size={12} className="ring-0" />
           {chain.name}
         </span>
       </div>
@@ -243,7 +243,7 @@ function SwapField({
           disabled={disabled}
           aria-haspopup="dialog"
           aria-label={`${side === "from" ? "Pay with" : "Receive"} ${token.symbol} on ${chain.name}. Change token`}
-          className="inline-flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent py-1 pr-2.5 pl-1 text-sm font-semibold text-secondary-foreground shadow-raised transition-[box-shadow,transform] outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:translate-y-px active:shadow-pressed disabled:opacity-50"
+          className="inline-flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-xl bg-secondary py-1 pr-2.5 pl-1 text-sm font-semibold text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring enabled:active:scale-96 disabled:opacity-50"
         >
           <TokenLogo token={token} chain={chain} size={30} />
           {token.symbol}
@@ -289,7 +289,7 @@ function FlipButton({ onFlip, disabled }: { onFlip: () => void; disabled?: boole
         }}
         whileTap={reduce ? undefined : { scale: 0.88 }}
         whileHover={reduce ? undefined : { scale: 1.06 }}
-        className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full bg-secondary bg-linear-to-b from-white/8 to-transparent text-secondary-foreground shadow-[var(--skeuo-raised),0_0_0_4px_var(--card)] outline-none focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-50"
+        className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-raised ring-4 ring-card outline-none focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-50"
       >
         <motion.span
           className="inline-flex"
@@ -342,10 +342,10 @@ function QuoteRow({
     [
       "Route",
       <span key="route" className="inline-flex items-center gap-1">
-        <ChainLogo chain={fromChain} size={13} className="shadow-none" />
+        <ChainLogo chain={fromChain} size={13} className="ring-0" />
         {fromChain.name}
         <span aria-hidden className="text-muted-foreground">→</span>
-        <ChainLogo chain={toChain} size={13} className="shadow-none" />
+        <ChainLogo chain={toChain} size={13} className="ring-0" />
         {toChain.name}
       </span>,
     ],
@@ -522,7 +522,7 @@ function TokenPicker({
               aria-pressed={active}
               onClick={() => setChainFilter(c.id)}
               className={cn(
-                "relative inline-flex h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 text-xs font-medium outline-none focus-visible:ring-3 focus-visible:ring-ring",
+                "relative inline-flex h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-lg px-3 text-xs font-medium outline-none focus-visible:ring-3 focus-visible:ring-ring",
                 active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -530,11 +530,11 @@ function TokenPicker({
                 <motion.span
                   layoutId={`${titleId}-chain`}
                   transition={reduce ? { duration: 0 } : PANEL}
-                  className="absolute inset-0 -z-0 rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised"
+                  className="absolute inset-0 -z-0 rounded-lg bg-secondary shadow-raised"
                 />
               ) : null}
               <span className="relative inline-flex items-center gap-1.5">
-                {chain ? <ChainLogo chain={chain} size={14} className="shadow-none" /> : null}
+                {chain ? <ChainLogo chain={chain} size={14} className="ring-0" /> : null}
                 {c.name}
               </span>
             </button>
@@ -635,7 +635,7 @@ function SlippageRow({ value, onChange }: { value: number; onChange: (v: number)
         <span id={id} className="text-xs text-muted-foreground">
           Max slippage
         </span>
-        <div role="radiogroup" aria-labelledby={id} className="inline-flex gap-0.5 rounded-full bg-muted/70 p-1 shadow-well">
+        <div role="radiogroup" aria-labelledby={id} className="inline-flex gap-0.5 rounded-lg bg-muted/70 p-1 shadow-well">
           {SLIPPAGE_OPTIONS.map((opt) => {
             const active = opt === value
             return (
@@ -646,7 +646,7 @@ function SlippageRow({ value, onChange }: { value: number; onChange: (v: number)
                 aria-checked={active}
                 onClick={() => onChange(opt)}
                 className={cn(
-                  "relative h-6 cursor-pointer rounded-full px-2.5 text-xs font-medium tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  "relative h-6 cursor-pointer rounded-md px-2.5 text-xs font-medium tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -654,7 +654,7 @@ function SlippageRow({ value, onChange }: { value: number; onChange: (v: number)
                   <motion.span
                     layoutId={`${id}-slip`}
                     transition={reduce ? { duration: 0 } : PANEL}
-                    className="absolute inset-0 rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised"
+                    className="absolute inset-0 rounded-md bg-secondary shadow-raised"
                   />
                 ) : null}
                 <span className="relative">{opt}%</span>

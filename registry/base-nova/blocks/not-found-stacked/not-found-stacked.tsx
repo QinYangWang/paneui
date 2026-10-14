@@ -8,7 +8,7 @@ import { buttonVariants } from "@/registry/base-nova/ui/button"
 
 const FAN: Transition = { type: "spring", stiffness: 320, damping: 22, mass: 0.8 }
 const CARD =
-  "absolute inset-0 flex flex-col items-center justify-center rounded-3xl bg-card bg-linear-to-b from-white/5 to-transparent shadow-raised"
+  "absolute inset-0 flex flex-col items-center justify-center rounded-3xl bg-card shadow-raised"
 
 type NotFoundProps = Omit<React.ComponentProps<"div">, "title" | "children"> & {
   /** The big status code. Default "404". */

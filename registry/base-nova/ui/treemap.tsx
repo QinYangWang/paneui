@@ -350,7 +350,7 @@ function Treemap({
                       initial={false}
                       animate={{ x: t.x + 10, y: t.y + 20, opacity: showLabel ? (dim ? 0.5 : 1) : 0 }}
                       transition={transition}
-                      className="fill-white text-[12px] font-medium [text-shadow:0_1px_1px_rgb(0_0_0/0.25)]"
+                      className="fill-white text-[12px] font-medium"
                     >
                       {t.label}
                     </motion.text>
@@ -358,7 +358,7 @@ function Treemap({
                       initial={false}
                       animate={{ x: t.x + 10, y: t.y + 36, opacity: showValue ? (dim ? 0.4 : 0.85) : 0 }}
                       transition={transition}
-                      className="fill-white text-[11px] tabular-nums [text-shadow:0_1px_1px_rgb(0_0_0/0.25)]"
+                      className="fill-white text-[11px] tabular-nums"
                     >
                       {formatPercent(t.share)}
                     </motion.text>

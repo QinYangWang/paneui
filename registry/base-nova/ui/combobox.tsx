@@ -33,7 +33,7 @@ function ComboboxInput({
       data-slot="combobox-input-group"
       data-size={size}
       className={cn(
-        "group/combobox relative flex w-full min-w-48 items-center gap-1.5 rounded-full bg-muted/60 pr-1.5 pl-3.5 shadow-well transition-[box-shadow,background-color] focus-within:bg-background focus-within:ring-3 focus-within:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8",
+        "group/combobox relative flex w-full min-w-48 items-center gap-1.5 rounded-lg bg-muted/60 pr-1.5 pl-3.5 shadow-well transition-[box-shadow,background-color] focus-within:bg-background focus-within:ring-3 focus-within:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8",
         className
       )}
     >
@@ -47,7 +47,7 @@ function ComboboxInput({
         <ComboboxPrimitive.Clear
           data-slot="combobox-clear"
           aria-label="Clear selection"
-          className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[color,background-color,opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring data-ending-style:scale-75 data-ending-style:opacity-0 data-starting-style:scale-75 data-starting-style:opacity-0"
+          className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-[color,background-color,opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring data-ending-style:scale-75 data-ending-style:opacity-0 data-starting-style:scale-75 data-starting-style:opacity-0"
         >
           <XIcon size={14} />
         </ComboboxPrimitive.Clear>
@@ -56,7 +56,7 @@ function ComboboxInput({
         <ComboboxPrimitive.Trigger
           data-slot="combobox-trigger"
           aria-label="Show options"
-          className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+          className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
         >
           <ChevronsUpDownIcon size={16} />
         </ComboboxPrimitive.Trigger>
@@ -66,7 +66,7 @@ function ComboboxInput({
 }
 
 /**
- * Raised pill button that shows the chosen value, like SelectTrigger. Pair it
+ * Raised button that shows the chosen value, like SelectTrigger. Pair it
  * with <ComboboxSearch /> inside the popup for the "search in popup" pattern.
  */
 function ComboboxTrigger({
@@ -80,7 +80,7 @@ function ComboboxTrigger({
       data-slot="combobox-trigger"
       data-size={size}
       className={cn(
-        "inline-flex w-full min-w-40 cursor-pointer items-center gap-2 rounded-full bg-secondary bg-linear-to-b from-white/5 to-transparent pr-2.5 pl-4 text-sm font-medium shadow-raised transition-[box-shadow,background-color] outline-none select-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 data-popup-open:shadow-pressed data-[size=default]:h-9 data-[size=sm]:h-8 [&_svg]:size-4 [&_svg]:shrink-0",
+        "inline-flex w-full min-w-40 cursor-pointer items-center gap-2 rounded-lg bg-secondary pr-2.5 pl-3 text-sm font-medium shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 data-popup-open:bg-accent data-[size=default]:h-9 data-[size=sm]:h-8 [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

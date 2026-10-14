@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react"
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
@@ -52,9 +52,6 @@ function TiltCard({
 
   const transform = useMotionTemplate`perspective(${perspective}px) rotateX(${srx}deg) rotateY(${sry}deg) scale(${ss})`
   const glareBg = useMotionTemplate`radial-gradient(circle at ${px}% ${py}%, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.12) 35%, transparent 65%)`
-  // a faint edge sheen opposite the glare keeps the tilt legible in light mode
-  const sheenAngle = useTransform(() => `${135 + sry.get() * 3}deg`)
-  const sheenBg = useMotionTemplate`linear-gradient(${sheenAngle}, rgb(255 255 255 / 0.08), transparent 55%)`
 
   const track = (e: React.PointerEvent<HTMLDivElement>) => {
     if (reduce || e.pointerType === "touch") return
@@ -90,7 +87,7 @@ function TiltCard({
       }}
       style={{ ...style, transform: reduce ? undefined : transform, transformStyle: "preserve-3d" }}
       className={cn(
-        "relative rounded-2xl bg-card bg-linear-to-b from-white/5 to-transparent text-card-foreground shadow-raised will-change-transform",
+        "relative rounded-2xl bg-card text-card-foreground shadow-raised will-change-transform",
         className
       )}
       {...props}
@@ -104,7 +101,6 @@ function TiltCard({
           className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]"
         >
           <motion.div style={{ background: glareBg }} className="absolute inset-0 mix-blend-soft-light" />
-          <motion.div style={{ background: sheenBg }} className="absolute inset-0" />
         </motion.div>
       )}
     </motion.div>

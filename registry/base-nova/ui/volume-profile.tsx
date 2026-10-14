@@ -375,7 +375,7 @@ function VolumeProfile({
           ].map((item) => (
             <div
               key={item.k}
-              className="rounded-xl bg-card bg-linear-to-b from-white/6 to-transparent px-3 py-2 shadow-raised"
+              className="rounded-xl bg-card px-3 py-2 shadow-raised"
             >
               <dt className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
                 {item.c && <span className="size-1.5 rounded-full" style={{ background: item.c }} />}

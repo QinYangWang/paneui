@@ -406,7 +406,7 @@ function MonthsGrid() {
               }
               className={cn(
                 cellBase,
-                "h-8 cursor-pointer bg-secondary bg-linear-to-b from-white/6 to-transparent font-semibold shadow-raised hover:shadow-raised-hover active:shadow-pressed disabled:cursor-default"
+                "h-8 cursor-pointer bg-secondary font-semibold shadow-raised transition-[box-shadow,background-color] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover disabled:cursor-default"
               )}
               style={{
                 color: row.total == null ? undefined : row.total >= 0 ? UP : DOWN,
@@ -461,7 +461,7 @@ function YearsGrid() {
             onFocus={(e) => setHot({ kind: "year", year: row.year, ...anchor(e.currentTarget) })}
             onBlur={() => setHot(null)}
             onClick={(e) => pick(row.year, e.shiftKey)}
-            className="relative flex cursor-pointer flex-col gap-2 overflow-hidden rounded-2xl bg-card bg-linear-to-b from-white/5 to-transparent p-3 text-left shadow-raised outline-none transition-shadow hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:shadow-pressed"
+            className="relative flex cursor-pointer flex-col gap-2 overflow-hidden rounded-2xl bg-card p-3 text-left shadow-raised outline-none transition-[box-shadow,scale] duration-150 ease-out hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:scale-99"
             style={{ boxShadow: selected ? "inset 0 0 0 1.5px var(--foreground)" : undefined }}
           >
             <span
@@ -624,7 +624,7 @@ function ReturnsCalendarSummary({ className, ...props }: React.ComponentProps<"d
         <button
           type="button"
           onClick={() => setSelection(null)}
-          className="ml-auto rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent px-2 py-0.5 text-[11px] font-medium text-secondary-foreground shadow-raised outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:shadow-pressed"
+          className="ml-auto rounded-md bg-secondary px-2 py-0.5 text-[11px] font-medium text-secondary-foreground shadow-raised outline-none transition-[box-shadow,background-color,scale] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring active:scale-96"
         >
           Clear
         </button>

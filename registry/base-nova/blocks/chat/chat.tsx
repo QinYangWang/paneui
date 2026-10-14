@@ -32,7 +32,7 @@ function ChatBubble({
       className={cn(
         "max-w-[80%] rounded-[1.25rem] px-4 py-2.5 text-[0.95rem] leading-relaxed",
         isUser
-          ? "self-end rounded-br-md bg-primary bg-linear-to-b from-white/12 to-transparent text-primary-foreground shadow-primary"
+          ? "self-end rounded-br-md bg-primary text-primary-foreground shadow-primary"
           : "self-start rounded-bl-md bg-secondary text-secondary-foreground shadow-raised",
         className
       )}

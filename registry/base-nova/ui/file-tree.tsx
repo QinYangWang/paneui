@@ -277,7 +277,7 @@ function FileTree({
                   layoutId={pillId}
                   aria-hidden
                   transition={reduce ? { duration: 0 } : SPRING}
-                  className="absolute inset-0 rounded-xl bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised"
+                  className="absolute inset-0 rounded-xl bg-secondary shadow-raised"
                 />
               )}
               {!isSelected && (

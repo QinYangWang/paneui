@@ -106,7 +106,7 @@ function ArcLabel({
         if (!e.defaultPrevented) onSelect()
       }}
       className={cn(
-        "absolute top-0 left-0 cursor-pointer rounded-full px-3 py-1.5 text-lg whitespace-nowrap text-muted-foreground transition-[color] duration-200 outline-none",
+        "absolute top-0 left-0 cursor-pointer rounded-lg px-3 py-1.5 text-lg whitespace-nowrap text-muted-foreground transition-[color] duration-200 outline-none",
         "focus-visible:ring-3 focus-visible:ring-ring disabled:cursor-not-allowed disabled:line-through",
         "data-selected:font-medium data-selected:text-foreground",
         horizontal ? "origin-center" : side === "left" ? "origin-right" : "origin-left"
@@ -359,7 +359,7 @@ function ArcPicker({
       data-side={side}
       data-disabled={disabled || undefined}
       className={cn(
-        "relative isolate touch-none overflow-hidden rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent shadow-raised select-none [-webkit-touch-callout:none] data-disabled:opacity-50",
+        "relative isolate touch-none overflow-hidden rounded-2xl bg-card shadow-raised select-none [-webkit-touch-callout:none] data-disabled:opacity-50",
         disabled ? "cursor-not-allowed" : "cursor-grab active:cursor-grabbing",
         className
       )}
@@ -391,7 +391,7 @@ function ArcPicker({
         <motion.span
           aria-hidden
           data-slot="arc-picker-indicator"
-          className="pointer-events-none absolute top-0 left-0 -z-10 h-10 -translate-y-1/2 rounded-full bg-muted shadow-well"
+          className="pointer-events-none absolute top-0 left-0 -z-10 h-10 -translate-y-1/2 rounded-lg bg-muted shadow-well"
           style={{ width: pillWidth, x: pillX }}
         />
         {options.map((o, i) => (

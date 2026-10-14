@@ -19,7 +19,7 @@ export default function ScrollRevealDemo() {
         <p className="pb-40 text-center text-xs text-muted-foreground">Scroll down — cards reveal every time they enter</p>
         {UPDATES.map(({ icon: Icon, title, body }, i) => (
           <ScrollReveal key={title} once={false} from={i % 2 ? "right" : "left"} amount={0.6}>
-            <div className="flex items-center gap-3 rounded-2xl bg-card bg-linear-to-b from-white/6 to-transparent p-4 shadow-raised">
+            <div className="flex items-center gap-3 rounded-2xl bg-card p-4 shadow-raised">
               <IconChip tone="primary">
                 <Icon />
               </IconChip>

@@ -243,7 +243,7 @@ function CommandPalette({
           data-slot="command-palette"
           initialFocus={inputRef}
           className={cn(
-            "fixed top-[12vh] left-1/2 z-50 flex max-h-[min(30rem,76vh)] w-[calc(100%-2rem)] max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-3xl bg-popover bg-linear-to-b from-white/4 to-transparent text-popover-foreground shadow-surface outline-none",
+            "fixed top-[12vh] left-1/2 z-50 flex max-h-[min(30rem,76vh)] w-[calc(100%-2rem)] max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-3xl bg-popover text-popover-foreground shadow-surface outline-none",
             "transition-[opacity,scale,translate] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-120",
             "data-starting-style:-translate-y-2 data-starting-style:scale-97 data-starting-style:opacity-0 data-ending-style:scale-98 data-ending-style:opacity-0",
             "motion-reduce:data-starting-style:translate-y-0 motion-reduce:data-starting-style:scale-100",
@@ -324,7 +324,7 @@ function CommandPalette({
                               <motion.span
                                 layoutId="command-palette-active"
                                 aria-hidden
-                                className="absolute inset-0 rounded-xl bg-secondary bg-linear-to-b from-white/5 to-transparent shadow-raised"
+                                className="absolute inset-0 rounded-xl bg-secondary shadow-raised"
                                 transition={
                                   reduce ? { duration: 0 } : { type: "spring", stiffness: 600, damping: 42, mass: 0.6 }
                                 }

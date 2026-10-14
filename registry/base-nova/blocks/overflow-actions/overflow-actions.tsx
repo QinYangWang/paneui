@@ -40,12 +40,13 @@ export type OverflowActionsProps = {
 const SHELL: Transition = { type: "spring", stiffness: 240, damping: 22, mass: 0.85 }
 
 const sizes = {
-  sm: { rail: "gap-1 p-1", action: "h-8 min-w-8 gap-1.5 px-3 text-xs [&_svg]:size-3.5", toggle: "size-8 [&_svg]:size-3.5" },
-  md: { rail: "gap-1.5 p-1.5", action: "h-9 min-w-9 gap-2 px-3.5 text-sm [&_svg]:size-4", toggle: "size-9 [&_svg]:size-4" },
+  // Concentric radii: rail radius = item radius + rail padding.
+  sm: { rail: "gap-1 rounded-lg p-1", action: "h-8 min-w-8 gap-1.5 rounded-sm px-3 text-xs [&_svg]:size-3.5", toggle: "size-8 rounded-sm [&_svg]:size-3.5" },
+  md: { rail: "gap-1.5 rounded-xl p-1.5", action: "h-9 min-w-9 gap-2 rounded-md px-3.5 text-sm [&_svg]:size-4", toggle: "size-9 rounded-md [&_svg]:size-4" },
 }
 
 const actionClass =
-  "relative inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full font-medium whitespace-nowrap outline-none transition-[background-color,color,box-shadow] duration-150 select-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset data-disabled:pointer-events-none data-disabled:opacity-45"
+  "relative inline-flex shrink-0 cursor-pointer items-center justify-center font-medium whitespace-nowrap outline-none transition-[background-color,color,box-shadow,scale] duration-150 ease-out select-none active:scale-96 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset data-disabled:pointer-events-none data-disabled:opacity-45"
 
 export function OverflowActions({
   primaryActions,
@@ -95,8 +96,8 @@ export function OverflowActions({
         item.destructive
           ? "text-destructive hover:bg-destructive/10"
           : fromOverflow
-            ? "text-muted-foreground hover:bg-muted hover:text-foreground"
-            : "bg-secondary bg-linear-to-b from-white/5 to-transparent text-secondary-foreground shadow-raised hover:shadow-raised-hover active:shadow-pressed"
+            ? "text-muted-foreground hover:bg-accent hover:text-foreground"
+            : "bg-secondary text-secondary-foreground shadow-raised hover:bg-accent hover:shadow-raised-hover"
       )}
     >
       {item.icon}
@@ -117,7 +118,7 @@ export function OverflowActions({
         }
       }}
       className={cn(
-        "inline-flex max-w-full items-center rounded-full bg-card bg-linear-to-b from-white/5 to-transparent text-card-foreground shadow-raised",
+        "inline-flex max-w-full items-center bg-card text-card-foreground shadow-raised",
         s.rail,
         className
       )}
@@ -163,8 +164,8 @@ export function OverflowActions({
         className={cn(
           actionClass,
           s.toggle,
-          "text-muted-foreground hover:bg-muted hover:text-foreground",
-          expanded && "bg-muted text-foreground shadow-well"
+          "text-muted-foreground hover:bg-accent hover:text-foreground",
+          expanded && "bg-accent text-foreground"
         )}
       >
         <AnimatePresence mode="popLayout" initial={false}>

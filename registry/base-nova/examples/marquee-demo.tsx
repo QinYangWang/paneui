@@ -18,7 +18,7 @@ export default function MarqueeDemo() {
           {ITEMS.map(({ icon: Icon, label }) => (
             <div
               key={label}
-              className="flex items-center gap-2 rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent px-3.5 py-1.5 text-sm whitespace-nowrap shadow-raised"
+              className="flex items-center gap-2 rounded-full bg-secondary px-3.5 py-1.5 text-sm whitespace-nowrap shadow-raised"
             >
               <Icon className="size-4 text-muted-foreground" />
               {label}

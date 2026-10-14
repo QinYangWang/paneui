@@ -147,11 +147,11 @@ function AccountAvatar({ account, size = 28 }: { account: WalletAccount; size?: 
     <span
       aria-hidden
       data-slot="wallet-avatar"
-      className="relative inline-flex shrink-0 overflow-hidden rounded-full shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_0_0_1px_rgb(0_0_0/0.06)]"
+      className="relative inline-flex shrink-0 overflow-hidden rounded-full shadow-chip"
       style={{
         width: size,
         height: size,
-        backgroundImage: `radial-gradient(circle at 30% 25%, oklch(0.88 0.12 ${a}), transparent 60%), linear-gradient(135deg, oklch(0.68 0.17 ${a}), oklch(0.55 0.2 ${b}))`,
+        backgroundImage: `linear-gradient(135deg, oklch(0.68 0.17 ${a}), oklch(0.55 0.2 ${b}))`,
       }}
     />
   )
@@ -651,7 +651,7 @@ function WalletCard({
             {hasNotifications ? (
               <span aria-hidden className="absolute top-1.5 right-1.5 flex size-2">
                 <span className="absolute inset-0 animate-ping rounded-full bg-primary opacity-60 motion-reduce:animate-none" />
-                <span className="relative size-2 rounded-full bg-primary shadow-[0_0_0_2px_var(--card)]" />
+                <span className="relative size-2 rounded-full bg-primary ring-2 ring-card" />
               </span>
             ) : null}
           </button>
@@ -710,10 +710,10 @@ function WalletCard({
           >
             <span
               className={cn(
-                "inline-flex size-12 items-center justify-center rounded-full bg-linear-to-b to-transparent transition-shadow",
+                "inline-flex size-12 items-center justify-center rounded-full transition-[background-color,box-shadow] duration-150 ease-out",
                 key === "send"
-                  ? "bg-primary from-white/16 text-primary-foreground shadow-primary group-active/action:shadow-pressed"
-                  : "bg-secondary from-white/6 text-secondary-foreground shadow-raised group-hover/action:shadow-raised-hover group-active/action:shadow-pressed"
+                  ? "bg-primary text-primary-foreground shadow-primary group-hover/action:bg-primary/90"
+                  : "bg-secondary text-secondary-foreground shadow-raised group-hover/action:bg-accent group-hover/action:shadow-raised-hover"
               )}
             >
               <Icon className="size-[18px]" />
@@ -729,9 +729,9 @@ function WalletCard({
             <li key={asset.id} className="flex items-center gap-3 rounded-xl px-2 py-2">
               <span
                 aria-hidden
-                className="inline-flex size-8 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35)]"
+                className="inline-flex size-8 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white shadow-chip"
                 style={{
-                  backgroundImage: `linear-gradient(to bottom, color-mix(in oklch, ${asset.color}, white 20%), ${asset.color})`,
+                  backgroundColor: asset.color,
                 }}
               >
                 {asset.symbol.slice(0, 4)}

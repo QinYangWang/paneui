@@ -36,7 +36,7 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const crumbClass =
-  "inline-flex h-7 items-center gap-1.5 rounded-full px-2 transition-[background-color,color,box-shadow] duration-150 outline-none [&_svg]:size-3.5 [&_svg]:shrink-0"
+  "inline-flex h-7 items-center gap-1.5 rounded-md px-2 transition-[background-color,color,box-shadow] duration-150 outline-none [&_svg]:size-3.5 [&_svg]:shrink-0"
 
 /** Link crumb. Renders an <a> by default; use `render` for a router Link. */
 function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProps<"a">) {
@@ -48,7 +48,7 @@ function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProp
       ...props,
       className: cn(
         crumbClass,
-        "cursor-pointer hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed",
+        "cursor-pointer hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring",
         className
       ),
     },
@@ -65,7 +65,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
       aria-current="page"
       className={cn(
         crumbClass,
-        "bg-secondary bg-linear-to-b from-white/6 to-transparent font-medium text-foreground shadow-raised",
+        "bg-secondary font-medium text-foreground shadow-raised",
         className
       )}
       {...props}
@@ -105,7 +105,7 @@ function BreadcrumbEllipsis({
   ...props
 }: Omit<React.ComponentProps<"span">, "children"> & { items?: BreadcrumbHiddenItem[]; label?: string }) {
   const iconBox = cn(
-    "inline-flex size-7 items-center justify-center rounded-full [&_svg]:size-4",
+    "inline-flex size-7 items-center justify-center rounded-md [&_svg]:size-4",
     className
   )
 
@@ -124,7 +124,7 @@ function BreadcrumbEllipsis({
         aria-label={label}
         className={cn(
           iconBox,
-          "cursor-pointer transition-[background-color,color,box-shadow] duration-150 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed data-popup-open:bg-secondary data-popup-open:text-foreground data-popup-open:shadow-raised"
+          "cursor-pointer transition-[background-color,color,box-shadow] duration-150 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring data-popup-open:bg-secondary data-popup-open:text-foreground data-popup-open:shadow-raised"
         )}
       >
         <MoreHorizontalIcon />

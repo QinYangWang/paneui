@@ -54,7 +54,7 @@ export function CommandPill({ command, className }: { command: string; className
       data-slot="command-pill"
       className={cn(
         // eslint-disable-next-line shadcn/no-arbitrary-values -- 13px mono reads like 14px sans; no text token for it yet
-        "flex h-11 min-w-0 items-center gap-2 rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent pr-1.5 pl-4 font-mono text-[13px] text-secondary-foreground shadow-raised",
+        "flex h-11 min-w-0 items-center gap-2 rounded-xl bg-secondary pr-1.5 pl-3.5 font-mono text-[13px] text-secondary-foreground shadow-raised",
         className
       )}
     >

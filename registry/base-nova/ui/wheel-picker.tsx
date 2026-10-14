@@ -294,7 +294,7 @@ function WheelPicker({
       data-disabled={disabled || undefined}
       className={cn(
         "relative isolate min-w-16 flex-1 text-[0.95rem] select-none [-webkit-touch-callout:none] data-disabled:opacity-50",
-        !group && "rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent px-1.5 shadow-raised",
+        !group && "rounded-2xl bg-card px-1.5 shadow-raised",
         className
       )}
       style={{ height, ...style }}
@@ -396,7 +396,7 @@ function WheelPickerGroup({
         role="group"
         data-slot="wheel-picker-group"
         className={cn(
-          "relative isolate flex items-stretch gap-0.5 rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent px-1.5 shadow-raised",
+          "relative isolate flex items-stretch gap-0.5 rounded-2xl bg-card px-1.5 shadow-raised",
           className
         )}
         {...props}

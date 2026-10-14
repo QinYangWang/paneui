@@ -235,7 +235,7 @@ function ResourceTree({ label, items, query, expanded, onToggle, activeId, onAct
                   "group/item relative mx-1 my-px flex h-8 cursor-pointer items-center gap-1.5 rounded-xl pr-2 text-sm outline-none select-none",
                   "transition-[background-color,box-shadow,color] duration-150 focus-visible:ring-3 focus-visible:ring-ring",
                   active
-                    ? "bg-card bg-linear-to-b from-white/6 to-transparent font-medium text-foreground shadow-raised"
+                    ? "bg-card font-medium text-foreground shadow-raised"
                     : "text-foreground/85 hover:bg-muted",
                   item.disabled && "pointer-events-none opacity-50"
                 )}
@@ -465,7 +465,7 @@ function AISidebar({
             aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
             aria-expanded={open}
             onClick={() => setOpen(!open)}
-            className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed"
+            className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
           >
             <SidebarIcon size={17} />
           </button>
@@ -506,7 +506,7 @@ function AISidebar({
                 </button>
               ) : (
                 searchHotkey && (
-                  <kbd className="rounded-full bg-background px-1.5 font-mono text-[10px] text-muted-foreground shadow-chip">
+                  <kbd className="rounded-sm bg-background px-1.5 font-mono text-[10px] text-muted-foreground shadow-chip">
                     ⌘{searchHotkey.toUpperCase()}
                   </kbd>
                 )
@@ -595,7 +595,7 @@ function AISidebar({
                       }}
                       className={cn(
                         "grid size-9 cursor-pointer place-items-center rounded-xl outline-none transition-[background-color,box-shadow] focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-50",
-                        active ? "bg-card bg-linear-to-b from-white/6 to-transparent shadow-raised" : "hover:bg-muted"
+                        active ? "bg-card shadow-raised" : "hover:bg-muted"
                       )}
                     >
                       <ResourceIcon kind={item.kind} />

@@ -10,7 +10,7 @@ export default function FileTreeDemo() {
   const [value, setValue] = React.useState<string | null>("button.tsx")
   return (
     <div className="flex w-72 flex-col gap-2">
-      <div className="rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent p-2 shadow-surface">
+      <div className="rounded-2xl bg-card p-2 shadow-surface">
         <FileTree
           label="Project files"
           value={value}

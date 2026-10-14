@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "input",
   "title": "Input",
-  "description": "Text input in a soft inset well.",
+  "description": "Text input with a hairline inset ring.",
   "dependencies": [
     "@base-ui/react"
   ],

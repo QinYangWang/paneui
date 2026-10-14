@@ -223,8 +223,8 @@ function SortableStackItem({
         whileDrag={reduce ? undefined : { scale: 1.025 }}
         style={{ position: "relative", ...style }}
         className={cn(
-          "flex items-center gap-2 rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent py-2 pr-3 pl-1.5 text-sm text-card-foreground shadow-raised transition-shadow duration-200 select-none",
-          "data-dragging:z-10 data-dragging:shadow-[var(--skeuo-raised-hover),0_14px_30px_-10px_rgb(0_0_0/0.35)]",
+          "flex items-center gap-2 rounded-2xl bg-card py-2 pr-3 pl-1.5 text-sm text-card-foreground shadow-raised transition-shadow duration-200 select-none",
+          "data-dragging:z-10 data-dragging:shadow-surface",
           className
         )}
       >
@@ -296,7 +296,7 @@ function SortableStackUndo({ className, children, onClick, ...props }: React.Com
         if (!e.defaultPrevented) undo()
       }}
       className={cn(
-        "inline-flex h-8 cursor-pointer items-center gap-1.5 self-start rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent px-3 text-[0.8rem] font-medium text-secondary-foreground shadow-raised outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed",
+        "inline-flex h-8 cursor-pointer items-center gap-1.5 self-start rounded-lg bg-secondary px-2.5 text-[0.8rem] font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96",
         "pointer-events-none translate-y-1 scale-95 opacity-0 transition-[opacity,translate,scale,box-shadow] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] data-visible:pointer-events-auto data-visible:translate-y-0 data-visible:scale-100 data-visible:opacity-100 motion-reduce:transition-opacity",
         className
       )}

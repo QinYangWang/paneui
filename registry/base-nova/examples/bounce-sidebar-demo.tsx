@@ -18,7 +18,7 @@ const items = [
 export default function BounceSidebarDemo() {
   const [value, setValue] = React.useState("inbox")
   return (
-    <div className="rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent p-2 shadow-surface">
+    <div className="rounded-2xl bg-card p-2 shadow-surface">
       <BounceSidebar items={items} value={value} onValueChange={setValue} label="Workspace" />
     </div>
   )

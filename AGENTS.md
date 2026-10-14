@@ -34,17 +34,23 @@ component only if the design really needs a new treatment.
   `muted`, `muted-foreground`, `accent`, `destructive`, `success`, `warning`,
   `border`, `input`, `ring`, `code` (each `*-foreground` where defined). Washes use
   opacity modifiers (`bg-success/12`, `ring-primary/20`). Never palette colors
-  (`bg-zinc-100`), hex, or `[#…]`. `white`/`black` only for highlights on filled
-  surfaces (`from-white/14`, `text-white` on a destructive fill).
-- **Shadows (skeuomorphic)**: `shadow-raised` (resting control/card) →
-  `hover:shadow-raised-hover` → `active:shadow-pressed`; `shadow-primary` (filled
-  primary); `shadow-well` (inset fields, tracks); `shadow-surface` (floating panels,
-  frames, popovers); `shadow-chip` (kbd, small chips). Shadows give elevation;
-  borders are for dividers, table cells, selected states and inputs.
-- **Radius**: base `--radius` 0.75rem → `rounded-sm/md/lg/xl/2xl`. Buttons, chips,
-  badges, pills, switches: `rounded-full`. Cards and panels: `rounded-2xl`
-  (`rounded-3xl` for large frames). IconChip squircles: sm `rounded-lg` → xl `rounded-2xl`.
-  Circles are only for avatars and status dots.
+  (`bg-zinc-100`), hex, or `[#…]`. `white`/`black` only for text on colored fills
+  (`text-white` on destructive) and scrims (`bg-black/40`).
+- **Visual direction (flat, since 2026-10-14)**: after jakub.kr / oklch.fyi. Chroma-0
+  neutral grays, calm primary blue `oklch(0.57 0.15 258)`. No gradient sheens, inset
+  highlights, text-shadows or glows on controls. Research: `notes/flat-tokens-research.md`.
+- **Elevation**: `shadow-raised` (resting control/card: 1px hairline ring + faint drop)
+  → `hover:shadow-raised-hover` (ring a step darker) and/or `hover:bg-accent`;
+  `shadow-surface` (popovers, menus, floating panels); `shadow-well` (inset hairline for
+  fields and tracks); `shadow-chip` (kbd, small chips); `shadow-primary` (filled primary).
+  Dark mode elevation is the hairline ring only. `shadow-pressed` is a flat ring; press
+  is expressed with scale, not shadow.
+- **Radius**: base `--radius` 0.5rem → `rounded-sm/md/lg/xl/2xl` = 4/6/8/12/16px.
+  Buttons, inputs, select/combobox triggers, tab lists: `rounded-lg`; items inside a
+  padded container `rounded-md`; menus/popups `rounded-xl`; cards `rounded-xl`/`2xl`.
+  Keep radii concentric (outer = inner + padding). `rounded-full` only for inherently
+  round things: avatars, dots, switches and slider thumbs, badges/tags, icon-only
+  circular buttons, progress bars.
 - **New tokens**: add them to `app/globals.css` in `oklch()`, with a `.dark` value
   and an `@theme inline` mapping, in a separate reviewed change.
 
@@ -95,8 +101,8 @@ or margin on the child, not padding on a component.
   `transition-colors`, `transition-transform`), never `transition-all`.
 - Every movement, scale or blur is gated: `useReducedMotion()` / `motion-reduce:` /
   `motion-safe:`, falling back to an opacity cross-fade.
-- `Button` press is `active:translate-y-px` + `shadow-pressed`; keep it. Other custom
-  pressables follow the house rule below (scale 0.96).
+- Press is `active:scale-96` (150ms ease-out, `scale` in the transition list) on
+  Button and every custom pressable; large surfaces may use `scale-98`.
 
 ## Light and dark
 

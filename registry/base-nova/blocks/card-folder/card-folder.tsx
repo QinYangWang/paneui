@@ -36,7 +36,7 @@ export interface CardFolderProps {
 
 const SPRING = { type: "spring", stiffness: 340, damping: 26, mass: 0.9 } as const
 const iconButton =
-  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-50"
+  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50"
 
 function useControllable<T>(value: T | undefined, defaultValue: T, onChange?: (v: T) => void) {
   const [internal, setInternal] = React.useState(defaultValue)
@@ -76,10 +76,10 @@ function DefaultArt() {
   return (
     <span
       aria-hidden
-      className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_0%,color-mix(in_oklch,var(--primary),white_30%),transparent_60%),linear-gradient(135deg,color-mix(in_oklch,var(--primary),black_10%),color-mix(in_oklch,var(--primary),black_55%))]"
+      className="absolute inset-0 bg-primary"
     >
-      <span className="absolute -right-10 -bottom-16 size-48 rounded-full border-[18px] border-white/8" />
-      <span className="absolute -right-2 -bottom-24 size-48 rounded-full border-[18px] border-white/6" />
+      <span className="absolute -right-10 -bottom-16 size-48 rounded-full border-[18px] border-primary-foreground/10" />
+      <span className="absolute -right-2 -bottom-24 size-48 rounded-full border-[18px] border-primary-foreground/6" />
     </span>
   )
 }
@@ -166,7 +166,7 @@ export function CardFolder({
         {/* The card */}
         <motion.span
           className={cn(
-            "absolute top-5 left-1/2 block aspect-[1.586] w-[17.5rem] overflow-hidden rounded-2xl text-left text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_1px_2px_rgb(0_0_0/0.25)]",
+            "absolute top-5 left-1/2 block aspect-[1.586] w-[17.5rem] overflow-hidden rounded-2xl text-left text-primary-foreground shadow-raised",
             cardClassName
           )}
           initial={false}
@@ -177,18 +177,18 @@ export function CardFolder({
                   y: open ? -10 : 0,
                   scale: open ? 1.035 : 1,
                   boxShadow: open
-                    ? "inset 0 1px 0 rgb(255 255 255 / 0.3), 0 18px 32px -12px rgb(0 0 0 / 0.45)"
-                    : "inset 0 1px 0 rgb(255 255 255 / 0.3), 0 1px 2px rgb(0 0 0 / 0.25)",
+                    ? "0 0 0 1px rgb(0 0 0 / 0.06), 0 16px 28px -14px rgb(0 0 0 / 0.28)"
+                    : "0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px rgb(0 0 0 / 0.06)",
                 }
           }
           transition={{ ...SPRING, delay: open ? 0.04 : 0 }}
           style={{ x: "-50%" }}
         >
           {card ?? <DefaultArt />}
-          <span className="relative flex size-full flex-col justify-between p-4 [text-shadow:0_1px_1px_rgb(0_0_0/0.25)]">
+          <span className="relative flex size-full flex-col justify-between p-4">
             <span className="flex items-start justify-between">
               <span className="text-sm font-semibold tracking-wide">{brand}</span>
-              <span aria-hidden className="h-6 w-8 rounded-md bg-linear-to-br from-warning/60 to-warning shadow-[inset_0_0_0_1px_rgb(0_0_0/0.15)]" />
+              <span aria-hidden className="h-6 w-8 rounded-md bg-warning/90" />
             </span>
             <span className="flex flex-col gap-2">
               <Swap
@@ -217,12 +217,11 @@ export function CardFolder({
         {/* Front of the pocket: compresses into its bottom seam as the card lifts */}
         <motion.span
           aria-hidden
-          className="absolute inset-x-0 bottom-0 z-10 block overflow-hidden rounded-[1.75rem] bg-secondary bg-linear-to-b from-white/6 to-transparent shadow-raised"
+          className="absolute inset-x-0 bottom-0 z-10 block overflow-hidden rounded-[1.75rem] bg-secondary shadow-raised"
           initial={false}
           animate={{ height: open ? 52 : 150 }}
           transition={reduce ? { duration: 0.15 } : SPRING}
         >
-          <span className="absolute inset-x-6 top-0 h-px bg-white/25" />
           <span className="absolute inset-2 rounded-[1.35rem] border-[1.5px] border-dashed border-foreground/15" />
           <span className="absolute inset-x-0 bottom-0 flex h-[52px] items-center justify-center text-xs font-medium text-muted-foreground">
             <AnimatePresence mode="popLayout" initial={false}>

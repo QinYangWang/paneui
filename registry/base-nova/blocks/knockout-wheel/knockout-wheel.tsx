@@ -229,7 +229,7 @@ function KnockoutWheel({ rounds, label = "Tournament wheel", className, ...props
                   className={cn(
                     "relative flex size-full items-center justify-center rounded-full font-bold tracking-tight",
                     n.team
-                      ? "text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_0_0_0.5px_rgb(0_0_0/0.15),0_1px_3px_rgb(0_0_0/0.25)] text-shadow-[0_1px_0_rgb(0_0_0/0.2)]"
+                      ? "text-white shadow-raised"
                       : "border border-dashed border-border bg-muted text-muted-foreground shadow-well",
                     n.hub && n.team && "ring-3 ring-primary/35 ring-offset-2 ring-offset-background"
                   )}

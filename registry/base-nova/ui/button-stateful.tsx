@@ -95,7 +95,7 @@ function StatefulButton({
         "overflow-hidden data-[state=loading]:cursor-progress data-[state=loading]:disabled:pointer-events-auto data-[state=loading]:disabled:opacity-100",
         tint &&
           variant === "default" &&
-          "data-[state=error]:bg-destructive data-[state=error]:shadow-[inset_0_1px_0_rgb(255_255_255/0.25),0_0_0_1px_color-mix(in_oklch,var(--destructive),black_20%),0_1px_2px_rgb(0_0_0/0.3)] data-[state=success]:bg-success data-[state=success]:shadow-[inset_0_1px_0_rgb(255_255_255/0.25),0_0_0_1px_color-mix(in_oklch,var(--success),black_20%),0_1px_2px_rgb(0_0_0/0.3)]",
+          "data-[state=error]:bg-destructive data-[state=error]:shadow-[0_0_0_1px_color-mix(in_oklch,var(--destructive),black_10%)] data-[state=success]:bg-success data-[state=success]:shadow-[0_0_0_1px_color-mix(in_oklch,var(--success),black_10%)]",
         className
       )}
       {...props}

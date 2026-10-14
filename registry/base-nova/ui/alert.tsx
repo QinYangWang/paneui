@@ -130,7 +130,7 @@ function Alert({
               <div
                 data-slot="alert-surface"
                 className={cn(
-                  "relative isolate flex w-full items-start gap-3 overflow-hidden rounded-2xl bg-card bg-linear-to-b from-white/6 to-transparent p-3.5 text-sm text-card-foreground shadow-raised",
+                  "relative isolate flex w-full items-start gap-3 overflow-hidden rounded-2xl bg-card p-3.5 text-sm text-card-foreground shadow-raised",
                   contentClassName
                 )}
               >
@@ -197,7 +197,7 @@ function AlertClose({ className, onClick, children, ...props }: React.ComponentP
         if (!e.defaultPrevented) dismiss()
       }}
       className={cn(
-        "-mt-0.5 -mr-1 flex size-7 shrink-0 cursor-pointer items-center justify-center self-start rounded-full text-muted-foreground transition-[background-color,color,box-shadow] duration-150 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed [&_svg]:size-3.5",
+        "-mt-0.5 -mr-1 flex size-7 shrink-0 cursor-pointer items-center justify-center self-start rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 [&_svg]:size-3.5",
         className
       )}
       {...props}

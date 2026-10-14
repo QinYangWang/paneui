@@ -134,7 +134,6 @@ function RangeSliderInline({
             style={{ width: `calc(${EDGE + 6}px + ${p} * (100% - ${EDGE * 2}px))` }}
             className={cn(
               "absolute inset-y-0 left-0 rounded-xl bg-card shadow-raised",
-              "before:absolute before:inset-0 before:rounded-[inherit] before:bg-linear-to-b before:from-white/6 before:to-transparent",
               "transition-[width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-dragging/ris:transition-none motion-reduce:transition-none"
             )}
           />
@@ -184,7 +183,7 @@ function RangeSliderInline({
                 key={edge}
                 aria-hidden
                 className={cn(
-                  "absolute left-1/2 w-1 -translate-x-1/2 rounded-full bg-primary shadow-[0_0_0_0.5px_color-mix(in_oklch,var(--primary),black_25%)]",
+                  "absolute left-1/2 w-1 -translate-x-1/2 rounded-full bg-primary",
                   "h-1/2 transition-[height,scale] duration-250 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-data-parted/thumb:h-1.5 motion-reduce:transition-none",
                   "group-data-dragging/ris:scale-x-125",
                   edge

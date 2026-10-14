@@ -143,7 +143,7 @@ function AvailabilityScheduler({
     <div
       data-slot="availability-scheduler"
       className={cn(
-        "w-full max-w-xl rounded-2xl bg-card bg-linear-to-b from-white/4 to-transparent p-2 shadow-surface",
+        "w-full max-w-xl rounded-2xl bg-card p-2 shadow-surface",
         className
       )}
       {...props}

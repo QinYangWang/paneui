@@ -61,7 +61,7 @@ function MorphWidth({ children, className }: { children: React.ReactNode; classN
 }
 
 const SURFACE =
-  "bg-secondary bg-linear-to-b from-white/6 to-transparent text-secondary-foreground shadow-raised hover:shadow-raised-hover"
+  "bg-secondary text-secondary-foreground shadow-raised hover:bg-accent hover:shadow-raised-hover"
 
 type ExpandableButtonProps = Omit<ButtonPrimitive.Props, "children"> &
   ExpandableState & {
@@ -100,9 +100,9 @@ function ExpandableButton({
       }}
       className={cn(
         "inline-flex h-10 shrink-0 cursor-pointer items-center rounded-full p-0.5 text-sm font-medium whitespace-nowrap outline-none select-none",
-        "transition-[box-shadow,background-color,color] duration-150 focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed disabled:pointer-events-none disabled:opacity-50",
+        "transition-[box-shadow,background-color,color,scale] duration-150 ease-out focus-visible:ring-3 focus-visible:ring-ring active:scale-96 disabled:pointer-events-none disabled:opacity-50",
         SURFACE,
-        "data-expanded:bg-primary data-expanded:text-primary-foreground data-expanded:shadow-primary data-expanded:from-white/14",
+        "data-expanded:bg-primary data-expanded:text-primary-foreground data-expanded:shadow-primary data-expanded:hover:bg-primary/90",
         className
       )}
       {...props}

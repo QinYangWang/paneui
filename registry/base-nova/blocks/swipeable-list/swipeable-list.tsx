@@ -183,7 +183,7 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
               className={cn(
                 "relative flex shrink-0 cursor-pointer flex-col items-center justify-center gap-1 overflow-hidden text-[0.7rem] font-medium outline-none",
                 "transition-[flex-grow,opacity,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset disabled:opacity-50",
-                "bg-linear-to-b from-white/12 to-transparent [&_svg]:size-4.5",
+                "[&_svg]:size-4.5",
                 toneClass[action.tone ?? "neutral"],
                 isArmed && action.id === edgeId ? "grow" : "grow-0",
                 hidden && "opacity-0"
@@ -233,7 +233,7 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
         style={{ x }}
         data-slot="swipeable-list-surface"
         className={cn(
-          "relative z-10 flex touch-pan-y items-center gap-3 rounded-2xl bg-card bg-linear-to-b from-white/5 to-transparent px-3.5 py-3 text-card-foreground shadow-raised outline-none select-none",
+          "relative z-10 flex touch-pan-y items-center gap-3 rounded-2xl bg-card px-3.5 py-3 text-card-foreground shadow-raised outline-none select-none",
           "focus-visible:ring-3 focus-visible:ring-ring",
           hasActions && "cursor-grab active:cursor-grabbing",
           item.disabled && "opacity-60"

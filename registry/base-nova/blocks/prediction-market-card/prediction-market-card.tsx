@@ -97,13 +97,13 @@ function MarketAvatar({
     <span
       aria-hidden
       className={cn(
-        "inline-flex shrink-0 items-center justify-center overflow-hidden font-semibold shadow-[inset_0_1px_0_rgb(255_255_255/0.3),inset_0_-1px_0_rgb(0_0_0/0.12)]",
+        "inline-flex shrink-0 items-center justify-center overflow-hidden font-semibold shadow-chip",
         size === "md" ? "size-11 rounded-2xl text-sm" : "size-7 rounded-full text-[10px]",
         color ? "text-white" : "bg-muted text-foreground"
       )}
       style={
         color
-          ? { backgroundImage: `linear-gradient(to bottom, color-mix(in oklch, ${color}, white 18%), ${color})` }
+          ? { backgroundColor: color }
           : undefined
       }
     >
@@ -152,10 +152,10 @@ function OddsButton({
       transition={PRESS}
       className={cn(
         "relative inline-flex h-9 min-w-[4.25rem] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-xl px-3 text-sm font-semibold tabular-nums outline-none focus-visible:ring-3 focus-visible:ring-ring",
-        "bg-linear-to-b from-white/10 to-transparent transition-[background-color,box-shadow]",
+        "transition-[background-color,box-shadow]",
         side === "yes"
-          ? "bg-success/12 text-success shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--success),transparent_70%),0_2px_0_color-mix(in_oklch,var(--success),transparent_75%)] hover:bg-success/20"
-          : "bg-destructive/10 text-destructive shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--destructive),transparent_70%),0_2px_0_color-mix(in_oklch,var(--destructive),transparent_75%)] hover:bg-destructive/18",
+          ? "bg-success/12 text-success ring-1 ring-success/30 ring-inset hover:bg-success/20"
+          : "bg-destructive/10 text-destructive ring-1 ring-destructive/30 ring-inset hover:bg-destructive/18",
         className
       )}
     >

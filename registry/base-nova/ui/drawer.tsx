@@ -78,7 +78,7 @@ function DrawerContent({
             data-slot="drawer-content"
             data-side={side}
             className={cn(
-              "fixed inset-y-2 z-50 flex w-[min(24rem,calc(100vw-1rem))] flex-col overflow-hidden rounded-3xl bg-popover bg-linear-to-b from-white/4 to-transparent text-popover-foreground shadow-surface outline-none",
+              "fixed inset-y-2 z-50 flex w-[min(24rem,calc(100vw-1rem))] flex-col overflow-hidden rounded-3xl bg-popover text-popover-foreground shadow-surface outline-none",
               "data-[side=left]:left-2 data-[side=right]:right-2",
               className
             )}

@@ -15,7 +15,7 @@ export default function MagneticDemo() {
           <a
             href="#"
             aria-label={label}
-            className="grid size-12 place-items-center rounded-2xl bg-secondary bg-linear-to-b from-white/6 to-transparent text-foreground shadow-raised transition-shadow outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring"
+            className="grid size-12 place-items-center rounded-2xl bg-secondary text-foreground shadow-raised transition-shadow outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring"
           >
             <Icon className="size-5" />
           </a>

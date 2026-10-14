@@ -8,7 +8,7 @@ export default function ThemeDemo() {
           <div
             className={
               s === "primary"
-                ? "size-16 rounded-2xl bg-primary bg-linear-to-b from-white/14 to-transparent shadow-primary"
+                ? "size-16 rounded-2xl bg-primary shadow-primary"
                 : "size-16 rounded-2xl bg-card"
             }
             style={s === "primary" ? undefined : { boxShadow: `var(--skeuo-${s})` }}

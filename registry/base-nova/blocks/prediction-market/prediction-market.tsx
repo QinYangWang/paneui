@@ -226,8 +226,8 @@ function OutcomePicker({
                 layoutId={layoutId}
                 transition={reduce ? { duration: 0 } : SLIDE}
                 className={cn(
-                  "absolute inset-0 rounded-xl bg-card bg-linear-to-b to-transparent shadow-raised",
-                  tone === "positive" ? "from-success/14" : "from-destructive/12"
+                  "absolute inset-0 rounded-xl shadow-raised",
+                  tone === "positive" ? "bg-success/12" : "bg-destructive/10"
                 )}
               />
             ) : null}
@@ -377,7 +377,7 @@ function PredictionMarket({
                 disabled={busy}
                 whileTap={reduce ? undefined : { scale: 0.92, y: 1 }}
                 onClick={() => update({ amount: String(Number(((Number(order.amount) || 0) + inc).toFixed(2))) })}
-                className="h-8 cursor-pointer rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent px-3 text-xs font-semibold text-secondary-foreground tabular-nums shadow-raised outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-50"
+                className="h-8 cursor-pointer rounded-lg bg-secondary px-3 text-xs font-semibold text-secondary-foreground tabular-nums shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover enabled:active:scale-96 focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-50"
               >
                 +{buying ? usd(inc, 0) : inc}
               </motion.button>
@@ -387,7 +387,7 @@ function PredictionMarket({
               disabled={busy}
               whileTap={reduce ? undefined : { scale: 0.92, y: 1 }}
               onClick={() => update({ amount: buying ? String(Math.floor(balance)) : String(held) })}
-              className="h-8 cursor-pointer rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent px-3 text-xs font-semibold text-secondary-foreground shadow-raised outline-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-50"
+              className="h-8 cursor-pointer rounded-lg bg-secondary px-3 text-xs font-semibold text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover enabled:active:scale-96 focus-visible:ring-3 focus-visible:ring-ring disabled:opacity-50"
             >
               Max
             </motion.button>

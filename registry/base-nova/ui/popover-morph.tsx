@@ -21,7 +21,7 @@ function MorphPopoverTrigger({ className, ...props }: PopoverPrimitive.Trigger.P
     <PopoverPrimitive.Trigger
       data-slot="morph-popover-trigger"
       className={cn(
-        "inline-flex h-9 cursor-pointer items-center gap-2 rounded-full bg-secondary bg-linear-to-b from-white/6 to-transparent px-4 text-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow] outline-none select-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+        "inline-flex h-9 cursor-pointer items-center gap-2 rounded-lg bg-secondary px-3.5 text-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:shadow-raised-hover active:scale-96 focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}
@@ -58,7 +58,7 @@ function MorphPopoverContent({
           data-slot="morph-popover-content"
           style={{ "--morph-r0": triggerRadius } as React.CSSProperties}
           className={cn(
-            "group/morph relative flex w-72 min-w-(--anchor-width) max-w-[calc(100vw-1rem)] flex-col gap-3 rounded-2xl bg-popover bg-linear-to-b from-white/4 to-transparent p-4 text-sm text-popover-foreground shadow-surface outline-none",
+            "group/morph relative flex w-72 min-w-(--anchor-width) max-w-[calc(100vw-1rem)] flex-col gap-3 rounded-2xl bg-popover p-4 text-sm text-popover-foreground shadow-surface outline-none",
             // insets of the trigger's box inside the panel, per side/alignment
             "[--mt:0px] [--mb:calc(100%_-_var(--anchor-height))] [--ml:0px] [--mr:calc(100%_-_var(--anchor-width))]",
             "data-[side=top]:[--mt:calc(100%_-_var(--anchor-height))] data-[side=top]:[--mb:0px]",

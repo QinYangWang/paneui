@@ -142,10 +142,10 @@ function NotFoundTerminal({
     >
       <style>{`@keyframes nf-caret{0%,100%{opacity:1}50%{opacity:0}}`}</style>
       <div className="w-full max-w-md overflow-hidden rounded-2xl bg-card text-left shadow-surface">
-        <div className="flex h-9 items-center gap-1.5 border-b border-border/70 bg-linear-to-b from-white/5 to-transparent px-3.5">
-          <span className="size-2.5 rounded-full bg-destructive/80 shadow-[inset_0_0_0_0.5px_rgb(0_0_0/0.2)]" />
-          <span className="size-2.5 rounded-full bg-warning/80 shadow-[inset_0_0_0_0.5px_rgb(0_0_0/0.2)]" />
-          <span className="size-2.5 rounded-full bg-success/80 shadow-[inset_0_0_0_0.5px_rgb(0_0_0/0.2)]" />
+        <div className="flex h-9 items-center gap-1.5 border-b border-border/70 px-3.5">
+          <span className="size-2.5 rounded-full bg-destructive/80" />
+          <span className="size-2.5 rounded-full bg-warning/80" />
+          <span className="size-2.5 rounded-full bg-success/80" />
           <span className="flex-1 pr-10 text-center text-xs text-muted-foreground">{windowTitle}</span>
         </div>
         <p className="sr-only">

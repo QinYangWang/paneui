@@ -20,9 +20,9 @@ export default function Gallery() {
         <Badge variant="primary" size="sm">
           {total} components · Base UI · Tailwind 4
         </Badge>
-        <h1 className="text-4xl font-semibold tracking-tight">Soft, tactile components.</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">Quiet, precise components.</h1>
         <p className="max-w-xl text-lg text-muted-foreground">
-          Copy-paste React components on Base UI, Tailwind 4 and Motion, with a light touch of skeuomorphism. Install any
+          Copy-paste React components on Base UI, Tailwind 4 and Motion, with neutral OKLCH tokens and hairline depth. Install any
           of them with the shadcn CLI.
         </p>
         <Button nativeButton={false} render={<Link href="/docs" />}>

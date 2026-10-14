@@ -91,7 +91,7 @@ function Slider<Value extends number | readonly number[]>({
         >
           <SliderPrimitive.Indicator
             data-slot="slider-indicator"
-            className="rounded-full bg-primary shadow-[inset_0_1px_0_rgb(255_255_255/0.25),inset_0_0_0_1px_color-mix(in_oklch,var(--primary),black_18%)]"
+            className="rounded-full bg-primary"
           />
           {tickValues.map((tick) => {
             const pct = ((tick - min) / span) * 100
@@ -117,7 +117,7 @@ function Slider<Value extends number | readonly number[]>({
               getAriaLabel={getThumbLabel}
               data-slot="slider-thumb"
               className={cn(
-                "group/thumb block size-5 rounded-full bg-linear-to-b from-white to-[oklch(0.93_0_0)] shadow-[inset_0_1px_0_rgb(255_255_255),0_0_0_0.5px_rgb(0_0_0/0.12),0_1px_2px_rgb(0_0_0/0.3),0_2px_4px_-1px_rgb(0_0_0/0.2)] outline-none",
+                "group/thumb block size-5 rounded-full bg-card shadow-raised outline-none",
                 "transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 data-dragging:scale-115 has-focus-visible:ring-3 has-focus-visible:ring-ring motion-reduce:transition-none"
               )}
             >
@@ -125,7 +125,7 @@ function Slider<Value extends number | readonly number[]>({
                 <SliderPrimitive.Value
                   data-slot="slider-value"
                   className={cn(
-                    "pointer-events-none absolute rounded-full bg-popover px-2 py-0.5 text-xs font-medium whitespace-nowrap text-popover-foreground tabular-nums shadow-surface",
+                    "pointer-events-none absolute rounded-md bg-popover px-2 py-0.5 text-xs font-medium whitespace-nowrap text-popover-foreground tabular-nums shadow-surface",
                     "transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
                     vertical
                       ? "top-1/2 left-full ml-2 origin-left -translate-y-1/2"

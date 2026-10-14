@@ -263,13 +263,6 @@ function HoldActionButton({
         </motion.svg>
       </motion.span>
 
-      {/* One sheen over face, liquid and wave alike, so the wave (a plain fill)
-          and the liquid behind it are exactly the same colour: no band at the edge. */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-linear-to-b from-white/8 to-transparent"
-      />
-
       <span id={hintId} className="sr-only">
         {hint}
       </span>

@@ -19,13 +19,13 @@ const iconChipVariants = cva(
   {
     variants: {
       tone: {
-        neutral: "bg-secondary bg-linear-to-b from-white/6 to-transparent text-muted-foreground shadow-raised",
+        neutral: "bg-secondary text-muted-foreground shadow-raised",
         primary: "bg-primary/12 text-primary shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary)_24%,transparent)]",
         success: "bg-success/12 text-success shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--success)_24%,transparent)]",
         warning: "bg-warning/14 text-warning shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--warning)_26%,transparent)]",
         destructive:
           "bg-destructive/12 text-destructive shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--destructive)_26%,transparent)]",
-        solid: "bg-primary bg-linear-to-b from-white/16 to-transparent text-primary-foreground shadow-primary",
+        solid: "bg-primary text-primary-foreground shadow-primary",
       },
       size: {
         sm: "size-6 rounded-lg [&_svg]:size-3.5",

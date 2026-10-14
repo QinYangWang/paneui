@@ -178,7 +178,7 @@ function ExpandableTabs({
         aria-label={ariaLabel}
         aria-orientation="horizontal"
         data-slot="expandable-tabs-bar"
-        className={cn("inline-flex items-center gap-1 rounded-full bg-muted/70 p-1 shadow-well", barClassName)}
+        className={cn("inline-flex items-center gap-1 rounded-lg bg-muted/70 p-1 shadow-well", barClassName)}
       >
         {items.map((item, index) => {
           const selected = item.id === value
@@ -201,9 +201,9 @@ function ExpandableTabs({
               onKeyDown={(event) => onKeyDown(event, index)}
               onFocus={() => setFocusIndex(index)}
               className={cn(
-                "relative inline-flex h-9 min-w-9 cursor-pointer items-center justify-center rounded-full px-2.5 text-sm font-medium text-muted-foreground outline-none select-none",
+                "relative inline-flex h-9 min-w-9 cursor-pointer items-center justify-center rounded-md px-2.5 text-sm font-medium text-muted-foreground outline-none select-none",
                 "transition-[color,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40",
-                "data-active:bg-secondary data-active:bg-linear-to-b data-active:from-white/6 data-active:to-transparent data-active:text-foreground data-active:shadow-raised",
+                "data-active:bg-secondary data-active:text-foreground data-active:shadow-raised",
                 "[&_svg]:size-4.5 [&_svg]:shrink-0"
               )}
             >

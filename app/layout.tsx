@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   title: { default: "qinyang/ui", template: "%s · qinyang/ui" },
-  description: "Soft, tactile components on Base UI, distributed via shadcn.",
+  description: "Quiet, precise components on Base UI, distributed via shadcn.",
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

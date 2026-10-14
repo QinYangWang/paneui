@@ -30,7 +30,7 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "inline-flex w-full min-w-40 cursor-pointer items-center gap-2 rounded-full bg-secondary bg-linear-to-b from-white/5 to-transparent pr-2.5 pl-4 text-sm font-medium shadow-raised transition-[box-shadow,background-color] outline-none select-none hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 data-popup-open:shadow-pressed data-[size=default]:h-9 data-[size=sm]:h-8 [&_svg]:size-4 [&_svg]:shrink-0",
+        "inline-flex w-full min-w-40 cursor-pointer items-center gap-2 rounded-lg bg-secondary pr-2.5 pl-3.5 text-sm font-medium shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50 data-popup-open:bg-accent data-[size=default]:h-9 data-[size=sm]:h-8 [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}
@@ -65,16 +65,16 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           className={cn(
-            "relative max-h-(--available-height) min-w-(--anchor-width) origin-(--transform-origin) overflow-hidden rounded-2xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-95 data-ending-style:opacity-0 data-[side=none]:data-ending-style:scale-100 data-starting-style:scale-95 data-starting-style:opacity-0 data-[side=none]:data-starting-style:scale-100",
+            "relative max-h-(--available-height) min-w-(--anchor-width) origin-(--transform-origin) overflow-hidden rounded-xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-95 data-ending-style:opacity-0 data-[side=none]:data-ending-style:scale-100 data-starting-style:scale-95 data-starting-style:opacity-0 data-[side=none]:data-starting-style:scale-100",
             className
           )}
           {...props}
         >
-          <SelectPrimitive.ScrollUpArrow className="top-0 z-10 flex h-6 w-full cursor-default items-center justify-center rounded-t-2xl bg-popover text-muted-foreground">
+          <SelectPrimitive.ScrollUpArrow className="top-0 z-10 flex h-6 w-full cursor-default items-center justify-center rounded-t-xl bg-popover text-muted-foreground">
             <ChevronUpIcon size={14} />
           </SelectPrimitive.ScrollUpArrow>
           <SelectPrimitive.List className="max-h-(--available-height) scroll-py-6 overflow-y-auto p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{children}</SelectPrimitive.List>
-          <SelectPrimitive.ScrollDownArrow className="bottom-0 z-10 flex h-6 w-full cursor-default items-center justify-center rounded-b-2xl bg-popover text-muted-foreground">
+          <SelectPrimitive.ScrollDownArrow className="bottom-0 z-10 flex h-6 w-full cursor-default items-center justify-center rounded-b-xl bg-popover text-muted-foreground">
             <ChevronDownIcon size={14} />
           </SelectPrimitive.ScrollDownArrow>
         </SelectPrimitive.Popup>
@@ -88,7 +88,7 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "relative flex h-8 cursor-default items-center gap-2 rounded-xl pr-8 pl-2.5 text-sm outline-none select-none transition-[background-color,box-shadow] duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-secondary data-highlighted:shadow-raised [&_svg]:size-4 [&_svg]:shrink-0",
+        "relative flex h-8 cursor-default items-center gap-2 rounded-md pr-8 pl-2.5 text-sm outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

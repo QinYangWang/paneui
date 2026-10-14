@@ -105,8 +105,8 @@ function OTPInput({
                     className={cn(
                       "relative grid h-12 w-10 place-items-center rounded-xl bg-muted shadow-well transition-[background-color,box-shadow] duration-200",
                       char && "bg-card",
-                      status === "error" && "shadow-[inset_0_0_0_1px_var(--destructive),0_0_0_3px_color-mix(in_oklch,var(--destructive)_18%,transparent)]",
-                      status === "success" && "shadow-[inset_0_0_0_1px_var(--success),0_0_0_3px_color-mix(in_oklch,var(--success)_16%,transparent)]",
+                      status === "error" && "inset-ring inset-ring-destructive ring-3 ring-destructive/18",
+                      status === "success" && "inset-ring inset-ring-success ring-3 ring-success/16",
                       disabled && "opacity-50"
                     )}
                   >
@@ -121,7 +121,7 @@ function OTPInput({
                         layoutId="otp-focus-ring"
                         aria-hidden
                         transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 460, damping: 34, mass: 0.6 }}
-                        className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_0_1.5px_var(--primary),0_0_0_3px_var(--ring)]"
+                        className="pointer-events-none absolute inset-0 rounded-xl inset-ring-2 inset-ring-primary ring-3 ring-ring"
                       />
                     ) : null}
                     {isFocused && !char && status === "idle" ? (
@@ -162,7 +162,7 @@ function OTPInput({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.6 }}
               transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 26 }}
-              className="absolute -right-9 grid size-6 place-items-center rounded-full bg-success text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_1px_2px_rgb(0_0_0/0.2)]"
+              className="absolute -right-9 grid size-6 place-items-center rounded-full bg-success text-white"
             >
               <svg viewBox="0 0 18 18" fill="none" className="size-4">
                 <motion.path

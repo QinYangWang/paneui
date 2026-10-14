@@ -253,8 +253,8 @@ function MessageScroller({
               exit={reduce ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.92, filter: "blur(4px)" }}
               transition={reduce ? { duration: 0.12 } : { type: "spring", stiffness: 520, damping: 34 }}
               className={cn(
-                "absolute bottom-3 left-1/2 z-10 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full bg-popover bg-linear-to-b from-white/6 to-transparent pr-3.5 pl-2.5 text-xs font-medium text-popover-foreground shadow-surface outline-none select-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed",
-                hasNew && "bg-primary text-primary-foreground shadow-primary hover:text-primary-foreground"
+                "absolute bottom-3 left-1/2 z-10 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-popover pr-3 pl-2.5 text-xs font-medium text-popover-foreground shadow-surface transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96",
+                hasNew && "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90 hover:text-primary-foreground"
               )}
               style={{ x: "-50%" }}
             >

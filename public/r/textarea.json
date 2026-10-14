@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "textarea",
   "title": "Textarea",
-  "description": "Auto-growing textarea in a soft inset well.",
+  "description": "Auto-growing textarea with a hairline inset ring.",
   "registryDependencies": [
     "@qinyang/theme"
   ],

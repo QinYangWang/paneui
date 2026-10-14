@@ -26,7 +26,7 @@ export function IconGrid() {
               setTimeout(() => setCopied(null), 1200)
             }}
             className={cn(
-              "flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-card px-2 pt-5 pb-3 text-foreground shadow-chip transition hover:shadow-raised-hover active:shadow-pressed"
+              "flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-card px-2 pt-5 pb-3 text-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover active:scale-96"
             )}
           >
             <Icon size={22} />

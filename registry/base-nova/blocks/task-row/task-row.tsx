@@ -27,7 +27,7 @@ function StatusMark({ status }: { status: TaskStatus }) {
           transition={{ type: "spring", stiffness: 500, damping: 28 }}
           className={cn(
             "inline-flex size-7 items-center justify-center rounded-full",
-            status === "done" && "bg-success text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_1px_2px_rgb(0_0_0/0.3)]",
+            status === "done" && "bg-success text-white",
             status === "failed" && "bg-destructive/14 text-destructive",
             status === "running" && "bg-primary/14 text-primary",
             status === "queued" && "bg-muted shadow-well"
@@ -62,7 +62,7 @@ export function TaskRow({
       data-status={status}
       onClick={onClick}
       className={cn(
-        "group/task flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-[background-color,box-shadow] outline-none hover:bg-card hover:shadow-raised focus-visible:ring-3 focus-visible:ring-ring active:shadow-pressed",
+        "group/task flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-[background-color,box-shadow] outline-none hover:bg-card hover:shadow-raised focus-visible:ring-3 focus-visible:ring-ring",
         className
       )}
     >
