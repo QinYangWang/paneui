@@ -25,6 +25,12 @@ export const GUIDE_PAGES = [
     keywords: ["theme", "tokens", "dark mode", "accent", "colors", "css variables", "radius", "shadow", "typography"],
   },
   {
+    href: "/docs/colors",
+    title: "Colors",
+    description: "Every colour token by role, with light and dark values, plus a live accent picker that exports its CSS.",
+    keywords: ["color", "colour", "tokens", "palette", "accent", "primary", "custom accent", "oklch", "dark mode", "css variables"],
+  },
+  {
     href: "/docs/cli",
     title: "CLI & registry",
     description: "Browse, inspect and install @qinyang items with the shadcn CLI, or point it straight at an item URL.",

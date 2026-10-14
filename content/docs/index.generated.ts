@@ -12,6 +12,8 @@ import d_alert from "./alert"
 import d_animated_number from "./animated-number"
 import d_animated_sidebar from "./animated-sidebar"
 import d_aspect_ratio from "./aspect-ratio"
+import d_avatar from "./avatar"
+import d_avatar_generator from "./avatar-generator"
 import d_badge from "./badge"
 import d_bottom_sheet from "./bottom-sheet"
 import d_breadcrumb from "./breadcrumb"
@@ -105,6 +107,8 @@ export const docsContent: Record<string, ComponentDoc> = {
   "animated-number": d_animated_number,
   "animated-sidebar": d_animated_sidebar,
   "aspect-ratio": d_aspect_ratio,
+  "avatar": d_avatar,
+  "avatar-generator": d_avatar_generator,
   "badge": d_badge,
   "bottom-sheet": d_bottom_sheet,
   "breadcrumb": d_breadcrumb,

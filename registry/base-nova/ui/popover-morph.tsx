@@ -7,10 +7,13 @@ import { XIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 
 /*
- * A popover whose panel grows out of the trigger's own shape. The panel is laid
- * over the trigger and starts clipped to the trigger's box (its rounded-lg radius
- * and colour included), then unclips to its full size from the trigger's corner and
- * eases into the popover surface; closing folds it back into the button.
+ * A popover whose panel grows out of the trigger's own shape. It is anchored like
+ * Popover (8px side offset, centred by default); while it opens, a surface layer
+ * starts as an exact copy of the trigger (its box, rounded-lg radius, card colour
+ * and hairline) and expands across the gap into the popover surface, with the
+ * content clipped to it. Closing folds it back into the button.
+ * The surface is a sibling of the popup so its hairline ring and shadow are never
+ * clipped: the standard `shadow-surface` shows at rest and during the morph.
  * Base UI Popover handles focus, Escape, outside press and ARIA.
  */
 
@@ -33,53 +36,74 @@ function MorphPopoverContent({
   className,
   children,
   side = "bottom",
-  align = "start",
+  align = "center",
+  sideOffset = 8,
+  collisionPadding = 8,
   triggerRadius = "var(--radius-lg)",
   ...props
 }: PopoverPrimitive.Popup.Props & {
-  /** Which way the panel grows from the trigger. */
+  /** Which side of the trigger the panel opens on (and grows towards). */
   side?: "top" | "bottom"
-  /** Which trigger edge the panel stays pinned to. */
+  /** Which trigger edge the panel lines up with, as in Popover. */
   align?: "start" | "center" | "end"
+  /** Gap between trigger and panel in px, as in Popover. */
+  sideOffset?: number
+  /** Viewport margin kept when the panel flips or shifts. */
+  collisionPadding?: number
   /** Corner radius of the trigger shape the panel starts from (CSS length). Defaults to `var(--radius-lg)`, the radius of `MorphPopoverTrigger`. */
   triggerRadius?: string
 }) {
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Positioner
-        className="z-50 outline-none"
+        className={cn(
+          "z-50 outline-none",
+          // The trigger's box in the panel's coordinates (inset from each panel edge), per resolved side/alignment.
+          "[--mt:calc(-1_*_(var(--anchor-height)_+_var(--morph-gap)))] [--mb:calc(100%_+_var(--morph-gap))]",
+          "data-[side=top]:[--mt:calc(100%_+_var(--morph-gap))] data-[side=top]:[--mb:calc(-1_*_(var(--anchor-height)_+_var(--morph-gap)))]",
+          "[--ml:calc((100%_-_var(--anchor-width))_/_2)] [--mr:calc((100%_-_var(--anchor-width))_/_2)]",
+          "data-[align=start]:[--ml:0px] data-[align=start]:[--mr:calc(100%_-_var(--anchor-width))]",
+          "data-[align=end]:[--ml:calc(100%_-_var(--anchor-width))] data-[align=end]:[--mr:0px]"
+        )}
+        style={{ "--morph-gap": `${sideOffset}px`, "--morph-r0": triggerRadius } as React.CSSProperties}
         side={side}
         align={align}
-        // overlap the trigger so the panel can grow out of it
-        sideOffset={({ anchor }) => -anchor.height}
-        collisionPadding={8}
+        sideOffset={sideOffset}
+        collisionPadding={collisionPadding}
       >
         <PopoverPrimitive.Popup
           data-slot="morph-popover-content"
-          style={{ "--morph-r0": triggerRadius } as React.CSSProperties}
           className={cn(
-            "group/morph relative flex w-72 min-w-(--anchor-width) max-w-[calc(100vw-1rem)] flex-col gap-3 rounded-2xl bg-popover p-4 text-ui text-popover-foreground shadow-surface outline-none",
-            // insets of the trigger's box inside the panel, per side/alignment
-            "[--mt:0px] [--mb:calc(100%_-_var(--anchor-height))] [--ml:0px] [--mr:calc(100%_-_var(--anchor-width))]",
-            "data-[side=top]:[--mt:calc(100%_-_var(--anchor-height))] data-[side=top]:[--mb:0px]",
-            "data-[align=end]:[--ml:calc(100%_-_var(--anchor-width))] data-[align=end]:[--mr:0px]",
-            "data-[align=center]:[--ml:calc((100%_-_var(--anchor-width))_/_2)] data-[align=center]:[--mr:calc((100%_-_var(--anchor-width))_/_2)]",
-            "[clip-path:inset(0_round_var(--radius-2xl))] transition-[clip-path,background-color,box-shadow,opacity] [transition-duration:450ms,450ms,450ms,180ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
-            "data-starting-style:bg-card data-starting-style:opacity-0 data-starting-style:shadow-raised data-starting-style:[clip-path:inset(var(--mt)_var(--mr)_var(--mb)_var(--ml)_round_var(--morph-r0))]",
-            "data-ending-style:bg-card data-ending-style:opacity-0 data-ending-style:shadow-raised data-ending-style:duration-300 data-ending-style:[clip-path:inset(var(--mt)_var(--mr)_var(--mb)_var(--ml)_round_var(--morph-r0))]",
-            "motion-reduce:duration-150 motion-reduce:data-starting-style:[clip-path:inset(0_round_var(--radius-2xl))] motion-reduce:data-ending-style:[clip-path:inset(0_round_var(--radius-2xl))]",
+            "peer/morph group/morph relative flex w-72 min-w-(--anchor-width) max-w-[calc(100vw-1rem)] flex-col gap-3 p-4 text-ui text-popover-foreground outline-none",
+            // Content is clipped to the surface's shape while it morphs.
+            "[clip-path:inset(0_round_var(--radius-2xl))] transition-[clip-path,opacity] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-300 data-ending-style:opacity-0",
+            "motion-safe:data-starting-style:[clip-path:inset(var(--mt)_var(--mr)_var(--mb)_var(--ml)_round_var(--morph-r0))]",
+            "motion-safe:data-ending-style:[clip-path:inset(var(--mt)_var(--mr)_var(--mb)_var(--ml)_round_var(--morph-r0))]",
+            "motion-reduce:duration-150 motion-reduce:data-starting-style:opacity-0",
             className
           )}
           {...props}
         >
-          {/* content settles in once the surface has opened up */}
+          {/* content settles in once the surface has mostly opened up */}
           <div
             data-slot="morph-popover-body"
-            className="contents [&>*]:transition-[opacity,filter,translate] [&>*]:delay-100 [&>*]:duration-300 [&>*]:ease-[cubic-bezier(0.22,1,0.36,1)] group-data-ending-style/morph:[&>*]:opacity-0 group-data-ending-style/morph:[&>*]:delay-0 group-data-ending-style/morph:[&>*]:duration-150 group-data-starting-style/morph:[&>*]:translate-y-1 group-data-starting-style/morph:[&>*]:opacity-0 group-data-starting-style/morph:[&>*]:blur-[3px] motion-reduce:[&>*]:translate-0 motion-reduce:[&>*]:blur-none"
+            className="contents [&>*]:transition-[opacity,filter,translate] [&>*]:delay-150 [&>*]:duration-300 [&>*]:ease-[cubic-bezier(0.22,1,0.36,1)] group-data-ending-style/morph:[&>*]:opacity-0 group-data-ending-style/morph:[&>*]:delay-0 group-data-ending-style/morph:[&>*]:duration-150 group-data-starting-style/morph:[&>*]:translate-y-1 group-data-starting-style/morph:[&>*]:opacity-0 group-data-starting-style/morph:[&>*]:blur-[3px] motion-reduce:[&>*]:translate-0 motion-reduce:[&>*]:blur-none motion-reduce:[&>*]:delay-0"
           >
             {children}
           </div>
         </PopoverPrimitive.Popup>
+        {/* The popover surface (fill + hairline + lift), drawn behind the popup and never clipped. */}
+        <div
+          aria-hidden
+          data-slot="morph-popover-surface"
+          className={cn(
+            "pointer-events-none absolute inset-0 -z-10 rounded-2xl bg-popover shadow-surface",
+            "transition-[top,right,bottom,left,border-radius,background-color,box-shadow,opacity] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)] peer-data-ending-style/morph:duration-300 peer-data-ending-style/morph:opacity-0",
+            "motion-safe:peer-data-starting-style/morph:top-(--mt) motion-safe:peer-data-starting-style/morph:right-(--mr) motion-safe:peer-data-starting-style/morph:bottom-(--mb) motion-safe:peer-data-starting-style/morph:left-(--ml) motion-safe:peer-data-starting-style/morph:rounded-(--morph-r0) motion-safe:peer-data-starting-style/morph:bg-card motion-safe:peer-data-starting-style/morph:shadow-raised",
+            "motion-safe:peer-data-ending-style/morph:top-(--mt) motion-safe:peer-data-ending-style/morph:right-(--mr) motion-safe:peer-data-ending-style/morph:bottom-(--mb) motion-safe:peer-data-ending-style/morph:left-(--ml) motion-safe:peer-data-ending-style/morph:rounded-(--morph-r0) motion-safe:peer-data-ending-style/morph:bg-card motion-safe:peer-data-ending-style/morph:shadow-raised",
+            "motion-reduce:duration-150 motion-reduce:peer-data-starting-style/morph:opacity-0"
+          )}
+        />
       </PopoverPrimitive.Positioner>
     </PopoverPrimitive.Portal>
   )

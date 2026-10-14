@@ -415,6 +415,16 @@ export const UsersIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const PaletteIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...puff}
+      fillRule="evenodd"
+      d="M9 3.4a5.6 5.6 0 000 11.2c.9 0 1.4-.6 1.4-1.3 0-.8-.6-1.1-.6-1.8 0-.6.5-1.1 1.2-1.1h1.2c1.9 0 3.2-1.2 3.2-3C15.4 5.9 12.6 3.4 9 3.4zM6.4 6.85a1.75 1.75 0 100 3.5 1.75 1.75 0 000-3.5zM9.6 4.75a1.75 1.75 0 100 3.5 1.75 1.75 0 000-3.5z"
+    />
+  </Icon>
+);
+
 export const SettingsIcon = (p: IconProps) => (
   <Icon {...p}>
     <path

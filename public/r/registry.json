@@ -3403,6 +3403,61 @@
       "meta": {
         "category": "Blocks"
       }
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Base UI avatar with image and initials fallback, five sizes (xs–xl), circle or squircle shape, a presence status dot, and an overlapping group with a +N count.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "avatar-generator",
+      "type": "registry:ui",
+      "title": "Avatar Generator",
+      "description": "Deterministic kawaii avatars from a seed in the Seline style (head crop, blushed cheeks), with male/female/any generation, plus an editor with seed shuffle, gender toggle, part pickers, SVG download and JSX copy. Artwork: Humation (MIT).",
+      "dependencies": [
+        "@humation/core",
+        "@humation/assets-humation-1",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/avatar",
+        "@qinyang/button",
+        "@qinyang/input",
+        "@qinyang/select",
+        "@qinyang/tabs",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/generated-avatar.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/base-nova/ui/avatar-generator.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
     }
   ]
 }

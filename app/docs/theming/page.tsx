@@ -1,5 +1,7 @@
+import { PRESET_THEMES, type PresetAccent } from "@/components/docs/accent-color"
 import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
+import { ThemingSystem } from "@/components/docs/theming-system"
 import { REGISTRY_NAME } from "@/lib/docs"
 import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
 
@@ -30,32 +32,25 @@ function Table({ head, children }: { head: string[]; children: React.ReactNode }
 }
 
 /* Swatch classes are written out in full so Tailwind generates them. */
-const COLORS: { token: string; swatch: string; use: string }[] = [
-  { token: "background / foreground", swatch: "bg-background", use: "Page canvas and default text. #fcfcfc and neutral-800 in light, #0e0e0e and neutral-100 in dark." },
-  { token: "card, popover", swatch: "bg-card", use: "Opaque raised surfaces: cards, triggers, menus, dialogs, floating panels." },
-  { token: "primary", swatch: "bg-primary", use: "The one emphasis colour: filled buttons, checked controls, selection. Neutral by default; accent presets replace it." },
-  { token: "secondary, muted, accent", swatch: "bg-secondary", use: "Translucent fills (black 3–4% / white 4%), not surfaces: hover, selected rows, tracks." },
-  { token: "muted-foreground", swatch: "bg-muted-foreground", use: "Secondary text, captions, nav icons." },
-  { token: "destructive", swatch: "bg-destructive", use: "Errors and destructive actions." },
-  { token: "success", swatch: "bg-success", use: "Completed and positive states." },
-  { token: "warning", swatch: "bg-warning", use: "Caution states." },
-  { token: "border", swatch: "bg-border", use: "Hairline dividers (black 5% / white 4%)." },
-  { token: "input", swatch: "bg-input", use: "Field outlines (black 6% / white 5%)." },
-  { token: "ring", swatch: "bg-ring", use: "Focus rings, always used at /50: focus-visible:ring-2 focus-visible:ring-ring/50." },
-  { token: "code", swatch: "bg-code", use: "Code block surface." },
-  { token: "shell, shell-border", swatch: "bg-shell", use: "App chrome: the window band and rail sidebar, with the shell-inset content panel." },
+const SWATCHES: { token: string; swatch: string }[] = [
+  { token: "background", swatch: "bg-background" },
+  { token: "card", swatch: "bg-card" },
+  { token: "primary", swatch: "bg-primary" },
+  { token: "secondary", swatch: "bg-secondary" },
+  { token: "muted-foreground", swatch: "bg-muted-foreground" },
+  { token: "border", swatch: "bg-border" },
+  { token: "ring", swatch: "bg-ring" },
+  { token: "destructive", swatch: "bg-destructive" },
+  { token: "success", swatch: "bg-success" },
+  { token: "warning", swatch: "bg-warning" },
+  { token: "chart-1…5", swatch: "bg-chart-1" },
+  { token: "shell", swatch: "bg-shell" },
 ]
 
-const CHARTS = ["bg-chart-1", "bg-chart-2", "bg-chart-3", "bg-chart-4", "bg-chart-5"]
-
-/** Light-mode primaries, mirroring the html[data-accent] blocks in app/globals.css. */
-const ACCENTS: { name: string; light: string; dark: string }[] = [
-  { name: "blue", light: "oklch(0.57 0.15 258)", dark: "oklch(0.6 0.145 256)" },
-  { name: "green", light: "oklch(0.56 0.13 155)", dark: "oklch(0.64 0.14 155)" },
-  { name: "orange", light: "oklch(0.62 0.17 45)", dark: "oklch(0.7 0.16 52)" },
-  { name: "rose", light: "oklch(0.58 0.19 12)", dark: "oklch(0.65 0.18 12)" },
-  { name: "violet", light: "oklch(0.55 0.18 290)", dark: "oklch(0.64 0.16 290)" },
-]
+/** Accent presets with their light and dark primaries (accent-color.ts mirrors app/globals.css). */
+const ACCENTS = (Object.keys(PRESET_THEMES) as PresetAccent[])
+  .filter((name) => name !== "neutral")
+  .map((name) => ({ name, light: PRESET_THEMES[name].light.primary, dark: PRESET_THEMES[name].dark.primary }))
 
 const TYPE: { cls: string; size: string; use: string }[] = [
   { cls: "text-ui-2xs", size: "10px", use: "Tiny counters and labels." },
@@ -135,7 +130,7 @@ const NEW_TOKEN = `:root  { --info: oklch(0.6 0.12 230); }
 
 export default function Theming() {
   const toc = [
-    { id: "how-it-works", title: "How it works" },
+    { id: "how-it-works", title: "How the system works" },
     { id: "colors", title: "Colors" },
     { id: "dark-mode", title: "Dark mode" },
     { id: "accent-presets", title: "Accent presets" },
@@ -148,18 +143,13 @@ export default function Theming() {
   return (
     <GuidePage href="/docs/theming" toc={toc}>
       <section className="flex flex-col gap-4">
-        <GuideH2 id="how-it-works">How it works</GuideH2>
-        <p className="text-muted-foreground">
-          The theme is a set of CSS variables in your global stylesheet: values on <Code>:root</Code> for light mode and on{" "}
-          <Code>.dark</Code> for dark mode, mapped to Tailwind utilities in <Code>@theme inline</Code>. Components only use
-          those utilities (<Code>bg-card</Code>, <Code>text-muted-foreground</Code>, <Code>rounded-xl</Code>,{" "}
-          <Code>shadow-raised</Code>), so changing a variable restyles every component at once.
-        </p>
+        <GuideH2 id="how-it-works">How the system works</GuideH2>
+        <ThemingSystem />
         <InstallCommand args={`add @${REGISTRY_NAME}/theme`} />
         <p className="text-muted-foreground">
           <Code>@{REGISTRY_NAME}/theme</Code> writes the variables below and installs <Code>@{REGISTRY_NAME}/utils</Code>,
-          a <Code>cn()</Code> whose tailwind-merge config treats the <Code>text-ui-*</Code> sizes as font sizes. Colours are
-          OKLCH; washes use opacity modifiers such as <Code>bg-success/12</Code> or <Code>ring-primary/20</Code>.
+          a <Code>cn()</Code> whose tailwind-merge config treats the <Code>text-ui-*</Code> sizes as font sizes. Washes use
+          opacity modifiers such as <Code>bg-success/12</Code> or <Code>ring-primary/20</Code>.
         </p>
         <AgentCodeBlock code={CSS_EXAMPLE} filename="globals.css (excerpt)" language="css" maxHeight={360} />
       </section>
@@ -167,33 +157,19 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="colors">Colors</GuideH2>
         <p className="text-muted-foreground">
-          Swatches follow the theme you are viewing. Each colour has a matching <Code>-foreground</Code> token where text sits
-          on it. Never use palette colours (<Code>bg-zinc-100</Code>) or hex values in components.
+          Colours are grouped by role: background, fill, text, border, state and chart. Each has a matching{" "}
+          <Code>-foreground</Code> token where text sits on it. Never use palette colours (<Code>bg-zinc-100</Code>) or hex
+          values in components. Every token with its light and dark value is on{" "}
+          <TextLink href="/docs/colors">Colors</TextLink>.
         </p>
-        <Table head={["", "Token", "Use for"]}>
-          {COLORS.map((c) => (
-            <tr key={c.token} className={row}>
-              <td className={`${td} w-12`}>
-                <span className={`block size-6 rounded-md shadow-chip ${c.swatch}`} />
-              </td>
-              <td className={`${td} font-mono text-xs whitespace-nowrap text-foreground`}>{c.token}</td>
-              <td className={`${td} text-muted-foreground`}>{c.use}</td>
-            </tr>
+        <div className="flex flex-wrap gap-2">
+          {SWATCHES.map((s) => (
+            <span key={s.token} className="flex items-center gap-2 rounded-lg bg-card py-1.5 pr-2.5 pl-1.5 shadow-raised">
+              <span className={`block size-5 rounded-sm shadow-chip ${s.swatch}`} />
+              <span className="font-mono text-xs">{s.token}</span>
+            </span>
           ))}
-          <tr className={row}>
-            <td className={`${td} w-12`}>
-              <span className="flex">
-                {CHARTS.map((c) => (
-                  <span key={c} className={`-mr-1.5 block size-4 rounded-full ring-2 ring-card ${c}`} />
-                ))}
-              </span>
-            </td>
-            <td className={`${td} font-mono text-xs whitespace-nowrap text-foreground`}>chart-1 … chart-5</td>
-            <td className={`${td} text-muted-foreground`}>
-              Blue, green, amber, red, violet. Charts never use primary, so they stay coloured under every accent.
-            </td>
-          </tr>
-        </Table>
+        </div>
       </section>
 
       <section className="flex flex-col gap-4">
@@ -236,6 +212,10 @@ export default function Theming() {
           is permanent. To let users switch, as the accent menu in this site&apos;s header does, keep the neutral values and
           add one block per accent keyed on an attribute, then persist the choice (this site uses{" "}
           <Code>localStorage[&quot;accent&quot;]</Code>, applied by the same pre-paint script as dark mode).
+        </p>
+        <p className="text-muted-foreground">
+          Need a brand colour instead? <TextLink href="/docs/colors#accent">Colors</TextLink> has a live picker that
+          derives the dark variant in OKLCH and copies the exact <Code>:root</Code> / <Code>.dark</Code> overrides.
         </p>
         <AgentCodeBlock code={ACCENT_RUNTIME} filename="globals.css" language="css" />
       </section>

@@ -9,7 +9,9 @@ import { Menu, MenuContent, MenuGroup, MenuLabel, MenuRadioGroup, MenuRadioItem,
 import { THEME_CHANGE_EVENT, ThemeToggle, useThemeToggle, type ThemeChangeDetail } from "@/registry/base-nova/ui/theme-toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
-import { ACCENT_KEY, ACCENTS, THEME_KEY, type Accent } from "./theme-script"
+import { PRESET_LABELS, PRESET_THEMES, type PresetAccent } from "./accent-color"
+import { setAccent, useAccentState, type AccentChoice } from "./accent-store"
+import { THEME_KEY } from "./theme-script"
 
 type Mode = "light" | "dark" | "system"
 const isMode = (v: unknown): v is Mode => v === "light" || v === "dark" || v === "system"
@@ -36,55 +38,22 @@ function applyInstant(dark: boolean) {
   requestAnimationFrame(() => requestAnimationFrame(() => mute.remove()))
 }
 
-const isAccent = (v: unknown): v is Accent => typeof v === "string" && (ACCENTS as readonly string[]).includes(v)
+/** Menu swatches: each preset's light primary (neutral follows the current foreground). Values from accent-color.ts. */
+const accentOptions: { accent: PresetAccent; label: string; swatch: string }[] = (Object.keys(PRESET_LABELS) as PresetAccent[]).map(
+  (a) => ({ accent: a, label: PRESET_LABELS[a], swatch: a === "neutral" ? "var(--foreground)" : PRESET_THEMES[a].light.primary })
+)
 
-/** Menu swatches: each preset's light primary (neutral follows the current foreground). Mirrors app/globals.css. */
-const accentOptions: { accent: Accent; label: string; swatch: string }[] = [
-  { accent: "neutral", label: "Neutral", swatch: "var(--foreground)" },
-  { accent: "blue", label: "Blue", swatch: "oklch(0.57 0.15 258)" },
-  { accent: "green", label: "Green", swatch: "oklch(0.56 0.13 155)" },
-  { accent: "orange", label: "Orange", swatch: "oklch(0.62 0.17 45)" },
-  { accent: "rose", label: "Rose", swatch: "oklch(0.58 0.19 12)" },
-  { accent: "violet", label: "Violet", swatch: "oklch(0.55 0.18 290)" },
-]
-
-function applyAccent(accent: Accent) {
-  const root = document.documentElement
-  if (accent === "neutral") root.removeAttribute("data-accent")
-  else root.setAttribute("data-accent", accent)
-}
+const isChoice = (v: unknown, hasCustom: boolean): v is AccentChoice =>
+  (v === "custom" && hasCustom) || accentOptions.some((o) => o.accent === v)
 
 /**
- * Accent picker: swaps `data-accent` on <html> (presets live in app/globals.css),
- * persists localStorage["accent"] for the pre-paint script and syncs other tabs.
+ * Accent picker: swaps `data-accent` on <html> (presets live in app/globals.css; a custom colour
+ * picked on the Colors page rides in its own <style>), persists localStorage["accent"] for the
+ * pre-paint script and syncs other tabs and the Colors page.
  */
 export function AccentControl() {
-  const [accent, setAccent] = React.useState<Accent>("neutral")
-
-  React.useEffect(() => {
-    const stored = localStorage.getItem(ACCENT_KEY)
-    setAccent(isAccent(stored) ? stored : "neutral")
-    const onStorage = (e: StorageEvent) => {
-      if (e.key !== ACCENT_KEY) return
-      const next = isAccent(e.newValue) ? e.newValue : "neutral"
-      setAccent(next)
-      applyAccent(next)
-    }
-    window.addEventListener("storage", onStorage)
-    return () => window.removeEventListener("storage", onStorage)
-  }, [])
-
-  const choose = (next: Accent) => {
-    setAccent(next)
-    applyAccent(next)
-    try {
-      localStorage.setItem(ACCENT_KEY, next)
-    } catch {
-      // storage can be unavailable (private mode, sandboxed iframes)
-    }
-  }
-
-  const label = accentOptions.find((o) => o.accent === accent)?.label ?? "Neutral"
+  const { accent, custom } = useAccentState()
+  const label = accent === "custom" ? "Custom" : PRESET_LABELS[accent]
 
   return (
     <Menu>
@@ -101,7 +70,7 @@ export function AccentControl() {
       <MenuContent align="end" className="min-w-40">
         <MenuGroup>
           <MenuLabel>Accent</MenuLabel>
-          <MenuRadioGroup value={accent} onValueChange={(v) => isAccent(v) && choose(v)}>
+          <MenuRadioGroup value={accent} onValueChange={(v) => isChoice(v, !!custom) && setAccent(v)}>
             {accentOptions.map(({ accent: a, label: l, swatch }) => (
               <MenuRadioItem key={a} value={a} closeOnClick>
                 <span
@@ -112,6 +81,16 @@ export function AccentControl() {
                 {l}
               </MenuRadioItem>
             ))}
+            {custom ? (
+              <MenuRadioItem value="custom" closeOnClick>
+                <span
+                  aria-hidden
+                  className="size-3.5 shrink-0 rounded-full bg-(--swatch) shadow-chip"
+                  style={{ "--swatch": custom.light.primary } as React.CSSProperties}
+                />
+                Custom
+              </MenuRadioItem>
+            ) : null}
           </MenuRadioGroup>
         </MenuGroup>
       </MenuContent>

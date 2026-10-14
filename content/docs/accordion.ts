@@ -39,6 +39,28 @@ export default {
       title: "With icons",
       description: "`AccordionTrigger` takes an `icon` that sits in a chip before the label and tints when open.",
     },
+    {
+      id: "ghost",
+      title: "Borderless",
+      description:
+        "`variant=\"ghost\"` drops the well: items are separated by spacing, rows fill on hover and the open item keeps a soft fill.",
+    },
+    {
+      id: "ghost-multiple",
+      title: "Borderless, multiple",
+      description: "`multiple` works the same on the borderless variant.",
+    },
+    {
+      id: "ghost-disabled",
+      title: "Borderless, disabled",
+      description: "A disabled item dims and stops responding to hover and clicks.",
+    },
+    {
+      id: "ghost-with-icons",
+      title: "Borderless, with icons",
+      description:
+        "On the borderless variant the `icon` sits bare at 16px, muted until its item opens, and the panel text lines up with the label. Use one icon family (solid) per list.",
+    },
   ],
   notes: [
     {
@@ -49,10 +71,17 @@ export default {
   api: [
     {
       name: "Accordion",
-      description: "The tinted container. Single-open by default.",
+      description: "The container. Single-open by default.",
       extends: "Base UI Accordion.Root",
       extendsHref: "https://base-ui.com/react/components/accordion#root",
       props: [
+        {
+          name: "variant",
+          type: `"default" | "ghost"`,
+          default: `"default"`,
+          description:
+            "`default`: an inset well holding raised rows. `ghost`: borderless, items separated by spacing with hover-fill rows.",
+        },
         {
           name: "defaultValue",
           type: "any[]",
@@ -98,7 +127,7 @@ export default {
       dataAttributes: [
         {
           name: "data-open",
-          description: "Present while the item is open (raised card style).",
+          description: "Present while the item is open (raised card in `default`, soft fill in `ghost`).",
         },
       ],
     },
@@ -110,7 +139,8 @@ export default {
         {
           name: "icon",
           type: "ReactNode",
-          description: "Leading icon, shown in a round chip that turns primary when open.",
+          description:
+            "Leading icon. `default`: in a round chip that turns primary when open. `ghost`: bare 16px, muted until open.",
         },
       ],
     },

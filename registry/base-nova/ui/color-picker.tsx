@@ -188,15 +188,15 @@ function ColorPickerTrigger({
       data-slot="color-picker-trigger"
       disabled={disabled}
       className={cn(
-        "inline-flex h-8 cursor-pointer items-center gap-2 rounded-lg bg-card py-1 pr-3 pl-1 text-ui font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,opacity,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
-        !showHex && "pr-1",
+        "inline-flex h-8 cursor-pointer items-center gap-2 rounded-lg bg-card py-1 pr-3 pl-1.5 text-ui font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,opacity,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
+        !showHex && "pr-1.5",
         className
       )}
       {...props}
     >
       {children ?? (
         <>
-          <ColorPickerSwatch className="size-7" />
+          <ColorPickerSwatch />
           {showHex ? <span className="font-mono text-ui-sm tabular-nums uppercase">{hex}</span> : null}
           <span className="sr-only">{`, current colour ${hex}${hsva.a < 1 ? `, ${Math.round(hsva.a * 100)}% opacity` : ""}`}</span>
         </>
@@ -534,7 +534,7 @@ function ColorPickerSwatch({ className, style, ...props }: React.ComponentProps<
       aria-hidden
       data-slot="color-picker-swatch"
       className={cn(
-        "relative inline-block size-8 shrink-0 overflow-hidden rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)]",
+        "relative inline-block size-5 shrink-0 overflow-hidden rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)]",
         className
       )}
       style={{ background: `linear-gradient(${rgbaCss(hsvaToRgba(hsva))}, ${rgbaCss(hsvaToRgba(hsva))}), ${CHECKER}`, ...style }}
@@ -549,13 +549,16 @@ function ColorPickerPresets({ className, ...props }: React.ComponentProps<"div">
       role="group"
       aria-label="Presets"
       data-slot="color-picker-presets"
-      className={cn("flex flex-wrap gap-1", className)}
+      className={cn("-m-0.75 flex flex-wrap gap-0.5", className)}
       {...props}
     />
   )
 }
 
-/** One preset colour. `value` is a hex string. */
+/**
+ * One preset colour. `value` is a hex string. An 18px swatch centred in a 24px
+ * hit area; the selected ring sits concentric around it (1.5px gap + 1.5px ring).
+ */
 function ColorPickerPreset({
   value,
   label,
@@ -578,12 +581,20 @@ function ColorPickerPreset({
         if (rgba && !e.defaultPrevented) setHsva(rgbaToHsva(rgba, hsva), true)
       }}
       className={cn(
-        "size-6 cursor-pointer rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)] transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring/50 aria-pressed:shadow-[0_0_0_2px_var(--popover),0_0_0_3.5px_var(--foreground)] disabled:opacity-50 motion-reduce:transition-none",
+        "group/preset inline-flex size-6 cursor-pointer items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
-      style={{ background: rgba ? `linear-gradient(${rgbaCss(rgba)}, ${rgbaCss(rgba)}), ${CHECKER}` : undefined }}
       {...props}
-    />
+    >
+      <span
+        aria-hidden
+        className={cn(
+          "size-4.5 rounded-full shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent)] transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/preset:scale-110 group-disabled/preset:scale-100 motion-reduce:transition-none",
+          "group-aria-pressed/preset:scale-100 group-aria-pressed/preset:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--foreground)_12%,transparent),0_0_0_1.5px_var(--popover),0_0_0_3px_var(--foreground)]"
+        )}
+        style={{ background: rgba ? `linear-gradient(${rgbaCss(rgba)}, ${rgbaCss(rgba)}), ${CHECKER}` : undefined }}
+      />
+    </button>
   )
 }
 

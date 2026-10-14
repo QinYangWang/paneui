@@ -184,12 +184,12 @@ function RangeSliderInline({
               "transition-[inset-inline-start] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-dragging/ris:transition-none motion-reduce:transition-none"
             )}
           >
-            {/* One bar; it fades out while it crosses the label or readout. */}
+            {/* One grey bar (darker on hover/drag); it fades out while it crosses the label or readout. */}
             <span
               aria-hidden
               className={cn(
-                "absolute top-1/2 left-1/2 h-5 w-1 -translate-1/2 rounded-full bg-primary",
-                "transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                "absolute top-1/2 left-1/2 h-5 w-1 -translate-1/2 rounded-full bg-muted-foreground/40 group-hover/ris:bg-muted-foreground/60 group-data-dragging/ris:bg-muted-foreground/70",
+                "transition-[opacity,scale,background-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
                 "group-data-dragging/ris:scale-x-125 group-data-parted/thumb:scale-y-50 group-data-parted/thumb:opacity-0"
               )}
             />

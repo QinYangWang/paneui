@@ -26,7 +26,7 @@ export default {
     {
       id: "placement",
       title: "Placement",
-      description: "`side` (`bottom` or `top`) sets which way the panel grows; `align` pins it to the trigger's `start`, `center` or `end` edge.",
+      description: "Anchored like Popover: `side` (`bottom` or `top`) picks the side it opens on, 8px from the trigger (`sideOffset`); `align` lines it up with the trigger's `start`, `center` (default) or `end` edge.",
     },
     {
       id: "form",
@@ -37,7 +37,7 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "The panel starts clipped to the trigger's box and colour, then unclips to full size over 450ms while its content fades and settles in 100ms later; closing folds it back. With reduced motion it only cross-fades, in 150ms.",
+      body: "The surface starts as a copy of the trigger (box, radius, colour and hairline) and grows across the 8px gap into the popover surface over 450ms, keeping its hairline ring and shadow the whole way; the content is clipped to it and settles in 150ms later. Closing folds it back into the trigger in 300ms. With reduced motion it only cross-fades, in 150ms.",
     },
     {
       title: "Keyboard",
@@ -65,16 +65,18 @@ export default {
     },
     {
       name: "MorphPopoverContent",
-      description: "Portal, positioner and popup laid over the trigger. A 288px panel by default.",
+      description: "Portal, positioner and popup, anchored to the trigger like Popover (8px side offset) with the standard popover surface (`rounded-2xl`, `bg-popover`, `shadow-surface`). A 288px panel by default.",
       extends: "Base UI Popover.Popup",
       extendsHref: `${BASE}#popup`,
       props: [
-        { name: "side", type: `"top" | "bottom"`, default: `"bottom"`, description: "Which way the panel grows from the trigger." },
+        { name: "side", type: `"top" | "bottom"`, default: `"bottom"`, description: "Which side of the trigger the panel opens on (and grows towards)." },
+        { name: "sideOffset", type: "number", default: "8", description: "Gap between trigger and panel in px, as in Popover." },
+        { name: "collisionPadding", type: "number", default: "8", description: "Viewport margin kept when the panel flips or shifts." },
         {
           name: "align",
           type: `"start" | "center" | "end"`,
-          default: `"start"`,
-          description: "Which trigger edge the panel stays pinned to.",
+          default: `"center"`,
+          description: "Which trigger edge the panel lines up with, as in Popover.",
         },
         {
           name: "triggerRadius",
@@ -84,7 +86,7 @@ export default {
         },
       ],
       dataAttributes: [
-        { name: "data-side / data-align", description: "The resolved placement, used to work out the clip start." },
+        { name: "data-side / data-align", description: "The resolved placement (on the positioner and popup), used to work out where the morph starts." },
         { name: "data-starting-style / data-ending-style", description: "Present while the panel opens or closes." },
       ],
     },

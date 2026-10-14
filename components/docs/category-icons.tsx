@@ -15,6 +15,7 @@ import {
   MonitorIcon,
   NavigationIcon,
   ServerIcon,
+  PaletteIcon,
   SettingsIcon,
   ShapesIcon,
   SparklesIcon,
@@ -51,6 +52,7 @@ export const guideIcons: Record<string, IconComponent> = {
   "/docs": HomeIcon,
   "/docs/installation": TerminalSquareIcon,
   "/docs/theming": SettingsIcon,
+  "/docs/colors": PaletteIcon,
   "/docs/cli": FolderIcon,
   "/docs/changelog": BookmarkIcon,
 }

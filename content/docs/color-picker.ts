@@ -144,14 +144,14 @@ export default {
     },
     {
       name: "ColorPickerSwatch",
-      description: "The current colour over a checkerboard so transparency shows.",
+      description: "The current colour over a checkerboard so transparency shows (20px; resize with `size-*`).",
       extends: "span",
       props: [],
     },
     { name: "ColorPickerPresets", description: "Wrapping group of preset buttons, labelled `Presets`.", extends: "div", props: [] },
     {
       name: "ColorPickerPreset",
-      description: "One preset swatch button; `aria-pressed` when it matches the current colour.",
+      description: "One preset swatch button: an 18px swatch in a 24px hit area, with a concentric ring when `aria-pressed` (it matches the current colour).",
       extends: "button",
       props: [
         { name: "value", type: "string", required: true, description: "Hex colour applied on click." },

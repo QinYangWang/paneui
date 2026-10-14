@@ -37,7 +37,7 @@ export default function ColorPickerDemo() {
           <ColorPickerArea />
           <ColorPickerHue />
           <div className="flex items-center gap-2">
-            <ColorPickerSwatch className="size-8" />
+            <ColorPickerSwatch />
             <ColorPickerHexInput />
           </div>
           <ColorPickerPresets>
