@@ -53,7 +53,9 @@ function RangeSliderRuler({
 }: RangeSliderRulerProps) {
   const reduce = useReducedMotion() ?? false
   const stride = step > 0 ? step : 1
-  const steps = Math.max(0, Math.round((max - min) / stride))
+  // Whole steps that fit in [min, max]; floor (not round) so an off-grid max is never exceeded,
+  // like a native range input. The epsilon absorbs float error (0.3 / 0.1 = 2.999…).
+  const steps = Math.max(0, Math.floor((max - min) / stride + 1e-7))
   const decimals = (String(stride).split(".")[1] ?? "").length
   const fmt = (v: number) => v.toFixed(decimals)
 

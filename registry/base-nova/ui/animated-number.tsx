@@ -22,9 +22,13 @@ type AnimatedNumberProps = Omit<React.HTMLAttributes<HTMLSpanElement>, "children
   format?: Intl.NumberFormatOptions
   /** Wait until the number scrolls into view before counting. */
   startOnView?: boolean
-  /** Spring settings; defaults settle in roughly a second. */
+  /**
+   * Spring settings. The default 380/42/0.7 is in the house range and slightly
+   * overdamped, so the count glides in without overshooting the target.
+   */
   stiffness?: number
   damping?: number
+  mass?: number
 }
 
 function AnimatedNumber({
@@ -33,8 +37,9 @@ function AnimatedNumber({
   locale,
   format,
   startOnView = true,
-  stiffness = 70,
-  damping = 20,
+  stiffness = 380,
+  damping = 42,
+  mass = 0.7,
   className,
   ...props
 }: AnimatedNumberProps) {
@@ -49,7 +54,7 @@ function AnimatedNumber({
   )
 
   const target = useMotionValue(from)
-  const spring = useSpring(target, { stiffness, damping, restDelta: 0.001 })
+  const spring = useSpring(target, { stiffness, damping, mass, restDelta: 0.001 })
   const display = useTransform(spring, (v) => formatter.format(v))
 
   React.useEffect(() => {

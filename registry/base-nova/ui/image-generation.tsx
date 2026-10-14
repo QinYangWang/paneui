@@ -49,6 +49,10 @@ type ImageGenerationProps = Omit<React.ComponentProps<"figure">, "children"> & {
   aspectRatio?: React.CSSProperties["aspectRatio"]
   onRetry?: () => void
   onDownload?: () => void
+  /** Message in the frame when `status` is `error`. */
+  errorText?: React.ReactNode
+  /** Label of the error frame's retry button (shown with `onRetry`). */
+  retryLabel?: React.ReactNode
   /** Accessible description of the finished image. */
   alt?: string
   mediaClassName?: string
@@ -69,6 +73,8 @@ function ImageGeneration({
   aspectRatio = "1 / 1",
   onRetry,
   onDownload,
+  errorText = "Couldn’t finish this image.",
+  retryLabel = "Try again",
   alt,
   className,
   mediaClassName,
@@ -162,7 +168,7 @@ function ImageGeneration({
           <div className="absolute inset-0 grid place-items-center p-6 text-center">
             <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground">
               <AlertCircleIcon className="size-5 text-destructive" />
-              Couldn&apos;t finish this image.
+              {errorText}
               {onRetry ? (
                 <button
                   type="button"
@@ -170,7 +176,7 @@ function ImageGeneration({
                   className="mt-1 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-secondary px-3 text-xs font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-3 focus-visible:ring-ring active:scale-96"
                 >
                   <RefreshIcon className="size-3.5" />
-                  Try again
+                  {retryLabel}
                 </button>
               ) : null}
             </div>

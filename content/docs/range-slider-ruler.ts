@@ -52,7 +52,7 @@ export default {
           description: "Called once a drag, flick, wheel or key press has settled.",
         },
         { name: "min", type: "number", default: "0", description: "Lowest value." },
-        { name: "max", type: "number", default: "100", description: "Highest value, snapped to the nearest whole step from `min`." },
+        { name: "max", type: "number", default: "100", description: "Highest value. If it is off the step grid, the scale ends on the last whole step below it (min 0, max 11, step 3 ends at 9), never above." },
         { name: "step", type: "number", default: "1", description: "Value between two ticks; its decimals set the readout precision." },
         { name: "gap", type: "number", default: "12", description: "Pixels between two steps on the scale." },
         { name: "majorEvery", type: "number", default: "5", description: "Every Nth step is a tall, labelled tick." },

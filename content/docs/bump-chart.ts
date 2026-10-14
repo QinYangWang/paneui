@@ -17,7 +17,7 @@ export default {
     {
       id: "pinned",
       title: "Pinned",
-      description: "Clicking a line, dot or legend item pins it; `defaultActive` pins one on load.",
+      description: "Clicking a line, dot or legend item pins it; `defaultActiveId` pins one on load.",
     },
     {
       id: "gaps",
@@ -32,7 +32,7 @@ export default {
     {
       id: "controlled",
       title: "Controlled",
-      description: "`active` and `onActiveChange` let other controls pin a series. Series take a `color` too.",
+      description: "`activeId` and `onActiveChange` let other controls pin a series. Series take a `color` too.",
     },
   ],
   notes: [
@@ -55,9 +55,11 @@ export default {
         { name: "periods", type: "string[]", required: true, description: "Period labels, oldest first." },
         { name: "label", type: "string", default: `"Rankings over time"`, description: "Accessible name." },
         { name: "rowHeight", type: "number", default: "40", description: "Vertical distance between ranks in px." },
-        { name: "active", type: "string | null", description: "Controlled pinned series id." },
-        { name: "defaultActive", type: "string | null", description: "Series pinned on first render." },
+        { name: "activeId", type: "string | null", description: "Controlled pinned series id." },
+        { name: "defaultActiveId", type: "string | null", description: "Series pinned on first render." },
         { name: "onActiveChange", type: "(id: string | null) => void", description: "Called when a series is pinned or unpinned." },
+        { name: "active", type: "string | null", description: "Deprecated alias of `activeId`." },
+        { name: "defaultActive", type: "string | null", description: "Deprecated alias of `defaultActiveId`." },
         { name: "showLegend", type: "boolean", default: "true", description: "Show the legend pills." },
         { name: "showRankLabels", type: "boolean", default: "true", description: "Show the rank number inside each dot." },
       ],

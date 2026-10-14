@@ -20,7 +20,9 @@ type NumberTickerProps = Omit<React.HTMLAttributes<HTMLSpanElement>, "children">
 }
 
 const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-const SPRING: Transition = { type: "spring", stiffness: 140, damping: 20, mass: 0.9 }
+// House range (AGENTS.md); damping ratio ~0.9 like the old 140/20/0.9 roll, so a
+// digit lands with a hint of give but no visible bounce.
+const SPRING: Transition = { type: "spring", stiffness: 380, damping: 30, mass: 0.7 }
 
 function Digit({
   digit,

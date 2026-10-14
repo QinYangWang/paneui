@@ -32,13 +32,13 @@ export default {
     {
       id: "search-hotkey",
       title: "Search Hotkey",
-      description: "`searchHotkey` sets the ⌘ / Ctrl shortcut that opens the sidebar and focuses search (here ⌘J); pass `null` to disable it.",
+      description: "`searchHotkey` sets the ⌘ / Ctrl shortcut that opens the sidebar and focuses search (here ⌘J on Mac, Ctrl+J elsewhere; the hint shows the right modifier); pass `null` to disable it.",
     },
   ],
   notes: [
     {
       title: "Keyboard",
-      body: "The tree follows the WAI-ARIA tree pattern: `ArrowUp` / `ArrowDown` move, `ArrowRight` / `ArrowLeft` open, close or go to the parent, `Home` / `End` jump, `Enter` / `Space` activate, typing jumps by label, and `F2` renames when `renamable`. `Escape` clears search.",
+      body: "The tree follows the WAI-ARIA tree pattern: `ArrowUp` / `ArrowDown` move, `ArrowRight` / `ArrowLeft` open, close or go to the parent, `Home` / `End` jump, `Enter` / `Space` activate, typing jumps by label, and `F2` renames when `renamable`. `Escape` clears search. The search shortcut (⌘K on Mac, Ctrl+K elsewhere) is shared: with several sidebars on a page, only the most recently mounted, focused or clicked one responds.",
     },
     {
       title: "Related",
@@ -66,7 +66,7 @@ export default {
         { name: "actions", type: "(open: boolean) => ReactNode", description: "Rendered under the title, e.g. a New chat button." },
         { name: "footer", type: "(open: boolean) => ReactNode", description: "Pinned to the bottom, e.g. the account row." },
         { name: "searchable", type: "boolean", default: "true", description: "Show the search field." },
-        { name: "searchHotkey", type: "string | null", default: `"k"`, description: "⌘ / Ctrl + this key focuses search. `null` disables it." },
+        { name: "searchHotkey", type: "string | null", default: `"k"`, description: "⌘ (Mac) / Ctrl + this key opens the sidebar and focuses search; the hint shows the platform modifier. Only the most recently mounted, focused or clicked sidebar responds. `null` disables it." },
         { name: "renamable", type: "boolean", default: "false", description: "Allow inline rename (F2, double-click or the pencil)." },
         { name: "onRename", type: "(item: SidebarResource, label: string) => void", description: "Called after a rename, including bookmarks." },
         { name: "width", type: "string", default: `"16rem"`, description: "Expanded width as a CSS length." },

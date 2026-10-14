@@ -26,6 +26,11 @@ export default {
       title: "Decimals",
       description: "Combine a fractional `step` with `format` (Intl.NumberFormat options) to keep the digits fixed.",
     },
+    {
+      id: "localized",
+      title: "Localized",
+      description: "`decrementLabel` and `incrementLabel` name the − and + buttons; pass them with `locale` for a fully translated control.",
+    },
     { id: "disabled", title: "Disabled", description: "`disabled` dims the whole control." },
   ],
   notes: [
@@ -50,6 +55,8 @@ export default {
           type: "string",
           description: "Accessible name, applied to the value input (not the root).",
         },
+        { name: "decrementLabel", type: "string", default: `"Decrease"`, description: "Accessible name of the − button; translate it with the rest of your UI." },
+        { name: "incrementLabel", type: "string", default: `"Increase"`, description: "Accessible name of the + button." },
         { name: "unit", type: "ReactNode", description: "Text after the number, e.g. \"guests\". Visual only." },
         { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Control height (32 / 40px)." },
         { name: "value", type: "number | null", description: "Controlled value." },

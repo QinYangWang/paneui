@@ -95,7 +95,7 @@ function ComboboxTrigger({
 function ComboboxSearch({ className, ...props }: ComboboxPrimitive.Input.Props) {
   return (
     <div data-slot="combobox-search" className="p-1.5 pb-0">
-      <div className="flex h-8 items-center gap-2 rounded-xl bg-muted/60 px-2.5 shadow-well focus-within:bg-background">
+      <div className="flex h-8 items-center gap-2 rounded-md bg-muted/60 px-2.5 shadow-well focus-within:bg-background">
         <SearchIcon size={15} className="shrink-0 text-muted-foreground" />
         <ComboboxPrimitive.Input
           className={cn(
@@ -131,7 +131,7 @@ function ComboboxContent({
         <ComboboxPrimitive.Popup
           data-slot="combobox-content"
           className={cn(
-            "relative flex max-h-[min(var(--available-height),22rem)] w-(--anchor-width) min-w-48 origin-(--transform-origin) flex-col overflow-hidden rounded-2xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
+            "relative flex max-h-[min(var(--available-height),22rem)] w-(--anchor-width) min-w-48 origin-(--transform-origin) flex-col overflow-hidden rounded-xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
             className
           )}
           {...props}
@@ -161,7 +161,7 @@ function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.
     <ComboboxPrimitive.Item
       data-slot="combobox-item"
       className={cn(
-        "relative flex h-8 cursor-default items-center gap-2 rounded-xl pr-8 pl-2.5 text-sm outline-none select-none transition-[background-color,box-shadow] duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-secondary data-highlighted:shadow-raised [&_svg]:size-4 [&_svg]:shrink-0",
+        "relative flex h-8 cursor-default items-center gap-2 rounded-md pr-8 pl-2.5 text-sm outline-none select-none transition-[background-color,box-shadow] duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-secondary data-highlighted:shadow-raised [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

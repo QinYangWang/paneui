@@ -30,6 +30,11 @@ export default {
       description: "Tune `thickness` and `gap` (viewBox units of a 200×200 box) and hide the legend with `showLegend={false}`.",
     },
     {
+      id: "descriptions",
+      title: "Descriptions",
+      description: "A segment's `description` shows as a second line in the legend and is included in its accessible name and the data table.",
+    },
+    {
       id: "controlled",
       title: "Controlled",
       description: "`activeId` and `onActiveChange` drive the highlighted segment from outside, e.g. to keep one always selected.",
@@ -52,9 +57,9 @@ export default {
       props: [
         {
           name: "segments",
-          type: "{ id: string; label: string; value: number; color?: string }[]",
+          type: "{ id: string; label: string; value: number; color?: string; description?: string }[]",
           required: true,
-          description: "Slices in order. Non-positive values are skipped.",
+          description: "Slices in order. Non-positive values are skipped. `description` shows under the label in the legend and is read with the segment.",
         },
         { name: "label", type: "string", default: `"Donut chart"`, description: "Accessible name of the chart." },
         { name: "thickness", type: "number", default: "22", description: "Ring thickness in viewBox units." },

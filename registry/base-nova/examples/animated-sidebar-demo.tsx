@@ -87,7 +87,7 @@ export default function AnimatedSidebarDemo() {
         <div className="flex items-center gap-2">
           <SidebarTrigger />
           <span className="text-sm font-medium">{title}</span>
-          <span className="ml-auto text-xs text-muted-foreground">⌘B to toggle</span>
+          <span className="ml-auto text-xs text-muted-foreground">⌘/Ctrl+B to toggle</span>
           <BellIcon className="size-4 text-muted-foreground" />
         </div>
         <div className="grid flex-1 grid-cols-2 gap-3">

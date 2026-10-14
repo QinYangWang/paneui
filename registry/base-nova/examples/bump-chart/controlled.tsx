@@ -33,7 +33,7 @@ export default function BumpChartControlled() {
       <BumpChart
         series={series}
         periods={periods}
-        active={pinned}
+        activeId={pinned}
         onActiveChange={setPinned}
         label="Sales leaderboard this week"
       />

@@ -62,7 +62,10 @@ type ToolApprovalProps = Omit<React.ComponentProps<"div">, "title"> & {
    * already set, the card mounts as approved and `onDecisionChange("always")` fires.
    */
   rememberKey?: string
-  /** Allow undoing an "Always allow" from the resolved card. */
+  /**
+   * Show Undo (after Allow once / Deny) and Revoke (after Always allow) on the
+   * resolved card. Only Revoke clears the `rememberKey` entry.
+   */
   revocable?: boolean
   defaultArgsOpen?: boolean
 }
@@ -91,27 +94,36 @@ function ToolApproval({
   const reduce = useReducedMotion()
   const [internal, setInternal] = React.useState<ToolApprovalDecision | null>(defaultDecision)
   const decision = decisionProp !== undefined ? decisionProp : internal
-  const [argsOpen, setArgsOpen] = React.useState(defaultArgsOpen && (decisionProp ?? defaultDecision) == null)
+  const [argsOpen, setArgsOpen] = React.useState(defaultArgsOpen && decision == null)
   const pending = decision == null
   const onChangeRef = React.useRef(onDecisionChange)
   onChangeRef.current = onDecisionChange
+
+  // Follow the decision, controlled or not: resolving folds the arguments,
+  // going back to pending (Undo, or a parent resetting `decision` to null)
+  // reopens them as `defaultArgsOpen` says.
+  const [prevDecision, setPrevDecision] = React.useState(decision)
+  if (decision !== prevDecision) {
+    setPrevDecision(decision)
+    setArgsOpen(decision == null ? defaultArgsOpen : false)
+  }
 
   const decide = React.useCallback(
     (next: ToolApprovalDecision | null) => {
       if (decisionProp === undefined) setInternal(next)
       if (next === "always") writeRemembered(rememberKey, true)
-      if (next === null) writeRemembered(rememberKey, false)
-      if (next !== null) setArgsOpen(false)
+      // Only revoking an "Always allow" forgets it; undoing "Allow once" or
+      // "Deny" leaves a permission saved earlier alone.
+      if (next === null && decision === "always") writeRemembered(rememberKey, false)
       onChangeRef.current?.(next)
     },
-    [decisionProp, rememberKey]
+    [decision, decisionProp, rememberKey]
   )
 
   // Remembered permission from an earlier session.
   React.useEffect(() => {
     if (pending && readRemembered(rememberKey)) {
       if (decisionProp === undefined) setInternal("always")
-      setArgsOpen(false)
       onChangeRef.current?.("always")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

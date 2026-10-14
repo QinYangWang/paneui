@@ -65,7 +65,7 @@ export default {
         {
           name: "transition",
           type: "Transition",
-          default: `{ type: "spring", stiffness: 140, damping: 20, mass: 0.9 }`,
+          default: `{ type: "spring", stiffness: 380, damping: 30, mass: 0.7 }`,
           description: "motion transition merged over the default spring.",
         },
         { name: "digitClassName", type: "string", description: "Classes for each rolling digit column." },

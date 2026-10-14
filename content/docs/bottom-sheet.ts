@@ -90,7 +90,11 @@ export default {
         },
         { name: "open", type: "boolean", description: "Controlled open state." },
         { name: "defaultOpen", type: "boolean", default: "false", description: "Open on first render." },
-        { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the sheet opens or closes." },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean, details: Dialog.Root.ChangeEventDetails) => void",
+          description: "Called when the sheet opens or closes, with Base UI event details (`reason`, `event`, `cancel()`), like Drawer. A drag-down dismissal reports `reason: \"imperative-action\"`.",
+        },
       ],
     },
     {

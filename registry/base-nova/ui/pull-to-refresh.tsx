@@ -87,19 +87,22 @@ function PullToRefresh({
   const refreshRef = React.useRef(onRefresh)
   refreshRef.current = onRefresh
   const running = React.useRef(false)
-  const busyRefExternal = React.useRef(refreshingProp)
-  busyRefExternal.current = refreshingProp
+  // Bumped when our own onRefresh settles. Closing is decided in the effect
+  // below, after React has committed, so a parent that sets `refreshing` from a
+  // void onRefresh is seen before we spring shut (no close-then-reopen).
+  const [settled, setSettled] = React.useState(0)
 
-  // External refresh: hold the content open while it runs, close when it ends.
+  // Hold the content open while a refresh runs (ours or the parent's), close
+  // once neither is running.
   React.useEffect(() => {
     if (refreshingProp) {
       setStatus("refreshing")
       animate(y, holdDistance, reduce ? { duration: 0 } : SETTLE)
-    } else if (refreshingProp === false && statusRef.current === "refreshing" && !running.current) {
+    } else if (statusRef.current === "refreshing" && !running.current) {
       setStatus("idle")
       animate(y, 0, reduce ? { duration: 0 } : SETTLE)
     }
-  }, [refreshingProp, holdDistance, reduce, setStatus, y])
+  }, [refreshingProp, settled, holdDistance, reduce, setStatus, y])
 
   const release = React.useCallback(async () => {
     if (statusRef.current === "ready") {
@@ -110,10 +113,7 @@ function PullToRefresh({
         await refreshRef.current()
       } finally {
         running.current = false
-        if (!busyRefExternal.current) {
-          setStatus("idle")
-          animate(y, 0, reduce ? { duration: 0 } : SETTLE)
-        }
+        setSettled((n) => n + 1)
       }
     } else if (statusRef.current === "pulling") {
       setStatus("idle")

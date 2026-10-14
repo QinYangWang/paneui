@@ -439,6 +439,14 @@ function LiquidityHeatmapLegend({
   )
 }
 
+/** Decimal places in a step, e.g. 0.25 -> 2, 1e-7 -> 7. */
+function stepDecimals(step: number) {
+  if (!Number.isFinite(step)) return 0
+  const [mantissa, exp] = String(step).toLowerCase().split("e")
+  const frac = mantissa.split(".")[1]?.length ?? 0
+  return Math.min(20, Math.max(0, frac - Number(exp ?? 0)))
+}
+
 /** Deterministic order-book-like snapshots for demos and tests. */
 function generateLiquiditySnapshots(
   count: number,
@@ -461,6 +469,8 @@ function generateLiquiditySnapshots(
   } = {}
 ): LiquiditySnapshot[] {
   const r = rand ?? seededRandom(seed)
+  // Round the traded price to the band step's precision (0.0005 -> 4dp), never coarser than cents.
+  const decimals = Math.max(2, stepDecimals(step))
   const base = Math.round(start / step) * step
   const lo = base - (bands / 2) * step
   // a few persistent walls that drift in and out
@@ -488,7 +498,7 @@ function generateLiquiditySnapshots(
       id: t,
       label: new Date(t).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "UTC" }),
       levels,
-      price: Number(price.toFixed(2)),
+      price: Number(price.toFixed(decimals)),
     })
   }
   return out

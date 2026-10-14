@@ -47,7 +47,7 @@ export default {
         { name: "aspectRatio", type: "number", default: "1.25", description: "Item height as a multiple of its width." },
         { name: "itemWidth", type: "number", description: "Item width in px. Defaults to filling the arc between neighbours." },
         { name: "dragSpeed", type: "number", default: "1.2", description: "Items rolled per item-width dragged." },
-        { name: "index", type: "number", description: "Controlled active index." },
+        { name: "index", type: "number", description: "Controlled active index. The ring starts on it and rolls to follow changes." },
         { name: "defaultIndex", type: "number", default: "0", description: "Initial active index when uncontrolled." },
         { name: "onIndexChange", type: "(index: number) => void", description: "Called when the front item changes." },
         { name: "controls", type: "boolean", default: "true", description: "Show previous / next buttons and a counter under the stage." },

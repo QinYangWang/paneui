@@ -162,7 +162,8 @@ function CylinderCarousel({
 
   const [uncontrolled, setUncontrolled] = React.useState(defaultIndex)
   const active = wrap(indexProp ?? uncontrolled, Math.max(count, 1))
-  const rotation = useMotionValue(defaultIndex)
+  // Start the ring on the controlled index when there is one, not defaultIndex.
+  const rotation = useMotionValue(wrap(indexProp ?? defaultIndex, Math.max(count, 1)))
   const animation = React.useRef<AnimationPlaybackControls | null>(null)
 
   const reported = React.useRef(wrap(indexProp ?? defaultIndex, Math.max(count, 1)))

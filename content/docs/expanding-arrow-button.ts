@@ -10,7 +10,7 @@ export default {
     {
       id: "accents",
       title: "Accents",
-      description: "`accentClassName` restyles the sweeping tile, e.g. a different token background and text colour.",
+      description: "`accentClassName` restyles the sweeping tile (a different token background and text colour) and `labelClassName` the label, e.g. `tabular-nums` for a count. Both take token classes.",
     },
     {
       id: "as-link",

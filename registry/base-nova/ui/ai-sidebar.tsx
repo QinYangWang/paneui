@@ -319,6 +319,67 @@ function RenameField({ initial, onDone }: { initial: string; onDone: (value: str
   )
 }
 
+/* ──────────────────────────── Shortcut ──────────────────────────── */
+
+// One window listener for every AISidebar on the page. Instances stack in mount
+// order; focusing or pressing inside one moves it to the top, and only the
+// topmost instance with a matching key handles ⌘/Ctrl+key.
+type HotkeyEntry = { key: string; run: () => void }
+const hotkeyStack: HotkeyEntry[] = []
+
+function onHotkey(e: KeyboardEvent) {
+  if (!(e.metaKey || e.ctrlKey) || e.altKey || e.defaultPrevented) return
+  const key = e.key.toLowerCase()
+  for (let i = hotkeyStack.length - 1; i >= 0; i--) {
+    if (hotkeyStack[i].key !== key) continue
+    e.preventDefault()
+    hotkeyStack[i].run()
+    return
+  }
+}
+
+function useSearchHotkey(key: string | null | undefined, run: () => void) {
+  const runRef = React.useRef(run)
+  React.useLayoutEffect(() => {
+    runRef.current = run
+  })
+  const entryRef = React.useRef<HotkeyEntry | null>(null)
+
+  React.useEffect(() => {
+    if (!key) return
+    const entry: HotkeyEntry = { key: key.toLowerCase(), run: () => runRef.current() }
+    entryRef.current = entry
+    hotkeyStack.push(entry)
+    if (hotkeyStack.length === 1) window.addEventListener("keydown", onHotkey)
+    return () => {
+      const at = hotkeyStack.indexOf(entry)
+      if (at >= 0) hotkeyStack.splice(at, 1)
+      if (hotkeyStack.length === 0) window.removeEventListener("keydown", onHotkey)
+      if (entryRef.current === entry) entryRef.current = null
+    }
+  }, [key])
+
+  // Make this instance the one the shortcut drives.
+  return React.useCallback(() => {
+    const entry = entryRef.current
+    const at = entry ? hotkeyStack.indexOf(entry) : -1
+    if (entry && at >= 0 && at !== hotkeyStack.length - 1) {
+      hotkeyStack.splice(at, 1)
+      hotkeyStack.push(entry)
+    }
+  }, [])
+}
+
+const noopSubscribe = () => () => {}
+/** ⌘ on Apple platforms, Ctrl elsewhere (⌘ while server rendering). */
+function useModKeyLabel() {
+  return React.useSyncExternalStore(
+    noopSubscribe,
+    () => (/Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent) ? "⌘" : "Ctrl+"),
+    () => "⌘"
+  )
+}
+
 /* ──────────────────────────── Sidebar ──────────────────────────── */
 
 type AISidebarProps = Omit<React.HTMLAttributes<HTMLElement>, "title"> & {
@@ -343,7 +404,11 @@ type AISidebarProps = Omit<React.HTMLAttributes<HTMLElement>, "title"> & {
   /** Pinned to the bottom, e.g. the account row. Receives the open state. */
   footer?: (open: boolean) => React.ReactNode
   searchable?: boolean
-  /** ⌘/Ctrl + this key focuses search (opening the sidebar). `null` disables the shortcut. */
+  /**
+   * ⌘/Ctrl + this key focuses search (opening the sidebar). With several sidebars
+   * on a page only the most recently mounted, focused or clicked one responds.
+   * `null` disables the shortcut.
+   */
   searchHotkey?: string | null
   /** Allow inline rename (F2, double-click or the pencil). */
   renamable?: boolean
@@ -373,6 +438,8 @@ function AISidebar({
   onRename,
   width = "16rem",
   className,
+  onFocusCapture,
+  onPointerDownCapture,
   ...props
 }: AISidebarProps) {
   const reduce = useReducedMotion()
@@ -426,19 +493,12 @@ function AISidebar({
   )
 
   // ⌘K / Ctrl+K jumps to search (opening the sidebar first).
-  React.useEffect(() => {
-    if (!searchable || !searchHotkey) return
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === searchHotkey.toLowerCase()) {
-        e.preventDefault()
-        if (openProp === undefined) setInnerOpen(true)
-        onOpenChange?.(true)
-        requestAnimationFrame(() => searchRef.current?.focus())
-      }
-    }
-    window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
-  }, [searchable, searchHotkey, openProp, onOpenChange])
+  const claimShortcut = useSearchHotkey(searchable ? searchHotkey : null, () => {
+    if (openProp === undefined) setInnerOpen(true)
+    onOpenChange?.(true)
+    requestAnimationFrame(() => searchRef.current?.focus())
+  })
+  const modKey = useModKeyLabel()
 
   const railItems = [...items, ...bookmarks]
 
@@ -454,6 +514,14 @@ function AISidebar({
         "relative flex h-full shrink-0 flex-col overflow-hidden bg-secondary/60 text-sm",
         className
       )}
+      onFocusCapture={(e) => {
+        claimShortcut()
+        onFocusCapture?.(e)
+      }}
+      onPointerDownCapture={(e) => {
+        claimShortcut()
+        onPointerDownCapture?.(e)
+      }}
       {...(props as React.ComponentProps<typeof motion.nav>)}
     >
       {/* Header */}
@@ -507,7 +575,8 @@ function AISidebar({
               ) : (
                 searchHotkey && (
                   <kbd className="rounded-sm bg-background px-1.5 font-mono text-[10px] text-muted-foreground shadow-chip">
-                    ⌘{searchHotkey.toUpperCase()}
+                    {modKey}
+                    {searchHotkey.toUpperCase()}
                   </kbd>
                 )
               )}

@@ -30,7 +30,7 @@ export default function StatusBarCustomStatuses() {
   return (
     <div className="w-full max-w-xl">
       <StatusBar
-        title="main"
+        title={<code className="font-mono">main</code>}
         label="CI runs on main"
         data={data}
         statuses={statuses}

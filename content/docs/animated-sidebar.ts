@@ -66,7 +66,7 @@ export default {
   notes: [
     {
       title: "Keyboard",
-      body: "⌘/Ctrl + B toggles the sidebar; change the key with `shortcut` or pass `null` to turn it off (do this when several sidebars share a page). Disclosure items set `aria-expanded` and `aria-controls`.",
+      body: "⌘/Ctrl + B toggles the sidebar; change the key with `shortcut` or pass `null` to turn it off. All sidebars share one listener: with several on a page, only the most recently mounted, focused or clicked one toggles. Disclosure items set `aria-expanded` and `aria-controls`.",
     },
     {
       title: "Related",
@@ -82,7 +82,7 @@ export default {
         { name: "open", type: "boolean", description: "Controlled expanded state." },
         { name: "defaultOpen", type: "boolean", default: "true", description: "Initial expanded state when uncontrolled." },
         { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the sidebar expands or collapses." },
-        { name: "shortcut", type: "string | null", default: `"b"`, description: "Key that toggles with ⌘/Ctrl. `null` disables the shortcut." },
+        { name: "shortcut", type: "string | null", default: `"b"`, description: "Key that toggles with ⌘/Ctrl. Only the most recently mounted, focused or clicked sidebar responds. `null` disables the shortcut." },
       ],
       dataAttributes: [{ name: "data-state", description: "`expanded` or `collapsed`." }],
     },

@@ -17,3 +17,14 @@ Not fixed yet. One line each.
 - Hardcoded English: Stepper Decrease/Increase, image-generation error text. Label peer-disabled never applies to Base UI checkbox/radio/switch.
 - Motion: number-ticker/animated-number springs far outside house range; order-book arrow moves under reduced motion.
 - Duplicate shiki/copy logic in tool-result and agent-code-block.
+
+## Fixed 2026-10-14 (fix pass)
+Groups A–E fixed: composition-chart/status-bar prop collisions, price-target-fan horizon caption, liquidity-heatmap rounding, bump-chart activeId, chart label contrast (onFill), funnel fade, donut descriptions, order-book reduced motion; tabs vertical, popover-morph/color-picker radius, color-picker primary default + passthrough, slider a11y names, ruler clamp; shared hotkey stacks (sidebars), cylinder index, offline demo images, morphing-modal onViewChange, tilt perspective, chromatic SR text, pull-to-refresh; tool-approval undo, tool-result 0ms, image-generation labels, number springs, message-scroller footer/overlay, citations favicon opt-out; lint slot-ClassName exemption, token drift, stepper labels, dialog scroll, label disabled, bottom-sheet details.
+## Still open
+- Dock items rounded-[32%] needs a `rounded-squircle` utility in globals.css.
+- Dialog close button scrolls away with long content.
+- animated-sidebar + ai-sidebar on the same key both fire (separate stacks).
+- onFill() duplicated in treemap/candlestick/funnel → move to chart-utils.
+- Out-of-range springs: cylinder-carousel glide, animated-sidebar mass 0.8, range-slider-wave BAR_SPRING damping 19.
+- tool-approval: parent resetting "always" doesn't clear rememberKey (document).
+- tool-result and agent-code-block duplicate highlighter.

@@ -87,7 +87,7 @@ export default {
         { name: "count", type: "number", required: true, description: "Number of snapshots (first argument)." },
         { name: "seed", type: "number", default: "3", description: "Random seed." },
         { name: "start", type: "number", default: "100", description: "Starting price." },
-        { name: "step", type: "number", default: "0.5", description: "Price band size." },
+        { name: "step", type: "number", default: "0.5", description: "Price band size. Snapshot `price` is rounded to its precision (at least 2 decimals)." },
         { name: "bands", type: "number", default: "24", description: "Number of price bands." },
         { name: "startTime", type: "number", default: "Date.UTC(2026, 0, 15, 14, 0)", description: "First snapshot time (ms)." },
         { name: "interval", type: "number", default: "60000", description: "Time between snapshots (ms)." },

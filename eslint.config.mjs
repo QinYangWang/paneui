@@ -87,9 +87,58 @@ const HEADLESS = [
 const TEXT_COMPONENTS = [
   "TextReveal", "TextShimmer", "TextScramble", "TextCascade", "ChromaticTextReveal",
   "DigitSwap", "NumberTicker", "AnimatedNumber", "ReasoningText",
+  // Action-swap label slots: the label's type (e.g. tabular-nums for a count).
+  "ActionSwapText", "ActionSwapBlurText", "ActionSwapRollText", "ActionSwapCascadeText",
 ];
 
 const re = (names) => "^(" + names.join("|") + ")$";
+
+// ───────────────────────────────────────────────────────────────────────────
+// Component-owned class props.
+//
+// @shadcn/lint reads every `*ClassName` attribute as the component's className,
+// so documented slot hooks (accentClassName, labelClassName, backdropClassName,
+// rowClassName = (ctx) => …) were reported as restyling the component, and
+// function-valued ones as dynamic. A prop the component itself defines for a
+// slot is the API working as intended, so no-restyle and require-static-classes
+// skip classes written inside a `<lowercase>…ClassName` attribute. Plain
+// `className` keeps its contracts, and no-raw-colors / no-arbitrary-values /
+// no-unknown-classes still check slot props: tokens only.
+// ───────────────────────────────────────────────────────────────────────────
+const COMPONENT_CLASS_PROP = /^[a-z][A-Za-z0-9]*ClassName$/;
+
+function inComponentClassProp(node) {
+  for (let n = node; n; n = n.parent) {
+    if (n.type === "JSXAttribute") {
+      return n.name?.type === "JSXIdentifier" && COMPONENT_CLASS_PROP.test(n.name.name);
+    }
+    if (n.type === "JSXOpeningElement" || n.type === "JSXElement" || n.type === "Program") return false;
+  }
+  return false;
+}
+
+function allowComponentClassProps(rule) {
+  return {
+    ...rule,
+    create(context) {
+      const report = (descriptor) => {
+        if (descriptor?.node && inComponentClassProp(descriptor.node)) return;
+        context.report(descriptor);
+      };
+      return rule.create(Object.create(context, { report: { value: report } }));
+    },
+  };
+}
+
+// Same rule names (shadcn/*), so existing eslint-disable comments keep working.
+const shadcnPlugin = {
+  ...shadcn,
+  rules: {
+    ...shadcn.rules,
+    "no-restyle": allowComponentClassProps(shadcn.rules["no-restyle"]),
+    "require-static-classes": allowComponentClassProps(shadcn.rules["require-static-classes"]),
+  },
+};
 
 const designSystemRules = [
   // Shared recognition + note for every shadcn rule.
@@ -188,8 +237,8 @@ const designSystemRules = [
                   '"{{className}}": <{{component}}> takes margins and w-full/w-auto only. Height and padding come from its size prop; set other widths on the parent.',
               },
             },
-            // The accent slot is a documented color hook (accentClassName).
-            { pattern: "^ExpandingArrowButton$", allow: [...PLACEMENT, "w-full", "color"] },
+            // Loader draws in currentColor: a token text colour is its tint.
+            { pattern: "^Loader$", allow: ["layout", "text-color"] },
             // Icons from components/icons.tsx (IconChip is a component, not an icon).
             {
               pattern: "^(?!IconChip$).+Icon$",
@@ -230,7 +279,7 @@ const eslintConfig = [
     // @shadcn/lint: register the plugin. eslint-config-next already sets up
     // the TypeScript/JSX parser for these files, so no parser override here.
     files: ["**/*.{js,jsx,ts,tsx}"],
-    plugins: { shadcn },
+    plugins: { shadcn: shadcnPlugin },
   },
   ...designSystemRules,
 ];

@@ -17,7 +17,7 @@ export default {
     {
       id: "custom-statuses",
       title: "Custom Statuses",
-      description: "Pass your own `statuses` map. Each `weight` feeds the uptime figure: 1 is up, 0 is down, `null` is not counted.",
+      description: "Pass your own `statuses` map. Each `weight` feeds the uptime figure: 1 is up, 0 is down, `null` is not counted. `title` takes any node, here a branch name in mono.",
     },
     {
       id: "hourly",
@@ -63,7 +63,7 @@ export default {
           description: "Status definitions. The defaults are `operational`, `degraded`, `outage`, `maintenance` and `nodata`.",
         },
         { name: "label", type: "string", default: `"Status history"`, description: "Accessible name; also the header title fallback." },
-        { name: "title", type: "string", description: "Service name in the header row." },
+        { name: "title", type: "React.ReactNode", description: "Service name in the header row; any node (e.g. name plus a badge). Replaces the HTML `title` tooltip attribute." },
         { name: "height", type: "number", default: "36", description: "Bar height in px." },
         { name: "gap", type: "number", default: "3", description: "Gap between bars in px." },
         { name: "showHeader", type: "boolean", default: "true", description: "Show the status dot, title, current status and uptime." },

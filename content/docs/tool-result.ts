@@ -67,7 +67,7 @@ export default {
         { name: "title", type: "ReactNode", required: true, description: "What the call does." },
         { name: "status", type: `"running" | "success" | "error" | "cancelled"`, default: `"running"`, description: "Run state." },
         { name: "kind", type: `"terminal" | "request" | "custom"`, default: `"custom"`, description: "Picks the default header icon." },
-        { name: "duration", type: "number", description: "Final duration in seconds. While running and unset, elapsed time ticks on its own." },
+        { name: "duration", type: "number", description: "Final duration in seconds. While running and unset, elapsed time ticks on its own (and stays frozen after); a call that never ran in this mount shows no duration." },
         { name: "meta", type: "ReactNode", description: "Extra header text such as an exit code." },
         { name: "icon", type: "ReactNode", description: "Replaces the `kind` icon in the chip." },
         { name: "open", type: "boolean", description: "Controlled open state." },

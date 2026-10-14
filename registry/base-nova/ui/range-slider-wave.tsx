@@ -19,7 +19,7 @@ type RangeSliderWaveProps = Omit<
   bars?: number
   /** Crest width in bars; bigger spreads the bell wider. */
   spread?: number
-  /** Optional heading row above the bars. Also the accessible name. */
+  /** Optional heading row above the bars. Also the accessible name; without it, `aria-label` / `aria-labelledby` on the root name the thumb. */
   label?: string
   /** Formats the readout in the heading row (and the announced value). */
   formatValue?: (value: number) => string
@@ -41,10 +41,18 @@ function RangeSliderWave({
   bars = 28,
   spread = 2.4,
   label,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   formatValue = String,
   ...props
 }: RangeSliderWaveProps) {
   const reduce = useReducedMotion() ?? false
+
+  const unnamed = !label && !ariaLabel && !ariaLabelledBy
+  React.useEffect(() => {
+    if (process.env.NODE_ENV !== "production" && unnamed)
+      console.warn("RangeSliderWave: pass `label`, `aria-label` or `aria-labelledby` so the slider has an accessible name.")
+  }, [unnamed])
   const [inner, setInner] = React.useState(defaultValue ?? min)
   const current = value ?? inner
   const span = max - min || 1
@@ -120,7 +128,8 @@ function RangeSliderWave({
         <SliderPrimitive.Track data-slot="range-slider-wave-track" className="relative h-full w-full">
           <SliderPrimitive.Thumb
             data-slot="range-slider-wave-thumb"
-            aria-label={label}
+            aria-label={label ?? ariaLabel}
+            aria-labelledby={ariaLabelledBy}
             getAriaValueText={(_, v) => formatValue(v)}
             className="size-px opacity-0 outline-none"
           />

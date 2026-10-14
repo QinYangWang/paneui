@@ -213,6 +213,13 @@ function PriceTargetFan({
 /*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
 
+/** "12-month horizon", "18-month horizon", or "30-day horizon" for short spans. */
+function horizonLabel(nowTime: number, horizonTime: number) {
+  const days = Math.max(0, Math.round((horizonTime - nowTime) / DAY))
+  if (days < 45) return `${days}-day horizon`
+  return `${Math.round(days / 30.4375)}-month horizon`
+}
+
 function PriceTargetFanHeader({ className, children, ...props }: React.ComponentProps<"div">) {
   const { current, targets, active, history, formatPrice, symbol, projectAt, nowTime, horizonTime } = usePriceTargetFan()
   const mean = targets[Math.floor(targets.length / 2)]
@@ -281,7 +288,7 @@ function PriceTargetFanHeader({ className, children, ...props }: React.Component
                 ({signedPct(mean.upside)})
               </span>
             </div>
-            {analysts > 0 && <div className="mt-0.5">{analysts} analysts · 12-month horizon</div>}
+            {analysts > 0 && <div className="mt-0.5">{analysts} analysts · {horizonLabel(nowTime, horizonTime)}</div>}
           </div>
         )
       )}

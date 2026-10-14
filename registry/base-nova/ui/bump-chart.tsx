@@ -36,10 +36,15 @@ type BumpChartProps = Omit<React.ComponentProps<"div">, "children"> & {
   label?: string
   /** Vertical distance between ranks in px. */
   rowHeight?: number
-  /** Pinned series (click a line, dot or legend item). */
-  active?: string | null
-  defaultActive?: string | null
+  /** Pinned series id (controlled). Click a line, dot or legend item to pin. */
+  activeId?: string | null
+  /** Series pinned on first render (uncontrolled). */
+  defaultActiveId?: string | null
   onActiveChange?: (id: string | null) => void
+  /** @deprecated Use `activeId`. */
+  active?: string | null
+  /** @deprecated Use `defaultActiveId`. */
+  defaultActive?: string | null
   showLegend?: boolean
   /** Show the rank number inside each dot. */
   showRankLabels?: boolean
@@ -69,9 +74,11 @@ function BumpChart({
   periods,
   label = "Rankings over time",
   rowHeight = 40,
-  active: activeProp,
-  defaultActive,
+  activeId,
+  defaultActiveId,
   onActiveChange,
+  active: deprecatedActive,
+  defaultActive: deprecatedDefaultActive,
   showLegend = true,
   showRankLabels = true,
   className,
@@ -80,7 +87,11 @@ function BumpChart({
   const [ref, size] = useChartSize<HTMLDivElement>()
   const reduce = useReducedMotion()
   const transition = useChartTransition()
-  const [pinned, setPinned] = useActiveId(activeProp, defaultActive, onActiveChange)
+  const [pinned, setPinned] = useActiveId(
+    activeId !== undefined ? activeId : deprecatedActive,
+    defaultActiveId !== undefined ? defaultActiveId : deprecatedDefaultActive,
+    onActiveChange
+  )
   const [hoverSeries, setHoverSeries] = React.useState<string | null>(null)
   const [cursor, setCursor] = React.useState<{ id: string; period: number } | null>(null)
 

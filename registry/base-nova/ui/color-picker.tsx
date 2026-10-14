@@ -55,6 +55,23 @@ function formatHex({ r, g, b, a }: Rgba): string {
 }
 
 const hsvaToHex = (c: Hsva) => formatHex(hsvaToRgba(c))
+
+/** The light theme's `--primary` (oklch(0.57 0.15 258)) in hex: the server-render default before the live token is read. */
+const PRIMARY_FALLBACK = "#3976ce"
+
+/** Resolve the live `--primary` token to RGBA (any CSS colour syntax) by painting one canvas pixel. */
+function readPrimary(): Rgba | null {
+  if (typeof document === "undefined") return null
+  const token = getComputedStyle(document.documentElement).getPropertyValue("--primary").trim()
+  const ctx = token ? document.createElement("canvas").getContext("2d", { willReadFrequently: true }) : null
+  if (!ctx) return null
+  ctx.fillStyle = "#010203"
+  ctx.fillStyle = token
+  if (ctx.fillStyle === "#010203") return null // the browser could not parse the token
+  ctx.fillRect(0, 0, 1, 1)
+  const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data
+  return { r, g, b, a: 1 }
+}
 const rgbaCss = ({ r, g, b, a }: Rgba) => `rgb(${r} ${g} ${b} / ${a})`
 
 const CHECKER =
@@ -82,6 +99,7 @@ function useColorPicker() {
 type ColorPickerProps = Omit<PopoverPrimitive.Root.Props, "children"> & {
   /** Hex colour (#rrggbb or #rrggbbaa). */
   value?: string
+  /** Initial colour when uncontrolled. Defaults to the theme's `--primary`. */
   defaultValue?: string
   /** Fires continuously while dragging. */
   onValueChange?: (hex: string) => void
@@ -100,7 +118,7 @@ type ColorPickerProps = Omit<PopoverPrimitive.Root.Props, "children"> & {
  */
 function ColorPicker({
   value,
-  defaultValue = "#3b82f6",
+  defaultValue,
   onValueChange,
   onValueCommit,
   alpha = false,
@@ -108,9 +126,17 @@ function ColorPicker({
   children,
   ...props
 }: ColorPickerProps) {
-  const [hsva, setHsvaState] = React.useState<Hsva>(() => rgbaToHsva(parseHex(value ?? defaultValue) ?? parseHex("#000")!))
+  const [hsva, setHsvaState] = React.useState<Hsva>(() => rgbaToHsva(parseHex(value ?? defaultValue ?? PRIMARY_FALLBACK) ?? parseHex("#000")!))
   const latest = React.useRef(hsva)
   latest.current = hsva
+
+  // No value or defaultValue: adopt the live theme primary once mounted (no change callbacks fire).
+  const usesThemeDefault = React.useRef(value === undefined && defaultValue === undefined)
+  React.useEffect(() => {
+    if (!usesThemeDefault.current) return
+    const rgba = readPrimary()
+    if (rgba && formatHex(rgba) !== hsvaToHex(latest.current)) setHsvaState(rgbaToHsva(rgba))
+  }, [])
 
   // Adopt controlled values from outside without losing the hue on greys.
   React.useEffect(() => {
@@ -181,14 +207,20 @@ function ColorPickerTrigger({
 
 /**
  * Popup panel. It opens on top of the trigger and expands out of the chip's
- * pill shape (clip-path morph), then shrinks back into it on close.
+ * rounded-lg shape (clip-path morph), then shrinks back into it on close.
  */
 function ColorPickerContent({
   className,
+  style,
   align = "start",
   collisionPadding = 8,
+  triggerRadius = "var(--radius-lg)",
   ...props
-}: PopoverPrimitive.Popup.Props & Pick<PopoverPrimitive.Positioner.Props, "align" | "collisionPadding">) {
+}: PopoverPrimitive.Popup.Props &
+  Pick<PopoverPrimitive.Positioner.Props, "align" | "collisionPadding"> & {
+    /** Corner radius of the trigger shape the panel starts from (CSS length). Defaults to `var(--radius-lg)`, the radius of `ColorPickerTrigger`. */
+    triggerRadius?: string
+  }) {
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Positioner
@@ -200,14 +232,17 @@ function ColorPickerContent({
       >
         <PopoverPrimitive.Popup
           data-slot="color-picker-content"
+          style={(state) =>
+            ({ "--morph-r0": triggerRadius, ...(typeof style === "function" ? style(state) : style) }) as React.CSSProperties
+          }
           className={cn(
             "flex w-64 flex-col gap-3 rounded-2xl bg-popover p-3 text-sm text-popover-foreground shadow-surface outline-none",
             // Morph: rest shape keeps the shadow; start/end shape is the trigger chip.
             "[clip-path:inset(-24px_round_44px)] transition-[clip-path,opacity] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-250",
-            "data-[side=bottom]:data-starting-style:[clip-path:inset(0_calc(100%_-_var(--anchor-width))_calc(100%_-_var(--anchor-height))_0_round_calc(var(--anchor-height)/2))]",
-            "data-[side=bottom]:data-ending-style:[clip-path:inset(0_calc(100%_-_var(--anchor-width))_calc(100%_-_var(--anchor-height))_0_round_calc(var(--anchor-height)/2))]",
-            "data-[side=top]:data-starting-style:[clip-path:inset(calc(100%_-_var(--anchor-height))_calc(100%_-_var(--anchor-width))_0_0_round_calc(var(--anchor-height)/2))]",
-            "data-[side=top]:data-ending-style:[clip-path:inset(calc(100%_-_var(--anchor-height))_calc(100%_-_var(--anchor-width))_0_0_round_calc(var(--anchor-height)/2))]",
+            "data-[side=bottom]:data-starting-style:[clip-path:inset(0_calc(100%_-_var(--anchor-width))_calc(100%_-_var(--anchor-height))_0_round_var(--morph-r0))]",
+            "data-[side=bottom]:data-ending-style:[clip-path:inset(0_calc(100%_-_var(--anchor-width))_calc(100%_-_var(--anchor-height))_0_round_var(--morph-r0))]",
+            "data-[side=top]:data-starting-style:[clip-path:inset(calc(100%_-_var(--anchor-height))_calc(100%_-_var(--anchor-width))_0_0_round_var(--morph-r0))]",
+            "data-[side=top]:data-ending-style:[clip-path:inset(calc(100%_-_var(--anchor-height))_calc(100%_-_var(--anchor-width))_0_0_round_var(--morph-r0))]",
             "data-ending-style:opacity-0 data-starting-style:opacity-60",
             "motion-reduce:transition-opacity motion-reduce:data-starting-style:[clip-path:inset(-24px_round_44px)] motion-reduce:data-ending-style:[clip-path:inset(-24px_round_44px)] motion-reduce:data-starting-style:opacity-0",
             className
@@ -314,6 +349,11 @@ function ColorPickerArea({
 
 /* ─────────────────────────── channel sliders ─────────────────────────── */
 
+type ChannelSliderPassthrough = Omit<
+  SliderPrimitive.Root.Props,
+  "value" | "defaultValue" | "min" | "max" | "step" | "onValueChange" | "onValueCommitted" | "onChange" | "children" | "className"
+> & { className?: string }
+
 function ChannelSlider({
   className,
   value,
@@ -326,7 +366,8 @@ function ChannelSlider({
   onCommit,
   disabled,
   checker,
-}: {
+  ...props
+}: Omit<ChannelSliderPassthrough, "disabled"> & {
   className?: string
   value: number
   max: number
@@ -342,6 +383,7 @@ function ChannelSlider({
   return (
     <SliderPrimitive.Root
       data-slot="color-picker-slider"
+      {...props}
       value={value}
       min={0}
       max={max}
@@ -367,16 +409,22 @@ function ChannelSlider({
   )
 }
 
-function ColorPickerHue({ className, label = "Hue" }: { className?: string; label?: string }) {
+type ColorPickerChannelProps = ChannelSliderPassthrough & {
+  /** Accessible name of the thumb. */
+  label?: string
+}
+
+/** Hue slider (0–360). Other props go to the Base UI Slider root. */
+function ColorPickerHue({ label = "Hue", disabled: disabledProp, ...props }: ColorPickerChannelProps) {
   const { hsva, setHsva, commit, disabled } = useColorPicker()
   return (
     <ChannelSlider
-      className={className}
+      {...props}
       label={label}
       value={hsva.h}
       max={360}
       step={1}
-      disabled={disabled}
+      disabled={disabled || !!disabledProp}
       track="linear-gradient(to right, #f00 0%, #ff0 16.66%, #0f0 33.33%, #0ff 50%, #00f 66.66%, #f0f 83.33%, #f00 100%)"
       thumbColor={`hsl(${hsva.h} 100% 50%)`}
       onChange={(h) => setHsva({ ...hsva, h })}
@@ -385,18 +433,18 @@ function ColorPickerHue({ className, label = "Hue" }: { className?: string; labe
   )
 }
 
-/** Opacity slider. Only meaningful with `alpha` on the root. */
-function ColorPickerAlpha({ className, label = "Opacity" }: { className?: string; label?: string }) {
+/** Opacity slider. Only meaningful with `alpha` on the root. Other props go to the Base UI Slider root. */
+function ColorPickerAlpha({ label = "Opacity", disabled: disabledProp, ...props }: ColorPickerChannelProps) {
   const { hsva, setHsva, commit, disabled } = useColorPicker()
   const { r, g, b } = hsvaToRgba(hsva)
   return (
     <ChannelSlider
-      className={className}
+      {...props}
       label={label}
       value={Math.round(hsva.a * 100)}
       max={100}
       step={1}
-      disabled={disabled}
+      disabled={disabled || !!disabledProp}
       checker
       track={`linear-gradient(to right, rgb(${r} ${g} ${b} / 0), rgb(${r} ${g} ${b}))`}
       thumbColor={rgbaCss(hsvaToRgba(hsva))}
@@ -556,4 +604,4 @@ export {
   parseHex,
   formatHex,
 }
-export type { Hsva, Rgba, ColorPickerProps }
+export type { Hsva, Rgba, ColorPickerProps, ColorPickerChannelProps }

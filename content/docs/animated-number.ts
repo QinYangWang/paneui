@@ -19,7 +19,7 @@ export default {
     {
       id: "spring",
       title: "Spring",
-      description: "Tune the count with `stiffness` and `damping`; higher stiffness settles faster.",
+      description: "Tune the count with `stiffness`, `damping` and `mass`; higher stiffness settles faster, and damping below critical overshoots the target.",
     },
   ],
   notes: [
@@ -57,8 +57,9 @@ export default {
           default: "true",
           description: "Wait until half the number scrolls into view before counting.",
         },
-        { name: "stiffness", type: "number", default: "70", description: "Spring stiffness." },
-        { name: "damping", type: "number", default: "20", description: "Spring damping." },
+        { name: "stiffness", type: "number", default: "380", description: "Spring stiffness." },
+        { name: "damping", type: "number", default: "42", description: "Spring damping; the default is slightly overdamped so the count never overshoots." },
+        { name: "mass", type: "number", default: "0.7", description: "Spring mass." },
       ],
       dataAttributes: [{ name: "data-slot", description: `"animated-number"` }],
     },

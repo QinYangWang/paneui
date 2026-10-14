@@ -493,7 +493,6 @@ function EditableTable({
       renderHeader={renderHeader}
       headerAccessory={headerAccessory}
       gutter={gutter}
-      // eslint-disable-next-line shadcn/require-static-classes -- rowClassName is a per-row callback API; the string inside is static
       rowClassName={() => "has-[[data-insert-row]:hover]:shadow-[inset_0_-2px_0_var(--primary)]"}
       emptyState={
         tableProps.emptyState ??

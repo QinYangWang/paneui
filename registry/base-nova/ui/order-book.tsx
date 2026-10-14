@@ -345,6 +345,7 @@ function OrderBookSide({
 
 function OrderBookSpread({ className, ...props }: React.ComponentProps<"div">) {
   const { spread, mid, lastPrice, lastDirection, formatPrice } = useOrderBook()
+  const reduce = useReducedMotion()
   const color = lastDirection === "up" ? BID : lastDirection === "down" ? ASK : undefined
   return (
     <div
@@ -362,8 +363,8 @@ function OrderBookSpread({ className, ...props }: React.ComponentProps<"div">) {
           {lastDirection && (
             <motion.span
               key={lastDirection}
-              initial={{ opacity: 0, y: lastDirection === "up" ? 4 : -4 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: lastDirection === "up" ? 4 : -4 }}
+              animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2, ease: CHART_EASE }}
               className="text-[10px]"
@@ -421,6 +422,7 @@ function OrderBookBalance({ className, ...props }: React.ComponentProps<"div">) 
 
 function OrderBookDepthSummary({ className, ...props }: React.ComponentProps<"div">) {
   const { active, bids, asks, formatPrice, formatSize, baseSymbol, quoteSymbol } = useOrderBook()
+  const reduce = useReducedMotion()
   const list = active ? (active.side === "bid" ? bids : asks) : []
   const slice = active ? list.slice(0, active.index + 1) : []
   const size = slice.reduce((s, l) => s + l.size, 0)
@@ -437,9 +439,9 @@ function OrderBookDepthSummary({ className, ...props }: React.ComponentProps<"di
         {active ? (
           <motion.div
             key="summary"
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 4 }}
+            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -4 }}
             transition={{ duration: 0.16, ease: CHART_EASE }}
             className="flex flex-wrap justify-between gap-x-3"
           >

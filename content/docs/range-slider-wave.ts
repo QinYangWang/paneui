@@ -48,7 +48,12 @@ export default {
         { name: "step", type: "number", default: "1", description: "Value granularity." },
         { name: "bars", type: "number", default: "28", description: "Number of equalizer bars." },
         { name: "spread", type: "number", default: "2.4", description: "Crest width in bars; bigger spreads the bell wider." },
-        { name: "label", type: "string", description: "Heading row above the bars. Also the accessible name; set it, since there is no visible thumb." },
+        { name: "label", type: "string", description: "Heading row above the bars. Also the accessible name of the thumb." },
+        {
+          name: "aria-label / aria-labelledby",
+          type: "string",
+          description: "Name the thumb without a visible `label` (forwarded to the thumb's input). Without any of the three, a dev-only console warning fires.",
+        },
         { name: "formatValue", type: "(value: number) => string", default: "String", description: "Formats the readout in the heading row and the announced value." },
       ],
       dataAttributes: [{ name: "data-disabled", description: "Present when disabled." }],

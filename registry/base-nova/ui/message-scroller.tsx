@@ -9,13 +9,18 @@ import { cn } from "@/lib/utils"
 type MessageScrollerContextValue = {
   /** True while the viewport is pinned to the newest content. */
   atLiveEdge: boolean
+  /** True once content arrived below a reader who scrolled up. */
+  hasNew: boolean
   /** Scroll to the newest content and re-attach following. */
   scrollToLatest: (behavior?: ScrollBehavior) => void
 }
 
 const MessageScrollerContext = React.createContext<MessageScrollerContextValue | null>(null)
 
-/** Read the nearest `MessageScroller`'s live-edge state, e.g. for a custom pill. */
+/**
+ * Read the nearest `MessageScroller`'s live-edge state, e.g. for a custom pill.
+ * Works in its children and in its `footer` and `overlay` slots.
+ */
 function useMessageScroller() {
   const ctx = React.useContext(MessageScrollerContext)
   if (!ctx) throw new Error("useMessageScroller must be used inside <MessageScroller>")
@@ -40,6 +45,17 @@ type MessageScrollerProps = Omit<React.ComponentProps<"div">, "onScroll"> & {
   /** Classes for the content column inside the viewport. */
   contentClassName?: string
   onLiveEdgeChange?: (atLiveEdge: boolean) => void
+  /**
+   * Rendered below the viewport, outside the scrolling content (a composer or
+   * a jump bar). Can call `useMessageScroller()`.
+   */
+  footer?: React.ReactNode
+  /**
+   * Rendered over the viewport, outside the scrolling content, in the
+   * `relative` frame around the viewport: position it yourself (e.g. `absolute bottom-3 right-3`).
+   * Can call `useMessageScroller()`.
+   */
+  overlay?: React.ReactNode
 }
 
 /**
@@ -57,6 +73,8 @@ function MessageScroller({
   viewportClassName,
   contentClassName,
   onLiveEdgeChange,
+  footer,
+  overlay,
   className,
   children,
   ...props
@@ -199,7 +217,7 @@ function MessageScroller({
     }
   }, [glide, startAtEnd, threshold])
 
-  const ctx = React.useMemo(() => ({ atLiveEdge, scrollToLatest }), [atLiveEdge, scrollToLatest])
+  const ctx = React.useMemo(() => ({ atLiveEdge, hasNew, scrollToLatest }), [atLiveEdge, hasNew, scrollToLatest])
   const showPill = showJumpButton && !atLiveEdge
 
   return (
@@ -210,59 +228,67 @@ function MessageScroller({
         className={cn("relative flex min-h-0 flex-col", className)}
         {...props}
       >
-        <div
-          ref={viewportRef}
-          data-slot="message-scroller-viewport"
-          tabIndex={0}
-          onScroll={handleScroll}
-          onWheel={handleWheel}
-          onKeyDown={handleKeyDown}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onPointerDown={(e) => {
-            // Grabbing the scrollbar hands control to the reader.
-            if (e.target === e.currentTarget) stop()
-          }}
-          className={cn(
-            "min-h-0 flex-1 overflow-y-auto overscroll-contain scrollbar-thin outline-none [overflow-anchor:none] focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset",
-            viewportClassName
-          )}
-        >
+        {/* Frame: the viewport plus everything floating over it, so the pill and
+            overlay sit above the scroll area, never over the footer. */}
+        <div data-slot="message-scroller-frame" className="relative flex min-h-0 flex-1 flex-col">
           <div
-            ref={contentRef}
-            role="log"
-            aria-live="polite"
-            aria-relevant="additions"
-            data-slot="message-scroller-content"
-            className={cn("flex flex-col p-4", contentClassName)}
+            ref={viewportRef}
+            data-slot="message-scroller-viewport"
+            tabIndex={0}
+            onScroll={handleScroll}
+            onWheel={handleWheel}
+            onKeyDown={handleKeyDown}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onPointerDown={(e) => {
+              // Grabbing the scrollbar hands control to the reader.
+              if (e.target === e.currentTarget) stop()
+            }}
+            className={cn(
+              "min-h-0 flex-1 overflow-y-auto overscroll-contain scrollbar-thin outline-none [overflow-anchor:none] focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset",
+              viewportClassName
+            )}
           >
-            {children}
+            <div
+              ref={contentRef}
+              role="log"
+              aria-live="polite"
+              aria-relevant="additions"
+              data-slot="message-scroller-content"
+              className={cn("flex flex-col p-4", contentClassName)}
+            >
+              {children}
+            </div>
           </div>
+
+          {overlay}
+
+          <AnimatePresence>
+            {showPill && (
+              <motion.button
+                key="jump"
+                type="button"
+                data-slot="message-scroller-jump"
+                data-new={hasNew || undefined}
+                onClick={() => scrollToLatest()}
+                initial={reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.9, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.92, filter: "blur(4px)" }}
+                transition={reduce ? { duration: 0.12 } : { type: "spring", stiffness: 520, damping: 34 }}
+                className={cn(
+                  "absolute bottom-3 left-1/2 z-10 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-popover pr-3 pl-2.5 text-xs font-medium text-popover-foreground shadow-surface transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96",
+                  hasNew && "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90 hover:text-primary-foreground"
+                )}
+                style={{ x: "-50%" }}
+              >
+                <ArrowDownIcon className="size-3.5" />
+                {hasNew ? newLabel : jumpLabel}
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
 
-        <AnimatePresence>
-          {showPill && (
-            <motion.button
-              key="jump"
-              type="button"
-              data-slot="message-scroller-jump"
-              data-new={hasNew || undefined}
-              onClick={() => scrollToLatest()}
-              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.9, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.92, filter: "blur(4px)" }}
-              transition={reduce ? { duration: 0.12 } : { type: "spring", stiffness: 520, damping: 34 }}
-              className={cn(
-                "absolute bottom-3 left-1/2 z-10 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-popover pr-3 pl-2.5 text-xs font-medium text-popover-foreground shadow-surface transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96",
-                hasNew && "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90 hover:text-primary-foreground"
-              )}
-              style={{ x: "-50%" }}
-            >
-              <ArrowDownIcon className="size-3.5" />
-              {hasNew ? newLabel : jumpLabel}
-            </motion.button>
-          )}
-        </AnimatePresence>
+        {footer}
       </div>
     </MessageScrollerContext.Provider>
   )

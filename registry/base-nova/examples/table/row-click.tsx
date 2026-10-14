@@ -22,7 +22,7 @@ const columns: TableColumn<Member>[] = [
     width: 180,
     grow: true,
     sortable: true,
-    cell: (r) => (r.suspended ? <span className="text-muted-foreground">{r.name} · suspended</span> : r.name),
+    cell: (r) => (r.suspended ? `${r.name} · suspended` : r.name),
   },
   { key: "role", header: "Role", width: 110, sortable: true },
   { key: "lastActive", header: "Last active", width: 130, align: "right" },
@@ -42,6 +42,7 @@ export default function TableRowClick() {
         height={260}
         defaultSort={{ key: "name", direction: "asc" }}
         onRowClick={({ row }) => setOpen(row)}
+        rowClassName={({ row }) => (row.suspended ? "text-muted-foreground" : undefined)}
       />
       <p className="px-1 text-xs text-muted-foreground">
         {open ? (

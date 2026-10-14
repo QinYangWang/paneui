@@ -28,7 +28,7 @@ export default {
     {
       id: "row-click",
       title: "Row Click and Density",
-      description: "`onRowClick` receives the row context and `rowHeight` / `headerHeight` make it compact. `defaultSort` sets the starting sort.",
+      description: "`onRowClick` receives the row context, `rowClassName` styles rows from it (suspended members are muted) and `rowHeight` / `headerHeight` make it compact. `defaultSort` sets the starting sort.",
     },
     {
       id: "scroll-to-index",
@@ -85,7 +85,7 @@ export default {
         { name: "headerAccessory", type: "(ctx: TableHeaderContext<T>) => ReactNode", description: "Extra content inside a header cell, e.g. a column menu." },
         { name: "gutter", type: "{ width: number; header?: ReactNode; cell: (ctx: TableRowContext<T>) => ReactNode }", description: "Leading lane before the checkbox, e.g. row handles." },
         { name: "onRowClick", type: "(ctx: TableRowContext<T>, event: MouseEvent) => void", description: "Called when a row is clicked." },
-        { name: "rowClassName", type: "(ctx: TableRowContext<T>) => string | undefined", description: "Class per row." },
+        { name: "rowClassName", type: "(ctx: TableRowContext<T>) => string | undefined", description: "Class per row from its context, e.g. `text-muted-foreground` for archived rows. Tokens only." },
         { name: "animateLayout", type: "boolean", default: "true", description: "Slide rows and columns into new positions on insert, delete, sort and reorder. Off under reduced motion." },
         { name: "className", type: "string", description: "Class for the outer surface." },
         { name: "ref", type: "Ref<TableHandle>", description: "`scrollToIndex(index, { align, behavior })`, `scrollToTop(behavior)` and `element()`." },

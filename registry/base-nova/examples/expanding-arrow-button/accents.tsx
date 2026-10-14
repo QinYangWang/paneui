@@ -6,6 +6,7 @@ export default function ExpandingArrowButtonAccents() {
       <ExpandingArrowButton accentClassName="bg-foreground text-background">Read the changelog</ExpandingArrowButton>
       <ExpandingArrowButton accentClassName="bg-warning text-black">Review open issues</ExpandingArrowButton>
       <ExpandingArrowButton accentClassName="bg-destructive text-white">Go to danger zone</ExpandingArrowButton>
+      <ExpandingArrowButton labelClassName="tabular-nums">Resolve 12 comments</ExpandingArrowButton>
     </div>
   )
 }

@@ -29,11 +29,6 @@ export default {
       description: "`side` (`bottom` or `top`) sets which way the panel grows; `align` pins it to the trigger's `start`, `center` or `end` edge.",
     },
     {
-      id: "trigger-radius",
-      title: "Trigger Radius",
-      description: "`triggerRadius` is the corner radius the panel starts from. Set it to `var(--radius-lg)` to match the default trigger exactly.",
-    },
-    {
       id: "form",
       title: "Controlled Form",
       description: "Control it with `open` / `onOpenChange` to close the panel after a submit.",
@@ -84,8 +79,8 @@ export default {
         {
           name: "triggerRadius",
           type: "string",
-          default: `"calc(var(--anchor-height) / 2)"`,
-          description: "Corner radius (CSS length) of the trigger shape the panel starts from. Defaults to a full pill.",
+          default: `"var(--radius-lg)"`,
+          description: "Corner radius (CSS length) of the trigger shape the panel starts from. The default matches `MorphPopoverTrigger`'s `rounded-lg`; change it only if you reshape the trigger.",
         },
       ],
       dataAttributes: [

@@ -54,11 +54,16 @@ export default {
       title: "No Close Button",
       description: "Set `showClose={false}` on `DialogContent` when the footer action is the only way out.",
     },
+    {
+      id: "long-content",
+      title: "Long Content",
+      description: "The popup never grows past the viewport (1rem margin): taller content scrolls inside it, and the scroll doesn't chain to the page.",
+    },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The backdrop fades and the popup scales from 96% and rises 8px over 250ms; it scales back down as it closes.",
+      body: "The backdrop fades and the popup scales from 96% and rises 8px over 250ms; it scales back down as it closes. With reduced motion it only fades.",
     },
     {
       title: "Accessibility",
@@ -90,7 +95,7 @@ export default {
     },
     {
       name: "DialogContent",
-      description: "Portal, blurred backdrop and the centred popup (max-width 28rem).",
+      description: "Portal, blurred backdrop, a padded viewport and the centred popup (max-width 28rem, max-height the viewport minus 1rem each side, scrolls with `overscroll-contain` when taller).",
       extends: "Base UI Dialog.Popup",
       extendsHref: "https://base-ui.com/react/components/dialog#popup",
       props: [

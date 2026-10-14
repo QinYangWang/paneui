@@ -18,7 +18,6 @@ export default function CenterMorphModalBackdrop() {
         <PlayIcon data-icon="inline-start" />
         Watch the tour
       </CenterMorphModalTrigger>
-      {/* eslint-disable-next-line shadcn/no-restyle -- backdropClassName is the documented hook for a darker scrim */}
       <CenterMorphModalContent backdropClassName="bg-black/70">
         <CenterMorphModalHeader>
           <CenterMorphModalTitle>Product tour</CenterMorphModalTitle>

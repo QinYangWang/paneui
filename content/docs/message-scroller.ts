@@ -16,7 +16,7 @@ export default {
     {
       id: "custom-jump",
       title: "Custom Jump Control",
-      description: "Set `showJumpButton={false}` and build your own from `useMessageScroller()`; the hook only works inside the scroller, so this bar is a sticky child of the content.",
+      description: "Set `showJumpButton={false}` and build your own from `useMessageScroller()`. Pass it as `footer` to sit below the viewport, or as `overlay` to float over it; both are outside the scrolling content but can still use the hook.",
     },
     {
       id: "live-edge-change",
@@ -59,6 +59,8 @@ export default {
         { name: "viewportClassName", type: "string", description: "Classes for the scrolling viewport." },
         { name: "contentClassName", type: "string", description: "Classes for the content column inside the viewport (default `flex flex-col p-4`)." },
         { name: "onLiveEdgeChange", type: "(atLiveEdge: boolean) => void", description: "Called when the viewport attaches to or releases the live edge." },
+        { name: "footer", type: "ReactNode", description: "Rendered below the viewport, outside the scrolling content (a composer, a jump bar). Can call `useMessageScroller()`." },
+        { name: "overlay", type: "ReactNode", description: "Rendered over the viewport, outside the scrolling content, in a `relative` frame; position it yourself. Can call `useMessageScroller()`." },
       ],
       dataAttributes: [
         { name: "data-live-edge", description: "On the root while pinned to the newest content." },
@@ -67,9 +69,10 @@ export default {
     },
     {
       name: "useMessageScroller",
-      description: "Reads the nearest `MessageScroller`. Throws outside one.",
+      description: "Reads the nearest `MessageScroller` from its children, `footer` or `overlay`. Throws outside one.",
       props: [
         { name: "atLiveEdge", type: "boolean", description: "Returned. True while pinned to the newest content." },
+        { name: "hasNew", type: "boolean", description: "Returned. True once content arrived below a reader who scrolled up." },
         { name: "scrollToLatest", type: "(behavior?: ScrollBehavior) => void", description: "Returned. Scroll to the newest content and re-attach; `\"smooth\"` by default." },
       ],
     },

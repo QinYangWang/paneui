@@ -22,7 +22,8 @@ const FADE: Transition = { duration: 0.2, ease: [0.22, 1, 0.36, 1] }
 
 type SheetContextValue = {
   open: boolean
-  setOpen: (open: boolean) => void
+  /** Closes through Base UI, so `onOpenChange` gets real event details. */
+  close: () => void
   snapPoints: number[]
   snap: number
   setSnap: (index: number) => void
@@ -53,7 +54,8 @@ function useViewportHeight() {
 type BottomSheetProps = Omit<DialogPrimitive.Root.Props, "open" | "defaultOpen" | "onOpenChange" | "children"> & {
   open?: boolean
   defaultOpen?: boolean
-  onOpenChange?: (open: boolean) => void
+  /** Same signature as Drawer: a drag-down dismissal arrives with reason `"imperative-action"`. */
+  onOpenChange?: (open: boolean, details: DialogPrimitive.Root.ChangeEventDetails) => void
   /** Visible heights as fractions of the viewport, smallest first. */
   snapPoints?: number[]
   /** Index into `snapPoints` the sheet opens at. */
@@ -76,6 +78,7 @@ function BottomSheet({
   onSnapChange,
   dismissible = true,
   children,
+  actionsRef: actionsRefProp,
   ...props
 }: BottomSheetProps) {
   const [openState, setOpenState] = React.useState(defaultOpen)
@@ -84,13 +87,9 @@ function BottomSheet({
   const snap = snapProp ?? snapState
   const dragControls = useDragControls()
 
-  const setOpen = React.useCallback(
-    (next: boolean) => {
-      if (openProp === undefined) setOpenState(next)
-      onOpenChange?.(next)
-    },
-    [openProp, onOpenChange]
-  )
+  const ownActionsRef = React.useRef<DialogPrimitive.Root.Actions | null>(null)
+  const actionsRef = actionsRefProp ?? ownActionsRef
+  const close = React.useCallback(() => actionsRef.current?.close(), [actionsRef])
   const setSnap = React.useCallback(
     (index: number) => {
       if (snapProp === undefined) setSnapState(index)
@@ -109,20 +108,22 @@ function BottomSheet({
   const sorted = React.useMemo(() => [...snapPoints].sort((a, b) => a - b), [snapPoints])
 
   const value = React.useMemo(
-    () => ({ open, setOpen, snapPoints: sorted, snap, setSnap, defaultSnap, dismissible, dragControls }),
-    [open, setOpen, sorted, snap, setSnap, defaultSnap, dismissible, dragControls]
+    () => ({ open, close, snapPoints: sorted, snap, setSnap, defaultSnap, dismissible, dragControls }),
+    [open, close, sorted, snap, setSnap, defaultSnap, dismissible, dragControls]
   )
 
   return (
     <SheetContext.Provider value={value}>
       <DialogPrimitive.Root
         open={open}
+        actionsRef={actionsRef}
         onOpenChange={(next, details) => {
           if (!next && !dismissible && details.reason !== "close-press") {
             details.cancel()
             return
           }
-          setOpen(next)
+          if (openProp === undefined) setOpenState(next)
+          onOpenChange?.(next, details)
         }}
         {...props}
       >
@@ -161,7 +162,7 @@ function SheetSurface({
   showHandle,
   ...props
 }: Omit<DialogPrimitive.Popup.Props, "render"> & { showHandle: boolean }) {
-  const { setOpen, snapPoints, snap, setSnap, dismissible, dragControls } = useSheet()
+  const { close, snapPoints, snap, setSnap, dismissible, dragControls } = useSheet()
   const reduce = useReducedMotion()
   const vh = useViewportHeight()
 
@@ -187,7 +188,7 @@ function SheetSurface({
     const projected = current + info.velocity.y * 0.18
     const lowest = offsetFor(0)
     if (dismissible && (projected > lowest + Math.min(140, (height - lowest) * 0.45) || info.velocity.y > 1100)) {
-      setOpen(false)
+      close()
       return
     }
     let nearest = 0

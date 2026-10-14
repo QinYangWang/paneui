@@ -17,7 +17,7 @@ export default {
     {
       id: "single-color",
       title: "Single Color",
-      description: "`color` paints every stage in one hue that deepens stage by stage, instead of the palette.",
+      description: "`color` paints every stage in one hue that fades toward the background stage by stage, instead of the palette.",
     },
     {
       id: "horizontal",
@@ -63,7 +63,7 @@ export default {
           description: "Vertical: height of each stage row. Horizontal: plot height.",
         },
         { name: "gap", type: "number", default: "4", description: "Gap between stages in px." },
-        { name: "color", type: "string", description: "One colour for every stage, deepening by depth." },
+        { name: "color", type: "string", description: "One colour for every stage, fading toward the background by depth (readable in light and dark)." },
         {
           name: "minRatio",
           type: "number",

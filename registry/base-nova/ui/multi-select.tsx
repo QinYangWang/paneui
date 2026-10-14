@@ -76,7 +76,7 @@ function MultiSelectTrigger({
       ref={anchorRef}
       data-slot="multi-select-trigger"
       className={cn(
-        "relative flex min-h-9 w-full min-w-56 flex-wrap items-center gap-1 rounded-[1.125rem] bg-muted/60 py-1 pr-8 pl-1 shadow-well transition-[box-shadow,background-color] focus-within:bg-background focus-within:ring-3 focus-within:ring-ring",
+        "relative flex min-h-9 w-full min-w-56 flex-wrap items-center gap-1 rounded-lg bg-muted/60 py-1 pr-8 pl-1 shadow-well transition-[box-shadow,background-color] focus-within:bg-background focus-within:ring-3 focus-within:ring-ring",
         className
       )}
       {...props}
@@ -174,7 +174,7 @@ function MultiSelectItem({ className, children, ...props }: ComboboxPrimitive.It
     >
       <span
         aria-hidden
-        className="flex size-4 shrink-0 items-center justify-center rounded-[5px] bg-muted shadow-well transition-[background-color,box-shadow] duration-150 group-data-selected/item:bg-primary group-data-selected/item:shadow-primary"
+        className="flex size-4 shrink-0 items-center justify-center rounded-sm bg-muted shadow-well transition-[background-color,box-shadow] duration-150 group-data-selected/item:bg-primary group-data-selected/item:shadow-primary"
       >
         <CheckIcon
           size={12}

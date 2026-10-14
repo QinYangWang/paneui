@@ -43,7 +43,7 @@ const STATUS_BAR_STATUSES = {
   },
 } satisfies Record<string, StatusBarStatus>
 
-type StatusBarProps = Omit<React.ComponentProps<"section">, "children"> & {
+type StatusBarProps = Omit<React.ComponentProps<"section">, "children" | "title"> & {
   data: readonly StatusBarDatum[]
   statuses?: Record<string, StatusBarStatus>
   label?: string

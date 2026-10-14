@@ -40,7 +40,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "Rows slide into place when prices shift, depth bars spring to their new size and a row flashes green or red when its size grows or shrinks. Layout motion is off with reduced motion.",
+      body: "Rows slide into place when prices shift, depth bars spring to their new size and a row flashes green or red when its size grows or shrinks. With reduced motion, rows and the last-price arrow cross-fade instead of moving.",
     },
   ],
   api: [

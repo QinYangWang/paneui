@@ -27,9 +27,9 @@ export default {
       description: "`defaultHidden` starts some series switched off. Clicking a legend pill toggles it; the last visible series can't be hidden.",
     },
     {
-      id: "hidden-change",
-      title: "Reacting to Toggles",
-      description: "`onHiddenChange` reports the hidden ids whenever a legend pill is toggled.",
+      id: "controlled",
+      title: "Controlled",
+      description: "Pass `hidden` with `onHiddenChange` to own the hidden series, e.g. to reset them from outside with a Show all button.",
     },
   ],
   notes: [
@@ -65,7 +65,7 @@ export default {
         {
           name: "hidden",
           type: "string[]",
-          description: "Controlled hidden series. Currently clashes with the HTML `hidden` attribute in TypeScript; use `defaultHidden` + `onHiddenChange`.",
+          description: "Controlled hidden series ids. Replaces the HTML `hidden` attribute, which the chart does not forward.",
         },
         { name: "onHiddenChange", type: "(hidden: string[]) => void", description: "Called when a series is toggled." },
       ],

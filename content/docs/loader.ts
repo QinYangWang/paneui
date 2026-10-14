@@ -14,7 +14,7 @@ export default {
     {
       id: "colors",
       title: "Colors",
-      description: "Loaders draw in `currentColor`, so tint them by setting a token `text-*` colour on a wrapper element.",
+      description: "Loaders draw in `currentColor`: put a token `text-*` colour on the `Loader` itself, or let it inherit from its parent.",
     },
     {
       id: "in-context",

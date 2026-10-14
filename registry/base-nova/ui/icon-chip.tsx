@@ -29,7 +29,7 @@ const iconChipVariants = cva(
       },
       size: {
         sm: "size-6 rounded-lg [&_svg]:size-3.5",
-        default: "size-8 rounded-[10px] [&_svg]:size-4",
+        default: "size-8 rounded-lg [&_svg]:size-4",
         lg: "size-10 rounded-xl [&_svg]:size-5",
         xl: "size-12 rounded-2xl [&_svg]:size-6",
       },

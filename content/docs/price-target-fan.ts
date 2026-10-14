@@ -67,7 +67,7 @@ export default {
           description: "Usually high, average and low.",
         },
         { name: "current", type: "number", default: "last history price", description: "Last traded price; the fan starts here." },
-        { name: "horizon", type: "string", default: "12 months after the last close", description: "Target date, UTC `YYYY-MM-DD`." },
+        { name: "horizon", type: "string", default: "12 months after the last close", description: "Target date, UTC `YYYY-MM-DD`. The header caption follows it (`6-month horizon`, `18-month horizon`)." },
         { name: "label", type: "string", default: `"Analyst price targets"`, description: "Accessible name." },
         { name: "symbol", type: "string", description: "Ticker shown in the header." },
         { name: "formatPrice", type: "(v: number) => string", default: "2 decimals", description: "Formats prices." },

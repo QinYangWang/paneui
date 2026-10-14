@@ -6,7 +6,7 @@ export default {
   baseUi: { name: "Popover", href: POPOVER },
   usage: {
     imports: `import { ColorPicker, ColorPickerArea, ColorPickerContent, ColorPickerHue, ColorPickerTrigger } from "@/components/ui/color-picker"`,
-    code: `<ColorPicker defaultValue="#3b82f6">
+    code: `<ColorPicker>
   <ColorPickerTrigger />
   <ColorPickerContent>
     <ColorPickerArea />
@@ -55,7 +55,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "The panel opens over the trigger and unclips out of the chip's shape; the area thumb lifts into a loupe while dragging. With reduced motion the panel fades and the thumb barely scales.",
+      body: "The panel opens over the trigger and unclips out of the chip's `rounded-lg` shape; the area thumb lifts into a loupe while dragging. With reduced motion the panel fades and the thumb barely scales.",
     },
     {
       title: "Related",
@@ -70,7 +70,12 @@ export default {
       extendsHref: `${POPOVER}#root`,
       props: [
         { name: "value", type: "string", description: "Controlled hex colour (`#rrggbb` or `#rrggbbaa`)." },
-        { name: "defaultValue", type: "string", default: `"#3b82f6"`, description: "Initial colour when uncontrolled." },
+        {
+          name: "defaultValue",
+          type: "string",
+          default: "theme `--primary`",
+          description: "Initial colour when uncontrolled. Without it the picker starts on the live `--primary` token (read after mount; `#3976ce`, the light primary, during server render).",
+        },
         { name: "onValueChange", type: "(hex: string) => void", description: "Fires continuously while dragging or typing." },
         {
           name: "onValueCommit",
@@ -96,6 +101,12 @@ export default {
       props: [
         { name: "align", type: `"start" | "center" | "end"`, default: `"start"`, description: "Trigger edge the panel lines up with." },
         { name: "collisionPadding", type: "number | Padding", default: "8", description: "Space kept from the viewport edges." },
+        {
+          name: "triggerRadius",
+          type: "string",
+          default: `"var(--radius-lg)"`,
+          description: "Corner radius (CSS length) of the trigger shape the panel morphs from. The default matches `ColorPickerTrigger`; change it only if you reshape the trigger.",
+        },
       ],
     },
     {
@@ -107,18 +118,22 @@ export default {
     },
     {
       name: "ColorPickerHue",
-      description: "Hue slider (0–360). Accepts only these props.",
+      description: "Hue slider (0–360). Value, range and change handlers are owned by the picker; other props go to the slider root.",
+      extends: "Base UI Slider.Root",
+      extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
         { name: "label", type: "string", default: `"Hue"`, description: "Accessible name of the thumb." },
-        { name: "className", type: "string", description: "Merged onto the slider root." },
+        { name: "disabled", type: "boolean", default: "false", description: "Disable this slider; the root's `disabled` also applies." },
       ],
     },
     {
       name: "ColorPickerAlpha",
-      description: "Opacity slider over a checkerboard. Only meaningful with `alpha` on the root.",
+      description: "Opacity slider over a checkerboard. Only meaningful with `alpha` on the root. Other props go to the slider root, as for `ColorPickerHue`.",
+      extends: "Base UI Slider.Root",
+      extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
         { name: "label", type: "string", default: `"Opacity"`, description: "Accessible name of the thumb." },
-        { name: "className", type: "string", description: "Merged onto the slider root." },
+        { name: "disabled", type: "boolean", default: "false", description: "Disable this slider; the root's `disabled` also applies." },
       ],
     },
     {

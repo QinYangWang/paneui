@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils"
 
 /*
  * A popover whose panel grows out of the trigger's own shape. The panel is laid
- * over the trigger and starts clipped to the trigger's box (pill radius and
- * colour included), then unclips to its full size from the trigger's corner and
+ * over the trigger and starts clipped to the trigger's box (its rounded-lg radius
+ * and colour included), then unclips to its full size from the trigger's corner and
  * eases into the popover surface; closing folds it back into the button.
  * Base UI Popover handles focus, Escape, outside press and ARIA.
  */
@@ -34,14 +34,14 @@ function MorphPopoverContent({
   children,
   side = "bottom",
   align = "start",
-  triggerRadius = "calc(var(--anchor-height) / 2)",
+  triggerRadius = "var(--radius-lg)",
   ...props
 }: PopoverPrimitive.Popup.Props & {
   /** Which way the panel grows from the trigger. */
   side?: "top" | "bottom"
   /** Which trigger edge the panel stays pinned to. */
   align?: "start" | "center" | "end"
-  /** Corner radius of the trigger shape the panel starts from (CSS length). Defaults to a full pill. */
+  /** Corner radius of the trigger shape the panel starts from (CSS length). Defaults to `var(--radius-lg)`, the radius of `MorphPopoverTrigger`. */
   triggerRadius?: string
 }) {
   return (

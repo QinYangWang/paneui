@@ -46,7 +46,12 @@ export default {
         { name: "min", type: "number", default: "0", description: "Lowest value." },
         { name: "max", type: "number", default: "100", description: "Highest value." },
         { name: "step", type: "number", default: "1", description: "Value granularity." },
-        { name: "label", type: "string", description: "Text on the left of the pill. Also the accessible name; set it, since there is no visible thumb." },
+        { name: "label", type: "string", description: "Text on the left of the pill. Also the accessible name of the thumb." },
+        {
+          name: "aria-label / aria-labelledby",
+          type: "string",
+          description: "Name the thumb without a visible `label` (forwarded to the thumb's input). Without any of the three, a dev-only console warning fires.",
+        },
         { name: "formatValue", type: "(value: number) => string", default: 'v => v + "%"', description: "Formats the value on the right and the announced value." },
       ],
       dataAttributes: [{ name: "data-disabled", description: "Present when disabled." }],

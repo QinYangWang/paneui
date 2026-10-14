@@ -26,7 +26,7 @@ export default {
     {
       id: "error-retry",
       title: "Error and Retry",
-      description: "With `onRetry`, the error frame offers Try again and the finished image offers Generate again. `onDownload` adds a Download action.",
+      description: "With `onRetry`, the error frame offers Try again and the finished image offers Generate again. `errorText` and `retryLabel` replace the error copy. `onDownload` adds a Download action.",
     },
   ],
   notes: [
@@ -54,6 +54,8 @@ export default {
         { name: "aspectRatio", type: `CSSProperties["aspectRatio"]`, default: `"1 / 1"`, description: "Frame aspect ratio." },
         { name: "onRetry", type: "() => void", description: "Adds Try again (error) and Generate again (complete)." },
         { name: "onDownload", type: "() => void", description: "Adds a Download action once complete." },
+        { name: "errorText", type: "ReactNode", default: `"Couldn’t finish this image."`, description: "Message in the frame when `status` is `error`; pass your own copy or a translation." },
+        { name: "retryLabel", type: "ReactNode", default: `"Try again"`, description: "Label of the error frame's retry button (shown with `onRetry`)." },
         { name: "alt", type: "string", description: "Accessible description of the finished image." },
         { name: "mediaClassName", type: "string", description: "Classes for the layer wrapping `children`." },
       ],

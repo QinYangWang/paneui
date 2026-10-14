@@ -10,18 +10,16 @@ const FILES = ["Q3 report.pdf", "Brand guide.fig", "Offsite photos.zip", "Contra
 export default function PullToRefreshExternalRefreshing() {
   const [syncing, setSyncing] = React.useState(false)
 
-  const sync = () =>
-    new Promise<void>((resolve) => {
-      setSyncing(true)
-      setTimeout(() => {
-        setSyncing(false)
-        resolve()
-      }, 1600)
-    })
+  // Fire-and-forget: the pull and the button both just start the sync, and
+  // `refreshing` alone holds the spinner until it ends.
+  const sync = () => {
+    setSyncing(true)
+    setTimeout(() => setSyncing(false), 1600)
+  }
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
-      <Button variant="secondary" onClick={() => void sync()} disabled={syncing} className="self-start">
+      <Button variant="secondary" onClick={sync} disabled={syncing} className="self-start">
         {syncing ? "Syncing…" : "Sync now"}
       </Button>
       <PullToRefresh

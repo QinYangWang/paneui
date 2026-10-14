@@ -56,6 +56,12 @@ type FunnelChartProps = Omit<React.ComponentProps<"section">, "children"> & {
   onActiveChange?: (id: string | null) => void
 }
 
+/**
+ * Readable label colour on a stage fill: white on dark fills, near-black on light ones
+ * (the light theme's foreground). CSS relative colour; browsers without it keep `fill-white`.
+ */
+const onFill = (fill: string) => `oklch(from ${fill} clamp(0.2435, calc((0.65 - l) * 1000), 1) 0 0)`
+
 function placeStages(stages: readonly FunnelStage[], color?: string): PlacedStage[] {
   const seen = new Set<string>()
   const valid = stages.filter((s) => {
@@ -71,7 +77,8 @@ function placeStages(stages: readonly FunnelStage[], color?: string): PlacedStag
       index: i,
       color:
         s.color ??
-        (color ? `color-mix(in oklch, ${color} ${100 - i * (32 / Math.max(1, valid.length - 1))}%, black)` : chartColor(i)),
+        // Single hue fades toward the page background stage by stage, so it stays readable in both themes.
+        (color ? `color-mix(in oklch, ${color} ${100 - i * (40 / Math.max(1, valid.length - 1))}%, var(--background))` : chartColor(i)),
       ofFirst: first ? s.value / first : 0,
       ofPrevious: prev ? s.value / prev : 0,
       dropOff: prev ? 1 - s.value / prev : 0,
@@ -272,6 +279,7 @@ function FunnelChart({
                     textAnchor="middle"
                     dominantBaseline="central"
                     className="pointer-events-none fill-white text-[11px] font-semibold tabular-nums"
+                    style={{ fill: onFill(s.color) }}
                   >
                     {v}%
                   </motion.text>

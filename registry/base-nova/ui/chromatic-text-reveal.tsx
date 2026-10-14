@@ -34,7 +34,14 @@ type ChromaticTextRevealProps = Omit<React.HTMLAttributes<HTMLSpanElement>, "chi
   loop?: boolean
   /** Wait until the text scrolls into view. */
   startOnView?: boolean
+  /**
+   * What screen readers read instead of the animation. Defaults to the prefix
+   * followed by every word ("Built to feel fast or calm").
+   */
+  srLabel?: string
 }
+
+const listFormat = new Intl.ListFormat("en", { type: "disjunction" })
 
 /**
  * A fixed prefix followed by a cycling final word. Each word sweeps in left to right while
@@ -49,6 +56,7 @@ function ChromaticTextReveal({
   delay = 0,
   loop = true,
   startOnView = true,
+  srLabel,
   className,
   ...props
 }: ChromaticTextRevealProps) {
@@ -78,7 +86,11 @@ function ChromaticTextReveal({
       className={cn("inline-flex flex-wrap items-baseline", className)}
       {...props}
     >
-      <span className="sr-only">{[prefix, words[0]].filter(Boolean).join(" ")}</span>
+      {/* The animation is aria-hidden; screen readers get the whole phrase once,
+          not a live region that re-announces on every cycle. */}
+      <span className="sr-only">
+        {srLabel ?? [prefix, listFormat.format(Array.from(new Set(words)))].filter(Boolean).join(" ")}
+      </span>
       {prefix ? (
         <span aria-hidden className="whitespace-pre">
           {prefix}{" "}

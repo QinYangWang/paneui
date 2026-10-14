@@ -15,7 +15,7 @@ const series: BumpSeries[] = [
 export default function BumpChartPinned() {
   return (
     <div className="w-full max-w-2xl">
-      <BumpChart series={series} periods={periods} defaultActive="knicks" label="Power rankings by week" />
+      <BumpChart series={series} periods={periods} defaultActiveId="knicks" label="Power rankings by week" />
     </div>
   )
 }

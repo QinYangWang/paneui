@@ -30,6 +30,12 @@ type Candle = {
 const UP = "var(--success)"
 const DOWN = "var(--destructive)"
 
+/**
+ * Readable label colour on a chart fill: white on dark fills, near-black on light ones
+ * (the light theme's foreground). CSS relative colour; browsers without it keep `fill-white`.
+ */
+const onFill = (fill: string) => `oklch(from ${fill} clamp(0.2435, calc((0.65 - l) * 1000), 1) 0 0)`
+
 type CandlestickChartProps = Omit<React.ComponentProps<"div">, "children"> & {
   candles: readonly Candle[]
   label?: string
@@ -300,6 +306,7 @@ function CandlestickChart({
                   textAnchor="middle"
                   dominantBaseline="central"
                   className="fill-white text-[10px] font-semibold tabular-nums"
+                  style={{ fill: onFill(lastUp ? UP : DOWN) }}
                 >
                   {formatPrice(lastValue)}
                 </text>

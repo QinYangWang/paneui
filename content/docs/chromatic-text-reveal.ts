@@ -39,7 +39,7 @@ export default {
     },
     {
       title: "Accessibility",
-      body: "The animated text is `aria-hidden`; screen readers read the prefix and the first word once. The slot reserves the widest word, so the line never reflows.",
+      body: "The animated text is `aria-hidden`; screen readers read the whole phrase once, as the prefix followed by every word (\"Built to feel fast or calm\"), rather than a live region that re-announces each cycle. Pass `srLabel` to word it yourself, e.g. for non-English text. The slot reserves the widest word, so the line never reflows.",
     },
   ],
   api: [
@@ -64,6 +64,12 @@ export default {
           type: "boolean",
           default: "true",
           description: "Wait until 40% of the text scrolls into view.",
+        },
+        {
+          name: "srLabel",
+          type: "string",
+          default: "prefix + all words",
+          description: "Text screen readers read instead of the animation. Defaults to the prefix followed by every word joined with “or”.",
         },
       ],
     },

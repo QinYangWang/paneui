@@ -22,7 +22,7 @@ export default function MorphingModalViewChange() {
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <MorphingModal onViewChange={setView} onOpenChange={(open) => !open && setView("main")}>
+      <MorphingModal onViewChange={setView}>
         <MorphingModalTrigger render={<Button variant="secondary" />}>Settings</MorphingModalTrigger>
         <MorphingModalContent>
           <MorphingModalView name="main">

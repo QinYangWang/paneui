@@ -16,7 +16,7 @@ export default {
     {
       id: "external-refreshing",
       title: "External Refreshing",
-      description: "Pass `refreshing` to hold the spinner open for a refresh started elsewhere, like a Sync button.",
+      description: "Pass `refreshing` to hold the spinner open for a refresh started elsewhere, like a Sync button. Here `onRefresh` just starts the sync and returns nothing; `refreshing` keeps the content open until it ends.",
     },
     {
       id: "status-change",
@@ -50,9 +50,9 @@ export default {
           name: "onRefresh",
           type: "() => void | Promise<void>",
           required: true,
-          description: "Runs when the pull is released past `threshold`. Return a promise to keep the spinner until it settles.",
+          description: "Runs when the pull is released past `threshold`. Return a promise to keep the spinner until it settles, or return nothing and set `refreshing` instead.",
         },
-        { name: "refreshing", type: "boolean", description: "Hold the refreshing state for a refresh managed outside the gesture." },
+        { name: "refreshing", type: "boolean", description: "Hold the refreshing state for a refresh managed outside the gesture. The content stays open until both this and any `onRefresh` promise are done." },
         { name: "disabled", type: "boolean", default: "false", description: "Turn the pull gesture off." },
         { name: "threshold", type: "number", default: "64", description: "Resisted pull distance (px) that arms the refresh." },
         { name: "maxPull", type: "number", default: "120", description: "Ceiling of the resisted pull (px)." },

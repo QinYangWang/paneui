@@ -41,7 +41,7 @@ export default {
         { name: "max", type: "number", default: "10", description: "Maximum tilt in degrees at the card's edges." },
         { name: "glare", type: "boolean", default: "true", description: "Show the cursor-tracked glare." },
         { name: "scale", type: "number", default: "1.02", description: "Scale while hovered." },
-        { name: "perspective", type: "number", default: "900", description: "CSS perspective distance in px." },
+        { name: "perspective", type: "number", default: "900", description: "CSS perspective distance in px. Changes apply live." },
       ],
     },
     {

@@ -17,10 +17,12 @@ const THREAD = [
 ] as const
 
 function JumpBar() {
-  const { atLiveEdge, scrollToLatest } = useMessageScroller()
+  const { atLiveEdge, hasNew, scrollToLatest } = useMessageScroller()
   return (
-    <div className="sticky bottom-0 flex items-center justify-between gap-3 rounded-xl bg-popover py-2 pr-2 pl-3 shadow-surface">
-      <span className="text-xs text-muted-foreground">{atLiveEdge ? "Following the conversation" : "Reading earlier messages"}</span>
+    <div className="flex items-center justify-between gap-3 border-t border-border py-2 pr-2 pl-4">
+      <span className="text-xs text-muted-foreground">
+        {atLiveEdge ? "Following the conversation" : hasNew ? "New messages below" : "Reading earlier messages"}
+      </span>
       <Button size="xs" variant="secondary" disabled={atLiveEdge} onClick={() => scrollToLatest()}>
         <ArrowDownIcon data-icon="inline-start" />
         Latest
@@ -31,7 +33,12 @@ function JumpBar() {
 
 export default function MessageScrollerCustomJump() {
   return (
-    <MessageScroller showJumpButton={false} className="h-80 w-full max-w-md rounded-2xl bg-card shadow-surface" contentClassName="gap-3">
+    <MessageScroller
+      showJumpButton={false}
+      footer={<JumpBar />}
+      className="h-80 w-full max-w-md rounded-2xl bg-card shadow-surface"
+      contentClassName="gap-3"
+    >
       {THREAD.map((m) => (
         <Message key={m.id} from={m.from}>
           <MessageContent>
@@ -39,7 +46,6 @@ export default function MessageScrollerCustomJump() {
           </MessageContent>
         </Message>
       ))}
-      <JumpBar />
     </MessageScroller>
   )
 }

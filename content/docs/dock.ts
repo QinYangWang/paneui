@@ -54,7 +54,7 @@ export default {
       name: "Dock",
       extends: "div",
       props: [
-        { name: "size", type: "number", default: "44", description: "Resting item size in px." },
+        { name: "size", type: "number", default: "44", description: "Resting item size in px. The dock's corner radius follows it (item squircle radius + 8px inset), so any size stays concentric." },
         { name: "magnification", type: "number", default: "64", description: "Item size in px directly under the pointer." },
         { name: "distance", type: "number", default: "140", description: "Pointer distance in px over which neighbours grow." },
         { name: "tooltipSide", type: `"top" | "bottom"`, default: `"top"`, description: "Side tooltips open on." },

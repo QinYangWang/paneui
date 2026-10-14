@@ -50,33 +50,46 @@ function MorphingModal({
   onViewChange?: (view: string) => void
 }) {
   const [stack, setStack] = React.useState<string[]>([defaultView])
+  // Mirror of `stack` so navigation reads the current stack synchronously and
+  // calls onViewChange once, outside a state updater (updaters run twice in
+  // StrictMode).
+  const stackRef = React.useRef(stack)
   const [direction, setDirection] = React.useState<1 | -1>(1)
   const navigated = React.useRef(false)
   const view = stack[stack.length - 1]
 
+  const commit = React.useCallback((next: string[]) => {
+    stackRef.current = next
+    setStack(next)
+  }, [])
+
   const push = React.useCallback(
     (next: string) => {
+      const s = stackRef.current
+      if (s[s.length - 1] === next) return
       navigated.current = true
       setDirection(1)
-      setStack((s) => (s[s.length - 1] === next ? s : [...s, next]))
+      commit([...s, next])
       onViewChange?.(next)
     },
-    [onViewChange]
+    [commit, onViewChange]
   )
   const back = React.useCallback(() => {
+    const s = stackRef.current
+    if (s.length < 2) return
     navigated.current = true
     setDirection(-1)
-    setStack((s) => {
-      if (s.length < 2) return s
-      onViewChange?.(s[s.length - 2])
-      return s.slice(0, -1)
-    })
-  }, [onViewChange])
+    commit(s.slice(0, -1))
+    onViewChange?.(s[s.length - 2])
+  }, [commit, onViewChange])
   const reset = React.useCallback(() => {
+    const s = stackRef.current
     navigated.current = false
     setDirection(-1)
-    setStack([defaultView])
-  }, [defaultView])
+    if (s.length === 1 && s[0] === defaultView) return
+    commit([defaultView])
+    onViewChange?.(defaultView)
+  }, [commit, defaultView, onViewChange])
 
   const ctx = React.useMemo<MorphingModalContextValue>(
     () => ({ view, direction, canGoBack: stack.length > 1, push, back, reset, navigated }),

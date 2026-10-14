@@ -14,9 +14,9 @@ export default function ActionSwapBlurCustomSlots() {
       <ActionSwapBlurIcon value={liked ? "liked" : "like"}>
         {liked ? <HeartIcon className="text-destructive" /> : <ThumbsUpIcon />}
       </ActionSwapBlurIcon>
-      <span className="tabular-nums">
-        <ActionSwapBlurText value={String(count)}>{count} likes</ActionSwapBlurText>
-      </span>
+      <ActionSwapBlurText value={String(count)} className="tabular-nums">
+        {count} likes
+      </ActionSwapBlurText>
     </Button>
   )
 }

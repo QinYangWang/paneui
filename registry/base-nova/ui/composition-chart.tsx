@@ -32,7 +32,7 @@ type CompositionPeriod = {
   values: Record<string, number>
 }
 
-type CompositionChartProps = Omit<React.ComponentProps<"section">, "children"> & {
+type CompositionChartProps = Omit<React.ComponentProps<"section">, "children" | "hidden"> & {
   series: readonly CompositionSeries[]
   data: readonly CompositionPeriod[]
   mode?: "bar" | "area"
@@ -42,6 +42,7 @@ type CompositionChartProps = Omit<React.ComponentProps<"section">, "children"> &
   showLegend?: boolean
   /** Series hidden initially (uncontrolled). */
   defaultHidden?: readonly string[]
+  /** Hidden series ids (controlled). Pair with `onHiddenChange`. */
   hidden?: readonly string[]
   onHiddenChange?: (hidden: string[]) => void
 }
@@ -100,7 +101,8 @@ function CompositionChart({
   const transition = useChartTransition()
   const clipId = useChartId("composition-clip")
   const [innerHidden, setInnerHidden] = React.useState<string[]>(() => [...(defaultHidden ?? [])])
-  const hidden = hiddenProp ? [...hiddenProp] : innerHidden
+  const controlled = hiddenProp !== undefined
+  const hidden = controlled ? [...hiddenProp] : innerHidden
   const [hoverSeries, setHoverSeries] = React.useState<string | null>(null)
   const [hoverIndex, setHoverIndex] = React.useState<number | null>(null)
 
@@ -117,7 +119,7 @@ function CompositionChart({
     // Never hide the last visible series.
     if (!isHidden && visible.length <= 1) return
     const next = isHidden ? hidden.filter((h) => h !== id) : [...hidden, id]
-    if (!hiddenProp) setInnerHidden(next)
+    if (!controlled) setInnerHidden(next)
     onHiddenChange?.(next)
   }
 

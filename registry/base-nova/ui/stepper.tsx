@@ -13,6 +13,10 @@ type StepperProps = NumberFieldPrimitive.Root.Props & {
   /** Text after the number, e.g. "guests". Visual only. */
   unit?: React.ReactNode
   size?: "sm" | "default"
+  /** Accessible name of the − button. */
+  decrementLabel?: string
+  /** Accessible name of the + button. */
+  incrementLabel?: string
 }
 
 /**
@@ -29,6 +33,8 @@ function Stepper({
   locale,
   unit,
   size = "default",
+  decrementLabel = "Decrease",
+  incrementLabel = "Increase",
   "aria-label": ariaLabel,
   ...props
 }: StepperProps) {
@@ -71,7 +77,7 @@ function Stepper({
           sm ? "h-8" : "h-10"
         )}
       >
-        <NumberFieldPrimitive.Decrement data-slot="stepper-decrement" className={stepButton(sm)} aria-label="Decrease">
+        <NumberFieldPrimitive.Decrement data-slot="stepper-decrement" className={stepButton(sm)} aria-label={decrementLabel}>
           <MinusIcon />
         </NumberFieldPrimitive.Decrement>
 
@@ -83,7 +89,7 @@ function Stepper({
             onBlur={() => setEditing(false)}
             className={cn(
               "absolute inset-0 w-full bg-transparent text-center font-medium tabular-nums outline-none selection:bg-primary/25",
-              sm ? "text-sm" : "text-[15px]",
+              sm ? "text-sm" : "text-base",
               editing ? "text-foreground" : "text-transparent caret-transparent"
             )}
           />
@@ -92,7 +98,7 @@ function Stepper({
             aria-hidden
             className={cn(
               "pointer-events-none flex items-center justify-center overflow-hidden px-1 font-medium tabular-nums text-foreground transition-opacity duration-150",
-              sm ? "h-6 text-sm" : "h-7 text-[15px]",
+              sm ? "h-6 text-sm" : "h-7 text-base",
               editing && "opacity-0"
             )}
           >
@@ -125,7 +131,7 @@ function Stepper({
           </span>
         </div>
 
-        <NumberFieldPrimitive.Increment data-slot="stepper-increment" className={stepButton(sm)} aria-label="Increase">
+        <NumberFieldPrimitive.Increment data-slot="stepper-increment" className={stepButton(sm)} aria-label={incrementLabel}>
           <PlusIcon />
         </NumberFieldPrimitive.Increment>
       </NumberFieldPrimitive.Group>

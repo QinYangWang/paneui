@@ -15,7 +15,7 @@ type RangeSliderFluidProps = Omit<
   value?: number
   defaultValue?: number
   onValueChange?: (value: number, details: SliderPrimitive.Root.ChangeEventDetails) => void
-  /** Text on the left of the pill. Also the accessible name. */
+  /** Text on the left of the pill. Also the accessible name; without it, `aria-label` / `aria-labelledby` on the root name the thumb. */
   label?: string
   /** Formats the value on the right (and the announced value). */
   formatValue?: (value: number) => string
@@ -35,10 +35,18 @@ function RangeSliderFluid({
   max = 100,
   step = 1,
   label,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   formatValue = (v) => `${v}%`,
   ...props
 }: RangeSliderFluidProps) {
   const reduce = useReducedMotion() ?? false
+
+  const unnamed = !label && !ariaLabel && !ariaLabelledBy
+  React.useEffect(() => {
+    if (process.env.NODE_ENV !== "production" && unnamed)
+      console.warn("RangeSliderFluid: pass `label`, `aria-label` or `aria-labelledby` so the slider has an accessible name.")
+  }, [unnamed])
   const [inner, setInner] = React.useState(defaultValue ?? min)
   const current = value ?? inner
   const span = max - min || 1
@@ -126,7 +134,8 @@ function RangeSliderFluid({
           {/* Invisible handle: keeps a real range input for keyboard and AT. */}
           <SliderPrimitive.Thumb
             data-slot="range-slider-fluid-thumb"
-            aria-label={label}
+            aria-label={label ?? ariaLabel}
+            aria-labelledby={ariaLabelledBy}
             getAriaValueText={(_, v) => formatValue(v)}
             className="size-px opacity-0 outline-none"
           />

@@ -14,7 +14,7 @@ export default {
     {
       id: "controlled",
       title: "Controlled",
-      description: "Own the decision with `decision` and `onDecisionChange`; `null` means pending.",
+      description: "Own the decision with `decision` and `onDecisionChange`; `null` means pending. Setting it back to `null` (Ask again) reopens the arguments as `defaultArgsOpen` says.",
     },
     {
       id: "resolved",
@@ -24,7 +24,7 @@ export default {
     {
       id: "remembered",
       title: "Remembered",
-      description: "With `rememberKey`, Always allow is saved to `localStorage` and the card mounts approved next time; Revoke clears it.",
+      description: "With `rememberKey`, Always allow is saved to `localStorage` and the card mounts approved next time. Only Revoke clears it; Undo after Allow once or Deny leaves a saved Always allow alone.",
     },
     {
       id: "command",
@@ -58,8 +58,8 @@ export default {
         { name: "defaultDecision", type: `"once" | "always" | "deny" | null`, default: "null", description: "Initial decision when uncontrolled." },
         { name: "onDecisionChange", type: `(decision: "once" | "always" | "deny" | null) => void`, description: "Called on Allow, Deny, Undo and when a remembered permission is found." },
         { name: "rememberKey", type: "string", description: "`localStorage` key that remembers Always allow across sessions." },
-        { name: "revocable", type: "boolean", default: "true", description: "Show Undo / Revoke on the resolved card." },
-        { name: "defaultArgsOpen", type: "boolean", default: "true", description: "Start with arguments shown (only while pending)." },
+        { name: "revocable", type: "boolean", default: "true", description: "Show Undo (after Allow once / Deny) or Revoke (after Always allow) on the resolved card. Only Revoke clears `rememberKey`." },
+        { name: "defaultArgsOpen", type: "boolean", default: "true", description: "Show arguments while pending, on mount and whenever the decision returns to `null`." },
       ],
       dataAttributes: [{ name: "data-decision", description: "`pending`, `once`, `always` or `deny`." }],
     },

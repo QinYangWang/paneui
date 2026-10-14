@@ -39,7 +39,7 @@ export default {
     {
       id: "view-change",
       title: "Nested Settings",
-      description: "A menu of `MorphingModalLink` rows; `onViewChange` reports each view the user lands on.",
+      description: "A menu of `MorphingModalLink` rows; `onViewChange` reports each view the user lands on, including the return to the first view after closing.",
     },
     {
       id: "no-close-button",
@@ -69,7 +69,7 @@ export default {
       extendsHref: `${BASE}#root`,
       props: [
         { name: "defaultView", type: "string", default: `"main"`, description: "The view shown when the modal opens." },
-        { name: "onViewChange", type: "(view: string) => void", description: "Called with the new view after `push` or `back`." },
+        { name: "onViewChange", type: "(view: string) => void", description: "Called once with the new view whenever it changes: after `push`, `back` or `reset`, including the reset to `defaultView` when the modal finishes closing." },
       ],
     },
     {
@@ -126,7 +126,7 @@ export default {
         { name: "direction", type: "1 | -1", description: "Direction of the last navigation." },
         { name: "push", type: "(view: string) => void", description: "Go to a view (pushes it onto the back stack)." },
         { name: "back", type: "() => void", description: "Return to the previous view." },
-        { name: "reset", type: "() => void", description: "Jump back to the first view and clear the stack." },
+        { name: "reset", type: "() => void", description: "Jump back to the first view and clear the stack (calls `onViewChange` if the view changes)." },
       ],
     },
   ],

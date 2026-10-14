@@ -37,6 +37,11 @@ export default {
       description: "Give `TabsList` `w-full` and each `TabsTab` `flex-1` for an even segmented control.",
     },
     {
+      id: "vertical",
+      title: "Vertical",
+      description: "Set `orientation=\"vertical\"` on `Tabs` to put the list beside the panels; the indicator slides on y and `ArrowUp` / `ArrowDown` move focus.",
+    },
+    {
       id: "icon-only",
       title: "Icon Only",
       description: "Tabs size their icons to 16px; give icon-only tabs an `aria-label`.",
@@ -45,22 +50,28 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "A raised indicator slides between tabs (300ms ease-out) using the positions Base UI measures. The indicator is laid out for horizontal tab lists only.",
+      body: "A raised indicator slides between tabs (300ms ease-out) using the positions Base UI measures, on x for horizontal lists and on y for vertical ones. Under `prefers-reduced-motion: reduce` it jumps without sliding.",
     },
     {
       title: "Keyboard",
-      body: "`ArrowLeft` / `ArrowRight` move focus between tabs (looping), `Home` / `End` jump to the ends, and `Enter` or `Space` activates the focused tab.",
+      body: "`ArrowLeft` / `ArrowRight` (or `ArrowUp` / `ArrowDown` when vertical) move focus between tabs (looping), `Home` / `End` jump to the ends, and `Enter` or `Space` activates the focused tab.",
     },
   ],
   api: [
     {
       name: "Tabs",
-      description: "Column wrapper with a 12px gap between list and panels.",
+      description: "Column wrapper with a 12px gap between list and panels; a row when vertical.",
       extends: "Base UI Tabs.Root",
       extendsHref: "https://base-ui.com/react/components/tabs#root",
       props: [
         { name: "defaultValue", type: "any", default: "0", description: "Tab selected on first render." },
         { name: "value", type: "any", description: "Controlled selected tab." },
+        {
+          name: "orientation",
+          type: '"horizontal" | "vertical"',
+          default: '"horizontal"',
+          description: "Lays the list out as a row or a column; the indicator and arrow keys follow it.",
+        },
         {
           name: "onValueChange",
           type: "(value: any, eventDetails) => void",
@@ -94,6 +105,7 @@ export default {
       dataAttributes: [
         { name: "data-active", description: "Present on the selected tab (foreground text)." },
         { name: "data-disabled", description: "Present when disabled." },
+        { name: "data-orientation", description: "`horizontal` or `vertical`, from the root." },
       ],
     },
     {

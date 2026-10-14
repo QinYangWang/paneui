@@ -292,7 +292,10 @@ type ToolResultProps = Omit<React.ComponentProps<"div">, "title"> & {
   title: React.ReactNode
   status?: ToolResultStatus
   kind?: ToolResultKind
-  /** Final duration in seconds. While running, elapsed time ticks on its own. */
+  /**
+   * Final duration in seconds. While running, elapsed time ticks on its own;
+   * when the call never ran in this mount and this is unset, no duration shows.
+   */
   duration?: number
   /** Extra header text such as an exit code. */
   meta?: React.ReactNode
@@ -340,6 +343,8 @@ function ToolResult({
   const [isOpen, setOpen] = useControllableOpen(open, defaultOpen, onOpenChange)
   const elapsed = useElapsed(running)
   const shownDuration = duration ?? elapsed
+  // Nothing to show for a call that never ran here and has no `duration`.
+  const showDuration = duration != null || running || elapsed > 0
   const viewportRef = React.useRef<HTMLDivElement>(null)
   const prevStatus = React.useRef(status)
   const KindIcon = KIND_ICON[kind]
@@ -383,9 +388,11 @@ function ToolResult({
           <span className="hidden min-w-0 shrink truncate font-mono text-[11px] text-muted-foreground sm:inline">{tool}</span>
         </span>
         {meta ? <span className="shrink-0 font-mono text-[11px] text-muted-foreground">{meta}</span> : null}
-        <span className="shrink-0 font-mono text-[11px] text-muted-foreground tabular-nums">
-          {formatDuration(shownDuration)}
-        </span>
+        {showDuration ? (
+          <span className="shrink-0 font-mono text-[11px] text-muted-foreground tabular-nums">
+            {formatDuration(shownDuration)}
+          </span>
+        ) : null}
         <span
           role="status"
           className={cn("inline-flex shrink-0 items-center gap-1 text-xs font-medium", STATUS_TONE[status])}

@@ -22,6 +22,19 @@ type CitationSource = {
   meta?: React.ReactNode
   /** Replaces the favicon, e.g. a file icon for a non-web source. */
   icon?: React.ReactNode
+  /** Explicit favicon image URL (e.g. self-hosted); used instead of the `favicon` lookup. */
+  faviconSrc?: string
+}
+
+/**
+ * Where favicons come from: `true` (default) uses Google's favicon service,
+ * `false` makes no remote request and shows the domain monogram, and a function
+ * maps a domain to your own image URL (return `undefined` for the monogram).
+ */
+type CitationFaviconOption = boolean | ((domain: string) => string | undefined)
+
+function googleFavicon(domain: string) {
+  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`
 }
 
 function domainOf(source: Pick<CitationSource, "url" | "domain">) {
@@ -49,6 +62,7 @@ type CitationGroupContextValue = {
   setOpen: (open: boolean) => void
   highlighted: string | null
   focusSource: (id: string) => void
+  favicon?: CitationFaviconOption
 }
 
 const CitationGroupContext = React.createContext<CitationGroupContextValue | null>(null)
@@ -64,9 +78,12 @@ function CitationGroup({
   defaultOpen = false,
   open: openProp,
   onOpenChange,
+  favicon,
   children,
 }: {
   sources: CitationSource[]
+  /** Favicon source for every marker, row and stack inside the group. */
+  favicon?: CitationFaviconOption
   idPrefix?: string
   defaultOpen?: boolean
   open?: boolean
@@ -106,8 +123,8 @@ function CitationGroup({
   )
 
   const value = React.useMemo(
-    () => ({ sources, idPrefix: prefix, open, setOpen, highlighted, focusSource }),
-    [sources, prefix, open, setOpen, highlighted, focusSource]
+    () => ({ sources, idPrefix: prefix, open, setOpen, highlighted, focusSource, favicon }),
+    [sources, prefix, open, setOpen, highlighted, focusSource, favicon]
   )
   return <CitationGroupContext.Provider value={value}>{children}</CitationGroupContext.Provider>
 }
@@ -116,17 +133,27 @@ function CitationGroup({
 /* Favicon + stack                                                             */
 /* -------------------------------------------------------------------------- */
 
-/** Site favicon in a small raised chip; falls back to a monogram, or `icon`. */
+/**
+ * Site favicon in a small raised chip; falls back to a monogram, or `icon`.
+ * `favicon` (or the surrounding group's) decides whether a remote image loads.
+ */
 function CitationFavicon({
   source,
+  favicon: faviconProp,
   className,
 }: {
-  source: Pick<CitationSource, "url" | "domain" | "icon">
+  source: Pick<CitationSource, "url" | "domain" | "icon" | "faviconSrc">
+  favicon?: CitationFaviconOption
   className?: string
 }) {
+  const group = React.useContext(CitationGroupContext)
+  const favicon = faviconProp ?? group?.favicon ?? true
   const domain = domainOf(source)
-  const [failed, setFailed] = React.useState(false)
-  const showImg = !source.icon && domain && source.url && !failed
+  const src =
+    source.faviconSrc ??
+    (domain && source.url && favicon !== false ? (favicon === true ? googleFavicon(domain) : favicon(domain)) : undefined)
+  const [failedSrc, setFailedSrc] = React.useState<string | null>(null)
+  const showImg = !source.icon && src && failedSrc !== src
 
   return (
     <span
@@ -142,13 +169,13 @@ function CitationFavicon({
       ) : showImg ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`}
+          src={src}
           alt=""
           width={14}
           height={14}
           loading="lazy"
           referrerPolicy="no-referrer"
-          onError={() => setFailed(true)}
+          onError={() => setFailedSrc(src)}
           className="size-3.5 rounded-[3px] object-contain"
         />
       ) : domain ? (
@@ -164,16 +191,18 @@ function CitationFavicon({
 function CitationStack({
   sources,
   limit = 3,
+  favicon,
   className,
 }: {
   sources: CitationSource[]
   limit?: number
+  favicon?: CitationFaviconOption
   className?: string
 }) {
   return (
     <span data-slot="citation-stack" aria-hidden className={cn("flex items-center -space-x-1.5", className)}>
       {sources.slice(0, limit).map((s) => (
-        <CitationFavicon key={s.id} source={s} className="size-5 rounded-full ring-2 ring-card" />
+        <CitationFavicon key={s.id} source={s} favicon={favicon} className="size-5 rounded-full ring-2 ring-card" />
       ))}
     </span>
   )
@@ -192,13 +221,24 @@ type CitationProps = Omit<React.ComponentProps<"a">, "children"> & {
   index?: number
   /** Hover delay in ms before the preview opens. */
   delay?: number
+  /** Favicon source for the preview; defaults to the group's. */
+  favicon?: CitationFaviconOption
 }
 
 /**
  * Inline numbered citation marker. Hover or focus shows a preview card with the
  * source title, domain and excerpt; click jumps to the reference list.
  */
-function Citation({ sourceId, source: sourceProp, index: indexProp, delay = 250, className, onClick, ...props }: CitationProps) {
+function Citation({
+  sourceId,
+  source: sourceProp,
+  index: indexProp,
+  delay = 250,
+  favicon,
+  className,
+  onClick,
+  ...props
+}: CitationProps) {
   const group = React.useContext(CitationGroupContext)
   const found = sourceId && group ? group.sources.findIndex((s) => s.id === sourceId) : -1
   const source = sourceProp ?? (found >= 0 ? group!.sources[found] : undefined)
@@ -245,7 +285,7 @@ function Citation({ sourceId, source: sourceProp, index: indexProp, delay = 250,
             )}
           >
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <CitationFavicon source={source} />
+              <CitationFavicon source={source} favicon={favicon} />
               <span className="min-w-0 flex-1 truncate">{domain ?? "Source"}</span>
               {index != null ? <span className="font-mono tabular-nums">[{index}]</span> : null}
             </div>
@@ -283,9 +323,11 @@ function Citation({ sourceId, source: sourceProp, index: indexProp, delay = 250,
 /** Numbered reference rows; new sources slide in as they stream. */
 function CitationList({
   sources: sourcesProp,
+  favicon,
   className,
 }: {
   sources?: CitationSource[]
+  favicon?: CitationFaviconOption
   className?: string
 }) {
   const group = React.useContext(CitationGroupContext)
@@ -317,7 +359,7 @@ function CitationList({
                 className="group/citation-row flex scroll-m-4 items-center gap-2.5 rounded-xl px-2 py-1.5 transition-[background-color,box-shadow] duration-300 outline-none hover:bg-muted/70 focus-visible:ring-3 focus-visible:ring-ring data-highlighted:bg-primary/10 data-highlighted:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary)_30%,transparent)]"
               >
                 <span className="w-4 shrink-0 text-right font-mono text-[11px] text-muted-foreground tabular-nums">{i + 1}</span>
-                <CitationFavicon source={source} />
+                <CitationFavicon source={source} favicon={favicon} />
                 <span className="flex min-w-0 flex-1 flex-col sm:flex-row sm:items-baseline sm:gap-2">
                   <span className="truncate text-sm font-medium text-foreground/90 group-hover/citation-row:text-foreground">
                     {source.title}
@@ -347,9 +389,11 @@ function Citations({
   open: openProp,
   defaultOpen = false,
   onOpenChange,
+  favicon,
   className,
 }: {
   sources?: CitationSource[]
+  favicon?: CitationFaviconOption
   title?: React.ReactNode
   open?: boolean
   defaultOpen?: boolean
@@ -375,7 +419,7 @@ function Citations({
       className={cn("flex w-full flex-col text-sm", className)}
     >
       <CollapsiblePrimitive.Trigger className="group/citations -ml-1 inline-flex h-8 w-fit cursor-pointer items-center gap-2 rounded-lg pr-2.5 pl-1.5 text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring active:scale-96 data-panel-open:text-foreground">
-        <CitationStack sources={sources} />
+        <CitationStack sources={sources} favicon={favicon} />
         <span className="font-medium">{title}</span>
         <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] leading-none font-semibold tabular-nums shadow-chip">
           {sources.length}
@@ -383,7 +427,7 @@ function Citations({
         <ChevronDownIcon className="size-3.5 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/citations:rotate-180 motion-reduce:transition-none" />
       </CollapsiblePrimitive.Trigger>
       <CollapsiblePrimitive.Panel className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none">
-        <CitationList sources={sources} className="pt-1.5" />
+        <CitationList sources={sources} favicon={favicon} className="pt-1.5" />
       </CollapsiblePrimitive.Panel>
     </CollapsiblePrimitive.Root>
   )
@@ -409,4 +453,5 @@ export {
   CitationCount,
   type CitationSource,
   type CitationProps,
+  type CitationFaviconOption,
 }

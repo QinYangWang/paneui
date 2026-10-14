@@ -22,25 +22,30 @@ function DialogContent({
         data-slot="dialog-backdrop"
         className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
       />
-      <DialogPrimitive.Popup
-        data-slot="dialog-content"
-        className={cn(
-          "fixed top-1/2 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 flex-col gap-4 rounded-3xl bg-popover p-6 text-popover-foreground shadow-surface transition-[opacity,scale,translate] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none data-ending-style:scale-96 data-ending-style:opacity-0 data-starting-style:translate-y-[calc(-50%+8px)] data-starting-style:scale-96 data-starting-style:opacity-0",
-          className
-        )}
-        {...props}
+      <DialogPrimitive.Viewport
+        data-slot="dialog-viewport"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
       >
-        {children}
-        {showClose && (
-          <DialogPrimitive.Close
-            data-slot="dialog-close"
-            aria-label="Close"
-            className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
-          >
-            <XIcon size={16} />
-          </DialogPrimitive.Close>
-        )}
-      </DialogPrimitive.Popup>
+        <DialogPrimitive.Popup
+          data-slot="dialog-content"
+          className={cn(
+            "relative flex max-h-full w-full max-w-md flex-col gap-4 overflow-y-auto overscroll-contain rounded-3xl bg-popover p-6 text-popover-foreground shadow-surface transition-[opacity,scale,translate] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none data-ending-style:scale-96 data-ending-style:opacity-0 data-starting-style:translate-y-2 data-starting-style:scale-96 data-starting-style:opacity-0 motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:translate-y-0 motion-reduce:data-starting-style:scale-100",
+            className
+          )}
+          {...props}
+        >
+          {children}
+          {showClose && (
+            <DialogPrimitive.Close
+              data-slot="dialog-close"
+              aria-label="Close"
+              className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+            >
+              <XIcon size={16} />
+            </DialogPrimitive.Close>
+          )}
+        </DialogPrimitive.Popup>
+      </DialogPrimitive.Viewport>
     </DialogPrimitive.Portal>
   )
 }
@@ -69,7 +74,7 @@ function DialogDescription({ className, ...props }: DialogPrimitive.Description.
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("text-[0.95rem] leading-relaxed text-muted-foreground", className)}
+      className={cn("text-sm leading-relaxed text-pretty text-muted-foreground", className)}
       {...props}
     />
   )

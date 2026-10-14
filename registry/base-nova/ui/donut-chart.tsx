@@ -107,6 +107,7 @@ function DonutChart({
   )
   const total = placed.reduce((a, s) => a + s.value, 0)
   const active = placed.find((s) => s.id === activeId) ?? null
+  const hasDescriptions = placed.some((s) => s.description)
 
   const focusSegment = (index: number) => {
     const n = placed.length
@@ -167,7 +168,7 @@ function DonutChart({
                 strokeLinecap="round"
                 tabIndex={0}
                 role="img"
-                aria-label={`${s.label}: ${formatValue(s.value)}, ${formatPercent(s.share)}`}
+                aria-label={`${s.label}: ${formatValue(s.value)}, ${formatPercent(s.share)}${s.description ? `. ${s.description}` : ""}`}
                 className="cursor-pointer outline-none focus-visible:[filter:drop-shadow(0_0_3px_var(--ring))]"
                 style={{ stroke: s.color }}
                 initial={
@@ -214,9 +215,9 @@ function DonutChart({
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.span
               key={active?.id ?? "__total"}
-              initial={{ opacity: 0, y: 4, filter: "blur(2px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -4, filter: "blur(2px)" }}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 4, filter: "blur(2px)" }}
+              animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -4, filter: "blur(2px)" }}
               transition={{ duration: 0.18, ease: CHART_EASE }}
               className="flex max-w-[70%] items-center gap-1.5 truncate text-xs font-medium text-muted-foreground"
             >
@@ -269,7 +270,12 @@ function DonutChart({
                     />
                   )}
                   <ChartSwatch color={s.color} className="relative" />
-                  <span className="relative min-w-0 flex-1 truncate text-foreground">{s.label}</span>
+                  <span className="relative flex min-w-0 flex-1 flex-col">
+                    <span className="truncate text-foreground">{s.label}</span>
+                    {s.description && (
+                      <span className="truncate text-xs text-muted-foreground">{s.description}</span>
+                    )}
+                  </span>
                   <span className="relative text-muted-foreground tabular-nums">
                     {formatValue(s.value)}
                   </span>
@@ -285,8 +291,13 @@ function DonutChart({
 
       <ChartDataTable
         caption={`${label} data`}
-        columns={["Segment", "Value", "Share"]}
-        rows={placed.map((s) => [s.label, formatValue(s.value), formatPercent(s.share)])}
+        columns={["Segment", "Value", "Share", ...(hasDescriptions ? ["Description"] : [])]}
+        rows={placed.map((s) => [
+          s.label,
+          formatValue(s.value),
+          formatPercent(s.share),
+          ...(hasDescriptions ? [s.description ?? ""] : []),
+        ])}
       />
     </div>
   )

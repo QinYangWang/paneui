@@ -22,6 +22,7 @@ export default function ImageGenerationErrorRetry() {
         prompt="Paper-cut fox in an autumn forest"
         meta="1024 × 1024"
         alt="Paper-cut fox among orange trees"
+        errorText="The model timed out. Your prompt is saved."
         onRetry={retry}
         onDownload={() => setDownloads((d) => d + 1)}
       >

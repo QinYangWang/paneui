@@ -44,13 +44,18 @@ function TiltCard({
   const px = useMotionValue(50)
   const py = useMotionValue(50)
   const glareOpacity = useMotionValue(0)
+  // A motion value (not a literal in the template) so a changed prop applies.
+  const perspectiveValue = useMotionValue(perspective)
+  React.useEffect(() => {
+    perspectiveValue.set(perspective)
+  }, [perspective, perspectiveValue])
 
   const srx = useSpring(rx, TILT_SPRING)
   const sry = useSpring(ry, TILT_SPRING)
   const ss = useSpring(s, TILT_SPRING)
   const sGlare = useSpring(glareOpacity, { stiffness: 200, damping: 30 })
 
-  const transform = useMotionTemplate`perspective(${perspective}px) rotateX(${srx}deg) rotateY(${sry}deg) scale(${ss})`
+  const transform = useMotionTemplate`perspective(${perspectiveValue}px) rotateX(${srx}deg) rotateY(${sry}deg) scale(${ss})`
   const glareBg = useMotionTemplate`radial-gradient(circle at ${px}% ${py}%, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.12) 35%, transparent 65%)`
 
   const track = (e: React.PointerEvent<HTMLDivElement>) => {

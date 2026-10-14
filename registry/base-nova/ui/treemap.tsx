@@ -21,6 +21,13 @@ import {
   useChartTransition,
 } from "@/registry/base-nova/ui/chart-utils"
 
+
+/**
+ * Readable label colour on a chart fill: white on dark fills, near-black on light ones
+ * (the light theme's foreground). CSS relative colour; browsers without it keep `fill-white`.
+ */
+const onFill = (fill: string) => `oklch(from ${fill} clamp(0.2435, calc((0.65 - l) * 1000), 1) 0 0)`
+
 type TreemapNode = {
   id: string
   label: string
@@ -351,6 +358,7 @@ function Treemap({
                       animate={{ x: t.x + 10, y: t.y + 20, opacity: showLabel ? (dim ? 0.5 : 1) : 0 }}
                       transition={transition}
                       className="fill-white text-[12px] font-medium"
+                      style={{ fill: onFill(t.color) }}
                     >
                       {t.label}
                     </motion.text>
@@ -359,6 +367,7 @@ function Treemap({
                       animate={{ x: t.x + 10, y: t.y + 36, opacity: showValue ? (dim ? 0.4 : 0.85) : 0 }}
                       transition={transition}
                       className="fill-white text-[11px] tabular-nums"
+                      style={{ fill: onFill(t.color) }}
                     >
                       {formatPercent(t.share)}
                     </motion.text>

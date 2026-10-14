@@ -83,9 +83,10 @@ function Dock({
             mouseX.set(Infinity)
             onMouseLeave?.(e)
           }}
-          style={{ height: size + 16, ...style }}
+          // Concentric with the resting items: their 32% squircle radius + the 8px inset.
+          style={{ height: size + 16, borderRadius: Math.round(size * 0.32) + 8, ...style }}
           className={cn(
-            "inline-flex w-fit items-end gap-1.5 rounded-[1.375rem] bg-popover/85 px-2 pb-2 text-popover-foreground shadow-surface backdrop-blur-xl",
+            "inline-flex w-fit items-end gap-1.5 bg-popover/85 px-2 pb-2 text-popover-foreground shadow-surface backdrop-blur-xl",
             className
           )}
           {...props}

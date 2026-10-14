@@ -32,12 +32,64 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui
  * items and into nested sub-items; when a submenu folds, or the whole sidebar
  * folds into its icon rail, the pill morphs back onto the parent row. The
  * panel width springs between full and rail width, labels fade, and rail
- * items get tooltips. ⌘/Ctrl+B toggles.
+ * items get tooltips. ⌘/Ctrl+B toggles the most recently mounted or focused
+ * sidebar on the page (one shared listener, not one per instance).
  */
 
 const WIDTH_SPRING = { type: "spring", stiffness: 380, damping: 38, mass: 0.8 } as const
 const PILL_SPRING = { type: "spring", stiffness: 420, damping: 36, mass: 0.7 } as const
 const EASE = [0.22, 1, 0.36, 1] as const
+
+/* ───────────────────────── Shortcut registry ───────────────────────── */
+
+// One window listener for every SidebarProvider on the page. Instances stack in
+// mount order; focusing or pressing inside one moves it to the top, and only the
+// topmost instance with a matching key handles ⌘/Ctrl+key.
+type HotkeyEntry = { key: string; run: () => void }
+const hotkeyStack: HotkeyEntry[] = []
+
+function onHotkey(e: KeyboardEvent) {
+  if (!(e.metaKey || e.ctrlKey) || e.defaultPrevented) return
+  const key = e.key.toLowerCase()
+  for (let i = hotkeyStack.length - 1; i >= 0; i--) {
+    if (hotkeyStack[i].key !== key) continue
+    e.preventDefault()
+    hotkeyStack[i].run()
+    return
+  }
+}
+
+function useSidebarHotkey(key: string | null | undefined, run: () => void) {
+  const runRef = React.useRef(run)
+  React.useLayoutEffect(() => {
+    runRef.current = run
+  })
+  const entryRef = React.useRef<HotkeyEntry | null>(null)
+
+  React.useEffect(() => {
+    if (!key) return
+    const entry: HotkeyEntry = { key: key.toLowerCase(), run: () => runRef.current() }
+    entryRef.current = entry
+    hotkeyStack.push(entry)
+    if (hotkeyStack.length === 1) window.addEventListener("keydown", onHotkey)
+    return () => {
+      const at = hotkeyStack.indexOf(entry)
+      if (at >= 0) hotkeyStack.splice(at, 1)
+      if (hotkeyStack.length === 0) window.removeEventListener("keydown", onHotkey)
+      if (entryRef.current === entry) entryRef.current = null
+    }
+  }, [key])
+
+  // Make this instance the one the shortcut drives.
+  return React.useCallback(() => {
+    const entry = entryRef.current
+    const at = entry ? hotkeyStack.indexOf(entry) : -1
+    if (entry && at >= 0 && at !== hotkeyStack.length - 1) {
+      hotkeyStack.splice(at, 1)
+      hotkeyStack.push(entry)
+    }
+  }, [])
+}
 
 /* ───────────────────────── Provider ───────────────────────── */
 
@@ -62,7 +114,10 @@ type SidebarProviderProps = React.ComponentProps<"div"> & {
   open?: boolean
   defaultOpen?: boolean
   onOpenChange?: (open: boolean) => void
-  /** Key that toggles with ⌘/Ctrl. `null` disables the shortcut. */
+  /**
+   * Key that toggles with ⌘/Ctrl. With several sidebars on a page only the most
+   * recently mounted, focused or clicked one responds. `null` disables it.
+   */
   shortcut?: string | null
 }
 
@@ -73,6 +128,8 @@ function SidebarProvider({
   shortcut = "b",
   className,
   style,
+  onFocusCapture,
+  onPointerDownCapture,
   ...props
 }: SidebarProviderProps) {
   const [internal, setInternal] = React.useState(defaultOpen)
@@ -89,17 +146,7 @@ function SidebarProvider({
   )
   const toggle = React.useCallback(() => setOpen(!open), [open, setOpen])
 
-  React.useEffect(() => {
-    if (!shortcut) return
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === shortcut.toLowerCase()) {
-        e.preventDefault()
-        toggle()
-      }
-    }
-    window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
-  }, [shortcut, toggle])
+  const claimShortcut = useSidebarHotkey(shortcut, toggle)
 
   const ctx = React.useMemo<SidebarContextValue>(
     () => ({ open, setOpen, toggle, state: open ? "expanded" : "collapsed", reduce, pillId }),
@@ -113,6 +160,14 @@ function SidebarProvider({
         data-state={ctx.state}
         style={{ "--sidebar-width": "15rem", "--sidebar-width-icon": "3.75rem", ...style } as React.CSSProperties}
         className={cn("group/sidebar-wrapper flex w-full min-w-0", className)}
+        onFocusCapture={(e) => {
+          claimShortcut()
+          onFocusCapture?.(e)
+        }}
+        onPointerDownCapture={(e) => {
+          claimShortcut()
+          onPointerDownCapture?.(e)
+        }}
         {...props}
       />
     </SidebarContext.Provider>
