@@ -120,18 +120,72 @@ import AvatarDemo from "@/registry/base-nova/examples/avatar-demo"
 import AvatarGeneratorDemo from "@/registry/base-nova/examples/avatar-generator-demo"
 
 import { TemplatePreview } from "./template-preview"
+import SparklineDemo from "@/registry/base-nova/examples/sparkline-demo"
+import TrendChartDemo from "@/registry/base-nova/examples/trend-chart-demo"
+import BarListDemo from "@/registry/base-nova/examples/bar-list-demo"
+import StatCardDemo from "@/registry/base-nova/examples/stat-card-demo"
+import EmptyStateDemo from "@/registry/base-nova/examples/empty-state-demo"
+import PageHeaderDemo from "@/registry/base-nova/examples/page-header-demo"
+import UsageMeterDemo from "@/registry/base-nova/examples/usage-meter-demo"
+import SettingsSectionDemo from "@/registry/base-nova/examples/settings-section-demo"
+import FieldDemo from "@/registry/base-nova/examples/field-demo"
+import PasswordInputDemo from "@/registry/base-nova/examples/password-input-demo"
+import SegmentedControlDemo from "@/registry/base-nova/examples/segmented-control-demo"
+import AccentPickerDemo from "@/registry/base-nova/examples/accent-picker-demo"
+import PaginationDemo from "@/registry/base-nova/examples/pagination-demo"
+import WorkspaceSwitcherDemo from "@/registry/base-nova/examples/workspace-switcher-demo"
+import UserMenuDemo from "@/registry/base-nova/examples/user-menu-demo"
+import DataTableDemo from "@/registry/base-nova/examples/data-table-demo"
+import ResizableDemo from "@/registry/base-nova/examples/resizable-demo"
+import TabStripDemo from "@/registry/base-nova/examples/tab-strip-demo"
+import IconRailDemo from "@/registry/base-nova/examples/icon-rail-demo"
+import TerminalViewDemo from "@/registry/base-nova/examples/terminal-view-demo"
+import ThreadListItemDemo from "@/registry/base-nova/examples/thread-list-item-demo"
+import WorkSummaryDemo from "@/registry/base-nova/examples/work-summary-demo"
+import EditedFilesCardDemo from "@/registry/base-nova/examples/edited-files-card-demo"
+import ModelPickerDemo from "@/registry/base-nova/examples/model-picker-demo"
+import AgentComposerDemo from "@/registry/base-nova/examples/agent-composer-demo"
+import ToggleGroupDemo from "@/registry/base-nova/examples/toggle-group-demo"
+import ToolbarDemo from "@/registry/base-nova/examples/toolbar-demo"
+import MenuListDemo from "@/registry/base-nova/examples/menu-list-demo"
+import SwatchPickerDemo from "@/registry/base-nova/examples/swatch-picker-demo"
+import NotionEditorDemo from "@/registry/base-nova/examples/notion-editor-demo"
+import EmailEditorDemo from "@/registry/base-nova/examples/email-editor-demo"
 
 
-const SaasDashboardPreview = () => <TemplatePreview name="saas-dashboard" />
+const SaasPreview = () => <TemplatePreview name="saas" />
 const AgentWorkspacePreview = () => <TemplatePreview name="agent-workspace" />
-const LandingPreview = () => <TemplatePreview name="landing" />
 const DocsTemplatePreview = () => <TemplatePreview name="docs" />
 const BlogPreview = () => <TemplatePreview name="blog" />
 
 export const demos: Record<string, React.ComponentType> = {
-  "saas-dashboard": SaasDashboardPreview,
+  "sparkline": SparklineDemo,
+  "trend-chart": TrendChartDemo,
+  "bar-list": BarListDemo,
+  "stat-card": StatCardDemo,
+  "empty-state": EmptyStateDemo,
+  "page-header": PageHeaderDemo,
+  "usage-meter": UsageMeterDemo,
+  "settings-section": SettingsSectionDemo,
+  "field": FieldDemo,
+  "password-input": PasswordInputDemo,
+  "segmented-control": SegmentedControlDemo,
+  "accent-picker": AccentPickerDemo,
+  "pagination": PaginationDemo,
+  "workspace-switcher": WorkspaceSwitcherDemo,
+  "user-menu": UserMenuDemo,
+  "data-table": DataTableDemo,
+  "resizable": ResizableDemo,
+  "tab-strip": TabStripDemo,
+  "icon-rail": IconRailDemo,
+  "terminal-view": TerminalViewDemo,
+  "thread-list-item": ThreadListItemDemo,
+  "work-summary": WorkSummaryDemo,
+  "edited-files-card": EditedFilesCardDemo,
+  "model-picker": ModelPickerDemo,
+  "agent-composer": AgentComposerDemo,
+  saas: SaasPreview,
   "agent-workspace": AgentWorkspacePreview,
-  landing: LandingPreview,
   docs: DocsTemplatePreview,
   blog: BlogPreview,
   theme: ThemeDemo,
@@ -252,4 +306,10 @@ export const demos: Record<string, React.ComponentType> = {
   "not-found-terminal": NotFoundTerminalDemo,
   avatar: AvatarDemo,
   "avatar-generator": AvatarGeneratorDemo,
+  "toggle-group": ToggleGroupDemo,
+  "toolbar": ToolbarDemo,
+  "menu-list": MenuListDemo,
+  "swatch-picker": SwatchPickerDemo,
+  "notion-editor": NotionEditorDemo,
+  "email-editor": EmailEditorDemo,
 }

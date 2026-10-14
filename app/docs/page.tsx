@@ -22,7 +22,7 @@ const CATEGORY_BLURBS: Record<string, string> = {
   Agents: "Messages, streaming replies, tool calls, diffs and plans for agent UIs.",
   Charts: "Charts and activity calendars on the five-hue chart palette.",
   Blocks: "Composed pieces: prompt bar, command palette, uploads, forms and more.",
-  Templates: "Full pages to start from: dashboard, agent workspace, landing, docs, blog.",
+  Templates: "Full apps to start from, installable in one command: SaaS (landing, dashboard, settings, auth), agent workspace (ACP), docs, blog.",
 }
 
 const PRINCIPLES = [

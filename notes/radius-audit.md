@@ -112,3 +112,16 @@ morphing-tabs, or anything under `app/`. They are being edited now, so re-run af
    first) and update this file. Expect the 21 fixed findings to be gone and the 7 open ones above to remain
    until their owners pick them up.
 3. Add actions to the config when a new component only shows nested radii on interaction.
+
+## Round 6 (2026-10-15)
+
+Audit of the round-6 components and templates, light and dark: 0 findings after these fixes.
+
+- Fixed in the library: `edited-files-card` (root `frame-xl frame-inset-2`, header buttons `rounded-inner`),
+  `notion-editor` (root `frame-xl frame-inset-2`, so the document toolbar's `rounded-inner` buttons sit at 6px),
+  `email-editor` header (h-12 px-3: its controls sit 9.5px in and keep their token).
+- Fixed in examples: wrappers around rail/list rows (`thread-list-item`, `user-menu`, `workspace-switcher`,
+  `icon-rail`, `tab-strip`) are `rounded-2xl` around `p-2`/`p-1.5` (18 − 8 = 10 = the rows' `rounded-lg`);
+  `toolbar/document-bar` is a `frame-xl frame-inset-2` bar.
+- Allow-listed: `segmented-control` 9–15px in (a control), the `swatch-picker` "none" strike line, and an
+  email section nested in a Show-if block (third frame level, editor chrome only).

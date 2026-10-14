@@ -49,5 +49,23 @@ export default {
       slot: "project-folder",
       reason: "Decorative folder illustration: tab/flap shapes and paper sheets are drawn shapes, not nested surfaces.",
     },
+    {
+      slot: "segmented-control",
+      minInset: 9,
+      level: "should",
+      reason: "A segmented control is a self-contained control: 9–15px in, it keeps its own token like buttons do.",
+    },
+    {
+      slot: "swatch-picker-item",
+      selector: "span.absolute.h-px",
+      reason: "The diagonal strike of the \"none\" swatch is a 1px line drawn across a round dot, not a nested surface.",
+    },
+    {
+      page: "email-editor",
+      selector: "node-section > div.frame-xl.frame-p-1",
+      reason:
+        "An email section dropped inside a Show-if block is a third frame level (show-if → content → section); " +
+        "editor chrome only, latent (dashed outline on hover), and the exported HTML has no radius there.",
+    },
   ],
 }

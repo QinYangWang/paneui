@@ -7,9 +7,20 @@
  * a small one-time shift.
  */
 export const galleryHeights: Record<string, number> = {
-  "saas-dashboard": 556,
+  "resizable": 320,
+  "tab-strip": 256,
+  "icon-rail": 420,
+  "terminal-view": 360,
+  "thread-list-item": 400,
+  "work-summary": 300,
+  "edited-files-card": 320,
+  "model-picker": 256,
+  "agent-composer": 420,
+  "notion-editor": 600,
+  "email-editor": 760,
+  "menu-list": 420,
+  "saas": 556,
   "agent-workspace": 556,
-  "landing": 556,
   "docs": 556,
   "blog": 556,
   "accordion": 264,

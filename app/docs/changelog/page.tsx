@@ -8,6 +8,45 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-templates",
+    date: "October 15, 2026",
+    title: "SaaS and agent workspace templates, Notion-style and email editors",
+    tag: "Templates",
+    changes: [
+      <>
+        One-command templates: <Code>shadcn init -d -n my-app &lt;url&gt;</Code> creates a Next.js app with the theme, every
+        component and the routes in place, with no <Code>components.json</Code> setup (published items reference their
+        dependencies by URL). See <TextLink href="/docs/cli#templates">CLI &amp; registry</TextLink>.
+      </>,
+      <>
+        <Code>saas</Code> replaces the Landing Page and SaaS Dashboard templates: marketing home, pricing and changelog,
+        login, sign-up, password reset and email code with mock auth, a dashboard with overview, analytics and a customers
+        table, settings (profile, account, billing, team, notifications, appearance) and a 404.
+      </>,
+      <>
+        <Code>agent-workspace</Code> is rebuilt after Synara as an Agent Client Protocol client: threads, tabs, split chat
+        panes, terminal, file explorer, review diffs and an offline demo agent, plus a WebSocket bridge
+        (<Code>server/acp-bridge.mjs</Code>) that runs Claude Code, Codex, Gemini CLI or any ACP agent.
+      </>,
+      <>
+        <TextLink href="/docs/notion-editor">Notion editor</TextLink> (Tiptap: slash menu, bubble menu, drag handles,
+        callouts, toggles, tables, MDX import and export) and <TextLink href="/docs/email-editor">email editor</TextLink>{" "}
+        (maily.to-style blocks and variables, rendered to email HTML with React Email).
+      </>,
+      <>
+        28 new components the templates are built from: sparkline, trend-chart, bar-list, stat-card, empty-state,
+        page-header, usage-meter, settings-section, field, password-input, segmented-control, accent-picker, pagination,
+        workspace-switcher, user-menu, data-table, resizable, tab-strip, icon-rail, terminal-view, thread-list-item,
+        work-summary, edited-files-card, model-picker, toggle-group, toolbar, menu-list and swatch-picker; the
+        agent-composer block; a plain variant for signup-form and new options on file-diff and message-scroller.
+      </>,
+      <>
+        The theme item now sets <Code>--color-primary</Code>, <Code>--color-ring</Code> and the dark primary and chart
+        colours explicitly, so a fresh shadcn app no longer keeps its default dark primary.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-14-native-desktop",
     date: "October 14, 2026",
     title: "Native desktop style, neutral primary and accent presets",
