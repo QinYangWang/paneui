@@ -30,6 +30,8 @@ type SignupFormProps = Omit<React.ComponentProps<"form">, "onSubmit" | "children
   termsLabel?: React.ReactNode
   /** Rendered under the submit button, e.g. a sign-in link. */
   footer?: React.ReactNode
+  /** `card` (default) is a raised card; `plain` drops the surface for pages that frame the form themselves. */
+  variant?: "card" | "plain"
 }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
@@ -76,6 +78,7 @@ function SignupForm({
   successLabel = "Account created",
   termsLabel = "I agree to the Terms and Privacy Policy",
   footer,
+  variant = "card",
   className,
   ...props
 }: SignupFormProps) {
@@ -161,8 +164,10 @@ function SignupForm({
       data-slot="signup-form"
       noValidate
       onSubmit={submit}
+      data-variant={variant}
       className={cn(
-        "flex w-full max-w-sm flex-col gap-5 rounded-2xl bg-card p-5 shadow-raised",
+        "flex w-full flex-col gap-5",
+        variant === "card" && "max-w-sm rounded-2xl bg-card p-5 shadow-raised",
         className
       )}
       {...props}

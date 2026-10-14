@@ -1,0 +1,151 @@
+"use client"
+
+import * as React from "react"
+
+import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { Button } from "@/registry/base-nova/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/base-nova/ui/select"
+
+/*
+ * Page controls for a list or table.
+ *
+ *   <Pagination page={page} pageCount={12} onPageChange={setPage} />
+ *
+ * Shows prev / next and a window of page numbers with ellipses
+ * (1 … 4 5 6 … 12). Compose the parts yourself for a different layout:
+ * PaginationSummary ("21–30 of 248") and PaginationPageSize (rows per page).
+ */
+
+/** Page numbers to show: first, last, `siblings` around the current page, "…" for gaps. */
+function getPageRange(page: number, pageCount: number, siblings = 1): (number | "ellipsis")[] {
+  const total = siblings * 2 + 5
+  if (pageCount <= total) return Array.from({ length: pageCount }, (_, i) => i + 1)
+  const left = Math.max(page - siblings, 2)
+  const right = Math.min(page + siblings, pageCount - 1)
+  const showLeft = left > 3
+  const showRight = right < pageCount - 2
+  if (!showLeft) {
+    const count = 3 + siblings * 2
+    return [...Array.from({ length: count }, (_, i) => i + 1), "ellipsis", pageCount]
+  }
+  if (!showRight) {
+    const count = 3 + siblings * 2
+    return [1, "ellipsis", ...Array.from({ length: count }, (_, i) => pageCount - count + i + 1)]
+  }
+  return [1, "ellipsis", ...Array.from({ length: right - left + 1 }, (_, i) => left + i), "ellipsis", pageCount]
+}
+
+type PaginationProps = Omit<React.ComponentProps<"nav">, "children"> & {
+  /** 1-based current page. */
+  page: number
+  pageCount: number
+  onPageChange: (page: number) => void
+  /** Pages either side of the current one. Default 1. */
+  siblings?: number
+  /** Hide the number buttons (prev / next and "Page 2 of 9" only), e.g. on phones. */
+  compact?: boolean
+}
+
+function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = false, className, ...props }: PaginationProps) {
+  const count = Math.max(1, pageCount)
+  const current = Math.min(Math.max(1, page), count)
+  const go = (p: number) => onPageChange(Math.min(Math.max(1, p), count))
+  return (
+    <nav data-slot="pagination" aria-label="Pagination" className={cn("flex items-center gap-1", className)} {...props}>
+      <Button variant="ghost" size="icon-sm" aria-label="Previous page" disabled={current <= 1} onClick={() => go(current - 1)}>
+        <ChevronLeftIcon />
+      </Button>
+      {compact ? (
+        <span className="px-2 text-ui text-muted-foreground tabular-nums" aria-live="polite">
+          Page {current} of {count}
+        </span>
+      ) : (
+        <ul className="flex items-center gap-0.5">
+          {getPageRange(current, count, siblings).map((p, i) =>
+            p === "ellipsis" ? (
+              <li key={`e${i}`} aria-hidden className="grid size-7 place-items-center text-muted-foreground [&_svg]:size-3.5">
+                <MoreHorizontalIcon />
+              </li>
+            ) : (
+              <li key={p}>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  aria-label={`Page ${p}`}
+                  aria-current={p === current ? "page" : undefined}
+                  onClick={() => go(p)}
+                  // The current page reads as selected: the row-active fill from the sidebar.
+                  className="w-auto min-w-7 px-1.5 text-ui tabular-nums aria-[current=page]:bg-foreground/6"
+                >
+                  {p}
+                </Button>
+              </li>
+            )
+          )}
+        </ul>
+      )}
+      <Button variant="ghost" size="icon-sm" aria-label="Next page" disabled={current >= count} onClick={() => go(current + 1)}>
+        <ChevronRightIcon />
+      </Button>
+    </nav>
+  )
+}
+
+/** "21–30 of 248 results". */
+function PaginationSummary({
+  page,
+  pageSize,
+  total,
+  noun = "results",
+  className,
+  ...props
+}: Omit<React.ComponentProps<"p">, "children"> & { page: number; pageSize: number; total: number; noun?: string }) {
+  const from = total === 0 ? 0 : (page - 1) * pageSize + 1
+  const to = Math.min(total, page * pageSize)
+  const nf = new Intl.NumberFormat("en-US")
+  return (
+    <p data-slot="pagination-summary" className={cn("text-ui text-muted-foreground tabular-nums", className)} {...props}>
+      {total === 0 ? `No ${noun}` : `${nf.format(from)}–${nf.format(to)} of ${nf.format(total)} ${noun}`}
+    </p>
+  )
+}
+
+/** Rows-per-page select. */
+function PaginationPageSize({
+  value,
+  onValueChange,
+  options = [10, 20, 50],
+  label = "Rows per page",
+  className,
+}: {
+  value: number
+  onValueChange: (size: number) => void
+  options?: number[]
+  label?: string
+  className?: string
+}) {
+  const id = React.useId()
+  return (
+    <div data-slot="pagination-page-size" className={cn("flex items-center gap-2 text-ui text-muted-foreground", className)}>
+      <span id={id} className="whitespace-nowrap">
+        {label}
+      </span>
+      <Select value={value} onValueChange={(v) => v != null && onValueChange(Number(v))}>
+        <SelectTrigger size="sm" aria-labelledby={id} className="w-18 min-w-0">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((o) => (
+            <SelectItem key={o} value={o}>
+              {o}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  )
+}
+
+export { Pagination, PaginationSummary, PaginationPageSize, getPageRange }
+export type { PaginationProps }
