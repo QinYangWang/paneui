@@ -33,6 +33,8 @@ export const REGISTRY_URL = `${SITE_URL}/r/{name}.json`
 
 export function getItems(): DocItem[] {
   return registry.items
+    // Accent presets (theme-blue, …) are installable but documented on the Installation page, not as their own pages.
+    .filter((item) => !(item as { meta?: { hidden?: boolean } }).meta?.hidden)
     .map((item) => {
       const i = item as typeof item & { dependencies?: string[]; registryDependencies?: string[]; files?: { path: string }[] }
       return {

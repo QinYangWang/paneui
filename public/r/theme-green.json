@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-green",
+  "title": "Theme: Green accent",
+  "description": "Green accent preset: swaps the neutral primary, primary-foreground and ring for green in light and dark. Install after @qinyang/theme.",
+  "registryDependencies": [
+    "@qinyang/theme"
+  ],
+  "cssVars": {
+    "light": {
+      "primary": "oklch(0.56 0.13 155)",
+      "primary-foreground": "oklch(1 0 0)",
+      "ring": "oklch(0.56 0.13 155 / 45%)"
+    },
+    "dark": {
+      "primary": "oklch(0.64 0.14 155)",
+      "primary-foreground": "oklch(0.2 0.03 155)",
+      "ring": "oklch(0.64 0.14 155 / 50%)"
+    }
+  },
+  "meta": {
+    "category": "Foundations",
+    "hidden": true
+  },
+  "type": "registry:theme"
+}

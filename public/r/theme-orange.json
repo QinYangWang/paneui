@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-orange",
+  "title": "Theme: Orange accent",
+  "description": "Orange accent preset: swaps the neutral primary, primary-foreground and ring for orange in light and dark. Install after @qinyang/theme.",
+  "registryDependencies": [
+    "@qinyang/theme"
+  ],
+  "cssVars": {
+    "light": {
+      "primary": "oklch(0.62 0.17 45)",
+      "primary-foreground": "oklch(1 0 0)",
+      "ring": "oklch(0.62 0.17 45 / 45%)"
+    },
+    "dark": {
+      "primary": "oklch(0.7 0.16 52)",
+      "primary-foreground": "oklch(0.2 0.04 52)",
+      "ring": "oklch(0.7 0.16 52 / 50%)"
+    }
+  },
+  "meta": {
+    "category": "Foundations",
+    "hidden": true
+  },
+  "type": "registry:theme"
+}

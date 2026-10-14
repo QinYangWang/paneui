@@ -74,7 +74,7 @@ export default {
           name: "defaultValue",
           type: "string",
           default: "theme `--primary`",
-          description: "Initial colour when uncontrolled. Without it the picker starts on the live `--primary` token (read after mount; `#3976ce`, the light primary, during server render).",
+          description: "Initial colour when uncontrolled. Without it the picker starts on the live `--primary` token (read after mount; `#171717`, the default light primary, during server render).",
         },
         { name: "onValueChange", type: "(hex: string) => void", description: "Fires continuously while dragging or typing." },
         {

@@ -56,8 +56,8 @@ function formatHex({ r, g, b, a }: Rgba): string {
 
 const hsvaToHex = (c: Hsva) => formatHex(hsvaToRgba(c))
 
-/** The light theme's `--primary` (oklch(0.57 0.15 258)) in hex: the server-render default before the live token is read. */
-const PRIMARY_FALLBACK = "#3976ce"
+/** The default light theme's `--primary` (oklch(0.205 0 0), neutral black) in hex: the server-render default before the live token is read. */
+const PRIMARY_FALLBACK = "#171717"
 
 /** Resolve the live `--primary` token to RGBA (any CSS colour syntax) by painting one canvas pixel. */
 function readPrimary(): Rgba | null {

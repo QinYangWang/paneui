@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-rose",
+  "title": "Theme: Rose accent",
+  "description": "Rose accent preset: swaps the neutral primary, primary-foreground and ring for rose in light and dark. Install after @qinyang/theme.",
+  "registryDependencies": [
+    "@qinyang/theme"
+  ],
+  "cssVars": {
+    "light": {
+      "primary": "oklch(0.58 0.19 12)",
+      "primary-foreground": "oklch(1 0 0)",
+      "ring": "oklch(0.58 0.19 12 / 45%)"
+    },
+    "dark": {
+      "primary": "oklch(0.65 0.18 12)",
+      "primary-foreground": "oklch(1 0 0)",
+      "ring": "oklch(0.65 0.18 12 / 50%)"
+    }
+  },
+  "meta": {
+    "category": "Foundations",
+    "hidden": true
+  },
+  "type": "registry:theme"
+}

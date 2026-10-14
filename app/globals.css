@@ -27,6 +27,11 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -52,8 +57,8 @@
   --card-foreground: oklch(0.2435 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2435 0 0);
-  --primary: oklch(0.57 0.15 258);
-  --primary-foreground: oklch(1 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(1 0 0);
   --secondary-foreground: oklch(0.2435 0 0);
   --muted: oklch(0.9731 0 0);
@@ -65,7 +70,13 @@
   --warning: oklch(0.74 0.14 72);
   --border: oklch(0 0 0 / 8%);
   --input: oklch(0 0 0 / 10%);
-  --ring: oklch(0.57 0.15 258 / 45%);
+  --ring: oklch(0.556 0 0 / 40%);
+  /* Charts keep their own hues so data stays readable whatever the accent. */
+  --chart-1: oklch(0.57 0.15 258);
+  --chart-2: oklch(0.6 0.14 152);
+  --chart-3: oklch(0.74 0.14 72);
+  --chart-4: oklch(0.58 0.2 27);
+  --chart-5: oklch(0.55 0.16 295);
   --code: oklch(0.9731 0 0);
   --scrollbar: oklch(0 0 0 / 16%);
   --scrollbar-hover: oklch(0 0 0 / 28%);
@@ -91,8 +102,8 @@
   --card-foreground: oklch(0.9491 0 0);
   --popover: oklch(0.2134 0 0);
   --popover-foreground: oklch(0.9491 0 0);
-  --primary: oklch(0.6 0.145 256);
-  --primary-foreground: oklch(1 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.2134 0 0);
   --secondary-foreground: oklch(0.9491 0 0);
   --muted: oklch(0.2134 0 0);
@@ -104,7 +115,12 @@
   --warning: oklch(0.8 0.14 75);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.6 0.145 256 / 50%);
+  --ring: oklch(0.708 0 0 / 40%);
+  --chart-1: oklch(0.6 0.145 256);
+  --chart-2: oklch(0.7 0.15 152);
+  --chart-3: oklch(0.8 0.14 75);
+  --chart-4: oklch(0.64 0.19 25);
+  --chart-5: oklch(0.65 0.15 295);
   --code: oklch(0.1496 0 0);
   --scrollbar: oklch(1 0 0 / 14%);
   --scrollbar-hover: oklch(1 0 0 / 24%);
@@ -116,6 +132,61 @@
   --skeuo-well: inset 0 0 0 1px oklch(1 0 0 / 8%);
   --skeuo-surface: 0 0 0 1px oklch(1 0 0 / 8%), 0 8px 24px -12px oklch(0 0 0 / 50%);
   --skeuo-chip: 0 0 0 1px oklch(1 0 0 / 7%);
+}
+
+/*
+ * Accent presets: `data-accent` on <html> swaps the primary (default is neutral black / white).
+ * The docs header persists the pick in localStorage["accent"]; registry items theme-<name> ship the same values.
+ */
+html[data-accent="blue"] {
+  --primary: oklch(0.57 0.15 258);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.57 0.15 258 / 45%);
+}
+html[data-accent="blue"].dark {
+  --primary: oklch(0.6 0.145 256);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.6 0.145 256 / 50%);
+}
+html[data-accent="green"] {
+  --primary: oklch(0.56 0.13 155);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.56 0.13 155 / 45%);
+}
+html[data-accent="green"].dark {
+  --primary: oklch(0.64 0.14 155);
+  --primary-foreground: oklch(0.2 0.03 155);
+  --ring: oklch(0.64 0.14 155 / 50%);
+}
+html[data-accent="orange"] {
+  --primary: oklch(0.62 0.17 45);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.62 0.17 45 / 45%);
+}
+html[data-accent="orange"].dark {
+  --primary: oklch(0.7 0.16 52);
+  --primary-foreground: oklch(0.2 0.04 52);
+  --ring: oklch(0.7 0.16 52 / 50%);
+}
+html[data-accent="rose"] {
+  --primary: oklch(0.58 0.19 12);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.58 0.19 12 / 45%);
+}
+html[data-accent="rose"].dark {
+  --primary: oklch(0.65 0.18 12);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.65 0.18 12 / 50%);
+}
+html[data-accent="violet"] {
+  --primary: oklch(0.55 0.18 290);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.55 0.18 290 / 45%);
+}
+html[data-accent="violet"].dark {
+  --primary: oklch(0.64 0.16 290);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.64 0.16 290 / 50%);
 }
 
 @layer base {

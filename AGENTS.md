@@ -32,13 +32,23 @@ component only if the design really needs a new treatment.
 
 - **Colors**: `background`, `foreground`, `card`, `popover`, `primary`, `secondary`,
   `muted`, `muted-foreground`, `accent`, `destructive`, `success`, `warning`,
-  `border`, `input`, `ring`, `code` (each `*-foreground` where defined). Washes use
+  `border`, `input`, `ring`, `code`, `chart-1`…`chart-5` (each `*-foreground` where defined). Washes use
   opacity modifiers (`bg-success/12`, `ring-primary/20`). Never palette colors
   (`bg-zinc-100`), hex, or `[#…]`. `white`/`black` only for text on colored fills
   (`text-white` on destructive) and scrims (`bg-black/40`).
 - **Visual direction (flat, since 2026-10-14)**: after jakub.kr / oklch.fyi. Chroma-0
-  neutral grays, calm primary blue `oklch(0.57 0.15 258)`. No gradient sheens, inset
-  highlights, text-shadows or glows on controls. Research: `notes/flat-tokens-research.md`.
+  neutral grays. No gradient sheens, inset highlights, text-shadows or glows on controls.
+  Research: `notes/flat-tokens-research.md`.
+- **Primary is neutral (since 2026-10-14)**: near-black `oklch(0.205 0 0)` with white
+  text in light, near-white `oklch(0.922 0 0)` with near-black text in dark; `ring` is a
+  translucent gray. So never pair `bg-primary` with `text-white`: use
+  `text-primary-foreground`, and check primary fills/text in dark mode (primary is white
+  there). Accent presets (blue, green, orange, rose, violet) override `primary`,
+  `primary-foreground` and `ring` via `html[data-accent="…"]` blocks in `globals.css`
+  (light and `.dark`), switched by the docs header and persisted in
+  `localStorage["accent"]`; each ships as a `theme-<name>` registry item. Charts never use
+  `primary`: they use `chart-1`…`chart-5` (blue, green, amber, red, violet), which stay
+  coloured under every accent.
 - **Elevation**: `shadow-raised` (resting control/card: 1px hairline ring + faint drop)
   → `hover:shadow-raised-hover` (ring a step darker) and/or `hover:bg-accent`;
   `shadow-surface` (popovers, menus, floating panels); `shadow-well` (inset hairline for

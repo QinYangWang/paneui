@@ -71,6 +71,11 @@ export default function Installation() {
       <Step n={2} title="Install the theme">
         <p className="text-muted-foreground">The depth tokens (raised, pressed, well…) and the icon set every component relies on.</p>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme @${REGISTRY_NAME}/icons`} />
+        <p className="text-muted-foreground">
+          The primary colour is neutral: near-black in light mode, near-white in dark. For a coloured accent, add one
+          preset after the theme: blue, green, orange, rose or violet.
+        </p>
+        <InstallCommand args={`add @${REGISTRY_NAME}/theme-blue`} />
       </Step>
 
       <Step n={3} title="Add components">
