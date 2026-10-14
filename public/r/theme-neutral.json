@@ -4,7 +4,7 @@
   "title": "Theme: Neutral accent",
   "description": "Neutral accent preset: sets the --accent-50…950 ramp to Tailwind neutral; a black primary with white text in light mode and a near-white primary with dark text in dark mode, ring neutral-400 / neutral-500. Install after @qinyang/theme.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "cssVars": {
     "light": {

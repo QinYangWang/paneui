@@ -1,23 +1,46 @@
-# registry-template
+# qinyang/ui
 
-You can use the `shadcn` CLI to run your own component registry. Running your own
-component registry allows you to distribute your custom components, hooks, pages, and
-other files to any React project.
+A shadcn registry (`@qinyang/*`, Base UI primitives, Tailwind CSS 4, motion) and its
+Next.js docs site. Docs and gallery: https://qinyangwang.github.io/ui
 
-> [!IMPORTANT]  
-> This template uses Tailwind v4. For Tailwind v3, see [registry-template-v3](https://github.com/shadcn-ui/registry-template-v3).
+## Templates in one command
 
-## Getting Started
+Each template is a complete app. `init` creates a Next.js project, writes the theme, installs
+every component the template uses and puts its routes in `app/`:
 
-This is a template for creating a custom registry using Next.js.
+```bash
+pnpm dlx shadcn@latest init -d -n my-saas  https://qinyangwang.github.io/ui/r/saas.json
+pnpm dlx shadcn@latest init -d -n my-agent https://qinyangwang.github.io/ui/r/agent-workspace.json
+pnpm dlx shadcn@latest init -d -n my-docs  https://qinyangwang.github.io/ui/r/docs.json
+pnpm dlx shadcn@latest init -d -n my-blog  https://qinyangwang.github.io/ui/r/blog.json
+```
 
-- The template uses a `registry.json` file to define components and their files.
-- The `shadcn build` command is used to build the registry.
-- The registry items are served as static files under `public/r/[name].json`.
-- The template also includes a route handler for serving registry items.
-- Every registry item are compatible with the `shadcn` CLI.
-- We have also added v0 integration using the `Open in v0` api.
+| Template | Routes |
+| --- | --- |
+| `saas` | `/` marketing home, `/pricing`, `/changelog`, `/login`, `/signup`, `/forgot-password`, `/verify`, `/dashboard` (overview, analytics, customers, settings), 404 |
+| `agent-workspace` | `/` the Agent Client Protocol workspace (offline demo agent); `node server/acp-bridge.mjs --root .` connects real agents |
+| `docs` | `/docs` |
+| `blog` | `/blog`, `/blog/post` |
 
-## Documentation
+Into an existing Next.js app (Tailwind 4), use `add` with the same URL:
+`pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/saas.json`. The editor blocks install
+the same way: `.../r/notion-editor.json` (MDX import/export) and `.../r/email-editor.json`.
 
-Visit the [shadcn documentation](https://ui.shadcn.com/docs/registry) to view the full documentation.
+No `components.json` setup is needed: published items list their dependencies as absolute URLs
+(`scripts/registry-postbuild.mjs`). To use short names (`shadcn add @qinyang/button`), add
+`"registries": { "@qinyang": "https://qinyangwang.github.io/ui/r/{name}.json" }` to components.json.
+
+If you scaffold the app yourself with `create-next-app` and pnpm 10+, approve its native builds
+(`pnpm approve-builds`, or `allowBuilds` in `pnpm-workspace.yaml`) or pnpm stops with
+`ERR_PNPM_IGNORED_BUILDS`; `shadcn init -d` already does this.
+
+## Development
+
+```bash
+pnpm install
+pnpm lint && pnpm exec tsc --noEmit -p .
+pnpm docs:gen          # regenerate docs indexes after adding content/docs or examples
+pnpm registry:build    # shadcn build + post-process into public/r
+```
+
+Design rules for contributors and coding agents: [AGENTS.md](AGENTS.md).

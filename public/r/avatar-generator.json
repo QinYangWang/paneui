@@ -9,13 +9,13 @@
     "@dicebear/notionists@^9.4.3"
   ],
   "registryDependencies": [
-    "@qinyang/theme",
-    "@qinyang/avatar",
-    "@qinyang/button",
-    "@qinyang/input",
-    "@qinyang/select",
-    "@qinyang/tabs",
-    "@qinyang/icons"
+    "https://qinyangwang.github.io/ui/r/theme.json",
+    "https://qinyangwang.github.io/ui/r/avatar.json",
+    "https://qinyangwang.github.io/ui/r/button.json",
+    "https://qinyangwang.github.io/ui/r/input.json",
+    "https://qinyangwang.github.io/ui/r/select.json",
+    "https://qinyangwang.github.io/ui/r/tabs.json",
+    "https://qinyangwang.github.io/ui/r/icons.json"
   ],
   "files": [
     {

@@ -5,7 +5,7 @@
   "description": "Infinite horizontal or vertical scroller with edge fade and pause on hover, driven by CSS animation.",
   "dependencies": [],
   "registryDependencies": [
-    "@qinyang/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "files": [
     {

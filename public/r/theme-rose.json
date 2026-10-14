@@ -4,7 +4,7 @@
   "title": "Theme: Rose accent",
   "description": "Rose accent preset: sets the --accent-50…950 ramp to Tailwind rose; primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "cssVars": {
     "light": {

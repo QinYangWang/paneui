@@ -8,16 +8,16 @@
     "@base-ui/react"
   ],
   "registryDependencies": [
-    "@qinyang/theme",
-    "@qinyang/icons",
-    "@qinyang/button",
-    "@qinyang/chat",
-    "@qinyang/prompt-bar",
-    "@qinyang/ai-sidebar",
-    "@qinyang/todo-list",
-    "@qinyang/reasoning-text",
-    "@qinyang/agent-progress",
-    "@qinyang/icon-chip"
+    "https://qinyangwang.github.io/ui/r/theme.json",
+    "https://qinyangwang.github.io/ui/r/icons.json",
+    "https://qinyangwang.github.io/ui/r/button.json",
+    "https://qinyangwang.github.io/ui/r/chat.json",
+    "https://qinyangwang.github.io/ui/r/prompt-bar.json",
+    "https://qinyangwang.github.io/ui/r/ai-sidebar.json",
+    "https://qinyangwang.github.io/ui/r/todo-list.json",
+    "https://qinyangwang.github.io/ui/r/reasoning-text.json",
+    "https://qinyangwang.github.io/ui/r/agent-progress.json",
+    "https://qinyangwang.github.io/ui/r/icon-chip.json"
   ],
   "files": [
     {

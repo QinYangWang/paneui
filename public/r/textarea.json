@@ -4,7 +4,7 @@
   "title": "Textarea",
   "description": "Auto-growing textarea with a hairline inset ring.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "files": [
     {

@@ -7,8 +7,8 @@
     "motion"
   ],
   "registryDependencies": [
-    "@qinyang/theme",
-    "@qinyang/icon-chip"
+    "https://qinyangwang.github.io/ui/r/theme.json",
+    "https://qinyangwang.github.io/ui/r/icon-chip.json"
   ],
   "files": [
     {

@@ -4,7 +4,7 @@
   "title": "Card",
   "description": "Surface card with header, content and footer parts, plus an inset variant: a tinted frame holding a raised CardPanel for featured content.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "files": [
     {

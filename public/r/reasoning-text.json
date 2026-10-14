@@ -7,10 +7,10 @@
     "motion"
   ],
   "registryDependencies": [
-    "@qinyang/theme",
-    "@qinyang/text-shimmer",
-    "@qinyang/text-cascade",
-    "@qinyang/text-scramble"
+    "https://qinyangwang.github.io/ui/r/theme.json",
+    "https://qinyangwang.github.io/ui/r/text-shimmer.json",
+    "https://qinyangwang.github.io/ui/r/text-cascade.json",
+    "https://qinyangwang.github.io/ui/r/text-scramble.json"
   ],
   "files": [
     {

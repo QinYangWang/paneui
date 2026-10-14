@@ -8,7 +8,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "@qinyang/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "files": [
     {

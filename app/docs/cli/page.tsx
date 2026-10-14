@@ -18,7 +18,15 @@ export default function CliPage() {
   "registryDependencies": ["${ns}/theme"],
   "files": [{ "path": "registry/base-nova/ui/button.tsx", "type": "registry:ui", "content": "…" }]
 }`
+  const templateUrl = (name: string) => REGISTRY_URL.replace("{name}", name)
+  const templates = [
+    { name: "saas", app: "my-saas", what: "marketing home, pricing, changelog, auth pages, dashboard, analytics, customers and settings" },
+    { name: "agent-workspace", app: "my-agent", what: "the ACP agent workspace as the home page, plus server/acp-bridge.mjs" },
+    { name: "docs", app: "my-docs", what: "a docs site at /docs" },
+    { name: "blog", app: "my-blog", what: "a blog at /blog and /blog/post" },
+  ]
   const toc = [
+    { id: "templates", title: "Templates in one command" },
     { id: "the-registry", title: "The registry" },
     { id: "add", title: "add" },
     { id: "view", title: "view" },
@@ -29,6 +37,34 @@ export default function CliPage() {
   ]
   return (
     <GuidePage href="/docs/cli" toc={toc}>
+      <section className="flex flex-col gap-4">
+        <GuideH2 id="templates">Templates in one command</GuideH2>
+        <p className="text-muted-foreground">
+          Each template is a complete app. Pass its URL to <Code>init</Code> and the CLI creates a Next.js project, writes the
+          theme into <Code>app/globals.css</Code>, installs every component it uses and puts its routes in <Code>app/</Code>.
+          No <Code>components.json</Code> setup is needed: items point at their dependencies by URL.
+        </p>
+        <InstallCommand args={`init -d -n my-saas ${templateUrl("saas")}`} />
+        <p className="text-muted-foreground">
+          Then <Code>cd my-saas</Code> and run <Code>pnpm dev</Code>. In an existing Next.js app with Tailwind 4, use{" "}
+          <Code>add</Code> instead (it asks before replacing files such as <Code>app/page.tsx</Code>):
+        </p>
+        <InstallCommand args={`add ${templateUrl("saas")}`} />
+        <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
+          {templates.map((t) => (
+            <li key={t.name}>
+              <Code>{t.name}</Code>: {t.what}.{" "}
+              <Code>init -d -n {t.app} {templateUrl(t.name)}</Code>
+            </li>
+          ))}
+        </ul>
+        <p className="text-muted-foreground">
+          The notion-editor and email-editor blocks install the same way into an existing app, for example{" "}
+          <Code>add {templateUrl("notion-editor")}</Code>, and land in <Code>components/notion-editor/</Code> and{" "}
+          <Code>components/email-editor/</Code>.
+        </p>
+      </section>
+
       <section className="flex flex-col gap-4">
         <GuideH2 id="the-registry">The registry</GuideH2>
         <p className="text-muted-foreground">

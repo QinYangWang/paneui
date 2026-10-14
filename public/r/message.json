@@ -8,10 +8,10 @@
     "@base-ui/react"
   ],
   "registryDependencies": [
-    "@qinyang/theme",
-    "@qinyang/button",
-    "@qinyang/tooltip",
-    "@qinyang/message-bubble"
+    "https://qinyangwang.github.io/ui/r/theme.json",
+    "https://qinyangwang.github.io/ui/r/button.json",
+    "https://qinyangwang.github.io/ui/r/tooltip.json",
+    "https://qinyangwang.github.io/ui/r/message-bubble.json"
   ],
   "files": [
     {

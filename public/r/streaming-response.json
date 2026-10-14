@@ -7,10 +7,10 @@
     "motion"
   ],
   "registryDependencies": [
-    "@qinyang/theme",
-    "@qinyang/icons",
-    "@qinyang/citations",
-    "@qinyang/tool-result"
+    "https://qinyangwang.github.io/ui/r/theme.json",
+    "https://qinyangwang.github.io/ui/r/icons.json",
+    "https://qinyangwang.github.io/ui/r/citations.json",
+    "https://qinyangwang.github.io/ui/r/tool-result.json"
   ],
   "files": [
     {

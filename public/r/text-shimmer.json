@@ -5,7 +5,7 @@
   "description": "CSS-only highlight that sweeps across text in theme token colours.",
   "dependencies": [],
   "registryDependencies": [
-    "@qinyang/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "files": [
     {

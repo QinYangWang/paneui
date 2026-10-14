@@ -11,6 +11,8 @@
       "cssVars": {
         "theme": {
           "color-code": "var(--code)",
+          "color-primary": "var(--primary)",
+          "color-ring": "var(--ring)",
           "font-sans": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif",
           "font-mono": "var(--font-jetbrains-mono, \"JetBrains Mono\"), \"JetBrains Mono\", \"SF Mono\", \"SFMono-Regular\", Menlo, Consolas, \"Liberation Mono\", monospace",
           "color-success": "var(--success)",
@@ -137,7 +139,18 @@
           "skeuo-well": "inset 0 0 0 1px oklch(100% 0 0 / 12%)",
           "skeuo-surface": "0 0 0 1px oklch(100% 0 0 / 10%), 0 1px 1px oklch(0% 0 0 / 14%), 0 4px 4px oklch(0% 0 0 / 10%), 0 16px 40px -12px oklch(0% 0 0 / 50%)",
           "skeuo-chip": "0 0 0 1px oklch(100% 0 0 / 10%)",
-          "image-outline": "oklch(1 0 0 / 0.1)"
+          "image-outline": "oklch(1 0 0 / 0.1)",
+          "primary": "var(--accent-600)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)",
+          "chart-1": "oklch(77.7% 0.152 181.912)",
+          "chart-2": "oklch(84.1% 0.238 128.85)",
+          "chart-3": "oklch(71.8% 0.202 349.761)",
+          "chart-4": "oklch(74.6% 0.16 232.661)",
+          "chart-5": "oklch(71.4% 0.203 305.504)",
+          "chart-6": "oklch(66% 0.184 254.753)",
+          "chart-7": "oklch(76.5% 0.177 163.223)",
+          "chart-8": "oklch(85.2% 0.199 91.936)"
         }
       },
       "css": {
@@ -660,74 +673,243 @@
       }
     },
     {
-      "name": "saas-dashboard",
+      "name": "saas",
       "type": "registry:block",
-      "title": "SaaS Dashboard",
-      "description": "Full-page SaaS console: collapsible animated sidebar, top bar with ⌘K command palette, breadcrumb and account menu, KPI cards with number tickers and sparklines, revenue chart, activity feed, sortable invoices table and a settings drawer.",
+      "title": "SaaS",
+      "description": "Complete SaaS starter with real routes: marketing home (hero with a live product shot, logos, features, monthly/yearly pricing, testimonials, FAQ, CTA), pricing comparison and changelog; login, sign-up, forgot-password and email-code pages with validation and mock auth; an app shell with collapsible sidebar, workspace switcher, user menu, breadcrumbs and ⌘K palette; overview (KPI stat cards, revenue and usage charts, activity), analytics (date range, plan filter, charts, top pages), customers data table with detail drawer; settings for profile, account, billing, team, notifications and appearance; and a 404. All copy and mock data live in components/saas/lib/data.ts.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/animated-sidebar",
-        "@qinyang/badge",
-        "@qinyang/breadcrumb",
-        "@qinyang/button",
-        "@qinyang/card",
-        "@qinyang/command-palette",
-        "@qinyang/composition-chart",
-        "@qinyang/drawer",
-        "@qinyang/icon-chip",
         "@qinyang/icons",
+        "@qinyang/otp-input",
+        "@qinyang/signup-form",
+        "@qinyang/avatar",
+        "@qinyang/button",
+        "@qinyang/button-stateful",
+        "@qinyang/checkbox",
+        "@qinyang/field",
+        "@qinyang/icon-chip",
         "@qinyang/input",
-        "@qinyang/label",
-        "@qinyang/menu",
+        "@qinyang/password-input",
+        "@qinyang/stat-card",
+        "@qinyang/theme-toggle",
+        "@qinyang/drawer",
+        "@qinyang/badge",
+        "@qinyang/accordion",
+        "@qinyang/card",
+        "@qinyang/marquee",
         "@qinyang/number-ticker",
+        "@qinyang/segmented-control",
+        "@qinyang/shader-background",
+        "@qinyang/text-reveal",
+        "@qinyang/trend-chart",
+        "@qinyang/not-found-terminal",
+        "@qinyang/accent-picker",
+        "@qinyang/toast",
+        "@qinyang/tooltip",
+        "@qinyang/page-header",
+        "@qinyang/settings-section",
+        "@qinyang/data-table",
+        "@qinyang/dialog",
+        "@qinyang/menu",
+        "@qinyang/radio",
         "@qinyang/select",
         "@qinyang/switch",
         "@qinyang/table",
-        "@qinyang/tabs",
-        "@qinyang/theme-toggle",
-        "@qinyang/toast",
-        "@qinyang/tooltip"
+        "@qinyang/textarea",
+        "@qinyang/usage-meter",
+        "@qinyang/bar-list",
+        "@qinyang/date-range-picker",
+        "@qinyang/donut-chart",
+        "@qinyang/empty-state",
+        "@qinyang/command-palette",
+        "@qinyang/animated-sidebar",
+        "@qinyang/breadcrumb",
+        "@qinyang/user-menu",
+        "@qinyang/workspace-switcher"
       ],
       "files": [
         {
-          "path": "registry/base-nova/templates/saas-dashboard/saas-dashboard.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/saas/components/auth/auth-pages.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/auth/auth-pages.tsx"
         },
         {
-          "path": "registry/base-nova/templates/saas-dashboard/parts/app-sidebar.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/saas/components/marketing/marketing-shell.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/marketing/marketing-shell.tsx"
         },
         {
-          "path": "registry/base-nova/templates/saas-dashboard/parts/avatar.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/saas/components/marketing/pages.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/marketing/pages.tsx"
         },
         {
-          "path": "registry/base-nova/templates/saas-dashboard/parts/data.ts",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/saas/components/marketing/sections.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/marketing/sections.tsx"
         },
         {
-          "path": "registry/base-nova/templates/saas-dashboard/parts/settings-drawer.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/saas/components/marketing/stagger.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/marketing/stagger.tsx"
         },
         {
-          "path": "registry/base-nova/templates/saas-dashboard/parts/sparkline.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/saas/components/not-found-page.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/not-found-page.tsx"
         },
         {
-          "path": "registry/base-nova/templates/saas-dashboard/parts/top-bar.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/saas/components/providers.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/providers.tsx"
         },
         {
-          "path": "registry/base-nova/templates/saas-dashboard/parts/widgets.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/saas/components/settings/settings-layout.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/settings/settings-layout.tsx"
         },
         {
-          "path": "registry/base-nova/templates/saas-dashboard/page.tsx",
+          "path": "registry/base-nova/templates/saas/components/settings/settings-pages.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/settings/settings-pages.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/lib/auth.ts",
+          "type": "registry:component",
+          "target": "components/saas/lib/auth.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/lib/data.ts",
+          "type": "registry:component",
+          "target": "components/saas/lib/data.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/lib/routes.tsx",
+          "type": "registry:component",
+          "target": "components/saas/lib/routes.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/(auth)/forgot-password/page.tsx",
+          "type": "registry:page",
+          "target": "app/(auth)/forgot-password/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/(auth)/layout.tsx",
+          "type": "registry:page",
+          "target": "app/(auth)/layout.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/(auth)/login/page.tsx",
+          "type": "registry:page",
+          "target": "app/(auth)/login/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/(auth)/signup/page.tsx",
+          "type": "registry:page",
+          "target": "app/(auth)/signup/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/(auth)/verify/page.tsx",
+          "type": "registry:page",
+          "target": "app/(auth)/verify/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/changelog/page.tsx",
+          "type": "registry:page",
+          "target": "app/changelog/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/analytics/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/analytics/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/customers/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/customers/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/layout.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/layout.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/page.tsx",
           "type": "registry:page",
           "target": "app/dashboard/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/settings/account/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/settings/account/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/settings/appearance/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/settings/appearance/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/settings/billing/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/settings/billing/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/settings/layout.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/settings/layout.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/settings/notifications/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/settings/notifications/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/settings/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/settings/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/dashboard/settings/team/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/settings/team/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/not-found.tsx",
+          "type": "registry:page",
+          "target": "app/not-found.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/app/pricing/page.tsx",
+          "type": "registry:page",
+          "target": "app/pricing/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/components/app/analytics-page.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/app/analytics-page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/components/app/app-shell.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/app/app-shell.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/components/app/customers-page.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/app/customers-page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/saas/components/app/overview-page.tsx",
+          "type": "registry:component",
+          "target": "components/saas/components/app/overview-page.tsx"
         }
       ],
       "meta": {
@@ -738,111 +920,120 @@
       "name": "agent-workspace",
       "type": "registry:block",
       "title": "Agent Workspace",
-      "description": "Full-page coding-agent GUI: sessions sidebar, a conversation of agent blocks (plan, tool output, diffs, code, approval, streamed summary), prompt bar and a file tree with diff preview.",
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/agent-code-block",
-        "@qinyang/animated-sidebar",
-        "@qinyang/badge",
-        "@qinyang/button",
-        "@qinyang/drawer",
-        "@qinyang/file-diff",
-        "@qinyang/file-tree",
-        "@qinyang/icon-chip",
-        "@qinyang/icons",
-        "@qinyang/message",
-        "@qinyang/prompt-bar",
-        "@qinyang/reasoning-text",
-        "@qinyang/streaming-response",
-        "@qinyang/theme-toggle",
-        "@qinyang/todo-list",
-        "@qinyang/tool-approval",
-        "@qinyang/tool-result",
-        "@qinyang/tooltip"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/templates/agent-workspace/agent-workspace.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "registry/base-nova/templates/agent-workspace/parts/conversation.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "registry/base-nova/templates/agent-workspace/parts/data.ts",
-          "type": "registry:component"
-        },
-        {
-          "path": "registry/base-nova/templates/agent-workspace/parts/files-panel.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "registry/base-nova/templates/agent-workspace/parts/session-nav.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "registry/base-nova/templates/agent-workspace/page.tsx",
-          "type": "registry:page",
-          "target": "app/agent/page.tsx"
-        }
-      ],
-      "meta": {
-        "category": "Templates"
-      }
-    },
-    {
-      "name": "landing",
-      "type": "registry:block",
-      "title": "Landing Page",
-      "description": "Full-page product landing: sticky nav, shader hero with text reveal and staggered entrance, logo marquee, how-it-works demo, feature grid, monthly/yearly pricing, testimonials, FAQ, CTA and footer.",
+      "description": "Synara-style multi-provider coding-agent workspace and Agent Client Protocol client: icon rail, threads sidebar, thread tabs, split chats with work logs, approvals and edited files, a composer with mode / model / effort, and a terminal / explorer / browser dock. Runs offline on a demo agent; a bundled Node bridge connects Claude Code, Codex, Gemini or any ACP agent.",
       "dependencies": [
+        "@agentclientprotocol/sdk",
+        "ws",
         "motion"
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/accordion",
+        "@qinyang/icons",
+        "@qinyang/agent-composer",
         "@qinyang/agent-code-block",
         "@qinyang/badge",
         "@qinyang/button",
-        "@qinyang/card",
-        "@qinyang/drawer",
-        "@qinyang/icon-chip",
-        "@qinyang/icons",
-        "@qinyang/marquee",
-        "@qinyang/number-ticker",
-        "@qinyang/shader-background",
-        "@qinyang/tabs",
-        "@qinyang/text-reveal",
+        "@qinyang/command-palette",
+        "@qinyang/dialog",
+        "@qinyang/edited-files-card",
+        "@qinyang/file-diff",
+        "@qinyang/file-tree",
+        "@qinyang/icon-rail",
+        "@qinyang/input",
+        "@qinyang/label",
+        "@qinyang/loader",
+        "@qinyang/menu",
+        "@qinyang/message",
+        "@qinyang/message-scroller",
+        "@qinyang/model-picker",
+        "@qinyang/resizable",
+        "@qinyang/select",
+        "@qinyang/streaming-response",
+        "@qinyang/tab-strip",
+        "@qinyang/terminal-view",
+        "@qinyang/textarea",
         "@qinyang/theme-toggle",
+        "@qinyang/thread-list-item",
         "@qinyang/todo-list",
-        "@qinyang/tool-approval"
+        "@qinyang/tool-approval",
+        "@qinyang/tooltip",
+        "@qinyang/work-summary"
       ],
       "files": [
         {
-          "path": "registry/base-nova/templates/landing/landing.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/agent-workspace/agent-workspace.tsx",
+          "type": "registry:component",
+          "target": "components/agent-workspace/agent-workspace.tsx"
         },
         {
-          "path": "registry/base-nova/templates/landing/parts/avatar.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/agent-workspace/acp/client.ts",
+          "type": "registry:component",
+          "target": "components/agent-workspace/acp/client.ts"
         },
         {
-          "path": "registry/base-nova/templates/landing/parts/data.ts",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/agent-workspace/acp/transport.ts",
+          "type": "registry:component",
+          "target": "components/agent-workspace/acp/transport.ts"
         },
         {
-          "path": "registry/base-nova/templates/landing/parts/sections.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/agent-workspace/acp/mock-agent.ts",
+          "type": "registry:component",
+          "target": "components/agent-workspace/acp/mock-agent.ts"
         },
         {
-          "path": "registry/base-nova/templates/landing/parts/stagger.tsx",
-          "type": "registry:component"
+          "path": "registry/base-nova/templates/agent-workspace/acp/demo-data.ts",
+          "type": "registry:component",
+          "target": "components/agent-workspace/acp/demo-data.ts"
         },
         {
-          "path": "registry/base-nova/templates/landing/page.tsx",
+          "path": "registry/base-nova/templates/agent-workspace/parts/agents.ts",
+          "type": "registry:component",
+          "target": "components/agent-workspace/parts/agents.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/parts/chat-pane.tsx",
+          "type": "registry:component",
+          "target": "components/agent-workspace/parts/chat-pane.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/parts/dock.tsx",
+          "type": "registry:component",
+          "target": "components/agent-workspace/parts/dock.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/parts/provider-icon.tsx",
+          "type": "registry:component",
+          "target": "components/agent-workspace/parts/provider-icon.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/parts/settings-dialog.tsx",
+          "type": "registry:component",
+          "target": "components/agent-workspace/parts/settings-dialog.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/parts/threads-sidebar.tsx",
+          "type": "registry:component",
+          "target": "components/agent-workspace/parts/threads-sidebar.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/parts/timeline.tsx",
+          "type": "registry:component",
+          "target": "components/agent-workspace/parts/timeline.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/page.tsx",
           "type": "registry:page",
           "target": "app/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/server/acp-bridge.mjs",
+          "type": "registry:file",
+          "target": "server/acp-bridge.mjs"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/server/README.md",
+          "type": "registry:file",
+          "target": "server/README.md"
         }
       ],
       "meta": {
@@ -875,19 +1066,23 @@
       "files": [
         {
           "path": "registry/base-nova/templates/docs/docs.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/docs-template/docs.tsx"
         },
         {
           "path": "registry/base-nova/templates/docs/parts/article.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/docs-template/parts/article.tsx"
         },
         {
           "path": "registry/base-nova/templates/docs/parts/docs-nav.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/docs-template/parts/docs-nav.tsx"
         },
         {
           "path": "registry/base-nova/templates/docs/parts/toc.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/docs-template/parts/toc.tsx"
         },
         {
           "path": "registry/base-nova/templates/docs/page.tsx",
@@ -921,35 +1116,48 @@
       "files": [
         {
           "path": "registry/base-nova/templates/blog/blog.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/blog/blog.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/parts/avatar.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/blog/parts/avatar.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/parts/chrome.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/blog/parts/chrome.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/parts/cover-art.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/blog/parts/cover-art.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/parts/data.ts",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/blog/parts/data.ts"
         },
         {
           "path": "registry/base-nova/templates/blog/parts/stagger.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/blog/parts/stagger.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/parts/toc.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/blog/parts/toc.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/post.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/blog/post.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/blog/layout.tsx",
+          "type": "registry:page",
+          "target": "app/blog/layout.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/page.tsx",
@@ -3557,6 +3765,788 @@
       ],
       "meta": {
         "category": "Display"
+      }
+    },
+    {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "title": "Sparkline",
+      "description": "Word-sized trend chart (area, line or bar) in currentColor, stretched to its box, drawn in on mount.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/sparkline.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "trend-chart",
+      "type": "registry:ui",
+      "title": "Trend Chart",
+      "description": "Absolute values over time as an area, line or bar chart, optionally stacked: value axis, gridlines, hover crosshair with tooltip, legend toggles and a screen-reader table.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/chart-utils"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/trend-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "bar-list",
+      "type": "registry:ui",
+      "title": "Bar List",
+      "description": "Ranked list with a proportional chart-coloured bar behind each label: top pages, referrers, countries.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/bar-list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Charts"
+      }
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:ui",
+      "title": "Stat Card",
+      "description": "KPI card: label, big tabular number, a delta badge whose sign sets its tone (invertible for churn and latency) and a sparkline tinted to match.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/badge",
+        "@qinyang/sparkline"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/stat-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "Empty State",
+      "description": "What a list, table or page shows when it has nothing yet: icon chip, title, description and actions, bare, outlined or muted.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/empty-state.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "page-header",
+      "type": "registry:ui",
+      "title": "Page Header",
+      "description": "App page header: eyebrow, h1 title, description and actions that wrap under the title on narrow screens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/page-header.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "usage-meter",
+      "type": "registry:ui",
+      "title": "Usage Meter",
+      "description": "Quota bar on Base UI Meter: label, used / limit readout and a bar that turns warning then destructive as it fills.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/usage-meter.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "settings-section",
+      "type": "registry:ui",
+      "title": "Settings Section",
+      "description": "Native settings layout: section header, grouped card of label + control rows split by hairlines, footer band for Save, danger-zone tone and a settings sub-nav.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/settings-section.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Form field on Base UI Field: label, control, description and an animated error, wired with aria-describedby and aria-invalid.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "password-input",
+      "type": "registry:ui",
+      "title": "Password Input",
+      "description": "Input with a show / hide button inside its end edge; a field control like Input.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/input"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/password-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "Pick-one control on Base UI RadioGroup with a raised thumb that glides between options: billing cycle, chart type, theme.",
+      "dependencies": [
+        "@base-ui/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/segmented-control.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "accent-picker",
+      "type": "registry:ui",
+      "title": "Accent Picker",
+      "description": "Swatch picker for the theme's accent presets: sets data-accent on <html>, persists it, ships the preset CSS and a pre-paint script.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/accent-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Page controls with prev / next, numbered pages and ellipses, a compact mode, a results summary and a rows-per-page select.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/select"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "workspace-switcher",
+      "type": "registry:ui",
+      "title": "Workspace Switcher",
+      "description": "Sidebar-header team switcher: current workspace mark, name and plan, a menu of the others and Create workspace; collapses to the mark.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/menu"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/workspace-switcher.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "user-menu",
+      "type": "registry:ui",
+      "title": "User Menu",
+      "description": "Signed-in user button (avatar, name, email) opening an account menu; avatar-only in an icon rail or as a compact top-bar button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/avatar",
+        "@qinyang/menu"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/user-menu.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Table with search, faceted filters with counts, column visibility, sorting, row selection with bulk actions, row action menus, pagination and empty / no-results states.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/empty-state",
+        "@qinyang/input",
+        "@qinyang/menu",
+        "@qinyang/pagination",
+        "@qinyang/table"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/data-table.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Data"
+      }
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Toggle and toggle group: pressed-state buttons for marks and alignment, default or outline, three sizes.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "toolbar",
+      "type": "registry:ui",
+      "title": "Toolbar",
+      "description": "Roving-focus toolbar with buttons, toggles, separators and inputs; floating (selection bubble) and inset variants.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/toolbar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "menu-list",
+      "type": "registry:ui",
+      "title": "Menu List",
+      "description": "Keyboard-navigable list that keeps focus elsewhere (aria-activedescendant): slash menus, mention pickers, autocomplete.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/menu-list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
+    },
+    {
+      "name": "swatch-picker",
+      "type": "registry:ui",
+      "title": "Swatch Picker",
+      "description": "Pick one colour from a fixed palette: colour dots or letter swatches, radio-group keyboard behaviour.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/swatch-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "notion-editor",
+      "type": "registry:block",
+      "title": "Notion Editor",
+      "description": "Notion-style block editor on Tiptap: slash menu, selection bubble, drag handles, markdown shortcuts, callouts, toggles, tables, code highlighting, and lossless MDX import / export.",
+      "dependencies": [
+        "@tiptap/core",
+        "@tiptap/pm",
+        "@tiptap/react",
+        "@tiptap/starter-kit",
+        "@tiptap/extensions",
+        "@tiptap/extension-text-style",
+        "@tiptap/extension-highlight",
+        "@tiptap/suggestion",
+        "@floating-ui/dom",
+        "@tiptap/extension-list",
+        "@tiptap/extension-table",
+        "@tiptap/extension-image",
+        "@tiptap/extension-code-block-lowlight",
+        "@tiptap/extension-details",
+        "lowlight",
+        "unified",
+        "remark-parse",
+        "remark-mdx",
+        "remark-gfm",
+        "remark-stringify",
+        "mdast-util-mdx",
+        "@base-ui/react"
+      ],
+      "devDependencies": [
+        "@types/mdast"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/input",
+        "@qinyang/menu",
+        "@qinyang/popover",
+        "@qinyang/tooltip",
+        "@qinyang/toolbar",
+        "@qinyang/menu-list",
+        "@qinyang/swatch-picker"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/notion-editor/extensions.ts",
+          "type": "registry:component",
+          "target": "components/notion-editor/extensions.ts"
+        },
+        {
+          "path": "registry/base-nova/blocks/notion-editor/mdx.ts",
+          "type": "registry:component",
+          "target": "components/notion-editor/mdx.ts"
+        },
+        {
+          "path": "registry/base-nova/blocks/notion-editor/suggestion-menu.tsx",
+          "type": "registry:component",
+          "target": "components/notion-editor/suggestion-menu.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/notion-editor/slash-command.tsx",
+          "type": "registry:component",
+          "target": "components/notion-editor/slash-command.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/notion-editor/block-types.tsx",
+          "type": "registry:component",
+          "target": "components/notion-editor/block-types.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/notion-editor/bubble-menu.tsx",
+          "type": "registry:component",
+          "target": "components/notion-editor/bubble-menu.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/notion-editor/block-handle.tsx",
+          "type": "registry:component",
+          "target": "components/notion-editor/block-handle.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/notion-editor/node-views.tsx",
+          "type": "registry:component",
+          "target": "components/notion-editor/node-views.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/notion-editor/notion-editor.tsx",
+          "type": "registry:component",
+          "target": "components/notion-editor/notion-editor.tsx"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "email-editor",
+      "type": "registry:block",
+      "title": "Email Editor",
+      "description": "Visual email editor (after maily.to): buttons, images, logo, columns, sections, spacer, footer, {{variables}}, Show if / Repeat, subject + preheader, desktop / mobile preview, and email-safe HTML / JSON export with React Email.",
+      "dependencies": [
+        "@tiptap/core",
+        "@tiptap/pm",
+        "@tiptap/react",
+        "@tiptap/starter-kit",
+        "@tiptap/extensions",
+        "@tiptap/extension-text-style",
+        "@tiptap/extension-highlight",
+        "@tiptap/suggestion",
+        "@floating-ui/dom",
+        "@tiptap/extension-text-align",
+        "@tiptap/extension-mention",
+        "@react-email/components",
+        "@react-email/render",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/notion-editor",
+        "@qinyang/button",
+        "@qinyang/input",
+        "@qinyang/menu",
+        "@qinyang/select",
+        "@qinyang/switch",
+        "@qinyang/segmented-control",
+        "@qinyang/swatch-picker",
+        "@qinyang/toggle-group",
+        "@qinyang/toolbar"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/email-editor/nodes.tsx",
+          "type": "registry:component",
+          "target": "components/email-editor/nodes.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/email-editor/render.tsx",
+          "type": "registry:component",
+          "target": "components/email-editor/render.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/email-editor/templates.ts",
+          "type": "registry:component",
+          "target": "components/email-editor/templates.ts"
+        },
+        {
+          "path": "registry/base-nova/blocks/email-editor/email-editor.tsx",
+          "type": "registry:component",
+          "target": "components/email-editor/email-editor.tsx"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
+      }
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Split panes with draggable dividers: percent or pixel sizes, live resizing, collapsible panels, keyboard control and layouts persisted to localStorage.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/resizable.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "tab-strip",
+      "type": "registry:ui",
+      "title": "Tab Strip",
+      "description": "Horizontal document and panel tabs: closable, drag to reorder, faded overflow scrolling and arrow-key navigation, in raised or pill style.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/tab-strip.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "icon-rail",
+      "type": "registry:ui",
+      "title": "Icon Rail",
+      "description": "Narrow vertical app rail of icon buttons with tooltips, shortcuts, badges and round status avatars, after Synara and Codex.",
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/icon-rail.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "terminal-view",
+      "type": "registry:ui",
+      "title": "Terminal View",
+      "description": "Terminal surface with ANSI colour output mapped to theme tokens, follow-the-end scrolling, a command line with history and a status line.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/terminal-view.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "thread-list-item",
+      "type": "registry:ui",
+      "title": "Thread List Item",
+      "description": "Two-line agent thread row: provider icon and title, then repo, pull request number in its status colour and branch, grouped under Recent / Today headings.",
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/loader"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/thread-list-item.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "work-summary",
+      "type": "registry:ui",
+      "title": "Work Summary",
+      "description": "Collapsible “Worked for 25s” step log of an agent turn: live elapsed time, steps with ACP tool kinds and statuses, and per-step output.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/loader",
+        "@qinyang/text-shimmer"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/work-summary.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "edited-files-card",
+      "type": "registry:ui",
+      "title": "Edited Files Card",
+      "description": "Summary of the files an agent changed in a turn with total +/−, Undo and Review, and rows that expand to each file's diff.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/file-diff"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/edited-files-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "title": "Model Picker",
+      "description": "Composer pickers for agent model, reasoning effort and mode / access level: a quiet trigger and a menu with descriptions, groups and tones.",
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/menu"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/model-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
+      }
+    },
+    {
+      "name": "agent-composer",
+      "type": "registry:block",
+      "title": "Agent Composer",
+      "description": "Coding-agent composer with @file mentions and /command suggestions, attach and voice buttons, picker slots, a stacked banner area and send / stop.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/agent-composer/agent-composer.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {
+        "category": "Blocks"
       }
     }
   ]

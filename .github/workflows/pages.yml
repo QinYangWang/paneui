@@ -28,7 +28,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
-      - run: pnpm shadcn build
+      - run: pnpm registry:build
       - run: pnpm next build
       - run: touch out/.nojekyll
       - name: Publish to gh-pages

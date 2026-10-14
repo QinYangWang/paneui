@@ -7,8 +7,8 @@
     "motion"
   ],
   "registryDependencies": [
-    "@qinyang/button",
-    "@qinyang/icons"
+    "https://qinyangwang.github.io/ui/r/button.json",
+    "https://qinyangwang.github.io/ui/r/icons.json"
   ],
   "files": [
     {

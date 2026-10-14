@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "page-header",
+  "title": "Page Header",
+  "description": "App page header: eyebrow, h1 title, description and actions that wrap under the title on narrow screens.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://qinyangwang.github.io/ui/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/page-header.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * The top of an app page: optional breadcrumb or eyebrow, the title, one line\n * of description, and the page's actions on the right (they wrap under the\n * title on narrow screens).\n *\n *   <PageHeader>\n *     <PageHeaderContent>\n *       <PageHeaderTitle>Customers</PageHeaderTitle>\n *       <PageHeaderDescription>Everyone with an active workspace.</PageHeaderDescription>\n *     </PageHeaderContent>\n *     <PageHeaderActions><Button>Add customer</Button></PageHeaderActions>\n *   </PageHeader>\n */\n\nfunction PageHeader({ className, ...props }: React.ComponentProps<\"header\">) {\n  return (\n    <header\n      data-slot=\"page-header\"\n      className={cn(\"flex flex-wrap items-end justify-between gap-x-6 gap-y-4\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction PageHeaderContent({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"page-header-content\" className={cn(\"flex min-w-0 flex-col gap-1\", className)} {...props} />\n}\n\n/** Small line above the title: a breadcrumb, a status or a section name. */\nfunction PageHeaderEyebrow({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"page-header-eyebrow\" className={cn(\"mb-1 flex items-center gap-2 text-ui-sm text-muted-foreground\", className)} {...props} />\n}\n\nfunction PageHeaderTitle({ className, ...props }: React.ComponentProps<\"h1\">) {\n  return <h1 data-slot=\"page-header-title\" className={cn(\"text-2xl font-semibold tracking-tight text-balance\", className)} {...props} />\n}\n\nfunction PageHeaderDescription({ className, ...props }: React.ComponentProps<\"p\">) {\n  return <p data-slot=\"page-header-description\" className={cn(\"max-w-2xl text-sm text-pretty text-muted-foreground\", className)} {...props} />\n}\n\nfunction PageHeaderActions({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"page-header-actions\" className={cn(\"flex flex-wrap items-center gap-2\", className)} {...props} />\n}\n\nexport { PageHeader, PageHeaderContent, PageHeaderEyebrow, PageHeaderTitle, PageHeaderDescription, PageHeaderActions }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Display"
+  },
+  "type": "registry:ui"
+}

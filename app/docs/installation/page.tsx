@@ -46,7 +46,8 @@ export default function Installation() {
           <AlertTitle>Requirements</AlertTitle>
           <AlertDescription>
             A React project (Next.js, Vite or similar) with Tailwind CSS 4 and shadcn initialised on a Base UI style (base-nova). Run{" "}
-            <Code>shadcn init</Code> first if you have no components.json yet.
+            <Code>shadcn init</Code> first if you have no components.json yet. Starting a new app? The SaaS, agent workspace,
+            docs and blog templates install in one command: see <TextLink href="/docs/cli#templates">Templates in one command</TextLink>.
           </AlertDescription>
         </AlertContent>
       </Alert>

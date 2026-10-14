@@ -8,8 +8,8 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "@qinyang/theme",
-    "@qinyang/icons"
+    "https://qinyangwang.github.io/ui/r/theme.json",
+    "https://qinyangwang.github.io/ui/r/icons.json"
   ],
   "files": [
     {
