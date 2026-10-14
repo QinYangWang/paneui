@@ -135,13 +135,13 @@ function DonutChart({
       data-slot="donut-chart"
       className={cn(
         "grid w-full items-center gap-6",
-        showLegend && legendPosition === "side" && "sm:grid-cols-[minmax(0,auto)_1fr]",
+        showLegend && legendPosition === "side" && "sm:grid-cols-[minmax(10rem,auto)_1fr]",
         className
       )}
       {...props}
     >
       <div
-        className="relative mx-auto aspect-square w-full"
+        className="@container relative mx-auto aspect-square w-full min-w-0"
         style={{ maxWidth: maxSize }}
         onPointerLeave={() => setActiveId(null)}
       >
@@ -235,7 +235,7 @@ function DonutChart({
               animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, y: -4, filter: "blur(2px)" }}
               transition={{ duration: 0.18, ease: CHART_EASE }}
-              className="flex max-w-[70%] items-center gap-1.5 truncate text-ui-sm font-medium text-muted-foreground"
+              className="flex max-w-[64%] items-center gap-1.5 truncate text-[min(0.8125rem,7.5cqw)] font-medium text-muted-foreground"
             >
               {active && <ChartSwatch color={active.color} />}
               {active?.label ?? totalLabel}
@@ -244,12 +244,12 @@ function DonutChart({
           <ChartNumber
             value={active?.value ?? total}
             format={formatValue}
-            className="mt-0.5 text-2xl font-semibold tracking-tight text-foreground"
+            className="mt-0.5 max-w-[72%] truncate text-[min(1.5rem,12cqw)] leading-tight font-semibold tracking-tight text-foreground"
           />
           <motion.span
             animate={{ opacity: active ? 1 : 0 }}
             transition={{ duration: 0.15 }}
-            className="text-ui-sm text-muted-foreground tabular-nums"
+            className="max-w-[64%] truncate text-[min(0.8125rem,7cqw)] text-muted-foreground tabular-nums"
           >
             {active ? `${formatPercent(active.share)} of ${totalLabel.toLowerCase()}` : "\u00a0"}
           </motion.span>
