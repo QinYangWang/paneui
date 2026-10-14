@@ -1,0 +1,38 @@
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/base-nova/ui/select"
+
+const rows = [
+  { value: "10", label: "10 rows" },
+  { value: "25", label: "25 rows" },
+  { value: "50", label: "50 rows" },
+]
+
+export default function SelectSizes() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-3">
+      <Select items={rows} defaultValue="25">
+        <SelectTrigger size="sm" className="w-auto">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {rows.map((r) => (
+            <SelectItem key={r.value} value={r.value}>
+              {r.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <Select items={rows} defaultValue="25">
+        <SelectTrigger className="w-auto">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {rows.map((r) => (
+            <SelectItem key={r.value} value={r.value}>
+              {r.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  )
+}

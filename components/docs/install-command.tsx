@@ -38,12 +38,26 @@ function usePackageManager() {
       if (isManager(stored) && stored !== current) setManager(stored)
     } catch {}
   }, [])
-  return React.useSyncExternalStore(subscribe, () => current, () => "pnpm" as Manager)
+  return React.useSyncExternalStore(
+    subscribe,
+    () => current,
+    () => "pnpm" as Manager,
+  )
 }
 
 const COPY_ITEMS: ActionSwapItem[] = [
-  { value: "copy", label: "Copy", icon: <CopyIcon />, ariaLabel: "Copy command" },
-  { value: "copied", label: "Copied", icon: <CheckIcon className="text-success" />, ariaLabel: "Copied" },
+  {
+    value: "copy",
+    label: "Copy",
+    icon: <CopyIcon />,
+    ariaLabel: "Copy command",
+  },
+  {
+    value: "copied",
+    label: "Copied",
+    icon: <CheckIcon className="text-success" />,
+    ariaLabel: "Copied",
+  },
 ]
 
 /** A raised pill holding one shell command, with a blur-swap copy button. */
@@ -55,7 +69,7 @@ export function CommandPill({ command, className }: { command: string; className
       className={cn(
         // eslint-disable-next-line shadcn/no-arbitrary-values -- 13px mono reads like 14px sans; no text token for it yet
         "flex h-11 min-w-0 items-center gap-2 rounded-xl bg-secondary pr-1.5 pl-3.5 font-mono text-[13px] text-secondary-foreground shadow-raised",
-        className
+        className,
       )}
     >
       <span aria-hidden className="text-muted-foreground select-none">
@@ -100,6 +114,35 @@ export function InstallCommand({ args, className }: { args: string; className?: 
       {(Object.keys(MANAGERS) as Manager[]).map((m) => (
         <TabsPanel key={m} value={m}>
           <CommandPill command={`${MANAGERS[m]} ${args}`} />
+        </TabsPanel>
+      ))}
+    </Tabs>
+  )
+}
+
+const ADD = {
+  pnpm: "pnpm add",
+  npm: "npm install",
+  yarn: "yarn add",
+  bun: "bun add",
+} as const satisfies Record<Manager, string>
+
+/** `pnpm add <packages>` with the same remembered package-manager tabs. */
+export function PackageInstall({ packages, className }: { packages: string[]; className?: string }) {
+  const pm = usePackageManager()
+  return (
+    <Tabs value={pm} onValueChange={(v) => isManager(v) && setManager(v)} className={cn("gap-2.5", className)}>
+      <TabsList className="p-0.5">
+        {(Object.keys(ADD) as Manager[]).map((m) => (
+          // eslint-disable-next-line shadcn/no-restyle -- compact mono package-manager tabs; Tabs has no size prop yet
+          <TabsTab key={m} value={m} className="h-6 px-3 font-mono text-xs">
+            {m}
+          </TabsTab>
+        ))}
+      </TabsList>
+      {(Object.keys(ADD) as Manager[]).map((m) => (
+        <TabsPanel key={m} value={m}>
+          <CommandPill command={`${ADD[m]} ${packages.join(" ")}`} />
         </TabsPanel>
       ))}
     </Tabs>

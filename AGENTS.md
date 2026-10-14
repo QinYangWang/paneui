@@ -165,3 +165,6 @@ house rules:
 Fix the code first. If a rule is wrong for a legitimate case, use one
 `// eslint-disable-next-line shadcn/<rule> -- <reason>` (JSX: `{/* … */}`) on that
 line only, with a reason. List them with `rg "eslint-disable.*shadcn/"`; each is a design decision to review.
+
+## Component docs pages
+Every registry:ui item has `content/docs/<name>.ts` (type `ComponentDoc` in lib/doc-types.ts: usage, composition, examples, notes, api) and examples in `registry/base-nova/examples/<name>/<id>.tsx`. After adding or renaming one run `pnpm docs:gen` (regenerates content/docs/index.generated.ts and components/docs/examples.generated.tsx; commit both). API tables list only props the library adds or changes; the rest is `extends` with a Base UI link. Examples render client-only.

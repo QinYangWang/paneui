@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "registry:build": "shadcn build"
+    "registry:build": "shadcn build",
+    "docs:gen": "node scripts/gen-docs.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
