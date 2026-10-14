@@ -26,7 +26,7 @@ export default function ShaderBackgroundDemo() {
           <p className="mt-1 text-sm text-muted-foreground">Colours come from your theme tokens, so it follows light and dark.</p>
         </div>
       </ShaderBackground>
-      <div role="group" aria-label="Shader variant" className="flex flex-wrap gap-1.5 self-center rounded-full bg-muted p-1 shadow-well">
+      <div role="group" aria-label="Shader variant" className="flex flex-wrap gap-0.5 self-center rounded-lg bg-muted p-1 shadow-well">
         {VARIANTS.map((v) => (
           <Button
             key={v.value}

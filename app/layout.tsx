@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
 
 import { themeScript } from "@/components/docs/theme-script"
-import { getGroups } from "@/lib/docs"
+import { getNavGroups } from "@/lib/docs"
 import { ToastProvider } from "@/registry/base-nova/ui/toast"
 import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
 
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const groups = getGroups().map((g) => ({
+  const groups = getNavGroups().map((g) => ({
     category: g.category,
-    items: g.items.map(({ name, title, description }) => ({ name, title, description })),
+    items: g.items.map(({ name, title, summary }) => ({ name, title, description: summary })),
   }))
   return (
     <html lang="en" suppressHydrationWarning>

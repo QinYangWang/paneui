@@ -9,7 +9,7 @@ import { Inline } from "@/components/docs/doc-inline"
 import { DocToc, type TocEntry } from "@/components/docs/doc-toc"
 import { InstallCommand, PackageInstall } from "@/components/docs/install-command"
 import { PreviewTabs } from "@/components/docs/preview-tabs"
-import { demoFile, getItem, getItems, readSource, REGISTRY_NAME } from "@/lib/docs"
+import { demoFile, getItem, getItems, getNavGroups, readSource, REGISTRY_NAME } from "@/lib/docs"
 import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import {
@@ -31,7 +31,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ name: string }> }) {
   const item = getItem((await params).name)
-  return item ? { title: item.title, description: item.description } : {}
+  return item ? { title: item.title, description: item.summary } : {}
 }
 
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
@@ -136,7 +136,8 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
   const item = getItem(name)
   if (!item) notFound()
 
-  const items = getItems()
+  // Prev/next follow the sidebar: categories in order, A–Z inside each.
+  const items = getNavGroups().flatMap((g) => g.items)
   const index = items.findIndex((i) => i.name === name)
   const prev = items[index - 1]
   const next = items[index + 1]
@@ -164,6 +165,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
     ...(name === "icons" ? [{ id: "all-icons", title: "All icons" }] : []),
     ...(doc && (doc.api.length > 0 || doc.baseUi) ? [{ id: "api-reference", title: "API Reference" }] : []),
   ]
+  const isTemplate = item.category === "Templates"
   const prefix = `@${REGISTRY_NAME}/`
   const deps = [
     ...item.registryDependencies.map((d) => {
@@ -179,15 +181,23 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         <header className="flex flex-col gap-3">
           <Breadcrumb className="-ml-2">
             <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink render={<Link href="/docs" />}>Docs</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink render={<Link href={`/#${categorySlug(item.category)}`} />}>
-                  {item.category}
-                </BreadcrumbLink>
-              </BreadcrumbItem>
+              {isTemplate ? (
+                <BreadcrumbItem>
+                  <BreadcrumbLink render={<Link href={`/#${categorySlug(item.category)}`} />}>Templates</BreadcrumbLink>
+                </BreadcrumbItem>
+              ) : (
+                <>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink render={<Link href="/" />}>Components</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink render={<Link href={`/#${categorySlug(item.category)}`} />}>
+                      {item.category}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                </>
+              )}
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage>{item.title}</BreadcrumbPage>
@@ -195,7 +205,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
             </BreadcrumbList>
           </Breadcrumb>
           <h1 className="text-3xl font-semibold tracking-tight">{item.title}</h1>
-          <p className="text-lg text-muted-foreground">{item.description}</p>
+          <p className="text-lg text-muted-foreground">{item.summary}</p>
           {doc?.baseUi && (
             <div className="flex flex-wrap gap-1.5">
               <Badge variant="outline" size="sm" render={<a href={doc.baseUi.href} />}>
@@ -203,7 +213,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
               </Badge>
             </div>
           )}
-          {item.category === "Templates" && (
+          {isTemplate && (
             <div className="flex flex-wrap gap-2 pt-1">
               <Button nativeButton={false} render={<Link href={`/templates/${item.name}/`} />}>
                 Open template

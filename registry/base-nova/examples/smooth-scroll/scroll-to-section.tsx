@@ -15,7 +15,7 @@ function Nav() {
   return (
     <div className="sticky top-0 z-10 flex gap-1 bg-muted p-2">
       {SECTIONS.map((s) => (
-        <Button key={s.id} size="xs" variant="ghost" onClick={() => scrollTo(`#ss-${s.id}`, { offset: -48 })}>
+        <Button key={s.id} size="sm" variant="ghost" onClick={() => scrollTo(`#ss-${s.id}`, { offset: -48 })}>
           {s.title}
         </Button>
       ))}

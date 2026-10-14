@@ -162,7 +162,7 @@ function TodoList({
       onOpenChange={setOpen}
       data-slot="todo-list"
       data-complete={complete || undefined}
-      className={cn("flex w-full flex-col rounded-2xl bg-card shadow-raised", className)}
+      className={cn("flex w-full flex-col frame-2xl frame-inset-2 bg-card shadow-raised", className)}
       {...props}
     >
       <CollapsiblePrimitive.Trigger
@@ -257,7 +257,7 @@ function TodoList({
                   exit={{ opacity: 0, y: -4, transition: { duration: 0.14 } }}
                   transition={{ duration: 0.22, ease: EASE_OUT, layout: SPRING }}
                   className={cn(
-                    "flex items-start gap-2.5 rounded-xl px-1.5 py-1.5 transition-colors duration-200",
+                    "flex items-start gap-2.5 rounded-inner px-1.5 py-1.5 transition-colors duration-200",
                     status === "in-progress" && "bg-primary/6"
                   )}
                 >

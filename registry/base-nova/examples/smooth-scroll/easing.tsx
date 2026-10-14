@@ -13,7 +13,7 @@ const LINES = [
 
 function List() {
   return (
-    <ul className="flex flex-col gap-2 p-3">
+    <ul className="flex flex-col gap-2 p-2">
       {LINES.map((l) => (
         <li key={l} className="rounded-lg bg-card px-3 py-2 text-sm text-foreground shadow-raised">
           {l}

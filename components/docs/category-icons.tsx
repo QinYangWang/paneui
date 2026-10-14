@@ -2,16 +2,20 @@ import type * as React from "react"
 
 import {
   BoltIcon,
+  BookmarkIcon,
   BotIcon,
   ChartIcon,
   CopyIcon,
   EditIcon,
   FileIcon,
+  FolderIcon,
   GridIcon,
   HomeIcon,
+  InboxIcon,
   MonitorIcon,
   NavigationIcon,
   ServerIcon,
+  SettingsIcon,
   ShapesIcon,
   SparklesIcon,
   TerminalSquareIcon,
@@ -36,10 +40,19 @@ export const categoryIcons: Record<string, IconComponent> = {
   Data: ServerIcon,
   Agents: BotIcon,
   Charts: ChartIcon,
-  Blocks: GridIcon,
+  Blocks: InboxIcon,
 }
 
-export const ComponentsIcon: IconComponent = HomeIcon
-export const InstallIcon: IconComponent = TerminalSquareIcon
+/** Components overview (the gallery at /). */
+export const ComponentsIcon: IconComponent = GridIcon
+
+/** "Getting started" pages, keyed by href (see docs-pages.ts). Same solid family as the categories. */
+export const guideIcons: Record<string, IconComponent> = {
+  "/docs": HomeIcon,
+  "/docs/installation": TerminalSquareIcon,
+  "/docs/theming": SettingsIcon,
+  "/docs/cli": FolderIcon,
+  "/docs/changelog": BookmarkIcon,
+}
 
 export const categorySlug = (category: string) => category.toLowerCase().replace(/\s+/g, "-")

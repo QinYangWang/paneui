@@ -14,7 +14,8 @@ import {
 } from "@/registry/base-nova/ui/animated-sidebar"
 import { cn } from "@/lib/utils"
 
-import { categoryIcons, ComponentsIcon, InstallIcon } from "./category-icons"
+import { categoryIcons, ComponentsIcon, guideIcons } from "./category-icons"
+import { COMPONENTS_HREF, COMPONENTS_TITLE, GUIDE_PAGES } from "./docs-pages"
 
 export type NavGroup = { category: string; items: { name: string; title: string; description: string }[] }
 
@@ -63,25 +64,54 @@ export function DocsNav({ groups, pathname, className }: { groups: NavGroup[]; p
       <SidebarGroup>
         <SidebarGroupLabel>Getting started</SidebarGroupLabel>
         <SidebarMenu>
-          <SidebarItem icon={<ComponentsIcon />} label="Components" isActive={pathname === "/"} render={<Link href="/" />} />
+          {GUIDE_PAGES.map((p) => {
+            const Icon = guideIcons[p.href]
+            return (
+              <SidebarItem
+                key={p.href}
+                icon={Icon ? <Icon /> : undefined}
+                label={p.title}
+                isActive={pathname === p.href}
+                render={<Link href={p.href} />}
+              />
+            )
+          })}
+        </SidebarMenu>
+      </SidebarGroup>
+      <SidebarGroup>
+        <SidebarGroupLabel>Components</SidebarGroupLabel>
+        <SidebarMenu>
           <SidebarItem
-            icon={<InstallIcon />}
-            label="Installation"
-            isActive={pathname === "/docs"}
-            render={<Link href="/docs" />}
+            icon={<ComponentsIcon />}
+            label={COMPONENTS_TITLE}
+            isActive={pathname === COMPONENTS_HREF}
+            render={<Link href={COMPONENTS_HREF} />}
           />
+          {components.map(renderGroup)}
         </SidebarMenu>
       </SidebarGroup>
       {templates.length > 0 && (
         <SidebarGroup>
           <SidebarGroupLabel>Templates</SidebarGroupLabel>
-          <SidebarMenu>{templates.map(renderGroup)}</SidebarMenu>
+          <SidebarMenu>
+            {templates.flatMap((g) =>
+              g.items.map((i) => {
+                const href = `/docs/${i.name}`
+                const Icon = categoryIcons[g.category]
+                return (
+                  <SidebarItem
+                    key={i.name}
+                    icon={Icon ? <Icon /> : undefined}
+                    label={i.title}
+                    isActive={pathname === href}
+                    render={<Link href={href} />}
+                  />
+                )
+              }),
+            )}
+          </SidebarMenu>
         </SidebarGroup>
       )}
-      <SidebarGroup>
-        <SidebarGroupLabel>Components</SidebarGroupLabel>
-        <SidebarMenu>{components.map(renderGroup)}</SidebarMenu>
-      </SidebarGroup>
     </SidebarContent>
   )
 }

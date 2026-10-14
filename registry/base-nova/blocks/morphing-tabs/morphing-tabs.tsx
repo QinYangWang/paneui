@@ -104,6 +104,36 @@ function MorphingTabs({
   }, [activeIndex])
 
   const tabRefs = React.useRef(new Map<string, HTMLButtonElement | null>())
+  const railRef = React.useRef<HTMLDivElement>(null)
+
+  /**
+   * Scroll the rail (only the rail, never the page) so a tab and its concave feet are fully visible.
+   * The target is absolute, so a call made while a smooth scroll is still running lands on the same spot.
+   */
+  const reveal = React.useCallback(
+    (id: string, instant = false) => {
+      const rail = railRef.current
+      const tab = tabRefs.current.get(id)?.parentElement
+      if (!rail || !tab || rail.scrollWidth <= rail.clientWidth) return
+      const r = rail.getBoundingClientRect()
+      const t = tab.getBoundingClientRect()
+      const inset = 16 // 8px foot + 8px breathing room
+      let left: number | null = null
+      if (t.left < r.left + inset) left = rail.scrollLeft + (t.left - r.left) - inset
+      else if (t.right > r.right - inset) left = rail.scrollLeft + (t.right - r.right) + inset
+      if (left === null) return
+      rail.scrollTo({ left, behavior: instant || reduceMotion ? "auto" : "smooth" })
+    },
+    [reduceMotion]
+  )
+
+  const activeId = active?.id
+  const revealedOnce = React.useRef(false)
+  React.useEffect(() => {
+    if (!activeId) return
+    reveal(activeId, !revealedOnce.current)
+    revealedOnce.current = true
+  }, [activeId, reveal])
   const dragging = React.useRef(false)
   const orderAtDragStart = React.useRef<string[]>(order)
   const [focusId, setFocusId] = React.useState<string | null>(null)
@@ -170,6 +200,7 @@ function MorphingTabs({
     <LayoutGroup id={uid}>
       <div data-slot="morphing-tabs" className={cn("flex w-full flex-col", className)}>
         <Reorder.Group
+          ref={railRef}
           as="div"
           axis="x"
           values={order}
@@ -194,6 +225,8 @@ function MorphingTabs({
                 dragElastic={0.12}
                 whileDrag={reduceMotion ? undefined : { scale: 1.03 }}
                 onDragStart={() => {
+                  // A drag starts with a focus on the tab; let the user steer instead of auto-scrolling.
+                  railRef.current?.scrollTo({ left: railRef.current.scrollLeft })
                   dragging.current = true
                   orderAtDragStart.current = orderRef.current
                 }}
@@ -244,7 +277,10 @@ function MorphingTabs({
                     disabled={item.disabled}
                     tabIndex={id === rovingId ? 0 : -1}
                     data-active={selected || undefined}
-                    onFocus={() => setFocusId(id)}
+                    onFocus={() => {
+                      setFocusId(id)
+                      if (!dragging.current) reveal(id)
+                    }}
                     onClick={() => {
                       if (dragging.current) return
                       setValue(id)

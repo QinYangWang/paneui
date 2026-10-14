@@ -201,11 +201,11 @@ function FileUploadRow({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={reduce ? { opacity: 0 } : { opacity: 0, x: -12, scale: 0.98, transition: { duration: 0.18 } }}
       transition={{ type: "spring", stiffness: 420, damping: 34 }}
-      className="flex items-center gap-3 rounded-2xl bg-card p-2.5 pr-2 shadow-raised"
+      className="flex items-center gap-3 frame-2xl frame-p-2.5 pr-2 bg-card shadow-raised"
     >
       <span
         className={cn(
-          "relative inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-muted shadow-well",
+          "relative inline-flex size-10 shrink-0 items-center justify-center rounded-inner bg-muted shadow-well",
           status === "error" ? "text-destructive" : "text-muted-foreground"
         )}
       >

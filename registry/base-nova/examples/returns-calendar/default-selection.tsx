@@ -10,7 +10,7 @@ const data: ReturnsCalendarYear[] = [
 
 export default function ReturnsCalendarDefaultSelection() {
   return (
-    <div className="w-full max-w-3xl">
+    <div className="w-full max-w-4xl">
       <ReturnsCalendar
         data={data}
         defaultSelection={{ start: { year: 2025, month: 6 }, end: { year: 2025, month: 11 } }}

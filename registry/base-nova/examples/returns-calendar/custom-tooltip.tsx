@@ -17,7 +17,7 @@ const startingBalance = 10_000
 
 export default function ReturnsCalendarCustomTooltip() {
   return (
-    <div className="w-full max-w-3xl">
+    <div className="w-full max-w-4xl">
       <ReturnsCalendar data={data} label="Portfolio monthly returns">
         <ReturnsCalendarGrid>
           <ReturnsCalendarTooltip>

@@ -143,7 +143,7 @@ function AvailabilityScheduler({
     <div
       data-slot="availability-scheduler"
       className={cn(
-        "w-full max-w-xl rounded-2xl bg-card p-2 shadow-raised",
+        "w-full max-w-xl frame-2xl frame-p-2 bg-card shadow-raised",
         className
       )}
       {...props}
@@ -236,7 +236,7 @@ function DayRow({
       data-slot="availability-day"
       data-enabled={data.enabled || undefined}
       className={cn(
-        "flex flex-col gap-3 rounded-xl px-3 py-3 sm:flex-row sm:items-start sm:gap-4",
+        "flex flex-col gap-3 rounded-inner px-3 py-3 sm:flex-row sm:items-start sm:gap-4",
         !first && "border-t border-border/60"
       )}
       role="group"

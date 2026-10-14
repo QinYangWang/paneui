@@ -259,6 +259,87 @@ const designSystemRules = [
   },
 ];
 
+
+// ───────────────────────────────────────────────────────────────────────────
+// qinyang/concentric-radius
+//
+// Static half of the nested-radius rule (the runtime half is `pnpm audit:radius`).
+// For a JSX element whose className literally sets a radius token and a padding
+// (rounded-2xl p-2, or frame-2xl frame-p-2), every DIRECT JSX child that sets
+// its own radius token must equal outer − padding (±2px), or use rounded-inner.
+// Only unprefixed literal classes are read (cn("…") / template strings included,
+// conditional branches too); anything computed is left to the runtime audit.
+// ───────────────────────────────────────────────────────────────────────────
+const RADIUS_PX = { none: 0, sm: 6, md: 8, lg: 10, xl: 14, "2xl": 18, "3xl": 22, shell: 13 };
+const SPACING_PX = (n) => (/^\d+(\.\d+)?$/.test(n) ? parseFloat(n) * 4 : null);
+
+function classTokens(attr) {
+  if (!attr || !attr.value) return [];
+  const out = [];
+  const visit = (n) => {
+    if (!n || typeof n !== "object") return;
+    if (n.type === "Literal" && typeof n.value === "string") out.push(...n.value.split(/\s+/));
+    else if (n.type === "TemplateElement") out.push(...n.value.cooked.split(/\s+/));
+    for (const k of Object.keys(n)) {
+      if (k === "parent" || k === "loc" || k === "range") continue;
+      const v = n[k];
+      if (Array.isArray(v)) v.forEach(visit);
+      else if (v && typeof v.type === "string") visit(v);
+    }
+  };
+  visit(attr.value);
+  return out.filter(Boolean);
+}
+
+function readBox(opening) {
+  const attr = opening.attributes.find(
+    (a) => a.type === "JSXAttribute" && a.name && a.name.name === "className"
+  );
+  const tokens = classTokens(attr);
+  let radius = null, pad = null, inner = false;
+  for (const t of tokens) {
+    if (t.includes(":")) continue; // variants (hover:, sm:, data-…) are state, not the resting shape
+    let m;
+    if ((m = t.match(/^(?:rounded|frame)-(none|sm|md|lg|xl|2xl|3xl|shell)$/))) radius = RADIUS_PX[m[1]];
+    else if (t === "rounded-inner" || t === "frame-inner") inner = true;
+    else if ((m = t.match(/^(?:p|frame-p)-([\d.]+)$/))) pad = SPACING_PX(m[1]); // not frame-inset: that inset is only for rounded-inner children
+  }
+  return { attr, radius, pad, inner };
+}
+
+const concentricRadius = {
+  meta: {
+    type: "suggestion",
+    docs: { description: "Nested radii must be concentric: inner = outer − padding (AGENTS.md)." },
+    schema: [],
+  },
+  create(context) {
+    return {
+      JSXElement(node) {
+        const outer = readBox(node.openingElement);
+        if (outer.radius == null || outer.pad == null || outer.pad === 0) return;
+        const want = Math.max(outer.radius - outer.pad, 0);
+        if (want < 4) return; // inset too large for concentric: children keep their own token
+        for (const child of node.children) {
+          if (child.type !== "JSXElement") continue;
+          const box = readBox(child.openingElement);
+          if (box.inner || box.radius == null) continue;
+          if (Math.abs(box.radius - want) <= 2) continue;
+          context.report({
+            node: box.attr,
+            message:
+              `Radius ${box.radius}px inside a ${outer.radius}px container with ${outer.pad}px padding: ` +
+              `concentric is ${want}px. Use rounded-inner with frame-* on the container ` +
+              `(e.g. "frame-2xl frame-p-2" → "rounded-inner"). See AGENTS.md › Radius.`,
+          });
+        }
+      },
+    };
+  },
+};
+
+const qinyangPlugin = { rules: { "concentric-radius": concentricRadius } };
+
 const eslintConfig = [
   {
     // `next lint` ignored these implicitly; `eslint .` needs them spelled out.
@@ -279,9 +360,13 @@ const eslintConfig = [
     // @shadcn/lint: register the plugin. eslint-config-next already sets up
     // the TypeScript/JSX parser for these files, so no parser override here.
     files: ["**/*.{js,jsx,ts,tsx}"],
-    plugins: { shadcn: shadcnPlugin },
+    plugins: { shadcn: shadcnPlugin, qinyang: qinyangPlugin },
   },
   ...designSystemRules,
+  {
+    files: [...LIBRARY_FILES, ...CONSUMER_FILES],
+    rules: { "qinyang/concentric-radius": "warn" },
+  },
 ];
 
 export default eslintConfig;

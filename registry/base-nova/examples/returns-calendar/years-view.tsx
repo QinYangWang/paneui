@@ -12,7 +12,7 @@ const data: ReturnsCalendarYear[] = [
 
 export default function ReturnsCalendarYearsView() {
   return (
-    <div className="w-full max-w-3xl">
+    <div className="w-full max-w-4xl">
       <ReturnsCalendar data={data} defaultView="years" label="Index fund yearly returns" />
     </div>
   )

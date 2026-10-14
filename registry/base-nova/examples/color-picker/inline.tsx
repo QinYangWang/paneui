@@ -22,7 +22,7 @@ function RgbReadout() {
 
 export default function ColorPickerInline() {
   return (
-    <div className="flex w-64 flex-col gap-3 rounded-2xl bg-card p-3 shadow-raised">
+    <div className="flex w-64 flex-col gap-3 frame-2xl frame-p-3 bg-card shadow-raised">
       <ColorPicker defaultValue="#e11d48">
         <ColorPickerArea />
         <ColorPickerHue />

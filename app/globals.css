@@ -310,6 +310,100 @@ html[data-accent="violet"].dark {
   margin-bottom: 3px;
 }
 
+/*
+ * ───────────── Concentric radii: frame-* + rounded-inner ─────────────
+ *
+ * A rounded element inside a rounded, padded container must use the container's radius minus
+ * the inset (inner = outer − padding − border), or the corners visibly drift apart.
+ * Instead of computing that by hand in every component:
+ *
+ *   <div class="frame-xl frame-p-1">          radius xl (14px), padding 4px
+ *     <button class="rounded-inner">…</button>   → 14 − 4 = 10px
+ *   </div>
+ *
+ *   frame-{sm…3xl|shell|[len]}  the container: sets its border-radius and publishes the radius
+ *                               its children should use (--frame-inner-1).
+ *   frame-p-{n|[len]}           padding on all sides AND the inset used in the calculation.
+ *   frame-inset-{n|[len]}       only the inset (when the gap comes from px/py, a gap, or a
+ *                               wrapper): the frame's own padding is left alone.
+ *   frame-border                add the frame's 1px border to the inset.
+ *   rounded-inner               a child: border-radius = frame radius − inset (min 2px).
+ *   rounded-{t,b,s,e}-inner     the same for one side (first/last rows, segmented ends).
+ *   frame-inner                 a child that is itself a padded frame (second level): gets
+ *                               rounded-inner and publishes its own inner radius, so its
+ *                               children use rounded-inner too. Combine with frame-p-*.
+ *
+ * Two levels deep (frame → frame-inner → rounded-inner) is supported; beyond that, compute the
+ * value explicitly. `frame-xl` on an element that has no children to fit is just `rounded-xl`.
+ * Inputs are registered as non-inheriting so a frame never picks up an ancestor's padding.
+ */
+@property --frame-r {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --frame-p {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --frame-b {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@utility frame-* {
+  --frame-r: --value(--radius-*, [length]);
+  border-radius: --value(--radius-*, [length]);
+  --frame-inner-1: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 2px);
+  /* A fresh frame starts a new chain, even inside a frame-inner. */
+  --frame-inner-2: initial;
+}
+
+@utility frame-p-* {
+  --frame-p: --spacing(--value(integer, number));
+  padding: --spacing(--value(integer, number));
+  --frame-p: --value([length]);
+  padding: --value([length]);
+}
+
+@utility frame-inset-* {
+  --frame-p: --spacing(--value(integer, number));
+  --frame-p: --value([length]);
+}
+
+@utility frame-border {
+  --frame-b: 1px;
+}
+
+@utility rounded-inner {
+  border-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+}
+@utility rounded-t-inner {
+  border-top-left-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+  border-top-right-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+}
+@utility rounded-b-inner {
+  border-bottom-left-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+  border-bottom-right-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+}
+@utility rounded-s-inner {
+  border-start-start-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+  border-end-start-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+}
+@utility rounded-e-inner {
+  border-start-end-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+  border-end-end-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
+}
+
+/* Second level: its own radius is the parent's inner radius; it publishes the next one. */
+@utility frame-inner {
+  --frame-r: var(--frame-inner-1, var(--radius-lg));
+  border-radius: var(--frame-inner-1, var(--radius-lg));
+  --frame-inner-2: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 2px);
+}
+
 /* Shiki dual themes (defaultColor: false). */
 .shiki,
 .shiki span {

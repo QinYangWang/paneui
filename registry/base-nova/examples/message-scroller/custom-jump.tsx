@@ -23,7 +23,7 @@ function JumpBar() {
       <span className="text-xs text-muted-foreground">
         {atLiveEdge ? "Following the conversation" : hasNew ? "New messages below" : "Reading earlier messages"}
       </span>
-      <Button size="xs" variant="secondary" disabled={atLiveEdge} onClick={() => scrollToLatest()}>
+      <Button size="sm" variant="secondary" disabled={atLiveEdge} onClick={() => scrollToLatest()}>
         <ArrowDownIcon data-icon="inline-start" />
         Latest
       </Button>

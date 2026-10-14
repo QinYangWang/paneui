@@ -6,6 +6,7 @@ style. `pnpm lint` enforces most of them (`@shadcn/lint`, rules in the
 "qinyang/ui design-system rules" block of `eslint.config.mjs`); the rest is on you.
 
 **After making changes, run `pnpm lint` and `pnpm exec tsc --noEmit -p .` and fix all errors.**
+After changing radii or padding on nested surfaces, also run `pnpm audit:radius` against a fresh static export.
 
 ## Where things live
 
@@ -20,6 +21,8 @@ style. `pnpm lint` enforces most of them (`@shadcn/lint`, rules in the
 | `app/globals.css` | The theme: every token below | — |
 | `notes/icon-usage.md` | Icon usage system | — |
 | `notes/synara-native-style.md` | Native desktop style reference (Synara/Codex values) | — |
+| `notes/radius-audit.md` | Nested-radius audit triage (open findings by owner) | — |
+| `scripts/audit-radius.mjs` (+ `.config.mjs`) | `pnpm audit:radius`: browser audit of nested radii | — |
 | `THIRD_PARTY_NOTICES.md` | MIT notice for Synara | — |
 
 Import library code as `@/registry/base-nova/ui/<file>` or `@/registry/base-nova/blocks/<name>/<file>`.
@@ -74,9 +77,43 @@ component only if the design really needs a new treatment.
   buttons `rounded-sm`, checkboxes 4px; tab indicators inside a `p-0.5` list `rounded-md`;
   menus/popups `rounded-xl` (`p-1`, concentric with `rounded-lg` rows); cards, tables, code
   blocks `rounded-xl`; two-layer inset cards and big panels `rounded-2xl`; dialogs `rounded-3xl`. Two-layer cards: `<Card variant="inset">` + `<CardPanel>` (tinted frame, p-1, raised panel) for presented content (demos, media, code, featured plans) only; dense dashboard cards stay default.
-  Keep radii concentric (outer = inner + padding). `rounded-full` only for inherently
+  Keep radii concentric (outer = inner + padding): see **Nested radii** below. `rounded-full` only for inherently
   round things: avatars, dots, switches and slider thumbs, badges/tags, icon-only
   circular buttons, progress bars.
+- **Nested radii (hard rule, since 2026-10-14)**: any rounded element placed inside a rounded
+  container with padding uses `rounded-inner` (or an explicitly computed concentric token), never
+  the same token as its container. Declare the container with the `frame-*` utilities from
+  `app/globals.css` and the child follows it:
+
+  ```tsx
+  <div className="frame-2xl frame-p-2 bg-card">        {/* 18px, padding 8px */}
+    <li className="rounded-inner hover:bg-secondary">… {/* 18 − 8 = 10px */}
+  ```
+
+  | Utility | On | Does |
+  | --- | --- | --- |
+  | `frame-{sm…3xl,shell}` | container | sets its radius and publishes radius − inset to descendants |
+  | `frame-p-{n}` | container | padding on all sides **and** the inset used in the maths (`pr-1.5` etc. still override one side) |
+  | `frame-inset-{n}` | container | only the inset, when the gap comes from a wrapper's `px-2 pb-2`, a gap, or asymmetric padding |
+  | `frame-border` | container | adds the container's 1px border to the inset |
+  | `rounded-inner`, `rounded-{t,b,s,e}-inner` | child | radius = frame radius − inset (min 2px); outside any frame it falls back to `rounded-lg` |
+  | `frame-inner` | child that is itself padded | takes `rounded-inner` and publishes its own inner radius (combine with `frame-p-*`/`frame-inset-*`) |
+
+  Two levels (`frame-*` → `frame-inner` → `rounded-inner`) are supported; a third must compute its
+  value. A component that uses `rounded-inner` puts its `frame-*` on its own root, so it never
+  follows a frame it does not own. A consumer `rounded-*`/`p-*` on the same element still wins
+  (utility order), but then the published inset is stale: change the `frame-*` instead.
+  When the rule applies: inset ≤ 8px is always concentric. If radius − inset would be < 4px the
+  container is too loose for concentric: the child keeps its own token (or shrink the padding /
+  grow the container, as `attachment-upload` does). For insets of 9–15px, surfaces (rows, panels,
+  wells, media, thumbnails) stay concentric; self-contained controls (buttons, icon chips, inputs)
+  keep their token. Never put a child's radius above its container's.
+  Checks: `pnpm lint` warns (`qinyang/concentric-radius`) when a direct JSX child's literal radius
+  token breaks the rule; `pnpm audit:radius` (needs the static export served, `BASE_URL`, default
+  `http://localhost:3123`) measures every docs page in the browser, including opened menus and
+  hovered rows from `scripts/audit-radius.config.mjs`, and writes a report grouped by page and
+  component (allow-list intentional cases there, each with a reason). Triage notes:
+  `notes/radius-audit.md`.
 - **New tokens**: add them to `app/globals.css` in `oklch()`, with a `.dark` value
   and an `@theme inline` mapping, in a separate reviewed change.
 
@@ -172,7 +209,7 @@ house rules:
 - **Press**: no press scale on standard controls (see Motion); motion-showcase pressables
   may scale to `0.96` over `150ms` `ease-out`, disabled never scales.
 - **Concentric radii**: outer radius = inner radius + padding (+ border) on nested
-  surfaces with an even inset ≤ 24px; beyond that, keep each surface's own token.
+  surfaces; use `frame-*` + `rounded-inner` (see Tokens › Nested radii for when it applies).
 - **Text wrapping**: `text-balance` on headings and titles, `text-pretty` on body
   paragraphs and descriptions.
 - **Numbers**: `tabular-nums` on any number that updates, aligns in columns, or

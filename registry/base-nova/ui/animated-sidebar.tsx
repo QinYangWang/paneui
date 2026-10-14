@@ -222,7 +222,7 @@ function Sidebar({
         className={cn(
           "flex h-full w-full flex-col overflow-hidden text-foreground",
           variant === "floating"
-            ? "rounded-xl bg-card shadow-surface"
+            ? "rounded-2xl bg-card shadow-well"
             : cn("bg-shell", side === "left" ? "border-r border-border" : "border-l border-border"),
           panelClassName
         )}

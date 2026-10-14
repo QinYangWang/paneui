@@ -236,7 +236,7 @@ function ColorPickerContent({
             ({ "--morph-r0": triggerRadius, ...(typeof style === "function" ? style(state) : style) }) as React.CSSProperties
           }
           className={cn(
-            "flex w-64 flex-col gap-3 rounded-2xl bg-popover p-3 text-ui text-popover-foreground shadow-surface outline-none",
+            "flex w-64 flex-col gap-3 frame-2xl frame-p-3 bg-popover text-ui text-popover-foreground shadow-surface outline-none",
             // Morph: rest shape keeps the shadow; start/end shape is the trigger chip.
             "[clip-path:inset(-24px_round_44px)] transition-[clip-path,opacity] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-250",
             "data-[side=bottom]:data-starting-style:[clip-path:inset(0_calc(100%_-_var(--anchor-width))_calc(100%_-_var(--anchor-height))_0_round_var(--morph-r0))]",
@@ -297,7 +297,7 @@ function ColorPickerArea({
       data-slot="color-picker-area"
       data-disabled={disabled || undefined}
       className={cn(
-        "relative h-40 w-full cursor-crosshair touch-none rounded-xl select-none data-disabled:pointer-events-none data-disabled:opacity-50",
+        "relative h-40 w-full cursor-crosshair touch-none rounded-inner select-none data-disabled:pointer-events-none data-disabled:opacity-50",
         "after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-well",
         className
       )}
@@ -479,7 +479,7 @@ function ColorPickerHexInput({
     <label
       data-slot="color-picker-hex"
       className={cn(
-        "flex h-8 min-w-0 flex-1 items-center gap-1 rounded-xl bg-background dark:bg-input/32 px-2.5 font-mono text-ui-sm shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50",
+        "flex h-8 min-w-0 flex-1 items-center gap-1 rounded-inner bg-background dark:bg-input/32 px-2.5 font-mono text-ui-sm shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50",
         className
       )}
     >

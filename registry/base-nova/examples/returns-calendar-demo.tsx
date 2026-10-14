@@ -23,7 +23,7 @@ const data = (() => {
 export default function ReturnsCalendarDemo() {
   const [view, setView] = React.useState<ReturnsCalendarView>("months")
   return (
-    <div className="w-full max-w-3xl space-y-3">
+    <div className="w-full max-w-4xl space-y-3">
       <div className="flex items-center justify-between gap-3">
         <div>
           <div className="text-sm font-medium">Strategy returns</div>

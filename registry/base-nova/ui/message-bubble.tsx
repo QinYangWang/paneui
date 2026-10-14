@@ -30,7 +30,10 @@ const messageBubbleVariants = cva(
   {
     variants: {
       tone: {
-        default: "bg-card text-secondary-foreground shadow-raised",
+        // Hairline drawn inside (well) plus the primary tone's drop, not the
+        // outer raised ring: an outer ring eats 1px of the gap on each side, so
+        // stacked incoming bubbles read tighter than stacked outgoing ones.
+        default: "bg-card text-secondary-foreground shadow-[var(--skeuo-well),var(--skeuo-primary)]",
         primary:
           "bg-primary text-primary-foreground shadow-primary [&_a]:text-primary-foreground",
         muted: "bg-muted text-foreground shadow-well",

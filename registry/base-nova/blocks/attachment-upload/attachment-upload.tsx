@@ -260,7 +260,7 @@ function AttachmentRow({
       }
       transition={{ type: "spring", stiffness: 380, damping: 32, delay }}
       className={cn(
-        "group/row relative flex items-center gap-3 overflow-hidden rounded-2xl p-2 pr-1.5 transition-colors",
+        "group/row relative flex items-center gap-3 overflow-hidden frame-inner frame-p-2 pr-1.5 transition-colors",
         status === "error" ? "bg-destructive/6" : "hover:bg-muted/60"
       )}
     >
@@ -269,14 +269,14 @@ function AttachmentRow({
           type="button"
           onClick={() => onPreview(item)}
           aria-label={`Preview ${item.name}`}
-          className="relative size-11 shrink-0 cursor-zoom-in rounded-xl shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="relative size-11 shrink-0 cursor-zoom-in rounded-inner shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {!previewing && <Thumb item={item} layout={!reduce} />}
         </button>
       ) : (
         <span
           className={cn(
-            "inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-muted shadow-well",
+            "inline-flex size-11 shrink-0 items-center justify-center rounded-inner bg-muted shadow-well",
             status === "error" ? "text-destructive" : "text-muted-foreground"
           )}
         >
@@ -491,11 +491,11 @@ export function AttachmentUpload({
       <div
         data-slot="attachment-upload"
         className={cn(
-          "flex w-full flex-col gap-3 rounded-3xl bg-card p-3 shadow-raised",
+          "flex w-full flex-col gap-3 frame-3xl frame-p-2 bg-card shadow-raised",
           className
         )}
       >
-        <div className="flex items-center justify-between gap-2 px-1.5 pt-0.5">
+        <div className="flex items-center justify-between gap-2 px-2.5 pt-1.5">
           <div className="flex items-center gap-2 text-ui font-medium">
             <AttachIcon size={16} className="text-muted-foreground" />
             {label}
@@ -537,7 +537,7 @@ export function AttachmentUpload({
           }}
           transition={{ type: "spring", stiffness: 420, damping: 36 }}
           className={cn(
-            "relative flex rounded-2xl bg-background dark:bg-input/32 shadow-well transition-colors",
+            "relative flex rounded-inner bg-background dark:bg-input/32 shadow-well transition-colors",
             "outline-2 -outline-offset-6 outline-transparent outline-dashed",
             compact ? "items-center gap-3 px-3 py-2.5" : "flex-col items-center gap-2.5 px-6 py-8 text-center",
             dragging && "bg-primary/8 outline-primary/50",
@@ -548,8 +548,9 @@ export function AttachmentUpload({
             layout={!reduce}
             animate={reduce ? undefined : { y: dragging ? -3 : 0, rotate: dragging ? -8 : 0 }}
             className={cn(
-              "inline-flex shrink-0 items-center justify-center rounded-xl bg-card shadow-raised",
-              compact ? "size-8" : "size-11",
+              "inline-flex shrink-0 items-center justify-center bg-card shadow-raised",
+              // compact: 10px into the dropzone, so concentric with it (14 − 10 ≈ rounded-sm)
+              compact ? "size-8 rounded-sm" : "size-11 rounded-xl",
               dragging ? "text-primary" : "text-muted-foreground"
             )}
           >

@@ -145,12 +145,19 @@ function EditableTable({
   const columnMap = React.useMemo(() => new Map(columns.map((c) => [c.key, c])), [columns])
 
   /* focus management ------------------------------------------------------- */
-  const focusCell = React.useCallback((pos: CellPos) => {
+  // Scrolling waits a frame: when a row was just inserted, the virtualizer only
+  // knows the new count after React commits. Scrolling to it earlier clamps to
+  // the old last row and the virtualizer's reconcile pass then snaps the
+  // viewport back, so every "New row" click jolted the table.
+  const focusCell = React.useCallback((pos: CellPos, reveal: "auto" | "end" = "auto") => {
     setActive(pos)
-    tableRef.current?.scrollToIndex(pos.row)
     let tries = 0
     const attempt = () => {
       const root = tableRef.current?.element()
+      if (tries === 0) {
+        if (reveal === "end" && root) root.scrollTo({ top: root.scrollHeight - root.clientHeight })
+        else tableRef.current?.scrollToIndex(pos.row)
+      }
       const el = root?.querySelector<HTMLElement>(`[data-cell="${pos.row}:${CSS.escape(pos.key)}"]`)
       if (el) el.focus({ preventScroll: true })
       else if (tries++ < 6) requestAnimationFrame(attempt)
@@ -200,7 +207,9 @@ function EditableTable({
       next.splice(index, 0, row)
       return next
     })
-    if (columns[0]) focusCell({ row: index, key: columns[0].key })
+    // Appending keeps the "New row" band pinned under the pointer: scroll to
+    // the very end so the new row lands right above it.
+    if (columns[0]) focusCell({ row: index, key: columns[0].key }, index >= rows.length ? "end" : "auto")
   }
 
   const deleteRow = (index: number) => {

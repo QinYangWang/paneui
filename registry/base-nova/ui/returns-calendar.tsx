@@ -234,21 +234,24 @@ function ReturnsCalendarGrid({ className, children }: { className?: string; chil
     <div
       ref={containerRef}
       data-slot="returns-calendar-grid"
-      className={cn("relative", className)}
+      className={cn("relative min-w-0", className)}
       onPointerLeave={() => setHot(null)}
     >
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.div
-          key={view}
-          initial={reduce ? false : { opacity: 0, y: 6, filter: "blur(3px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6, filter: "blur(3px)" }}
-          transition={{ duration: 0.24, ease: CHART_EASE }}
-          aria-label={label}
-        >
-          {view === "months" ? <MonthsGrid /> : <YearsGrid />}
-        </motion.div>
-      </AnimatePresence>
+      {/* Months keep a readable minimum width; narrow containers scroll sideways instead of squeezing the cells. p-1/-m-1 keeps focus rings and the hover scale from being clipped. */}
+      <div data-slot="returns-calendar-scroll" className="-m-1 overflow-x-auto overscroll-x-contain p-1" onScroll={() => setHot(null)}>
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={view}
+            initial={reduce ? false : { opacity: 0, y: 6, filter: "blur(3px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6, filter: "blur(3px)" }}
+            transition={{ duration: 0.24, ease: CHART_EASE }}
+            aria-label={label}
+          >
+            {view === "months" ? <MonthsGrid /> : <YearsGrid />}
+          </motion.div>
+        </AnimatePresence>
+      </div>
       {children ?? <ReturnsCalendarTooltip />}
     </div>
   )
@@ -300,8 +303,8 @@ function MonthsGrid() {
     <div
       role="grid"
       aria-label={`${label}. Arrow keys move between months; Enter starts and ends a range; Shift+arrows extend it.`}
-      className="grid min-w-0 gap-1 select-none"
-      style={{ gridTemplateColumns: "2.75rem repeat(12, minmax(0, 1fr)) 3.75rem" }}
+      className="grid gap-1 select-none"
+      style={{ gridTemplateColumns: "2.75rem repeat(12, minmax(3.5rem, 1fr)) 3.75rem" }}
     >
       <div role="row" className="contents">
         {/* Takes the row-header column: an sr-only (absolute) header would drop out of the grid and shift every cell one column left. */}
@@ -314,10 +317,7 @@ function MonthsGrid() {
             role="columnheader"
             className="pb-0.5 text-center text-ui-2xs font-medium text-muted-foreground"
           >
-            <span className="sm:hidden" aria-hidden>
-              {m[0]}
-            </span>
-            <span className="max-sm:sr-only">{m}</span>
+            {m}
           </span>
         ))}
         <span role="columnheader" className="pb-0.5 text-center text-ui-2xs font-medium text-muted-foreground">
@@ -385,7 +385,7 @@ function MonthsGrid() {
                     boxShadow: selected ? "inset 0 0 0 1.5px var(--foreground)" : undefined,
                   }}
                 >
-                  <span className="max-sm:hidden">{signed(v, digits)}</span>
+                  {signed(v, digits)}
                 </motion.button>
               )
             })}

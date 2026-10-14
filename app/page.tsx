@@ -18,19 +18,21 @@ export default function ComponentsPage() {
   const total = getItems().length
   return (
     <div className="flex flex-col gap-14">
-      <section className="flex flex-col items-start gap-4">
-        <Badge variant="primary" size="sm">
-          {total} components · Base UI · Tailwind 4
-        </Badge>
-        <h1 className="text-4xl font-semibold tracking-tight">Quiet, precise components.</h1>
-        <p className="max-w-xl text-lg text-muted-foreground">
-          Copy-paste React components on Base UI, Tailwind 4 and Motion, in a native desktop style: system type, hairline borders, quiet fills. Install any
-          of them with the shadcn CLI.
+      <section className="flex flex-col items-start gap-3">
+        <h1 className="text-3xl font-semibold tracking-tight">Components</h1>
+        <p className="max-w-2xl text-lg text-muted-foreground">
+          {total} components, blocks and templates on Base UI, Tailwind 4 and Motion, with live previews. Pick one to see its
+          usage, examples and API, or start with the installation guide.
         </p>
-        <Button nativeButton={false} render={<Link href="/docs" />}>
-          Get started
-          <ArrowRightIcon data-icon="inline-end" />
-        </Button>
+        <div className="flex flex-wrap gap-2 pt-1">
+          <Button nativeButton={false} render={<Link href="/docs/installation" />}>
+            Installation
+            <ArrowRightIcon data-icon="inline-end" />
+          </Button>
+          <Button variant="secondary" nativeButton={false} render={<Link href="/docs" />}>
+            Introduction
+          </Button>
+        </div>
       </section>
       {groups.map((g, gi) => {
         return (
@@ -55,13 +57,14 @@ export default function ComponentsPage() {
                       href={`/docs/${item.name}`}
                       className="outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
                     >
-                      <CardHeader className="grid-cols-[1fr_auto] items-center py-3">
+                      {/* minmax(0,1fr): a long description must wrap/clamp, never widen the grid track and stretch the card. */}
+                      <CardHeader className="grid-cols-[minmax(0,1fr)_auto] items-center py-3">
                         <CardTitle className="font-medium">{item.title}</CardTitle>
                         <ArrowRightIcon
                           size={16}
                           className="col-start-2 row-span-2 shrink-0 text-muted-foreground transition-transform group-hover/gallery:translate-x-0.5 group-hover/gallery:text-foreground"
                         />
-                        <CardDescription className="truncate text-sm">{item.description}</CardDescription>
+                        <CardDescription className="line-clamp-2 text-sm">{item.summary}</CardDescription>
                       </CardHeader>
                     </Link>
                   </Card>

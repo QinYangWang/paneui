@@ -48,11 +48,15 @@ const LABEL_GAP = 6
  * overhangs by exactly 8px whatever its width. A badged item pushes its label out by that much more.
  */
 const BADGE_OVERHANG = 8
+/*
+ * The label clips its width animation (overflow-hidden). py-1/-my-1 on it and mr-px on the kbd keep the
+ * kbd's hairline ring and drop inside the clip without changing the row height.
+ */
 
 const sizes = {
-  // Concentric radii: bar radius = item radius + bar padding.
+  // Concentric radii: bar radius = item radius + bar padding (md 14 = 10 + 4, sm 10 = 6 + 4).
   sm: { bar: "gap-0.5 rounded-lg p-1", item: "h-7 min-w-7 rounded-sm px-1.5 text-ui-sm", icon: "[&_svg]:size-3.5", radius: "rounded-sm" },
-  md: { bar: "gap-1 rounded-xl p-1.5", item: "h-9 min-w-9 rounded-md px-2.5 text-ui", icon: "[&_svg]:size-4", radius: "rounded-md" },
+  md: { bar: "gap-0.5 rounded-xl p-1", item: "h-9 min-w-9 rounded-lg px-2.5 text-ui", icon: "[&_svg]:size-4", radius: "rounded-lg" },
 }
 
 export function ExpandableActionBar({
@@ -210,11 +214,11 @@ export function ExpandableActionBar({
                     : { width: 0, opacity: 0, marginLeft: 0, filter: reduce ? "blur(0px)" : "blur(3px)" }
                 }
                 transition={reduce ? { duration: 0 } : LABEL}
-                className="relative inline-flex items-center gap-1.5 overflow-hidden"
+                className="relative -my-1 inline-flex items-center gap-1.5 overflow-hidden py-1"
               >
                 {item.label}
                 {item.shortcut && (
-                  <kbd className="inline-flex h-4.5 items-center rounded-md bg-background/60 px-1 font-sans text-ui-2xs text-muted-foreground shadow-chip">
+                  <kbd className="mr-px inline-flex h-4.5 min-w-4.5 items-center justify-center rounded-md bg-background px-1 font-sans text-ui-2xs text-muted-foreground shadow-chip">
                     {item.shortcut}
                   </kbd>
                 )}

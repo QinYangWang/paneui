@@ -372,7 +372,7 @@ function ToolResult({
       aria-busy={running}
       {...props}
       className={cn(
-        "w-full overflow-hidden rounded-2xl bg-card text-ui text-card-foreground shadow-raised",
+        "w-full overflow-hidden frame-2xl frame-inset-2 bg-card text-ui text-card-foreground shadow-raised",
         className
       )}
     >
@@ -411,7 +411,7 @@ function ToolResult({
         className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none"
       >
         <div className="px-2 pb-2">
-          <div className="overflow-hidden rounded-xl bg-code shadow-well">
+          <div className="overflow-hidden rounded-inner bg-code shadow-well">
             <div
               ref={viewportRef}
               role="log"

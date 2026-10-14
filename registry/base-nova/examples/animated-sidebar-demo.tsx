@@ -93,9 +93,9 @@ export default function AnimatedSidebarDemo() {
           <BellIcon className="size-4 text-muted-foreground" />
         </div>
         <div className="grid flex-1 grid-cols-2 gap-3">
-          <div className="rounded-xl bg-card shadow-raised" />
-          <div className="rounded-xl bg-card shadow-raised" />
-          <div className="col-span-2 rounded-xl bg-card shadow-raised" />
+          <div className="rounded-md bg-card shadow-raised" />
+          <div className="rounded-md bg-card shadow-raised" />
+          <div className="col-span-2 rounded-md bg-card shadow-raised" />
         </div>
       </SidebarInset>
     </SidebarProvider>
