@@ -10,7 +10,7 @@ export default function TiltCardDemo() {
           <SparklesIcon />
         </IconChip>
         <div className="flex flex-col gap-1">
-          <p className="text-[0.95rem] font-semibold tracking-tight">Pro plan</p>
+          <p className="text-base font-semibold tracking-tight">Pro plan</p>
           <p className="text-sm leading-relaxed text-muted-foreground">Unlimited projects, preview deploys and priority builds.</p>
         </div>
         <p className="text-2xl font-semibold tracking-tight">

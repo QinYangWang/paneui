@@ -27,6 +27,7 @@ export default function AnimatedBadgeDemo() {
         </Button>
       </div>
       <div className="flex flex-wrap items-center gap-2">
+        {/* eslint-disable-next-line shadcn/no-restyle -- no "live" status yet: tint the idle dot with the success token */}
         <AnimatedBadge size="sm" status="idle" pulse className="text-success">
           Live
         </AnimatedBadge>

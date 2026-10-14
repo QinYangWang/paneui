@@ -15,10 +15,10 @@ export default function MessageBubbleDemo() {
 
       <MessageBubble>
         <MessageBubbleCollapsible collapsedHeight={72}>
-          Here's the summary of the vendor thread: the renewal quote went up 12% because of the new seat tier,
+          Here’s the summary of the vendor thread: the renewal quote went up 12% because of the new seat tier,
           procurement wants a 2-year term to hold the price, and legal flagged the auto-renew clause in section 4.2.
           Finance can approve up to $18k without a committee review, so the 2-year option would need sign-off.
-          I'd suggest replying to ask for the 1-year price with a cap on next year's increase.
+          I’d suggest replying to ask for the 1-year price with a cap on next year’s increase.
         </MessageBubbleCollapsible>
       </MessageBubble>
 
@@ -27,7 +27,7 @@ export default function MessageBubbleDemo() {
           Dana joined the conversation
         </MessageBubble>
         <MessageBubble tone="destructive" size="sm" align="end">
-          Couldn't send. Tap to retry.
+          Couldn’t send. Tap to retry.
         </MessageBubble>
         <MessageBubble tone="outline" size="sm">
           Draft saved

@@ -39,10 +39,12 @@ export default function CommandPaletteDemo() {
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <Button variant="secondary" onClick={() => setOpen(true)} className="w-64 justify-start text-muted-foreground">
-        <SearchIcon data-icon="inline-start" />
-        Search or jump to…
-      </Button>
+      <div className="w-64">
+        <Button variant="secondary" onClick={() => setOpen(true)} className="w-full justify-start text-muted-foreground">
+          <SearchIcon data-icon="inline-start" />
+          Search or jump to…
+        </Button>
+      </div>
       <p className="text-xs text-muted-foreground">{last ? `Ran “${last}”` : "Pick a command to run it"}</p>
       <CommandPalette items={items} hotkey={false} open={open} onOpenChange={setOpen} onSelect={(item) => setLast(item.label)} />
     </div>

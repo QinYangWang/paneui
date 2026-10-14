@@ -14,7 +14,7 @@ export default function TextCascadeDemo() {
   }, [])
   return (
     <div className="flex items-center gap-3 rounded-2xl bg-card px-4 py-3 shadow-raised">
-      <span className="size-2 rounded-full bg-primary shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_20%,transparent)]" />
+      <span className="size-2 rounded-full bg-primary ring-3 ring-primary/20" />
       <span className="text-sm text-muted-foreground">
         production · <TextCascade text={STEPS[i]} className="font-medium text-foreground" />
       </span>

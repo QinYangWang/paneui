@@ -293,7 +293,7 @@ function ArcPicker({
     d.samples.push({ t: e.timeStamp, p: axis(e) })
     while (d.samples.length > 2 && e.timeStamp - d.samples[0].t > 90) d.samples.shift()
   }
-  const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+  const endDrag = () => {
     const d = dragState.current
     dragState.current = null
     if (!d) return
@@ -369,11 +369,11 @@ function ArcPicker({
       onPointerMove={onPointerMove}
       onPointerUp={(e) => {
         dragJustEnded.current = !!dragState.current?.moved
-        endDrag(e)
+        endDrag()
         onPointerUpProp?.(e)
       }}
       onPointerCancel={(e) => {
-        endDrag(e)
+        endDrag()
         onPointerCancelProp?.(e)
       }}
       onKeyDown={onKeyDown}

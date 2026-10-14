@@ -53,6 +53,7 @@ export function CommandPill({ command, className }: { command: string; className
     <div
       data-slot="command-pill"
       className={cn(
+        // eslint-disable-next-line shadcn/no-arbitrary-values -- 13px mono reads like 14px sans; no text token for it yet
         "flex h-11 min-w-0 items-center gap-2 rounded-full bg-secondary bg-linear-to-b from-white/4 to-transparent pr-1.5 pl-4 font-mono text-[13px] text-secondary-foreground shadow-raised",
         className
       )}
@@ -90,6 +91,7 @@ export function InstallCommand({ args, className }: { args: string; className?: 
     <Tabs value={pm} onValueChange={(v) => isManager(v) && setManager(v)} className={cn("gap-2.5", className)}>
       <TabsList className="p-0.5">
         {(Object.keys(MANAGERS) as Manager[]).map((m) => (
+          // eslint-disable-next-line shadcn/no-restyle -- compact mono package-manager tabs; Tabs has no size prop yet
           <TabsTab key={m} value={m} className="h-6 px-3 font-mono text-xs">
             {m}
           </TabsTab>

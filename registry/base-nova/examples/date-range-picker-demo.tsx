@@ -32,13 +32,15 @@ export default function DateRangePickerDemo() {
       <DateRangePickerTrigger placeholder="Check-in – Check-out" />
       <DateRangePickerContent>
         <div className="flex gap-3">
-          <DateRangePickerPresets className="hidden border-r border-border pr-3 sm:flex">
-            <DateRangePickerPreset range={nextWeekend}>This weekend</DateRangePickerPreset>
-            <DateRangePickerPreset range={() => ({ from: today, to: addDays(today, 7) })}>Next 7 nights</DateRangePickerPreset>
-            <DateRangePickerPreset range={() => ({ from: addDays(today, 14), to: addDays(today, 28) })}>
-              Two weeks, later
-            </DateRangePickerPreset>
-          </DateRangePickerPresets>
+          <div className="hidden border-r border-border pr-3 sm:block">
+            <DateRangePickerPresets>
+              <DateRangePickerPreset range={nextWeekend}>This weekend</DateRangePickerPreset>
+              <DateRangePickerPreset range={() => ({ from: today, to: addDays(today, 7) })}>Next 7 nights</DateRangePickerPreset>
+              <DateRangePickerPreset range={() => ({ from: addDays(today, 14), to: addDays(today, 28) })}>
+                Two weeks, later
+              </DateRangePickerPreset>
+            </DateRangePickerPresets>
+          </div>
           <DateRangePickerCalendar />
         </div>
         <DateRangePickerFooter>

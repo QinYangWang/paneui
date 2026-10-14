@@ -122,6 +122,7 @@ export function ThemeControls({ className }: { className?: string }) {
             render={
               <MenuTrigger
                 ref={triggerRef}
+                // eslint-disable-next-line shadcn/no-restyle -- compact 28px-wide trigger beside the GitHub icon (existing header design)
                 render={<Button variant="ghost" size="icon-sm" aria-label="Theme options" className="w-7 text-muted-foreground" />}
               />
             }

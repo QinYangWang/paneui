@@ -12,9 +12,11 @@ export default function SlideActionButtonDemo() {
       >
         Slide to pay $48.20
       </SlideActionButton>
-      <SlideActionButton completeLabel="Door unlocked" className="w-64">
-        Slide to unlock
-      </SlideActionButton>
+      <div className="w-64">
+        <SlideActionButton completeLabel="Door unlocked" className="w-full">
+          Slide to unlock
+        </SlideActionButton>
+      </div>
     </div>
   )
 }

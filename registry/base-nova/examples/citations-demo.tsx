@@ -27,7 +27,7 @@ export default function CitationsDemo() {
   return (
     <CitationGroup sources={SOURCES}>
       <div className="flex w-full max-w-lg flex-col gap-3">
-        <p className="text-[0.95rem] leading-relaxed text-foreground/90">
+        <p className="text-base leading-relaxed text-foreground/90">
           The View Transition API animates between two DOM states with a single call
           <Citation sourceId="mdn" />. Same-document transitions shipped in Chrome 111, with cross-document support
           following later

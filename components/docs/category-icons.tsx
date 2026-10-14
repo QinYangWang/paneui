@@ -9,6 +9,7 @@ import {
   FileIcon,
   GridIcon,
   HomeIcon,
+  MonitorIcon,
   NavigationIcon,
   ServerIcon,
   ShapesIcon,
@@ -24,6 +25,7 @@ type IconComponent = React.ComponentType<{ className?: string; size?: number }>
  * optical weight; no outlined ring or open line glyph belongs in this set.
  */
 export const categoryIcons: Record<string, IconComponent> = {
+  Templates: MonitorIcon,
   Foundations: SparklesIcon,
   Forms: EditIcon,
   Overlays: CopyIcon,

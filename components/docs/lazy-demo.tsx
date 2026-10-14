@@ -80,7 +80,7 @@ export function LazyDemo({ name, eager = false, className }: { name: string; eag
         } as React.CSSProperties
       }
       className={cn(
-        "flex min-h-64 flex-1 items-center justify-center overflow-hidden bg-background/40 p-6 shadow-[inset_0_-1px_0_var(--border)] sm:p-8",
+        "flex min-h-64 flex-1 items-center justify-center overflow-hidden border-b border-border bg-background/40 p-6 sm:p-8",
         estimate && "xl:min-h-(--demo-h)",
         className
       )}

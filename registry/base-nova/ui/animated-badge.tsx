@@ -20,12 +20,6 @@ const STATUS_VARIANT = {
   info: "primary",
 } as const
 
-const SIZE_CLASS: Record<AnimatedBadgeSize, string> = {
-  sm: "",
-  default: "",
-  lg: "h-8 gap-2 px-3 text-sm [&_[data-slot=animated-badge-icon]]:size-4",
-}
-
 const ICON_SIZE: Record<AnimatedBadgeSize, string> = {
   sm: "size-3",
   default: "size-3.5",
@@ -152,7 +146,11 @@ function AnimatedBadge({
       data-status={status}
       variant={STATUS_VARIANT[status]}
       size={size === "sm" ? "sm" : "default"}
-      className={cn("transition-[box-shadow,background-color,color] duration-300", SIZE_CLASS[size], className)}
+      className={cn(
+        "transition-[box-shadow,background-color,color] duration-300",
+        size === "lg" && "h-8 gap-2 px-3 text-sm [&_[data-slot=animated-badge-icon]]:size-4",
+        className
+      )}
       {...props}
     >
       {showIcon ? (

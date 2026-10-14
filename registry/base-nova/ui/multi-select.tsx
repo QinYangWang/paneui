@@ -54,6 +54,9 @@ function chipKey(value: unknown, index: number): React.Key {
  * Inset well holding the chosen values as removable raised chips, with the
  * search input trailing them. Backspace in an empty input removes the last chip.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- chip values are the Combobox item type; callers annotate their own callbacks
+type ChipValue = any
+
 function MultiSelectTrigger({
   className,
   placeholder = "Select…",
@@ -62,8 +65,8 @@ function MultiSelectTrigger({
   ...props
 }: Omit<ComboboxPrimitive.Chips.Props, "children"> & {
   placeholder?: string
-  renderChip?: (value: any) => React.ReactNode
-  getKey?: (value: any, index: number) => React.Key
+  renderChip?: (value: ChipValue) => React.ReactNode
+  getKey?: (value: ChipValue, index: number) => React.Key
 }) {
   const anchorRef = React.useContext(MultiSelectAnchorContext)
   const reduce = useReducedMotion()

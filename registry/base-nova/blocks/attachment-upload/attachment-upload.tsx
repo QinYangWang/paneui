@@ -135,7 +135,7 @@ function ProgressRing({ progress }: { progress: number }) {
   const c = 2 * Math.PI * r
   return (
     <svg viewBox="0 0 24 24" className="size-6 -rotate-90" aria-hidden>
-      <circle cx="12" cy="12" r={r} fill="none" stroke="rgb(255 255 255 / 0.35)" strokeWidth="2.5" />
+      <circle cx="12" cy="12" r={r} fill="none" stroke="currentColor" strokeWidth="2.5" className="text-white/35" />
       <motion.circle
         cx="12"
         cy="12"

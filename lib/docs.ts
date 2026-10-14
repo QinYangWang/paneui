@@ -18,7 +18,7 @@ export type DocItem = {
   files: string[]
 }
 
-export const ORDER = ["Foundations", "Forms", "Overlays", "Display", "Navigation", "Text", "Motion", "Data", "Agents", "Charts", "Blocks"] as const
+export const ORDER = ["Templates", "Foundations", "Forms", "Overlays", "Display", "Navigation", "Text", "Motion", "Data", "Agents", "Charts", "Blocks"] as const
 
 function categoryOf(type: string, meta?: { category?: string }): Category {
   if (meta?.category && (ORDER as readonly string[]).includes(meta.category)) return meta.category as Category

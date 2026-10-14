@@ -188,7 +188,7 @@ export function CardFolder({
           <span className="relative flex size-full flex-col justify-between p-4 [text-shadow:0_1px_1px_rgb(0_0_0/0.25)]">
             <span className="flex items-start justify-between">
               <span className="text-sm font-semibold tracking-wide">{brand}</span>
-              <span aria-hidden className="h-6 w-8 rounded-md bg-linear-to-br from-amber-200 to-amber-400 shadow-[inset_0_0_0_1px_rgb(0_0_0/0.15)]" />
+              <span aria-hidden className="h-6 w-8 rounded-md bg-linear-to-br from-warning/60 to-warning shadow-[inset_0_0_0_1px_rgb(0_0_0/0.15)]" />
             </span>
             <span className="flex flex-col gap-2">
               <Swap

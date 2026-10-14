@@ -61,7 +61,7 @@ export default function InfiniteMasonryDemo() {
   return (
     <InfiniteMasonry
       aria-label="Inspiration feed"
-      className="h-[30rem] w-full max-w-3xl"
+      className="h-120 w-full max-w-3xl"
       items={shots}
       getItemKey={(s) => s.id}
       estimateSize={(s) => 200 * s.ratio + 56}
@@ -79,7 +79,7 @@ export default function InfiniteMasonryDemo() {
               backgroundImage: `radial-gradient(circle at 25% 20%, oklch(0.92 0.06 ${s.hue} / 0.9), transparent 55%), linear-gradient(160deg, oklch(0.72 0.13 ${s.hue}), oklch(0.5 0.15 ${(s.hue + 60) % 360}))`,
             }}
           >
-            <span className="absolute top-2 left-2 rounded-full bg-black/30 px-2 text-[0.65rem] leading-5 font-medium text-white backdrop-blur-sm">
+            <span className="absolute top-2 left-2 rounded-full bg-black/30 px-2 text-xs leading-5 font-medium text-white backdrop-blur-sm">
               #{s.id + 1}
             </span>
           </div>

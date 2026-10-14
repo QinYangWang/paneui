@@ -221,3 +221,203 @@
 .dark .shiki span {
   color: var(--shiki-dark);
 }
+
+/* ───────────── Reading: container widths + long-form typography ───────────── */
+
+/* Hairline drawn inside content images: pure black/white so it never tints the edge. */
+:root {
+  --image-outline: oklch(0 0 0 / 0.1);
+}
+.dark {
+  --image-outline: oklch(1 0 0 / 0.1);
+}
+
+@theme {
+  /* max-w-reading: comfortable measure for articles; max-w-page: site content column. */
+  --container-reading: 68ch;
+  --container-page: 76rem;
+}
+
+/*
+ * prose-qy: long-form typography for blog posts and docs, built only from tokens
+ * so it follows light and dark. Anything inside `.not-prose` is left alone
+ * (code blocks, alerts, tabs and other components dropped into an article).
+ */
+@utility prose-qy {
+  --prose-gap: 1.25em;
+  color: var(--foreground);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: var(--container-reading);
+  overflow-wrap: break-word;
+
+  & :where(p, ul, ol, blockquote, pre, table, figure, img, hr):not(:where(.not-prose, .not-prose *)) {
+    margin-block: var(--prose-gap);
+  }
+  & > :where(.not-prose) {
+    margin-block: 1.75em;
+  }
+  & > :first-child {
+    margin-top: 0;
+  }
+  & > :last-child {
+    margin-bottom: 0;
+  }
+  & :where(p, li):not(:where(.not-prose, .not-prose *)) {
+    color: color-mix(in oklch, var(--foreground) 86%, var(--muted-foreground));
+    text-wrap: pretty;
+  }
+  & :where(h1, h2, h3, h4):not(:where(.not-prose, .not-prose *)) {
+    color: var(--foreground);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    scroll-margin-top: 5rem;
+    text-wrap: balance;
+  }
+  & :where(h1):not(:where(.not-prose, .not-prose *)) {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin-block: 0 0.8em;
+  }
+  & :where(h2):not(:where(.not-prose, .not-prose *)) {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin-block: 2.2em 0.7em;
+  }
+  & :where(h3):not(:where(.not-prose, .not-prose *)) {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-block: 1.8em 0.5em;
+  }
+  & :where(h4):not(:where(.not-prose, .not-prose *)) {
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0;
+    margin-block: 1.6em 0.4em;
+  }
+  & :where(h2 + *, h3 + *, h4 + *):not(:where(.not-prose, .not-prose *)) {
+    margin-top: 0;
+  }
+  & :where(strong):not(:where(.not-prose, .not-prose *)) {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+  & :where(a):not(:where(.not-prose, .not-prose *)) {
+    color: var(--primary);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklch, var(--primary) 40%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    transition-property: text-decoration-color;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
+  }
+  & :where(a):not(:where(.not-prose, .not-prose *)):hover {
+    text-decoration-color: var(--primary);
+  }
+  & :where(ul, ol):not(:where(.not-prose, .not-prose *)) {
+    padding-inline-start: 1.5em;
+  }
+  & :where(ul):not(:where(.not-prose, .not-prose *)) {
+    list-style: disc;
+  }
+  & :where(ol):not(:where(.not-prose, .not-prose *)) {
+    list-style: decimal;
+  }
+  & :where(li):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 0.4em;
+    padding-inline-start: 0.25em;
+  }
+  & :where(li)::marker {
+    color: var(--muted-foreground);
+  }
+  & :where(blockquote):not(:where(.not-prose, .not-prose *)) {
+    border-radius: calc(var(--radius) + 4px);
+    background: color-mix(in oklch, var(--muted) 60%, transparent);
+    box-shadow: inset 3px 0 0 0 color-mix(in oklch, var(--primary) 70%, transparent), var(--skeuo-well);
+    color: var(--foreground);
+    font-style: italic;
+    padding: 1em 1.25em 1em 1.5em;
+  }
+  & :where(blockquote p):not(:where(.not-prose, .not-prose *)) {
+    color: inherit;
+    margin-block: 0.4em;
+  }
+  & :where(code):not(:where(pre code, .not-prose, .not-prose *)) {
+    border-radius: 0.4em;
+    background: var(--code);
+    box-shadow: var(--skeuo-chip);
+    color: var(--foreground);
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    padding: 0.15em 0.4em;
+  }
+  & :where(a code):not(:where(.not-prose, .not-prose *)) {
+    color: inherit;
+  }
+  & :where(pre):not(:where(.not-prose, .not-prose *)) {
+    border-radius: calc(var(--radius) + 8px);
+    background: var(--code);
+    box-shadow: var(--skeuo-well);
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    line-height: 1.6;
+    overflow-x: auto;
+    padding: 1em 1.25em;
+  }
+  & :where(hr):not(:where(.not-prose, .not-prose *)) {
+    border: 0;
+    height: 1px;
+    background: var(--border);
+    margin-block: 2.5em;
+  }
+  & :where(img, video, svg.prose-media):not(:where(.not-prose, .not-prose *)) {
+    border-radius: calc(var(--radius) + 8px);
+    outline: 1px solid var(--image-outline);
+    outline-offset: -1px;
+    height: auto;
+    max-width: 100%;
+  }
+  & :where(figcaption):not(:where(.not-prose, .not-prose *)) {
+    color: var(--muted-foreground);
+    font-size: 0.875em;
+    line-height: 1.5;
+    margin-top: 0.75em;
+    text-align: center;
+    text-wrap: balance;
+  }
+  & :where(table):not(:where(.not-prose, .not-prose *)) {
+    border-collapse: separate;
+    border-radius: calc(var(--radius) + 4px);
+    border-spacing: 0;
+    box-shadow: 0 0 0 1px var(--border);
+    font-size: 0.9em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
+    overflow: hidden;
+    width: 100%;
+  }
+  & :where(th):not(:where(.not-prose, .not-prose *)) {
+    background: var(--muted);
+    color: var(--foreground);
+    font-weight: 600;
+    text-align: start;
+  }
+  & :where(th, td):not(:where(.not-prose, .not-prose *)) {
+    border-bottom: 1px solid var(--border);
+    padding: 0.6em 0.9em;
+  }
+  & :where(tr:last-child td):not(:where(.not-prose, .not-prose *)) {
+    border-bottom: 0;
+  }
+  & :where(kbd):not(:where(.not-prose, .not-prose *)) {
+    border-radius: 0.375em;
+    background: var(--muted);
+    box-shadow: var(--skeuo-chip);
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    padding: 0.1em 0.4em;
+  }
+}

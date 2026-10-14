@@ -9,7 +9,7 @@ import { Button } from "@/registry/base-nova/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/registry/base-nova/ui/card"
 import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
-const wide = new Set(["chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
+const wide = new Set(["saas-dashboard", "agent-workspace", "landing", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
 export default function Gallery() {
   const groups = getGroups()
@@ -48,6 +48,7 @@ export default function Gallery() {
                 return (
                   <Card
                     key={item.name}
+                    // eslint-disable-next-line shadcn/no-restyle -- gallery tiles: rounded-3xl stays concentric around the p-6 demo well
                     className={`group/gallery gap-0 rounded-3xl py-0 ${wide.has(item.name) ? "xl:col-span-2" : ""}`}
                   >
                     {/* Demos mount near the viewport and unmount when far away; see LazyDemo. */}

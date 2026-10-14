@@ -76,7 +76,7 @@ export default function KnockoutBracketDemo() {
       rounds={rounds}
       initialRound={1}
       thirdPlace={m("third", "Sat 17 Dec", [CRO, 2], [MAR, 1], "home")}
-      className="max-w-[760px]"
+      className="max-w-190"
     />
   )
 }

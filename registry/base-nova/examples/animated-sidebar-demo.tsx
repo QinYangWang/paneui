@@ -39,10 +39,10 @@ export default function AnimatedSidebarDemo() {
   const title = active.startsWith("project:") ? active.slice(8) : titles[active]
 
   return (
-    <SidebarProvider className="h-[26rem] w-full max-w-2xl gap-3">
+    <SidebarProvider className="h-104 w-full max-w-2xl gap-3">
       <Sidebar>
         <SidebarHeader>
-          <div className="flex h-9 items-center gap-2.5 px-[10px]">
+          <div className="flex h-9 items-center gap-2.5 px-2.5">
             <IconChip size="sm" tone="solid">
               <SparklesIcon />
             </IconChip>

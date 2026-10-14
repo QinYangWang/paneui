@@ -156,7 +156,20 @@ import PredictionMarketCardDemo from "@/registry/base-nova/examples/prediction-m
 import PredictionMarketDemo from "@/registry/base-nova/examples/prediction-market-demo"
 import WalletCardDemo from "@/registry/base-nova/examples/wallet-card-demo"
 
+import { TemplatePreview } from "./template-preview"
+
+const SaasDashboardPreview = () => <TemplatePreview name="saas-dashboard" />
+const AgentWorkspacePreview = () => <TemplatePreview name="agent-workspace" />
+const LandingPreview = () => <TemplatePreview name="landing" />
+const DocsTemplatePreview = () => <TemplatePreview name="docs" />
+const BlogPreview = () => <TemplatePreview name="blog" />
+
 export const demos: Record<string, React.ComponentType> = {
+  "saas-dashboard": SaasDashboardPreview,
+  "agent-workspace": AgentWorkspacePreview,
+  landing: LandingPreview,
+  docs: DocsTemplatePreview,
+  blog: BlogPreview,
   theme: ThemeDemo,
   icons: IconsDemo,
   "icon-chip": IconChipDemo,

@@ -30,12 +30,14 @@ type FileTreeFolderProps = Omit<FileTreeNode, "type" | "children"> & { children?
 type FileTreeFileProps = Omit<FileTreeNode, "type" | "children">
 
 /** Declarative folder; rendered by <FileTree>, renders nothing on its own. */
-function FileTreeFolder(_props: FileTreeFolderProps) {
+function FileTreeFolder(props: FileTreeFolderProps) {
+  void props
   return null
 }
 
 /** Declarative file; rendered by <FileTree>, renders nothing on its own. */
-function FileTreeFile(_props: FileTreeFileProps) {
+function FileTreeFile(props: FileTreeFileProps) {
+  void props
   return null
 }
 

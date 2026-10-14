@@ -79,10 +79,12 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
               onClick={() => setSearchOpen(true)}
               aria-label="Search components"
               aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
+              // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a 240px field (sm+)
               className="w-9 justify-center px-0 text-muted-foreground sm:w-60 sm:justify-start sm:px-3"
             >
               <SearchIcon />
               <span className="hidden sm:inline">Search components…</span>
+              {/* eslint-disable-next-line shadcn/no-arbitrary-values -- 10px keycap label; no text token below text-xs yet */}
               <kbd className="ml-auto hidden rounded-md bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground shadow-chip sm:inline">
                 {shortcut}
               </kbd>
@@ -99,7 +101,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
                   />
                 }
               >
-                <GithubIcon className="size-[18px]" />
+                <GithubIcon className="size-4.5" />
               </TooltipTrigger>
               <TooltipContent side="bottom">GitHub</TooltipContent>
             </Tooltip>
@@ -109,6 +111,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
       </header>
 
       <div className="flex min-w-0 flex-1">
+        {/* eslint-disable-next-line shadcn/no-arbitrary-values -- viewport height minus the h-14 sticky header */}
         <Sidebar variant="sidebar" aria-label="Docs" className="sticky top-14 h-[calc(100svh-3.5rem)] self-start max-lg:hidden">
           <DocsNav groups={groups} pathname={pathname} />
         </Sidebar>
@@ -118,6 +121,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
       </div>
 
       <Drawer side="left" open={navOpen} onOpenChange={setNavOpen}>
+        {/* eslint-disable-next-line shadcn/no-arbitrary-values -- 20rem drawer that never exceeds the viewport minus a 1rem gutter */}
         <DrawerContent className="w-[min(20rem,calc(100vw-1rem))]">
           <DrawerHeader className="pb-2">
             <DrawerTitle className="flex items-center gap-2">
@@ -126,6 +130,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
             </DrawerTitle>
           </DrawerHeader>
           <SidebarProvider shortcut={null} className="min-h-0 flex-1" style={{ "--sidebar-width": "100%" } as React.CSSProperties}>
+            {/* eslint-disable-next-line shadcn/no-restyle -- sidebar embedded in the mobile drawer: the drawer is the surface */}
             <Sidebar variant="sidebar" collapsible="none" aria-label="Docs" panelClassName="border-r-0 bg-transparent">
               <DocsNav groups={groups} pathname={pathname} className="px-3 pb-4" />
             </Sidebar>

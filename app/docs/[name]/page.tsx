@@ -67,6 +67,14 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         </Breadcrumb>
         <h1 className="text-3xl font-semibold tracking-tight">{item.title}</h1>
         <p className="text-lg text-muted-foreground">{item.description}</p>
+        {item.category === "Templates" && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            <Button nativeButton={false} render={<Link href={`/templates/${item.name}/`} />}>
+              Open template
+              <ArrowRightIcon data-icon="inline-end" />
+            </Button>
+          </div>
+        )}
         {deps.length > 0 && (
           <div className="flex flex-wrap gap-1.5 pt-1">
             {deps.map((d) =>

@@ -71,5 +71,5 @@ const rounds: WheelRound[] = [
 ]
 
 export default function KnockoutWheelDemo() {
-  return <KnockoutWheel rounds={rounds} label="2022 World Cup knockout stage" className="max-w-[440px]" />
+  return <KnockoutWheel rounds={rounds} label="2022 World Cup knockout stage" className="max-w-110" />
 }

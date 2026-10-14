@@ -30,7 +30,7 @@ export function IconGrid() {
             )}
           >
             <Icon size={22} />
-            <span className="w-full truncate text-[11px] text-muted-foreground">
+            <span className="w-full truncate text-xs text-muted-foreground">
               {copied === name ? "Copied" : name.replace(/Icon$/, "")}
             </span>
           </button>

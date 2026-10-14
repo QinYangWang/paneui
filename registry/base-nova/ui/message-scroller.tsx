@@ -197,7 +197,6 @@ function MessageScroller({
       ro.disconnect()
       stop()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [glide, startAtEnd, threshold])
 
   const ctx = React.useMemo(() => ({ atLiveEdge, scrollToLatest }), [atLiveEdge, scrollToLatest])

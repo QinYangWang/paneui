@@ -38,6 +38,26 @@ export function DocsNav({ groups, pathname, className }: { groups: NavGroup[]; p
     box.scrollTop = Math.max(0, top - box.clientHeight / 2 + el.offsetHeight / 2)
   }, [])
 
+  const templates = groups.filter((g) => g.category === "Templates")
+  const components = groups.filter((g) => g.category !== "Templates")
+  const renderGroup = (g: NavGroup) => {
+    const Icon = categoryIcons[g.category]
+    return (
+      <SidebarItem key={g.category} icon={Icon ? <Icon /> : undefined} label={g.category} badge={g.items.length} defaultOpen>
+        <SidebarSub>
+          {g.items.map((i) => {
+            const href = `/docs/${i.name}`
+            return (
+              <SidebarSubItem key={i.name} isActive={pathname === href} render={<Link href={href} />}>
+                {i.title}
+              </SidebarSubItem>
+            )
+          })}
+        </SidebarSub>
+      </SidebarItem>
+    )
+  }
+
   return (
     <SidebarContent ref={ref} className={cn("scrollbar-hover py-2", className)}>
       <SidebarGroup>
@@ -52,27 +72,15 @@ export function DocsNav({ groups, pathname, className }: { groups: NavGroup[]; p
           />
         </SidebarMenu>
       </SidebarGroup>
+      {templates.length > 0 && (
+        <SidebarGroup>
+          <SidebarGroupLabel>Templates</SidebarGroupLabel>
+          <SidebarMenu>{templates.map(renderGroup)}</SidebarMenu>
+        </SidebarGroup>
+      )}
       <SidebarGroup>
         <SidebarGroupLabel>Components</SidebarGroupLabel>
-        <SidebarMenu>
-          {groups.map((g) => {
-            const Icon = categoryIcons[g.category]
-            return (
-              <SidebarItem key={g.category} icon={Icon ? <Icon /> : undefined} label={g.category} badge={g.items.length} defaultOpen>
-                <SidebarSub>
-                  {g.items.map((i) => {
-                    const href = `/docs/${i.name}`
-                    return (
-                      <SidebarSubItem key={i.name} isActive={pathname === href} render={<Link href={href} />}>
-                        {i.title}
-                      </SidebarSubItem>
-                    )
-                  })}
-                </SidebarSub>
-              </SidebarItem>
-            )
-          })}
-        </SidebarMenu>
+        <SidebarMenu>{components.map(renderGroup)}</SidebarMenu>
       </SidebarGroup>
     </SidebarContent>
   )

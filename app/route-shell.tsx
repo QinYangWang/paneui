@@ -1,0 +1,17 @@
+"use client"
+
+import type * as React from "react"
+import { usePathname } from "next/navigation"
+
+import type { NavGroup } from "@/components/docs/docs-nav"
+import { SiteShell } from "@/components/docs/site-shell"
+
+/**
+ * Docs pages get the docs chrome (header, sidebar, ⌘K). Full-page templates
+ * under /templates/* render bare, full-bleed, but keep the root providers.
+ */
+export function RouteShell({ groups, children }: { groups: NavGroup[]; children: React.ReactNode }) {
+  const pathname = usePathname() ?? "/"
+  if (pathname === "/templates" || pathname.startsWith("/templates/")) return <>{children}</>
+  return <SiteShell groups={groups}>{children}</SiteShell>
+}

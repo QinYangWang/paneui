@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 
-import { SiteShell } from "@/components/docs/site-shell"
 import { themeScript } from "@/components/docs/theme-script"
 import { getGroups } from "@/lib/docs"
 import { ToastProvider } from "@/registry/base-nova/ui/toast"
 import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
+
+import { RouteShell } from "./route-shell"
 
 import "./globals.css"
 
@@ -30,7 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ToastProvider>
           <TooltipProvider>
-            <SiteShell groups={groups}>{children}</SiteShell>
+            <RouteShell groups={groups}>{children}</RouteShell>
           </TooltipProvider>
         </ToastProvider>
       </body>

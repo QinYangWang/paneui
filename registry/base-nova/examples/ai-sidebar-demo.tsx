@@ -49,7 +49,7 @@ const BOOKMARKS: SidebarResource[] = [
 
 export default function AISidebarDemo() {
   return (
-    <div className="h-[30rem] w-full max-w-md overflow-hidden rounded-[1.75rem] bg-background shadow-surface">
+    <div className="h-120 w-full max-w-md overflow-hidden rounded-3xl bg-background shadow-surface">
       <AISidebar
         defaultItems={ITEMS}
         bookmarks={BOOKMARKS}

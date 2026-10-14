@@ -7,6 +7,11 @@
  * a small one-time shift.
  */
 export const galleryHeights: Record<string, number> = {
+  "saas-dashboard": 556,
+  "agent-workspace": 556,
+  "landing": 556,
+  "docs": 556,
+  "blog": 556,
   "accordion": 284,
   "agent-code-block": 448,
   "ai-sidebar": 544,

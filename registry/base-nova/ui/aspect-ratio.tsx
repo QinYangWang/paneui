@@ -87,7 +87,6 @@ function AspectRatioImage({
 
   return (
     <div className="absolute inset-0 flex items-center justify-center">
-      {/* eslint-disable-next-line @next/next/no-img-element -- registry code runs outside Next too */}
       <motion.img
         data-slot="aspect-ratio-image"
         width={width}

@@ -85,7 +85,7 @@ export function DynamicIsland({ view = null, tone = "ink", className, children }
         className={cn(
           "relative flex justify-center overflow-hidden",
           tone === "ink"
-            ? "bg-neutral-950 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.08),0_0_0_1px_rgb(255_255_255/0.06),0_10px_30px_-12px_rgb(0_0_0/0.6)]"
+            ? "bg-black text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.08),0_0_0_1px_rgb(255_255_255/0.06),0_10px_30px_-12px_rgb(0_0_0/0.6)]"
             : "bg-popover bg-linear-to-b from-white/5 to-transparent text-popover-foreground shadow-surface"
         )}
       >

@@ -36,6 +36,7 @@ function MagneticButton({
       range={range}
       spring={spring}
       disabled={disabled}
+      // eslint-disable-next-line shadcn/require-static-classes -- forwards the caller's wrapperClassName; checked at the call site
       className={wrapperClassName}
     >
       <Button
