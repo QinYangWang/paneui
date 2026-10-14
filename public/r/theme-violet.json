@@ -2,20 +2,31 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-violet",
   "title": "Theme: Violet accent",
-  "description": "Violet accent preset: swaps the neutral primary, primary-foreground and ring for violet in light and dark. Install after @qinyang/theme.",
+  "description": "Violet accent preset: sets the --accent-50…950 ramp to Tailwind violet; primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
   "registryDependencies": [
     "@qinyang/theme"
   ],
   "cssVars": {
     "light": {
-      "primary": "oklch(0.55 0.18 290)",
-      "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.55 0.18 290)"
+      "accent-50": "oklch(96.9% 0.016 293.756)",
+      "accent-100": "oklch(94.3% 0.029 294.588)",
+      "accent-200": "oklch(89.4% 0.057 293.283)",
+      "accent-300": "oklch(81.1% 0.111 293.571)",
+      "accent-400": "oklch(70.2% 0.183 293.541)",
+      "accent-500": "oklch(60.6% 0.250 292.717)",
+      "accent-600": "oklch(54.1% 0.281 293.009)",
+      "accent-700": "oklch(49.1% 0.270 292.581)",
+      "accent-800": "oklch(43.2% 0.232 292.759)",
+      "accent-900": "oklch(38% 0.189 293.745)",
+      "accent-950": "oklch(28.3% 0.141 291.089)",
+      "primary": "var(--accent-600)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     },
     "dark": {
-      "primary": "oklch(0.64 0.16 290)",
-      "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.64 0.16 290)"
+      "primary": "var(--accent-600)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     }
   },
   "meta": {

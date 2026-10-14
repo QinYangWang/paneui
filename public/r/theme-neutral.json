@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-neutral",
+  "title": "Theme: Neutral accent",
+  "description": "Neutral accent preset: sets the --accent-50…950 ramp to Tailwind neutral; a black primary with white text in light mode and a near-white primary with dark text in dark mode, ring neutral-400 / neutral-500. Install after @qinyang/theme.",
+  "registryDependencies": [
+    "@qinyang/theme"
+  ],
+  "cssVars": {
+    "light": {
+      "accent-50": "oklch(98.5% 0 0)",
+      "accent-100": "oklch(97.6% 0 0)",
+      "accent-200": "oklch(94% 0 0)",
+      "accent-300": "oklch(87% 0 0)",
+      "accent-400": "oklch(70.8% 0 0)",
+      "accent-500": "oklch(55.6% 0 0)",
+      "accent-600": "oklch(43.9% 0 0)",
+      "accent-700": "oklch(37.1% 0 0)",
+      "accent-800": "oklch(26.9% 0 0)",
+      "accent-900": "oklch(20.5% 0 0)",
+      "accent-950": "oklch(14.5% 0 0)",
+      "primary": "var(--accent-900)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-400)"
+    },
+    "dark": {
+      "primary": "var(--accent-100)",
+      "primary-foreground": "var(--accent-900)",
+      "ring": "var(--accent-500)"
+    }
+  },
+  "meta": {
+    "category": "Foundations",
+    "hidden": true
+  },
+  "type": "registry:theme"
+}

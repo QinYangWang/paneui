@@ -4,10 +4,10 @@ import { Code } from "./guide-page"
 
 /** Variable → utility → consumer, one row per kind of token in app/globals.css. */
 const LAYERS: { variable: string; value: string; utility: React.ReactNode; usedBy: string }[] = [
-  { variable: "--background", value: "oklch(0.9911 0 0)", utility: <Code>bg-background</Code>, usedBy: "Page canvas" },
+  { variable: "--background", value: "oklch(100% 0 0)", utility: <Code>bg-background</Code>, usedBy: "Page canvas" },
   {
     variable: "--primary",
-    value: "oklch(0.205 0 0)",
+    value: "var(--accent-600)",
     utility: (
       <>
         <Code>bg-primary</Code> <Code>text-primary-foreground</Code>
@@ -15,7 +15,7 @@ const LAYERS: { variable: string; value: string; utility: React.ReactNode; usedB
     ),
     usedBy: "Filled buttons, switches, checks, selection",
   },
-  { variable: "--border", value: "oklch(0 0 0 / 5%)", utility: <Code>border-border</Code>, usedBy: "Every divider (base layer default)" },
+  { variable: "--border", value: "oklch(0% 0 0 / 8%)", utility: <Code>border-border</Code>, usedBy: "Every divider (base layer default)" },
   { variable: "--radius", value: "0.625rem", utility: <Code>rounded-sm … rounded-3xl</Code>, usedBy: "All corners, 0.6× to 2.2×" },
   { variable: "--skeuo-raised", value: "ring + 1px drop", utility: <Code>shadow-raised</Code>, usedBy: "Resting cards and controls" },
   { variable: "--text-ui", value: "0.8125rem", utility: <Code>text-ui</Code>, usedBy: "Buttons, inputs, menus, nav" },
@@ -98,8 +98,9 @@ export function ThemingSystem() {
       <p className="text-muted-foreground">
         That indirection is also the path to dark mode: <Code>.dark</Code> on <Code>&lt;html&gt;</Code> points the same
         variables at dark values, so a component written once is right in both modes. The accent works the same way one
-        level up: <Code>html[data-accent]</Code> replaces <Code>--primary</Code>, <Code>--primary-foreground</Code> and{" "}
-        <Code>--ring</Code>, and everything interactive recolours while surfaces, text, states and charts stay put.
+        level up, after BoardUI: <Code>--primary</Code> and <Code>--ring</Code> read an <Code>--accent-50…950</Code> ramp
+        (blue by default), <Code>html[data-accent]</Code> swaps the ramp, and everything interactive recolours while
+        surfaces, text, states and charts stay put.
       </p>
 
       <ol className="grid gap-3 sm:grid-cols-3">

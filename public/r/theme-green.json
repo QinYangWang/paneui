@@ -2,20 +2,31 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-green",
   "title": "Theme: Green accent",
-  "description": "Green accent preset: swaps the neutral primary, primary-foreground and ring for green in light and dark. Install after @qinyang/theme.",
+  "description": "Green accent preset: sets the --accent-50…950 ramp to Tailwind green; primary = the 700 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
   "registryDependencies": [
     "@qinyang/theme"
   ],
   "cssVars": {
     "light": {
-      "primary": "oklch(0.56 0.13 155)",
-      "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.56 0.13 155)"
+      "accent-50": "oklch(98.2% 0.018 155.826)",
+      "accent-100": "oklch(96.2% 0.044 156.743)",
+      "accent-200": "oklch(92.5% 0.084 155.995)",
+      "accent-300": "oklch(87.1% 0.150 154.449)",
+      "accent-400": "oklch(79.2% 0.209 151.711)",
+      "accent-500": "oklch(72.3% 0.219 149.579)",
+      "accent-600": "oklch(62.7% 0.194 149.214)",
+      "accent-700": "oklch(52.7% 0.154 150.069)",
+      "accent-800": "oklch(44.8% 0.119 151.328)",
+      "accent-900": "oklch(39.3% 0.095 152.535)",
+      "accent-950": "oklch(26.6% 0.065 152.934)",
+      "primary": "var(--accent-700)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     },
     "dark": {
-      "primary": "oklch(0.64 0.14 155)",
-      "primary-foreground": "oklch(0.2 0.03 155)",
-      "ring": "oklch(0.64 0.14 155)"
+      "primary": "var(--accent-700)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     }
   },
   "meta": {

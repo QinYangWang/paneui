@@ -16,7 +16,8 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
         "peer group/checkbox relative inline-flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-[4px] bg-background text-primary-foreground shadow-well outline-none dark:bg-input/32",
         "transition-[background-color,box-shadow] duration-150 ease-out motion-reduce:transition-none",
         "focus-visible:ring-2 focus-visible:ring-ring/50",
-        "data-checked:bg-primary data-checked:shadow-primary data-indeterminate:bg-primary data-indeterminate:shadow-primary",
+        // dark:bg-input/32 above is as specific as data-checked:bg-primary and sorts after it, so the dark checked fill is restated.
+        "data-checked:bg-primary data-checked:shadow-primary data-indeterminate:bg-primary data-indeterminate:shadow-primary dark:data-checked:bg-primary dark:data-indeterminate:bg-primary",
         "data-invalid:shadow-[inset_0_0_0_1px_var(--destructive)] data-disabled:cursor-not-allowed data-disabled:opacity-64",
         className
       )}

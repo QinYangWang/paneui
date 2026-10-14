@@ -1,5 +1,4 @@
 import type * as React from "react"
-import dynamic from "next/dynamic"
 
 import ApprovalCardDemo from "@/registry/base-nova/examples/approval-card-demo"
 import BadgeDemo from "@/registry/base-nova/examples/badge-demo"
@@ -117,12 +116,11 @@ import FileUploadDemo from "@/registry/base-nova/examples/file-upload-demo"
 import AvailabilitySchedulerDemo from "@/registry/base-nova/examples/availability-scheduler-demo"
 import SignupFormDemo from "@/registry/base-nova/examples/signup-form-demo"
 import NotFoundTerminalDemo from "@/registry/base-nova/examples/not-found-terminal-demo"
+import AvatarDemo from "@/registry/base-nova/examples/avatar-demo"
+import AvatarGeneratorDemo from "@/registry/base-nova/examples/avatar-generator-demo"
 
 import { TemplatePreview } from "./template-preview"
 
-// Loaded on demand: these pull in the Humation artwork (~216 KB gzip), which shouldn't weigh on the whole gallery.
-const AvatarDemo = dynamic(() => import("@/registry/base-nova/examples/avatar-demo"), { ssr: false })
-const AvatarGeneratorDemo = dynamic(() => import("@/registry/base-nova/examples/avatar-generator-demo"), { ssr: false })
 
 const SaasDashboardPreview = () => <TemplatePreview name="saas-dashboard" />
 const AgentWorkspacePreview = () => <TemplatePreview name="agent-workspace" />

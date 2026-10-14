@@ -21,27 +21,29 @@ import { Radio, RadioGroup } from "@/registry/base-nova/ui/radio"
 import { Slider } from "@/registry/base-nova/ui/slider"
 import { Switch } from "@/registry/base-nova/ui/switch"
 
-import { oklchToHex, parseOklch, PRESET_LABELS, PRESET_THEMES, themeCss, type PresetAccent } from "./accent-color"
+import { DEFAULT_ACCENT, oklchToHex, parseOklch, PRESET_LABELS, PRESET_THEMES, RAMP_STOPS, themeCss, type PresetAccent } from "./accent-color"
 import { setAccent, setCustomAccent, useAccentState } from "./accent-store"
 
 const PRESETS = Object.keys(PRESET_THEMES) as PresetAccent[]
-const CHARTS = ["bg-chart-1", "bg-chart-2", "bg-chart-3", "bg-chart-4", "bg-chart-5"]
+const CHARTS = ["bg-chart-1", "bg-chart-2", "bg-chart-3", "bg-chart-4", "bg-chart-5", "bg-chart-6", "bg-chart-7", "bg-chart-8"]
 
 
 /**
  * Live accent: presets and a custom colour recolour the whole site (header, demos,
  * template previews) by switching `data-accent` on <html>; "Copy theme CSS" exports
- * the exact :root/.dark overrides for the current pick.
+ * the exact ramp and :root/.dark overrides for the current pick.
  */
 export function ThemingAccent() {
   const { accent, custom } = useAccentState()
   const { copied, copy } = useCopy()
-  const theme = accent === "custom" && custom ? custom : PRESET_THEMES[accent === "custom" ? "neutral" : accent]
+  const preset = PRESET_THEMES[accent === "custom" ? DEFAULT_ACCENT : accent]
+  const theme = accent === "custom" && custom ? custom : preset
   const label = accent === "custom" && custom ? `custom ${custom.hex}` : PRESET_LABELS[accent as PresetAccent].toLowerCase()
   const css = themeCss(theme, label)
 
   // The picker shows the custom colour once there is one, otherwise the current light primary.
-  const pickerHex = custom?.hex ?? oklchToHex(parseOklch(PRESET_THEMES[accent === "custom" ? "neutral" : accent].light.primary) ?? { l: 0.205, c: 0, h: 0 })
+  const pickerHex = custom?.hex ?? oklchToHex(parseOklch(preset.light.primary) ?? { l: 0.546, c: 0.245, h: 262.9 })
+  const ramp = theme.ramp ?? preset.ramp ?? []
 
   // Coalesce drag updates to one per frame (each writes localStorage and re-syncs template iframes).
   const frame = React.useRef<number | null>(null)
@@ -111,9 +113,24 @@ export function ThemingAccent() {
                 </Button>
               ) : null}
             </div>
-            <Button variant="ghost" size="sm" className="ml-auto" onClick={() => setAccent("neutral", null)}>
+            <Button variant="ghost" size="sm" className="ml-auto" onClick={() => setAccent(DEFAULT_ACCENT, null)}>
               Reset
             </Button>
+          </div>
+
+          <div className="flex flex-col gap-1.5 border-b px-4 py-3">
+            <div className="flex h-6 overflow-hidden rounded-md shadow-chip" role="img" aria-label="Accent ramp, 50 to 950">
+              {ramp.map((v, i) => (
+                <span key={RAMP_STOPS[i]} className="flex-1 bg-(--stop)" style={{ "--stop": v } as React.CSSProperties} />
+              ))}
+            </div>
+            <div aria-hidden className="flex font-mono text-ui-2xs text-muted-foreground tabular-nums">
+              {RAMP_STOPS.map((s) => (
+                <span key={s} className="flex-1 text-center">
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="grid gap-x-8 gap-y-5 px-4 py-5 sm:grid-cols-2">
@@ -164,7 +181,7 @@ export function ThemingAccent() {
 
       <div className="flex flex-wrap items-center gap-3">
         <p className="min-w-0 flex-1 text-sm text-muted-foreground">
-          Take it home: paste these overrides after the theme variables. Three variables per mode, nothing else changes.
+          Take it home: paste these overrides after the theme variables. The eleven ramp stops plus primary, its text and the ring; nothing else changes.
         </p>
         <Button onClick={() => copy(css)}>
           {copied ? <CheckIcon /> : <CopyIcon />}

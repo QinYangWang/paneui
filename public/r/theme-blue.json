@@ -2,20 +2,31 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-blue",
   "title": "Theme: Blue accent",
-  "description": "Blue accent preset: swaps the neutral primary, primary-foreground and ring for blue in light and dark. Install after @qinyang/theme.",
+  "description": "Blue accent preset (the default): sets the --accent-50…950 ramp to Tailwind blue (BoardUI's blue-400 #3392ff); primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
   "registryDependencies": [
     "@qinyang/theme"
   ],
   "cssVars": {
     "light": {
-      "primary": "oklch(0.57 0.15 258)",
-      "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.57 0.15 258)"
+      "accent-50": "oklch(97% 0.014 254.604)",
+      "accent-100": "oklch(93.2% 0.032 255.585)",
+      "accent-200": "oklch(88.2% 0.059 254.128)",
+      "accent-300": "oklch(80.9% 0.105 251.813)",
+      "accent-400": "oklch(66% 0.184 254.753)",
+      "accent-500": "oklch(62.3% 0.214 259.815)",
+      "accent-600": "oklch(54.6% 0.245 262.881)",
+      "accent-700": "oklch(48.8% 0.243 264.376)",
+      "accent-800": "oklch(42.4% 0.199 265.638)",
+      "accent-900": "oklch(37.9% 0.146 265.522)",
+      "accent-950": "oklch(28.2% 0.091 267.935)",
+      "primary": "var(--accent-600)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     },
     "dark": {
-      "primary": "oklch(0.6 0.145 256)",
-      "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.6 0.145 256)"
+      "primary": "var(--accent-600)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     }
   },
   "meta": {

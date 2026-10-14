@@ -7,7 +7,7 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "Theme",
-      "description": "Native desktop tokens after Synara/Codex: system UI font (-apple-system/Segoe UI) on a 13px type scale (text-ui-2xs/xs/sm/ui/lg = 10/11/12/13/14px), translucent black/white fills for secondary/muted/accent, 5-6% hairline borders, a neutral black/white primary (accent presets: theme-blue, theme-green, theme-orange, theme-rose, theme-violet), a five-hue chart palette (chart-1..5), a 0.625rem radius with multiplier steps (sm .6x, md .8x, xl 1.4x, 2xl 1.8x, shell 1.3x), near-flat elevation shadows (raised, pressed, primary, well, surface, chip), shell/shell-border app-chrome tokens and a shell-inset utility for the rail layout, code surface and scrollbar tokens with thin rounded scrollbars and scrollbar-thin/-hover/-none utilities, reading tokens (max-w-reading 68ch, max-w-page, image outline) and a prose-qy long-form typography utility. Installs @qinyang/utils (cn that knows the text-ui sizes).",
+      "description": "Native desktop tokens after Synara/Codex with BoardUI's colour system: system UI font (-apple-system/Segoe UI) on a 13px type scale (text-ui-2xs/xs/sm/ui/lg = 10/11/12/13/14px), Tailwind's neutral OKLCH ramp (white page and cards, neutral-950 text, neutral-500 secondary text; dark: #121212 page, neutral-800 cards, neutral-50 text, neutral-400 secondary text), translucent fills equal to neutral-100 for secondary/muted/accent, neutral-200 / neutral-800 hairline borders, an --accent-50…950 ramp (blue by default) driving primary (the 600 stop, white text) and ring (500) (accent presets: theme-neutral, theme-blue, theme-green, theme-orange, theme-rose, theme-violet), BoardUI's eight-hue chart palette (chart-1..8: teal, lime, pink, sky, purple, blue, emerald, yellow), a 0.625rem radius with multiplier steps (sm .6x, md .8x, xl 1.4x, 2xl 1.8x, shell 1.3x), near-flat elevation shadows (raised, pressed, primary, well, surface, chip), shell/shell-border app-chrome tokens and a shell-inset utility for the rail layout, code surface and scrollbar tokens with thin rounded scrollbars and scrollbar-thin/-hover/-none utilities, reading tokens (max-w-reading 68ch, max-w-page, image outline) and a prose-qy long-form typography utility. Installs @qinyang/utils (cn that knows the text-ui sizes).",
       "cssVars": {
         "theme": {
           "color-code": "var(--code)",
@@ -20,6 +20,9 @@
           "color-chart-3": "var(--chart-3)",
           "color-chart-4": "var(--chart-4)",
           "color-chart-5": "var(--chart-5)",
+          "color-chart-6": "var(--chart-6)",
+          "color-chart-7": "var(--chart-7)",
+          "color-chart-8": "var(--chart-8)",
           "color-shell": "var(--shell)",
           "color-shell-border": "var(--shell-border)",
           "radius-sm": "calc(var(--radius) * 0.6)",
@@ -51,83 +54,89 @@
         },
         "light": {
           "radius": "0.625rem",
-          "background": "oklch(0.9911 0 0)",
-          "foreground": "oklch(0.269 0 0)",
-          "card": "oklch(1 0 0)",
-          "card-foreground": "oklch(0.269 0 0)",
-          "popover": "oklch(1 0 0)",
-          "popover-foreground": "oklch(0.269 0 0)",
-          "primary": "oklch(0.205 0 0)",
-          "primary-foreground": "oklch(1 0 0)",
-          "secondary": "oklch(0 0 0 / 3%)",
-          "secondary-foreground": "oklch(0.269 0 0)",
-          "muted": "oklch(0 0 0 / 4%)",
-          "muted-foreground": "oklch(0.5155 0 0)",
-          "accent": "oklch(0 0 0 / 4%)",
-          "accent-foreground": "oklch(0.269 0 0)",
-          "destructive": "oklch(0.58 0.2 27)",
-          "success": "oklch(0.6 0.14 152)",
-          "warning": "oklch(0.74 0.14 72)",
-          "border": "oklch(0 0 0 / 5%)",
-          "input": "oklch(0 0 0 / 6%)",
-          "ring": "oklch(0.708 0 0)",
-          "chart-1": "oklch(0.57 0.15 258)",
-          "chart-2": "oklch(0.6 0.14 152)",
-          "chart-3": "oklch(0.74 0.14 72)",
-          "chart-4": "oklch(0.58 0.2 27)",
-          "chart-5": "oklch(0.55 0.16 295)",
-          "code": "oklch(0.9731 0 0)",
-          "scrollbar": "oklch(0 0 0 / 16%)",
-          "scrollbar-hover": "oklch(0 0 0 / 28%)",
-          "shell": "oklch(0.9685 0 0)",
-          "shell-border": "oklch(0 0 0 / 10%)",
-          "skeuo-raised": "0 0 0 1px oklch(0 0 0 / 8%), 0 1px 2px oklch(0 0 0 / 5%)",
-          "skeuo-raised-hover": "0 0 0 1px oklch(0 0 0 / 12%), 0 1px 2px oklch(0 0 0 / 6%)",
-          "skeuo-pressed": "0 0 0 1px oklch(0 0 0 / 8%)",
-          "skeuo-primary": "0 1px 2px oklch(0 0 0 / 8%)",
-          "skeuo-well": "inset 0 0 0 1px oklch(0 0 0 / 8%)",
-          "skeuo-surface": "0 0 0 1px oklch(0 0 0 / 6%), 0 2px 6px -2px oklch(0 0 0 / 6%), 0 12px 28px -8px oklch(0 0 0 / 14%)",
-          "skeuo-chip": "0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px oklch(0 0 0 / 5%)",
+          "accent-50": "oklch(97% 0.014 254.604)",
+          "accent-100": "oklch(93.2% 0.032 255.585)",
+          "accent-200": "oklch(88.2% 0.059 254.128)",
+          "accent-300": "oklch(80.9% 0.105 251.813)",
+          "accent-400": "oklch(66% 0.184 254.753)",
+          "accent-500": "oklch(62.3% 0.214 259.815)",
+          "accent-600": "oklch(54.6% 0.245 262.881)",
+          "accent-700": "oklch(48.8% 0.243 264.376)",
+          "accent-800": "oklch(42.4% 0.199 265.638)",
+          "accent-900": "oklch(37.9% 0.146 265.522)",
+          "accent-950": "oklch(28.2% 0.091 267.935)",
+          "background": "oklch(100% 0 0)",
+          "card": "oklch(100% 0 0)",
+          "popover": "oklch(100% 0 0)",
+          "foreground": "oklch(14.5% 0 0)",
+          "card-foreground": "oklch(14.5% 0 0)",
+          "popover-foreground": "oklch(14.5% 0 0)",
+          "muted-foreground": "oklch(55.6% 0 0)",
+          "primary": "var(--accent-600)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "secondary": "oklch(0% 0 0 / 3%)",
+          "secondary-foreground": "oklch(14.5% 0 0)",
+          "muted": "oklch(0% 0 0 / 3%)",
+          "accent": "oklch(0% 0 0 / 3%)",
+          "accent-foreground": "oklch(14.5% 0 0)",
+          "destructive": "oklch(63.7% 0.237 25.331)",
+          "success": "oklch(64.8% 0.2 131.684)",
+          "warning": "oklch(68.1% 0.162 75.834)",
+          "border": "oklch(0% 0 0 / 8%)",
+          "input": "oklch(0% 0 0 / 8%)",
+          "ring": "var(--accent-500)",
+          "chart-1": "oklch(77.7% 0.152 181.912)",
+          "chart-2": "oklch(84.1% 0.238 128.85)",
+          "chart-3": "oklch(71.8% 0.202 349.761)",
+          "chart-4": "oklch(74.6% 0.16 232.661)",
+          "chart-5": "oklch(71.4% 0.203 305.504)",
+          "chart-6": "oklch(66% 0.184 254.753)",
+          "chart-7": "oklch(76.5% 0.177 163.223)",
+          "chart-8": "oklch(85.2% 0.199 91.936)",
+          "code": "oklch(97.6% 0 0)",
+          "scrollbar": "oklch(0% 0 0 / 16%)",
+          "scrollbar-hover": "oklch(0% 0 0 / 28%)",
+          "shell": "oklch(97.6% 0 0)",
+          "shell-border": "oklch(0% 0 0 / 10%)",
+          "skeuo-raised": "0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%)",
+          "skeuo-raised-hover": "0 0 0 1px oklch(0% 0 0 / 17%), 0 1px 1px oklch(0% 0 0 / 5%)",
+          "skeuo-pressed": "0 0 0 1px oklch(0% 0 0 / 8%)",
+          "skeuo-primary": "0 1px 2px oklch(0% 0 0 / 8%)",
+          "skeuo-well": "inset 0 0 0 1px oklch(0% 0 0 / 8%)",
+          "skeuo-surface": "0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 4%), 0 4px 4px oklch(0% 0 0 / 2%), 0 12px 28px -8px oklch(0% 0 0 / 10%)",
+          "skeuo-chip": "0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%)",
           "image-outline": "oklch(0 0 0 / 0.1)"
         },
         "dark": {
-          "background": "oklch(0.1638 0 0)",
-          "foreground": "oklch(0.97 0 0)",
-          "card": "oklch(0.1749 0 0)",
-          "card-foreground": "oklch(0.97 0 0)",
-          "popover": "oklch(0.1749 0 0)",
-          "popover-foreground": "oklch(0.97 0 0)",
-          "primary": "oklch(0.97 0 0)",
-          "primary-foreground": "oklch(0.205 0 0)",
-          "secondary": "oklch(1 0 0 / 4%)",
-          "secondary-foreground": "oklch(0.97 0 0)",
-          "muted": "oklch(1 0 0 / 4%)",
-          "muted-foreground": "oklch(0.6032 0 0)",
-          "accent": "oklch(1 0 0 / 4%)",
-          "accent-foreground": "oklch(0.97 0 0)",
-          "destructive": "oklch(0.64 0.19 25)",
-          "success": "oklch(0.7 0.15 152)",
-          "warning": "oklch(0.8 0.14 75)",
-          "border": "oklch(1 0 0 / 4%)",
-          "input": "oklch(1 0 0 / 5%)",
-          "ring": "oklch(0.556 0 0)",
-          "chart-1": "oklch(0.6 0.145 256)",
-          "chart-2": "oklch(0.7 0.15 152)",
-          "chart-3": "oklch(0.8 0.14 75)",
-          "chart-4": "oklch(0.64 0.19 25)",
-          "chart-5": "oklch(0.65 0.15 295)",
-          "code": "oklch(0.1496 0 0)",
-          "scrollbar": "oklch(1 0 0 / 14%)",
-          "scrollbar-hover": "oklch(1 0 0 / 24%)",
-          "shell": "oklch(0.218 0 0)",
-          "shell-border": "oklch(1 0 0 / 9%)",
-          "skeuo-raised": "0 0 0 1px oklch(1 0 0 / 7%)",
-          "skeuo-raised-hover": "0 0 0 1px oklch(1 0 0 / 12%)",
-          "skeuo-pressed": "0 0 0 1px oklch(1 0 0 / 6%)",
+          "background": "oklch(18.2% 0 0)",
+          "card": "oklch(26.9% 0 0)",
+          "popover": "oklch(26.9% 0 0)",
+          "foreground": "oklch(98.5% 0 0)",
+          "card-foreground": "oklch(98.5% 0 0)",
+          "popover-foreground": "oklch(98.5% 0 0)",
+          "muted-foreground": "oklch(70.8% 0 0)",
+          "secondary": "oklch(100% 0 0 / 7%)",
+          "secondary-foreground": "oklch(98.5% 0 0)",
+          "muted": "oklch(100% 0 0 / 5%)",
+          "accent": "oklch(100% 0 0 / 7%)",
+          "accent-foreground": "oklch(98.5% 0 0)",
+          "destructive": "oklch(63.7% 0.237 25.331)",
+          "success": "oklch(84.1% 0.238 128.85)",
+          "warning": "oklch(79.5% 0.184 86.047)",
+          "border": "oklch(100% 0 0 / 8%)",
+          "input": "oklch(100% 0 0 / 12%)",
+          "code": "oklch(20.5% 0 0)",
+          "scrollbar": "oklch(100% 0 0 / 14%)",
+          "scrollbar-hover": "oklch(100% 0 0 / 24%)",
+          "shell": "oklch(20.5% 0 0)",
+          "shell-border": "oklch(100% 0 0 / 9%)",
+          "skeuo-raised": "0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 1px oklch(0% 0 0 / 14%)",
+          "skeuo-raised-hover": "0 0 0 1px oklch(100% 0 0 / 20%), 0 1px 1px oklch(0% 0 0 / 14%)",
+          "skeuo-pressed": "0 0 0 1px oklch(100% 0 0 / 8%)",
           "skeuo-primary": "0 0 0 0 transparent",
-          "skeuo-well": "inset 0 0 0 1px oklch(1 0 0 / 7%)",
-          "skeuo-surface": "0 0 0 1px oklch(1 0 0 / 7%), 0 16px 40px -12px oklch(0 0 0 / 60%)",
-          "skeuo-chip": "0 0 0 1px oklch(1 0 0 / 6%)",
+          "skeuo-well": "inset 0 0 0 1px oklch(100% 0 0 / 12%)",
+          "skeuo-surface": "0 0 0 1px oklch(100% 0 0 / 10%), 0 1px 1px oklch(0% 0 0 / 14%), 0 4px 4px oklch(0% 0 0 / 10%), 0 16px 40px -12px oklch(0% 0 0 / 50%)",
+          "skeuo-chip": "0 0 0 1px oklch(100% 0 0 / 10%)",
           "image-outline": "oklch(1 0 0 / 0.1)"
         }
       },
@@ -398,23 +407,70 @@
       }
     },
     {
-      "name": "theme-blue",
+      "name": "theme-neutral",
       "type": "registry:theme",
-      "title": "Theme: Blue accent",
-      "description": "Blue accent preset: swaps the neutral primary, primary-foreground and ring for blue in light and dark. Install after @qinyang/theme.",
+      "title": "Theme: Neutral accent",
+      "description": "Neutral accent preset: sets the --accent-50…950 ramp to Tailwind neutral; a black primary with white text in light mode and a near-white primary with dark text in dark mode, ring neutral-400 / neutral-500. Install after @qinyang/theme.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
       "cssVars": {
         "light": {
-          "primary": "oklch(0.57 0.15 258)",
-          "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.57 0.15 258)"
+          "accent-50": "oklch(98.5% 0 0)",
+          "accent-100": "oklch(97.6% 0 0)",
+          "accent-200": "oklch(94% 0 0)",
+          "accent-300": "oklch(87% 0 0)",
+          "accent-400": "oklch(70.8% 0 0)",
+          "accent-500": "oklch(55.6% 0 0)",
+          "accent-600": "oklch(43.9% 0 0)",
+          "accent-700": "oklch(37.1% 0 0)",
+          "accent-800": "oklch(26.9% 0 0)",
+          "accent-900": "oklch(20.5% 0 0)",
+          "accent-950": "oklch(14.5% 0 0)",
+          "primary": "var(--accent-900)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-400)"
         },
         "dark": {
-          "primary": "oklch(0.6 0.145 256)",
-          "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.6 0.145 256)"
+          "primary": "var(--accent-100)",
+          "primary-foreground": "var(--accent-900)",
+          "ring": "var(--accent-500)"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-blue",
+      "type": "registry:theme",
+      "title": "Theme: Blue accent",
+      "description": "Blue accent preset (the default): sets the --accent-50…950 ramp to Tailwind blue (BoardUI's blue-400 #3392ff); primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "accent-50": "oklch(97% 0.014 254.604)",
+          "accent-100": "oklch(93.2% 0.032 255.585)",
+          "accent-200": "oklch(88.2% 0.059 254.128)",
+          "accent-300": "oklch(80.9% 0.105 251.813)",
+          "accent-400": "oklch(66% 0.184 254.753)",
+          "accent-500": "oklch(62.3% 0.214 259.815)",
+          "accent-600": "oklch(54.6% 0.245 262.881)",
+          "accent-700": "oklch(48.8% 0.243 264.376)",
+          "accent-800": "oklch(42.4% 0.199 265.638)",
+          "accent-900": "oklch(37.9% 0.146 265.522)",
+          "accent-950": "oklch(28.2% 0.091 267.935)",
+          "primary": "var(--accent-600)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
+        },
+        "dark": {
+          "primary": "var(--accent-600)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         }
       },
       "meta": {
@@ -426,20 +482,31 @@
       "name": "theme-green",
       "type": "registry:theme",
       "title": "Theme: Green accent",
-      "description": "Green accent preset: swaps the neutral primary, primary-foreground and ring for green in light and dark. Install after @qinyang/theme.",
+      "description": "Green accent preset: sets the --accent-50…950 ramp to Tailwind green; primary = the 700 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
       "cssVars": {
         "light": {
-          "primary": "oklch(0.56 0.13 155)",
-          "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.56 0.13 155)"
+          "accent-50": "oklch(98.2% 0.018 155.826)",
+          "accent-100": "oklch(96.2% 0.044 156.743)",
+          "accent-200": "oklch(92.5% 0.084 155.995)",
+          "accent-300": "oklch(87.1% 0.150 154.449)",
+          "accent-400": "oklch(79.2% 0.209 151.711)",
+          "accent-500": "oklch(72.3% 0.219 149.579)",
+          "accent-600": "oklch(62.7% 0.194 149.214)",
+          "accent-700": "oklch(52.7% 0.154 150.069)",
+          "accent-800": "oklch(44.8% 0.119 151.328)",
+          "accent-900": "oklch(39.3% 0.095 152.535)",
+          "accent-950": "oklch(26.6% 0.065 152.934)",
+          "primary": "var(--accent-700)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         },
         "dark": {
-          "primary": "oklch(0.64 0.14 155)",
-          "primary-foreground": "oklch(0.2 0.03 155)",
-          "ring": "oklch(0.64 0.14 155)"
+          "primary": "var(--accent-700)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         }
       },
       "meta": {
@@ -451,20 +518,31 @@
       "name": "theme-orange",
       "type": "registry:theme",
       "title": "Theme: Orange accent",
-      "description": "Orange accent preset: swaps the neutral primary, primary-foreground and ring for orange in light and dark. Install after @qinyang/theme.",
+      "description": "Orange accent preset: sets the --accent-50…950 ramp to Tailwind orange; primary = the 700 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
       "cssVars": {
         "light": {
-          "primary": "oklch(0.62 0.17 45)",
-          "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.62 0.17 45)"
+          "accent-50": "oklch(98% 0.016 73.684)",
+          "accent-100": "oklch(95.4% 0.038 75.164)",
+          "accent-200": "oklch(90.1% 0.076 70.697)",
+          "accent-300": "oklch(83.7% 0.128 66.290)",
+          "accent-400": "oklch(75% 0.183 55.934)",
+          "accent-500": "oklch(70.5% 0.213 47.604)",
+          "accent-600": "oklch(64.6% 0.222 41.116)",
+          "accent-700": "oklch(55.3% 0.195 38.402)",
+          "accent-800": "oklch(47% 0.157 37.304)",
+          "accent-900": "oklch(40.8% 0.123 38.172)",
+          "accent-950": "oklch(26.6% 0.079 36.259)",
+          "primary": "var(--accent-700)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         },
         "dark": {
-          "primary": "oklch(0.7 0.16 52)",
-          "primary-foreground": "oklch(0.2 0.04 52)",
-          "ring": "oklch(0.7 0.16 52)"
+          "primary": "var(--accent-700)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         }
       },
       "meta": {
@@ -476,20 +554,31 @@
       "name": "theme-rose",
       "type": "registry:theme",
       "title": "Theme: Rose accent",
-      "description": "Rose accent preset: swaps the neutral primary, primary-foreground and ring for rose in light and dark. Install after @qinyang/theme.",
+      "description": "Rose accent preset: sets the --accent-50…950 ramp to Tailwind rose; primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
       "cssVars": {
         "light": {
-          "primary": "oklch(0.58 0.19 12)",
-          "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.58 0.19 12)"
+          "accent-50": "oklch(96.9% 0.015 12.422)",
+          "accent-100": "oklch(94.1% 0.030 12.580)",
+          "accent-200": "oklch(89.2% 0.058 10.001)",
+          "accent-300": "oklch(81% 0.117 11.638)",
+          "accent-400": "oklch(71.2% 0.194 13.428)",
+          "accent-500": "oklch(64.5% 0.246 16.439)",
+          "accent-600": "oklch(58.6% 0.253 17.585)",
+          "accent-700": "oklch(51.4% 0.222 16.935)",
+          "accent-800": "oklch(45.5% 0.188 13.697)",
+          "accent-900": "oklch(41% 0.159 10.272)",
+          "accent-950": "oklch(27.1% 0.105 12.094)",
+          "primary": "var(--accent-600)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         },
         "dark": {
-          "primary": "oklch(0.65 0.18 12)",
-          "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.65 0.18 12)"
+          "primary": "var(--accent-600)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         }
       },
       "meta": {
@@ -501,20 +590,31 @@
       "name": "theme-violet",
       "type": "registry:theme",
       "title": "Theme: Violet accent",
-      "description": "Violet accent preset: swaps the neutral primary, primary-foreground and ring for violet in light and dark. Install after @qinyang/theme.",
+      "description": "Violet accent preset: sets the --accent-50…950 ramp to Tailwind violet; primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
       "cssVars": {
         "light": {
-          "primary": "oklch(0.55 0.18 290)",
-          "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.55 0.18 290)"
+          "accent-50": "oklch(96.9% 0.016 293.756)",
+          "accent-100": "oklch(94.3% 0.029 294.588)",
+          "accent-200": "oklch(89.4% 0.057 293.283)",
+          "accent-300": "oklch(81.1% 0.111 293.571)",
+          "accent-400": "oklch(70.2% 0.183 293.541)",
+          "accent-500": "oklch(60.6% 0.250 292.717)",
+          "accent-600": "oklch(54.1% 0.281 293.009)",
+          "accent-700": "oklch(49.1% 0.270 292.581)",
+          "accent-800": "oklch(43.2% 0.232 292.759)",
+          "accent-900": "oklch(38% 0.189 293.745)",
+          "accent-950": "oklch(28.3% 0.141 291.089)",
+          "primary": "var(--accent-600)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         },
         "dark": {
-          "primary": "oklch(0.64 0.16 290)",
-          "primary-foreground": "oklch(1 0 0)",
-          "ring": "oklch(0.64 0.16 290)"
+          "primary": "var(--accent-600)",
+          "primary-foreground": "oklch(100% 0 0)",
+          "ring": "var(--accent-500)"
         }
       },
       "meta": {
@@ -3430,10 +3530,8 @@
       "name": "avatar-generator",
       "type": "registry:ui",
       "title": "Avatar Generator",
-      "description": "Deterministic kawaii avatars from a seed in the Seline style (head crop, blushed cheeks), with male/female/any generation, plus an editor with seed shuffle, gender toggle, part pickers, SVG download and JSX copy. Artwork: Humation (MIT).",
+      "description": "Deterministic kawaii avatars drawn in code from a seed, after the Seline logo (black hair, white face, blushed cheeks), hand-inked by default (seeded wobble, pen-pressure strokes, open loops) or smooth vector lines: male/female/any hairstyles, eyes, mouth, top, skin tone and accessory parts, plus an editor with seed shuffle, gender and style toggles, part pickers, SVG download and JSX copy.",
       "dependencies": [
-        "@humation/core",
-        "@humation/assets-humation-1",
         "@base-ui/react"
       ],
       "registryDependencies": [

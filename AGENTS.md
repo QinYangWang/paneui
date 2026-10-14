@@ -23,7 +23,7 @@ After changing radii or padding on nested surfaces, also run `pnpm audit:radius`
 | `notes/synara-native-style.md` | Native desktop style reference (Synara/Codex values) | — |
 | `notes/radius-audit.md` | Nested-radius audit triage (open findings by owner) | — |
 | `scripts/audit-radius.mjs` (+ `.config.mjs`) | `pnpm audit:radius`: browser audit of nested radii | — |
-| `THIRD_PARTY_NOTICES.md` | MIT notice for Synara | — |
+| `THIRD_PARTY_NOTICES.md` | MIT notices for Synara (style) and BoardUI (colours) | — |
 
 Import library code as `@/registry/base-nova/ui/<file>` or `@/registry/base-nova/blocks/<name>/<file>`.
 **Library** files own their appearance (no `no-restyle`; arbitrary values only warn).
@@ -37,39 +37,49 @@ component only if the design really needs a new treatment.
 
 - **Colors**: `background`, `foreground`, `card`, `popover`, `primary`, `secondary`,
   `muted`, `muted-foreground`, `accent`, `destructive`, `success`, `warning`,
-  `border`, `input`, `ring`, `code`, `chart-1`…`chart-5`, `shell`, `shell-border` (each `*-foreground` where defined). Washes use
+  `border`, `input`, `ring`, `code`, `chart-1`…`chart-8`, `shell`, `shell-border` (each `*-foreground` where defined),
+  plus the internal `--accent-50`…`--accent-950` ramp that `primary`/`ring` read (not a utility; never use it in components). Washes use
   opacity modifiers (`bg-success/12`, `ring-primary/20`). Never palette colors
   (`bg-zinc-100`), hex, or `[#…]`. `white`/`black` only for text on colored fills
   (`text-white` on destructive) and scrims (`bg-black/40`).
 - **Visual direction: native desktop, after Synara / Codex (since 2026-10-14)**. Replaces the
   earlier flat look as the only style (no switch). Values from Synara's `index.css` and
   `components/ui` (MIT, see `THIRD_PARTY_NOTICES.md`); summary in `notes/synara-native-style.md`.
-  Background `#fcfcfc` / `#0e0e0e`, card/popover white / background 99% + white, foreground
-  neutral-800 / neutral-100. `secondary`, `muted`, `accent` are **translucent fills** (black 3–4% /
-  white 4%), not surfaces: use them for hover/selected/track fills, and `bg-card` / `bg-popover` /
+  Colours are no longer Synara's: see the next bullet.
+- **Colours: BoardUI's colour system (since 2026-10-14)**, MIT, see `THIRD_PARTY_NOTICES.md`; values
+  from BoardUI's `styles/theme.css` re-expressed under the shadcn names (mapping in comments in
+  `app/globals.css`). Tailwind neutral OKLCH ramp with BoardUI's neutral-100 `#f7f7f7`, neutral-200
+  `#ebebeb`, neutral-925 `#121212`. Light: page, card, popover white; foreground neutral-950;
+  muted-foreground neutral-500. Dark: page `#121212`, card/popover neutral-800, foreground neutral-50,
+  muted-foreground neutral-400 (BoardUI's neutral-500 is only 3.2:1 on a neutral-800 card).
+  `secondary`, `muted`, `accent` are **translucent fills** (black 3% = neutral-100 on white / white
+  5–7%), not surfaces: use them for hover/selected/track fills, and `bg-card` / `bg-popover` /
   `bg-background` for anything opaque (raised controls, triggers, floating panels, morph shells).
-  `border` black 5% / white 4%, `input` black 6% / white 5%, `ring` neutral-400 / neutral-500
-  (used at `/50`). No gradient sheens, inset highlights, text-shadows or glows. Charts stay
-  coloured (Synara's grayscale charts were not adopted). App chrome: `bg-shell` (window band and
-  rail sidebar, surface 97% + black / 95% + white) and the `shell-inset` utility (content panel:
-  0.5px `shell-border` hairline, `rounded-shell`, 3px gap to the right and bottom window edges).
-- **Primary is neutral (since 2026-10-14)**: near-black `oklch(0.205 0 0)` with white
-  text in light, near-white `oklch(0.97 0 0)` (neutral-100) with near-black text in dark; `ring` is
-  neutral-400 / neutral-500, used at `/50`. So never pair `bg-primary` with `text-white`: use
-  `text-primary-foreground`, and check primary fills/text in dark mode (primary is white
-  there). Accent presets (blue, green, orange, rose, violet) override `primary`,
-  `primary-foreground` and an opaque `ring` (used at `/50` like the neutral one) via `html[data-accent="…"]` blocks in `globals.css`
-  (light and `.dark`), switched by the docs header and persisted in
-  `localStorage["accent"]`; each ships as a `theme-<name>` registry item. Charts never use
-  `primary`: they use `chart-1`…`chart-5` (blue, green, amber, red, violet), which stay
+  `border` black 8% / white 8% (= neutral-200 on white / neutral-800 on the dark page), `input` black
+  8% / white 12% (neutral-700 on a card), `ring` the accent's 500 stop (used at `/50`). States:
+  `destructive` red-500 (both modes), `success` lime-600 / lime-400, `warning` yellow-600 / yellow-500.
+  Charts `chart-1`…`chart-8`: teal, lime, pink, sky, purple, blue, emerald, yellow (all 400, both
+  modes). No gradient sheens, inset highlights, text-shadows or glows. App chrome: `bg-shell`
+  (window band and rail sidebar, neutral-100 / neutral-900) and the `shell-inset` utility (content
+  panel: 0.5px `shell-border` hairline, `rounded-shell`, 3px gap to the right and bottom window edges).
+- **Primary is blue, from one accent ramp (since 2026-10-14, after BoardUI)**: `primary` =
+  `var(--accent-600)` with white `primary-foreground`, `ring` = `var(--accent-500)`, the same in both
+  modes. The default ramp (no attribute) is Tailwind blue with BoardUI's blue-400 `#3392ff`. Accent
+  presets (neutral, green, orange, rose, violet) are `html[data-accent="…"]` blocks in `globals.css`
+  that swap the eleven `--accent-*` stops (green and orange point primary at 700 for 4.5:1 white
+  text; neutral re-points primary to neutral-900 / white text in light and neutral-100 /
+  neutral-900 text in dark), switched by the docs header and persisted in `localStorage["accent"]`
+  ("blue" = default); each ships as a `theme-<name>` registry item (`theme-blue` restores the
+  default). Never pair `bg-primary` with `text-white`: use `text-primary-foreground` (neutral's dark
+  primary is near-white). Charts never use `primary`: they use `chart-1`…`chart-8`, which stay
   coloured under every accent.
-- **Elevation (near-flat)**: `shadow-raised` (resting control/card: 1px hairline ring + 0 1px 2px
-  black/5%, Synara's icon chip) → `hover:shadow-raised-hover` (ring a step darker);
+- **Elevation (near-flat)**: `shadow-raised` (resting control/card: 1px neutral-200 hairline ring
+  (black 8% / white 12%) + BoardUI's shadow-card 0 1px 1px black/5%, 14% in dark) → `hover:shadow-raised-hover` (ring a step darker);
   `shadow-surface` (popovers, menus, dialogs, floating panels only: hairline + soft lift);
   `shadow-well` (inset hairline for fields and tracks); `shadow-chip` (kbd, small chips);
   `shadow-primary` (filled primary, a 1-2px drop, none in dark). Resting cards, tables and code
   blocks use `shadow-raised`, never `shadow-surface`. Dark mode elevation is the hairline ring
-  only. Hover on rows, menu items, ghost/outline buttons and nav is a fill (`bg-secondary`), not a ring.
+  plus BoardUI's darker contact shadow. Hover on rows, menu items, ghost/outline buttons and nav is a fill (`bg-secondary`), not a ring.
 - **Focus**: `focus-visible:ring-2 focus-visible:ring-ring/50`.
 - **Radius**: base `--radius` 0.625rem with Synara's multipliers → `rounded-sm/md/lg/xl/2xl/3xl`
   = 6/8/10/14/18/22px (`rounded-shell` 13px for the rail inset panel).
@@ -249,6 +259,7 @@ Every registry:ui item has `content/docs/<name>.ts` (type `ComponentDoc` in lib/
 
 ## Attribution
 
-The visual style follows Synara (https://github.com/Emanuele-web04/synara), MIT License,
+The colours follow BoardUI (https://github.com/BoardUI/boardui), MIT License, Copyright (c) 2026
+Mertcan Dundar Esmergul (BoardUI). The visual style follows Synara (https://github.com/Emanuele-web04/synara), MIT License,
 Copyright (c) 2026 T3 Tools Inc. and Copyright (c) 2026 Emanuele Di Pietro. Full notice in
 `THIRD_PARTY_NOTICES.md`; keep it when moving more values from that source.

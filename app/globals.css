@@ -5,8 +5,11 @@
 
 /*
  * Visual direction: native desktop, after Synara / Codex (MIT, see THIRD_PARTY_NOTICES.md).
- * System UI font on a 13px scale, translucent black/white fills for secondary/muted/accent,
- * 5–6% hairlines, near-flat elevation and a 0.625rem radius with multiplier steps.
+ * System UI font on a 13px scale, near-flat elevation and a 0.625rem radius with multiplier steps.
+ * Colours: BoardUI's colour system (MIT, see THIRD_PARTY_NOTICES.md): Tailwind's neutral OKLCH
+ * ramp (with BoardUI's neutral-100 #f7f7f7, neutral-200 #ebebeb, neutral-925 #121212 and
+ * blue-400 #3392ff), one --accent-50…950 ramp (blue by default) behind primary and ring, and a
+ * categorical chart palette. Token names stay shadcn's; the mapping is in the comments below.
  */
 @theme inline {
   --color-background: var(--background);
@@ -39,6 +42,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
   /* App chrome: the window band/sidebar tone and the hairline of the inset content panel. */
   --color-shell: var(--shell);
   --color-shell-border: var(--shell-border);
@@ -76,145 +82,221 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.9911 0 0); /* #fcfcfc */
-  --foreground: oklch(0.269 0 0); /* neutral-800 */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.269 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.269 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0 0 0 / 3%);
-  --secondary-foreground: oklch(0.269 0 0);
-  --muted: oklch(0 0 0 / 4%);
-  --muted-foreground: oklch(0.5155 0 0); /* neutral-500 mixed 10% toward black */
-  --accent: oklch(0 0 0 / 4%);
-  --accent-foreground: oklch(0.269 0 0);
-  --destructive: oklch(0.58 0.2 27);
-  --success: oklch(0.6 0.14 152);
-  --warning: oklch(0.74 0.14 72);
-  --border: oklch(0 0 0 / 5%);
-  --input: oklch(0 0 0 / 6%);
-  --ring: oklch(0.708 0 0); /* neutral-400 */
-  /* Charts keep their own hues so data stays readable whatever the accent. */
-  --chart-1: oklch(0.57 0.15 258);
-  --chart-2: oklch(0.6 0.14 152);
-  --chart-3: oklch(0.74 0.14 72);
-  --chart-4: oklch(0.58 0.2 27);
-  --chart-5: oklch(0.55 0.16 295);
-  --code: oklch(0.9731 0 0);
-  --scrollbar: oklch(0 0 0 / 16%);
-  --scrollbar-hover: oklch(0 0 0 / 28%);
-  /* Shell band = surface 97% + black; inset panel hairline black/10%. */
-  --shell: oklch(0.9685 0 0);
-  --shell-border: oklch(0 0 0 / 10%);
 
-  /* Elevation: one hairline ring, at most a 1-2px drop (Synara icon chip); popups get a soft lift. */
-  --skeuo-raised: 0 0 0 1px oklch(0 0 0 / 8%), 0 1px 2px oklch(0 0 0 / 5%);
-  --skeuo-raised-hover: 0 0 0 1px oklch(0 0 0 / 12%), 0 1px 2px oklch(0 0 0 / 6%);
-  --skeuo-pressed: 0 0 0 1px oklch(0 0 0 / 8%);
-  --skeuo-primary: 0 1px 2px oklch(0 0 0 / 8%);
-  --skeuo-well: inset 0 0 0 1px oklch(0 0 0 / 8%);
+  /*
+   * Accent ramp (BoardUI --color-accent-50…950): the CTA hue. primary, primary-foreground and
+   * ring read it, so a preset (html[data-accent]) or a custom colour only swaps these eleven
+   * stops. Default blue = Tailwind blue with BoardUI's blue-400 (#3392ff). Not to be confused with
+   * --accent below, which is shadcn's hover/selected fill.
+   */
+  --accent-50: oklch(97% 0.014 254.604);
+  --accent-100: oklch(93.2% 0.032 255.585);
+  --accent-200: oklch(88.2% 0.059 254.128);
+  --accent-300: oklch(80.9% 0.105 251.813);
+  --accent-400: oklch(66% 0.184 254.753);
+  --accent-500: oklch(62.3% 0.214 259.815);
+  --accent-600: oklch(54.6% 0.245 262.881);
+  --accent-700: oklch(48.8% 0.243 264.376);
+  --accent-800: oklch(42.4% 0.199 265.638);
+  --accent-900: oklch(37.9% 0.146 265.522);
+  --accent-950: oklch(28.2% 0.091 267.935);
+
+  /* Surfaces: BoardUI background/full (white) and background/primary/default (white). */
+  --background: oklch(100% 0 0);
+  --card: oklch(100% 0 0);
+  --popover: oklch(100% 0 0);
+  /* Text: text/primary neutral-950, text/secondary neutral-500 (4.7:1 on white). */
+  --foreground: oklch(14.5% 0 0);
+  --card-foreground: oklch(14.5% 0 0);
+  --popover-foreground: oklch(14.5% 0 0);
+  --muted-foreground: oklch(55.6% 0 0);
+  /* Primary: the accent's 600 stop (BoardUI's button gradient runs 500 → 600) with white text. */
+  --primary: var(--accent-600);
+  --primary-foreground: oklch(100% 0 0);
+  /*
+   * Fills stay translucent so they read on any surface: black 3% is neutral-100 (#f7f7f7) on white,
+   * BoardUI's background/primary/hover and background/secondary/default.
+   */
+  --secondary: oklch(0% 0 0 / 3%);
+  --secondary-foreground: oklch(14.5% 0 0);
+  --muted: oklch(0% 0 0 / 3%);
+  --accent: oklch(0% 0 0 / 3%);
+  --accent-foreground: oklch(14.5% 0 0);
+  /* State: red-500, lime-600 (notification success), yellow-600. */
+  --destructive: oklch(63.7% 0.237 25.331);
+  --success: oklch(64.8% 0.2 131.684);
+  --warning: oklch(68.1% 0.162 75.834);
+  /* Borders: black 8% is neutral-200 (#ebebeb) on white (border/button/default, separator). */
+  --border: oklch(0% 0 0 / 8%);
+  --input: oklch(0% 0 0 / 8%);
+  /* Focus: border/focus-ring = accent-500, used at /50. */
+  --ring: var(--accent-500);
+  /* Charts: BoardUI chart-1…8 (teal, lime, pink, sky, purple, blue, emerald, yellow, all 400). */
+  --chart-1: oklch(77.7% 0.152 181.912);
+  --chart-2: oklch(84.1% 0.238 128.85);
+  --chart-3: oklch(71.8% 0.202 349.761);
+  --chart-4: oklch(74.6% 0.16 232.661);
+  --chart-5: oklch(71.4% 0.203 305.504);
+  --chart-6: oklch(66% 0.184 254.753);
+  --chart-7: oklch(76.5% 0.177 163.223);
+  --chart-8: oklch(85.2% 0.199 91.936);
+  /* Code well: neutral-100. */
+  --code: oklch(97.6% 0 0);
+  --scrollbar: oklch(0% 0 0 / 16%);
+  --scrollbar-hover: oklch(0% 0 0 / 28%);
+  /* Shell band: background/secondary neutral-100; inset panel hairline black/10%. */
+  --shell: oklch(97.6% 0 0);
+  --shell-border: oklch(0% 0 0 / 10%);
+
+  /*
+   * Elevation: a neutral-200 hairline (black 8%) with BoardUI's shadow-card (0 1px 1px 5%); hover
+   * steps the ring to neutral-300 (border/button/hover); popups add shadow-dropdown and a soft lift.
+   */
+  --skeuo-raised: 0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%);
+  --skeuo-raised-hover: 0 0 0 1px oklch(0% 0 0 / 17%), 0 1px 1px oklch(0% 0 0 / 5%);
+  --skeuo-pressed: 0 0 0 1px oklch(0% 0 0 / 8%);
+  --skeuo-primary: 0 1px 2px oklch(0% 0 0 / 8%);
+  --skeuo-well: inset 0 0 0 1px oklch(0% 0 0 / 8%);
   --skeuo-surface:
-    0 0 0 1px oklch(0 0 0 / 6%), 0 2px 6px -2px oklch(0 0 0 / 6%), 0 12px 28px -8px oklch(0 0 0 / 14%);
-  --skeuo-chip: 0 0 0 1px oklch(0 0 0 / 6%), 0 1px 2px oklch(0 0 0 / 5%);
+    0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 4%), 0 4px 4px oklch(0% 0 0 / 2%),
+    0 12px 28px -8px oklch(0% 0 0 / 10%);
+  --skeuo-chip: 0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%);
 }
 
 .dark {
-  --background: oklch(0.1638 0 0); /* #0e0e0e */
-  --foreground: oklch(0.97 0 0); /* neutral-100 */
-  --card: oklch(0.1749 0 0); /* background 99% + white */
-  --card-foreground: oklch(0.97 0 0);
-  --popover: oklch(0.1749 0 0);
-  --popover-foreground: oklch(0.97 0 0);
-  --primary: oklch(0.97 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(1 0 0 / 4%);
-  --secondary-foreground: oklch(0.97 0 0);
-  --muted: oklch(1 0 0 / 4%);
-  --muted-foreground: oklch(0.6032 0 0); /* neutral-500 mixed 10% toward white */
-  --accent: oklch(1 0 0 / 4%);
-  --accent-foreground: oklch(0.97 0 0);
-  --destructive: oklch(0.64 0.19 25);
-  --success: oklch(0.7 0.15 152);
-  --warning: oklch(0.8 0.14 75);
-  --border: oklch(1 0 0 / 4%);
-  --input: oklch(1 0 0 / 5%);
-  --ring: oklch(0.556 0 0); /* neutral-500 */
-  --chart-1: oklch(0.6 0.145 256);
-  --chart-2: oklch(0.7 0.15 152);
-  --chart-3: oklch(0.8 0.14 75);
-  --chart-4: oklch(0.64 0.19 25);
-  --chart-5: oklch(0.65 0.15 295);
-  --code: oklch(0.1496 0 0);
-  --scrollbar: oklch(1 0 0 / 14%);
-  --scrollbar-hover: oklch(1 0 0 / 24%);
-  /* Shell band = surface 95% + white; inset panel hairline white/9%. */
-  --shell: oklch(0.218 0 0);
-  --shell-border: oklch(1 0 0 / 9%);
+  /* Page background/full neutral-925 (#121212); cards, popovers, fields background/primary neutral-800. */
+  --background: oklch(18.2% 0 0);
+  --card: oklch(26.9% 0 0);
+  --popover: oklch(26.9% 0 0);
+  /*
+   * text/primary neutral-50. text/secondary is neutral-500 in BoardUI, but that is 3.2:1 on a
+   * neutral-800 card, so it moves one step to neutral-400 (5.8:1 on cards, 7.2:1 on the page).
+   */
+  --foreground: oklch(98.5% 0 0);
+  --card-foreground: oklch(98.5% 0 0);
+  --popover-foreground: oklch(98.5% 0 0);
+  --muted-foreground: oklch(70.8% 0 0);
+  /* Primary keeps the light value (BoardUI's CTA gradient does not change with mode). */
+  /* Fills: white 7% ≈ neutral-700 / 60% on a neutral-800 card (background/primary/hover). */
+  --secondary: oklch(100% 0 0 / 7%);
+  --secondary-foreground: oklch(98.5% 0 0);
+  --muted: oklch(100% 0 0 / 5%);
+  --accent: oklch(100% 0 0 / 7%);
+  --accent-foreground: oklch(98.5% 0 0);
+  /*
+   * State: lime-400, yellow-500. destructive stays red-500 rather than BoardUI's text/error red-400:
+   * it also fills the destructive button, where white text on red-400 is 2.9:1 (BoardUI's dark
+   * danger button keeps its red-500 → 600 gradient).
+   */
+  --destructive: oklch(63.7% 0.237 25.331);
+  --success: oklch(84.1% 0.238 128.85);
+  --warning: oklch(79.5% 0.184 86.047);
+  /*
+   * Borders: white 8% is neutral-800 on the page (separator, table), still visible on a card;
+   * input white 12% is neutral-700 on a card (border/button/default).
+   */
+  --border: oklch(100% 0 0 / 8%);
+  --input: oklch(100% 0 0 / 12%);
+  --code: oklch(20.5% 0 0);
+  --scrollbar: oklch(100% 0 0 / 14%);
+  --scrollbar-hover: oklch(100% 0 0 / 24%);
+  /* Shell band: background/secondary neutral-900; inset panel hairline white/9%. */
+  --shell: oklch(20.5% 0 0);
+  --shell-border: oklch(100% 0 0 / 9%);
 
-  --skeuo-raised: 0 0 0 1px oklch(1 0 0 / 7%);
-  --skeuo-raised-hover: 0 0 0 1px oklch(1 0 0 / 12%);
-  --skeuo-pressed: 0 0 0 1px oklch(1 0 0 / 6%);
+  /* Hairline neutral-700 on a card (white 12%) plus BoardUI's dark shadow-card; hover neutral-600-ish. */
+  --skeuo-raised: 0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 1px oklch(0% 0 0 / 14%);
+  --skeuo-raised-hover: 0 0 0 1px oklch(100% 0 0 / 20%), 0 1px 1px oklch(0% 0 0 / 14%);
+  --skeuo-pressed: 0 0 0 1px oklch(100% 0 0 / 8%);
   --skeuo-primary: 0 0 0 0 transparent;
-  --skeuo-well: inset 0 0 0 1px oklch(1 0 0 / 7%);
-  --skeuo-surface: 0 0 0 1px oklch(1 0 0 / 7%), 0 16px 40px -12px oklch(0 0 0 / 60%);
-  --skeuo-chip: 0 0 0 1px oklch(1 0 0 / 6%);
+  --skeuo-well: inset 0 0 0 1px oklch(100% 0 0 / 12%);
+  --skeuo-surface:
+    0 0 0 1px oklch(100% 0 0 / 10%), 0 1px 1px oklch(0% 0 0 / 14%), 0 4px 4px oklch(0% 0 0 / 10%),
+    0 16px 40px -12px oklch(0% 0 0 / 50%);
+  --skeuo-chip: 0 0 0 1px oklch(100% 0 0 / 10%);
 }
 
 /*
- * Accent presets: `data-accent` on <html> swaps the primary (default is neutral black / white).
- * The docs header persists the pick in localStorage["accent"]; registry items theme-<name> ship the same values.
+ * Accent presets: `data-accent` on <html> swaps the --accent-* ramp (default, no attribute, is blue).
+ * primary follows the 600 stop with white text; green and orange use 700, the first stop where
+ * white text reaches 4.5:1. Neutral is the old black/white primary: neutral-900 with white text in
+ * light, neutral-100 with neutral-900 text in dark. The docs header persists the pick in
+ * localStorage["accent"]; registry items theme-<name> ship the same values.
  */
-html[data-accent="blue"] {
-  --primary: oklch(0.57 0.15 258);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.57 0.15 258);
+html[data-accent="neutral"] {
+  --accent-50: oklch(98.5% 0 0);
+  --accent-100: oklch(97.6% 0 0);
+  --accent-200: oklch(94% 0 0);
+  --accent-300: oklch(87% 0 0);
+  --accent-400: oklch(70.8% 0 0);
+  --accent-500: oklch(55.6% 0 0);
+  --accent-600: oklch(43.9% 0 0);
+  --accent-700: oklch(37.1% 0 0);
+  --accent-800: oklch(26.9% 0 0);
+  --accent-900: oklch(20.5% 0 0);
+  --accent-950: oklch(14.5% 0 0);
+  --primary: var(--accent-900);
+  --primary-foreground: oklch(100% 0 0);
+  --ring: var(--accent-400);
 }
-html[data-accent="blue"].dark {
-  --primary: oklch(0.6 0.145 256);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.6 0.145 256);
+html[data-accent="neutral"].dark {
+  --primary: var(--accent-100);
+  --primary-foreground: var(--accent-900);
+  --ring: var(--accent-500);
 }
 html[data-accent="green"] {
-  --primary: oklch(0.56 0.13 155);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.56 0.13 155);
-}
-html[data-accent="green"].dark {
-  --primary: oklch(0.64 0.14 155);
-  --primary-foreground: oklch(0.2 0.03 155);
-  --ring: oklch(0.64 0.14 155);
+  --accent-50: oklch(98.2% 0.018 155.826);
+  --accent-100: oklch(96.2% 0.044 156.743);
+  --accent-200: oklch(92.5% 0.084 155.995);
+  --accent-300: oklch(87.1% 0.150 154.449);
+  --accent-400: oklch(79.2% 0.209 151.711);
+  --accent-500: oklch(72.3% 0.219 149.579);
+  --accent-600: oklch(62.7% 0.194 149.214);
+  --accent-700: oklch(52.7% 0.154 150.069);
+  --accent-800: oklch(44.8% 0.119 151.328);
+  --accent-900: oklch(39.3% 0.095 152.535);
+  --accent-950: oklch(26.6% 0.065 152.934);
+  --primary: var(--accent-700);
 }
 html[data-accent="orange"] {
-  --primary: oklch(0.62 0.17 45);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.62 0.17 45);
-}
-html[data-accent="orange"].dark {
-  --primary: oklch(0.7 0.16 52);
-  --primary-foreground: oklch(0.2 0.04 52);
-  --ring: oklch(0.7 0.16 52);
+  --accent-50: oklch(98% 0.016 73.684);
+  --accent-100: oklch(95.4% 0.038 75.164);
+  --accent-200: oklch(90.1% 0.076 70.697);
+  --accent-300: oklch(83.7% 0.128 66.290);
+  --accent-400: oklch(75% 0.183 55.934);
+  --accent-500: oklch(70.5% 0.213 47.604);
+  --accent-600: oklch(64.6% 0.222 41.116);
+  --accent-700: oklch(55.3% 0.195 38.402);
+  --accent-800: oklch(47% 0.157 37.304);
+  --accent-900: oklch(40.8% 0.123 38.172);
+  --accent-950: oklch(26.6% 0.079 36.259);
+  --primary: var(--accent-700);
 }
 html[data-accent="rose"] {
-  --primary: oklch(0.58 0.19 12);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.58 0.19 12);
-}
-html[data-accent="rose"].dark {
-  --primary: oklch(0.65 0.18 12);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.65 0.18 12);
+  --accent-50: oklch(96.9% 0.015 12.422);
+  --accent-100: oklch(94.1% 0.030 12.580);
+  --accent-200: oklch(89.2% 0.058 10.001);
+  --accent-300: oklch(81% 0.117 11.638);
+  --accent-400: oklch(71.2% 0.194 13.428);
+  --accent-500: oklch(64.5% 0.246 16.439);
+  --accent-600: oklch(58.6% 0.253 17.585);
+  --accent-700: oklch(51.4% 0.222 16.935);
+  --accent-800: oklch(45.5% 0.188 13.697);
+  --accent-900: oklch(41% 0.159 10.272);
+  --accent-950: oklch(27.1% 0.105 12.094);
 }
 html[data-accent="violet"] {
-  --primary: oklch(0.55 0.18 290);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.55 0.18 290);
-}
-html[data-accent="violet"].dark {
-  --primary: oklch(0.64 0.16 290);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.64 0.16 290);
+  --accent-50: oklch(96.9% 0.016 293.756);
+  --accent-100: oklch(94.3% 0.029 294.588);
+  --accent-200: oklch(89.4% 0.057 293.283);
+  --accent-300: oklch(81.1% 0.111 293.571);
+  --accent-400: oklch(70.2% 0.183 293.541);
+  --accent-500: oklch(60.6% 0.250 292.717);
+  --accent-600: oklch(54.1% 0.281 293.009);
+  --accent-700: oklch(49.1% 0.270 292.581);
+  --accent-800: oklch(43.2% 0.232 292.759);
+  --accent-900: oklch(38% 0.189 293.745);
+  --accent-950: oklch(28.3% 0.141 291.089);
 }
 
 @layer base {

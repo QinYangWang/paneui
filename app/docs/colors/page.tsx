@@ -1,7 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
 
-import { PRESET_THEMES } from "@/components/docs/accent-color"
+import { DEFAULT_ACCENT, PRESET_RAMPS, RAMP_STOPS } from "@/components/docs/accent-color"
 import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { ThemingAccent } from "@/components/docs/theming-accent"
 import { ThemingTokenTable } from "@/components/docs/theming-token-table"
@@ -12,10 +12,10 @@ export const metadata = { title: "Colors" }
 /** Light/dark values straight from the theme, read once at build time. */
 function readTheme() {
   const theme = parseThemeTokens(fs.readFileSync(path.join(process.cwd(), "app/globals.css"), "utf8"))
-  // The neutral accent in accent-color.ts mirrors :root/.dark; flag drift in the build log.
-  const n = PRESET_THEMES.neutral
-  if (theme.light.primary !== n.light.primary || theme.dark.primary !== n.dark.primary || theme.light.ring !== n.light.ring) {
-    console.warn("[docs/colors] accent-color.ts neutral values no longer match app/globals.css")
+  // The default ramp in accent-color.ts mirrors the --accent-* stops on :root; flag drift in the build log.
+  const ramp = PRESET_RAMPS[DEFAULT_ACCENT]
+  if (RAMP_STOPS.some((s, i) => theme.light[`accent-${s}`] !== ramp[i]) || theme.light.primary !== "var(--accent-600)") {
+    console.warn("[docs/colors] accent-color.ts default ramp no longer matches app/globals.css")
   }
   return theme
 }
@@ -41,11 +41,14 @@ export default function Colors() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent">One accent, every control</GuideH2>
         <p className="text-muted-foreground">
-          Filled buttons, switches, checkboxes, radios, sliders, links, selection and focus rings all read{" "}
-          <Code>--primary</Code>, <Code>--primary-foreground</Code> and <Code>--ring</Code>. Pick a preset or any colour and
-          the whole site recolours live, in both modes; surfaces, text, states and charts deliberately stay as they are. A
-          custom colour is kept as picked in light mode (darkened only if it would fall under 3:1 against the page), lifted
-          in OKLCH for dark mode, and given white or dark text by contrast, the same rule the presets follow. The choice is remembered like the header&apos;s accent menu.
+          The colours follow <TextLink href="https://www.boardui.com/components/color">BoardUI</TextLink>&apos;s system. Filled
+          buttons, switches, checkboxes, radios, sliders, tabs, links, selection and focus rings all read{" "}
+          <Code>--primary</Code>, <Code>--primary-foreground</Code> and <Code>--ring</Code>, and those read one{" "}
+          <Code>--accent-50…950</Code> ramp: primary is its 600 stop with white text, ring its 500 stop, the same in both
+          modes. Blue is the default; pick a preset or any colour and the whole site recolours live, while surfaces, text,
+          states and charts deliberately stay as they are. A custom colour gets a ramp built on blue&apos;s lightness steps in
+          its own hue, and is used as picked for primary (darkened or lifted only if it would fall under 3:1 against the
+          page) with white or dark text by contrast. The choice is remembered like the header&apos;s accent menu.
         </p>
         <ThemingAccent />
       </section>

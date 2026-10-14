@@ -9,7 +9,7 @@ import { Menu, MenuContent, MenuGroup, MenuLabel, MenuRadioGroup, MenuRadioItem,
 import { THEME_CHANGE_EVENT, ThemeToggle, useThemeToggle, type ThemeChangeDetail } from "@/registry/base-nova/ui/theme-toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
-import { PRESET_LABELS, PRESET_THEMES, type PresetAccent } from "./accent-color"
+import { DEFAULT_ACCENT, PRESET_LABELS, PRESET_THEMES, type PresetAccent } from "./accent-color"
 import { setAccent, useAccentState, type AccentChoice } from "./accent-store"
 import { THEME_KEY } from "./theme-script"
 
@@ -38,7 +38,7 @@ function applyInstant(dark: boolean) {
   requestAnimationFrame(() => requestAnimationFrame(() => mute.remove()))
 }
 
-/** Menu swatches: each preset's light primary (neutral follows the current foreground). Values from accent-color.ts. */
+/** Menu swatches: each preset's light primary (neutral follows the current foreground); blue is the default. Values from accent-color.ts. */
 const accentOptions: { accent: PresetAccent; label: string; swatch: string }[] = (Object.keys(PRESET_LABELS) as PresetAccent[]).map(
   (a) => ({ accent: a, label: PRESET_LABELS[a], swatch: a === "neutral" ? "var(--foreground)" : PRESET_THEMES[a].light.primary })
 )
@@ -79,6 +79,7 @@ export function AccentControl() {
                   style={{ "--swatch": swatch } as React.CSSProperties}
                 />
                 {l}
+                {a === DEFAULT_ACCENT ? <span className="ml-auto text-ui-xs text-muted-foreground">Default</span> : null}
               </MenuRadioItem>
             ))}
             {custom ? (

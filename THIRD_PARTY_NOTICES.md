@@ -32,27 +32,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## @pierre/diffs (runtime dependency of `file-diff`)
+## BoardUI (colour system)
 
-`registry/base-nova/ui/file-diff.tsx` renders its rows with `@pierre/diffs`
-(https://diffs.com), Copyright 2025 Pierre Computer Company,
-licensed under the Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
-It is installed from npm as a dependency and not vendored or modified; the package ships no
-NOTICE file. Its full license text is in `node_modules/@pierre/diffs/LICENSE.md`.
-
-## Humation (avatar artwork and seed algorithm)
-
-The `avatar-generator` item (`registry/base-nova/ui/generated-avatar.tsx`,
-`registry/base-nova/ui/avatar-generator.tsx`) renders the hand-drawn avatar parts of Humation,
-https://github.com/humation-labs/humation (https://humation.app), installed from npm as
-`@humation/core` and `@humation/assets-humation-1` (1.0.3). The artwork is used unmodified from
-the package at runtime; our code adds a head crop, blush overlay and a gender filter over the
-part lists, and mirrors Humation's FNV-1a `${seed}:${slot}` pick so gender-filtered avatars stay
-deterministic. Both the packages and the artwork are MIT licensed.
+The theme colours in `app/globals.css` (and the `theme` / `theme-<accent>` registry items) follow
+BoardUI's colour system, https://github.com/BoardUI/boardui (`styles/theme.css`, commit
+ec5c5eb, and https://www.boardui.com/components/color): the Tailwind neutral OKLCH ramp with
+BoardUI's primitive overrides (neutral-100 #f7f7f7, neutral-200 #ebebeb, neutral-925 #121212,
+blue-400 #3392ff), the role mapping of text, background, border and focus tokens, the
+`--accent-50…950` ramp that drives the call-to-action colour (blue by default), and the
+categorical chart palette. Values were re-expressed under this project's shadcn token names;
+no source files were copied verbatim.
 
 MIT License
 
-Copyright (c) 2026 Humation contributors
+Copyright (c) 2026 Mertcan Dundar Esmergul (BoardUI)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,3 +64,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## @pierre/diffs (runtime dependency of `file-diff`)
+
+`registry/base-nova/ui/file-diff.tsx` renders its rows with `@pierre/diffs`
+(https://diffs.com), Copyright 2025 Pierre Computer Company,
+licensed under the Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+It is installed from npm as a dependency and not vendored or modified; the package ships no
+NOTICE file. Its full license text is in `node_modules/@pierre/diffs/LICENSE.md`.

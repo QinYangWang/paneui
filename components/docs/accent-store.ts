@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { customAccentStyle, deriveAccent, type AccentTheme, type PresetAccent } from "./accent-color"
+import { customAccentStyle, DEFAULT_ACCENT, deriveAccent, RAMP_STOPS, type AccentTheme, type PresetAccent } from "./accent-color"
 import { ACCENT_CHANGE_EVENT, ACCENT_KEY, ACCENTS, CUSTOM_ACCENT_KEY, CUSTOM_ACCENT_STYLE_ID } from "./theme-script"
 
 /** A custom accent as stored in localStorage[CUSTOM_ACCENT_KEY]. */
@@ -20,13 +20,16 @@ export function parseCustomAccent(raw: string | null): CustomAccent | null {
   if (!raw) return null
   try {
     const v = JSON.parse(raw) as Partial<CustomAccent>
-    return typeof v.hex === "string" && isVars(v.light) && isVars(v.dark) ? (v as CustomAccent) : null
+    if (typeof v.hex !== "string" || !isVars(v.light) || !isVars(v.dark)) return null
+    // Accents saved before the ramp existed carry only primary/foreground/ring.
+    const ramp = Array.isArray(v.ramp) && v.ramp.length === RAMP_STOPS.length && v.ramp.every((x) => typeof x === "string") ? v.ramp : undefined
+    return { hex: v.hex, light: v.light as CustomAccent["light"], dark: v.dark as CustomAccent["dark"], ramp }
   } catch {
     return null
   }
 }
 
-/** The stored accent; "custom" falls back to neutral when its colours are missing or malformed. */
+/** The stored accent; "custom" falls back to the default (blue) when its colours are missing or malformed. */
 export function readAccentState(): AccentState {
   let accent: string | null = null
   let custom: CustomAccent | null = null
@@ -36,8 +39,8 @@ export function readAccentState(): AccentState {
   } catch {
     // storage can be unavailable (private mode, sandboxed iframes)
   }
-  if (accent === "custom") return custom ? { accent: "custom", custom } : { accent: "neutral", custom: null }
-  return { accent: isPreset(accent) ? accent : "neutral", custom }
+  if (accent === "custom") return custom ? { accent: "custom", custom } : { accent: DEFAULT_ACCENT, custom: null }
+  return { accent: isPreset(accent) ? accent : DEFAULT_ACCENT, custom }
 }
 
 /** Write (or remove) the custom accent <style> in a document. Returns true when its text changed. */
@@ -66,7 +69,7 @@ function applyToDocument({ accent, custom }: AccentState) {
     root.setAttribute("data-accent", "custom")
   } else {
     if (!custom) syncCustomStyle(document, null)
-    if (accent === "neutral") root.removeAttribute("data-accent")
+    if (accent === DEFAULT_ACCENT) root.removeAttribute("data-accent")
     else root.setAttribute("data-accent", accent)
   }
 }
@@ -79,7 +82,7 @@ function applyToDocument({ accent, custom }: AccentState) {
 export function setAccent(accent: AccentChoice, custom?: CustomAccent | null) {
   const current = readAccentState()
   const nextCustom = custom === undefined ? current.custom : custom
-  const state: AccentState = { accent: accent === "custom" && !nextCustom ? "neutral" : accent, custom: nextCustom }
+  const state: AccentState = { accent: accent === "custom" && !nextCustom ? DEFAULT_ACCENT : accent, custom: nextCustom }
   applyToDocument(state)
   try {
     localStorage.setItem(ACCENT_KEY, state.accent)
@@ -91,7 +94,7 @@ export function setAccent(accent: AccentChoice, custom?: CustomAccent | null) {
   window.dispatchEvent(new CustomEvent<AccentState>(ACCENT_CHANGE_EVENT, { detail: state }))
 }
 
-/** Pick a custom colour (hex): derives light and dark variants and applies them. */
+/** Pick a custom colour (hex): derives its ramp and light and dark variants and applies them. */
 export function setCustomAccent(hex: string) {
   const theme = deriveAccent(hex)
   if (theme) setAccent("custom", { hex, ...theme })
@@ -99,7 +102,7 @@ export function setCustomAccent(hex: string) {
 
 /** Current accent, kept in step with other controls on the page and other tabs. */
 export function useAccentState(): AccentState {
-  const [state, setState] = React.useState<AccentState>({ accent: "neutral", custom: null })
+  const [state, setState] = React.useState<AccentState>({ accent: DEFAULT_ACCENT, custom: null })
   React.useEffect(() => {
     setState(readAccentState())
     const onChange = (e: Event) => setState((e as CustomEvent<AccentState>).detail ?? readAccentState())

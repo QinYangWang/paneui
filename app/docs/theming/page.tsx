@@ -1,4 +1,4 @@
-import { PRESET_THEMES, type PresetAccent } from "@/components/docs/accent-color"
+import { DEFAULT_ACCENT, PRESET_THEMES, type PresetAccent } from "@/components/docs/accent-color"
 import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
 import { ThemingSystem } from "@/components/docs/theming-system"
@@ -43,14 +43,17 @@ const SWATCHES: { token: string; swatch: string }[] = [
   { token: "destructive", swatch: "bg-destructive" },
   { token: "success", swatch: "bg-success" },
   { token: "warning", swatch: "bg-warning" },
-  { token: "chart-1…5", swatch: "bg-chart-1" },
+  { token: "chart-1…8", swatch: "bg-chart-1" },
   { token: "shell", swatch: "bg-shell" },
 ]
 
 /** Accent presets with their light and dark primaries (accent-color.ts mirrors app/globals.css). */
-const ACCENTS = (Object.keys(PRESET_THEMES) as PresetAccent[])
-  .filter((name) => name !== "neutral")
-  .map((name) => ({ name, light: PRESET_THEMES[name].light.primary, dark: PRESET_THEMES[name].dark.primary }))
+const ACCENTS = (Object.keys(PRESET_THEMES) as PresetAccent[]).map((name) => ({
+  name,
+  light: PRESET_THEMES[name].light.primary,
+  dark: PRESET_THEMES[name].dark.primary,
+  isDefault: name === DEFAULT_ACCENT,
+}))
 
 const TYPE: { cls: string; size: string; use: string }[] = [
   { cls: "text-ui-2xs", size: "10px", use: "Tiny counters and labels." },
@@ -79,20 +82,23 @@ const SHADOWS: { cls: string; use: string }[] = [
 
 const CSS_EXAMPLE = `:root {
   --radius: 0.625rem;
-  --background: oklch(0.9911 0 0);
-  --foreground: oklch(0.269 0 0);
-  --primary: oklch(0.205 0 0);
-  --secondary: oklch(0 0 0 / 3%);
-  --border: oklch(0 0 0 / 5%);
+  --accent-500: oklch(62.3% 0.214 259.815);  /* blue ramp, 50 … 950 */
+  --accent-600: oklch(54.6% 0.245 262.881);
+  --background: oklch(100% 0 0);             /* white */
+  --foreground: oklch(14.5% 0 0);            /* neutral-950 */
+  --muted-foreground: oklch(55.6% 0 0);      /* neutral-500 */
+  --primary: var(--accent-600);
+  --ring: var(--accent-500);
+  --border: oklch(0% 0 0 / 8%);              /* neutral-200 on white */
   /* … */
 }
 
 .dark {
-  --background: oklch(0.1638 0 0);
-  --foreground: oklch(0.97 0 0);
-  --primary: oklch(0.97 0 0);
-  --secondary: oklch(1 0 0 / 4%);
-  --border: oklch(1 0 0 / 4%);
+  --background: oklch(18.2% 0 0);            /* #121212 */
+  --card: oklch(26.9% 0 0);                  /* neutral-800 */
+  --foreground: oklch(98.5% 0 0);            /* neutral-50 */
+  --muted-foreground: oklch(70.8% 0 0);      /* neutral-400 */
+  --border: oklch(100% 0 0 / 8%);            /* neutral-800 on the page */
   /* … */
 }
 
@@ -109,16 +115,21 @@ const dark = mode === "dark" || (mode === "system" && matchMedia("(prefers-color
 document.documentElement.classList.toggle("dark", dark)
 document.documentElement.style.colorScheme = dark ? "dark" : "light"`
 
-const ACCENT_RUNTIME = `/* Switch at runtime by setting data-accent on <html> */
-html[data-accent="blue"] {
-  --primary: oklch(0.57 0.15 258);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.57 0.15 258);
+const ACCENT_RUNTIME = `/* Switch at runtime by setting data-accent on <html>: swap the ramp, primary and ring follow */
+html[data-accent="violet"] {
+  --accent-50: oklch(96.9% 0.016 293.756);
+  /* … 100 … 900 … */
+  --accent-500: oklch(60.6% 0.250 292.717);
+  --accent-600: oklch(54.1% 0.281 293.009);
+  --accent-950: oklch(28.3% 0.141 291.089);
 }
-html[data-accent="blue"].dark {
-  --primary: oklch(0.6 0.145 256);
-  --primary-foreground: oklch(1 0 0);
-  --ring: oklch(0.6 0.145 256);
+
+/* Neutral also re-points primary: near-black in light, near-white with dark text in dark */
+html[data-accent="neutral"] { /* neutral ramp … */ --primary: var(--accent-900); --ring: var(--accent-400); }
+html[data-accent="neutral"].dark {
+  --primary: var(--accent-100);
+  --primary-foreground: var(--accent-900);
+  --ring: var(--accent-500);
 }`
 
 const NEW_TOKEN = `:root  { --info: oklch(0.6 0.12 230); }
@@ -177,9 +188,10 @@ export default function Theming() {
         <p className="text-muted-foreground">
           Dark mode is class based: <Code>.dark</Code> on <Code>&lt;html&gt;</Code> switches every token, and the theme
           declares the variant as <Code>@custom-variant dark (&amp;:is(.dark *))</Code>. Set <Code>color-scheme</Code> along
-          with it so native scrollbars and form controls follow. Elevation in dark mode is the hairline ring only, and{" "}
-          <Code>primary</Code> turns near-white, so pair it with <Code>text-primary-foreground</Code>, never{" "}
-          <Code>text-white</Code>.
+          with it so native scrollbars and form controls follow. Dark mode moves the page to #121212 and cards, popovers
+          and fields to neutral-800, with a hairline and a soft contact shadow for elevation. <Code>primary</Code> keeps
+          its colour in both modes, but the neutral preset turns it near-white, so always pair it with{" "}
+          <Code>text-primary-foreground</Code>, never <Code>text-white</Code>.
         </p>
         <AgentCodeBlock code={DARK_SCRIPT} filename="theme-script.js" language="js" />
         <p className="text-muted-foreground">
@@ -191,9 +203,11 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent-presets">Accent presets</GuideH2>
         <p className="text-muted-foreground">
-          The default primary is neutral: near-black in light mode, near-white in dark. Each preset replaces only{" "}
-          <Code>primary</Code>, <Code>primary-foreground</Code> and an opaque <Code>ring</Code> for both modes; everything
-          else stays neutral. Install one after the theme:
+          As in BoardUI, the accent is one <Code>--accent-50…950</Code> ramp and the default is blue (Tailwind blue with
+          BoardUI&apos;s <Code>#3392ff</Code> at 400). <Code>primary</Code> is the 600 stop with white text (700 for green
+          and orange, where white needs the darker stop for 4.5:1) and <Code>ring</Code> the 500 stop, the same in both
+          modes. Neutral keeps the old black / white primary. A preset swaps only the ramp (and, for neutral, where
+          primary points); surfaces, text, states and charts stay put. Install one after the theme:
         </p>
         <div className="flex flex-wrap gap-2">
           {ACCENTS.map((a) => (
@@ -203,19 +217,20 @@ export default function Theming() {
                 <span className="-ml-1.5 block size-5 rounded-full bg-(--swatch) ring-2 ring-card" style={{ "--swatch": a.dark } as React.CSSProperties} />
               </span>
               <span className="font-mono text-xs">theme-{a.name}</span>
+              {a.isDefault ? <span className="text-ui-xs text-muted-foreground">default</span> : null}
             </div>
           ))}
         </div>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme-violet`} />
         <p className="text-muted-foreground">
           Installed this way the preset overwrites the variables on <Code>:root</Code> and <Code>.dark</Code>, so the accent
-          is permanent. To let users switch, as the accent menu in this site&apos;s header does, keep the neutral values and
-          add one block per accent keyed on an attribute, then persist the choice (this site uses{" "}
+          is permanent. To let users switch, as the accent menu in this site&apos;s header does, keep the default blue ramp on{" "}
+          <Code>:root</Code> and add one block per accent keyed on an attribute, then persist the choice (this site uses{" "}
           <Code>localStorage[&quot;accent&quot;]</Code>, applied by the same pre-paint script as dark mode).
         </p>
         <p className="text-muted-foreground">
           Need a brand colour instead? <TextLink href="/docs/colors#accent">Colors</TextLink> has a live picker that
-          derives the dark variant in OKLCH and copies the exact <Code>:root</Code> / <Code>.dark</Code> overrides.
+          builds a ramp in its hue and copies the exact <Code>:root</Code> / <Code>.dark</Code> overrides.
         </p>
         <AgentCodeBlock code={ACCENT_RUNTIME} filename="globals.css" language="css" />
       </section>

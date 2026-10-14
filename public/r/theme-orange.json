@@ -2,20 +2,31 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-orange",
   "title": "Theme: Orange accent",
-  "description": "Orange accent preset: swaps the neutral primary, primary-foreground and ring for orange in light and dark. Install after @qinyang/theme.",
+  "description": "Orange accent preset: sets the --accent-50…950 ramp to Tailwind orange; primary = the 700 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
   "registryDependencies": [
     "@qinyang/theme"
   ],
   "cssVars": {
     "light": {
-      "primary": "oklch(0.62 0.17 45)",
-      "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.62 0.17 45)"
+      "accent-50": "oklch(98% 0.016 73.684)",
+      "accent-100": "oklch(95.4% 0.038 75.164)",
+      "accent-200": "oklch(90.1% 0.076 70.697)",
+      "accent-300": "oklch(83.7% 0.128 66.290)",
+      "accent-400": "oklch(75% 0.183 55.934)",
+      "accent-500": "oklch(70.5% 0.213 47.604)",
+      "accent-600": "oklch(64.6% 0.222 41.116)",
+      "accent-700": "oklch(55.3% 0.195 38.402)",
+      "accent-800": "oklch(47% 0.157 37.304)",
+      "accent-900": "oklch(40.8% 0.123 38.172)",
+      "accent-950": "oklch(26.6% 0.079 36.259)",
+      "primary": "var(--accent-700)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     },
     "dark": {
-      "primary": "oklch(0.7 0.16 52)",
-      "primary-foreground": "oklch(0.2 0.04 52)",
-      "ring": "oklch(0.7 0.16 52)"
+      "primary": "var(--accent-700)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     }
   },
   "meta": {

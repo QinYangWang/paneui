@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { customAccentStyle } from "./accent-color"
+import { customAccentStyle, DEFAULT_ACCENT } from "./accent-color"
 import { readAccentState, readCustomStyle, syncCustomStyle } from "./accent-store"
 import { ACCENT_KEY, CUSTOM_ACCENT_KEY, THEME_KEY } from "./theme-script"
 
@@ -55,7 +55,7 @@ function readStoredTheme(): RootTheme {
   const dark = m === "dark" || (m === "system" && matchMedia("(prefers-color-scheme: dark)").matches)
   const { accent, custom } = readAccentState()
   if (accent === "custom" && custom) return { dark, accent, custom: customAccentStyle(custom) }
-  return { dark, accent: accent === "neutral" ? null : accent }
+  return { dark, accent: accent === DEFAULT_ACCENT ? null : accent }
 }
 
 /**

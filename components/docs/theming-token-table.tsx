@@ -4,9 +4,9 @@ import type * as React from "react"
 
 import { Badge } from "@/registry/base-nova/ui/badge"
 
-import { PRESET_THEMES, type AccentVars } from "./accent-color"
+import { PRESET_THEMES, RAMP_STOPS, type AccentVars } from "./accent-color"
 import { useAccentState } from "./accent-store"
-import type { ParsedTheme, TokenKind, TokenRole } from "./theming-tokens"
+import { modeValue, type ParsedTheme, type TokenKind, type TokenRole } from "./theming-tokens"
 
 /** Tokens the accent replaces, mapped to their AccentVars key. */
 const ACCENT_TOKENS: Record<string, keyof AccentVars> = { primary: "primary", "primary-foreground": "foreground", ring: "ring" }
@@ -49,16 +49,18 @@ function ValueCell({ kind, value, bg }: { kind: TokenKind; value: string | undef
 
 /**
  * Token tables by role: token and Tailwind class, light and dark value with a live swatch each.
- * Values come from app/globals.css (parsed at build time); primary, primary-foreground and
- * ring follow the accent you pick, in both modes.
+ * Values come from app/globals.css (parsed at build time); primary, primary-foreground, ring
+ * and the accent ramp follow the accent you pick, in both modes, as resolved colours.
  */
 export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: ParsedTheme }) {
   const { accent, custom } = useAccentState()
-  const accentTheme = accent === "custom" ? custom : accent === "neutral" ? null : PRESET_THEMES[accent]
+  const accentTheme = accent === "custom" ? custom : PRESET_THEMES[accent]
   const valueFor = (name: string, which: "light" | "dark") => {
     const key = ACCENT_TOKENS[name]
     if (key && accentTheme) return accentTheme[which][key]
-    return theme[which][name]
+    const stop = name.startsWith("accent-") ? (RAMP_STOPS as readonly string[]).indexOf(name.slice(7)) : -1
+    if (stop >= 0 && accentTheme?.ramp) return accentTheme.ramp[stop]
+    return modeValue(theme, name, which)
   }
 
   return (

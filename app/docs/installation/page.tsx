@@ -63,11 +63,11 @@ export default function Installation() {
         </p>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme @${REGISTRY_NAME}/icons`} />
         <p className="text-muted-foreground">
-          The primary colour is neutral: near-black in light mode, near-white in dark. For a coloured accent, add one
-          preset after the theme: blue, green, orange, rose or violet. <TextLink href="/docs/theming#accent-presets">Theming</TextLink>{" "}
+          The colours follow BoardUI&apos;s system and the accent is blue. For another accent, add one preset after the
+          theme: neutral (black / white), green, orange, rose or violet. <TextLink href="/docs/theming#accent-presets">Theming</TextLink>{" "}
           covers what each token does.
         </p>
-        <InstallCommand args={`add @${REGISTRY_NAME}/theme-blue`} />
+        <InstallCommand args={`add @${REGISTRY_NAME}/theme-violet`} />
       </Step>
 
       <Step n={3} id="add-components" title="Add components">

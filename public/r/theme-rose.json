@@ -2,20 +2,31 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-rose",
   "title": "Theme: Rose accent",
-  "description": "Rose accent preset: swaps the neutral primary, primary-foreground and ring for rose in light and dark. Install after @qinyang/theme.",
+  "description": "Rose accent preset: sets the --accent-50…950 ramp to Tailwind rose; primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
   "registryDependencies": [
     "@qinyang/theme"
   ],
   "cssVars": {
     "light": {
-      "primary": "oklch(0.58 0.19 12)",
-      "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.58 0.19 12)"
+      "accent-50": "oklch(96.9% 0.015 12.422)",
+      "accent-100": "oklch(94.1% 0.030 12.580)",
+      "accent-200": "oklch(89.2% 0.058 10.001)",
+      "accent-300": "oklch(81% 0.117 11.638)",
+      "accent-400": "oklch(71.2% 0.194 13.428)",
+      "accent-500": "oklch(64.5% 0.246 16.439)",
+      "accent-600": "oklch(58.6% 0.253 17.585)",
+      "accent-700": "oklch(51.4% 0.222 16.935)",
+      "accent-800": "oklch(45.5% 0.188 13.697)",
+      "accent-900": "oklch(41% 0.159 10.272)",
+      "accent-950": "oklch(27.1% 0.105 12.094)",
+      "primary": "var(--accent-600)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     },
     "dark": {
-      "primary": "oklch(0.65 0.18 12)",
-      "primary-foreground": "oklch(1 0 0)",
-      "ring": "oklch(0.65 0.18 12)"
+      "primary": "var(--accent-600)",
+      "primary-foreground": "oklch(100% 0 0)",
+      "ring": "var(--accent-500)"
     }
   },
   "meta": {
