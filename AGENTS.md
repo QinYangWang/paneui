@@ -47,7 +47,7 @@ component only if the design really needs a new treatment.
   is expressed with scale, not shadow.
 - **Radius**: base `--radius` 0.5rem → `rounded-sm/md/lg/xl/2xl` = 4/6/8/12/16px.
   Buttons, inputs, select/combobox triggers, tab lists: `rounded-lg`; items inside a
-  padded container `rounded-md`; menus/popups `rounded-xl`; cards `rounded-xl`/`2xl`.
+  padded container `rounded-md`; menus/popups `rounded-xl`; cards `rounded-xl`/`2xl`. Two-layer cards: `<Card variant="inset">` + `<CardPanel>` (tinted frame, p-1, raised panel) for presented content (demos, media, code, featured plans) only; dense dashboard cards stay default.
   Keep radii concentric (outer = inner + padding). `rounded-full` only for inherently
   round things: avatars, dots, switches and slider thumbs, badges/tags, icon-only
   circular buttons, progress bars.

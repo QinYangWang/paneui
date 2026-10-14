@@ -6,7 +6,7 @@ import { LazyDemo } from "@/components/docs/lazy-demo"
 import { getGroups, getItems } from "@/lib/docs"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/registry/base-nova/ui/card"
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@/registry/base-nova/ui/card"
 import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 const wide = new Set(["saas-dashboard", "agent-workspace", "landing", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
@@ -48,16 +48,18 @@ export default function Gallery() {
                 return (
                   <Card
                     key={item.name}
-                    // eslint-disable-next-line shadcn/no-restyle -- gallery tiles: rounded-3xl stays concentric around the p-6 demo well
-                    className={`group/gallery gap-0 rounded-3xl py-0 ${wide.has(item.name) ? "xl:col-span-2" : ""}`}
+                    variant="inset"
+                    className={`group/gallery ${wide.has(item.name) ? "xl:col-span-2" : ""}`}
                   >
-                    {/* Demos mount near the viewport and unmount when far away; see LazyDemo. */}
-                    <LazyDemo name={item.name} eager={gi === 0 && index < 4} />
+                    <CardPanel className="flex-1 py-0">
+                      {/* Demos mount near the viewport and unmount when far away; see LazyDemo. */}
+                      <LazyDemo name={item.name} eager={gi === 0 && index < 4} className="border-b-0 bg-transparent" />
+                    </CardPanel>
                     <Link
                       href={`/docs/${item.name}`}
                       className="outline-none focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-inset"
                     >
-                      <CardHeader className="grid-cols-[1fr_auto] items-center py-4">
+                      <CardHeader className="grid-cols-[1fr_auto] items-center py-3">
                         <CardTitle className="font-medium">{item.title}</CardTitle>
                         <ArrowRightIcon
                           size={16}

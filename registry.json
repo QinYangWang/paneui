@@ -718,7 +718,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "Raised surface card with header, content and footer parts.",
+      "description": "Surface card with header, content and footer parts, plus an inset variant: a tinted frame holding a raised CardPanel for featured content.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
