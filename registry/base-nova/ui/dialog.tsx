@@ -36,13 +36,18 @@ function DialogContent({
         >
           {children}
           {showClose && (
-            <DialogPrimitive.Close
-              data-slot="dialog-close"
-              aria-label="Close"
-              className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
-            >
-              <XIcon size={16} />
-            </DialogPrimitive.Close>
+            // Last in the DOM (so focus order and initial focus are unchanged) but shown first
+            // (`order-first`) as a zero-height sticky row: it sits 16px from the top-right corner
+            // like an absolute button, and stays pinned there while long content scrolls under it.
+            <div data-slot="dialog-close-row" className="sticky top-0 z-10 order-first -mb-4 flex h-0 shrink-0 justify-end">
+              <DialogPrimitive.Close
+                data-slot="dialog-close"
+                aria-label="Close"
+                className="-mt-2 -mr-2 inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-popover text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring"
+              >
+                <XIcon size={16} />
+              </DialogPrimitive.Close>
+            </div>
           )}
         </DialogPrimitive.Popup>
       </DialogPrimitive.Viewport>

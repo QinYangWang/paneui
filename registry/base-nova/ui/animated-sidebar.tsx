@@ -36,7 +36,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui
  * sidebar on the page (one shared listener, not one per instance).
  */
 
-const WIDTH_SPRING = { type: "spring", stiffness: 380, damping: 38, mass: 0.8 } as const
+// ζ ≈ 1.09: a slightly overdamped settle with no bounce.
+const WIDTH_SPRING = { type: "spring", stiffness: 380, damping: 36, mass: 0.7 } as const
 const PILL_SPRING = { type: "spring", stiffness: 420, damping: 36, mass: 0.7 } as const
 const EASE = [0.22, 1, 0.36, 1] as const
 

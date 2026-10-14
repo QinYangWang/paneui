@@ -43,6 +43,16 @@ function writeRemembered(key: string | undefined, value: boolean) {
   } catch {}
 }
 
+/**
+ * Forget a remembered "Always allow": removes the `rememberKey` entry from
+ * localStorage (the value is stored under the key itself). Use it when a
+ * controlled parent resets `decision` from "always" to `null`, which on its own
+ * does not clear the saved permission. Safe to call on the server or with an unset key.
+ */
+function forgetToolApproval(rememberKey: string | undefined) {
+  writeRemembered(rememberKey, false)
+}
+
 type ToolApprovalProps = Omit<React.ComponentProps<"div">, "title"> & {
   /** Tool identifier, e.g. `github.create_pull_request`. */
   tool: string
@@ -60,6 +70,8 @@ type ToolApprovalProps = Omit<React.ComponentProps<"div">, "title"> & {
   /**
    * localStorage key that remembers "Always allow" across sessions. When it is
    * already set, the card mounts as approved and `onDecisionChange("always")` fires.
+   * Only Revoke clears it; a controlled parent resetting `decision` to `null` must
+   * call `forgetToolApproval(rememberKey)` itself.
    */
   rememberKey?: string
   /**
@@ -253,4 +265,4 @@ function ToolApproval({
   )
 }
 
-export { ToolApproval, type ToolApprovalProps, type ToolApprovalDecision, type ToolApprovalRisk }
+export { ToolApproval, forgetToolApproval, type ToolApprovalProps, type ToolApprovalDecision, type ToolApprovalRisk }

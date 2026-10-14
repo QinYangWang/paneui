@@ -119,6 +119,11 @@ export default {
       ],
     },
     {
+      name: "onFill",
+      description: "`onFill(fill)` returns a readable label colour for text drawn on that fill: white on dark fills, near-black on light ones (CSS relative colour). Set it as the inline `fill` and keep a `fill-white` class as the fallback for browsers without relative colour. Used by treemap, candlestick and funnel labels.",
+      props: [{ name: "fill", type: "string", required: true, description: "The fill colour behind the label (any CSS colour or `var(--token)`)." }],
+    },
+    {
       name: "scaleLinear",
       description: "`scaleLinear(domain, range)` maps values to pixels; the result also has `domain`, `range`, `invert(px)` and `ticks(count = 5)`.",
       props: [

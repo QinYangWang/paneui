@@ -57,7 +57,7 @@ export default {
     {
       id: "long-content",
       title: "Long Content",
-      description: "The popup never grows past the viewport (1rem margin): taller content scrolls inside it, and the scroll doesn't chain to the page.",
+      description: "The popup never grows past the viewport (1rem margin): taller content scrolls inside it, the close button stays pinned to the top-right corner while it scrolls, and the scroll doesn't chain to the page.",
     },
   ],
   notes: [
@@ -103,7 +103,7 @@ export default {
           name: "showClose",
           type: "boolean",
           default: "true",
-          description: "Render the round close button in the top-right corner.",
+          description: "Render the round close button in the top-right corner. It is sticky, so it stays reachable while long content scrolls; it stays last in the focus order.",
         },
       ],
       dataAttributes: [

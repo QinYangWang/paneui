@@ -44,6 +44,15 @@ function chartAlpha(color: string, percent: number) {
   return `color-mix(in oklch, ${color} ${percent}%, transparent)`
 }
 
+/**
+ * Readable label colour on a chart fill: white on dark fills, near-black on light ones
+ * (the light theme's foreground). CSS relative colour; pair it with a `fill-white`
+ * class so browsers without relative colour keep white labels.
+ */
+function onFill(fill: string) {
+  return `oklch(from ${fill} clamp(0.2435, calc((0.65 - l) * 1000), 1) 0 0)`
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                   Easing                                   */
 /* -------------------------------------------------------------------------- */
@@ -537,6 +546,7 @@ export {
   CHART_SPRING,
   chartColor,
   chartAlpha,
+  onFill,
   useChartTransition,
   useChartSize,
   scaleLinear,

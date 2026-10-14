@@ -1054,29 +1054,6 @@
       }
     },
     {
-      "name": "dock",
-      "type": "registry:ui",
-      "title": "Dock",
-      "description": "macOS-style dock of icon buttons with hover magnification, groups and separators, a gliding active pill and tooltips.",
-      "dependencies": [
-        "@base-ui/react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/tooltip"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/dock.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Navigation"
-      }
-    },
-    {
       "name": "text-reveal",
       "type": "registry:ui",
       "title": "Text Reveal",

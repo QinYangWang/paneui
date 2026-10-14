@@ -14,6 +14,7 @@ import {
   clamp,
   formatNumber,
   formatPercent,
+  onFill,
   useActiveId,
   useChartSize,
   useChartTransition,
@@ -55,12 +56,6 @@ type FunnelChartProps = Omit<React.ComponentProps<"section">, "children"> & {
   defaultActiveId?: string | null
   onActiveChange?: (id: string | null) => void
 }
-
-/**
- * Readable label colour on a stage fill: white on dark fills, near-black on light ones
- * (the light theme's foreground). CSS relative colour; browsers without it keep `fill-white`.
- */
-const onFill = (fill: string) => `oklch(from ${fill} clamp(0.2435, calc((0.65 - l) * 1000), 1) 0 0)`
 
 function placeStages(stages: readonly FunnelStage[], color?: string): PlacedStage[] {
   const seen = new Set<string>()

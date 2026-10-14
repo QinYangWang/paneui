@@ -35,7 +35,6 @@ import AlertDemo from "@/registry/base-nova/examples/alert-demo"
 import CollapsibleDemo from "@/registry/base-nova/examples/collapsible-demo"
 import AccordionDemo from "@/registry/base-nova/examples/accordion-demo"
 import BreadcrumbDemo from "@/registry/base-nova/examples/breadcrumb-demo"
-import DockDemo from "@/registry/base-nova/examples/dock-demo"
 import TextRevealDemo from "@/registry/base-nova/examples/text-reveal-demo"
 import TextShimmerDemo from "@/registry/base-nova/examples/text-shimmer-demo"
 import TextScrambleDemo from "@/registry/base-nova/examples/text-scramble-demo"
@@ -168,7 +167,6 @@ export const demos: Record<string, React.ComponentType> = {
   "collapsible": CollapsibleDemo,
   "accordion": AccordionDemo,
   "breadcrumb": BreadcrumbDemo,
-  "dock": DockDemo,
   "text-reveal": TextRevealDemo,
   "text-shimmer": TextShimmerDemo,
   "text-scramble": TextScrambleDemo,

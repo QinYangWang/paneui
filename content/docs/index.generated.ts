@@ -30,7 +30,6 @@ import d_context_menu from "./context-menu"
 import d_date_range_picker from "./date-range-picker"
 import d_dialog from "./dialog"
 import d_digit_swap from "./digit-swap"
-import d_dock from "./dock"
 import d_donut_chart from "./donut-chart"
 import d_drawer from "./drawer"
 import d_expandable_control from "./expandable-control"
@@ -125,7 +124,6 @@ export const docsContent: Record<string, ComponentDoc> = {
   "date-range-picker": d_date_range_picker,
   "dialog": d_dialog,
   "digit-swap": d_digit_swap,
-  "dock": d_dock,
   "donut-chart": d_donut_chart,
   "drawer": d_drawer,
   "expandable-control": d_expandable_control,

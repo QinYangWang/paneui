@@ -24,7 +24,7 @@ export default {
     {
       id: "remembered",
       title: "Remembered",
-      description: "With `rememberKey`, Always allow is saved to `localStorage` and the card mounts approved next time. Only Revoke clears it; Undo after Allow once or Deny leaves a saved Always allow alone.",
+      description: "With `rememberKey`, Always allow is saved to `localStorage` and the card mounts approved next time. Only Revoke clears it; Undo after Allow once or Deny leaves a saved Always allow alone. Here the parent owns the decision, so Forget calls `forgetToolApproval(rememberKey)` before resetting `decision` to `null`.",
     },
     {
       id: "command",
@@ -36,6 +36,10 @@ export default {
     {
       title: "Accessibility",
       body: 'The card is a `role="group"` labelled "Permission request for {tool}", and the resolved line is a `role="status"` so the decision is announced.',
+    },
+    {
+      title: "Forgetting a remembered approval",
+      body: "Revoke clears the `rememberKey` entry, but a controlled parent that resets `decision` from `\"always\"` to `null` doesn't: the card would find the saved permission again on its next mount. Call `forgetToolApproval(rememberKey)` (or `localStorage.removeItem(rememberKey)`) alongside the reset.",
     },
     {
       title: "Motion",
@@ -57,11 +61,16 @@ export default {
         { name: "decision", type: `"once" | "always" | "deny" | null`, description: "Controlled decision; `null` is pending." },
         { name: "defaultDecision", type: `"once" | "always" | "deny" | null`, default: "null", description: "Initial decision when uncontrolled." },
         { name: "onDecisionChange", type: `(decision: "once" | "always" | "deny" | null) => void`, description: "Called on Allow, Deny, Undo and when a remembered permission is found." },
-        { name: "rememberKey", type: "string", description: "`localStorage` key that remembers Always allow across sessions." },
+        { name: "rememberKey", type: "string", description: "`localStorage` key that remembers Always allow across sessions (stored as `localStorage[rememberKey] = \"always\"`). Only Revoke clears it: a controlled parent resetting `decision` from `\"always\"` to `null` leaves it saved, so call `forgetToolApproval(rememberKey)` too." },
         { name: "revocable", type: "boolean", default: "true", description: "Show Undo (after Allow once / Deny) or Revoke (after Always allow) on the resolved card. Only Revoke clears `rememberKey`." },
         { name: "defaultArgsOpen", type: "boolean", default: "true", description: "Show arguments while pending, on mount and whenever the decision returns to `null`." },
       ],
       dataAttributes: [{ name: "data-decision", description: "`pending`, `once`, `always` or `deny`." }],
+    },
+    {
+      name: "forgetToolApproval",
+      description: "`forgetToolApproval(rememberKey)` removes a remembered Always allow (the same as `localStorage.removeItem(rememberKey)`). Call it when you reset a controlled `decision` to `null`; it doesn't change what a mounted card shows. A no-op on the server or with an undefined key.",
+      props: [{ name: "rememberKey", type: "string | undefined", required: true, description: "The `rememberKey` passed to the card." }],
     },
   ],
 } satisfies ComponentDoc
