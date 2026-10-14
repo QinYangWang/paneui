@@ -54,6 +54,7 @@ export default {
         { name: "startAtEnd", type: "boolean", default: "true", description: "Start scrolled to the bottom on mount." },
         { name: "follow", type: "boolean", default: "true", description: "Follow new content while at the live edge." },
         { name: "showJumpButton", type: "boolean", default: "true", description: "Show the floating jump-to-latest pill when released." },
+        { name: "jumpButton", type: `"pill" | "icon"`, default: `"pill"`, description: "`icon` renders a round arrow-only button (label kept for screen readers), as in Synara and Codex." },
         { name: "jumpLabel", type: "string", default: `"Jump to latest"`, description: "Pill label when nothing new is below." },
         { name: "newLabel", type: "string", default: `"New messages"`, description: "Pill label once content arrived below the reader." },
         { name: "viewportClassName", type: "string", description: "Classes for the scrolling viewport." },

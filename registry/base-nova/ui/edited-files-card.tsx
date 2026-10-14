@@ -1,0 +1,183 @@
+"use client"
+
+import * as React from "react"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+
+import { ChevronDownIcon, FolderIcon, UndoIcon } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { Button } from "@/registry/base-nova/ui/button"
+import { FileDiff, parseUnifiedDiff } from "@/registry/base-nova/ui/file-diff"
+
+const EASE = [0.22, 1, 0.36, 1] as const
+
+type EditedFile = {
+  path: string
+  /** Unified diff for this file. */
+  diff?: string
+  /** Or the two versions (ACP `Diff` content: `oldText` null = new file). */
+  oldText?: string | null
+  newText?: string | null
+  /** Counts shown before the diff loads; derived from `diff` when omitted. */
+  additions?: number
+  deletions?: number
+}
+
+function countLines(text: string | null | undefined) {
+  if (!text) return 0
+  return text.replace(/\n$/, "").split("\n").length
+}
+
+/** +/- counts for one file: from its diff rows, or a line-set comparison of old and new text. */
+function fileStats(file: EditedFile) {
+  if (file.additions !== undefined || file.deletions !== undefined)
+    return { additions: file.additions ?? 0, deletions: file.deletions ?? 0 }
+  if (file.diff) {
+    let additions = 0
+    let deletions = 0
+    for (const r of parseUnifiedDiff(file.diff)) {
+      if (r.type === "added") additions++
+      else if (r.type === "removed") deletions++
+    }
+    return { additions, deletions }
+  }
+  if (file.oldText == null) return { additions: countLines(file.newText), deletions: 0 }
+  if (file.newText == null) return { additions: 0, deletions: countLines(file.oldText) }
+  // Cheap estimate: lines present in one version and not the other.
+  const before = new Map<string, number>()
+  for (const l of file.oldText.split("\n")) before.set(l, (before.get(l) ?? 0) + 1)
+  let additions = 0
+  for (const l of file.newText.split("\n")) {
+    const n = before.get(l) ?? 0
+    if (n > 0) before.set(l, n - 1)
+    else additions++
+  }
+  let deletions = 0
+  for (const n of before.values()) deletions += n
+  return { additions, deletions }
+}
+
+type EditedFilesCardProps = Omit<React.ComponentProps<"div">, "title"> & {
+  files: EditedFile[]
+  /** Revert the turn's edits. The button hides when omitted. */
+  onUndo?: () => void
+  /** Open the full review (diff panel). The button hides when omitted. */
+  onReview?: () => void
+  /** Reveal a file in the explorer: adds a folder button to each row. */
+  onRevealFile?: (path: string) => void
+  /** Start with the file list open. */
+  defaultOpen?: boolean
+  title?: React.ReactNode
+}
+
+/**
+ * Summary of the files an agent changed in a turn (after Synara): "Edited 4
+ * files" with total +/-, Undo and Review, and one row per file that expands
+ * to its diff (`FileDiff`, row variant).
+ */
+function EditedFilesCard({
+  files,
+  onUndo,
+  onReview,
+  onRevealFile,
+  defaultOpen = true,
+  title,
+  className,
+  ...props
+}: EditedFilesCardProps) {
+  const reduce = useReducedMotion()
+  const [open, setOpen] = React.useState(defaultOpen)
+  const stats = React.useMemo(() => files.map(fileStats), [files])
+  const additions = stats.reduce((s, x) => s + x.additions, 0)
+  const deletions = stats.reduce((s, x) => s + x.deletions, 0)
+  const listId = React.useId()
+
+  return (
+    <div
+      data-slot="edited-files-card"
+      data-open={open || undefined}
+      className={cn("frame-xl frame-inset-2 overflow-hidden bg-card text-ui shadow-raised", className)}
+      {...props}
+    >
+      <div className="flex items-center gap-2 py-2 pr-2 pl-3">
+        <div className="flex min-w-0 flex-1 flex-col">
+          <span className="truncate font-medium">
+            {title ?? `Edited ${files.length} ${files.length === 1 ? "file" : "files"}`}
+          </span>
+          <span className="flex gap-1.5 font-mono text-ui-sm tabular-nums">
+            <span className="text-success">+{additions}</span>
+            <span className="text-destructive">−{deletions}</span>
+            <span className="sr-only">
+              {additions} additions, {deletions} deletions
+            </span>
+          </span>
+        </div>
+        {onUndo && (
+          <Button variant="ghost" size="sm" onClick={onUndo} className="rounded-inner text-muted-foreground">
+            Undo
+            <UndoIcon data-icon="inline-end" />
+          </Button>
+        )}
+        {onReview && (
+          <Button variant="outline" size="sm" onClick={onReview} className="rounded-inner">
+            Review
+          </Button>
+        )}
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-label={open ? "Hide files" : "Show files"}
+          onClick={() => setOpen(!open)}
+          className="rounded-inner text-muted-foreground"
+        >
+          <ChevronDownIcon className={cn("transition-transform duration-200 motion-reduce:transition-none", open && "rotate-180")} />
+        </Button>
+      </div>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id={listId}
+            key="files"
+            initial={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            animate={reduce ? { opacity: 1 } : { height: "auto", opacity: 1 }}
+            exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="overflow-hidden"
+          >
+            <ul data-slot="edited-files-list" className="flex flex-col border-t border-border">
+              {files.map((file) => (
+                <li key={file.path} className="border-b border-border last:border-b-0">
+                  <FileDiff
+                    variant="row"
+                    filename={file.path}
+                    diff={file.diff}
+                    {...(file.diff === undefined ? { oldFile: file.oldText ?? null, newFile: file.newText ?? null } : {})}
+                    defaultOpen={false}
+                    copyable={false}
+                    maxHeight={280}
+                    actions={
+                      onRevealFile && (
+                        <Button
+                          variant="ghost"
+                          size="icon-xs"
+                          aria-label={`Reveal ${file.path}`}
+                          onClick={() => onRevealFile(file.path)}
+                          className="text-muted-foreground"
+                        >
+                          <FolderIcon />
+                        </Button>
+                      )
+                    }
+                  />
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+export { EditedFilesCard, fileStats, type EditedFile, type EditedFilesCardProps }

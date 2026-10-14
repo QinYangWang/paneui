@@ -1,0 +1,51 @@
+import type { ComponentDoc } from "@/lib/doc-types"
+
+export default {
+  usage: {
+    imports: `import { TabStrip, TabStripItem } from "@/components/ui/tab-strip"`,
+    code: `<TabStrip value={active} onValueChange={setActive} order={order} onReorder={setOrder} onClose={close}>
+  {order.map((id) => (
+    <TabStripItem key={id} value={id} icon={<FileIcon />}>{titles[id]}</TabStripItem>
+  ))}
+</TabStrip>`,
+  },
+  composition: `TabStrip
+└── TabStripItem`,
+  examples: [
+    { id: "pill", title: "Pill", description: "`variant=\"pill\"` marks the selected tab with a fill instead of a raised card, for panel tabs inside a surface." },
+    { id: "overflow", title: "Overflow", description: "Too many tabs scroll sideways with faded edges; the selected tab is kept in view. `indicator` adds a dot for unsaved changes." },
+  ],
+  notes: [
+    { title: "Reorder", body: "Pass `order` and `onReorder` and render children in that order: tabs drag sideways with a spring (instant with reduced motion). Without them the strip is static." },
+    { title: "Closing", body: "With `onClose`, tabs show a close button on hover (always on the selected tab), close on middle click, and on ⌫ / Delete when focused. Set `closable={false}` on a tab to keep it." },
+    { title: "Keyboard", body: "The strip is a `tablist`: ← / → move and select, Home / End jump to the ends, Enter or Space selects." },
+  ],
+  api: [
+    {
+      name: "TabStrip",
+      extends: "div",
+      props: [
+        { name: "value", type: "string | null", description: "Selected tab (controlled)." },
+        { name: "defaultValue", type: "string | null", description: "Initial tab (uncontrolled)." },
+        { name: "onValueChange", type: "(value: string) => void", description: "Called when a tab is selected." },
+        { name: "order", type: "string[]", description: "Tab values in display order; enables drag to reorder with `onReorder`." },
+        { name: "onReorder", type: "(order: string[]) => void", description: "Called with the new order while dragging." },
+        { name: "onClose", type: "(value: string) => void", description: "Shows close buttons and handles middle click / Delete." },
+        { name: "variant", type: `"default" | "pill"`, default: `"default"`, description: "Raised card (document tabs on the window band) or fill (panel tabs)." },
+        { name: "actions", type: "ReactNode", description: "Pinned after the scrolling tabs." },
+      ],
+    },
+    {
+      name: "TabStripItem",
+      extends: "div",
+      props: [
+        { name: "value", type: "string", required: true, description: "Identifies the tab." },
+        { name: "icon", type: "ReactNode", description: "Leading glyph, sized to 14px." },
+        { name: "closable", type: "boolean", description: "Override whether this tab shows a close button." },
+        { name: "indicator", type: "boolean", description: "Primary dot after the label." },
+        { name: "disabled", type: "boolean", description: "Dim and skip the tab." },
+      ],
+      dataAttributes: [{ name: "data-selected", description: "Present on the selected tab." }],
+    },
+  ],
+} satisfies ComponentDoc

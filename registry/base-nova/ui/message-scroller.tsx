@@ -36,6 +36,8 @@ type MessageScrollerProps = Omit<React.ComponentProps<"div">, "onScroll"> & {
   follow?: boolean
   /** Show the floating "jump to latest" pill when released. Defaults to true. */
   showJumpButton?: boolean
+  /** `pill`: arrow + label (default). `icon`: a round arrow-only button (Synara / Codex style), label kept for screen readers. */
+  jumpButton?: "pill" | "icon"
   /** Pill label when there is nothing new below. */
   jumpLabel?: string
   /** Pill label once content arrived below the reader. */
@@ -68,6 +70,7 @@ function MessageScroller({
   startAtEnd = true,
   follow = true,
   showJumpButton = true,
+  jumpButton = "pill",
   jumpLabel = "Jump to latest",
   newLabel = "New messages",
   viewportClassName,
@@ -270,6 +273,7 @@ function MessageScroller({
                 type="button"
                 data-slot="message-scroller-jump"
                 data-new={hasNew || undefined}
+                data-variant={jumpButton}
                 onClick={() => scrollToLatest()}
                 initial={reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.9, filter: "blur(4px)" }}
                 animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
@@ -277,12 +281,13 @@ function MessageScroller({
                 transition={reduce ? { duration: 0.12 } : { type: "spring", stiffness: 520, damping: 34 }}
                 className={cn(
                   "absolute bottom-3 left-1/2 z-10 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-popover pr-3 pl-2.5 text-ui-sm font-medium text-popover-foreground shadow-surface transition-[background-color,color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
-                  hasNew && "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90 hover:text-primary-foreground"
+                  hasNew && "bg-primary text-primary-foreground shadow-primary hover:bg-primary/90 hover:text-primary-foreground",
+                  "data-[variant=icon]:size-8 data-[variant=icon]:justify-center data-[variant=icon]:rounded-full data-[variant=icon]:p-0"
                 )}
                 style={{ x: "-50%" }}
               >
                 <ArrowDownIcon className="size-3.5" />
-                {hasNew ? newLabel : jumpLabel}
+                <span className={cn(jumpButton === "icon" && "sr-only")}>{hasNew ? newLabel : jumpLabel}</span>
               </motion.button>
             )}
           </AnimatePresence>

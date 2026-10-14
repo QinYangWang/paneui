@@ -268,6 +268,10 @@ type FileDiffProps<A = undefined> = Omit<React.ComponentProps<"div">, "children"
   renderAnnotation?: (annotation: DiffLineAnnotation<A>) => React.ReactNode
   /** Extra `@pierre/diffs` options, merged over ours. */
   options?: Omit<PierreFileDiffOptions<A, undefined>, "diffStyle" | "themeType">
+  /** `card`: raised code card (default). `row`: flat row for lists of files (edited-files card), chevron at the end. */
+  variant?: "card" | "row"
+  /** Extra controls in the header, before the copy button (open in editor, reveal in folder…). */
+  actions?: React.ReactNode
 }
 
 /**
@@ -301,6 +305,8 @@ function FileDiff<A = undefined>({
   lineAnnotations,
   renderAnnotation,
   options: optionsProp,
+  variant = "card",
+  actions,
   className,
   style,
   ...props
@@ -423,17 +429,22 @@ function FileDiff<A = undefined>({
       data-slot="file-diff"
       data-status={status}
       data-diff-style={diffStyle}
+      data-variant={variant}
       aria-busy={streaming || undefined}
-      className={cn("overflow-hidden rounded-xl bg-code text-ui shadow-raised", className)}
+      className={cn(
+        "overflow-hidden text-ui",
+        variant === "card" ? "rounded-xl bg-code shadow-raised" : "bg-transparent",
+        className
+      )}
       style={style}
       {...props}
     >
-      <div className="flex h-10 items-center gap-1 pr-1.5 pl-1.5">
+      <div className={cn("flex items-center gap-1 pr-1.5 pl-1.5", variant === "card" ? "h-10" : "h-9")}>
         <CollapsiblePrimitive.Trigger
           data-slot="file-diff-trigger"
           className="group/trigger flex h-7 min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-lg px-2 text-left outline-none select-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50"
         >
-          <ChevronDownIcon className="size-4 shrink-0 -rotate-90 text-muted-foreground transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/trigger:rotate-0 motion-reduce:transition-none" />
+          {variant === "card" && <ChevronDownIcon className="size-4 shrink-0 -rotate-90 text-muted-foreground transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/trigger:rotate-0 motion-reduce:transition-none" />}
           {streaming ? (
             <Loader size="sm" label="Writing changes" className="size-4 text-primary" />
           ) : (
@@ -449,11 +460,20 @@ function FileDiff<A = undefined>({
             <span className="sr-only">
               {additions} additions, {deletions} deletions
             </span>
-            <DiffStat additions={additions} deletions={deletions} />
+            {variant === "card" && <DiffStat additions={additions} deletions={deletions} />}
           </span>
         </CollapsiblePrimitive.Trigger>
         {diffStyleToggle && <DiffStyleToggle value={diffStyle} onChange={setDiffStyle} />}
+        {actions}
         {copyable && <CodeCopyButton value={newText} label="Copy new file contents" />}
+        {variant === "row" && (
+          <CollapsiblePrimitive.Trigger
+            aria-label={open ? "Hide changes" : "Show changes"}
+            className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+          >
+            <ChevronDownIcon className={cn("size-3.5 transition-transform duration-200 motion-reduce:transition-none", open && "rotate-180")} />
+          </CollapsiblePrimitive.Trigger>
+        )}
       </div>
 
       <CollapsiblePanel>

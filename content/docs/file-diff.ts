@@ -92,6 +92,8 @@ export default {
         { name: "lineAnnotations", type: "DiffLineAnnotation<A>[]", description: "Rows of your own UI pinned under diff lines: `{ side: \"additions\" | \"deletions\", lineNumber, metadata }`." },
         { name: "renderAnnotation", type: "(annotation: DiffLineAnnotation<A>) => ReactNode", description: "Renders each annotation (comments, accept/reject buttons…)." },
         { name: "options", type: "FileDiffOptions", description: "Extra `@pierre/diffs` options merged over the defaults, e.g. `hunkSeparators`, `expandUnchanged`, `enableLineSelection`." },
+        { name: "variant", type: `"card" | "row"`, default: `"card"`, description: "`row` drops the card surface and moves the chevron to the end, for lists of files such as `EditedFilesCard`." },
+        { name: "actions", type: "ReactNode", description: "Extra header controls before the copy button (reveal in folder, open in editor)." },
       ],
       dataAttributes: [
         { name: "data-status", description: "`streaming` or `complete`." },
