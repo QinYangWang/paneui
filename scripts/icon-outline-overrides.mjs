@@ -1,11 +1,11 @@
 /**
  * Outline redraws for icons whose automatic outline (puff traced as a contour) does not
- * read cleanly at 14px. Key = export name in components/icons.tsx, value = the JSX that
+ * read cleanly at 14px. Key = export name in registry/base-nova/icons/puffy/icons.tsx, value = the JSX that
  * goes inside <Icon>. Primitives available: `line`, `puff` (outline contour, same as
  * line) and `solid` (filled, for tiny dots). Same rules as the puffy set: 18x18 grid,
  * ~2.5px padding, path/circle/rect only, min gap between strokes ~1.4px.
  *
- * Every new icon in components/icons.tsx needs an outline check: render the sheet with
+ * Every new icon in the puffy set needs an outline check: render the sheet with
  * `--outline` and add an entry here if the generated version looks wrong.
  */
 export const outlineOverrides = {

@@ -1,6 +1,6 @@
 ---
 name: puffy-icons
-description: Draws new icons for the qinyang/ui icon set (18x18 grid, single colour) in either installed style, puffy (soft, inflated filled glyphs) or outline (1.6px round strokes), and adds them to an installed components/icons.tsx. Use when a component needs an icon the set doesn't have, when changing an existing glyph, or when choosing which icons to use together in a nav, toolbar or card header.
+description: Draws new icons for the qinyang/ui icon set (single colour) in whichever style is installed, rounded (the default, 24x24 outline glyphs with 1.75px round strokes), puffy (18x18 soft, inflated filled glyphs) or outline (18x18, 1.6px round strokes), and adds them to an installed components/icons.tsx. Use when a component needs an icon the set doesn't have, when changing an existing glyph, or when choosing which icons to use together in a nav, toolbar or card header.
 ---
 
 # Puffy icons
@@ -47,20 +47,64 @@ const puff = { stroke: "currentColor", strokeWidth: 1.5, strokeLinejoin: "round"
 
 ## Which style is installed
 
-The set ships in two styles with identical export names, both installed as `components/icons.tsx`:
+The set ships in three styles with identical export names, all installed as `components/icons.tsx`:
 
 ```bash
+npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons.json --overwrite          # rounded (default)
+npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-puffy.json --overwrite    # puffy
 npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-outline.json --overwrite  # outline
-npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons.json --overwrite          # puffy
 ```
 
-Check the primitives at the top of the file before drawing:
+Check the top of the file before drawing:
 
-- **Puffy**: `puff` has no `fill` key (filled with `currentColor`, stroke 1.5). Follow the puffy rules below.
-- **Outline**: `puff` is `{ fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" }`
+- **Rounded**: `viewBox="0 0 24 24"` and primitives `line` (stroke 1.75), `dot` and `solid`, no `puff`. Follow "Drawing in the rounded style".
+- **Puffy**: 18x18, `puff` has no `fill` key (filled with `currentColor`, stroke 1.5). Follow the puffy rules below.
+- **Outline**: 18x18, `puff` is `{ fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" }`
   and there is also a `solid` primitive (the filled, 1.5-stroke version). Follow "Drawing in the outline style".
 
+The primitives section above describes the puffy file; the rounded file defines its own at the top.
 Always draw in the style the project has installed, so a new icon matches its neighbours.
+
+## Drawing in the rounded style
+
+```tsx
+function Icon({ size = 18, children, ...props }: IconProps & { children: React.ReactNode }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden {...props}>
+      {children}
+    </svg>
+  );
+}
+const line = { fill: "none", stroke: "currentColor", strokeWidth: 1.75, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+const dot = { fill: "currentColor", stroke: "none" } as const;   // small dots only
+const solid = { fill: "currentColor", stroke: "none" } as const; // brand marks only
+```
+
+- 24x24 grid, centre 12,12. Glyphs are large: artwork spans about 2 to 22 (a full circle is r=10,
+  a card is 19x17 or 20x16). Thin glyphs (chevrons, check, plus) span about 12 to 16.
+- Every shape is `line`. `dot` only for tiny filled dots (r 1.1 to 1.4: info dot, ellipsis, bullets).
+- Very rounded: rect `rx` 4 to 5 on cards and windows (3 on small parts), corners on paths eased with
+  arcs of radius 2 or more. Only arrowheads and chevrons keep a point, softened by the round join.
+- Keep parallel strokes at least 2.25 apart and at most about three details inside a shape, so the
+  icon reads at 16px. Circles sit a little smaller than squares (r=10 next to a 19 to 20 square).
+- Shapes the puffy style fills are outlines here.
+
+```tsx
+export const MailIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect {...line} x="2" y="4" width="20" height="16" rx="4.5" />
+    <path {...line} d="M6 8.5l4.3 3.1a3 3 0 0 0 3.4 0L18 8.5" />
+  </Icon>
+);
+
+export const InfoIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle {...line} cx="12" cy="12" r="10" />
+    <path {...line} d="M12 16.5v-5" />
+    <circle {...dot} cx="12" cy="8" r="1.1" />
+  </Icon>
+);
+```
 
 ## Drawing in the outline style
 

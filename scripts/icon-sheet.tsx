@@ -1,6 +1,7 @@
 // Renders every *Icon export to a contact sheet (48px, 14px and 18px of each icon on dark).
 // Usage: node sheet.cjs [out.png] [filter] [--outline | --compare] [--light] [--from=N --count=M]
-//   default    the puffy set (components/icons.tsx)
+//   default    the puffy set (registry/base-nova/icons/puffy/icons.tsx)
+//   --rounded  the rounded default set (components/icons.tsx)
 //   --outline  the generated outline set (registry/base-nova/icons/outline/icons.tsx)
 //   --compare  both, side by side per icon (puffy left, outline right)
 //   filter     comma list of name substrings
@@ -8,7 +9,8 @@ import * as React from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import { writeFileSync } from "node:fs"
 
-import * as P from "../components/icons"
+import * as P from "../registry/base-nova/icons/puffy/icons"
+import * as R from "../components/icons"
 import * as O from "../registry/base-nova/icons/outline/icons"
 
 type C = React.ComponentType<{ size?: number }>
@@ -17,9 +19,9 @@ const flags = args.filter((a) => a.startsWith("--"))
 const [outArg, filterArg] = args.filter((a) => !a.startsWith("--"))
 const out = outArg ?? "/workspace/work/iconrender/sheet.png"
 const filter = filterArg?.split(",")
-const mode = flags.includes("--compare") ? "compare" : flags.includes("--outline") ? "outline" : "puffy"
+const mode = flags.includes("--compare") ? "compare" : flags.includes("--outline") ? "outline" : flags.includes("--rounded") ? "rounded" : "puffy"
 const light = flags.includes("--light")
-const sets: Record<string, C>[] = (mode === "compare" ? [P, O] : mode === "outline" ? [O] : [P]) as unknown as Record<string, C>[]
+const sets: Record<string, C>[] = (mode === "compare" ? [P, O] : mode === "outline" ? [O] : mode === "rounded" ? [R] : [P]) as unknown as Record<string, C>[]
 const num = (f: string) => Number(flags.find((a) => a.startsWith(`--${f}=`))?.split("=")[1] ?? NaN)
 const from = num("from") || 0, count = num("count") || Infinity
 const names = Object.keys(P)

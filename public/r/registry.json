@@ -639,7 +639,7 @@
       "name": "icons",
       "type": "registry:component",
       "title": "Icons",
-      "description": "Puffy, soft single-color icon set on an 18x18 grid. Filled shapes use a 1.5px round-join stroke, open glyphs a 1.6px round stroke. Installs to components/icons.tsx; icons-outline is the same set in outline style.",
+      "description": "Rounded single-color outline icon set on a 24x24 grid: 1.75px round strokes, soft corners, glyphs that fill the box. Installs to components/icons.tsx; icons-puffy and icons-outline are the same names in other styles.",
       "files": [
         {
           "path": "components/icons.tsx",
@@ -652,10 +652,27 @@
       }
     },
     {
+      "name": "icons-puffy",
+      "type": "registry:component",
+      "title": "Icons (puffy)",
+      "description": "The icon set in puffy style: the same names and props on an 18x18 grid, filled shapes traced with a 1.5px round-join stroke. Installs to components/icons.tsx, replacing the rounded set; add icons with --overwrite to switch back.",
+      "files": [
+        {
+          "path": "registry/base-nova/icons/puffy/icons.tsx",
+          "type": "registry:component",
+          "target": "components/icons.tsx"
+        }
+      ],
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
       "name": "icons-outline",
       "type": "registry:component",
       "title": "Icons (outline)",
-      "description": "The icon set in outline style: the same names, props and 18x18 grid, with every filled shape drawn as a 1.6px round outline. Installs to components/icons.tsx, replacing the puffy set; add icons with --overwrite to switch back.",
+      "description": "The icon set in outline style: the same names, props and 18x18 grid, with every filled shape drawn as a 1.6px round outline. Installs to components/icons.tsx, replacing the rounded set; add icons with --overwrite to switch back.",
       "files": [
         {
           "path": "registry/base-nova/icons/outline/icons.tsx",

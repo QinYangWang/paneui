@@ -199,7 +199,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
     })),
     ...(name === "icons"
       ? [
-          { id: "outline-style", title: "Outline style" },
+          { id: "icon-styles", title: "Icon styles" },
           { id: "make-your-own-icons", title: "Make your own icons" },
           { id: "all-icons", title: "All icons" },
         ]
@@ -371,22 +371,24 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
 
         {name === "icons" && (
           <section className="flex flex-col gap-3">
-            <H2 id="outline-style">Outline style</H2>
+            <H2 id="icon-styles">Icon styles</H2>
             <p className="text-pretty text-muted-foreground">
-              The set also ships in an outline style: the same names, props and 18×18 grid, with every filled shape drawn
-              as a 1.6px round outline. Both styles install to{" "}
+              The default set is rounded: outline glyphs on a 24×24 grid with 1.75px round strokes and soft corners. The
+              same names and props also ship in two other styles: puffy (filled shapes on an 18×18 grid) and outline (the
+              puffy shapes as 1.6px outlines). Every style installs to 
               <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>,
-              so one command switches every component in your project. Preview both with the toggle under All icons.
+              so one command switches every component in your project. Preview them with the toggle under All icons.
             </p>
+            <InstallCommand args={`add ${SITE_URL}/r/icons-puffy.json --overwrite`} />
             <InstallCommand args={`add ${SITE_URL}/r/icons-outline.json --overwrite`} />
-            <p className="text-pretty text-muted-foreground">Switch back to puffy:</p>
+            <p className="text-pretty text-muted-foreground">Back to rounded:</p>
             <InstallCommand args={`add ${SITE_URL}/r/icons.json --overwrite`} />
             <p className="text-pretty text-muted-foreground">
-              Components list the icon set as a dependency, so adding one later asks whether to overwrite{" "}
+              Components list the icon set as a dependency, so adding one later asks whether to overwrite 
               <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>.
-              Answer no (the default) to keep your style. If you add components with{" "}
+              Answer no (the default) to keep your style. If you add components with 
               <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">--overwrite</code>, the
-              puffy set comes back: run the outline command again afterwards.
+              rounded set comes back: run your style&apos;s command again afterwards.
             </p>
           </section>
         )}
@@ -396,10 +398,9 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
             <H2 id="make-your-own-icons">Make your own icons</H2>
             <p className="text-pretty text-muted-foreground">
               Need a glyph the set doesn&apos;t have? Install the <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puffy-icons</code>{" "}
-              agent skill and ask your coding agent for it. The skill carries the drawing rules (18×18 grid, the{" "}
-              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puff</code> and{" "}
-              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">line</code> primitives,
-              knockouts), reference icons, a preview script to check the result at 14px, and how to add it to your{" "}
+              agent skill and ask your coding agent for it. The skill carries the drawing rules for every style (grids,
+              primitives, corner radii), reference icons, a preview script to check the result at small sizes, and how to
+              add it to your{" "}
               <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>.
               Works with any coding agent that reads Agent Skills.
             </p>

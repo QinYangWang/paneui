@@ -11,7 +11,7 @@ export const metadata = { title: "Introduction" }
 
 /** One line per category for the "What's inside" grid. */
 const CATEGORY_BLURBS: Record<string, string> = {
-  Foundations: "The theme tokens, the puffy icon set and the icon chip every header uses.",
+  Foundations: "The theme tokens, the rounded icon set and the icon chip every header uses.",
   Forms: "Buttons, fields, pickers and confirm controls at a 32px desktop density.",
   Overlays: "Menus, popovers, dialogs, drawers, sheets and toasts.",
   Display: "Cards, badges, alerts, accordions, loaders and the theme toggle.",
@@ -125,7 +125,7 @@ export default function Introduction() {
             <Code>motion/react</Code> for springs and layout animation.
           </li>
           <li>
-            The <TextLink href="https://ui.shadcn.com/docs/cli">shadcn CLI</TextLink> for distribution, and a puffy 18×18
+            The <TextLink href="https://ui.shadcn.com/docs/cli">shadcn CLI</TextLink> for distribution, and a rounded 24×24
             icon set shipped as <Code>@{REGISTRY_NAME}/icons</Code>.
           </li>
         </ul>
