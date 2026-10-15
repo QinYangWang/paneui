@@ -6,7 +6,17 @@ export default {
 @import "./typeset.css";`,
     code: `<article className="typeset typeset-docs">{content}</article>`,
   },
-  examples: [],
+  examples: [
+    {
+      id: "content-slots",
+      title: "Prose in Tabs",
+      description: "Use `typeset` on a tab, accordion or collapsible panel (or `CardContent`) when its content is prose.",
+    },
+    {
+      id: "nested",
+      title: "Nested Panels",
+    },
+  ],
   api: [],
   notes: [
     {
@@ -16,6 +26,10 @@ export default {
     {
       title: "Components inside prose",
       body: "Every library component carries `data-slot` and is skipped automatically. Wrap anything else in `not-typeset`. Utilities on an element override the typeset styles without `!important`.",
+    },
+    {
+      title: "Prose inside components",
+      body: "A component slot with `.typeset` or `data-typeset` styles its own content as prose again, inheriting the surrounding preset; components inside it stay skipped. `TabsPanel`, `AccordionPanel`, `CollapsiblePanel` and `CardContent` take a `typeset` prop that sets the attribute (and lets the accordion content keep the prose size and colour). `data-typeset=\"docs\"`, `\"reading\"` or `\"chat\"` picks a preset where there is no container. Re-enabling works three levels deep.",
     },
     {
       title: "Streaming",

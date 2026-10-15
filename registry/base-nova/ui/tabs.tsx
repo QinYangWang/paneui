@@ -114,10 +114,16 @@ function TabsTab({ className, ...props }: TabsPrimitive.Tab.Props) {
   )
 }
 
-function TabsPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
+type TabsPanelProps = TabsPrimitive.Panel.Props & {
+  /** Turns prose styles back on for this panel's content inside a `typeset` container (or names a preset when used on its own). */
+  typeset?: boolean | "docs" | "reading" | "chat"
+}
+
+function TabsPanel({ className, typeset, ...props }: TabsPanelProps) {
   return (
     <TabsPrimitive.Panel
       data-slot="tabs-panel"
+      data-typeset={typeset === true ? "" : typeset || undefined}
       className={cn("outline-none focus-visible:ring-2 focus-visible:ring-ring/50", className)}
       {...props}
     />
@@ -125,4 +131,5 @@ function TabsPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
 }
 
 export { Tabs, TabsList, TabsTab, TabsPanel, tabsListVariants, tabsTabVariants }
+export type { TabsPanelProps }
 export type { TabsSize, TabsVariant }

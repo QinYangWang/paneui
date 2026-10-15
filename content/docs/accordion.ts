@@ -152,6 +152,7 @@ export default {
           default: "false",
           description: "Keep the content in the DOM while closed.",
         },
+        { name: "typeset", type: 'boolean | "docs" | "reading" | "chat"', default: "false", description: "Turn prose styles back on for the panel content inside a `typeset` container, or name a preset when it stands alone. The content then keeps the surrounding text size and colour." },
       ],
     },
   ],

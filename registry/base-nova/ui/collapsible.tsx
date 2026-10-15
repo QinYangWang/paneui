@@ -40,7 +40,12 @@ function CollapsibleTrigger({
 }
 
 /** Panel that reveals with a smooth height transition and a soft content fade. */
-function CollapsiblePanel({ className, children, ...props }: CollapsiblePrimitive.Panel.Props) {
+type CollapsiblePanelProps = CollapsiblePrimitive.Panel.Props & {
+  /** Turns prose styles back on for this panel's content inside a `typeset` container (or names a preset when used on its own). */
+  typeset?: boolean | "docs" | "reading" | "chat"
+}
+
+function CollapsiblePanel({ className, children, typeset, ...props }: CollapsiblePanelProps) {
   return (
     <CollapsiblePrimitive.Panel
       data-slot="collapsible-panel"
@@ -52,6 +57,7 @@ function CollapsiblePanel({ className, children, ...props }: CollapsiblePrimitiv
     >
       <div
         data-slot="collapsible-content"
+        data-typeset={typeset === true ? "" : typeset || undefined}
         className="transition-[opacity,translate,filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-ending-style/collapsible-panel:-translate-y-1 group-data-ending-style/collapsible-panel:opacity-0 group-data-ending-style/collapsible-panel:blur-[1px] group-data-starting-style/collapsible-panel:-translate-y-1 group-data-starting-style/collapsible-panel:opacity-0 group-data-starting-style/collapsible-panel:blur-[1px] motion-reduce:transition-none"
       >
         {children}
@@ -61,3 +67,4 @@ function CollapsiblePanel({ className, children, ...props }: CollapsiblePrimitiv
 }
 
 export { Collapsible, CollapsibleTrigger, CollapsiblePanel }
+export type { CollapsiblePanelProps }

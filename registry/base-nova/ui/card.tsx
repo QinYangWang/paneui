@@ -103,8 +103,20 @@ function CardAction({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="card-content" className={cn("px-(--card-spacing)", className)} {...props} />
+type CardContentProps = React.ComponentProps<"div"> & {
+  /** Turns prose styles back on for this content inside a `typeset` container (or names a preset when used on its own). */
+  typeset?: boolean | "docs" | "reading" | "chat"
+}
+
+function CardContent({ className, typeset, ...props }: CardContentProps) {
+  return (
+    <div
+      data-slot="card-content"
+      data-typeset={typeset === true ? "" : typeset || undefined}
+      className={cn("px-(--card-spacing)", className)}
+      {...props}
+    />
+  )
 }
 
 function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
@@ -118,4 +130,4 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 export { Card, CardPanel, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter, cardVariants }
-export type { CardProps }
+export type { CardProps, CardContentProps }

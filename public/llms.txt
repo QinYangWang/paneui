@@ -12,6 +12,7 @@ Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/
 - [Icon Chip](https://qinyangwang.github.io/ui/docs/icon-chip/): Frames an icon so card and section headers match. JSON: https://qinyangwang.github.io/ui/r/icon-chip.json
 - [Icons](https://qinyangwang.github.io/ui/r/icons.json): Rounded outline icon set used across the library. JSON: https://qinyangwang.github.io/ui/r/icons.json
 - [Theme](https://qinyangwang.github.io/ui/r/theme.json): Design tokens, type scale and utilities every component in the library reads. JSON: https://qinyangwang.github.io/ui/r/theme.json
+- [Theme Accents](https://qinyangwang.github.io/ui/docs/theme-accents/): Switches the accent colour at runtime with one attribute. JSON: https://qinyangwang.github.io/ui/r/theme-accents.json
 - [Typeset](https://qinyangwang.github.io/ui/docs/typeset/): Styles long-form text in docs, articles and chat messages. JSON: https://qinyangwang.github.io/ui/r/typeset.json
 
 ## Forms
@@ -117,6 +118,7 @@ Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/
 - [Action Swap Blur](https://qinyangwang.github.io/ui/docs/action-swap-blur/): A button that blurs its label and icon into the next state. JSON: https://qinyangwang.github.io/ui/r/action-swap-blur.json
 - [Action Swap Roll](https://qinyangwang.github.io/ui/docs/action-swap-roll/): A button that rolls its label and icon into the next state. JSON: https://qinyangwang.github.io/ui/r/action-swap-roll.json
 - [Animated Number](https://qinyangwang.github.io/ui/docs/animated-number/): Counts up to a number when it scrolls into view. JSON: https://qinyangwang.github.io/ui/r/animated-number.json
+- [Code Block](https://qinyangwang.github.io/ui/docs/code-block/): Shows code highlighted at build time, alone or in tabs. JSON: https://qinyangwang.github.io/ui/r/code-block.json
 - [Digit Swap](https://qinyangwang.github.io/ui/docs/digit-swap/): Animates a changing number by rolling only the characters that change. JSON: https://qinyangwang.github.io/ui/r/digit-swap.json
 - [Marquee](https://qinyangwang.github.io/ui/docs/marquee/): Scrolls content past in an endless loop. JSON: https://qinyangwang.github.io/ui/r/marquee.json
 - [Number Ticker](https://qinyangwang.github.io/ui/docs/number-ticker/): Number whose digits roll to each new value. JSON: https://qinyangwang.github.io/ui/r/number-ticker.json

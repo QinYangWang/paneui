@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./typeset.css";
+@import "./theme-accents.css";
 
 /* The desktop example has its own install; never scan it for classes. */
 @source not "../apps";

@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+import { useReducedMotion } from "motion/react"
 import type { Highlighter } from "shiki"
 
-import { CheckIcon, CopyIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { CodeCopyButton, useCopy } from "@/registry/base-nova/ui/code-block"
 import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 
 /* -------------------------------------------------------------------------- */
@@ -137,76 +137,6 @@ function CodeLine({ text, tokens }: { text: string; tokens?: CodeToken[] }) {
   }
   if (used < text.length) parts.push(<React.Fragment key="rest">{text.slice(used)}</React.Fragment>)
   return <>{parts}</>
-}
-
-/* -------------------------------------------------------------------------- */
-/*  Copy                                                                       */
-/* -------------------------------------------------------------------------- */
-
-function useCopy(timeout = 1600) {
-  const [copied, setCopied] = React.useState(false)
-  const timer = React.useRef<number | undefined>(undefined)
-  React.useEffect(() => () => window.clearTimeout(timer.current), [])
-  const copy = React.useCallback(
-    async (text: string) => {
-      try {
-        await navigator.clipboard?.writeText(text)
-      } catch {
-        return
-      }
-      setCopied(true)
-      window.clearTimeout(timer.current)
-      timer.current = window.setTimeout(() => setCopied(false), timeout)
-    },
-    [timeout]
-  )
-  return { copied, copy }
-}
-
-/** Small icon button that swaps to a check after copying. */
-function CodeCopyButton({
-  value,
-  className,
-  label = "Copy code",
-}: {
-  value: string | (() => string)
-  className?: string
-  label?: string
-}) {
-  const { copied, copy } = useCopy()
-  const reduce = useReducedMotion() ?? false
-  return (
-    <button
-      type="button"
-      data-slot="code-copy-button"
-      aria-label={copied ? "Copied" : label}
-      onClick={(e) => {
-        e.stopPropagation()
-        copy(typeof value === "function" ? value() : value)
-      }}
-      className={cn(
-        "relative grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-copied:text-success",
-        className
-      )}
-      data-copied={copied || undefined}
-    >
-      <AnimatePresence initial={false} mode="popLayout">
-        <motion.span
-          key={copied ? "check" : "copy"}
-          initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6, filter: "blur(2px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6, filter: "blur(2px)" }}
-          transition={{ type: "spring", stiffness: 600, damping: 32 }}
-          className="grid place-items-center"
-        >
-          {copied ? <CheckIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
-        </motion.span>
-      </AnimatePresence>
-      <span className="sr-only" aria-live="polite">
-        {copied ? "Copied" : ""}
-      </span>
-    </button>
-  )
 }
 
 /* -------------------------------------------------------------------------- */

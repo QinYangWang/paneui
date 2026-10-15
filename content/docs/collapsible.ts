@@ -69,7 +69,9 @@ export default {
       description: "Animates its height; the children sit in an inner wrapper that fades and slides.",
       extends: "Collapsible.Panel",
       extendsHref: "https://base-ui.com/react/components/collapsible#panel",
-      props: [],
+      props: [
+        { name: "typeset", type: 'boolean | "docs" | "reading" | "chat"', default: "false", description: "Turn prose styles back on for the panel content inside a `typeset` container, or name a preset when it stands alone." },
+      ],
       dataAttributes: [
         { name: "data-starting-style / data-ending-style", description: "Set during the open and close transitions." },
       ],

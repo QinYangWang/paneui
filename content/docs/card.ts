@@ -87,7 +87,13 @@ Card variant="inset"
       extends: "div",
       props: [],
     },
-    { name: "CardContent", extends: "div", props: [] },
+    {
+      name: "CardContent",
+      extends: "div",
+      props: [
+        { name: "typeset", type: 'boolean | "docs" | "reading" | "chat"', default: "false", description: "Turn prose styles back on for the content inside a `typeset` container, or name a preset when it stands alone." },
+      ],
+    },
     { name: "CardFooter", description: "A row with a 8px gap between items.", extends: "div", props: [] },
   ],
 } satisfies ComponentDoc

@@ -120,6 +120,7 @@ export default {
       props: [
         { name: "value", type: "any", description: "The `TabsTab` value that shows this panel.", required: true },
         { name: "keepMounted", type: "boolean", default: "false", description: "Keep the panel in the DOM while hidden." },
+        { name: "typeset", type: 'boolean | "docs" | "reading" | "chat"', default: "false", description: "Turn prose styles back on for the panel content inside a `typeset` container, or name a preset when it stands alone." },
       ],
     },
   ],

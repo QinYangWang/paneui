@@ -26,6 +26,8 @@ import OverflowHintDemo from "@/registry/base-nova/examples/overflow-hint-demo"
 import TerminalDemo from "@/registry/base-nova/examples/terminal-demo"
 import ScrollAreaDemo from "@/registry/base-nova/examples/scroll-area-demo"
 import TypesetDemo from "@/registry/base-nova/examples/typeset-demo"
+import ThemeAccentsDemo from "@/registry/base-nova/examples/theme-accents-demo"
+import CodeBlockDemo from "@/registry/base-nova/examples/code-block-demo"
 import CheckboxDemo from "@/registry/base-nova/examples/checkbox-demo"
 import RadioDemo from "@/registry/base-nova/examples/radio-demo"
 import StepperDemo from "@/registry/base-nova/examples/stepper-demo"
@@ -214,6 +216,7 @@ export const demos: Record<string, React.ComponentType> = {
   blog: BlogPreview,
   theme: ThemeDemo,
   typeset: TypesetDemo,
+  "theme-accents": ThemeAccentsDemo,
   "scroll-area": ScrollAreaDemo,
   "app-shell": AppShellDemo,
   "overflow-hint": OverflowHintDemo,
@@ -296,6 +299,7 @@ export const demos: Record<string, React.ComponentType> = {
   "message": MessageDemo,
   "message-scroller": MessageScrollerDemo,
   "agent-code-block": AgentCodeBlockDemo,
+  "code-block": CodeBlockDemo,
   "file-diff": FileDiffDemo,
   "tool-result": ToolResultDemo,
   "citations": CitationsDemo,

@@ -7,6 +7,16 @@ export default {
   },
   examples: [
     {
+      id: "tri-state",
+      title: "Light, Dark and System",
+      description: "Use `modes=\"tri\"` when people should be able to go back to following the OS.",
+    },
+    {
+      id: "use-theme",
+      title: "useTheme",
+      description: "Use the hook for a menu or segmented control of your own.",
+    },
+    {
       id: "sizes",
       title: "Sizes",
       description: "Use a smaller `size-*` class in dense toolbars, matching the glyph with `iconSize`.",
@@ -28,7 +38,11 @@ export default {
     },
     {
       title: "Persistence",
-      body: "The choice is saved to `localStorage` under `storageKey` and a `theme-change` window event (`THEME_CHANGE_EVENT`) fires, so several toggles stay in sync. Add a pre-paint script that reads the same key to avoid a flash on load.",
+      body: "The choice is saved to `localStorage` under `storageKey` (`\"light\"` or `\"dark\"`); choosing System removes the key, and no key means the page follows the OS, including OS changes while it is open. A `theme-change` window event (`THEME_CHANGE_EVENT`) fires, so several toggles stay in sync, and other tabs follow through the storage event.",
+    },
+    {
+      title: "Pre-paint script",
+      body: "Inline `getThemeScript()` in a `<script>` at the top of `<head>` so the first paint has the right theme: `<script dangerouslySetInnerHTML={{ __html: getThemeScript() }} />` (pass your `storageKey` if you changed it). It sets the `.dark` class and `color-scheme`, and with no stored value keeps following OS changes even before the page hydrates.",
     },
   ],
   api: [
@@ -42,7 +56,28 @@ export default {
         { name: "storageKey", type: "string", default: `"theme"`, description: "`localStorage` key for the saved theme." },
         { name: "duration", type: "number", default: "560", description: "Reveal duration in ms." },
         { name: "onThemeChange", type: `(theme: "light" | "dark") => void`, description: "Called after the theme changes." },
+        { name: "modes", type: '"binary" | "tri"', default: '"binary"', description: "`binary` flips light and dark. `tri` cycles light, dark and system and shows the stored choice (a monitor icon for system)." },
       ],
+      dataAttributes: [{ name: "data-mode", description: "With `modes=\"tri\"`: `light`, `dark` or `system`." }],
+    },
+    {
+      name: "useTheme",
+      description: "Returns `{ theme, resolvedTheme, systemTheme, setTheme }`. `theme` is the stored choice (`\"system\"` when nothing is stored), `resolvedTheme` the theme on the page. All are `null` until mounted.",
+      props: [
+        { name: "storageKey", type: "string", default: `"theme"`, description: "`localStorage` key." },
+        { name: "duration", type: "number", default: "560", description: "Reveal duration in ms." },
+        { name: "onThemeChange", type: `(theme: "light" | "dark") => void`, description: "Called after the theme on the page changes." },
+        {
+          name: "setTheme",
+          type: `(theme: "light" | "dark" | "system", options?: { origin?: { x: number; y: number } }) => void`,
+          description: "Returned. Store a choice and reveal the result from `origin`; `\"system\"` removes the key.",
+        },
+      ],
+    },
+    {
+      name: "getThemeScript",
+      description: "`(storageKey?: string) => string`. Source of the pre-paint script.",
+      props: [],
     },
     {
       name: "useThemeToggle",

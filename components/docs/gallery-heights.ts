@@ -29,6 +29,7 @@ export const galleryHeights: Record<string, number> = {
   "blog": 556,
   "accordion": 264,
   "agent-code-block": 448,
+  "code-block": 256,
   "ai-sidebar": 544,
   "alert": 464,
   "animated-sidebar": 480,

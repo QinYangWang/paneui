@@ -8,6 +8,34 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-novon",
+    date: "October 16, 2026",
+    title: "Static code blocks, a system theme and prose in panels",
+    tag: "Components",
+    changes: [
+      <>
+        New <TextLink href="/docs/code-block">Code Block</TextLink> and <Code>CodeGroup</Code> for code highlighted at
+        build time. Nothing is highlighted in the browser.
+      </>,
+      <>
+        <Code>ThemeToggle</Code> takes <Code>modes=&quot;tri&quot;</Code> to cycle light, dark and system. The new{" "}
+        <Code>useTheme()</Code> hook and <Code>getThemeScript()</Code> follow the OS while nothing is stored.
+      </>,
+      <>
+        <Code>typeset</Code> on <Code>TabsPanel</Code>, <Code>AccordionPanel</Code>, <Code>CollapsiblePanel</Code>{" "}
+        and <Code>CardContent</Code> styles their content as prose inside a <Code>typeset</Code> container.
+      </>,
+      <>
+        New <TextLink href="/docs/theme-accents">Theme Accents</TextLink> switches every accent preset with{" "}
+        <Code>data-accent</Code>, and the hidden <Code>theme-radii</Code> does the same for <Code>data-radius</Code>.
+      </>,
+      <>
+        <Code>FileTreeFolder</Code> and <Code>FileTreeFile</Code> no longer need a <Code>value</Code>; it defaults to
+        the node&apos;s path.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-components",
     date: "October 16, 2026",
     title: "Radius control, 16 new components and a new docs layout",

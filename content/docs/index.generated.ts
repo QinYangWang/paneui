@@ -32,6 +32,7 @@ import d_carousel from "./carousel"
 import d_chart_utils from "./chart-utils"
 import d_checkbox from "./checkbox"
 import d_citations from "./citations"
+import d_code_block from "./code-block"
 import d_collapsible from "./collapsible"
 import d_color_picker from "./color-picker"
 import d_combobox from "./combobox"
@@ -129,6 +130,7 @@ import d_text_reveal from "./text-reveal"
 import d_text_scramble from "./text-scramble"
 import d_text_shimmer from "./text-shimmer"
 import d_textarea from "./textarea"
+import d_theme_accents from "./theme-accents"
 import d_theme_toggle from "./theme-toggle"
 import d_thread_list_item from "./thread-list-item"
 import d_toast from "./toast"
@@ -180,6 +182,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "chart-utils": d_chart_utils,
   "checkbox": d_checkbox,
   "citations": d_citations,
+  "code-block": d_code_block,
   "collapsible": d_collapsible,
   "color-picker": d_color_picker,
   "combobox": d_combobox,
@@ -277,6 +280,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "text-scramble": d_text_scramble,
   "text-shimmer": d_text_shimmer,
   "textarea": d_textarea,
+  "theme-accents": d_theme_accents,
   "theme-toggle": d_theme_toggle,
   "thread-list-item": d_thread_list_item,
   "toast": d_toast,

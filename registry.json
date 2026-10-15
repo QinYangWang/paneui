@@ -578,6 +578,45 @@
       }
     },
     {
+      "name": "theme-accents",
+      "type": "registry:file",
+      "title": "Theme Accents",
+      "description": "Switches the accent colour at runtime with one attribute.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "app/theme-accents.css",
+          "type": "registry:file",
+          "target": "app/theme-accents.css"
+        }
+      ],
+      "meta": {
+        "category": "Foundations"
+      }
+    },
+    {
+      "name": "theme-radii",
+      "type": "registry:file",
+      "title": "Theme Radii",
+      "description": "Switches corner rounding at runtime with one attribute.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "app/theme-radii.css",
+          "type": "registry:file",
+          "target": "app/theme-radii.css"
+        }
+      ],
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
       "name": "icons",
       "type": "registry:component",
       "title": "Icons",
@@ -2707,6 +2746,32 @@
       }
     },
     {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Shows code highlighted at build time, alone or in tabs.",
+      "dependencies": [
+        "motion",
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/scroll-area",
+        "@qinyang/tabs",
+        "@qinyang/file-tree"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/code-block.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Text"
+      }
+    },
+    {
       "name": "agent-code-block",
       "type": "registry:ui",
       "title": "Agent Code Block",
@@ -2719,7 +2784,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/scroll-area"
+        "@qinyang/scroll-area",
+        "@qinyang/code-block"
       ],
       "files": [
         {
