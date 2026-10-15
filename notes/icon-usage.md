@@ -47,3 +47,36 @@ caps; checkbox/otp use a 2px stroke because they sit on a filled box).
 - `QinyangLogoIcon`: soft rounded square with a "q" knocked out. Docs header,
   mobile drawer title, favicon (`app/icon.svg`, same path, light/dark aware).
 - `GithubIcon`: simplified puffy octocat silhouette, used for the repo link.
+
+## Outline variant
+The set ships in a second style, outline (`@qinyang/icons-outline`), with the same
+exports, `IconProps` and `Icon` wrapper. Both registry items target
+`components/icons.tsx`, so `shadcn add <site>/r/icons-outline.json --overwrite`
+switches a project and `.../icons.json --overwrite` switches back.
+
+- **Single source**: `components/icons.tsx` (puffy) is the only hand-drawn file.
+  `scripts/gen-icon-styles.mjs` (`pnpm icons:gen`, also the first step of
+  `pnpm registry:build`) copies it into
+  `registry/base-nova/icons/outline/icons.tsx` and redefines `puff` as an outline
+  contour (fill none, 1.6 stroke, round caps and joins, the same as `line`), so
+  every filled shape becomes its own outline on the same geometry. Never edit the
+  generated file; `node scripts/gen-icon-styles.mjs --check` fails when it is
+  stale.
+- **Override map**: `scripts/icon-outline-overrides.mjs` maps an export name to
+  the JSX inside `<Icon>` for icons whose automatic outline does not read: evenodd
+  knockouts that would double up (Bot, Inbox, Server, TerminalSquare,
+  ClipboardList, Palette, QinyangLogo, History, CalendarDays), shapes too narrow to
+  keep an open middle (Chart, Pause, the thumbs cuffs, Sliders knobs) and tiny dots
+  that stay filled (Grip, More, Cart wheels, CircleDot centre). Overrides may use
+  `solid` (the filled puff) for dots of r ≤ ~0.6. The generator fails if an
+  override names an icon that no longer exists.
+- **Outline check for new icons**: whenever an icon is added or changed, render it in
+  both styles (`node sheet.cjs out.png <filter> --compare`, see the icon skill for
+  the bundling step) and look at 14px: min ~1.4px between strokes, holes still
+  open, weight matching the other outline icons. Add an override when it fails.
+- **Adding components later**: items depend on `icons`, so the CLI asks before
+  overwriting an existing, different `components/icons.tsx` (default no; a
+  non-interactive run stops at the prompt). `add … --overwrite` restores the
+  puffy set; users re-run the outline command afterwards.
+- Docs: `/docs/icons` previews both styles with a Puffy / Outline segmented
+  control (`components/docs/icon-grid.tsx` imports both files).

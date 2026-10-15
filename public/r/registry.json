@@ -639,15 +639,33 @@
       "name": "icons",
       "type": "registry:component",
       "title": "Icons",
-      "description": "Puffy, soft single-color icon set on an 18x18 grid. Filled shapes use a 1.5px round-join stroke, open glyphs a 1.6px round stroke.",
+      "description": "Puffy, soft single-color icon set on an 18x18 grid. Filled shapes use a 1.5px round-join stroke, open glyphs a 1.6px round stroke. Installs to components/icons.tsx; icons-outline is the same set in outline style.",
       "files": [
         {
           "path": "components/icons.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/icons.tsx"
         }
       ],
       "meta": {
         "category": "Foundations"
+      }
+    },
+    {
+      "name": "icons-outline",
+      "type": "registry:component",
+      "title": "Icons (outline)",
+      "description": "The icon set in outline style: the same names, props and 18x18 grid, with every filled shape drawn as a 1.6px round outline. Installs to components/icons.tsx, replacing the puffy set; add icons with --overwrite to switch back.",
+      "files": [
+        {
+          "path": "registry/base-nova/icons/outline/icons.tsx",
+          "type": "registry:component",
+          "target": "components/icons.tsx"
+        }
+      ],
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
       }
     },
     {

@@ -8,6 +8,25 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-outline-icons",
+    date: "October 15, 2026",
+    title: "Outline icon style",
+    tag: "Icons",
+    changes: [
+      <>
+        The icon set ships in an outline style as <Code>icons-outline</Code>: the same 136 names, props and 18×18 grid,
+        with filled shapes drawn as 1.6px round outlines and tiny dots kept solid. It installs to{" "}
+        <Code>components/icons.tsx</Code> like the puffy set, so <Code>add …/r/icons-outline.json --overwrite</Code>{" "}
+        switches every component and <Code>add …/r/icons.json --overwrite</Code> switches back. See{" "}
+        <TextLink href="/docs/icons#outline-style">Icons</TextLink> and{" "}
+        <TextLink href="/docs/cli#icon-style">CLI &amp; registry</TextLink>.
+      </>,
+      <>
+        The Icons page has a Puffy / Outline toggle that previews the whole grid in either style.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-15-mobile",
     date: "October 15, 2026",
     title: "Agent workspace and Colors on phones",

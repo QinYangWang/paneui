@@ -33,6 +33,7 @@ export default function CliPage() {
     { id: "search", title: "search" },
     { id: "by-url", title: "Install by URL" },
     { id: "updating", title: "Updating" },
+    { id: "icon-style", title: "Switch the icon style" },
     { id: "item-types", title: "Item types" },
   ]
   return (
@@ -120,6 +121,24 @@ export default function CliPage() {
           <TextLink href="/docs/changelog">Changelog</TextLink> for what moved.
         </p>
         <InstallCommand args={`add ${ns}/button --diff components/ui/button.tsx`} />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <GuideH2 id="icon-style">Switch the icon style</GuideH2>
+        <p className="text-muted-foreground">
+          The icon set comes in two styles that both install to <Code>components/icons.tsx</Code>, with the same exports.
+          Replacing that one file switches every component that uses icons. Outline:
+        </p>
+        <InstallCommand args={`add ${templateUrl("icons-outline")} --overwrite`} />
+        <p className="text-muted-foreground">Back to puffy:</p>
+        <InstallCommand args={`add ${templateUrl("icons")} --overwrite`} />
+        <p className="text-muted-foreground">
+          Every item that uses icons depends on <Code>{ns}/icons</Code>. When you add one later, the CLI sees that{" "}
+          <Code>components/icons.tsx</Code> already exists and differs, and asks before overwriting it (default no; a
+          non-interactive run stops at the question instead of overwriting). Keep the default to stay on outline. Adding
+          with <Code>--overwrite</Code> writes the puffy set back, so run the outline command again afterwards. See{" "}
+          <TextLink href="/docs/icons#outline-style">Icons</TextLink> for both styles side by side.
+        </p>
       </section>
 
       <section className="flex flex-col gap-4">

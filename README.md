@@ -34,6 +34,23 @@ If you scaffold the app yourself with `create-next-app` and pnpm 10+, approve it
 (`pnpm approve-builds`, or `allowBuilds` in `pnpm-workspace.yaml`) or pnpm stops with
 `ERR_PNPM_IGNORED_BUILDS`; `shadcn init -d` already does this.
 
+## Icon style
+
+The icon set ships in two styles with the same exports, both installed to `components/icons.tsx`.
+One command switches every component in your project:
+
+```bash
+pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-outline.json --overwrite  # outline
+pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/icons.json --overwrite          # puffy (default)
+```
+
+Items that use icons depend on `icons`; adding one later asks before overwriting your
+`components/icons.tsx` (answer no, the default). Adding with `--overwrite` restores the puffy set, so
+re-run the outline command afterwards. In this repo the outline file is generated:
+`components/icons.tsx` is the source, `scripts/icon-outline-overrides.mjs` holds per-icon outline
+redraws, and `pnpm icons:gen` (also part of `pnpm registry:build`) writes
+`registry/base-nova/icons/outline/icons.tsx`.
+
 ## Development
 
 ```bash

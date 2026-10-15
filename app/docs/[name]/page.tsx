@@ -10,7 +10,7 @@ import { Inline } from "@/components/docs/doc-inline"
 import { DocToc, type TocEntry } from "@/components/docs/doc-toc"
 import { InstallCommand, PackageInstall } from "@/components/docs/install-command"
 import { PreviewTabs } from "@/components/docs/preview-tabs"
-import { demoFile, getItem, getItems, getNavGroups, readSource, REGISTRY_NAME } from "@/lib/docs"
+import { demoFile, getItem, getItems, getNavGroups, readSource, REGISTRY_NAME, SITE_URL } from "@/lib/docs"
 import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import {
@@ -199,6 +199,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
     })),
     ...(name === "icons"
       ? [
+          { id: "outline-style", title: "Outline style" },
           { id: "make-your-own-icons", title: "Make your own icons" },
           { id: "all-icons", title: "All icons" },
         ]
@@ -367,6 +368,28 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
             </p>
           </section>
         ))}
+
+        {name === "icons" && (
+          <section className="flex flex-col gap-3">
+            <H2 id="outline-style">Outline style</H2>
+            <p className="text-pretty text-muted-foreground">
+              The set also ships in an outline style: the same names, props and 18×18 grid, with every filled shape drawn
+              as a 1.6px round outline. Both styles install to{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>,
+              so one command switches every component in your project. Preview both with the toggle under All icons.
+            </p>
+            <InstallCommand args={`add ${SITE_URL}/r/icons-outline.json --overwrite`} />
+            <p className="text-pretty text-muted-foreground">Switch back to puffy:</p>
+            <InstallCommand args={`add ${SITE_URL}/r/icons.json --overwrite`} />
+            <p className="text-pretty text-muted-foreground">
+              Components list the icon set as a dependency, so adding one later asks whether to overwrite{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>.
+              Answer no (the default) to keep your style. If you add components with{" "}
+              <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">--overwrite</code>, the
+              puffy set comes back: run the outline command again afterwards.
+            </p>
+          </section>
+        )}
 
         {name === "icons" && (
           <section className="flex flex-col gap-3">

@@ -30,6 +30,7 @@ const LIBRARY_FILES = [
   "registry/base-nova/ui/**/*.{ts,tsx}",
   "registry/base-nova/blocks/**/*.{ts,tsx}",
   "components/icons.tsx",
+  "registry/base-nova/icons/**/*.tsx",
 ];
 
 const CONSUMER_FILES = [
