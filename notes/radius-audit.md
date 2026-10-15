@@ -125,3 +125,22 @@ Audit of the round-6 components and templates, light and dark: 0 findings after 
   `toolbar/document-bar` is a `frame-xl frame-inset-2` bar.
 - Allow-listed: `segmented-control` 9–15px in (a control), the `swatch-picker` "none" strike line, and an
   email section nested in a Show-if block (third frame level, editor chrome only).
+
+## Round 13 (2026-10-16): radius presets
+
+`pnpm audit:radius --radius <none|sm|lg|xl>` audits under a preset. Token pairs that were concentric by
+coincidence at the default `--radius` (rounded-xl around p-1 rows = rounded-lg) drift at large radii,
+because the padding stays fixed while every token scales. The fix is always `frame-*` + `rounded-inner`.
+
+- Default radius: 0 findings (11 allow-listed).
+- Fixed: inset `Card` publishes its frame (`frame-2xl frame-inset-1`, `CardPanel` `rounded-inner`); multi-select
+  well (`frame-lg` + per-size inset; chips and the trigger button `rounded-inner`) and popup
+  (`frame-xl frame-inset-1`, rows `rounded-inner`, 10px at default instead of 8px); morph-select popup
+  (`frame-xl frame-inset-1.5`, rows `rounded-inner`); card-folder dashed outline computes outer − 8px.
+- Allow-listed: calendar range endpoints (round button over a square-sided strip); terminal emulator scroll
+  layers (square, clipped by the demo card's overflow-hidden).
+- Open at `xl` (17: 3 must, 14 should; all latent or controls): multi-select chip remove buttons (make the
+  chip `frame-inner frame-inset-0.5`), `shared-layout-bg/disabled` and `thread-list-item` demos (container
+  token around a fixed `p-1`/`p-2`; the consumer lint blocks `frame-*` on library components, so these need
+  a plain wrapper frame), `user-menu` demo, kbd inside the header search and input-group addons
+  (controls), animated-sidebar inset panel.
