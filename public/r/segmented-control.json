@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "segmented-control",
   "title": "Segmented Control",
-  "description": "Pick-one control on Base UI RadioGroup with a raised thumb that glides between options: billing cycle, chart type, theme.",
+  "description": "Pick-one control on a radio group with a raised thumb that glides between options: billing cycle, chart type, theme.",
   "dependencies": [
     "@base-ui/react",
     "motion"

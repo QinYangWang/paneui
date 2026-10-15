@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "citations",
   "title": "Citations",
-  "description": "Inline numbered citation markers with a Base UI PreviewCard hover preview, linked through a CitationGroup to a collapsible, progressively animated reference list.",
+  "description": "Inline numbered citation markers with a hover preview card, linked through a CitationGroup to a collapsible, progressively animated reference list.",
   "dependencies": [
     "@base-ui/react",
     "motion"

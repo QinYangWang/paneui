@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "collapsible",
   "title": "Collapsible",
-  "description": "Base UI Collapsible with a smooth height reveal, soft content fade and a rotating chevron trigger.",
+  "description": "Collapsible with a smooth height reveal, soft content fade and a rotating chevron trigger.",
   "dependencies": [
     "@base-ui/react"
   ],

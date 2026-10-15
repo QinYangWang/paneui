@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-blue",
   "title": "Theme: Blue accent",
-  "description": "Blue accent preset (the default): sets the --accent-50…950 ramp to Tailwind blue (BoardUI's blue-400 #3392ff); primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+  "description": "Blue accent preset (the default): sets the --accent-50…950 ramp to Tailwind blue (#3392ff at 400); primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "range-slider-inline",
   "title": "Range Slider Inline",
-  "description": "Base UI slider with a raised fill growing inside an inset well, the label and value printed on the track, ten stop markers and a slim thumb that parts around the text.",
+  "description": "Slider with a raised fill growing inside an inset well, the label and value printed on the track, ten stop markers and a slim thumb that parts around the text.",
   "dependencies": [
     "@base-ui/react"
   ],

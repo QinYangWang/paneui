@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "accordion",
   "title": "Accordion",
-  "description": "Base UI Accordion in an inset well with raised open rows, optional icon chips, springy height reveal and single or multiple open items.",
+  "description": "Accordion in an inset well with raised open rows, optional icon chips, springy height reveal and single or multiple open items.",
   "dependencies": [
     "@base-ui/react"
   ],
