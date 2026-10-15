@@ -522,7 +522,8 @@ export function AgentWorkspace() {
           <ResizablePanelGroup direction="horizontal" autoSaveId="agent-workspace-shell" handleRef={outer} className="min-w-0 flex-1">
             <ResizablePanel id="threads" defaultSize="248px" minSize="220px" maxSize="420px" collapsible onCollapsedChange={(c) => setSidebarOpen(!c)}>
               <div className="flex h-full flex-col">
-                <div className="flex h-10 shrink-0 items-center gap-0.5 px-2">
+                {/* eslint-disable-next-line shadcn/no-arbitrary-values -- 3px inset gap + 0.5px panel border, so this row centres with the chat toolbar */}
+                <div className="mt-[3.5px] flex h-10 shrink-0 items-center gap-1 px-2">
                   <ToolbarButton label="Hide sidebar" shortcut="⌘B" onClick={toggleSidebar}>
                     <SidebarIcon />
                   </ToolbarButton>

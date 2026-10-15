@@ -119,6 +119,10 @@ function FileTree({
   ...props
 }: FileTreeProps) {
   const reduce = useReducedMotion() ?? false
+  // Guides grow in only for rows that appear after mount (a folder opening); rows that are
+  // there from the start draw their guides immediately, so a guide never stays at scale 0.
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => setMounted(true), [])
   const pillId = `file-tree-pill-${React.useId()}`
   const [internalValue, setInternalValue] = React.useState(defaultValue)
   const [internalExpanded, setInternalExpanded] = React.useState(defaultExpanded)
@@ -294,11 +298,11 @@ function FileTree({
                 <motion.span
                   key={d}
                   aria-hidden
-                  initial={reduce ? false : { scaleY: 0 }}
+                  initial={reduce || !mounted ? false : { scaleY: 0 }}
                   animate={{ scaleY: 1 }}
                   transition={{ duration: reduce ? 0 : 0.28, ease: EASE }}
                   style={{ left: PAD + d * indent + 7 }}
-                  className="absolute inset-y-0 z-10 w-px origin-top bg-foreground/10"
+                  className="absolute inset-y-0 z-10 w-px origin-top bg-foreground/15"
                 />
               ))}
 

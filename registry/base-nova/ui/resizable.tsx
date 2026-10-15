@@ -205,6 +205,11 @@ function ResizablePanelGroup({
     }
     setSizesState(next)
     setCollapsed(nextCollapsed)
+    // A restored layout can start with panels collapsed: tell their owners, so toggles that
+    // only show while a panel is hidden (an "expand" button) appear after a reload too.
+    for (const p of panelsRef.current) {
+      if (p.id && nextCollapsed[p.id]) p.onCollapsedChange?.(true)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- re-run only when the set of panels changes
   }, [signature, storageKey])
 

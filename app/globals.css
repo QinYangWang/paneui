@@ -390,6 +390,12 @@ html[data-accent="violet"] {
   margin-bottom: 3px;
 }
 
+/* Sticky top edge for a shell-inset panel that scrolls with the page (docs shell). */
+@utility shell-cap {
+  border-top-left-radius: calc(var(--radius) * 1.3);
+  border-top-right-radius: calc(var(--radius) * 1.3);
+}
+
 /*
  * ───────────── Concentric radii: frame-* + rounded-inner ─────────────
  *
