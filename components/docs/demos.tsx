@@ -21,6 +21,8 @@ import TabsDemo from "@/registry/base-nova/examples/tabs-demo"
 import TaskRowDemo from "@/registry/base-nova/examples/task-row-demo"
 import TextareaDemo from "@/registry/base-nova/examples/textarea-demo"
 import ThemeDemo from "@/registry/base-nova/examples/theme-demo"
+import AppShellDemo from "@/registry/base-nova/examples/app-shell-demo"
+import OverflowHintDemo from "@/registry/base-nova/examples/overflow-hint-demo"
 import TypesetDemo from "@/registry/base-nova/examples/typeset-demo"
 import CheckboxDemo from "@/registry/base-nova/examples/checkbox-demo"
 import RadioDemo from "@/registry/base-nova/examples/radio-demo"
@@ -191,6 +193,8 @@ export const demos: Record<string, React.ComponentType> = {
   blog: BlogPreview,
   theme: ThemeDemo,
   typeset: TypesetDemo,
+  "app-shell": AppShellDemo,
+  "overflow-hint": OverflowHintDemo,
   icons: IconsDemo,
   "icon-chip": IconChipDemo,
   button: ButtonDemo,

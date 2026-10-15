@@ -8,6 +8,25 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-app-shell",
+    date: "October 15, 2026",
+    title: "App shell, overflow hints and real block drag",
+    tag: "Components",
+    changes: [
+      <>
+        New <Code>app-shell</Code>: header, rail sidebar and inset panel on one grid, with the toggle centred on the rail
+        icons. The docs site runs on it.
+      </>,
+      <>
+        New <Code>overflow-hint</Code> shows the full text of a truncated label in a hover card you can select and copy.
+        Tab strip titles use it, and the last tab keeps its border.
+      </>,
+      <>Block editor drag works with mouse and touch, with a drop line, Move up and Move down, and keyboard moves.</>,
+      <>Avatar generator lays out by its own width. Agent activity&rsquo;s live ring is no longer clipped.</>,
+      <>Inline code no longer breaks after a hyphen, and <Code>shadow-surface</Code> sits lower.</>,
+    ],
+  },
+  {
     id: "2026-10-15-typeset-copy",
     date: "October 15, 2026",
     title: "Typeset and shorter copy",

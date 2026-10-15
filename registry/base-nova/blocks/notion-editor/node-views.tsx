@@ -16,6 +16,9 @@ const calloutTone: Record<CalloutType, string> = {
   danger: "bg-destructive/10",
 }
 
+/** Colour emoji faces ahead of the UI font, so the icon never falls back to a text glyph. */
+const emojiFont = "font-[Apple_Color_Emoji,Segoe_UI_Emoji,Noto_Color_Emoji,sans-serif]"
+
 const calloutIcons: Record<CalloutType, string> = { info: "💡", note: "📝", success: "✅", warning: "⚠️", danger: "🚨" }
 
 function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
@@ -32,7 +35,10 @@ function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
           disabled={!editor.isEditable}
           contentEditable={false}
           aria-label="Callout style"
-          className="mt-px inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-base leading-none outline-none select-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-default disabled:hover:bg-transparent"
+          className={cn(
+            "mt-px inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-base leading-none outline-none select-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-default disabled:hover:bg-transparent",
+            emojiFont
+          )}
         >
           {icon}
         </MenuTrigger>
@@ -45,7 +51,9 @@ function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
             >
               {(Object.keys(calloutIcons) as CalloutType[]).map((t) => (
                 <MenuRadioItem key={t} value={t}>
-                  <span aria-hidden>{calloutIcons[t]}</span>
+                  <span aria-hidden className={emojiFont}>
+                    {calloutIcons[t]}
+                  </span>
                   <span className="capitalize">{t}</span>
                 </MenuRadioItem>
               ))}

@@ -5,6 +5,7 @@ import { Reorder, useReducedMotion } from "motion/react"
 
 import { XIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { OverflowHintText } from "@/registry/base-nova/ui/overflow-hint"
 
 type TabStripVariant = "default" | "pill"
 
@@ -146,7 +147,9 @@ function TabStrip({
   }
 
   const ctx = React.useMemo(() => ({ value, select, close: onClose, variant, reorderable }), [value, select, onClose, variant, reorderable])
-  const listClass = cn("flex min-w-0 items-center", variant === "pill" ? "gap-1" : "gap-0.5")
+  // `w-max`: the list wraps every tab, so the scroller's 1px padding sits after the last one and
+  // its ring isn't clipped at the scroll end (a list sized to the scroller lets tabs overflow it).
+  const listClass = cn("flex w-max items-center", variant === "pill" ? "gap-1" : "gap-0.5")
 
   return (
     <TabStripContext.Provider value={ctx}>
@@ -194,9 +197,11 @@ type TabStripItemProps = Omit<React.ComponentProps<"div">, "onDrag" | "onDragSta
   /** Dot after the label: unsaved changes or new activity. */
   indicator?: boolean
   disabled?: boolean
+  /** Full text shown on hover while the label is truncated. Defaults to the label; `false` turns it off. */
+  hint?: React.ReactNode
 }
 
-function TabStripItem({ value, icon, closable, indicator, disabled, className, children, ...props }: TabStripItemProps) {
+function TabStripItem({ value, icon, closable, indicator, disabled, hint, className, children, ...props }: TabStripItemProps) {
   const ctx = useTabStrip()
   const reduce = useReducedMotion()
   const selected = ctx.value === value
@@ -221,7 +226,13 @@ function TabStripItem({ value, icon, closable, indicator, disabled, className, c
         }}
       >
         {icon && <span className="flex size-4 shrink-0 items-center justify-center text-muted-foreground [&_svg]:size-3.5">{icon}</span>}
-        <span className="min-w-0 flex-1 truncate">{children}</span>
+        {hint === false ? (
+          <span className="min-w-0 flex-1 truncate">{children}</span>
+        ) : (
+          <OverflowHintText hint={hint} side="bottom" align="start" alignOffset={-8} className="flex-1">
+            {children}
+          </OverflowHintText>
+        )}
         {indicator && <span aria-label="Has changes" className="size-1.5 shrink-0 rounded-full bg-primary" />}
       </span>
       {canClose && (

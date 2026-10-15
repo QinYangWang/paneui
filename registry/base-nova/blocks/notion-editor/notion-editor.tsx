@@ -6,7 +6,7 @@ import { EditorContent, useEditor, useEditorState } from "@tiptap/react"
 
 import { DownloadIcon, UndoIcon, UploadIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
-import { EditorBlockHandle } from "@/registry/base-nova/blocks/notion-editor/block-handle"
+import { EditorBlockHandle, moveBlock, moveSelectedBlock } from "@/registry/base-nova/blocks/notion-editor/block-handle"
 import { EditorBubbleMenu } from "@/registry/base-nova/blocks/notion-editor/bubble-menu"
 import { notionExtensions, type ImageUploader } from "@/registry/base-nova/blocks/notion-editor/extensions"
 import { fromMDX, toMDX } from "@/registry/base-nova/blocks/notion-editor/mdx"
@@ -66,10 +66,12 @@ export const editorContentClass = cn(
   // states
   "[&_.ProseMirror-selectednode]:outline-none [&_[data-type=callout].ProseMirror-selectednode]:ring-2 [&_[data-type=callout].ProseMirror-selectednode]:ring-ring/50",
   "[&_.is-empty]:before:pointer-events-none [&_.is-empty]:before:float-left [&_.is-empty]:before:h-0 [&_.is-empty]:before:text-muted-foreground/60 [&_.is-empty]:before:content-[attr(data-placeholder)]",
-  "[&_.ProseMirror-gapcursor]:after:border-foreground"
+  "[&_.ProseMirror-gapcursor]:after:border-foreground",
+  // the block being dragged from the gutter grip
+  "[&_[data-block-dragging]]:opacity-40 [&_[data-block-dragging]]:transition-opacity [&_[data-block-dragging]]:duration-150"
 )
 
-/** ⌘K (link) and other editor-level shortcuts. The bubble menu registers `openLink`. */
+/** ⌘K (link), ⌘⇧↑ / ⌘⇧↓ (move block) and other editor-level shortcuts. The bubble menu registers `openLink`. */
 export const NotionShortcuts = Extension.create({
   name: "notionShortcuts",
   addStorage() {
@@ -82,6 +84,8 @@ export const NotionShortcuts = Extension.create({
         this.storage.openLink?.()
         return true
       },
+      "Mod-Shift-ArrowUp": () => moveSelectedBlock(this.editor, "up"),
+      "Mod-Shift-ArrowDown": () => moveSelectedBlock(this.editor, "down"),
     }
   },
 })
@@ -320,4 +324,4 @@ export function NotionEditor({
   )
 }
 
-export { fromMDX, toMDX }
+export { fromMDX, moveBlock, moveSelectedBlock, toMDX }

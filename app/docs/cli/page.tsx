@@ -1,4 +1,5 @@
-import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page"
+import type { TocEntry } from "@/components/docs/doc-toc"
+import { Code, GuideH2, GuideH3, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
 import { REGISTRY_NAME, REGISTRY_URL, SITE_URL } from "@/lib/docs"
 import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
@@ -19,14 +20,16 @@ export default function CliPage() {
   "files": [{ "path": "registry/base-nova/ui/button.tsx", "type": "registry:ui", "content": "…" }]
 }`
   const templateUrl = (name: string) => REGISTRY_URL.replace("{name}", name)
-  const templates = [
-    { name: "saas", app: "my-saas", what: "a starter app with marketing pages, sign-in and a dashboard" },
-    { name: "agent-workspace", app: "my-agent", what: "the agent workspace as the home page, with its ACP bridge server" },
-    { name: "docs", app: "my-docs", what: "a docs site at /docs" },
-    { name: "blog", app: "my-blog", what: "a blog at /blog" },
+  const templates: { name: string; what: string; routes: string[] }[] = [
+    { name: "saas", what: "Marketing pages, sign-in and a dashboard", routes: ["app/page.tsx", "app/not-found.tsx", "app/pricing", "app/changelog", "app/(auth)", "app/dashboard"] },
+    { name: "agent-workspace", what: "The agent workspace with its ACP bridge server", routes: ["app/page.tsx", "server/acp-bridge.mjs"] },
+    { name: "docs", what: "A docs site", routes: ["app/docs/page.tsx"] },
+    { name: "blog", what: "A blog with a post page", routes: ["app/blog"] },
   ]
-  const toc = [
+  const toc: TocEntry[] = [
     { id: "templates", title: "Templates in one command" },
+    { id: "new-project", title: "New project", depth: 2 },
+    { id: "existing-project", title: "Existing project", depth: 2 },
     { id: "the-registry", title: "The registry" },
     { id: "add", title: "add" },
     { id: "view", title: "view" },
@@ -41,28 +44,84 @@ export default function CliPage() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="templates">Templates in one command</GuideH2>
         <p className="text-muted-foreground">
-          To start a new app from a template, pass its URL to <Code>init</Code>. The CLI creates a Next.js project, writes
-          the theme, installs every component the template uses and adds its routes. You don&apos;t need to set up{" "}
-          <Code>components.json</Code> first, because items point at their dependencies by URL.
+          Templates install by URL. Pick the path that matches where you start.
         </p>
-        <InstallCommand args={`init -d -n my-saas ${templateUrl("saas")}`} />
-        <p className="text-muted-foreground">
-          Then <Code>cd my-saas</Code> and run <Code>pnpm dev</Code>. In an existing Next.js app with Tailwind 4, use{" "}
-          <Code>add</Code> instead. It asks before replacing files such as <Code>app/page.tsx</Code>.
-        </p>
-        <InstallCommand args={`add ${templateUrl("saas")}`} />
-        <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
-          {templates.map((t) => (
-            <li key={t.name}>
-              <Code>{t.name}</Code> installs {t.what}.{" "}
-              <Code>init -d -n {t.app} {templateUrl(t.name)}</Code>
+        <div className="flex flex-col gap-4 pt-2">
+          <GuideH3 id="new-project">New project</GuideH3>
+          <p className="text-muted-foreground">
+            Use <Code>init</Code> when you&apos;re starting from nothing. It creates the Next.js app with the theme and every
+            component the template needs, so there is nothing to set up first.
+          </p>
+          <InstallCommand args={`init -d -n my-saas ${templateUrl("saas")}`} />
+          <p className="text-muted-foreground">
+            Then run <Code>cd my-saas</Code> and <Code>pnpm dev</Code>.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-4 pt-2">
+          <GuideH3 id="existing-project">Existing project</GuideH3>
+          <p className="text-muted-foreground">
+            Use <Code>add</Code> when the app is already set up and you want the template&apos;s pages next to your own.
+          </p>
+          <InstallCommand args={`add ${templateUrl("saas")}`} />
+          <p className="text-muted-foreground">Before you run it, check these.</p>
+          <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
+            <li>
+              The app uses the App Router and Tailwind CSS 4. If it has no <Code>components.json</Code>, the CLI offers to
+              create one first.
             </li>
-          ))}
-        </ul>
-        <p className="text-muted-foreground">
-          The notion-editor and email-editor blocks install into an existing app the same way, for example{" "}
-          <Code>add {templateUrl("notion-editor")}</Code>.
-        </p>
+            <li>
+              Your work is committed, so you can review the diff afterwards. Add <Code>--dry-run</Code> to list the files
+              without writing them.
+            </li>
+            <li>
+              Nothing you need lives at the template&apos;s routes (table below). The CLI asks before replacing an existing
+              file; <Code>--overwrite</Code> replaces it without asking.
+            </li>
+            <li>
+              The theme rewrites its variables in your global CSS, so custom values under the same names are replaced.
+              Re-apply them after.
+            </li>
+          </ul>
+          <p className="text-muted-foreground">
+            The notion-editor and email-editor blocks install the same way, for example{" "}
+            <Code>add {templateUrl("notion-editor")}</Code>.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-4 pt-2">
+          <GuideH3 id="template-list">Pick a template</GuideH3>
+          <p className="text-muted-foreground">
+            Swap <Code>saas</Code> in either command for another name. Each one also adds its parts under{" "}
+            <Code>components/&lt;name&gt;/</Code>.
+          </p>
+          <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
+            <table className="w-full min-w-xl border-collapse text-left text-sm">
+              <thead className="text-muted-foreground">
+                <tr className="border-b border-border">
+                  <th className="px-4 py-2.5 font-medium">Template</th>
+                  <th className="px-4 py-2.5 font-medium">You get</th>
+                  <th className="px-4 py-2.5 font-medium">Writes to</th>
+                </tr>
+              </thead>
+              <tbody>
+                {templates.map((t) => (
+                  <tr key={t.name} className="border-b border-border last:border-b-0">
+                    <td className="px-4 py-2.5 align-top font-mono text-xs whitespace-nowrap text-foreground">{t.name}</td>
+                    <td className="px-4 py-2.5 align-top text-muted-foreground">{t.what}</td>
+                    <td className="px-4 py-2.5 align-top">
+                      <span className="flex flex-wrap gap-1">
+                        {t.routes.map((r) => (
+                          <Code key={r}>{r}</Code>
+                        ))}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
 
       <section className="flex flex-col gap-4">

@@ -10,11 +10,12 @@ export default {
   composition: `NotionEditor
 ├── NotionEditorToolbar        undo / redo, word count, Import / Export MDX
 ├── EditorContent              the document (notionExtensions)
-├── EditorBlockHandle          "+" and drag grip in the gutter
+├── EditorBlockHandle          "+" and drag grip in the gutter, drop line
 └── EditorBubbleMenu           turn into, marks, link, colour
 
 useNotionEditor(options)      the editor instance, for your own layout
 toMDX(editor | json) / fromMDX(source)
+moveBlock(editor, from, to) · moveSelectedBlock(editor, "up" | "down")
 SlashCommand · defaultSlashItems · suggestionRenderer`,
   examples: [
     { id: "controlled-mdx", title: "Controlled MDX", description: "Use when the document lives in your own state as an MDX string." },
@@ -22,7 +23,8 @@ SlashCommand · defaultSlashItems · suggestionRenderer`,
     { id: "custom-slash-items", title: "Custom Slash Items", description: "Use to add your own blocks or commands to the `/` menu." },
   ],
   notes: [
-    { title: "Blocks and shortcuts", body: "Text, headings 1–3 (4–6 kept from MDX), bulleted, numbered and to-do lists, toggle, quote, callout, divider, code block (with syntax highlighting), image and table. Markdown input rules cover `#`, `-`, `1.`, `[ ]`, `>`, three backticks, `---`, `**bold**`, `_italic_`, backtick code, `~~strike~~`. `⌘B` `⌘I` `⌘U` `⌘⇧S` `⌘E` for marks, `⌘K` for a link, `⌘⇧H` highlight, `⌘⌥1–3` headings, `⌘⇧7/8/9` lists." },
+    { title: "Blocks and shortcuts", body: "Text, headings 1–3 (4–6 kept from MDX), bulleted, numbered and to-do lists, toggle, quote, callout, divider, code block (with syntax highlighting), image and table. Markdown input rules cover `#`, `-`, `1.`, `[ ]`, `>`, three backticks, `---`, `**bold**`, `_italic_`, backtick code, `~~strike~~`. `⌘B` `⌘I` `⌘U` `⌘⇧S` `⌘E` for marks, `⌘K` for a link, `⌘⇧H` highlight, `⌘⌥1–3` headings, `⌘⇧7/8/9` lists, `⌘⇧↑` / `⌘⇧↓` move the block." },
+    { title: "Moving blocks", body: "Drag the grip with a mouse, pen or finger; a line marks where the block lands, the scroll area follows the pointer near its edges and Escape cancels. On touch the gutter sits on the block that holds the caret. The grip menu also has Move up and Move down. Every move is one undo step." },
     { title: "MDX round trip", body: "`fromMDX` parses MDX with GitHub-flavoured Markdown and `toMDX` prints it back. `<Callout type icon>` maps to the callout block, `<details><summary>` to the toggle, `<u>`, `<mark>` and `<span style={{ color }}>` to underline, highlight and colour. Anything else (unknown JSX, `import` / `export`, `{expressions}`, footnotes) becomes an editable raw MDX block, so `toMDX(fromMDX(source))` equals `formatMDX(source)`." },
     { title: "Images", body: "The image block, paste and drop go through `uploadImage(file) => Promise<url>`; the default inlines a data URL, so pass your own uploader for real documents." },
   ],
@@ -55,6 +57,7 @@ SlashCommand · defaultSlashItems · suggestionRenderer`,
       { name: "colors", type: "boolean", default: "true", description: "Show the colour popover." },
       { name: "textColors / highlightColors", type: "Swatch[]", description: "Palettes (theme tokens by default)." },
     ] },
+    { name: "moveBlock", description: "`moveBlock(editor, from, to): boolean` moves the top-level block at `from` to the gap at `to`.", props: [] },
     { name: "EditorBlockHandle", description: "Render inside the same `relative` container as `EditorContent`.", props: [
       { name: "editor", type: "Editor", required: true, description: "The editor." },
       { name: "blockTypes", type: "BlockType[] | false", description: "\"Turn into\" targets in the grip menu." },

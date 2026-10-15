@@ -8,7 +8,7 @@ import { TabStrip, TabStripItem } from "@/registry/base-nova/ui/tab-strip"
 
 const INITIAL = [
   { id: "a", title: "Fix broken chat dragging", provider: "codex" },
-  { id: "b", title: "Redesign split chats", provider: "codex" },
+  { id: "b", title: "Redesign split chats so both panes keep their scroll", provider: "codex" },
   { id: "c", title: "Hide empty threads", provider: "claude" },
 ]
 

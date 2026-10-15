@@ -15,13 +15,15 @@ const variants = [
 
 export default function AvatarGeneratorOptions() {
   return (
-    <div className="grid grid-cols-5 gap-x-5 gap-y-5">
-      {variants.map((variant) => (
-        <figure key={variant.label} className="flex flex-col items-center gap-2">
-          <GeneratedAvatar seed="hana" gender="female" size={64} shape="rounded" {...variant.props} />
-          <figcaption className="text-xs text-muted-foreground">{variant.label}</figcaption>
-        </figure>
-      ))}
+    <div className="@container w-full max-w-lg">
+      <div className="grid grid-cols-3 gap-4 @md:grid-cols-5">
+        {variants.map((variant) => (
+          <figure key={variant.label} className="flex flex-col items-center gap-2">
+            <GeneratedAvatar seed="hana" gender="female" size={64} shape="rounded" {...variant.props} />
+            <figcaption className="text-center text-xs text-balance text-muted-foreground">{variant.label}</figcaption>
+          </figure>
+        ))}
+      </div>
     </div>
   )
 }

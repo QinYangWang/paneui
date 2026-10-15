@@ -4,11 +4,10 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 
-import { GithubIcon, MenuIcon, QinyangLogoIcon, SearchIcon } from "@/components/icons"
+import { GithubIcon, QinyangLogoIcon, SearchIcon } from "@/components/icons"
 import { CommandPalette, type CommandPaletteItem } from "@/registry/base-nova/blocks/command-palette/command-palette"
-import { Sidebar, SidebarProvider, SidebarTrigger } from "@/registry/base-nova/ui/animated-sidebar"
+import { AppShell, AppShellHeader, AppShellMain, AppShellSidebar, AppShellTrigger } from "@/registry/base-nova/ui/app-shell"
 import { Button } from "@/registry/base-nova/ui/button"
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/registry/base-nova/ui/drawer"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
 import { cn } from "@/lib/utils"
@@ -44,11 +43,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
   const pathname = normalizePath(usePathname())
   const router = useRouter()
   const mac = useIsMac()
-  const [navOpen, setNavOpen] = React.useState(false)
   const [searchOpen, setSearchOpen] = React.useState(false)
-
-  // Close the mobile drawer once a link in it navigated.
-  React.useEffect(() => setNavOpen(false), [pathname])
 
   const items = React.useMemo<CommandPaletteItem[]>(() => {
     const go = (href: string) => () => router.push(href)
@@ -85,118 +80,97 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
   const shortcut = mac ? "⌘K" : "Ctrl K"
 
   return (
-    <SidebarProvider shortcut={null} className="min-h-svh flex-col bg-shell">
-      <header className="sticky top-0 z-40 h-12 shrink-0 bg-shell">
-        <div className="flex h-full items-center gap-1.5 px-2.5 sm:px-3">
+    <AppShell shortcut={null}>
+      <AppShellHeader
+        leading={
           <Tooltip>
-            <TooltipTrigger render={<SidebarTrigger className="max-lg:hidden" />} />
+            <TooltipTrigger render={<AppShellTrigger />} />
             <TooltipContent side="bottom">Toggle sidebar</TooltipContent>
           </Tooltip>
-          <Button variant="ghost" size="icon-sm" className="lg:hidden" aria-label="Open navigation" onClick={() => setNavOpen(true)}>
-            <MenuIcon />
-          </Button>
-          <Link
-            href="/"
-            className="flex items-center gap-2 rounded-md py-1 pr-2 pl-1 text-ui font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-          >
-            <QinyangLogoIcon size={20} className="text-foreground" />
-            qinyang/ui
-          </Link>
-          <nav aria-label="Main" className="ml-2 flex items-center gap-0.5 max-md:hidden">
-            {headerLinks.map((l) => {
-              const active = l.isActive(pathname, groups)
-              return (
-                <Link
-                  key={l.label}
-                  href={l.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "inline-flex h-7 items-center rounded-lg px-2.5 text-ui font-medium text-muted-foreground transition-colors duration-150 outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
-                    active && "text-foreground",
-                  )}
-                >
-                  {l.label}
-                </Link>
-              )
-            })}
-          </nav>
-
-          <div className="ml-auto flex items-center gap-1.5">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setSearchOpen(true)}
-              aria-label="Search docs"
-              aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
-              // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a 240px field (sm+)
-              className="w-8 justify-center px-0 text-muted-foreground sm:w-56 sm:justify-start sm:px-2.5"
-            >
-              <SearchIcon />
-              <span className="hidden sm:inline">Search docs…</span>
-              <kbd className="ml-auto hidden rounded-sm bg-card px-1.5 py-px font-sans text-ui-xs text-muted-foreground shadow-chip sm:inline">
-                {shortcut}
-              </kbd>
-            </Button>
-            <Tooltip>
-              <TooltipTrigger
-                render={
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    nativeButton={false}
-                    render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}
-                    aria-label="GitHub repository"
-                  />
-                }
+        }
+      >
+        {/* Starts on the sidebar's label column: the mark lines up with the nav labels below it. */}
+        <Link
+          href="/"
+          className="-ms-1 flex items-center gap-2 rounded-md py-1 ps-1 pe-2 text-ui font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+        >
+          <QinyangLogoIcon size={18} className="text-foreground" />
+          qinyang/ui
+        </Link>
+        <nav aria-label="Main" className="ml-2 flex items-center gap-0.5 max-md:hidden">
+          {headerLinks.map((l) => {
+            const active = l.isActive(pathname, groups)
+            return (
+              <Link
+                key={l.label}
+                href={l.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "inline-flex h-7 items-center rounded-lg px-2.5 text-ui font-medium text-muted-foreground transition-colors duration-150 outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+                  active && "text-foreground",
+                )}
               >
-                <GithubIcon className="size-4.5" />
-              </TooltipTrigger>
-              <TooltipContent side="bottom">GitHub</TooltipContent>
-            </Tooltip>
-            <ThemeControls />
-          </div>
+                {l.label}
+              </Link>
+            )
+          })}
+        </nav>
+
+        <div className="ml-auto flex items-center gap-1.5">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search docs"
+            aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
+            // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a 240px field (sm+)
+            className="w-8 justify-center px-0 text-muted-foreground sm:w-56 sm:justify-start sm:px-2.5"
+          >
+            <SearchIcon />
+            <span className="hidden sm:inline">Search docs…</span>
+            <kbd className="ml-auto hidden rounded-sm bg-card px-1.5 py-px font-sans text-ui-xs text-muted-foreground shadow-chip sm:inline">
+              {shortcut}
+            </kbd>
+          </Button>
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  nativeButton={false}
+                  render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}
+                  aria-label="GitHub repository"
+                />
+              }
+            >
+              <GithubIcon className="size-4.5" />
+            </TooltipTrigger>
+            <TooltipContent side="bottom">GitHub</TooltipContent>
+          </Tooltip>
+          <ThemeControls />
         </div>
-      </header>
+      </AppShellHeader>
 
-      <div className="flex min-w-0 flex-1">
-        {/* eslint-disable-next-line shadcn/no-arbitrary-values, shadcn/no-restyle -- viewport height minus the h-12 band; the rail sidebar sits on the shell band with no seam (the inset panel draws the edge) */}
-        <Sidebar variant="sidebar" aria-label="Docs" panelClassName="border-r-0" className="sticky top-12 h-[calc(100svh-3rem)] self-start max-lg:hidden">
-          <DocsNav groups={groups} pathname={pathname} />
-        </Sidebar>
-        {/* Rail layout: the content is an inset panel on the shell band (see the shell-inset utility). */}
-        <main className="shell-inset min-w-0 flex-1 px-5 py-8 max-lg:ml-0.75 sm:px-8 lg:px-10 lg:py-10">
-          {/* The panel scrolls with the page; this cap stays under the header and redraws the panel's
-              rounded top edge, so the corners don't turn square once the page scrolls. */}
-          <div aria-hidden className="pointer-events-none sticky top-12 z-30 -mx-5 -mt-8 mb-8 h-0 sm:-mx-8 lg:-mx-10 lg:-mt-10 lg:mb-10">
-            {/* eslint-disable-next-line shadcn/no-arbitrary-values -- covers the panel's 0.5px hairline exactly */}
-            <div className="absolute -top-[0.5px] -right-[0.5px] -left-[0.5px] h-4 bg-shell">
-              {/* eslint-disable-next-line shadcn/no-arbitrary-values -- same 0.5px hairline as shell-inset */}
-              <div className="shell-cap h-full border-x-[0.5px] border-t-[0.5px] border-shell-border bg-background" />
-            </div>
-          </div>
+      <AppShellSidebar
+        aria-label="Docs"
+        mobileTitle={
+          <>
+            <QinyangLogoIcon size={18} />
+            qinyang/ui
+          </>
+        }
+      >
+        <DocsNav groups={groups} pathname={pathname} />
+      </AppShellSidebar>
+
+      <AppShellMain>
+        <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
           <div className="mx-auto w-full max-w-5xl">{children}</div>
-        </main>
-      </div>
-
-      <Drawer side="left" open={navOpen} onOpenChange={setNavOpen}>
-        {/* eslint-disable-next-line shadcn/no-arbitrary-values -- 20rem drawer that never exceeds the viewport minus a 1rem gutter */}
-        <DrawerContent className="w-[min(20rem,calc(100vw-1rem))]">
-          <DrawerHeader className="pb-2">
-            <DrawerTitle className="flex items-center gap-2">
-              <QinyangLogoIcon size={22} />
-              qinyang/ui
-            </DrawerTitle>
-          </DrawerHeader>
-          <SidebarProvider shortcut={null} className="min-h-0 flex-1" style={{ "--sidebar-width": "100%" } as React.CSSProperties}>
-            {/* eslint-disable-next-line shadcn/no-restyle -- sidebar embedded in the mobile drawer: the drawer is the surface */}
-            <Sidebar variant="sidebar" collapsible="none" aria-label="Docs" panelClassName="border-r-0 bg-transparent">
-              <DocsNav groups={groups} pathname={pathname} className="px-3 pb-4" />
-            </Sidebar>
-          </SidebarProvider>
-        </DrawerContent>
-      </Drawer>
+        </div>
+      </AppShellMain>
 
       <CommandPalette items={items} open={searchOpen} onOpenChange={setSearchOpen} placeholder="Search docs and components…" />
-    </SidebarProvider>
+    </AppShell>
   )
 }

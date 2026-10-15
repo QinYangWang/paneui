@@ -13,6 +13,7 @@ import d_ai_sidebar from "./ai-sidebar"
 import d_alert from "./alert"
 import d_animated_number from "./animated-number"
 import d_animated_sidebar from "./animated-sidebar"
+import d_app_shell from "./app-shell"
 import d_aspect_ratio from "./aspect-ratio"
 import d_avatar from "./avatar"
 import d_avatar_generator from "./avatar-generator"
@@ -67,6 +68,7 @@ import d_morphing_modal from "./morphing-modal"
 import d_multi_select from "./multi-select"
 import d_notion_editor from "./notion-editor"
 import d_number_ticker from "./number-ticker"
+import d_overflow_hint from "./overflow-hint"
 import d_page_header from "./page-header"
 import d_pagination from "./pagination"
 import d_password_input from "./password-input"
@@ -140,6 +142,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "alert": d_alert,
   "animated-number": d_animated_number,
   "animated-sidebar": d_animated_sidebar,
+  "app-shell": d_app_shell,
   "aspect-ratio": d_aspect_ratio,
   "avatar": d_avatar,
   "avatar-generator": d_avatar_generator,
@@ -194,6 +197,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "multi-select": d_multi_select,
   "notion-editor": d_notion_editor,
   "number-ticker": d_number_ticker,
+  "overflow-hint": d_overflow_hint,
   "page-header": d_page_header,
   "pagination": d_pagination,
   "password-input": d_password_input,

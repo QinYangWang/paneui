@@ -46,7 +46,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "Under reduced motion the spinners and pulse rings stop, search chips fade in without scaling, and panels open without a height transition.",
+      body: "Under reduced motion the spinners stop, the live group loses its pulse ring, search chips fade in without scaling, and panels open without a height transition.",
     },
   ],
   api: [

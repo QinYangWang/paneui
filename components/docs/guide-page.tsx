@@ -12,6 +12,7 @@ import {
 } from "@/registry/base-nova/ui/breadcrumb"
 import { Button } from "@/registry/base-nova/ui/button"
 
+import { codeContent, INLINE_CODE_CLS } from "./doc-inline"
 import { DocToc, type TocEntry } from "./doc-toc"
 import { COMPONENTS_HREF, GUIDE_PAGES } from "./docs-pages"
 
@@ -36,7 +37,7 @@ export function GuideH3({ id, children }: { id: string; children: React.ReactNod
 
 /** Inline code in reading copy. */
 export function Code({ children }: { children: React.ReactNode }) {
-  return <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">{children}</code>
+  return <code className={`${INLINE_CODE_CLS} text-xs`}>{codeContent(children)}</code>
 }
 
 /** Underlined text link for reading copy (internal hrefs use next/link). */

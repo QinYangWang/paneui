@@ -53,6 +53,10 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
       body: "Store the seed when the avatar can be regenerated from the user. When the user edits it, store `{ seed, gender, selections, accessories }` from `onValueChange`. A future release of the drawing set that adds parts can change seed-only picks, so pin explicit `selections` for avatars that must never change.",
     },
     {
+      title: "Generator width",
+      body: "`AvatarGenerator` lays out by its own width, not the screen's: stacked below 36rem, preview beside the controls from there. Size it with `className` (it fills its parent up to `max-w-2xl`).",
+    },
+    {
       title: "Dark mode",
       body: "The line art is black on white faces, so the default `tint` background stays light in both themes. Use `background=\"none\"` only on light surfaces.",
     },

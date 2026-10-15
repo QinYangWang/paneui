@@ -174,8 +174,8 @@ export default function Theming() {
         </p>
         <div className="flex flex-wrap gap-2">
           {SWATCHES.map((s) => (
-            <span key={s.token} className="flex items-center gap-2 rounded-lg bg-card py-1.5 pr-2.5 pl-1.5 shadow-raised">
-              <span className={`block size-5 rounded-sm shadow-chip ${s.swatch}`} />
+            <span key={s.token} className="frame-lg frame-p-1.5 flex items-center gap-2 bg-card pr-2.5 shadow-raised">
+              <span className={`block size-5 rounded-inner shadow-chip ${s.swatch}`} />
               <span className="font-mono text-xs">{s.token}</span>
             </span>
           ))}

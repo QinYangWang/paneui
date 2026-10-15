@@ -9,6 +9,7 @@
 export const galleryHeights: Record<string, number> = {
   "resizable": 320,
   "tab-strip": 256,
+  "avatar-generator": 798,
   "icon-rail": 420,
   "terminal-view": 360,
   "thread-list-item": 400,

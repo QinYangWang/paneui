@@ -23,6 +23,11 @@ import { Tabs, TabsList, TabsTab } from "@/registry/base-nova/ui/tabs"
  * gesture) where hair only offers the chosen gender's styles, a strip of seed variations, and SVG
  * download / JSX copy. Layout is the two-layer inset card: tinted frame (rounded-2xl, p-1) around a
  * raised panel (rounded-inner = 14px).
+ *
+ * The layout follows the generator's own width (container queries), not the viewport, so it holds up
+ * in a narrow card on a wide screen: stacked below 36rem, preview beside the controls from there.
+ * Inside the controls, the part pickers are label-beside rows until 18rem, then two-up with the label on top;
+ * the actions stretch to fill until 24rem.
  */
 
 type AvatarGeneratorState = {
@@ -151,14 +156,14 @@ function AvatarGenerator({
   return (
     <div
       data-slot="avatar-generator"
-      className={cn("frame-2xl frame-p-1 w-full max-w-2xl bg-muted shadow-raised dark:bg-background", className)}
+      className={cn("@container/avatar-generator frame-2xl frame-p-1 w-full max-w-2xl bg-muted shadow-raised dark:bg-background", className)}
       {...props}
     >
-      <div className="grid gap-5 rounded-inner bg-card p-4 shadow-raised sm:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+      <div className="grid gap-5 rounded-inner bg-card p-4 shadow-raised @xl/avatar-generator:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] @2xl/avatar-generator:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
         <div className="flex flex-col gap-3">
           <div
             data-slot="avatar-generator-preview"
-            className="flex aspect-square items-center justify-center rounded-xl bg-secondary"
+            className="flex h-44 items-center justify-center rounded-xl bg-secondary @xl/avatar-generator:aspect-square @xl/avatar-generator:h-auto"
           >
             <GeneratedAvatar
               {...avatarOptions}
@@ -166,7 +171,11 @@ function AvatarGenerator({
               title={`Avatar for ${state.seed || "empty seed"}`}
             />
           </div>
-          <div className="flex items-center justify-between gap-1" role="group" aria-label="Variations">
+          <div
+            className="flex items-center justify-center gap-2 @xl/avatar-generator:justify-between @xl/avatar-generator:gap-0"
+            role="group"
+            aria-label="Variations"
+          >
             {Array.from({ length: VARIATIONS }, (_, i) => {
               const seed = `${state.seed}-${i + 1}`
               return (
@@ -189,7 +198,7 @@ function AvatarGenerator({
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-col gap-4">
+        <div className="@container/avatar-generator-controls flex min-w-0 flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label htmlFor={seedId} className="text-ui font-medium">
               Seed
@@ -232,7 +241,7 @@ function AvatarGenerator({
             </Tabs>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-2 gap-y-3">
+          <div className="grid gap-x-2 gap-y-2 @2xs/avatar-generator-controls:grid-cols-2 @2xs/avatar-generator-controls:gap-y-3">
             {PICKERS.map(({ slot, label }) => {
               const parts = getAvatarParts(slot, state.gender)
               const items = (() => {
@@ -250,7 +259,10 @@ function AvatarGenerator({
               })()
               const value = slot === "glasses" ? glassesValue : (state.selections[slot] ?? FROM_SEED)
               return (
-                <div key={slot} className="flex min-w-0 flex-col gap-1.5">
+                <div
+                  key={slot}
+                  className="grid min-w-0 grid-cols-[4rem_minmax(0,1fr)] items-center gap-2 @2xs/avatar-generator-controls:flex @2xs/avatar-generator-controls:flex-col @2xs/avatar-generator-controls:items-stretch @2xs/avatar-generator-controls:gap-1.5"
+                >
                   <span className="text-ui-sm text-muted-foreground">{label}</span>
                   <Select items={items} value={value} onValueChange={(v) => setPart(slot, String(v))}>
                     <SelectTrigger size="sm" aria-label={label} className="min-w-0">
@@ -270,11 +282,11 @@ function AvatarGenerator({
           </div>
 
           <div className="mt-auto flex flex-wrap justify-end gap-2 pt-1">
-            <Button variant="outline" onClick={download}>
+            <Button variant="outline" onClick={download} className="grow @sm/avatar-generator-controls:grow-0">
               <DownloadIcon />
               Download SVG
             </Button>
-            <Button onClick={copy} aria-live="polite">
+            <Button onClick={copy} aria-live="polite" className="grow @sm/avatar-generator-controls:grow-0">
               {copied ? <CheckIcon /> : <CopyIcon />}
               {copied ? "Copied" : "Copy code"}
             </Button>

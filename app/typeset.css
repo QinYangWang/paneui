@@ -285,6 +285,13 @@
       font-size: 0.85em;
       border-radius: min(calc(var(--radius, 0.5em) * 0.6), 0.35em);
       padding: 0.125em 0.3em;
+      /* A wrapped chip keeps its padding, background and radius on every line. */
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      /* Docs prose keeps tokens like --radius or text-ui-* on one line (no break at a
+         hyphen); other presets wrap, and anything too long still breaks rather than overflow. */
+      white-space: var(--typeset-code-wrap, normal);
+      overflow-wrap: anywhere;
     }
 
     /* Code blocks. */
@@ -516,6 +523,7 @@
     --typeset-size: 14px;
     --typeset-leading: 1.7;
     --typeset-flow: 1em;
+    --typeset-code-wrap: nowrap;
   }
   /* Articles and blog posts. */
   .typeset-reading {

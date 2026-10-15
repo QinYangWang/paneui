@@ -15,7 +15,7 @@
   --color-background: var(--background);
   --color-code: var(--code);
   --color-foreground: var(--foreground);
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   --font-mono:
     var(--font-jetbrains-mono, "JetBrains Mono"), "JetBrains Mono", "SF Mono", "SFMono-Regular", Menlo,
     Consolas, "Liberation Mono", monospace;
@@ -157,8 +157,7 @@
   --skeuo-primary: 0 1px 2px oklch(0% 0 0 / 8%);
   --skeuo-well: inset 0 0 0 1px oklch(0% 0 0 / 8%);
   --skeuo-surface:
-    0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 4%), 0 4px 4px oklch(0% 0 0 / 2%),
-    0 12px 28px -8px oklch(0% 0 0 / 10%);
+    0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 2px oklch(0% 0 0 / 6%), 0 4px 10px -4px oklch(0% 0 0 / 8%);
   --skeuo-chip: 0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%);
 }
 
@@ -210,8 +209,7 @@
   --skeuo-primary: 0 0 0 0 transparent;
   --skeuo-well: inset 0 0 0 1px oklch(100% 0 0 / 12%);
   --skeuo-surface:
-    0 0 0 1px oklch(100% 0 0 / 10%), 0 1px 1px oklch(0% 0 0 / 14%), 0 4px 4px oklch(0% 0 0 / 10%),
-    0 16px 40px -12px oklch(0% 0 0 / 50%);
+    0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 2px oklch(0% 0 0 / 18%), 0 4px 12px -4px oklch(0% 0 0 / 36%);
   --skeuo-chip: 0 0 0 1px oklch(100% 0 0 / 10%);
 }
 

@@ -1,5 +1,48 @@
 import * as React from "react"
 
+/** Tokens up to this length never break inside; longer ones (URLs, paths) may wrap anywhere. */
+const NOWRAP_MAX = 32
+
+/**
+ * Inline code chip classes. `box-decoration-clone` gives every line fragment its own padding,
+ * background and radius, so a chip that does wrap stays whole on both lines. `whitespace-normal`
+ * overrides the typeset rule, since tokens here get their own nowrap spans.
+ */
+export const INLINE_CODE_CLS =
+  "box-decoration-clone rounded-md bg-muted px-1.5 py-0.5 font-mono whitespace-normal text-foreground wrap-anywhere"
+
+/** Flattens string/number children to text, or returns null when they hold elements. */
+function textOf(children: React.ReactNode): string | null {
+  let out = ""
+  for (const c of React.Children.toArray(children)) {
+    if (typeof c === "string" || typeof c === "number") out += c
+    else return null
+  }
+  return out
+}
+
+/**
+ * Inline code content with no break inside a short token. Browsers may wrap at a hyphen,
+ * which split `text-muted-foreground` as `text-muted-` / `foreground` and left a dangling `-`
+ * at a line edge. Each whitespace-separated token up to NOWRAP_MAX characters is kept on one
+ * line; the spaces between tokens stay the only break points.
+ */
+export function codeContent(children: React.ReactNode): React.ReactNode {
+  const text = textOf(children)
+  if (text == null) return children
+  const parts = text.split(/(\s+)/)
+  if (parts.length === 1) return text.length <= NOWRAP_MAX ? <span className="whitespace-nowrap">{text}</span> : text
+  return parts.map((part, i) =>
+    part === "" || /^\s+$/.test(part) || part.length > NOWRAP_MAX ? (
+      part
+    ) : (
+      <span key={i} className="whitespace-nowrap">
+        {part}
+      </span>
+    ),
+  )
+}
+
 /** Renders `code` spans and [text](href) links in hand-written doc strings. */
 export function Inline({ text }: { text: string }) {
   const parts: React.ReactNode[] = []
@@ -10,8 +53,8 @@ export function Inline({ text }: { text: string }) {
     if (m.index > last) parts.push(text.slice(last, m.index))
     if (m[1] != null)
       parts.push(
-        <code key={m.index} className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground">
-          {m[1]}
+        <code key={m.index} className={`${INLINE_CODE_CLS} text-sm`}>
+          {codeContent(m[1])}
         </code>,
       )
     else

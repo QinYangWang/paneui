@@ -242,6 +242,25 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
 const PANEL =
   "h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none"
 
+/**
+ * Live halo on a group icon. It grows to 1.5x (5px past the 20px icon), which
+ * stays inside the stream's left inset, so the ring is never cut by the
+ * panel's overflow clip. Reduced motion shows no halo.
+ */
+function PulseRing() {
+  const reduce = useReducedMotion()
+  if (reduce) return null
+  return (
+    <motion.span
+      aria-hidden
+      className="pointer-events-none absolute inset-0 rounded-full bg-primary/20"
+      initial={{ scale: 1, opacity: 0.9 }}
+      animate={{ scale: 1.5, opacity: 0 }}
+      transition={{ duration: 1.2, ease: "easeOut", repeat: Infinity }}
+    />
+  )
+}
+
 function ActivityGroupView({
   group,
   open,
@@ -269,7 +288,7 @@ function ActivityGroupView({
           )}
         >
           <Icon />
-          {group.active ? <span className="absolute inset-0 animate-ping rounded-full bg-primary/20 motion-reduce:animate-none" /> : null}
+          {group.active ? <PulseRing /> : null}
         </span>
         {group.active ? (
           <TextShimmer className="truncate font-medium">{label}</TextShimmer>
@@ -406,7 +425,10 @@ function AgentActivity({
         ) : null}
       </CollapsiblePrimitive.Trigger>
 
-      <CollapsiblePrimitive.Panel className={PANEL}>
+      {/* The panel clips for its height transition. Pull its box 6px left (the
+          header's own -ml-1.5) and pad it back, so the group triggers' hover
+          fill, focus rings and live halos have room inside the clip. */}
+      <CollapsiblePrimitive.Panel className={cn(PANEL, "-ml-1.5 pl-1.5")}>
         <ol aria-label="Agent activity" className="flex flex-col pt-1.5 pl-0.5">
           {groups.map((group, i) => (
             <ActivityGroupView
