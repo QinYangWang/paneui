@@ -156,6 +156,22 @@ import MenuListDemo from "@/registry/base-nova/examples/menu-list-demo"
 import SwatchPickerDemo from "@/registry/base-nova/examples/swatch-picker-demo"
 import NotionEditorDemo from "@/registry/base-nova/examples/notion-editor-demo"
 import EmailEditorDemo from "@/registry/base-nova/examples/email-editor-demo"
+import AlertDialogDemo from "@/registry/base-nova/examples/alert-dialog-demo"
+import CommandDemo from "@/registry/base-nova/examples/command-demo"
+import CalendarDemo from "@/registry/base-nova/examples/calendar-demo"
+import DatePickerDemo from "@/registry/base-nova/examples/date-picker-demo"
+import ProgressDemo from "@/registry/base-nova/examples/progress-demo"
+import SkeletonDemo from "@/registry/base-nova/examples/skeleton-demo"
+import SeparatorDemo from "@/registry/base-nova/examples/separator-demo"
+import KbdDemo from "@/registry/base-nova/examples/kbd-demo"
+import InputOTPDemo from "@/registry/base-nova/examples/input-otp-demo"
+import InputGroupDemo from "@/registry/base-nova/examples/input-group-demo"
+import ButtonGroupDemo from "@/registry/base-nova/examples/button-group-demo"
+import NativeSelectDemo from "@/registry/base-nova/examples/native-select-demo"
+import MenubarDemo from "@/registry/base-nova/examples/menubar-demo"
+import NavigationMenuDemo from "@/registry/base-nova/examples/navigation-menu-demo"
+import CarouselDemo from "@/registry/base-nova/examples/carousel-demo"
+import HoverCardDemo from "@/registry/base-nova/examples/hover-card-demo"
 
 
 const SaasPreview = () => <TemplatePreview name="saas" />
@@ -324,4 +340,20 @@ export const demos: Record<string, React.ComponentType> = {
   "swatch-picker": SwatchPickerDemo,
   "notion-editor": NotionEditorDemo,
   "email-editor": EmailEditorDemo,
+  "alert-dialog": AlertDialogDemo,
+  "command": CommandDemo,
+  "calendar": CalendarDemo,
+  "date-picker": DatePickerDemo,
+  "progress": ProgressDemo,
+  "skeleton": SkeletonDemo,
+  "separator": SeparatorDemo,
+  "kbd": KbdDemo,
+  "input-otp": InputOTPDemo,
+  "input-group": InputGroupDemo,
+  "button-group": ButtonGroupDemo,
+  "native-select": NativeSelectDemo,
+  "menubar": MenubarDemo,
+  "navigation-menu": NavigationMenuDemo,
+  "carousel": CarouselDemo,
+  "hover-card": HoverCardDemo,
 }

@@ -7,6 +7,9 @@
  * a small one-time shift.
  */
 export const galleryHeights: Record<string, number> = {
+  "command": 336,
+  "calendar": 348,
+  "carousel": 284,
   "resizable": 320,
   "tab-strip": 256,
   "avatar-generator": 798,

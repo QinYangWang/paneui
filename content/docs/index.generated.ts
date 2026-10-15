@@ -11,6 +11,7 @@ import d_agent_progress from "./agent-progress"
 import d_agent_workspace from "./agent-workspace"
 import d_ai_sidebar from "./ai-sidebar"
 import d_alert from "./alert"
+import d_alert_dialog from "./alert-dialog"
 import d_animated_number from "./animated-number"
 import d_animated_sidebar from "./animated-sidebar"
 import d_app_shell from "./app-shell"
@@ -22,18 +23,23 @@ import d_bar_list from "./bar-list"
 import d_bottom_sheet from "./bottom-sheet"
 import d_breadcrumb from "./breadcrumb"
 import d_button from "./button"
+import d_button_group from "./button-group"
 import d_button_stateful from "./button-stateful"
+import d_calendar from "./calendar"
 import d_candlestick_chart from "./candlestick-chart"
 import d_card from "./card"
+import d_carousel from "./carousel"
 import d_chart_utils from "./chart-utils"
 import d_checkbox from "./checkbox"
 import d_citations from "./citations"
 import d_collapsible from "./collapsible"
 import d_color_picker from "./color-picker"
 import d_combobox from "./combobox"
+import d_command from "./command"
 import d_composition_chart from "./composition-chart"
 import d_context_menu from "./context-menu"
 import d_data_table from "./data-table"
+import d_date_picker from "./date-picker"
 import d_date_range_picker from "./date-range-picker"
 import d_dialog from "./dialog"
 import d_digit_swap from "./digit-swap"
@@ -50,22 +56,29 @@ import d_file_tree from "./file-tree"
 import d_funnel_chart from "./funnel-chart"
 import d_heat_calendar from "./heat-calendar"
 import d_hold_action_button from "./hold-action-button"
+import d_hover_card from "./hover-card"
 import d_icon_chip from "./icon-chip"
 import d_icon_rail from "./icon-rail"
 import d_image_generation from "./image-generation"
 import d_input from "./input"
+import d_input_group from "./input-group"
+import d_input_otp from "./input-otp"
+import d_kbd from "./kbd"
 import d_label from "./label"
 import d_loader from "./loader"
 import d_magnetic from "./magnetic"
 import d_marquee from "./marquee"
 import d_menu from "./menu"
 import d_menu_list from "./menu-list"
+import d_menubar from "./menubar"
 import d_message from "./message"
 import d_message_bubble from "./message-bubble"
 import d_message_scroller from "./message-scroller"
 import d_model_picker from "./model-picker"
 import d_morphing_modal from "./morphing-modal"
 import d_multi_select from "./multi-select"
+import d_native_select from "./native-select"
+import d_navigation_menu from "./navigation-menu"
 import d_notion_editor from "./notion-editor"
 import d_number_ticker from "./number-ticker"
 import d_overflow_hint from "./overflow-hint"
@@ -75,6 +88,7 @@ import d_password_input from "./password-input"
 import d_popover from "./popover"
 import d_popover_morph from "./popover-morph"
 import d_preview_rail from "./preview-rail"
+import d_progress from "./progress"
 import d_pull_to_refresh from "./pull-to-refresh"
 import d_radio from "./radio"
 import d_range_slider_inline from "./range-slider-inline"
@@ -87,9 +101,11 @@ import d_scroll_to from "./scroll-to"
 import d_segmented_control from "./segmented-control"
 import d_select from "./select"
 import d_select_morph from "./select-morph"
+import d_separator from "./separator"
 import d_settings_section from "./settings-section"
 import d_shader_background from "./shader-background"
 import d_shared_layout_bg from "./shared-layout-bg"
+import d_skeleton from "./skeleton"
 import d_slide_action_button from "./slide-action-button"
 import d_slider from "./slider"
 import d_smooth_scroll from "./smooth-scroll"
@@ -143,6 +159,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "agent-workspace": d_agent_workspace,
   "ai-sidebar": d_ai_sidebar,
   "alert": d_alert,
+  "alert-dialog": d_alert_dialog,
   "animated-number": d_animated_number,
   "animated-sidebar": d_animated_sidebar,
   "app-shell": d_app_shell,
@@ -154,18 +171,23 @@ export const docsContent: Record<string, ComponentDoc> = {
   "bottom-sheet": d_bottom_sheet,
   "breadcrumb": d_breadcrumb,
   "button": d_button,
+  "button-group": d_button_group,
   "button-stateful": d_button_stateful,
+  "calendar": d_calendar,
   "candlestick-chart": d_candlestick_chart,
   "card": d_card,
+  "carousel": d_carousel,
   "chart-utils": d_chart_utils,
   "checkbox": d_checkbox,
   "citations": d_citations,
   "collapsible": d_collapsible,
   "color-picker": d_color_picker,
   "combobox": d_combobox,
+  "command": d_command,
   "composition-chart": d_composition_chart,
   "context-menu": d_context_menu,
   "data-table": d_data_table,
+  "date-picker": d_date_picker,
   "date-range-picker": d_date_range_picker,
   "dialog": d_dialog,
   "digit-swap": d_digit_swap,
@@ -182,22 +204,29 @@ export const docsContent: Record<string, ComponentDoc> = {
   "funnel-chart": d_funnel_chart,
   "heat-calendar": d_heat_calendar,
   "hold-action-button": d_hold_action_button,
+  "hover-card": d_hover_card,
   "icon-chip": d_icon_chip,
   "icon-rail": d_icon_rail,
   "image-generation": d_image_generation,
   "input": d_input,
+  "input-group": d_input_group,
+  "input-otp": d_input_otp,
+  "kbd": d_kbd,
   "label": d_label,
   "loader": d_loader,
   "magnetic": d_magnetic,
   "marquee": d_marquee,
   "menu": d_menu,
   "menu-list": d_menu_list,
+  "menubar": d_menubar,
   "message": d_message,
   "message-bubble": d_message_bubble,
   "message-scroller": d_message_scroller,
   "model-picker": d_model_picker,
   "morphing-modal": d_morphing_modal,
   "multi-select": d_multi_select,
+  "native-select": d_native_select,
+  "navigation-menu": d_navigation_menu,
   "notion-editor": d_notion_editor,
   "number-ticker": d_number_ticker,
   "overflow-hint": d_overflow_hint,
@@ -207,6 +236,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "popover": d_popover,
   "popover-morph": d_popover_morph,
   "preview-rail": d_preview_rail,
+  "progress": d_progress,
   "pull-to-refresh": d_pull_to_refresh,
   "radio": d_radio,
   "range-slider-inline": d_range_slider_inline,
@@ -219,9 +249,11 @@ export const docsContent: Record<string, ComponentDoc> = {
   "segmented-control": d_segmented_control,
   "select": d_select,
   "select-morph": d_select_morph,
+  "separator": d_separator,
   "settings-section": d_settings_section,
   "shader-background": d_shader_background,
   "shared-layout-bg": d_shared_layout_bg,
+  "skeleton": d_skeleton,
   "slide-action-button": d_slide_action_button,
   "slider": d_slider,
   "smooth-scroll": d_smooth_scroll,
