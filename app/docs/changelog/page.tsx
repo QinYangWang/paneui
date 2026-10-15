@@ -8,6 +8,21 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-scroll-area",
+    date: "October 15, 2026",
+    title: "Scroll area, smoother loaders and a compact tool approval",
+    tag: "Components",
+    changes: [
+      <>
+        New <Code>scroll-area</Code> keeps thin scrollbars inside rounded frames. Table, code block, pull to refresh,
+        smooth scroll and scroll progress use it.
+      </>,
+      <>Loader runs on CSS keyframes and loops without a jump. Text shimmer has a brighter band.</>,
+      <>Tool approval is a single request row that folds into a result line.</>,
+      <>Data table and availability scheduler lay out by their own width.</>,
+    ],
+  },
+  {
     id: "2026-10-15-app-shell",
     date: "October 15, 2026",
     title: "App shell, overflow hints and real block drag",

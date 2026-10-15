@@ -28,6 +28,10 @@ export default {
       body: "Both variants are a `role=\"progressbar\"` with `aria-valuenow` from 0 to 100, kept in step without re-rendering. Name it with `label`. Under reduced motion the spring follow is off.",
     },
     {
+      title: "Inside a frame",
+      body: "A `sticky` bar takes no room in the flow: it overlays the content's edge, inset from the frame like the scrollbars, and its ends follow the frame's corners (radius less the inset), so it never runs past a rounded edge.",
+    },
+    {
       title: "Related",
       body: "Reads [Smooth Scroll](/docs/smooth-scroll) by default. See also [Scroll To](/docs/scroll-to), [Scroll Reveal](/docs/scroll-reveal).",
     },
@@ -50,6 +54,11 @@ export default {
           description: "Bar only. `fixed` for the page, `sticky` inside a scroll container, `absolute` inside a relative box.",
         },
         { name: "thickness", type: "number", default: "3", description: "Bar height or ring stroke width in px." },
+        {
+          name: "inset",
+          type: "number",
+          description: "Bar only. Gap in px from the container's edges. A `sticky` bar defaults to its scroll area's scrollbar inset (4px) and bends with the frame's rounded corners; other positions default to 0.",
+        },
         { name: "size", type: "number", default: "44", description: "Ring only. Diameter in px." },
         { name: "showValue", type: "boolean", default: "false", description: "Ring only. Show the percentage in the middle." },
       ],

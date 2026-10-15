@@ -433,12 +433,16 @@ function EditableTable({
             </MenuItem>
           </MenuContent>
         </Menu>
-        <InsertPill
-          data-insert-col
-          label={`Insert column after ${ctx.column.header}`}
-          onClick={() => insertColumn(index + 1)}
-          className="top-1/2 -right-2 -translate-y-1/2 group-hover/header:scale-100 group-hover/header:opacity-100"
-        />
+        {/* On the last column the pill would hang past the table and add horizontal
+            scroll; "Insert right" in the menu appends there instead. */}
+        {index < columns.length - 1 ? (
+          <InsertPill
+            data-insert-col
+            label={`Insert column after ${ctx.column.header}`}
+            onClick={() => insertColumn(index + 1)}
+            className="top-1/2 -right-2 -translate-y-1/2 group-hover/header:scale-100 group-hover/header:opacity-100"
+          />
+        ) : null}
       </>
     )
   }

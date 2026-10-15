@@ -10,10 +10,11 @@ const REMEMBER_KEY = "docs-tool-approval-weather"
 export default function ToolApprovalRemembered() {
   const [decision, setDecision] = React.useState<ToolApprovalDecision | null>(null)
   return (
-    <div className="flex w-full max-w-md flex-col gap-3">
+    <div className="flex w-full max-w-md flex-col gap-2">
       <ToolApproval
         tool="weather.forecast"
         title="Check the weather?"
+        description="Hong Kong, next three days."
         risk="low"
         rememberKey={REMEMBER_KEY}
         args={{ city: "Hong Kong", days: 3 }}

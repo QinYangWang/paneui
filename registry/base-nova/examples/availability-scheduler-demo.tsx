@@ -33,7 +33,7 @@ export default function AvailabilitySchedulerDemo() {
   )
   return (
     <div className="flex w-full max-w-xl flex-col gap-3">
-      <div className="flex items-baseline justify-between px-1">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 px-1">
         <p className="text-sm font-medium">Office hours</p>
         <p className="text-xs text-muted-foreground tabular-nums">{hours.toFixed(1)} h / week · Asia/Taipei</p>
       </div>

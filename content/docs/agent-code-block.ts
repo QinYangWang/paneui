@@ -39,6 +39,10 @@ export default {
   ],
   notes: [
     {
+      title: "Scrollbars",
+      body: "The code area scrolls in a [Scroll Area](/docs/scroll-area) on both axes, below the header and inside the rounded frame.",
+    },
+    {
       title: "Streaming",
       body: "While `streaming`, the block follows the newest line unless the reader scrolls away, and keeps already-coloured tokens so lines never flash back to plain text.",
     },

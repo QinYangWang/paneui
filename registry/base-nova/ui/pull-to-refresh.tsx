@@ -6,12 +6,13 @@ import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 
 import { RefreshIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { Loader } from "@/registry/base-nova/ui/loader"
+import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 
 type PullToRefreshStatus = "idle" | "pulling" | "ready" | "refreshing"
 
 const SETTLE = { type: "spring", stiffness: 420, damping: 38, mass: 0.6 } as const
 
-type PullToRefreshProps = Omit<React.ComponentProps<"div">, "children"> & {
+type PullToRefreshProps = Omit<React.ComponentProps<"div">, "children" | "dir"> & {
   children: React.ReactNode
   /** Runs once the pull passes the threshold and is released. Await it to hold the spinner. */
   onRefresh: () => void | Promise<void>
@@ -29,7 +30,7 @@ type PullToRefreshProps = Omit<React.ComponentProps<"div">, "children"> & {
   refreshingLabel?: React.ReactNode
   /** Called whenever the gesture status changes. */
   onStatusChange?: (status: PullToRefreshStatus) => void
-  /** Classes for the inner scrolling element. */
+  /** Classes for the content that moves with the pull. */
   contentClassName?: string
 }
 
@@ -208,73 +209,77 @@ function PullToRefresh({
   const text = busy ? refreshingLabel : ready ? releaseLabel : pullingLabel
 
   return (
-    <div
+    <ScrollArea
       data-slot="pull-to-refresh"
       data-status={status}
       aria-busy={busy || undefined}
-      className={cn("relative isolate overflow-hidden", className)}
+      viewportRef={scrollRef}
+      viewportClassName="overscroll-y-contain bg-inherit [-webkit-touch-callout:none]"
+      className={cn("isolate", className)}
       {...props}
     >
-      {/* Indicator sits in the gap the content opens up. */}
-      <motion.div
-        aria-hidden
-        data-slot="pull-to-refresh-indicator"
-        style={{ y: indicatorY, opacity: busy ? 1 : indicatorOpacity }}
-        className="pointer-events-none absolute inset-x-0 top-0 z-0 flex items-center justify-center gap-2 pt-2"
-      >
-        <motion.span
-          animate={reduce ? undefined : { scale: ready ? 1.1 : 1 }}
-          transition={{ type: "spring", stiffness: 500, damping: 18, mass: 0.5 }}
+      {/* Clips the pulled content so the pull never grows the scroll range. */}
+      <div className="relative min-h-full overflow-clip bg-inherit">
+        {/* Indicator sits in the gap the content opens up. */}
+        <motion.div
+          aria-hidden
+          data-slot="pull-to-refresh-indicator"
+          style={{ y: indicatorY, opacity: busy ? 1 : indicatorOpacity }}
+          className="pointer-events-none absolute inset-x-0 top-0 z-0 flex items-center justify-center gap-2 pt-2"
+        >
+          <motion.span
+            animate={reduce ? undefined : { scale: ready ? 1.1 : 1 }}
+            transition={{ type: "spring", stiffness: 500, damping: 18, mass: 0.5 }}
+            className={cn(
+              "relative flex size-9 items-center justify-center rounded-full shadow-raised transition-colors duration-200",
+              ready || busy ? "bg-primary text-primary-foreground shadow-primary" : "bg-card text-muted-foreground"
+            )}
+          >
+            {busy ? (
+              <Loader variant="ring" size="sm" label="Refreshing" />
+            ) : (
+              <>
+                <svg viewBox="0 0 36 36" className="absolute inset-0 size-full -rotate-90">
+                  <motion.circle
+                    cx={18}
+                    cy={18}
+                    r={15}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeOpacity={0.35}
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    pathLength={1}
+                    strokeDasharray="1 1"
+                    style={{ strokeDashoffset: ringOffset }}
+                  />
+                </svg>
+                <motion.span style={reduce ? undefined : { rotate: arrowRotate }} className="flex">
+                  <RefreshIcon className="size-4" />
+                </motion.span>
+              </>
+            )}
+          </motion.span>
+          <span className="text-ui-sm font-medium text-muted-foreground">{text}</span>
+        </motion.div>
+
+        <motion.div
+          data-slot="pull-to-refresh-content"
+          style={{ y }}
           className={cn(
-            "relative flex size-9 items-center justify-center rounded-full shadow-raised transition-colors duration-200",
-            ready || busy ? "bg-primary text-primary-foreground shadow-primary" : "bg-card text-muted-foreground"
+            "relative z-10 bg-inherit",
+            status === "pulling" || status === "ready" ? "select-none" : undefined,
+            contentClassName
           )}
         >
-          {busy ? (
-            <Loader variant="ring" size="sm" label="Refreshing" />
-          ) : (
-            <>
-              <svg viewBox="0 0 36 36" className="absolute inset-0 size-full -rotate-90">
-                <motion.circle
-                  cx={18}
-                  cy={18}
-                  r={15}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeOpacity={0.35}
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  pathLength={1}
-                  strokeDasharray="1 1"
-                  style={{ strokeDashoffset: ringOffset }}
-                />
-              </svg>
-              <motion.span style={reduce ? undefined : { rotate: arrowRotate }} className="flex">
-                <RefreshIcon className="size-4" />
-              </motion.span>
-            </>
-          )}
-        </motion.span>
-        <span className="text-ui-sm font-medium text-muted-foreground">{text}</span>
-      </motion.div>
+          {children}
+        </motion.div>
+      </div>
 
       <span role="status" aria-live="polite" className="sr-only">
         {busy ? refreshingLabel : ""}
       </span>
-
-      <motion.div
-        ref={scrollRef}
-        data-slot="pull-to-refresh-content"
-        style={{ y }}
-        className={cn(
-          "relative z-10 h-full overflow-y-auto overscroll-y-contain bg-inherit [-webkit-touch-callout:none]",
-          status === "pulling" || status === "ready" ? "select-none" : undefined,
-          contentClassName
-        )}
-      >
-        {children}
-      </motion.div>
-    </div>
+    </ScrollArea>
   )
 }
 

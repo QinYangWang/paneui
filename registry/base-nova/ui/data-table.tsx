@@ -197,6 +197,38 @@ function DataTable<T>({
     return data.filter((_, i) => set.has(ids[i]))
   }, [data, ids, selected])
 
+  /* toolbar: facets fold into one menu when they can't share a row -------- */
+  const toolbarRef = React.useRef<HTMLDivElement>(null)
+  const searchRef = React.useRef<HTMLDivElement>(null)
+  const facetsRef = React.useRef<HTMLDivElement>(null)
+  const endRef = React.useRef<HTMLDivElement>(null)
+  const facetsWidth = React.useRef(0)
+  const [collapsed, setCollapsed] = React.useState(false)
+  const measure = React.useCallback(() => {
+    const bar = toolbarRef.current
+    if (!bar) return
+    if (facetsRef.current) facetsWidth.current = facetsRef.current.scrollWidth
+    const gap = parseFloat(getComputedStyle(bar).columnGap) || 0
+    const search = searchRef.current
+    // Search shares the row from the container breakpoint on; below it, it takes a row of its own.
+    const sharesRow = !!search && search.offsetWidth < bar.clientWidth - 1
+    const room = bar.clientWidth - (sharesRow ? parseFloat(getComputedStyle(search).minWidth) + gap : 0)
+    const end = endRef.current?.scrollWidth ?? 0
+    setCollapsed(facetsWidth.current + (end ? gap + end : 0) > room + 0.5)
+  }, [])
+  React.useLayoutEffect(() => {
+    const bar = toolbarRef.current
+    if (!bar) return
+    measure()
+    const observer = new ResizeObserver(() => measure())
+    observer.observe(bar)
+    return () => observer.disconnect()
+  }, [measure])
+  // Facet labels change width with their counts and the Reset button.
+  React.useLayoutEffect(() => {
+    if (!collapsed) measure()
+  }, [collapsed, measure, active, filtering, hidden])
+
   const isEmpty = data.length === 0
   const height = HEADER + (pageRows.length ? pageRows.length * rowHeight : EMPTY_HEIGHT)
 
@@ -221,13 +253,33 @@ function DataTable<T>({
         </EmptyState>
       )
 
+  const facetProps = (f: DataTableFilter<T>): FacetProps<T> => ({
+    filter: f,
+    data,
+    value: active[f.key] ?? [],
+    onValueChange: (v: string[]) => {
+      setActive((a) => ({ ...a, [f.key]: v }))
+      setPage(1)
+    },
+  })
+  const activeFilterCount = Object.values(active).reduce((n, v) => n + v.length, 0)
+
   return (
-    <div data-slot="data-table" className={cn("flex min-w-0 flex-col gap-3", className)}>
+    <div data-slot="data-table" className={cn("@container/data-table flex min-w-0 flex-col gap-3", className)}>
       {/* Toolbar ------------------------------------------------------------ */}
-      <div data-slot="data-table-toolbar" className="flex flex-wrap items-center gap-2">
+      <div
+        ref={toolbarRef}
+        data-slot="data-table-toolbar"
+        data-filters={collapsed ? "menu" : "inline"}
+        className="flex flex-wrap items-center gap-2"
+      >
         {searchText !== false && (
-          <div className="relative w-full sm:w-64">
-            <SearchIcon aria-hidden className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+          <div
+            ref={searchRef}
+            data-slot="data-table-search"
+            className="relative basis-full @[40rem]/data-table:max-w-64 @[40rem]/data-table:min-w-40 @[40rem]/data-table:flex-1 @[40rem]/data-table:basis-0"
+          >
+            <SearchIcon aria-hidden className="pointer-events-none absolute top-1/2 left-2.5 size-3.5 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
               value={query}
@@ -237,29 +289,25 @@ function DataTable<T>({
               }}
               placeholder={searchPlaceholder}
               aria-label={searchPlaceholder.replace(/…$/, "")}
-              className="pl-8"
+              className="h-7 pl-7.5"
             />
           </div>
         )}
-        {filters.map((f) => (
-          <DataTableFacet
-            key={f.key}
-            filter={f}
-            data={data}
-            value={active[f.key] ?? []}
-            onValueChange={(v) => {
-              setActive((a) => ({ ...a, [f.key]: v }))
-              setPage(1)
-            }}
-          />
-        ))}
-        {filtering && (
-          <Button variant="ghost" size="sm" onClick={resetFilters}>
-            Reset
-            <XIcon data-icon="inline-end" />
-          </Button>
+        {filters.length > 0 && collapsed && <DataTableFilterMenu filters={filters} facet={facetProps} count={activeFilterCount} onClear={resetFilters} />}
+        {(filters.length > 0 || filtering) && !collapsed && (
+          <div ref={facetsRef} data-slot="data-table-filters" className="flex shrink-0 items-center gap-2">
+            {filters.map((f) => (
+              <DataTableFacet key={f.key} {...facetProps(f)} />
+            ))}
+            {filtering && (
+              <Button variant="ghost" size="sm" onClick={resetFilters}>
+                Reset
+                <XIcon data-icon="inline-end" />
+              </Button>
+            )}
+          </div>
         )}
-        <div className="ml-auto flex items-center gap-2">
+        <div ref={endRef} className="ml-auto flex shrink-0 items-center gap-2">
           {toolbar}
           {hideableColumns.length > 0 && (
             <Menu>
@@ -335,9 +383,9 @@ function DataTable<T>({
 
       {/* Footer ------------------------------------------------------------- */}
       {!isEmpty && (
-        <div data-slot="data-table-footer" className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-1">
+        <div data-slot="data-table-footer" className="flex items-center justify-between gap-4 px-1">
           <PaginationSummary page={current} pageSize={pageSize} total={sorted.length} noun={noun} />
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center gap-4">
             <PaginationPageSize
               value={pageSize}
               options={pageSizeOptions}
@@ -345,9 +393,10 @@ function DataTable<T>({
                 setPageSize(s)
                 setPage(1)
               }}
-              className="max-sm:hidden"
+              className="hidden @[36rem]/data-table:flex"
             />
-            <Pagination page={current} pageCount={pageCount} onPageChange={setPage} />
+            <Pagination page={current} pageCount={pageCount} onPageChange={setPage} className="hidden @[28rem]/data-table:flex" />
+            <Pagination page={current} pageCount={pageCount} onPageChange={setPage} compact className="@[28rem]/data-table:hidden" />
           </div>
         </div>
       )}
@@ -355,23 +404,46 @@ function DataTable<T>({
   )
 }
 
-/** Multi-select filter button with counts per option. */
-function DataTableFacet<T>({
-  filter,
-  data,
-  value,
-  onValueChange,
-}: {
+type FacetProps<T> = {
   filter: DataTableFilter<T>
   data: readonly T[]
   value: string[]
   onValueChange: (value: string[]) => void
-}) {
+}
+
+function FacetCount({ children }: { children: React.ReactNode }) {
+  return <span className="-mr-0.5 rounded-full bg-primary/14 px-1.5 text-ui-xs leading-4.5 font-medium text-primary tabular-nums">{children}</span>
+}
+
+/** One filter's options as checkbox rows, each with its row count. */
+function FacetOptions<T>({ filter, data, value, onValueChange }: FacetProps<T>) {
   const counts = React.useMemo(() => {
     const m = new Map<string, number>()
     for (const row of data) for (const v of readFilterValue(row, filter)) m.set(v, (m.get(v) ?? 0) + 1)
     return m
   }, [data, filter])
+  return (
+    <MenuGroup>
+      <MenuLabel>{filter.label}</MenuLabel>
+      {filter.options.map((o) => (
+        <MenuCheckboxItem
+          key={o.value}
+          checked={value.includes(o.value)}
+          closeOnClick={false}
+          onCheckedChange={(on) => onValueChange(on ? [...value, o.value] : value.filter((v) => v !== o.value))}
+        >
+          {o.icon}
+          <span className="flex-1 truncate">{o.label}</span>
+          <span className="text-ui-xs text-muted-foreground tabular-nums">{counts.get(o.value) ?? 0}</span>
+        </MenuCheckboxItem>
+      ))}
+    </MenuGroup>
+  )
+}
+
+/** Multi-select filter button with counts per option. */
+function DataTableFacet<T>(props: FacetProps<T>) {
+  const { filter, value, onValueChange } = props
   return (
     <Menu>
       <MenuTrigger
@@ -380,32 +452,51 @@ function DataTableFacet<T>({
       >
         <FilterIcon data-icon="inline-start" />
         {filter.label}
-        {value.length > 0 && (
-          <span className="-mr-0.5 rounded-full bg-primary/14 px-1.5 text-ui-xs leading-4.5 font-medium text-primary tabular-nums">
-            {value.length}
-          </span>
-        )}
+        {value.length > 0 && <FacetCount>{value.length}</FacetCount>}
       </MenuTrigger>
       <MenuContent className="w-52">
-        <MenuGroup>
-          <MenuLabel>{filter.label}</MenuLabel>
-          {filter.options.map((o) => (
-            <MenuCheckboxItem
-              key={o.value}
-              checked={value.includes(o.value)}
-              closeOnClick={false}
-              onCheckedChange={(on) => onValueChange(on ? [...value, o.value] : value.filter((v) => v !== o.value))}
-            >
-              {o.icon}
-              <span className="flex-1 truncate">{o.label}</span>
-              <span className="text-ui-xs text-muted-foreground tabular-nums">{counts.get(o.value) ?? 0}</span>
-            </MenuCheckboxItem>
-          ))}
-        </MenuGroup>
+        <FacetOptions {...props} />
         {value.length > 0 && (
           <>
             <MenuSeparator />
             <MenuItem onClick={() => onValueChange([])}>Clear filter</MenuItem>
+          </>
+        )}
+      </MenuContent>
+    </Menu>
+  )
+}
+
+/** Every facet in one menu, for toolbars too narrow for a button per filter. */
+function DataTableFilterMenu<T>({
+  filters,
+  facet,
+  count,
+  onClear,
+}: {
+  filters: readonly DataTableFilter<T>[]
+  facet: (f: DataTableFilter<T>) => FacetProps<T>
+  count: number
+  onClear: () => void
+}) {
+  return (
+    <Menu>
+      <MenuTrigger render={<Button variant="outline" size="sm" />} aria-label={count ? `Filters: ${count} selected` : "Filters"}>
+        <FilterIcon data-icon="inline-start" />
+        Filter
+        {count > 0 && <FacetCount>{count}</FacetCount>}
+      </MenuTrigger>
+      <MenuContent className="max-h-(--available-height) w-56">
+        {filters.map((f, i) => (
+          <React.Fragment key={f.key}>
+            {i > 0 && <MenuSeparator />}
+            <FacetOptions {...facet(f)} />
+          </React.Fragment>
+        ))}
+        {count > 0 && (
+          <>
+            <MenuSeparator />
+            <MenuItem onClick={onClear}>Clear filters</MenuItem>
           </>
         )}
       </MenuContent>

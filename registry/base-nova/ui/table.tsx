@@ -8,6 +8,7 @@ import { ChevronUpIcon, ChevronsUpDownIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { Checkbox } from "@/registry/base-nova/ui/checkbox"
 import { Loader } from "@/registry/base-nova/ui/loader"
+import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 
 /* -------------------------------------------------------------------------- */
 /*                                    Types                                   */
@@ -681,267 +682,265 @@ function Table<T>({
   }
 
   return (
-    <div
+    <ScrollArea
       data-slot="table"
-      className={cn(
-        "relative w-full overflow-hidden rounded-xl bg-card text-ui text-card-foreground shadow-raised",
-        className
-      )}
+      orientation="both"
+      viewportRef={scrollRef}
+      // The vertical track runs below the sticky header.
+      scrollbarMargin={{ top: headerHeight }}
+      viewportProps={{
+        role,
+        "aria-label": ariaLabel,
+        "aria-rowcount": rows.length + 1,
+        "aria-colcount": columns.length + leadCount,
+        "aria-multiselectable": role === "grid" && selectable ? true : undefined,
+        "aria-busy": loading || undefined,
+        tabIndex: role === "table" ? 0 : undefined,
+      }}
+      className={cn("w-full rounded-xl bg-card text-ui text-card-foreground shadow-raised", className)}
+      style={{ height }}
     >
-      <div
-        ref={scrollRef}
-        role={role}
-        aria-label={ariaLabel}
-        aria-rowcount={rows.length + 1}
-        aria-colcount={columns.length + leadCount}
-        aria-multiselectable={role === "grid" && selectable ? true : undefined}
-        aria-busy={loading || undefined}
-        tabIndex={role === "table" ? 0 : undefined}
-        className="relative overflow-auto overscroll-contain outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
-        style={{ height }}
-      >
-        <div className="relative min-w-full" style={{ width: contentWidth }}>
-          {/* Header ---------------------------------------------------------- */}
-          <div
-            ref={headerRef}
-            role="rowgroup"
-            className="sticky top-0 z-20 bg-card shadow-[0_1px_0_var(--border)]"
-            style={{ height: headerHeight }}
-          >
-            <div role="row" aria-rowindex={1} className="relative h-full">
-              {gutter ? (
-                <div role="columnheader" className="absolute inset-y-0 left-0 flex items-center justify-center" style={{ width: gutter.width }}>
-                  {gutter.header}
-                </div>
-              ) : null}
-              {selectable ? (
-                <div
-                  role="columnheader"
-                  className="absolute inset-y-0 flex items-center justify-center"
-                  style={{ left: gutter?.width ?? 0, width: SELECT_WIDTH }}
-                >
-                  <Checkbox
-                    checked={allSelected}
-                    indeterminate={someSelected && !allSelected}
-                    onCheckedChange={toggleAll}
-                    aria-label={allSelected ? "Deselect all rows" : "Select all rows"}
-                    disabled={rows.length === 0}
-                  />
-                </div>
-              ) : null}
-              {orderedColumns.map((column, colIndex) => {
-                const ctx = headerContext(column, colIndex)
-                const isDragging = drag?.active === true && drag.key === column.key
-                const canResize = resizable && column.resizable !== false
-                const width = widths[column.key] ?? 0
-                return (
-                  <div
-                    key={column.key}
-                    role="columnheader"
-                    aria-colindex={leadCount + colIndex + 1}
-                    aria-sort={column.sortable ? (ctx.sort === "asc" ? "ascending" : ctx.sort === "desc" ? "descending" : "none") : undefined}
-                    data-col-key={column.key}
-                    data-dragging={isDragging || undefined}
-                    className={cn(
-                      "group/header absolute inset-y-0 left-0 flex items-center hover:z-10 focus-within:z-10",
-                      cellMotion(column.key),
-                      isDragging && "z-30 hover:z-30 rounded-xl bg-card shadow-raised-hover",
-                      column.headerClassName
-                    )}
-                    style={{ width, transform: `translateX(${columnX(column.key)}px)` }}
-                  >
-                    {renderHeader ? (
-                      renderHeader(ctx)
-                    ) : column.sortable || reorderable ? (
-                      <button
-                        type="button"
-                        {...ctx.labelProps}
-                        aria-description={reorderable ? "Alt plus arrow keys moves the column" : undefined}
-                        className={cn(headerLabelClass, alignClass(column.align), ctx.sort && "text-foreground", !column.sortable && "cursor-default")}
-                      >
-                        <span className="truncate">{column.header}</span>
-                        {column.sortable ? <SortIndicator direction={ctx.sort} /> : null}
-                      </button>
-                    ) : (
-                      <div className={cn(headerLabelClass, alignClass(column.align))}>
-                        <span className="truncate">{column.header}</span>
-                      </div>
-                    )}
-                    {headerAccessory?.(ctx)}
-                    {canResize ? (
-                      <div
-                        role="separator"
-                        aria-orientation="vertical"
-                        aria-label={`Resize ${typeof column.header === "string" ? column.header : column.key} column`}
-                        aria-valuenow={Math.round(width)}
-                        aria-valuemin={minFor(column)}
-                        tabIndex={0}
-                        data-resizing={resizingKey === column.key || undefined}
-                        className="group/resize absolute inset-y-1 -right-1.5 z-10 flex w-3 cursor-col-resize touch-none justify-center outline-none"
-                        onPointerDown={(e) => {
-                          if (e.button !== 0) return
-                          e.preventDefault()
-                          e.stopPropagation()
-                          e.currentTarget.setPointerCapture(e.pointerId)
-                          resizeRef.current = { key: column.key, startX: e.clientX, startWidth: width }
-                          setResizingKey(column.key)
-                        }}
-                        onPointerMove={(e) => {
-                          const r = resizeRef.current
-                          if (!r) return
-                          setWidth(r.key, Math.max(minFor(column), r.startWidth + e.clientX - r.startX))
-                        }}
-                        onPointerUp={() => {
-                          const r = resizeRef.current
-                          resizeRef.current = null
-                          setResizingKey(null)
-                          if (r) onColumnResize?.(r.key, Math.round(widths[r.key] ?? r.startWidth))
-                        }}
-                        onPointerCancel={() => {
-                          resizeRef.current = null
-                          setResizingKey(null)
-                        }}
-                        onDoubleClick={() => {
-                          setWidthOverrides((prev) => {
-                            const next = { ...prev }
-                            delete next[column.key]
-                            return next
-                          })
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return
-                          e.preventDefault()
-                          const step = (e.shiftKey ? 48 : 16) * (e.key === "ArrowLeft" ? -1 : 1)
-                          const next = Math.max(minFor(column), width + step)
-                          setWidth(column.key, next)
-                          onColumnResize?.(column.key, Math.round(next))
-                        }}
-                      >
-                        <span className="h-full w-0.5 rounded-full bg-border transition-[background-color,width] duration-150 group-hover/header:bg-muted-foreground/40 group-hover/resize:w-[3px] group-hover/resize:bg-primary group-focus-visible/resize:w-[3px] group-focus-visible/resize:bg-primary group-data-resizing/resize:w-[3px] group-data-resizing/resize:bg-primary" />
-                      </div>
-                    ) : null}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* Body ------------------------------------------------------------ */}
-          <div ref={bodyRef} role="rowgroup" className="relative" style={{ height: bodyHeight }}>
-            {showSkeleton ? (
-              <div role="row" aria-busy className="absolute inset-x-0 top-0">
-                <span className="sr-only" role="status">
-                  Loading rows
-                </span>
-                {Array.from({ length: skeletonCount }, (_, i) => (
-                  <TableSkeletonRow
-                    key={i}
-                    index={i}
-                    height={rowHeight}
-                    cells={[
-                      ...(gutter ? [gutter.width] : []),
-                      ...(selectable ? [SELECT_WIDTH] : []),
-                      ...baseOrder.map((k) => widths[k] ?? DEFAULT_COLUMN_WIDTH),
-                    ]}
-                  />
-                ))}
-              </div>
-            ) : rows.length === 0 ? (
-              <div role="row" className="sticky left-0 flex h-full items-center justify-center p-8 text-ui text-muted-foreground" style={{ width: viewportWidth || "100%" }}>
-                <div role={cellRole}>{emptyState}</div>
-              </div>
-            ) : (
-              virtualItems.map((item) => {
-                const entry = sortedRows[item.index]
-                if (!entry) return null
-                const isSelected = selected.has(entry.id)
-                const rowCtx: TableRowContext<T> = {
-                  row: entry.row,
-                  rowId: entry.id,
-                  rowIndex: item.index,
-                  dataIndex: entry.dataIndex,
-                  selected: isSelected,
-                }
-                return (
-                  <div
-                    key={entry.id}
-                    role="row"
-                    aria-rowindex={item.index + 2}
-                    aria-selected={role === "grid" && selectable ? isSelected : undefined}
-                    data-row-id={entry.id}
-                    data-selected={isSelected || undefined}
-                    onClick={onRowClick ? (e) => onRowClick(rowCtx, e) : undefined}
-                    className={cn(
-                      "group/row absolute inset-x-0 top-0 border-b border-border/60 transition-colors duration-150 hover:z-10 hover:bg-muted/45 focus-within:z-10",
-                      "data-selected:bg-primary/8 data-selected:hover:bg-primary/12",
-                      animate && "transition-[transform,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                      onRowClick && "cursor-pointer",
-                      rowClassName?.(rowCtx)
-                    )}
-                    style={{ height: rowHeight, transform: `translateY(${item.start - headerHeight}px)` }}
-                  >
-                    {gutter ? (
-                      <div role={cellRole} className="absolute inset-y-0 left-0 flex items-center justify-center" style={{ width: gutter.width }}>
-                        {gutter.cell(rowCtx)}
-                      </div>
-                    ) : null}
-                    {selectable ? (
-                      <div
-                        role={cellRole}
-                        className="absolute inset-y-0 flex items-center justify-center"
-                        style={{ left: gutter?.width ?? 0, width: SELECT_WIDTH }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Checkbox
-                          checked={isSelected}
-                          onCheckedChange={(checked, details) => {
-                            const event = details.event as Partial<MouseEvent> | undefined
-                            toggleRow(item.index, checked, !!event?.shiftKey)
-                          }}
-                          aria-label={`Select row ${item.index + 1}`}
-                        />
-                      </div>
-                    ) : null}
-                    {orderedColumns.map((column, colIndex) => {
-                      const value = readValue(entry.row, column)
-                      const cellCtx: TableCellContext<T> = { ...rowCtx, column, colIndex, value }
-                      const content = column.cell ? column.cell(entry.row, cellCtx) : formatValue(value)
-                      const isDragging = drag?.active === true && drag.key === column.key
-                      return (
-                        <div
-                          key={column.key}
-                          role={cellRole}
-                          aria-colindex={leadCount + colIndex + 1}
-                          data-col-key={column.key}
-                          className={cn(
-                            "absolute inset-y-0 left-0 flex min-w-0 items-center px-3 tabular-nums",
-                            alignClass(column.align),
-                            cellMotion(column.key),
-                            isDragging && "z-20 bg-card/90 shadow-raised",
-                            column.className
-                          )}
-                          style={{ width: widths[column.key] ?? 0, transform: `translateX(${columnX(column.key)}px)` }}
-                        >
-                          {renderCell ? renderCell({ ...cellCtx, content }) : <div className="min-w-0 truncate">{content}</div>}
-                        </div>
-                      )
-                    })}
-                  </div>
-                )
-              })
-            )}
-
-            {resolvedFooter && !showSkeleton && rows.length > 0 ? (
-              <div className="absolute inset-x-0" style={{ top: totalSize, height: footerHeight }}>
-                <div data-slot="table-footer" className="sticky left-0 h-full" style={{ width: viewportWidth || "100%" }}>
-                  {resolvedFooter}
-                </div>
+      <div className="relative min-w-full" style={{ width: contentWidth }}>
+        {/* Header ---------------------------------------------------------- */}
+        <div
+          ref={headerRef}
+          role="rowgroup"
+          className="sticky top-0 z-20 bg-card shadow-[0_1px_0_var(--border)]"
+          style={{ height: headerHeight }}
+        >
+          <div role="row" aria-rowindex={1} className="relative h-full">
+            {gutter ? (
+              <div role="columnheader" className="absolute inset-y-0 left-0 flex items-center justify-center" style={{ width: gutter.width }}>
+                {gutter.header}
               </div>
             ) : null}
+            {selectable ? (
+              <div
+                role="columnheader"
+                className="absolute inset-y-0 flex items-center justify-center"
+                style={{ left: gutter?.width ?? 0, width: SELECT_WIDTH }}
+              >
+                <Checkbox
+                  checked={allSelected}
+                  indeterminate={someSelected && !allSelected}
+                  onCheckedChange={toggleAll}
+                  aria-label={allSelected ? "Deselect all rows" : "Select all rows"}
+                  disabled={rows.length === 0}
+                />
+              </div>
+            ) : null}
+            {orderedColumns.map((column, colIndex) => {
+              const ctx = headerContext(column, colIndex)
+              const isDragging = drag?.active === true && drag.key === column.key
+              const canResize = resizable && column.resizable !== false
+              const width = widths[column.key] ?? 0
+              return (
+                <div
+                  key={column.key}
+                  role="columnheader"
+                  aria-colindex={leadCount + colIndex + 1}
+                  aria-sort={column.sortable ? (ctx.sort === "asc" ? "ascending" : ctx.sort === "desc" ? "descending" : "none") : undefined}
+                  data-col-key={column.key}
+                  data-dragging={isDragging || undefined}
+                  className={cn(
+                    "group/header absolute inset-y-0 left-0 flex items-center hover:z-10 focus-within:z-10",
+                    cellMotion(column.key),
+                    isDragging && "z-30 hover:z-30 rounded-xl bg-card shadow-raised-hover",
+                    column.headerClassName
+                  )}
+                  style={{ width, transform: `translateX(${columnX(column.key)}px)` }}
+                >
+                  {renderHeader ? (
+                    renderHeader(ctx)
+                  ) : column.sortable || reorderable ? (
+                    <button
+                      type="button"
+                      {...ctx.labelProps}
+                      aria-description={reorderable ? "Alt plus arrow keys moves the column" : undefined}
+                      className={cn(headerLabelClass, alignClass(column.align), ctx.sort && "text-foreground", !column.sortable && "cursor-default")}
+                    >
+                      <span className="truncate">{column.header}</span>
+                      {column.sortable ? <SortIndicator direction={ctx.sort} /> : null}
+                    </button>
+                  ) : (
+                    <div className={cn(headerLabelClass, alignClass(column.align))}>
+                      <span className="truncate">{column.header}</span>
+                    </div>
+                  )}
+                  {headerAccessory?.(ctx)}
+                  {canResize ? (
+                    <div
+                      role="separator"
+                      aria-orientation="vertical"
+                      aria-label={`Resize ${typeof column.header === "string" ? column.header : column.key} column`}
+                      aria-valuenow={Math.round(width)}
+                      aria-valuemin={minFor(column)}
+                      tabIndex={0}
+                      data-resizing={resizingKey === column.key || undefined}
+                      className="group/resize absolute inset-y-1 -right-1.5 z-10 flex w-3 cursor-col-resize touch-none justify-center outline-none"
+                      onPointerDown={(e) => {
+                        if (e.button !== 0) return
+                        e.preventDefault()
+                        e.stopPropagation()
+                        e.currentTarget.setPointerCapture(e.pointerId)
+                        resizeRef.current = { key: column.key, startX: e.clientX, startWidth: width }
+                        setResizingKey(column.key)
+                      }}
+                      onPointerMove={(e) => {
+                        const r = resizeRef.current
+                        if (!r) return
+                        setWidth(r.key, Math.max(minFor(column), r.startWidth + e.clientX - r.startX))
+                      }}
+                      onPointerUp={() => {
+                        const r = resizeRef.current
+                        resizeRef.current = null
+                        setResizingKey(null)
+                        if (r) onColumnResize?.(r.key, Math.round(widths[r.key] ?? r.startWidth))
+                      }}
+                      onPointerCancel={() => {
+                        resizeRef.current = null
+                        setResizingKey(null)
+                      }}
+                      onDoubleClick={() => {
+                        setWidthOverrides((prev) => {
+                          const next = { ...prev }
+                          delete next[column.key]
+                          return next
+                        })
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return
+                        e.preventDefault()
+                        const step = (e.shiftKey ? 48 : 16) * (e.key === "ArrowLeft" ? -1 : 1)
+                        const next = Math.max(minFor(column), width + step)
+                        setWidth(column.key, next)
+                        onColumnResize?.(column.key, Math.round(next))
+                      }}
+                    >
+                      <span className="h-full w-0.5 rounded-full bg-border transition-[background-color,width] duration-150 group-hover/header:bg-muted-foreground/40 group-hover/resize:w-[3px] group-hover/resize:bg-primary group-focus-visible/resize:w-[3px] group-focus-visible/resize:bg-primary group-data-resizing/resize:w-[3px] group-data-resizing/resize:bg-primary" />
+                    </div>
+                  ) : null}
+                </div>
+              )
+            })}
           </div>
         </div>
+
+        {/* Body ------------------------------------------------------------ */}
+        <div ref={bodyRef} role="rowgroup" className="relative" style={{ height: bodyHeight }}>
+          {showSkeleton ? (
+            <div role="row" aria-busy className="absolute inset-x-0 top-0">
+              <span className="sr-only" role="status">
+                Loading rows
+              </span>
+              {Array.from({ length: skeletonCount }, (_, i) => (
+                <TableSkeletonRow
+                  key={i}
+                  index={i}
+                  height={rowHeight}
+                  cells={[
+                    ...(gutter ? [gutter.width] : []),
+                    ...(selectable ? [SELECT_WIDTH] : []),
+                    ...baseOrder.map((k) => widths[k] ?? DEFAULT_COLUMN_WIDTH),
+                  ]}
+                />
+              ))}
+            </div>
+          ) : rows.length === 0 ? (
+            <div role="row" className="sticky left-0 flex h-full items-center justify-center p-8 text-ui text-muted-foreground" style={{ width: viewportWidth || "100%" }}>
+              <div role={cellRole}>{emptyState}</div>
+            </div>
+          ) : (
+            virtualItems.map((item) => {
+              const entry = sortedRows[item.index]
+              if (!entry) return null
+              const isSelected = selected.has(entry.id)
+              const rowCtx: TableRowContext<T> = {
+                row: entry.row,
+                rowId: entry.id,
+                rowIndex: item.index,
+                dataIndex: entry.dataIndex,
+                selected: isSelected,
+              }
+              return (
+                <div
+                  key={entry.id}
+                  role="row"
+                  aria-rowindex={item.index + 2}
+                  aria-selected={role === "grid" && selectable ? isSelected : undefined}
+                  data-row-id={entry.id}
+                  data-selected={isSelected || undefined}
+                  onClick={onRowClick ? (e) => onRowClick(rowCtx, e) : undefined}
+                  className={cn(
+                    "group/row absolute inset-x-0 top-0 border-b border-border/60 transition-colors duration-150 hover:z-10 hover:bg-muted/45 focus-within:z-10",
+                    "data-selected:bg-primary/8 data-selected:hover:bg-primary/12",
+                    animate && "transition-[transform,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    onRowClick && "cursor-pointer",
+                    rowClassName?.(rowCtx)
+                  )}
+                  style={{ height: rowHeight, transform: `translateY(${item.start - headerHeight}px)` }}
+                >
+                  {gutter ? (
+                    <div role={cellRole} className="absolute inset-y-0 left-0 flex items-center justify-center" style={{ width: gutter.width }}>
+                      {gutter.cell(rowCtx)}
+                    </div>
+                  ) : null}
+                  {selectable ? (
+                    <div
+                      role={cellRole}
+                      className="absolute inset-y-0 flex items-center justify-center"
+                      style={{ left: gutter?.width ?? 0, width: SELECT_WIDTH }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Checkbox
+                        checked={isSelected}
+                        onCheckedChange={(checked, details) => {
+                          const event = details.event as Partial<MouseEvent> | undefined
+                          toggleRow(item.index, checked, !!event?.shiftKey)
+                        }}
+                        aria-label={`Select row ${item.index + 1}`}
+                      />
+                    </div>
+                  ) : null}
+                  {orderedColumns.map((column, colIndex) => {
+                    const value = readValue(entry.row, column)
+                    const cellCtx: TableCellContext<T> = { ...rowCtx, column, colIndex, value }
+                    const content = column.cell ? column.cell(entry.row, cellCtx) : formatValue(value)
+                    const isDragging = drag?.active === true && drag.key === column.key
+                    return (
+                      <div
+                        key={column.key}
+                        role={cellRole}
+                        aria-colindex={leadCount + colIndex + 1}
+                        data-col-key={column.key}
+                        className={cn(
+                          "absolute inset-y-0 left-0 flex min-w-0 items-center px-3 tabular-nums",
+                          alignClass(column.align),
+                          cellMotion(column.key),
+                          isDragging && "z-20 bg-card/90 shadow-raised",
+                          column.className
+                        )}
+                        style={{ width: widths[column.key] ?? 0, transform: `translateX(${columnX(column.key)}px)` }}
+                      >
+                        {renderCell ? renderCell({ ...cellCtx, content }) : <div className="min-w-0 truncate">{content}</div>}
+                      </div>
+                    )
+                  })}
+                </div>
+              )
+            })
+          )}
+
+          {resolvedFooter && !showSkeleton && rows.length > 0 ? (
+            <div className="absolute inset-x-0" style={{ top: totalSize, height: footerHeight }}>
+              <div data-slot="table-footer" className="sticky left-0 h-full" style={{ width: viewportWidth || "100%" }}>
+                {resolvedFooter}
+              </div>
+            </div>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </ScrollArea>
   )
 }
 

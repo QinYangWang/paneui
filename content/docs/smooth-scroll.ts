@@ -26,6 +26,10 @@ export default {
   ],
   notes: [
     {
+      title: "Scrollbars",
+      body: "Contained mode scrolls in a [Scroll Area](/docs/scroll-area): thin overlay bars inside the frame that follow the eased position. `container` points at its viewport.",
+    },
+    {
       title: "Motion",
       body: "Under reduced motion nothing is eased, so scrolling is native and `scrollTo` jumps instead of animating. Touch scrolling stays native unless you set `touch`.",
     },

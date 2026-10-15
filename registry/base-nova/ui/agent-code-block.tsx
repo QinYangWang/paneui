@@ -6,6 +6,7 @@ import type { Highlighter } from "shiki"
 
 import { CheckIcon, CopyIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 
 /* -------------------------------------------------------------------------- */
 /*  Highlighting (shared with file-diff)                                       */
@@ -321,15 +322,18 @@ function AgentCodeBlock({
           {copyButton}
         </div>
       )}
-      <div
-        ref={viewportRef}
-        data-slot="agent-code-block-viewport"
-        style={{ maxHeight }}
-        onScroll={(e) => {
-          const el = e.currentTarget
-          pinned.current = el.scrollHeight - el.scrollTop - el.clientHeight < 24
+      <ScrollArea
+        orientation="both"
+        viewportRef={viewportRef}
+        viewportProps={{
+          "data-slot": "agent-code-block-viewport",
+          style: { maxHeight },
+          onScroll: (e) => {
+            const el = e.currentTarget
+            pinned.current = el.scrollHeight - el.scrollTop - el.clientHeight < 24
+          },
         }}
-        className="overflow-auto scrollbar-thin"
+        className={filename !== undefined ? "rounded-b-[inherit]" : "rounded-[inherit]"}
       >
         <pre className="m-0 w-max min-w-full py-3 font-mono leading-[1.65]">
           <code className="block">
@@ -376,7 +380,7 @@ function AgentCodeBlock({
             })}
           </code>
         </pre>
-      </div>
+      </ScrollArea>
     </div>
   )
 }

@@ -28,7 +28,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "With reduced motion every variant swaps movement, rotation and scale for a soft opacity fade; `spinner` is opacity-only already.",
+      body: "Loops are CSS keyframes shipped with the component, so they don't stall on a busy page or restart on re-render. With reduced motion every variant swaps movement, rotation and scale for a soft opacity fade and drops the extra `pulse` and `ripple` rings; `spinner` is opacity-only already.",
     },
   ],
   api: [

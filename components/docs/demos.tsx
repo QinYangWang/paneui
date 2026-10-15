@@ -23,6 +23,7 @@ import TextareaDemo from "@/registry/base-nova/examples/textarea-demo"
 import ThemeDemo from "@/registry/base-nova/examples/theme-demo"
 import AppShellDemo from "@/registry/base-nova/examples/app-shell-demo"
 import OverflowHintDemo from "@/registry/base-nova/examples/overflow-hint-demo"
+import ScrollAreaDemo from "@/registry/base-nova/examples/scroll-area-demo"
 import TypesetDemo from "@/registry/base-nova/examples/typeset-demo"
 import CheckboxDemo from "@/registry/base-nova/examples/checkbox-demo"
 import RadioDemo from "@/registry/base-nova/examples/radio-demo"
@@ -193,6 +194,7 @@ export const demos: Record<string, React.ComponentType> = {
   blog: BlogPreview,
   theme: ThemeDemo,
   typeset: TypesetDemo,
+  "scroll-area": ScrollAreaDemo,
   "app-shell": AppShellDemo,
   "overflow-hint": OverflowHintDemo,
   icons: IconsDemo,

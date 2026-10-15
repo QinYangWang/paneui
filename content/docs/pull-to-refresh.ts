@@ -30,6 +30,10 @@ export default {
   ],
   notes: [
     {
+      title: "Scrollbars",
+      body: "Scrolls in a [Scroll Area](/docs/scroll-area), so its scrollbar stays inside the rounded frame and holds still while the content is pulled. The pull never changes the scroll range.",
+    },
+    {
       title: "Motion",
       body: "Content springs back once `onRefresh` resolves. With reduced motion it jumps into place and the arrow doesn't rotate.",
     },
@@ -64,7 +68,7 @@ export default {
           type: `(status: "idle" | "pulling" | "ready" | "refreshing") => void`,
           description: "Called whenever the gesture status changes.",
         },
-        { name: "contentClassName", type: "string", description: "Classes for the inner scrolling element." },
+        { name: "contentClassName", type: "string", description: "Classes for the content that moves with the pull." },
       ],
       dataAttributes: [
         { name: "data-status", description: "`idle`, `pulling`, `ready` or `refreshing` on the root." },

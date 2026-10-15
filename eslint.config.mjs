@@ -78,7 +78,7 @@ const PLACEMENT = [
 // Unstyled primitives with no surface of their own (scroll containers,
 // motion wrappers, triggers): the caller supplies the frame with tokens.
 const HEADLESS = [
-  "SmoothScroll", "MessageScroller", "PullToRefresh", "ShaderBackground",
+  "SmoothScroll", "ScrollArea", "MessageScroller", "PullToRefresh", "ShaderBackground",
   "Collapsible", "ContextMenuTrigger", "SharedLayoutBg", "SharedLayoutBgItem",
   "TiltCard", "TiltCardLayer", "SidebarProvider", "SidebarInset", "SidebarHideCollapsed",
   "Magnetic", "ScrollReveal", "Parallax", "ParallaxLayer",

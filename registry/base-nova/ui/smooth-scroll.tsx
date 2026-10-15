@@ -5,6 +5,7 @@ import Lenis from "lenis"
 import { type MotionValue, useMotionValue, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 
 /* Lenis' exponential ease-out: quick to respond, long soft tail. */
 const easeScroll = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
@@ -237,16 +238,14 @@ function SmoothScroll({
 
   return (
     <SmoothScrollContext.Provider value={api}>
-      <div
-        ref={wrapperRef}
+      <ScrollArea
         data-slot="smooth-scroll"
         data-smooth={api.smooth ? "" : undefined}
-        className={cn(
-          // no overscroll containment: at its ends the wheel/touch chains to the page
-          "relative outline-none [scroll-behavior:auto]",
-          orientation === "horizontal" ? "overflow-x-auto overflow-y-hidden" : "overflow-x-hidden overflow-y-auto",
-          className
-        )}
+        orientation={orientation}
+        viewportRef={wrapperRef}
+        // no overscroll containment: at its ends the wheel/touch chains to the page
+        viewportClassName="overscroll-auto [scroll-behavior:auto]"
+        className={className}
         {...props}
       >
         <div
@@ -256,7 +255,7 @@ function SmoothScroll({
         >
           {children}
         </div>
-      </div>
+      </ScrollArea>
     </SmoothScrollContext.Provider>
   )
 }

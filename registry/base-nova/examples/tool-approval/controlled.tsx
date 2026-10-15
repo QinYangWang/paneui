@@ -8,10 +8,11 @@ import { ToolApproval, type ToolApprovalDecision } from "@/registry/base-nova/ui
 export default function ToolApprovalControlled() {
   const [decision, setDecision] = React.useState<ToolApprovalDecision | null>(null)
   return (
-    <div className="flex w-full max-w-md flex-col gap-3">
+    <div className="flex w-full max-w-md flex-col gap-2">
       <ToolApproval
         tool="slack.post_message"
         title="Post to #design?"
+        description="Review moved to Thursday 3 pm."
         args={{ channel: "#design", text: "Review moved to Thursday 3 pm." }}
         decision={decision}
         onDecisionChange={setDecision}

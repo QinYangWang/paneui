@@ -151,6 +151,16 @@ function Permission({ item, onResolve }: { item: Extract<TimelineItem, { kind: "
       args={command ?? (diff && diff.type === "diff" ? diff.path : item.toolCall.rawInput)}
       argsLanguage={command ? "bash" : undefined}
       revocable={false}
+      allowAlways={item.options.some((o) => o.kind === "allow_always")}
+      status={
+        item.toolCall.status === "in_progress"
+          ? "running"
+          : item.toolCall.status === "completed"
+            ? "done"
+            : item.toolCall.status === "failed"
+              ? "failed"
+              : undefined
+      }
       decision={decision}
       onDecisionChange={(d) => {
         if (!d || item.outcome !== undefined) return

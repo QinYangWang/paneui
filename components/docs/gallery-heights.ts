@@ -32,7 +32,7 @@ export const galleryHeights: Record<string, number> = {
   "approval-card": 336,
   "aspect-ratio": 404,
   "attachment-upload": 494,
-  "availability-scheduler": 574,
+  "availability-scheduler": 748,
   "candlestick-chart": 440,
   "card": 431,
   "card-folder": 376,
@@ -74,7 +74,7 @@ export const galleryHeights: Record<string, number> = {
   "table-editable": 456,
   "task-row": 302,
   "todo-list": 294,
-  "tool-approval": 604,
+  "tool-approval": 220,
   "tool-result": 393,
   "treemap": 506,
 }

@@ -1,7 +1,4 @@
-"use client"
-
 import * as React from "react"
-import { motion, useReducedMotion, type Transition } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
@@ -9,22 +6,47 @@ type LoaderVariant = "spinner" | "ring" | "dots" | "bars" | "pulse" | "ripple" |
 type LoaderSize = "sm" | "md" | "lg"
 
 const SIZES: Record<LoaderSize, number> = { sm: 16, md: 24, lg: 32 }
-const EASE = [0.45, 0, 0.55, 1] as const
+const IN_OUT = "cubic-bezier(0.45,0,0.55,1)"
 
-type PartProps = { s: number; speed: number; reduce: boolean }
+// Every loop is a CSS keyframe animation shipped with the component (React
+// hoists and dedupes it by href). CSS keeps the loops on the compositor, so
+// they never stall on a busy main thread and never restart on re-render.
+// Each keyframe ends where it starts (or fades to 0 before it resets), and
+// staggered parts are offset with negative delays that divide the period, so
+// every part runs in phase from the first frame.
+const LOADER_CSS =
+  "@keyframes qy-loader-tick{from{opacity:1}to{opacity:.2}}" +
+  "@keyframes qy-loader-spin{to{rotate:360deg}}" +
+  "@keyframes qy-loader-bounce{0%,80%,100%{translate:0 0;opacity:.55}40%{translate:0 var(--qy-lift);opacity:1}}" +
+  "@keyframes qy-loader-bar{0%,100%{scale:1 .35}50%{scale:1 1}}" +
+  "@keyframes qy-loader-breathe{0%,100%{scale:1}50%{scale:.82}}" +
+  "@keyframes qy-loader-wave{0%{scale:var(--qy-from);opacity:0}18%{opacity:var(--qy-peak);animation-timing-function:cubic-bezier(0.33,0,0.67,1)}100%{scale:1;opacity:0}}" +
+  "@keyframes qy-loader-type{0%,100%{opacity:.3;scale:.85;translate:0 0}50%{opacity:1;scale:1.1;translate:0 var(--qy-lift)}}" +
+  "@keyframes qy-loader-fade{0%,100%{opacity:1}50%{opacity:.35}}" +
+  "@media (prefers-reduced-motion: reduce){" +
+  "[data-slot=loader] [data-reduce=hide]{display:none}" +
+  "[data-slot=loader] [data-reduce=fade]{animation-name:qy-loader-fade!important;animation-duration:var(--qy-fade)!important;animation-timing-function:" +
+  IN_OUT +
+  "!important;scale:none!important;translate:none!important;rotate:none!important}}"
 
-/** Reduced motion: every variant falls back to a calm opacity fade, no transforms. */
-function fade(speed: number, delay = 0): Transition {
-  return { duration: 1.4 / speed, ease: EASE, repeat: Infinity, delay }
+type PartProps = { s: number; d: (seconds: number) => number }
+
+/** Inline animation for one part; `phase` (0–1) is how far into the loop it starts late. */
+function anim(name: string, duration: number, ease: string, phase = 0): React.CSSProperties {
+  return {
+    animation: `${name} ${duration}s ${ease} infinite`,
+    animationDelay: phase ? `${-((1 - phase) * duration).toFixed(3)}s` : undefined,
+  }
 }
 
-function Spinner({ s, speed }: PartProps) {
-  // Opacity-only, so it is already reduced-motion safe.
+function Spinner({ s, d }: PartProps) {
+  // Opacity-only, so it keeps running under reduced motion.
   const ticks = 8
+  const dur = d(0.9)
   return (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
       {Array.from({ length: ticks }, (_, i) => (
-        <motion.rect
+        <rect
           key={i}
           x={10.75}
           y={1.5}
@@ -33,157 +55,176 @@ function Spinner({ s, speed }: PartProps) {
           rx={1.25}
           fill="currentColor"
           transform={`rotate(${(360 / ticks) * i} 12 12)`}
-          initial={{ opacity: 0.2 }}
-          animate={{ opacity: [1, 0.2] }}
-          transition={{ duration: 0.9 / speed, ease: "linear", repeat: Infinity, delay: (i / ticks) * (0.9 / speed) }}
+          style={anim("qy-loader-tick", dur, "linear", i / ticks)}
         />
       ))}
     </svg>
   )
 }
 
-function Ring({ s, speed, reduce }: PartProps) {
+function Ring({ s, d }: PartProps) {
   return (
-    <motion.svg
+    <svg
       width={s}
       height={s}
       viewBox="0 0 24 24"
       fill="none"
-      animate={reduce ? { opacity: [1, 0.45, 1] } : { rotate: 360 }}
-      transition={reduce ? fade(speed) : { duration: 0.8 / speed, ease: "linear", repeat: Infinity }}
+      data-reduce="fade"
+      style={{ ...anim("qy-loader-spin", d(0.8), "linear"), transformOrigin: "center" }}
     >
       <circle cx={12} cy={12} r={9.5} stroke="currentColor" strokeOpacity={0.18} strokeWidth={3} />
       <path d="M12 2.5a9.5 9.5 0 0 1 9.5 9.5" stroke="currentColor" strokeWidth={3} strokeLinecap="round" />
-    </motion.svg>
+    </svg>
   )
 }
 
-function Dots({ s, speed, reduce }: PartProps) {
-  const d = Math.max(3, Math.round(s / 4.5))
+function Dots({ s, d }: PartProps) {
+  const size = Math.max(3, Math.round(s / 4.5))
+  const dur = d(0.9)
   return (
-    <span className="flex items-center" style={{ height: s, gap: d * 0.6 }}>
+    <span className="flex items-center" style={{ height: s, gap: size * 0.6 }}>
       {[0, 1, 2].map((i) => (
-        <motion.span
+        <span
           key={i}
+          data-reduce="fade"
           className="block rounded-full bg-current"
-          style={{ width: d, height: d }}
-          animate={reduce ? { opacity: [0.3, 1, 0.3] } : { y: [0, -d * 0.9, 0], opacity: [0.55, 1, 0.55] }}
-          transition={reduce ? fade(speed, i * 0.18) : { duration: 0.75 / speed, ease: EASE, repeat: Infinity, delay: i * 0.12 / speed, repeatDelay: 0.15 / speed }}
+          style={
+            {
+              width: size,
+              height: size,
+              "--qy-lift": `${-size * 0.9}px`,
+              ...anim("qy-loader-bounce", dur, IN_OUT, (i * 2) / 15),
+            } as React.CSSProperties
+          }
         />
       ))}
     </span>
   )
 }
 
-function Bars({ s, speed, reduce }: PartProps) {
+function Bars({ s, d }: PartProps) {
   const w = Math.max(2, Math.round(s / 8))
+  const dur = d(0.9)
   return (
     <span className="flex items-center" style={{ height: s, gap: w * 0.75 }}>
       {[0, 1, 2, 3].map((i) => (
-        <motion.span
+        <span
           key={i}
-          className="block origin-center rounded-full bg-current"
-          style={{ width: w, height: s * 0.8 }}
-          animate={reduce ? { opacity: [0.3, 1, 0.3] } : { scaleY: [0.35, 1, 0.35] }}
-          transition={reduce ? fade(speed, i * 0.15) : { duration: 0.9 / speed, ease: EASE, repeat: Infinity, delay: i * 0.1 / speed }}
+          data-reduce="fade"
+          className="block rounded-full bg-current"
+          style={{ width: w, height: s * 0.8, ...anim("qy-loader-bar", dur, IN_OUT, i / 9) }}
         />
       ))}
     </span>
   )
 }
 
-function Pulse({ s, speed, reduce }: PartProps) {
+function Pulse({ s, d }: PartProps) {
+  const dur = d(1.4)
+  const core = 0.38
   return (
     <span className="relative flex items-center justify-center" style={{ width: s, height: s }}>
-      {!reduce && (
-        <motion.span
-          className="absolute inset-0 rounded-full bg-current"
-          animate={{ scale: [0.35, 1], opacity: [0.45, 0] }}
-          transition={{ duration: 1.2 / speed, ease: [0.22, 1, 0.36, 1], repeat: Infinity }}
-        />
-      )}
-      <motion.span
-        className="block rounded-full bg-current"
-        style={{ width: s * 0.38, height: s * 0.38 }}
-        animate={reduce ? { opacity: [1, 0.4, 1] } : { scale: [1, 0.82, 1] }}
-        transition={reduce ? fade(speed) : { duration: 1.2 / speed, ease: EASE, repeat: Infinity }}
+      {/* The halo spawns at the core's size with opacity 0, as the core
+          finishes its breath, so the reset is invisible. */}
+      <span
+        data-reduce="hide"
+        className="absolute inset-0 rounded-full bg-current"
+        style={
+          {
+            "--qy-from": core,
+            "--qy-peak": 0.4,
+            scale: core,
+            opacity: 0,
+            ...anim("qy-loader-wave", dur, "cubic-bezier(0.25,0.4,0.45,1)"),
+          } as React.CSSProperties
+        }
+      />
+      <span
+        data-reduce="fade"
+        className="relative block rounded-full bg-current"
+        style={{ width: s * core, height: s * core, ...anim("qy-loader-breathe", dur, IN_OUT) }}
       />
     </span>
   )
 }
 
-function Ripple({ s, speed, reduce }: PartProps) {
-  if (reduce) {
-    return (
-      <motion.span
-        className="block rounded-full border-2 border-current"
-        style={{ width: s, height: s }}
-        animate={{ opacity: [1, 0.35, 1] }}
-        transition={fade(speed)}
-      />
-    )
-  }
+function Ripple({ s, d }: PartProps) {
+  const dur = d(1.8)
+  const rings = 3
   return (
     <span className="relative block" style={{ width: s, height: s }}>
-      {[0, 1].map((i) => (
-        <motion.span
+      {Array.from({ length: rings }, (_, i) => (
+        <span
           key={i}
+          data-reduce={i ? "hide" : "fade"}
           className="absolute inset-0 rounded-full border-current"
-          style={{ borderWidth: Math.max(1.5, s / 14) }}
-          initial={{ scale: 0, opacity: 1 }}
-          animate={{ scale: [0, 1], opacity: [1, 0] }}
-          transition={{ duration: 1.4 / speed, ease: [0.22, 1, 0.36, 1], repeat: Infinity, delay: (i * 0.7) / speed }}
+          style={
+            {
+              borderWidth: Math.max(1.5, s / 14),
+              "--qy-from": 0.15,
+              "--qy-peak": 1,
+              ...anim("qy-loader-wave", dur, "cubic-bezier(0.3,0.5,0.5,1)", i / rings),
+            } as React.CSSProperties
+          }
         />
       ))}
     </span>
   )
 }
 
-function Orbit({ s, speed, reduce }: PartProps) {
-  const d = Math.max(3, s / 5)
+function Orbit({ s, d }: PartProps) {
+  const size = Math.max(3, s / 5)
+  const dur = d(1.1)
   return (
     <span className="relative block" style={{ width: s, height: s }}>
       <span
         className="absolute rounded-full bg-current opacity-30"
-        style={{ width: d, height: d, left: (s - d) / 2, top: (s - d) / 2 }}
+        style={{ width: size, height: size, left: (s - size) / 2, top: (s - size) / 2 }}
       />
       {[0, 1].map((i) => (
-        <motion.span
-          key={i}
-          className="absolute inset-0"
-          initial={{ rotate: i * 180 }}
-          animate={reduce ? { opacity: [1, 0.35, 1] } : { rotate: i * 180 + 360 }}
-          transition={reduce ? fade(speed, i * 0.35) : { duration: 1.1 / speed, ease: [0.6, 0.1, 0.4, 0.9], repeat: Infinity }}
-        >
+        <span key={i} className="absolute inset-0" style={{ rotate: `${i * 180}deg` }}>
           <span
-            className="absolute rounded-full bg-current"
-            style={{ width: d, height: d, left: (s - d) / 2, top: 0, opacity: i ? 0.6 : 1 }}
-          />
-        </motion.span>
+            data-reduce="fade"
+            className="absolute inset-0"
+            style={anim("qy-loader-spin", dur, "cubic-bezier(0.6,0.1,0.4,0.9)")}
+          >
+            <span
+              className="absolute rounded-full bg-current"
+              style={{ width: size, height: size, left: (s - size) / 2, top: 0, opacity: i ? 0.6 : 1 }}
+            />
+          </span>
+        </span>
       ))}
     </span>
   )
 }
 
-function Typing({ s, speed, reduce }: PartProps) {
-  const d = Math.max(3, Math.round(s / 5.5))
+function Typing({ s, d }: PartProps) {
+  const size = Math.max(3, Math.round(s / 5.5))
+  const dur = d(1.1)
   return (
     <span
       className="flex items-center justify-center rounded-full"
       style={{
         height: s,
         paddingInline: s * 0.32,
-        gap: d * 0.7,
+        gap: size * 0.7,
         backgroundColor: "color-mix(in oklch, currentColor 12%, transparent)",
       }}
     >
       {[0, 1, 2].map((i) => (
-        <motion.span
+        <span
           key={i}
+          data-reduce="fade"
           className="block rounded-full bg-current"
-          style={{ width: d, height: d }}
-          animate={reduce ? { opacity: [0.3, 1, 0.3] } : { opacity: [0.3, 1, 0.3], scale: [0.85, 1.1, 0.85], y: [0, -d * 0.35, 0] }}
-          transition={reduce ? fade(speed, i * 0.2) : { duration: 1.1 / speed, ease: EASE, repeat: Infinity, delay: (i * 0.18) / speed }}
+          style={
+            {
+              width: size,
+              height: size,
+              "--qy-lift": `${-size * 0.35}px`,
+              ...anim("qy-loader-type", dur, IN_OUT, i / 6),
+            } as React.CSSProperties
+          }
         />
       ))}
     </span>
@@ -211,6 +252,7 @@ function Loader({
   size = "md",
   speed = 1,
   label = "Loading",
+  style,
   ...props
 }: Omit<React.ComponentProps<"span">, "children"> & {
   variant?: LoaderVariant
@@ -220,20 +262,28 @@ function Loader({
   /** Announced to screen readers. */
   label?: string
 }) {
-  const reduce = useReducedMotion() ?? false
   const Part = PARTS[variant]
+  const s = SIZES[size]
+  const rate = speed > 0 ? speed : 1
+  const d = (seconds: number) => +(seconds / rate).toFixed(3)
   return (
-    <span
-      role="status"
-      aria-label={label}
-      data-slot="loader"
-      data-variant={variant}
-      data-size={size}
-      className={cn("inline-flex shrink-0 items-center justify-center text-current", className)}
-      {...props}
-    >
-      <Part s={SIZES[size]} speed={speed} reduce={reduce} />
-    </span>
+    <>
+      <style href="qy-loader" precedence="default">
+        {LOADER_CSS}
+      </style>
+      <span
+        role="status"
+        aria-label={label}
+        data-slot="loader"
+        data-variant={variant}
+        data-size={size}
+        className={cn("inline-flex shrink-0 items-center justify-center text-current", className)}
+        style={{ "--qy-fade": `${d(1.4)}s`, ...style } as React.CSSProperties}
+        {...props}
+      >
+        <Part s={s} d={d} />
+      </span>
+    </>
   )
 }
 

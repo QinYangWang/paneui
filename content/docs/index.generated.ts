@@ -80,6 +80,7 @@ import d_radio from "./radio"
 import d_range_slider_inline from "./range-slider-inline"
 import d_reasoning_text from "./reasoning-text"
 import d_resizable from "./resizable"
+import d_scroll_area from "./scroll-area"
 import d_scroll_progress from "./scroll-progress"
 import d_scroll_reveal from "./scroll-reveal"
 import d_scroll_to from "./scroll-to"
@@ -209,6 +210,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "range-slider-inline": d_range_slider_inline,
   "reasoning-text": d_reasoning_text,
   "resizable": d_resizable,
+  "scroll-area": d_scroll_area,
   "scroll-progress": d_scroll_progress,
   "scroll-reveal": d_scroll_reveal,
   "scroll-to": d_scroll_to,

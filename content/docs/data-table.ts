@@ -18,6 +18,7 @@ export default {
   notes: [
     { title: "What it adds to Table", body: "It builds on [Table](/docs/table). Columns are Table columns plus `label` and `hideable`, and `toolbar` adds your own controls." },
     { title: "Data flow", body: "Everything runs on the client: filter → search → sort → page. Selection survives paging. For server-side data, page and filter on the server and render Table directly." },
+    { title: "Narrow containers", body: "The toolbar follows the table's own width, not the window's. Below 40rem the search takes its own row, and when the filter buttons can't share a row with your `toolbar` controls they fold into one Filter menu. Below 28rem the pager switches to its compact form." },
     { title: "Row actions", body: "Put `DataTableRowActions` with `MenuItem`s in an actions column; clicks inside it don't trigger `onRowClick`." },
   ],
   api: [

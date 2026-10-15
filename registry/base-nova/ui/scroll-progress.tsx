@@ -42,6 +42,11 @@ type ScrollProgressBarProps = CommonProps & {
   position?: "fixed" | "sticky" | "absolute"
   /** Thickness in px. */
   thickness?: number
+  /**
+   * Gap (px) from the container's edges. A sticky bar defaults to the scroll
+   * area's scrollbar inset and follows its rounded corners; others default to 0.
+   */
+  inset?: number
 }
 
 type ScrollProgressRingProps = CommonProps & {
@@ -77,10 +82,17 @@ function ScrollProgressBar({
   side = "top",
   position = "fixed",
   thickness = 3,
+  inset,
   className,
 }: ScrollProgressBarProps) {
   const value = useProgress(progress, spring)
   const ref = useAriaValue(value)
+  const top = side === "top"
+  // A sticky bar sits inside a scroll area's frame: inset like its scrollbars and
+  // concentric with its corners (radius less the gap, never below 0).
+  const sticky = position === "sticky"
+  const gap = inset !== undefined ? `${inset}px` : sticky ? "var(--scroll-area-inset, 0px)" : "0px"
+  const radius = sticky ? `max(0px, calc(var(--scroll-area-radius-${side}, 0px) - ${gap}))` : "0px"
   return (
     <div
       ref={ref}
@@ -91,19 +103,30 @@ function ScrollProgressBar({
       aria-valuenow={0}
       data-slot="scroll-progress"
       data-variant="bar"
-      style={{ height: thickness }}
-      className={cn(
-        "pointer-events-none inset-x-0 z-40 overflow-hidden bg-muted/60",
-        position,
-        side === "top" ? "top-0" : "bottom-0",
-        className
-      )}
+      // Sticky bars take no room in the flow; they overlay the content's edge.
+      style={{ height: sticky ? 0 : thickness }}
+      className={cn("pointer-events-none inset-x-0 z-40", position, top ? "top-0" : "bottom-0", className)}
     >
-      <motion.div
-        data-slot="scroll-progress-indicator"
-        style={{ scaleX: value }}
-        className="h-full origin-left rounded-r-full bg-primary"
-      />
+      {/* Clip box shaped like the frame's corners, so the band bends with them. */}
+      <div
+        className={cn("absolute flex overflow-hidden", top ? "items-start" : "items-end")}
+        style={{
+          left: gap,
+          right: gap,
+          [top ? "top" : "bottom"]: gap,
+          height: `max(${thickness}px, ${radius})`,
+          [top ? "borderTopLeftRadius" : "borderBottomLeftRadius"]: radius,
+          [top ? "borderTopRightRadius" : "borderBottomRightRadius"]: radius,
+        }}
+      >
+        <div className="w-full overflow-hidden bg-muted/60" style={{ height: thickness }}>
+          <motion.div
+            data-slot="scroll-progress-indicator"
+            style={{ scaleX: value }}
+            className="h-full origin-left rounded-r-full bg-primary"
+          />
+        </div>
+      </div>
     </div>
   )
 }

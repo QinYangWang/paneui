@@ -1570,9 +1570,7 @@
       "type": "registry:ui",
       "title": "Loader",
       "description": "Shows that something is loading.",
-      "dependencies": [
-        "motion"
-      ],
+      "dependencies": [],
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -2054,12 +2052,14 @@
       "title": "Pull to Refresh",
       "description": "Refreshes a scrolling list when the user pulls it down.",
       "dependencies": [
-        "motion"
+        "motion",
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/loader"
+        "@qinyang/loader",
+        "@qinyang/scroll-area"
       ],
       "files": [
         {
@@ -2078,10 +2078,12 @@
       "description": "Eases scrolling for a page or a scroll container.",
       "dependencies": [
         "lenis",
-        "motion"
+        "motion",
+        "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/scroll-area"
       ],
       "files": [
         {
@@ -2091,6 +2093,27 @@
       ],
       "meta": {
         "category": "Motion"
+      }
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Scroll container with thin scrollbars that stay inside its frame.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/scroll-area.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
       }
     },
     {
@@ -2289,7 +2312,8 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/checkbox",
-        "@qinyang/loader"
+        "@qinyang/loader",
+        "@qinyang/scroll-area"
       ],
       "files": [
         {
@@ -2430,11 +2454,13 @@
       "description": "Displays code from an agent, including code still streaming in.",
       "dependencies": [
         "shiki",
-        "motion"
+        "motion",
+        "@base-ui/react"
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/scroll-area"
       ],
       "files": [
         {
@@ -2582,10 +2608,10 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/badge",
         "@qinyang/button",
         "@qinyang/tool-result",
-        "@qinyang/icon-chip"
+        "@qinyang/icon-chip",
+        "@qinyang/action-swap-roll"
       ],
       "files": [
         {

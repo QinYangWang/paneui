@@ -38,6 +38,10 @@ export default {
   ],
   notes: [
     {
+      title: "Scrollbars",
+      body: "The table scrolls in a [Scroll Area](/docs/scroll-area). The vertical track starts below the sticky header and both tracks stay inside the rounded frame.",
+    },
+    {
       title: "Keyboard",
       body: "Sortable headers are buttons (asc → desc → off). With `reorderable`, Alt + ← / → moves the focused column; with `resizable`, focus a column edge and use ← / → (Shift for bigger steps), or double-click it to reset. Shift-click a checkbox to select a range.",
     },

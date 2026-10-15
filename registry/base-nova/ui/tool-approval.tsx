@@ -1,30 +1,28 @@
 "use client"
 
 import * as React from "react"
-import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
-import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+import { AnimatePresence, animate, motion, useReducedMotion, type AnimationPlaybackControls } from "motion/react"
 
-import { CheckIcon, ChevronDownIcon, ShieldIcon, UndoIcon, WarningIcon, XIcon } from "@/components/icons"
+import { CheckIcon, ChevronDownIcon, ShieldIcon, UndoIcon, WarningIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
-import { Badge } from "@/registry/base-nova/ui/badge"
+import { ActionSwapRollText } from "@/registry/base-nova/ui/action-swap-roll"
 import { Button } from "@/registry/base-nova/ui/button"
 import { IconChip } from "@/registry/base-nova/ui/icon-chip"
-import { AGENT_EASE, CodeHighlight, type CodeLanguage } from "@/registry/base-nova/ui/tool-result"
+import { AGENT_EASE, CodeHighlight, ToolStatusIcon, type CodeLanguage } from "@/registry/base-nova/ui/tool-result"
 
 type ToolApprovalDecision = "once" | "always" | "deny"
 type ToolApprovalRisk = "low" | "medium" | "high"
+/** What happened after an approval: the call is running, finished or failed. */
+type ToolApprovalStatus = "running" | "done" | "failed"
 
-const RISK: Record<ToolApprovalRisk, { label: string; variant: "chip" | "warning" | "destructive" }> = {
-  low: { label: "Read only", variant: "chip" },
-  medium: { label: "Makes changes", variant: "warning" },
-  high: { label: "Destructive", variant: "destructive" },
+const RISK: Record<ToolApprovalRisk, { label: string; tone: "neutral" | "warning" | "destructive" }> = {
+  low: { label: "Read only", tone: "neutral" },
+  medium: { label: "Makes changes", tone: "warning" },
+  high: { label: "Destructive", tone: "destructive" },
 }
 
-const DECISION_COPY: Record<ToolApprovalDecision, string> = {
-  once: "Allowed once",
-  always: "Always allowed",
-  deny: "Denied",
-}
+const DEFAULT_TITLE = "Allow this tool to run?"
+const HEIGHT_SPRING = { type: "spring", stiffness: 420, damping: 38, mass: 0.6 } as const
 
 function readRemembered(key?: string) {
   if (!key || typeof window === "undefined") return false
@@ -53,11 +51,66 @@ function forgetToolApproval(rememberKey: string | undefined) {
   writeRemembered(rememberKey, false)
 }
 
+/**
+ * Animates a frame's height whenever `morphKey` changes: from the height it had
+ * before the commit to the height of its new content, then back to `auto`.
+ */
+function useHeightMorph(morphKey: number, disabled: boolean | null) {
+  const outerRef = React.useRef<HTMLDivElement>(null)
+  const innerRef = React.useRef<HTMLDivElement>(null)
+  const lastHeight = React.useRef(0)
+  const controls = React.useRef<AnimationPlaybackControls | null>(null)
+
+  // Track the settled height; the observer reports after layout, so inside the
+  // layout effect below it still holds the height from before the commit.
+  React.useLayoutEffect(() => {
+    const el = innerRef.current
+    if (!el) return
+    lastHeight.current = el.offsetHeight
+    if (typeof ResizeObserver === "undefined") return
+    const ro = new ResizeObserver(() => {
+      lastHeight.current = el.offsetHeight
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  React.useLayoutEffect(() => {
+    const outer = outerRef.current
+    const inner = innerRef.current
+    if (!morphKey || !outer || !inner) return
+    const from = controls.current ? outer.offsetHeight : lastHeight.current
+    const to = inner.offsetHeight
+    controls.current?.stop()
+    controls.current = null
+    if (disabled || from === to || !from) {
+      outer.style.height = ""
+      return
+    }
+    outer.style.height = `${from}px`
+    const run = animate(outer, { height: [from, to] }, HEIGHT_SPRING)
+    controls.current = run
+    run.then(() => {
+      if (controls.current !== run) return
+      controls.current = null
+      outer.style.height = ""
+    })
+  }, [morphKey, disabled])
+
+  return [outerRef, innerRef] as const
+}
+
 type ToolApprovalProps = Omit<React.ComponentProps<"div">, "title"> & {
   /** Tool identifier, e.g. `github.create_pull_request`. */
   tool: string
+  /** The question while pending. Inline `<code>` is styled, e.g. ``Run `rm -rf dist`?``. */
   title?: React.ReactNode
+  /** One line under the title while pending. Defaults to the tool identifier. */
   description?: React.ReactNode
+  /** Text of the result line. Defaults to a string `title` without its question mark, else `tool`. */
+  resultTitle?: React.ReactNode
+  /** Icon in the tile. Defaults to a shield, or a warning sign for `risk="high"`. */
+  icon?: React.ReactNode
   /** Arguments preview: an object is pretty-printed as JSON, a string is shown as-is. */
   args?: unknown
   /** Language for a string `args` preview (e.g. `bash` for a command). */
@@ -67,49 +120,64 @@ type ToolApprovalProps = Omit<React.ComponentProps<"div">, "title"> & {
   decision?: ToolApprovalDecision | null
   defaultDecision?: ToolApprovalDecision | null
   onDecisionChange?: (decision: ToolApprovalDecision | null) => void
+  /** Outcome of an approved call, shown on the result line. */
+  status?: ToolApprovalStatus
+  /** Show an Always allow button next to Approve. Defaults to on when `rememberKey` is set. */
+  allowAlways?: boolean
   /**
    * localStorage key that remembers "Always allow" across sessions. When it is
-   * already set, the card mounts as approved and `onDecisionChange("always")` fires.
+   * already set, the item mounts as approved and `onDecisionChange("always")` fires.
    * Only Revoke clears it; a controlled parent resetting `decision` to `null` must
    * call `forgetToolApproval(rememberKey)` itself.
    */
   rememberKey?: string
   /**
-   * Show Undo (after Allow once / Deny) and Revoke (after Always allow) on the
-   * resolved card. Only Revoke clears the `rememberKey` entry.
+   * Show Undo (after Approve / Deny) and Revoke (after Always allow) on the
+   * result line until a `status` arrives. Only Revoke clears the `rememberKey` entry.
    */
   revocable?: boolean
+  /** Show the arguments while pending, on mount and whenever the decision returns to `null`. */
   defaultArgsOpen?: boolean
 }
 
 /**
- * Human-in-the-loop permission card: tool name, risk, arguments preview and
- * Allow once / Always allow / Deny. Resolves into a compact remembered state
- * that can be revoked.
+ * Human-in-the-loop permission request: a compact row with Deny and Approve
+ * that collapses into a single tool line showing the outcome.
  */
 function ToolApproval({
   tool,
-  title = "Allow this tool to run?",
+  title = DEFAULT_TITLE,
   description,
+  resultTitle,
+  icon,
   args,
   argsLanguage = "bash",
   risk = "medium",
   decision: decisionProp,
   defaultDecision = null,
   onDecisionChange,
+  status,
+  allowAlways,
   rememberKey,
   revocable = true,
-  defaultArgsOpen = true,
+  defaultArgsOpen = false,
   className,
   ...props
 }: ToolApprovalProps) {
   const reduce = useReducedMotion()
+  const argsId = React.useId()
   const [internal, setInternal] = React.useState<ToolApprovalDecision | null>(defaultDecision)
   const decision = decisionProp !== undefined ? decisionProp : internal
-  const [argsOpen, setArgsOpen] = React.useState(defaultArgsOpen && decision == null)
   const pending = decision == null
+  const [argsOpen, setArgsOpen] = React.useState(defaultArgsOpen && pending)
   const onChangeRef = React.useRef(onDecisionChange)
   onChangeRef.current = onDecisionChange
+
+  // The frame animates its height only while the content swaps (request row ↔
+  // result line, arguments shown ↔ hidden); otherwise it stays `auto`.
+  const [morphKey, setMorphKey] = React.useState(0)
+  const [outerRef, innerRef] = useHeightMorph(morphKey, reduce)
+  const [skipMorph, setSkipMorph] = React.useState(false)
 
   // Follow the decision, controlled or not: resolving folds the arguments,
   // going back to pending (Undo, or a parent resetting `decision` to null)
@@ -118,23 +186,33 @@ function ToolApproval({
   if (decision !== prevDecision) {
     setPrevDecision(decision)
     setArgsOpen(decision == null ? defaultArgsOpen : false)
+    if ((decision == null) !== (prevDecision == null)) {
+      if (skipMorph) setSkipMorph(false)
+      else setMorphKey((k) => k + 1)
+    }
+  }
+
+  const toggleArgs = () => {
+    setMorphKey((k) => k + 1)
+    setArgsOpen((open) => !open)
   }
 
   const decide = React.useCallback(
     (next: ToolApprovalDecision | null) => {
       if (decisionProp === undefined) setInternal(next)
       if (next === "always") writeRemembered(rememberKey, true)
-      // Only revoking an "Always allow" forgets it; undoing "Allow once" or
-      // "Deny" leaves a permission saved earlier alone.
+      // Only revoking an "Always allow" forgets it; undoing Approve or Deny
+      // leaves a permission saved earlier alone.
       if (next === null && decision === "always") writeRemembered(rememberKey, false)
       onChangeRef.current?.(next)
     },
     [decision, decisionProp, rememberKey]
   )
 
-  // Remembered permission from an earlier session.
+  // Remembered permission from an earlier session: resolve without the morph.
   React.useEffect(() => {
     if (pending && readRemembered(rememberKey)) {
+      setSkipMorph(true)
       if (decisionProp === undefined) setInternal("always")
       onChangeRef.current?.("always")
     }
@@ -147,6 +225,25 @@ function ToolApproval({
   }, [args])
   const argsLang: CodeLanguage = typeof args === "string" ? argsLanguage : "json"
   const riskInfo = RISK[risk]
+  const showAlways = allowAlways ?? rememberKey != null
+  const tileIcon = icon ?? (risk === "high" ? <WarningIcon /> : <ShieldIcon />)
+  const lineTitle =
+    resultTitle ??
+    (typeof title === "string" && title !== DEFAULT_TITLE ? title.replace(/\s*\?$/, "") : title === DEFAULT_TITLE ? tool : title)
+
+  const outcome = pending ? null : decision === "deny" ? "denied" : (status ?? (decision === "always" ? "always" : "approved"))
+  const OUTCOME: Record<NonNullable<typeof outcome>, { label: string; tone: string; icon: React.ReactNode }> = {
+    approved: { label: "Approved", tone: "text-success", icon: <CheckIcon className="size-3.5" /> },
+    always: { label: "Always allowed", tone: "text-success", icon: <CheckIcon className="size-3.5" /> },
+    running: { label: "Running", tone: "text-primary", icon: <ToolStatusIcon status="running" /> },
+    done: { label: "Done", tone: "text-success", icon: <ToolStatusIcon status="success" /> },
+    failed: { label: "Failed", tone: "text-destructive", icon: <ToolStatusIcon status="error" /> },
+    denied: { label: "Denied", tone: "text-muted-foreground", icon: <ToolStatusIcon status="cancelled" /> },
+  }
+
+  const enter = { opacity: 0 }
+  const fadeIn = { duration: reduce ? 0.15 : 0.22, ease: AGENT_EASE, delay: reduce ? 0 : 0.04 }
+  const fadeOut = { duration: 0.12, ease: AGENT_EASE }
 
   return (
     <div
@@ -154,115 +251,158 @@ function ToolApproval({
       aria-label={`Permission request for ${tool}`}
       data-slot="tool-approval"
       data-decision={decision ?? "pending"}
+      data-status={pending ? undefined : (status ?? undefined)}
       className={cn(
-        "w-full overflow-hidden rounded-2xl bg-card text-ui text-card-foreground shadow-raised",
-        pending && "ring-1 ring-warning/35",
+        "@container/tool-approval frame-2xl frame-inset-2 w-full overflow-hidden text-ui text-foreground ring-1 ring-border ring-inset",
         className
       )}
       {...props}
     >
-      <div className="flex items-start gap-3 p-3.5 pb-2.5">
-        <IconChip
-          tone={pending ? (risk === "high" ? "destructive" : "warning") : decision === "deny" ? "neutral" : "success"}
-          className="transition-[background-color,color,box-shadow] duration-300"
-        >
+      <div ref={outerRef} className="relative overflow-hidden">
+        <div ref={innerRef} className="relative p-2">
           <AnimatePresence mode="popLayout" initial={false}>
-            <motion.span
-              key={decision ?? "pending"}
-              initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.5, rotate: -20 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.5 }}
-              transition={{ type: "spring", stiffness: 500, damping: 28 }}
-              className="grid place-items-center"
-            >
-              {pending ? (
-                risk === "high" ? <WarningIcon /> : <ShieldIcon />
-              ) : decision === "deny" ? (
-                <XIcon />
-              ) : (
-                <CheckIcon />
-              )}
-            </motion.span>
+            {pending ? (
+              <motion.div
+                key="request"
+                data-slot="tool-approval-request"
+                initial={enter}
+                animate={{ opacity: 1, transition: fadeIn }}
+                exit={{ opacity: 0, transition: fadeOut }}
+                className="flex flex-col"
+              >
+                <div
+                  className={cn(
+                    "flex flex-col gap-2",
+                    // Three buttons need a wider row before the actions sit beside the text.
+                    showAlways
+                      ? "@lg/tool-approval:flex-row @lg/tool-approval:items-center @lg/tool-approval:gap-3"
+                      : "@sm/tool-approval:flex-row @sm/tool-approval:items-center @sm/tool-approval:gap-3"
+                  )}
+                >
+                  <div className="flex min-w-0 flex-1 items-center gap-2">
+                    <IconChip tone={riskInfo.tone} className="rounded-inner">
+                      {tileIcon}
+                    </IconChip>
+                    <div className="flex min-w-0 flex-1 flex-col">
+                      <span
+                        data-slot="tool-approval-title"
+                        className="font-medium text-pretty [&_code]:rounded-sm [&_code]:bg-muted [&_code]:px-1 [&_code]:py-px [&_code]:font-mono [&_code]:text-ui-sm"
+                      >
+                        {title}
+                      </span>
+                      <span
+                        data-slot="tool-approval-description"
+                        className={cn("text-ui-sm text-pretty text-muted-foreground", description == null && "truncate font-mono")}
+                      >
+                        {description ?? tool}
+                        <span className="sr-only">. {riskInfo.label}.</span>
+                      </span>
+                    </div>
+                    {argsText ? (
+                      <Button
+                        size="icon-sm"
+                        variant="ghost"
+                        aria-expanded={argsOpen}
+                        aria-controls={argsOpen ? argsId : undefined}
+                        aria-label={argsOpen ? "Hide arguments" : "Show arguments"}
+                        title={argsOpen ? "Hide arguments" : "Show arguments"}
+                        onClick={toggleArgs}
+                        className="text-muted-foreground"
+                      >
+                        <ChevronDownIcon
+                          className={cn(
+                            "transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                            argsOpen && "rotate-180"
+                          )}
+                        />
+                      </Button>
+                    ) : null}
+                  </div>
+                  <div
+                    data-slot="tool-approval-actions"
+                    className={cn(
+                      "ms-10 flex shrink-0 flex-wrap items-center gap-1.5",
+                      showAlways ? "@lg/tool-approval:ms-0" : "@sm/tool-approval:ms-0"
+                    )}
+                  >
+                    <Button size="sm" variant="outline" onClick={() => decide("deny")}>
+                      Deny
+                    </Button>
+                    {showAlways ? (
+                      <Button size="sm" variant="secondary" onClick={() => decide("always")}>
+                        Always allow
+                      </Button>
+                    ) : null}
+                    <Button size="sm" onClick={() => decide("once")}>
+                      Approve
+                    </Button>
+                  </div>
+                </div>
+                <AnimatePresence mode="popLayout" initial={false}>
+                  {argsText && argsOpen ? (
+                    <motion.div
+                      key="args"
+                      id={argsId}
+                      data-slot="tool-approval-args"
+                      initial={enter}
+                      animate={{ opacity: 1, transition: fadeIn }}
+                      exit={{ opacity: 0, transition: fadeOut }}
+                      className="mt-2 max-h-52 w-full overflow-auto rounded-inner bg-code p-3 shadow-well scrollbar-thin"
+                    >
+                      <CodeHighlight code={argsText} language={argsLang} wrap />
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="result"
+                data-slot="tool-approval-result"
+                initial={enter}
+                animate={{ opacity: 1, transition: fadeIn }}
+                exit={{ opacity: 0, transition: fadeOut }}
+                className="flex min-h-6 w-full items-center gap-2"
+              >
+                <IconChip size="sm" className="rounded-inner">
+                  {tileIcon}
+                </IconChip>
+                <span className="flex min-w-0 flex-1 items-baseline gap-2">
+                  <span className="max-w-full shrink-0 truncate font-medium [&_code]:font-mono [&_code]:text-ui-sm">{lineTitle}</span>
+                  {lineTitle !== tool ? (
+                    <span className="hidden min-w-0 truncate font-mono text-ui-xs text-muted-foreground @sm/tool-approval:inline">
+                      {tool}
+                    </span>
+                  ) : null}
+                </span>
+                {outcome ? (
+                  <span
+                    role="status"
+                    className={cn("inline-flex shrink-0 items-center gap-1 text-ui-sm font-medium", OUTCOME[outcome].tone)}
+                  >
+                    {OUTCOME[outcome].icon}
+                    <ActionSwapRollText value={outcome}>{OUTCOME[outcome].label}</ActionSwapRollText>
+                  </span>
+                ) : null}
+                {revocable && status == null ? (
+                  <Button size="xs" variant="ghost" onClick={() => decide(null)} className="rounded-inner text-muted-foreground">
+                    <UndoIcon />
+                    {decision === "always" ? "Revoke" : "Undo"}
+                  </Button>
+                ) : null}
+              </motion.div>
+            )}
           </AnimatePresence>
-        </IconChip>
-        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-          <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="font-semibold">{pending ? title : DECISION_COPY[decision]}</span>
-            <Badge size="sm" variant={pending ? riskInfo.variant : decision === "deny" ? "outline" : "success"}>
-              {pending ? riskInfo.label : decision === "always" ? "Remembered" : decision === "once" ? "This run" : "Blocked"}
-            </Badge>
-          </div>
-          <code className="truncate font-mono text-ui-sm text-muted-foreground">{tool}</code>
-          {description && pending ? <p className="pt-1 leading-relaxed text-muted-foreground">{description}</p> : null}
         </div>
-      </div>
-
-      {argsText ? (
-        <CollapsiblePrimitive.Root open={argsOpen} onOpenChange={setArgsOpen} className="px-3.5">
-          <CollapsiblePrimitive.Trigger className="group/args -ml-1.5 inline-flex h-7 cursor-pointer items-center gap-1 rounded-md px-1.5 text-ui-sm font-medium text-muted-foreground outline-none select-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50">
-            {argsOpen ? "Hide arguments" : "Show arguments"}
-            <ChevronDownIcon className="size-3.5 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/args:rotate-180 motion-reduce:transition-none" />
-          </CollapsiblePrimitive.Trigger>
-          <CollapsiblePrimitive.Panel className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none">
-            <div className="max-h-52 overflow-auto rounded-xl bg-code p-3 shadow-well scrollbar-thin">
-              <CodeHighlight code={argsText} language={argsLang} wrap />
-            </div>
-          </CollapsiblePrimitive.Panel>
-        </CollapsiblePrimitive.Root>
-      ) : null}
-
-      <div className="relative p-3.5 pt-3">
-        <AnimatePresence mode="popLayout" initial={false}>
-          {pending ? (
-            <motion.div
-              key="actions"
-              initial={{ opacity: 0, y: reduce ? 0 : 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: reduce ? 0 : -6, filter: reduce ? "none" : "blur(2px)" }}
-              transition={{ duration: 0.22, ease: AGENT_EASE }}
-              className="flex flex-wrap items-center gap-2"
-            >
-              <Button size="sm" variant="ghost" onClick={() => decide("deny")} className="text-muted-foreground">
-                Deny
-              </Button>
-              <div className="ml-auto flex gap-2">
-                <Button size="sm" variant="secondary" onClick={() => decide("once")}>
-                  Allow once
-                </Button>
-                <Button size="sm" onClick={() => decide("always")}>
-                  Always allow
-                </Button>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="resolved"
-              role="status"
-              initial={{ opacity: 0, y: reduce ? 0 : 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: AGENT_EASE }}
-              className="flex min-h-8 items-center gap-2 text-ui-sm text-muted-foreground"
-            >
-              <span className="flex-1">
-                {decision === "always"
-                  ? "Future calls to this tool run without asking."
-                  : decision === "once"
-                    ? "Approved for this call only."
-                    : "The agent was told not to run this tool."}
-              </span>
-              {revocable ? (
-                <Button size="xs" variant="ghost" onClick={() => decide(null)} className="text-muted-foreground">
-                  <UndoIcon />
-                  {decision === "always" ? "Revoke" : "Undo"}
-                </Button>
-              ) : null}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </div>
   )
 }
 
-export { ToolApproval, forgetToolApproval, type ToolApprovalProps, type ToolApprovalDecision, type ToolApprovalRisk }
+export {
+  ToolApproval,
+  forgetToolApproval,
+  type ToolApprovalProps,
+  type ToolApprovalDecision,
+  type ToolApprovalRisk,
+  type ToolApprovalStatus,
+}

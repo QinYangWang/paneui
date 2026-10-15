@@ -31,7 +31,7 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "The sweep is a CSS keyframe animation shipped with the component. Under `prefers-reduced-motion: reduce` it stops and the gradient rests at its midpoint.",
+      body: "The sweep is a CSS keyframe animation shipped with the component. The band enters and leaves fully clear of the text, so the loop has no visible reset. Under `prefers-reduced-motion: reduce` it stops with the band resting mid-text.",
     },
     {
       title: "Related",
@@ -55,7 +55,7 @@ export default {
           name: "spread",
           type: "number",
           default: "14",
-          description: "Width of the bright band, as a percentage of the gradient.",
+          description: "Width of the bright band; 14 spans about half the text.",
         },
         {
           name: "style",

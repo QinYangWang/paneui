@@ -143,7 +143,7 @@ function AvailabilityScheduler({
     <div
       data-slot="availability-scheduler"
       className={cn(
-        "w-full max-w-xl frame-2xl frame-p-2 bg-card shadow-raised",
+        "@container w-full max-w-xl frame-2xl frame-p-2 bg-card shadow-raised",
         className
       )}
       {...props}
@@ -236,13 +236,15 @@ function DayRow({
       data-slot="availability-day"
       data-enabled={data.enabled || undefined}
       className={cn(
-        "flex flex-col gap-3 rounded-inner px-3 py-3 sm:flex-row sm:items-start sm:gap-4",
-        !first && "border-t border-border/60"
+        // Lays out by the scheduler's own width, not the screen: narrow stacks the ranges under
+        // the day, wide puts them beside it. Actions sit on the day's first line either way.
+        "relative grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 rounded-inner px-3 py-3 @lg:grid-cols-[8rem_auto_minmax(0,1fr)] @lg:gap-x-4",
+        !first && "before:absolute before:inset-x-3 before:top-0 before:h-px before:bg-border/60"
       )}
       role="group"
       aria-labelledby={labelId}
     >
-      <label className="flex h-9 w-36 shrink-0 cursor-pointer items-center gap-3 text-ui font-medium select-none">
+      <label className="col-start-1 row-start-1 flex h-9 min-w-0 cursor-pointer items-center gap-3 text-ui font-medium select-none">
         <Switch
           checked={data.enabled}
           onCheckedChange={(checked) =>
@@ -253,12 +255,12 @@ function DayRow({
           }
           aria-label={`${day.label} available`}
         />
-        <span id={labelId} className={cn("transition-colors duration-200", !data.enabled && "text-muted-foreground")}>
+        <span id={labelId} className={cn("truncate transition-colors duration-200", !data.enabled && "text-muted-foreground")}>
           {day.label}
         </span>
       </label>
 
-      <div className="min-w-0 flex-1">
+      <div className="col-span-2 row-start-2 min-w-0 @lg:col-span-1 @lg:col-start-2 @lg:row-start-1">
         <AnimatePresence initial={false} mode="popLayout">
           {!data.enabled ? (
             <motion.p
@@ -267,7 +269,7 @@ function DayRow({
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, y: -4, filter: "blur(3px)" }}
               transition={ROW}
-              className="flex h-9 items-center text-ui text-muted-foreground"
+              className="hidden h-9 items-center text-ui text-muted-foreground @lg:flex"
             >
               Unavailable
             </motion.p>
@@ -283,7 +285,9 @@ function DayRow({
               <AnimatePresence initial={false}>
                 {data.ranges.map((r, i) => (
                   <motion.li key={r.id} {...slide} transition={ROW} className="overflow-visible">
-                    <div className={cn("flex items-center gap-2", i > 0 && "pt-2")}>
+                    <div className="flex min-h-9 items-center gap-2 @max-3xs:py-1">
+                      {/* Below 16rem the two times stack instead of squeezing. */}
+                      <div className="flex min-w-0 items-center gap-2 @max-3xs:flex-1 @max-3xs:flex-col @max-3xs:items-stretch @max-3xs:gap-1">
                       <TimeSelect
                         label={`${day.label} range ${i + 1} start`}
                         value={r.start}
@@ -292,7 +296,7 @@ function DayRow({
                         invalid={bad.has(r.id)}
                         onChange={(v) => setEdge(r.id, "start", v)}
                       />
-                      <span aria-hidden className="text-muted-foreground">
+                      <span aria-hidden className="text-muted-foreground @max-3xs:hidden">
                         –
                       </span>
                       <TimeSelect
@@ -303,6 +307,7 @@ function DayRow({
                         invalid={bad.has(r.id)}
                         onChange={(v) => setEdge(r.id, "end", v)}
                       />
+                      </div>
                       <Button
                         variant="ghost"
                         size="icon-sm"
@@ -317,21 +322,6 @@ function DayRow({
                       >
                         <XIcon />
                       </Button>
-                      {i === 0 && (
-                        <div className="ml-auto flex items-center gap-1 sm:ml-0">
-                          <Button
-                            variant="ghost"
-                            size="icon-sm"
-                            aria-label={`Add a range on ${day.label}`}
-                            disabled={!canAdd}
-                            onClick={addRange}
-                            className="text-muted-foreground hover:text-foreground"
-                          >
-                            <PlusIcon />
-                          </Button>
-                          <CopyMenu day={day} days={days} onCopy={onCopy} />
-                        </div>
-                      )}
                     </div>
                   </motion.li>
                 ))}
@@ -347,7 +337,7 @@ function DayRow({
                     role="alert"
                     className="overflow-hidden text-ui-sm text-destructive"
                   >
-                    <span className="block pt-2">These hours overlap.</span>
+                    <span className="block pt-0.5">These hours overlap.</span>
                   </motion.li>
                 )}
               </AnimatePresence>
@@ -355,6 +345,43 @@ function DayRow({
           )}
         </AnimatePresence>
       </div>
+
+      <AnimatePresence initial={false} mode="popLayout">
+        {!data.enabled ? (
+          <motion.p
+            key="off"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            aria-hidden
+            className="col-start-2 row-start-1 flex h-9 items-center text-ui text-muted-foreground @lg:hidden"
+          >
+            Unavailable
+          </motion.p>
+        ) : (
+          <motion.div
+            key="actions"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="col-start-2 row-start-1 flex h-9 items-center gap-1 @lg:col-start-3 @lg:-ml-2 @lg:justify-self-start"
+          >
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              aria-label={`Add a range on ${day.label}`}
+              disabled={!canAdd}
+              onClick={addRange}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <PlusIcon />
+            </Button>
+            <CopyMenu day={day} days={days} onCopy={onCopy} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </li>
   )
 }
@@ -384,7 +411,7 @@ function TimeSelect({
         size="sm"
         aria-label={label}
         aria-invalid={invalid || undefined}
-        className="w-26 min-w-0 pl-3 tabular-nums aria-invalid:ring-2 aria-invalid:ring-destructive/40"
+        className="w-26 min-w-max pl-3 tabular-nums @max-3xs:w-full aria-invalid:ring-2 aria-invalid:ring-destructive/40"
       >
         <SelectValue />
       </SelectTrigger>
