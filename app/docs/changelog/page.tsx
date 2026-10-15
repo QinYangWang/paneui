@@ -8,6 +8,20 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-file-tree-icons",
+    date: "October 15, 2026",
+    title: "File tree: chevrons for folders, type icons for files",
+    tag: "File tree",
+    changes: [
+      <>
+        Folders show only their chevron; files show a file-type icon picked and tinted by extension. Both sit in the same
+        16px slot, so at each level chevrons and file icons line up. <Code>getFileKind(name)</Code> is exported, and the
+        default <Code>indent</Code> is now 12px.
+      </>,
+      <>Redrawn <Code>CarIcon</Code> (side view), <Code>HighlighterIcon</Code> (chisel marker with a stroke) and <Code>SendIcon</Code> (points right).</>,
+    ],
+  },
+  {
     id: "2026-10-15-rounded-icons",
     date: "October 15, 2026",
     title: "Rounded icons are the new default",

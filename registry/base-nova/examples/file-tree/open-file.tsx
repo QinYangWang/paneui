@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { CodeIcon, ImageIcon, LockIcon } from "@/components/icons"
+import { LockIcon } from "@/components/icons"
 import { FileTree, FileTreeFile, FileTreeFolder } from "@/registry/base-nova/ui/file-tree"
 
 export default function FileTreeOpenFile() {
@@ -12,12 +12,12 @@ export default function FileTreeOpenFile() {
       <div className="rounded-xl bg-card p-2 shadow-surface">
         <FileTree label="Site" defaultExpanded={["public", "pages"]} onOpenFile={(node) => setOpened(node.name)}>
           <FileTreeFolder value="pages" name="pages">
-            <FileTreeFile value="index.html" name="index.html" icon={<CodeIcon />} />
-            <FileTreeFile value="about.html" name="about.html" icon={<CodeIcon />} />
+            <FileTreeFile value="index.html" name="index.html" />
+            <FileTreeFile value="about.html" name="about.html" />
           </FileTreeFolder>
           <FileTreeFolder value="public" name="public">
-            <FileTreeFile value="hero.png" name="hero.png" icon={<ImageIcon />} />
-            <FileTreeFile value="logo.svg" name="logo.svg" icon={<ImageIcon />} />
+            <FileTreeFile value="hero.png" name="hero.png" />
+            <FileTreeFile value="logo.svg" name="logo.svg" />
           </FileTreeFolder>
           <FileTreeFile value="secrets" name="secrets.env" icon={<LockIcon />} disabled />
         </FileTree>

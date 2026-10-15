@@ -3,16 +3,28 @@
 import * as React from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
-import { ChevronRightIcon, FileIcon, FolderIcon } from "@/components/icons"
+import {
+  BracesIcon,
+  ChevronRightIcon,
+  CodeIcon,
+  FileIcon,
+  ImageIcon,
+  LockIcon,
+  PaletteIcon,
+  SettingsIcon,
+  TerminalIcon,
+  TypeIcon,
+} from "@/components/icons"
 import { cn } from "@/lib/utils"
 
 /*
  * File / folder primitives. <FileTreeFolder> and <FileTreeFile> are
  * declarative: <FileTree> reads them into one flattened, keyboard-navigable
  * collection (WAI-ARIA tree pattern, roving tabindex, typeahead). Density and
- * geometry follow the VS Code explorer: 22px rows, 8px indent per level, a
- * 16px twistie with a 12px chevron, and a thin indent guide under each open
- * folder's twistie. Rows spring in and out as folders open and the selection
+ * geometry: 22px rows, 12px indent per level and one 16px leading slot per
+ * row. A folder's slot holds its chevron, a file's slot holds its file-type
+ * icon, so at the same level chevrons and file icons share one column. A thin
+ * indent guide runs under each open folder's chevron. Rows spring in and out as folders open and the selection
  * is one fill that glides between rows.
  */
 
@@ -81,6 +93,47 @@ function siblingsOf(nodes: FileTreeNode[], value: string): FileTreeNode[] | null
 }
 
 const SPRING = { type: "spring", stiffness: 420, damping: 34, mass: 0.6 } as const
+type FileKind = { icon: React.ReactNode; className: string }
+
+const KINDS: Record<string, FileKind> = {
+  ts: { icon: <CodeIcon />, className: "text-sky-600 dark:text-sky-400" },
+  js: { icon: <CodeIcon />, className: "text-amber-600 dark:text-amber-400" },
+  code: { icon: <CodeIcon />, className: "text-violet-600 dark:text-violet-400" },
+  markup: { icon: <CodeIcon />, className: "text-orange-600 dark:text-orange-400" },
+  style: { icon: <PaletteIcon />, className: "text-pink-600 dark:text-pink-400" },
+  data: { icon: <BracesIcon />, className: "text-yellow-600 dark:text-yellow-400" },
+  text: { icon: <TypeIcon />, className: "text-blue-600 dark:text-blue-400" },
+  image: { icon: <ImageIcon />, className: "text-emerald-600 dark:text-emerald-400" },
+  shell: { icon: <TerminalIcon />, className: "text-green-600 dark:text-green-400" },
+  config: { icon: <SettingsIcon />, className: "text-muted-foreground" },
+  lock: { icon: <LockIcon />, className: "text-muted-foreground" },
+  file: { icon: <FileIcon />, className: "text-muted-foreground" },
+}
+
+const EXT: Record<string, keyof typeof KINDS> = {
+  ts: "ts", tsx: "ts", mts: "ts", cts: "ts",
+  js: "js", jsx: "js", mjs: "js", cjs: "js",
+  py: "code", go: "code", rs: "code", rb: "code", java: "code", kt: "code", swift: "code", c: "code", h: "code",
+  cpp: "code", cs: "code", php: "code", vue: "code", svelte: "code", astro: "code", sql: "code",
+  html: "markup", htm: "markup", xml: "markup", mdx: "markup",
+  css: "style", scss: "style", sass: "style", less: "style",
+  json: "data", jsonc: "data", yaml: "data", yml: "data", toml: "data", csv: "data",
+  md: "text", txt: "text", rst: "text",
+  png: "image", jpg: "image", jpeg: "image", gif: "image", webp: "image", avif: "image", svg: "image", ico: "image",
+  sh: "shell", bash: "shell", zsh: "shell", fish: "shell", ps1: "shell",
+  env: "config", ini: "config", conf: "config", config: "config", gitignore: "config", npmrc: "config", editorconfig: "config",
+  lock: "lock", pem: "lock", key: "lock",
+}
+
+/** The file-type icon and tint the tree shows for a file name (by extension). */
+function getFileKind(name: string): FileKind {
+  const lower = name.toLowerCase()
+  if (lower.startsWith(".env")) return KINDS.config
+  const dot = lower.lastIndexOf(".")
+  const ext = dot === -1 ? "" : lower.slice(dot + 1)
+  return KINDS[EXT[ext] ?? "file"]
+}
+
 const POP = { type: "spring", stiffness: 520, damping: 26, mass: 0.5 } as const
 const EASE = [0.22, 1, 0.36, 1] as const
 /** Left padding of a depth-0 row, px. */
@@ -98,7 +151,7 @@ type FileTreeProps = Omit<React.ComponentProps<"div">, "children" | "defaultValu
   onExpandedChange?: (expanded: string[]) => void
   /** Called when a file (not a folder) is activated with Enter or a click. */
   onOpenFile?: (node: FileTreeNode) => void
-  /** Indent per level, px (VS Code explorer default: 8). */
+  /** Indent per level, px. */
   indent?: number
   label?: string
 }
@@ -113,7 +166,7 @@ function FileTree({
   defaultExpanded = [],
   onExpandedChange,
   onOpenFile,
-  indent = 8,
+  indent = 12,
   label = "Files",
   className,
   ...props
@@ -273,7 +326,7 @@ function FileTree({
               }}
               style={{ paddingLeft: PAD + row.depth * indent }}
               className={cn(
-                "group/file-tree-item relative flex h-[22px] shrink-0 cursor-pointer items-center gap-1 rounded-sm pr-2 text-muted-foreground outline-none select-none",
+                "group/file-tree-item relative flex h-[22px] shrink-0 cursor-pointer items-center gap-1.5 rounded-sm pr-2 text-muted-foreground outline-none select-none",
                 "focus-visible:ring-inset",
                 "transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
                 isSelected && "font-medium text-foreground",
@@ -306,40 +359,30 @@ function FileTree({
                 />
               ))}
 
-              <motion.span
-                aria-hidden
-                initial={false}
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                transition={reduce ? { duration: 0 } : POP}
-                className={cn(
-                  "relative z-10 grid size-4 shrink-0 place-items-center text-muted-foreground [&_svg]:size-3",
-                  !isFolder && "invisible"
-                )}
-              >
-                <ChevronRightIcon />
-              </motion.span>
-
-              <span
-                aria-hidden
-                className={cn(
-                  "relative z-10 grid size-4 shrink-0 place-items-center transition-colors [&_svg]:size-4",
-                  isFolder && isOpen && "text-primary"
-                )}
-              >
-                {node.icon ??
-                  (isFolder ? (
-                    <motion.span
-                      initial={false}
-                      animate={isOpen && !reduce ? { scale: [1, 1.14, 1], rotate: [0, -6, 0] } : { scale: 1, rotate: 0 }}
-                      transition={{ duration: 0.32, ease: EASE }}
-                      className="grid place-items-center"
-                    >
-                      <FolderIcon />
-                    </motion.span>
-                  ) : (
-                    <FileIcon />
-                  ))}
-              </span>
+              {/* one leading slot: the chevron for a folder, the file-type icon for a file */}
+              {isFolder ? (
+                <motion.span
+                  aria-hidden
+                  data-slot="file-tree-chevron"
+                  initial={false}
+                  animate={{ rotate: isOpen ? 90 : 0 }}
+                  transition={reduce ? { duration: 0 } : POP}
+                  className={cn(
+                    "relative z-10 grid size-4 shrink-0 place-items-center text-muted-foreground transition-colors [&_svg]:size-3",
+                    isOpen && "text-foreground"
+                  )}
+                >
+                  {node.icon ?? <ChevronRightIcon />}
+                </motion.span>
+              ) : (
+                <span
+                  aria-hidden
+                  data-slot="file-tree-icon"
+                  className={cn("relative z-10 grid size-4 shrink-0 place-items-center [&_svg]:size-4", !node.icon && getFileKind(node.name).className)}
+                >
+                  {node.icon ?? getFileKind(node.name).icon}
+                </span>
+              )}
 
               <span data-slot="file-tree-label" className="relative z-10 min-w-0 flex-1 truncate">
                 {node.name}
@@ -353,5 +396,5 @@ function FileTree({
   )
 }
 
-export { FileTree, FileTreeFolder, FileTreeFile }
-export type { FileTreeProps, FileTreeNode, FileTreeFolderProps, FileTreeFileProps }
+export { FileTree, FileTreeFolder, FileTreeFile, getFileKind }
+export type { FileTreeProps, FileTreeNode, FileTreeFolderProps, FileTreeFileProps, FileKind }

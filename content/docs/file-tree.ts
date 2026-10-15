@@ -29,13 +29,17 @@ export default {
     {
       id: "open-file",
       title: "Open File and Icons",
-      description: "`onOpenFile` fires when a file is clicked or activated with Enter. Each node takes an `icon`, and `indent` sets px per level.",
+      description: "`onOpenFile` fires when a file is clicked or activated with Enter. Files get a file-type icon from their extension; a file's `icon` replaces it (here the lock on `secrets.env`), and `indent` sets px per level.",
     },
   ],
   notes: [
     {
       title: "Keyboard",
       body: "Follows the WAI-ARIA tree pattern: ↑ / ↓ move, → opens a folder or enters it, ← closes it or goes to the parent, Home / End jump, Enter or Space activates, `*` expands every sibling folder, and typing jumps to the next matching name.",
+    },
+    {
+      title: "Icons",
+      body: "Every row has one 16px leading slot: a folder shows its chevron there, a file its file-type icon, picked and tinted by extension (code, styles, data, text, images, shell, config, locks; anything else gets a plain file). So at each level the chevrons and the file icons line up in one column. `getFileKind(name)` returns the same icon and tint for use elsewhere.",
     },
     {
       title: "Motion",
@@ -56,7 +60,7 @@ export default {
         { name: "defaultExpanded", type: "string[]", default: "[]", description: "Folders open on first render." },
         { name: "onExpandedChange", type: "(expanded: string[]) => void", description: "Called when folders open or close." },
         { name: "onOpenFile", type: "(node: FileTreeNode) => void", description: "Called when a file (not a folder) is activated with Enter or a click." },
-        { name: "indent", type: "number", default: "8", description: "Indent per level, px (VS Code explorer default)." },
+        { name: "indent", type: "number", default: "12", description: "Indent per level, px." },
         { name: "label", type: "string", default: `"Files"`, description: "Accessible name of the tree." },
       ],
       dataAttributes: [
@@ -70,7 +74,7 @@ export default {
       props: [
         { name: "value", type: "string", required: true, description: "Unique id." },
         { name: "name", type: "string", required: true, description: "Label; also used for typeahead." },
-        { name: "icon", type: "ReactNode", description: "Replaces the folder icon." },
+        { name: "icon", type: "ReactNode", description: "Replaces the chevron. Folders have no folder icon; the chevron is their only leading mark." },
         { name: "meta", type: "ReactNode", description: "Trailing content (status dot, size, badge)." },
         { name: "disabled", type: "boolean", description: "Dim it and ignore activation." },
         { name: "className", type: "string", description: "Class for the row." },

@@ -185,11 +185,10 @@ export const PhoneIcon = (p: IconProps) => (
 
 export const CarIcon = (p: IconProps) => (
   <Icon {...p}>
-    <path {...line} d="M5.5 10.5l1.6-4.1A3 3 0 0 1 9.9 4.5h4.2a3 3 0 0 1 2.8 1.9l1.6 4.1" />
-    <rect {...line} x="2.5" y="10.5" width="19" height="7" rx="3" />
-    <path {...line} d="M5.5 17.5v1a1.5 1.5 0 0 0 3 0v-1M15.5 17.5v1a1.5 1.5 0 0 0 3 0v-1" />
-    <circle {...dot} cx="7" cy="14" r="1.1" />
-    <circle {...dot} cx="17" cy="14" r="1.1" />
+    <path {...line} d="M4.8 16.5H3.5a1 1 0 0 1-1-1v-2.3a2 2 0 0 1 1.4-1.9l2.3-.8 2.5-3.4A3 3 0 0 1 11.1 6h3.3a3 3 0 0 1 2.3 1.1l2.8 3.4 1.2.3a2 2 0 0 1 1.5 1.9v2.8a1 1 0 0 1-1 1h-1.3M9.2 16.5h5.6" />
+    <path {...line} d="M6.4 10.5h13.1M12.5 6.2v4.3" />
+    <circle {...line} cx="7" cy="16.5" r="2.2" />
+    <circle {...line} cx="17" cy="16.5" r="2.2" />
   </Icon>
 );
 
@@ -390,8 +389,9 @@ export const StrikethroughIcon = (p: IconProps) => (
 );
 export const HighlighterIcon = (p: IconProps) => (
   <Icon {...p}>
-    <path {...line} d="M17.34 3.54L20.16 6.36Q21.44 7.63 20.16 8.9L12.24 16.83Q11.82 17.25 11.39 16.83L6.87 12.31Q6.45 11.88 6.87 11.46L14.8 3.54Q16.07 2.27 17.34 3.54z" />
-    <path {...line} d="M6.45 11.88L4.47 13.87Q4.04 14.29 4.47 14.71L8.99 19.23Q9.41 19.66 9.83 19.23L11.82 17.25M4.04 14.29L2.25 19.18Q2.01 19.84 2.5 20.33L3.37 21.2Q3.86 21.69 4.52 21.45L9.41 19.66" />
+    <path {...line} d="M14.6 3.9a2 2 0 0 1 2.8 0l2.7 2.7a2 2 0 0 1 0 2.8L13 16.5 7.5 11z" />
+    <path {...line} d="M7.5 11l-1.5 1.5a1.5 1.5 0 0 0-.3 1.7l.5 1.1-2.7 2.7h4.2l.8-.8 1.1.5a1.5 1.5 0 0 0 1.7-.3l1.7-1.9" />
+    <path {...line} d="M13.5 20.5h7" />
   </Icon>
 );
 export const BaselineIcon = (p: IconProps) => (
@@ -681,8 +681,8 @@ export const ChatIcon = (p: IconProps) => (
 
 export const SendIcon = (p: IconProps) => (
   <Icon {...p}>
-    <path {...line} d="M20.3 3.1c.5-.2 1 .3.8.8l-5.9 16.1c-.3.9-1.5.9-1.9.1l-2.9-6.5-6.5-2.9c-.8-.4-.8-1.6.1-1.9z" />
-    <path {...line} d="M10.6 13.4l6.1-6.1" />
+    <path {...line} d="M4.6 3.7l15.8 7.2c.9.4.9 1.8 0 2.2L4.6 20.3c-.9.4-1.8-.5-1.4-1.4L6 12 3.2 5.1c-.4-.9.5-1.8 1.4-1.4z" />
+    <path {...line} d="M6 12h5.5" />
   </Icon>
 );
 
