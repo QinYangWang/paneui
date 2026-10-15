@@ -9,7 +9,8 @@ import {
   type TerminalTransport,
 } from "@/registry/base-nova/ui/terminal"
 
-import { normalize, ROOT, USER, type Workspace } from "./workspace"
+import type { VsCodeHost } from "./host"
+import { normalize, rel, ROOT, USER, type Workspace } from "./workspace"
 
 export type TerminalSession = { id: string; title: string; transport: TerminalTransport; remote: boolean }
 
@@ -37,9 +38,19 @@ const quote = (s: string) => (/^[\w./~-]+$/.test(s) ? s : `'${s.replace(/'/g, `'
  * Terminal sessions in groups: each group is one tab in the list and shows
  * its terminals side by side (a split). Local sessions run the browser shell
  * on the shared workspace; with a PTY address every new session connects to
- * a real shell instead.
+ * a real shell instead, and a host's terminal (a desktop shell) wins over both.
  */
-export function useTerminals({ ws, ptyUrl, onOpenFile }: { ws: Workspace; ptyUrl: string | null; onOpenFile: (path: string) => void }) {
+export function useTerminals({
+  ws,
+  ptyUrl,
+  host,
+  onOpenFile,
+}: {
+  ws: Workspace
+  ptyUrl: string | null
+  host?: VsCodeHost
+  onOpenFile: (path: string) => void
+}) {
   const [sessions, setSessions] = React.useState<TerminalSession[]>([])
   const [groups, setGroups] = React.useState<string[][]>([])
   const [active, setActive] = React.useState<string | null>(null)
@@ -73,12 +84,17 @@ export function useTerminals({ ws, ptyUrl, onOpenFile }: { ws: Workspace; ptyUrl
   const make = React.useCallback(
     (cwd?: string): TerminalSession => {
       const n = ++counter.current
+      if (host?.terminal) {
+        const dir = cwd && cwd.startsWith(ROOT) ? rel(cwd) : ""
+        const transport = host.terminal({ cwd: ws.mounted ? dir : null, folder: ws.mounted })
+        return { id: `term-${n}-${Date.now().toString(36)}`, title: `${host.shellName ?? "shell"} ${n}`, transport, remote: true }
+      }
       const remote = !!ptyUrl
       const base = remote ? createWebSocketTransport(ptyUrl!) : createLocalShell({ fs: ws, cwd: ROOT, user: USER, host: "workspace", commands })
       const startup = cwd && cwd !== ROOT ? `cd ${quote(cwd)}\r` : null
       return { id: `term-${n}-${Date.now().toString(36)}`, title: remote ? `bash ${n}` : `sh ${n}`, transport: withStartup(base, startup), remote }
     },
-    [ws, ptyUrl, commands]
+    [ws, ptyUrl, host, commands]
   )
 
   const create = React.useCallback(

@@ -1,0 +1,17 @@
+@import "../../../../app/globals.css";
+
+/* The template and the components it uses live in the repo, outside this app. */
+@source "../../../../registry/base-nova";
+@source "../../../../components";
+@source "../../../../lib";
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--shell);
+}

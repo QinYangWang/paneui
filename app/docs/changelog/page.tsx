@@ -8,6 +8,22 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-desktop",
+    date: "October 15, 2026",
+    title: "Code editor on the desktop",
+    tag: "Templates",
+    changes: [
+      <>
+        New desktop example in <Code>apps/desktop</Code> runs the <Code>vscode</Code> template in a native window, on
+        folders from disk with real shells.
+      </>,
+      <>
+        <Code>VsCodeApp</Code> takes an optional <Code>host</Code> for folders on disk, terminals, a native menu and a
+        draggable title bar.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-15-terminal",
     date: "October 15, 2026",
     title: "Terminal and a code editor template",

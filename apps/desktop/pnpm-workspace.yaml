@@ -1,0 +1,6 @@
+# Its own workspace, so installing the docs site at the repo root never pulls in the desktop shell.
+allowBuilds:
+  electron: true
+  esbuild: true
+  node-pty: true
+  "@tailwindcss/oxide": true

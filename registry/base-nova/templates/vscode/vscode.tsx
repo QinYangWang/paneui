@@ -19,6 +19,7 @@ import {
   TerminalSquareIcon,
   WarningIcon,
 } from "@/components/icons"
+import { cn } from "@/lib/utils"
 import { CommandPalette, type CommandPaletteItem } from "@/registry/base-nova/blocks/command-palette/command-palette"
 import { BottomSheet, BottomSheetContent, BottomSheetTitle } from "@/registry/base-nova/ui/bottom-sheet"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/registry/base-nova/ui/breadcrumb"
@@ -43,13 +44,14 @@ import { CodeEditor, type CodeEditorHandle, type Problem } from "./parts/code-ed
 import { Docs } from "./parts/docs"
 import { Explorer, type ExplorerHandle } from "./parts/explorer"
 import { ExtensionsView } from "./parts/extensions-view"
+import type { HostCommand, VsCodeHost } from "./parts/host"
 import { languageOf } from "./parts/languages"
 import { ScmView } from "./parts/scm-view"
 import { SearchView } from "./parts/search-view"
 import { IconAction } from "./parts/sidebar-header"
 import { StatusLine } from "./parts/status-line"
 import { useTerminals } from "./parts/terminals"
-import { abs, basename, dirname, rel, ROOT_NAME, Workspace } from "./parts/workspace"
+import { abs, basename, dirname, rel, Workspace } from "./parts/workspace"
 
 type View = "explorer" | "search" | "scm" | "extensions"
 type Session = { tabs: string[]; active: string | null; view: View }
@@ -98,19 +100,20 @@ const VIEWS: { id: View; label: string; shortcut: string; icon: React.ReactNode 
  * and a status bar. The explorer, the editor and every local terminal share
  * one file system, saved in this browser. `?pty=ws://…` connects new
  * terminals to a real shell instead. Below `md` the sidebar becomes a drawer
- * and the panel a bottom sheet.
+ * and the panel a bottom sheet. A `host` (a desktop shell) adds folders on
+ * disk, real terminals, a native menu and a draggable title bar.
  */
-export function VsCodeApp() {
+export function VsCodeApp({ host }: { host?: VsCodeHost } = {}) {
   const [stores, setStores] = React.useState<{ ws: Workspace; docs: Docs } | null>(null)
   React.useEffect(() => {
     const ws = new Workspace()
     setStores({ ws, docs: new Docs(ws) })
   }, [])
   if (!stores) return <div className="h-dvh w-full bg-shell" />
-  return <Shell ws={stores.ws} docs={stores.docs} />
+  return <Shell ws={stores.ws} docs={stores.docs} host={host} />
 }
 
-function Shell({ ws, docs }: { ws: Workspace; docs: Docs }) {
+function Shell({ ws, docs, host }: { ws: Workspace; docs: Docs; host?: VsCodeHost }) {
   const initial = React.useMemo(() => loadSession(ws), [ws])
   const mobile = useIsMobile()
   const { theme, toggle: toggleTheme } = useThemeToggle()
@@ -228,15 +231,55 @@ function Shell({ ws, docs }: { ws: Workspace; docs: Docs }) {
 
   /* ------------------------------ terminals ------------------------------- */
 
-  const terms = useTerminals({ ws, ptyUrl, onOpenFile: openFile })
+  const terms = useTerminals({ ws, ptyUrl, host, onOpenFile: openFile })
   const started = React.useRef(false)
   React.useEffect(() => {
     if (started.current) return
     started.current = true
     terms.create()
-    log(ws.restored ? `Restored ${ROOT_NAME} from this browser (${ws.listFiles().length} files)` : `Created ${ROOT_NAME} from the starter project`)
-    log(ptyUrl ? `Terminals connect to ${ptyUrl}` : "Terminals run a local shell on the workspace files")
-  }, [terms, log, ws, ptyUrl])
+    log(ws.restored ? `Restored ${ws.name} from this browser (${ws.listFiles().length} files)` : `Created ${ws.name} from the starter project`)
+    log(host?.terminal ? "Terminals run your shell" : ptyUrl ? `Terminals connect to ${ptyUrl}` : "Terminals run a local shell on the workspace files")
+  }, [terms, log, ws, ptyUrl, host])
+
+  /* ------------------------------- folders -------------------------------- */
+
+  const showFiles = (paths: string[]) => {
+    docs.clear()
+    paths.forEach((p) => docs.open(p))
+    setTabs(paths)
+    setActive(paths[0] ?? null)
+    setSelected(paths[0] ?? null)
+  }
+
+  const openFolder = async () => {
+    if (!host?.openFolder || !host.fs) return
+    const unsaved = docs.dirtyPaths().length
+    let folder
+    try {
+      folder = await host.openFolder()
+    } catch (e) {
+      return log(`Couldn’t open the folder: ${e instanceof Error ? e.message : String(e)}`, "error")
+    }
+    if (!folder) return
+    ws.mount(folder, host.fs, (e) => log(`Couldn’t write to disk: ${e instanceof Error ? e.message : String(e)}`, "error"))
+    const readme = ["README.md", "readme.md", "package.json"].map(abs).find((p) => ws.exists(p))
+    showFiles(readme ? [readme] : [])
+    const count = ws.listFiles().length
+    log(`Opened ${folder.name} (${count} ${count === 1 ? "file" : "files"}${folder.skipped ? `, ${folder.skipped} skipped` : ""})`)
+    if (unsaved) log(`Discarded unsaved changes in ${unsaved} ${unsaved === 1 ? "file" : "files"}`)
+    terms.create()
+  }
+
+  const closeFolder = async () => {
+    if (!ws.mounted) return
+    await host?.closeFolder?.()
+    ws.unmount()
+    showFiles(DEFAULT_TABS.filter((p) => ws.exists(p)))
+    log(`Back to ${ws.name}`)
+  }
+
+  // Changes on disk from outside the editor.
+  React.useEffect(() => host?.onChanges?.((changes) => ws.mounted && ws.applyExternal(changes)), [host, ws])
 
   /* ------------------------------- layout --------------------------------- */
 
@@ -308,6 +351,23 @@ function Shell({ ws, docs }: { ws: Workspace; docs: Docs }) {
       e.stopPropagation()
     }
   }
+  // Commands from a native menu.
+  const command = React.useRef<(c: HostCommand) => void>(() => {})
+  command.current = (c) => {
+    if (c === "open-folder") void openFolder()
+    else if (c === "close-folder") void closeFolder()
+    else if (c === "save") save()
+    else if (c === "save-all") saveAll()
+    else if (c === "new-file") createInExplorer("file")
+    else if (c === "new-folder") createInExplorer("folder")
+    else if (c === "commands") setPalette("commands")
+    else if (c === "files") setPalette("files")
+    else if (c === "toggle-sidebar") toggleSidebar()
+    else if (c === "toggle-panel") togglePanel()
+    else if (c === "new-terminal") newTerminal()
+  }
+  React.useEffect(() => host?.onCommand?.((c) => command.current(c)), [host])
+
   React.useEffect(() => {
     // Capture phase, so the shortcuts win over the editor's and the terminal's own key handling.
     const onKey = (e: KeyboardEvent) => keys.current(e)
@@ -320,13 +380,19 @@ function Shell({ ws, docs }: { ws: Workspace; docs: Docs }) {
   const paletteItems: CommandPaletteItem[] =
     palette === "files"
       ? [
-          ...[...tabs].reverse().map((p) => ({ id: `open:${p}`, label: basename(p), description: rel(dirname(p)) || ROOT_NAME, keywords: [rel(p)], group: "Open editors", icon: FileIcon, onSelect: () => openFile(p) })),
+          ...[...tabs].reverse().map((p) => ({ id: `open:${p}`, label: basename(p), description: rel(dirname(p)) || ws.name, keywords: [rel(p)], group: "Open editors", icon: FileIcon, onSelect: () => openFile(p) })),
           ...ws
             .listFiles()
             .filter((p) => !tabs.includes(p))
-            .map((p) => ({ id: `file:${p}`, label: basename(p), description: rel(dirname(p)) || ROOT_NAME, keywords: [rel(p)], group: "Files", icon: FileIcon, onSelect: () => openFile(p) })),
+            .map((p) => ({ id: `file:${p}`, label: basename(p), description: rel(dirname(p)) || ws.name, keywords: [rel(p)], group: "Files", icon: FileIcon, onSelect: () => openFile(p) })),
         ]
       : [
+          ...(host?.openFolder
+            ? [
+                { id: "open-folder", label: "File: Open folder…", group: "File", shortcut: ["⌘", "O"], icon: FolderIcon, onSelect: () => void openFolder() },
+                { id: "close-folder", label: "File: Close folder", group: "File", icon: FolderIcon, disabled: !ws.mounted, onSelect: () => void closeFolder() },
+              ]
+            : []),
           { id: "save", label: "File: Save", group: "File", shortcut: ["⌘", "S"], icon: FileIcon, disabled: !active, onSelect: () => save() },
           { id: "save-all", label: "File: Save all", group: "File", shortcut: ["⌥", "⌘", "S"], icon: FileIcon, onSelect: saveAll },
           { id: "new-file", label: "File: New file…", group: "File", icon: FileIcon, onSelect: () => createInExplorer("file") },
@@ -352,6 +418,7 @@ function Shell({ ws, docs }: { ws: Workspace; docs: Docs }) {
         ]
 
   const resetWorkspace = () => {
+    if (ws.mounted) void host?.closeFolder?.()
     ws.reset()
     docs.clear()
     DEFAULT_TABS.forEach((p) => docs.open(p))
@@ -359,7 +426,7 @@ function Shell({ ws, docs }: { ws: Workspace; docs: Docs }) {
     setActive(DEFAULT_TABS[0])
     setSelected(DEFAULT_TABS[0])
     setConfirmReset(false)
-    log(`Reset ${ROOT_NAME} to the starter project`)
+    log(`Reset ${ws.name} to the starter project`)
   }
 
   /* -------------------------------- render -------------------------------- */
@@ -574,7 +641,7 @@ function Shell({ ws, docs }: { ws: Workspace; docs: Docs }) {
       warnings={warnings}
       cursor={active ? cursor : null}
       language={language}
-      remote={!!ptyUrl}
+      remote={!!ptyUrl || !!host?.terminal}
       dark={dark}
       onBranch={() => showSidebar("scm")}
       onProblems={() => showPanel("problems")}
@@ -611,6 +678,20 @@ function Shell({ ws, docs }: { ws: Workspace; docs: Docs }) {
         </div>
       ) : (
         <div className="flex h-dvh w-full flex-col overflow-hidden bg-shell text-foreground">
+          {host?.titleBar && (
+            <header
+              className={cn(
+                "window-drag flex h-9 shrink-0 items-center justify-center px-3 text-ui-sm font-medium text-muted-foreground",
+                host.titleBar.controls === "left" && "ps-20",
+                host.titleBar.controls === "right" && "pe-36"
+              )}
+            >
+              <span className="truncate">
+                {active ? `${basename(active)} — ` : ""}
+                {ws.name}
+              </span>
+            </header>
+          )}
           <div className="flex min-h-0 flex-1">
             {rail("vertical")}
             <ResizablePanelGroup direction="horizontal" autoSaveId="vscode-template-shell" handleRef={outer} className="min-w-0 flex-1">

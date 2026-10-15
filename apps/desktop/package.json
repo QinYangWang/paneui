@@ -1,0 +1,29 @@
+{
+  "name": "qinyang-ui-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The code editor template as a desktop app.",
+  "main": "out/main/index.js",
+  "scripts": {
+    "postinstall": "electron-rebuild -f -o node-pty",
+    "rebuild": "electron-rebuild -f -o node-pty",
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron .",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "node-pty": "1.1.0"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.1",
+    "@tailwindcss/vite": "4.1.11",
+    "@types/node": "^22.10.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "electron": "^44.0.0",
+    "electron-vite": "^5.0.0",
+    "monaco-editor": "0.55.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.0.0"
+  }
+}

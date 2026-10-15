@@ -350,6 +350,8 @@ const eslintConfig = [
       "public/**",
       "node_modules/**",
       "next-env.d.ts",
+      // The desktop example: its own install and toolchain.
+      "apps/",
       // Vendored agent skills (installed via skills-lock.json), not our code.
       ".agents/**",
       ".claude/**",

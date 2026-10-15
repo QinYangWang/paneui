@@ -1,5 +1,6 @@
 import type { ShellFs } from "@/registry/base-nova/ui/terminal"
 
+import type { HostChange, HostFolder, HostFs } from "./host"
 import { SEED_DIRS, SEED_FILES } from "./seed"
 
 /** Shell user, home and the folder the explorer shows. */
@@ -52,7 +53,8 @@ function fsError(code: string, path: string) {
 /**
  * The workspace file system: one synchronous store shared by the explorer,
  * the editor and every local terminal (it implements the shell's file system
- * interface). Changes under the workspace root persist in localStorage.
+ * interface). Changes under the workspace root persist in localStorage, or,
+ * with a folder mounted from disk, are written through to it.
  * `baseline` is the last commit, which source control diffs against.
  */
 export class Workspace implements ShellFs {
@@ -66,6 +68,10 @@ export class Workspace implements ShellFs {
   version = 0
   /** Whether the state came from storage rather than the seed. */
   restored = false
+  /** Name the explorer shows for the root. */
+  name = ROOT_NAME
+  private disk: { fs: HostFs; onError: (e: unknown) => void } | null = null
+  private applying = false
 
   constructor() {
     if (!this.load()) this.seed()
@@ -98,7 +104,7 @@ export class Workspace implements ShellFs {
   }
 
   private persist() {
-    if (typeof window === "undefined") return
+    if (typeof window === "undefined" || this.disk) return
     clearTimeout(this.saveTimer)
     this.saveTimer = setTimeout(() => {
       const files: Record<string, string> = {}
@@ -112,8 +118,67 @@ export class Workspace implements ShellFs {
     }, 150)
   }
 
+  /** Whether the root is a folder on disk. */
+  get mounted() {
+    return !!this.disk
+  }
+
+  /**
+   * Show a folder from disk at the root. From here on every change under the
+   * root is also written to `fs`; failed writes go to `onError`.
+   */
+  mount(folder: HostFolder, fs: HostFs, onError: (e: unknown) => void) {
+    clearTimeout(this.saveTimer)
+    this.files.clear()
+    this.dirs = new Set([...SYSTEM_DIRS, ROOT])
+    for (const d of folder.dirs) this.ensureDir(abs(d))
+    for (const [p, content] of Object.entries(folder.files)) this.put(abs(p), content)
+    this.baseline = { ...folder.files }
+    this.name = folder.name
+    this.restored = false
+    this.disk = { fs, onError }
+    this.changed()
+  }
+
+  /** Back to the in-browser workspace. */
+  unmount() {
+    if (!this.disk) return
+    this.disk = null
+    this.name = ROOT_NAME
+    this.files.clear()
+    if (!this.load()) this.seed()
+    this.changed()
+  }
+
+  /** Take changes made on disk by something else, without writing them back. */
+  applyExternal(changes: HostChange[]) {
+    this.applying = true
+    try {
+      for (const c of changes) {
+        const p = abs(c.path)
+        try {
+          if (c.type === "write") this.writeFile(p, c.content)
+          else if (c.type === "mkdir") this.mkdir(p)
+          else if (this.exists(p)) this.rm(p, { recursive: true })
+        } catch {
+          /* a file became a folder or the reverse: the next change settles it */
+        }
+      }
+    } finally {
+      this.applying = false
+    }
+  }
+
+  private write(op: (fs: HostFs) => Promise<void>, ...paths: string[]) {
+    const disk = this.disk
+    if (!disk || this.applying || !paths.every((p) => p !== ROOT && inWorkspace(p))) return
+    op(disk.fs).catch(disk.onError)
+  }
+
   /** Back to the starter project, and forget the saved copy. */
   reset() {
+    this.disk = null
+    this.name = ROOT_NAME
     this.seed()
     this.restored = false
     this.changed()
@@ -198,6 +263,7 @@ export class Workspace implements ShellFs {
     if (this.dirs.has(p)) throw fsError("EISDIR", p)
     if (this.files.get(p) === content) return
     this.put(p, content)
+    this.write((fs) => fs.writeFile(rel(p), content), p)
     this.changed()
   }
 
@@ -211,12 +277,17 @@ export class Workspace implements ShellFs {
       added = true
       d = dirname(d)
     }
-    if (added) this.changed()
+    if (!added) return
+    this.write((fs) => fs.mkdir(rel(p)), p)
+    this.changed()
   }
 
   rm(path: string, opts?: { recursive?: boolean }) {
     const p = normalize(path)
-    if (this.files.delete(p)) return this.changed()
+    if (this.files.delete(p)) {
+      this.write((fs) => fs.rm(rel(p)), p)
+      return this.changed()
+    }
     if (!this.dirs.has(p)) throw fsError("ENOENT", p)
     if (p === "/" || p === ROOT) throw fsError("EPERM", p)
     const inside = (x: string) => x.startsWith(`${p}/`)
@@ -225,6 +296,7 @@ export class Workspace implements ShellFs {
     for (const f of [...this.files.keys()]) if (inside(f)) this.files.delete(f)
     for (const d of [...this.dirs]) if (inside(d)) this.dirs.delete(d)
     this.dirs.delete(p)
+    this.write((fs) => fs.rm(rel(p)), p)
     this.changed()
   }
 
@@ -250,6 +322,7 @@ export class Workspace implements ShellFs {
       }
       this.ensureDir(dirname(b))
     } else throw fsError("ENOENT", a)
+    this.write((fs) => fs.rename(rel(a), rel(b)), a, b)
     this.changed()
   }
 

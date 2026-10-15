@@ -26,7 +26,8 @@ export default function CodeEditorPage() {
 │       └── BottomPanel         Problems · Output · Terminal (Terminal × n, splits)
 ├── StatusLine                  branch, problems, cursor, language
 ├── CommandPalette              ⇧⌘P commands · ⌘P files
-└── parts/workspace.ts          the shared file system (localStorage)`,
+├── parts/workspace.ts          the shared file system (localStorage, or a folder on disk)
+└── parts/host.ts               optional desktop host: folders, shells, menu, title bar`,
   examples: [],
   api: [],
   notes: [
@@ -40,11 +41,15 @@ export default function CodeEditorPage() {
     },
     {
       title: "The editor",
-      body: "The editor loads from a CDN on first use and shows a spinner meanwhile; if it cannot load it falls back to a plain text area on the same buffers. Its colours are read from the theme tokens and follow light, dark and the accent live. Every workspace file has a model, so imports resolve across files and Problems lists TypeScript errors for the whole workspace. To bundle it instead of the CDN, call `loader.config({ monaco })` from `@monaco-editor/react` with a local `monaco-editor` import.",
+      body: "The editor loads from a CDN on first use and shows a spinner meanwhile; if it cannot load it falls back to a plain text area on the same buffers. Its colours are read from the theme tokens and follow light, dark and the accent live. Every workspace file has a model, so imports resolve across files and Problems lists TypeScript errors for the whole workspace. To bundle it instead of the CDN, call `loader.config({ monaco })` from `@monaco-editor/react` with a local `monaco-editor` import, as the desktop app does.",
     },
     {
       title: "Real terminals",
       body: "With `?pty=ws://…` in the URL every new terminal connects to the PTY bridge from the terminal item instead of the local shell. A real shell sees your disk, not the browser workspace, so the explorer and the terminal no longer share files in that mode.",
+    },
+    {
+      title: "Desktop app",
+      body: "`apps/desktop` runs this template in a native window. It passes a `host` (`parts/host.ts`) to `VsCodeApp`: File › Open Folder loads a folder from disk, saves and explorer changes write back to it, changes made outside show up, and every terminal is your own shell started in that folder. The editor is bundled, so it works offline. Without a folder it shows the starter project. Install and run steps are in `apps/desktop/README.md`.",
     },
     {
       title: "Keyboard",

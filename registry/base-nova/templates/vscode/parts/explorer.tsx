@@ -19,7 +19,7 @@ import { Input } from "@/registry/base-nova/ui/input"
 import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 
 import { IconAction, SidebarHeader } from "./sidebar-header"
-import { basename, dirname, normalize, rel, ROOT, ROOT_NAME, type Workspace } from "./workspace"
+import { basename, dirname, normalize, rel, ROOT, type Workspace } from "./workspace"
 
 type Status = "M" | "A" | "D"
 
@@ -219,7 +219,7 @@ export function Explorer({
         </IconAction>
       </SidebarHeader>
 
-      <div className="flex h-6 shrink-0 items-center px-3 text-ui-xs font-semibold tracking-wide text-muted-foreground uppercase">{ROOT_NAME}</div>
+      <div className="flex h-6 shrink-0 items-center px-3 text-ui-xs font-semibold tracking-wide text-muted-foreground uppercase">{ws.name}</div>
 
       {edit && (
         <form
@@ -230,7 +230,7 @@ export function Explorer({
           }}
         >
           <label htmlFor="explorer-name" className="truncate px-0.5 text-ui-xs text-muted-foreground">
-            {edit.kind === "rename" ? "Rename" : edit.kind === "file" ? "New file" : "New folder"} in {rel(edit.parent) || ROOT_NAME}
+            {edit.kind === "rename" ? "Rename" : edit.kind === "file" ? "New file" : "New folder"} in {rel(edit.parent) || ws.name}
           </label>
           <Input
             id="explorer-name"
