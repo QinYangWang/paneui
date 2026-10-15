@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "qinyang",
-  "homepage": "https://ui.qinyang.wang",
+  "homepage": "https://qinyangwang.github.io/ui",
   "items": [
     {
       "name": "theme",
@@ -25,6 +25,8 @@
           "color-chart-8": "var(--chart-8)",
           "color-shell": "var(--shell)",
           "color-shell-border": "var(--shell-border)",
+          "radius-2xs": "calc(var(--radius) * 0.3)",
+          "radius-xs": "calc(var(--radius) * 0.4)",
           "radius-sm": "calc(var(--radius) * 0.6)",
           "radius-md": "calc(var(--radius) * 0.8)",
           "radius-xl": "calc(var(--radius) * 1.4)",
@@ -478,6 +480,96 @@
           "primary": "var(--accent-600)",
           "primary-foreground": "oklch(100% 0 0)",
           "ring": "var(--accent-500)"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-none",
+      "type": "registry:theme",
+      "title": "Theme: Square radius",
+      "description": "Radius preset with square corners everywhere.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "0rem"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-sm",
+      "type": "registry:theme",
+      "title": "Theme: Small radius",
+      "description": "Radius preset with tighter corners everywhere.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "0.375rem"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-default",
+      "type": "registry:theme",
+      "title": "Theme: Default radius",
+      "description": "Radius preset that restores the default corner rounding.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "0.625rem"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-lg",
+      "type": "registry:theme",
+      "title": "Theme: Large radius",
+      "description": "Radius preset with rounder corners everywhere.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "0.875rem"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-xl",
+      "type": "registry:theme",
+      "title": "Theme: Extra large radius",
+      "description": "Radius preset with the roundest corners everywhere.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "1.125rem"
         }
       },
       "meta": {
@@ -3204,7 +3296,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/kbd"
       ],
       "files": [
         {
@@ -4695,6 +4788,353 @@
       ],
       "meta": {
         "category": "Blocks"
+      }
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Interrupts to confirm a destructive or important action.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Searchable list of actions, inline or in a dialog.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Overlays"
+      }
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Month grid for picking a date or a range.",
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Field that opens a calendar to pick one date.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/control-size",
+        "@qinyang/calendar",
+        "@qinyang/popover",
+        "@qinyang/select"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/date-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Shows how far a task has come.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Placeholder shape while content loads.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Divides groups of content with a hairline.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Shows a keyboard key or shortcut.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "Enters a one-time code, one character per slot.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/control-size"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/input-otp.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Input with icons, text or buttons inside the field.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/control-size",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/input-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Joins related buttons into one control.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/button-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native Select",
+      "description": "The browser's own select, styled as a field.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/control-size"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/native-select.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "Row of menus for a desktop app window.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/menu"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Site navigation with panels of links.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/navigation-menu.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Scrolls through slides one at a time.",
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/carousel.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Previews a linked item while it is hovered.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/hover-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Overlays"
       }
     }
   ]

@@ -106,7 +106,7 @@ function MorphSelectContent({
         <SelectPrimitive.Popup
           data-slot="morph-select-content"
           className={cn(
-            "group/morph flex h-(--morph-h) w-(--anchor-width) flex-col overflow-clip rounded-xl bg-popover text-popover-foreground shadow-surface outline-none data-[side=top]:justify-end",
+            "group/morph flex h-(--morph-h) w-(--anchor-width) flex-col overflow-clip frame-xl frame-inset-1.5 rounded-xl bg-popover text-popover-foreground shadow-surface outline-none data-[side=top]:justify-end",
             "transition-[height,margin,background-color,box-shadow] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]",
             // closed geometry: trigger-sized box; the margin keeps the positioner at full size
             "data-starting-style:h-(--anchor-height) data-starting-style:bg-card data-starting-style:shadow-raised",
@@ -151,7 +151,7 @@ function MorphSelectItem({ className, children, ...props }: SelectPrimitive.Item
     <SelectPrimitive.Item
       data-slot="morph-select-item"
       className={cn(
-        "relative flex h-8.5 cursor-default items-center gap-2 rounded-md pr-8 pl-2.5 text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent [&_svg]:size-4 [&_svg]:shrink-0",
+        "relative flex h-8.5 cursor-default items-center gap-2 rounded-inner pr-8 pl-2.5 text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

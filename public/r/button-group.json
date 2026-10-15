@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "title": "Button Group",
+  "description": "Joins related buttons into one control.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://qinyangwang.github.io/ui/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Joins buttons (and inputs, selects) into one control: inner corners go square and\n * neighbours overlap by their hairline. Nest groups with a gap to space clusters apart.\n */\nconst buttonGroupVariants = cva(\n  \"flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2\",\n  {\n    variants: {\n      orientation: {\n        horizontal:\n          \"[&>*:not(:first-child)]:rounded-s-none [&>*:not(:last-child)]:rounded-e-none [&>[data-variant=outline]:not(:first-child)]:-ms-px [&>[data-slot=input]:not(:first-child)]:-ms-px\",\n        vertical:\n          \"flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none [&>[data-variant=outline]:not(:first-child)]:-mt-px\",\n      },\n    },\n    defaultVariants: { orientation: \"horizontal\" },\n  }\n)\n\nfunction ButtonGroup({\n  className,\n  orientation = \"horizontal\",\n  ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof buttonGroupVariants>) {\n  return (\n    <div\n      role=\"group\"\n      data-slot=\"button-group\"\n      data-orientation={orientation}\n      className={cn(buttonGroupVariants({ orientation }), className)}\n      {...props}\n    />\n  )\n}\n\n/** Static text or an icon in the row, on the same well as an input. */\nfunction ButtonGroupText({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"button-group-text\"\n      className={cn(\n        \"flex items-center gap-1.5 rounded-lg bg-secondary px-2.5 text-ui font-medium text-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n/** A hairline between filled buttons that would otherwise touch. */\nfunction ButtonGroupSeparator({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: React.ComponentProps<\"div\"> & { orientation?: \"horizontal\" | \"vertical\" }) {\n  return (\n    <div\n      role=\"separator\"\n      aria-orientation={orientation}\n      data-slot=\"button-group-separator\"\n      className={cn(\"shrink-0 self-stretch bg-foreground/10\", orientation === \"vertical\" ? \"w-px\" : \"h-px\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Forms"
+  },
+  "type": "registry:ui"
+}

@@ -23,6 +23,8 @@
       "color-chart-8": "var(--chart-8)",
       "color-shell": "var(--shell)",
       "color-shell-border": "var(--shell-border)",
+      "radius-2xs": "calc(var(--radius) * 0.3)",
+      "radius-xs": "calc(var(--radius) * 0.4)",
       "radius-sm": "calc(var(--radius) * 0.6)",
       "radius-md": "calc(var(--radius) * 0.8)",
       "radius-xl": "calc(var(--radius) * 1.4)",

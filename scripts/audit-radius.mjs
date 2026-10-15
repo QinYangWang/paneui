@@ -57,6 +57,8 @@ const opt = (n, d) => {
 }
 const BASE = (process.env.BASE_URL || opt("--base", "http://localhost:3123")).replace(/\/$/, "")
 const THEME = flag("--dark") ? "dark" : "light"
+// --radius <none|sm|lg|xl>: audit under a radius preset (stored the way the Customize page stores it)
+const RADIUS = opt("--radius", "")
 const OUT = path.resolve(ROOT, opt("--out", "node_modules/.cache/radius-audit"))
 const CONCURRENCY = Number(opt("--concurrency", "3"))
 const TOL = Number(opt("--tolerance", "2"))
@@ -277,11 +279,12 @@ const context = await browser.newContext({
   colorScheme: THEME,
   reducedMotion: "reduce",
 })
-await context.addInitScript((theme) => {
+await context.addInitScript(([theme, radius]) => {
   try {
     localStorage.setItem("theme", theme)
+    if (radius) localStorage.setItem("radius", radius)
   } catch {}
-}, THEME)
+}, [THEME, RADIUS])
 
 const allow = config.allow ?? []
 const isAllowed = (page, f) =>

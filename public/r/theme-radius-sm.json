@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-radius-sm",
+  "title": "Theme: Small radius",
+  "description": "Radius preset with tighter corners everywhere.",
+  "registryDependencies": [
+    "https://qinyangwang.github.io/ui/r/theme.json"
+  ],
+  "cssVars": {
+    "light": {
+      "radius": "0.375rem"
+    }
+  },
+  "meta": {
+    "category": "Foundations",
+    "hidden": true
+  },
+  "type": "registry:theme"
+}

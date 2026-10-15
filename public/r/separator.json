@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "title": "Separator",
+  "description": "Divides groups of content with a hairline.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "https://qinyangwang.github.io/ui/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\"\n\nimport { cn } from \"@/lib/utils\"\n\n/** A hairline between groups of content. Horizontal by default. */\nfunction Separator({ className, orientation = \"horizontal\", ...props }: React.ComponentProps<typeof SeparatorPrimitive>) {\n  return (\n    <SeparatorPrimitive\n      data-slot=\"separator\"\n      orientation={orientation}\n      className={cn(\n        \"shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:self-stretch\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Separator }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Display"
+  },
+  "type": "registry:ui"
+}

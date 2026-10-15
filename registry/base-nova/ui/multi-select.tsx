@@ -25,27 +25,27 @@ const MultiSelectSizeContext = React.createContext<MultiSelectSize | undefined>(
 // An inherited `xs` (from a Field) maps to `sm`: chips need at least 20px.
 const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: string; input: string; trigger: string; item: string }> = {
   sm: {
-    well: "min-h-7 py-0.5 pr-7 pl-0.5",
-    chip: "h-6 rounded-md pl-2 text-ui-sm",
+    well: "frame-inset-0.5 min-h-7 py-0.5 pr-7 pl-0.5",
+    chip: "h-6 rounded-inner pl-2 text-ui-sm",
     remove: "size-5",
     input: "h-6 md:text-ui",
-    trigger: "top-0.5 right-0.5 size-6 rounded-md",
+    trigger: "top-0.5 right-0.5 size-6 rounded-inner",
     item: "h-7 text-ui-sm",
   },
   default: {
-    well: "min-h-8 py-1 pr-8 pl-1",
-    chip: "h-6 rounded-sm pl-2 text-ui-sm",
+    well: "frame-inset-1 min-h-8 py-1 pr-8 pl-1",
+    chip: "h-6 rounded-inner pl-2 text-ui-sm",
     remove: "size-5",
     input: "h-6 md:text-ui",
-    trigger: "top-1 right-1 size-6 rounded-sm",
+    trigger: "top-1 right-1 size-6 rounded-inner",
     item: "h-8 text-ui",
   },
   lg: {
-    well: "min-h-9 py-1 pr-9 pl-1",
-    chip: "h-7 rounded-sm pl-2.5 text-ui",
+    well: "frame-inset-1 min-h-9 py-1 pr-9 pl-1",
+    chip: "h-7 rounded-inner pl-2.5 text-ui",
     remove: "size-6",
     input: "h-7 md:text-ui-lg",
-    trigger: "top-1 right-1 size-7 rounded-sm",
+    trigger: "top-1 right-1 size-7 rounded-inner",
     item: "h-9 text-ui-lg",
   },
 }
@@ -97,7 +97,7 @@ function chipKey(value: unknown, index: number): React.Key {
 /**
  * Inset well holding the chosen values as removable raised chips, with the
  * search input trailing them. Chips sit 4px inside the rounded-lg well, so they
- * take rounded-sm (10 − 4 = 6px) and the same 1px hairline as the well. Backspace in an empty input removes the last chip.
+ * take rounded-inner (radius − inset) and the same 1px hairline as the well. Backspace in an empty input removes the last chip.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- chip values are the Combobox item type; callers annotate their own callbacks
 type ChipValue = any
@@ -126,7 +126,7 @@ function MultiSelectTrigger({
       data-slot="multi-select-trigger"
       data-size={size}
       className={cn(
-        "relative flex w-full min-w-56 flex-wrap items-center gap-1 rounded-lg bg-background dark:bg-input/32 shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50",
+        "relative flex w-full min-w-56 flex-wrap items-center gap-1 frame-lg rounded-lg bg-background dark:bg-input/32 shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50",
         c.well,
         className
       )}
@@ -209,7 +209,7 @@ function MultiSelectContent({
         <ComboboxPrimitive.Popup
           data-slot="multi-select-content"
           className={cn(
-            "relative flex max-h-[min(var(--available-height),22rem)] w-(--anchor-width) min-w-48 origin-(--transform-origin) flex-col overflow-hidden rounded-xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0",
+            "relative flex max-h-[min(var(--available-height),22rem)] w-(--anchor-width) min-w-48 origin-(--transform-origin) flex-col overflow-hidden frame-xl frame-inset-1 rounded-xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0",
             className
           )}
           {...props}
@@ -229,7 +229,7 @@ function MultiSelectItem({ className, children, ...props }: ComboboxPrimitive.It
       data-slot="multi-select-item"
       data-size={size}
       className={cn(
-        "group/item relative flex cursor-default items-center gap-2.5 rounded-md px-2.5 outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent",
+        "group/item relative flex cursor-default items-center gap-2.5 rounded-inner px-2.5 outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent",
         sizeClass[size].item,
         className
       )}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "title": "Progress",
+  "description": "Shows how far a task has come.",
+  "dependencies": [
+    "@base-ui/react",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://qinyangwang.github.io/ui/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst trackVariants = cva(\"relative w-full overflow-hidden rounded-full bg-foreground/8\", {\n  variants: {\n    size: { sm: \"h-1\", default: \"h-1.5\", lg: \"h-2\" },\n  },\n  defaultVariants: { size: \"default\" },\n})\n\nconst indicatorVariants = cva(\n  \"h-full rounded-full transition-[width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none\",\n  {\n    variants: {\n      tone: {\n        default: \"bg-primary\",\n        success: \"bg-success\",\n        warning: \"bg-warning\",\n        destructive: \"bg-destructive\",\n      },\n    },\n    defaultVariants: { tone: \"default\" },\n  }\n)\n\n// The indeterminate bar slides across the track; under reduced motion it pulses in place.\nconst INDETERMINATE_CSS =\n  \"@keyframes qy-progress{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}@keyframes qy-progress-pulse{0%,100%{opacity:.4}50%{opacity:1}}\"\n\ntype ProgressProps = Omit<ProgressPrimitive.Root.Props, \"children\"> &\n  VariantProps<typeof trackVariants> &\n  VariantProps<typeof indicatorVariants> & {\n    /** Label and value row above the track (`ProgressLabel`, `ProgressValue`). */\n    children?: React.ReactNode\n  }\n\n/** A determinate bar, or an indeterminate one when `value` is `null`. */\nfunction Progress({ className, size = \"default\", tone = \"default\", value, children, ...props }: ProgressProps) {\n  const indeterminate = value == null\n  return (\n    <ProgressPrimitive.Root\n      data-slot=\"progress\"\n      data-size={size}\n      value={value}\n      className={cn(\"flex w-full flex-col gap-1.5\", className)}\n      {...props}\n    >\n      {indeterminate && (\n        <style href=\"qy-progress\" precedence=\"default\">\n          {INDETERMINATE_CSS}\n        </style>\n      )}\n      {children != null && <div className=\"flex items-center justify-between gap-3\">{children}</div>}\n      <ProgressPrimitive.Track data-slot=\"progress-track\" className={trackVariants({ size })}>\n        <ProgressPrimitive.Indicator\n          data-slot=\"progress-indicator\"\n          className={cn(\n            indicatorVariants({ tone }),\n            indeterminate &&\n              \"w-2/5 animate-[qy-progress_1.4s_cubic-bezier(0.65,0,0.35,1)_infinite] motion-reduce:w-full motion-reduce:animate-[qy-progress-pulse_1.6s_ease-in-out_infinite]\"\n          )}\n        />\n      </ProgressPrimitive.Track>\n    </ProgressPrimitive.Root>\n  )\n}\n\nfunction ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {\n  return <ProgressPrimitive.Label data-slot=\"progress-label\" className={cn(\"text-ui font-medium\", className)} {...props} />\n}\n\nfunction ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {\n  return (\n    <ProgressPrimitive.Value\n      data-slot=\"progress-value\"\n      className={cn(\"text-ui-sm text-muted-foreground tabular-nums\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Progress, ProgressLabel, ProgressValue }\nexport type { ProgressProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Display"
+  },
+  "type": "registry:ui"
+}

@@ -44,3 +44,39 @@ for (const file of fs.readdirSync(dir)) {
   }
 }
 console.log(`registry-postbuild: ${changed} items rewritten (dependencies → ${base}/r/<name>.json, own lint rules stripped)`)
+
+// 3. public/llms.txt: an index of the items with their one-line descriptions, for agents.
+{
+  const order = ["Foundations", "Forms", "Overlays", "Display", "Navigation", "Text", "Motion", "Data", "Agents", "Charts", "Blocks", "Templates"]
+  const docsDir = path.join(root, "content/docs")
+  const visible = registry.items.filter((i) => !i.meta?.hidden)
+  const byCat = new Map()
+  for (const item of visible) {
+    const cat = item.meta?.category ?? "Other"
+    if (!byCat.has(cat)) byCat.set(cat, [])
+    byCat.get(cat).push(item)
+  }
+  const cats = [...byCat.keys()].sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99))
+  const lines = [
+    `# ${registry.name}/ui`,
+    "",
+    `> ${registry.description ?? "A shadcn registry of desktop-density components, agent interfaces and page templates."}`,
+    "",
+    `Install any item with \`npx shadcn@latest add ${base}/r/<name>.json\`, or add \`"@${registry.name}": "${base}/r/{name}.json"\` to \`registries\` in components.json and run \`npx shadcn@latest add @${registry.name}/<name>\`.`,
+    "",
+    `- [Registry index](${base}/r/registry.json)`,
+    `- [Docs](${base}/docs/)`,
+    "",
+  ]
+  for (const cat of cats) {
+    lines.push(`## ${cat}`, "")
+    for (const item of byCat.get(cat).sort((a, b) => a.name.localeCompare(b.name))) {
+      const hasDocs = fs.existsSync(path.join(docsDir, `${item.name}.ts`)) || cat === "Templates" || cat === "Blocks"
+      const link = hasDocs ? `${base}/docs/${item.name}/` : `${base}/r/${item.name}.json`
+      lines.push(`- [${item.title ?? item.name}](${link}): ${item.description ?? ""} JSON: ${base}/r/${item.name}.json`)
+    }
+    lines.push("")
+  }
+  fs.writeFileSync(path.join(root, "public/llms.txt"), lines.join("\n"))
+  console.log(`registry-postbuild: public/llms.txt (${visible.length} items)`)
+}

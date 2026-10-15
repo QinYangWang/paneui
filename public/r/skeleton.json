@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "Placeholder shape while content loads.",
+  "registryDependencies": [
+    "https://qinyangwang.github.io/ui/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/skeleton.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst skeletonVariants = cva(\"animate-pulse bg-foreground/6 motion-reduce:animate-none\", {\n  variants: {\n    shape: {\n      default: \"rounded-lg\",\n      circle: \"rounded-full\",\n      card: \"rounded-xl\",\n    },\n  },\n  defaultVariants: { shape: \"default\" },\n})\n\n/**\n * Placeholder for content that is still loading. Size it with `className` (`h-4 w-32`,\n * `size-8`). The pulse stops under reduced motion.\n */\nfunction Skeleton({ className, shape = \"default\", ...props }: React.ComponentProps<\"div\"> & VariantProps<typeof skeletonVariants>) {\n  return <div data-slot=\"skeleton\" aria-hidden className={cn(skeletonVariants({ shape }), className)} {...props} />\n}\n\nexport { Skeleton, skeletonVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Display"
+  },
+  "type": "registry:ui"
+}

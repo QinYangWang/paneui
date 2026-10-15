@@ -222,7 +222,7 @@ export function CardFolder({
           animate={{ height: open ? 52 : 150 }}
           transition={reduce ? { duration: 0.15 } : SPRING}
         >
-          <span className="absolute inset-2 rounded-[calc(var(--radius)*2.16)] border-[1.5px] border-dashed border-foreground/15" />
+          <span className="absolute inset-2 rounded-[max(0px,calc(var(--radius)*2.8-8px))] border-[1.5px] border-dashed border-foreground/15" />
           <span className="absolute inset-x-0 bottom-0 flex h-[52px] items-center justify-center text-ui-sm font-medium text-muted-foreground">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
