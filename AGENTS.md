@@ -79,10 +79,15 @@ component only if the design really needs a new treatment.
   blocks use `shadow-raised`, never `shadow-surface`. Dark mode elevation is the hairline ring
   plus a darker contact shadow. Hover on rows, menu items, ghost/outline buttons and nav is a fill (`bg-secondary`), not a ring.
 - **Focus**: `focus-visible:ring-2 focus-visible:ring-ring/50`.
-- **Radius**: base `--radius` 0.625rem with multiplier steps → `rounded-sm/md/lg/xl/2xl/3xl`
-  = 6/8/10/14/18/22px (`rounded-shell` 13px for the rail inset panel).
+- **Radius**: base `--radius` 0.625rem with multiplier steps → `rounded-2xs/xs/sm/md/lg/xl/2xl/3xl`
+  = 3/4/6/8/10/14/18/22px (`rounded-shell` 13px for the rail inset panel). **Every radius derives from
+  `--radius`** (since 2026-10-16): never hardcode px/rem radii in library files; use a token or
+  `rounded-[calc(var(--radius)*k)]` so presets rescale it (`html[data-radius="none|sm|lg|xl"]`, a custom
+  value inline on <html>, `theme-radius-*` registry items). Only 1–2px caret/bar radii, `rounded-full`
+  and `rounded-[inherit]` stay literal. Motion-animated `borderRadius` numbers (feedback-widget,
+  morphing-search, aspect-ratio) and SVG `rx` in charts are literal by design.
   Buttons, inputs, select/combobox triggers, tab lists, menu/select rows: `rounded-lg`; xs
-  buttons `rounded-sm`, checkboxes 4px; tab indicators inside a `p-0.5` list `rounded-md`;
+  buttons `rounded-sm`, checkboxes `rounded-xs`; tab indicators inside a `p-0.5` list `rounded-md`;
   menus/popups `rounded-xl` (`p-1`, concentric with `rounded-lg` rows); cards, tables, code
   blocks `rounded-xl`; two-layer inset cards and big panels `rounded-2xl`; dialogs `rounded-3xl`. Two-layer cards: `<Card variant="inset">` + `<CardPanel>` (tinted frame, p-1, raised panel) for presented content (demos, media, code, featured plans) only; dense dashboard cards stay default.
   Keep radii concentric (outer = inner + padding): see **Nested radii** below. `rounded-full` only for inherently
@@ -104,7 +109,7 @@ component only if the design really needs a new treatment.
   | `frame-p-{n}` | container | padding on all sides **and** the inset used in the maths (`pr-1.5` etc. still override one side) |
   | `frame-inset-{n}` | container | only the inset, when the gap comes from a wrapper's `px-2 pb-2`, a gap, or asymmetric padding |
   | `frame-border` | container | adds the container's 1px border to the inset |
-  | `rounded-inner`, `rounded-{t,b,s,e}-inner` | child | radius = frame radius − inset (min 2px); outside any frame it falls back to `rounded-lg` |
+  | `rounded-inner`, `rounded-{t,b,s,e}-inner` | child | radius = frame radius − inset (min 2px, 0 when the frame is square); outside any frame it falls back to `rounded-lg` |
   | `frame-inner` | child that is itself padded | takes `rounded-inner` and publishes its own inner radius (combine with `frame-p-*`/`frame-inset-*`) |
 
   Two levels (`frame-*` → `frame-inner` → `rounded-inner`) are supported; a third must compute its

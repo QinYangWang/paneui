@@ -90,7 +90,7 @@ function Highlight({ text, query }: { text: string; query: string }) {
   return (
     <>
       {text.slice(0, at)}
-      <mark className="rounded-[3px] bg-primary/18 text-foreground">{text.slice(at, at + query.length)}</mark>
+      <mark className="rounded-2xs bg-primary/18 text-foreground">{text.slice(at, at + query.length)}</mark>
       {text.slice(at + query.length)}
     </>
   )

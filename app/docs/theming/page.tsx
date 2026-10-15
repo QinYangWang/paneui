@@ -64,6 +64,8 @@ const TYPE: { cls: string; size: string; use: string }[] = [
 ]
 
 const RADII: { cls: string; corner: string; px: string; use: string }[] = [
+  { cls: "rounded-2xs", corner: "rounded-tl-2xs", px: "3px", use: "Search highlights and favicons." },
+  { cls: "rounded-xs", corner: "rounded-tl-xs", px: "4px", use: "Checkboxes and extra-small segments and tabs." },
   { cls: "rounded-sm", corner: "rounded-tl-sm", px: "6px", use: "Extra-small buttons, keys and small chips." },
   { cls: "rounded-md", corner: "rounded-tl-md", px: "8px", use: "Tab indicators inside a p-0.5 list." },
   { cls: "rounded-lg", corner: "rounded-tl-lg", px: "10px", use: "Controls and menu rows." },
@@ -170,7 +172,7 @@ export default function Theming() {
         <p className="text-muted-foreground">
           Colours are named by role, and each surface has a matching <Code>-foreground</Code> token for text on it. Use
           tokens in components, never palette colours (<Code>bg-zinc-100</Code>) or hex values. Every token&apos;s light and
-          dark value is on <TextLink href="/docs/colors">Colors</TextLink>.
+          dark value is on <TextLink href="/docs/colors">Customize</TextLink>.
         </p>
         <div className="flex flex-wrap gap-2">
           {SWATCHES.map((s) => (
@@ -223,7 +225,7 @@ export default function Theming() {
           and apply the saved choice in the same pre-paint script as dark mode.
         </p>
         <p className="text-muted-foreground">
-          For a brand colour, use the picker on <TextLink href="/docs/colors#accent">Colors</TextLink> to build a ramp and
+          For a brand colour, use the picker on <TextLink href="/docs/colors#accent">Customize</TextLink> to build a ramp and
           copy its overrides.
         </p>
         <AgentCodeBlock code={ACCENT_RUNTIME} filename="globals.css" language="css" />
@@ -253,7 +255,8 @@ export default function Theming() {
           Every step is a multiple of <Code>--radius</Code>, so change the base and the whole scale follows. Keep nested
           corners concentric, with the inner radius equal to the outer radius minus the padding between them. That is why{" "}
           <Code>p-1</Code> menus (<Code>rounded-xl</Code>) hold <Code>rounded-lg</Code> rows. Use <Code>rounded-full</Code>{" "}
-          only for shapes that are actually round.
+          only for shapes that are actually round. Sizes below are at the default <Code>0.625rem</Code>; try other
+          values on <TextLink href="/docs/colors#radius">Customize</TextLink>.
         </p>
         <Table head={["", "Class", "Size", "Use for"]}>
           {RADII.map((r) => (

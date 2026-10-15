@@ -92,7 +92,7 @@ function ButtonView({ node, selected }: ReactNodeViewProps) {
         data-drag-handle
         className={cn(
           "inline-flex h-10 cursor-pointer items-center px-5 text-ui-lg font-medium transition-[box-shadow] duration-150 select-none",
-          radius === "pill" ? "rounded-full" : radius === "square" ? "rounded-xs" : "rounded-lg",
+          radius === "pill" ? "rounded-full" : radius === "square" ? "rounded-[calc(var(--radius)*0.2)]" : "rounded-lg",
           variant === "filled" && "text-white",
           variant === "outline" && "border-2 bg-transparent",
           variant === "link" && "h-auto px-0 underline underline-offset-4",

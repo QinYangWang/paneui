@@ -157,7 +157,7 @@ function MultiSelectTrigger({
                     <ComboboxPrimitive.ChipRemove
                       aria-label="Remove"
                       className={cn(
-                        "flex shrink-0 cursor-pointer items-center justify-center rounded-[4px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                        "flex shrink-0 cursor-pointer items-center justify-center rounded-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
                         c.remove
                       )}
                     >

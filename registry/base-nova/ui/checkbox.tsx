@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils"
 const checkboxVariants = cva("", {
   variants: {
     size: {
-      sm: "size-3.5 rounded-[3px]",
-      default: "size-4 rounded-[4px]",
-      lg: "size-5 rounded-[5px]",
+      sm: "size-3.5 rounded-2xs",
+      default: "size-4 rounded-xs",
+      lg: "size-5 rounded-[calc(var(--radius)*0.5)]",
     },
   },
   defaultVariants: { size: "default" },

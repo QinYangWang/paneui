@@ -216,7 +216,7 @@ function SheetSurface({
       <DialogPrimitive.Popup
         data-slot="bottom-sheet-content"
         className={cn(
-          "fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-xl flex-col rounded-t-[1.75rem] bg-popover text-popover-foreground shadow-surface outline-none",
+          "fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-xl flex-col rounded-t-[calc(var(--radius)*2.8)] bg-popover text-popover-foreground shadow-surface outline-none",
           // Extends below the viewport so an upward overdrag never shows a gap.
           "after:absolute after:inset-x-0 after:top-full after:h-[50vh] after:bg-popover",
           className
@@ -257,7 +257,7 @@ function BottomSheetHandle({ className, ...props }: React.ComponentProps<"button
       onPointerDown={(e) => dragControls.start(e)}
       onClick={() => multiple && setSnap(snap === snapPoints.length - 1 ? 0 : snap + 1)}
       className={cn(
-        "group/handle flex h-7 w-full shrink-0 cursor-grab touch-none items-center justify-center rounded-t-[1.75rem] outline-none active:cursor-grabbing",
+        "group/handle flex h-7 w-full shrink-0 cursor-grab touch-none items-center justify-center rounded-t-[calc(var(--radius)*2.8)] outline-none active:cursor-grabbing",
         className
       )}
       {...props}

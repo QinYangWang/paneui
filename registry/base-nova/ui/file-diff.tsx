@@ -183,7 +183,7 @@ function DiffStat({ additions, deletions }: { additions: number; deletions: numb
         <span
           key={i}
           className={cn(
-            "size-1.5 rounded-xs transition-colors duration-300",
+            "size-1.5 rounded-[calc(var(--radius)*0.2)] transition-colors duration-300",
             i < add ? "bg-success" : i < add + del ? "bg-destructive" : "bg-muted shadow-well"
           )}
         />

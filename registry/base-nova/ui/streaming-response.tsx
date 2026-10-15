@@ -114,7 +114,7 @@ function StreamingCaret({ className }: { className?: string }) {
       aria-hidden
       data-slot="streaming-caret"
       className={cn(
-        "ml-0.5 inline-block h-[1.05em] w-[0.5em] translate-y-[0.15em] rounded-[3px] bg-primary/80 animate-[qy-caret_1s_steps(1)_infinite] motion-reduce:animate-none",
+        "ml-0.5 inline-block h-[1.05em] w-[0.5em] translate-y-[0.15em] rounded-2xs bg-primary/80 animate-[qy-caret_1s_steps(1)_infinite] motion-reduce:animate-none",
         className
       )}
       />

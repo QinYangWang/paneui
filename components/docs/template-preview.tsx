@@ -47,7 +47,7 @@ export function TemplatePreview({ name, path = `/templates/${name}/`, height = 4
     if (scale <= 0) return
     syncTheme()
     const mo = new MutationObserver(syncTheme)
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-accent"] })
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-accent", "data-radius", "style"] })
     return () => mo.disconnect()
   }, [scale, syncTheme])
 

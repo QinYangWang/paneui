@@ -51,6 +51,9 @@
   /* App chrome: the window band/sidebar tone and the hairline of the inset content panel. */
   --color-shell: var(--shell);
   --color-shell-border: var(--shell-border);
+  /* Every radius is a multiple of --radius, so one value (or a data-radius preset) rescales them all. */
+  --radius-2xs: calc(var(--radius) * 0.3);
+  --radius-xs: calc(var(--radius) * 0.4);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -214,6 +217,23 @@
   --skeuo-surface:
     0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 2px oklch(0% 0 0 / 18%), 0 4px 12px -4px oklch(0% 0 0 / 36%);
   --skeuo-chip: 0 0 0 1px oklch(100% 0 0 / 10%);
+}
+
+/*
+ * Radius presets: `data-radius` on <html> swaps the one base value every radius token multiplies
+ * (default, no attribute, is 0.625rem). A custom value is set inline as `--radius` on <html>.
+ */
+html[data-radius="none"] {
+  --radius: 0rem;
+}
+html[data-radius="sm"] {
+  --radius: 0.375rem;
+}
+html[data-radius="lg"] {
+  --radius: 0.875rem;
+}
+html[data-radius="xl"] {
+  --radius: 1.125rem;
 }
 
 /*
@@ -425,7 +445,7 @@ html[data-accent="violet"] {
  *   frame-inset-{n|[len]}       only the inset (when the gap comes from px/py, a gap, or a
  *                               wrapper): the frame's own padding is left alone.
  *   frame-border                add the frame's 1px border to the inset.
- *   rounded-inner               a child: border-radius = frame radius − inset (min 2px).
+ *   rounded-inner               a child: border-radius = frame radius − inset (min 2px, never above the frame).
  *   rounded-{t,b,s,e}-inner     the same for one side (first/last rows, segmented ends).
  *   frame-inner                 a child that is itself a padded frame (second level): gets
  *                               rounded-inner and publishes its own inner radius, so its
@@ -454,7 +474,7 @@ html[data-accent="violet"] {
 @utility frame-* {
   --frame-r: --value(--radius-*, [length]);
   border-radius: --value(--radius-*, [length]);
-  --frame-inner-1: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 2px);
+  --frame-inner-1: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), min(2px, var(--frame-r)));
   /* A fresh frame starts a new chain, even inside a frame-inner. */
   --frame-inner-2: initial;
 }
@@ -499,7 +519,7 @@ html[data-accent="violet"] {
 @utility frame-inner {
   --frame-r: var(--frame-inner-1, var(--radius-lg));
   border-radius: var(--frame-inner-1, var(--radius-lg));
-  --frame-inner-2: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 2px);
+  --frame-inner-2: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), min(2px, var(--frame-r)));
 }
 
 /* Dual-theme syntax highlighting (defaultColor: false). */

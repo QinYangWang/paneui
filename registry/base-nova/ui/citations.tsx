@@ -176,7 +176,7 @@ function CitationFavicon({
           loading="lazy"
           referrerPolicy="no-referrer"
           onError={() => setFailedSrc(src)}
-          className="size-3.5 rounded-[3px] object-contain"
+          className="size-3.5 rounded-2xs object-contain"
         />
       ) : domain ? (
         domain.charAt(0)

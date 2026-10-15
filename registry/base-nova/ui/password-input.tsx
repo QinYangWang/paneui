@@ -16,7 +16,7 @@ import { Input } from "@/registry/base-nova/ui/input"
 
 // The reveal button stays a square inset 2-4px from the field edge at every size.
 const revealClass: Record<ControlSize, string> = {
-  xs: "right-0.5 size-5 rounded-[4px] [&_svg]:size-3.5",
+  xs: "right-0.5 size-5 rounded-xs [&_svg]:size-3.5",
   sm: "right-0.5 size-6 rounded-md [&_svg]:size-4",
   default: "right-1 size-6 rounded-md [&_svg]:size-4",
   lg: "right-1 size-7 rounded-md [&_svg]:size-4",

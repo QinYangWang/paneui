@@ -45,7 +45,7 @@ const tabsTabVariants = cva(
       },
     },
     compoundVariants: [
-      { variant: "default", size: "xs", className: "h-5 rounded-[4px]" },
+      { variant: "default", size: "xs", className: "h-5 rounded-xs" },
       { variant: "default", size: "sm", className: "h-6 rounded-md" },
       { variant: "default", size: "default", className: "h-7 rounded-md" },
       { variant: "default", size: "lg", className: "h-8 rounded-md" },
@@ -93,7 +93,7 @@ function TabsList({ className, children, size = "default", variant = "default", 
           data-slot="tabs-indicator"
           className={cn(
             "absolute top-0 left-0 -z-10 transition-[translate,width,height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-            v === "default" && (s === "xs" ? "rounded-[4px]" : "rounded-md"),
+            v === "default" && (s === "xs" ? "rounded-xs" : "rounded-md"),
             indicatorClass[v]
           )}
         />

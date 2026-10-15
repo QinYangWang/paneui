@@ -74,7 +74,7 @@ const comboboxItemVariants = cva(
 
 // Clear and chevron buttons inside the input well, per size: [button box, clear icon px].
 const inputButton: Record<ControlSize, [string, number]> = {
-  xs: ["size-5 rounded-[4px]", 12],
+  xs: ["size-5 rounded-xs", 12],
   sm: ["size-6 rounded-md", 14],
   default: ["size-6 rounded-md", 14],
   lg: ["size-7 rounded-md", 14],

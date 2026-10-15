@@ -26,9 +26,9 @@ export const GUIDE_PAGES = [
   },
   {
     href: "/docs/colors",
-    title: "Colors",
-    description: "Every colour token by role, and a picker for your own accent.",
-    keywords: ["color", "colour", "tokens", "palette", "accent", "primary", "custom accent", "oklch", "dark mode", "css variables"],
+    title: "Customize",
+    description: "Pick an accent and a radius, and see every colour token by role.",
+    keywords: ["customize", "radius", "corners", "rounded", "color", "colour", "tokens", "palette", "accent", "primary", "custom accent", "oklch", "dark mode", "css variables"],
   },
   {
     href: "/docs/cli",

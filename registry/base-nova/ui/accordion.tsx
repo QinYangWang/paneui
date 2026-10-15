@@ -32,7 +32,7 @@ function Accordion({
         data-variant={variant}
         className={cn(
           "flex w-full flex-col gap-1",
-          variant === "default" && "rounded-[1.25rem] bg-background p-1 shadow-well dark:bg-input/32",
+          variant === "default" && "rounded-[calc(var(--radius)*2)] bg-background p-1 shadow-well dark:bg-input/32",
           className
         )}
         {...props}

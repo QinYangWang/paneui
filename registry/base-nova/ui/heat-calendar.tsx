@@ -451,7 +451,7 @@ function HeatCalendarGrid({ className, children }: { className?: string; childre
                       onBlur={() => setHot(null)}
                       onKeyDown={(e) => onKeyDown(e, day)}
                       className={cn(
-                        "relative cursor-pointer rounded-[4px] outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+                        "relative cursor-pointer rounded-xs outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                         day.level === 0 && "shadow-well"
                       )}
                       style={{
@@ -538,7 +538,7 @@ function HeatCalendarLegend({ className, ...props }: React.ComponentProps<"div">
       {[0, 1, 2, 3, 4].map((l) => (
         <span
           key={l}
-          className={cn("size-2.5 rounded-[3px]", l === 0 && "shadow-well")}
+          className={cn("size-2.5 rounded-2xs", l === 0 && "shadow-well")}
           style={{ background: levelColor(l) }}
         />
       ))}

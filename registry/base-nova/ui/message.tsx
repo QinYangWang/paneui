@@ -206,7 +206,7 @@ function MessageTyping({ label = "Typing", className, ...props }: React.Componen
       aria-label={label}
       data-slot="message-typing"
       className={cn(
-        "flex h-10 w-16 items-center justify-center gap-1 self-start rounded-[1.25rem] rounded-bl-md bg-card shadow-[var(--skeuo-well),var(--skeuo-primary)]",
+        "flex h-10 w-16 items-center justify-center gap-1 self-start rounded-[calc(var(--radius)*2)] rounded-bl-md bg-card shadow-[var(--skeuo-well),var(--skeuo-primary)]",
         className
       )}
       {...props}

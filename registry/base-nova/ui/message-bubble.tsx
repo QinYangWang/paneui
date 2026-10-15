@@ -26,7 +26,7 @@ function useMessageSide(align?: MessageSide): MessageSide {
 }
 
 const messageBubbleVariants = cva(
-  "relative w-fit max-w-full rounded-[1.25rem] px-4 py-2.5 text-ui-lg leading-relaxed wrap-break-word transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none focus-visible:ring-2 focus-visible:ring-ring/50 [&_a]:underline [&_a]:underline-offset-2",
+  "relative w-fit max-w-full rounded-[calc(var(--radius)*2)] px-4 py-2.5 text-ui-lg leading-relaxed wrap-break-word transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none focus-visible:ring-2 focus-visible:ring-ring/50 [&_a]:underline [&_a]:underline-offset-2",
   {
     variants: {
       tone: {

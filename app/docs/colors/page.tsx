@@ -4,10 +4,11 @@ import path from "node:path"
 import { DEFAULT_ACCENT, PRESET_RAMPS, RAMP_STOPS } from "@/components/docs/accent-color"
 import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { ThemingAccent } from "@/components/docs/theming-accent"
+import { ThemingRadius } from "@/components/docs/theming-radius"
 import { ThemingTokenTable } from "@/components/docs/theming-token-table"
 import { parseThemeTokens, TOKEN_ROLES } from "@/components/docs/theming-tokens"
 
-export const metadata = { title: "Colors" }
+export const metadata = { title: "Customize" }
 
 /** Light/dark values straight from the theme, read once at build time. */
 function readTheme() {
@@ -24,6 +25,7 @@ export default function Colors() {
   const theme = readTheme()
   const toc = [
     { id: "accent", title: "One accent" },
+    { id: "radius", title: "Radius" },
     ...TOKEN_ROLES.map((r) => ({ id: r.id, title: r.title })),
   ]
   return (
@@ -32,7 +34,8 @@ export default function Colors() {
       toc={toc}
       lede={
         <>
-          Every colour a component reads is a role token with a light and a dark value. See{" "}
+          Pick an accent and a radius for the whole site, then copy the CSS. Every colour a component reads is a role
+          token with a light and a dark value; see{" "}
           <TextLink href="/docs/theming#how-it-works">Theming</TextLink> for how the layers fit together.
         </>
       }
@@ -45,6 +48,16 @@ export default function Colors() {
           custom colour is darkened or lifted only if it would fall under 3:1 contrast against the page.
         </p>
         <ThemingAccent />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <GuideH2 id="radius">One radius, every corner</GuideH2>
+        <p className="text-muted-foreground">
+          Every radius token multiplies <Code>--radius</Code>, and nested surfaces subtract their padding from it, so
+          corners stay concentric at any value. Pick a preset or drag for your own, then copy the override, or install
+          a preset with <Code>theme-radius-none</Code>, <Code>-sm</Code>, <Code>-lg</Code> or <Code>-xl</Code>.
+        </p>
+        <ThemingRadius />
       </section>
 
       {TOKEN_ROLES.map((role) => (

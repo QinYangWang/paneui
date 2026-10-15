@@ -25,6 +25,8 @@
           "color-chart-8": "var(--chart-8)",
           "color-shell": "var(--shell)",
           "color-shell-border": "var(--shell-border)",
+          "radius-2xs": "calc(var(--radius) * 0.3)",
+          "radius-xs": "calc(var(--radius) * 0.4)",
           "radius-sm": "calc(var(--radius) * 0.6)",
           "radius-md": "calc(var(--radius) * 0.8)",
           "radius-xl": "calc(var(--radius) * 1.4)",
@@ -478,6 +480,96 @@
           "primary": "var(--accent-600)",
           "primary-foreground": "oklch(100% 0 0)",
           "ring": "var(--accent-500)"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-none",
+      "type": "registry:theme",
+      "title": "Theme: Square radius",
+      "description": "Radius preset with square corners everywhere.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "0rem"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-sm",
+      "type": "registry:theme",
+      "title": "Theme: Small radius",
+      "description": "Radius preset with tighter corners everywhere.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "0.375rem"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-default",
+      "type": "registry:theme",
+      "title": "Theme: Default radius",
+      "description": "Radius preset that restores the default corner rounding.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "0.625rem"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-lg",
+      "type": "registry:theme",
+      "title": "Theme: Large radius",
+      "description": "Radius preset with rounder corners everywhere.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "0.875rem"
+        }
+      },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "theme-radius-xl",
+      "type": "registry:theme",
+      "title": "Theme: Extra large radius",
+      "description": "Radius preset with the roundest corners everywhere.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "cssVars": {
+        "light": {
+          "radius": "1.125rem"
         }
       },
       "meta": {
