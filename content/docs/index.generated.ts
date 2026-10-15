@@ -106,6 +106,7 @@ import d_table from "./table"
 import d_table_async from "./table-async"
 import d_table_editable from "./table-editable"
 import d_tabs from "./tabs"
+import d_terminal from "./terminal"
 import d_terminal_view from "./terminal-view"
 import d_text_cascade from "./text-cascade"
 import d_text_reveal from "./text-reveal"
@@ -126,6 +127,7 @@ import d_trend_chart from "./trend-chart"
 import d_typeset from "./typeset"
 import d_usage_meter from "./usage-meter"
 import d_user_menu from "./user-menu"
+import d_vscode from "./vscode"
 import d_wheel_picker from "./wheel-picker"
 import d_work_summary from "./work-summary"
 import d_workspace_switcher from "./workspace-switcher"
@@ -236,6 +238,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "table-async": d_table_async,
   "table-editable": d_table_editable,
   "tabs": d_tabs,
+  "terminal": d_terminal,
   "terminal-view": d_terminal_view,
   "text-cascade": d_text_cascade,
   "text-reveal": d_text_reveal,
@@ -256,6 +259,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "typeset": d_typeset,
   "usage-meter": d_usage_meter,
   "user-menu": d_user_menu,
+  "vscode": d_vscode,
   "wheel-picker": d_wheel_picker,
   "work-summary": d_work_summary,
   "workspace-switcher": d_workspace_switcher,

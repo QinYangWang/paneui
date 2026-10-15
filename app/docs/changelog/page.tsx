@@ -8,6 +8,20 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-terminal",
+    date: "October 15, 2026",
+    title: "Terminal and a code editor template",
+    tag: "Templates",
+    changes: [
+      <>
+        New <Code>terminal</Code> runs a shell in the page, or a real one on your machine through the bundled bridge.
+      </>,
+      <>
+        New <Code>vscode</Code> template: an editor, file explorer and terminals on one shared workspace.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-15-scroll-area",
     date: "October 15, 2026",
     title: "Scroll area, smoother loaders and a compact tool approval",

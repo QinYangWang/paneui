@@ -154,3 +154,51 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## xterm.js (runtime dependency of `terminal`)
+
+`registry/base-nova/ui/terminal.tsx` draws the terminal with `@xterm/xterm`, `@xterm/addon-fit`
+and `@xterm/addon-web-links` (https://github.com/xtermjs/xterm.js), installed from npm as
+dependencies. The component inlines the package's base stylesheet (`css/xterm.css`, minified,
+with the scrollbar shadow rules removed, the IME composition colours switched to theme tokens and
+a thinner scrollbar slider) so it works without a CSS import. MIT License:
+
+Copyright (c) 2017-2019, The xterm.js authors (https://github.com/xtermjs/xterm.js)
+Copyright (c) 2014-2016, SourceLair Private Company (https://www.sourcelair.com)
+Copyright (c) 2012-2013, Christopher Jeffrey (https://github.com/chjj/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+## node-pty and ws (used by `terminal-server/pty-bridge.mjs`)
+
+The PTY bridge shipped with `terminal` imports `ws` (https://github.com/websockets/ws, MIT;
+Copyright (c) 2011 Einar Otto Stangvik, (c) 2013 Arnout Kazemier and contributors, (c) 2016 Luigi
+Pinca and contributors) and a PTY binding that users install themselves: `node-pty`
+(https://github.com/microsoft/node-pty, MIT; Copyright (c) 2012-2015 Christopher Jeffrey,
+(c) 2016 Daniel Imms, (c) 2018-present Microsoft Corporation) or its prebuilt fork
+`@homebridge/node-pty-prebuilt-multiarch` (MIT, same notices). Neither binding is a dependency of
+this repository and no code from them is vendored.
+
+
+## @monaco-editor/react and the editor it loads (used by the `vscode` template)
+
+The `vscode` template depends on `@monaco-editor/react` (https://github.com/suren-atoyan/monaco-react,
+MIT; Copyright (c) 2018 Suren Atoyan), which loads `monaco-editor` (https://github.com/microsoft/monaco-editor,
+MIT; Copyright (c) 2016 - present Microsoft Corporation) from the jsDelivr CDN at runtime. No code from
+either is vendored in this repository.

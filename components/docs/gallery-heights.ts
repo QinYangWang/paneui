@@ -75,6 +75,8 @@ export const galleryHeights: Record<string, number> = {
   "task-row": 302,
   "todo-list": 294,
   "tool-approval": 220,
+  "terminal": 360,
+  "vscode": 556,
   "tool-result": 393,
   "treemap": 506,
 }

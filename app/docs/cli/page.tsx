@@ -22,6 +22,7 @@ export default function CliPage() {
   const templateUrl = (name: string) => REGISTRY_URL.replace("{name}", name)
   const templates: { name: string; what: string; routes: string[] }[] = [
     { name: "saas", what: "Marketing pages, sign-in and a dashboard", routes: ["app/page.tsx", "app/not-found.tsx", "app/pricing", "app/changelog", "app/(auth)", "app/dashboard"] },
+    { name: "vscode", what: "A code editor with a shared workspace and terminals", routes: ["app/page.tsx"] },
     { name: "agent-workspace", what: "The agent workspace with its ACP bridge server", routes: ["app/page.tsx", "server/acp-bridge.mjs"] },
     { name: "docs", what: "A docs site", routes: ["app/docs/page.tsx"] },
     { name: "blog", what: "A blog with a post page", routes: ["app/blog"] },

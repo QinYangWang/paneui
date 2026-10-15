@@ -23,6 +23,7 @@ import TextareaDemo from "@/registry/base-nova/examples/textarea-demo"
 import ThemeDemo from "@/registry/base-nova/examples/theme-demo"
 import AppShellDemo from "@/registry/base-nova/examples/app-shell-demo"
 import OverflowHintDemo from "@/registry/base-nova/examples/overflow-hint-demo"
+import TerminalDemo from "@/registry/base-nova/examples/terminal-demo"
 import ScrollAreaDemo from "@/registry/base-nova/examples/scroll-area-demo"
 import TypesetDemo from "@/registry/base-nova/examples/typeset-demo"
 import CheckboxDemo from "@/registry/base-nova/examples/checkbox-demo"
@@ -158,6 +159,7 @@ import EmailEditorDemo from "@/registry/base-nova/examples/email-editor-demo"
 
 
 const SaasPreview = () => <TemplatePreview name="saas" />
+const VsCodePreview = () => <TemplatePreview name="vscode" />
 const AgentWorkspacePreview = () => <TemplatePreview name="agent-workspace" />
 const DocsTemplatePreview = () => <TemplatePreview name="docs" />
 const BlogPreview = () => <TemplatePreview name="blog" />
@@ -189,6 +191,8 @@ export const demos: Record<string, React.ComponentType> = {
   "model-picker": ModelPickerDemo,
   "agent-composer": AgentComposerDemo,
   saas: SaasPreview,
+  vscode: VsCodePreview,
+  terminal: TerminalDemo,
   "agent-workspace": AgentWorkspacePreview,
   docs: DocsTemplatePreview,
   blog: BlogPreview,

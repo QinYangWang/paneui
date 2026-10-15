@@ -778,6 +778,125 @@
       }
     },
     {
+      "name": "vscode",
+      "type": "registry:block",
+      "title": "Code Editor",
+      "description": "Edit a project in the browser, with a shell on the same files.",
+      "dependencies": [
+        "@monaco-editor/react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/command-palette",
+        "@qinyang/bottom-sheet",
+        "@qinyang/breadcrumb",
+        "@qinyang/button",
+        "@qinyang/context-menu",
+        "@qinyang/dialog",
+        "@qinyang/drawer",
+        "@qinyang/file-tree",
+        "@qinyang/icon-rail",
+        "@qinyang/input",
+        "@qinyang/loader",
+        "@qinyang/menu",
+        "@qinyang/resizable",
+        "@qinyang/scroll-area",
+        "@qinyang/switch",
+        "@qinyang/tab-strip",
+        "@qinyang/terminal",
+        "@qinyang/textarea",
+        "@qinyang/theme-toggle",
+        "@qinyang/tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/templates/vscode/vscode.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/vscode.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/bottom-panel.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/parts/bottom-panel.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/code-editor.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/parts/code-editor.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/docs.ts",
+          "type": "registry:component",
+          "target": "components/vscode/parts/docs.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/editor-theme.ts",
+          "type": "registry:component",
+          "target": "components/vscode/parts/editor-theme.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/explorer.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/parts/explorer.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/extensions-view.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/parts/extensions-view.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/languages.ts",
+          "type": "registry:component",
+          "target": "components/vscode/parts/languages.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/scm-view.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/parts/scm-view.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/search-view.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/parts/search-view.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/seed.ts",
+          "type": "registry:component",
+          "target": "components/vscode/parts/seed.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/sidebar-header.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/parts/sidebar-header.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/status-line.tsx",
+          "type": "registry:component",
+          "target": "components/vscode/parts/status-line.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/terminals.ts",
+          "type": "registry:component",
+          "target": "components/vscode/parts/terminals.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/parts/workspace.ts",
+          "type": "registry:component",
+          "target": "components/vscode/parts/workspace.ts"
+        },
+        {
+          "path": "registry/base-nova/templates/vscode/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        }
+      ],
+      "meta": {
+        "category": "Templates"
+      }
+    },
+    {
       "name": "agent-workspace",
       "type": "registry:block",
       "title": "Agent Workspace",
@@ -4355,6 +4474,40 @@
       ],
       "meta": {
         "category": "Navigation"
+      }
+    },
+    {
+      "name": "terminal",
+      "type": "registry:ui",
+      "title": "Terminal",
+      "description": "Runs a shell in the page or on your machine.",
+      "dependencies": [
+        "@xterm/xterm",
+        "@xterm/addon-fit",
+        "@xterm/addon-web-links",
+        "ws"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/terminal.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/base-nova/ui/terminal-server/pty-bridge.mjs",
+          "type": "registry:file",
+          "target": "terminal-server/pty-bridge.mjs"
+        },
+        {
+          "path": "registry/base-nova/ui/terminal-server/README.md",
+          "type": "registry:file",
+          "target": "terminal-server/README.md"
+        }
+      ],
+      "meta": {
+        "category": "Agents"
       }
     },
     {
