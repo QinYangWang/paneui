@@ -5,6 +5,7 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from "@/components/icons"
+import { useControlSize } from "@/lib/control-size"
 import { cn } from "@/lib/utils"
 import {
   ComboboxCollection,
@@ -17,16 +18,59 @@ import {
 
 const MultiSelectAnchorContext = React.createContext<React.RefObject<HTMLDivElement | null> | null>(null)
 
+type MultiSelectSize = "sm" | "default" | "lg"
+const MultiSelectSizeContext = React.createContext<MultiSelectSize | undefined>(undefined)
+
+// Well heights match Button (sm 28, default 32, lg 36) while it holds one row of chips.
+// An inherited `xs` (from a Field) maps to `sm`: chips need at least 20px.
+const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: string; input: string; trigger: string; item: string }> = {
+  sm: {
+    well: "min-h-7 py-0.5 pr-7 pl-0.5",
+    chip: "h-6 rounded-md pl-2 text-ui-sm",
+    remove: "size-5",
+    input: "h-6 md:text-ui",
+    trigger: "top-0.5 right-0.5 size-6 rounded-md",
+    item: "h-7 text-ui-sm",
+  },
+  default: {
+    well: "min-h-8 py-1 pr-8 pl-1",
+    chip: "h-6 rounded-sm pl-2 text-ui-sm",
+    remove: "size-5",
+    input: "h-6 md:text-ui",
+    trigger: "top-1 right-1 size-6 rounded-sm",
+    item: "h-8 text-ui",
+  },
+  lg: {
+    well: "min-h-9 py-1 pr-9 pl-1",
+    chip: "h-7 rounded-sm pl-2.5 text-ui",
+    remove: "size-6",
+    input: "h-7 md:text-ui-lg",
+    trigger: "top-1 right-1 size-7 rounded-sm",
+    item: "h-9 text-ui-lg",
+  },
+}
+
+function useMultiSelectSize(own?: MultiSelectSize | "xs") {
+  const fromRoot = React.useContext(MultiSelectSizeContext)
+  const size = useControlSize<MultiSelectSize | "xs">(own ?? fromRoot)
+  return size === "xs" ? "sm" : size
+}
+
 const CHIP_SPRING = { type: "spring", stiffness: 520, damping: 34, mass: 0.6 } as const
 
-type MultiSelectProps<Value> = Omit<ComboboxPrimitive.Root.Props<Value, true>, "multiple">
+type MultiSelectProps<Value> = Omit<ComboboxPrimitive.Root.Props<Value, true>, "multiple"> & {
+  /** Sizes the well, its chips and the option rows together. */
+  size?: MultiSelectSize
+}
 
 /** Combobox in multiple mode: picks stay open-ended and show as chips. */
-function MultiSelect<Value>(props: MultiSelectProps<Value>) {
+function MultiSelect<Value>({ size, ...props }: MultiSelectProps<Value>) {
   const anchorRef = React.useRef<HTMLDivElement | null>(null)
   return (
     <MultiSelectAnchorContext.Provider value={anchorRef}>
-      <ComboboxPrimitive.Root<Value, true> multiple {...props} />
+      <MultiSelectSizeContext.Provider value={size}>
+        <ComboboxPrimitive.Root<Value, true> multiple {...props} />
+      </MultiSelectSizeContext.Provider>
     </MultiSelectAnchorContext.Provider>
   )
 }
@@ -63,21 +107,27 @@ function MultiSelectTrigger({
   placeholder = "Select…",
   renderChip = defaultChipLabel,
   getKey = chipKey,
+  size: sizeProp,
   ...props
 }: Omit<ComboboxPrimitive.Chips.Props, "children"> & {
   placeholder?: string
   renderChip?: (value: ChipValue) => React.ReactNode
   getKey?: (value: ChipValue, index: number) => React.Key
+  size?: MultiSelectSize
 }) {
   const anchorRef = React.useContext(MultiSelectAnchorContext)
   const reduce = useReducedMotion()
+  const size = useMultiSelectSize(sizeProp)
+  const c = sizeClass[size]
 
   return (
     <ComboboxPrimitive.Chips
       ref={anchorRef}
       data-slot="multi-select-trigger"
+      data-size={size}
       className={cn(
-        "relative flex min-h-8 w-full min-w-56 flex-wrap items-center gap-1 rounded-lg bg-background dark:bg-input/32 py-1 pr-8 pl-1 shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50",
+        "relative flex w-full min-w-56 flex-wrap items-center gap-1 rounded-lg bg-background dark:bg-input/32 shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50",
+        c.well,
         className
       )}
       {...props}
@@ -98,12 +148,18 @@ function MultiSelectTrigger({
                 >
                   <ComboboxPrimitive.Chip
                     data-slot="multi-select-chip"
-                    className="flex h-6 max-w-48 items-center gap-1 rounded-sm bg-card pr-0.5 pl-2 text-ui-sm font-medium shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50"
+                    className={cn(
+                      "flex max-w-48 items-center gap-1 bg-card pr-0.5 font-medium shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50",
+                      c.chip
+                    )}
                   >
                     <span className="truncate">{renderChip(value)}</span>
                     <ComboboxPrimitive.ChipRemove
                       aria-label="Remove"
-                      className="flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-[4px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                      className={cn(
+                        "flex shrink-0 cursor-pointer items-center justify-center rounded-[4px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                        c.remove
+                      )}
                     >
                       <XIcon size={12} />
                     </ComboboxPrimitive.ChipRemove>
@@ -114,14 +170,17 @@ function MultiSelectTrigger({
             <ComboboxPrimitive.Input
               data-slot="multi-select-input"
               placeholder={selected.length ? undefined : placeholder}
-              className="h-6 min-w-16 flex-1 bg-transparent px-2 text-base outline-none placeholder:text-muted-foreground md:text-ui"
+              className={cn("min-w-16 flex-1 bg-transparent px-2 text-base outline-none placeholder:text-muted-foreground", c.input)}
             />
           </>
         )}
       </ComboboxPrimitive.Value>
       <ComboboxPrimitive.Trigger
         aria-label="Show options"
-        className="absolute top-1 right-1 flex size-6 cursor-pointer items-center justify-center rounded-sm text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+        className={cn(
+          "absolute flex cursor-pointer items-center justify-center text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+          c.trigger
+        )}
       >
         <ChevronsUpDownIcon size={16} />
       </ComboboxPrimitive.Trigger>
@@ -164,11 +223,14 @@ function MultiSelectContent({
 
 /** Option row with a checkbox-style tick that fills when the value is chosen. */
 function MultiSelectItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
+  const size = React.useContext(MultiSelectSizeContext) ?? "default"
   return (
     <ComboboxPrimitive.Item
       data-slot="multi-select-item"
+      data-size={size}
       className={cn(
-        "group/item relative flex h-8 cursor-default items-center gap-2.5 rounded-md px-2.5 text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent",
+        "group/item relative flex cursor-default items-center gap-2.5 rounded-md px-2.5 outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent",
+        sizeClass[size].item,
         className
       )}
       {...props}
@@ -194,6 +256,7 @@ const MultiSelectSeparator = ComboboxSeparator
 const MultiSelectEmpty = ComboboxEmpty
 const MultiSelectCollection = ComboboxCollection
 
+export type { MultiSelectProps, MultiSelectSize }
 export {
   MultiSelect,
   MultiSelectTrigger,

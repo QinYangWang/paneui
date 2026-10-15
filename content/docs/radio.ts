@@ -43,6 +43,7 @@ import { Radio, RadioGroup } from "@/components/ui/radio"`,
       title: "Disabled",
       description: "Use `disabled` on one `Radio` to block a single option, or on the group to block them all.",
     },
+    { id: "sizes", title: "Sizes" },
   ],
   notes: [
     {
@@ -61,6 +62,7 @@ import { Radio, RadioGroup } from "@/components/ui/radio"`,
       extends: "RadioGroup",
       extendsHref: "https://base-ui.com/react/components/radio#radiogroup",
       props: [
+        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Size of every radio inside: 14 / 16 / 20px." },
         { name: "value", type: "Value", description: "Controlled selected value." },
         { name: "defaultValue", type: "Value", description: "Selected value on first render." },
         {
@@ -77,10 +79,12 @@ import { Radio, RadioGroup } from "@/components/ui/radio"`,
       extends: "Radio.Root",
       extendsHref: "https://base-ui.com/react/components/radio#root",
       props: [
+        { name: "size", type: `"sm" | "default" | "lg"`, description: "Overrides the group size. Inside a sized `Field` it takes the field's size (`xs` maps to `sm`)." },
         { name: "value", type: "Value", required: true, description: "Identifies this option in the group." },
         { name: "disabled", type: "boolean", default: "false", description: "Disable this radio." },
       ],
       dataAttributes: [
+        { name: "data-size", description: "The resolved size." },
         { name: "data-checked", description: "Present when selected." },
         { name: "data-disabled", description: "Present when disabled." },
         { name: "data-invalid", description: "Present when invalid inside a Field (destructive ring)." },

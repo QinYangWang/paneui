@@ -18,6 +18,7 @@ export default {
       description: "Use when the input has a length limit, pairing a controlled `value` with `maxLength`.",
     },
     { id: "with-button", title: "With Button", description: "Use for short forms that submit straight from the field." },
+    { id: "sizes", title: "Sizes" },
   ],
   notes: [
     {
@@ -30,7 +31,10 @@ export default {
       name: "Textarea",
       description: "Multi-line text field. It adds no props of its own.",
       extends: "textarea",
-      props: [],
+      props: [
+        { name: "size", type: `"xs" | "sm" | "default" | "lg"`, default: `"default"`, description: "Padding, minimum height (48 / 56 / 64 / 80px) and text size, matching Input. Inside a sized `Field` it takes the field's size." },
+      ],
+      dataAttributes: [{ name: "data-size", description: "The resolved size." }],
     },
   ],
 } satisfies ComponentDoc

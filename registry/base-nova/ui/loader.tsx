@@ -3,9 +3,10 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 type LoaderVariant = "spinner" | "ring" | "dots" | "bars" | "pulse" | "ripple" | "orbit" | "typing"
-type LoaderSize = "sm" | "md" | "lg"
+/** `default` is an alias of `md`, matching the other components' size names. */
+type LoaderSize = "xs" | "sm" | "md" | "default" | "lg"
 
-const SIZES: Record<LoaderSize, number> = { sm: 16, md: 24, lg: 32 }
+const SIZES: Record<LoaderSize, number> = { xs: 12, sm: 16, md: 24, default: 24, lg: 32 }
 const IN_OUT = "cubic-bezier(0.45,0,0.55,1)"
 
 // Every loop is a CSS keyframe animation shipped with the component (React
@@ -276,7 +277,7 @@ function Loader({
         aria-label={label}
         data-slot="loader"
         data-variant={variant}
-        data-size={size}
+        data-size={size === "default" ? "md" : size}
         className={cn("inline-flex shrink-0 items-center justify-center text-current", className)}
         style={{ "--qy-fade": `${d(1.4)}s`, ...style } as React.CSSProperties}
         {...props}

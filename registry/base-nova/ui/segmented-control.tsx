@@ -3,6 +3,7 @@
 import * as React from "react"
 import { Radio as RadioPrimitive } from "@base-ui/react/radio"
 import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group"
+import { cva, type VariantProps } from "class-variance-authority"
 import { LayoutGroup, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -19,11 +20,49 @@ import { cn } from "@/lib/utils"
  *   </SegmentedControl>
  */
 
-const SegmentedContext = React.createContext<{ id: string; size: "sm" | "default"; value: unknown; reduce: boolean } | null>(null)
+// Outer heights match Button (xs 24, sm 28, default 32, lg 36): items are 4px shorter
+// inside the p-0.5 well, and their radius is the well's minus 2px.
+const segmentedControlVariants = cva("relative inline-flex w-fit items-center gap-0.5 bg-muted p-0.5 shadow-well", {
+  variants: {
+    size: {
+      xs: "rounded-sm",
+      sm: "rounded-lg",
+      default: "rounded-lg",
+      lg: "rounded-lg",
+    },
+  },
+  defaultVariants: { size: "default" },
+})
+
+const segmentedControlItemVariants = cva(
+  "relative inline-flex cursor-pointer items-center select-none justify-center gap-1.5 font-medium whitespace-nowrap text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-checked:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 [&_svg]:size-3.5 [&_svg]:shrink-0",
+  {
+    variants: {
+      size: {
+        xs: "h-5 rounded-[4px] px-2 text-ui-xs [&_svg]:size-3",
+        sm: "h-6 rounded-md px-2.5 text-ui-sm",
+        default: "h-7 rounded-md px-3 text-ui",
+        lg: "h-8 rounded-md px-3.5 text-ui-lg [&_svg]:size-4",
+      },
+    },
+    defaultVariants: { size: "default" },
+  }
+)
+
+type SegmentedControlSize = NonNullable<VariantProps<typeof segmentedControlVariants>["size"]>
+
+const thumbRadius: Record<SegmentedControlSize, string> = {
+  xs: "rounded-[4px]",
+  sm: "rounded-md",
+  default: "rounded-md",
+  lg: "rounded-md",
+}
+
+const SegmentedContext = React.createContext<{ id: string; size: SegmentedControlSize; value: unknown; reduce: boolean } | null>(null)
 
 type SegmentedControlProps = Omit<RadioGroupPrimitive.Props<string>, "onValueChange"> & {
   onValueChange?: (value: string) => void
-  size?: "sm" | "default"
+  size?: SegmentedControlSize
 }
 
 function SegmentedControl({ className, size = "default", value, defaultValue, onValueChange, ...props }: SegmentedControlProps) {
@@ -43,7 +82,7 @@ function SegmentedControl({ className, size = "default", value, defaultValue, on
             setInner(v)
             onValueChange?.(String(v))
           }}
-          className={cn("relative inline-flex w-fit items-center gap-0.5 rounded-lg bg-muted p-0.5 shadow-well", className)}
+          className={cn(segmentedControlVariants({ size }), className)}
           {...props}
         />
       </LayoutGroup>
@@ -54,15 +93,13 @@ function SegmentedControl({ className, size = "default", value, defaultValue, on
 function SegmentedControlItem({ className, children, value, ...props }: RadioPrimitive.Root.Props<string>) {
   const ctx = React.useContext(SegmentedContext)
   const selected = ctx?.value === value
+  const size = ctx?.size ?? "default"
   return (
     <RadioPrimitive.Root
       data-slot="segmented-control-item"
+      data-size={size}
       value={value}
-      className={cn(
-        "relative inline-flex cursor-pointer items-center select-none justify-center gap-1.5 rounded-md font-medium whitespace-nowrap text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-checked:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 [&_svg]:size-3.5 [&_svg]:shrink-0",
-        ctx?.size === "sm" ? "h-6 px-2.5 text-ui-sm" : "h-7 px-3 text-ui",
-        className
-      )}
+      className={cn(segmentedControlItemVariants({ size }), className)}
       {...props}
     >
       {selected && (
@@ -70,7 +107,7 @@ function SegmentedControlItem({ className, children, value, ...props }: RadioPri
           aria-hidden
           layoutId={`${ctx?.id}-thumb`}
           transition={ctx?.reduce ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 40, mass: 0.6 }}
-          className="absolute inset-0 rounded-md bg-card shadow-raised"
+          className={cn("absolute inset-0 bg-card shadow-raised", thumbRadius[size])}
         />
       )}
       <span className="relative inline-flex items-center gap-1.5">{children}</span>
@@ -78,5 +115,5 @@ function SegmentedControlItem({ className, children, value, ...props }: RadioPri
   )
 }
 
-export { SegmentedControl, SegmentedControlItem }
-export type { SegmentedControlProps }
+export { SegmentedControl, SegmentedControlItem, segmentedControlVariants, segmentedControlItemVariants }
+export type { SegmentedControlProps, SegmentedControlSize }

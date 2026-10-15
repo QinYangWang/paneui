@@ -57,9 +57,9 @@ export default {
       props: [
         {
           name: "size",
-          type: `"xs" | "sm" | "md" | "lg" | "xl"`,
+          type: `"xs" | "sm" | "md" | "default" | "lg" | "xl"`,
           default: `"md"`,
-          description: "Box size and fallback text size, from 20px at `xs` through 24, 32 and 40px to 48px at `xl`. Inside an `AvatarGroup` it defaults to the group's size.",
+          description: "Box size and fallback text size, from 20px at `xs` through 24, 32 and 40px to 48px at `xl`; `default` is the same as `md`. Inside an `AvatarGroup` it defaults to the group's size.",
         },
         {
           name: "shape",
@@ -107,7 +107,7 @@ export default {
       description: "Overlapping stack with a `background` ring around each avatar.",
       extends: "div",
       props: [
-        { name: "size", type: `"xs" | "sm" | "md" | "lg" | "xl"`, default: `"md"`, description: "Default size for every avatar inside, and the overlap." },
+        { name: "size", type: `"xs" | "sm" | "md" | "default" | "lg" | "xl"`, default: `"md"`, description: "Default size for every avatar inside, and the overlap." },
         { name: "shape", type: `"circle" | "rounded"`, default: `"circle"`, description: "Default shape for every avatar inside." },
       ],
     },

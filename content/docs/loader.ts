@@ -20,6 +20,7 @@ export default {
       title: "In Context",
       description: "Use `size=\"sm\"` inside buttons and status rows, and give each one a specific `label`.",
     },
+    { id: "sizes", title: "Sizes", description: "Use `xs` inside `xs` and `sm` buttons." },
   ],
   notes: [
     {
@@ -43,7 +44,7 @@ export default {
           default: `"spinner"`,
           description: "Animation style.",
         },
-        { name: "size", type: `"sm" | "md" | "lg"`, default: `"md"`, description: "16, 24 or 32px." },
+        { name: "size", type: `"xs" | "sm" | "md" | "default" | "lg"`, default: `"md"`, description: "12, 16, 24 or 32px; `default` is the same as `md`." },
         { name: "speed", type: "number", default: "1", description: "Multiplier on animation speed; 2 is twice as fast." },
         { name: "label", type: "string", default: `"Loading"`, description: "Announced to screen readers." },
       ],

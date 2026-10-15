@@ -19,6 +19,12 @@ import { cn } from "@/lib/utils"
 
 type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl"
 type AvatarShape = "circle" | "rounded"
+/** `default` is an alias of `md` (32px), matching the other components' size names. */
+type AvatarSizeProp = AvatarSize | "default"
+
+function toAvatarSize(size: AvatarSizeProp): AvatarSize {
+  return size === "default" ? "md" : size
+}
 
 const AvatarGroupContext = React.createContext<{ size?: AvatarSize; shape?: AvatarShape } | null>(null)
 
@@ -50,11 +56,11 @@ const avatarVariants = cva(
   }
 )
 
-type AvatarProps = AvatarPrimitive.Root.Props & VariantProps<typeof avatarVariants>
+type AvatarProps = AvatarPrimitive.Root.Props & Omit<VariantProps<typeof avatarVariants>, "size"> & { size?: AvatarSizeProp | null }
 
 function Avatar({ className, size, shape, ...props }: AvatarProps) {
   const group = React.useContext(AvatarGroupContext)
-  const resolvedSize = size ?? group?.size ?? "md"
+  const resolvedSize = toAvatarSize(size ?? group?.size ?? "md")
   const resolvedShape = shape ?? group?.shape ?? "circle"
   return (
     <AvatarPrimitive.Root
@@ -145,10 +151,11 @@ const avatarGroupVariants = cva(
 /** Overlapping stack. Its `size` and `shape` become the default for every `Avatar` inside. */
 function AvatarGroup({
   className,
-  size = "md",
+  size: sizeProp = "md",
   shape = "circle",
   ...props
-}: React.ComponentProps<"div"> & { size?: AvatarSize; shape?: AvatarShape }) {
+}: React.ComponentProps<"div"> & { size?: AvatarSizeProp; shape?: AvatarShape }) {
+  const size = toAvatarSize(sizeProp)
   const value = React.useMemo(() => ({ size, shape }), [size, shape])
   return (
     <AvatarGroupContext.Provider value={value}>
@@ -185,5 +192,6 @@ export {
   AvatarGroupCount,
   avatarVariants,
   type AvatarSize,
+  type AvatarSizeProp,
   type AvatarShape,
 }

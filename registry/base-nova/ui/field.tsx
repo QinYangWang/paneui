@@ -4,6 +4,7 @@ import * as React from "react"
 import { Field as FieldPrimitive } from "@base-ui/react/field"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
+import { ControlSizeContext, useControlSize, type ControlSize } from "@/lib/control-size"
 import { cn } from "@/lib/utils"
 
 /*
@@ -20,18 +21,37 @@ import { cn } from "@/lib/utils"
  *
  * FieldError renders only while it has children, sliding open and shut.
  * Validate however you like (on submit, on blur) and pass the message in.
+ *
+ * `size` on Field sizes the controls inside (Input, Textarea, PasswordInput, Select and
+ * Combobox triggers, MultiSelect, Checkbox, Radio, Switch, Slider) and the label; a
+ * control's own `size` still wins.
  */
 
-function Field({ className, ...props }: FieldPrimitive.Root.Props) {
-  return <FieldPrimitive.Root data-slot="field" className={cn("group/field flex min-w-0 flex-col gap-1.5", className)} {...props} />
+const fieldGap: Record<ControlSize, string> = { xs: "gap-1", sm: "gap-1.5", default: "gap-1.5", lg: "gap-2" }
+const labelText: Record<ControlSize, string> = { xs: "text-ui-sm", sm: "text-ui", default: "text-ui", lg: "text-ui-lg" }
+
+function Field({ className, size, ...props }: FieldPrimitive.Root.Props & { size?: ControlSize }) {
+  const resolved = useControlSize(size)
+  const root = (
+    <FieldPrimitive.Root
+      data-slot="field"
+      data-size={resolved}
+      className={cn("group/field flex min-w-0 flex-col", fieldGap[resolved], className)}
+      {...props}
+    />
+  )
+  return size ? <ControlSizeContext.Provider value={size}>{root}</ControlSizeContext.Provider> : root
 }
 
 function FieldLabel({ className, ...props }: FieldPrimitive.Label.Props) {
+  const size = useControlSize()
   return (
     <FieldPrimitive.Label
       data-slot="field-label"
       className={cn(
-        "flex items-center gap-2 text-ui leading-none font-medium select-none data-disabled:opacity-64",
+        labelText[size],
+        // After the size: a font-size class drops an earlier leading-* when classes merge.
+        "flex items-center gap-2 leading-none font-medium select-none data-disabled:opacity-64",
         className
       )}
       {...props}

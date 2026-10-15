@@ -20,6 +20,7 @@ export default {
 ├── AlertAction
 └── AlertClose`,
   examples: [
+    { id: "variants", title: "Variants", description: "Use `warning` and `destructive` only when the user has to act; they are announced as alerts." },
     {
       id: "default-variant",
       title: "Default",
@@ -40,6 +41,7 @@ export default {
       title: "Custom Dismiss",
       description: "Call `useAlert().dismiss` when a child, like an action button, should close the alert.",
     },
+    { id: "small", title: "Small", description: "Use inside cards, dialogs and forms." },
   ],
   notes: [
     {
@@ -57,6 +59,7 @@ export default {
       description: "Inline message surface that animates in and out.",
       extends: "motion.div",
       props: [
+        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "`sm` uses 10px padding, a 14px radius and the 24px icon chip; `default` 14px, 18px and 32px." },
         {
           name: "variant",
           type: `"default" | "info" | "success" | "warning" | "destructive"`,
@@ -77,7 +80,10 @@ export default {
           description: "Classes for the inner surface row; `className` goes on the outer element that animates height.",
         },
       ],
-      dataAttributes: [{ name: "data-variant", description: "The `variant` value." }],
+      dataAttributes: [
+        { name: "data-variant", description: "The `variant` value." },
+        { name: "data-size", description: "The `size` value." },
+      ],
     },
     {
       name: "AlertIcon",
@@ -116,6 +122,7 @@ export default {
       props: [
         { name: "open", type: "boolean", description: "Whether the alert is visible." },
         { name: "variant", type: "AlertVariant", description: "The alert's variant." },
+        { name: "size", type: "AlertSize", description: "The alert's size." },
         { name: "setOpen", type: "(open: boolean) => void", description: "Show or hide the alert." },
         { name: "dismiss", type: "() => void", description: "Hide the alert with its exit animation." },
       ],

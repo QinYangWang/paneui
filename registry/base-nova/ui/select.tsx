@@ -2,11 +2,62 @@
 
 import * as React from "react"
 import { Select as SelectPrimitive } from "@base-ui/react/select"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon, ChevronsUpDownIcon } from "@/components/icons"
+import { ControlSizeContext, useControlSize, type ControlSize } from "@/lib/control-size"
 import { cn } from "@/lib/utils"
 
-const Select = SelectPrimitive.Root
+// Trigger heights match Button (xs 24, sm 28, default 32, lg 36). Rows grow with the
+// trigger only when the size is set on <Select>, so a small trigger can still open a
+// full-size list.
+const selectTriggerVariants = cva(
+  "inline-flex w-full min-w-36 cursor-pointer items-center gap-2 bg-card shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-popup-open:shadow-raised-hover [&_svg]:shrink-0",
+  {
+    variants: {
+      size: {
+        xs: "h-6 gap-1.5 rounded-sm pr-1.5 pl-2 text-ui-xs [&_svg]:size-3",
+        sm: "h-7 rounded-lg pr-2 pl-2.5 text-ui-sm [&_svg]:size-3.5",
+        default: "h-8 rounded-lg pr-2 pl-2.5 text-ui [&_svg]:size-3.5",
+        lg: "h-9 rounded-lg pr-2.5 pl-3 text-ui-lg [&_svg]:size-4",
+      },
+    },
+    defaultVariants: { size: "default" },
+  }
+)
+
+const selectItemVariants = cva(
+  "relative flex cursor-default items-center gap-2 rounded-lg py-px outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:shrink-0",
+  {
+    variants: {
+      size: {
+        xs: "min-h-6 pr-6 pl-1.5 text-ui-xs [&_svg]:size-3",
+        sm: "min-h-6 pr-7 pl-2 text-ui-sm [&_svg]:size-3.5",
+        default: "min-h-6.5 pr-7 pl-2 text-ui [&_svg]:size-3.5",
+        lg: "min-h-8 pr-8 pl-2.5 text-ui-lg [&_svg]:size-4",
+      },
+    },
+    defaultVariants: { size: "default" },
+  }
+)
+
+const SelectItemSizeContext = React.createContext<ControlSize | undefined>(undefined)
+
+type SelectProps<Value, Multiple extends boolean | undefined = false> = SelectPrimitive.Root.Props<Value, Multiple> & {
+  /** Sizes the trigger and the rows together. */
+  size?: ControlSize
+}
+
+function Select<Value, Multiple extends boolean | undefined = false>({ size, ...props }: SelectProps<Value, Multiple>) {
+  const root = <SelectPrimitive.Root<Value, Multiple> {...props} />
+  if (!size) return root
+  return (
+    <ControlSizeContext.Provider value={size}>
+      <SelectItemSizeContext.Provider value={size}>{root}</SelectItemSizeContext.Provider>
+    </ControlSizeContext.Provider>
+  )
+}
+
 const SelectGroup = SelectPrimitive.Group
 
 function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
@@ -21,18 +72,16 @@ function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
 
 function SelectTrigger({
   className,
-  size = "default",
+  size: sizeProp,
   children,
   ...props
-}: SelectPrimitive.Trigger.Props & { size?: "sm" | "default" }) {
+}: SelectPrimitive.Trigger.Props & VariantProps<typeof selectTriggerVariants>) {
+  const size = useControlSize(sizeProp)
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
-      className={cn(
-        "inline-flex w-full min-w-36 cursor-pointer items-center gap-2 rounded-lg bg-card pr-2 pl-2.5 text-ui shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-popup-open:shadow-raised-hover data-[size=default]:h-8 data-[size=sm]:h-7 data-[size=sm]:text-ui-sm [&_svg]:size-3.5 [&_svg]:shrink-0",
-        className
-      )}
+      className={cn(selectTriggerVariants({ size }), className)}
       {...props}
     >
       {children}
@@ -84,17 +133,16 @@ function SelectContent({
 }
 
 function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Props) {
+  const size = React.useContext(SelectItemSizeContext) ?? "default"
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
-      className={cn(
-        "relative flex min-h-6.5 cursor-default items-center gap-2 rounded-lg py-px pr-7 pl-2 text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:size-3.5 [&_svg]:shrink-0",
-        className
-      )}
+      data-size={size}
+      className={cn(selectItemVariants({ size }), className)}
       {...props}
     >
       <SelectPrimitive.ItemText className="flex flex-1 items-center gap-2 truncate">{children}</SelectPrimitive.ItemText>
-      <SelectPrimitive.ItemIndicator className="absolute right-2 flex text-foreground">
+      <SelectPrimitive.ItemIndicator className={cn("absolute flex text-foreground", size === "xs" ? "right-1.5" : size === "lg" ? "right-2.5" : "right-2")}>
         <CheckIcon />
       </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
@@ -115,4 +163,16 @@ function SelectSeparator({ className, ...props }: SelectPrimitive.Separator.Prop
   return <SelectPrimitive.Separator data-slot="select-separator" className={cn("mx-2 my-1 h-px bg-border", className)} {...props} />
 }
 
-export { Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectItem, SelectLabel, SelectSeparator }
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  selectTriggerVariants,
+  selectItemVariants,
+}
+export type { SelectProps }

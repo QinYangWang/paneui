@@ -25,7 +25,7 @@ export default {
         { name: "value", type: "string", description: "Controlled value." },
         { name: "defaultValue", type: "string", description: "Initial value." },
         { name: "onValueChange", type: "(value: string) => void", description: "Called with the new value." },
-        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "`sm` items are 24px tall, `default` 28px." },
+        { name: "size", type: `"xs" | "sm" | "default" | "lg"`, default: `"default"`, description: "Outer height 24 / 28 / 32 / 36px, the Button heights; items are 4px shorter." },
       ],
     },
     { name: "SegmentedControlItem", extends: "Radio.Root", extendsHref: "https://base-ui.com/react/components/radio#root", props: [{ name: "value", type: "string", required: true, description: "This option's value." }] },

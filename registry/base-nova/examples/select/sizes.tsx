@@ -9,30 +9,20 @@ const rows = [
 export default function SelectSizes() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3">
-      <Select items={rows} defaultValue="25">
-        <SelectTrigger size="sm" className="w-auto">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {rows.map((r) => (
-            <SelectItem key={r.value} value={r.value}>
-              {r.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Select items={rows} defaultValue="25">
-        <SelectTrigger className="w-auto">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {rows.map((r) => (
-            <SelectItem key={r.value} value={r.value}>
-              {r.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      {(["xs", "sm", "default", "lg"] as const).map((size) => (
+        <Select key={size} size={size} items={rows} defaultValue="25">
+          <SelectTrigger className="w-auto" aria-label={`Rows (${size})`}>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {rows.map((r) => (
+              <SelectItem key={r.value} value={r.value}>
+                {r.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      ))}
     </div>
   )
 }

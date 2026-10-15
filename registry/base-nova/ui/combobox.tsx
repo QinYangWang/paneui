@@ -2,11 +2,96 @@
 
 import * as React from "react"
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { CheckIcon, ChevronsUpDownIcon, SearchIcon, XIcon } from "@/components/icons"
+import { ControlSizeContext, useControlSize, type ControlSize } from "@/lib/control-size"
 import { cn } from "@/lib/utils"
 
-const Combobox = ComboboxPrimitive.Root
+// Heights match Button (xs 24, sm 28, default 32, lg 36). Set `size` on <Combobox> to size
+// the input or trigger and the rows together.
+const ComboboxItemSizeContext = React.createContext<ControlSize | undefined>(undefined)
+
+type ComboboxProps<Value, Multiple extends boolean | undefined = false, Item = Value> = ComboboxPrimitive.Root.Props<
+  Value,
+  Multiple,
+  Item
+> & {
+  size?: ControlSize
+}
+
+function Combobox<Value, Multiple extends boolean | undefined = false, Item = Value>({
+  size,
+  ...props
+}: ComboboxProps<Value, Multiple, Item>) {
+  const root = <ComboboxPrimitive.Root<Value, Multiple, Item> {...props} />
+  if (!size) return root
+  return (
+    <ControlSizeContext.Provider value={size}>
+      <ComboboxItemSizeContext.Provider value={size}>{root}</ComboboxItemSizeContext.Provider>
+    </ControlSizeContext.Provider>
+  )
+}
+
+const comboboxInputVariants = cva(
+  "group/combobox relative flex w-full min-w-48 items-center bg-background dark:bg-input/32 shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64",
+  {
+    variants: {
+      size: {
+        xs: "h-6 gap-1 rounded-sm pr-0.5 pl-2",
+        sm: "h-7 gap-1.5 rounded-lg pr-1 pl-2.5",
+        default: "h-8 gap-1.5 rounded-lg pr-1 pl-2.5",
+        lg: "h-9 gap-2 rounded-lg pr-1 pl-3",
+      },
+    },
+    defaultVariants: { size: "default" },
+  }
+)
+
+const comboboxTriggerVariants = cva(
+  "inline-flex w-full min-w-36 cursor-pointer items-center gap-2 bg-card shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-popup-open:shadow-raised-hover [&_svg]:shrink-0",
+  {
+    variants: {
+      size: {
+        xs: "h-6 gap-1.5 rounded-sm pr-1.5 pl-2 text-ui-xs [&_svg]:size-3",
+        sm: "h-7 rounded-lg pr-2 pl-2.5 text-ui-sm [&_svg]:size-3.5",
+        default: "h-8 rounded-lg pr-2 pl-2.5 text-ui [&_svg]:size-3.5",
+        lg: "h-9 rounded-lg pr-2.5 pl-3 text-ui-lg [&_svg]:size-4",
+      },
+    },
+    defaultVariants: { size: "default" },
+  }
+)
+
+const comboboxItemVariants = cva(
+  "relative flex cursor-default items-center gap-2 rounded-lg py-px outline-none select-none transition-[background-color,box-shadow] duration-150 data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:shrink-0",
+  {
+    variants: {
+      size: {
+        xs: "min-h-6 pr-6 pl-1.5 text-ui-xs [&_svg]:size-3",
+        sm: "min-h-6 pr-7 pl-2 text-ui-sm [&_svg]:size-3.5",
+        default: "min-h-6.5 pr-7 pl-2 text-ui [&_svg]:size-3.5",
+        lg: "min-h-8 pr-8 pl-2.5 text-ui-lg [&_svg]:size-4",
+      },
+    },
+    defaultVariants: { size: "default" },
+  }
+)
+
+// Clear and chevron buttons inside the input well, per size: [button box, clear icon px].
+const inputButton: Record<ControlSize, [string, number]> = {
+  xs: ["size-5 rounded-[4px]", 12],
+  sm: ["size-6 rounded-md", 14],
+  default: ["size-6 rounded-md", 14],
+  lg: ["size-7 rounded-md", 14],
+}
+const inputText: Record<ControlSize, string> = {
+  xs: "md:text-ui-xs",
+  sm: "md:text-ui",
+  default: "md:text-ui",
+  lg: "md:text-ui-lg",
+}
+
 const ComboboxValue = ComboboxPrimitive.Value
 const ComboboxCollection = ComboboxPrimitive.Collection
 const useComboboxFilter = ComboboxPrimitive.useFilter
@@ -20,45 +105,50 @@ function ComboboxInput({
   showSearchIcon = true,
   showClear = true,
   showTrigger = true,
-  size = "default",
+  size: sizeProp,
   ...props
-}: Omit<ComboboxPrimitive.Input.Props, "size"> & {
-  showSearchIcon?: boolean
-  showClear?: boolean
-  showTrigger?: boolean
-  size?: "sm" | "default"
-}) {
+}: Omit<ComboboxPrimitive.Input.Props, "size"> &
+  VariantProps<typeof comboboxInputVariants> & {
+    showSearchIcon?: boolean
+    showClear?: boolean
+    showTrigger?: boolean
+  }) {
+  const size = useControlSize(sizeProp)
+  const [buttonBox, iconSize] = inputButton[size]
   return (
     <ComboboxPrimitive.InputGroup
       data-slot="combobox-input-group"
       data-size={size}
-      className={cn(
-        "group/combobox relative flex w-full min-w-48 items-center gap-1.5 rounded-lg bg-background dark:bg-input/32 pr-1 pl-2.5 shadow-well transition-[box-shadow,background-color] focus-within:ring-2 focus-within:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-[size=default]:h-8 data-[size=sm]:h-7",
-        className
-      )}
+      className={cn(comboboxInputVariants({ size }), className)}
     >
-      {showSearchIcon && <SearchIcon size={16} className="shrink-0 text-muted-foreground" />}
+      {showSearchIcon && <SearchIcon size={size === "xs" ? 14 : 16} className="shrink-0 text-muted-foreground" />}
       <ComboboxPrimitive.Input
         data-slot="combobox-input"
-        className="h-full min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground/72 md:text-ui"
+        className={cn("h-full min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground/72", inputText[size])}
         {...props}
       />
       {showClear && (
         <ComboboxPrimitive.Clear
           data-slot="combobox-clear"
           aria-label="Clear selection"
-          className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-[color,background-color,opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-ending-style:scale-75 data-ending-style:opacity-0 data-starting-style:scale-75 data-starting-style:opacity-0"
+          className={cn(
+            "flex shrink-0 cursor-pointer items-center justify-center text-muted-foreground transition-[color,background-color,opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-ending-style:scale-75 data-ending-style:opacity-0 data-starting-style:scale-75 data-starting-style:opacity-0",
+            buttonBox
+          )}
         >
-          <XIcon size={14} />
+          <XIcon size={iconSize} />
         </ComboboxPrimitive.Clear>
       )}
       {showTrigger && (
         <ComboboxPrimitive.Trigger
           data-slot="combobox-trigger"
           aria-label="Show options"
-          className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+          className={cn(
+            "flex shrink-0 cursor-pointer items-center justify-center text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+            buttonBox
+          )}
         >
-          <ChevronsUpDownIcon size={16} />
+          <ChevronsUpDownIcon size={size === "xs" ? 14 : 16} />
         </ComboboxPrimitive.Trigger>
       )}
     </ComboboxPrimitive.InputGroup>
@@ -71,18 +161,16 @@ function ComboboxInput({
  */
 function ComboboxTrigger({
   className,
-  size = "default",
+  size: sizeProp,
   children,
   ...props
-}: ComboboxPrimitive.Trigger.Props & { size?: "sm" | "default" }) {
+}: ComboboxPrimitive.Trigger.Props & VariantProps<typeof comboboxTriggerVariants>) {
+  const size = useControlSize(sizeProp)
   return (
     <ComboboxPrimitive.Trigger
       data-slot="combobox-trigger"
       data-size={size}
-      className={cn(
-        "inline-flex w-full min-w-36 cursor-pointer items-center gap-2 rounded-lg bg-card pr-2 pl-2.5 text-ui shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-popup-open:shadow-raised-hover data-[size=default]:h-8 data-[size=sm]:h-7 data-[size=sm]:text-ui-sm [&_svg]:size-3.5 [&_svg]:shrink-0",
-        className
-      )}
+      className={cn(comboboxTriggerVariants({ size }), className)}
       {...props}
     >
       <span className="flex-1 truncate text-left data-placeholder:text-muted-foreground">{children}</span>
@@ -157,17 +245,18 @@ function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
 }
 
 function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
+  const size = React.useContext(ComboboxItemSizeContext) ?? "default"
   return (
     <ComboboxPrimitive.Item
       data-slot="combobox-item"
-      className={cn(
-        "relative flex min-h-6.5 cursor-default items-center gap-2 rounded-lg py-px pr-7 pl-2 text-ui outline-none select-none transition-[background-color,box-shadow] duration-150 data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:size-3.5 [&_svg]:shrink-0",
-        className
-      )}
+      data-size={size}
+      className={cn(comboboxItemVariants({ size }), className)}
       {...props}
     >
       <span className="flex flex-1 items-center gap-2 truncate">{children}</span>
-      <ComboboxPrimitive.ItemIndicator className="absolute right-2 flex text-foreground">
+      <ComboboxPrimitive.ItemIndicator
+        className={cn("absolute flex text-foreground", size === "xs" ? "right-1.5" : size === "lg" ? "right-2.5" : "right-2")}
+      >
         <CheckIcon />
       </ComboboxPrimitive.ItemIndicator>
     </ComboboxPrimitive.Item>
@@ -223,5 +312,10 @@ export {
   ComboboxSeparator,
   ComboboxEmpty,
   ComboboxCollection,
+  ComboboxItemSizeContext,
   useComboboxFilter,
+  comboboxInputVariants,
+  comboboxTriggerVariants,
+  comboboxItemVariants,
 }
+export type { ComboboxProps }

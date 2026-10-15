@@ -1,4 +1,5 @@
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
@@ -7,23 +8,39 @@ import { cn } from "@/lib/utils"
  * that holds a raised CardPanel. Use it to present something (a demo, image,
  * code, a featured plan); keep dense dashboard cards on the default variant.
  * Radii stay concentric: frame rounded-2xl (16px) = panel rounded-xl (12px) + p-1.
+ * `outline` is a hairline with no fill or shadow (cards on a card), `ghost` is
+ * spacing only (groups that need the card rhythm without a surface).
+ * `size` sets the shared spacing (sm 12px, default 16px, lg 24px) that every part reads.
  */
-function Card({
-  className,
-  size = "default",
-  variant = "default",
-  ...props
-}: React.ComponentProps<"div"> & { size?: "default" | "sm"; variant?: "default" | "inset" }) {
+const cardVariants = cva(
+  "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl py-(--card-spacing) text-ui text-card-foreground",
+  {
+    variants: {
+      variant: {
+        default: "bg-card shadow-raised",
+        outline: "bg-transparent shadow-[inset_0_0_0_1px_var(--border)]",
+        ghost: "bg-transparent",
+        inset: "gap-0 rounded-2xl bg-muted p-1 shadow-raised dark:bg-background",
+      },
+      size: {
+        sm: "[--card-spacing:--spacing(3)]",
+        default: "[--card-spacing:--spacing(4)]",
+        lg: "[--card-spacing:--spacing(6)]",
+      },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  }
+)
+
+type CardProps = React.ComponentProps<"div"> & VariantProps<typeof cardVariants>
+
+function Card({ className, size = "default", variant = "default", ...props }: CardProps) {
   return (
     <div
       data-slot="card"
       data-size={size}
       data-variant={variant}
-      className={cn(
-        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-ui text-card-foreground shadow-raised [--card-spacing:--spacing(4)] data-[size=sm]:[--card-spacing:--spacing(3)]",
-        "data-[variant=inset]:gap-0 data-[variant=inset]:rounded-2xl data-[variant=inset]:bg-muted data-[variant=inset]:p-1 data-[variant=inset]:shadow-raised dark:data-[variant=inset]:bg-background",
-        className
-      )}
+      className={cn(cardVariants({ size, variant }), className)}
       {...props}
     />
   )
@@ -100,4 +117,5 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-export { Card, CardPanel, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter }
+export { Card, CardPanel, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter, cardVariants }
+export type { CardProps }

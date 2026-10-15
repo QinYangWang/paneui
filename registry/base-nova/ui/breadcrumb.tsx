@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useRender } from "@base-ui/react/use-render"
+import { cva } from "class-variance-authority"
 
 import { ChevronRightIcon, MoreHorizontalIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
@@ -11,13 +12,40 @@ function Breadcrumb({ "aria-label": ariaLabel = "Breadcrumb", ...props }: React.
   return <nav data-slot="breadcrumb" aria-label={ariaLabel} {...props} />
 }
 
-function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
+type BreadcrumbSize = "sm" | "default" | "lg"
+
+const BreadcrumbSizeContext = React.createContext<BreadcrumbSize>("default")
+
+// Crumb heights step with Button: sm 24px, default 28px (the toolbar size), lg 32px.
+const breadcrumbCrumbVariants = cva(
+  "inline-flex items-center gap-1.5 transition-[background-color,color,box-shadow] duration-150 outline-none [&_svg]:shrink-0",
+  {
+    variants: {
+      size: {
+        sm: "h-6 rounded-sm px-1.5 text-ui-sm [&_svg]:size-3",
+        default: "h-7 rounded-md px-2 [&_svg]:size-3.5",
+        lg: "h-8 rounded-lg px-2.5 text-ui-lg [&_svg]:size-4",
+      },
+    },
+    defaultVariants: { size: "default" },
+  }
+)
+
+/** `size` applies to every crumb, separator and ellipsis inside. */
+function BreadcrumbList({ className, size = "default", ...props }: React.ComponentProps<"ol"> & { size?: BreadcrumbSize }) {
   return (
-    <ol
-      data-slot="breadcrumb-list"
-      className={cn("flex flex-wrap items-center gap-0.5 text-ui break-words text-muted-foreground", className)}
-      {...props}
-    />
+    <BreadcrumbSizeContext.Provider value={size}>
+      <ol
+        data-slot="breadcrumb-list"
+        data-size={size}
+        className={cn(
+          "flex flex-wrap items-center gap-0.5 break-words text-muted-foreground",
+          size === "sm" ? "text-ui-sm" : size === "lg" ? "text-ui-lg" : "text-ui",
+          className
+        )}
+        {...props}
+      />
+    </BreadcrumbSizeContext.Provider>
   )
 }
 
@@ -35,11 +63,9 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
   )
 }
 
-const crumbClass =
-  "inline-flex h-7 items-center gap-1.5 rounded-md px-2 transition-[background-color,color,box-shadow] duration-150 outline-none [&_svg]:size-3.5 [&_svg]:shrink-0"
-
 /** Link crumb. Renders an <a> by default; use `render` for a router Link. */
 function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProps<"a">) {
+  const size = React.useContext(BreadcrumbSizeContext)
   return useRender({
     defaultTagName: "a",
     render,
@@ -47,7 +73,7 @@ function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProp
       "data-slot": "breadcrumb-link",
       ...props,
       className: cn(
-        crumbClass,
+        breadcrumbCrumbVariants({ size }),
         "cursor-pointer hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       ),
@@ -57,29 +83,27 @@ function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProp
 
 /** The current page: plain foreground text (no chip), marked aria-current. */
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
+  const size = React.useContext(BreadcrumbSizeContext)
   return (
     <span
       data-slot="breadcrumb-page"
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={cn(
-        crumbClass,
-        "font-medium text-foreground",
-        className
-      )}
+      className={cn(breadcrumbCrumbVariants({ size }), "font-medium text-foreground", className)}
       {...props}
     />
   )
 }
 
 function BreadcrumbSeparator({ className, children, ...props }: React.ComponentProps<"li">) {
+  const size = React.useContext(BreadcrumbSizeContext)
   return (
     <li
       data-slot="breadcrumb-separator"
       role="presentation"
       aria-hidden="true"
-      className={cn("flex items-center text-muted-foreground/60 [&>svg]:size-3.5", className)}
+      className={cn("flex items-center text-muted-foreground/60", size === "sm" ? "[&>svg]:size-3" : size === "lg" ? "[&>svg]:size-4" : "[&>svg]:size-3.5", className)}
       {...props}
     >
       {children ?? <ChevronRightIcon />}
@@ -104,8 +128,10 @@ function BreadcrumbEllipsis({
   label = "Show hidden breadcrumbs",
   ...props
 }: Omit<React.ComponentProps<"span">, "children"> & { items?: BreadcrumbHiddenItem[]; label?: string }) {
+  const size = React.useContext(BreadcrumbSizeContext)
   const iconBox = cn(
-    "inline-flex size-7 items-center justify-center rounded-md [&_svg]:size-4",
+    "inline-flex items-center justify-center",
+    size === "sm" ? "size-6 rounded-sm [&_svg]:size-3.5" : size === "lg" ? "size-8 rounded-lg [&_svg]:size-4" : "size-7 rounded-md [&_svg]:size-4",
     className
   )
 
@@ -157,10 +183,12 @@ function BreadcrumbTrail({
   itemsBeforeCollapse = 1,
   itemsAfterCollapse = 2,
   separator,
+  size = "default",
   className,
   ...props
 }: Omit<React.ComponentProps<"nav">, "children"> & {
   items: BreadcrumbTrailItem[]
+  size?: BreadcrumbSize
   maxItems?: number
   itemsBeforeCollapse?: number
   itemsAfterCollapse?: number
@@ -201,7 +229,7 @@ function BreadcrumbTrail({
 
   return (
     <Breadcrumb className={className} {...props}>
-      <BreadcrumbList>
+      <BreadcrumbList size={size}>
         {nodes.flatMap((node, i) =>
           i === 0 ? [node] : [<BreadcrumbSeparator key={`s-${i}`}>{separator}</BreadcrumbSeparator>, node]
         )}
@@ -219,5 +247,6 @@ export {
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
   BreadcrumbTrail,
+  breadcrumbCrumbVariants,
 }
-export type { BreadcrumbHiddenItem, BreadcrumbTrailItem }
+export type { BreadcrumbHiddenItem, BreadcrumbTrailItem, BreadcrumbSize }

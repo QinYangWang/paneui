@@ -32,6 +32,7 @@ import { Label } from "@/components/ui/label"`,
       id: "task-list",
       title: "Task List",
     },
+    { id: "sizes", title: "Sizes", description: "Use `lg` in touch-first forms and `sm` in dense tables." },
   ],
   notes: [
     {
@@ -50,6 +51,7 @@ import { Label } from "@/components/ui/label"`,
       extends: "Checkbox.Root",
       extendsHref: "https://base-ui.com/react/components/checkbox#root",
       props: [
+        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Box 14 / 16 / 20px. Inside a sized `Field` it takes the field's size (`xs` maps to `sm`)." },
         { name: "checked", type: "boolean", description: "Controlled checked state." },
         { name: "defaultChecked", type: "boolean", default: "false", description: "Checked state on first render." },
         {
@@ -66,6 +68,7 @@ import { Label } from "@/components/ui/label"`,
         { name: "disabled", type: "boolean", default: "false", description: "Dims the box and blocks interaction." },
       ],
       dataAttributes: [
+        { name: "data-size", description: "The resolved size." },
         { name: "data-checked", description: "Present when checked (primary fill)." },
         { name: "data-indeterminate", description: "Present when indeterminate." },
         { name: "data-disabled", description: "Present when disabled." },

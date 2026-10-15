@@ -45,6 +45,8 @@ export default {
       title: "Icon Only",
       description: "Use in tight toolbars, giving each icon-only tab an `aria-label`.",
     },
+    { id: "sizes", title: "Sizes", description: "Match the toolbar the tabs sit in." },
+    { id: "underline", title: "Underline", description: "Use for page-level sections, where a filled track would compete with the content." },
   ],
   notes: [
     {
@@ -84,6 +86,8 @@ export default {
       extends: "Tabs.List",
       extendsHref: "https://base-ui.com/react/components/tabs#list",
       props: [
+        { name: "size", type: `"xs" | "sm" | "default" | "lg"`, default: `"default"`, description: "Height 24 / 28 / 32 / 36px for the list, the Button heights. Applies to every tab." },
+        { name: "variant", type: `"default" | "underline"`, default: `"default"`, description: "`default` is a raised indicator on a well; `underline` is a 2px bar on a hairline." },
         {
           name: "activateOnFocus",
           type: "boolean",
@@ -92,6 +96,7 @@ export default {
         },
         { name: "loopFocus", type: "boolean", default: "true", description: "Wrap arrow-key focus at the ends." },
       ],
+      dataAttributes: [{ name: "data-size", description: "The `size` value." }, { name: "data-variant", description: "The `variant` value." }],
     },
     {
       name: "TabsTab",

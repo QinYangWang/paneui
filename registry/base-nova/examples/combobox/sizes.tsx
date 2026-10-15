@@ -11,12 +11,19 @@ import {
 
 const airports = ["HKG · Hong Kong", "TPE · Taipei", "NRT · Tokyo Narita", "SIN · Singapore", "LHR · London Heathrow"]
 
+const sizes = [
+  { size: "xs", label: "Extra small" },
+  { size: "sm", label: "Small" },
+  { size: "default", label: "Default" },
+  { size: "lg", label: "Large" },
+] as const
+
 export default function ComboboxSizes() {
   return (
     <div className="flex w-64 flex-col gap-3">
-      {(["sm", "default"] as const).map((size) => (
-        <Combobox key={size} items={airports}>
-          <ComboboxInput size={size} placeholder={size === "sm" ? "Small" : "Default"} aria-label={`Airport (${size})`} />
+      {sizes.map(({ size, label }) => (
+        <Combobox key={size} size={size} items={airports}>
+          <ComboboxInput placeholder={label} aria-label={`Airport (${label})`} />
           <ComboboxContent>
             <ComboboxEmpty>No airport found.</ComboboxEmpty>
             <ComboboxList>

@@ -53,6 +53,7 @@ BreadcrumbTrail (renders all of the above from items)`,
       title: "Static Ellipsis",
       description: "Use a static ellipsis when the hidden crumbs aren't worth navigating to.",
     },
+    { id: "sizes", title: "Sizes", description: "Use `sm` in panel headers and `lg` as a page title row." },
   ],
   notes: [
     {
@@ -70,7 +71,13 @@ BreadcrumbTrail (renders all of the above from items)`,
       extends: "nav",
       props: [{ name: "aria-label", type: "string", default: `"Breadcrumb"`, description: "Accessible name of the nav." }],
     },
-    { name: "BreadcrumbList", description: "Wrapping row of crumbs.", extends: "ol", props: [] },
+    {
+      name: "BreadcrumbList",
+      description: "Wrapping row of crumbs.",
+      extends: "ol",
+      props: [{ name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Crumb height 24, 28 or 32px and text size, for every part inside." }],
+      dataAttributes: [{ name: "data-size", description: "The `size` value." }],
+    },
     { name: "BreadcrumbItem", description: "One crumb; fades in on mount.", extends: "li", props: [] },
     {
       name: "BreadcrumbLink",
@@ -119,6 +126,7 @@ BreadcrumbTrail (renders all of the above from items)`,
       description: "Renders a whole breadcrumb from `items`; the last item is the current page.",
       extends: "nav",
       props: [
+        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Passed to `BreadcrumbList`." },
         {
           name: "items",
           type: "{ label: ReactNode; href?: string; icon?: ReactNode; onClick?: () => void }[]",

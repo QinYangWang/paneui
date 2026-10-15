@@ -1,17 +1,42 @@
 "use client"
 
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 import { AnimatePresence, motion, useReducedMotion, type HTMLMotionProps } from "motion/react"
 
 import { AlertCircleIcon, CheckCircleIcon, InfoIcon, WarningIcon, XIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
-type AlertVariant = "default" | "info" | "success" | "warning" | "destructive"
+// The surface is an opaque card; the tone is a wash painted underneath the content
+// (a ::before layer) so it never changes the text contrast tokens.
+const alertVariants = cva(
+  "relative isolate flex w-full items-start overflow-hidden bg-card text-card-foreground shadow-raised before:pointer-events-none before:absolute before:inset-0 before:-z-10",
+  {
+    variants: {
+      variant: {
+        default: "before:bg-transparent",
+        info: "before:bg-primary/7",
+        success: "before:bg-success/9",
+        warning: "before:bg-warning/11",
+        destructive: "before:bg-destructive/8",
+      },
+      size: {
+        sm: "gap-2.5 rounded-xl p-2.5 text-ui",
+        default: "gap-3 rounded-2xl p-3.5 text-ui",
+      },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  }
+)
+
+type AlertVariant = NonNullable<VariantProps<typeof alertVariants>["variant"]>
+type AlertSize = NonNullable<VariantProps<typeof alertVariants>["size"]>
 
 type AlertContextValue = {
   open: boolean
   variant: AlertVariant
+  size: AlertSize
   setOpen: (open: boolean) => void
   dismiss: () => void
 }
@@ -22,14 +47,6 @@ function useAlert() {
   const ctx = React.useContext(AlertContext)
   if (!ctx) throw new Error("useAlert must be used within <Alert>")
   return ctx
-}
-
-const tintClass: Record<AlertVariant, string> = {
-  default: "bg-transparent",
-  info: "bg-primary/7",
-  success: "bg-success/9",
-  warning: "bg-warning/11",
-  destructive: "bg-destructive/8",
 }
 
 const chipTone = {
@@ -55,6 +72,8 @@ type AlertProps = Omit<
   "initial" | "animate" | "exit" | "transition" | "role" | "children"
 > & {
   variant?: AlertVariant
+  /** `sm` tightens the padding and uses the small icon chip, for alerts inside cards and forms. */
+  size?: AlertSize
   /** Controlled visibility. Hiding animates the alert out (height collapses, surface fades). */
   open?: boolean
   defaultOpen?: boolean
@@ -72,6 +91,7 @@ type AlertProps = Omit<
  */
 function Alert({
   variant = "default",
+  size = "default",
   open: openProp,
   defaultOpen = true,
   onOpenChange,
@@ -97,7 +117,7 @@ function Alert({
     [controlled]
   )
   const dismiss = React.useCallback(() => setOpen(false), [setOpen])
-  const ctx = React.useMemo(() => ({ open, variant, setOpen, dismiss }), [open, variant, setOpen, dismiss])
+  const ctx = React.useMemo(() => ({ open, variant, size, setOpen, dismiss }), [open, variant, size, setOpen, dismiss])
 
   const resolvedRole = role ?? (variant === "warning" || variant === "destructive" ? "alert" : "status")
 
@@ -108,6 +128,7 @@ function Alert({
           <motion.div
             data-slot="alert"
             data-variant={variant}
+            data-size={size}
             role={resolvedRole}
             initial={reduce ? { opacity: 0 } : { opacity: 0, height: 0, scale: 0.96, filter: "blur(2px)" }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, height: "auto", scale: 1, filter: "blur(0px)" }}
@@ -129,12 +150,8 @@ function Alert({
             <div className="px-1 pt-px pb-1">
               <div
                 data-slot="alert-surface"
-                className={cn(
-                  "relative isolate flex w-full items-start gap-3 overflow-hidden rounded-2xl bg-card p-3.5 text-ui text-card-foreground shadow-raised",
-                  contentClassName
-                )}
+                className={cn(alertVariants({ variant, size }), contentClassName)}
               >
-                <span aria-hidden className={cn("pointer-events-none absolute inset-0 -z-10", tintClass[variant])} />
                 {children}
               </div>
             </div>
@@ -147,10 +164,10 @@ function Alert({
 
 /** Icon chip. Renders the variant's default icon unless children are given. */
 function AlertIcon({ className, children, ...props }: React.ComponentProps<"span">) {
-  const { variant } = useAlert()
+  const { variant, size } = useAlert()
   const Icon = defaultIcon[variant]
   return (
-    <IconChip data-slot="alert-icon" tone={chipTone[variant]} className={className} {...props}>
+    <IconChip data-slot="alert-icon" tone={chipTone[variant]} size={size === "sm" ? "sm" : "default"} className={className} {...props}>
       {children ?? <Icon />}
     </IconChip>
   )
@@ -158,8 +175,13 @@ function AlertIcon({ className, children, ...props }: React.ComponentProps<"span
 
 /** Wraps title + description so they stack beside the icon. */
 function AlertContent({ className, ...props }: React.ComponentProps<"div">) {
+  const { size } = useAlert()
   return (
-    <div data-slot="alert-content" className={cn("flex min-w-0 flex-1 flex-col gap-0.5 pt-1", className)} {...props} />
+    <div
+      data-slot="alert-content"
+      className={cn("flex min-w-0 flex-1 flex-col gap-0.5", size === "sm" ? "pt-0.5" : "pt-1", className)}
+      {...props}
+    />
   )
 }
 
@@ -186,7 +208,7 @@ function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
 
 /** Dismiss button; closes the parent Alert with its exit animation. */
 function AlertClose({ className, onClick, children, ...props }: React.ComponentProps<"button">) {
-  const { dismiss } = useAlert()
+  const { dismiss, size } = useAlert()
   return (
     <button
       type="button"
@@ -197,7 +219,8 @@ function AlertClose({ className, onClick, children, ...props }: React.ComponentP
         if (!e.defaultPrevented) dismiss()
       }}
       className={cn(
-        "-mt-0.5 -mr-1 flex size-7 shrink-0 cursor-pointer items-center justify-center self-start rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-3.5",
+        size === "sm" ? "-mr-0.5 size-6" : "-mt-0.5 -mr-1 size-7",
+        "flex shrink-0 cursor-pointer items-center justify-center self-start rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-3.5",
         className
       )}
       {...props}
@@ -207,5 +230,5 @@ function AlertClose({ className, onClick, children, ...props }: React.ComponentP
   )
 }
 
-export { Alert, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose, useAlert }
-export type { AlertVariant, AlertProps }
+export { Alert, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose, useAlert, alertVariants }
+export type { AlertVariant, AlertSize, AlertProps }

@@ -47,6 +47,7 @@ export default {
       title: "Controlled",
       description: "Use when other UI sets or reads the selection.",
     },
+    { id: "sizes", title: "Sizes" },
   ],
   notes: [
     {
@@ -69,6 +70,7 @@ export default {
       extends: "Combobox.Root",
       extendsHref: `${BASE}#root`,
       props: [
+        { name: "size", type: `"sm" | "default" | "lg"`, description: "Sizes the well (28, 32 or 36px for one row of chips), its chips and the option rows. Inside a sized `Field` it takes the field's size (`xs` maps to `sm`)." },
         { name: "value", type: "Value[]", description: "Controlled selected values." },
         { name: "defaultValue", type: "Value[]", description: "Initially selected values." },
         { name: "onValueChange", type: "(value: Value[], details) => void", description: "Called when the selection changes." },
@@ -80,6 +82,7 @@ export default {
       extends: "Combobox.Chips",
       extendsHref: `${BASE}#chips`,
       props: [
+        { name: "size", type: `"sm" | "default" | "lg"`, description: "Overrides the root size for the well only." },
         { name: "placeholder", type: "string", default: `"Select…"`, description: "Input placeholder while nothing is selected." },
         {
           name: "renderChip",
@@ -94,6 +97,7 @@ export default {
           description: "React key for each chip.",
         },
       ],
+      dataAttributes: [{ name: "data-size", description: "The resolved size." }],
     },
     {
       name: "MultiSelectContent",

@@ -26,6 +26,7 @@ export default {
       description: "Use when the steps matter, such as a rating.",
     },
     { id: "disabled", title: "Disabled" },
+    { id: "sizes", title: "Sizes" },
   ],
   notes: [
     {
@@ -48,6 +49,7 @@ export default {
       extends: "Slider.Root",
       extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
+        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Thumb 16 / 20 / 24px on a 6 / 8 / 10px track. Inside a sized `Field` it takes the field's size (`xs` maps to `sm`)." },
         {
           name: "ticks",
           type: "boolean | number",
@@ -85,6 +87,7 @@ export default {
         },
       ],
       dataAttributes: [
+        { name: "data-size", description: "On the root, the resolved size." },
         { name: "data-dragging", description: "On the thumb while it is dragged (scaled up)." },
         { name: "data-active", description: "On a tick (`data-slot=\"slider-tick\"`) inside the selected range." },
         { name: "data-disabled", description: "Present when disabled." },

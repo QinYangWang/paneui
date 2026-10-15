@@ -3,7 +3,18 @@
 import * as React from "react"
 import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 
+import { useControlSize, type ControlSize } from "@/lib/control-size"
 import { cn } from "@/lib/utils"
+
+type SliderSize = "sm" | "default" | "lg"
+
+// Thumb 16 / 20 / 24px on a 6 / 8 / 10px track. `inset` is half the thumb, used to
+// place ticks under the thumb centre with `edge` alignment.
+const sliderSizes: Record<SliderSize, { control: [string, string]; track: [string, string]; thumb: string; inset: string }> = {
+  sm: { control: ["h-4 w-full", "h-full w-4 flex-col justify-center"], track: ["h-1.5 w-full", "h-full w-1.5"], thumb: "size-4", inset: "0.5rem" },
+  default: { control: ["h-5 w-full", "h-full w-5 flex-col justify-center"], track: ["h-2 w-full", "h-full w-2"], thumb: "size-5", inset: "0.625rem" },
+  lg: { control: ["h-6 w-full", "h-full w-6 flex-col justify-center"], track: ["h-2.5 w-full", "h-full w-2.5"], thumb: "size-6", inset: "0.75rem" },
+}
 
 type SliderProps<Value extends number | readonly number[] = number | readonly number[]> =
   SliderPrimitive.Root.Props<Value> & {
@@ -13,6 +24,8 @@ type SliderProps<Value extends number | readonly number[] = number | readonly nu
     showValue?: boolean | "always"
     /** Accessible label per thumb, e.g. for a range: `(i) => (i ? "Max" : "Min")`. */
     getThumbLabel?: (index: number) => string
+    /** Thumb and track size. An `xs` inherited from a Field maps to `sm`. */
+    size?: SliderSize
   }
 
 /**
@@ -32,8 +45,12 @@ function Slider<Value extends number | readonly number[]>({
   getThumbLabel,
   orientation = "horizontal",
   thumbAlignment = "edge",
+  size: sizeProp,
   ...props
 }: SliderProps<Value>) {
+  const inherited = useControlSize<ControlSize>(sizeProp)
+  const size: SliderSize = inherited === "xs" ? "sm" : inherited
+  const dims = sliderSizes[size]
   const initial = (value ?? defaultValue ?? min) as number | readonly number[]
   const [values, setValues] = React.useState<readonly number[]>(toArray(initial))
 
@@ -45,7 +62,7 @@ function Slider<Value extends number | readonly number[]>({
   // With `edge` alignment the thumb's centre travels from half a thumb (10px)
   // inside one end of the track to half a thumb inside the other, so ticks use
   // the same inset to sit exactly under the thumb at every step, min/max included.
-  const thumbInset = thumbAlignment === "center" ? "0px" : "0.625rem"
+  const thumbInset = thumbAlignment === "center" ? "0px" : dims.inset
   const span = max - min || 1
   const low = values.length > 1 ? Math.min(...values) : min
   const high = Math.max(...values)
@@ -60,6 +77,7 @@ function Slider<Value extends number | readonly number[]>({
   return (
     <SliderPrimitive.Root
       data-slot="slider"
+      data-size={size}
       value={value}
       defaultValue={defaultValue}
       min={min}
@@ -82,12 +100,12 @@ function Slider<Value extends number | readonly number[]>({
         data-slot="slider-control"
         className={cn(
           "relative flex cursor-pointer items-center data-disabled:cursor-not-allowed",
-          vertical ? "h-full w-5 flex-col justify-center" : "h-5 w-full"
+          vertical ? dims.control[1] : dims.control[0]
         )}
       >
         <SliderPrimitive.Track
           data-slot="slider-track"
-          className={cn("relative rounded-full bg-muted shadow-well", vertical ? "h-full w-2" : "h-2 w-full")}
+          className={cn("relative rounded-full bg-muted shadow-well", vertical ? dims.track[1] : dims.track[0])}
         >
           <SliderPrimitive.Indicator
             data-slot="slider-indicator"
@@ -117,7 +135,8 @@ function Slider<Value extends number | readonly number[]>({
               getAriaLabel={getThumbLabel}
               data-slot="slider-thumb"
               className={cn(
-                "group/thumb block size-5 rounded-full bg-card shadow-raised outline-none",
+                "group/thumb block rounded-full bg-card shadow-raised outline-none",
+                dims.thumb,
                 "transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 data-dragging:scale-115 has-focus-visible:ring-2 has-focus-visible:ring-ring/50 motion-reduce:transition-none"
               )}
             >
@@ -151,4 +170,4 @@ function toArray(v: number | readonly number[]): readonly number[] {
 }
 
 export { Slider }
-export type { SliderProps }
+export type { SliderProps, SliderSize }

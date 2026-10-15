@@ -237,6 +237,23 @@
       }
     },
     {
+      "name": "control-size",
+      "type": "registry:lib",
+      "title": "Control size",
+      "description": "Shares one size between a field and the controls inside it.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "lib/control-size.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
       "name": "typeset",
       "type": "registry:file",
       "title": "Typeset",
@@ -1229,7 +1246,10 @@
       ],
       "meta": {
         "category": "Display"
-      }
+      },
+      "dependencies": [
+        "class-variance-authority"
+      ]
     },
     {
       "name": "input",
@@ -1237,10 +1257,12 @@
       "title": "Input",
       "description": "Single-line text field.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -1258,7 +1280,8 @@
       "title": "Textarea",
       "description": "Takes multi-line text input that grows with its content.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -1268,7 +1291,10 @@
       ],
       "meta": {
         "category": "Forms"
-      }
+      },
+      "dependencies": [
+        "class-variance-authority"
+      ]
     },
     {
       "name": "label",
@@ -1291,10 +1317,12 @@
       "title": "Checkbox",
       "description": "Toggles a single option on or off.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -1313,10 +1341,12 @@
       "description": "Picks exactly one option from a short list.",
       "dependencies": [
         "@base-ui/react",
-        "motion"
+        "motion",
+        "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -1360,7 +1390,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -1468,7 +1499,8 @@
       "title": "Alert",
       "description": "Shows an inline message that can animate in and be dismissed.",
       "dependencies": [
-        "motion"
+        "motion",
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@qinyang/theme",
@@ -1535,7 +1567,8 @@
       "title": "Breadcrumb",
       "description": "Shows where the current page sits in the site hierarchy.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@qinyang/theme",
@@ -1680,11 +1713,13 @@
       "title": "Combobox",
       "description": "Picks one option from a long list by typing to filter.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -1727,7 +1762,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/combobox"
+        "@qinyang/combobox",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -3075,10 +3111,12 @@
       "title": "Switch",
       "description": "Turns a single setting on or off.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -3096,7 +3134,8 @@
       "title": "Tabs",
       "description": "Switches between related panels of content in one place.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@qinyang/theme"
@@ -3183,11 +3222,13 @@
       "title": "Select",
       "description": "Picks one option from a list.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -3967,7 +4008,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -3990,7 +4032,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/input"
+        "@qinyang/input",
+        "@qinyang/control-size"
       ],
       "files": [
         {
@@ -4009,7 +4052,8 @@
       "description": "Switches a setting between a few options.",
       "dependencies": [
         "@base-ui/react",
-        "motion"
+        "motion",
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@qinyang/theme"

@@ -15,7 +15,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
  * Shows prev / next and a window of page numbers with ellipses
  * (1 … 4 5 6 … 12). Compose the parts yourself for a different layout:
  * PaginationSummary ("21–30 of 248") and PaginationPageSize (rows per page).
+ *
+ * `size` steps the buttons along the Button scale: sm uses 24px buttons, default 28px
+ * (the toolbar size), lg 32px.
  */
+
+type PaginationSize = "sm" | "default" | "lg"
+
+const paginationSizes = {
+  sm: { button: "icon-xs", gap: "size-6", trigger: "xs" },
+  default: { button: "icon-sm", gap: "size-7", trigger: "sm" },
+  lg: { button: "icon", gap: "size-8", trigger: "default" },
+} as const satisfies Record<PaginationSize, { button: string; gap: string; trigger: string }>
 
 /** Page numbers to show: first, last, `siblings` around the current page, "…" for gaps. */
 function getPageRange(page: number, pageCount: number, siblings = 1): (number | "ellipsis")[] {
@@ -45,38 +56,43 @@ type PaginationProps = Omit<React.ComponentProps<"nav">, "children"> & {
   siblings?: number
   /** Hide the number buttons (prev / next and "Page 2 of 9" only), e.g. on phones. */
   compact?: boolean
+  size?: PaginationSize
 }
 
-function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = false, className, ...props }: PaginationProps) {
+function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = false, size = "default", className, ...props }: PaginationProps) {
+  const dims = paginationSizes[size]
   const count = Math.max(1, pageCount)
   const current = Math.min(Math.max(1, page), count)
   const go = (p: number) => onPageChange(Math.min(Math.max(1, p), count))
   return (
-    <nav data-slot="pagination" aria-label="Pagination" className={cn("flex items-center gap-1", className)} {...props}>
-      <Button variant="ghost" size="icon-sm" aria-label="Previous page" disabled={current <= 1} onClick={() => go(current - 1)}>
+    <nav data-slot="pagination" data-size={size} aria-label="Pagination" className={cn("flex items-center gap-1", className)} {...props}>
+      <Button variant="ghost" size={dims.button} aria-label="Previous page" disabled={current <= 1} onClick={() => go(current - 1)}>
         <ChevronLeftIcon />
       </Button>
       {compact ? (
-        <span className="px-2 text-ui text-muted-foreground tabular-nums" aria-live="polite">
+        <span className={cn("px-2 text-muted-foreground tabular-nums", size === "sm" ? "text-ui-xs" : "text-ui")} aria-live="polite">
           Page {current} of {count}
         </span>
       ) : (
         <ul className="flex items-center gap-0.5">
           {getPageRange(current, count, siblings).map((p, i) =>
             p === "ellipsis" ? (
-              <li key={`e${i}`} aria-hidden className="grid size-7 place-items-center text-muted-foreground [&_svg]:size-3.5">
+              <li key={`e${i}`} aria-hidden className={cn("grid place-items-center text-muted-foreground [&_svg]:size-3.5", dims.gap)}>
                 <MoreHorizontalIcon />
               </li>
             ) : (
               <li key={p}>
                 <Button
                   variant="ghost"
-                  size="icon-sm"
+                  size={dims.button}
                   aria-label={`Page ${p}`}
                   aria-current={p === current ? "page" : undefined}
                   onClick={() => go(p)}
                   // The current page reads as selected: the row-active fill from the sidebar.
-                  className="w-auto min-w-7 px-1.5 text-ui tabular-nums aria-[current=page]:bg-foreground/6"
+                  className={cn(
+                    "w-auto tabular-nums aria-[current=page]:bg-foreground/6",
+                    size === "sm" ? "min-w-6 px-1 text-ui-xs" : size === "lg" ? "min-w-8 px-2 text-ui" : "min-w-7 px-1.5 text-ui"
+                  )}
                 >
                   {p}
                 </Button>
@@ -85,7 +101,7 @@ function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = fal
           )}
         </ul>
       )}
-      <Button variant="ghost" size="icon-sm" aria-label="Next page" disabled={current >= count} onClick={() => go(current + 1)}>
+      <Button variant="ghost" size={dims.button} aria-label="Next page" disabled={current >= count} onClick={() => go(current + 1)}>
         <ChevronRightIcon />
       </Button>
     </nav>
@@ -117,22 +133,29 @@ function PaginationPageSize({
   onValueChange,
   options = [10, 20, 50],
   label = "Rows per page",
+  size = "default",
   className,
 }: {
   value: number
   onValueChange: (size: number) => void
   options?: number[]
   label?: string
+  /** Matches Pagination's `size`. */
+  size?: PaginationSize
   className?: string
 }) {
   const id = React.useId()
   return (
-    <div data-slot="pagination-page-size" className={cn("flex items-center gap-2 text-ui text-muted-foreground", className)}>
+    <div
+      data-slot="pagination-page-size"
+      data-size={size}
+      className={cn("flex items-center gap-2 text-muted-foreground", size === "sm" ? "text-ui-xs" : "text-ui", className)}
+    >
       <span id={id} className="whitespace-nowrap">
         {label}
       </span>
       <Select value={value} onValueChange={(v) => v != null && onValueChange(Number(v))}>
-        <SelectTrigger size="sm" aria-labelledby={id} className="w-18 min-w-0">
+        <SelectTrigger size={paginationSizes[size].trigger} aria-labelledby={id} className="w-18 min-w-0">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -148,4 +171,4 @@ function PaginationPageSize({
 }
 
 export { Pagination, PaginationSummary, PaginationPageSize, getPageRange }
-export type { PaginationProps }
+export type { PaginationProps, PaginationSize }

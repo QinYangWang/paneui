@@ -29,6 +29,7 @@ export default {
       title: "Read Only",
       description: "Use `readOnly` for values the user can see but not change; it stays focusable.",
     },
+    { id: "sizes", title: "Sizes" },
   ],
   notes: [
     {
@@ -47,6 +48,7 @@ export default {
       extends: "Switch.Root",
       extendsHref: "https://base-ui.com/react/components/switch#root",
       props: [
+        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Track 26×16 / 32×20 / 40×24px. Inside a sized `Field` it takes the field's size (`xs` maps to `sm`)." },
         { name: "checked", type: "boolean", description: "Controlled state." },
         { name: "defaultChecked", type: "boolean", default: "false", description: "Initial state when uncontrolled." },
         {
@@ -59,6 +61,7 @@ export default {
         { name: "name", type: "string", description: "Submits the value with a form." },
       ],
       dataAttributes: [
+        { name: "data-size", description: "The resolved size." },
         { name: "data-checked", description: "Present when on." },
         { name: "data-unchecked", description: "Present when off." },
         { name: "data-disabled", description: "Present when disabled." },

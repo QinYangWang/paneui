@@ -35,7 +35,7 @@ export default {
     {
       id: "sizes",
       title: "Sizes",
-      description: "Use `sm` in toolbars and dense rows.",
+      description: "Set `size` on `Select` to size the trigger and its rows together.",
     },
     {
       id: "with-icons",
@@ -88,11 +88,11 @@ export default {
       extends: "Select.Trigger",
       extendsHref: "https://base-ui.com/react/components/select#trigger",
       props: [
-        { name: "size", type: `"default" | "sm"`, default: `"default"`, description: "`default` is 32px tall, `sm` 28px." },
+        { name: "size", type: `"xs" | "sm" | "default" | "lg"`, default: `"default"`, description: "Height 24 / 28 / 32 / 36px. Defaults to the `Select` size, then a sized `Field`." },
       ],
       dataAttributes: [
         { name: "data-popup-open", description: "Present while the list is open." },
-        { name: "data-size", description: "`default` or `sm`." },
+        { name: "data-size", description: "The resolved size." },
       ],
     },
     {

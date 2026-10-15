@@ -8,6 +8,30 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-sizes",
+    date: "October 15, 2026",
+    title: "Sizes and variants across form and display components",
+    tag: "Components",
+    changes: [
+      <>
+        Form controls take the Button size scale (<Code>xs</Code>, <Code>sm</Code>, <Code>default</Code>,{" "}
+        <Code>lg</Code>), so a field and the button beside it line up at every size.
+      </>,
+      <>
+        <Code>size</Code> on <Code>Field</Code> sizes the label and the control inside. <Code>size</Code> on{" "}
+        <Code>Select</Code>, <Code>Combobox</Code> and <Code>MultiSelect</Code> sizes the trigger and its rows together.
+      </>,
+      <>
+        New <Code>underline</Code> variant for tabs, <Code>outline</Code> and <Code>ghost</Code> cards, a{" "}
+        <Code>lg</Code> card, and a small alert.
+      </>,
+      <>
+        Checkbox, radio, switch, slider, pagination and breadcrumb take a <Code>size</Code>. Every default looks the same
+        as before.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-15-desktop",
     date: "October 15, 2026",
     title: "Code editor on the desktop",

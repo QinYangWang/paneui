@@ -41,7 +41,7 @@ export default {
     {
       id: "sizes",
       title: "Sizes",
-      description: "Use `sm` in toolbars and dense forms.",
+      description: "Set `size` on `Combobox` to size the input and its rows together.",
     },
     {
       id: "input-options",
@@ -83,7 +83,7 @@ export default {
       extends: "Combobox.Input",
       extendsHref: `${BASE}#input`,
       props: [
-        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height, 28px or 32px." },
+        { name: "size", type: `"xs" | "sm" | "default" | "lg"`, default: `"default"`, description: "Height 24 / 28 / 32 / 36px. Defaults to the `Combobox` size, then a sized `Field`." },
         { name: "showSearchIcon", type: "boolean", default: "true", description: "Show the leading search icon." },
         {
           name: "showClear",
@@ -103,7 +103,7 @@ export default {
       description: "Raised button showing the chosen value, like `SelectTrigger`. Put `ComboboxValue` inside.",
       extends: "Combobox.Trigger",
       extendsHref: `${BASE}#trigger`,
-      props: [{ name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height, 28px or 32px." }],
+      props: [{ name: "size", type: `"xs" | "sm" | "default" | "lg"`, default: `"default"`, description: "Height 24 / 28 / 32 / 36px. Defaults to the `Combobox` size, then a sized `Field`." }],
       dataAttributes: [{ name: "data-popup-open", description: "Present while the list is open." }],
     },
     {

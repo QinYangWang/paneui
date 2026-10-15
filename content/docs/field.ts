@@ -17,13 +17,22 @@ export default {
     ├── Input / Select / FieldControl
     ├── FieldDescription
     └── FieldError`,
-  examples: [{ id: "textarea", title: "Any Control", description: "Use `FieldControl render={<Textarea />}` when the control isn't field-aware, so it still gets the label, `aria-invalid` and descriptions." }],
+  examples: [
+    { id: "sizes", title: "Sizes", description: "Set `size` on the field instead of on each control." },
+    { id: "textarea", title: "Any Control", description: "Use `FieldControl render={<Textarea />}` when the control isn't field-aware, so it still gets the label, `aria-invalid` and descriptions." },
+  ],
   notes: [
     { title: "Validation", body: "Validate however you like and pass the message to `FieldError`; it renders only while it has children. `invalid` on `Field` sets `aria-invalid` on the control, which turns its ring destructive." },
     { title: "Accessibility", body: "The field links the label to the control and the description and error to it with `aria-describedby`." },
   ],
   api: [
-    { name: "Field", extends: "Field.Root", extendsHref: "https://base-ui.com/react/components/field#root", props: [{ name: "invalid", type: "boolean", description: "Marks the control invalid." }, { name: "disabled", type: "boolean", description: "Disables the control and dims the label." }] },
+    { name: "Field", extends: "Field.Root", extendsHref: "https://base-ui.com/react/components/field#root", props: [
+        { name: "size", type: `"xs" | "sm" | "default" | "lg"`, description: "Sizes the label and every control inside (Input, Textarea, PasswordInput, Select and Combobox triggers, MultiSelect, Checkbox, Radio, Switch, Slider). A control's own `size` wins." },
+        { name: "invalid", type: "boolean", description: "Marks the control invalid." },
+        { name: "disabled", type: "boolean", description: "Disables the control and dims the label." },
+      ],
+      dataAttributes: [{ name: "data-size", description: "The resolved size." }],
+    },
     { name: "FieldError", extends: "Field.Error", description: "The message; nothing renders while it is empty.", props: [{ name: "children", type: "ReactNode", description: "The message." }] },
     { name: "FieldControl", extends: "Field.Control", description: "Makes any element a field control via `render`.", props: [] },
     { name: "FieldLabelRow", extends: "div", description: "Label with something at the end, e.g. a \"Forgot password?\" link.", props: [] },

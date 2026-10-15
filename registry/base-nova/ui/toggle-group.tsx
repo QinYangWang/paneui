@@ -8,7 +8,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 // Native toggles: a pressed state is a fill, never a press scale. Sizes follow the button
-// density (h-8 default, sm h-7, xs h-6). For a one-of-many value with a raised thumb on a
+// density (lg h-9, h-8 default, sm h-7, xs h-6). For a one-of-many value with a raised thumb on a
 // well, use SegmentedControl instead.
 const toggleVariants = cva(
   "inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg text-ui font-medium whitespace-nowrap text-muted-foreground transition-[background-color,color,box-shadow] duration-150 ease-out outline-none select-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-pressed:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -23,6 +23,7 @@ const toggleVariants = cva(
         default: "h-8 min-w-8 px-2.5",
         sm: "h-7 min-w-7 px-2 [&_svg:not([class*='size-'])]:size-3.5",
         xs: "h-6 min-w-6 rounded-sm px-1.5 text-ui-xs [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-9 min-w-9 px-3 text-ui-lg",
       },
     },
     defaultVariants: { variant: "default", size: "default" },
@@ -33,7 +34,15 @@ type ToggleVariantProps = VariantProps<typeof toggleVariants>
 
 /** A two-state button (bold on/off). `pressed` / `defaultPressed` / `onPressedChange`. */
 function Toggle({ className, variant, size, ...props }: TogglePrimitive.Props & ToggleVariantProps) {
-  return <TogglePrimitive data-slot="toggle" className={cn(toggleVariants({ variant, size }), className)} {...props} />
+  return (
+    <TogglePrimitive
+      data-slot="toggle"
+      data-variant={variant ?? "default"}
+      data-size={size ?? "default"}
+      className={cn(toggleVariants({ variant, size }), className)}
+      {...props}
+    />
+  )
 }
 
 const ToggleGroupContext = React.createContext<ToggleVariantProps>({})
@@ -53,6 +62,7 @@ function ToggleGroup<Value extends string = string>({
     <ToggleGroupPrimitive
       data-slot="toggle-group"
       data-variant={variant}
+      data-size={size}
       className={cn(
         "inline-flex w-fit items-center gap-0.5 data-[orientation=vertical]:flex-col",
         className
@@ -66,10 +76,14 @@ function ToggleGroup<Value extends string = string>({
 
 function ToggleGroupItem({ className, variant, size, ...props }: TogglePrimitive.Props & ToggleVariantProps) {
   const ctx = React.useContext(ToggleGroupContext)
+  const v = variant ?? ctx.variant ?? "default"
+  const s = size ?? ctx.size ?? "default"
   return (
     <TogglePrimitive
       data-slot="toggle-group-item"
-      className={cn(toggleVariants({ variant: variant ?? ctx.variant, size: size ?? ctx.size }), className)}
+      data-variant={v}
+      data-size={s}
+      className={cn(toggleVariants({ variant: v, size: s }), className)}
       {...props}
     />
   )
