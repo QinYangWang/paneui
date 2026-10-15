@@ -15,6 +15,7 @@ import {
   Rows2Icon,
   TerminalSquareIcon,
   TrashIcon,
+  XIcon,
 } from "@/components/icons"
 import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
 import { Button } from "@/registry/base-nova/ui/button"
@@ -78,7 +79,7 @@ function TerminalPane({ client, state, id, status }: { client: AcpClient; state:
   )
 }
 
-function TerminalDock({ client, state, status }: { client: AcpClient; state: ClientState; status?: string }) {
+function TerminalDock({ client, state, status, compact = false }: { client: AcpClient; state: ClientState; status?: string; compact?: boolean }) {
   const [userTerms, setUserTerms] = React.useState(["user-1"])
   const [active, setActive] = React.useState("user-1")
   const [split, setSplit] = React.useState<"none" | "horizontal" | "vertical">("none")
@@ -125,18 +126,22 @@ function TerminalDock({ client, state, status }: { client: AcpClient; state: Cli
             ))}
           </TabStrip>
         )}
-        <IconAction label="Split right" pressed={split === "horizontal"} onClick={() => setSplit((s) => (s === "horizontal" ? "none" : "horizontal"))}>
-          <Columns2Icon />
-        </IconAction>
-        <IconAction label="Split down" pressed={split === "vertical"} onClick={() => setSplit((s) => (s === "vertical" ? "none" : "vertical"))}>
-          <Rows2Icon />
-        </IconAction>
+        {!compact && (
+          <>
+            <IconAction label="Split right" pressed={split === "horizontal"} onClick={() => setSplit((s) => (s === "horizontal" ? "none" : "horizontal"))}>
+              <Columns2Icon />
+            </IconAction>
+            <IconAction label="Split down" pressed={split === "vertical"} onClick={() => setSplit((s) => (s === "vertical" ? "none" : "vertical"))}>
+              <Rows2Icon />
+            </IconAction>
+          </>
+        )}
         <IconAction label="Clear terminal" onClick={() => client.setTerminal(current, "", state.terminals[current]?.title)}>
           <TrashIcon />
         </IconAction>
       </div>
       <div className="min-h-0 flex-1">
-        {split !== "none" && other ? (
+        {split !== "none" && other && !compact ? (
           <ResizablePanelGroup direction={split} autoSaveId={`agent-workspace-terminal-${split}`}>
             <ResizablePanel id="a" minSize={20}>
               <TerminalPane client={client} state={state} id={current} status={status} />
@@ -294,6 +299,7 @@ export function Dock({
   explorerPath,
   onExplorerPath,
   status,
+  compact = false,
 }: {
   client: AcpClient
   state: ClientState
@@ -305,6 +311,8 @@ export function Dock({
   explorerPath: string | null
   onExplorerPath: (path: string | null) => void
   status?: string
+  /** Phone layout (inside a bottom sheet): no terminal splits, and the collapse button closes the sheet. */
+  compact?: boolean
 }) {
   const missing = (Object.keys(TAB_META) as DockTab[]).filter((t) => !tabs.includes(t))
   return (
@@ -342,12 +350,12 @@ export function Dock({
         >
           <PlusIcon />
         </IconAction>
-        <IconAction label="Hide panel" shortcut="⌘J" onClick={onCollapse}>
-          <PanelRightIcon />
+        <IconAction label={compact ? "Close panel" : "Hide panel"} shortcut="⌘J" onClick={onCollapse}>
+          {compact ? <XIcon /> : <PanelRightIcon />}
         </IconAction>
       </div>
       <div className="min-h-0 flex-1">
-        {tab === "terminal" && <TerminalDock client={client} state={state} status={status} />}
+        {tab === "terminal" && <TerminalDock client={client} state={state} status={status} compact={compact} />}
         {tab === "explorer" && <ExplorerDock client={client} state={state} selected={explorerPath} onSelect={onExplorerPath} />}
         {tab === "browser" && <BrowserDock />}
       </div>

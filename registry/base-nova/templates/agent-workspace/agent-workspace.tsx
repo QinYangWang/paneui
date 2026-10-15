@@ -24,8 +24,10 @@ import {
 } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { CommandPalette, type CommandPaletteItem } from "@/registry/base-nova/blocks/command-palette/command-palette"
+import { BottomSheet, BottomSheetContent, BottomSheetTitle } from "@/registry/base-nova/ui/bottom-sheet"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/registry/base-nova/ui/dialog"
+import { Drawer, DrawerContent, DrawerTitle } from "@/registry/base-nova/ui/drawer"
 import { FileDiff } from "@/registry/base-nova/ui/file-diff"
 import { IconRail, IconRailAvatar, IconRailGroup, IconRailItem, IconRailSpacer } from "@/registry/base-nova/ui/icon-rail"
 import {
@@ -51,12 +53,41 @@ import { ThreadsSidebar, type ThreadSummary } from "./parts/threads-sidebar"
 
 const DEMO_TABS = ["sess_scrollbar", "sess_hide_empty", "sess_split_close", "sess_fix_drag"]
 
-function ToolbarButton({ label, shortcut, onClick, pressed, children }: { label: string; shortcut?: string; onClick?: () => void; pressed?: boolean; children: React.ReactNode }) {
+/** Below `md` the workspace switches to its phone layout. */
+const MOBILE_QUERY = "(max-width: 767.98px)"
+
+function useIsMobile() {
+  return React.useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia(MOBILE_QUERY)
+      mq.addEventListener("change", onChange)
+      return () => mq.removeEventListener("change", onChange)
+    },
+    () => window.matchMedia(MOBILE_QUERY).matches,
+    () => false
+  )
+}
+
+function ToolbarButton({
+  label,
+  shortcut,
+  onClick,
+  pressed,
+  size = "icon-sm",
+  children,
+}: {
+  label: string
+  shortcut?: string
+  onClick?: () => void
+  pressed?: boolean
+  size?: "icon-sm" | "icon"
+  children: React.ReactNode
+}) {
   return (
     <Tooltip>
       <TooltipTrigger
         render={
-          <Button variant="ghost" size="icon-sm" aria-label={label} aria-pressed={pressed} onClick={onClick} className={cn("text-muted-foreground", pressed && "text-foreground")}>
+          <Button variant="ghost" size={size} aria-label={label} aria-pressed={pressed} onClick={onClick} className={cn("text-muted-foreground", pressed && "text-foreground")}>
             {children}
           </Button>
         }
@@ -70,9 +101,11 @@ function ToolbarButton({ label, shortcut, onClick, pressed, children }: { label:
 }
 
 /**
- * Synara-style multi-provider coding-agent workspace, wired to the Agent
- * Client Protocol: an icon rail, a threads sidebar, tabs of open threads,
- * one or two chat panes and a dock with terminal, explorer and browser.
+ * Multi-provider coding-agent workspace, wired to the Agent Client Protocol:
+ * an icon rail, a threads sidebar, tabs of open threads, one or two chat
+ * panes and a dock with terminal, explorer and browser. Below `md` it becomes
+ * a phone layout: a header with the tabs, the rail and threads in a drawer,
+ * the dock in a bottom sheet and one full-width chat (no split).
  * Starts on the offline demo agent; Settings → Agents connects real ACP
  * agents through server/acp-bridge.mjs.
  */
@@ -103,7 +136,11 @@ export function AgentWorkspace() {
   const outer = React.useRef<ResizablePanelGroupHandle>(null)
   const inner = React.useRef<ResizablePanelGroupHandle>(null)
 
-  const active = focus === "right" && right ? right : left
+  const mobile = useIsMobile()
+  const [navOpen, setNavOpen] = React.useState(false)
+  const [dockSheetOpen, setDockSheetOpen] = React.useState(false)
+
+  const active = focus === "right" && right && !mobile ? right : left
   const agent = agents.find((a) => a.id === agentId) ?? DEMO_AGENT
 
   /* ------------------------------ threads ------------------------------- */
@@ -195,6 +232,7 @@ export function AgentWorkspace() {
   }
 
   const toggleSplit = () => {
+    if (mobile) return
     if (right) {
       setRight(null)
       setFocus("left")
@@ -259,10 +297,15 @@ export function AgentWorkspace() {
     return () => client.disconnect()
   }, [client, connect])
 
+  // Tablets (md to lg): open with the dock collapsed so the chat keeps its 360px minimum.
+  React.useEffect(() => {
+    if (!mobile && window.matchMedia("(max-width: 1023.98px)").matches) inner.current?.collapse("dock")
+  }, [mobile])
+
   /* ----------------------------- shortcuts ------------------------------ */
 
-  const toggleSidebar = () => outer.current?.toggle("threads")
-  const toggleDock = () => inner.current?.toggle("dock")
+  const toggleSidebar = () => (mobile ? setNavOpen((o) => !o) : outer.current?.toggle("threads"))
+  const toggleDock = () => (mobile ? setDockSheetOpen((o) => !o) : inner.current?.toggle("dock"))
 
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -283,7 +326,7 @@ export function AgentWorkspace() {
 
   const paletteItems: CommandPaletteItem[] = [
     { id: "new", label: "New thread", group: "Threads", shortcut: ["⌘", "N"], icon: EditIcon, onSelect: () => void newThread() },
-    { id: "split", label: right ? "Close split view" : "Split chats side by side", group: "View", shortcut: ["⌘", "\\"], icon: Columns2Icon, onSelect: toggleSplit },
+    ...(mobile ? [] : [{ id: "split", label: right ? "Close split view" : "Split chats side by side", group: "View", shortcut: ["⌘", "\\"], icon: Columns2Icon, onSelect: toggleSplit }]),
     { id: "sidebar", label: "Toggle threads sidebar", group: "View", shortcut: ["⌘", "B"], icon: SidebarIcon, onSelect: toggleSidebar },
     { id: "dock", label: "Toggle terminal panel", group: "View", shortcut: ["⌘", "J"], icon: TerminalSquareIcon, onSelect: toggleDock },
     { id: "theme", label: "Toggle dark mode", group: "View", icon: MoonIcon, onSelect: toggleTheme },
@@ -313,167 +356,257 @@ export function AgentWorkspace() {
         setExplorerPath(path)
         setDockTabs((t) => (t.includes("explorer") ? t : [...t, "explorer"]))
         setDockTab("explorer")
-        inner.current?.expand("dock")
+        if (mobile) setDockSheetOpen(true)
+        else inner.current?.expand("dock")
       }}
+    />
+  )
+
+  const closeNav = () => setNavOpen(false)
+
+  const rail = (orientation: "vertical" | "horizontal") => {
+    const horizontal = orientation === "horizontal"
+    // In the phone drawer, items that open something else close the drawer first.
+    const then = (fn: () => void) => () => {
+      if (horizontal) closeNav()
+      fn()
+    }
+    return (
+      <IconRail aria-label="App" orientation={orientation}>
+        <IconRailGroup>
+          <IconRailItem label="Home" icon={<HomeIcon />} onClick={then(() => left && show(left))} />
+          <IconRailItem label="Inbox" icon={<InboxIcon />} />
+          <IconRailItem label="Tasks" icon={<ClipboardListIcon />} />
+          <IconRailItem
+            label="Branches"
+            icon={<GitBranchIcon />}
+            onClick={then(() => {
+              setDockTab("explorer")
+              if (horizontal) setDockSheetOpen(true)
+            })}
+          />
+          <IconRailItem label="History" shortcut="⌘K" icon={<HistoryIcon />} onClick={then(() => setPaletteOpen(true))} />
+          <IconRailItem label="Agents" icon={<GridIcon />} onClick={then(() => setSettingsOpen(true))} />
+          {!horizontal && <IconRailItem label="Threads" shortcut="⌘B" icon={<FolderIcon />} active={sidebarOpen} onClick={toggleSidebar} />}
+        </IconRailGroup>
+        <IconRailSpacer />
+        <IconRailGroup>
+          {/* The phone row has room for the connected agent only; the rest are in the threads header menu. */}
+          {(horizontal ? agents.filter((a) => a.id === agentId) : agents.slice(0, 3)).map((a) => (
+            <IconRailAvatar
+              key={a.id}
+              label={a.name}
+              hint={a.id === agentId ? state.connection : "not connected"}
+              status={a.id !== agentId ? "offline" : state.connection === "ready" ? "online" : state.connection === "connecting" ? "busy" : "error"}
+              onClick={then(() => (a.builtin ? void connect(a, bridge) : setSettingsOpen(true)))}
+            >
+              <ProviderIcon provider={a.provider} />
+            </IconRailAvatar>
+          ))}
+          <IconRailItem label="Command palette" shortcut="⌘K" icon={<HelpCircleIcon />} onClick={then(() => setPaletteOpen(true))} />
+          <IconRailItem label="Settings" shortcut="⌘," icon={<SettingsIcon />} onClick={then(() => setSettingsOpen(true))} />
+        </IconRailGroup>
+      </IconRail>
+    )
+  }
+
+  const sidebar = (
+    <ThreadsSidebar
+      threads={threads}
+      activeId={active}
+      onSelect={(id) => {
+        show(id)
+        closeNav()
+      }}
+      onNewThread={() => {
+        closeNav()
+        void newThread()
+      }}
+      agents={agents}
+      agentId={agentId}
+      onSelectAgent={(id) => {
+        const a = agents.find((x) => x.id === id)
+        if (a?.builtin) void connect(a, bridge)
+        else setSettingsOpen(true)
+      }}
+      onOpenSettings={() => {
+        closeNav()
+        setSettingsOpen(true)
+      }}
+    />
+  )
+
+  const tabStrip = (
+    <TabStrip
+      value={active}
+      onValueChange={(id) => show(id)}
+      order={tabs}
+      onReorder={setTabs}
+      onClose={closeTab}
+      aria-label="Open threads"
+      className="min-w-0 flex-1"
+    >
+      {tabs.map((id) => {
+        const t = threadOf(id)
+        return (
+          <TabStripItem key={id} value={id} icon={<ProviderIcon provider={t?.provider} />} indicator={t?.running} className={mobile ? "w-32" : "w-36"}>
+            {t?.title ?? state.sessions[id]?.title ?? "Thread"}
+          </TabStripItem>
+        )
+      })}
+    </TabStrip>
+  )
+
+  const errorBanner =
+    state.connection === "error" ? (
+      <div role="alert" className="flex items-center gap-2 border-b border-border bg-destructive/8 px-4 py-2 text-ui text-destructive">
+        <span className="min-w-0 flex-1 truncate">{state.error ?? "Disconnected"}</span>
+        <Button variant="outline" size="xs" onClick={() => setSettingsOpen(true)}>
+          Agent settings
+        </Button>
+      </div>
+    ) : null
+
+  const emptyState = (
+    <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
+      <p className="text-ui text-muted-foreground">{state.connection === "connecting" ? "Connecting…" : "No thread open."}</p>
+      <Button variant="secondary" onClick={() => void newThread()} disabled={state.connection !== "ready"}>
+        <EditIcon data-icon="inline-start" />
+        New thread
+      </Button>
+    </div>
+  )
+
+  const dock = (onCollapse: () => void, compact = false) => (
+    <Dock
+      client={client}
+      state={state}
+      tab={dockTab}
+      onTabChange={setDockTab}
+      tabs={dockTabs}
+      onTabsChange={setDockTabs}
+      onCollapse={onCollapse}
+      explorerPath={explorerPath}
+      onExplorerPath={setExplorerPath}
+      status={statusLine}
+      compact={compact}
     />
   )
 
   return (
     <TooltipProvider>
-      <div className="flex h-dvh w-full overflow-hidden bg-shell text-foreground">
-        <IconRail aria-label="App">
-          <IconRailGroup>
-            <IconRailItem label="Home" icon={<HomeIcon />} onClick={() => left && show(left)} />
-            <IconRailItem label="Inbox" icon={<InboxIcon />} />
-            <IconRailItem label="Tasks" icon={<ClipboardListIcon />} />
-            <IconRailItem label="Branches" icon={<GitBranchIcon />} onClick={() => setDockTab("explorer")} />
-            <IconRailItem label="History" shortcut="⌘K" icon={<HistoryIcon />} onClick={() => setPaletteOpen(true)} />
-            <IconRailItem label="Agents" icon={<GridIcon />} onClick={() => setSettingsOpen(true)} />
-            <IconRailItem label="Threads" shortcut="⌘B" icon={<FolderIcon />} active={sidebarOpen} onClick={toggleSidebar} />
-          </IconRailGroup>
-          <IconRailSpacer />
-          <IconRailGroup>
-            {agents.slice(0, 3).map((a) => (
-              <IconRailAvatar
-                key={a.id}
-                label={a.name}
-                hint={a.id === agentId ? state.connection : "not connected"}
-                status={a.id !== agentId ? "offline" : state.connection === "ready" ? "online" : state.connection === "connecting" ? "busy" : "error"}
-                onClick={() => (a.builtin ? void connect(a, bridge) : setSettingsOpen(true))}
-              >
-                <ProviderIcon provider={a.provider} />
-              </IconRailAvatar>
-            ))}
-            <IconRailItem label="Command palette" shortcut="⌘K" icon={<HelpCircleIcon />} onClick={() => setPaletteOpen(true)} />
-            <IconRailItem label="Settings" shortcut="⌘," icon={<SettingsIcon />} onClick={() => setSettingsOpen(true)} />
-          </IconRailGroup>
-        </IconRail>
+      {mobile ? (
+        /* Phone layout: header (threads, tabs, new, panel), one full-width chat. */
+        <div className="flex h-dvh w-full flex-col overflow-hidden bg-shell text-foreground">
+          <header className="flex h-12 shrink-0 items-center gap-1 px-1.5">
+            <ToolbarButton label="Threads and navigation" shortcut="⌘B" size="icon" pressed={navOpen} onClick={() => setNavOpen(true)}>
+              <SidebarIcon />
+            </ToolbarButton>
+            {tabStrip}
+            <ToolbarButton label="New thread" shortcut="⌘N" size="icon" onClick={() => void newThread()}>
+              <PlusIcon />
+            </ToolbarButton>
+            <ToolbarButton label="Terminal, files and browser" shortcut="⌘J" size="icon" pressed={dockSheetOpen} onClick={() => setDockSheetOpen(true)}>
+              <TerminalSquareIcon />
+            </ToolbarButton>
+          </header>
+          <main className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-t-shell border-t border-shell-border bg-background">
+            {errorBanner}
+            <div className="min-h-0 flex-1">{left ? pane(left, "left") : emptyState}</div>
+          </main>
+        </div>
+      ) : (
+        <div className="flex h-dvh w-full overflow-hidden bg-shell text-foreground">
+          {rail("vertical")}
 
-        <ResizablePanelGroup direction="horizontal" autoSaveId="agent-workspace-shell" handleRef={outer} className="min-w-0 flex-1">
-          <ResizablePanel id="threads" defaultSize="248px" minSize="220px" maxSize="420px" collapsible onCollapsedChange={(c) => setSidebarOpen(!c)}>
-            <div className="flex h-full flex-col">
-              <div className="flex h-10 shrink-0 items-center gap-0.5 px-2">
-                <ToolbarButton label="Hide sidebar" shortcut="⌘B" onClick={toggleSidebar}>
-                  <SidebarIcon />
-                </ToolbarButton>
-                <ToolbarButton label="Back" onClick={() => go(-1)}>
-                  <ArrowLeftIcon />
-                </ToolbarButton>
-                <ToolbarButton label="Forward" onClick={() => go(1)}>
-                  <ArrowRightIcon />
-                </ToolbarButton>
+          <ResizablePanelGroup direction="horizontal" autoSaveId="agent-workspace-shell" handleRef={outer} className="min-w-0 flex-1">
+            <ResizablePanel id="threads" defaultSize="248px" minSize="220px" maxSize="420px" collapsible onCollapsedChange={(c) => setSidebarOpen(!c)}>
+              <div className="flex h-full flex-col">
+                <div className="flex h-10 shrink-0 items-center gap-0.5 px-2">
+                  <ToolbarButton label="Hide sidebar" shortcut="⌘B" onClick={toggleSidebar}>
+                    <SidebarIcon />
+                  </ToolbarButton>
+                  <ToolbarButton label="Back" onClick={() => go(-1)}>
+                    <ArrowLeftIcon />
+                  </ToolbarButton>
+                  <ToolbarButton label="Forward" onClick={() => go(1)}>
+                    <ArrowRightIcon />
+                  </ToolbarButton>
+                </div>
+                <div className="min-h-0 flex-1">{sidebar}</div>
               </div>
-              <div className="min-h-0 flex-1">
-                <ThreadsSidebar
-                  threads={threads}
-                  activeId={active}
-                  onSelect={(id) => show(id)}
-                  onNewThread={() => void newThread()}
-                  agents={agents}
-                  agentId={agentId}
-                  onSelectAgent={(id) => {
-                    const a = agents.find((x) => x.id === id)
-                    if (a?.builtin) void connect(a, bridge)
-                    else setSettingsOpen(true)
-                  }}
-                  onOpenSettings={() => setSettingsOpen(true)}
-                />
-              </div>
-            </div>
-          </ResizablePanel>
-          <ResizableHandle variant="hidden" />
-          <ResizablePanel id="main" minSize={40}>
-            <div className="shell-inset mt-0.75 flex h-full min-h-0 flex-col overflow-hidden">
-              <ResizablePanelGroup direction="horizontal" autoSaveId="agent-workspace-content" handleRef={inner}>
-                <ResizablePanel id="chat" minSize="360px">
-                  <div className="flex h-full min-w-0 flex-col">
-                    <div className="flex h-10 shrink-0 items-center gap-1 border-b border-border px-2">
-                      {!sidebarOpen && (
-                        <ToolbarButton label="Show sidebar" shortcut="⌘B" onClick={toggleSidebar}>
-                          <SidebarIcon />
+            </ResizablePanel>
+            <ResizableHandle variant="hidden" />
+            <ResizablePanel id="main" minSize={40}>
+              <div className="shell-inset mt-0.75 flex h-full min-h-0 flex-col overflow-hidden">
+                <ResizablePanelGroup direction="horizontal" autoSaveId="agent-workspace-content" handleRef={inner}>
+                  <ResizablePanel id="chat" minSize="360px">
+                    <div className="flex h-full min-w-0 flex-col">
+                      <div className="flex h-10 shrink-0 items-center gap-1 border-b border-border px-2">
+                        {!sidebarOpen && (
+                          <ToolbarButton label="Show sidebar" shortcut="⌘B" onClick={toggleSidebar}>
+                            <SidebarIcon />
+                          </ToolbarButton>
+                        )}
+                        {tabStrip}
+                        <ToolbarButton label={right ? "Close split" : "Split chats"} shortcut="⌘\" pressed={!!right} onClick={toggleSplit}>
+                          <Columns2Icon />
                         </ToolbarButton>
-                      )}
-                      <TabStrip
-                        value={active}
-                        onValueChange={(id) => show(id)}
-                        order={tabs}
-                        onReorder={setTabs}
-                        onClose={closeTab}
-                        aria-label="Open threads"
-                        className="min-w-0 flex-1"
-                      >
-                        {tabs.map((id) => {
-                          const t = threadOf(id)
-                          return (
-                            <TabStripItem key={id} value={id} icon={<ProviderIcon provider={t?.provider} />} indicator={t?.running} className="w-36">
-                              {t?.title ?? state.sessions[id]?.title ?? "Thread"}
-                            </TabStripItem>
-                          )
-                        })}
-                      </TabStrip>
-                      <ToolbarButton label={right ? "Close split" : "Split chats"} shortcut="⌘\" pressed={!!right} onClick={toggleSplit}>
-                        <Columns2Icon />
-                      </ToolbarButton>
-                      <ToolbarButton label="New thread" shortcut="⌘N" onClick={() => void newThread()}>
-                        <PlusIcon />
-                      </ToolbarButton>
-                      <ToolbarButton label={dockOpen ? "Hide panel" : "Show panel"} shortcut="⌘J" pressed={dockOpen} onClick={toggleDock}>
-                        <PanelRightIcon />
-                      </ToolbarButton>
+                        <ToolbarButton label="New thread" shortcut="⌘N" onClick={() => void newThread()}>
+                          <PlusIcon />
+                        </ToolbarButton>
+                        <ToolbarButton label={dockOpen ? "Hide panel" : "Show panel"} shortcut="⌘J" pressed={dockOpen} onClick={toggleDock}>
+                          <PanelRightIcon />
+                        </ToolbarButton>
+                      </div>
+                      <div className="min-h-0 flex-1">
+                        {errorBanner}
+                        {right ? (
+                          <ResizablePanelGroup direction="horizontal" autoSaveId="agent-workspace-split">
+                            <ResizablePanel id="left" minSize="320px">
+                              {pane(left, "left")}
+                            </ResizablePanel>
+                            <ResizableHandle />
+                            <ResizablePanel id="right" minSize="320px">
+                              {pane(right, "right")}
+                            </ResizablePanel>
+                          </ResizablePanelGroup>
+                        ) : left ? (
+                          pane(left, "left")
+                        ) : (
+                          emptyState
+                        )}
+                      </div>
                     </div>
-                    <div className="min-h-0 flex-1">
-                      {state.connection === "error" && (
-                        <div role="alert" className="flex items-center gap-2 border-b border-border bg-destructive/8 px-4 py-2 text-ui text-destructive">
-                          <span className="min-w-0 flex-1 truncate">{state.error ?? "Disconnected"}</span>
-                          <Button variant="outline" size="xs" onClick={() => setSettingsOpen(true)}>
-                            Agent settings
-                          </Button>
-                        </div>
-                      )}
-                      {right ? (
-                        <ResizablePanelGroup direction="horizontal" autoSaveId="agent-workspace-split">
-                          <ResizablePanel id="left" minSize="320px">
-                            {pane(left, "left")}
-                          </ResizablePanel>
-                          <ResizableHandle />
-                          <ResizablePanel id="right" minSize="320px">
-                            {pane(right, "right")}
-                          </ResizablePanel>
-                        </ResizablePanelGroup>
-                      ) : left ? (
-                        pane(left, "left")
-                      ) : (
-                        <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
-                          <p className="text-ui text-muted-foreground">{state.connection === "connecting" ? "Connecting…" : "No thread open."}</p>
-                          <Button variant="secondary" onClick={() => void newThread()} disabled={state.connection !== "ready"}>
-                            <EditIcon data-icon="inline-start" />
-                            New thread
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </ResizablePanel>
-                <ResizableHandle />
-                <ResizablePanel id="dock" defaultSize={44} minSize="300px" collapsible onCollapsedChange={(c) => setDockOpen(!c)}>
-                  <Dock
-                    client={client}
-                    state={state}
-                    tab={dockTab}
-                    onTabChange={setDockTab}
-                    tabs={dockTabs}
-                    onTabsChange={setDockTabs}
-                    onCollapse={() => inner.current?.collapse("dock")}
-                    explorerPath={explorerPath}
-                    onExplorerPath={setExplorerPath}
-                    status={statusLine}
-                  />
-                </ResizablePanel>
-              </ResizablePanelGroup>
-            </div>
-          </ResizablePanel>
-        </ResizablePanelGroup>
-      </div>
+                  </ResizablePanel>
+                  <ResizableHandle />
+                  <ResizablePanel id="dock" defaultSize={44} minSize="300px" collapsible onCollapsedChange={(c) => setDockOpen(!c)}>
+                    {dock(() => inner.current?.collapse("dock"))}
+                  </ResizablePanel>
+                </ResizablePanelGroup>
+              </div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        </div>
+      )}
+
+      {mobile && (
+        <>
+          <Drawer side="left" open={navOpen} onOpenChange={setNavOpen}>
+            <DrawerContent showClose={false} className="p-0">
+              <DrawerTitle className="sr-only">Threads</DrawerTitle>
+              <div className="min-h-0 flex-1 pt-2">{sidebar}</div>
+              <div className="shrink-0 border-t border-border">{rail("horizontal")}</div>
+            </DrawerContent>
+          </Drawer>
+          <BottomSheet open={dockSheetOpen} onOpenChange={setDockSheetOpen} snapPoints={[0.6, 0.92]}>
+            <BottomSheetContent className="max-w-none">
+              <BottomSheetTitle className="sr-only">Terminal, files and browser</BottomSheetTitle>
+              <div className="min-h-0 flex-1">{dock(() => setDockSheetOpen(false), true)}</div>
+            </BottomSheetContent>
+          </BottomSheet>
+        </>
+      )}
 
       <CommandPalette items={paletteItems} open={paletteOpen} onOpenChange={setPaletteOpen} placeholder="Search threads and commands…" />
 
