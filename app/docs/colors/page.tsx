@@ -2,7 +2,7 @@ import fs from "node:fs"
 import path from "node:path"
 
 import { DEFAULT_ACCENT, PRESET_RAMPS, RAMP_STOPS } from "@/components/docs/accent-color"
-import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page"
+import { Code, GuideH2, GuidePage } from "@/components/docs/guide-page"
 import { ThemingAccent } from "@/components/docs/theming-accent"
 import { ThemingRadius } from "@/components/docs/theming-radius"
 import { ThemingTokenTable } from "@/components/docs/theming-token-table"
@@ -32,13 +32,7 @@ export default function Colors() {
     <GuidePage
       href="/docs/colors"
       toc={toc}
-      lede={
-        <>
-          Pick an accent and a radius for the whole site, then copy the CSS. Every colour a component reads is a role
-          token with a light and a dark value; see{" "}
-          <TextLink href="/docs/theming#how-it-works">Theming</TextLink> for how the layers fit together.
-        </>
-      }
+      lede="Pick an accent and a radius for the whole site, then copy the CSS."
     >
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent">One accent, every control</GuideH2>

@@ -23,6 +23,7 @@ After changing radii or padding on nested surfaces, also run `pnpm audit:radius`
 | `notes/icon-usage.md` | Icon usage system | — |
 | `notes/native-style.md` | Native desktop style reference (token values and what was adopted) | — |
 | `notes/radius-audit.md` | Nested-radius audit triage (open findings by owner) | — |
+| `notes/docs-shell.md` | Docs header, sidebar and preview frame decisions | — |
 | `scripts/audit-radius.mjs` (+ `.config.mjs`) | `pnpm audit:radius`: browser audit of nested radii | — |
 | `THIRD_PARTY_NOTICES.md` | Licence notices for the style and colour references, the diff renderer and the avatar art; the **only** place third-party names and provenance appear | — |
 
@@ -172,6 +173,7 @@ or margin on the child, not padding on a component.
   `CalendarDaysIcon` not `CalendarIcon`, `TerminalSquareIcon` not `TerminalIcon`).
   Line glyphs are for controls (chevrons, close, add, search).
 - Nav/sidebar/palette icons: 16px, `text-muted-foreground`, active `text-foreground`, bare.
+  The docs site sidebar (`components/docs/docs-nav.tsx`) is text-only: no per-item icons (see `notes/docs-shell.md`).
   Inline icons: the button sets the size.
 - Title/header/card/alert icons go in `<IconChip>` (sizes sm 24 / default 32 / lg 40 / xl 48;
   tones neutral, primary, success, warning, destructive, solid); one size per list.

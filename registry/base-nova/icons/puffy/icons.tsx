@@ -985,11 +985,10 @@ export const ClipboardListIcon = (p: IconProps) => (
 /** The qinyang/ui mark: a soft rounded square with a "q" knocked out. */
 export const QinyangLogoIcon = (p: IconProps) => (
   <Icon {...p}>
-    <path
-      {...puff}
-      fillRule="evenodd"
-      d="M5.2 3.4h7.6a1.8 1.8 0 011.8 1.8v7.6a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V5.2a1.8 1.8 0 011.8-1.8zM9 4h3.95v8.45a1.55 1.55 0 01-3.1 0v-.64A3.95 3.95 0 119 4zM9 7.1a.85.85 0 100 1.7.85.85 0 000-1.7z"
-    />
+    {/* Outlined rounded square holding a stroked uppercase Q (a knocked-out Q fills in at small sizes). */}
+    <rect {...line} x="2.6" y="2.6" width="12.8" height="12.8" rx="3.6" />
+    <circle {...line} cx="8.7" cy="8.6" r="2.8" />
+    <path {...line} d="M9.9 9.9l2.5 2.5" />
   </Icon>
 );
 

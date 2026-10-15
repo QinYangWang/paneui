@@ -8,6 +8,32 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-components",
+    date: "October 16, 2026",
+    title: "Radius control, 16 new components and a new docs layout",
+    tag: "Components",
+    changes: [
+      <>
+        Every radius follows <Code>--radius</Code>. Pick a preset or a custom value on{" "}
+        <TextLink href="/docs/colors">Customize</TextLink>, copy the CSS, or install a <Code>theme-radius-*</Code> item.
+        Nested frames stay concentric at every value.
+      </>,
+      <>
+        New <Code>alert-dialog</Code>, <Code>command</Code>, <Code>calendar</Code>, <Code>date-picker</Code>,{" "}
+        <Code>progress</Code>, <Code>skeleton</Code>, <Code>separator</Code>, <Code>kbd</Code>, <Code>input-otp</Code>,{" "}
+        <Code>input-group</Code>, <Code>button-group</Code>, <Code>native-select</Code>, <Code>menubar</Code>,{" "}
+        <Code>navigation-menu</Code>, <Code>carousel</Code> and <Code>hover-card</Code>.
+      </>,
+      <>
+        The docs have a single header and a text sidebar with collapsible sections, counts and a page outline. The
+        logo is now a capital Q.
+      </>,
+      <>
+        Component previews switch between device widths, control sizes and right-to-left, and open in a new tab.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-15-sizes",
     date: "October 15, 2026",
     title: "Sizes and variants across form and display components",

@@ -4,10 +4,11 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 
-import { GithubIcon, QinyangLogoIcon, SearchIcon } from "@/components/icons"
+import { GithubIcon, MenuIcon, QinyangLogoIcon, SearchIcon } from "@/components/icons"
 import { CommandPalette, type CommandPaletteItem } from "@/registry/base-nova/blocks/command-palette/command-palette"
-import { AppShell, AppShellHeader, AppShellMain, AppShellSidebar, AppShellTrigger } from "@/registry/base-nova/ui/app-shell"
 import { Button } from "@/registry/base-nova/ui/button"
+import { Drawer, DrawerContent, DrawerTitle } from "@/registry/base-nova/ui/drawer"
+import { Kbd } from "@/registry/base-nova/ui/kbd"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
 import { cn } from "@/lib/utils"
@@ -22,7 +23,7 @@ const GITHUB_URL = "https://github.com/QinYangWang/ui"
 const isTemplate = (pathname: string, groups: NavGroup[]) =>
   groups.some((g) => g.category === "Templates" && g.items.some((i) => pathname === `/docs/${i.name}`))
 
-/** Header sections, mirroring the sidebar: Getting started pages, components (overview + item pages), templates. */
+/** Header sections, mirroring the sidebar sections: Docs, Components, Templates. */
 const headerLinks: { label: string; href: string; isActive: (pathname: string, groups: NavGroup[]) => boolean }[] = [
   { label: "Docs", href: "/docs", isActive: (p) => GUIDE_PAGES.some((g) => g.href === p) },
   {
@@ -39,11 +40,31 @@ function useIsMac() {
   return mac
 }
 
+/** Mark plus wordmark; the mark is the favicon and the registry logo. */
+function Brand() {
+  return (
+    <Link
+      href="/"
+      className="-ms-1 flex h-8 items-center gap-2 rounded-lg ps-1 pe-2 text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+    >
+      <QinyangLogoIcon size={20} className="text-foreground" />
+      qinyang/ui
+    </Link>
+  )
+}
+
+/*
+ * Docs chrome: one white surface split by hairlines. The header's brand column is exactly the
+ * sidebar's width and starts on the sidebar's content edge; the header tabs share the sidebar's
+ * active treatment (a 2px indicator line, on the bottom edge here and the guide line there).
+ * Notes: notes/docs-shell.md.
+ */
 export function SiteShell({ groups, children }: { groups: NavGroup[]; children: React.ReactNode }) {
   const pathname = normalizePath(usePathname())
   const router = useRouter()
   const mac = useIsMac()
   const [searchOpen, setSearchOpen] = React.useState(false)
+  const [drawerOpen, setDrawerOpen] = React.useState(false)
 
   const items = React.useMemo<CommandPaletteItem[]>(() => {
     const go = (href: string) => () => router.push(href)
@@ -78,26 +99,22 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
   }, [groups, router])
 
   const shortcut = mac ? "⌘K" : "Ctrl K"
+  const openSearch = React.useCallback(() => {
+    setDrawerOpen(false)
+    setSearchOpen(true)
+  }, [])
 
   return (
-    <AppShell shortcut={null}>
-      <AppShellHeader
-        leading={
-          <Tooltip>
-            <TooltipTrigger render={<AppShellTrigger />} />
-            <TooltipContent side="bottom">Toggle sidebar</TooltipContent>
-          </Tooltip>
-        }
-      >
-        {/* Starts on the sidebar's label column: the mark lines up with the nav labels below it. */}
-        <Link
-          href="/"
-          className="-ms-1 flex items-center gap-2 rounded-md py-1 ps-1 pe-2 text-ui font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-        >
-          <QinyangLogoIcon size={18} className="text-foreground" />
-          qinyang/ui
-        </Link>
-        <nav aria-label="Main" className="ml-2 flex items-center gap-0.5 max-md:hidden">
+    <div data-slot="docs-shell" className="min-h-svh bg-background text-foreground">
+      <header className="sticky top-0 z-40 flex h-12 items-center border-b border-border bg-background">
+        <div className="flex h-full shrink-0 items-center gap-1 ps-3 pe-2 lg:w-64 lg:ps-4">
+          <Button variant="ghost" size="icon-sm" aria-label="Open navigation" onClick={() => setDrawerOpen(true)} className="lg:hidden">
+            <MenuIcon />
+          </Button>
+          <Brand />
+        </div>
+
+        <nav aria-label="Main" className="flex h-full items-stretch gap-1 max-md:hidden lg:ps-6">
           {headerLinks.map((l) => {
             const active = l.isActive(pathname, groups)
             return (
@@ -106,31 +123,32 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
                 href={l.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "inline-flex h-7 items-center rounded-lg px-2.5 text-ui font-medium text-muted-foreground transition-colors duration-150 outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+                  "group/tab relative flex items-center px-2.5 text-ui font-medium text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:text-foreground",
                   active && "text-foreground",
                 )}
               >
-                {l.label}
+                <span className="rounded-md px-0.5 group-focus-visible/tab:ring-2 group-focus-visible/tab:ring-ring/50">{l.label}</span>
+                <span aria-hidden className={cn("absolute inset-x-2.5 -bottom-px h-0.5 rounded-full", active ? "bg-foreground" : "bg-transparent")} />
               </Link>
             )
           })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1.5">
+        <div className="ms-auto flex items-center gap-1.5 pe-3 lg:pe-4">
           <Button
             variant="secondary"
             size="sm"
-            onClick={() => setSearchOpen(true)}
+            onClick={openSearch}
             aria-label="Search docs"
             aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
-            // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a 240px field (sm+)
-            className="w-8 justify-center px-0 text-muted-foreground sm:w-56 sm:justify-start sm:px-2.5"
+            // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a field (sm+)
+            className="w-7 justify-center px-0 text-muted-foreground sm:w-52 sm:justify-start sm:px-2.5"
           >
             <SearchIcon />
             <span className="hidden sm:inline">Search docs…</span>
-            <kbd className="ml-auto hidden rounded-sm bg-card px-1.5 py-px font-sans text-ui-xs text-muted-foreground shadow-chip sm:inline">
+            <Kbd size="sm" className="ms-auto hidden sm:inline-flex">
               {shortcut}
-            </kbd>
+            </Kbd>
           </Button>
           <Tooltip>
             <TooltipTrigger
@@ -150,27 +168,43 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
           </Tooltip>
           <ThemeControls />
         </div>
-      </AppShellHeader>
+      </header>
 
-      <AppShellSidebar
-        aria-label="Docs"
-        mobileTitle={
-          <>
-            <QinyangLogoIcon size={18} />
-            qinyang/ui
-          </>
-        }
-      >
-        <DocsNav groups={groups} pathname={pathname} />
-      </AppShellSidebar>
+      <div className="flex">
+        <aside
+          // Fills the viewport under the header and sticks while the page scrolls.
+          style={{ "--docs-aside-h": "calc(100svh - 3rem)" } as React.CSSProperties}
+          className="sticky top-12 hidden h-(--docs-aside-h) w-64 shrink-0 flex-col border-e border-border lg:flex"
+        >
+          <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
+        </aside>
 
-      <AppShellMain>
-        <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
-          <div className="mx-auto w-full max-w-5xl">{children}</div>
-        </div>
-      </AppShellMain>
+        <main className="min-w-0 flex-1">
+          <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+            <div className="mx-auto w-full max-w-6xl">{children}</div>
+          </div>
+        </main>
+      </div>
+
+      <Drawer side="left" open={drawerOpen} onOpenChange={setDrawerOpen}>
+        <DrawerContent
+          className="w-80"
+          // a link inside the drawer navigates, so the drawer has done its job
+          onClickCapture={(e) => {
+            if ((e.target as HTMLElement).closest("a[href]")) setDrawerOpen(false)
+          }}
+        >
+          <div className="flex h-14 shrink-0 items-center px-4">
+            <DrawerTitle className="flex items-center gap-2 text-ui-lg font-semibold">
+              <QinyangLogoIcon size={20} />
+              qinyang/ui
+            </DrawerTitle>
+          </div>
+          <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
+        </DrawerContent>
+      </Drawer>
 
       <CommandPalette items={items} open={searchOpen} onOpenChange={setSearchOpen} placeholder="Search docs and components…" />
-    </AppShell>
+    </div>
   )
 }

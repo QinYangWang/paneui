@@ -82,12 +82,6 @@ export const outlineOverrides = {
     <rect {...puff} x="4.6" y="4.4" width="3" height="9.2" rx="1" />
     <rect {...puff} x="10.4" y="4.4" width="3" height="9.2" rx="1" />
   `,
-  // The knocked-out q becomes a stroked q inside the outlined square.
-  QinyangLogoIcon: `
-    <path {...puff} d="M5.2 3.4h7.6a1.8 1.8 0 011.8 1.8v7.6a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V5.2a1.8 1.8 0 011.8-1.8z" />
-    <circle {...line} cx="8.8" cy="8.2" r="1.8" />
-    <path {...line} d="M10.6 7.4v4.1" />
-  `,
   // Two knocked-out racks would double up: one outlined unit with a divider and status dots.
   ServerIcon: `
     <rect {...puff} x="3.4" y="3.6" width="11.2" height="10.8" rx="1.8" />
