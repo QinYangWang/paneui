@@ -57,26 +57,26 @@ const ACCENTS = (Object.keys(PRESET_THEMES) as PresetAccent[]).map((name) => ({
 
 const TYPE: { cls: string; size: string; use: string }[] = [
   { cls: "text-ui-2xs", size: "10px", use: "Tiny counters and labels." },
-  { cls: "text-ui-xs", size: "11px", use: "Meta, shortcuts, counts." },
+  { cls: "text-ui-xs", size: "11px", use: "Meta text, shortcuts and counts." },
   { cls: "text-ui-sm", size: "12px", use: "Captions, badges, small controls, tooltips." },
-  { cls: "text-ui", size: "13px", use: "Default UI: buttons, inputs, menus, nav, body inside components." },
+  { cls: "text-ui", size: "13px", use: "The default for controls, menus and text inside components." },
   { cls: "text-ui-lg", size: "14px", use: "Large controls and card titles." },
 ]
 
 const RADII: { cls: string; corner: string; px: string; use: string }[] = [
-  { cls: "rounded-sm", corner: "rounded-tl-sm", px: "6px", use: "xs buttons, kbd, small chips." },
+  { cls: "rounded-sm", corner: "rounded-tl-sm", px: "6px", use: "Extra-small buttons, keys and small chips." },
   { cls: "rounded-md", corner: "rounded-tl-md", px: "8px", use: "Tab indicators inside a p-0.5 list." },
-  { cls: "rounded-lg", corner: "rounded-tl-lg", px: "10px", use: "Buttons, inputs, triggers, tab lists, menu and select rows." },
-  { cls: "rounded-xl", corner: "rounded-tl-xl", px: "14px", use: "Menus and popups (p-1, concentric with rounded-lg rows), cards, tables, code blocks." },
+  { cls: "rounded-lg", corner: "rounded-tl-lg", px: "10px", use: "Controls and menu rows." },
+  { cls: "rounded-xl", corner: "rounded-tl-xl", px: "14px", use: "Menus, popups, cards, tables and code blocks." },
   { cls: "rounded-2xl", corner: "rounded-tl-2xl", px: "18px", use: "Two-layer inset cards and big panels." },
   { cls: "rounded-3xl", corner: "rounded-tl-3xl", px: "22px", use: "Dialogs." },
 ]
 
 const SHADOWS: { cls: string; use: string }[] = [
-  { cls: "shadow-raised", use: "Resting controls and cards: a 1px hairline ring plus a 1–2px drop. Hover steps to shadow-raised-hover." },
+  { cls: "shadow-raised", use: "Resting controls and cards. Hover steps to shadow-raised-hover." },
   { cls: "shadow-surface", use: "Popovers, menus, dialogs and floating panels only." },
   { cls: "shadow-well", use: "Inset hairline for fields and tracks." },
-  { cls: "shadow-chip", use: "kbd and small chips." },
+  { cls: "shadow-chip", use: "Keys and small chips." },
   { cls: "shadow-primary", use: "Filled primary buttons (none in dark)." },
 ]
 
@@ -159,8 +159,8 @@ export default function Theming() {
         <InstallCommand args={`add @${REGISTRY_NAME}/theme`} />
         <p className="text-muted-foreground">
           <Code>@{REGISTRY_NAME}/theme</Code> writes the variables below and installs <Code>@{REGISTRY_NAME}/utils</Code>,
-          a <Code>cn()</Code> whose tailwind-merge config treats the <Code>text-ui-*</Code> sizes as font sizes. Washes use
-          opacity modifiers such as <Code>bg-success/12</Code> or <Code>ring-primary/20</Code>.
+          whose <Code>cn()</Code> merges the <Code>text-ui-*</Code> sizes as font sizes. For a tinted wash, add an opacity
+          modifier such as <Code>bg-success/12</Code>.
         </p>
         <AgentCodeBlock code={CSS_EXAMPLE} filename="globals.css (excerpt)" language="css" maxHeight={360} />
       </section>
@@ -168,10 +168,9 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="colors">Colors</GuideH2>
         <p className="text-muted-foreground">
-          Colours are grouped by role: background, fill, text, border, state and chart. Each has a matching{" "}
-          <Code>-foreground</Code> token where text sits on it. Never use palette colours (<Code>bg-zinc-100</Code>) or hex
-          values in components. Every token with its light and dark value is on{" "}
-          <TextLink href="/docs/colors">Colors</TextLink>.
+          Colours are named by role, and each surface has a matching <Code>-foreground</Code> token for text on it. Use
+          tokens in components, never palette colours (<Code>bg-zinc-100</Code>) or hex values. Every token&apos;s light and
+          dark value is on <TextLink href="/docs/colors">Colors</TextLink>.
         </p>
         <div className="flex flex-wrap gap-2">
           {SWATCHES.map((s) => (
@@ -186,28 +185,24 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="dark-mode">Dark mode</GuideH2>
         <p className="text-muted-foreground">
-          Dark mode is class based: <Code>.dark</Code> on <Code>&lt;html&gt;</Code> switches every token, and the theme
-          declares the variant as <Code>@custom-variant dark (&amp;:is(.dark *))</Code>. Set <Code>color-scheme</Code> along
-          with it so native scrollbars and form controls follow. Dark mode moves the page to #121212 and cards, popovers
-          and fields to neutral-800, with a hairline and a soft contact shadow for elevation. <Code>primary</Code> keeps
-          its colour in both modes, but the neutral preset turns it near-white, so always pair it with{" "}
-          <Code>text-primary-foreground</Code>, never <Code>text-white</Code>.
+          Put <Code>.dark</Code> on <Code>&lt;html&gt;</Code> to switch every token. The theme declares the variant as{" "}
+          <Code>@custom-variant dark (&amp;:is(.dark *))</Code>. Set <Code>color-scheme</Code> at the same time so native
+          scrollbars and form controls follow. Pair <Code>primary</Code> with <Code>text-primary-foreground</Code>, never <Code>text-white</Code>, because the
+          neutral preset makes it near-white in dark mode.
         </p>
         <AgentCodeBlock code={DARK_SCRIPT} filename="theme-script.js" language="js" />
         <p className="text-muted-foreground">
-          <TextLink href="/docs/theme-toggle">Theme Toggle</TextLink> stores the choice and repaints the page with a circular
-          reveal through the View Transition API; this site pairs it with a Light / Dark / System menu.
+          To let users switch, use <TextLink href="/docs/theme-toggle">Theme Toggle</TextLink>, which stores the choice for
+          the script above.
         </p>
       </section>
 
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent-presets">Accent presets</GuideH2>
         <p className="text-muted-foreground">
-          The accent is one <Code>--accent-50…950</Code> ramp and the default is blue (Tailwind blue with
-          <Code>#3392ff</Code> at 400). <Code>primary</Code> is the 600 stop with white text (700 for green
-          and orange, where white needs the darker stop for 4.5:1) and <Code>ring</Code> the 500 stop, the same in both
-          modes. Neutral keeps the old black / white primary. A preset swaps only the ramp (and, for neutral, where
-          primary points); surfaces, text, states and charts stay put. Install one after the theme:
+          The accent is one <Code>--accent-50…950</Code> ramp, blue by default. <Code>primary</Code> reads the 600 stop
+          (700 for green and orange, so white text keeps 4.5:1 contrast) and <Code>ring</Code> the 500 stop. A preset
+          swaps only the ramp, so surfaces, text and charts stay the same. Install one after the theme.
         </p>
         <div className="flex flex-wrap gap-2">
           {ACCENTS.map((a) => (
@@ -223,14 +218,13 @@ export default function Theming() {
         </div>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme-violet`} />
         <p className="text-muted-foreground">
-          Installed this way the preset overwrites the variables on <Code>:root</Code> and <Code>.dark</Code>, so the accent
-          is permanent. To let users switch, as the accent menu in this site&apos;s header does, keep the default blue ramp on{" "}
-          <Code>:root</Code> and add one block per accent keyed on an attribute, then persist the choice (this site uses{" "}
-          <Code>localStorage[&quot;accent&quot;]</Code>, applied by the same pre-paint script as dark mode).
+          An installed preset overwrites the variables on <Code>:root</Code> and <Code>.dark</Code>, so the accent is fixed.
+          To let users switch, keep the default ramp on <Code>:root</Code>, add one block per accent keyed on an attribute,
+          and apply the saved choice in the same pre-paint script as dark mode.
         </p>
         <p className="text-muted-foreground">
-          Need a brand colour instead? <TextLink href="/docs/colors#accent">Colors</TextLink> has a live picker that
-          builds a ramp in its hue and copies the exact <Code>:root</Code> / <Code>.dark</Code> overrides.
+          For a brand colour, use the picker on <TextLink href="/docs/colors#accent">Colors</TextLink> to build a ramp and
+          copy its overrides.
         </p>
         <AgentCodeBlock code={ACCENT_RUNTIME} filename="globals.css" language="css" />
       </section>
@@ -238,11 +232,9 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="typography">Typography</GuideH2>
         <p className="text-muted-foreground">
-          UI text uses the system font (<Code>-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, system-ui</Code>) with
-          normal letter-spacing on a native 13px scale. Code, keys and terminals use JetBrains Mono, falling back to SF Mono
-          and Menlo. Library components use the <Code>text-ui*</Code> sizes; Tailwind&apos;s <Code>text-sm</Code> to{" "}
-          <Code>text-2xl</Code> stay for reading copy and page headings. Titles are <Code>font-semibold</Code>, labels and
-          buttons <Code>font-medium</Code>.
+          UI text uses the system font and code uses a monospace font. Use the <Code>text-ui*</Code> sizes inside
+          components, and keep <Code>text-sm</Code> to <Code>text-2xl</Code> for reading copy and page headings. Set titles
+          in <Code>font-semibold</Code> and labels and buttons in <Code>font-medium</Code>.
         </p>
         <Table head={["Class", "Size", "Use for"]}>
           {TYPE.map((t) => (
@@ -258,11 +250,10 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="radius">Radius</GuideH2>
         <p className="text-muted-foreground">
-          One base, <Code>--radius: 0.625rem</Code>, with fixed multipliers (0.6×, 0.8×, 1×, 1.4×, 1.8×, 2.2×). Change the
-          base and every step follows. Keep nested corners concentric: an inner radius equals the outer radius minus the
-          padding between them, which is why <Code>p-1</Code> menus (<Code>rounded-xl</Code>) hold{" "}
-          <Code>rounded-lg</Code> rows. <Code>rounded-full</Code> is only for round things: avatars, dots, switches, badges,
-          circular icon buttons.
+          Every step is a multiple of <Code>--radius</Code>, so change the base and the whole scale follows. Keep nested
+          corners concentric, with the inner radius equal to the outer radius minus the padding between them. That is why{" "}
+          <Code>p-1</Code> menus (<Code>rounded-xl</Code>) hold <Code>rounded-lg</Code> rows. Use <Code>rounded-full</Code>{" "}
+          only for shapes that are actually round.
         </p>
         <Table head={["", "Class", "Size", "Use for"]}>
           {RADII.map((r) => (
@@ -281,9 +272,8 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="elevation">Elevation</GuideH2>
         <p className="text-muted-foreground">
-          Near-flat: hairline rings with at most a soft drop. Resting cards, tables and code blocks use{" "}
-          <Code>shadow-raised</Code>, never <Code>shadow-surface</Code>. Hover on rows, menu items, ghost buttons and nav is a
-          fill (<Code>bg-secondary</Code>), not a ring.
+          Give resting cards, tables and code blocks <Code>shadow-raised</Code>, never <Code>shadow-surface</Code>. Show
+          hover on rows, menu items and ghost buttons with a fill (<Code>bg-secondary</Code>), not a ring.
         </p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {SHADOWS.map((s) => (
@@ -301,7 +291,7 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="native-style">Native style rules</GuideH2>
         <p className="text-muted-foreground">
-          The look is a quiet native desktop style. A few rules keep new components consistent with it:
+          Follow these rules when you build a new component.
         </p>
         <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
           <li>
@@ -310,19 +300,18 @@ export default function Theming() {
           </li>
           <li>No gradient sheens, inset highlights, text shadows or glows.</li>
           <li>
-            Desktop density: buttons and inputs <Code>h-8</Code> (sm <Code>h-7</Code>, xs <Code>h-6</Code>), menu rows 26px,
-            checkboxes 16px, switches 32×20. Disabled is <Code>opacity-64</Code>.
+            Size buttons and inputs at <Code>h-8</Code> (sm <Code>h-7</Code>, xs <Code>h-6</Code>) and menu rows at 26px.
+            Show disabled with <Code>opacity-64</Code>.
           </li>
           <li>
-            Standard controls answer a press with a fill change, not a scale. Popups enter from <Code>scale-98</Code> and
+            Answer a press on standard controls with a fill change, not a scale. Popups enter from <Code>scale-98</Code> and
             opacity.
           </li>
           <li>
-            Focus is always <Code>focus-visible:ring-2 focus-visible:ring-ring/50</Code>.
+            Show focus with <Code>focus-visible:ring-2 focus-visible:ring-ring/50</Code>.
           </li>
           <li>
-            App chrome sits on <Code>bg-shell</Code>, with content in a <Code>shell-inset</Code> panel: a 0.5px hairline,{" "}
-            <Code>rounded-shell</Code> (13px) and a 3px gap to the window edges.
+            Put app chrome on <Code>bg-shell</Code> and the content in a <Code>shell-inset</Code> panel.
           </li>
         </ul>
       </section>
@@ -331,7 +320,7 @@ export default function Theming() {
         <GuideH2 id="adding-tokens">Adding tokens</GuideH2>
         <p className="text-muted-foreground">
           Define a new token in OKLCH with a value for both modes, then map it in <Code>@theme inline</Code> to get the
-          utilities. Contributors to this repository add tokens in their own reviewed change (see AGENTS.md).
+          utilities.
         </p>
         <AgentCodeBlock code={NEW_TOKEN} filename="globals.css" language="css" />
       </section>

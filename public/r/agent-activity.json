@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "agent-activity",
   "title": "Agent Activity",
-  "description": "One adaptive activity stream for an agent run that groups reasoning, web searches, tool calls and steps on a timeline, with live shimmering status and collapsing groups.",
+  "description": "Shows what an agent did during a run as one activity stream.",
   "dependencies": [
     "@base-ui/react",
     "motion"

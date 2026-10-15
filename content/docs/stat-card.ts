@@ -33,10 +33,10 @@ export default {
     ├── StatCardHint
     └── StatCardSparkline`,
   examples: [
-    { id: "with-ticker", title: "With Number Ticker", description: "Put a `NumberTicker` inside `StatCardValue` so live numbers roll to their new value." },
+    { id: "with-ticker", title: "With Number Ticker", description: "Use for live numbers that change while the page is open." },
   ],
   notes: [
-    { title: "Tone", body: "`StatCardDelta` picks its tone from the sign: a rise is success, a fall destructive, zero neutral. Pass `invert` for metrics where up is bad (churn, latency, errors). `StatCardSparkline` follows the same tone unless you give it a text colour." },
+    { title: "Tone", body: "`StatCardDelta` takes its tone from the sign, success for a rise, destructive for a fall and neutral at zero. Pass `invert` for metrics where up is bad (churn, latency, errors). `StatCardSparkline` follows the same tone unless you give it a text colour." },
   ],
   api: [
     { name: "StatCard", extends: "div", description: "Raised card (`rounded-xl`, `shadow-raised`, 16px padding) that shares the delta's tone with the sparkline.", props: [], dataAttributes: [{ name: "data-tone", description: "`positive`, `negative` or `neutral`, from the delta." }] },

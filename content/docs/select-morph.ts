@@ -29,28 +29,28 @@ export default {
     {
       id: "placeholder",
       title: "Placeholder",
-      description: "Add an item with `value: null` to `items` and leave out `defaultValue`; its label shows in muted text until something is picked.",
+      description: "Use when the field starts empty, with an item whose `value` is `null` as the prompt.",
     },
     {
       id: "with-icons",
       title: "With Icons",
-      description: "Put icons in items and the trigger. Pass the same row to `header` so the popup's mirrored first row matches the trigger.",
+      description: "Use when icons help tell options apart, passing the same row to `header` so the popup matches the trigger.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "Disable single options with `disabled` on `MorphSelectItem`, or the whole select with `disabled` on `MorphSelect`.",
+      description: "Use `disabled` on `MorphSelectItem` to block one option, or on `MorphSelect` to block the whole select.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Drive the selection with `value` / `onValueChange` and the popup with `open` / `onOpenChange`.",
+      description: "Use when other UI sets the value or opens the popup.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The popup starts as a box the exact size of the trigger and grows to its content height over 450ms, so the outline stays continuous; options fade and settle in after it. With reduced motion the popup cross-fades at full size.",
+      body: "The popup grows from the trigger's size to its content height over 450ms. With reduced motion it cross-fades at full size.",
     },
     {
       title: "Keyboard",
@@ -58,7 +58,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other morphing surfaces: [Popover Morph](/docs/popover-morph), [Morphing Modal](/docs/morphing-modal), [Morphing Search](/docs/morphing-search), [Morphing Tabs](/docs/morphing-tabs).",
+      body: "See also [Popover Morph](/docs/popover-morph), [Morphing Modal](/docs/morphing-modal), [Morphing Search](/docs/morphing-search) and [Morphing Tabs](/docs/morphing-tabs).",
     },
   ],
   api: [

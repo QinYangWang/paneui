@@ -21,6 +21,7 @@ import TabsDemo from "@/registry/base-nova/examples/tabs-demo"
 import TaskRowDemo from "@/registry/base-nova/examples/task-row-demo"
 import TextareaDemo from "@/registry/base-nova/examples/textarea-demo"
 import ThemeDemo from "@/registry/base-nova/examples/theme-demo"
+import TypesetDemo from "@/registry/base-nova/examples/typeset-demo"
 import CheckboxDemo from "@/registry/base-nova/examples/checkbox-demo"
 import RadioDemo from "@/registry/base-nova/examples/radio-demo"
 import StepperDemo from "@/registry/base-nova/examples/stepper-demo"
@@ -189,6 +190,7 @@ export const demos: Record<string, React.ComponentType> = {
   docs: DocsTemplatePreview,
   blog: BlogPreview,
   theme: ThemeDemo,
+  typeset: TypesetDemo,
   icons: IconsDemo,
   "icon-chip": IconChipDemo,
   button: ButtonDemo,

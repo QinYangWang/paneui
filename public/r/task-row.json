@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "task-row",
   "title": "Task Row",
-  "description": "Background task row with animated status marks (queued, running, done, failed).",
+  "description": "Shows the progress of one background task.",
   "dependencies": [
     "motion"
   ],

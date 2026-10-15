@@ -35,17 +35,17 @@ export default {
     {
       id: "groups",
       title: "Groups",
-      description: "Pass grouped `items` and render each with `MultiSelectGroup`, `MultiSelectLabel` and `MultiSelectCollection`.",
+      description: "Use when the options fall into categories.",
     },
     {
       id: "objects",
       title: "Object Values",
-      description: "For object items set `itemToStringLabel` for filtering, and `renderChip` / `getKey` on the trigger for the chip text and key.",
+      description: "Use when items are objects, with `itemToStringLabel`, `renderChip` and `getKey` turning them into text and keys.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Own the selection array with `value` and `onValueChange` to set it from elsewhere.",
+      description: "Use when other UI sets or reads the selection.",
     },
   ],
   notes: [
@@ -55,7 +55,11 @@ export default {
     },
     {
       title: "Motion",
-      body: "Chips pop in and out on a spring (520 / 34 / 0.6) and the rest reflow with layout animation. With reduced motion they only fade. Related: [Combobox](/docs/combobox).",
+      body: "Chips use a 520 / 34 / 0.6 spring. With reduced motion they only fade.",
+    },
+    {
+      title: "Related",
+      body: "See also [Combobox](/docs/combobox).",
     },
   ],
   api: [
@@ -72,7 +76,7 @@ export default {
     },
     {
       name: "MultiSelectTrigger",
-      description: "Inset well holding removable chips, the search input and a chevron. The popup anchors to it.",
+      description: "Holds the chips and the search input. The popup anchors to it.",
       extends: "Combobox.Chips",
       extendsHref: `${BASE}#chips`,
       props: [
@@ -104,7 +108,7 @@ export default {
     },
     {
       name: "MultiSelectItem",
-      description: "Option row with a checkbox-style tick that fills when chosen.",
+      description: "Option row with a tick that fills when chosen.",
       extends: "Combobox.Item",
       extendsHref: `${BASE}#item`,
       props: [],

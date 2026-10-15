@@ -10,7 +10,7 @@ export default {
   <MenuItem variant="destructive">Sign out</MenuItem>
 </UserMenu>`,
   },
-  examples: [{ id: "compact", title: "Compact", description: "`variant=\"compact\"` is a bare avatar button for a top bar." }],
+  examples: [{ id: "compact", title: "Compact", description: "Use `compact` in a top bar." }],
   notes: [{ title: "In a sidebar", body: "Put it in `SidebarFooter`; `collapsed` shows only the avatar in the icon rail. The menu opens upward by default (`side=\"top\"`)." }],
   api: [
     {

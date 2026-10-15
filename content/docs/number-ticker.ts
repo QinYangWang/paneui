@@ -9,23 +9,23 @@ export default {
     {
       id: "formats",
       title: "Formats",
-      description: "`format` takes any `Intl.NumberFormat` options: currency, percent or compact notation. Separators and symbols stay static; only digits roll.",
+      description: "Use for currency, percentages or compact counts.",
     },
     {
       id: "stagger",
       title: "Stagger and Transition",
-      description: "`stagger` sets the seconds between neighbouring digits (rippling from the right) and `transition` replaces the roll spring.",
+      description: "Use when the default roll feels too fast or too even.",
     },
     {
       id: "live",
       title: "Live Counter",
-      description: "Set `startOnView={false}` for numbers that update on their own; `digitClassName` styles each rolling column.",
+      description: "Use `startOnView={false}` for numbers that update on their own.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Each digit is a column of 0–9 that springs to place. With reduced motion digits jump straight to their value. The formatted number is read from a visually hidden copy for screen readers.",
+      body: "Only digits roll; separators and symbols stay still. With reduced motion digits jump straight to their value. The formatted number is read from a visually hidden copy for screen readers.",
     },
     {
       title: "Related",

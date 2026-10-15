@@ -5,7 +5,7 @@ export default {
     imports: `import { Pagination, PaginationPageSize, PaginationSummary } from "@/components/ui/pagination"`,
     code: `<Pagination page={page} pageCount={12} onPageChange={setPage} />`,
   },
-  examples: [{ id: "compact", title: "Compact", description: "`compact` drops the number buttons for \"Page 2 of 9\", for phones and narrow panels." }],
+  examples: [{ id: "compact", title: "Compact", description: "Use on phones and narrow panels." }],
   notes: [{ title: "Accessibility", body: "A `nav` labelled Pagination; the current page button has `aria-current=\"page\"`, prev / next are disabled at the ends. `getPageRange` is exported if you build your own." }],
   api: [
     {

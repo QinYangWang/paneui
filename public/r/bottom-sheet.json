@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "bottom-sheet",
   "title": "Bottom Sheet",
-  "description": "Draggable bottom sheet with snap points, fling-aware drag-to-dismiss and a grip handle that also cycles snaps from the keyboard.",
+  "description": "A panel that slides up from the bottom and snaps to heights.",
   "dependencies": [
     "@base-ui/react",
     "motion"

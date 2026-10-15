@@ -35,23 +35,23 @@ BreadcrumbTrail (renders all of the above from items)`,
     {
       id: "custom-separator",
       title: "Custom Separator",
-      description: "Pass children to `BreadcrumbSeparator` to replace the chevron.",
+      description: "Use a custom separator, like a slash, for file paths.",
     },
     {
       id: "with-icons",
       title: "With Icons",
-      description: "Icons inside a link or page crumb are sized to 14px. Give icon-only links an `aria-label`.",
+      description: "Use an icon for the root crumb, and give icon-only links an `aria-label`.",
     },
     {
       id: "trail-options",
       title: "Trail Options",
       description:
-        "`BreadcrumbTrail` folds the middle into a menu past `maxItems`; `itemsBeforeCollapse` and `itemsAfterCollapse` set what stays, and `separator` swaps the chevron.",
+        "Use `BreadcrumbTrail` options when deep paths need to fold past `maxItems`.",
     },
     {
       id: "static-ellipsis",
       title: "Static Ellipsis",
-      description: "Without `items`, `BreadcrumbEllipsis` is a plain visual marker instead of a menu button.",
+      description: "Use a static ellipsis when the hidden crumbs aren't worth navigating to.",
     },
   ],
   notes: [
@@ -74,6 +74,7 @@ BreadcrumbTrail (renders all of the above from items)`,
     { name: "BreadcrumbItem", description: "One crumb; fades in on mount.", extends: "li", props: [] },
     {
       name: "BreadcrumbLink",
+      description: "A link crumb. Icons inside it, or inside `BreadcrumbPage`, are sized to 14px.",
       extends: "a",
       props: [
         {
@@ -85,7 +86,7 @@ BreadcrumbTrail (renders all of the above from items)`,
     },
     {
       name: "BreadcrumbPage",
-      description: "The current page as plain foreground text (no chip), with `aria-current=\"page\"`.",
+      description: "The current page, with `aria-current=\"page\"`.",
       extends: "span",
       props: [],
     },
@@ -96,7 +97,7 @@ BreadcrumbTrail (renders all of the above from items)`,
     },
     {
       name: "BreadcrumbEllipsis",
-      description: "The \"…\" crumb. With `items` it is a button that opens a menu of the hidden crumbs.",
+      description: "The \"…\" crumb. With `items` it is a button that opens a menu of the hidden crumbs; without them it is a plain marker.",
       extends: "span",
       props: [
         {

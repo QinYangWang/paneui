@@ -33,7 +33,7 @@ server/acp-bridge.mjs             WebSocket ↔ stdio bridge for real agents`,
   notes: [
     {
       title: "What it is",
-      body: "A multi-provider coding-agent workspace that is a real [Agent Client Protocol](https://agentclientprotocol.com/get-started/introduction) client. Threads are ACP sessions: streamed `session/update` notifications become messages, “Worked for 25s” step logs (`tool_call` / `tool_call_update`), the plan, slash commands (`available_commands_update`), modes and models; `session/request_permission` opens an approval card; `diff` content becomes the Edited files card with Undo and Review.",
+      body: "A multi-provider coding-agent workspace that is a real [Agent Client Protocol](https://agentclientprotocol.com/get-started/introduction) client. Threads are ACP sessions. Streamed `session/update` notifications become messages, step logs (`tool_call` / `tool_call_update`), the plan, slash commands (`available_commands_update`), modes and models. `session/request_permission` opens an approval card, and `diff` content becomes the Edited files card with Undo and Review.",
     },
     {
       title: "Offline demo",
@@ -41,7 +41,7 @@ server/acp-bridge.mjs             WebSocket ↔ stdio bridge for real agents`,
     },
     {
       title: "Running the bridge",
-      body: "Browsers cannot spawn agents, so `server/acp-bridge.mjs` (Node 18+, needs `ws`) does it: run `node server/acp-bridge.mjs --root /path/to/repo` (options `--port 8787`, `--host 127.0.0.1`, `--token`, `--verbose`; or `ACP_BRIDGE_*` env vars). It prints `ws://127.0.0.1:8787` and a token. In the workspace open Settings → Agents, paste both, pick an agent and press Connect.",
+      body: "Browsers cannot spawn agents, so `server/acp-bridge.mjs` (Node 18+, needs `ws`) does it. Run `node server/acp-bridge.mjs --root /path/to/repo` (options `--port 8787`, `--host 127.0.0.1`, `--token`, `--verbose`; or `ACP_BRIDGE_*` env vars). It prints `ws://127.0.0.1:8787` and a token. In the workspace open Settings → Agents, paste both, pick an agent and press Connect.",
     },
     {
       title: "Agents",
@@ -49,7 +49,7 @@ server/acp-bridge.mjs             WebSocket ↔ stdio bridge for real agents`,
     },
     {
       title: "What the bridge serves",
-      body: "It pipes ACP between the WebSocket and the agent's stdio and answers the client-side methods itself: `fs/read_text_file`, `fs/write_text_file` and `terminal/create` · `output` · `wait_for_exit` · `kill` · `release`, all confined to `--root`. Terminal output and file writes are mirrored to the page as `_bridge/*` notifications (live output in the dock, Undo on edited files), and `_bridge/list_files`, `read_file`, `write_file` and `exec` power the explorer, @mentions and the terminal.",
+      body: "It pipes ACP between the WebSocket and the agent's stdio and answers the client-side methods itself (`fs/read_text_file`, `fs/write_text_file` and `terminal/create` · `output` · `wait_for_exit` · `kill` · `release`), all confined to `--root`. Terminal output and file writes are mirrored to the page as `_bridge/*` notifications (live output in the dock, Undo on edited files), and `_bridge/list_files`, `read_file`, `write_file` and `exec` power the explorer, @mentions and the terminal.",
     },
     {
       title: "Security",
@@ -57,7 +57,7 @@ server/acp-bridge.mjs             WebSocket ↔ stdio bridge for real agents`,
     },
     {
       title: "Keyboard",
-      body: "⌘K command palette, ⌘N new thread, ⌘B threads sidebar, ⌘J terminal panel, ⌘\\\\ split chats, ⌘1–9 switch tabs, ⌘, settings. In the composer: Enter sends, Shift+Enter adds a line, Esc stops the agent, @ mentions files and / lists the agent's commands. Every divider drags, collapses (Enter) and remembers its size.",
+      body: "⌘K command palette, ⌘N new thread, ⌘B threads sidebar, ⌘J terminal panel, ⌘\\\\ split chats, ⌘1–9 switch tabs, ⌘, settings. In the composer, Enter sends, Shift+Enter adds a line, Esc stops the agent, @ mentions files and / lists the agent's commands. Every divider drags, collapses (Enter) and remembers its size.",
     },
   ],
   api: [

@@ -12,17 +12,17 @@ export default {
       id: "tones",
       title: "Tones",
       description:
-        "`neutral` is a raised secondary surface; `primary`, `success`, `warning` and `destructive` are tinted washes; `solid` is filled primary for a brand mark.",
+        "Use `neutral` by default, a tinted tone when the icon carries a status, and `solid` for a brand mark.",
     },
     {
       id: "sizes",
       title: "Sizes",
-      description: "`sm` (24px), `default` (32px), `lg` (40px) and `xl` (48px). Use one size per list.",
+      description: "Use one `size` per list so the icons line up.",
     },
     {
       id: "card-header",
       title: "Card Header",
-      description: "Put title-level icons in a chip next to `CardTitle` so headers read as one family.",
+      description: "Use next to `CardTitle` for title-level icons, so headers read as one family.",
     },
   ],
   notes: [

@@ -9,31 +9,31 @@ export const GUIDE_PAGES = [
   {
     href: "/docs",
     title: "Introduction",
-    description: "Copy-paste React components for Tailwind 4, in a quiet native desktop style.",
+    description: "React components you install as source with the shadcn CLI.",
     keywords: ["about", "overview", "start", "principles"],
   },
   {
     href: "/docs/installation",
     title: "Installation",
-    description: "Add the @qinyang namespace to components.json, install the theme, then add components with the shadcn CLI.",
+    description: "Register the namespace, install the theme, then add components.",
     keywords: ["setup", "install", "components.json", "registry"],
   },
   {
     href: "/docs/theming",
     title: "Theming",
-    description: "The tokens every component reads: colours, dark mode, accent presets, type scale, radius and elevation.",
+    description: "How the theme tokens work and how to change them.",
     keywords: ["theme", "tokens", "dark mode", "accent", "colors", "css variables", "radius", "shadow", "typography"],
   },
   {
     href: "/docs/colors",
     title: "Colors",
-    description: "Every colour token by role, with light and dark values, plus a live accent picker that exports its CSS.",
+    description: "Every colour token by role, and a picker for your own accent.",
     keywords: ["color", "colour", "tokens", "palette", "accent", "primary", "custom accent", "oklch", "dark mode", "css variables"],
   },
   {
     href: "/docs/cli",
     title: "CLI & registry",
-    description: "Browse, inspect and install @qinyang items with the shadcn CLI, or point it straight at an item URL.",
+    description: "Find, inspect and install registry items from the command line.",
     keywords: ["shadcn", "cli", "add", "view", "search", "registry", "json"],
   },
   {

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "user-menu",
   "title": "User Menu",
-  "description": "Signed-in user button (avatar, name, email) opening an account menu; avatar-only in an icon rail or as a compact top-bar button.",
+  "description": "Opens account actions for the signed-in user.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json",

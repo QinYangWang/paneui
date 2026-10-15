@@ -19,27 +19,27 @@ export default {
     {
       id: "statuses",
       title: "Statuses",
-      description: "Each item's `status` is `pending`, `in-progress`, `done` or `failed`; `detail` adds a second line and `meta` a trailing note. Failures are counted in the header.",
+      description: "Use `detail` and `meta` when a step needs a reason, a count or a duration.",
     },
     {
       id: "collapsed",
       title: "Collapsed",
-      description: "With `defaultOpen={false}`, the header shows the in-progress item under the title so the plan stays glanceable.",
+      description: "Use `defaultOpen={false}` where space is tight; the header still shows the in-progress item.",
     },
     {
       id: "collapse-on-complete",
       title: "Collapse on Complete",
-      description: "`collapseOnComplete` folds the plan away 700ms after every item is done, and the header icon turns into a check.",
+      description: "Use when a finished plan should get out of the way of the reply.",
     },
     {
       id: "max-height",
       title: "Max Height",
-      description: "`maxHeight` caps the list in px; longer plans scroll inside it.",
+      description: "Use for long plans inside a fixed-height panel.",
     },
     {
       id: "status-mark",
       title: "Status Mark",
-      description: "`TodoStatusMark` is exported on its own: one SVG that morphs between the four states.",
+      description: "Use the mark alone in your own step lists.",
     },
   ],
   notes: [
@@ -55,7 +55,7 @@ export default {
   api: [
     {
       name: "TodoList",
-      description: "Collapsible agent task plan with a live completion count.",
+      description: "Collapsible agent task plan with a live completion count; failures are counted in the header.",
       extends: "Collapsible.Root",
       extendsHref: "https://base-ui.com/react/components/collapsible#root",
       props: [
@@ -64,7 +64,7 @@ export default {
         { name: "open", type: "boolean", description: "Controlled open state." },
         { name: "defaultOpen", type: "boolean", default: "true", description: "Initial open state when uncontrolled." },
         { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the plan opens or closes." },
-        { name: "collapseOnComplete", type: "boolean", default: "false", description: "Fold the plan away once every item is done." },
+        { name: "collapseOnComplete", type: "boolean", default: "false", description: "Fold the plan away 700ms after every item is done." },
         { name: "maxHeight", type: "number", description: "Cap the list height in px; it scrolls past this." },
       ],
       dataAttributes: [
@@ -79,7 +79,7 @@ export default {
         { name: "id", type: "string", required: true, description: "Stable key." },
         { name: "title", type: "ReactNode", required: true, description: "What the step does." },
         { name: "status", type: `"pending" | "in-progress" | "done" | "failed"`, default: `"pending"`, description: "Step state." },
-        { name: "meta", type: "ReactNode", description: "Trailing note: a duration, a count, a failure reason." },
+        { name: "meta", type: "ReactNode", description: "Trailing note, such as a duration, count or failure reason." },
         { name: "detail", type: "ReactNode", description: "Second line under the title." },
       ],
     },

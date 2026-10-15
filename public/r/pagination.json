@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "pagination",
   "title": "Pagination",
-  "description": "Page controls with prev / next, numbered pages and ellipses, a compact mode, a results summary and a rows-per-page select.",
+  "description": "Moves through pages of results in a list or table.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json",

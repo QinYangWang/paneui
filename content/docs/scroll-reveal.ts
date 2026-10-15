@@ -11,18 +11,18 @@ export default {
     {
       id: "directions",
       title: "Directions",
-      description: "`from` picks the edge it slides in from and `distance` how far. With `once={false}` it replays on every entry.",
+      description: "Use `once={false}` when content should replay each time it comes back into view.",
     },
     {
       id: "stagger",
       title: "Stagger",
-      description: "Give siblings an increasing `delay` (100 ms apart). Here `amount=\"all\"` waits until the whole card is visible and `blur` is softened to 4px.",
+      description: "Use for lists and grids so items arrive one after another.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Slides on a spring while opacity and blur ease out. Under reduced motion it only fades in over 200 ms.",
+      body: "Under reduced motion it only fades in, over 200 ms.",
     },
     {
       title: "Related",

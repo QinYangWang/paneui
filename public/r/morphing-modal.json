@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "morphing-modal",
   "title": "Morphing Modal",
-  "description": "Single dialog surface with inner views that springs to each view's height as you navigate, with direction-aware transitions and back navigation.",
+  "description": "Dialog that moves between several views inside one panel.",
   "dependencies": [
     "@base-ui/react",
     "motion"

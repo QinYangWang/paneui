@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tooltip",
   "title": "Tooltip",
-  "description": "Tooltip with scale-in motion and an optional keyboard hint.",
+  "description": "Labels a control with a short hint on hover or focus.",
   "dependencies": [
     "@base-ui/react"
   ],

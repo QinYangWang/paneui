@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "funnel-chart",
   "title": "Funnel Chart",
-  "description": "Vertical or horizontal funnel of S-curved stages that morph with the data, with conversion labels and animated-number tooltips for value, share and drop-off.",
+  "description": "Shows how much drops off at each step of a process.",
   "dependencies": [
     "motion"
   ],

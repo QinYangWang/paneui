@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "wheel-picker",
   "title": "Wheel Picker",
-  "description": "Scroll-wheel picker: a 3D drum driven by a real scroll container, so it gets native momentum and scroll-snap detents, plus mouse drag and full keyboard control; compose several in a WheelPickerGroup for times and dates.",
+  "description": "Picks a value by scrolling a wheel, as for times and dates.",
   "dependencies": [
     "motion"
   ],

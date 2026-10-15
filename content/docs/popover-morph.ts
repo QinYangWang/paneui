@@ -26,18 +26,18 @@ export default {
     {
       id: "placement",
       title: "Placement",
-      description: "Anchored like Popover: `side` (`bottom` or `top`) picks the side it opens on, 8px from the trigger (`sideOffset`); `align` lines it up with the trigger's `start`, `center` (default) or `end` edge.",
+      description: "Use `side=\"top\"` when the trigger sits near the bottom of the screen.",
     },
     {
       id: "form",
       title: "Controlled Form",
-      description: "Control it with `open` / `onOpenChange` to close the panel after a submit.",
+      description: "Use when the panel should close after a submit.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The surface starts as a copy of the trigger (box, radius, colour and hairline) and grows across the 8px gap into the popover surface over 450ms, keeping its hairline ring and shadow the whole way; the content is clipped to it and settles in 150ms later. Closing folds it back into the trigger in 300ms. With reduced motion it only cross-fades, in 150ms.",
+      body: "The surface grows from a copy of the trigger across the 8px gap over 450ms, and the content settles in 150ms later. Closing folds it back in 300ms. With reduced motion it only cross-fades, in 150ms.",
     },
     {
       title: "Keyboard",
@@ -45,7 +45,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other morphing surfaces: [Select Morph](/docs/select-morph), [Morphing Modal](/docs/morphing-modal), [Morphing Search](/docs/morphing-search), [Morphing Tabs](/docs/morphing-tabs).",
+      body: "See also [Select Morph](/docs/select-morph), [Morphing Modal](/docs/morphing-modal), [Morphing Search](/docs/morphing-search) and [Morphing Tabs](/docs/morphing-tabs).",
     },
   ],
   api: [

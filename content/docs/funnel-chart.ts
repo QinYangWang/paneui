@@ -17,17 +17,17 @@ export default {
     {
       id: "single-color",
       title: "Single Color",
-      description: "`color` paints every stage in one hue that fades toward the background stage by stage, instead of the palette.",
+      description: "Pass `color` when the funnel should use one hue instead of the palette.",
     },
     {
       id: "horizontal",
       title: "Horizontal",
-      description: "`direction=\"horizontal\"` flows left to right; `size` is then the plot height and `gap` the space between stages.",
+      description: "Use `direction=\"horizontal\"` in wide, short spaces; `size` then sets the plot height.",
     },
     {
       id: "descriptions",
       title: "Descriptions",
-      description: "A stage's `description` appears in its tooltip. `defaultActiveId` opens one on load, and `minRatio` keeps tiny stages visible.",
+      description: "Add a stage `description` when the tooltip needs context, and `minRatio` when tiny stages must stay visible.",
     },
   ],
   notes: [

@@ -9,22 +9,22 @@ export default {
     {
       id: "on-mount",
       title: "Scramble On Mount",
-      description: "Add `scrambleOnMount` to decode the first value too; remount with a `key` to replay it.",
+      description: "Use when the first value should decode too; remount with a `key` to replay it.",
     },
     {
       id: "glyphs",
       title: "Custom Glyphs",
-      description: "`glyphs` sets the characters sampled while a position is unresolved, here hexadecimal only.",
+      description: "Use a narrower set, such as hex digits, to match the kind of value shown.",
     },
     {
       id: "duration",
       title: "Duration",
-      description: "`duration` fixes the total time in ms; left unset it scales with the text length between 360 and 900ms.",
+      description: "Use a fixed `duration` when several scrambles must finish together.",
     },
     {
       id: "on-complete",
       title: "On Complete",
-      description: "`onComplete` fires once the new `value` has fully resolved.",
+      description: "Use to start the next step once the text settles.",
     },
   ],
   notes: [

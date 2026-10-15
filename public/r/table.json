@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "table",
   "title": "Table",
-  "description": "Virtualized data table for 10k+ rows with click-to-sort headers, checkbox row selection with shift-click ranges, drag-to-resize and drag-to-reorder columns, and rows and columns that glide into new positions.",
+  "description": "Shows large data sets that people sort, select and resize.",
   "dependencies": [
     "@tanstack/react-virtual",
     "motion",

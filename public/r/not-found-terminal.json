@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "not-found-terminal",
   "title": "404 Terminal",
-  "description": "404 page as a terminal session that types a failed cd into the missing path, prints the 404 status and idles on a blinking caret.",
+  "description": "404 page styled as a terminal session.",
   "dependencies": [
     "motion"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "recommendation-card",
   "title": "Recommendation Card",
-  "description": "Agent suggestion with inline chips, a confidence meter and accept/alternatives actions.",
+  "description": "Shows an agent's suggestion for the user to accept or swap.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/card.json",
     "https://qinyangwang.github.io/ui/r/badge.json",

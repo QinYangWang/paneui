@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "work-summary",
   "title": "Work Summary",
-  "description": "Collapsible “Worked for 25s” step log of an agent turn: live elapsed time, steps with ACP tool kinds and statuses, and per-step output.",
+  "description": "Summarises the steps an agent took during one turn.",
   "dependencies": [
     "motion"
   ],

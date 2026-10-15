@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "approval-card",
   "title": "Approval Card",
-  "description": "Approve or decline an agent action, with animated result and undo.",
+  "description": "Asks the user to approve or decline an agent's action.",
   "dependencies": [
     "motion"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "message-bubble",
   "title": "Message Bubble",
-  "description": "Single conversational bubble with tones, start/end alignment, joined corners when grouped, an expandable long-content section and render-prop support for link or button bubbles.",
+  "description": "Holds one chat message in a speech bubble.",
   "dependencies": [
     "@base-ui/react",
     "class-variance-authority"

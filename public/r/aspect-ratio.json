@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "aspect-ratio",
   "title": "Aspect Ratio",
-  "description": "Responsive frame locked to a ratio that springs smoothly between ratios, with a cover-cropped image part that scales without stretching.",
+  "description": "Keeps content at a set ratio and animates ratio changes.",
   "dependencies": [
     "motion"
   ],

@@ -26,27 +26,27 @@ export default {
     {
       id: "avatars",
       title: "Avatars",
-      description: "`MessageAvatar` takes initials, an icon or an image; `placeholder` keeps follow-up rows aligned without repeating it.",
+      description: "Use `placeholder` on follow-up rows to keep them aligned without repeating the avatar.",
     },
     {
       id: "hover-actions",
       title: "Hover Actions",
-      description: "Without `visible`, `MessageActions` fades in on hover or keyboard focus of the row, and stays shown on touch screens.",
+      description: "Leave out `visible` when actions should appear only on hover or focus; touch screens always show them.",
     },
     {
       id: "system",
       title: "System Rows",
-      description: "`from=\"system\"` rows sit on the start side; pair them with a `muted` bubble or a `MessageMarker` for notes between turns.",
+      description: "Use `from=\"system\"` for notes between turns, with a `muted` bubble or a `MessageMarker`.",
     },
     {
       id: "compact",
       title: "Compact Spacing",
-      description: "`spacing=\"compact\"` tightens the gap between rows from 20px to 8px for dense threads.",
+      description: "Use `spacing=\"compact\"` for dense threads.",
     },
     {
       id: "animate-in",
       title: "Animate In",
-      description: "Set `animateIn` on rows that were just sent; they pop up once from the sender's corner.",
+      description: "Set `animateIn` only on rows that were just sent, not on loaded history.",
     },
   ],
   notes: [
@@ -111,7 +111,7 @@ export default {
       extends: "div",
       props: [{ name: "label", type: "string", default: `"Typing"`, description: "Accessible label of the status." }],
     },
-    { name: "MessageMarker", description: "Centred divider between turns: a date, \"New\" or a note.", extends: "div", props: [] },
+    { name: "MessageMarker", description: "Centred divider between turns, such as a date, \"New\" or a note.", extends: "div", props: [] },
     {
       name: "MessageBubble",
       description: "Re-exported from [Message Bubble](/docs/message-bubble), along with `MessageBubbleGroup` and `MessageBubbleCollapsible`.",

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "sortable-stack",
   "title": "Sortable Stack",
-  "description": "Drag-to-reorder stack of raised rows on motion Reorder, dragged from a grip handle, with keyboard reordering, screen-reader announcements and a one-step undo.",
+  "description": "List the user can reorder by dragging or keyboard.",
   "dependencies": [
     "motion"
   ],

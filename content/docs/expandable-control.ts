@@ -10,17 +10,17 @@ export default {
     {
       id: "controlled",
       title: "Controlled",
-      description: "Drive `expanded` with `onExpandedChange`, here so only one button in a toolbar is open at a time.",
+      description: "Control `expanded` with `onExpandedChange` when only one button in a toolbar should be open at a time.",
     },
     {
       id: "chip-actions",
       title: "Chip Actions",
-      description: "`ExpandableChip` reveals any trailing action. `collapseOnAction={false}` keeps it open; `disabled` locks the chip.",
+      description: "Set `collapseOnAction={false}` when the revealed action may run more than once in a row.",
     },
     {
       id: "prevent-toggle",
       title: "Prevent Toggle",
-      description: "Call `event.preventDefault()` in `onClick` to stop the button from toggling.",
+      description: "Call `event.preventDefault()` in `onClick` when a click should act without toggling the button.",
     },
   ],
   notes: [
@@ -30,7 +30,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "The surface springs between natural widths (300 / 24 / 0.8) and the revealed part blurs and scales in. With reduced motion the width changes instantly and the part fades.",
+      body: "The width springs between natural sizes (300 / 24 / 0.8). With reduced motion the width changes instantly and the revealed part only fades.",
     },
   ],
   api: [

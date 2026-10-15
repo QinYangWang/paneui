@@ -16,20 +16,24 @@ export default {
     {
       id: "error-retry",
       title: "Error and Retry",
-      description: "When `loadPage` rejects, a retry band replaces the footer (or a “Try again” empty state if nothing has loaded). Page 3 fails once here — scroll down.",
+      description: "Use when the source can fail mid-list; page 3 fails once here, so scroll down.",
     },
     {
       id: "reset-key",
       title: "Reset Key and End Message",
-      description: "Change `resetKey` (a filter) to drop loaded pages, abort the in-flight request and start again from the top. `endMessage` replaces the end-of-list note.",
+      description: "Use `resetKey` when a filter or search changes the result set.",
     },
     {
       id: "use-async-pages",
       title: "useAsyncPages",
-      description: "The paging hook on its own, for lists that are not a table.",
+      description: "Use for paged lists that are not a table.",
     },
   ],
   notes: [
+    {
+      title: "Errors",
+      body: "When `loadPage` rejects, a retry band replaces the footer, or a “Try again” empty state shows if nothing has loaded yet.",
+    },
     {
       title: "Accessibility",
       body: "The table sets `aria-busy` while a page loads; the loading band is a `status` and the error bands are `alert`s.",
@@ -47,8 +51,8 @@ export default {
       extendsHref: "/docs/table",
       props: [
         { name: "loadPage", type: "(page: number, signal: AbortSignal) => Promise<AsyncPage<T>>", required: true, description: "Fetch one page; reject to show the retry footer. Honour `signal` to cancel." },
-        { name: "resetKey", type: "unknown", description: "Change to throw away loaded pages and start again (e.g. a new filter)." },
-        { name: "endMessage", type: "ReactNode | ((count: number) => ReactNode)", description: "Shown under the last row once every page is in. Pass `null` to hide." },
+        { name: "resetKey", type: "unknown", description: "Change to drop loaded pages, abort the in-flight request and start again from the top (e.g. a new filter)." },
+        { name: "endMessage", type: "ReactNode | ((count: number) => ReactNode)", description: "Replaces the end-of-list note shown once every page is in. Pass `null` to hide." },
         { name: "onStatusChange", type: `(status: "loading" | "idle" | "error" | "done", rowCount: number) => void`, description: "Called when the load status or row count changes." },
       ],
     },

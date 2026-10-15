@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "shared-layout-bg",
   "title": "Shared Layout Background",
-  "description": "Raised hover pill that glides between items via shared layout, follows keyboard focus, and blurs in and out as the pointer enters and leaves the group.",
+  "description": "Hover highlight that follows the pointer across a group.",
   "dependencies": [
     "@base-ui/react",
     "motion"

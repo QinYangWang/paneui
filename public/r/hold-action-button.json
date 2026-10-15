@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "hold-action-button",
   "title": "Hold Action Button",
-  "description": "Press-and-hold confirm button whose wavy liquid fill rises vertically or horizontally, drains if released early, and works with a held Space or Enter.",
+  "description": "Confirms a risky action by making the user press and hold.",
   "dependencies": [
     "motion"
   ],

@@ -18,32 +18,32 @@ export default {
     {
       id: "statuses",
       title: "Statuses",
-      description: "`status` is `running`, `success`, `error` or `cancelled`; the label rolls between them and the chip turns red on errors.",
+      description: "Use `status` to mirror the tool call as it runs and finishes.",
     },
     {
       id: "error-retry",
       title: "Error with Retry",
-      description: "`onRetry` adds a Run again button to the footer and `meta` shows extra header text such as an exit code. Failed runs stay open.",
+      description: "Use `onRetry` when a failed call can be run again; failed runs stay open.",
     },
     {
       id: "requests",
       title: "Requests",
-      description: "`kind=\"request\"` with `ToolResultRequest` shows a tinted method, the URL, the status code and a highlighted body.",
+      description: "Use for HTTP calls, pairing `kind=\"request\"` with `ToolResultRequest`.",
     },
     {
       id: "custom-icon",
       title: "Custom Icon",
-      description: "`kind=\"custom\"` is the default; pass `icon` to show your tool's own glyph in the chip.",
+      description: "Use `icon` for tools that have their own glyph.",
     },
     {
       id: "output-languages",
       title: "Output Languages",
-      description: "`ToolResultOutput` highlights `bash`, `json`, `diff`, `tsx`, `typescript`, `yaml`, `python` or `text`; `maxHeight` caps the well before it scrolls.",
+      description: "Use `language` to match the tool's output format.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Use `open` and `onOpenChange` to own the disclosure, or `collapseOnComplete={false}` to keep a finished run open.",
+      description: "Use `open` and `onOpenChange` when you own the disclosure, or `collapseOnComplete={false}` to keep a finished run open.",
     },
   ],
   notes: [

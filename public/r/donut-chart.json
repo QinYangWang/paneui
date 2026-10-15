@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "donut-chart",
   "title": "Donut Chart",
-  "description": "Ring of rounded, gapped segments in an inset track with a centre readout and legend that highlight together on hover or focus.",
+  "description": "Shows how parts make up a whole as a ring.",
   "dependencies": [
     "motion"
   ],

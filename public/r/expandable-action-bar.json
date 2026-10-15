@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "expandable-action-bar",
   "title": "Expandable Action Bar",
-  "description": "Toolbar of compact icon actions that expand into labelled controls on hover or keyboard focus, with a gliding active highlight, badges and shortcut hints.",
+  "description": "Icon toolbar that reveals labels when the user reaches for it.",
   "dependencies": [
     "@base-ui/react",
     "motion"

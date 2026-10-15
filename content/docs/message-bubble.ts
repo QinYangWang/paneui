@@ -14,32 +14,32 @@ export default {
     {
       id: "tones",
       title: "Tones",
-      description: "`tone` covers sender (`primary`), reply (`default`), system (`muted`), quiet (`outline`), error (`destructive`) and unframed (`ghost`) messages.",
+      description: "Match `tone` to who is speaking and why, such as `primary` for the sender and `destructive` for errors.",
     },
     {
       id: "sizes",
       title: "Sizes",
-      description: "`size=\"sm\"` tightens padding and type for chips like status lines and quick replies.",
+      description: "Use `size=\"sm\"` for chips like status lines and quick replies.",
     },
     {
       id: "align-and-tail",
       title: "Alignment and Tail",
-      description: "`align` picks the side the bubble hugs; set `tail={false}` to round the corner toward the sender.",
+      description: "Set `align=\"end\"` for the user's own bubbles, and `tail={false}` when the bubble shouldn't point at its sender.",
     },
     {
       id: "grouped",
       title: "Grouped",
-      description: "Bubbles in a `MessageBubbleGroup` inherit its `align` and tighten the corners where they join.",
+      description: "Wrap consecutive bubbles from one sender in `MessageBubbleGroup` so they share `align` and join corners.",
     },
     {
       id: "interactive",
       title: "Interactive",
-      description: "Pass `render={<button />}` to make the whole bubble pressable, e.g. quick-reply suggestions.",
+      description: "Pass `render={<button />}` when the whole bubble is pressable, e.g. quick-reply suggestions.",
     },
     {
       id: "collapsible",
       title: "Collapsible",
-      description: "`MessageBubbleCollapsible` clips long content to `collapsedHeight`, with custom `moreLabel` and `lessLabel`; `defaultExpanded` starts it open.",
+      description: "Wrap long content in `MessageBubbleCollapsible` so it stays clipped until the reader expands it.",
     },
   ],
   notes: [
@@ -63,7 +63,7 @@ export default {
           name: "tone",
           type: `"default" | "primary" | "muted" | "outline" | "destructive" | "ghost"`,
           default: `"default"`,
-          description: "Visual style.",
+          description: "`primary` for the sender, `default` for replies, `muted` for system, `outline` for quiet, `destructive` for errors and `ghost` for unframed messages.",
         },
         { name: "size", type: `"default" | "sm"`, default: `"default"`, description: "Padding, radius and text size." },
         { name: "align", type: `"start" | "end"`, description: "Side the bubble hugs. Inherited from `Message` / `MessageBubbleGroup` when omitted, else `start`." },

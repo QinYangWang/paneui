@@ -22,22 +22,22 @@ export default {
     {
       id: "monday-start",
       title: "Monday Start",
-      description: "`weekStartsOn={1}` starts rows on Monday. `cellSize`, `gap` and `color` change the grid's look.",
+      description: "Set `weekStartsOn={1}` where weeks start on Monday.",
     },
     {
       id: "full-year",
       title: "Full Year",
-      description: "53 `weeks` with small cells for a contribution-graph year. `maxCount` caps the scale so one busy day doesn't wash out the rest.",
+      description: "Use 53 `weeks` for a full year, with `maxCount` so one busy day doesn't wash out the rest.",
     },
     {
       id: "custom-composition",
       title: "Custom Composition",
-      description: "Arrange the parts yourself and pass `HeatCalendarTooltip` a function child to render your own tooltip body.",
+      description: "Arrange the parts yourself when you need another layout or your own tooltip body.",
     },
     {
       id: "default-selection",
       title: "Default Selection",
-      description: "`defaultSelection` preselects a date range; the summary totals it and offers Clear.",
+      description: "Pass `defaultSelection` to open with a range already totalled, such as the current week.",
     },
   ],
   notes: [
@@ -104,7 +104,7 @@ export default {
     },
     {
       name: "generateHeatCalendarData",
-      description: "Deterministic demo data with quieter weekends: `generateHeatCalendarData(rand, options)`.",
+      description: "Deterministic demo data with quieter weekends, called as `generateHeatCalendarData(rand, options)`.",
       props: [
         { name: "rand", type: "() => number", required: true, description: "Random source (first argument)." },
         { name: "endDate", type: "string", default: `"2026-10-13"`, description: "Last day generated." },

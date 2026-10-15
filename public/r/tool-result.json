@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tool-result",
   "title": "Tool Result",
-  "description": "Execution disclosure for an agent tool call, with live status, ticking duration, syntax-highlighted terminal output or request/response, copy and retry, collapsing once it finishes.",
+  "description": "Shows what an agent tool call ran and what it returned.",
   "dependencies": [
     "@base-ui/react",
     "motion",

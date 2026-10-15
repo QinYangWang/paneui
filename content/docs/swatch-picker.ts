@@ -15,9 +15,9 @@ export default {
   onValueChange={setColor}
 />`,
   },
-  examples: [{ id: "letter", title: "Letter", description: "`variant=\"letter\"` shows an \"A\" in each colour, for text colour menus." }],
+  examples: [{ id: "letter", title: "Letter", description: "Use `letter` in text colour menus." }],
   notes: [
-    { title: "Palette, not picker", body: "For any colour use `ColorPicker`. `SwatchPicker` is a fixed palette, a radio group: one tab stop, arrow keys move between swatches. A swatch without `color` is the \"none\" choice and gets a slash." },
+    { title: "Palette, not picker", body: "For an arbitrary colour use `ColorPicker`; `SwatchPicker` is a fixed palette. It is a radio group with one tab stop, and arrow keys move between swatches. A swatch without `color` is the \"none\" choice." },
     { title: "Colours", body: "Pass theme tokens (`var(--chart-1)`) for UI that follows light and dark, or hex when the value leaves the app (the email editor's palette)." },
   ],
   api: [

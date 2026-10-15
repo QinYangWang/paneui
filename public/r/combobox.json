@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "combobox",
   "title": "Combobox",
-  "description": "Searchable select with grouped options, empty state and keyboard navigation, in an inset input with a select-style popup.",
+  "description": "Picks one option from a long list by typing to filter.",
   "dependencies": [
     "@base-ui/react"
   ],

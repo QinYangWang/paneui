@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "usage-meter",
   "title": "Usage Meter",
-  "description": "Quota bar on a meter: label, used / limit readout and a bar that turns warning then destructive as it fills.",
+  "description": "Shows how much of a quota has been used.",
   "dependencies": [
     "@base-ui/react"
   ],

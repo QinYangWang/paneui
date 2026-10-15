@@ -30,27 +30,27 @@ export default {
     {
       id: "placeholder",
       title: "Placeholder",
-      description: "Add an item with `value: null` to `items` and leave the select empty; `SelectValue` shows its label in muted text.",
+      description: "Use when the field starts empty, with an item whose `value` is `null` as the prompt.",
     },
     {
       id: "sizes",
       title: "Sizes",
-      description: "`SelectTrigger` comes in `sm` (28px) and `default` (32px).",
+      description: "Use `sm` in toolbars and dense rows.",
     },
     {
       id: "with-icons",
       title: "With Icons",
-      description: "Put an icon before the label in `SelectItem`, and pass a function child to `SelectValue` to show it in the trigger too.",
+      description: "Use when icons help tell the options apart.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "Disable one option with `disabled` on `SelectItem`, or the whole control with `disabled` on `Select`.",
+      description: "Use `disabled` on `SelectItem` to block one option, or on `Select` to block the whole control.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Use `value` and `onValueChange` to react to the choice elsewhere in the UI.",
+      description: "Use when other UI reacts to the choice.",
     },
   ],
   notes: [
@@ -88,7 +88,7 @@ export default {
       extends: "Select.Trigger",
       extendsHref: "https://base-ui.com/react/components/select#trigger",
       props: [
-        { name: "size", type: `"default" | "sm"`, default: `"default"`, description: "Height: 32px or 28px." },
+        { name: "size", type: `"default" | "sm"`, default: `"default"`, description: "`default` is 32px tall, `sm` 28px." },
       ],
       dataAttributes: [
         { name: "data-popup-open", description: "Present while the list is open." },

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-neutral",
   "title": "Theme: Neutral accent",
-  "description": "Neutral accent preset: sets the --accent-50…950 ramp to Tailwind neutral; a black primary with white text in light mode and a near-white primary with dark text in dark mode, ring neutral-400 / neutral-500. Install after @qinyang/theme.",
+  "description": "Accent preset that makes the primary colour black or white.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"
   ],

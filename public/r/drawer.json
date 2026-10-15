@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "drawer",
   "title": "Drawer",
-  "description": "Side panel that springs in from the left or right over a dimmed backdrop, with header, body and footer parts.",
+  "description": "Side panel for navigation or secondary tasks over the page.",
   "dependencies": [
     "@base-ui/react",
     "motion"

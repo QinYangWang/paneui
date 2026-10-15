@@ -20,11 +20,11 @@ export default {
       name: "AccentPicker",
       extends: "RadioGroup",
       props: [
-        { name: "accents", type: "Accent[]", default: "all six", description: "Presets to offer: blue, neutral, green, orange, rose, violet." },
+        { name: "accents", type: "Accent[]", default: "all six", description: "Presets to offer, from `blue`, `neutral`, `green`, `orange`, `rose` and `violet`." },
         { name: "showLabels", type: "boolean", default: "false", description: "Names under the swatches." },
       ],
     },
-    { name: "useAccent", description: "Hook: `[accent, setAccent]`, kept in sync across pickers and tabs.", props: [] },
+    { name: "useAccent", description: "Returns `[accent, setAccent]`, kept in sync across pickers and tabs.", props: [] },
     { name: "AccentPresets", description: "`<style>` with the presets plus a pre-paint script.", props: [] },
   ],
 } satisfies ComponentDoc

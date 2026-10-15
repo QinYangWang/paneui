@@ -257,6 +257,17 @@ line only, with a reason. List them with `rg "eslint-disable.*shadcn/"`; each is
 ## Component docs pages
 Every registry:ui item has `content/docs/<name>.ts` (type `ComponentDoc` in lib/doc-types.ts: usage, composition, examples, notes, api) and examples in `registry/base-nova/examples/<name>/<id>.tsx`. After adding or renaming one run `pnpm docs:gen` (regenerates content/docs/index.generated.ts and components/docs/examples.generated.tsx; commit both). API tables list only props the library adds or changes; the rest is `extends` with a link to the primitive's docs. Examples render client-only.
 
+## Copy density (hard rule; full skill in `skills/copy-density/SKILL.md`)
+
+1. Component cards (gallery, any overview grid) show the name and the preview only. Never write the colon-list pattern ("X: a, b, c and d").
+2. Where a live preview is shown, the text never restates what the preview shows. The preview is the explanation.
+3. Implementation details (install paths, pixel values, variant lists, file locations) appear only in the detail page body, never in cards, nav, search or ledes.
+4. Each example block on a detail page is title, preview and code. Use at most one lead-in sentence, and it must answer "when to use", never "what it is".
+5. No adjective stacking (complete, comprehensive, powerful, seamless, robust, modern, flexible).
+6. Self-check: any card or lede over two lines gets cut to one line.
+
+A registry `description` is the page lede, the nav search text and `<meta>`, so it's one plain sentence of 12 words or fewer, with no values or lists. Long-form prose (guides, changelog, notes, blog and docs templates) renders inside `typeset typeset-docs` (`app/typeset.css`). Don't hand-style elements inside it, and put `not-typeset` on components dropped into it.
+
 ## Wording: no third-party names or provenance
 
 Code comments, UI copy, demo data and docs prose (`content/docs/*.ts`, `app/**`, `components/docs/**`,

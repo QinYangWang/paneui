@@ -7,7 +7,7 @@ import { LazyDemo } from "@/components/docs/lazy-demo"
 import { getGroups, getItems } from "@/lib/docs"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
-import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@/registry/base-nova/ui/card"
+import { Card, CardHeader, CardPanel, CardTitle } from "@/registry/base-nova/ui/card"
 
 const wide = new Set(["saas", "agent-workspace", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
@@ -21,8 +21,7 @@ export default function ComponentsPage() {
       <section className="flex flex-col items-start gap-3">
         <h1 className="text-3xl font-semibold tracking-tight">Components</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          {total} components, blocks and templates for Tailwind 4, with live previews. Pick one to see its
-          usage, examples and API, or start with the installation guide.
+          {total} components, blocks and templates for Tailwind 4.
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
           <Button nativeButton={false} render={<Link href="/docs/installation" />}>
@@ -57,14 +56,13 @@ export default function ComponentsPage() {
                       href={`/docs/${item.name}`}
                       className="outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
                     >
-                      {/* minmax(0,1fr): a long description must wrap/clamp, never widen the grid track and stretch the card. */}
+                      {/* Cards carry the name and the preview only (copy-density rule 1). */}
                       <CardHeader className="grid-cols-[minmax(0,1fr)_auto] items-center py-3">
                         <CardTitle className="font-medium">{item.title}</CardTitle>
                         <ArrowRightIcon
                           size={16}
-                          className="col-start-2 row-span-2 shrink-0 text-muted-foreground transition-transform group-hover/gallery:translate-x-0.5 group-hover/gallery:text-foreground"
+                          className="col-start-2 shrink-0 text-muted-foreground transition-transform group-hover/gallery:translate-x-0.5 group-hover/gallery:text-foreground"
                         />
-                        <CardDescription className="line-clamp-2 text-sm">{item.summary}</CardDescription>
                       </CardHeader>
                     </Link>
                   </Card>

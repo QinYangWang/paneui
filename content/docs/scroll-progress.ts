@@ -9,17 +9,17 @@ export default {
     {
       id: "bottom-bar",
       title: "Bottom Bar",
-      description: "Put the bar last with `side=\"bottom\"` and `position=\"sticky\"` to pin it to the bottom of a scroll container; `thickness` sets its height and `spring={false}` makes it track exactly.",
+      description: "Use inside a scroll container, pinned to its bottom edge.",
     },
     {
       id: "ring-sizes",
       title: "Ring Sizes",
-      description: "`variant=\"ring\"` takes `size`, `thickness` and `showValue` for the percentage in the middle.",
+      description: "Use the ring where an edge bar has no room, such as a floating button.",
     },
     {
       id: "custom-progress",
       title: "Custom Progress",
-      description: "Pass any 0–1 `MotionValue` as `progress` to drive the indicator from something other than scroll, like an upload.",
+      description: "Use to show progress that isn't scroll, like an upload.",
     },
   ],
   notes: [

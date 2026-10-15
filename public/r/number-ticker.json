@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "number-ticker",
   "title": "Number Ticker",
-  "description": "Slot-machine digits that roll to a new value with a staggered spring, formatted with Intl.NumberFormat.",
+  "description": "Number whose digits roll to each new value.",
   "dependencies": [
     "motion"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tool-approval",
   "title": "Tool Approval",
-  "description": "Human-in-the-loop permission card with tool name, risk level and arguments preview, offering Allow once, Always allow or Deny, with a remembered, revocable state.",
+  "description": "Asks the user to allow or deny an agent tool call.",
   "dependencies": [
     "@base-ui/react",
     "motion"

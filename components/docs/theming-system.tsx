@@ -15,8 +15,8 @@ const LAYERS: { variable: string; value: string; utility: React.ReactNode; usedB
     ),
     usedBy: "Filled buttons, switches, checks, selection",
   },
-  { variable: "--border", value: "oklch(0% 0 0 / 8%)", utility: <Code>border-border</Code>, usedBy: "Every divider (base layer default)" },
-  { variable: "--radius", value: "0.625rem", utility: <Code>rounded-sm … rounded-3xl</Code>, usedBy: "All corners, 0.6× to 2.2×" },
+  { variable: "--border", value: "oklch(0% 0 0 / 8%)", utility: <Code>border-border</Code>, usedBy: "Every divider" },
+  { variable: "--radius", value: "0.625rem", utility: <Code>rounded-sm … rounded-3xl</Code>, usedBy: "All corners" },
   { variable: "--skeuo-raised", value: "ring + 1px drop", utility: <Code>shadow-raised</Code>, usedBy: "Resting cards and controls" },
   { variable: "--text-ui", value: "0.8125rem", utility: <Code>text-ui</Code>, usedBy: "Buttons, inputs, menus, nav" },
 ]
@@ -26,7 +26,7 @@ const STEPS: { title: string; body: React.ReactNode }[] = [
     title: "Map each mode",
     body: (
       <>
-        Light values on <Code>:root</Code>, dark values on <Code>.dark</Code>, under the same names.
+        Put light values on <Code>:root</Code> and dark values on <Code>.dark</Code>, under the same names.
       </>
     ),
   },
@@ -34,7 +34,7 @@ const STEPS: { title: string; body: React.ReactNode }[] = [
     title: "Use semantic utilities",
     body: (
       <>
-        <Code>bg-card</Code>, <Code>text-muted-foreground</Code>, <Code>ring-ring/50</Code>: never palette colours or hex.
+        Write <Code>bg-card</Code> or <Code>text-muted-foreground</Code>, never palette colours or hex.
       </>
     ),
   },
@@ -42,18 +42,18 @@ const STEPS: { title: string; body: React.ReactNode }[] = [
     title: "Keep it central",
     body: (
       <>
-        Components don&apos;t need <Code>dark:</Code> colour overrides, so a theme change is one edit in one file.
+        Skip <Code>dark:</Code> colour overrides in components, so a theme change stays one edit in one file.
       </>
     ),
   },
 ]
 
 const EXTRAS: { name: React.ReactNode; body: string }[] = [
-  { name: <Code>--radius</Code>, body: "One base with fixed multipliers; frame-* and rounded-inner keep nested corners concentric." },
-  { name: <Code>text-ui-*</Code>, body: "A native 13px scale (10–14px) declared in @theme, so it does not change with mode." },
-  { name: <Code>--skeuo-*</Code>, body: "Elevation: hairline rings and soft drops behind shadow-raised, -surface, -well, -chip, -primary." },
-  { name: <Code>--shell</Code>, body: "App chrome: the window band, rail sidebar and the shell-inset content panel." },
-  { name: <Code>--scrollbar</Code>, body: "Thumb colours read by the base layer's thin, rounded scrollbars." },
+  { name: <Code>--radius</Code>, body: "One base that every corner multiplies, so nested corners stay concentric." },
+  { name: <Code>text-ui-*</Code>, body: "The type scale for text inside components." },
+  { name: <Code>--skeuo-*</Code>, body: "The shadows behind the shadow-* utilities." },
+  { name: <Code>--shell</Code>, body: "Colours for app chrome around the content panel." },
+  { name: <Code>--scrollbar</Code>, body: "Scrollbar thumb colours." },
 ]
 
 /** "How the system works" for the Theming page: two layers, two modes, one accent. */
@@ -62,11 +62,10 @@ export function ThemingSystem() {
     <div className="flex flex-col gap-6">
       <p className="text-muted-foreground">
         The theme has two layers. <strong className="font-medium text-foreground">Values</strong> are CSS variables in{" "}
-        <Code>globals.css</Code>, written per role in OKLCH (<Code>--card</Code>, <Code>--muted-foreground</Code>,{" "}
-        <Code>--ring</Code>): what a colour is for, not what it looks like. <strong className="font-medium text-foreground">Utilities</strong>{" "}
-        sit on top: <Code>@theme inline</Code> maps each variable to Tailwind classes, so <Code>--card</Code> becomes{" "}
-        <Code>bg-card</Code>. Components only use the utilities. Change a value and every component follows, with no
-        component file touched.
+        <Code>globals.css</Code>, named for what a colour is for, such as <Code>--card</Code>.{" "}
+        <strong className="font-medium text-foreground">Utilities</strong> map each variable to a class in{" "}
+        <Code>@theme inline</Code>, so <Code>--card</Code> becomes <Code>bg-card</Code>. Components use only the
+        utilities, so changing a value restyles every component without touching its file.
       </p>
 
       <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
@@ -96,11 +95,9 @@ export function ThemingSystem() {
       </div>
 
       <p className="text-muted-foreground">
-        That indirection is also the path to dark mode: <Code>.dark</Code> on <Code>&lt;html&gt;</Code> points the same
-        variables at dark values, so a component written once is right in both modes. The accent works the same way one
-        level up: <Code>--primary</Code> and <Code>--ring</Code> read an <Code>--accent-50…950</Code> ramp
-        (blue by default), <Code>html[data-accent]</Code> swaps the ramp, and everything interactive recolours while
-        surfaces, text, states and charts stay put.
+        Dark mode works the same way. <Code>.dark</Code> on <Code>&lt;html&gt;</Code> points the same variables at dark
+        values, so a component written once is right in both modes. The accent sits one level up, where{" "}
+        <Code>--primary</Code> and <Code>--ring</Code> read an <Code>--accent-50…950</Code> ramp that a preset swaps.
       </p>
 
       <ol className="grid gap-3 sm:grid-cols-3">
@@ -114,7 +111,7 @@ export function ThemingSystem() {
       </ol>
 
       <div className="flex flex-col gap-2">
-        <p className="text-muted-foreground">Beyond colour, the same file carries the rest of the system:</p>
+        <p className="text-muted-foreground">The same file also holds these tokens.</p>
         <ul className="flex flex-col gap-1.5 text-sm text-muted-foreground">
           {EXTRAS.map((e, i) => (
             <li key={i} className="flex gap-3">

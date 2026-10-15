@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "email-editor",
   "title": "Email Editor",
-  "description": "Visual email editor: buttons, images, logo, columns, sections, spacer, footer, {{variables}}, Show if / Repeat, subject + preheader, desktop / mobile preview, and email-safe HTML / JSON export.",
+  "description": "Edits email templates and exports them as email-safe HTML.",
   "dependencies": [
     "@tiptap/core",
     "@tiptap/pm",

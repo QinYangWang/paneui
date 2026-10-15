@@ -36,27 +36,27 @@ export default {
     {
       id: "popup-search",
       title: "Search In Popup",
-      description: "Use `ComboboxTrigger` with `ComboboxValue` for a select-like button, and put `ComboboxSearch` at the top of the popup.",
+      description: "Use `ComboboxTrigger` with `ComboboxSearch` when the field should look like a select.",
     },
     {
       id: "sizes",
       title: "Sizes",
-      description: "`ComboboxInput` and `ComboboxTrigger` take `size` `\"sm\"` (28px) or `\"default\"` (32px).",
+      description: "Use `sm` in toolbars and dense forms.",
     },
     {
       id: "input-options",
       title: "Input Options",
-      description: "Hide the leading search icon, the clear button or the chevron with `showSearchIcon`, `showClear` and `showTrigger`.",
+      description: "Turn off controls a field doesn't need, like the clear button when a choice is required.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Own the selection with `value` and `onValueChange`; the clear button sets it to `null`.",
+      description: "Use `value` and `onValueChange` when the selection drives other UI; clearing sets it to `null`.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "Pass `disabled` to a `ComboboxItem` to skip one option, or to `Combobox` to lock the whole field.",
+      description: "Disable a `ComboboxItem` for an unavailable option, or `Combobox` to lock the field.",
     },
   ],
   notes: [
@@ -72,7 +72,7 @@ export default {
   api: [
     {
       name: "Combobox",
-      description: "Re-export of the primitive root: `items`, `value`, `defaultValue`, `onValueChange`, `filter`, `disabled` and so on.",
+      description: "Re-export of the primitive root, taking `items`, `value`, `defaultValue`, `onValueChange`, `filter`, `disabled` and its other props.",
       extends: "Combobox.Root",
       extendsHref: `${BASE}#root`,
       props: [],
@@ -83,7 +83,7 @@ export default {
       extends: "Combobox.Input",
       extendsHref: `${BASE}#input`,
       props: [
-        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height: 28px or 32px." },
+        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height, 28px or 32px." },
         { name: "showSearchIcon", type: "boolean", default: "true", description: "Show the leading search icon." },
         {
           name: "showClear",
@@ -94,7 +94,7 @@ export default {
         { name: "showTrigger", type: "boolean", default: "true", description: "Render the chevron that opens the list." },
       ],
       dataAttributes: [
-        { name: "data-size", description: "On the input group: the `size` value." },
+        { name: "data-size", description: "On the input group, the `size` value." },
         { name: "data-disabled", description: "On the input group while disabled." },
       ],
     },
@@ -103,7 +103,7 @@ export default {
       description: "Raised button showing the chosen value, like `SelectTrigger`. Put `ComboboxValue` inside.",
       extends: "Combobox.Trigger",
       extendsHref: `${BASE}#trigger`,
-      props: [{ name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height: 28px or 32px." }],
+      props: [{ name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Height, 28px or 32px." }],
       dataAttributes: [{ name: "data-popup-open", description: "Present while the list is open." }],
     },
     {
@@ -169,7 +169,7 @@ export default {
     },
     {
       name: "useComboboxFilter",
-      description: "Re-export of `Combobox.useFilter`: locale-aware `contains`, `startsWith` and `endsWith` matchers to pass to `filter`.",
+      description: "Re-export of `Combobox.useFilter`, returning locale-aware `contains`, `startsWith` and `endsWith` matchers for `filter`.",
       extends: "Combobox.useFilter",
       extendsHref: BASE,
       props: [],

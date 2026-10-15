@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "chat-app",
   "title": "Chat App",
-  "description": "A complete agent workspace: AI sidebar, a conversation where each turn reasons, runs a live plan and streams its reply, and a prompt bar with stop, driven by a scripted fake agent.",
+  "description": "Agent workspace with a sidebar, conversation and prompt bar.",
   "dependencies": [
     "motion",
     "@base-ui/react"

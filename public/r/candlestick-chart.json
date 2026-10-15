@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "candlestick-chart",
   "title": "Candlestick Chart",
-  "description": "OHLC candles with a volume pane, animated last-price line and a crosshair with price/time readouts, keyboard inspectable and built for live-updating data.",
+  "description": "Charts price movement over time with volume.",
   "dependencies": [
     "motion"
   ],

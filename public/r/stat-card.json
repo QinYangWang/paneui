@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "stat-card",
   "title": "Stat Card",
-  "description": "KPI card: label, big tabular number, a delta badge whose sign sets its tone (invertible for churn and latency) and a sparkline tinted to match.",
+  "description": "Card for a key metric and how it changed.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json",

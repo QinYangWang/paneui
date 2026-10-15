@@ -7,12 +7,10 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "Theme",
-      "description": "Native desktop tokens: system UI font (-apple-system/Segoe UI) on a 13px type scale (text-ui-2xs/xs/sm/ui/lg = 10/11/12/13/14px), Tailwind's neutral OKLCH ramp (white page and cards, neutral-950 text, neutral-500 secondary text; dark: #121212 page, neutral-800 cards, neutral-50 text, neutral-400 secondary text), translucent fills equal to neutral-100 for secondary/muted/accent, neutral-200 / neutral-800 hairline borders, an --accent-50…950 ramp (blue by default) driving primary (the 600 stop, white text) and ring (500) (accent presets: theme-neutral, theme-blue, theme-green, theme-orange, theme-rose, theme-violet), an eight-hue chart palette (chart-1..8: teal, lime, pink, sky, purple, blue, emerald, yellow), a 0.625rem radius with multiplier steps (sm .6x, md .8x, xl 1.4x, 2xl 1.8x, shell 1.3x), near-flat elevation shadows (raised, pressed, primary, well, surface, chip), shell/shell-border app-chrome tokens and a shell-inset utility for the rail layout, code surface and scrollbar tokens with thin rounded scrollbars and scrollbar-thin/-hover/-none utilities, reading tokens (max-w-reading 68ch, max-w-page, image outline) and a prose-qy long-form typography utility. Installs @qinyang/utils (cn that knows the text-ui sizes).",
+      "description": "Design tokens, type scale and utilities every component in the library reads.",
       "cssVars": {
         "theme": {
           "color-code": "var(--code)",
-          "color-primary": "var(--primary)",
-          "color-ring": "var(--ring)",
           "font-sans": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif",
           "font-mono": "var(--font-jetbrains-mono, \"JetBrains Mono\"), \"JetBrains Mono\", \"SF Mono\", \"SFMono-Regular\", Menlo, Consolas, \"Liberation Mono\", monospace",
           "color-success": "var(--success)",
@@ -139,18 +137,7 @@
           "skeuo-well": "inset 0 0 0 1px oklch(100% 0 0 / 12%)",
           "skeuo-surface": "0 0 0 1px oklch(100% 0 0 / 10%), 0 1px 1px oklch(0% 0 0 / 14%), 0 4px 4px oklch(0% 0 0 / 10%), 0 16px 40px -12px oklch(0% 0 0 / 50%)",
           "skeuo-chip": "0 0 0 1px oklch(100% 0 0 / 10%)",
-          "image-outline": "oklch(1 0 0 / 0.1)",
-          "primary": "var(--accent-600)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)",
-          "chart-1": "oklch(77.7% 0.152 181.912)",
-          "chart-2": "oklch(84.1% 0.238 128.85)",
-          "chart-3": "oklch(71.8% 0.202 349.761)",
-          "chart-4": "oklch(74.6% 0.16 232.661)",
-          "chart-5": "oklch(71.4% 0.203 305.504)",
-          "chart-6": "oklch(66% 0.184 254.753)",
-          "chart-7": "oklch(76.5% 0.177 163.223)",
-          "chart-8": "oklch(85.2% 0.199 91.936)"
+          "image-outline": "oklch(1 0 0 / 0.1)"
         }
       },
       "css": {
@@ -207,183 +194,6 @@
             "display": "none"
           }
         },
-        "@utility prose-qy": {
-          "--prose-gap": "1.25em",
-          "color": "var(--foreground)",
-          "font-size": "1rem",
-          "line-height": "1.75",
-          "max-width": "var(--container-reading)",
-          "overflow-wrap": "break-word",
-          "& :where(p, ul, ol, blockquote, pre, table, figure, img, hr):not(:where(.not-prose, .not-prose *))": {
-            "margin-block": "var(--prose-gap)"
-          },
-          "& > :where(.not-prose)": {
-            "margin-block": "1.75em"
-          },
-          "& > :first-child": {
-            "margin-top": "0"
-          },
-          "& > :last-child": {
-            "margin-bottom": "0"
-          },
-          "& :where(p, li):not(:where(.not-prose, .not-prose *))": {
-            "color": "color-mix(in oklch, var(--foreground) 86%, var(--muted-foreground))",
-            "text-wrap": "pretty"
-          },
-          "& :where(h1, h2, h3, h4):not(:where(.not-prose, .not-prose *))": {
-            "color": "var(--foreground)",
-            "font-weight": "600",
-            "letter-spacing": "-0.02em",
-            "scroll-margin-top": "5rem",
-            "text-wrap": "balance"
-          },
-          "& :where(h1):not(:where(.not-prose, .not-prose *))": {
-            "font-size": "2.25rem",
-            "line-height": "1.2",
-            "margin-block": "0 0.8em"
-          },
-          "& :where(h2):not(:where(.not-prose, .not-prose *))": {
-            "font-size": "1.5rem",
-            "line-height": "1.3",
-            "margin-block": "2.2em 0.7em"
-          },
-          "& :where(h3):not(:where(.not-prose, .not-prose *))": {
-            "font-size": "1.25rem",
-            "line-height": "1.3",
-            "letter-spacing": "-0.01em",
-            "margin-block": "1.8em 0.5em"
-          },
-          "& :where(h4):not(:where(.not-prose, .not-prose *))": {
-            "font-size": "1rem",
-            "line-height": "1.5",
-            "letter-spacing": "0",
-            "margin-block": "1.6em 0.4em"
-          },
-          "& :where(h2 + *, h3 + *, h4 + *):not(:where(.not-prose, .not-prose *))": {
-            "margin-top": "0"
-          },
-          "& :where(strong):not(:where(.not-prose, .not-prose *))": {
-            "color": "var(--foreground)",
-            "font-weight": "600"
-          },
-          "& :where(a):not(:where(.not-prose, .not-prose *))": {
-            "color": "var(--primary)",
-            "font-weight": "500",
-            "text-decoration": "underline",
-            "text-decoration-color": "color-mix(in oklch, var(--primary) 40%, transparent)",
-            "text-decoration-thickness": "1px",
-            "text-underline-offset": "0.22em",
-            "transition-property": "text-decoration-color",
-            "transition-duration": "150ms",
-            "transition-timing-function": "ease-out"
-          },
-          "& :where(a):not(:where(.not-prose, .not-prose *)):hover": {
-            "text-decoration-color": "var(--primary)"
-          },
-          "& :where(ul, ol):not(:where(.not-prose, .not-prose *))": {
-            "padding-inline-start": "1.5em"
-          },
-          "& :where(ul):not(:where(.not-prose, .not-prose *))": {
-            "list-style": "disc"
-          },
-          "& :where(ol):not(:where(.not-prose, .not-prose *))": {
-            "list-style": "decimal"
-          },
-          "& :where(li):not(:where(.not-prose, .not-prose *))": {
-            "margin-block": "0.4em",
-            "padding-inline-start": "0.25em"
-          },
-          "& :where(li)::marker": {
-            "color": "var(--muted-foreground)"
-          },
-          "& :where(blockquote):not(:where(.not-prose, .not-prose *))": {
-            "border-radius": "calc(var(--radius) + 4px)",
-            "background": "color-mix(in oklch, var(--muted) 60%, transparent)",
-            "box-shadow": "inset 3px 0 0 0 color-mix(in oklch, var(--primary) 70%, transparent), var(--skeuo-well)",
-            "color": "var(--foreground)",
-            "font-style": "italic",
-            "padding": "1em 1.25em 1em 1.5em"
-          },
-          "& :where(blockquote p):not(:where(.not-prose, .not-prose *))": {
-            "color": "inherit",
-            "margin-block": "0.4em"
-          },
-          "& :where(code):not(:where(pre code, .not-prose, .not-prose *))": {
-            "border-radius": "0.4em",
-            "background": "var(--code)",
-            "box-shadow": "var(--skeuo-chip)",
-            "color": "var(--foreground)",
-            "font-family": "var(--font-mono)",
-            "font-size": "0.86em",
-            "padding": "0.15em 0.4em"
-          },
-          "& :where(a code):not(:where(.not-prose, .not-prose *))": {
-            "color": "inherit"
-          },
-          "& :where(pre):not(:where(.not-prose, .not-prose *))": {
-            "border-radius": "calc(var(--radius) + 8px)",
-            "background": "var(--code)",
-            "box-shadow": "var(--skeuo-well)",
-            "font-family": "var(--font-mono)",
-            "font-size": "0.875em",
-            "line-height": "1.6",
-            "overflow-x": "auto",
-            "padding": "1em 1.25em"
-          },
-          "& :where(hr):not(:where(.not-prose, .not-prose *))": {
-            "border": "0",
-            "height": "1px",
-            "background": "var(--border)",
-            "margin-block": "2.5em"
-          },
-          "& :where(img, video, svg.prose-media):not(:where(.not-prose, .not-prose *))": {
-            "border-radius": "calc(var(--radius) + 8px)",
-            "outline": "1px solid var(--image-outline)",
-            "outline-offset": "-1px",
-            "height": "auto",
-            "max-width": "100%"
-          },
-          "& :where(figcaption):not(:where(.not-prose, .not-prose *))": {
-            "color": "var(--muted-foreground)",
-            "font-size": "0.875em",
-            "line-height": "1.5",
-            "margin-top": "0.75em",
-            "text-align": "center",
-            "text-wrap": "balance"
-          },
-          "& :where(table):not(:where(.not-prose, .not-prose *))": {
-            "border-collapse": "separate",
-            "border-radius": "calc(var(--radius) + 4px)",
-            "border-spacing": "0",
-            "box-shadow": "0 0 0 1px var(--border)",
-            "font-size": "0.9em",
-            "font-variant-numeric": "tabular-nums",
-            "line-height": "1.5",
-            "overflow": "hidden",
-            "width": "100%"
-          },
-          "& :where(th):not(:where(.not-prose, .not-prose *))": {
-            "background": "var(--muted)",
-            "color": "var(--foreground)",
-            "font-weight": "600",
-            "text-align": "start"
-          },
-          "& :where(th, td):not(:where(.not-prose, .not-prose *))": {
-            "border-bottom": "1px solid var(--border)",
-            "padding": "0.6em 0.9em"
-          },
-          "& :where(tr:last-child td):not(:where(.not-prose, .not-prose *))": {
-            "border-bottom": "0"
-          },
-          "& :where(kbd):not(:where(.not-prose, .not-prose *))": {
-            "border-radius": "0.375em",
-            "background": "var(--muted)",
-            "box-shadow": "var(--skeuo-chip)",
-            "font-family": "var(--font-mono)",
-            "font-size": "0.8em",
-            "padding": "0.1em 0.4em"
-          }
-        },
         "@utility shell-inset": {
           "background-color": "var(--background)",
           "border": "0.5px solid var(--shell-border)",
@@ -403,7 +213,7 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "cn helper",
-      "description": "cn() = clsx + tailwind-merge, extended so the theme's text-ui-2xs … text-ui-lg sizes merge as font sizes (not colours).",
+      "description": "Class-merging helper that understands the theme's font sizes.",
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -420,10 +230,26 @@
       }
     },
     {
+      "name": "typeset",
+      "type": "registry:file",
+      "title": "Typeset",
+      "description": "Styles long-form text in docs, articles and chat messages.",
+      "files": [
+        {
+          "path": "app/typeset.css",
+          "type": "registry:file",
+          "target": "app/typeset.css"
+        }
+      ],
+      "meta": {
+        "category": "Foundations"
+      }
+    },
+    {
       "name": "theme-neutral",
       "type": "registry:theme",
       "title": "Theme: Neutral accent",
-      "description": "Neutral accent preset: sets the --accent-50…950 ramp to Tailwind neutral; a black primary with white text in light mode and a near-white primary with dark text in dark mode, ring neutral-400 / neutral-500. Install after @qinyang/theme.",
+      "description": "Accent preset that makes the primary colour black or white.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -459,7 +285,7 @@
       "name": "theme-blue",
       "type": "registry:theme",
       "title": "Theme: Blue accent",
-      "description": "Blue accent preset (the default): sets the --accent-50…950 ramp to Tailwind blue (#3392ff at 400); primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+      "description": "Accent preset that sets the primary colour to blue, the default.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -495,7 +321,7 @@
       "name": "theme-green",
       "type": "registry:theme",
       "title": "Theme: Green accent",
-      "description": "Green accent preset: sets the --accent-50…950 ramp to Tailwind green; primary = the 700 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+      "description": "Accent preset that sets the primary colour to green.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -531,7 +357,7 @@
       "name": "theme-orange",
       "type": "registry:theme",
       "title": "Theme: Orange accent",
-      "description": "Orange accent preset: sets the --accent-50…950 ramp to Tailwind orange; primary = the 700 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+      "description": "Accent preset that sets the primary colour to orange.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -567,7 +393,7 @@
       "name": "theme-rose",
       "type": "registry:theme",
       "title": "Theme: Rose accent",
-      "description": "Rose accent preset: sets the --accent-50…950 ramp to Tailwind rose; primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+      "description": "Accent preset that sets the primary colour to rose.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -603,7 +429,7 @@
       "name": "theme-violet",
       "type": "registry:theme",
       "title": "Theme: Violet accent",
-      "description": "Violet accent preset: sets the --accent-50…950 ramp to Tailwind violet; primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+      "description": "Accent preset that sets the primary colour to violet.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -639,7 +465,7 @@
       "name": "icons",
       "type": "registry:component",
       "title": "Icons",
-      "description": "Rounded single-color outline icon set on a 24x24 grid: 1.75px round strokes, soft corners, glyphs that fill the box. Installs to components/icons.tsx; icons-puffy and icons-outline are the same names in other styles.",
+      "description": "Rounded outline icon set used across the library.",
       "files": [
         {
           "path": "components/icons.tsx",
@@ -655,7 +481,7 @@
       "name": "icons-puffy",
       "type": "registry:component",
       "title": "Icons (puffy)",
-      "description": "The icon set in puffy style: the same names and props on an 18x18 grid, filled shapes traced with a 1.5px round-join stroke. Installs to components/icons.tsx, replacing the rounded set; add icons with --overwrite to switch back.",
+      "description": "The icon set redrawn as soft filled shapes, under the same names.",
       "files": [
         {
           "path": "registry/base-nova/icons/puffy/icons.tsx",
@@ -672,7 +498,7 @@
       "name": "icons-outline",
       "type": "registry:component",
       "title": "Icons (outline)",
-      "description": "The icon set in outline style: the same names, props and 18x18 grid, with every filled shape drawn as a 1.6px round outline. Installs to components/icons.tsx, replacing the rounded set; add icons with --overwrite to switch back.",
+      "description": "The icon set as thin outlines on the compact grid, same names.",
       "files": [
         {
           "path": "registry/base-nova/icons/outline/icons.tsx",
@@ -689,7 +515,7 @@
       "name": "icon-chip",
       "type": "registry:ui",
       "title": "Icon Chip",
-      "description": "The house frame for title and header icons: a raised squircle in four sizes with neutral, tinted and solid tones, so every card header reads as one icon family.",
+      "description": "Frames an icon so card and section headers match.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -711,7 +537,7 @@
       "name": "saas",
       "type": "registry:block",
       "title": "SaaS",
-      "description": "Complete SaaS starter with real routes: marketing home (hero with a live product shot, logos, features, monthly/yearly pricing, testimonials, FAQ, CTA), pricing comparison and changelog; login, sign-up, forgot-password and email-code pages with validation and mock auth; an app shell with collapsible sidebar, workspace switcher, user menu, breadcrumbs and ⌘K palette; overview (KPI stat cards, revenue and usage charts, activity), analytics (date range, plan filter, charts, top pages), customers data table with detail drawer; settings for profile, account, billing, team, notifications and appearance; and a 404. All copy and mock data live in components/saas/lib/data.ts.",
+      "description": "Starter app with marketing pages, sign-in flows and a dashboard.",
       "dependencies": [
         "motion"
       ],
@@ -955,7 +781,7 @@
       "name": "agent-workspace",
       "type": "registry:block",
       "title": "Agent Workspace",
-      "description": "Multi-provider coding-agent workspace and Agent Client Protocol client: icon rail, threads sidebar, thread tabs, split chats with work logs, approvals and edited files, a composer with mode / model / effort, and a terminal / explorer / browser dock. Runs offline on a demo agent; a bundled Node bridge connects Claude Code, Codex, Gemini or any ACP agent.",
+      "description": "A full app for chatting with and supervising coding agents.",
       "dependencies": [
         "@agentclientprotocol/sdk",
         "ws",
@@ -963,6 +789,7 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
+        "@qinyang/typeset",
         "@qinyang/icons",
         "@qinyang/agent-composer",
         "@qinyang/agent-code-block",
@@ -1079,12 +906,13 @@
       "name": "docs",
       "type": "registry:block",
       "title": "Docs Site",
-      "description": "Full-page documentation layout: header with ⌘K search, section nav, prose-qy article with code blocks, callouts, tabs and tables, scroll-spy \"On this page\" TOC and prev/next pagination.",
+      "description": "Documentation site layout with search, navigation and a page outline.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
         "@qinyang/theme",
+        "@qinyang/typeset",
         "@qinyang/agent-code-block",
         "@qinyang/alert",
         "@qinyang/animated-sidebar",
@@ -1133,12 +961,13 @@
       "name": "blog",
       "type": "registry:block",
       "title": "Personal Blog",
-      "description": "Full-page personal blog: intro with avatar and status badge, featured post, post list with tags, dates and reading time, and a post page with prose-qy article, CSS cover art, TOC, author card, related posts and newsletter signup.",
+      "description": "Personal blog with a post list and an article page.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
         "@qinyang/theme",
+        "@qinyang/typeset",
         "@qinyang/agent-code-block",
         "@qinyang/badge",
         "@qinyang/button",
@@ -1213,7 +1042,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Native desktop button (32px, 13px label) with primary, secondary, outline, ghost, destructive and link variants; flat fills, hover is a fill change.",
+      "description": "Triggers an action or submits a form.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -1235,7 +1064,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "Chips and status badges, with an optional avatar mark.",
+      "description": "Labels an item with a short status or category.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -1257,7 +1086,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "Surface card with header, content and footer parts, plus an inset variant: a tinted frame holding a raised CardPanel for featured content.",
+      "description": "Groups related content and actions on one surface.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -1275,7 +1104,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Text input with a hairline inset ring.",
+      "description": "Single-line text field.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1296,7 +1125,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "Auto-growing textarea with a hairline inset ring.",
+      "description": "Takes multi-line text input that grows with its content.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -1314,7 +1143,7 @@
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
-      "description": "Form label.",
+      "description": "Names a form control.",
       "files": [
         {
           "path": "registry/base-nova/ui/label.tsx",
@@ -1329,7 +1158,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "16px inset-well checkbox that fills primary and draws its check on, with an indeterminate dash.",
+      "description": "Toggles a single option on or off.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1350,7 +1179,7 @@
       "name": "radio",
       "type": "registry:ui",
       "title": "Radio",
-      "description": "RadioGroup and Radio with a primary dot that glides to the selected option.",
+      "description": "Picks exactly one option from a short list.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1372,7 +1201,7 @@
       "name": "stepper",
       "type": "registry:ui",
       "title": "Stepper",
-      "description": "Numeric − value + stepper on a number field primitive with rolling digits, raised buttons and disabled ends at min and max.",
+      "description": "Adjusts a number up or down in fixed steps.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1395,7 +1224,7 @@
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
-      "description": "Single or range slider with an inset well track, primary fill, raised thumb, optional tick dots and a floating value bubble.",
+      "description": "Picks a value or range by dragging.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1416,7 +1245,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "Floating panel that scales out of its trigger, with optional header, title, description, footer and close parts.",
+      "description": "Floating panel for extra content or actions near a trigger.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1438,7 +1267,7 @@
       "name": "context-menu",
       "type": "registry:ui",
       "title": "Context Menu",
-      "description": "Right-click or long-press menu that grows from the pointer, sharing the Menu's items, checkboxes, radios and submenus.",
+      "description": "Opens actions for an item on right-click or long-press.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1461,7 +1290,7 @@
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
-      "description": "Side panel that springs in from the left or right over a dimmed backdrop, with header, body and footer parts.",
+      "description": "Side panel for navigation or secondary tasks over the page.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1484,7 +1313,7 @@
       "name": "bottom-sheet",
       "type": "registry:ui",
       "title": "Bottom Sheet",
-      "description": "Draggable bottom sheet with snap points, fling-aware drag-to-dismiss and a grip handle that also cycles snaps from the keyboard.",
+      "description": "A panel that slides up from the bottom and snaps to heights.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1506,7 +1335,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "Composable inline alert (Alert, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose) with info/success/warning/destructive variants and animated appear/dismiss.",
+      "description": "Shows an inline message that can animate in and be dismissed.",
       "dependencies": [
         "motion"
       ],
@@ -1529,7 +1358,7 @@
       "name": "collapsible",
       "type": "registry:ui",
       "title": "Collapsible",
-      "description": "Collapsible with a smooth height reveal, soft content fade and a rotating chevron trigger.",
+      "description": "Shows and hides a section of content.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1551,7 +1380,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Accordion in an inset well with raised open rows, optional icon chips, springy height reveal and single or multiple open items.",
+      "description": "Stacks sections that expand one at a time or several together.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1573,7 +1402,7 @@
       "name": "breadcrumb",
       "type": "registry:ui",
       "title": "Breadcrumb",
-      "description": "Composable breadcrumb parts with separators, a raised current-page chip, soft crumb entrances and an ellipsis that opens a menu of hidden crumbs.",
+      "description": "Shows where the current page sits in the site hierarchy.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1596,7 +1425,7 @@
       "name": "text-reveal",
       "type": "registry:ui",
       "title": "Text Reveal",
-      "description": "Word- or character-by-character reveal with a springy slide-up and blur, on mount or when scrolled into view.",
+      "description": "Reveals a headline word by word on load or scroll.",
       "dependencies": [
         "motion"
       ],
@@ -1617,7 +1446,7 @@
       "name": "text-shimmer",
       "type": "registry:ui",
       "title": "Text Shimmer",
-      "description": "CSS-only highlight that sweeps across text in theme token colours.",
+      "description": "Marks text as in progress with a moving highlight.",
       "dependencies": [],
       "registryDependencies": [
         "@qinyang/theme"
@@ -1636,7 +1465,7 @@
       "name": "text-scramble",
       "type": "registry:ui",
       "title": "Text Scramble",
-      "description": "Controlled text that scrambles through random glyphs before resolving to its new value, at a stable width.",
+      "description": "Scrambles text into its new value when it changes.",
       "dependencies": [
         "motion"
       ],
@@ -1657,7 +1486,7 @@
       "name": "number-ticker",
       "type": "registry:ui",
       "title": "Number Ticker",
-      "description": "Slot-machine digits that roll to a new value with a staggered spring, formatted with Intl.NumberFormat.",
+      "description": "Number whose digits roll to each new value.",
       "dependencies": [
         "motion"
       ],
@@ -1678,7 +1507,7 @@
       "name": "animated-number",
       "type": "registry:ui",
       "title": "Animated Number",
-      "description": "Number that springs up to its value when it scrolls into view, formatted with Intl.NumberFormat.",
+      "description": "Counts up to a number when it scrolls into view.",
       "dependencies": [
         "motion"
       ],
@@ -1699,7 +1528,7 @@
       "name": "marquee",
       "type": "registry:ui",
       "title": "Marquee",
-      "description": "Infinite horizontal or vertical scroller with edge fade and pause on hover, driven by CSS animation.",
+      "description": "Scrolls content past in an endless loop.",
       "dependencies": [],
       "registryDependencies": [
         "@qinyang/theme"
@@ -1718,7 +1547,7 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "Searchable select with grouped options, empty state and keyboard navigation, in an inset input with a select-style popup.",
+      "description": "Picks one option from a long list by typing to filter.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1740,7 +1569,7 @@
       "name": "loader",
       "type": "registry:ui",
       "title": "Loader",
-      "description": "Loading indicator in eight variants (spinner, ring, dots, bars, pulse, ripple, orbit, typing) and three sizes that inherits currentColor and fades calmly under reduced motion.",
+      "description": "Shows that something is loading.",
       "dependencies": [
         "motion"
       ],
@@ -1761,7 +1590,7 @@
       "name": "multi-select",
       "type": "registry:ui",
       "title": "Multi Select",
-      "description": "Searchable multiple-choice combobox with removable chips that spring in and out of the trigger and checkbox-style ticks.",
+      "description": "Searchable picker for choosing several options at once.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1785,7 +1614,7 @@
       "name": "button-stateful",
       "type": "registry:ui",
       "title": "Button Stateful",
-      "description": "Our Button that moves idle → loading → success / error, blur-swapping its icon and label while its width springs to fit each state.",
+      "description": "A button that shows loading, success and error after a press.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1809,7 +1638,7 @@
       "name": "magnetic",
       "type": "registry:ui",
       "title": "Magnetic",
-      "description": "Wrapper that pulls any element toward a nearby cursor and springs it home on leave, for fine pointers only and off under reduced motion.",
+      "description": "Makes any element lean toward a nearby cursor.",
       "dependencies": [
         "motion"
       ],
@@ -1830,7 +1659,7 @@
       "name": "hold-action-button",
       "type": "registry:ui",
       "title": "Hold Action Button",
-      "description": "Press-and-hold confirm button whose wavy liquid fill rises vertically or horizontally, drains if released early, and works with a held Space or Enter.",
+      "description": "Confirms a risky action by making the user press and hold.",
       "dependencies": [
         "motion"
       ],
@@ -1851,7 +1680,7 @@
       "name": "slide-action-button",
       "type": "registry:ui",
       "title": "Slide Action Button",
-      "description": "Inset track with a draggable thumb that confirms when slid to the end (with an optional pending state for async work) and springs back otherwise; keyboard-operable as a slider.",
+      "description": "Confirms an action when the user slides it to the end.",
       "dependencies": [
         "motion"
       ],
@@ -1874,7 +1703,7 @@
       "name": "expanding-arrow-button",
       "type": "registry:ui",
       "title": "Expanding Arrow Button",
-      "description": "Button with an accent tile that sweeps across the button into a fading trail of dotted chevrons on hover or keyboard focus.",
+      "description": "Call-to-action button with an arrow sweep on hover.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1895,7 +1724,7 @@
       "name": "expandable-control",
       "type": "registry:ui",
       "title": "Expandable Control",
-      "description": "Click-to-expand controls: an icon button that grows to reveal its label and a chip that reveals a trailing action, both morphing width on a spring.",
+      "description": "Button or chip that expands on click to reveal a label or action.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1917,7 +1746,7 @@
       "name": "text-cascade",
       "type": "registry:ui",
       "title": "Text Cascade",
-      "description": "Standalone text that rolls letter by letter, left to right, through a soft blur whenever its value changes, gliding to the new width.",
+      "description": "Rolls text letter by letter whenever its value changes.",
       "dependencies": [
         "motion"
       ],
@@ -1938,7 +1767,7 @@
       "name": "action-swap-blur",
       "type": "registry:ui",
       "title": "Action Swap Blur",
-      "description": "Copy-button style control whose label and icon dissolve into the next state with blur, fade and scale, with optional auto-reset.",
+      "description": "A button that blurs its label and icon into the next state.",
       "dependencies": [
         "motion"
       ],
@@ -1961,7 +1790,7 @@
       "name": "action-swap-roll",
       "type": "registry:ui",
       "title": "Action Swap Roll",
-      "description": "Button whose next label and icon roll up from below through a soft blur as the old ones lift away.",
+      "description": "A button that rolls its label and icon into the next state.",
       "dependencies": [
         "motion"
       ],
@@ -1983,7 +1812,7 @@
       "name": "digit-swap",
       "type": "registry:ui",
       "title": "Digit Swap",
-      "description": "Fixed-slot digits and mask glyphs that roll only where they change, with auto/up/down direction and stagger from either end.",
+      "description": "Animates a changing number by rolling only the characters that change.",
       "dependencies": [
         "motion"
       ],
@@ -2004,7 +1833,7 @@
       "name": "select-morph",
       "type": "registry:ui",
       "title": "Select Morph",
-      "description": "Select whose trigger unfolds into the option list as one surface, folding back on close.",
+      "description": "Select whose trigger unfolds into its option list.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -2026,7 +1855,7 @@
       "name": "popover-morph",
       "type": "registry:ui",
       "title": "Popover Morph",
-      "description": "Popover whose panel grows out of the trigger's own shape and colour and folds back into it.",
+      "description": "Popover that grows out of its trigger and folds back.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -2048,7 +1877,7 @@
       "name": "morphing-modal",
       "type": "registry:ui",
       "title": "Morphing Modal",
-      "description": "Single dialog surface with inner views that springs to each view's height as you navigate, with direction-aware transitions and back navigation.",
+      "description": "Dialog that moves between several views inside one panel.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2071,7 +1900,7 @@
       "name": "shared-layout-bg",
       "type": "registry:ui",
       "title": "Shared Layout Background",
-      "description": "Raised hover pill that glides between items via shared layout, follows keyboard focus, and blurs in and out as the pointer enters and leaves the group.",
+      "description": "Hover highlight that follows the pointer across a group.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2093,7 +1922,7 @@
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
-      "description": "Responsive frame locked to a ratio that springs smoothly between ratios, with a cover-cropped image part that scales without stretching.",
+      "description": "Keeps content at a set ratio and animates ratio changes.",
       "dependencies": [
         "motion"
       ],
@@ -2114,7 +1943,7 @@
       "name": "wheel-picker",
       "type": "registry:ui",
       "title": "Wheel Picker",
-      "description": "Scroll-wheel picker: a 3D drum driven by a real scroll container, so it gets native momentum and scroll-snap detents, plus mouse drag and full keyboard control; compose several in a WheelPickerGroup for times and dates.",
+      "description": "Picks a value by scrolling a wheel, as for times and dates.",
       "dependencies": [
         "motion"
       ],
@@ -2135,7 +1964,7 @@
       "name": "color-picker",
       "type": "registry:ui",
       "title": "Color Picker",
-      "description": "Composable colour picker whose raised trigger chip morphs open into a saturation/brightness area with hue and opacity sliders, a hex field and presets.",
+      "description": "Picks a colour by dragging, entering hex or choosing a preset.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -2156,7 +1985,7 @@
       "name": "date-range-picker",
       "type": "registry:ui",
       "title": "Date Range Picker",
-      "description": "Composable date range picker (Root, Trigger, Content, Calendar, Grid, Presets, Summary, Clear) with animated month navigation, hover range preview and keyboard grid navigation, built on Intl and Date with no date library.",
+      "description": "Picks a start and end date from a calendar.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2180,7 +2009,7 @@
       "name": "sortable-stack",
       "type": "registry:ui",
       "title": "Sortable Stack",
-      "description": "Drag-to-reorder stack of raised rows on motion Reorder, dragged from a grip handle, with keyboard reordering, screen-reader announcements and a one-step undo.",
+      "description": "List the user can reorder by dragging or keyboard.",
       "dependencies": [
         "motion"
       ],
@@ -2202,7 +2031,7 @@
       "name": "range-slider-inline",
       "type": "registry:ui",
       "title": "Range Slider Inline",
-      "description": "Slider with a raised fill growing inside an inset well, the label and value printed on the track, ten stop markers and a slim thumb that parts around the text.",
+      "description": "Slider that shows its label and value on the track.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -2223,7 +2052,7 @@
       "name": "pull-to-refresh",
       "type": "registry:ui",
       "title": "Pull to Refresh",
-      "description": "Scroll container with rubber-band pull, a threshold arrow that winds up and turns primary, async onRefresh and our loader while it runs.",
+      "description": "Refreshes a scrolling list when the user pulls it down.",
       "dependencies": [
         "motion"
       ],
@@ -2246,7 +2075,7 @@
       "name": "smooth-scroll",
       "type": "registry:ui",
       "title": "Smooth Scroll",
-      "description": "Lenis-powered SmoothScroll provider that eases the window or its own scroll container, with a useSmoothScroll hook exposing offset, progress, velocity and scrollTo.",
+      "description": "Eases scrolling for a page or a scroll container.",
       "dependencies": [
         "lenis",
         "motion"
@@ -2268,7 +2097,7 @@
       "name": "scroll-progress",
       "type": "registry:ui",
       "title": "Scroll Progress",
-      "description": "Scroll-driven progress indicator as an edge bar (fixed, sticky or absolute) or a raised ring with an optional percentage, spring-smoothed and exposed as a progressbar.",
+      "description": "Shows how far the reader has scrolled.",
       "dependencies": [
         "motion",
         "lenis"
@@ -2291,7 +2120,7 @@
       "name": "scroll-to",
       "type": "registry:ui",
       "title": "Scroll To",
-      "description": "Button that eases to a px offset, selector or element through the nearest SmoothScroll, falling back to native smooth scrolling, and can move focus to the target.",
+      "description": "Button that scrolls to a section or position.",
       "dependencies": [
         "@base-ui/react",
         "lenis",
@@ -2316,7 +2145,7 @@
       "name": "scroll-reveal",
       "type": "registry:ui",
       "title": "Scroll Reveal",
-      "description": "Reveals content with a spring slide and blur as it enters view, from any side, once or every time it re-enters.",
+      "description": "Brings content into view as it scrolls onscreen.",
       "dependencies": [
         "motion",
         "lenis"
@@ -2339,7 +2168,7 @@
       "name": "shader-background",
       "type": "registry:ui",
       "title": "Shader Background",
-      "description": "Animated WebGL background in mesh-gradient, grain, warp, waves and dot-orbit variants, coloured from props or theme tokens and paused offscreen or under reduced motion.",
+      "description": "Animated backdrop for hero sections and empty states.",
       "dependencies": [
         "@paper-design/shaders-react",
         "motion"
@@ -2361,7 +2190,7 @@
       "name": "chart-utils",
       "type": "registry:ui",
       "title": "Chart Utils",
-      "description": "Shared chart helpers: token-based palette (chart-1..5 with semantic fallbacks), linear/band scales, ResizeObserver sizing, seeded PRNG, formatters, springy ChartNumber, in-chart tooltip shell and raised legend pills.",
+      "description": "Shared helpers for building and styling your own charts.",
       "dependencies": [
         "motion"
       ],
@@ -2382,7 +2211,7 @@
       "name": "animated-sidebar",
       "type": "registry:ui",
       "title": "Animated Sidebar",
-      "description": "Composable app sidebar (Provider, Sidebar, Header, Content, Group, Item, Sub, Footer, Trigger, Inset) with a gliding active pill that morphs through nested navigation and a spring fold into an icon rail with tooltips.",
+      "description": "App navigation sidebar that folds into an icon rail.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2406,7 +2235,7 @@
       "name": "file-tree",
       "type": "registry:ui",
       "title": "File Tree",
-      "description": "Declarative file and folder primitives rendered as an ARIA tree with springing rows and branch guides, a gliding raised selection, and full keyboard navigation with typeahead.",
+      "description": "Browses files and folders in a keyboard-navigable tree.",
       "dependencies": [
         "motion"
       ],
@@ -2428,7 +2257,7 @@
       "name": "preview-rail",
       "type": "registry:ui",
       "title": "Preview Rail",
-      "description": "Navigation rail of compact ticks that swell into a pyramid around the pointed or focused tick while a preview card glides alongside to reveal its label and description.",
+      "description": "Compact section navigation that previews each destination.",
       "dependencies": [
         "motion"
       ],
@@ -2450,7 +2279,7 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "Virtualized data table for 10k+ rows with click-to-sort headers, checkbox row selection with shift-click ranges, drag-to-resize and drag-to-reorder columns, and rows and columns that glide into new positions.",
+      "description": "Shows large data sets that people sort, select and resize.",
       "dependencies": [
         "@tanstack/react-virtual",
         "motion",
@@ -2476,7 +2305,7 @@
       "name": "table-editable",
       "type": "registry:ui",
       "title": "Table Editable",
-      "description": "Spreadsheet-style table that edits cells in place, walks the grid with arrow keys, and inserts or deletes rows and columns from border handles and + pills with a smooth re-layout.",
+      "description": "Lets people edit cells and add or remove rows and columns.",
       "dependencies": [
         "@tanstack/react-virtual",
         "motion",
@@ -2502,7 +2331,7 @@
       "name": "table-async",
       "type": "registry:ui",
       "title": "Table Async",
-      "description": "Table that loads pages on demand: skeleton rows on first load, infinite scroll as the virtualized list nears its end, a loading footer, retry on failure and an end-of-list note.",
+      "description": "Loads table rows page by page as the reader scrolls.",
       "dependencies": [
         "@tanstack/react-virtual",
         "motion",
@@ -2528,7 +2357,7 @@
       "name": "message-bubble",
       "type": "registry:ui",
       "title": "Message Bubble",
-      "description": "Single conversational bubble with tones, start/end alignment, joined corners when grouped, an expandable long-content section and render-prop support for link or button bubbles.",
+      "description": "Holds one chat message in a speech bubble.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -2551,7 +2380,7 @@
       "name": "message",
       "type": "registry:ui",
       "title": "Message",
-      "description": "Composable conversation primitives: Message rows aligned by sender, MessageAvatar, auto-grouped MessageContent bubbles, MessageHeader, MessageMeta, hover-revealed MessageActions, typing indicator and day markers.",
+      "description": "Lays out chat conversation rows by sender.",
       "dependencies": [
         "motion",
         "@base-ui/react"
@@ -2576,7 +2405,7 @@
       "name": "message-scroller",
       "type": "registry:ui",
       "title": "Message Scroller",
-      "description": "Conversation viewport that glides with streamed output at the live edge, releases as soon as the reader scrolls up, and offers a 'jump to latest' pill that turns into 'New messages' when content arrives below.",
+      "description": "Keeps a chat view pinned to new messages until the reader scrolls up.",
       "dependencies": [
         "motion"
       ],
@@ -2598,7 +2427,7 @@
       "name": "agent-code-block",
       "type": "registry:ui",
       "title": "Agent Code Block",
-      "description": "Syntax-highlighted code surface for agent output that streams without flicker, with line numbers, highlighted lines, a filename header, a live caret that follows the newest line and a copy button.",
+      "description": "Displays code from an agent, including code still streaming in.",
       "dependencies": [
         "shiki",
         "motion"
@@ -2621,7 +2450,7 @@
       "name": "file-diff",
       "type": "registry:ui",
       "title": "File Diff",
-      "description": "Collapsible diff view (unified or split) of one file change with live +/− counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
+      "description": "Shows one file's changes as a diff, even while an agent streams them.",
       "dependencies": [
         "@base-ui/react",
         "@pierre/diffs",
@@ -2648,7 +2477,7 @@
       "name": "tool-result",
       "type": "registry:ui",
       "title": "Tool Result",
-      "description": "Execution disclosure for an agent tool call, with live status, ticking duration, syntax-highlighted terminal output or request/response, copy and retry, collapsing once it finishes.",
+      "description": "Shows what an agent tool call ran and what it returned.",
       "dependencies": [
         "@base-ui/react",
         "motion",
@@ -2674,7 +2503,7 @@
       "name": "citations",
       "type": "registry:ui",
       "title": "Citations",
-      "description": "Inline numbered citation markers with a hover preview card, linked through a CitationGroup to a collapsible, progressively animated reference list.",
+      "description": "Links an answer's claims to the sources behind them.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2697,12 +2526,13 @@
       "name": "streaming-response",
       "type": "registry:ui",
       "title": "Streaming Response",
-      "description": "Stable assistant reply surface that renders streamed markdown-ish text with a caret, then reveals copy, regenerate and thumbs feedback actions plus an expandable sources list.",
+      "description": "Shows an assistant reply as it streams, then offers copy and feedback.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
         "@qinyang/theme",
+        "@qinyang/typeset",
         "@qinyang/icons",
         "@qinyang/citations",
         "@qinyang/tool-result"
@@ -2721,7 +2551,7 @@
       "name": "image-generation",
       "type": "registry:ui",
       "title": "Image Generation",
-      "description": "Fixed-frame generated-image surface that moves from queued through a grain and blur refinement reveal to a sharp result with prompt, copy, regenerate and download actions.",
+      "description": "Shows a generated image from queued to finished, with its actions.",
       "dependencies": [
         "motion"
       ],
@@ -2744,7 +2574,7 @@
       "name": "tool-approval",
       "type": "registry:ui",
       "title": "Tool Approval",
-      "description": "Human-in-the-loop permission card with tool name, risk level and arguments preview, offering Allow once, Always allow or Deny, with a remembered, revocable state.",
+      "description": "Asks the user to allow or deny an agent tool call.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2771,7 +2601,7 @@
       "name": "agent-activity",
       "type": "registry:ui",
       "title": "Agent Activity",
-      "description": "One adaptive activity stream for an agent run that groups reasoning, web searches, tool calls and steps on a timeline, with live shimmering status and collapsing groups.",
+      "description": "Shows what an agent did during a run as one activity stream.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2797,7 +2627,7 @@
       "name": "reasoning-text",
       "type": "registry:ui",
       "title": "Reasoning Text",
-      "description": "Shimmering reasoning copy with a terminal ASCII spinner that cycles phrases by blur swap, letter cascade or scramble.",
+      "description": "Status line that shows an agent is still working.",
       "dependencies": [
         "motion"
       ],
@@ -2821,7 +2651,7 @@
       "name": "agent-progress",
       "type": "registry:ui",
       "title": "Agent Progress",
-      "description": "Compact working readout: a pulsing 3×3 activity glyph, an action verb and a live tabular timer that can pause, resume or be controlled.",
+      "description": "Shows that an agent is working, with a running timer.",
       "dependencies": [
         "motion"
       ],
@@ -2842,7 +2672,7 @@
       "name": "todo-list",
       "type": "registry:ui",
       "title": "Todo List",
-      "description": "Collapsible agent task plan with morphing pending, in-progress, done and failed marks, a rolling completion count and compact per-step meta.",
+      "description": "Shows an agent's step-by-step plan and its progress.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2866,7 +2696,7 @@
       "name": "ai-sidebar",
       "type": "registry:ui",
       "title": "AI Sidebar",
-      "description": "Collapsible AI workspace sidebar with folders, projects, files and bookmarks, an icon rail, ⌘K search with highlighted matches, tree keyboard navigation and inline rename.",
+      "description": "Navigates folders, projects and files in an AI workspace.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2890,7 +2720,7 @@
       "name": "treemap",
       "type": "registry:ui",
       "title": "Treemap",
-      "description": "Squarified treemap in plain SVG with one level of grouping, tiles that spring to new positions when data changes, value/share tooltips and a group-highlighting legend.",
+      "description": "Compares parts of a total as sized tiles.",
       "dependencies": [
         "motion"
       ],
@@ -2912,7 +2742,7 @@
       "name": "candlestick-chart",
       "type": "registry:ui",
       "title": "Candlestick Chart",
-      "description": "OHLC candles with a volume pane, animated last-price line and a crosshair with price/time readouts, keyboard inspectable and built for live-updating data.",
+      "description": "Charts price movement over time with volume.",
       "dependencies": [
         "motion"
       ],
@@ -2934,7 +2764,7 @@
       "name": "donut-chart",
       "type": "registry:ui",
       "title": "Donut Chart",
-      "description": "Ring of rounded, gapped segments in an inset track with a centre readout and legend that highlight together on hover or focus.",
+      "description": "Shows how parts make up a whole as a ring.",
       "dependencies": [
         "motion"
       ],
@@ -2956,7 +2786,7 @@
       "name": "status-bar",
       "type": "registry:ui",
       "title": "Status Bar",
-      "description": "Uptime-style status history of rounded bars with a live status header, uptime percentage, period tooltips and a counted legend.",
+      "description": "Shows a service's status history and uptime.",
       "dependencies": [
         "motion"
       ],
@@ -2978,7 +2808,7 @@
       "name": "composition-chart",
       "type": "registry:ui",
       "title": "Composition Chart",
-      "description": "Normalised 100% composition over periods as stacked bars or morphing smooth areas, with period tooltips and a legend that toggles and highlights series.",
+      "description": "Charts how each part's share of a whole changes over time.",
       "dependencies": [
         "motion"
       ],
@@ -3000,7 +2830,7 @@
       "name": "funnel-chart",
       "type": "registry:ui",
       "title": "Funnel Chart",
-      "description": "Vertical or horizontal funnel of S-curved stages that morph with the data, with conversion labels and animated-number tooltips for value, share and drop-off.",
+      "description": "Shows how much drops off at each step of a process.",
       "dependencies": [
         "motion"
       ],
@@ -3022,7 +2852,7 @@
       "name": "heat-calendar",
       "type": "registry:ui",
       "title": "Heat Calendar",
-      "description": "Contribution-graph activity calendar on UTC dates with composable Grid, Tooltip, Summary and Legend parts, single-hue intensity levels, and controlled drag/keyboard range selection that totals the span.",
+      "description": "Shows daily activity over weeks or months as a calendar heat map.",
       "dependencies": [
         "motion"
       ],
@@ -3044,7 +2874,7 @@
       "name": "theme-toggle",
       "type": "registry:ui",
       "title": "Theme Toggle",
-      "description": "Light/dark button that repaints the page through the View Transition API with a circular reveal from the click point, falling back to an instant swap.",
+      "description": "Switches the page between light and dark themes.",
       "dependencies": [
         "motion"
       ],
@@ -3066,7 +2896,7 @@
       "name": "recommendation-card",
       "type": "registry:block",
       "title": "Recommendation Card",
-      "description": "Agent suggestion with inline chips, a confidence meter and accept/alternatives actions.",
+      "description": "Shows an agent's suggestion for the user to accept or swap.",
       "registryDependencies": [
         "@qinyang/card",
         "@qinyang/badge",
@@ -3086,7 +2916,7 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "Compact 32×20 toggle with a sliding thumb on a translucent track.",
+      "description": "Turns a single setting on or off.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3107,7 +2937,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Segmented tabs with a sliding indicator.",
+      "description": "Switches between related panels of content in one place.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3128,7 +2958,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Modal with a soft scale-in, dimmed backdrop and close button.",
+      "description": "Asks for a decision or input in a modal window.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3150,7 +2980,7 @@
       "name": "menu",
       "type": "registry:ui",
       "title": "Menu",
-      "description": "Dropdown menu with a soft highlight, checkbox and radio items, submenus and shortcuts.",
+      "description": "Dropdown of actions or options opened from a trigger.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3172,7 +3002,7 @@
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
-      "description": "Tooltip with scale-in motion and an optional keyboard hint.",
+      "description": "Labels a control with a short hint on hover or focus.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3194,7 +3024,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Select that aligns the chosen item with the trigger, with groups and check indicator.",
+      "description": "Picks one option from a list.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3216,7 +3046,7 @@
       "name": "toast",
       "type": "registry:ui",
       "title": "Toast",
-      "description": "Stacked, swipeable toasts with typed icons, actions and promise-style updates.",
+      "description": "Shows brief notifications that dismiss themselves.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3238,7 +3068,7 @@
       "name": "prompt-bar",
       "type": "registry:block",
       "title": "Prompt Bar",
-      "description": "Auto-growing prompt input with attach, voice, and an animated send/stop button.",
+      "description": "Input where the user writes and sends a prompt to an agent.",
       "dependencies": [
         "motion"
       ],
@@ -3260,7 +3090,7 @@
       "name": "chat",
       "type": "registry:block",
       "title": "Chat",
-      "description": "Chat thread with spring-in bubbles and a typing indicator.",
+      "description": "Message thread between a user and an agent.",
       "dependencies": [
         "motion"
       ],
@@ -3281,7 +3111,7 @@
       "name": "approval-card",
       "type": "registry:block",
       "title": "Approval Card",
-      "description": "Approve or decline an agent action, with animated result and undo.",
+      "description": "Asks the user to approve or decline an agent's action.",
       "dependencies": [
         "motion"
       ],
@@ -3306,7 +3136,7 @@
       "name": "task-row",
       "type": "registry:block",
       "title": "Task Row",
-      "description": "Background task row with animated status marks (queued, running, done, failed).",
+      "description": "Shows the progress of one background task.",
       "dependencies": [
         "motion"
       ],
@@ -3328,7 +3158,7 @@
       "name": "otp-input",
       "type": "registry:block",
       "title": "OTP Input",
-      "description": "One-time-code field with a gliding focus ring, digits that roll in, paste and autofill support, an error shake and a success check.",
+      "description": "Enters a one-time sign-in or verification code.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3350,7 +3180,7 @@
       "name": "command-palette",
       "type": "registry:block",
       "title": "Command Palette",
-      "description": "⌘K palette with fuzzy search, grouped results, a gliding active row, keyboard navigation and shortcut hints.",
+      "description": "Keyboard-first launcher for searching and running commands.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3373,7 +3203,7 @@
       "name": "chat-app",
       "type": "registry:block",
       "title": "Chat App",
-      "description": "A complete agent workspace: AI sidebar, a conversation where each turn reasons, runs a live plan and streams its reply, and a prompt bar with stop, driven by a scripted fake agent.",
+      "description": "Agent workspace with a sidebar, conversation and prompt bar.",
       "dependencies": [
         "motion",
         "@base-ui/react"
@@ -3404,7 +3234,7 @@
       "name": "notification-stack",
       "type": "registry:block",
       "title": "Notification Stack",
-      "description": "Compact notification cards stacked into a peeking summary that spring apart into a readable, dismissible list on hover, focus or tap.",
+      "description": "Collapses many notifications into one stack that opens on demand.",
       "dependencies": [
         "motion"
       ],
@@ -3427,7 +3257,7 @@
       "name": "feedback-widget",
       "type": "registry:block",
       "title": "Feedback Widget",
-      "description": "Corner trigger that morphs into a feedback popup with message and mood picker, then animates through sending, success and retry states.",
+      "description": "Collects a short message and mood from users without leaving the page.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3451,7 +3281,7 @@
       "name": "expandable-action-bar",
       "type": "registry:block",
       "title": "Expandable Action Bar",
-      "description": "Toolbar of compact icon actions that expand into labelled controls on hover or keyboard focus, with a gliding active highlight, badges and shortcut hints.",
+      "description": "Icon toolbar that reveals labels when the user reaches for it.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3473,7 +3303,7 @@
       "name": "overflow-actions",
       "type": "registry:block",
       "title": "Overflow Actions",
-      "description": "Connected pill rail of primary actions whose toggle springs the rail open to reveal extra controls, with staggered blur-in and an Escape to fold.",
+      "description": "Keeps primary actions visible and tucks extra ones behind a toggle.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3496,7 +3326,7 @@
       "name": "morphing-search",
       "type": "registry:block",
       "title": "Morphing Search",
-      "description": "A search field or compact icon that morphs into a results surface with grouped, highlighted matches, full keyboard navigation and an opt-in ⌘/Ctrl shortcut.",
+      "description": "Search field that opens into a list of results.",
       "dependencies": [
         "motion"
       ],
@@ -3518,7 +3348,7 @@
       "name": "expandable-tabs",
       "type": "registry:block",
       "title": "Expandable Tabs",
-      "description": "Icon tab bar whose active tab expands into a labelled pill while the panel above morphs its height and slides content in from the direction you moved.",
+      "description": "Icon tab bar for switching panels in tight spaces.",
       "dependencies": [
         "motion"
       ],
@@ -3540,7 +3370,7 @@
       "name": "morphing-tabs",
       "type": "registry:block",
       "title": "Morphing Tabs",
-      "description": "Drag- or keyboard-reorderable tabs whose selected tab joins a content surface that glides between tabs and morphs to each panel's height.",
+      "description": "Tabs the user can reorder, with content attached to the active tab.",
       "dependencies": [
         "motion"
       ],
@@ -3562,7 +3392,7 @@
       "name": "swipeable-list",
       "type": "registry:block",
       "title": "Swipeable List",
-      "description": "Mobile-style rows that swipe left or right to reveal tinted action rails, commit the edge action on a full swipe, and open from the keyboard with the arrow keys.",
+      "description": "List rows with actions revealed by swiping, for touch screens.",
       "dependencies": [
         "motion"
       ],
@@ -3584,7 +3414,7 @@
       "name": "project-folder",
       "type": "registry:block",
       "title": "Project Folder",
-      "description": "A folder whose file sheets fan out on hover or keyboard focus and fly into a focus-managed folder view dialog, then retrace their path when it closes.",
+      "description": "Folder that previews its files and opens into a file view.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3608,7 +3438,7 @@
       "name": "card-folder",
       "type": "registry:block",
       "title": "Card Folder",
-      "description": "A landscape payment card tucked into a stitched pocket that compresses into its seam as the card lifts forward, with a blur-swap details reveal, copy and overflow actions.",
+      "description": "Shows a saved payment card and reveals its details on request.",
       "dependencies": [
         "motion"
       ],
@@ -3630,7 +3460,7 @@
       "name": "attachment-upload",
       "type": "registry:block",
       "title": "Attachment Upload",
-      "description": "Mixed attachment workspace with a collapsing dropzone, staggered file, image and link rows, animated upload progress, retry, removal and shared-layout image previews.",
+      "description": "Attaches files, images and links to a message or form.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3653,7 +3483,7 @@
       "name": "file-upload",
       "type": "registry:block",
       "title": "File Upload",
-      "description": "Drag-and-drop upload queue with springy progress rows, queued/uploading/uploaded/failed states, retry and removal, driven by a pluggable upload function.",
+      "description": "Upload queue for dropping files and tracking each one.",
       "dependencies": [
         "motion"
       ],
@@ -3675,7 +3505,7 @@
       "name": "availability-scheduler",
       "type": "registry:block",
       "title": "Availability Scheduler",
-      "description": "Weekly availability editor where each day springs between available and unavailable, time ranges slide in and out as you add or remove them, times pick from a scrollable select, overlaps are flagged and a copy menu clones a day's hours to all days, weekdays or chosen days.",
+      "description": "Edits weekly hours when someone is available.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3702,7 +3532,7 @@
       "name": "signup-form",
       "type": "registry:block",
       "title": "Sign-up Form",
-      "description": "Composed sign-up form that flags a field once it is left, clears the error the moment it is fixed, shows a length-weighted password strength meter with a reveal toggle, accepts server field errors and walks the submit button through loading, success and error.",
+      "description": "Account sign-up form with inline validation and password strength.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3729,7 +3559,7 @@
       "name": "not-found-terminal",
       "type": "registry:block",
       "title": "404 Terminal",
-      "description": "404 page as a terminal session that types a failed cd into the missing path, prints the 404 status and idles on a blinking caret.",
+      "description": "404 page styled as a terminal session.",
       "dependencies": [
         "motion"
       ],
@@ -3751,7 +3581,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Avatar with image and initials fallback, five sizes (xs–xl), circle or squircle shape, a presence status dot, and an overlapping group with a +N count.",
+      "description": "Shows a person's photo or initials, alone or in a group.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -3773,7 +3603,7 @@
       "name": "avatar-generator",
       "type": "registry:ui",
       "title": "Avatar Generator",
-      "description": "Deterministic illustrated avatars from a seed, cropped so faces read at 20–32px: male/female/any hair from a curated long/short split, no beard for female, optional glasses, tint/circle/transparent/hex backgrounds and collision-free SVG ids, plus an editor with seed shuffle, gender toggle, part pickers (hair, eyes, brows, mouth, glasses, beard, top, gesture), SVG download and JSX copy.",
+      "description": "Draws a consistent illustrated avatar from a seed, with an editor.",
       "dependencies": [
         "@base-ui/react",
         "@dicebear/core@^9.4.3",
@@ -3806,7 +3636,7 @@
       "name": "sparkline",
       "type": "registry:ui",
       "title": "Sparkline",
-      "description": "Word-sized trend chart (area, line or bar) in currentColor, stretched to its box, drawn in on mount.",
+      "description": "Small inline chart that shows a trend.",
       "dependencies": [
         "motion"
       ],
@@ -3827,7 +3657,7 @@
       "name": "trend-chart",
       "type": "registry:ui",
       "title": "Trend Chart",
-      "description": "Absolute values over time as an area, line or bar chart, optionally stacked: value axis, gridlines, hover crosshair with tooltip, legend toggles and a screen-reader table.",
+      "description": "Plots how values change over time.",
       "dependencies": [
         "motion"
       ],
@@ -3849,7 +3679,7 @@
       "name": "bar-list",
       "type": "registry:ui",
       "title": "Bar List",
-      "description": "Ranked list with a proportional chart-coloured bar behind each label: top pages, referrers, countries.",
+      "description": "Ranks items by one measure with a bar behind each label.",
       "dependencies": [
         "motion"
       ],
@@ -3870,7 +3700,7 @@
       "name": "stat-card",
       "type": "registry:ui",
       "title": "Stat Card",
-      "description": "KPI card: label, big tabular number, a delta badge whose sign sets its tone (invertible for churn and latency) and a sparkline tinted to match.",
+      "description": "Card for a key metric and how it changed.",
       "dependencies": [],
       "registryDependencies": [
         "@qinyang/theme",
@@ -3892,7 +3722,7 @@
       "name": "empty-state",
       "type": "registry:ui",
       "title": "Empty State",
-      "description": "What a list, table or page shows when it has nothing yet: icon chip, title, description and actions, bare, outlined or muted.",
+      "description": "Tells users a list or page is empty and what to do next.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -3913,7 +3743,7 @@
       "name": "page-header",
       "type": "registry:ui",
       "title": "Page Header",
-      "description": "App page header: eyebrow, h1 title, description and actions that wrap under the title on narrow screens.",
+      "description": "Title, context and actions at the top of an app page.",
       "dependencies": [],
       "registryDependencies": [
         "@qinyang/theme"
@@ -3932,7 +3762,7 @@
       "name": "usage-meter",
       "type": "registry:ui",
       "title": "Usage Meter",
-      "description": "Quota bar on a meter: label, used / limit readout and a bar that turns warning then destructive as it fills.",
+      "description": "Shows how much of a quota has been used.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3953,7 +3783,7 @@
       "name": "settings-section",
       "type": "registry:ui",
       "title": "Settings Section",
-      "description": "Native settings layout: section header, grouped card of label + control rows split by hairlines, footer band for Save, danger-zone tone and a settings sub-nav.",
+      "description": "Layout for grouped settings pages.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3974,7 +3804,7 @@
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
-      "description": "Form field: label, control, description and an animated error, wired with aria-describedby and aria-invalid.",
+      "description": "Ties a label, control, hint and error into one form field.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3996,7 +3826,7 @@
       "name": "password-input",
       "type": "registry:ui",
       "title": "Password Input",
-      "description": "Input with a show / hide button inside its end edge; a field control like Input.",
+      "description": "Password field with a button to show or hide it.",
       "dependencies": [
         "motion"
       ],
@@ -4019,7 +3849,7 @@
       "name": "segmented-control",
       "type": "registry:ui",
       "title": "Segmented Control",
-      "description": "Pick-one control on a radio group with a raised thumb that glides between options: billing cycle, chart type, theme.",
+      "description": "Switches a setting between a few options.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -4041,7 +3871,7 @@
       "name": "accent-picker",
       "type": "registry:ui",
       "title": "Accent Picker",
-      "description": "Swatch picker for the theme's accent presets: sets data-accent on <html>, persists it, ships the preset CSS and a pre-paint script.",
+      "description": "Lets people choose the theme's accent colour, remembered across visits.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -4063,7 +3893,7 @@
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "Page controls with prev / next, numbered pages and ellipses, a compact mode, a results summary and a rows-per-page select.",
+      "description": "Moves through pages of results in a list or table.",
       "dependencies": [],
       "registryDependencies": [
         "@qinyang/theme",
@@ -4085,7 +3915,7 @@
       "name": "workspace-switcher",
       "type": "registry:ui",
       "title": "Workspace Switcher",
-      "description": "Sidebar-header team switcher: current workspace mark, name and plan, a menu of the others and Create workspace; collapses to the mark.",
+      "description": "Switches between workspaces or teams from the sidebar header.",
       "dependencies": [],
       "registryDependencies": [
         "@qinyang/theme",
@@ -4106,7 +3936,7 @@
       "name": "user-menu",
       "type": "registry:ui",
       "title": "User Menu",
-      "description": "Signed-in user button (avatar, name, email) opening an account menu; avatar-only in an icon rail or as a compact top-bar button.",
+      "description": "Opens account actions for the signed-in user.",
       "dependencies": [],
       "registryDependencies": [
         "@qinyang/theme",
@@ -4128,7 +3958,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "Table with search, faceted filters with counts, column visibility, sorting, row selection with bulk actions, row action menus, pagination and empty / no-results states.",
+      "description": "Browses, filters and acts on a set of rows.",
       "dependencies": [
         "motion"
       ],
@@ -4156,7 +3986,7 @@
       "name": "toggle-group",
       "type": "registry:ui",
       "title": "Toggle Group",
-      "description": "Toggle and toggle group: pressed-state buttons for marks and alignment, default or outline, three sizes.",
+      "description": "Turns formatting or view options on and off.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -4178,7 +4008,7 @@
       "name": "toolbar",
       "type": "registry:ui",
       "title": "Toolbar",
-      "description": "Roving-focus toolbar with buttons, toggles, separators and inputs; floating (selection bubble) and inset variants.",
+      "description": "Groups related actions into one keyboard-navigable bar.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -4200,7 +4030,7 @@
       "name": "menu-list",
       "type": "registry:ui",
       "title": "Menu List",
-      "description": "Keyboard-navigable list that keeps focus elsewhere (aria-activedescendant): slash menus, mention pickers, autocomplete.",
+      "description": "Keyboard-driven option list that leaves focus in the text field.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -4221,7 +4051,7 @@
       "name": "swatch-picker",
       "type": "registry:ui",
       "title": "Swatch Picker",
-      "description": "Pick one colour from a fixed palette: colour dots or letter swatches, radio-group keyboard behaviour.",
+      "description": "Picks one colour from a fixed palette.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -4242,7 +4072,7 @@
       "name": "notion-editor",
       "type": "registry:block",
       "title": "Block Editor",
-      "description": "Block editor: slash menu, selection bubble, drag handles, markdown shortcuts, callouts, toggles, tables, code highlighting, and lossless MDX import / export.",
+      "description": "Block editor for writing documents that save as MDX.",
       "dependencies": [
         "@tiptap/core",
         "@tiptap/pm",
@@ -4337,7 +4167,7 @@
       "name": "email-editor",
       "type": "registry:block",
       "title": "Email Editor",
-      "description": "Visual email editor: buttons, images, logo, columns, sections, spacer, footer, {{variables}}, Show if / Repeat, subject + preheader, desktop / mobile preview, and email-safe HTML / JSON export.",
+      "description": "Edits email templates and exports them as email-safe HTML.",
       "dependencies": [
         "@tiptap/core",
         "@tiptap/pm",
@@ -4398,7 +4228,7 @@
       "name": "resizable",
       "type": "registry:ui",
       "title": "Resizable",
-      "description": "Split panes with draggable dividers: percent or pixel sizes, live resizing, collapsible panels, keyboard control and layouts persisted to localStorage.",
+      "description": "Split panes the user can resize or collapse.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -4416,7 +4246,7 @@
       "name": "tab-strip",
       "type": "registry:ui",
       "title": "Tab Strip",
-      "description": "Horizontal document and panel tabs: closable, drag to reorder, faded overflow scrolling and arrow-key navigation, in raised or pill style.",
+      "description": "Switches between open documents or panels, with closing and reordering.",
       "dependencies": [
         "motion"
       ],
@@ -4438,7 +4268,7 @@
       "name": "icon-rail",
       "type": "registry:ui",
       "title": "Icon Rail",
-      "description": "Narrow vertical app rail of icon buttons with tooltips, shortcuts, badges and round status avatars; vertical or horizontal.",
+      "description": "Narrow bar of icon buttons for switching between app sections.",
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/tooltip"
@@ -4457,7 +4287,7 @@
       "name": "terminal-view",
       "type": "registry:ui",
       "title": "Terminal View",
-      "description": "Terminal surface with ANSI colour output mapped to theme tokens, follow-the-end scrolling, a command line with history and a status line.",
+      "description": "Shows command output and takes commands in a terminal panel.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -4475,7 +4305,7 @@
       "name": "thread-list-item",
       "type": "registry:ui",
       "title": "Thread List Item",
-      "description": "Two-line agent thread row: provider icon and title, then repo, pull request number in its status colour and branch, grouped under Recent / Today headings.",
+      "description": "Lists agent or chat threads in a sidebar.",
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
@@ -4495,7 +4325,7 @@
       "name": "work-summary",
       "type": "registry:ui",
       "title": "Work Summary",
-      "description": "Collapsible “Worked for 25s” step log of an agent turn: live elapsed time, steps with ACP tool kinds and statuses, and per-step output.",
+      "description": "Summarises the steps an agent took during one turn.",
       "dependencies": [
         "motion"
       ],
@@ -4519,7 +4349,7 @@
       "name": "edited-files-card",
       "type": "registry:ui",
       "title": "Edited Files Card",
-      "description": "Summary of the files an agent changed in a turn with total +/−, Undo and Review, and rows that expand to each file's diff.",
+      "description": "Summarises the files an agent changed, with undo and review.",
       "dependencies": [
         "motion"
       ],
@@ -4543,7 +4373,7 @@
       "name": "model-picker",
       "type": "registry:ui",
       "title": "Model Picker",
-      "description": "Composer pickers for agent model, reasoning effort and mode / access level: a quiet trigger and a menu with descriptions, groups and tones.",
+      "description": "Lets users choose an agent's model, effort or mode.",
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
@@ -4564,7 +4394,7 @@
       "name": "agent-composer",
       "type": "registry:block",
       "title": "Agent Composer",
-      "description": "Coding-agent composer with @file mentions and /command suggestions, attach and voice buttons, picker slots, a stacked banner area and send / stop.",
+      "description": "Prompt input for coding agents with file mentions and commands.",
       "dependencies": [
         "motion"
       ],

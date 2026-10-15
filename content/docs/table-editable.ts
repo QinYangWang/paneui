@@ -13,17 +13,17 @@ export default {
     {
       id: "read-only",
       title: "Read Only",
-      description: "`readOnly` keeps keyboard navigation but turns off editing, the row and column menus, insert pills and the new-row band.",
+      description: "Use when people should browse the data but not change it.",
     },
     {
       id: "cell-edit",
       title: "Cell Edit Callback",
-      description: "Uncontrolled with `defaultRows` / `defaultColumns`; `onCellEdit` reports each committed value. Columns with `type: \"number\"` store numbers.",
+      description: "Use when you save each edit as it commits instead of holding every row in state.",
     },
     {
       id: "create-row",
       title: "Custom New Rows",
-      description: "`createRow` and `createColumn` build what the + pills and menus insert. Here it is also `selectable` with column reordering off.",
+      description: "Use when new rows or columns need ids or defaults from your own data.",
     },
   ],
   notes: [
@@ -39,7 +39,7 @@ export default {
   api: [
     {
       name: "EditableTable",
-      description: "Spreadsheet-style table on the virtualized Table core. Also passes through these Table props: `aria-label`, `height`, `headerHeight`, `overscan`, `selectable` and the selection props, `resizable`, `minColumnWidth`, `onColumnResize`, `animateLayout`, `emptyState`, `className`.",
+      description: "Editable grid on the virtualized Table core. It also passes `aria-label`, `height`, `headerHeight`, `overscan`, `selectable` and the selection props, `resizable`, `minColumnWidth`, `onColumnResize`, `animateLayout`, `emptyState` and `className` through to Table.",
       extends: "Table",
       extendsHref: "/docs/table",
       props: [
@@ -50,10 +50,10 @@ export default {
         { name: "defaultColumns", type: "readonly EditableColumn[]", default: "[]", description: "Initial columns when uncontrolled." },
         { name: "onColumnsChange", type: "(columns: EditableColumn[]) => void", description: "Called after a column is added, renamed, moved or deleted." },
         { name: "onCellEdit", type: "(rowId: string, columnKey: string, value: EditableValue) => void", description: "Called when a cell edit commits." },
-        { name: "createRow", type: "(columns: readonly EditableColumn[]) => EditableRow", description: "Build a blank row; defaults to an id and empty cells." },
+        { name: "createRow", type: "(columns: readonly EditableColumn[]) => EditableRow", description: "Build the row the + pills, menus and new-row band insert; defaults to an id and empty cells." },
         { name: "createColumn", type: "(columns: readonly EditableColumn[]) => EditableColumn", description: "Build a new column; defaults to “Column N”." },
         { name: "showAddRow", type: "boolean", default: "true", description: "Show the “New row” band under the last row." },
-        { name: "readOnly", type: "boolean", default: "false", description: "Disable editing and structure changes." },
+        { name: "readOnly", type: "boolean", default: "false", description: "Turn off editing, the row and column menus, the insert pills and the new-row band. Keyboard navigation stays." },
         { name: "reorderable", type: "boolean", default: "true", description: "Drag headers to reorder (off when `readOnly`)." },
         { name: "rowHeight", type: "number", default: "40", description: "Row height in px." },
         { name: "ref", type: "Ref<TableHandle>", description: "Same handle as Table." },

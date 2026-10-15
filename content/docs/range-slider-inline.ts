@@ -10,24 +10,24 @@ export default {
     {
       id: "stops",
       title: "Stops",
-      description: "Ten stop markers are on by default; `snapToStops` settles onto the nearest one when a drag or track press ends, and `showStops={false}` hides them.",
+      description: "Use `snapToStops` when values should land on round steps.",
     },
     {
       id: "format",
       title: "Custom Range and Format",
-      description: "Set `min`, `max` and `step`, and `formatValue` for the readout and the announced value.",
+      description: "Use for units such as prices or percentages.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "`value` / `onValueChange` for live updates and `onValueCommitted` to save once the gesture ends.",
+      description: "Use `onValueCommitted` when saving should wait until the drag ends.",
     },
-    { id: "disabled", title: "Disabled", description: "`disabled` dims the slider and blocks input." },
+    { id: "disabled", title: "Disabled" },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The fill and thumb ease to clicked or keyed values over 300ms and track the pointer directly while dragging; the thumb is a single grey bar (darker while hovered or dragged) that fades out while it crosses the label or readout. At min and max the fill sits the same 4px inside the well on both ends. With reduced motion everything moves instantly.",
+      body: "Clicked or keyed values ease over 300ms, and drags track the pointer directly. The thumb fades out while it crosses the label or readout. With reduced motion everything moves instantly.",
     },
     {
       title: "Related",
@@ -54,7 +54,7 @@ export default {
         { name: "label", type: "string", required: true, description: "Text inside the left edge of the well. Also the thumb's accessible name." },
         { name: "formatValue", type: "(value: number) => string", default: "String", description: "Formats the readout and the announced value." },
         { name: "showStops", type: "boolean", default: "true", description: "Paint ten evenly spaced stop markers." },
-        { name: "snapToStops", type: "boolean", default: "false", description: "On pointer release, settle onto the nearest of the ten stops." },
+        { name: "snapToStops", type: "boolean", default: "false", description: "When a drag or track press ends, settle onto the nearest of the ten stops." },
       ],
       dataAttributes: [
         { name: "data-dragging", description: "Present on the root while dragging." },

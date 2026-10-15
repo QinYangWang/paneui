@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "action-swap-roll",
   "title": "Action Swap Roll",
-  "description": "Button whose next label and icon roll up from below through a soft blur as the old ones lift away.",
+  "description": "A button that rolls its label and icon into the next state.",
   "dependencies": [
     "motion"
   ],

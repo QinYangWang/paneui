@@ -75,13 +75,13 @@ function renderInline(text: string, sources: CitationSource[] | undefined, keyBa
     if (!part) return null
     if (part.startsWith("`") && part.endsWith("`") && part.length > 1)
       return (
-        <code key={key} className="rounded-md bg-muted px-1 py-0.5 font-mono text-[0.85em] shadow-well">
+        <code key={key}>
           {part.slice(1, -1)}
         </code>
       )
     if (part.startsWith("**") && part.endsWith("**") && part.length > 4)
       return (
-        <strong key={key} className="font-semibold text-foreground">
+        <strong key={key}>
           {part.slice(2, -2)}
         </strong>
       )
@@ -94,7 +94,7 @@ function renderInline(text: string, sources: CitationSource[] | undefined, keyBa
     const link = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/)
     if (link)
       return (
-        <a key={key} href={link[2]} target="_blank" rel="noreferrer noopener" className="font-medium text-primary underline-offset-4 hover:underline">
+        <a key={key} href={link[2]} target="_blank" rel="noreferrer noopener">
           {link[1]}
         </a>
       )
@@ -141,14 +141,14 @@ function ResponseMarkdown({
   const blocks = React.useMemo(() => parseBlocks(text), [text])
   const tail = caret ? <StreamingCaret /> : null
   return (
-    <div data-slot="response-markdown" className={cn("flex flex-col gap-3 text-ui-lg leading-relaxed text-foreground/90", className)}>
+    <div data-slot="response-markdown" className={cn("typeset typeset-chat text-foreground/90", className)}>
       {blocks.length === 0 && tail ? <p>{tail}</p> : null}
       {blocks.map((block, bi) => {
         const last = bi === blocks.length - 1
         const k = `b${bi}`
         if (block.type === "h")
           return (
-            <h3 key={k} className="pt-1 text-base font-semibold text-foreground">
+            <h3 key={k}>
               {renderInline(block.text, sources, k)}
               {last && tail}
             </h3>
@@ -156,7 +156,7 @@ function ResponseMarkdown({
         if (block.type === "code") {
           const lang = (CODE_LANGS.has(block.lang) ? block.lang : "text") as CodeLanguage
           return (
-            <div key={k} className="overflow-hidden rounded-xl bg-code p-3 shadow-well">
+            <div key={k} className="not-typeset mt-(--typeset-flow) overflow-hidden rounded-xl bg-code p-3 shadow-well first:mt-0">
               <CodeHighlight code={block.code} language={lang} />
               {last && tail}
             </div>
@@ -165,12 +165,9 @@ function ResponseMarkdown({
         if (block.type === "ul" || block.type === "ol") {
           const List = block.type
           return (
-            <List
-              key={k}
-              className={cn("flex flex-col gap-1.5 pl-5 marker:text-muted-foreground", block.type === "ul" ? "list-disc" : "list-decimal")}
-            >
+            <List key={k}>
               {block.items.map((item, ii) => (
-                <li key={ii} className="pl-1">
+                <li key={ii}>
                   {renderInline(item, sources, `${k}-${ii}`)}
                   {last && ii === block.items.length - 1 && tail}
                 </li>
@@ -256,7 +253,7 @@ function StreamingResponse({
 
   const body =
     children !== undefined ? (
-      <div className="text-ui-lg leading-relaxed text-foreground/90">
+      <div className="typeset typeset-chat text-foreground/90">
         {children}
         {streaming ? <StreamingCaret /> : null}
       </div>

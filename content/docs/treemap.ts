@@ -15,37 +15,37 @@ export default {
     {
       id: "flat",
       title: "Flat",
-      description: "Leaves without `children` tile the whole chart directly; tiles stay close to square.",
+      description: "Use when the data has no natural groups.",
     },
     {
       id: "custom-colors",
       title: "Custom Colors",
-      description: "`color` on a node overrides the palette; groups pass theirs down and shade each child a step darker. Use token colours like `var(--success)`.",
+      description: "Use `color` when a category has a fixed meaning, with token colours like `var(--success)`.",
     },
     {
       id: "spacing",
       title: "Gap, Padding and Radius",
-      description: "`gap` sets the space between tiles, `groupPadding` insets children inside a group and `radius` rounds every tile.",
+      description: "Use a smaller `gap` and `radius` when the chart holds many small tiles.",
     },
     {
       id: "controlled",
       title: "Controlled Active Tile",
-      description: "Drive the highlighted tile with `activeId` and `onActiveChange`, e.g. from a list outside the chart.",
+      description: "Use when a list outside the chart should highlight the same tile.",
     },
     {
       id: "compact",
       title: "Compact",
-      description: "`showLegend={false}` and a smaller `height` fit the chart into a dashboard card. Labels hide on tiles too small to hold them.",
+      description: "Use in dashboard cards, with `showLegend={false}` and a smaller `height`.",
     },
   ],
   notes: [
     {
       title: "Keyboard",
-      body: "Each tile is focusable: `Tab` in, then `ArrowRight` / `ArrowDown` and `ArrowLeft` / `ArrowUp` move between tiles, `Home` / `End` jump to the ends. Focus shows the tooltip.",
+      body: "Each tile is focusable. `Tab` in, then `ArrowRight` / `ArrowDown` and `ArrowLeft` / `ArrowUp` move between tiles and `Home` / `End` jump to the ends. Focus shows the tooltip.",
     },
     {
       title: "Accessibility",
-      body: "Every tile has an `aria-label` with its group, value and share, and a visually hidden data table lists all tiles for screen readers.",
+      body: "Every tile has an `aria-label` with its group, value and share, and a visually hidden data table lists all tiles for screen readers. Labels hide on tiles too small to hold them.",
     },
   ],
   api: [
@@ -75,13 +75,13 @@ export default {
         { name: "label", type: "string", required: true, description: "Tile and legend label." },
         { name: "value", type: "number", description: "Leaf value. Ignored when `children` is given (the group sums them)." },
         { name: "children", type: "TreemapNode[]", description: "Child leaves (one level is drawn)." },
-        { name: "color", type: "string", description: "Overrides the palette colour; groups pass theirs down." },
+        { name: "color", type: "string", description: "Overrides the palette colour; groups pass theirs down and shade each child a step darker." },
         { name: "description", type: "string", description: "Extra line in the tooltip." },
       ],
     },
     {
       name: "squarify",
-      description: "`(values: readonly number[], rect: { x, y, w, h }) => Rect[]`. The layout algorithm (Bruls, Huizing, van Wijk), exported for custom treemaps.",
+      description: "`(values: readonly number[], rect: { x, y, w, h }) => Rect[]`. The squarified layout algorithm, exported for custom treemaps.",
       props: [],
     },
   ],

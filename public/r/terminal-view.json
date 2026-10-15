@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "terminal-view",
   "title": "Terminal View",
-  "description": "Terminal surface with ANSI colour output mapped to theme tokens, follow-the-end scrolling, a command line with history and a status line.",
+  "description": "Shows command output and takes commands in a terminal panel.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"
   ],

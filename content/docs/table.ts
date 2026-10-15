@@ -18,22 +18,22 @@ export default {
     {
       id: "basic",
       title: "Basic",
-      description: "Just `data`, `columns` and a `height`. Use `accessor` to derive a value, `cell` to render it, `align` for numbers and `grow` to soak up spare width.",
+      description: "Start here for a static list, adding `cell` only where a value needs custom rendering.",
     },
     {
       id: "loading-empty",
       title: "Loading and Empty",
-      description: "`loading` with no data shows `skeletonRows` shimmering rows; with no data and not loading, `emptyState` fills the body.",
+      description: "Use while the first rows load or when a filter returns nothing.",
     },
     {
       id: "row-click",
       title: "Row Click and Density",
-      description: "`onRowClick` receives the row context, `rowClassName` styles rows from it (suspended members are muted) and `rowHeight` / `headerHeight` make it compact. `defaultSort` sets the starting sort.",
+      description: "Use when rows open a detail view, or in dense panels with smaller `rowHeight` and `headerHeight`.",
     },
     {
       id: "scroll-to-index",
       title: "Scroll to Row",
-      description: "Pass a `ref` to get a `TableHandle` and call `scrollToIndex` or `scrollToTop`; only visible rows of the 1,440 are rendered.",
+      description: "Use to jump to a search hit or a newly added row in a long list.",
     },
   ],
   notes: [
@@ -73,13 +73,13 @@ export default {
         { name: "rowHeight", type: "number", default: "44", description: "Row height in px." },
         { name: "headerHeight", type: "number", default: "40", description: "Header height in px." },
         { name: "height", type: "number", default: "440", description: "Viewport height in px." },
-        { name: "overscan", type: "number", default: "8", description: "Rows rendered beyond the viewport." },
+        { name: "overscan", type: "number", default: "8", description: "Rows rendered beyond the viewport; rows further out are not rendered." },
         { name: "loading", type: "boolean", default: "false", description: "Skeleton rows when there is no data yet, a loading footer otherwise; pauses `onEndReached`." },
-        { name: "skeletonRows", type: "number", description: "Number of skeleton rows while loading." },
+        { name: "skeletonRows", type: "number", description: "Number of skeleton rows while loading with no data." },
         { name: "onEndReached", type: "() => void", description: "Called when the list nears its end." },
         { name: "endReachedThreshold", type: "number", default: "8", description: "How many rows from the end `onEndReached` fires." },
         { name: "footer", type: "ReactNode", description: "A band under the last row (load more, add row, end of list)." },
-        { name: "emptyState", type: "ReactNode", default: `"No rows"`, description: "Shown when there are no rows." },
+        { name: "emptyState", type: "ReactNode", default: `"No rows"`, description: "Shown when there are no rows and `loading` is off." },
         { name: "renderCell", type: "(ctx: TableCellContext<T> & { content: ReactNode }) => ReactNode", description: "Wrap or replace any cell; `content` is what the table would have rendered." },
         { name: "renderHeader", type: "(ctx: TableHeaderContext<T>) => ReactNode", description: "Replace a header label; spread `labelProps` onto your element." },
         { name: "headerAccessory", type: "(ctx: TableHeaderContext<T>) => ReactNode", description: "Extra content inside a header cell, e.g. a column menu." },
@@ -119,7 +119,7 @@ export default {
     },
     {
       name: "TableSkeletonRow",
-      description: "A placeholder row of shimmering bars, for custom loading states.",
+      description: "Placeholder row for custom loading states.",
       props: [
         { name: "index", type: "number", required: true, description: "Row index; varies the bar widths." },
         { name: "cells", type: "readonly number[]", required: true, description: "Cell widths in px, in display order." },
@@ -139,7 +139,7 @@ export default {
     },
     {
       name: "useControllableState",
-      description: "`const [value, setValue] = useControllableState(value, defaultValue, onChange)`: controlled-or-uncontrolled state used by the table family. Also exported: `tableHeaderLabelClass` and `compareTableValues`.",
+      description: "`const [value, setValue] = useControllableState(value, defaultValue, onChange)` gives the table family its controlled-or-uncontrolled state. `tableHeaderLabelClass` and `compareTableValues` are exported too.",
       props: [],
     },
   ],

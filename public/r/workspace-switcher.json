@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "workspace-switcher",
   "title": "Workspace Switcher",
-  "description": "Sidebar-header team switcher: current workspace mark, name and plan, a menu of the others and Create workspace; collapses to the mark.",
+  "description": "Switches between workspaces or teams from the sidebar header.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json",

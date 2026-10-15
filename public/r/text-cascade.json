@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-cascade",
   "title": "Text Cascade",
-  "description": "Standalone text that rolls letter by letter, left to right, through a soft blur whenever its value changes, gliding to the new width.",
+  "description": "Rolls text letter by letter whenever its value changes.",
   "dependencies": [
     "motion"
   ],

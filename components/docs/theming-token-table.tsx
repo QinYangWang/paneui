@@ -92,7 +92,7 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
       <table className="w-full min-w-xl table-fixed border-collapse text-left text-sm">
         <thead className="text-muted-foreground">
           <tr className="border-b">
-            <th className="w-2/5 px-4 py-2.5 font-medium">Token / Tailwind class</th>
+            <th className="w-2/5 px-4 py-2.5 font-medium">Token / class</th>
             <th className="px-4 py-2.5 font-medium">Light</th>
             <th className="px-4 py-2.5 font-medium">Dark</th>
           </tr>

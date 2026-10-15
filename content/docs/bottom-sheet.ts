@@ -38,32 +38,32 @@ export default {
     {
       id: "single-snap",
       title: "Single Snap",
-      description: "One entry in `snapPoints` gives a fixed-height sheet; the handle then only drags to close.",
+      description: "Use one snap point for short content; the handle then only drags to close.",
     },
     {
       id: "controlled-snap",
       title: "Controlled Snap",
-      description: "Pass `snap` and `onSnapChange` to move between heights from your own buttons.",
+      description: "Use `snap` and `onSnapChange` when your own buttons move the sheet between heights.",
     },
     {
       id: "non-dismissible",
       title: "Non-dismissible",
-      description: "`dismissible={false}` ignores drag-down, Esc and backdrop presses; only `BottomSheetClose` closes it.",
+      description: "Use `dismissible={false}` when the reader must finish or cancel explicitly with `BottomSheetClose`.",
     },
     {
       id: "without-handle",
       title: "Without Handle",
-      description: "`showHandle={false}` drops the grip; here the sheet is also opened with `open` and `onOpenChange`.",
+      description: "Hide the handle when the sheet shouldn't be resized by dragging.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The sheet springs between snap points and a flick moves a whole snap; the backdrop lightens as you drag down. With reduced motion it fades in and out and jumps between snaps.",
+      body: "A flick moves a whole snap. With reduced motion the sheet fades in and out and jumps between snaps.",
     },
     {
       title: "Keyboard",
-      body: "The handle is a button: Enter or Space cycles to the next snap point (or collapses from the top one). Esc closes when `dismissible`.",
+      body: "The handle is a button, so Enter or Space cycles to the next snap point (or collapses from the top one). Esc closes when `dismissible`.",
     },
   ],
   api: [
@@ -114,7 +114,7 @@ export default {
     },
     {
       name: "BottomSheetHandle",
-      description: "The grip: drag to resize or dismiss, press to cycle snap points. Rendered by `BottomSheetContent`.",
+      description: "The grip. Drag it to resize or dismiss, press it to cycle snap points. Rendered by `BottomSheetContent`.",
       extends: "button",
       props: [],
     },

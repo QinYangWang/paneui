@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "icons-puffy",
   "title": "Icons (puffy)",
-  "description": "The icon set in puffy style: the same names and props on an 18x18 grid, filled shapes traced with a 1.5px round-join stroke. Installs to components/icons.tsx, replacing the rounded set; add icons with --overwrite to switch back.",
+  "description": "The icon set redrawn as soft filled shapes, under the same names.",
   "files": [
     {
       "path": "registry/base-nova/icons/puffy/icons.tsx",

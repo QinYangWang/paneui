@@ -9,38 +9,38 @@ export default {
     {
       id: "without-header",
       title: "Without Header",
-      description: "Leave out `filename` for a bare block; pass `language` explicitly and the copy button floats in on hover.",
+      description: "Use a bare block for inline snippets, passing `language` since there is no `filename`.",
     },
     {
       id: "excerpt",
       title: "Excerpt",
-      description: "`startLine` numbers an excerpt from its real position, and `highlightLines` takes numbers or `[start, end]` ranges as displayed.",
+      description: "Use `startLine` and `highlightLines` when quoting part of a larger file.",
     },
     {
       id: "no-line-numbers",
       title: "Without Line Numbers",
-      description: "`showLineNumbers={false}` suits shell commands and short snippets.",
+      description: "Turn line numbers off for shell commands and short snippets.",
     },
     {
       id: "wrap",
       title: "Wrap",
-      description: "`wrap` breaks long lines instead of scrolling horizontally; `maxHeight` caps the scrolling area in px.",
+      description: "Use `wrap` for prose-like output where horizontal scrolling hides the point.",
     },
     {
       id: "not-copyable",
       title: "Not Copyable",
-      description: "`copyable={false}` drops the copy button, e.g. for read-only output that shouldn't be pasted back.",
+      description: "Turn copying off for read-only output that shouldn't be pasted back.",
     },
     {
       id: "copy-button",
       title: "Copy Button",
-      description: "`CodeCopyButton` is exported for your own surfaces; `value` can be a string or a function read at click time.",
+      description: "Use `CodeCopyButton` to add the same copy action to your own surfaces.",
     },
   ],
   notes: [
     {
       title: "Streaming",
-      body: "While `streaming`, the block shows a Writing badge and caret, follows the newest line unless the reader scrolls away, and keeps already-coloured tokens so lines never flash back to plain text.",
+      body: "While `streaming`, the block follows the newest line unless the reader scrolls away, and keeps already-coloured tokens so lines never flash back to plain text.",
     },
     {
       title: "Motion",
@@ -58,7 +58,7 @@ export default {
         { name: "filename", type: "ReactNode", description: "Shown in a header with the language chip and copy button. Without it the copy button floats." },
         { name: "showLineNumbers", type: "boolean", default: "true", description: "Show the sticky line-number gutter." },
         { name: "startLine", type: "number", default: "1", description: "First line number, for excerpts." },
-        { name: "highlightLines", type: "(number | [start: number, end: number])[]", description: "Line numbers (as displayed) to emphasise." },
+        { name: "highlightLines", type: "(number | [start: number, end: number])[]", description: "Line numbers or `[start, end]` ranges, as displayed, to emphasise." },
         { name: "streaming", type: "boolean", default: "false", description: "Show a live caret and Writing badge and follow the newest line." },
         { name: "maxHeight", type: "number", default: "360", description: "Max height of the scrolling code area in px." },
         { name: "copyable", type: "boolean", default: "true", description: "Show the copy button." },
@@ -66,7 +66,7 @@ export default {
       ],
       dataAttributes: [
         { name: "data-streaming", description: "On the root while `streaming`." },
-        { name: "data-line", description: "On each line: its displayed number." },
+        { name: "data-line", description: "On each line, its displayed number." },
         { name: "data-highlighted", description: "On lines listed in `highlightLines`." },
       ],
     },

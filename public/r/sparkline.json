@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "sparkline",
   "title": "Sparkline",
-  "description": "Word-sized trend chart (area, line or bar) in currentColor, stretched to its box, drawn in on mount.",
+  "description": "Small inline chart that shows a trend.",
   "dependencies": [
     "motion"
   ],

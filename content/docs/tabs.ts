@@ -24,33 +24,32 @@ export default {
     {
       id: "controlled",
       title: "Controlled",
-      description: "Drive the selected tab with `value` and `onValueChange`.",
+      description: "Use when the URL or other UI decides which tab is open.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "Pass `disabled` to a `TabsTab` to skip it in the keyboard order and dim it.",
     },
     {
       id: "full-width",
       title: "Full Width",
-      description: "Give `TabsList` `w-full` and each `TabsTab` `flex-1` for an even segmented control.",
+      description: "Use as a segmented control, with `w-full` on `TabsList` and `flex-1` on each `TabsTab`.",
     },
     {
       id: "vertical",
       title: "Vertical",
-      description: "Set `orientation=\"vertical\"` on `Tabs` to put the list beside the panels; the indicator slides on y and `ArrowUp` / `ArrowDown` move focus.",
+      description: "Use for settings pages with many sections.",
     },
     {
       id: "icon-only",
       title: "Icon Only",
-      description: "Tabs size their icons to 16px; give icon-only tabs an `aria-label`.",
+      description: "Use in tight toolbars, giving each icon-only tab an `aria-label`.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "A raised indicator slides between tabs (300ms ease-out) using the measured tab positions, on x for horizontal lists and on y for vertical ones. Under `prefers-reduced-motion: reduce` it jumps without sliding.",
+      body: "The indicator slides over 300ms ease-out. Under `prefers-reduced-motion: reduce` it jumps without sliding.",
     },
     {
       title: "Keyboard",
@@ -96,14 +95,15 @@ export default {
     },
     {
       name: "TabsTab",
+      description: "Sizes its icons to 16px.",
       extends: "Tabs.Tab",
       extendsHref: "https://base-ui.com/react/components/tabs#tab",
       props: [
         { name: "value", type: "any", description: "Matches the `TabsPanel` it shows.", required: true },
-        { name: "disabled", type: "boolean", default: "false", description: "Dim the tab and block selection." },
+        { name: "disabled", type: "boolean", default: "false", description: "Dim the tab, block selection and skip it in the keyboard order." },
       ],
       dataAttributes: [
-        { name: "data-active", description: "Present on the selected tab (foreground text)." },
+        { name: "data-active", description: "Present on the selected tab." },
         { name: "data-disabled", description: "Present when disabled." },
         { name: "data-orientation", description: "`horizontal` or `vertical`, from the root." },
       ],

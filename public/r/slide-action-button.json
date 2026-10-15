@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "slide-action-button",
   "title": "Slide Action Button",
-  "description": "Inset track with a draggable thumb that confirms when slid to the end (with an optional pending state for async work) and springs back otherwise; keyboard-operable as a slider.",
+  "description": "Confirms an action when the user slides it to the end.",
   "dependencies": [
     "motion"
   ],

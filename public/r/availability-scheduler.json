@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "availability-scheduler",
   "title": "Availability Scheduler",
-  "description": "Weekly availability editor where each day springs between available and unavailable, time ranges slide in and out as you add or remove them, times pick from a scrollable select, overlaps are flagged and a copy menu clones a day's hours to all days, weekdays or chosen days.",
+  "description": "Edits weekly hours when someone is available.",
   "dependencies": [
     "@base-ui/react",
     "motion"

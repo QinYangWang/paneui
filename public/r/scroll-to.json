@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "scroll-to",
   "title": "Scroll To",
-  "description": "Button that eases to a px offset, selector or element through the nearest SmoothScroll, falling back to native smooth scrolling, and can move focus to the target.",
+  "description": "Button that scrolls to a section or position.",
   "dependencies": [
     "@base-ui/react",
     "lenis",

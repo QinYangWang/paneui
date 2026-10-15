@@ -9,12 +9,12 @@ export default {
     {
       id: "auto-direction",
       title: "Auto Direction",
-      description: "With the default `direction=\"auto\"`, digits roll up when the number grows and drop down when it shrinks.",
+      description: "Keep the default `direction=\"auto\"` for values that can rise or fall.",
     },
     {
       id: "odometer",
       title: "Odometer",
-      description: "`staggerFrom=\"end\"` ripples the change right to left, so a carry rolls through like an odometer.",
+      description: "Use `staggerFrom=\"end\"` for counters, so a carry ripples right to left.",
     },
     {
       id: "fixed-direction",
@@ -24,7 +24,7 @@ export default {
     {
       id: "replay",
       title: "Replay",
-      description: "Change `animationKey` to replay every glyph even when the value is unchanged, e.g. on reveal. `duration` and `stagger` set the pace.",
+      description: "Change `animationKey` to replay the roll on reveal when the value hasn't changed.",
     },
   ],
   notes: [

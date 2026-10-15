@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "pull-to-refresh",
   "title": "Pull to Refresh",
-  "description": "Scroll container with rubber-band pull, a threshold arrow that winds up and turns primary, async onRefresh and our loader while it runs.",
+  "description": "Refreshes a scrolling list when the user pulls it down.",
   "dependencies": [
     "motion"
   ],

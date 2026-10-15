@@ -9,27 +9,27 @@ export default {
     {
       id: "daily",
       title: "Daily Candles",
-      description: "Pass `formatTime` and `formatPrice` for your interval and currency; `time` is any increasing number, here a UTC day.",
+      description: "Pass `formatTime` and `formatPrice` to match your interval and currency.",
     },
     {
       id: "without-volume",
       title: "Without Volume",
-      description: "`showVolume={false}` gives the whole plot to price; the volume pane is also empty when candles have no `volume`.",
+      description: "Use `showVolume={false}` when candles have no `volume` or price needs the whole plot.",
     },
     {
       id: "compact",
       title: "Compact",
-      description: "`showReadout={false}` drops the OHLC header for small cards; a smaller `height` keeps it tight.",
+      description: "Use `showReadout={false}` and a smaller `height` for small cards.",
     },
     {
       id: "last-price",
       title: "Last Price",
-      description: "`lastPrice` moves the dashed last-price line off the final close, e.g. for an after-hours quote. It turns green or red against the previous close.",
+      description: "Use `lastPrice` for a quote newer than the final close, like after hours.",
     },
     {
       id: "volume-ratio",
       title: "Volume Ratio",
-      description: "`volumeRatio` sets the share of the plot used by the volume pane (default `0.2`). Past 60 candles the bars tighten automatically.",
+      description: "Use `volumeRatio` to give volume more or less of the plot.",
     },
   ],
   notes: [
@@ -45,7 +45,7 @@ export default {
   api: [
     {
       name: "CandlestickChart",
-      description: "OHLC candlestick chart with volume pane, crosshair and last-price line.",
+      description: "OHLC candlestick chart with volume pane, crosshair and last-price line. Past 60 candles the bars tighten automatically.",
       extends: "div",
       props: [
         { name: "candles", type: "readonly Candle[]", required: true, description: "Candles in time order." },
@@ -64,7 +64,7 @@ export default {
       name: "Candle",
       description: "One candle.",
       props: [
-        { name: "time", type: "number", required: true, description: "Unique, ordered key: a timestamp (ms) or any increasing number." },
+        { name: "time", type: "number", required: true, description: "Unique, ordered key, such as a timestamp (ms) or any increasing number." },
         { name: "open", type: "number", required: true, description: "Opening price." },
         { name: "high", type: "number", required: true, description: "Highest price." },
         { name: "low", type: "number", required: true, description: "Lowest price." },
@@ -74,7 +74,7 @@ export default {
     },
     {
       name: "generateCandles",
-      description: "Deterministic random-walk candles for demos and tests: `generateCandles(count, options?)`.",
+      description: "`generateCandles(count, options?)` makes deterministic random-walk candles for demos and tests.",
       props: [
         { name: "count", type: "number", required: true, description: "Number of candles." },
         { name: "seed", type: "number", default: "7", description: "Random seed." },

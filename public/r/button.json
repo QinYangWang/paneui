@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "button",
   "title": "Button",
-  "description": "Native desktop button (32px, 13px label) with primary, secondary, outline, ghost, destructive and link variants; flat fills, hover is a fill change.",
+  "description": "Triggers an action or submits a form.",
   "dependencies": [
     "@base-ui/react",
     "class-variance-authority"

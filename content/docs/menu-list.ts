@@ -19,9 +19,9 @@ export default {
 │       └── MenuListShortcut
 ├── MenuListSeparator
 └── MenuListEmpty`,
-  examples: [{ id: "plain", title: "Plain", description: "`variant=\"plain\"` drops the popup surface; with `tabIndex={0}` the list handles arrow keys itself when focused." }],
+  examples: [{ id: "plain", title: "Plain", description: "Use `variant=\"plain\"` when the list sits in the page instead of a popup; with `tabIndex={0}` it handles arrow keys itself." }],
   notes: [
-    { title: "Why not Menu", body: "`Menu` moves focus into its popup. Slash menus, mention pickers and autocomplete need focus to stay in the text, so `MenuList` tracks a highlighted value and exposes it with `aria-activedescendant`. The notion and email editors use it for `/` and `{{`." },
+    { title: "Why not Menu", body: "`Menu` moves focus into its popup. Slash menus, mention pickers and autocomplete need focus to stay in the text, so `MenuList` tracks a highlighted value and exposes it with `aria-activedescendant`. The block and email editors use it for `/` and `{{`." },
     { title: "Keyboard", body: "`ref.current.onKeyDown(event)` handles `ArrowUp` / `ArrowDown` (looping), `Home` / `End`, and `Enter` / `Tab` (clicks the highlighted item); it returns true when it used the key. The highlight resets to the first item when the list changes under it." },
   ],
   api: [

@@ -18,23 +18,22 @@ export default {
     {
       id: "with-description",
       title: "With Description",
-      description: "For settings rows, put the switch at the end and point a `Label` at it with `htmlFor` and the switch `id`.",
+      description: "Use in settings rows; point a `Label` at the switch with `htmlFor` and its `id`.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "`disabled` dims the switch in either state and blocks interaction.",
     },
     {
       id: "read-only",
       title: "Read Only",
-      description: "`readOnly` keeps full contrast and focus but ignores clicks, for values the user can see but not change.",
+      description: "Use `readOnly` for values the user can see but not change; it stays focusable.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The thumb slides with a playful overshoot curve (300ms) and stretches slightly while pressed; the track colour fades over 200ms.",
+      body: "The thumb slides over 300ms with an overshoot curve and the track colour fades over 200ms.",
     },
     {
       title: "Keyboard",
@@ -44,7 +43,7 @@ export default {
   api: [
     {
       name: "Switch",
-      description: "The track and thumb in one part. The library only styles it.",
+      description: "Track and thumb in one part.",
       extends: "Switch.Root",
       extendsHref: "https://base-ui.com/react/components/switch#root",
       props: [
@@ -60,7 +59,7 @@ export default {
         { name: "name", type: "string", description: "Submits the value with a form." },
       ],
       dataAttributes: [
-        { name: "data-checked", description: "Present when on (primary track, thumb moved right)." },
+        { name: "data-checked", description: "Present when on." },
         { name: "data-unchecked", description: "Present when off." },
         { name: "data-disabled", description: "Present when disabled." },
       ],

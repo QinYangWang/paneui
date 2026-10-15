@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "message",
   "title": "Message",
-  "description": "Composable conversation primitives: Message rows aligned by sender, MessageAvatar, auto-grouped MessageContent bubbles, MessageHeader, MessageMeta, hover-revealed MessageActions, typing indicator and day markers.",
+  "description": "Lays out chat conversation rows by sender.",
   "dependencies": [
     "motion",
     "@base-ui/react"

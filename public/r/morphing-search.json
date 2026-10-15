@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "morphing-search",
   "title": "Morphing Search",
-  "description": "A search field or compact icon that morphs into a results surface with grouped, highlighted matches, full keyboard navigation and an opt-in ⌘/Ctrl shortcut.",
+  "description": "Search field that opens into a list of results.",
   "dependencies": [
     "motion"
   ],

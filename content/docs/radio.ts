@@ -26,28 +26,28 @@ import { Radio, RadioGroup } from "@/components/ui/radio"`,
     {
       id: "horizontal",
       title: "Horizontal",
-      description: "`RadioGroup` is a vertical stack; add `flex-row` and a gap for a row.",
+      description: "Use for two or three short options that fit on one line.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `value` and `onValueChange` to react to the choice.",
+      description: "Use when other UI reacts to the choice.",
     },
     {
       id: "choice-cards",
       title: "Choice Cards",
-      description: "Wrap each option in a surface and ring it with `has-data-checked:` when its radio is selected.",
+      description: "Use when each option needs a description or price beside it.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "`disabled` on the group disables every radio; set it on one `Radio` to disable only that option.",
+      description: "Use `disabled` on one `Radio` to block a single option, or on the group to block them all.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Inside a `RadioGroup` the selected dot glides from one radio to the next on a spring; a standalone `Radio` pops its dot in instead. With reduced motion the dot moves instantly.",
+      body: "A standalone `Radio` pops its dot in instead of gliding. With reduced motion the dot moves instantly.",
     },
     {
       title: "Keyboard",

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "dialog",
   "title": "Dialog",
-  "description": "Modal with a soft scale-in, dimmed backdrop and close button.",
+  "description": "Asks for a decision or input in a modal window.",
   "dependencies": [
     "@base-ui/react"
   ],

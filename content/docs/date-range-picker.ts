@@ -27,22 +27,22 @@ export default {
     {
       id: "inline",
       title: "Inline",
-      description: "Drop the trigger and content to render the calendar in place. `unit` on the summary names the length (`day`/`days` here).",
+      description: "Leave out the trigger and content when the calendar should sit in the page instead of a popup.",
     },
     {
       id: "unavailable-dates",
       title: "Unavailable Dates",
-      description: "`min` blocks the past and `isDateDisabled` marks booked nights; a range can't span a disabled day. `closeOnComplete` closes once both ends are picked.",
+      description: "Use `min` and `isDateDisabled` when some days can't be booked; a range can't span a disabled day.",
     },
     {
       id: "locale",
       title: "Locale",
-      description: "`locale` drives month, weekday and range formatting through `Intl`; `weekStartsOn` overrides the first weekday. `unit={null}` hides the length.",
+      description: "Set `locale` and `weekStartsOn` when the picker should follow the reader's language and calendar.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Control the range with `value` / `onValueChange` and the popup with `open` / `onOpenChange`, here limited to the last 90 days with `min` and `max`.",
+      description: "Control `value` and `open` when other UI needs to read or set the range or the popup.",
     },
   ],
   notes: [
@@ -52,11 +52,11 @@ export default {
     },
     {
       title: "Motion",
-      body: "Month titles and grids slide in the direction you page. With reduced motion they only cross-fade.",
+      body: "With reduced motion, month changes cross-fade instead of sliding.",
     },
     {
       title: "Related",
-      body: "Other pickers: [Wheel Picker](/docs/wheel-picker), [Color Picker](/docs/color-picker).",
+      body: "See also [Wheel Picker](/docs/wheel-picker) and [Color Picker](/docs/color-picker).",
     },
   ],
   api: [
@@ -85,7 +85,7 @@ export default {
     },
     {
       name: "DateRangePickerTrigger",
-      description: "Raised pill with a calendar icon and the formatted range (`Intl.formatRange`).",
+      description: "Button that shows the formatted range (`Intl.formatRange`).",
       extends: "Popover.Trigger",
       extendsHref: `${POPOVER}#trigger`,
       props: [
@@ -129,7 +129,7 @@ export default {
     },
     {
       name: "DateRangePickerSummary",
-      description: "\"Mar 3 – 9 · 6 nights\", or a prompt for the next pick. Announced politely.",
+      description: "The range and its length (\"Mar 3 – 9 · 6 nights\"), or a prompt for the next pick, announced in a polite live region.",
       extends: "p",
       props: [
         {

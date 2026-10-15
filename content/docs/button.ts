@@ -19,7 +19,7 @@ export default {
     {
       id: "sizes",
       title: "Sizes",
-      description: "`xs` (24px), `sm` (28px), `default` (32px) and `lg` (36px) share the 10px radius; `xs` drops to 6px.",
+      description: "Use `sm` in toolbars and dense rows.",
     },
     {
       id: "with-icon",
@@ -30,13 +30,13 @@ export default {
     {
       id: "icon",
       title: "Icon",
-      description: "Icon-only sizes are square. Always give them an `aria-label`.",
+      description: "Use icon-only buttons in toolbars, and always give them an `aria-label`.",
     },
     { id: "disabled", title: "Disabled" },
     {
       id: "as-link",
       title: "As link",
-      description: "Render any element with `render`. Pass `nativeButton={false}` when it isn't a `<button>`.",
+      description: "Use `render` when the action navigates, with `nativeButton={false}` when it isn't a `<button>`.",
     },
   ],
   api: [
@@ -55,7 +55,7 @@ export default {
           name: "size",
           type: `"default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"`,
           default: `"default"`,
-          description: "Height and padding. `icon*` sizes are square.",
+          description: "Height and padding. `xs` is 24px, `sm` 28px, `default` 32px and `lg` 36px, all with a 10px radius except `xs` at 6px. `icon*` sizes are square.",
         },
         {
           name: "render",

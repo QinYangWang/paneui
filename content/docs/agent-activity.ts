@@ -16,33 +16,33 @@ export default {
     {
       id: "item-types",
       title: "Item Types",
-      description: "Items are `reasoning`, `search` (with `results`), `tool` (`read`, `edit`, `write`, `run` or any name, with `additions` / `deletions`) and `step`; consecutive items of one type fold into a group.",
+      description: "Use to show every kind of work in one run; consecutive items of one type fold into a group.",
     },
     {
       id: "completed",
       title: "Completed",
-      description: "With `status=\"complete\"` the stream folds into \"Worked for …\" plus a count of searches, tool calls and steps; `duration` sets the total.",
+      description: "Set `status=\"complete\"` once the run ends, with `duration` for the total time.",
     },
     {
       id: "custom-labels",
       title: "Custom Labels",
-      description: "`activeLabel` overrides the live header and `summary` the completed one.",
+      description: "Use `activeLabel` and `summary` when the default headers don't match your product's wording.",
     },
     {
       id: "errors",
       title: "Errors",
-      description: "Set `status: \"error\"` on an item to mark it with a cross and tint its group's icon red.",
+      description: "Set `status: \"error\"` on items that failed.",
     },
     {
       id: "keep-open",
       title: "Keep Open",
-      description: "`collapseOnComplete={false}` leaves the stream expanded when the run ends; `open` and `onOpenChange` control it after that.",
+      description: "Use `collapseOnComplete={false}` when readers should review the work after the run ends.",
     },
   ],
   notes: [
     {
       title: "Behaviour",
-      body: "While `working` the stream is always open and the header can't be toggled; the live group stays open with a shimmering label and the timer ticks. Groups the reader opens or closes keep that choice.",
+      body: "While `working` the stream is always open, the header can't be toggled and the live group stays open. Groups the reader opens or closes keep that choice.",
     },
     {
       title: "Motion",
@@ -64,7 +64,7 @@ export default {
         { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the stream opens or closes." },
         { name: "collapseOnComplete", type: "boolean", default: "true", description: "Fold into the summary line when the run completes." },
         { name: "activeLabel", type: "ReactNode", description: "Override the live header label." },
-        { name: "summary", type: "ReactNode", description: "Override the completed summary." },
+        { name: "summary", type: "ReactNode", description: "Override the completed summary, which defaults to \"Worked for …\" plus a count of searches, tool calls and steps." },
       ],
       dataAttributes: [{ name: "data-status", description: "`working` or `complete`." }],
     },

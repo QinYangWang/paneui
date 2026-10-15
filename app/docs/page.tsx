@@ -9,42 +9,26 @@ import { Button } from "@/registry/base-nova/ui/button"
 
 export const metadata = { title: "Introduction" }
 
-/** One line per category for the "What's inside" grid. */
-const CATEGORY_BLURBS: Record<string, string> = {
-  Foundations: "The theme tokens, the rounded icon set and the icon chip every header uses.",
-  Forms: "Buttons, fields, pickers and confirm controls at a 32px desktop density.",
-  Overlays: "Menus, popovers, dialogs, drawers, sheets and toasts.",
-  Display: "Cards, badges, alerts, accordions, loaders and the theme toggle.",
-  Navigation: "Tabs, breadcrumbs, the animated sidebar and a file tree.",
-  Text: "Reveals, shimmers, scrambles and rolling digits for copy and numbers.",
-  Motion: "Scroll, drag, magnetic and shader effects that respect reduced motion.",
-  Data: "Virtualized, editable and paginated tables.",
-  Agents: "Messages, streaming replies, tool calls, diffs and plans for agent UIs.",
-  Charts: "Charts and activity calendars on the five-hue chart palette.",
-  Blocks: "Composed pieces: prompt bar, command palette, uploads, forms and more.",
-  Templates: "Full apps to start from, installable in one command: SaaS (landing, dashboard, settings, auth), agent workspace (ACP), docs, blog.",
-}
-
 const PRINCIPLES = [
   {
     title: "Open code",
-    body: "Every item installs as source into your project through the shadcn CLI. There is no package to upgrade around: edit the component itself.",
+    body: "Every item installs into your project as source through the shadcn CLI. To change a component, edit its file.",
   },
   {
     title: "Native desktop style",
-    body: "System UI font on a 13px scale, translucent fills instead of grey surfaces, hairline borders and near-flat elevation.",
+    body: "Sizes and surfaces are tuned for dense app screens rather than marketing pages.",
   },
   {
     title: "Accessible primitives",
-    body: "Interactive parts are built on a maintained headless primitive layer, so focus management, keyboard support and ARIA come built in.",
+    body: "Interactive parts sit on headless primitives, so focus, keyboard and ARIA behaviour come built in.",
   },
   {
     title: "Motion with restraint",
-    body: "Critically damped springs, no press scale on standard controls, and every movement falls back to a cross-fade under prefers-reduced-motion.",
+    body: "Animations settle without bounce, and each one becomes a cross-fade when the user prefers reduced motion.",
   },
   {
     title: "Tokens only",
-    body: "Components read theme tokens, never palette colours or hex values, so light, dark and the accent presets restyle everything at once. Lint rules enforce it.",
+    body: "Components read theme tokens, never raw colours, so a theme or accent change restyles everything at once. Lint rules enforce it.",
   },
 ]
 
@@ -62,17 +46,16 @@ export default function Introduction() {
     <GuidePage
       href="/docs"
       toc={toc}
-      lede={`${total} copy-paste React components, blocks and templates for Tailwind CSS 4, in a quiet native desktop style. Install any of them with the shadcn CLI.`}
+      lede={`${total} React components, blocks and templates you install as source with the shadcn CLI.`}
     >
       <div className="flex flex-col gap-4 text-muted-foreground">
         <p>
-          qinyang/ui is a shadcn registry, not an npm package. You add the <Code>@{REGISTRY_NAME}</Code> namespace to your
-          project once, then the CLI copies each component, with the components it builds on, into your codebase. From then
-          on the code is yours.
+          qinyang/ui is a shadcn registry, not an npm package. Add the <Code>@{REGISTRY_NAME}</Code> namespace to your
+          project once, then the CLI copies each component and its dependencies into your codebase. From then on the code
+          is yours.
         </p>
         <p>
-          The library leans toward app interfaces: dense forms and menus, agent and chat surfaces, charts and data tables,
-          plus a handful of full-page templates that show the pieces working together.
+          Use it for app interfaces. Start from a template when you want the pieces already wired together.
         </p>
       </div>
 
@@ -104,8 +87,7 @@ export default function Introduction() {
                   {g.category}
                   <span className="ml-auto text-ui-xs text-muted-foreground tabular-nums">{g.items.length}</span>
                 </span>
-                <span className="text-sm text-muted-foreground">{CATEGORY_BLURBS[g.category]}</span>
-              </Link>
+                              </Link>
             )
           })}
         </div>
@@ -125,8 +107,8 @@ export default function Introduction() {
             <Code>motion/react</Code> for springs and layout animation.
           </li>
           <li>
-            The <TextLink href="https://ui.shadcn.com/docs/cli">shadcn CLI</TextLink> for distribution, and a rounded 24×24
-            icon set shipped as <Code>@{REGISTRY_NAME}/icons</Code>.
+            The <TextLink href="https://ui.shadcn.com/docs/cli">shadcn CLI</TextLink> for distribution, and an icon set
+            shipped as <Code>@{REGISTRY_NAME}/icons</Code>.
           </li>
         </ul>
       </section>
@@ -134,8 +116,8 @@ export default function Introduction() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="quick-start">Quick start</GuideH2>
         <p className="text-muted-foreground">
-          After adding the namespace (see <TextLink href="/docs/installation">Installation</TextLink>), install the theme and
-          a first component:
+          Add the namespace (see <TextLink href="/docs/installation">Installation</TextLink>), then install the theme and a
+          first component.
         </p>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme @${REGISTRY_NAME}/button`} />
         <div className="flex flex-wrap gap-2">

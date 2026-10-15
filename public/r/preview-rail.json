@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "preview-rail",
   "title": "Preview Rail",
-  "description": "Navigation rail of compact ticks that swell into a pyramid around the pointed or focused tick while a preview card glides alongside to reveal its label and description.",
+  "description": "Compact section navigation that previews each destination.",
   "dependencies": [
     "motion"
   ],

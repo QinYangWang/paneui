@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "notification-stack",
   "title": "Notification Stack",
-  "description": "Compact notification cards stacked into a peeking summary that spring apart into a readable, dismissible list on hover, focus or tap.",
+  "description": "Collapses many notifications into one stack that opens on demand.",
   "dependencies": [
     "motion"
   ],

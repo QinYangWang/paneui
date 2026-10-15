@@ -9,32 +9,32 @@ export default {
     {
       id: "markdown",
       title: "Markdown",
-      description: "`text` supports headings, bulleted and numbered lists, fenced code, `code`, **bold**, *em*, links and `[n]` citation markers.",
+      description: "Use for model replies; `text` renders a markdown subset as it streams.",
     },
     {
       id: "error",
       title: "Error",
-      description: "`status=\"error\"` shows an alert with `errorMessage` and, when `onRetry` is set, a Retry button.",
+      description: "Use when a stream fails; set `onRetry` to offer a Retry button.",
     },
     {
       id: "feedback",
       title: "Controlled Feedback",
-      description: "Own the thumbs state with `feedback` and `onFeedbackChange`; clicking the pressed thumb again clears it to `null`.",
+      description: "Use when you store ratings; clicking the pressed thumb again clears it to `null`.",
     },
     {
       id: "sources-open",
       title: "Sources Open, No Actions",
-      description: "`defaultSourcesOpen` expands the sources list once complete; `showActions={false}` hides the copy and feedback row.",
+      description: "Use in read-only transcripts where the sources matter more than the actions.",
     },
     {
       id: "custom-children",
       title: "Custom Content",
-      description: "Pass `children` instead of `text` to render your own markdown; set `copyText` so the copy action has plain text.",
+      description: "Use when you render the markdown yourself; set `copyText` so copying still yields plain text.",
     },
     {
       id: "markdown-and-caret",
       title: "ResponseMarkdown and StreamingCaret",
-      description: "Both are exported for your own message surfaces: the markdown renderer with an optional `caret`, and the caret alone.",
+      description: "Use these to build your own message surface with the same renderer and caret.",
     },
   ],
   notes: [
@@ -53,7 +53,7 @@ export default {
       description: "Surface for an assistant reply: streamed text, then actions and sources.",
       extends: "div",
       props: [
-        { name: "text", type: "string", description: "Markdown-ish text, streamed in by appending." },
+        { name: "text", type: "string", description: "Markdown subset (headings, lists, fenced and inline code, bold, italic, links, `[n]` citations), streamed in by appending." },
         { name: "children", type: "ReactNode", description: "Custom content instead of `text`." },
         { name: "status", type: `"streaming" | "complete" | "error"`, default: `"streaming"`, description: "Reply state; `streaming` shows the caret and hides actions." },
         { name: "sources", type: "CitationSource[]", description: "Sources for `[n]` markers and the footer list. See [Citations](/docs/citations)." },

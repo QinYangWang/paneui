@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "date-range-picker",
   "title": "Date Range Picker",
-  "description": "Composable date range picker (Root, Trigger, Content, Calendar, Grid, Presets, Summary, Clear) with animated month navigation, hover range preview and keyboard grid navigation, built on Intl and Date with no date library.",
+  "description": "Picks a start and end date from a calendar.",
   "dependencies": [
     "@base-ui/react",
     "motion"

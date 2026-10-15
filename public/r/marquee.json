@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "marquee",
   "title": "Marquee",
-  "description": "Infinite horizontal or vertical scroller with edge fade and pause on hover, driven by CSS animation.",
+  "description": "Scrolls content past in an endless loop.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"

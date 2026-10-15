@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "agent-composer",
   "title": "Agent Composer",
-  "description": "Coding-agent composer with @file mentions and /command suggestions, attach and voice buttons, picker slots, a stacked banner area and send / stop.",
+  "description": "Prompt input for coding agents with file mentions and commands.",
   "dependencies": [
     "motion"
   ],

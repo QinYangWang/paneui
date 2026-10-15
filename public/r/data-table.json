@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "data-table",
   "title": "Data Table",
-  "description": "Table with search, faceted filters with counts, column visibility, sorting, row selection with bulk actions, row action menus, pagination and empty / no-results states.",
+  "description": "Browses, filters and acts on a set of rows.",
   "dependencies": [
     "motion"
   ],

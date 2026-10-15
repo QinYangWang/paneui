@@ -65,7 +65,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
           <CoverArt variant={post.cover} className="aspect-video w-full rounded-3xl outline -outline-offset-1 outline-black/10 sm:aspect-21/9 dark:outline-white/10" />
 
           <div className="flex justify-between gap-12">
-            <article className="prose-qy min-w-0 flex-1">
+            <article className="typeset typeset-reading min-w-0 flex-1 max-w-reading">
               <p>
                 Put a rounded card inside another rounded card with a little padding between them, give both the same radius, and
                 something feels off. Most people can&apos;t say what. The inner corners look too sharp next to the outer ones, and the
@@ -95,7 +95,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                 With a radius scale, pick the inner token first and walk up the scale by the padding. Here a <code>20px</code> panel
                 sits in a <code>4px</code> frame, so the frame takes <code>24px</code>.
               </p>
-              <div className="not-prose">
+              <div className="not-typeset">
                 <AgentCodeBlock filename="nested-surface.tsx" code={CODE} copyable />
               </div>
               <p>

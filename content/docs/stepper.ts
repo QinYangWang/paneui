@@ -10,33 +10,33 @@ export default {
     code: `<Stepper aria-label="Guests" defaultValue={2} min={1} max={8} />`,
   },
   examples: [
-    { id: "sizes", title: "Sizes", description: "`sm` is 32px tall, `default` is 40px." },
+    { id: "sizes", title: "Sizes", description: "Use `sm` in toolbars and dense rows." },
     {
       id: "with-unit",
       title: "With Unit",
-      description: "`unit` adds muted text after the number, e.g. \"nights\". It is visual only.",
+      description: "Use `unit` when the number needs a word after it, e.g. \"nights\".",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `value` and `onValueChange`; the value is `null` while the field is empty.",
+      description: "Use when other UI reads the value; it is `null` while the field is empty.",
     },
     {
       id: "decimals",
       title: "Decimals",
-      description: "Combine a fractional `step` with `format` (Intl.NumberFormat options) to keep the digits fixed.",
+      description: "Use for prices and measurements, pairing a fractional `step` with `format` to fix the digits.",
     },
     {
       id: "localized",
       title: "Localized",
-      description: "`decrementLabel` and `incrementLabel` name the − and + buttons; pass them with `locale` for a fully translated control.",
+      description: "Use when your UI is translated, passing the button labels along with `locale`.",
     },
-    { id: "disabled", title: "Disabled", description: "`disabled` dims the whole control." },
+    { id: "disabled", title: "Disabled" },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Changed digits roll up or down in the direction of the change on a spring, with a slight blur. With reduced motion they cross-fade instead.",
+      body: "With reduced motion the rolling digits cross-fade instead.",
     },
     {
       title: "Keyboard",
@@ -46,7 +46,7 @@ export default {
   api: [
     {
       name: "Stepper",
-      description: "A − value + control with a rolling number display.",
+      description: "Number field with − and + step buttons.",
       extends: "NumberField.Root",
       extendsHref: "https://base-ui.com/react/components/number-field#root",
       props: [

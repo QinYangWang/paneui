@@ -26,10 +26,10 @@ export default {
 │   └── PageHeaderDescription
 └── PageHeaderActions`,
   examples: [],
-  notes: [{ title: "Layout", body: "Actions sit at the bottom-right of the title block and wrap under it on narrow screens. The title is the page's `h1`." }],
+  notes: [{ title: "Layout", body: "Actions wrap under the title on narrow screens. The title is the page's `h1`." }],
   api: [
     { name: "PageHeader", extends: "header", props: [] },
     { name: "PageHeaderTitle", extends: "h1", description: "`text-2xl` semibold, balanced wrapping.", props: [] },
-    { name: "PageHeaderEyebrow", extends: "div", description: "Small line above the title: a breadcrumb, status or section.", props: [] },
+    { name: "PageHeaderEyebrow", extends: "div", description: "Small line above the title, such as a breadcrumb or status.", props: [] },
   ],
 } satisfies ComponentDoc

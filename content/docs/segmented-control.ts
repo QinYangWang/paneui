@@ -11,10 +11,10 @@ export default {
   },
   composition: `SegmentedControl
 └── SegmentedControlItem`,
-  examples: [{ id: "sizes", title: "Sizes", description: "`size=\"sm\"` (24px) fits card headers and toolbars." }],
+  examples: [{ id: "sizes", title: "Sizes", description: "Use `sm` in card headers and toolbars." }],
   notes: [
-    { title: "Tabs or segmented control?", body: "Use Tabs when the options switch panels of content. Use a segmented control when they change a value: billing cycle, chart type, theme, range. It is a radio group, so arrow keys move the selection." },
-    { title: "Motion", body: "The raised thumb glides between items with a shared-layout spring; under reduced motion it moves instantly." },
+    { title: "Tabs or segmented control?", body: "Use Tabs when the options switch panels of content. Use a segmented control when they change a value, like a billing cycle or theme. It is a radio group, so arrow keys move the selection." },
+    { title: "Motion", body: "Under reduced motion the thumb moves instantly." },
   ],
   api: [
     {
@@ -25,7 +25,7 @@ export default {
         { name: "value", type: "string", description: "Controlled value." },
         { name: "defaultValue", type: "string", description: "Initial value." },
         { name: "onValueChange", type: "(value: string) => void", description: "Called with the new value." },
-        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "28px or 24px items." },
+        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "`sm` items are 24px tall, `default` 28px." },
       ],
     },
     { name: "SegmentedControlItem", extends: "Radio.Root", extendsHref: "https://base-ui.com/react/components/radio#root", props: [{ name: "value", type: "string", required: true, description: "This option's value." }] },

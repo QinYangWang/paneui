@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "command-palette",
   "title": "Command Palette",
-  "description": "⌘K palette with fuzzy search, grouped results, a gliding active row, keyboard navigation and shortcut hints.",
+  "description": "Keyboard-first launcher for searching and running commands.",
   "dependencies": [
     "@base-ui/react",
     "motion"

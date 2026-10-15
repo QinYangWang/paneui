@@ -47,7 +47,7 @@ export default {
     {
       id: "checkbox-items",
       title: "Checkbox Items",
-      description: "`MenuCheckboxItem` takes `checked` and `onCheckedChange`, and stays open on click so several can be toggled.",
+      description: "Use `MenuCheckboxItem` for options that toggle independently; the menu stays open so several can be toggled.",
     },
     {
       id: "radio-items",
@@ -57,12 +57,12 @@ export default {
     {
       id: "disabled-and-destructive",
       title: "Disabled and Destructive",
-      description: "Give a `MenuItem` `disabled` to dim it, or `variant=\"destructive\"` for actions that delete. `MenuShortcut` right-aligns a key hint.",
+      description: "Use `variant=\"destructive\"` for actions that delete and `disabled` for ones that aren't available right now.",
     },
     {
       id: "inset",
       title: "Inset",
-      description: "`inset` on `MenuItem` and `MenuLabel` lines their text up with items that have an icon or indicator.",
+      description: "Set `inset` on `MenuItem` and `MenuLabel` when only some items have an icon or indicator, so the text lines up.",
     },
   ],
   notes: [

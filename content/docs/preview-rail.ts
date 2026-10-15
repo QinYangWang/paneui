@@ -15,17 +15,17 @@ export default {
     {
       id: "horizontal",
       title: "Horizontal",
-      description: "`orientation=\"horizontal\"` lays the ticks in a row; `side=\"start\"` puts the preview card above it.",
+      description: "Use along the top or bottom of a page, with `side=\"start\"` to open the card above.",
     },
     {
       id: "render-preview",
       title: "Icons and Custom Preview",
-      description: "Items with an `icon` show it in an `IconChip` in the default card. `renderPreview` replaces the card contents; return `null` to show nothing for an item.",
+      description: "Use when the preview needs icons or your own contents.",
     },
     {
       id: "side-start",
       title: "Compact, Preview on Start",
-      description: "`side=\"start\"` opens the card on the left of a vertical rail, `itemSize` and `tickLength` make it denser, and `showActive={false}` lets the ticks rest when nothing is pointed at.",
+      description: "Use when the rail sits on the right edge and space is tight.",
     },
   ],
   notes: [
@@ -35,7 +35,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "Ticks grow into a pyramid around the pointed one and the card glides alongside. Under reduced motion the ticks and card change without animating and the card only fades.",
+      body: "Under reduced motion the ticks change without animating and the card only fades.",
     },
   ],
   api: [
@@ -71,7 +71,7 @@ export default {
         { name: "id", type: "string", required: true, description: "Unique id." },
         { name: "label", type: "string", required: true, description: "Accessible name and preview title." },
         { name: "description", type: "ReactNode", description: "Preview body text." },
-        { name: "icon", type: "ReactNode", description: "Leading icon in the default preview." },
+        { name: "icon", type: "ReactNode", description: "Leading icon, shown in an `IconChip` in the default preview." },
         { name: "href", type: "string", description: "Render the tick as a link." },
         { name: "target", type: "HTMLAttributeAnchorTarget", description: "Link target." },
         { name: "rel", type: "string", description: "Link rel. Defaults to `noreferrer noopener` for `_blank`." },

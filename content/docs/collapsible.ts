@@ -19,22 +19,20 @@ export default {
     {
       id: "default-open",
       title: "Default Open",
-      description: "`defaultOpen` starts the panel expanded.",
     },
     {
       id: "show-more",
       title: "Show More",
-      description: "`chevron={false}` turns the trigger into a plain text button below the panel; its label follows `open`.",
+      description: "Use `chevron={false}` for a show-more button below a truncated panel.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `open` and `onOpenChange` to toggle the panel from elsewhere too.",
+      description: "Use `open` and `onOpenChange` when something else also toggles the panel.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "`disabled` on `Collapsible` dims the trigger and keeps the panel shut.",
     },
   ],
   notes: [

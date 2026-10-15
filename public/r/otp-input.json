@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "otp-input",
   "title": "OTP Input",
-  "description": "One-time-code field with a gliding focus ring, digits that roll in, paste and autofill support, an error shake and a success check.",
+  "description": "Enters a one-time sign-in or verification code.",
   "dependencies": [
     "@base-ui/react",
     "motion"

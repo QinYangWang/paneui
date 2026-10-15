@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "settings-section",
   "title": "Settings Section",
-  "description": "Native settings layout: section header, grouped card of label + control rows split by hairlines, footer band for Save, danger-zone tone and a settings sub-nav.",
+  "description": "Layout for grouped settings pages.",
   "dependencies": [
     "@base-ui/react"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "popover-morph",
   "title": "Popover Morph",
-  "description": "Popover whose panel grows out of the trigger's own shape and colour and folds back into it.",
+  "description": "Popover that grows out of its trigger and folds back.",
   "dependencies": [
     "@base-ui/react"
   ],

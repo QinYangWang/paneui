@@ -27,22 +27,22 @@ export default {
     {
       id: "sides",
       title: "Sides",
-      description: "`side` places the tooltip `top` (default), `right`, `bottom` or `left` of the trigger.",
+      description: "Use another `side` when the default top placement would cover nearby content.",
     },
     {
       id: "align",
       title: "Align",
-      description: "`align` lines the tooltip up with the `start`, `center` or `end` of the trigger.",
+      description: "Use `start` or `end` for triggers at the edge of a toolbar or panel.",
     },
     {
       id: "with-icon",
       title: "With Icon",
-      description: "Content is an inline row, so an icon sits before the label. Any focusable element can be the trigger via `render`.",
+      description: "Use `render` to make any focusable element the trigger.",
     },
     {
       id: "delay",
       title: "Delay",
-      description: "Wrap a group in `TooltipProvider` with its own `delay` (ms). The default is 300.",
+      description: "Use a separate `TooltipProvider` with its own `delay` for a group that needs faster or slower hints.",
     },
   ],
   notes: [

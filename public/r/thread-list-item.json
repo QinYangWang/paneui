@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "thread-list-item",
   "title": "Thread List Item",
-  "description": "Two-line agent thread row: provider icon and title, then repo, pull request number in its status colour and branch, grouped under Recent / Today headings.",
+  "description": "Lists agent or chat threads in a sidebar.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json",
     "https://qinyangwang.github.io/ui/r/icons.json",

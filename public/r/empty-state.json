@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "empty-state",
   "title": "Empty State",
-  "description": "What a list, table or page shows when it has nothing yet: icon chip, title, description and actions, bare, outlined or muted.",
+  "description": "Tells users a list or page is empty and what to do next.",
   "dependencies": [
     "class-variance-authority"
   ],

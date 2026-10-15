@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "agent-progress",
   "title": "Agent Progress",
-  "description": "Compact working readout: a pulsing 3×3 activity glyph, an action verb and a live tabular timer that can pause, resume or be controlled.",
+  "description": "Shows that an agent is working, with a running timer.",
   "dependencies": [
     "motion"
   ],

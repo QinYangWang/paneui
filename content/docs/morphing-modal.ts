@@ -34,17 +34,17 @@ export default {
     {
       id: "steps",
       title: "Multi-step Flow",
-      description: "Call `push` from `useMorphingModal()` in your own buttons to build a wizard; set the first view with `defaultView` and put `MorphingModalBack` anywhere.",
+      description: "Use for a wizard whose own buttons call `push` from `useMorphingModal()`.",
     },
     {
       id: "view-change",
       title: "Nested Settings",
-      description: "A menu of `MorphingModalLink` rows; `onViewChange` reports each view the user lands on, including the return to the first view after closing.",
+      description: "Use when you need to know which view the user is on, through `onViewChange`.",
     },
     {
       id: "no-close-button",
       title: "Without Close Button",
-      description: "`showCloseButton={false}` drops the corner ×, for confirmations that should end with an explicit choice.",
+      description: "Use for confirmations that should end with an explicit choice.",
     },
   ],
   notes: [
@@ -58,7 +58,7 @@ export default {
     },
     {
       title: "Related",
-      body: "Other morphing surfaces: [Select Morph](/docs/select-morph), [Popover Morph](/docs/popover-morph), [Morphing Search](/docs/morphing-search), [Morphing Tabs](/docs/morphing-tabs).",
+      body: "See also [Select Morph](/docs/select-morph), [Popover Morph](/docs/popover-morph), [Morphing Search](/docs/morphing-search) and [Morphing Tabs](/docs/morphing-tabs).",
     },
   ],
   api: [
@@ -69,7 +69,7 @@ export default {
       extendsHref: `${BASE}#root`,
       props: [
         { name: "defaultView", type: "string", default: `"main"`, description: "The view shown when the modal opens." },
-        { name: "onViewChange", type: "(view: string) => void", description: "Called once with the new view whenever it changes: after `push`, `back` or `reset`, including the reset to `defaultView` when the modal finishes closing." },
+        { name: "onViewChange", type: "(view: string) => void", description: "Called once with the new view whenever it changes, including the reset to `defaultView` when the modal finishes closing." },
       ],
     },
     {

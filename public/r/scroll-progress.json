@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "scroll-progress",
   "title": "Scroll Progress",
-  "description": "Scroll-driven progress indicator as an edge bar (fixed, sticky or absolute) or a raised ring with an optional percentage, spring-smoothed and exposed as a progressbar.",
+  "description": "Shows how far the reader has scrolled.",
   "dependencies": [
     "motion",
     "lenis"

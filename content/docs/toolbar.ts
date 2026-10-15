@@ -20,11 +20,11 @@ export default {
 ├── ToolbarLink
 └── ToolbarInput`,
   examples: [
-    { id: "document-bar", title: "Document Bar", description: "The default variant inside a card header: undo / redo, a count and labelled actions (`size=\"label\"`)." },
-    { id: "inset", title: "Inset", description: "`variant=\"inset\"` puts the items in a well, for a compact control group." },
+    { id: "document-bar", title: "Document Bar", description: "Use the default variant in card and document headers, with `size=\"label\"` for text actions." },
+    { id: "inset", title: "Inset", description: "Use `inset` for a compact control group inside a panel." },
   ],
   notes: [
-    { title: "Keyboard", body: "The toolbar is one tab stop. Arrow keys move between items (looping), `Home` / `End` jump to the ends. Menu and popover triggers join the loop with `render={<ToolbarButton />}`." },
+    { title: "Keyboard", body: "The toolbar is one tab stop. Arrow keys move between items (looping) and `Home` / `End` jump to the ends. Menu and popover triggers join the loop with `render={<ToolbarButton />}`." },
     { title: "Radii", body: "`floating` is `rounded-xl` with `p-1`, so its 28px items take `rounded-inner` (10px). The plain variant falls back to `rounded-lg` items." },
   ],
   api: [

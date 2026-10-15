@@ -9,27 +9,27 @@ export default {
     {
       id: "spinners",
       title: "Spinners",
-      description: "`spinner` picks the terminal frame set of the default indicator: `braille`, `dots`, `line` or `star`.",
+      description: "Use to match the spinner to the tone of your interface.",
     },
     {
       id: "controlled",
       title: "Controlled Index",
-      description: "Pass `index` to show the phrase for the real current step; the component stops cycling on its own.",
+      description: "Use when you know the agent's real current step; it then stops cycling on its own.",
     },
     {
       id: "custom-indicator",
       title: "Custom Indicator",
-      description: "Replace the spinner with any node through `indicator`, or pass `null` to hide it.",
+      description: "Use when your product already has its own loading mark.",
     },
     {
       id: "no-ellipsis",
       title: "Without Ellipsis",
-      description: "Set `ellipsis={false}` when your phrases carry their own punctuation, and tune `interval` and `shimmerDuration`.",
+      description: "Use when your phrases carry their own punctuation.",
     },
     {
       id: "ascii-spinner",
       title: "ASCII Spinner",
-      description: "`AsciiSpinner` is exported on its own for inline terminal-style loading glyphs; `interval` sets milliseconds per frame.",
+      description: "Use `AsciiSpinner` on its own for inline loading marks, such as in a log view.",
     },
   ],
   notes: [
@@ -54,7 +54,7 @@ export default {
           default: `["Thinking", "Reading the context", "Weighing the options", "Drafting a reply"]`,
           description: "Phrases cycled while the agent works. A single phrase never changes.",
         },
-        { name: "mode", type: `"swap" | "cascade" | "scramble"`, default: `"swap"`, description: "Transition when the phrase changes: blur roll, letter roll or scramble." },
+        { name: "mode", type: `"swap" | "cascade" | "scramble"`, default: `"swap"`, description: "Transition between phrases. `swap` blurs and rolls, `cascade` rolls letter by letter, `scramble` scrambles the letters." },
         { name: "interval", type: "number", default: "2400", description: "Milliseconds each phrase stays up." },
         { name: "index", type: "number", description: "Controlled phrase index; when set, the component stops cycling on its own." },
         { name: "shimmerDuration", type: "number", default: "1.8", description: "Seconds per shimmer sweep." },

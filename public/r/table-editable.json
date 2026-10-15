@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "table-editable",
   "title": "Table Editable",
-  "description": "Spreadsheet-style table that edits cells in place, walks the grid with arrow keys, and inserts or deletes rows and columns from border handles and + pills with a smooth re-layout.",
+  "description": "Lets people edit cells and add or remove rows and columns.",
   "dependencies": [
     "@tanstack/react-virtual",
     "motion",

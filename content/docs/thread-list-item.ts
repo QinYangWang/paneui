@@ -20,8 +20,8 @@ export default {
 └── ThreadListGroup
     └── ThreadListItem`,
   examples: [
-    { id: "pr-states", title: "Pull Request States", description: "The PR number takes its status colour: open success, draft muted, merged purple, closed destructive." },
-    { id: "minimal", title: "Minimal", description: "Without `repo`, `pr` or `branch` the row is a single line, for plain chat lists." },
+    { id: "pr-states", title: "Pull Request States", description: "Use in coding-agent sidebars where threads map to pull requests." },
+    { id: "minimal", title: "Minimal", description: "Use for plain chat lists; without `repo`, `pr` or `branch` the row is one line." },
   ],
   notes: [{ title: "Truncation", body: "Title, repo and branch truncate independently; the branch gives way first so the PR number stays readable in a narrow sidebar." }],
   api: [
@@ -34,7 +34,7 @@ export default {
         { name: "title", type: "ReactNode", required: true, description: "Thread title." },
         { name: "icon", type: "ReactNode", description: "Provider or agent glyph." },
         { name: "repo", type: "string", description: "Repository or project." },
-        { name: "pr", type: `{ number: number; status: "open" | "draft" | "merged" | "closed" }`, description: "Linked pull request." },
+        { name: "pr", type: `{ number: number; status: "open" | "draft" | "merged" | "closed" }`, description: "Linked pull request. The number takes the status colour (open success, draft muted, merged purple, closed destructive)." },
         { name: "branch", type: "string", description: "Git branch." },
         { name: "active", type: "boolean", default: "false", description: "Selected row." },
         { name: "running", type: "boolean", default: "false", description: "Replace the icon with a spinner." },

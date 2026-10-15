@@ -19,29 +19,28 @@ export default {
     {
       id: "basic",
       title: "Basic",
-      description: "An image with an initials fallback. The fallback shows while the image loads and stays if it fails.",
     },
     {
       id: "sizes",
       title: "Sizes and Shapes",
       description:
-        "`xs` 20 · `sm` 24 · `md` 32 · `lg` 40 · `xl` 48px. `shape=\"rounded\"` is a squircle whose radius scales with the size (6–14px).",
+        "Use `sm` in dense lists, and `shape=\"rounded\"` for teams and apps rather than people.",
     },
     {
       id: "fallback",
       title: "Fallback",
       description:
-        "Initials, an icon, or a [generated avatar](/docs/avatar-generator) when the photo is missing. `delay` holds the fallback back so fast loads don't flash.",
+        "Use `delay` so fast-loading photos don't flash the fallback, or a [generated avatar](/docs/avatar-generator) when there is no photo.",
     },
     {
       id: "status",
       title: "Status",
-      description: "`AvatarStatus` adds a presence dot cut out of the page with a `background` ring; give it a `label` for screen readers.",
+      description: "Use `AvatarStatus` for presence, with a `label` when the state matters to screen readers.",
     },
     {
       id: "group",
       title: "Group",
-      description: "`AvatarGroup` overlaps its avatars and sets their `size` and `shape`; end with `AvatarGroupCount` for the overflow.",
+      description: "Use `AvatarGroup` for the people on a shared item, ending with `AvatarGroupCount` for the overflow.",
     },
   ],
   notes: [
@@ -60,13 +59,13 @@ export default {
           name: "size",
           type: `"xs" | "sm" | "md" | "lg" | "xl"`,
           default: `"md"`,
-          description: "Box size and fallback text size. Inside an `AvatarGroup` it defaults to the group's size.",
+          description: "Box size and fallback text size, from 20px at `xs` through 24, 32 and 40px to 48px at `xl`. Inside an `AvatarGroup` it defaults to the group's size.",
         },
         {
           name: "shape",
           type: `"circle" | "rounded"`,
           default: `"circle"`,
-          description: "Round, or a squircle with a size-matched radius.",
+          description: "Round, or a squircle whose radius scales with the size (6–14px).",
         },
       ],
       dataAttributes: [
@@ -82,6 +81,7 @@ export default {
     },
     {
       name: "AvatarFallback",
+      description: "Initials or an icon. Shows while the image loads and stays if it fails.",
       extends: "Avatar.Fallback",
       extendsHref: "https://base-ui.com/react/components/avatar#fallback",
       props: [
@@ -97,7 +97,7 @@ export default {
           name: "status",
           type: `"online" | "away" | "busy" | "offline"`,
           default: `"online"`,
-          description: "Colour: success, warning, destructive, muted.",
+          description: "Presence state; sets the dot to the success, warning, destructive or muted token, in that order.",
         },
         { name: "label", type: "string", description: "Accessible name (e.g. \"Online\"). Without it the dot is hidden from screen readers." },
       ],

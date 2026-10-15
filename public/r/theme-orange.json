@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-orange",
   "title": "Theme: Orange accent",
-  "description": "Orange accent preset: sets the --accent-50…950 ramp to Tailwind orange; primary = the 700 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+  "description": "Accent preset that sets the primary colour to orange.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"
   ],

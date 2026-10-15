@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "chart-utils",
   "title": "Chart Utils",
-  "description": "Shared chart helpers: token-based palette (chart-1..5 with semantic fallbacks), linear/band scales, ResizeObserver sizing, seeded PRNG, formatters, springy ChartNumber, in-chart tooltip shell and raised legend pills.",
+  "description": "Shared helpers for building and styling your own charts.",
   "dependencies": [
     "motion"
   ],

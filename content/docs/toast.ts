@@ -18,28 +18,28 @@ toast.add({ title: "Saved", description: "Your changes are live.", type: "succes
     {
       id: "types",
       title: "Types",
-      description: "`type` picks the leading icon: `success`, `error`, `warning`, `info` or `loading`. Leave it out for a plain toast.",
+      description: "Use `type` to match the outcome, or leave it out for a plain notice.",
     },
     {
       id: "with-action",
       title: "With Action",
-      description: "`actionProps` renders a small button under the text; use it for Undo and close the toast in its `onClick`.",
+      description: "Use for Undo, closing the toast in the action's `onClick`.",
     },
     {
       id: "promise",
       title: "Promise",
-      description: "`toast.promise()` shows a loading toast and swaps it for the success or error state when the promise settles.",
+      description: "Use for saves and uploads that take a moment; the toast follows the promise to success or error.",
     },
     {
       id: "persistent",
       title: "Persistent",
-      description: "`timeout: 0` keeps a toast until it is dismissed; `priority: \"high\"` announces it assertively. `toast.close()` with no id clears them all.",
+      description: "Use `timeout: 0` for messages the user must act on, and `priority: \"high\"` when they are urgent.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Toasts slide up from the bottom-right and stack with a small peek and scale. Hovering or focusing the stack expands it. Swipe right or down to dismiss.",
+      body: "Hovering or focusing the stack expands it, and swiping right or down dismisses a toast.",
     },
     {
       title: "Accessibility",
@@ -59,7 +59,7 @@ toast.add({ title: "Saved", description: "Your changes are live.", type: "succes
     },
     {
       name: "useToast",
-      description: "Alias of the toast primitive's `useToastManager`. Returns `{ toasts, add, update, close, promise }`; `add` returns the toast id.",
+      description: "Alias of the toast primitive's `useToastManager`. Returns `{ toasts, add, update, close, promise }`; `add` returns the toast id and `close()` with no id clears every toast.",
       extends: "Toast.useToastManager",
       extendsHref: "https://base-ui.com/react/components/toast#usetoastmanager",
       props: [
@@ -70,7 +70,7 @@ toast.add({ title: "Saved", description: "Your changes are live.", type: "succes
           type: `"success" | "error" | "warning" | "info" | "loading" | string`,
           description: "Known types get an icon; `loading` spins.",
         },
-        { name: "timeout", type: "number", description: "Override the provider timeout for this toast." },
+        { name: "timeout", type: "number", description: "Override the provider timeout for this toast; `0` keeps it until dismissed." },
         { name: "priority", type: `"low" | "high"`, default: `"low"`, description: "How urgently screen readers announce it." },
         {
           name: "actionProps",

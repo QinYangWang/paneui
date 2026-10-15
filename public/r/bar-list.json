@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "bar-list",
   "title": "Bar List",
-  "description": "Ranked list with a proportional chart-coloured bar behind each label: top pages, referrers, countries.",
+  "description": "Ranks items by one measure with a bar behind each label.",
   "dependencies": [
     "motion"
   ],

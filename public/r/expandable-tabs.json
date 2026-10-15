@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "expandable-tabs",
   "title": "Expandable Tabs",
-  "description": "Icon tab bar whose active tab expands into a labelled pill while the panel above morphs its height and slides content in from the direction you moved.",
+  "description": "Icon tab bar for switching panels in tight spaces.",
   "dependencies": [
     "motion"
   ],

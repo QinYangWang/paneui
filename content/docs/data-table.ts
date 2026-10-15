@@ -14,11 +14,11 @@ export default {
   onRowClick={({ row }) => open(row)}
 />`,
   },
-  examples: [{ id: "empty", title: "Empty State", description: "`emptyState` shows when `data` is empty. When filters or search match nothing, the table shows its own \"No matching\" state with a Clear filters button." }],
+  examples: [{ id: "empty", title: "Empty State", description: "Pass `emptyState` when the table can start with no rows; a search or filter that matches nothing shows its own state." }],
   notes: [
-    { title: "What it adds to Table", body: "A toolbar (search, faceted filters with counts, a column visibility menu, your own `toolbar` controls), a selection bar with `bulkActions`, and a footer with the row summary, rows per page and Pagination. Columns are [Table](/docs/table) columns plus `label` and `hideable`." },
+    { title: "What it adds to Table", body: "It builds on [Table](/docs/table). Columns are Table columns plus `label` and `hideable`, and `toolbar` adds your own controls." },
     { title: "Data flow", body: "Everything runs on the client: filter → search → sort → page. Selection survives paging. For server-side data, page and filter on the server and render Table directly." },
-    { title: "Row actions", body: "Put `DataTableRowActions` with `MenuItem`s in an actions column: it is a ⋯ menu whose clicks don't trigger `onRowClick`." },
+    { title: "Row actions", body: "Put `DataTableRowActions` with `MenuItem`s in an actions column; clicks inside it don't trigger `onRowClick`." },
   ],
   api: [
     {
@@ -29,7 +29,7 @@ export default {
         { name: "getRowId", type: "(row: T, index: number) => string", required: true, description: "Stable id per row." },
         { name: "searchText", type: "((row: T) => string) | false", description: "Text the search matches. Default: every string / number field. `false` hides search." },
         { name: "searchPlaceholder", type: "string", default: `"Search…"`, description: "Also its accessible name." },
-        { name: "filters", type: "DataTableFilter<T>[]", description: "Faceted multi-select filters: `{ key, label, options, accessor? }`." },
+        { name: "filters", type: "DataTableFilter<T>[]", description: "Faceted multi-select filters, each `{ key, label, options, accessor? }`." },
         { name: "defaultSort", type: "SortState", description: "Starting sort." },
         { name: "defaultHiddenColumns", type: "string[]", description: "Columns hidden at first." },
         { name: "defaultPageSize", type: "number", default: "10", description: "Rows per page." },

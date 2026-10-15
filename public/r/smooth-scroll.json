@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "smooth-scroll",
   "title": "Smooth Scroll",
-  "description": "Lenis-powered SmoothScroll provider that eases the window or its own scroll container, with a useSmoothScroll hook exposing offset, progress, velocity and scrollTo.",
+  "description": "Eases scrolling for a page or a scroll container.",
   "dependencies": [
     "lenis",
     "motion"

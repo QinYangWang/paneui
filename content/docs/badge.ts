@@ -9,22 +9,22 @@ export default {
     {
       id: "sizes",
       title: "Sizes",
-      description: "`default` is 28px tall for standalone chips; `sm` is 20px for tables and dense rows.",
+      description: "Use `sm` in tables and dense rows.",
     },
     {
       id: "with-icon",
       title: "With Icon",
-      description: "Drop an icon in as the first child; it is sized for you (14px, 12px at `sm`).",
+      description: "Put an icon first when the badge marks a status or category.",
     },
     {
       id: "with-avatar",
       title: "With Avatar",
-      description: "`BadgeAvatar` adds a round initial at the start and tightens the left padding.",
+      description: "Use `BadgeAvatar` when the badge names a person or vendor.",
     },
     {
       id: "as-link",
       title: "As Link",
-      description: "Pass `render={<a />}` to make a badge a link; the `chip` variant gets a hover ring.",
+      description: "Use `render={<a />}` when the badge leads to a filtered view or detail page.",
     },
   ],
   api: [
@@ -42,7 +42,7 @@ export default {
           name: "size",
           type: `"default" | "sm"`,
           default: `"default"`,
-          description: "Height, padding and text size.",
+          description: "Height, padding and text size. `default` is 28px tall and `sm` 20px; icons are 14px, or 12px at `sm`.",
         },
         {
           name: "render",

@@ -17,9 +17,9 @@ export default {
     ├── Input / Select / FieldControl
     ├── FieldDescription
     └── FieldError`,
-  examples: [{ id: "textarea", title: "Any Control", description: "Wrap controls that are not field-aware with `FieldControl render={<Textarea />}` to get the label, `aria-invalid` and descriptions wired up." }],
+  examples: [{ id: "textarea", title: "Any Control", description: "Use `FieldControl render={<Textarea />}` when the control isn't field-aware, so it still gets the label, `aria-invalid` and descriptions." }],
   notes: [
-    { title: "Validation", body: "Validate however you like and pass the message to `FieldError`; it renders only while it has children and slides open. `invalid` on `Field` marks the control `aria-invalid`, which turns its ring destructive." },
+    { title: "Validation", body: "Validate however you like and pass the message to `FieldError`; it renders only while it has children. `invalid` on `Field` sets `aria-invalid` on the control, which turns its ring destructive." },
     { title: "Accessibility", body: "The field links the label to the control and the description and error to it with `aria-describedby`." },
   ],
   api: [

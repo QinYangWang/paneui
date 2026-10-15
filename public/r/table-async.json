@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "table-async",
   "title": "Table Async",
-  "description": "Table that loads pages on demand: skeleton rows on first load, infinite scroll as the virtualized list nears its end, a loading footer, retry on failure and an end-of-list note.",
+  "description": "Loads table rows page by page as the reader scrolls.",
   "dependencies": [
     "@tanstack/react-virtual",
     "motion",

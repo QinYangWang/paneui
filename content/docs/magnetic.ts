@@ -11,17 +11,15 @@ export default {
     {
       id: "strength",
       title: "Strength",
-      description: "`strength` is the fraction of the cursor's offset from centre the content follows (default `0.3`).",
     },
     {
       id: "range",
       title: "Range",
-      description: "`range` extends the pull zone that many pixels beyond the element's edges (default `24`).",
     },
     {
       id: "spring",
       title: "Spring and Disabled",
-      description: "`spring` tunes the follow and snap back; `disabled` turns the effect off so the content sits still.",
+      description: "Use `disabled` to switch the effect off without unwrapping, e.g. while a button is busy.",
     },
   ],
   notes: [

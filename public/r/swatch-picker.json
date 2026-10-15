@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "swatch-picker",
   "title": "Swatch Picker",
-  "description": "Pick one colour from a fixed palette: colour dots or letter swatches, radio-group keyboard behaviour.",
+  "description": "Picks one colour from a fixed palette.",
   "dependencies": [
     "@base-ui/react"
   ],

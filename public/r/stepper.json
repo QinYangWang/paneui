@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "stepper",
   "title": "Stepper",
-  "description": "Numeric − value + stepper on a number field primitive with rolling digits, raised buttons and disabled ends at min and max.",
+  "description": "Adjusts a number up or down in fixed steps.",
   "dependencies": [
     "@base-ui/react",
     "motion"

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "animated-number",
   "title": "Animated Number",
-  "description": "Number that springs up to its value when it scrolls into view, formatted with Intl.NumberFormat.",
+  "description": "Counts up to a number when it scrolls into view.",
   "dependencies": [
     "motion"
   ],

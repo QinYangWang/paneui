@@ -12,12 +12,12 @@ export default {
     {
       id: "vertical",
       title: "Vertical",
-      description: "`direction=\"up\"` or `\"down\"` scrolls a column; give the parent a fixed height.",
+      description: "Use `direction=\"up\"` or `\"down\"` for a column, and give the parent a fixed height.",
     },
     {
       id: "no-fade",
       title: "Without Fade",
-      description: "Turn off the edge mask with `fade={false}` and keep it moving on hover with `pauseOnHover={false}`.",
+      description: "Turn off `fade` and `pauseOnHover` for decorative strips with nothing to read or click.",
     },
     {
       id: "repeat",

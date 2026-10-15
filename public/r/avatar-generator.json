@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "avatar-generator",
   "title": "Avatar Generator",
-  "description": "Deterministic illustrated avatars from a seed, cropped so faces read at 20–32px: male/female/any hair from a curated long/short split, no beard for female, optional glasses, tint/circle/transparent/hex backgrounds and collision-free SVG ids, plus an editor with seed shuffle, gender toggle, part pickers (hair, eyes, brows, mouth, glasses, beard, top, gesture), SVG download and JSX copy.",
+  "description": "Draws a consistent illustrated avatar from a seed, with an editor.",
   "dependencies": [
     "@base-ui/react",
     "@dicebear/core@^9.4.3",

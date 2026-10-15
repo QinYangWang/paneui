@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "context-menu",
   "title": "Context Menu",
-  "description": "Right-click or long-press menu that grows from the pointer, sharing the Menu's items, checkboxes, radios and submenus.",
+  "description": "Opens actions for an item on right-click or long-press.",
   "dependencies": [
     "@base-ui/react"
   ],

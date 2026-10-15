@@ -11,17 +11,17 @@ export default {
     {
       id: "custom-colors",
       title: "Custom Colors",
-      description: "`colors` takes any CSS colour, including `var(--token)` and `color-mix(...)`; they are re-read when the theme changes.",
+      description: "Use to match a brand palette instead of the theme.",
     },
     {
       id: "paused",
       title: "Speed and Paused",
-      description: "`speed` sets the animation rate and `paused` freezes the current frame.",
+      description: "Use `paused` or a lower `speed` behind content that needs a calm backdrop.",
     },
     {
       id: "shader-props",
       title: "Shader Props",
-      description: "`shaderProps` passes options straight to the underlying Paper shader, and `shaderClassName` styles the shader layer, e.g. its opacity.",
+      description: "Use to tune a shader beyond the built-in props.",
     },
   ],
   notes: [
@@ -40,12 +40,12 @@ export default {
           name: "variant",
           type: `"mesh-gradient" | "grain-gradient" | "warp" | "waves" | "dot-orbit"`,
           default: `"mesh-gradient"`,
-          description: "Which [Paper shader](https://shaders.paper.design) to render.",
+          description: "Which shader to render.",
         },
         {
           name: "colors",
           type: "string[]",
-          description: "Palette; defaults to tints of `--primary` and `--background`. `waves` uses only the first colour.",
+          description: "Any CSS colours, including `var(--token)` and `color-mix(...)`, re-read when the theme changes. Defaults to tints of `--primary` and `--background`; `waves` uses only the first colour.",
         },
         { name: "colorBack", type: "string", default: `"var(--background)"`, description: "Base colour behind the pattern (grain, waves, dot orbit)." },
         { name: "speed", type: "number", default: "0.6", description: "Animation speed. `0` freezes the current frame." },

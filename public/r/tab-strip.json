@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tab-strip",
   "title": "Tab Strip",
-  "description": "Horizontal document and panel tabs: closable, drag to reorder, faded overflow scrolling and arrow-key navigation, in raised or pill style.",
+  "description": "Switches between open documents or panels, with closing and reordering.",
   "dependencies": [
     "motion"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-green",
   "title": "Theme: Green accent",
-  "description": "Green accent preset: sets the --accent-50…950 ramp to Tailwind green; primary = the 700 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+  "description": "Accent preset that sets the primary colour to green.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"
   ],

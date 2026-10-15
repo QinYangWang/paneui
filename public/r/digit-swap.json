@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "digit-swap",
   "title": "Digit Swap",
-  "description": "Fixed-slot digits and mask glyphs that roll only where they change, with auto/up/down direction and stagger from either end.",
+  "description": "Animates a changing number by rolling only the characters that change.",
   "dependencies": [
     "motion"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "card",
   "title": "Card",
-  "description": "Surface card with header, content and footer parts, plus an inset variant: a tinted frame holding a raised CardPanel for featured content.",
+  "description": "Groups related content and actions on one surface.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"
   ],

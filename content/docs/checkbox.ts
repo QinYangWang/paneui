@@ -22,23 +22,21 @@ import { Label } from "@/components/ui/label"`,
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `checked` and `onCheckedChange` to drive other UI from the value.",
+      description: "Use `checked` and `onCheckedChange` when other UI depends on the value.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "`disabled` works in every state: unchecked, `defaultChecked` and `indeterminate`.",
     },
     {
       id: "task-list",
       title: "Task List",
-      description: "A list of controlled checkboxes that strike through finished items.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Checking fills the box and draws the check on stroke by stroke; `indeterminate` grows a dash from the centre. Presses squish to 86% on an overshoot curve. With reduced motion the transitions and the squish are off.",
+      body: "Presses squish to 86% on an overshoot curve. With reduced motion the transitions and the squish are off.",
     },
     {
       title: "Keyboard",

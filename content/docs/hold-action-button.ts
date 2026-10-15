@@ -11,17 +11,17 @@ export default {
     {
       id: "tones",
       title: "Tones",
-      description: "`tone` sets the liquid colour: `primary`, `success` or `destructive`.",
+      description: "Use `destructive` for irreversible actions and `success` for confirmations.",
     },
     {
       id: "duration",
       title: "Hold Duration",
-      description: "`holdDuration` is how long the press must last, in ms (default `1500`). Pair long holds with a specific `hint`.",
+      description: "Use a longer `holdDuration` for riskier actions, paired with a specific `hint`.",
     },
     {
       id: "stay-complete",
       title: "Stay Complete",
-      description: "Pass `resetDelay={null}` to keep the completed face, and react in `onHoldComplete`.",
+      description: "Pass `resetDelay={null}` when the completed state should stay, and react in `onHoldComplete`.",
     },
     { id: "disabled", title: "Disabled" },
   ],
@@ -38,7 +38,7 @@ export default {
   api: [
     {
       name: "HoldActionButton",
-      description: "Press-and-hold confirmation: liquid fills the button, then it completes.",
+      description: "Button that confirms once it is pressed and held.",
       extends: "button",
       props: [
         { name: "children", type: "ReactNode", required: true, description: "Idle label." },

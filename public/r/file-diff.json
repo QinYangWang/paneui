@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "file-diff",
   "title": "File Diff",
-  "description": "Collapsible diff view (unified or split) of one file change with live +/− counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
+  "description": "Shows one file's changes as a diff, even while an agent streams them.",
   "dependencies": [
     "@base-ui/react",
     "@pierre/diffs",

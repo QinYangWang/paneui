@@ -13,17 +13,17 @@ export default function CliPage() {
   "name": "button",
   "type": "registry:ui",
   "title": "Button",
-  "description": "Native desktop button (32px, 13px label) …",
+  "description": "Triggers an action or submits a form.",
   "dependencies": ["@base-ui/react", "class-variance-authority"],
   "registryDependencies": ["${ns}/theme"],
   "files": [{ "path": "registry/base-nova/ui/button.tsx", "type": "registry:ui", "content": "…" }]
 }`
   const templateUrl = (name: string) => REGISTRY_URL.replace("{name}", name)
   const templates = [
-    { name: "saas", app: "my-saas", what: "marketing home, pricing, changelog, auth pages, dashboard, analytics, customers and settings" },
-    { name: "agent-workspace", app: "my-agent", what: "the ACP agent workspace as the home page, plus server/acp-bridge.mjs" },
+    { name: "saas", app: "my-saas", what: "a starter app with marketing pages, sign-in and a dashboard" },
+    { name: "agent-workspace", app: "my-agent", what: "the agent workspace as the home page, with its ACP bridge server" },
     { name: "docs", app: "my-docs", what: "a docs site at /docs" },
-    { name: "blog", app: "my-blog", what: "a blog at /blog and /blog/post" },
+    { name: "blog", app: "my-blog", what: "a blog at /blog" },
   ]
   const toc = [
     { id: "templates", title: "Templates in one command" },
@@ -41,37 +41,35 @@ export default function CliPage() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="templates">Templates in one command</GuideH2>
         <p className="text-muted-foreground">
-          Each template is a complete app. Pass its URL to <Code>init</Code> and the CLI creates a Next.js project, writes the
-          theme into <Code>app/globals.css</Code>, installs every component it uses and puts its routes in <Code>app/</Code>.
-          No <Code>components.json</Code> setup is needed: items point at their dependencies by URL.
+          To start a new app from a template, pass its URL to <Code>init</Code>. The CLI creates a Next.js project, writes
+          the theme, installs every component the template uses and adds its routes. You don&apos;t need to set up{" "}
+          <Code>components.json</Code> first, because items point at their dependencies by URL.
         </p>
         <InstallCommand args={`init -d -n my-saas ${templateUrl("saas")}`} />
         <p className="text-muted-foreground">
           Then <Code>cd my-saas</Code> and run <Code>pnpm dev</Code>. In an existing Next.js app with Tailwind 4, use{" "}
-          <Code>add</Code> instead (it asks before replacing files such as <Code>app/page.tsx</Code>):
+          <Code>add</Code> instead. It asks before replacing files such as <Code>app/page.tsx</Code>.
         </p>
         <InstallCommand args={`add ${templateUrl("saas")}`} />
         <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
           {templates.map((t) => (
             <li key={t.name}>
-              <Code>{t.name}</Code>: {t.what}.{" "}
+              <Code>{t.name}</Code> installs {t.what}.{" "}
               <Code>init -d -n {t.app} {templateUrl(t.name)}</Code>
             </li>
           ))}
         </ul>
         <p className="text-muted-foreground">
-          The notion-editor and email-editor blocks install the same way into an existing app, for example{" "}
-          <Code>add {templateUrl("notion-editor")}</Code>, and land in <Code>components/notion-editor/</Code> and{" "}
-          <Code>components/email-editor/</Code>.
+          The notion-editor and email-editor blocks install into an existing app the same way, for example{" "}
+          <Code>add {templateUrl("notion-editor")}</Code>.
         </p>
       </section>
 
       <section className="flex flex-col gap-4">
         <GuideH2 id="the-registry">The registry</GuideH2>
         <p className="text-muted-foreground">
-          qinyang/ui is published as static JSON at <Code>{SITE_URL}/r/&lt;name&gt;.json</Code>, one file per item, built
-          from the repository&apos;s <Code>registry.json</Code> with <Code>shadcn build</Code>. Registering the namespace
-          lets every command below take short names like <Code>{ns}/button</Code>.
+          qinyang/ui is published as one static JSON file per item at <Code>{SITE_URL}/r/&lt;name&gt;.json</Code>. Register
+          the namespace so every command below accepts short names like <Code>{ns}/button</Code>.
         </p>
         <AgentCodeBlock code={config} filename="components.json" language="json" />
       </section>
@@ -84,9 +82,9 @@ export default function CliPage() {
         </p>
         <InstallCommand args={`add ${ns}/date-range-picker ${ns}/tool-result`} />
         <p className="text-muted-foreground">
-          Useful flags: <Code>--dry-run</Code> previews the files without writing them, <Code>--diff &lt;path&gt;</Code> shows
-          what would change in a file you already have, <Code>-o</Code> / <Code>--overwrite</Code> replaces existing files and{" "}
-          <Code>-p</Code> / <Code>--path</Code> sets where the files go.
+          Add <Code>--dry-run</Code> to preview the files without writing them, or <Code>--diff &lt;path&gt;</Code> to see
+          what would change in a file you already have. Use <Code>--overwrite</Code> to replace existing files and{" "}
+          <Code>--path</Code> to choose where they go.
         </p>
       </section>
 
@@ -107,8 +105,8 @@ export default function CliPage() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="by-url">Install by URL</GuideH2>
         <p className="text-muted-foreground">
-          Any command also takes an item&apos;s URL in place of its name. Items depend on other <Code>{ns}</Code> items (at
-          least the theme), so keep the namespace registered for those to resolve.
+          Any command also takes an item&apos;s URL in place of its name. Keep the namespace registered anyway, because
+          items depend on other <Code>{ns}</Code> items such as the theme.
         </p>
         <InstallCommand args={`add ${itemUrl}`} />
       </section>
@@ -126,20 +124,18 @@ export default function CliPage() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="icon-style">Switch the icon style</GuideH2>
         <p className="text-muted-foreground">
-          The icon set comes in three styles that all install to <Code>components/icons.tsx</Code>, with the same
-          exports: rounded (the default), puffy and outline. Replacing that one file switches every component that uses
-          icons:
+          The icon set comes in three styles with the same exports, and all of them install to the same file. Replace it to
+          switch the icons in every component.
         </p>
         <InstallCommand args={`add ${templateUrl("icons-puffy")} --overwrite`} />
         <InstallCommand args={`add ${templateUrl("icons-outline")} --overwrite`} />
-        <p className="text-muted-foreground">Back to rounded:</p>
+        <p className="text-muted-foreground">To go back to the default rounded set, run this.</p>
         <InstallCommand args={`add ${templateUrl("icons")} --overwrite`} />
         <p className="text-muted-foreground">
-          Every item that uses icons depends on <Code>{ns}/icons</Code>. When you add one later, the CLI sees that{" "}
-          <Code>components/icons.tsx</Code> already exists and differs, and asks before overwriting it (default no; a
-          non-interactive run stops at the question instead of overwriting). Keep the default to stay on your style.
-          Adding with <Code>--overwrite</Code> writes the rounded set back, so run your style&apos;s command again
-          afterwards. See <TextLink href="/docs/icons#icon-styles">Icons</TextLink> for the styles side by side.
+          When you later add an item that uses icons, the CLI asks before overwriting <Code>components/icons.tsx</Code>.
+          Answer no to keep your style. A non-interactive run stops at that question. If you add with{" "}
+          <Code>--overwrite</Code>, the rounded set comes back, so run your style&apos;s command again. Compare the styles on{" "}
+          <TextLink href="/docs/icons#icon-styles">Icons</TextLink>.
         </p>
       </section>
 
@@ -147,22 +143,22 @@ export default function CliPage() {
         <GuideH2 id="item-types">Item types</GuideH2>
         <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
           <li>
-            <Code>registry:ui</Code> components, installed to your <Code>ui</Code> alias.
+            <Code>registry:ui</Code> is a component, installed to your <Code>ui</Code> alias.
           </li>
           <li>
-            <Code>registry:block</Code> composed blocks and full-page templates, which can ship several files (a template
-            also ships its <Code>page.tsx</Code>).
+            <Code>registry:block</Code> is a block or template, which can ship several files including a{" "}
+            <Code>page.tsx</Code>.
           </li>
           <li>
-            <Code>registry:theme</Code> the theme and the <Code>theme-&lt;accent&gt;</Code> presets, which write CSS variables
-            rather than files (see <TextLink href="/docs/theming">Theming</TextLink>).
+            <Code>registry:theme</Code> is the theme or an accent preset, which writes CSS variables rather than files (see{" "}
+            <TextLink href="/docs/theming">Theming</TextLink>).
           </li>
           <li>
-            <Code>registry:lib</Code> and <Code>registry:component</Code> shared files: <Code>{ns}/utils</Code> (the{" "}
-            <Code>cn</Code> helper) and the <Code>{ns}/icons</Code> set.
+            <Code>registry:lib</Code> and <Code>registry:component</Code> are shared files such as <Code>{ns}/utils</Code>{" "}
+            and <Code>{ns}/icons</Code>.
           </li>
         </ul>
-        <p className="text-muted-foreground">A trimmed item file, as the CLI receives it:</p>
+        <p className="text-muted-foreground">This is a trimmed item file as the CLI receives it.</p>
         <AgentCodeBlock code={itemJson} filename={itemUrl.replace(/^https?:\/\//, "")} language="json" />
       </section>
     </GuidePage>

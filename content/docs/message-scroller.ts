@@ -11,17 +11,17 @@ export default {
     {
       id: "labels",
       title: "Pill Labels",
-      description: "`jumpLabel` shows when you scroll up; `newLabel` replaces it, in primary, once content arrives below you.",
+      description: "Set `jumpLabel` and `newLabel` to match your product's wording or language.",
     },
     {
       id: "custom-jump",
       title: "Custom Jump Control",
-      description: "Set `showJumpButton={false}` and build your own from `useMessageScroller()`. Pass it as `footer` to sit below the viewport, or as `overlay` to float over it; both are outside the scrolling content but can still use the hook.",
+      description: "Set `showJumpButton={false}` when you need your own control, built with `useMessageScroller()` and passed as `footer` or `overlay`.",
     },
     {
       id: "live-edge-change",
       title: "Live Edge Callback",
-      description: "`onLiveEdgeChange` fires when the reader detaches or re-attaches, e.g. to pause read receipts.",
+      description: "Use `onLiveEdgeChange` to react when the reader detaches or re-attaches, e.g. to pause read receipts.",
     },
     {
       id: "start-at-top",
@@ -31,7 +31,7 @@ export default {
     {
       id: "no-follow",
       title: "No Follow",
-      description: "With `follow={false}` the viewport never chases new content; the pill tells the reader it arrived.",
+      description: "Set `follow={false}` when new content shouldn't move the reader; the pill tells them it arrived.",
     },
   ],
   notes: [

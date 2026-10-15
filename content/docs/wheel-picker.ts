@@ -11,33 +11,33 @@ export default {
     {
       id: "single",
       title: "Single Wheel",
-      description: "On its own a wheel has its own raised surface. Options can be strings or `{ value, label }` objects; `defaultValue` makes it uncontrolled.",
+      description: "Use a single wheel for one short list, such as sizes or quantities.",
     },
     {
       id: "disabled-options",
       title: "Disabled Options",
-      description: "Options with `disabled: true` are struck through, and the drum never rests on them: it nudges to the nearest enabled row.",
+      description: "Use for options that exist but can't be picked right now.",
     },
     {
       id: "visible-count",
       title: "Rows and Height",
-      description: "`visibleCount` sets how many rows show through the window (odd numbers look best) and `itemHeight` the row height in px.",
+      description: "Use an odd `visibleCount` so the selected row sits in the middle.",
     },
     {
       id: "form",
       title: "In a Form",
-      description: "Give each wheel a `name` to submit its value through a hidden input. `WheelPickerGroup` passes `visibleCount` and `itemHeight` down.",
+      description: "Use `name` on each wheel to submit its value with a form.",
     },
-    { id: "disabled", title: "Disabled", description: "`disabled` dims the wheel and stops scrolling, dragging and keys." },
+    { id: "disabled", title: "Disabled" },
   ],
   notes: [
     {
       title: "Keyboard",
-      body: "The wheel is a `listbox`: Up/Down move one row, PageUp/PageDown a window, Home/End jump to the ends. Touch and trackpads scroll natively with momentum; mouse users can drag and fling.",
+      body: "The wheel is a `listbox`. Up/Down move one row, PageUp/PageDown a window, and Home/End jump to the ends. Touch and trackpads scroll natively with momentum; mouse users can drag and fling. The drum never rests on a disabled option and nudges to the nearest enabled row.",
     },
     {
       title: "Motion",
-      body: "Rows sit on a 3D drum that turns with the scroll position. With reduced motion the drum is flat, rows slide straight, and keyboard or click jumps are instant.",
+      body: "With reduced motion the drum is flat, rows slide straight, and keyboard or click jumps are instant.",
     },
     {
       title: "Related",
@@ -70,7 +70,7 @@ export default {
           description: "Rows visible through the window.",
         },
         { name: "itemHeight", type: "number", default: "36 (or the group's)", description: "Row height in px." },
-        { name: "disabled", type: "boolean", default: "false", description: "Dim the wheel and block interaction." },
+        { name: "disabled", type: "boolean", default: "false", description: "Dim the wheel and stop scrolling, dragging and keys." },
         { name: "name", type: "string", description: "Name of a hidden input carrying the value, for forms." },
         { name: "aria-label", type: "string", description: "Accessible name for the listbox. Always set one." },
       ],

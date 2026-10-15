@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "signup-form",
   "title": "Sign-up Form",
-  "description": "Composed sign-up form that flags a field once it is left, clears the error the moment it is fixed, shows a length-weighted password strength meter with a reveal toggle, accepts server field errors and walks the submit button through loading, success and error.",
+  "description": "Account sign-up form with inline validation and password strength.",
   "dependencies": [
     "@base-ui/react",
     "motion"

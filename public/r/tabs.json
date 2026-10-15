@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tabs",
   "title": "Tabs",
-  "description": "Segmented tabs with a sliding indicator.",
+  "description": "Switches between related panels of content in one place.",
   "dependencies": [
     "@base-ui/react"
   ],

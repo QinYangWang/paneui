@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "file-upload",
   "title": "File Upload",
-  "description": "Drag-and-drop upload queue with springy progress rows, queued/uploading/uploaded/failed states, retry and removal, driven by a pluggable upload function.",
+  "description": "Upload queue for dropping files and tracking each one.",
   "dependencies": [
     "motion"
   ],

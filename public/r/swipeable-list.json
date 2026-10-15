@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "swipeable-list",
   "title": "Swipeable List",
-  "description": "Mobile-style rows that swipe left or right to reveal tinted action rails, commit the edge action on a full swipe, and open from the keyboard with the arrow keys.",
+  "description": "List rows with actions revealed by swiping, for touch screens.",
   "dependencies": [
     "motion"
   ],

@@ -13,24 +13,24 @@ export default {
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `value` and `onValueChange` to show the value elsewhere.",
+      description: "Use when the value is shown or used elsewhere.",
     },
     {
       id: "vertical",
       title: "Vertical",
-      description: "`orientation=\"vertical\"` fills its parent's height (at least 160px).",
+      description: "Use in tall, narrow spaces such as a mixer column.",
     },
     {
       id: "tick-count",
       title: "Tick Count",
-      description: "`ticks` as a number draws that many evenly spaced dots; `ticks` as `true` draws one per step.",
+      description: "Use when the steps matter, such as a rating.",
     },
-    { id: "disabled", title: "Disabled", description: "`disabled` dims the slider and blocks dragging." },
+    { id: "disabled", title: "Disabled" },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The thumb grows on hover and while dragging, and the value bubble scales in. With reduced motion these transitions are off.",
+      body: "With reduced motion the thumb and value bubble don't animate.",
     },
     {
       title: "Keyboard",
@@ -38,7 +38,7 @@ export default {
     },
     {
       title: "Related",
-      body: "For a styled range picker see [Range Slider Inline](/docs/range-slider-inline).",
+      body: "For a single value with the label on the track, see [Range Slider Inline](/docs/range-slider-inline).",
     },
   ],
   api: [
@@ -51,12 +51,12 @@ export default {
         {
           name: "ticks",
           type: "boolean | number",
-          description: "Dots along the track: `true` = one per step, a number = that many evenly spaced (2–101).",
+          description: "Dots along the track. `true` draws one per step; a number (2–101) draws that many, evenly spaced.",
         },
         {
           name: "showValue",
           type: `boolean | "always"`,
-          description: "Value bubble over each thumb: on hover, focus and drag, or always.",
+          description: "`true` shows a value bubble over each thumb on hover, focus and drag; `\"always\"` keeps it up.",
         },
         {
           name: "getThumbLabel",
@@ -70,7 +70,7 @@ export default {
           name: "orientation",
           type: `"horizontal" | "vertical"`,
           default: `"horizontal"`,
-          description: "Layout direction.",
+          description: "Layout direction. Vertical fills the parent's height, at least 160px.",
         },
         {
           name: "thumbAlignment",

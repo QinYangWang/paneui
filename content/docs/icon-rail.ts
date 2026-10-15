@@ -17,11 +17,11 @@ export default {
 ├── IconRailSpacer
 └── IconRailAvatar`,
   examples: [
-    { id: "badges", title: "Badges", description: "`badge` takes a count (99+ caps it) or `true` for an attention dot." },
-    { id: "horizontal", title: "Horizontal", description: "`orientation=\"horizontal\"` lays the rail out as a 48px row, e.g. along the bottom of a mobile drawer; tooltips open above and the row scrolls sideways if it runs out of room." },
+    { id: "badges", title: "Badges", description: "Use a count `badge` for unread items and `true` for an attention dot; counts cap at 99+." },
+    { id: "horizontal", title: "Horizontal", description: "Use `orientation=\"horizontal\"` along the bottom of a mobile drawer; the row scrolls sideways when it runs out of room." },
   ],
   notes: [
-    { title: "Icons", body: "Rails use the solid icon family at 18px, muted at rest and foreground when active, as the icon usage rules ask. Every item has a tooltip with its label and shortcut, so give it a clear `label`." },
+    { title: "Icons", body: "Use solid icons at 18px, as the icon usage rules ask. Each item's tooltip shows its `label` and shortcut, so make the label clear." },
     { title: "Tooltips", body: "Wrap the app (or the rail) in `TooltipProvider` so moving along the rail opens tooltips instantly after the first one." },
   ],
   api: [
@@ -30,7 +30,7 @@ export default {
       extends: "nav",
       props: [
         { name: "orientation", type: `"vertical" | "horizontal"`, default: `"vertical"`, description: "A 48px column, or a 48px row (groups, separators and the spacer follow)." },
-        { name: "tooltipSide", type: `"right" | "left" | "top" | "bottom"`, default: `"right" / "top"`, description: "Side the tooltips open on: `right` for a vertical rail (left for one on the right edge), `top` for a horizontal one." },
+        { name: "tooltipSide", type: `"right" | "left" | "top" | "bottom"`, default: `"right" / "top"`, description: "Side tooltips open on. Defaults to `right` for a vertical rail and `top` for a horizontal one; use `left` for a rail on the right edge." },
       ],
       dataAttributes: [{ name: "data-orientation", description: "`vertical` or `horizontal`." }],
     },
@@ -53,7 +53,7 @@ export default {
       extends: "button",
       props: [
         { name: "label", type: "string", required: true, description: "Accessible name and tooltip." },
-        { name: "status", type: `"online" | "busy" | "error" | "offline"`, default: `"offline"`, description: "Coloured ring: success, warning, destructive, none." },
+        { name: "status", type: `"online" | "busy" | "error" | "offline"`, default: `"offline"`, description: "Ring colour. `online` is success, `busy` warning, `error` destructive and `offline` has none." },
         { name: "hint", type: "string", description: "Extra tooltip text, e.g. the connection state." },
       ],
     },

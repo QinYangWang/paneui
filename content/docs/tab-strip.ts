@@ -12,13 +12,14 @@ export default {
   composition: `TabStrip
 └── TabStripItem`,
   examples: [
-    { id: "pill", title: "Pill", description: "`variant=\"pill\"` marks the selected tab with a fill instead of a raised card, for panel tabs inside a surface." },
-    { id: "overflow", title: "Overflow", description: "Too many tabs scroll sideways with faded edges; the selected tab is kept in view. `indicator` adds a dot for unsaved changes." },
+    { id: "pill", title: "Pill", description: "Use `pill` for panel tabs inside a surface." },
+    { id: "overflow", title: "Overflow", description: "Use `indicator` to mark tabs with unsaved changes." },
   ],
   notes: [
-    { title: "Reorder", body: "Pass `order` and `onReorder` and render children in that order: tabs drag sideways with a spring (instant with reduced motion). On touch screens a swipe scrolls the strip instead, so dragging is off there and tabs and close buttons grow to 32px / 24px targets. Without them the strip is static." },
+    { title: "Reorder", body: "Pass `order` and `onReorder` and render children in that order to enable dragging; with reduced motion tabs move instantly. On touch screens a swipe scrolls the strip instead, so dragging is off and tabs and close buttons grow to 32px and 24px targets. Without them the strip is static." },
+    { title: "Overflow", body: "Extra tabs scroll sideways and the selected tab is kept in view." },
     { title: "Closing", body: "With `onClose`, tabs show a close button on hover (always on the selected tab), close on middle click, and on ⌫ / Delete when focused. Set `closable={false}` on a tab to keep it." },
-    { title: "Keyboard", body: "The strip is a `tablist`: ← / → move and select, Home / End jump to the ends, Enter or Space selects." },
+    { title: "Keyboard", body: "The strip is a `tablist`. ← / → move and select, Home / End jump to the ends, and Enter or Space selects." },
   ],
   api: [
     {

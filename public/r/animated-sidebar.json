@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "animated-sidebar",
   "title": "Animated Sidebar",
-  "description": "Composable app sidebar (Provider, Sidebar, Header, Content, Group, Item, Sub, Footer, Trigger, Inset) with a gliding active pill that morphs through nested navigation and a spring fold into an icon rail with tooltips.",
+  "description": "App navigation sidebar that folds into an icon rail.",
   "dependencies": [
     "@base-ui/react",
     "motion"

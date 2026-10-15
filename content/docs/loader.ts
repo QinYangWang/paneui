@@ -9,17 +9,16 @@ export default {
     {
       id: "speed",
       title: "Speed",
-      description: "`speed` multiplies the animation rate: `0.5` is half speed, `2` twice as fast.",
     },
     {
       id: "colors",
       title: "Colors",
-      description: "Loaders draw in `currentColor`: put a token `text-*` colour on the `Loader` itself, or let it inherit from its parent.",
+      description: "Put a token `text-*` colour on `Loader` when it shouldn't inherit its parent's `currentColor`.",
     },
     {
       id: "in-context",
       title: "In Context",
-      description: "Use `size=\"sm\"` (16px) inside buttons and status rows, and give each one a specific `label`.",
+      description: "Use `size=\"sm\"` inside buttons and status rows, and give each one a specific `label`.",
     },
   ],
   notes: [

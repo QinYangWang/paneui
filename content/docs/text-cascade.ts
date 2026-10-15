@@ -9,23 +9,23 @@ export default {
     {
       id: "stagger",
       title: "Stagger",
-      description: "`stagger` sets the seconds between neighbouring letters (default `0.025`); `0` rolls the whole word at once.",
+      description: "Use `0` to roll the whole word at once, e.g. for short status labels.",
     },
     {
       id: "fixed-width",
       title: "Width",
-      description: "By default the wrapper glides to the new word's width; `animateWidth={false}` snaps it, so surrounding text jumps.",
+      description: "Use `animateWidth={false}` only when the word sits in a fixed-width slot, since surrounding text otherwise jumps.",
     },
     {
       id: "headline",
       title: "Headline",
-      description: "Inherits the surrounding type, so it drops into a heading as the rotating word.",
+      description: "Use as the rotating word in a heading; it inherits the surrounding type.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Old letters lift out as new ones land, each on a spring (460 / 32 / 0.55), with exits at half the stagger. With reduced motion the word cross-fades and the width snaps. Screen readers read the current `text` once from a hidden copy.",
+      body: "Each letter moves on a spring (460 / 32 / 0.55) and exits take half the stagger. With reduced motion the word cross-fades and the width snaps. Screen readers read the current `text` once from a hidden copy.",
     },
     {
       title: "Related",
@@ -56,7 +56,7 @@ export default {
     },
     {
       name: "useContentWidth",
-      description: "Hook: `const [ref, width] = useContentWidth<HTMLSpanElement>()`. Tracks an in-flow sizer's rendered width with a ResizeObserver so a wrapper can animate to it. Also exported: `SWAP_SPRING`, `WIDTH_SPRING`, `EASE_OUT`.",
+      description: "`const [ref, width] = useContentWidth<HTMLSpanElement>()` tracks an in-flow sizer's rendered width with a ResizeObserver so a wrapper can animate to it. `SWAP_SPRING`, `WIDTH_SPRING` and `EASE_OUT` are exported too.",
       props: [],
     },
   ],

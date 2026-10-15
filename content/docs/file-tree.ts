@@ -19,31 +19,31 @@ export default {
     {
       id: "items",
       title: "From Data",
-      description: "Pass a nested `items` array of `FileTreeNode` instead of children; `meta` adds trailing content like a file size.",
+      description: "Pass a nested `items` array of `FileTreeNode` when the tree comes from data.",
     },
     {
       id: "controlled-expanded",
       title: "Controlled Expanded",
-      description: "Control which folders are open with `expanded` and `onExpandedChange`.",
+      description: "Control `expanded` and `onExpandedChange` when other UI opens or closes folders.",
     },
     {
       id: "open-file",
       title: "Open File and Icons",
-      description: "`onOpenFile` fires when a file is clicked or activated with Enter. Files get a file-type icon from their extension; a file's `icon` replaces it (here the lock on `secrets.env`), and `indent` sets px per level.",
+      description: "Use `onOpenFile` to open a file on click or Enter, and a file's `icon` to override its type icon.",
     },
   ],
   notes: [
     {
       title: "Keyboard",
-      body: "Follows the WAI-ARIA tree pattern: ↑ / ↓ move, → opens a folder or enters it, ← closes it or goes to the parent, Home / End jump, Enter or Space activates, `*` expands every sibling folder, and typing jumps to the next matching name.",
+      body: "Follows the WAI-ARIA tree pattern. ↑ / ↓ move, → opens a folder or enters it, ← closes it or goes to the parent, Home / End jump, Enter or Space activates, `*` expands every sibling folder, and typing jumps to the next matching name.",
     },
     {
       title: "Icons",
-      body: "Every row has one 16px leading slot: a folder shows its chevron there, a file its file-type icon, picked and tinted by extension (code, styles, data, text, images, shell, config, locks; anything else gets a plain file). So at each level the chevrons and the file icons line up in one column. `getFileKind(name)` returns the same icon and tint for use elsewhere.",
+      body: "A file gets its icon and tint from its extension, and an unknown extension gets a plain file. `getFileKind(name)` returns the same icon and tint for use elsewhere.",
     },
     {
       title: "Motion",
-      body: "Rows slide and unblur in as folders open, indent guides draw down, and the selection fill glides between rows. Under reduced motion rows only fade and the fill jumps.",
+      body: "Under reduced motion, rows only fade in and the selection fill jumps instead of gliding.",
     },
   ],
   api: [
@@ -87,7 +87,7 @@ export default {
     },
     {
       name: "FileTreeNode",
-      description: "Type of each entry in `items`: the folder props plus `type: \"file\" | \"folder\"` and `children?: FileTreeNode[]`.",
+      description: "Type of each entry in `items`, the folder props plus `type: \"file\" | \"folder\"` and `children?: FileTreeNode[]`.",
       props: [],
     },
   ],

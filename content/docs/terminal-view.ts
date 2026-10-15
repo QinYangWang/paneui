@@ -14,13 +14,13 @@ export default {
 ├── TerminalInput
 └── TerminalStatusLine`,
   examples: [
-    { id: "progress", title: "Progress", description: "A carriage return rewrites the current line, so progress bars settle in place instead of stacking." },
-    { id: "embedded", title: "Embedded", description: "`variant=\"embedded\"` is the compact inset well used for command output inside chat steps." },
+    { id: "progress", title: "Progress", description: "Use for installs and downloads whose progress lines rewrite in place." },
+    { id: "embedded", title: "Embedded", description: "Use `embedded` for command output inside chat steps." },
   ],
   notes: [
-    { title: "ANSI", body: "`TerminalOutput` parses SGR codes: the 8 / 16 colours, 256-colour and 24-bit colours (mapped to the nearest base colour), bold, dim, italic, underline and inverse. Colours map to theme tokens (red → destructive, green → success, yellow → warning, blue → primary, magenta / cyan → chart colours), so output follows light, dark and the accent. Cursor movement and OSC sequences are dropped. `parseAnsi` and `stripAnsi` are exported." },
+    { title: "ANSI", body: "`TerminalOutput` parses SGR colour codes plus bold, dim, italic, underline and inverse; 256-colour and 24-bit colours map to the nearest base colour. Colours map to theme tokens (red → destructive, green → success, yellow → warning, blue → primary, magenta / cyan → chart colours), so output follows the theme and accent. A carriage return rewrites the current line, and cursor movement and OSC sequences are dropped. `parseAnsi` and `stripAnsi` are exported." },
     { title: "Following", body: "Output stays pinned to the end while it grows, until the reader scrolls up; scrolling back to the bottom re-attaches. The log is `role=\"log\"` with polite announcements." },
-    { title: "History", body: "`TerminalInput` keeps what was submitted: ↑ / ↓ walk back and forward through it." },
+    { title: "History", body: "`TerminalInput` keeps submitted commands, and ↑ / ↓ walk back and forward through them." },
   ],
   api: [
     { name: "Terminal", extends: "div", props: [{ name: "variant", type: `"default" | "embedded"`, default: `"default"`, description: "Full panel surface or compact inset well." }] },

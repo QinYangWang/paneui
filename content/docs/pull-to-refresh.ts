@@ -11,28 +11,27 @@ export default {
     {
       id: "custom-labels",
       title: "Labels and Distances",
-      description: "Change the copy with `pullingLabel`, `releaseLabel` and `refreshingLabel`, and the feel with `threshold`, `maxPull` and `holdDistance`.",
+      description: "Use to match your app's wording or change how far the pull must go.",
     },
     {
       id: "external-refreshing",
       title: "External Refreshing",
-      description: "Pass `refreshing` to hold the spinner open for a refresh started elsewhere, like a Sync button. Here `onRefresh` just starts the sync and returns nothing; `refreshing` keeps the content open until it ends.",
+      description: "Use when a refresh can also start elsewhere, like a Sync button, and should hold the spinner open.",
     },
     {
       id: "status-change",
       title: "Status Changes",
-      description: "`onStatusChange` reports `idle`, `pulling`, `ready` and `refreshing` as the gesture moves.",
+      description: "Use to drive your own indicator from the gesture.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "With `disabled` the gesture is off and the area scrolls normally.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The content follows the pull with rubber-band resistance and springs back after `onRefresh` resolves. With reduced motion it jumps into place and the arrow doesn't rotate.",
+      body: "Content springs back once `onRefresh` resolves. With reduced motion it jumps into place and the arrow doesn't rotate.",
     },
     {
       title: "Accessibility",

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "magnetic",
   "title": "Magnetic",
-  "description": "Wrapper that pulls any element toward a nearby cursor and springs it home on leave, for fine pointers only and off under reduced motion.",
+  "description": "Makes any element lean toward a nearby cursor.",
   "dependencies": [
     "motion"
   ],

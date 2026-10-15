@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "composition-chart",
   "title": "Composition Chart",
-  "description": "Normalised 100% composition over periods as stacked bars or morphing smooth areas, with period tooltips and a legend that toggles and highlights series.",
+  "description": "Charts how each part's share of a whole changes over time.",
   "dependencies": [
     "motion"
   ],

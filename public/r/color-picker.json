@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "color-picker",
   "title": "Color Picker",
-  "description": "Composable colour picker whose raised trigger chip morphs open into a saturation/brightness area with hue and opacity sliders, a hex field and presets.",
+  "description": "Picks a colour by dragging, entering hex or choosing a preset.",
   "dependencies": [
     "@base-ui/react"
   ],

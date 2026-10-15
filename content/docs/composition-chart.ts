@@ -19,17 +19,17 @@ export default {
     {
       id: "area",
       title: "Area",
-      description: "`mode=\"area\"` draws smooth stacked bands instead of bars; the share stays 0–100% per period.",
+      description: "Use `mode=\"area\"` for many periods, where the trend matters more than any single one.",
     },
     {
       id: "default-hidden",
       title: "Default Hidden",
-      description: "`defaultHidden` starts some series switched off. Clicking a legend pill toggles it; the last visible series can't be hidden.",
+      description: "Use `defaultHidden` to start minor series switched off.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `hidden` with `onHiddenChange` to own the hidden series, e.g. to reset them from outside with a Show all button.",
+      description: "Use `hidden` with `onHiddenChange` to reset series from outside, like a Show all button.",
     },
   ],
   notes: [
@@ -41,7 +41,7 @@ export default {
   api: [
     {
       name: "CompositionChart",
-      description: "100% stacked chart: each period shows the share of every visible series.",
+      description: "100% stacked chart of each visible series' share per period. The last visible series can't be hidden.",
       extends: "section",
       props: [
         {

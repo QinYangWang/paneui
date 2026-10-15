@@ -22,32 +22,32 @@ export default {
     {
       id: "standalone",
       title: "Standalone Marker",
-      description: "Outside a `CitationGroup`, pass `source` and `index` directly; clicking opens the source in a new tab.",
+      description: "Use without a `CitationGroup` when there is no reference list, passing `source` and `index` directly.",
     },
     {
       id: "file-sources",
       title: "File Sources",
-      description: "Give non-web sources an `icon` and `meta`; without a `url` the row and preview have no link.",
+      description: "Give non-web sources, like files, an `icon` and `meta`.",
     },
     {
       id: "open-list",
       title: "Open by Default",
-      description: "`defaultOpen` on the group starts the Sources list expanded; a custom `title` renames the summary.",
+      description: "Use `defaultOpen` when the sources matter as much as the answer.",
     },
     {
       id: "streaming",
       title: "Streaming Sources",
-      description: "Append to `sources` as the agent reads; new rows slide into the list and the count updates.",
+      description: "Append to `sources` while the agent is still reading.",
     },
     {
       id: "no-remote-favicons",
       title: "No Remote Favicons",
-      description: "`favicon={false}` on the group (or on `Citations`, `CitationList`, `CitationStack`, `Citation`) makes no request to Google and shows each domain's monogram. Pass a function to load icons from your own service instead.",
+      description: "Use `favicon={false}` when domains must not leave your app, or pass a function to use your own icon service.",
     },
     {
       id: "list-and-count",
       title: "List, Stack and Count",
-      description: "`CitationList`, `CitationStack` and `CitationCount` work on their own for custom layouts like a sidebar.",
+      description: "Use the parts on their own for custom layouts, like a sidebar.",
     },
   ],
   notes: [
@@ -57,7 +57,7 @@ export default {
     },
     {
       title: "Favicons",
-      body: "By default `CitationFavicon` loads site icons from Google's favicon service when a source has a `url` (this sends the domain to Google), and falls back to the domain's first letter if that fails. `favicon={false}` turns remote favicons off, `favicon={(domain) => url}` uses your own service, a source's `faviconSrc` sets its image directly, and `icon` replaces the image with your own node.",
+      body: "By default `CitationFavicon` loads site icons from Google's favicon service when a source has a `url` (this sends the domain to Google), and falls back to the domain's first letter if that fails. The `favicon` prop works on the group and on `Citations`, `CitationList`, `CitationStack` and `Citation`. `favicon={false}` turns remote favicons off, `favicon={(domain) => url}` uses your own service, a source's `faviconSrc` sets its image directly, and `icon` replaces the image with your own node.",
     },
   ],
   api: [
@@ -70,7 +70,7 @@ export default {
         { name: "defaultOpen", type: "boolean", default: "false", description: "Start with the reference list open." },
         { name: "open", type: "boolean", description: "Controlled open state of the list." },
         { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the list opens or closes." },
-        { name: "favicon", type: "boolean | ((domain: string) => string | undefined)", default: "true", description: "Favicon source for everything inside the group: `true` Google's service, `false` no remote request (monogram), or a function returning your own URL." },
+        { name: "favicon", type: "boolean | ((domain: string) => string | undefined)", default: "true", description: "Favicon source for everything inside the group. `true` uses Google's service, `false` makes no remote request (monogram), and a function returns your own URL." },
         { name: "children", type: "ReactNode", required: true, description: "The response containing markers and `Citations`." },
       ],
     },
@@ -105,7 +105,7 @@ export default {
     },
     {
       name: "CitationList",
-      description: "Numbered reference rows (an `<ol>`); rows with a `url` are links.",
+      description: "Numbered reference rows (an `<ol>`); rows with a `url` are links, and without one the row and preview have no link.",
       props: [
         { name: "sources", type: "CitationSource[]", description: "Defaults to the group's sources." },
         { name: "favicon", type: "boolean | ((domain: string) => string | undefined)", description: "Favicon source for the rows; defaults to the group's, then `true`." },

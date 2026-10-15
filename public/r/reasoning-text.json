@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "reasoning-text",
   "title": "Reasoning Text",
-  "description": "Shimmering reasoning copy with a terminal ASCII spinner that cycles phrases by blur swap, letter cascade or scramble.",
+  "description": "Status line that shows an agent is still working.",
   "dependencies": [
     "motion"
   ],

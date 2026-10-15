@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "notion-editor",
   "title": "Block Editor",
-  "description": "Block editor: slash menu, selection bubble, drag handles, markdown shortcuts, callouts, toggles, tables, code highlighting, and lossless MDX import / export.",
+  "description": "Block editor for writing documents that save as MDX.",
   "dependencies": [
     "@tiptap/core",
     "@tiptap/pm",

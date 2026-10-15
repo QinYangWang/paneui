@@ -45,32 +45,32 @@ export default {
     {
       id: "collapsed",
       title: "Icon Rail",
-      description: "`defaultOpen={false}` on the provider starts folded into the icon rail, where items show their `label` (or `tooltip`) as a tooltip.",
+      description: "Use `defaultOpen={false}` on the provider when the content needs the width; rail items show their `label` or `tooltip` as a tooltip.",
     },
     {
       id: "flush-right",
       title: "Flush, Right Side",
-      description: "`variant=\"sidebar\"` drops the floating card for a hairline edge, and `side=\"right\"` moves it after the inset.",
+      description: "Use `variant=\"sidebar\"` for full-height app shells, and `side=\"right\"` for secondary panels.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Control the rail with `open` / `onOpenChange` on the provider, and a disclosure item with `open` / `onOpenChange` on `SidebarItem`.",
+      description: "Use `open` and `onOpenChange` when other UI must fold the rail or a disclosure item.",
     },
     {
       id: "static",
       title: "Non-collapsible Links",
-      description: "`collapsible=\"none\"` keeps it full width. Items with an `href` render as links; `disabled` dims them.",
+      description: "Use `collapsible=\"none\"` for short link lists that never fold.",
     },
   ],
   notes: [
     {
       title: "Keyboard",
-      body: "⌘/Ctrl + B toggles the sidebar; change the key with `shortcut` or pass `null` to turn it off. All sidebars share one listener: with several on a page, only the most recently mounted, focused or clicked one toggles. Disclosure items set `aria-expanded` and `aria-controls`.",
+      body: "⌘/Ctrl + B toggles the sidebar; change the key with `shortcut` or pass `null` to turn it off. All sidebars share one listener, so with several on a page, only the most recently mounted, focused or clicked one toggles. Disclosure items set `aria-expanded` and `aria-controls`.",
     },
     {
       title: "Related",
-      body: "[AI Sidebar](/docs/ai-sidebar).",
+      body: "See also [AI Sidebar](/docs/ai-sidebar).",
     },
   ],
   api: [
@@ -93,7 +93,7 @@ export default {
       extendsHref: "https://motion.dev/docs/react-motion-component",
       props: [
         { name: "side", type: `"left" | "right"`, default: `"left"`, description: "Which side of the inset it sits on." },
-        { name: "variant", type: `"floating" | "sidebar"`, default: `"floating"`, description: "`floating`: raised rounded card; `sidebar`: flush with a hairline edge." },
+        { name: "variant", type: `"floating" | "sidebar"`, default: `"floating"`, description: "`floating` is a raised rounded card; `sidebar` sits flush with a hairline edge." },
         { name: "collapsible", type: `"icon" | "none"`, default: `"icon"`, description: "`icon` folds into an icon rail; `none` never collapses." },
         { name: "panelClassName", type: "string", description: "Class for the inner panel surface." },
         { name: "aria-label", type: "string", default: `"Sidebar"`, description: "Accessible name of the aside." },

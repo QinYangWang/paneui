@@ -22,13 +22,13 @@ const html = await renderEmailHtml(email, { variables: { first_name: "Ada" } })`
 
 renderEmailHtml(email, options) · renderEmailText · EmailTemplate (email component tree)`,
   examples: [
-    { id: "blank", title: "Blank", description: "No `defaultValue`: start typing, press `/` for blocks and `{{` for variables." },
-    { id: "mobile-preview", title: "Mobile Preview", description: "`defaultView=\"preview\"` and `defaultDevice=\"mobile\"`. The preview renders the real exported HTML in a sandboxed iframe, filled with `previewValues` while Sample data is on." },
-    { id: "render-html", title: "Render HTML", description: "`renderEmailHtml` without values exports a template (`{{first_name}}`, `{{#if}}`, `{{#each}}`); with `variables` it fills them in." },
+    { id: "blank", title: "Blank", description: "Leave out `defaultValue` to start from an empty email, then press `/` for blocks and `{{` for variables." },
+    { id: "mobile-preview", title: "Mobile Preview", description: "Set `defaultView=\"preview\"` and `defaultDevice=\"mobile\"` when the editor opens for review on a phone layout." },
+    { id: "render-html", title: "Render HTML", description: "Call `renderEmailHtml` without values to hand a template to your email provider, or with `variables` for final HTML." },
   ],
   notes: [
-    { title: "Blocks", body: "Heading, text, lists, quote, button (filled / outline / link, corners, colour, alignment, URL), image (URL or upload, alt, link, width, alignment), logo, spacer, divider, footer, 2 and 3 columns, section (plain / gray / brand tint), Show if (renders when a variable is set) and Repeat (once per item of a list variable). Text bubble adds alignment; selecting a button, image, logo or spacer opens its settings." },
-    { title: "Email-safe HTML", body: "Export renders email-safe markup: table layout, inline styles, a `Preview` preheader, a 600px card that goes edge to edge below 600px, and a plain-text version (`renderEmailText`). Colours in the exported email are hex (`theme` prop), since mail clients do not see the site's tokens." },
+    { title: "Blocks", body: "Show if renders a block only when a variable is set, and Repeat renders it once per item of a list variable. Selecting a button, image, logo or spacer opens its settings." },
+    { title: "Email-safe HTML", body: "Export uses table layout and inline styles, adds a `Preview` preheader and a plain-text version (`renderEmailText`), and its 600px card goes edge to edge on narrower screens. Exported colours are hex (`theme` prop), since mail clients do not see the site's tokens. The preview renders this exported HTML in a sandboxed iframe, filled with `previewValues` while Sample data is on." },
     { title: "Variables and logic", body: "`variables` feeds the `{{` picker and the Show if / Repeat selects; `list: true` marks list variables. Without values the HTML keeps Handlebars syntax for your email provider; with values (`renderEmailHtml(email, { variables })`) the export is final, and `{{name}}` inside button URLs, image URLs, subject and preheader is filled too." },
   ],
   api: [
@@ -49,6 +49,6 @@ renderEmailHtml(email, options) · renderEmailText · EmailTemplate (email compo
     ] },
     { name: "renderEmailHtml", description: "`renderEmailHtml(email, { variables?, theme? }): Promise<string>`.", props: [] },
     { name: "renderEmailText", description: "Plain-text version of the same email.", props: [] },
-    { name: "emailExtensions", description: "`emailExtensions({ variables, slashItems, uploadImage, placeholder })`: every extension, for a custom layout with `useEditor`.", props: [] },
+    { name: "emailExtensions", description: "`emailExtensions({ variables, slashItems, uploadImage, placeholder })` returns every extension, for a custom layout with `useEditor`.", props: [] },
   ],
 } satisfies ComponentDoc

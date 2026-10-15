@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "trend-chart",
   "title": "Trend Chart",
-  "description": "Absolute values over time as an area, line or bar chart, optionally stacked: value axis, gridlines, hover crosshair with tooltip, legend toggles and a screen-reader table.",
+  "description": "Plots how values change over time.",
   "dependencies": [
     "motion"
   ],

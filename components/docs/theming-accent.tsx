@@ -181,7 +181,7 @@ export function ThemingAccent() {
 
       <div className="flex flex-wrap items-center gap-3">
         <p className="min-w-0 flex-1 basis-64 text-sm text-pretty text-muted-foreground">
-          Take it home: paste these overrides after the theme variables. The eleven ramp stops plus primary, its text and the ring; nothing else changes.
+          Paste these overrides after the theme variables to keep this accent in your project.
         </p>
         <Button onClick={() => copy(css)}>
           {copied ? <CheckIcon /> : <CopyIcon />}

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "ai-sidebar",
   "title": "AI Sidebar",
-  "description": "Collapsible AI workspace sidebar with folders, projects, files and bookmarks, an icon rail, ⌘K search with highlighted matches, tree keyboard navigation and inline rename.",
+  "description": "Navigates folders, projects and files in an AI workspace.",
   "dependencies": [
     "@base-ui/react",
     "motion"

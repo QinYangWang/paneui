@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "treemap",
   "title": "Treemap",
-  "description": "Squarified treemap in plain SVG with one level of grouping, tiles that spring to new positions when data changes, value/share tooltips and a group-highlighting legend.",
+  "description": "Compares parts of a total as sized tiles.",
   "dependencies": [
     "motion"
   ],

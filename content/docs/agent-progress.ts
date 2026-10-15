@@ -9,22 +9,22 @@ export default {
     {
       id: "with-meta",
       title: "With Meta",
-      description: "`meta` adds a trailing detail after a dot separator, such as a token or file count.",
+      description: "Use `meta` for a trailing detail such as a token or file count.",
     },
     {
       id: "controlled",
       title: "Controlled Elapsed",
-      description: "Pass `elapsed` in seconds to drive the timer from your own clock; the internal clock is ignored.",
+      description: "Pass `elapsed` in seconds when the timer must match your own clock.",
     },
     {
       id: "stopped",
       title: "Stopped",
-      description: "With `running={false}` the glyph rests in grey and the timer freezes at its last value.",
+      description: "Set `running={false}` when the run pauses or ends; the timer freezes at its last value.",
     },
     {
       id: "formats",
       title: "Timer Formats",
-      description: "The timer shows tenths under a minute, `m ss` under an hour and `h mm` beyond; `initialElapsed` sets where it starts.",
+      description: "Use `initialElapsed` when resuming a run that already started.",
     },
   ],
   notes: [
@@ -40,7 +40,7 @@ export default {
   api: [
     {
       name: "AgentProgress",
-      description: "A pulsing 3×3 glyph, an action verb and a live tabular timer.",
+      description: "Working readout with an activity glyph, an action verb and a live timer.",
       extends: "span",
       props: [
         { name: "label", type: "string", default: `"Working"`, description: "Verb for what the agent is doing." },
@@ -53,7 +53,7 @@ export default {
     },
     {
       name: "formatElapsed",
-      description: "The formatter behind the timer: `(seconds: number) => string`, e.g. `8.4s`, `1m 23s`, `1h 05m`.",
+      description: "The formatter behind the timer, `(seconds: number) => string`. It shows tenths under a minute, minutes and seconds under an hour, then hours and minutes, e.g. `8.4s`, `1m 23s`, `1h 05m`.",
       props: [{ name: "total", type: "number", required: true, description: "Elapsed seconds; negatives clamp to 0." }],
     },
   ],

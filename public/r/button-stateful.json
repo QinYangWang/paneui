@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "button-stateful",
   "title": "Button Stateful",
-  "description": "Our Button that moves idle → loading → success / error, blur-swapping its icon and label while its width springs to fit each state.",
+  "description": "A button that shows loading, success and error after a press.",
   "dependencies": [
     "@base-ui/react",
     "motion"

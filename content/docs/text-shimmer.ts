@@ -9,23 +9,23 @@ export default {
     {
       id: "elements",
       title: "Elements",
-      description: "Render a heading or paragraph with `as`; the default is an inline `span` that fits inside a sentence.",
+      description: "Use `as` when the shimmer is a heading or paragraph rather than inline text.",
     },
     {
       id: "speed",
       title: "Speed",
-      description: "`duration` sets the seconds for one sweep (default `2.2`).",
+      description: "Use a longer `duration` for long waits.",
     },
     {
       id: "spread",
       title: "Spread",
-      description: "`spread` widens or narrows the bright band, as a percentage of the gradient (default `14`).",
+      description: "Use a wider `spread` on large headings.",
     },
     {
       id: "colors",
       title: "Colors",
       description:
-        "Override the `--shimmer-base` and `--shimmer-highlight` custom properties through `style` to tint the sweep with any token.",
+        "Use on coloured surfaces, setting `--shimmer-base` and `--shimmer-highlight` through `style`.",
     },
   ],
   notes: [

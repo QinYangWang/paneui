@@ -30,28 +30,28 @@ export default {
     {
       id: "navigation",
       title: "Navigation",
-      description: "`side=\"left\"` for a menu; each link is a `DrawerClose` so picking one closes the drawer.",
+      description: "Use `side=\"left\"` for a nav menu, and make each link a `DrawerClose` so picking one closes the drawer.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `open` and `onOpenChange` to open it from anywhere and close it after an action.",
+      description: "Control `open` when another control opens the drawer or an action should close it.",
     },
     {
       id: "no-close-button",
       title: "Without Close Button",
-      description: "`showClose={false}` hides the corner ×; give the user another way out, like a Done button.",
+      description: "Hide the × with `showClose={false}` only when another control, like a Done button, closes the drawer.",
     },
     {
       id: "scrolling",
       title: "Scrolling Body",
-      description: "Only `DrawerBody` scrolls, so the header and footer stay in place.",
+      description: "Put long content in `DrawerBody`, the only part that scrolls, so the header and footer stay in place.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The panel slides in on a spring and exits on a stiffer one while the backdrop fades. With reduced motion both only fade.",
+      body: "The panel exits on a stiffer spring than it enters. With reduced motion the panel and backdrop only fade.",
     },
     {
       title: "Keyboard",
@@ -115,7 +115,7 @@ export default {
     },
     {
       name: "DrawerFooter",
-      description: "Bottom action row with a top border, pushed to the bottom.",
+      description: "Action row pinned to the bottom of the panel.",
       extends: "div",
       props: [],
     },

@@ -9,18 +9,18 @@ export default {
     {
       id: "with-input",
       title: "With Input",
-      description: "Point `htmlFor` at the field's `id`.",
+      description: "Point `htmlFor` at the field's `id` when the label sits apart from the control.",
     },
     {
       id: "with-checkbox",
       title: "With Checkbox",
-      description: "Wrap a control to make the whole row clickable. Add `font-normal` for option labels.",
+      description: "Wrap a control when the whole row should be clickable, with `font-normal` for option labels.",
     },
     {
       id: "disabled",
       title: "Disabled",
       description:
-        "A label wrapping a disabled control mutes its text (the control dims itself). A label placed right after a disabled control dims too, for native inputs (`:disabled`) and the library's Checkbox, Switch and Radio (`data-disabled`). For a field row, mark a `group` parent with `data-disabled=\"true\"`.",
+        "For a field row, mark a `group` parent with `data-disabled=\"true\"` so the label dims with its control.",
     },
   ],
   notes: [

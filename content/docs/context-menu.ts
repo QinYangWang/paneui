@@ -33,22 +33,22 @@ export default {
     {
       id: "basic",
       title: "Basic",
-      description: "Items with icons and `ContextMenuShortcut`; `variant=\"destructive\"` tints the last one.",
+      description: "Use `variant=\"destructive\"` for the item that deletes or removes.",
     },
     {
       id: "checkboxes",
       title: "Checkboxes",
-      description: "`ContextMenuCheckboxItem` toggles with `checked` and `onCheckedChange` and keeps the menu open.",
+      description: "Use checkbox items for toggles; the menu stays open so several can change.",
     },
     {
       id: "radio-group",
       title: "Radio Group",
-      description: "Wrap `ContextMenuRadioItem`s in a `ContextMenuRadioGroup` with `value` and `onValueChange`.",
+      description: "Use a radio group when the reader picks one option, like a sort order.",
     },
     {
       id: "inset",
       title: "Inset",
-      description: "`inset` on an item or label indents it to line up with checkbox and radio items.",
+      description: "Use `inset` on plain items and labels that sit beside checkbox or radio items.",
     },
   ],
   notes: [

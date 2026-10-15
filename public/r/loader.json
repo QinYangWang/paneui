@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "loader",
   "title": "Loader",
-  "description": "Loading indicator in eight variants (spinner, ring, dots, bars, pulse, ripple, orbit, typing) and three sizes that inherits currentColor and fades calmly under reduced motion.",
+  "description": "Shows that something is loading.",
   "dependencies": [
     "motion"
   ],

@@ -9,17 +9,17 @@ export default {
     {
       id: "async",
       title: "Async",
-      description: "Return a promise from `onComplete` to show `pendingLabel` with a spinner; a rejection springs the thumb back to the start.",
+      description: "Use when confirming starts async work, returning a promise from `onComplete`.",
     },
     {
       id: "threshold",
       title: "Threshold",
-      description: "`threshold` is the fraction of the track the thumb must pass to confirm on release (default `0.9`).",
+      description: "Use a lower `threshold` on long tracks or for low-risk actions.",
     },
     {
       id: "stay-complete",
       title: "Stay Complete",
-      description: "Pass `resetDelay={null}` to keep the confirmed state; `thumbIcon` replaces the chevron.",
+      description: "Use for one-time actions whose confirmed state should stay.",
     },
     { id: "disabled", title: "Disabled" },
   ],
@@ -30,7 +30,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "The thumb springs (420 / 34) and the idle label shimmers via [Text Shimmer](/docs/text-shimmer). With reduced motion springs become 200ms tweens and labels cross-fade.",
+      body: "The thumb uses a 420 / 34 spring and the idle label uses [Text Shimmer](/docs/text-shimmer). With reduced motion springs become 200ms tweens and labels cross-fade.",
     },
   ],
   api: [

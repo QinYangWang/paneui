@@ -14,23 +14,22 @@ export default {
     {
       id: "horizontal",
       title: "Horizontal",
-      description: "`orientation=\"horizontal\"` lays items in a row, for tab-like nav bars.",
+      description: "Use for nav bars laid out in a row.",
     },
     {
       id: "pill-style",
       title: "Pill Style",
-      description: "`pillClassName` restyles the gliding highlight; `inset` lets it reach past each item horizontally.",
+      description: "Use when the highlight should match a different surface or reach past each item.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "A `disabled` item is dimmed, skipped by the pointer and never takes the highlight.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "One raised pill glides between items with a spring and blurs in or out as the pointer enters or leaves the group. With reduced motion it jumps between items and only fades.",
+      body: "With reduced motion the pill jumps between items and only fades.",
     },
     {
       title: "Keyboard",
@@ -68,7 +67,7 @@ export default {
           type: "ReactElement | (props, state) => ReactElement",
           description: "Replace the rendered element, e.g. `<a />` or `<button />`.",
         },
-        { name: "disabled", type: "boolean", default: "false", description: "Dim the item and keep the highlight off it." },
+        { name: "disabled", type: "boolean", default: "false", description: "Dim the item, skip it for the pointer and keep the highlight off it." },
       ],
       dataAttributes: [{ name: "data-active", description: "Present while the item holds the highlight." }],
     },

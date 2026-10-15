@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "status-bar",
   "title": "Status Bar",
-  "description": "Uptime-style status history of rounded bars with a live status header, uptime percentage, period tooltips and a counted legend.",
+  "description": "Shows a service's status history and uptime.",
   "dependencies": [
     "motion"
   ],

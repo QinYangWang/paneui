@@ -12,37 +12,37 @@ export default {
     {
       id: "collapsed-rail",
       title: "Collapsed Rail",
-      description: "`defaultOpen={false}` folds the sidebar to a 56px icon rail with tooltips; clicking a folder or project opens it there. Shown in a fixed-height box.",
+      description: "Use `defaultOpen={false}` when the main content needs the width.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Own the width state with `open` / `onOpenChange` and the selection with `activeId` / `onActiveChange`.",
+      description: "Use `open` and `activeId` with their change handlers when routing or other UI owns the sidebar state.",
     },
     {
       id: "with-footer",
       title: "With Footer",
-      description: "`footer` and `actions` are render props that receive the open state, so they can switch to icon-only in the rail.",
+      description: "Use the `footer` and `actions` render props when they must switch to icon-only in the rail.",
     },
     {
       id: "minimal",
       title: "Minimal",
-      description: "`searchable={false}` drops search, `width` sets the expanded width, and items take `meta` and `disabled`.",
+      description: "Use `searchable={false}` for short lists that don't need search.",
     },
     {
       id: "search-hotkey",
       title: "Search Hotkey",
-      description: "`searchHotkey` sets the ⌘ / Ctrl shortcut that opens the sidebar and focuses search (here ⌘J on Mac, Ctrl+J elsewhere; the hint shows the right modifier); pass `null` to disable it.",
+      description: "Use `searchHotkey` when your app already uses ⌘K, or pass `null` to disable it.",
     },
   ],
   notes: [
     {
       title: "Keyboard",
-      body: "The tree follows the WAI-ARIA tree pattern: `ArrowUp` / `ArrowDown` move, `ArrowRight` / `ArrowLeft` open, close or go to the parent, `Home` / `End` jump, `Enter` / `Space` activate, typing jumps by label, and `F2` renames when `renamable`. `Escape` clears search. The search shortcut (⌘K on Mac, Ctrl+K elsewhere) is shared: with several sidebars on a page, only the most recently mounted, focused or clicked one responds.",
+      body: "The tree follows the WAI-ARIA tree pattern. `ArrowUp` / `ArrowDown` move, `ArrowRight` / `ArrowLeft` open, close or go to the parent, `Home` / `End` jump, `Enter` / `Space` activate, typing jumps by label, and `F2` renames when `renamable`. `Escape` clears search. The search shortcut (⌘K on Mac, Ctrl+K elsewhere) is shared, so with several sidebars on a page, only the most recently mounted, focused or clicked one responds.",
     },
     {
       title: "Related",
-      body: "Other sidebars: [Animated Sidebar](/docs/animated-sidebar).",
+      body: "See also [Animated Sidebar](/docs/animated-sidebar).",
     },
   ],
   api: [
@@ -51,7 +51,7 @@ export default {
       description: "Workspace sidebar with bookmarks, a searchable resource tree and a collapsible icon rail.",
       extends: "motion.nav",
       props: [
-        { name: "items", type: "SidebarResource[]", description: "Controlled workspace tree: folders and projects hold `children`, files are leaves." },
+        { name: "items", type: "SidebarResource[]", description: "Controlled workspace tree; folders and projects hold `children`, files are leaves." },
         { name: "defaultItems", type: "SidebarResource[]", default: "[]", description: "Initial tree when uncontrolled." },
         { name: "onItemsChange", type: "(items: SidebarResource[]) => void", description: "Called with the renamed tree." },
         { name: "bookmarks", type: "SidebarResource[]", default: "[]", description: "Pinned shortcuts in their own section." },
@@ -59,8 +59,8 @@ export default {
         { name: "defaultActiveId", type: "string | null", default: "null", description: "Initial active item." },
         { name: "onActiveChange", type: "(id: string, item: SidebarResource) => void", description: "Called when a leaf is activated." },
         { name: "defaultExpandedIds", type: "string[]", default: "[]", description: "Containers open on first render." },
-        { name: "open", type: "boolean", description: "Controlled: expanded (`true`) or icon rail (`false`)." },
-        { name: "defaultOpen", type: "boolean", default: "true", description: "Initial state when uncontrolled." },
+        { name: "open", type: "boolean", description: "Controlled state, expanded (`true`) or icon rail (`false`)." },
+        { name: "defaultOpen", type: "boolean", default: "true", description: "Initial state when uncontrolled. Closed, the sidebar is a 56px icon rail with tooltips, and clicking a folder or project expands it." },
         { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the sidebar expands or collapses." },
         { name: "title", type: "ReactNode", default: `"Workspace"`, description: "Title row content." },
         { name: "actions", type: "(open: boolean) => ReactNode", description: "Rendered under the title, e.g. a New chat button." },
@@ -74,7 +74,7 @@ export default {
       dataAttributes: [
         { name: "data-state", description: "`open` or `collapsed`." },
         { name: "data-active", description: "On the active tree item." },
-        { name: "data-kind", description: "On each tree item: its `kind`." },
+        { name: "data-kind", description: "On each tree item, its `kind`." },
       ],
     },
     {

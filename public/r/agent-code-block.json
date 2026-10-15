@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "agent-code-block",
   "title": "Agent Code Block",
-  "description": "Syntax-highlighted code surface for agent output that streams without flicker, with line numbers, highlighted lines, a filename header, a live caret that follows the newest line and a copy button.",
+  "description": "Displays code from an agent, including code still streaming in.",
   "dependencies": [
     "shiki",
     "motion"

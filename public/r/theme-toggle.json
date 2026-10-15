@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme-toggle",
   "title": "Theme Toggle",
-  "description": "Light/dark button that repaints the page through the View Transition API with a circular reveal from the click point, falling back to an instant swap.",
+  "description": "Switches the page between light and dark themes.",
   "dependencies": [
     "motion"
   ],

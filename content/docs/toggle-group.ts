@@ -4,13 +4,13 @@ const variant = {
   name: "variant",
   type: `"default" | "outline"`,
   default: `"default"`,
-  description: "`default` is a bare row whose pressed item gets a fill; `outline` draws a hairline around every item (settings panels).",
+  description: "`default` fills only the pressed item; `outline` frames every item, for settings panels.",
 }
 const size = {
   name: "size",
   type: `"default" | "sm" | "xs"`,
   default: `"default"`,
-  description: "32 / 28 / 24px tall, the button density.",
+  description: "Height 32 / 28 / 24px, matching the button sizes.",
 }
 
 export default {
@@ -27,8 +27,8 @@ export default {
 
 Toggle`,
   examples: [
-    { id: "outline", title: "Outline", description: "`variant=\"outline\"` with text items, as in an image settings panel. The group holds one value unless `multiple` is set." },
-    { id: "single-toggle", title: "Single Toggle", description: "`Toggle` on its own: `pressed` and `onPressedChange`." },
+    { id: "outline", title: "Outline", description: "Use `outline` with text items in settings panels." },
+    { id: "single-toggle", title: "Single Toggle", description: "Use `Toggle` alone for a single on/off option, driven by `pressed` and `onPressedChange`." },
   ],
   notes: [
     { title: "One value or many", body: "The value is always an array. Without `multiple` it holds at most one item, so read `value[0]`; to stop the user clearing the choice, ignore empty arrays in `onValueChange`." },

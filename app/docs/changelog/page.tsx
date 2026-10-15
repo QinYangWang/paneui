@@ -8,6 +8,21 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-typeset-copy",
+    date: "October 15, 2026",
+    title: "Typeset and shorter copy",
+    tag: "Docs",
+    changes: [
+      <>
+        New <Code>typeset</Code> item for long-form text, with <Code>typeset-docs</Code>, <Code>typeset-reading</Code>{" "}
+        and <Code>typeset-chat</Code> presets. It replaces <Code>prose-qy</Code>, and streamed responses, the blog and the
+        docs template now use it.
+      </>,
+      <>Gallery cards show the name and the preview only.</>,
+      <>Every description, example intro and note was rewritten to the copy-density rules in AGENTS.md.</>,
+    ],
+  },
+  {
     id: "2026-10-15-file-tree-icons",
     date: "October 15, 2026",
     title: "File tree: chevrons for folders, type icons for files",
@@ -200,11 +215,13 @@ export default function Changelog() {
             {e.tag && <Badge size="sm">{e.tag}</Badge>}
           </div>
           <GuideH2 id={e.id}>{e.title}</GuideH2>
-          <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
-            {e.changes.map((c, i) => (
-              <li key={i}>{c}</li>
-            ))}
-          </ul>
+          <div className="typeset typeset-docs text-muted-foreground">
+            <ul>
+              {e.changes.map((c, i) => (
+                <li key={i}>{c}</li>
+              ))}
+            </ul>
+          </div>
         </section>
       ))}
     </GuidePage>

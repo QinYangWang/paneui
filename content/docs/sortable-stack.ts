@@ -23,22 +23,21 @@ export default {
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `items` and `onItemsChange` to own the order, e.g. to save it or show it elsewhere.",
+      description: "Use when you save the order or show it elsewhere.",
     },
     {
       id: "move-to-top",
       title: "Move to Top",
-      description: "`useSortableStack()` gives custom controls `moveItem(id, \"first\" | \"last\" | -1 | 1)`; such moves are undoable too.",
+      description: "Use for shortcut buttons like Move to top, which `moveItem` makes undoable too.",
     },
     {
       id: "custom-undo",
       title: "Custom Undo",
-      description: "Turn off the built-in pill with `showUndo={false}` and put your own control in `footer`, which renders inside the stack's context.",
+      description: "Use when undo belongs in your own control instead of the built-in pill.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "`disabled` locks the order: handles are disabled and rows can't be dragged.",
     },
   ],
   notes: [
@@ -48,13 +47,13 @@ export default {
     },
     {
       title: "Motion",
-      body: "Rows spring into place and the dragged row lifts to a surface shadow at 1.025 scale. With reduced motion rows jump into place without scaling.",
+      body: "The dragged row scales to 1.025. With reduced motion rows jump into place without scaling.",
     },
   ],
   api: [
     {
       name: "SortableStack",
-      description: "Drag-to-reorder list built on motion `Reorder`. Items need a string `id`.",
+      description: "Drag-to-reorder list. Items need a string `id`.",
       props: [
         { name: "items", type: "T[]", description: "Controlled rows in order." },
         { name: "defaultItems", type: "T[]", default: "[]", description: "Initial rows when uncontrolled." },
@@ -72,7 +71,7 @@ export default {
           description: "Render the rows in their current order.",
         },
         { name: "label", type: "string", default: `"Sortable list"`, description: "Accessible name of the list." },
-        { name: "disabled", type: "boolean", default: "false", description: "Lock the order." },
+        { name: "disabled", type: "boolean", default: "false", description: "Lock the order; handles are disabled and rows can't be dragged." },
         { name: "showUndo", type: "boolean", default: "true", description: "Render the Undo pill under the list." },
         { name: "footer", type: "ReactNode", description: "Extra content under the list, inside the stack's context." },
         { name: "className", type: "string", description: "Merged onto the wrapper." },
@@ -80,7 +79,7 @@ export default {
     },
     {
       name: "SortableStackItem",
-      description: "One raised row (`motion` `Reorder.Item`).",
+      description: "One row.",
       props: [
         { name: "id", type: "string", required: true, description: "The item's id." },
         { name: "className", type: "string", description: "Merged onto the row." },
@@ -95,7 +94,7 @@ export default {
       extends: "button",
       props: [{ name: "children", type: "ReactNode", default: "grip icon", description: "Replace the grip icon." }],
     },
-    { name: "SortableStackContent", description: "Flexible content area of a row.", extends: "div", props: [] },
+    { name: "SortableStackContent", description: "Content area of a row.", extends: "div", props: [] },
     {
       name: "SortableStackUndo",
       description: "Restores the order from before the last move. Hidden until there is something to undo.",

@@ -21,7 +21,7 @@ export default {
 ├── EmptyStateTitle
 ├── EmptyStateDescription
 └── EmptyStateActions`,
-  examples: [{ id: "variants", title: "Variants", description: "`default` is bare (inside a card or table), `outline` a dashed drop zone, `muted` a quiet fill. `size` is `sm`, `default` or `lg`." }],
+  examples: [{ id: "variants", title: "Variants", description: "Use `default` inside a card or table, `outline` as a drop zone, and `muted` to set the area apart from the page." }],
   notes: [
     { title: "Writing", body: "Say what is missing, then what to do about it, then offer the action. For a filtered list, say no results matched and offer to clear the filters, as DataTable does." },
   ],

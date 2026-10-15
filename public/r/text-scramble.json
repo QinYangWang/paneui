@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-scramble",
   "title": "Text Scramble",
-  "description": "Controlled text that scrambles through random glyphs before resolving to its new value, at a stable width.",
+  "description": "Scrambles text into its new value when it changes.",
   "dependencies": [
     "motion"
   ],

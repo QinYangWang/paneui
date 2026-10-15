@@ -10,25 +10,25 @@ export default {
     {
       id: "accents",
       title: "Accents",
-      description: "`accentClassName` restyles the sweeping tile (a different token background and text colour) and `labelClassName` the label, e.g. `tabular-nums` for a count. Both take token classes.",
+      description: "Use token classes in `accentClassName` for a different accent, and in `labelClassName` for cases like `tabular-nums` on a count.",
     },
     {
       id: "as-link",
       title: "As Link",
-      description: "Render an anchor (or router `Link`) with `render` and `nativeButton={false}`.",
+      description: "Use `render` with `nativeButton={false}` when the button navigates, to render an anchor or router `Link`.",
     },
     { id: "disabled", title: "Disabled" },
   ],
   notes: [
     {
       title: "Motion",
-      body: "On hover or keyboard focus the tile widens across the button (500ms) and a staggered trail of dotted chevrons fades in. With reduced motion the tile changes width instantly and nothing slides.",
+      body: "The sweep runs on hover and on keyboard focus, over 500ms. With reduced motion the tile changes width instantly and nothing slides.",
     },
   ],
   api: [
     {
       name: "ExpandingArrowButton",
-      description: "Raised pill with an accent tile that sweeps across on hover or focus.",
+      description: "Button whose accent tile sweeps across on hover or focus.",
       extends: "Button",
       extendsHref: "https://base-ui.com/react/components/button#api-reference",
       props: [

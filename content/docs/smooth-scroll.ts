@@ -11,27 +11,27 @@ export default {
     {
       id: "horizontal",
       title: "Horizontal",
-      description: "`orientation=\"horizontal\"` lays the content out in a row and eases sideways wheel and trackpad scroll.",
+      description: "Use for galleries and timelines that scroll sideways.",
     },
     {
       id: "easing",
       title: "Lerp vs Duration",
-      description: "A lower `lerp` feels heavier; a fixed `duration` uses an exponential ease instead. `wheelMultiplier` scales each wheel step.",
+      description: "Use a fixed `duration` when every scroll should take the same time, or a lower `lerp` for a heavier feel.",
     },
     {
       id: "scroll-to-section",
       title: "Scroll to Section",
-      description: "Call `scrollTo` from `useSmoothScroll()` with a selector, element or px value; a negative `offset` clears a sticky header.",
+      description: "Use for in-page navigation, with a negative `offset` to clear a sticky header.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Easing is powered by Lenis. Under reduced motion no Lenis instance is created: scrolling is native and `scrollTo` jumps instead of animating. Touch scrolling stays native unless you set `touch`.",
+      body: "Under reduced motion nothing is eased, so scrolling is native and `scrollTo` jumps instead of animating. Touch scrolling stays native unless you set `touch`.",
     },
     {
       title: "Related",
-      body: "Scroll-driven parts read this provider: [Scroll Progress](/docs/scroll-progress), [Scroll To](/docs/scroll-to), [Scroll Reveal](/docs/scroll-reveal).",
+      body: "[Scroll Progress](/docs/scroll-progress), [Scroll To](/docs/scroll-to) and [Scroll Reveal](/docs/scroll-reveal) read this provider.",
     },
   ],
   api: [
@@ -53,13 +53,13 @@ export default {
         { name: "touch", type: "boolean", default: "false", description: "Ease touch scrolling too. Off by default so phones keep native momentum." },
         { name: "contentClassName", type: "string", description: "Class for the inner content element (contained mode only)." },
       ],
-      dataAttributes: [{ name: "data-smooth", description: "Present on the container while Lenis is easing it." }],
+      dataAttributes: [{ name: "data-smooth", description: "Present on the container while it is eased." }],
     },
     {
       name: "useSmoothScroll",
       description: "Scroll state for the nearest `SmoothScroll`. Outside a provider it falls back to the window's native scroll.",
       props: [
-        { name: "lenis", type: "Lenis | null", description: "The Lenis instance, or `null` on the native / reduced-motion path." },
+        { name: "lenis", type: "Lenis | null", description: "The easing instance, or `null` on the native or reduced-motion path." },
         { name: "smooth", type: "boolean", description: "Whether scrolling is currently eased." },
         { name: "container", type: "RefObject<HTMLElement | null> | null", description: "The scroll container, or `null` for the window." },
         { name: "offset", type: "MotionValue<number>", description: "Current scroll offset in px." },

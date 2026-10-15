@@ -11,22 +11,20 @@ export default {
     {
       id: "states",
       title: "States",
-      description: "Each `state` shows its own face: `idle` (children and `icon`), `loading`, `success` and `error`.",
+      description: "Use for async actions like saving, where the reader needs to see the result.",
     },
     {
       id: "variants",
       title: "Variants",
-      description: "Takes every Button `variant`. The green / red success and error tint applies to `default` only.",
     },
     {
       id: "no-tint",
       title: "Without Tint",
-      description: "Set `tint={false}` to keep the surface colour on success and error and change only the label.",
+      description: "Use `tint={false}` when coloured feedback would clash with the surrounding UI.",
     },
     {
       id: "sizes",
       title: "Sizes",
-      description: "Button `size` values pass through; the width springs between each face's natural width.",
     },
   ],
   notes: [
@@ -35,8 +33,12 @@ export default {
       body: "While `loading` the button is disabled but stays focusable (`focusableWhenDisabled`) and sets `aria-busy`. The current label is announced through a polite live region.",
     },
     {
+      title: "Motion",
+      body: "With reduced motion the faces cross-fade and the width changes instantly.",
+    },
+    {
       title: "Related",
-      body: "[Button](/docs/button). With reduced motion faces cross-fade and the width changes instantly.",
+      body: "See also [Button](/docs/button).",
     },
   ],
   api: [
@@ -50,7 +52,7 @@ export default {
           name: "state",
           type: `"idle" | "loading" | "success" | "error"`,
           default: `"idle"`,
-          description: "Which face the button shows. `loading` disables it (it stays focusable).",
+          description: "Which face the button shows. `idle` shows the children and `icon`; `loading` disables it (it stays focusable).",
         },
         { name: "children", type: "ReactNode", required: true, description: "Idle label." },
         { name: "loadingText", type: "ReactNode", default: `"Working"`, description: "Label while loading, after a spinner." },

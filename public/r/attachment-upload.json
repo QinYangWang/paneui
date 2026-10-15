@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "attachment-upload",
   "title": "Attachment Upload",
-  "description": "Mixed attachment workspace with a collapsing dropzone, staggered file, image and link rows, animated upload progress, retry, removal and shared-layout image previews.",
+  "description": "Attaches files, images and links to a message or form.",
   "dependencies": [
     "@base-ui/react",
     "motion"

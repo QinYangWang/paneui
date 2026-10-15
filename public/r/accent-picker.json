@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "accent-picker",
   "title": "Accent Picker",
-  "description": "Swatch picker for the theme's accent presets: sets data-accent on <html>, persists it, ships the preset CSS and a pre-paint script.",
+  "description": "Lets people choose the theme's accent colour, remembered across visits.",
   "dependencies": [
     "@base-ui/react"
   ],

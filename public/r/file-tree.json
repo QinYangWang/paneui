@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "file-tree",
   "title": "File Tree",
-  "description": "Declarative file and folder primitives rendered as an ARIA tree with springing rows and branch guides, a gliding raised selection, and full keyboard navigation with typeahead.",
+  "description": "Browses files and folders in a keyboard-navigable tree.",
   "dependencies": [
     "motion"
   ],

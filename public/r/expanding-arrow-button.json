@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "expanding-arrow-button",
   "title": "Expanding Arrow Button",
-  "description": "Button with an accent tile that sweeps across the button into a fading trail of dotted chevrons on hover or keyboard focus.",
+  "description": "Call-to-action button with an arrow sweep on hover.",
   "dependencies": [
     "@base-ui/react"
   ],

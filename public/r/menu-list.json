@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "menu-list",
   "title": "Menu List",
-  "description": "Keyboard-navigable list that keeps focus elsewhere (aria-activedescendant): slash menus, mention pickers, autocomplete.",
+  "description": "Keyboard-driven option list that leaves focus in the text field.",
   "dependencies": [
     "class-variance-authority"
   ],

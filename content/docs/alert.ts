@@ -23,28 +23,28 @@ export default {
     {
       id: "default-variant",
       title: "Default",
-      description: "The `default` variant has no tint and a neutral icon chip, for plain notices.",
+      description: "Use `default` for plain notices that carry no status.",
     },
     {
       id: "custom-icon",
       title: "Custom Icon",
-      description: "Pass an icon as the child of `AlertIcon` to replace the variant's default; the chip keeps its tone.",
+      description: "Pass an icon to `AlertIcon` when the message needs a more specific glyph than the variant's.",
     },
     {
       id: "actions",
       title: "Actions",
-      description: "`AlertAction` holds buttons on the right, centred on the row.",
+      description: "Use `AlertAction` when the reader can act on the message right away.",
     },
     {
       id: "use-alert",
       title: "Custom Dismiss",
-      description: "Call `useAlert().dismiss` from any child to close the alert with its exit animation.",
+      description: "Call `useAlert().dismiss` when a child, like an action button, should close the alert.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The alert grows its height, scales from 96% and un-blurs on enter, and reverses on dismiss so the content below slides up. With reduced motion it only fades.",
+      body: "The alert scales from 96% as it enters and reverses on dismiss, so the content below slides up. With reduced motion it only fades.",
     },
     {
       title: "Accessibility",

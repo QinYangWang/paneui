@@ -41,10 +41,10 @@ const install: Record<string, string> = {
   bun: "bun add -d @tessel/cli",
 }
 
-/** Article body. Long-form text uses `prose-qy`; components inside carry `not-prose`. */
+/** Article body. Long-form text uses `typeset typeset-docs`; components inside carry `not-typeset`. */
 export function Article() {
   return (
-    <div className="prose-qy">
+    <div className="typeset typeset-docs max-w-reading">
       <p>
         Tessel runs every session in a sandbox, but some actions reach outside it: pushing a branch, opening a pull request, calling a
         paid API. Approval policies decide which of those run on their own, which wait for a person and which are never allowed.
@@ -67,7 +67,7 @@ export function Article() {
         </li>
       </ol>
 
-      <div className="not-prose">
+      <div className="not-typeset">
         <Alert variant="info">
           <AlertIcon />
           <AlertContent>
@@ -110,7 +110,7 @@ export function Article() {
       <p>You need the CLI to validate a policy locally before you commit it.</p>
 
       <h3 id="install-cli">Install the CLI</h3>
-      <div className="not-prose">
+      <div className="not-typeset">
         <Tabs defaultValue="pnpm">
           <TabsList aria-label="Package manager">
             {Object.keys(install).map((k) => (
@@ -132,7 +132,7 @@ export function Article() {
         This policy lets Tessel run tests and builds freely, asks before anything touches <code>main</code> and blocks destructive
         shell commands outright.
       </p>
-      <div className="not-prose">
+      <div className="not-typeset">
         <AgentCodeBlock filename="tessel.toml" code={POLICY} highlightLines={[[15, 18]]} maxHeight={560} />
       </div>
       <p>
@@ -140,7 +140,7 @@ export function Article() {
         would have matched.
       </p>
 
-      <div className="not-prose">
+      <div className="not-typeset">
         <Alert variant="warning">
           <AlertIcon />
           <AlertContent>

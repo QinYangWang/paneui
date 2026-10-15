@@ -7,7 +7,7 @@ export default {
 <ModelPicker models={models} value={model} onValueChange={setModel} />
 <EffortPicker value={effort} onValueChange={setEffort} />`,
   },
-  examples: [{ id: "composer-picker", title: "Composer Picker", description: "`ComposerPicker` is the generic trigger + menu the presets are built on: any option list with descriptions, groups and a check." }],
+  examples: [{ id: "composer-picker", title: "Composer Picker", description: "Use `ComposerPicker` directly for an option list the presets don't cover." }],
   notes: [
     { title: "ACP", body: "Feed `ModePicker` from an agent's `SessionModeState`, `ModelPicker` from a config option with `category: \"model\"` (grouped options map to `provider`), and `EffortPicker` from `category: \"thought_level\"`." },
     { title: "Tone", body: "A mode with `tone: \"warning\"` (full access) or `\"destructive\"` colours the trigger while selected, so a risky setting is visible at a glance." },

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "morphing-tabs",
   "title": "Morphing Tabs",
-  "description": "Drag- or keyboard-reorderable tabs whose selected tab joins a content surface that glides between tabs and morphs to each panel's height.",
+  "description": "Tabs the user can reorder, with content attached to the active tab.",
   "dependencies": [
     "motion"
   ],

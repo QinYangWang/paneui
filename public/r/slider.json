@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "slider",
   "title": "Slider",
-  "description": "Single or range slider with an inset well track, primary fill, raised thumb, optional tick dots and a floating value bubble.",
+  "description": "Picks a value or range by dragging.",
   "dependencies": [
     "@base-ui/react"
   ],

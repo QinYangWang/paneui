@@ -14,13 +14,13 @@ export default {
 ├── ResizableHandle
 └── ResizablePanel`,
   examples: [
-    { id: "collapsible", title: "Collapsible", description: "`collapsible` panels snap shut when dragged past half their `minSize`; `handleRef` toggles them from a button. `variant=\"hidden\"` hides the hairline for a sidebar edge." },
-    { id: "with-handle", title: "With Handle", description: "`withHandle` adds a small grip on the divider, for split views where the edge is easy to miss." },
+    { id: "collapsible", title: "Collapsible", description: "Use for sidebars that can be dragged shut or toggled from a button." },
+    { id: "with-handle", title: "With Handle", description: "Use where the divider is easy to miss." },
   ],
   notes: [
     { title: "Sizes", body: "Sizes are percentages of the group, or pixel strings like `\"240px\"` for `defaultSize`, `minSize`, `maxSize` and `collapsedSize` (converted with the group's current size). Panels without `defaultSize` share what is left." },
     { title: "Persistence", body: "`autoSaveId` stores sizes and collapsed state in `localStorage[\"resizable:<id>\"]` when a drag, key press or collapse settles. The saved layout is used only while the set of panel ids is unchanged." },
-    { title: "Keyboard", body: "The divider is a focusable `separator`: arrow keys move it 2% (Shift: 10%), Enter collapses or expands the collapsible neighbour, double click resets every panel to its default." },
+    { title: "Keyboard", body: "The divider is a focusable `separator`. Arrow keys move it 2% (10% with Shift), Enter collapses or expands the collapsible neighbour, double click resets every panel to its default." },
     { title: "Motion", body: "Panels follow the pointer exactly while dragging; collapse and expand ease `flex-grow` over 200ms, instant with reduced motion. The primary guide on the divider appears after a 150ms hover." },
   ],
   api: [
@@ -32,7 +32,7 @@ export default {
         { name: "direction", type: `"horizontal" | "vertical"`, default: `"horizontal"`, description: "Lay panels out in a row or a column." },
         { name: "autoSaveId", type: "string", description: "Persist the layout under this key." },
         { name: "onLayout", type: "(sizes: number[]) => void", description: "Called with percentages whenever the layout settles." },
-        { name: "handleRef", type: "Ref<ResizablePanelGroupHandle>", description: "Imperative API: `collapse(id)`, `expand(id)`, `toggle(id)`, `isCollapsed(id)`, `getSizes()`, `setSizes(sizes)`, `reset()`." },
+        { name: "handleRef", type: "Ref<ResizablePanelGroupHandle>", description: "Imperative handle with `collapse(id)`, `expand(id)`, `toggle(id)`, `isCollapsed(id)`, `getSizes()`, `setSizes(sizes)` and `reset()`." },
       ],
       dataAttributes: [{ name: "data-dragging", description: "Present while a divider is dragged." }],
     },
@@ -44,7 +44,7 @@ export default {
         { name: "defaultSize", type: "number | `${number}px`", description: "Initial size." },
         { name: "minSize", type: "number | `${number}px`", default: "0", description: "Smallest size while dragging." },
         { name: "maxSize", type: "number | `${number}px`", default: "100", description: "Largest size while dragging." },
-        { name: "collapsible", type: "boolean", default: "false", description: "Allow snapping to `collapsedSize`." },
+        { name: "collapsible", type: "boolean", default: "false", description: "Snap to `collapsedSize` when dragged past half of `minSize`." },
         { name: "collapsedSize", type: "number | `${number}px`", default: "0", description: "Size when collapsed." },
         { name: "onCollapsedChange", type: "(collapsed: boolean) => void", description: "Called when the panel collapses or expands." },
       ],

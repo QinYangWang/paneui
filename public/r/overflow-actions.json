@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "overflow-actions",
   "title": "Overflow Actions",
-  "description": "Connected pill rail of primary actions whose toggle springs the rail open to reveal extra controls, with staggered blur-in and an Escape to fold.",
+  "description": "Keeps primary actions visible and tucks extra ones behind a toggle.",
   "dependencies": [
     "@base-ui/react",
     "motion"

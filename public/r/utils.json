@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "utils",
   "title": "cn helper",
-  "description": "cn() = clsx + tailwind-merge, extended so the theme's text-ui-2xs … text-ui-lg sizes merge as font sizes (not colours).",
+  "description": "Class-merging helper that understands the theme's font sizes.",
   "dependencies": [
     "clsx",
     "tailwind-merge"

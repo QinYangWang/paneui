@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "select-morph",
   "title": "Select Morph",
-  "description": "Select whose trigger unfolds into the option list as one surface, folding back on close.",
+  "description": "Select whose trigger unfolds into its option list.",
   "dependencies": [
     "@base-ui/react"
   ],

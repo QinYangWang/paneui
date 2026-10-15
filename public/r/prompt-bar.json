@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "prompt-bar",
   "title": "Prompt Bar",
-  "description": "Auto-growing prompt input with attach, voice, and an animated send/stop button.",
+  "description": "Input where the user writes and sends a prompt to an agent.",
   "dependencies": [
     "motion"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-reveal",
   "title": "Text Reveal",
-  "description": "Word- or character-by-character reveal with a springy slide-up and blur, on mount or when scrolled into view.",
+  "description": "Reveals a headline word by word on load or scroll.",
   "dependencies": [
     "motion"
   ],

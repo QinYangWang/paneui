@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "todo-list",
   "title": "Todo List",
-  "description": "Collapsible agent task plan with morphing pending, in-progress, done and failed marks, a rolling completion count and compact per-step meta.",
+  "description": "Shows an agent's step-by-step plan and its progress.",
   "dependencies": [
     "@base-ui/react",
     "motion"

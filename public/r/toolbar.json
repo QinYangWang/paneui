@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "toolbar",
   "title": "Toolbar",
-  "description": "Roving-focus toolbar with buttons, toggles, separators and inputs; floating (selection bubble) and inset variants.",
+  "description": "Groups related actions into one keyboard-navigable bar.",
   "dependencies": [
     "@base-ui/react",
     "class-variance-authority"

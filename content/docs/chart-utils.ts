@@ -11,22 +11,22 @@ export default {
     {
       id: "number",
       title: "Chart Number",
-      description: "`ChartNumber` springs from the previous `value` to the next and renders through any `format`.",
+      description: "Use `ChartNumber` for headline values that change with the selection.",
     },
     {
       id: "tooltip",
       title: "Tooltip",
-      description: "Build a bar chart from `useChartSize`, `scaleBand` and `scaleLinear`, and anchor `ChartTooltip` to the hovered bar with `x`, `y` and `bounds`.",
+      description: "Use `ChartTooltip` when you build your own chart from the scales and the size hook.",
     },
     {
       id: "legend",
       title: "Legend",
-      description: "`ChartLegendItem` is a real button: use `inactive` for series toggled off and `highlighted` for the hovered one.",
+      description: "Use `inactive` for series toggled off and `highlighted` for the hovered one.",
     },
     {
       id: "scales",
       title: "Scales and Ticks",
-      description: "`niceDomain` rounds a data range outward and `scale.ticks()` returns tidy tick values.",
+      description: "Use `niceDomain` before `scale.ticks()` so axes land on round numbers.",
     },
   ],
   notes: [
@@ -83,7 +83,7 @@ export default {
     { name: "ChartLegend", description: "Wrapping row of legend items.", extends: "div", props: [] },
     {
       name: "ChartLegendItem",
-      description: "Raised pill legend entry.",
+      description: "Legend entry, rendered as a button.",
       extends: "button",
       props: [
         { name: "color", type: "string", required: true, description: "Series colour." },
@@ -107,7 +107,7 @@ export default {
     },
     {
       name: "chartColor",
-      description: "`chartColor(index)` returns the series colour: `--chart-1…5` (falling back to semantic tokens), then blends for indexes past five. `CHART_COLORS` holds the base five.",
+      description: "`chartColor(index)` returns the series colour, `--chart-1…5` first (falling back to semantic tokens), then blends for indexes past five. `CHART_COLORS` holds the base five.",
       props: [{ name: "index", type: "number", required: true, description: "Series index." }],
     },
     {
@@ -120,7 +120,7 @@ export default {
     },
     {
       name: "onFill",
-      description: "`onFill(fill)` returns a readable label colour for text drawn on that fill: white on dark fills, near-black on light ones (CSS relative colour). Set it as the inline `fill` and keep a `fill-white` class as the fallback for browsers without relative colour. Used by treemap, candlestick and funnel labels.",
+      description: "`onFill(fill)` returns a readable label colour for text drawn on that fill, white on dark fills, near-black on light ones (CSS relative colour). Set it as the inline `fill` and keep a `fill-white` class as the fallback for browsers without relative colour. Used by treemap, candlestick and funnel labels.",
       props: [{ name: "fill", type: "string", required: true, description: "The fill colour behind the label (any CSS colour or `var(--token)`)." }],
     },
     {
@@ -147,7 +147,7 @@ export default {
     },
     {
       name: "formatCompact / formatNumber / formatPercent",
-      description: "`formatCompact(1284000)` → `1.3M`; `formatNumber` keeps up to 2 decimals; `formatPercent(share, digits = 1)` turns 0.42 into `42.0%`. Also exported: `clamp(value, min, max)` and `seededRandom(seed)` for deterministic demo data.",
+      description: "`formatCompact(1284000)` → `1.3M`; `formatNumber` keeps up to 2 decimals; `formatPercent(share, digits = 1)` turns 0.42 into `42.0%`. `clamp(value, min, max)` and `seededRandom(seed)`, for deterministic demo data, are also exported.",
       props: [],
     },
     {
@@ -162,7 +162,7 @@ export default {
     },
     {
       name: "useActiveId",
-      description: "`const [active, setActive] = useActiveId(value, defaultValue, onChange)`: controlled / uncontrolled active id shared by the charts.",
+      description: "`const [active, setActive] = useActiveId(value, defaultValue, onChange)` holds the controlled or uncontrolled active id shared by the charts.",
       props: [
         { name: "controlled", type: "T | null | undefined", description: "Controlled value; `undefined` means uncontrolled." },
         { name: "defaultValue", type: "T | null | undefined", description: "Initial value when uncontrolled." },

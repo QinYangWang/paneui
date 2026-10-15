@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "project-folder",
   "title": "Project Folder",
-  "description": "A folder whose file sheets fan out on hover or keyboard focus and fly into a focus-managed folder view dialog, then retrace their path when it closes.",
+  "description": "Folder that previews its files and opens into a file view.",
   "dependencies": [
     "@base-ui/react",
     "motion"

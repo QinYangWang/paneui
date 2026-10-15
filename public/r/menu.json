@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "menu",
   "title": "Menu",
-  "description": "Dropdown menu with a soft highlight, checkbox and radio items, submenus and shortcuts.",
+  "description": "Dropdown of actions or options opened from a trigger.",
   "dependencies": [
     "@base-ui/react"
   ],

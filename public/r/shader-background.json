@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "shader-background",
   "title": "Shader Background",
-  "description": "Animated WebGL background in mesh-gradient, grain, warp, waves and dot-orbit variants, coloured from props or theme tokens and paused offscreen or under reduced motion.",
+  "description": "Animated backdrop for hero sections and empty states.",
   "dependencies": [
     "@paper-design/shaders-react",
     "motion"

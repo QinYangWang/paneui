@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "icon-chip",
   "title": "Icon Chip",
-  "description": "The house frame for title and header icons: a raised squircle in four sizes with neutral, tinted and solid tones, so every card header reads as one icon family.",
+  "description": "Frames an icon so card and section headers match.",
   "dependencies": [
     "@base-ui/react",
     "class-variance-authority"

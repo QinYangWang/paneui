@@ -17,22 +17,22 @@ export default {
     {
       id: "custom-statuses",
       title: "Custom Statuses",
-      description: "Pass your own `statuses` map. Each `weight` feeds the uptime figure: 1 is up, 0 is down, `null` is not counted. `title` takes any node, here a branch name in mono.",
+      description: "Use when your states differ from the defaults.",
     },
     {
       id: "hourly",
       title: "Hourly",
-      description: "Any period works; `height` and `gap` (px) size the bars and `startLabel` / `endLabel` caption the ends.",
+      description: "Use for short windows such as the last 24 hours.",
     },
     {
       id: "compact",
       title: "Compact",
-      description: "`showHeader={false}` and `showLegend={false}` leave just the bars, for stacking several services.",
+      description: "Use when stacking several services in one view.",
     },
     {
       id: "no-data",
       title: "No Data",
-      description: "The built-in `nodata` status draws a faint bar and is left out of uptime.",
+      description: "Use for periods before monitoring started.",
     },
   ],
   notes: [
@@ -42,7 +42,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "Bars grow up in a quick stagger and the latest status dot pulses when operational; both are skipped with reduced motion.",
+      body: "With reduced motion the bars don't stagger in and the status dot doesn't pulse.",
     },
   ],
   api: [
@@ -60,7 +60,7 @@ export default {
           name: "statuses",
           type: "Record<string, { label: string; color: string; weight?: number | null }>",
           default: "STATUS_BAR_STATUSES",
-          description: "Status definitions. The defaults are `operational`, `degraded`, `outage`, `maintenance` and `nodata`.",
+          description: "Status definitions. Each `weight` feeds the uptime figure (1 up, 0 down, `null` not counted); `nodata` is left out of uptime. Defaults to `STATUS_BAR_STATUSES`.",
         },
         { name: "label", type: "string", default: `"Status history"`, description: "Accessible name; also the header title fallback." },
         { name: "title", type: "React.ReactNode", description: "Service name in the header row; any node (e.g. name plus a badge). Replaces the HTML `title` tooltip attribute." },

@@ -11,22 +11,22 @@ export default {
     {
       id: "statuses",
       title: "Statuses",
-      description: "`queued` breathes a dot grid (with `queuePosition`), `generating` and `refining` blur and grain the media, `error` shows a message.",
+      description: "Set `status` from your generation job, with `queuePosition` while it waits.",
     },
     {
       id: "progress",
       title: "Controlled Progress",
-      description: "Pass `progress` (0–1) from your backend; blur, grain and the hairline bar follow it. Without it, each status uses a default.",
+      description: "Pass `progress` when your backend reports it; without it, each status uses a default.",
     },
     {
       id: "aspect-ratio",
       title: "Aspect Ratio",
-      description: "`aspectRatio` fixes the frame so nothing shifts when the image lands; it takes any CSS `aspect-ratio` value.",
+      description: "Set `aspectRatio` to the image ratio so nothing shifts when the image lands.",
     },
     {
       id: "error-retry",
       title: "Error and Retry",
-      description: "With `onRetry`, the error frame offers Try again and the finished image offers Generate again. `errorText` and `retryLabel` replace the error copy. `onDownload` adds a Download action.",
+      description: "Pass `onRetry` when a failed or finished image can be generated again, and `onDownload` to offer a download.",
     },
   ],
   notes: [
@@ -51,7 +51,7 @@ export default {
         { name: "prompt", type: "string", description: "Caption text, also copyable once complete." },
         { name: "meta", type: "ReactNode", description: "Small meta line, e.g. `1024 × 1024 · v6`." },
         { name: "queuePosition", type: "number", description: "Queue position shown while `queued`." },
-        { name: "aspectRatio", type: `CSSProperties["aspectRatio"]`, default: `"1 / 1"`, description: "Frame aspect ratio." },
+        { name: "aspectRatio", type: `CSSProperties["aspectRatio"]`, default: `"1 / 1"`, description: "Frame aspect ratio; any CSS `aspect-ratio` value." },
         { name: "onRetry", type: "() => void", description: "Adds Try again (error) and Generate again (complete)." },
         { name: "onDownload", type: "() => void", description: "Adds a Download action once complete." },
         { name: "errorText", type: "ReactNode", default: `"Couldn’t finish this image."`, description: "Message in the frame when `status` is `error`; pass your own copy or a translation." },

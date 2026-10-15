@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "saas",
   "title": "SaaS",
-  "description": "Complete SaaS starter with real routes: marketing home (hero with a live product shot, logos, features, monthly/yearly pricing, testimonials, FAQ, CTA), pricing comparison and changelog; login, sign-up, forgot-password and email-code pages with validation and mock auth; an app shell with collapsible sidebar, workspace switcher, user menu, breadcrumbs and ⌘K palette; overview (KPI stat cards, revenue and usage charts, activity), analytics (date range, plan filter, charts, top pages), customers data table with detail drawer; settings for profile, account, billing, team, notifications and appearance; and a 404. All copy and mock data live in components/saas/lib/data.ts.",
+  "description": "Starter app with marketing pages, sign-in flows and a dashboard.",
   "dependencies": [
     "motion"
   ],

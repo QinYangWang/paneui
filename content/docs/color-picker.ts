@@ -29,37 +29,37 @@ export default {
     {
       id: "with-alpha",
       title: "With Alpha",
-      description: "Set `alpha` on the root and add `ColorPickerAlpha`; values below full opacity come out as 8-digit hex.",
+      description: "Use `alpha` with `ColorPickerAlpha` when the colour may be translucent.",
     },
     {
       id: "inline",
       title: "Inline",
-      description: "Leave out the trigger and content to render the parts in place. `useColorPicker()` reads the colour for custom parts, here an RGB readout.",
+      description: "Render the parts inline for settings panels, reading the colour with `useColorPicker()` for custom parts.",
     },
     {
       id: "commit",
       title: "Change vs Commit",
-      description: "`onValueChange` fires continuously while dragging; `onValueCommit` fires once a gesture, key, preset or hex entry ends.",
+      description: "Use `onValueCommit` for saves and history, and `onValueChange` for live previews.",
     },
     {
       id: "swatch-trigger",
       title: "Swatch Trigger",
-      description: "`showHex={false}` shrinks the trigger to the swatch (give it an `aria-label`); `align=\"end\"` pins the panel to its right edge.",
+      description: "Use `showHex={false}` in tight toolbars, with an `aria-label` on the trigger.",
     },
     { id: "disabled", title: "Disabled", description: "`disabled` on the root disables the trigger and every part." },
   ],
   notes: [
     {
       title: "Keyboard",
-      body: "The area thumb is a 2D slider: arrow keys nudge saturation and brightness 1% (Shift for 10%). Hue and alpha are sliders. The hex field commits on Enter or blur, reverts invalid input, and Escape restores the last value.",
+      body: "The area thumb is a 2D slider; arrow keys nudge saturation and brightness 1% (Shift for 10%). Hue and alpha are sliders. The hex field commits on Enter or blur, reverts invalid input, and Escape restores the last value.",
     },
     {
       title: "Motion",
-      body: "The panel opens over the trigger and unclips out of the chip's `rounded-lg` shape; the area thumb lifts into a loupe while dragging. With reduced motion the panel fades and the thumb barely scales.",
+      body: "With reduced motion the panel fades instead of growing from the trigger, and the area thumb barely scales while dragging.",
     },
     {
       title: "Related",
-      body: "Other pickers: [Wheel Picker](/docs/wheel-picker), [Date Range Picker](/docs/date-range-picker).",
+      body: "See also [Wheel Picker](/docs/wheel-picker) and [Date Range Picker](/docs/date-range-picker).",
     },
   ],
   api: [
@@ -80,7 +80,7 @@ export default {
         {
           name: "onValueCommit",
           type: "(hex: string) => void",
-          description: "Fires when a gesture ends (pointer up, key, hex commit, preset).",
+          description: "Fires once when a gesture ends (pointer up, key, hex commit, preset); `onValueChange` fires continuously while dragging.",
         },
         { name: "alpha", type: "boolean", default: "false", description: "Allow transparency; without it alpha is always 1." },
         { name: "disabled", type: "boolean", default: "false", description: "Disable the trigger and all parts." },
@@ -138,7 +138,7 @@ export default {
     },
     {
       name: "ColorPickerHexInput",
-      description: "Hex field in an inset well; complete 6 or 8-digit values apply while typing.",
+      description: "Hex field in an inset well; full 6 or 8-digit values apply while typing, and values below full opacity come out as 8-digit hex.",
       extends: "input",
       props: [{ name: "aria-label", type: "string", default: `"Hex colour"`, description: "Accessible name of the field." }],
     },
@@ -151,7 +151,7 @@ export default {
     { name: "ColorPickerPresets", description: "Wrapping group of preset buttons, labelled `Presets`.", extends: "div", props: [] },
     {
       name: "ColorPickerPreset",
-      description: "One preset swatch button: an 18px swatch in a 24px hit area, with a concentric ring when `aria-pressed` (it matches the current colour).",
+      description: "One preset swatch button, an 18px swatch in a 24px hit area, with a ring when `aria-pressed` (it matches the current colour).",
       extends: "button",
       props: [
         { name: "value", type: "string", required: true, description: "Hex colour applied on click." },

@@ -28,7 +28,6 @@ export const ORDER = ["Foundations", "Forms", "Overlays", "Display", "Navigation
  * (the registry text stays complete for `shadcn view`; the docs show this).
  */
 const SUMMARIES: Record<string, string> = {
-  theme: "Native desktop design tokens: type scale, translucent fills, hairlines, radius, elevation and accent presets.",
 }
 
 function categoryOf(type: string, meta?: { category?: string }): Category {

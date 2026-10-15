@@ -14,32 +14,31 @@ export default {
     {
       id: "copy-reset",
       title: "Copy With Reset",
-      description: "`resetAfter` returns the button to its first item after the given milliseconds.",
+      description: "Use `resetAfter` for copy buttons that should return to their first state.",
     },
     {
       id: "sizes",
       title: "Sizes",
-      description: "Every `Button` size works; the label width glides between states at each size.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Set `cycle={false}` and drive `value` yourself to step through async states like sending.",
+      description: "Use `cycle={false}` when an async task, like sending, decides the state.",
     },
     {
       id: "custom-slots",
       title: "Custom Slots",
-      description: "Compose `ActionSwapRollText` and `ActionSwapRollIcon` inside your own `Button`, in any order.",
+      description: "Use the slots when you need your own button layout or slot order.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The next label and icon roll up from below through a soft blur while the old ones lift out (spring 460 / 32 / 0.55, exits 150ms). With reduced motion they cross-fade and the width snaps.",
+      body: "The roll springs at 460 / 32 / 0.55 and exits take 150ms. With reduced motion they cross-fade and the width snaps.",
     },
     {
       title: "Related",
-      body: "Same API with another animation: [Action Swap Blur](/docs/action-swap-blur) (which holds the shared engine).",
+      body: "[Action Swap Blur](/docs/action-swap-blur) has the same API with a blur and holds the shared engine.",
     },
   ],
   api: [
@@ -53,7 +52,7 @@ export default {
           name: "items",
           type: "ActionSwapItem[]",
           required: true,
-          description: "States in order: `{ value: string; label: ReactNode; icon?: ReactNode; ariaLabel?: string }`.",
+          description: "States in order, each `{ value: string; label: ReactNode; icon?: ReactNode; ariaLabel?: string }`.",
         },
         { name: "value", type: "string", description: "Controlled current item value." },
         { name: "defaultValue", type: "string", description: "Initial item value. Defaults to the first item." },

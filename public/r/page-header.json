@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "page-header",
   "title": "Page Header",
-  "description": "App page header: eyebrow, h1 title, description and actions that wrap under the title on narrow screens.",
+  "description": "Title, context and actions at the top of an app page.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"

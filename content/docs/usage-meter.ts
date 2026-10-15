@@ -6,7 +6,7 @@ export default {
     imports: `import { UsageMeter } from "@/components/ui/usage-meter"`,
     code: `<UsageMeter label="Agent runs" value={8420} max={10000} unit="runs" description="Resets on Nov 1" />`,
   },
-  examples: [{ id: "percent", title: "Percent and Thresholds", description: "`readout=\"percent\"` shows the share; `warnAt` and `dangerAt` move the colour thresholds." }],
+  examples: [{ id: "percent", title: "Percent and Thresholds", description: "Use `percent` when the share matters more than the raw count, moving the thresholds with `warnAt` and `dangerAt`." }],
   notes: [{ title: "Accessibility", body: "Renders a meter (`role=\"meter\"`) labelled by `label`, with value text like \"8,420 of 10,000 runs\"." }],
   api: [
     {

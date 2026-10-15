@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "card-folder",
   "title": "Card Folder",
-  "description": "A landscape payment card tucked into a stitched pocket that compresses into its seam as the card lifts forward, with a blur-swap details reveal, copy and overflow actions.",
+  "description": "Shows a saved payment card and reveals its details on request.",
   "dependencies": [
     "motion"
   ],

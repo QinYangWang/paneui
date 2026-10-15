@@ -9,29 +9,29 @@ export default {
     {
       id: "split-char",
       title: "By Character",
-      description: "`split=\"char\"` reveals one letter at a time; letters of a word stay together when lines wrap.",
+      description: "Use for short headlines; letters of a word stay together when lines wrap.",
     },
     {
       id: "lines",
       title: "Multiple Lines",
-      description: "Pass an array to `text` for one line per entry, revealed as one sequence.",
+      description: "Use for multi-line headlines that should reveal as one sequence.",
     },
     {
       id: "on-view",
       title: "On Scroll Into View",
       description:
-        "`trigger=\"view\"` waits until 40% of the text is visible; `once={false}` replays it each time. Shown inside a scrolling box.",
+        "Use for content below the fold, with `once={false}` to replay it on every visit.",
     },
     {
       id: "custom-timing",
       title: "Custom Timing",
-      description: "Tune `stagger`, `delay`, `blur`, `offset` and the spring `transition`.",
+      description: "Use when the reveal has to match the pace of surrounding motion.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "Each word or letter rises from `offset`, un-blurs and fades in on a spring. With reduced motion units only fade, at half the stagger.",
+      body: "With reduced motion units only fade in, at half the stagger.",
     },
     {
       title: "Accessibility",
@@ -60,7 +60,7 @@ export default {
           name: "trigger",
           type: `"mount" | "view"`,
           default: `"mount"`,
-          description: "Play on mount, or when the text scrolls into view.",
+          description: "Play on mount, or once 40% of the text has scrolled into view.",
         },
         { name: "once", type: "boolean", default: "true", description: "With `trigger=\"view\"`, only play the first time." },
         {

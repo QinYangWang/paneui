@@ -17,7 +17,7 @@ export default {
     {
       id: "legend-bottom",
       title: "Legend Below",
-      description: "`legendPosition=\"bottom\"` stacks the legend under the ring; `maxSize` caps the ring's diameter.",
+      description: "Use `legendPosition=\"bottom\"` in narrow cards, with `maxSize` to cap the ring.",
     },
     {
       id: "custom-colors",
@@ -27,17 +27,17 @@ export default {
     {
       id: "thin-ring",
       title: "Thin Ring",
-      description: "Tune `thickness` and `gap` (viewBox units of a 200×200 box) and hide the legend with `showLegend={false}`.",
+      description: "Lower `thickness` and set `showLegend={false}` for small inline charts.",
     },
     {
       id: "descriptions",
       title: "Descriptions",
-      description: "A segment's `description` shows as a second line in the legend and is included in its accessible name and the data table.",
+      description: "Add a segment `description` when its label needs a second line of context.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "`activeId` and `onActiveChange` drive the highlighted segment from outside, e.g. to keep one always selected.",
+      description: "Use `activeId` and `onActiveChange` when something outside the chart drives the highlight, e.g. to keep one segment selected.",
     },
   ],
   notes: [
@@ -47,7 +47,7 @@ export default {
     },
     {
       title: "Motion",
-      body: "Segments draw in with a staggered spring and the hovered one thickens; with reduced motion they appear at once.",
+      body: "With reduced motion, segments appear at once instead of drawing in.",
     },
   ],
   api: [
@@ -62,7 +62,7 @@ export default {
           description: "Slices in order. Non-positive values are skipped. `description` shows under the label in the legend and is read with the segment.",
         },
         { name: "label", type: "string", default: `"Donut chart"`, description: "Accessible name of the chart." },
-        { name: "thickness", type: "number", default: "22", description: "Ring thickness in viewBox units." },
+        { name: "thickness", type: "number", default: "22", description: "Ring thickness in viewBox units (the box is 200×200)." },
         { name: "gap", type: "number", default: "4", description: "Gap between segments in viewBox units. Ends are rounded when every segment is long enough for round caps; otherwise all ends are square, so small segments never overlap their neighbours." },
         {
           name: "formatValue",

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "scroll-reveal",
   "title": "Scroll Reveal",
-  "description": "Reveals content with a spring slide and blur as it enters view, from any side, once or every time it re-enters.",
+  "description": "Brings content into view as it scrolls onscreen.",
   "dependencies": [
     "motion",
     "lenis"

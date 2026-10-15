@@ -32,22 +32,17 @@ export default function Colors() {
       toc={toc}
       lede={
         <>
-          Every colour a component reads is a role token: a CSS variable with a light value on <Code>:root</Code> and a dark
-          value on <Code>.dark</Code>, exposed as a Tailwind class. How the layers fit together is on{" "}
-          <TextLink href="/docs/theming#how-it-works">Theming</TextLink>.
+          Every colour a component reads is a role token with a light and a dark value. See{" "}
+          <TextLink href="/docs/theming#how-it-works">Theming</TextLink> for how the layers fit together.
         </>
       }
     >
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent">One accent, every control</GuideH2>
         <p className="text-muted-foreground">
-          Filled buttons, switches, checkboxes, radios, sliders, tabs, links, selection and focus rings all read{" "}
-          <Code>--primary</Code>, <Code>--primary-foreground</Code> and <Code>--ring</Code>, and those read one{" "}
-          <Code>--accent-50…950</Code> ramp: primary is its 600 stop with white text, ring its 500 stop, the same in both
-          modes. Blue is the default; pick a preset or any colour and the whole site recolours live, while surfaces, text,
-          states and charts deliberately stay as they are. A custom colour gets a ramp built on blue&apos;s lightness steps in
-          its own hue, and is used as picked for primary (darkened or lifted only if it would fall under 3:1 against the
-          page) with white or dark text by contrast. The choice is remembered like the header&apos;s accent menu.
+          Every accented control reads <Code>--primary</Code> and <Code>--ring</Code>, and both read one{" "}
+          <Code>--accent-50…950</Code> ramp. Pick a preset or a brand colour below to try it, then copy the overrides. A
+          custom colour is darkened or lifted only if it would fall under 3:1 contrast against the page.
         </p>
         <ThemingAccent />
       </section>

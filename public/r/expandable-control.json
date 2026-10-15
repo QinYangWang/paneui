@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "expandable-control",
   "title": "Expandable Control",
-  "description": "Click-to-expand controls: an icon button that grows to reveal its label and a chip that reveals a trailing action, both morphing width on a spring.",
+  "description": "Button or chip that expands on click to reveal a label or action.",
   "dependencies": [
     "@base-ui/react",
     "motion"

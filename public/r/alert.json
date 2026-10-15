@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "alert",
   "title": "Alert",
-  "description": "Composable inline alert (Alert, AlertIcon, AlertContent, AlertTitle, AlertDescription, AlertAction, AlertClose) with info/success/warning/destructive variants and animated appear/dismiss.",
+  "description": "Shows an inline message that can animate in and be dismissed.",
   "dependencies": [
     "motion"
   ],

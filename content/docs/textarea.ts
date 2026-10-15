@@ -6,18 +6,18 @@ export default {
     code: `<Textarea placeholder="Anything the agent should know?" />`,
   },
   examples: [
-    { id: "disabled", title: "Disabled", description: "`disabled` dims the field and shows a not-allowed cursor." },
+    { id: "disabled", title: "Disabled" },
     {
       id: "invalid",
       title: "Invalid",
-      description: "Set `aria-invalid` for the destructive ring and link the message with `aria-describedby`.",
+      description: "Use after validation fails; set `aria-invalid` and link the message with `aria-describedby`.",
     },
     {
       id: "with-counter",
       title: "With Counter",
-      description: "Control `value` and pair it with the native `maxLength` to show a live count.",
+      description: "Use when the input has a length limit, pairing a controlled `value` with `maxLength`.",
     },
-    { id: "with-button", title: "With Button", description: "A submit button aligned under the field." },
+    { id: "with-button", title: "With Button", description: "Use for short forms that submit straight from the field." },
   ],
   notes: [
     {
@@ -28,7 +28,7 @@ export default {
   api: [
     {
       name: "Textarea",
-      description: "A multi-line field in an inset well. It adds no props of its own.",
+      description: "Multi-line text field. It adds no props of its own.",
       extends: "textarea",
       props: [],
     },

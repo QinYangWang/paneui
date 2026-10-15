@@ -13,22 +13,22 @@ export default {
     {
       id: "ratios",
       title: "Ratios",
-      description: "`ratio` is width divided by height. `contentClassName` styles the content layer, here to centre a label.",
+      description: "Use `contentClassName` to style the content layer, such as centring a label.",
     },
     {
       id: "with-image",
       title: "With Image",
-      description: "`AspectRatioImage` cover-crops an image from its real `width` and `height`, so the crop scales smoothly as the frame springs to a new ratio.",
+      description: "Use `AspectRatioImage` for photos so the crop scales cleanly when the ratio changes.",
     },
     {
       id: "radius",
       title: "Radius",
-      description: "Set corners with `radius` (px) rather than a `rounded-*` class so they stay true while the frame is scaled mid-animation.",
+      description: "Use `radius` instead of a `rounded-*` class so corners stay true mid-animation.",
     },
     {
       id: "not-animated",
       title: "Without Animation",
-      description: "`animated={false}` snaps to the new ratio instead of springing.",
+      description: "Use `animated={false}` when ratio changes shouldn't draw attention.",
     },
   ],
   notes: [
@@ -51,7 +51,7 @@ export default {
     },
     {
       name: "AspectRatioImage",
-      description: "Cover-cropped image for `AspectRatio`. Must be used inside it.",
+      description: "Cover-cropped image for `AspectRatio`, sized from its real `width` and `height`. Must be used inside it.",
       extends: "motion.img",
       props: [
         { name: "alt", type: "string", required: true, description: "Alternative text." },

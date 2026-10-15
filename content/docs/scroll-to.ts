@@ -9,17 +9,16 @@ export default {
     {
       id: "variants",
       title: "Variants and Sizes",
-      description: "It is a `Button`, so every `variant` and `size` works. It defaults to `secondary`.",
     },
     {
       id: "duration",
       title: "Duration",
-      description: "`duration` sets the ease length in seconds when a `SmoothScroll` is easing; `to` also takes a px offset like `0`.",
+      description: "Use a longer `duration` for long jumps so the motion stays easy to follow.",
     },
     {
       id: "window",
       title: "Outside a Provider",
-      description: "Without a `SmoothScroll` around it, it uses the window's native smooth scrolling. This one scrolls the docs page.",
+      description: "Use on pages that scroll natively; without a `SmoothScroll` it falls back to the window.",
     },
   ],
   notes: [
@@ -41,7 +40,7 @@ export default {
       props: [
         { name: "to", type: "number | string | HTMLElement", required: true, description: "A px offset, a CSS selector or an element." },
         { name: "offset", type: "number", description: "Extra px from the target, e.g. `-64` to clear a sticky header." },
-        { name: "duration", type: "number", description: "Ease duration in seconds (Lenis path only)." },
+        { name: "duration", type: "number", description: "Ease duration in seconds, only inside a `SmoothScroll` that is easing." },
         { name: "focusTarget", type: "boolean", default: "false", description: "Move keyboard focus to a selector or element target after scrolling." },
         {
           name: "onClick",

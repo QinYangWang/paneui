@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "message-scroller",
   "title": "Message Scroller",
-  "description": "Conversation viewport that glides with streamed output at the live edge, releases as soon as the reader scrolls up, and offers a 'jump to latest' pill that turns into 'New messages' when content arrives below.",
+  "description": "Keeps a chat view pinned to new messages until the reader scrolls up.",
   "dependencies": [
     "motion"
   ],

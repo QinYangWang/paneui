@@ -14,25 +14,25 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
     {
       id: "by-seed",
       title: "From a Seed",
-      description: "Pass anything stable (a user id, an email). The same seed always draws the same avatar, on the server or the client.",
+      description: "Use a stable seed, like a user id, so a person gets the same avatar everywhere.",
     },
     {
       id: "gender",
       title: "Male and Female",
       description:
-        "`gender` limits hair to a hand-picked split of the hair styles: `female` draws long hair, bobs, buns, ponytails and headscarves (22 styles); `male` draws short cuts, quiffs and spikes (35 styles) and allows a beard. `female` never gets a beard. `any` (the default) picks from all 64, including the unisex curls, cap, paper hat and head wrap.",
+        "Use `gender` when the avatar should match the person's stated gender.",
     },
     {
       id: "options",
       title: "Options",
       description:
-        "`accessories` lets the seed add glasses; `selections` pins any part (`hair`, `eyes`, `brows`, `lips`, `nose`, `glasses`, `beard`, `body`, `gesture`), with `\"none\"` to turn off glasses, beard or gesture; `background` is `tint`, `circle`, `none` or a hex, and `colors.background` recolours the tint.",
+        "Use `selections` to pin parts the seed shouldn't choose, and `\"none\"` to turn off glasses, beard or gesture.",
     },
     {
       id: "generator",
       title: "Generator",
       description:
-        "`AvatarGenerator` is the editor: type or shuffle a seed, pick a gender and parts, then download the SVG or copy the JSX. `onValueChange` hands you the state to store.",
+        "Use `AvatarGenerator` when people design their own avatar, storing the state from `onValueChange`.",
     },
   ],
   notes: [
@@ -42,11 +42,11 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
     },
     {
       title: "Parts",
-      body: "Part names follow the drawing set: hair `variant01`…`variant63` plus `hat`, eyes `variant01`…`05`, brows `01`…`13`, lips `01`…`30`, nose `01`…`20`, glasses `01`…`11`, beard `01`…`12`, body (the top) `01`…`25`, and gesture `waveLongArms`, `waveLongArm`, `wavePointLongArms`, `waveOkLongArms`, `pointLongArm`, `okLongArm`, `handPhone`. Use `getAvatarParts(slot, gender)` for the list with labels. Gestures are off unless picked; the set's `point`, `ok` and `hand` are left out because the closer crop hides the hand.",
+      body: "Part names follow the drawing set, with hair `variant01`…`variant63` plus `hat`, eyes `variant01`…`05`, brows `01`…`13`, lips `01`…`30`, nose `01`…`20`, glasses `01`…`11`, beard `01`…`12`, body (the top) `01`…`25`, and gesture `waveLongArms`, `waveLongArm`, `wavePointLongArms`, `waveOkLongArms`, `pointLongArm`, `okLongArm`, `handPhone`. Use `getAvatarParts(slot, gender)` for the list with labels. Gestures are off unless picked; the set's `point`, `ok` and `hand` are left out because the closer crop hides the hand.",
     },
     {
       title: "Small sizes and ids",
-      body: "The drawings are busts; the avatar is zoomed in (`scale` 135, `translateY` 8) so the face still reads at `xs`/`sm` (20–24px). Every id inside the SVG (the clip mask, some tops) is prefixed: `GeneratedAvatar` and `GeneratedAvatarImage` use React's `useId`, `createGeneratedAvatar` a hash of the options (or your `idPrefix`), so any number of avatars, identical ones included, can share a page without one borrowing another's mask, and the markup is the same on the server and the client.",
+      body: "The drawings are busts; the avatar is zoomed in (`scale` 135, `translateY` 8) so the face still reads at `xs`/`sm` (20–24px). Every id inside the SVG (the clip mask, some tops) is prefixed. `GeneratedAvatar` and `GeneratedAvatarImage` use React's `useId`, `createGeneratedAvatar` a hash of the options (or your `idPrefix`), so any number of avatars, identical ones included, can share a page without one borrowing another's mask, and the markup is the same on the server and the client.",
     },
     {
       title: "Storing an avatar",
@@ -64,11 +64,11 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
       extends: "Avatar",
       props: [
         { name: "seed", type: "string", required: true, description: "Any stable string." },
-        { name: "gender", type: `"male" | "female" | "any"`, default: `"any"`, description: "Which hairstyles the seed picks from; `female` also turns beards off." },
+        { name: "gender", type: `"male" | "female" | "any"`, default: `"any"`, description: "Which hairstyles the seed picks from. `female` has 22 (long hair, bobs, buns, ponytails, headscarves) and never a beard; `male` has 35 short cuts and allows a beard; `any` uses all 64." },
         { name: "size", type: `"xs" | "sm" | "md" | "lg" | "xl" | number`, default: `"md"`, description: "An Avatar size or a pixel size. Inside an `AvatarGroup` it follows the group." },
         { name: "shape", type: `"circle" | "rounded"`, default: `"circle"`, description: "Passed to `Avatar`." },
-        { name: "accessories", type: "boolean", default: "false", description: "Let the seed add glasses (about one in three). Off keeps the clean look." },
-        { name: "background", type: `"tint" | "circle" | "none" | string`, default: `"tint"`, description: "Warm light grey square, the same tint as a disc, transparent, or a hex colour." },
+        { name: "accessories", type: "boolean", default: "false", description: "Let the seed add glasses (about one in three)." },
+        { name: "background", type: `"tint" | "circle" | "none" | string`, default: `"tint"`, description: "`tint` is a light grey square, `circle` the same tint as a disc, `none` transparent, or pass a hex colour." },
         { name: "selections", type: `{ hair?, eyes?, brows?, lips?, nose?, glasses?, beard?, body?, gesture?: string }`, description: "Explicit part per slot by name (`{ hair: \"variant46\", glasses: \"none\" }`). Overrides the seed; the Parts note lists the names." },
         { name: "colors", type: `{ background?: string }`, description: "Hex colour for the background tint." },
         { name: "idPrefix", type: "string", description: "Prefix for ids inside the SVG. Defaults to one from `useId` (a hash of the options in `createGeneratedAvatar`)." },

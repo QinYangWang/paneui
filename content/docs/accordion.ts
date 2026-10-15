@@ -22,44 +22,41 @@ export default {
     {
       id: "basic",
       title: "Basic",
-      description: "One item open at a time. Set the open item with `defaultValue`.",
+      description: "Use for FAQs and settings where one open answer at a time is enough.",
     },
     {
       id: "multiple",
       title: "Multiple",
-      description: "Add `multiple` to let several items stay open.",
+      description: "Use `multiple` when readers compare several answers side by side.",
     },
     {
       id: "disabled",
       title: "Disabled",
-      description: "Pass `disabled` to an `AccordionItem`.",
     },
     {
       id: "with-icons",
       title: "With icons",
-      description: "`AccordionTrigger` takes an `icon` that sits in a chip before the label and tints when open.",
+      description: "Use icons when readers scan the list by topic.",
     },
     {
       id: "ghost",
       title: "Borderless",
       description:
-        "`variant=\"ghost\"` drops the well: items are separated by spacing, rows fill on hover and the open item keeps a soft fill.",
+        "Use the borderless variant inside cards or panels that already have a frame.",
     },
     {
       id: "ghost-multiple",
       title: "Borderless, multiple",
-      description: "`multiple` works the same on the borderless variant.",
     },
     {
       id: "ghost-disabled",
       title: "Borderless, disabled",
-      description: "A disabled item dims and stops responding to hover and clicks.",
     },
     {
       id: "ghost-with-icons",
       title: "Borderless, with icons",
       description:
-        "On the borderless variant the `icon` sits bare at 16px, muted until its item opens, and the panel text lines up with the label. Use one icon family (solid) per list.",
+        "Use one icon family (solid) per list so the bare glyphs line up.",
     },
   ],
   notes: [
@@ -80,7 +77,7 @@ export default {
           type: `"default" | "ghost"`,
           default: `"default"`,
           description:
-            "`default`: an inset well holding raised rows. `ghost`: borderless, items separated by spacing with hover-fill rows.",
+            "`default` is an inset well of raised rows; `ghost` is borderless, with spacing between items and rows that fill on hover.",
         },
         {
           name: "defaultValue",
@@ -140,7 +137,7 @@ export default {
           name: "icon",
           type: "ReactNode",
           description:
-            "Leading icon. `default`: in a round chip that turns primary when open. `ghost`: bare 16px, muted until open.",
+            "Leading icon. In `default` it sits in a round chip that turns primary when open; in `ghost` it is bare at 16px and muted until open. The panel text lines up with the label.",
         },
       ],
     },

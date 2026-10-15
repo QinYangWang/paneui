@@ -42,12 +42,12 @@ export default {
     {
       id: "destructive",
       title: "Destructive",
-      description: "Name the thing being removed in the title and use a `destructive` Button for the confirm action.",
+      description: "Use to confirm a delete, naming the thing in the title and confirming with a `destructive` Button.",
     },
     {
       id: "with-form",
       title: "With Form",
-      description: "Control the dialog with `open` and `onOpenChange` so a form submit can close it.",
+      description: "Control `open` and `onOpenChange` when a form submit should close the dialog.",
     },
     {
       id: "no-close-button",
@@ -57,7 +57,6 @@ export default {
     {
       id: "long-content",
       title: "Long Content",
-      description: "The popup never grows past the viewport (1rem margin): taller content scrolls inside it, the close button stays pinned to the top-right corner while it scrolls, and the scroll doesn't chain to the page.",
     },
   ],
   notes: [
@@ -95,7 +94,7 @@ export default {
     },
     {
       name: "DialogContent",
-      description: "Portal, dimmed backdrop, a padded viewport and the centred popup (max-width 28rem, max-height the viewport minus 1rem each side, scrolls with `overscroll-contain` when taller).",
+      description: "Portal, backdrop and centred popup (max-width 28rem, max-height the viewport minus 1rem each side). Taller content scrolls inside it with `overscroll-contain`, so the page doesn't scroll.",
       extends: "Dialog.Popup",
       extendsHref: "https://base-ui.com/react/components/dialog#popup",
       props: [
@@ -103,7 +102,7 @@ export default {
           name: "showClose",
           type: "boolean",
           default: "true",
-          description: "Render the round close button in the top-right corner. It is sticky, so it stays reachable while long content scrolls; it stays last in the focus order.",
+          description: "Render the close button. It stays pinned while long content scrolls and comes last in the focus order.",
         },
       ],
       dataAttributes: [

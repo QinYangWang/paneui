@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "feedback-widget",
   "title": "Feedback Widget",
-  "description": "Corner trigger that morphs into a feedback popup with message and mood picker, then animates through sending, success and retry states.",
+  "description": "Collects a short message and mood from users without leaving the page.",
   "dependencies": [
     "@base-ui/react",
     "motion"

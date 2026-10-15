@@ -17,37 +17,37 @@ export default {
     {
       id: "cycle",
       title: "Cycle",
-      description: "Each click advances to the next of any number of `items`, wrapping back to the first.",
+      description: "Use when one button steps through several states in turn.",
     },
     {
       id: "text-only",
       title: "Text Only",
-      description: "Leave out `icon` and only the label swaps; the button springs to each label's width.",
+      description: "Use when the states need words but no icon.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Set `cycle={false}` and drive `value` yourself for async states like uploading.",
+      description: "Use `cycle={false}` when an async task, like an upload, decides the state.",
     },
     {
       id: "custom-slots",
       title: "Custom Slots",
-      description: "Compose `ActionSwapBlurIcon` and `ActionSwapBlurText` inside your own `Button`; a new `value` triggers the swap.",
+      description: "Use the slots when the button needs your own layout; a new `value` triggers the swap.",
     },
     {
       id: "animations",
       title: "Animations",
-      description: "This file also holds the shared engine: `ActionSwapButton` takes `animation` `\"blur\"`, `\"roll\"` or `\"cascade\"`.",
+      description: "Use `ActionSwapButton` when you pick the animation per button.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The label and icon dissolve and re-form with blur, fade and scale (220ms ease-out) while the width springs. With reduced motion they cross-fade and the width snaps. Each new state is announced through a polite live region.",
+      body: "The swap runs 220ms ease-out while the width springs. With reduced motion they cross-fade and the width snaps. Each new state is announced through a polite live region.",
     },
     {
       title: "Related",
-      body: "Same API with another animation: [Action Swap Roll](/docs/action-swap-roll).",
+      body: "[Action Swap Roll](/docs/action-swap-roll) has the same API with a rolling animation.",
     },
   ],
   api: [
@@ -97,7 +97,7 @@ export default {
     },
     {
       name: "ActionSwapBlurIcon",
-      description: "16px icon slot: the old glyph leaves as the new one arrives in the same cell.",
+      description: "16px icon slot; the old glyph leaves as the new one arrives in the same cell.",
       extends: "span",
       props: [
         { name: "value", type: "string", required: true, description: "Identity of the current icon." },

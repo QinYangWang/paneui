@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "chat",
   "title": "Chat",
-  "description": "Chat thread with spring-in bubbles and a typing indicator.",
+  "description": "Message thread between a user and an agent.",
   "dependencies": [
     "motion"
   ],

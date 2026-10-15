@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "multi-select",
   "title": "Multi Select",
-  "description": "Searchable multiple-choice combobox with removable chips that spring in and out of the trigger and checkbox-style ticks.",
+  "description": "Searchable picker for choosing several options at once.",
   "dependencies": [
     "@base-ui/react",
     "motion"

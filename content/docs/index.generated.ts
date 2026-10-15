@@ -120,6 +120,7 @@ import d_toolbar from "./toolbar"
 import d_tooltip from "./tooltip"
 import d_treemap from "./treemap"
 import d_trend_chart from "./trend-chart"
+import d_typeset from "./typeset"
 import d_usage_meter from "./usage-meter"
 import d_user_menu from "./user-menu"
 import d_wheel_picker from "./wheel-picker"
@@ -246,6 +247,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "tooltip": d_tooltip,
   "treemap": d_treemap,
   "trend-chart": d_trend_chart,
+  "typeset": d_typeset,
   "usage-meter": d_usage_meter,
   "user-menu": d_user_menu,
   "wheel-picker": d_wheel_picker,

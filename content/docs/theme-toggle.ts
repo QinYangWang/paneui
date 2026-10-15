@@ -9,23 +9,22 @@ export default {
     {
       id: "sizes",
       title: "Sizes",
-      description: "Set the button size with a `size-*` class and match the glyph with `iconSize`.",
+      description: "Use a smaller `size-*` class in dense toolbars, matching the glyph with `iconSize`.",
     },
     {
       id: "slow-reveal",
       title: "Reveal Duration",
-      description: "`duration` sets how long the circular reveal takes, in ms.",
     },
     {
       id: "use-theme-toggle",
       title: "useThemeToggle",
-      description: "Build your own control with the hook: `setTheme(theme, { origin })` grows the reveal from any point.",
+      description: "Use the hook to build your own control; `setTheme(theme, { origin })` starts the reveal from any point.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The new theme is revealed with a circular clip-path from the click point through the View Transition API; keyboard presses grow it from the button's centre. With reduced motion, or without the API, the theme swaps instantly and the icon only cross-fades.",
+      body: "The reveal uses the View Transition API and starts at the click point, or at the button's centre for keyboard presses. With reduced motion, or without the API, the theme swaps instantly and the icon only cross-fades.",
     },
     {
       title: "Persistence",

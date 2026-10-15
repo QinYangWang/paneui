@@ -28,28 +28,28 @@ export default {
     {
       id: "sides",
       title: "Sides",
-      description: "`side` picks the edge it opens on; it flips when there is no room.",
+      description: "Use `side` to keep the popover off content it would cover; it flips when there is no room.",
     },
     {
       id: "align",
       title: "Align",
-      description: "`align` lines the popover up with the trigger's `start`, `center` or `end`.",
+      description: "Use `start` or `end` when the trigger sits near an edge of the layout.",
     },
     {
       id: "controlled",
       title: "Controlled",
-      description: "Pass `open` and `onOpenChange` to `Popover` to close it after a form submits.",
+      description: "Use when the popover should close after a form submits.",
     },
     {
       id: "hover",
       title: "Open on Hover",
-      description: "`openOnHover` and `delay` on `PopoverTrigger` turn it into a hover card.",
+      description: "Use for previews that should appear on hover, like a hover card.",
     },
   ],
   notes: [
     {
       title: "Motion",
-      body: "The popup scales and fades out of the trigger with a 4px slide toward its side, and leaves faster than it arrives. With reduced motion it only fades.",
+      body: "The popup slides 4px toward its side and leaves faster than it arrives. With reduced motion it only fades.",
     },
     {
       title: "Keyboard",

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "toggle-group",
   "title": "Toggle Group",
-  "description": "Toggle and toggle group: pressed-state buttons for marks and alignment, default or outline, three sizes.",
+  "description": "Turns formatting or view options on and off.",
   "dependencies": [
     "@base-ui/react",
     "class-variance-authority"

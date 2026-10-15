@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "heat-calendar",
   "title": "Heat Calendar",
-  "description": "Contribution-graph activity calendar on UTC dates with composable Grid, Tooltip, Summary and Legend parts, single-hue intensity levels, and controlled drag/keyboard range selection that totals the span.",
+  "description": "Shows daily activity over weeks or months as a calendar heat map.",
   "dependencies": [
     "motion"
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "toast",
   "title": "Toast",
-  "description": "Stacked, swipeable toasts with typed icons, actions and promise-style updates.",
+  "description": "Shows brief notifications that dismiss themselves.",
   "dependencies": [
     "@base-ui/react"
   ],

@@ -347,9 +347,11 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
                   {ex.title}
                 </h3>
                 {ex.description && (
-                  <p className="text-muted-foreground">
-                    <Inline text={ex.description} />
-                  </p>
+                  <div className="typeset typeset-docs text-muted-foreground">
+                    <p>
+                      <Inline text={ex.description} />
+                    </p>
+                  </div>
                 )}
                 <PreviewTabs
                   example={`${name}/${ex.id}`}
@@ -363,9 +365,11 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         {doc?.notes?.map((n) => (
           <section key={n.title} className="flex flex-col gap-3">
             <H2 id={`note-${n.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{n.title}</H2>
-            <p className="text-muted-foreground">
-              <Inline text={n.body} />
-            </p>
+            <div className="typeset typeset-docs text-muted-foreground">
+              <p>
+                <Inline text={n.body} />
+              </p>
+            </div>
           </section>
         ))}
 
