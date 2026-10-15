@@ -16,7 +16,7 @@ export default {
   api: [
     {
       name: "WorkspaceSwitcher",
-      extends: "Base UI Menu.Trigger",
+      extends: "Menu.Trigger",
       props: [
         { name: "workspaces", type: "{ id: string; name: string; plan?: string; logo?: ReactNode }[]", required: true, description: "Choices; `logo` defaults to the first letter on a primary tile." },
         { name: "value", type: "string", required: true, description: "Current workspace id." },

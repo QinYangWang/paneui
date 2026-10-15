@@ -53,7 +53,7 @@ export default {
     },
     {
       title: "Keyboard",
-      body: "Enter or Space on the trigger opens it and moves focus inside; Esc closes it and returns focus, from Base UI.",
+      body: "Enter or Space on the trigger opens it and moves focus inside; Esc closes it and returns focus.",
     },
     {
       title: "Related",
@@ -63,20 +63,20 @@ export default {
   api: [
     {
       name: "Popover",
-      extends: "Base UI Popover.Root",
+      extends: "Popover.Root",
       extendsHref: "https://base-ui.com/react/components/popover#root",
       props: [],
     },
     {
       name: "PopoverTrigger",
-      extends: "Base UI Popover.Trigger",
+      extends: "Popover.Trigger",
       extendsHref: "https://base-ui.com/react/components/popover#trigger",
       props: [],
     },
     {
       name: "PopoverContent",
       description: "The 288px-wide popup, already wrapped in a portal and positioner.",
-      extends: "Base UI Popover.Popup",
+      extends: "Popover.Popup",
       extendsHref: "https://base-ui.com/react/components/popover#popup",
       props: [
         {
@@ -113,13 +113,13 @@ export default {
     },
     {
       name: "PopoverTitle",
-      extends: "Base UI Popover.Title",
+      extends: "Popover.Title",
       extendsHref: "https://base-ui.com/react/components/popover#title",
       props: [],
     },
     {
       name: "PopoverDescription",
-      extends: "Base UI Popover.Description",
+      extends: "Popover.Description",
       extendsHref: "https://base-ui.com/react/components/popover#description",
       props: [],
     },
@@ -132,14 +132,14 @@ export default {
     {
       name: "PopoverClose",
       description: "Unstyled close part. Pass `render={<Button />}` to make any button close the popover.",
-      extends: "Base UI Popover.Close",
+      extends: "Popover.Close",
       extendsHref: "https://base-ui.com/react/components/popover#close",
       props: [],
     },
     {
       name: "PopoverCloseButton",
       description: "Round × button pinned to the top-right corner, labelled \"Close\".",
-      extends: "Base UI Popover.Close",
+      extends: "Popover.Close",
       extendsHref: "https://base-ui.com/react/components/popover#close",
       props: [],
     },

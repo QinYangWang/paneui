@@ -59,7 +59,7 @@ export default {
     {
       name: "TooltipProvider",
       description: "Shares the open delay between tooltips. The docs app wraps everything in one.",
-      extends: "Base UI Tooltip.Provider",
+      extends: "Tooltip.Provider",
       extendsHref: "https://base-ui.com/react/components/tooltip#provider",
       props: [
         { name: "delay", type: "number", default: "300", description: "Milliseconds before a tooltip opens." },
@@ -68,8 +68,8 @@ export default {
     },
     {
       name: "Tooltip",
-      description: "Re-export of the Base UI root.",
-      extends: "Base UI Tooltip.Root",
+      description: "Re-export of the primitive root.",
+      extends: "Tooltip.Root",
       extendsHref: "https://base-ui.com/react/components/tooltip#root",
       props: [
         { name: "open", type: "boolean", description: "Controlled open state." },
@@ -83,14 +83,14 @@ export default {
     {
       name: "TooltipTrigger",
       description: "Re-export. Use `render` to make a Button the trigger.",
-      extends: "Base UI Tooltip.Trigger",
+      extends: "Tooltip.Trigger",
       extendsHref: "https://base-ui.com/react/components/tooltip#trigger",
       props: [],
     },
     {
       name: "TooltipContent",
       description: "Portal, positioner and popup in one.",
-      extends: "Base UI Tooltip.Popup",
+      extends: "Tooltip.Popup",
       extendsHref: "https://base-ui.com/react/components/tooltip#popup",
       props: [
         {

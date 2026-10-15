@@ -18,7 +18,7 @@ import {
   MenuSubTrigger,
 } from "@/registry/base-nova/ui/menu"
 
-// Base UI's ContextMenu shares its item parts with Menu, so the styled items from
+// The ContextMenu primitive shares its item parts with Menu, so the styled items from
 // menu.tsx are reused as-is and the two menus always look identical.
 const ContextMenu = ContextMenuPrimitive.Root
 

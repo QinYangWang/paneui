@@ -45,7 +45,7 @@ export default function Installation() {
         <AlertContent>
           <AlertTitle>Requirements</AlertTitle>
           <AlertDescription>
-            A React project (Next.js, Vite or similar) with Tailwind CSS 4 and shadcn initialised on a Base UI style (base-nova). Run{" "}
+            A React project (Next.js, Vite or similar) with Tailwind CSS 4 and shadcn initialised with the base-nova style. Run{" "}
             <Code>shadcn init</Code> first if you have no components.json yet. Starting a new app? The SaaS, agent workspace,
             docs and blog templates install in one command: see <TextLink href="/docs/cli#templates">Templates in one command</TextLink>.
           </AlertDescription>
@@ -64,7 +64,7 @@ export default function Installation() {
         </p>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme @${REGISTRY_NAME}/icons`} />
         <p className="text-muted-foreground">
-          The colours follow BoardUI&apos;s system and the accent is blue. For another accent, add one preset after the
+          The accent is blue by default. For another accent, add one preset after the
           theme: neutral (black / white), green, orange, rose or violet. <TextLink href="/docs/theming#accent-presets">Theming</TextLink>{" "}
           covers what each token does.
         </p>

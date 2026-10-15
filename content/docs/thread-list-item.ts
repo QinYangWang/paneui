@@ -8,9 +8,9 @@ export default {
     <ThreadListItem
       title="Fix broken chat dragging"
       icon={<ApertureIcon />}
-      repo="synara"
+      repo="workspace"
       pr={{ number: 1526, status: "open" }}
-      branch="synara/fix-chat-dragging"
+      branch="feat/fix-chat-dragging"
       active
     />
   </ThreadListGroup>

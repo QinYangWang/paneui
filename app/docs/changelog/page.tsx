@@ -8,9 +8,32 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-15-mobile",
+    date: "October 15, 2026",
+    title: "Agent workspace and Colors on phones",
+    tag: "Mobile",
+    changes: [
+      <>
+        <Code>agent-workspace</Code> has a phone layout below <Code>md</Code>: a header with the scrolling thread tabs, the
+        rail and threads in a drawer, terminal / explorer / browser in a bottom sheet and one full-width chat (split chats
+        are desktop only). On tablets it opens with the dock collapsed.
+      </>,
+      <>
+        <TextLink href="/docs/icon-rail">icon-rail</TextLink> gains <Code>orientation=&quot;horizontal&quot;</Code>;{" "}
+        <TextLink href="/docs/tab-strip">tab-strip</TextLink> scrolls instead of reordering on touch screens, with larger
+        targets; the mode and effort pickers show only their glyph in a composer narrower than 28rem;{" "}
+        <TextLink href="/docs/edited-files-card">edited-files-card</TextLink> no longer overlaps its buttons when narrow.
+      </>,
+      <>
+        On phones the Colors token tables and every API reference table become stacked lists, so nothing scrolls the page
+        sideways.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-15-templates",
     date: "October 15, 2026",
-    title: "SaaS and agent workspace templates, Notion-style and email editors",
+    title: "SaaS and agent workspace templates, block and email editors",
     tag: "Templates",
     changes: [
       <>
@@ -24,14 +47,14 @@ const ENTRIES: Entry[] = [
         table, settings (profile, account, billing, team, notifications, appearance) and a 404.
       </>,
       <>
-        <Code>agent-workspace</Code> is rebuilt after Synara as an Agent Client Protocol client: threads, tabs, split chat
+        <Code>agent-workspace</Code> is rebuilt as an Agent Client Protocol client: threads, tabs, split chat
         panes, terminal, file explorer, review diffs and an offline demo agent, plus a WebSocket bridge
         (<Code>server/acp-bridge.mjs</Code>) that runs Claude Code, Codex, Gemini CLI or any ACP agent.
       </>,
       <>
-        <TextLink href="/docs/notion-editor">Notion editor</TextLink> (Tiptap: slash menu, bubble menu, drag handles,
+        <TextLink href="/docs/notion-editor">Block editor</TextLink> (slash menu, bubble menu, drag handles,
         callouts, toggles, tables, MDX import and export) and <TextLink href="/docs/email-editor">email editor</TextLink>{" "}
-        (maily.to-style blocks and variables, rendered to email HTML with React Email).
+        (email blocks and variables, rendered to email-safe HTML).
       </>,
       <>
         28 new components the templates are built from: sparkline, trend-chart, bar-list, stat-card, empty-state,
@@ -53,7 +76,7 @@ const ENTRIES: Entry[] = [
     tag: "Theme",
     changes: [
       <>
-        New visual direction after Synara and Codex: system UI font on a 13px <Code>text-ui</Code> scale, translucent
+        New native desktop visual direction: system UI font on a 13px <Code>text-ui</Code> scale, translucent
         fills for secondary, muted and accent, 5–6% hairline borders, a 0.625rem radius with multiplier steps and an inset
         docs shell.
       </>,
@@ -109,7 +132,7 @@ const ENTRIES: Entry[] = [
     title: "First release",
     tag: "Release",
     changes: [
-      <>A shadcn registry on Base UI (the base-nova style) with Tailwind CSS 4, the first core components and the puffy icon set.</>,
+      <>A shadcn registry (the base-nova style) with Tailwind CSS 4, the first core components and the puffy icon set.</>,
     ],
   },
 ]

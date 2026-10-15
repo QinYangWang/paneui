@@ -4,12 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Visual direction: native desktop, after Synara / Codex (MIT, see THIRD_PARTY_NOTICES.md).
+ * Visual direction: native desktop.
  * System UI font on a 13px scale, near-flat elevation and a 0.625rem radius with multiplier steps.
- * Colours: BoardUI's colour system (MIT, see THIRD_PARTY_NOTICES.md): Tailwind's neutral OKLCH
- * ramp (with BoardUI's neutral-100 #f7f7f7, neutral-200 #ebebeb, neutral-925 #121212 and
- * blue-400 #3392ff), one --accent-50…950 ramp (blue by default) behind primary and ring, and a
- * categorical chart palette. Token names stay shadcn's; the mapping is in the comments below.
+ * Colours: Tailwind's neutral OKLCH ramp (with neutral-100 #f7f7f7, neutral-200 #ebebeb,
+ * neutral-925 #121212 and blue-400 #3392ff), one --accent-50…950 ramp (blue by default) behind primary and ring, and a
+ * categorical chart palette. The role of each token is in the comments below.
  */
 @theme inline {
   --color-background: var(--background);
@@ -66,7 +65,7 @@
   --shadow-chip: var(--skeuo-chip);
 }
 
-/* Native 13px type scale: text-ui is the default UI size (Synara appTypography, base 13). */
+/* Native 13px type scale: text-ui is the default UI size (base 13). */
 @theme {
   --text-ui-2xs: 0.625rem;
   --text-ui-2xs--line-height: 0.875rem;
@@ -84,10 +83,10 @@
   --radius: 0.625rem;
 
   /*
-   * Accent ramp (BoardUI --color-accent-50…950): the CTA hue. primary, primary-foreground and
+   * Accent ramp (--accent-50…950): the CTA hue. primary, primary-foreground and
    * ring read it, so a preset (html[data-accent]) or a custom colour only swaps these eleven
-   * stops. Default blue = Tailwind blue with BoardUI's blue-400 (#3392ff). Not to be confused with
-   * --accent below, which is shadcn's hover/selected fill.
+   * stops. Default blue = Tailwind blue with #3392ff at 400. Not to be confused with
+   * --accent below, which is the hover/selected fill.
    */
   --accent-50: oklch(97% 0.014 254.604);
   --accent-100: oklch(93.2% 0.032 255.585);
@@ -101,7 +100,7 @@
   --accent-900: oklch(37.9% 0.146 265.522);
   --accent-950: oklch(28.2% 0.091 267.935);
 
-  /* Surfaces: BoardUI background/full (white) and background/primary/default (white). */
+  /* Surfaces: page, card and popover are white. */
   --background: oklch(100% 0 0);
   --card: oklch(100% 0 0);
   --popover: oklch(100% 0 0);
@@ -110,12 +109,11 @@
   --card-foreground: oklch(14.5% 0 0);
   --popover-foreground: oklch(14.5% 0 0);
   --muted-foreground: oklch(55.6% 0 0);
-  /* Primary: the accent's 600 stop (BoardUI's button gradient runs 500 → 600) with white text. */
+  /* Primary: the accent's 600 stop with white text. */
   --primary: var(--accent-600);
   --primary-foreground: oklch(100% 0 0);
   /*
-   * Fills stay translucent so they read on any surface: black 3% is neutral-100 (#f7f7f7) on white,
-   * BoardUI's background/primary/hover and background/secondary/default.
+   * Fills stay translucent so they read on any surface: black 3% is neutral-100 (#f7f7f7) on white.
    */
   --secondary: oklch(0% 0 0 / 3%);
   --secondary-foreground: oklch(14.5% 0 0);
@@ -131,7 +129,7 @@
   --input: oklch(0% 0 0 / 8%);
   /* Focus: border/focus-ring = accent-500, used at /50. */
   --ring: var(--accent-500);
-  /* Charts: BoardUI chart-1…8 (teal, lime, pink, sky, purple, blue, emerald, yellow, all 400). */
+  /* Charts: chart-1…8 (teal, lime, pink, sky, purple, blue, emerald, yellow, all 400). */
   --chart-1: oklch(77.7% 0.152 181.912);
   --chart-2: oklch(84.1% 0.238 128.85);
   --chart-3: oklch(71.8% 0.202 349.761);
@@ -149,7 +147,7 @@
   --shell-border: oklch(0% 0 0 / 10%);
 
   /*
-   * Elevation: a neutral-200 hairline (black 8%) with BoardUI's shadow-card (0 1px 1px 5%); hover
+   * Elevation: a neutral-200 hairline (black 8%) with a 0 1px 1px 5% contact shadow; hover
    * steps the ring to neutral-300 (border/button/hover); popups add shadow-dropdown and a soft lift.
    */
   --skeuo-raised: 0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%);
@@ -169,14 +167,14 @@
   --card: oklch(26.9% 0 0);
   --popover: oklch(26.9% 0 0);
   /*
-   * text/primary neutral-50. text/secondary is neutral-500 in BoardUI, but that is 3.2:1 on a
+   * text/primary neutral-50. text/secondary at neutral-500 would be 3.2:1 on a
    * neutral-800 card, so it moves one step to neutral-400 (5.8:1 on cards, 7.2:1 on the page).
    */
   --foreground: oklch(98.5% 0 0);
   --card-foreground: oklch(98.5% 0 0);
   --popover-foreground: oklch(98.5% 0 0);
   --muted-foreground: oklch(70.8% 0 0);
-  /* Primary keeps the light value (BoardUI's CTA gradient does not change with mode). */
+  /* Primary keeps the light value (the CTA does not change with mode). */
   /* Fills: white 7% ≈ neutral-700 / 60% on a neutral-800 card (background/primary/hover). */
   --secondary: oklch(100% 0 0 / 7%);
   --secondary-foreground: oklch(98.5% 0 0);
@@ -184,8 +182,8 @@
   --accent: oklch(100% 0 0 / 7%);
   --accent-foreground: oklch(98.5% 0 0);
   /*
-   * State: lime-400, yellow-500. destructive stays red-500 rather than BoardUI's text/error red-400:
-   * it also fills the destructive button, where white text on red-400 is 2.9:1 (BoardUI's dark
+   * State: lime-400, yellow-500. destructive stays red-500 rather than red-400:
+   * it also fills the destructive button, where white text on red-400 is 2.9:1 (the dark
    * danger button keeps its red-500 → 600 gradient).
    */
   --destructive: oklch(63.7% 0.237 25.331);
@@ -204,7 +202,7 @@
   --shell: oklch(20.5% 0 0);
   --shell-border: oklch(100% 0 0 / 9%);
 
-  /* Hairline neutral-700 on a card (white 12%) plus BoardUI's dark shadow-card; hover neutral-600-ish. */
+  /* Hairline neutral-700 on a card (white 12%) plus a darker contact shadow; hover neutral-600-ish. */
   --skeuo-raised: 0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 1px oklch(0% 0 0 / 14%);
   --skeuo-raised-hover: 0 0 0 1px oklch(100% 0 0 / 20%), 0 1px 1px oklch(0% 0 0 / 14%);
   --skeuo-pressed: 0 0 0 1px oklch(100% 0 0 / 8%);
@@ -380,7 +378,7 @@ html[data-accent="violet"] {
 }
 
 /*
- * Codex rail layout: the window band and sidebar sit on `bg-shell`; the content is an inset panel
+ * Rail layout: the window band and sidebar sit on `bg-shell`; the content is an inset panel
  * with a 0.5px hairline (one device pixel on Retina), a 1.3x radius and a 3px gap to the
  * window's right and bottom edges.
  */
@@ -486,7 +484,7 @@ html[data-accent="violet"] {
   --frame-inner-2: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 2px);
 }
 
-/* Shiki dual themes (defaultColor: false). */
+/* Dual-theme syntax highlighting (defaultColor: false). */
 .shiki,
 .shiki span {
   color: var(--shiki-light);

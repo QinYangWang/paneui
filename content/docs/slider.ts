@@ -34,7 +34,7 @@ export default {
     },
     {
       title: "Keyboard",
-      body: "Arrow keys move the focused thumb by `step`; Page Up / Page Down and Home / End jump further, from Base UI.",
+      body: "Arrow keys move the focused thumb by `step`; Page Up / Page Down and Home / End jump further.",
     },
     {
       title: "Related",
@@ -45,7 +45,7 @@ export default {
     {
       name: "Slider",
       description: "Inset track, primary fill and a raised thumb. Pass an array value for a range.",
-      extends: "Base UI Slider.Root",
+      extends: "Slider.Root",
       extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
         {
@@ -76,7 +76,7 @@ export default {
           name: "thumbAlignment",
           type: `"edge" | "center"`,
           default: `"edge"`,
-          description: "`edge` keeps the thumb inside the track at both ends (Base UI defaults to `center`).",
+          description: "`edge` keeps the thumb inside the track at both ends (the primitive defaults to `center`).",
         },
         {
           name: "format",

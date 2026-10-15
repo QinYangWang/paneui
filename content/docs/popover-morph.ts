@@ -41,7 +41,7 @@ export default {
     },
     {
       title: "Keyboard",
-      body: "Base UI Popover: Enter or Space opens it, focus moves into the panel, Escape or an outside press closes it and returns focus to the trigger.",
+      body: "Enter or Space opens it, focus moves into the panel, Escape or an outside press closes it and returns focus to the trigger.",
     },
     {
       title: "Related",
@@ -51,22 +51,22 @@ export default {
   api: [
     {
       name: "MorphPopover",
-      description: "Base UI `Popover.Root`, re-exported unchanged.",
-      extends: "Base UI Popover.Root",
+      description: "`Popover.Root`, re-exported unchanged.",
+      extends: "Popover.Root",
       extendsHref: `${BASE}#root`,
       props: [],
     },
     {
       name: "MorphPopoverTrigger",
       description: "A raised trigger (32px, `rounded-lg`).",
-      extends: "Base UI Popover.Trigger",
+      extends: "Popover.Trigger",
       extendsHref: `${BASE}#trigger`,
       props: [],
     },
     {
       name: "MorphPopoverContent",
       description: "Portal, positioner and popup, anchored to the trigger like Popover (8px side offset) with the standard popover surface (`rounded-2xl`, `bg-popover`, `shadow-surface`). A 288px panel by default.",
-      extends: "Base UI Popover.Popup",
+      extends: "Popover.Popup",
       extendsHref: `${BASE}#popup`,
       props: [
         { name: "side", type: `"top" | "bottom"`, default: `"bottom"`, description: "Which side of the trigger the panel opens on (and grows towards)." },
@@ -98,13 +98,13 @@ export default {
     },
     {
       name: "MorphPopoverTitle",
-      extends: "Base UI Popover.Title",
+      extends: "Popover.Title",
       extendsHref: `${BASE}#title`,
       props: [],
     },
     {
       name: "MorphPopoverDescription",
-      extends: "Base UI Popover.Description",
+      extends: "Popover.Description",
       extendsHref: `${BASE}#description`,
       props: [],
     },
@@ -117,14 +117,14 @@ export default {
     {
       name: "MorphPopoverClose",
       description: "Unstyled close part; pass `render` to turn any element (e.g. a `Button`) into a close control.",
-      extends: "Base UI Popover.Close",
+      extends: "Popover.Close",
       extendsHref: `${BASE}#close`,
       props: [],
     },
     {
       name: "MorphPopoverCloseButton",
       description: "Round × button pinned to the panel's top-right corner, labelled `Close`.",
-      extends: "Base UI Popover.Close",
+      extends: "Popover.Close",
       extendsHref: `${BASE}#close`,
       props: [],
     },

@@ -5,7 +5,7 @@ export default {
   usage: {
     imports: `import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"`,
     code: `<Avatar>
-  <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+  <AvatarImage src="https://github.com/QinYangWang.png" alt="Qinyang" />
   <AvatarFallback>CN</AvatarFallback>
 </Avatar>`,
   },
@@ -53,7 +53,7 @@ export default {
   api: [
     {
       name: "Avatar",
-      extends: "Base UI Avatar.Root",
+      extends: "Avatar.Root",
       extendsHref: "https://base-ui.com/react/components/avatar#root",
       props: [
         {
@@ -76,13 +76,13 @@ export default {
     },
     {
       name: "AvatarImage",
-      extends: "Base UI Avatar.Image",
+      extends: "Avatar.Image",
       extendsHref: "https://base-ui.com/react/components/avatar#image",
       props: [],
     },
     {
       name: "AvatarFallback",
-      extends: "Base UI Avatar.Fallback",
+      extends: "Avatar.Fallback",
       extendsHref: "https://base-ui.com/react/components/avatar#fallback",
       props: [
         { name: "delay", type: "number", description: "Milliseconds to wait before showing the fallback." },

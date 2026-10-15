@@ -12,7 +12,7 @@ import { StarterKit } from "@tiptap/starter-kit"
 import { common, createLowlight } from "lowlight"
 
 /**
- * Schema-level extensions of the notion editor. No React here, so the MDX helpers
+ * Schema-level extensions of the block editor. No React here, so the MDX helpers
  * and tests can build the same schema in Node. Node views are attached in
  * notion-editor.tsx.
  */
@@ -207,7 +207,7 @@ export type NotionExtensionOptions = {
   uploadImage?: ImageUploader
 }
 
-/** Every schema extension of the notion editor (no node views, no menus). */
+/** Every schema extension of the block editor (no node views, no menus). */
 export function notionExtensions({
   placeholder = "Write, or press '/' for commands…",
   placeholders = {},

@@ -7,7 +7,7 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "Theme",
-      "description": "Native desktop tokens after Synara/Codex with BoardUI's colour system: system UI font (-apple-system/Segoe UI) on a 13px type scale (text-ui-2xs/xs/sm/ui/lg = 10/11/12/13/14px), Tailwind's neutral OKLCH ramp (white page and cards, neutral-950 text, neutral-500 secondary text; dark: #121212 page, neutral-800 cards, neutral-50 text, neutral-400 secondary text), translucent fills equal to neutral-100 for secondary/muted/accent, neutral-200 / neutral-800 hairline borders, an --accent-50…950 ramp (blue by default) driving primary (the 600 stop, white text) and ring (500) (accent presets: theme-neutral, theme-blue, theme-green, theme-orange, theme-rose, theme-violet), BoardUI's eight-hue chart palette (chart-1..8: teal, lime, pink, sky, purple, blue, emerald, yellow), a 0.625rem radius with multiplier steps (sm .6x, md .8x, xl 1.4x, 2xl 1.8x, shell 1.3x), near-flat elevation shadows (raised, pressed, primary, well, surface, chip), shell/shell-border app-chrome tokens and a shell-inset utility for the rail layout, code surface and scrollbar tokens with thin rounded scrollbars and scrollbar-thin/-hover/-none utilities, reading tokens (max-w-reading 68ch, max-w-page, image outline) and a prose-qy long-form typography utility. Installs @qinyang/utils (cn that knows the text-ui sizes).",
+      "description": "Native desktop tokens: system UI font (-apple-system/Segoe UI) on a 13px type scale (text-ui-2xs/xs/sm/ui/lg = 10/11/12/13/14px), Tailwind's neutral OKLCH ramp (white page and cards, neutral-950 text, neutral-500 secondary text; dark: #121212 page, neutral-800 cards, neutral-50 text, neutral-400 secondary text), translucent fills equal to neutral-100 for secondary/muted/accent, neutral-200 / neutral-800 hairline borders, an --accent-50…950 ramp (blue by default) driving primary (the 600 stop, white text) and ring (500) (accent presets: theme-neutral, theme-blue, theme-green, theme-orange, theme-rose, theme-violet), an eight-hue chart palette (chart-1..8: teal, lime, pink, sky, purple, blue, emerald, yellow), a 0.625rem radius with multiplier steps (sm .6x, md .8x, xl 1.4x, 2xl 1.8x, shell 1.3x), near-flat elevation shadows (raised, pressed, primary, well, surface, chip), shell/shell-border app-chrome tokens and a shell-inset utility for the rail layout, code surface and scrollbar tokens with thin rounded scrollbars and scrollbar-thin/-hover/-none utilities, reading tokens (max-w-reading 68ch, max-w-page, image outline) and a prose-qy long-form typography utility. Installs @qinyang/utils (cn that knows the text-ui sizes).",
       "cssVars": {
         "theme": {
           "color-code": "var(--code)",
@@ -459,7 +459,7 @@
       "name": "theme-blue",
       "type": "registry:theme",
       "title": "Theme: Blue accent",
-      "description": "Blue accent preset (the default): sets the --accent-50…950 ramp to Tailwind blue (BoardUI's blue-400 #3392ff); primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
+      "description": "Blue accent preset (the default): sets the --accent-50…950 ramp to Tailwind blue (#3392ff at 400); primary = the 600 stop with white text, ring = the 500 stop, in both modes. Install after @qinyang/theme.",
       "registryDependencies": [
         "@qinyang/theme"
       ],
@@ -920,7 +920,7 @@
       "name": "agent-workspace",
       "type": "registry:block",
       "title": "Agent Workspace",
-      "description": "Synara-style multi-provider coding-agent workspace and Agent Client Protocol client: icon rail, threads sidebar, thread tabs, split chats with work logs, approvals and edited files, a composer with mode / model / effort, and a terminal / explorer / browser dock. Runs offline on a demo agent; a bundled Node bridge connects Claude Code, Codex, Gemini or any ACP agent.",
+      "description": "Multi-provider coding-agent workspace and Agent Client Protocol client: icon rail, threads sidebar, thread tabs, split chats with work logs, approvals and edited files, a composer with mode / model / effort, and a terminal / explorer / browser dock. Runs offline on a demo agent; a bundled Node bridge connects Claude Code, Codex, Gemini or any ACP agent.",
       "dependencies": [
         "@agentclientprotocol/sdk",
         "ws",
@@ -1337,7 +1337,7 @@
       "name": "stepper",
       "type": "registry:ui",
       "title": "Stepper",
-      "description": "Numeric − value + stepper on Base UI NumberField with rolling digits, raised buttons and disabled ends at min and max.",
+      "description": "Numeric − value + stepper on a number field primitive with rolling digits, raised buttons and disabled ends at min and max.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -1494,7 +1494,7 @@
       "name": "collapsible",
       "type": "registry:ui",
       "title": "Collapsible",
-      "description": "Base UI Collapsible with a smooth height reveal, soft content fade and a rotating chevron trigger.",
+      "description": "Collapsible with a smooth height reveal, soft content fade and a rotating chevron trigger.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1516,7 +1516,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Base UI Accordion in an inset well with raised open rows, optional icon chips, springy height reveal and single or multiple open items.",
+      "description": "Accordion in an inset well with raised open rows, optional icon chips, springy height reveal and single or multiple open items.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1969,7 +1969,7 @@
       "name": "select-morph",
       "type": "registry:ui",
       "title": "Select Morph",
-      "description": "Select whose trigger unfolds into the option list as one surface, folding back on close, built on Base UI Select.",
+      "description": "Select whose trigger unfolds into the option list as one surface, folding back on close.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1991,7 +1991,7 @@
       "name": "popover-morph",
       "type": "registry:ui",
       "title": "Popover Morph",
-      "description": "Popover whose panel grows out of the trigger's own shape and colour and folds back into it, built on Base UI Popover.",
+      "description": "Popover whose panel grows out of the trigger's own shape and colour and folds back into it.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -2079,7 +2079,7 @@
       "name": "wheel-picker",
       "type": "registry:ui",
       "title": "Wheel Picker",
-      "description": "iOS-style picker wheel: a 3D drum driven by a real scroll container, so it gets native momentum and scroll-snap detents, plus mouse drag and full keyboard control; compose several in a WheelPickerGroup for times and dates.",
+      "description": "Scroll-wheel picker: a 3D drum driven by a real scroll container, so it gets native momentum and scroll-snap detents, plus mouse drag and full keyboard control; compose several in a WheelPickerGroup for times and dates.",
       "dependencies": [
         "motion"
       ],
@@ -2167,7 +2167,7 @@
       "name": "range-slider-inline",
       "type": "registry:ui",
       "title": "Range Slider Inline",
-      "description": "Base UI slider with a raised fill growing inside an inset well, the label and value printed on the track, ten stop markers and a slim thumb that parts around the text.",
+      "description": "Slider with a raised fill growing inside an inset well, the label and value printed on the track, ten stop markers and a slim thumb that parts around the text.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -2563,7 +2563,7 @@
       "name": "agent-code-block",
       "type": "registry:ui",
       "title": "Agent Code Block",
-      "description": "Shiki-highlighted code surface for agent output that streams without flicker, with line numbers, highlighted lines, a filename header, a live caret that follows the newest line and a copy button.",
+      "description": "Syntax-highlighted code surface for agent output that streams without flicker, with line numbers, highlighted lines, a filename header, a live caret that follows the newest line and a copy button.",
       "dependencies": [
         "shiki",
         "motion"
@@ -2586,7 +2586,7 @@
       "name": "file-diff",
       "type": "registry:ui",
       "title": "File Diff",
-      "description": "Collapsible diff view (unified or split) built on @pierre/diffs of one file change with live +/− counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
+      "description": "Collapsible diff view (unified or split) of one file change with live +/− counts and a diffstat, syntax-highlighted rows with old/new line numbers, and rows that animate in while an agent streams the edit.",
       "dependencies": [
         "@base-ui/react",
         "@pierre/diffs",
@@ -2613,7 +2613,7 @@
       "name": "tool-result",
       "type": "registry:ui",
       "title": "Tool Result",
-      "description": "Execution disclosure for an agent tool call, with live status, ticking duration, Shiki-highlighted terminal output or request/response, copy and retry, collapsing once it finishes.",
+      "description": "Execution disclosure for an agent tool call, with live status, ticking duration, syntax-highlighted terminal output or request/response, copy and retry, collapsing once it finishes.",
       "dependencies": [
         "@base-ui/react",
         "motion",
@@ -2639,7 +2639,7 @@
       "name": "citations",
       "type": "registry:ui",
       "title": "Citations",
-      "description": "Inline numbered citation markers with a Base UI PreviewCard hover preview, linked through a CitationGroup to a collapsible, progressively animated reference list.",
+      "description": "Inline numbered citation markers with a hover preview card, linked through a CitationGroup to a collapsible, progressively animated reference list.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -2987,7 +2987,7 @@
       "name": "heat-calendar",
       "type": "registry:ui",
       "title": "Heat Calendar",
-      "description": "GitHub-style activity calendar on UTC dates with composable Grid, Tooltip, Summary and Legend parts, single-hue intensity levels, and controlled drag/keyboard range selection that totals the span.",
+      "description": "Contribution-graph activity calendar on UTC dates with composable Grid, Tooltip, Summary and Legend parts, single-hue intensity levels, and controlled drag/keyboard range selection that totals the span.",
       "dependencies": [
         "motion"
       ],
@@ -3293,7 +3293,7 @@
       "name": "otp-input",
       "type": "registry:block",
       "title": "OTP Input",
-      "description": "One-time-code field on Base UI OTPField with a gliding focus ring, digits that roll in, paste and autofill support, an error shake and a success check.",
+      "description": "One-time-code field with a gliding focus ring, digits that roll in, paste and autofill support, an error shake and a success check.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3716,7 +3716,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Base UI avatar with image and initials fallback, five sizes (xs–xl), circle or squircle shape, a presence status dot, and an overlapping group with a +N count.",
+      "description": "Avatar with image and initials fallback, five sizes (xs–xl), circle or squircle shape, a presence status dot, and an overlapping group with a +N count.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -3738,7 +3738,7 @@
       "name": "avatar-generator",
       "type": "registry:ui",
       "title": "Avatar Generator",
-      "description": "Deterministic avatars from a seed in DiceBear's Notionists style (art by Zoish, CC0; DiceBear, MIT), cropped so faces read at 20–32px: male/female/any hair from a curated long/short split, no beard for female, optional glasses, tint/circle/transparent/hex backgrounds and collision-free SVG ids, plus an editor with seed shuffle, gender toggle, part pickers (hair, eyes, brows, mouth, glasses, beard, top, gesture), SVG download and JSX copy.",
+      "description": "Deterministic illustrated avatars from a seed, cropped so faces read at 20–32px: male/female/any hair from a curated long/short split, no beard for female, optional glasses, tint/circle/transparent/hex backgrounds and collision-free SVG ids, plus an editor with seed shuffle, gender toggle, part pickers (hair, eyes, brows, mouth, glasses, beard, top, gesture), SVG download and JSX copy.",
       "dependencies": [
         "@base-ui/react",
         "@dicebear/core@^9.4.3",
@@ -3897,7 +3897,7 @@
       "name": "usage-meter",
       "type": "registry:ui",
       "title": "Usage Meter",
-      "description": "Quota bar on Base UI Meter: label, used / limit readout and a bar that turns warning then destructive as it fills.",
+      "description": "Quota bar on a meter: label, used / limit readout and a bar that turns warning then destructive as it fills.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -3939,7 +3939,7 @@
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
-      "description": "Form field on Base UI Field: label, control, description and an animated error, wired with aria-describedby and aria-invalid.",
+      "description": "Form field: label, control, description and an animated error, wired with aria-describedby and aria-invalid.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3984,7 +3984,7 @@
       "name": "segmented-control",
       "type": "registry:ui",
       "title": "Segmented Control",
-      "description": "Pick-one control on Base UI RadioGroup with a raised thumb that glides between options: billing cycle, chart type, theme.",
+      "description": "Pick-one control on a radio group with a raised thumb that glides between options: billing cycle, chart type, theme.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -4206,8 +4206,8 @@
     {
       "name": "notion-editor",
       "type": "registry:block",
-      "title": "Notion Editor",
-      "description": "Notion-style block editor on Tiptap: slash menu, selection bubble, drag handles, markdown shortcuts, callouts, toggles, tables, code highlighting, and lossless MDX import / export.",
+      "title": "Block Editor",
+      "description": "Block editor: slash menu, selection bubble, drag handles, markdown shortcuts, callouts, toggles, tables, code highlighting, and lossless MDX import / export.",
       "dependencies": [
         "@tiptap/core",
         "@tiptap/pm",
@@ -4302,7 +4302,7 @@
       "name": "email-editor",
       "type": "registry:block",
       "title": "Email Editor",
-      "description": "Visual email editor (after maily.to): buttons, images, logo, columns, sections, spacer, footer, {{variables}}, Show if / Repeat, subject + preheader, desktop / mobile preview, and email-safe HTML / JSON export with React Email.",
+      "description": "Visual email editor: buttons, images, logo, columns, sections, spacer, footer, {{variables}}, Show if / Repeat, subject + preheader, desktop / mobile preview, and email-safe HTML / JSON export.",
       "dependencies": [
         "@tiptap/core",
         "@tiptap/pm",
@@ -4403,7 +4403,7 @@
       "name": "icon-rail",
       "type": "registry:ui",
       "title": "Icon Rail",
-      "description": "Narrow vertical app rail of icon buttons with tooltips, shortcuts, badges and round status avatars, after Synara and Codex.",
+      "description": "Narrow vertical app rail of icon buttons with tooltips, shortcuts, badges and round status avatars; vertical or horizontal.",
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/tooltip"

@@ -58,7 +58,7 @@ export default {
     },
     {
       title: "Keyboard",
-      body: "Opens on right-click or long-press. Arrow keys move between items, Enter selects, Arrow Right opens a submenu and Esc closes, from Base UI.",
+      body: "Opens on right-click or long-press. Arrow keys move between items, Enter selects, Arrow Right opens a submenu and Esc closes.",
     },
     {
       title: "Related",
@@ -68,21 +68,21 @@ export default {
   api: [
     {
       name: "ContextMenu",
-      extends: "Base UI ContextMenu.Root",
+      extends: "ContextMenu.Root",
       extendsHref: "https://base-ui.com/react/components/context-menu#root",
       props: [],
     },
     {
       name: "ContextMenuTrigger",
       description: "The area that opens the menu. Unstyled apart from disabling text selection and the iOS callout.",
-      extends: "Base UI ContextMenu.Trigger",
+      extends: "ContextMenu.Trigger",
       extendsHref: "https://base-ui.com/react/components/context-menu#trigger",
       props: [],
     },
     {
       name: "ContextMenuContent",
       description: "The popup, already wrapped in a portal and positioner.",
-      extends: "Base UI ContextMenu.Popup",
+      extends: "ContextMenu.Popup",
       extendsHref: "https://base-ui.com/react/components/context-menu#popup",
       props: [
         {
@@ -97,7 +97,7 @@ export default {
     },
     {
       name: "ContextMenuItem",
-      extends: "Base UI ContextMenu.Item",
+      extends: "ContextMenu.Item",
       extendsHref: "https://base-ui.com/react/components/context-menu#item",
       props: [
         {
@@ -113,39 +113,39 @@ export default {
     {
       name: "ContextMenuCheckboxItem",
       description: "Item with a check mark on the left.",
-      extends: "Base UI ContextMenu.CheckboxItem",
+      extends: "ContextMenu.CheckboxItem",
       extendsHref: "https://base-ui.com/react/components/context-menu#checkboxitem",
       props: [],
     },
     {
       name: "ContextMenuRadioGroup",
-      extends: "Base UI ContextMenu.RadioGroup",
+      extends: "ContextMenu.RadioGroup",
       extendsHref: "https://base-ui.com/react/components/context-menu#radiogroup",
       props: [],
     },
     {
       name: "ContextMenuRadioItem",
       description: "Item with a primary dot on the left when selected.",
-      extends: "Base UI ContextMenu.RadioItem",
+      extends: "ContextMenu.RadioItem",
       extendsHref: "https://base-ui.com/react/components/context-menu#radioitem",
       props: [],
     },
     {
       name: "ContextMenuGroup",
-      extends: "Base UI ContextMenu.Group",
+      extends: "ContextMenu.Group",
       extendsHref: "https://base-ui.com/react/components/context-menu#group",
       props: [],
     },
     {
       name: "ContextMenuLabel",
       description: "Small muted heading for a group. Place it inside a `ContextMenuGroup`.",
-      extends: "Base UI ContextMenu.GroupLabel",
+      extends: "ContextMenu.GroupLabel",
       extendsHref: "https://base-ui.com/react/components/context-menu#grouplabel",
       props: [{ name: "inset", type: "boolean", default: "false", description: "Indent to line up with checkbox and radio items." }],
     },
     {
       name: "ContextMenuSeparator",
-      extends: "Base UI ContextMenu.Separator",
+      extends: "ContextMenu.Separator",
       extendsHref: "https://base-ui.com/react/components/context-menu#separator",
       props: [],
     },
@@ -157,14 +157,14 @@ export default {
     },
     {
       name: "ContextMenuSub",
-      extends: "Base UI ContextMenu.SubmenuRoot",
+      extends: "ContextMenu.SubmenuRoot",
       extendsHref: "https://base-ui.com/react/components/context-menu#submenuroot",
       props: [],
     },
     {
       name: "ContextMenuSubTrigger",
       description: "Item with a trailing chevron that opens the submenu.",
-      extends: "Base UI ContextMenu.SubmenuTrigger",
+      extends: "ContextMenu.SubmenuTrigger",
       extendsHref: "https://base-ui.com/react/components/context-menu#submenutrigger",
       props: [],
       dataAttributes: [{ name: "data-popup-open", description: "Present while its submenu is open." }],
@@ -172,7 +172,7 @@ export default {
     {
       name: "ContextMenuSubContent",
       description: "The submenu popup. Opens to the right by default; takes the same props as `MenuContent`.",
-      extends: "Base UI Menu.Popup",
+      extends: "Menu.Popup",
       extendsHref: "https://base-ui.com/react/components/menu#popup",
       props: [],
     },

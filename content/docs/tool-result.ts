@@ -60,7 +60,7 @@ export default {
     {
       name: "ToolResult",
       description: "Execution disclosure for one agent tool call.",
-      extends: "Base UI Collapsible.Root",
+      extends: "Collapsible.Root",
       extendsHref: "https://base-ui.com/react/components/collapsible#root",
       props: [
         { name: "tool", type: "ReactNode", required: true, description: "Tool identifier shown in mono, e.g. `bash` or `http.get`. Hidden below `sm`." },
@@ -105,7 +105,7 @@ export default {
     },
     {
       name: "CodeHighlight",
-      description: "Dual-theme shiki highlight shared by the agent components.",
+      description: "Dual-theme syntax highlight shared by the agent components.",
       extends: "pre",
       props: [
         { name: "code", type: "string", required: true, description: "Source text." },

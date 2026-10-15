@@ -20,13 +20,13 @@ export default {
       id: "disabled",
       title: "Disabled",
       description:
-        "A label wrapping a disabled control mutes its text (the control dims itself). A label placed right after a disabled control dims too, for native inputs (`:disabled`) and Base UI Checkbox, Switch and Radio (`data-disabled`). For a field row, mark a `group` parent with `data-disabled=\"true\"`.",
+        "A label wrapping a disabled control mutes its text (the control dims itself). A label placed right after a disabled control dims too, for native inputs (`:disabled`) and the library's Checkbox, Switch and Radio (`data-disabled`). For a field row, mark a `group` parent with `data-disabled=\"true\"`.",
     },
   ],
   notes: [
     {
       title: "Disabled styles",
-      body: "Base UI controls render a `span` with `data-disabled`, so the label matches it with `has-data-disabled` (wrapping) and `peer-data-disabled` (sibling; Checkbox and Switch carry the `peer` class) as well as the native `has-disabled` / `peer-disabled`.",
+      body: "Checkbox, Switch and Radio render a `span` with `data-disabled`, so the label matches it with `has-data-disabled` (wrapping) and `peer-data-disabled` (sibling; Checkbox and Switch carry the `peer` class) as well as the native `has-disabled` / `peer-disabled`.",
     },
   ],
   api: [

@@ -29,7 +29,7 @@ export default {
     {
       name: "ExpandingArrowButton",
       description: "Raised pill with an accent tile that sweeps across on hover or focus.",
-      extends: "Base UI Button",
+      extends: "Button",
       extendsHref: "https://base-ui.com/react/components/button#api-reference",
       props: [
         { name: "accentClassName", type: "string", description: "Classes for the accent tile (e.g. a different background)." },

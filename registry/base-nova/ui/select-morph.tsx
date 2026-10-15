@@ -13,8 +13,8 @@ import { cn } from "@/lib/utils"
  * content height (and back on close). Because the ring and shadow are drawn by
  * the box itself, the border stays continuous at every frame of the morph. Its
  * first row mirrors the trigger, which is what makes the hand-off seamless.
- * Built on Base UI Select, so keyboard navigation, typeahead, focus and ARIA
- * come for free. The box uses overflow-clip (not hidden) so Base UI scrolling the
+ * Built on the Select primitive, so keyboard navigation, typeahead, focus and ARIA
+ * come for free. The box uses overflow-clip (not hidden) so the primitive scrolling the
  * selected item into view cannot scroll the morphing box itself.
  *
  * Geometry: `--morph-h` is the content's natural height (ResizeObserver). The

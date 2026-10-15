@@ -70,7 +70,7 @@ export default {
     {
       name: "BottomSheet",
       description: "Root. Holds the open state and the snap index.",
-      extends: "Base UI Dialog.Root",
+      extends: "Dialog.Root",
       extendsHref: "https://base-ui.com/react/components/dialog#root",
       props: [
         {
@@ -93,20 +93,20 @@ export default {
         {
           name: "onOpenChange",
           type: "(open: boolean, details: Dialog.Root.ChangeEventDetails) => void",
-          description: "Called when the sheet opens or closes, with Base UI event details (`reason`, `event`, `cancel()`), like Drawer. A drag-down dismissal reports `reason: \"imperative-action\"`.",
+          description: "Called when the sheet opens or closes, with the dialog's event details (`reason`, `event`, `cancel()`), like Drawer. A drag-down dismissal reports `reason: \"imperative-action\"`.",
         },
       ],
     },
     {
       name: "BottomSheetTrigger",
-      extends: "Base UI Dialog.Trigger",
+      extends: "Dialog.Trigger",
       extendsHref: "https://base-ui.com/react/components/dialog#trigger",
       props: [],
     },
     {
       name: "BottomSheetContent",
       description: "The sheet (up to 576px wide) with its backdrop and portal. Always as tall as the highest snap.",
-      extends: "Base UI Dialog.Popup",
+      extends: "Dialog.Popup",
       extendsHref: "https://base-ui.com/react/components/dialog#popup",
       props: [
         { name: "showHandle", type: "boolean", default: "true", description: "Render the grip at the top." },
@@ -138,19 +138,19 @@ export default {
     },
     {
       name: "BottomSheetTitle",
-      extends: "Base UI Dialog.Title",
+      extends: "Dialog.Title",
       extendsHref: "https://base-ui.com/react/components/dialog#title",
       props: [],
     },
     {
       name: "BottomSheetDescription",
-      extends: "Base UI Dialog.Description",
+      extends: "Dialog.Description",
       extendsHref: "https://base-ui.com/react/components/dialog#description",
       props: [],
     },
     {
       name: "BottomSheetClose",
-      extends: "Base UI Dialog.Close",
+      extends: "Dialog.Close",
       extendsHref: "https://base-ui.com/react/components/dialog#close",
       props: [],
     },

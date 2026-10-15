@@ -16,7 +16,7 @@ export type PartDoc = {
   /** Exported component or hook name, e.g. `AccordionTrigger`. */
   name: string
   description?: string
-  /** What the rest of its props come from, e.g. `Base UI Accordion.Trigger` or `button`. */
+  /** What the rest of its props come from, e.g. `Accordion.Trigger` or `button`. */
   extends?: string
   /** Docs link for `extends`. */
   extendsHref?: string
@@ -33,7 +33,7 @@ export type ExampleDoc = {
 }
 
 export type ComponentDoc = {
-  /** Base UI primitive this wraps, linked at the top and in API Reference. */
+  /** Headless primitive this wraps, linked at the top and in API Reference. */
   baseUi?: { name: string; href: string }
   usage: { imports: string; code: string }
   /** Part tree, e.g. "Accordion\n└── AccordionItem\n    ├── AccordionTrigger\n    └── AccordionPanel". */

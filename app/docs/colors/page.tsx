@@ -41,8 +41,7 @@ export default function Colors() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent">One accent, every control</GuideH2>
         <p className="text-muted-foreground">
-          The colours follow <TextLink href="https://www.boardui.com/components/color">BoardUI</TextLink>&apos;s system. Filled
-          buttons, switches, checkboxes, radios, sliders, tabs, links, selection and focus rings all read{" "}
+          Filled buttons, switches, checkboxes, radios, sliders, tabs, links, selection and focus rings all read{" "}
           <Code>--primary</Code>, <Code>--primary-foreground</Code> and <Code>--ring</Code>, and those read one{" "}
           <Code>--accent-50…950</Code> ramp: primary is its 600 stop with white text, ring its 500 stop, the same in both
           modes. Blue is the default; pick a preset or any colour and the whole site recolours live, while surfaces, text,

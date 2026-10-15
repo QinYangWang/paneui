@@ -30,7 +30,7 @@ import { unified } from "unified"
  *  - Inline `<u>`, `<mark>` and `<span style={{ color }}>` map to underline, highlight and colour.
  *  - Anything else (unknown JSX, import/export, `{expressions}`, footnote definitions) is kept
  *    verbatim as an `mdxBlock` / `mdxInline` node, so `toMDX(fromMDX(source))` equals the
- *    source after remark's normal formatting (see `formatMDX`).
+ *    source after the printer's normal formatting (see `formatMDX`).
  */
 
 type Mark = { type: string; attrs?: Record<string, unknown> }
@@ -57,7 +57,7 @@ function stringifyMdast(tree: Root) {
   return stringifier.stringify(tree)
 }
 
-/** The source as remark would print it: the canonical form a round trip returns. */
+/** The source as the printer would print it: the canonical form a round trip returns. */
 export function formatMDX(source: string) {
   return stringifyMdast(parseMdast(source))
 }

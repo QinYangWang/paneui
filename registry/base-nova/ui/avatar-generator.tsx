@@ -18,7 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsList, TabsTab } from "@/registry/base-nova/ui/tabs"
 
 /*
- * Avatar generator for the Notionists avatars (art by Zoish, CC0, via DiceBear): seed field with
+ * Avatar generator for the illustrated avatars: seed field with
  * shuffle, a gender segmented control, part pickers (hair, eyes, brows, mouth, glasses, beard, top,
  * gesture) where hair only offers the chosen gender's styles, a strip of seed variations, and SVG
  * download / JSX copy. Layout is the two-layer inset card: tinted frame (rounded-2xl, p-1) around a

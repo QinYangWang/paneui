@@ -45,7 +45,7 @@ export default {
     {
       name: "Switch",
       description: "The track and thumb in one part. The library only styles it.",
-      extends: "Base UI Switch.Root",
+      extends: "Switch.Root",
       extendsHref: "https://base-ui.com/react/components/switch#root",
       props: [
         { name: "checked", type: "boolean", description: "Controlled state." },

@@ -73,8 +73,8 @@ export default {
   api: [
     {
       name: "Dialog",
-      description: "Re-export of the Base UI root.",
-      extends: "Base UI Dialog.Root",
+      description: "Re-export of the primitive root.",
+      extends: "Dialog.Root",
       extendsHref: "https://base-ui.com/react/components/dialog#root",
       props: [
         { name: "open", type: "boolean", description: "Controlled open state." },
@@ -89,14 +89,14 @@ export default {
     {
       name: "DialogTrigger",
       description: "Re-export. Use `render` to make a Button the trigger.",
-      extends: "Base UI Dialog.Trigger",
+      extends: "Dialog.Trigger",
       extendsHref: "https://base-ui.com/react/components/dialog#trigger",
       props: [],
     },
     {
       name: "DialogContent",
       description: "Portal, dimmed backdrop, a padded viewport and the centred popup (max-width 28rem, max-height the viewport minus 1rem each side, scrolls with `overscroll-contain` when taller).",
-      extends: "Base UI Dialog.Popup",
+      extends: "Dialog.Popup",
       extendsHref: "https://base-ui.com/react/components/dialog#popup",
       props: [
         {
@@ -125,20 +125,20 @@ export default {
     },
     {
       name: "DialogTitle",
-      extends: "Base UI Dialog.Title",
+      extends: "Dialog.Title",
       extendsHref: "https://base-ui.com/react/components/dialog#title",
       props: [],
     },
     {
       name: "DialogDescription",
-      extends: "Base UI Dialog.Description",
+      extends: "Dialog.Description",
       extendsHref: "https://base-ui.com/react/components/dialog#description",
       props: [],
     },
     {
       name: "DialogClose",
       description: "Re-export. Closes the dialog when pressed.",
-      extends: "Base UI Dialog.Close",
+      extends: "Dialog.Close",
       extendsHref: "https://base-ui.com/react/components/dialog#close",
       props: [],
     },

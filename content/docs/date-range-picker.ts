@@ -63,7 +63,7 @@ export default {
     {
       name: "DateRangePicker",
       description: "Range state plus the popover root. Dates are local-midnight `Date`s.",
-      extends: "Base UI Popover.Root",
+      extends: "Popover.Root",
       extendsHref: `${POPOVER}#root`,
       props: [
         { name: "value", type: "{ from?: Date; to?: Date }", description: "Controlled range." },
@@ -86,7 +86,7 @@ export default {
     {
       name: "DateRangePickerTrigger",
       description: "Raised pill with a calendar icon and the formatted range (`Intl.formatRange`).",
-      extends: "Base UI Popover.Trigger",
+      extends: "Popover.Trigger",
       extendsHref: `${POPOVER}#trigger`,
       props: [
         { name: "placeholder", type: "string", default: `"Pick dates"`, description: "Shown while nothing is selected." },

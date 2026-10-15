@@ -203,8 +203,8 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent-presets">Accent presets</GuideH2>
         <p className="text-muted-foreground">
-          As in BoardUI, the accent is one <Code>--accent-50…950</Code> ramp and the default is blue (Tailwind blue with
-          BoardUI&apos;s <Code>#3392ff</Code> at 400). <Code>primary</Code> is the 600 stop with white text (700 for green
+          The accent is one <Code>--accent-50…950</Code> ramp and the default is blue (Tailwind blue with
+          <Code>#3392ff</Code> at 400). <Code>primary</Code> is the 600 stop with white text (700 for green
           and orange, where white needs the darker stop for 4.5:1) and <Code>ring</Code> the 500 stop, the same in both
           modes. Neutral keeps the old black / white primary. A preset swaps only the ramp (and, for neutral, where
           primary points); surfaces, text, states and charts stay put. Install one after the theme:
@@ -301,7 +301,7 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="native-style">Native style rules</GuideH2>
         <p className="text-muted-foreground">
-          The look follows Synara and Codex desktop apps. A few rules keep new components consistent with it:
+          The look is a quiet native desktop style. A few rules keep new components consistent with it:
         </p>
         <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
           <li>

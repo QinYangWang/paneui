@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
  * content clipped to it. Closing folds it back into the button.
  * The surface is a sibling of the popup so its hairline ring and shadow are never
  * clipped: the standard `shadow-surface` shows at rest and during the morph.
- * Base UI Popover handles focus, Escape, outside press and ARIA.
+ * The Popover primitive handles focus, Escape, outside press and ARIA.
  */
 
 const MorphPopover = PopoverPrimitive.Root

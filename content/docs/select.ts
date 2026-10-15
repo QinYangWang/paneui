@@ -66,8 +66,8 @@ export default {
   api: [
     {
       name: "Select",
-      description: "Re-export of the Base UI root.",
-      extends: "Base UI Select.Root",
+      description: "Re-export of the primitive root.",
+      extends: "Select.Root",
       extendsHref: "https://base-ui.com/react/components/select#root",
       props: [
         {
@@ -85,7 +85,7 @@ export default {
     {
       name: "SelectTrigger",
       description: "Raised button with a trailing up/down chevron. Full width with a 10rem minimum.",
-      extends: "Base UI Select.Trigger",
+      extends: "Select.Trigger",
       extendsHref: "https://base-ui.com/react/components/select#trigger",
       props: [
         { name: "size", type: `"default" | "sm"`, default: `"default"`, description: "Height: 32px or 28px." },
@@ -98,7 +98,7 @@ export default {
     {
       name: "SelectValue",
       description: "Shows the selected label, truncated.",
-      extends: "Base UI Select.Value",
+      extends: "Select.Value",
       extendsHref: "https://base-ui.com/react/components/select#value",
       props: [
         {
@@ -112,7 +112,7 @@ export default {
     {
       name: "SelectContent",
       description: "Portal, positioner, popup and scrollable list with scroll arrows.",
-      extends: "Base UI Select.Popup",
+      extends: "Select.Popup",
       extendsHref: "https://base-ui.com/react/components/select#popup",
       props: [
         {
@@ -134,7 +134,7 @@ export default {
     {
       name: "SelectItem",
       description: "Option row with a check on the right when selected.",
-      extends: "Base UI Select.Item",
+      extends: "Select.Item",
       extendsHref: "https://base-ui.com/react/components/select#item",
       props: [
         { name: "value", type: "any", description: "Value chosen by this item." },
@@ -148,20 +148,20 @@ export default {
     {
       name: "SelectGroup",
       description: "Re-export. Groups items under a `SelectLabel`.",
-      extends: "Base UI Select.Group",
+      extends: "Select.Group",
       extendsHref: "https://base-ui.com/react/components/select#group",
       props: [],
     },
     {
       name: "SelectLabel",
       description: "Small muted heading for a group.",
-      extends: "Base UI Select.GroupLabel",
+      extends: "Select.GroupLabel",
       extendsHref: "https://base-ui.com/react/components/select#group-label",
       props: [],
     },
     {
       name: "SelectSeparator",
-      extends: "Base UI Select.Separator",
+      extends: "Select.Separator",
       extendsHref: "https://base-ui.com/react/components/select#separator",
       props: [],
     },

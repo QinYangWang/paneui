@@ -21,7 +21,7 @@ let highlighterPromise: Promise<Highlighter> | null = null
 const loadedLangs = new Map<string, Promise<string>>()
 const tokenCache = new Map<string, CodeTokenLines>()
 
-/** Lazily create one shiki highlighter (JS regex engine, no wasm) for the page. */
+/** Lazily create one syntax highlighter (JS regex engine, no wasm) for the page. */
 function getHighlighter() {
   if (!highlighterPromise) {
     highlighterPromise = Promise.all([import("shiki"), import("shiki/engine/javascript")]).then(
@@ -59,7 +59,7 @@ const EXTENSION_LANGS: Record<string, string> = {
   c: "c", h: "c", cpp: "cpp", cs: "csharp", vue: "vue", svelte: "svelte", diff: "diff",
 }
 
-/** Guess a shiki language id from a filename like `app/page.tsx`. */
+/** Guess a syntax language id from a filename like `app/page.tsx`. */
 function languageFromFilename(filename?: string, fallback = "text") {
   const ext = filename?.split(".").pop()?.toLowerCase()
   return (ext && EXTENSION_LANGS[ext]) || fallback
@@ -225,7 +225,7 @@ function toLineSet(lines?: LineSelector[]) {
 
 type AgentCodeBlockProps = Omit<React.ComponentProps<"div">, "children"> & {
   code: string
-  /** Shiki language id. Inferred from `filename` when omitted. */
+  /** Syntax language id. Inferred from `filename` when omitted. */
   language?: string
   /** Shown in the header with the copy button. Without it the copy button floats. */
   filename?: React.ReactNode

@@ -37,7 +37,7 @@ export default {
     {
       name: "ExpandableButton",
       description: "Icon button that grows to reveal its label on click.",
-      extends: "Base UI Button",
+      extends: "Button",
       extendsHref: "https://base-ui.com/react/components/button#api-reference",
       props: [
         { name: "icon", type: "ReactNode", required: true, description: "Always visible." },

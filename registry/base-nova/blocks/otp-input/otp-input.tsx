@@ -24,7 +24,7 @@ type OTPInputProps = Omit<OTPFieldPrimitive.Root.Props, "length" | "children"> &
 }
 
 /**
- * One-time-code input built on Base UI OTPField: per-slot inputs with paste,
+ * One-time-code input built on the OTPField primitive: per-slot inputs with paste,
  * SMS autofill and arrow-key navigation. A focus ring glides between slots,
  * digits roll in, errors shake and success draws a check.
  */

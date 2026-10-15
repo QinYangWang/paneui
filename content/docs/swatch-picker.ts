@@ -21,7 +21,7 @@ export default {
     { title: "Colours", body: "Pass theme tokens (`var(--chart-1)`) for UI that follows light and dark, or hex when the value leaves the app (the email editor's palette)." },
   ],
   api: [
-    { name: "SwatchPicker", extends: "Base UI RadioGroup", extendsHref: "https://base-ui.com/react/components/radio#api-reference", props: [
+    { name: "SwatchPicker", extends: "RadioGroup", extendsHref: "https://base-ui.com/react/components/radio#api-reference", props: [
       { name: "swatches", type: "{ value: string; label: string; color?: string }[]", required: true, description: "The palette. `label` is the accessible name and tooltip." },
       { name: "variant", type: `"dot" | "letter"`, default: `"dot"`, description: "Colour dots or an \"A\" per colour." },
       { name: "label", type: "React.ReactNode", description: "Visible label above the swatches (also labels the group)." },

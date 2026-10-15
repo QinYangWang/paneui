@@ -57,7 +57,7 @@ type ThreadListItemProps = Omit<React.ComponentProps<"button">, "title"> & {
 }
 
 /**
- * Two-line thread row (after Synara's sidebar): provider icon and title, then
+ * Two-line thread row: provider icon and title, then
  * repo, pull request number in its status colour, and branch, all truncating
  * so the branch gives way first.
  */

@@ -23,7 +23,7 @@ export default {
     {
       id: "accept-reject",
       title: "Accept or Reject Changes",
-      description: "Hold a `FileDiffMetadata` from `@pierre/diffs` in state, pass it as `fileDiff`, and render buttons under each change with `lineAnnotations` + `renderAnnotation`. `diffAcceptRejectHunk` returns the resolved diff.",
+      description: "Hold a parsed `FileDiffMetadata` in state, pass it as `fileDiff`, and render buttons under each change with `lineAnnotations` + `renderAnnotation`. `diffAcceptRejectHunk` returns the resolved diff.",
     },
     {
       id: "collapse-on-complete",
@@ -49,7 +49,7 @@ export default {
   notes: [
     {
       title: "Renderer",
-      body: "The rows are drawn by [@pierre/diffs](https://diffs.com) (Apache-2.0, built on Shiki) inside a shadow root, themed with this library's tokens: `--code` surface, `font-mono` at 12px, `success` / `destructive` for additions and deletions, GitHub light/dark syntax colours that follow the `html.dark` class. The renderer is loaded on demand in the browser (about 200 KB gzipped, shared Shiki grammars load per language); during static export and until it arrives, a plain unhighlighted version of the rows is shown.",
+      body: "The rows are drawn by the bundled diff renderer inside a shadow root, themed with this library's tokens: `--code` surface, `font-mono` at 12px, `success` / `destructive` for additions and deletions, GitHub light/dark syntax colours that follow the `html.dark` class. The renderer is loaded on demand in the browser (about 200 KB gzipped, syntax grammars load per language); during static export and until it arrives, a plain unhighlighted version of the rows is shown.",
     },
     {
       title: "Motion",
@@ -57,14 +57,14 @@ export default {
     },
     {
       title: "Accessibility",
-      body: 'The header is a Base UI Collapsible trigger and reads out "N additions, N deletions". The rows sit in a region labelled "Changes to {filename}"; the Unified / Split switch is a radio group.',
+      body: 'The header is a collapsible trigger and reads out "N additions, N deletions". The rows sit in a region labelled "Changes to {filename}"; the Unified / Split switch is a radio group.',
     },
   ],
   api: [
     {
       name: "FileDiff",
-      description: "Disclosure for one file change with live +/− counts, rendering a unified or split diff with @pierre/diffs.",
-      extends: "Base UI Collapsible.Root",
+      description: "Disclosure for one file change with live +/− counts, rendering a unified or split diff.",
+      extends: "Collapsible.Root",
       extendsHref: "https://base-ui.com/react/components/collapsible#root",
       props: [
         { name: "filename", type: "string", required: true, description: "File path in the header; the directory part is dimmed. Also infers the language." },
@@ -72,8 +72,8 @@ export default {
         { name: "lines", type: "FileDiffLine[]", description: "Pre-parsed rows, e.g. appended one by one while an agent streams." },
         { name: "oldFile", type: "string | null", description: "Old contents for a two-file diff (`null` when the file is new). Unchanged regions become expandable." },
         { name: "newFile", type: "string | null", description: "New contents for a two-file diff (`null` when the file was deleted)." },
-        { name: "fileDiff", type: "FileDiffMetadata", description: "A diff already parsed by `@pierre/diffs` (`parseDiffFromFile`, `parsePatchFiles`, `diffAcceptRejectHunk`). Wins over every other source." },
-        { name: "language", type: "string", description: "Shiki language id, inferred from `filename` when omitted." },
+        { name: "fileDiff", type: "FileDiffMetadata", description: "An already parsed diff (from `parseDiffFromFile`, `parsePatchFiles` or `diffAcceptRejectHunk`). Wins over every other source." },
+        { name: "language", type: "string", description: "Syntax language id, inferred from `filename` when omitted." },
         { name: "status", type: `"streaming" | "complete"`, default: `"complete"`, description: "`streaming` shows a spinner, flashes new rows in and follows the end." },
         { name: "open", type: "boolean", description: "Controlled open state." },
         { name: "defaultOpen", type: "boolean", default: "true", description: "Initial open state when uncontrolled." },
@@ -91,7 +91,7 @@ export default {
         { name: "copyable", type: "boolean", default: "true", description: "Show a button that copies the new file contents." },
         { name: "lineAnnotations", type: "DiffLineAnnotation<A>[]", description: "Rows of your own UI pinned under diff lines: `{ side: \"additions\" | \"deletions\", lineNumber, metadata }`." },
         { name: "renderAnnotation", type: "(annotation: DiffLineAnnotation<A>) => ReactNode", description: "Renders each annotation (comments, accept/reject buttons…)." },
-        { name: "options", type: "FileDiffOptions", description: "Extra `@pierre/diffs` options merged over the defaults, e.g. `hunkSeparators`, `expandUnchanged`, `enableLineSelection`." },
+        { name: "options", type: "FileDiffOptions", description: "Extra renderer options merged over the defaults, e.g. `hunkSeparators`, `expandUnchanged`, `enableLineSelection`." },
         { name: "variant", type: `"card" | "row"`, default: `"card"`, description: "`row` drops the card surface and moves the chevron to the end, for lists of files such as `EditedFilesCard`." },
         { name: "actions", type: "ReactNode", description: "Extra header controls before the copy button (reveal in folder, open in editor)." },
       ],

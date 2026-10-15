@@ -27,7 +27,7 @@ export default {
     {
       id: "full-year",
       title: "Full Year",
-      description: "53 `weeks` with small cells for a GitHub-style year. `maxCount` caps the scale so one busy day doesn't wash out the rest.",
+      description: "53 `weeks` with small cells for a contribution-graph year. `maxCount` caps the scale so one busy day doesn't wash out the rest.",
     },
     {
       id: "custom-composition",

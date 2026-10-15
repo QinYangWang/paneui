@@ -84,10 +84,10 @@ export function ThreadsSidebar({
         <Menu>
           <MenuTrigger
             render={
-              <Button variant="ghost" size="sm" className="min-w-0" aria-label={`Workspace Synara, agent ${agent?.name ?? "none"}`} />
+              <Button variant="ghost" size="sm" className="min-w-0" aria-label={`Workspace, agent ${agent?.name ?? "none"}`} />
             }
           >
-            <span className="truncate text-ui-lg font-semibold">Synara</span>
+            <span className="truncate text-ui-lg font-semibold">Workspace</span>
             <ChevronDownIcon data-icon="inline-end" className="size-3 opacity-64" />
           </MenuTrigger>
           <MenuContent className="w-60">

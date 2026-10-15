@@ -47,7 +47,7 @@ export default {
   api: [
     {
       name: "WheelPicker",
-      description: "One iOS-style wheel.",
+      description: "One scroll wheel.",
       extends: "div",
       props: [
         {

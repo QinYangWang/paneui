@@ -49,7 +49,7 @@ type BlockHandleProps = {
 }
 
 /**
- * Notion's gutter controls: hover a block to get "+" (insert below and open the
+ * Gutter controls: hover a block to get "+" (insert below and open the
  * slash menu) and a grip (drag to reorder, click for delete / duplicate / turn
  * into). Render it inside the same `relative` container as `EditorContent`; it
  * tracks the pointer over that container. Content needs ~3.5rem of left padding.
@@ -198,7 +198,7 @@ export function EditorBlockHandle({ editor, blockTypes = defaultBlockTypes, clas
               type="button"
               aria-label="Drag to move, click for block actions"
               draggable
-              // Base UI menus open on mousedown, which would cancel the drag: open on click instead.
+              // Menus open on mousedown, which would cancel the drag: open on click instead.
               onMouseDown={(e: React.MouseEvent & { preventBaseUIHandler?: () => void }) => e.preventBaseUIHandler?.()}
               onClick={(e: React.MouseEvent & { preventBaseUIHandler?: () => void }) => {
                 e.preventBaseUIHandler?.()

@@ -4,11 +4,11 @@ export default function AvatarBasic() {
   return (
     <div className="flex items-center gap-3">
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+        <AvatarImage src="https://github.com/QinYangWang.png" alt="Qinyang" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <div className="flex flex-col">
-        <span className="text-sm font-medium">shadcn</span>
+        <span className="text-sm font-medium">Qinyang</span>
         <span className="text-xs text-muted-foreground">Maintainer</span>
       </div>
     </div>

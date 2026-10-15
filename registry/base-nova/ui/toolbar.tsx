@@ -51,7 +51,7 @@ function ToolbarButton({ className, size = "icon", ...props }: ToolbarPrimitive.
   return <ToolbarPrimitive.Button data-slot="toolbar-button" data-size={size} className={cn(toolbarItemClass, className)} {...props} />
 }
 
-/** A pressed / unpressed toolbar item (bold, italic): a Base UI Toggle inside the toolbar's focus loop. */
+/** A pressed / unpressed toolbar item (bold, italic): a toggle inside the toolbar's focus loop. */
 function ToolbarToggle({
   className,
   size = "icon",

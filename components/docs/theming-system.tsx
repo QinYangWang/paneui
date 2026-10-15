@@ -98,7 +98,7 @@ export function ThemingSystem() {
       <p className="text-muted-foreground">
         That indirection is also the path to dark mode: <Code>.dark</Code> on <Code>&lt;html&gt;</Code> points the same
         variables at dark values, so a component written once is right in both modes. The accent works the same way one
-        level up, after BoardUI: <Code>--primary</Code> and <Code>--ring</Code> read an <Code>--accent-50…950</Code> ramp
+        level up: <Code>--primary</Code> and <Code>--ring</Code> read an <Code>--accent-50…950</Code> ramp
         (blue by default), <Code>html[data-accent]</Code> swaps the ramp, and everything interactive recolours while
         surfaces, text, states and charts stay put.
       </p>

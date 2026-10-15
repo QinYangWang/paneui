@@ -19,7 +19,7 @@ export default {
   api: [
     {
       name: "SegmentedControl",
-      extends: "Base UI RadioGroup",
+      extends: "RadioGroup",
       extendsHref: "https://base-ui.com/react/components/radio#radiogroup",
       props: [
         { name: "value", type: "string", description: "Controlled value." },
@@ -28,6 +28,6 @@ export default {
         { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "28px or 24px items." },
       ],
     },
-    { name: "SegmentedControlItem", extends: "Base UI Radio.Root", extendsHref: "https://base-ui.com/react/components/radio#root", props: [{ name: "value", type: "string", required: true, description: "This option's value." }] },
+    { name: "SegmentedControlItem", extends: "Radio.Root", extendsHref: "https://base-ui.com/react/components/radio#root", props: [{ name: "value", type: "string", required: true, description: "This option's value." }] },
   ],
 } satisfies ComponentDoc

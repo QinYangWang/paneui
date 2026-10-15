@@ -56,7 +56,7 @@ export default {
     {
       name: "TodoList",
       description: "Collapsible agent task plan with a live completion count.",
-      extends: "Base UI Collapsible.Root",
+      extends: "Collapsible.Root",
       extendsHref: "https://base-ui.com/react/components/collapsible#root",
       props: [
         { name: "items", type: "TodoItem[]", required: true, description: "Plan items in order." },

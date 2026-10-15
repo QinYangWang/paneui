@@ -39,7 +39,7 @@ function Toggle({ className, variant, size, ...props }: TogglePrimitive.Props & 
 const ToggleGroupContext = React.createContext<ToggleVariantProps>({})
 
 /**
- * A row of toggles sharing one value array (Base UI ToggleGroup). Single choice by
+ * A row of toggles sharing one value array (the ToggleGroup primitive). Single choice by
  * default (text alignment); `multiple` for independent marks (bold, italic).
  */
 function ToggleGroup<Value extends string = string>({

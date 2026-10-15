@@ -7,7 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
 
 /*
- * A form field: label, control, help text and error, wired together by Base UI
+ * A form field: label, control, help text and error, wired together by the Field primitive
  * Field (the label targets the control; description and error are linked with
  * aria-describedby; `invalid` sets aria-invalid on the control).
  *

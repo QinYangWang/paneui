@@ -36,7 +36,7 @@ export default {
     {
       name: "Input",
       description: "A full-width text field in an inset well. It adds no props of its own.",
-      extends: "Base UI Input",
+      extends: "Input",
       extendsHref: "https://base-ui.com/react/components/input#api-reference",
       props: [],
     },

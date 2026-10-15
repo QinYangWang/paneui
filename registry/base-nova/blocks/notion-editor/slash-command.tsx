@@ -60,7 +60,7 @@ export async function insertImageFromFile(editor: Editor) {
 
 const icon = (I: React.ComponentType<{ className?: string }>) => <I className="size-4 text-muted-foreground" />
 
-/** The block menu of the notion editor. Pass your own list (or extend this one) via `slashItems`. */
+/** The block menu of the block editor. Pass your own list (or extend this one) via `slashItems`. */
 export const defaultSlashItems: SlashItem[] = [
   {
     id: "text",

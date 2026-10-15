@@ -9,7 +9,7 @@ export default {
   },
   composition: `NotionEditor
 ├── NotionEditorToolbar        undo / redo, word count, Import / Export MDX
-├── EditorContent              Tiptap document (notionExtensions)
+├── EditorContent              the document (notionExtensions)
 ├── EditorBlockHandle          "+" and drag grip in the gutter
 └── EditorBubbleMenu           turn into, marks, link, colour
 
@@ -23,13 +23,13 @@ SlashCommand · defaultSlashItems · suggestionRenderer`,
   ],
   notes: [
     { title: "Blocks and shortcuts", body: "Text, headings 1–3 (4–6 kept from MDX), bulleted, numbered and to-do lists, toggle, quote, callout, divider, code block (lowlight syntax highlighting), image and table. Markdown input rules: `#`, `-`, `1.`, `[ ]`, `>`, three backticks, `---`, `**bold**`, `_italic_`, backtick code, `~~strike~~`. `⌘B` `⌘I` `⌘U` `⌘⇧S` `⌘E` for marks, `⌘K` for a link, `⌘⇧H` highlight, `⌘⌥1–3` headings, `⌘⇧7/8/9` lists." },
-    { title: "MDX round trip", body: "`fromMDX` parses with remark (`remark-parse` + `remark-mdx` + `remark-gfm`) and `toMDX` prints with `remark-stringify`. `<Callout type icon>` maps to the callout block, `<details><summary>` to the toggle, `<u>`, `<mark>` and `<span style={{ color }}>` to underline, highlight and colour. Anything else (unknown JSX, `import` / `export`, `{expressions}`, footnotes) becomes an editable raw MDX block, so `toMDX(fromMDX(source))` equals the source after remark's formatting (`formatMDX(source)`); a Node test covers every block (`scripts/test-notion-editor-mdx.ts`)." },
+    { title: "MDX round trip", body: "`fromMDX` parses MDX with GitHub-flavoured Markdown and `toMDX` prints it back. `<Callout type icon>` maps to the callout block, `<details><summary>` to the toggle, `<u>`, `<mark>` and `<span style={{ color }}>` to underline, highlight and colour. Anything else (unknown JSX, `import` / `export`, `{expressions}`, footnotes) becomes an editable raw MDX block, so `toMDX(fromMDX(source))` equals the source after the printer's normal formatting (`formatMDX(source)`); a Node test covers every block (`scripts/test-notion-editor-mdx.ts`)." },
     { title: "Images", body: "The image block, paste and drop go through `uploadImage(file) => Promise<url>`; the default inlines a data URL, so pass your own uploader for real documents." },
-    { title: "Licences", body: "Built on Tiptap's MIT core and extensions only (StarterKit, Details, Table, Mention/Suggestion, CodeBlockLowlight). No Tiptap Pro extensions." },
+    { title: "Licences", body: "Uses MIT-licensed editor packages only (starter kit, details, table, mention / suggestion, highlighted code blocks); no paid extensions." },
   ],
   api: [
     { name: "NotionEditor", description: "Also takes every `useNotionEditor` option.", props: [
-      { name: "defaultValue", type: "string | JSONContent", description: "Initial document: an MDX string or Tiptap JSON." },
+      { name: "defaultValue", type: "string | JSONContent", description: "Initial document: an MDX string or editor JSON (`JSONContent`)." },
       { name: "value", type: "string | JSONContent", description: "Controlled document. Pair with `onChange`." },
       { name: "onChange", type: "(mdx: string, editor: Editor) => void", description: "Called with the document as MDX on every change." },
       { name: "onUpdate", type: "(editor: Editor) => void", description: "Called on every change; read `editor.getJSON()` for JSON." },
@@ -40,7 +40,7 @@ SlashCommand · defaultSlashItems · suggestionRenderer`,
       { name: "placeholders", type: "Partial<Record<string, string>>", description: "Placeholder per node type (`heading`, `paragraph`, `detailsSummary`…)." },
       { name: "slashItems", type: "SlashItem[]", default: "defaultSlashItems", description: "The `/` menu." },
       { name: "uploadImage", type: "(file: File) => Promise<string>", description: "Uploader for picked, pasted and dropped images." },
-      { name: "extensions", type: "AnyExtension[]", description: "Extra Tiptap extensions." },
+      { name: "extensions", type: "AnyExtension[]", description: "Extra editor extensions." },
       { name: "onReady", type: "(editor: Editor) => void", description: "Receive the editor instance." },
       { name: "contentClassName", type: "string", description: "Classes for the scrolling document area (padding)." },
     ] },

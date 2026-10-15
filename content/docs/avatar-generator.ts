@@ -6,7 +6,7 @@ export default {
 import { AvatarGenerator } from "@/components/ui/avatar-generator"`,
     code: `<GeneratedAvatar seed={user.id} gender="female" size="lg" title={user.name} />`,
   },
-  composition: `GeneratedAvatar        Avatar frame + Notionists drawing
+  composition: `GeneratedAvatar        Avatar frame + illustrated drawing
 GeneratedAvatarImage   bare <svg>, e.g. inside AvatarFallback
 createGeneratedAvatar  no React: SVG string, data URI, resolved parts
 AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
@@ -20,7 +20,7 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
       id: "gender",
       title: "Male and Female",
       description:
-        "`gender` limits hair to a hand-picked split of the Notionists styles: `female` draws long hair, bobs, buns, ponytails and headscarves (22 styles); `male` draws short cuts, quiffs and spikes (35 styles) and allows a beard. `female` never gets a beard. `any` (the default) picks from all 64, including the unisex curls, cap, paper hat and head wrap.",
+        "`gender` limits hair to a hand-picked split of the hair styles: `female` draws long hair, bobs, buns, ponytails and headscarves (22 styles); `male` draws short cuts, quiffs and spikes (35 styles) and allows a beard. `female` never gets a beard. `any` (the default) picks from all 64, including the unisex curls, cap, paper hat and head wrap.",
     },
     {
       id: "options",
@@ -38,19 +38,19 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
   notes: [
     {
       title: "Artwork and licence",
-      body: "The drawings are [Notionists](https://heyzoish.gumroad.com/l/notionists) by Zoish, released under CC0 1.0 (public domain, no attribution required, credited anyway), rendered with [DiceBear](https://www.dicebear.com/styles/notionists/) (`@dicebear/core` and `@dicebear/notionists`, MIT). Both packages install with the component; nothing is fetched at runtime. DiceBear's `<metadata>` block is stripped from the output; the credit lives here and in `THIRD_PARTY_NOTICES.md`.",
+      body: "The illustrations and the renderer install with the component as two packages; nothing is fetched at runtime. The licence metadata block is stripped from the SVG output; credits for the art and the renderer are in `THIRD_PARTY_NOTICES.md`.",
     },
     {
       title: "Parts",
-      body: "Part names are DiceBear's: hair `variant01`…`variant63` plus `hat`, eyes `variant01`…`05`, brows `01`…`13`, lips `01`…`30`, nose `01`…`20`, glasses `01`…`11`, beard `01`…`12`, body (the top) `01`…`25`, and gesture `waveLongArms`, `waveLongArm`, `wavePointLongArms`, `waveOkLongArms`, `pointLongArm`, `okLongArm`, `handPhone`. Use `getAvatarParts(slot, gender)` for the list with labels. Gestures are off unless picked; DiceBear's `point`, `ok` and `hand` are left out because the closer crop hides the hand.",
+      body: "Part names follow the drawing set: hair `variant01`…`variant63` plus `hat`, eyes `variant01`…`05`, brows `01`…`13`, lips `01`…`30`, nose `01`…`20`, glasses `01`…`11`, beard `01`…`12`, body (the top) `01`…`25`, and gesture `waveLongArms`, `waveLongArm`, `wavePointLongArms`, `waveOkLongArms`, `pointLongArm`, `okLongArm`, `handPhone`. Use `getAvatarParts(slot, gender)` for the list with labels. Gestures are off unless picked; the set's `point`, `ok` and `hand` are left out because the closer crop hides the hand.",
     },
     {
       title: "Small sizes and ids",
-      body: "Notionists is drawn as a bust; the avatar is zoomed in (DiceBear `scale` 135, `translateY` 8) so the face still reads at `xs`/`sm` (20–24px). Every id inside the SVG (the clip mask, some tops) is prefixed: `GeneratedAvatar` and `GeneratedAvatarImage` use React's `useId`, `createGeneratedAvatar` a hash of the options (or your `idPrefix`), so any number of avatars, identical ones included, can share a page without one borrowing another's mask, and the markup is the same on the server and the client.",
+      body: "The drawings are busts; the avatar is zoomed in (`scale` 135, `translateY` 8) so the face still reads at `xs`/`sm` (20–24px). Every id inside the SVG (the clip mask, some tops) is prefixed: `GeneratedAvatar` and `GeneratedAvatarImage` use React's `useId`, `createGeneratedAvatar` a hash of the options (or your `idPrefix`), so any number of avatars, identical ones included, can share a page without one borrowing another's mask, and the markup is the same on the server and the client.",
     },
     {
       title: "Storing an avatar",
-      body: "Store the seed when the avatar can be regenerated from the user. When the user edits it, store `{ seed, gender, selections, accessories }` from `onValueChange`. A future DiceBear release that adds parts can change seed-only picks, so pin explicit `selections` for avatars that must never change.",
+      body: "Store the seed when the avatar can be regenerated from the user. When the user edits it, store `{ seed, gender, selections, accessories }` from `onValueChange`. A future release of the drawing set that adds parts can change seed-only picks, so pin explicit `selections` for avatars that must never change.",
     },
     {
       title: "Dark mode",
@@ -60,7 +60,7 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
   api: [
     {
       name: "GeneratedAvatar",
-      description: "A seeded Notionists avatar inside the library's `Avatar` frame. Children (e.g. `AvatarStatus`) render on top.",
+      description: "A seeded illustrated avatar inside the library's `Avatar` frame. Children (e.g. `AvatarStatus`) render on top.",
       extends: "Avatar",
       props: [
         { name: "seed", type: "string", required: true, description: "Any stable string." },

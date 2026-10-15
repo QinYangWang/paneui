@@ -66,7 +66,7 @@ type HeatCalendarProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** Last UTC day shown ("YYYY-MM-DD"); defaults to the latest date in `data`. */
   endDate?: string
   weeks?: number
-  /** 0 = Sunday (GitHub style), 1 = Monday. */
+  /** 0 = Sunday (contribution-graph convention), 1 = Monday. */
   weekStartsOn?: 0 | 1
   /** Noun after every count. */
   unit?: string

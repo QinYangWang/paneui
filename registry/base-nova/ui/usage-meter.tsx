@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 
 /*
  * How much of a quota is used: label, "used / limit" and a bar that turns
- * warning, then destructive, as it fills. Built on Base UI Meter
+ * warning, then destructive, as it fills. Built on the Meter primitive
  * (role="meter", value text for screen readers).
  *
  *   <UsageMeter label="Agent runs" value={8420} max={10000} unit="runs" />

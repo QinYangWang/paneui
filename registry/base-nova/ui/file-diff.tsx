@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
 import type { DiffLineAnnotation, FileDiffMetadata, LineDiffTypes } from "@pierre/diffs"
-import type { FileDiffOptions as PierreFileDiffOptions } from "@pierre/diffs/react"
+import type { FileDiffOptions as RendererFileDiffOptions } from "@pierre/diffs/react"
 import { useReducedMotion } from "motion/react"
 
 import { ChevronDownIcon, FileIcon } from "@/components/icons"
@@ -58,7 +58,7 @@ function parseUnifiedDiff(diff: string): FileDiffLine[] {
 }
 
 /**
- * Turn rows back into a patch @pierre/diffs can parse. Hunk headers are
+ * Turn rows back into a patch the diff renderer can parse. Hunk headers are
  * recounted from the rows that are actually there, so a half-streamed hunk
  * still parses cleanly.
  */
@@ -85,32 +85,32 @@ function rowsToPatch(rows: FileDiffLine[], filename: string) {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Lazy @pierre/diffs (shiki + jsdiff stay out of the first bundle)          */
+/*  Lazy diff renderer (highlighter + diff engine stay out of the first bundle) */
 /* -------------------------------------------------------------------------- */
 
-type PierreModules = {
+type DiffModules = {
   core: typeof import("@pierre/diffs")
   react: typeof import("@pierre/diffs/react")
 }
 
-let pierreModules: PierreModules | null = null
-let pierrePromise: Promise<PierreModules> | null = null
+let diffModules: DiffModules | null = null
+let diffPromise: Promise<DiffModules> | null = null
 
-function loadPierre() {
-  pierrePromise ??= Promise.all([import("@pierre/diffs"), import("@pierre/diffs/react")]).then(([core, react]) => {
-    pierreModules = { core, react }
-    return pierreModules
+function loadDiffRenderer() {
+  diffPromise ??= Promise.all([import("@pierre/diffs"), import("@pierre/diffs/react")]).then(([core, react]) => {
+    diffModules = { core, react }
+    return diffModules
   })
-  return pierrePromise
+  return diffPromise
 }
 
 /** The renderer modules, or `null` on the server and until the chunk loads. */
-function usePierre() {
-  const [mods, setMods] = React.useState<PierreModules | null>(pierreModules)
+function useDiffRenderer() {
+  const [mods, setMods] = React.useState<DiffModules | null>(diffModules)
   React.useEffect(() => {
     if (mods) return
     let alive = true
-    loadPierre().then((m) => alive && setMods(m))
+    loadDiffRenderer().then((m) => alive && setMods(m))
     return () => {
       alive = false
     }
@@ -148,7 +148,7 @@ const HOST_STYLE = {
   "--diffs-gap-block": "4px",
 } as React.CSSProperties
 
-/* Paint the code surface with our `--code` token instead of the shiki theme bg. */
+/* Paint the code surface with our `--code` token instead of the highlighter theme bg. */
 const UNSAFE_CSS = /* css */ `
 :host, [data-diffs] { --diffs-light-bg: var(--code); --diffs-dark-bg: var(--code); }
 pre { background-color: var(--code); }
@@ -172,7 +172,7 @@ const STREAMING_CSS = /* css */ `
 /*  Header pieces                                                             */
 /* -------------------------------------------------------------------------- */
 
-/** Five-block GitHub-style ratio of additions to deletions. */
+/** Five-block diffstat ratio of additions to deletions. */
 function DiffStat({ additions, deletions }: { additions: number; deletions: number }) {
   const total = additions + deletions
   const add = total === 0 ? 0 : Math.round((additions / total) * 5)
@@ -236,9 +236,9 @@ type FileDiffProps<A = undefined> = Omit<React.ComponentProps<"div">, "children"
   oldFile?: string | null
   /** New file contents for a two-file diff (`null` = file deleted). */
   newFile?: string | null
-  /** Pre-built `@pierre/diffs` metadata, e.g. after `diffAcceptRejectHunk`. Wins over every other source. */
+  /** Pre-built diff metadata, e.g. after `diffAcceptRejectHunk`. Wins over every other source. */
   fileDiff?: FileDiffMetadata
-  /** Shiki language id, inferred from `filename` when omitted. */
+  /** Syntax language id, inferred from `filename` when omitted. */
   language?: string
   /** `streaming` shows a spinner and follows the end of the diff. */
   status?: "streaming" | "complete"
@@ -266,8 +266,8 @@ type FileDiffProps<A = undefined> = Omit<React.ComponentProps<"div">, "children"
   /** Rows of your own UI pinned under diff lines (comments, accept/reject…). */
   lineAnnotations?: DiffLineAnnotation<A>[]
   renderAnnotation?: (annotation: DiffLineAnnotation<A>) => React.ReactNode
-  /** Extra `@pierre/diffs` options, merged over ours. */
-  options?: Omit<PierreFileDiffOptions<A, undefined>, "diffStyle" | "themeType">
+  /** Extra diff renderer options, merged over ours. */
+  options?: Omit<RendererFileDiffOptions<A, undefined>, "diffStyle" | "themeType">
   /** `card`: raised code card (default). `row`: flat row for lists of files (edited-files card), chevron at the end. */
   variant?: "card" | "row"
   /** Extra controls in the header, before the copy button (open in editor, reveal in folder…). */
@@ -276,7 +276,7 @@ type FileDiffProps<A = undefined> = Omit<React.ComponentProps<"div">, "children"
 
 /**
  * Disclosure for one file change: header with path and live +/− counts,
- * expanding to a `@pierre/diffs` view (unified or split, syntax highlighted,
+ * expanding to a diff view (unified or split, syntax highlighted,
  * word-level changes). The renderer loads lazily on the client.
  */
 function FileDiff<A = undefined>({
@@ -313,7 +313,7 @@ function FileDiff<A = undefined>({
 }: FileDiffProps<A>) {
   const reduce = useReducedMotion() ?? false
   const dark = useHtmlDark()
-  const pierre = usePierre()
+  const renderer = useDiffRenderer()
   const streaming = status === "streaming"
   const twoFile = oldFile !== undefined || newFile !== undefined
 
@@ -351,8 +351,8 @@ function FileDiff<A = undefined>({
   )
 
   const metadata = React.useMemo<FileDiffMetadata | null>(() => {
-    if (!pierre) return null
-    const { core } = pierre
+    if (!renderer) return null
+    const { core } = renderer
     let meta: FileDiffMetadata | undefined
     if (fileDiffProp) meta = fileDiffProp
     else if (twoFile)
@@ -364,7 +364,7 @@ function FileDiff<A = undefined>({
     if (!meta) return null
     meta = { ...meta, name: filename }
     return language ? core.setLanguageOverride(meta, language) : meta
-  }, [pierre, fileDiffProp, twoFile, oldFile, newFile, rows, filename, language])
+  }, [renderer, fileDiffProp, twoFile, oldFile, newFile, rows, filename, language])
 
   let additions = 0
   let deletions = 0
@@ -390,7 +390,7 @@ function FileDiff<A = undefined>({
     return (metadata?.additionLines ?? []).join("")
   }
 
-  const options = React.useMemo<PierreFileDiffOptions<A, undefined>>(
+  const options = React.useMemo<RendererFileDiffOptions<A, undefined>>(
     () => ({
       theme: THEMES,
       themeType: dark ? "dark" : "light",
@@ -419,7 +419,7 @@ function FileDiff<A = undefined>({
   const slash = filename.lastIndexOf("/")
   const dir = slash >= 0 ? filename.slice(0, slash + 1) : ""
   const base = slash >= 0 ? filename.slice(slash + 1) : filename
-  const PierreFileDiff = pierre?.react.FileDiff
+  const RendererFileDiff = renderer?.react.FileDiff
 
   return (
     <CollapsiblePrimitive.Root
@@ -488,8 +488,8 @@ function FileDiff<A = undefined>({
           aria-label={`Changes to ${filename}`}
           className="overflow-auto border-t border-border scrollbar-thin"
         >
-          {PierreFileDiff && metadata ? (
-            <PierreFileDiff
+          {RendererFileDiff && metadata ? (
+            <RendererFileDiff
               fileDiff={metadata}
               options={options}
               lineAnnotations={lineAnnotations}

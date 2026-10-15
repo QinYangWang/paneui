@@ -69,7 +69,7 @@ export function getGroups() {
 }
 
 /**
- * Sidebar order: categories in ORDER, items A–Z inside each (like shadcn/ui's
+ * Sidebar order: categories in ORDER, items A–Z inside each (
  * component list). The gallery keeps the curated registry order instead.
  */
 export function getNavGroups() {

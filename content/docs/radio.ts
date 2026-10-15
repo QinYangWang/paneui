@@ -51,14 +51,14 @@ import { Radio, RadioGroup } from "@/components/ui/radio"`,
     },
     {
       title: "Keyboard",
-      body: "Tab moves into the group; arrow keys move and select, from Base UI.",
+      body: "Tab moves into the group; arrow keys move and select.",
     },
   ],
   api: [
     {
       name: "RadioGroup",
       description: "Groups radios and shares the gliding dot between them. A vertical stack with a 12px gap.",
-      extends: "Base UI RadioGroup",
+      extends: "RadioGroup",
       extendsHref: "https://base-ui.com/react/components/radio#radiogroup",
       props: [
         { name: "value", type: "Value", description: "Controlled selected value." },
@@ -74,7 +74,7 @@ import { Radio, RadioGroup } from "@/components/ui/radio"`,
     {
       name: "Radio",
       description: "An 18px round control in an inset well.",
-      extends: "Base UI Radio.Root",
+      extends: "Radio.Root",
       extendsHref: "https://base-ui.com/react/components/radio#root",
       props: [
         { name: "value", type: "Value", required: true, description: "Identifies this option in the group." },
@@ -83,7 +83,7 @@ import { Radio, RadioGroup } from "@/components/ui/radio"`,
       dataAttributes: [
         { name: "data-checked", description: "Present when selected." },
         { name: "data-disabled", description: "Present when disabled." },
-        { name: "data-invalid", description: "Present when invalid inside a Base UI Field (destructive ring)." },
+        { name: "data-invalid", description: "Present when invalid inside a Field (destructive ring)." },
       ],
     },
   ],

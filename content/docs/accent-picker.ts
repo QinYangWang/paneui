@@ -18,7 +18,7 @@ export default {
   api: [
     {
       name: "AccentPicker",
-      extends: "Base UI RadioGroup",
+      extends: "RadioGroup",
       props: [
         { name: "accents", type: "Accent[]", default: "all six", description: "Presets to offer: blue, neutral, green, orange, rose, violet." },
         { name: "showLabels", type: "boolean", default: "false", description: "Names under the swatches." },

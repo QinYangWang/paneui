@@ -1,7 +1,7 @@
 # qinyang/ui — agent guide
 
-A shadcn registry (`@qinyang/*`, style `base-nova`, Base UI primitives, Tailwind v4,
-motion/react) plus its Next.js docs site. These rules keep every coding agent on one
+A shadcn registry (`@qinyang/*`, style `base-nova`, headless primitives from `@base-ui/react`,
+Tailwind v4, motion/react) plus its Next.js docs site. These rules keep every coding agent on one
 style. `pnpm lint` enforces most of them (`@shadcn/lint`, rules in the
 "qinyang/ui design-system rules" block of `eslint.config.mjs`); the rest is on you.
 
@@ -20,10 +20,10 @@ After changing radii or padding on nested surfaces, also run `pnpm audit:radius`
 | `components/docs/**` | Docs shell (nav, gallery, install command) | consumer |
 | `app/globals.css` | The theme: every token below | — |
 | `notes/icon-usage.md` | Icon usage system | — |
-| `notes/synara-native-style.md` | Native desktop style reference (Synara/Codex values) | — |
+| `notes/native-style.md` | Native desktop style reference (token values and what was adopted) | — |
 | `notes/radius-audit.md` | Nested-radius audit triage (open findings by owner) | — |
 | `scripts/audit-radius.mjs` (+ `.config.mjs`) | `pnpm audit:radius`: browser audit of nested radii | — |
-| `THIRD_PARTY_NOTICES.md` | Notices for Synara (style), BoardUI (colours), @pierre/diffs, DiceBear + Notionists (avatars) | — |
+| `THIRD_PARTY_NOTICES.md` | Licence notices for the style and colour references, the diff renderer and the avatar art; the **only** place third-party names and provenance appear | — |
 
 Import library code as `@/registry/base-nova/ui/<file>` or `@/registry/base-nova/blocks/<name>/<file>`.
 **Library** files own their appearance (no `no-restyle`; arbitrary values only warn).
@@ -42,16 +42,13 @@ component only if the design really needs a new treatment.
   opacity modifiers (`bg-success/12`, `ring-primary/20`). Never palette colors
   (`bg-zinc-100`), hex, or `[#…]`. `white`/`black` only for text on colored fills
   (`text-white` on destructive) and scrims (`bg-black/40`).
-- **Visual direction: native desktop, after Synara / Codex (since 2026-10-14)**. Replaces the
-  earlier flat look as the only style (no switch). Values from Synara's `index.css` and
-  `components/ui` (MIT, see `THIRD_PARTY_NOTICES.md`); summary in `notes/synara-native-style.md`.
-  Colours are no longer Synara's: see the next bullet.
-- **Colours: BoardUI's colour system (since 2026-10-14)**, MIT, see `THIRD_PARTY_NOTICES.md`; values
-  from BoardUI's `styles/theme.css` re-expressed under the shadcn names (mapping in comments in
-  `app/globals.css`). Tailwind neutral OKLCH ramp with BoardUI's neutral-100 `#f7f7f7`, neutral-200
-  `#ebebeb`, neutral-925 `#121212`. Light: page, card, popover white; foreground neutral-950;
+- **Visual direction: native desktop (since 2026-10-14)**. Replaces the earlier flat look as the
+  only style (no switch); summary in `notes/native-style.md` (licence notices in
+  `THIRD_PARTY_NOTICES.md`).
+- **Colours (since 2026-10-14)**: roles in comments in `app/globals.css`. Tailwind neutral OKLCH
+  ramp with neutral-100 `#f7f7f7`, neutral-200 `#ebebeb`, neutral-925 `#121212`. Light: page, card, popover white; foreground neutral-950;
   muted-foreground neutral-500. Dark: page `#121212`, card/popover neutral-800, foreground neutral-50,
-  muted-foreground neutral-400 (BoardUI's neutral-500 is only 3.2:1 on a neutral-800 card).
+  muted-foreground neutral-400 (neutral-500 is only 3.2:1 on a neutral-800 card).
   `secondary`, `muted`, `accent` are **translucent fills** (black 3% = neutral-100 on white / white
   5–7%), not surfaces: use them for hover/selected/track fills, and `bg-card` / `bg-popover` /
   `bg-background` for anything opaque (raised controls, triggers, floating panels, morph shells).
@@ -62,9 +59,9 @@ component only if the design really needs a new treatment.
   modes). No gradient sheens, inset highlights, text-shadows or glows. App chrome: `bg-shell`
   (window band and rail sidebar, neutral-100 / neutral-900) and the `shell-inset` utility (content
   panel: 0.5px `shell-border` hairline, `rounded-shell`, 3px gap to the right and bottom window edges).
-- **Primary is blue, from one accent ramp (since 2026-10-14, after BoardUI)**: `primary` =
+- **Primary is blue, from one accent ramp (since 2026-10-14)**: `primary` =
   `var(--accent-600)` with white `primary-foreground`, `ring` = `var(--accent-500)`, the same in both
-  modes. The default ramp (no attribute) is Tailwind blue with BoardUI's blue-400 `#3392ff`. Accent
+  modes. The default ramp (no attribute) is Tailwind blue with `#3392ff` at 400. Accent
   presets (neutral, green, orange, rose, violet) are `html[data-accent="…"]` blocks in `globals.css`
   that swap the eleven `--accent-*` stops (green and orange point primary at 700 for 4.5:1 white
   text; neutral re-points primary to neutral-900 / white text in light and neutral-100 /
@@ -74,14 +71,14 @@ component only if the design really needs a new treatment.
   primary is near-white). Charts never use `primary`: they use `chart-1`…`chart-8`, which stay
   coloured under every accent.
 - **Elevation (near-flat)**: `shadow-raised` (resting control/card: 1px neutral-200 hairline ring
-  (black 8% / white 12%) + BoardUI's shadow-card 0 1px 1px black/5%, 14% in dark) → `hover:shadow-raised-hover` (ring a step darker);
+  (black 8% / white 12%) + a 0 1px 1px black/5% contact shadow, 14% in dark) → `hover:shadow-raised-hover` (ring a step darker);
   `shadow-surface` (popovers, menus, dialogs, floating panels only: hairline + soft lift);
   `shadow-well` (inset hairline for fields and tracks); `shadow-chip` (kbd, small chips);
   `shadow-primary` (filled primary, a 1-2px drop, none in dark). Resting cards, tables and code
   blocks use `shadow-raised`, never `shadow-surface`. Dark mode elevation is the hairline ring
-  plus BoardUI's darker contact shadow. Hover on rows, menu items, ghost/outline buttons and nav is a fill (`bg-secondary`), not a ring.
+  plus a darker contact shadow. Hover on rows, menu items, ghost/outline buttons and nav is a fill (`bg-secondary`), not a ring.
 - **Focus**: `focus-visible:ring-2 focus-visible:ring-ring/50`.
-- **Radius**: base `--radius` 0.625rem with Synara's multipliers → `rounded-sm/md/lg/xl/2xl/3xl`
+- **Radius**: base `--radius` 0.625rem with multiplier steps → `rounded-sm/md/lg/xl/2xl/3xl`
   = 6/8/10/14/18/22px (`rounded-shell` 13px for the rail inset panel).
   Buttons, inputs, select/combobox triggers, tab lists, menu/select rows: `rounded-lg`; xs
   buttons `rounded-sm`, checkboxes 4px; tab indicators inside a `p-0.5` list `rounded-md`;
@@ -131,7 +128,7 @@ component only if the design really needs a new treatment.
 
 System UI font (`font-sans`: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui) with
 `letter-spacing: normal` (no negative tracking at UI sizes); JetBrains Mono → SF Mono → Menlo
-(`font-mono`) for code, keys and terminals. **Native 13px scale** (Synara `appTypography`):
+(`font-mono`) for code, keys and terminals. **Native 13px scale**:
 `text-ui-2xs` 10 · `text-ui-xs` 11 (meta, shortcuts, counts) · `text-ui-sm` 12 (captions,
 badges, small controls, tooltips) · `text-ui` 13 (default UI: buttons, inputs, menus, nav,
 body inside components) · `text-ui-lg` 14 (lg controls, card titles). Library components use
@@ -143,7 +140,7 @@ sizes (shipped as `@qinyang/utils`, a dependency of `@qinyang/theme`). Never `te
 
 ## Density
 
-Synara's desktop density: buttons `h-8` default, `sm` h-7, `xs`/`icon-xs` h-6, `lg` h-9, `icon` 32,
+Desktop density: buttons `h-8` default, `sm` h-7, `xs`/`icon-xs` h-6, `lg` h-9, `icon` 32,
 `icon-sm` 28; inputs, select/combobox triggers `h-8` (`sm` h-7), `px-2.5`; menu/select/combobox
 rows `min-h-6.5` (26px) `px-2` `rounded-lg`, popup padding `p-1`, separators `mx-2 my-1`; tooltips
 `px-2 py-1 text-ui-sm`; sidebar rows `h-8` (sub rows `h-7`) with `text-ui`, icons
@@ -159,7 +156,7 @@ or margin on the child, not padding on a component.
 
 ## Icons (summary of `notes/icon-usage.md` + puffy rules)
 
-- All icons come from `@/components/icons` (`@qinyang/icons`), never lucide or ad-hoc SVG.
+- All icons come from `@/components/icons` (`@qinyang/icons`), never another icon package or ad-hoc SVG.
 - Drawing: 18×18 grid, ~2.5px padding, only the `puff` (filled, 1.5 round stroke)
   and `line` (1.6 stroke, round caps) primitives, `currentColor` only, `path`/`circle`/`rect` only.
 - Two families never mixed in one group: **solid (puff)** and **line/ring**. Nav,
@@ -188,7 +185,7 @@ or margin on the child, not padding on a component.
 - Every movement, scale or blur is gated: `useReducedMotion()` / `motion-reduce:` /
   `motion-safe:`, falling back to an opacity cross-fade.
 - **No press scale on standard controls** (Button, triggers, toggles, nav rows, checkbox, radio):
-  native controls answer with a fill change, as in Synara. Press scale is kept only where the
+  native controls answer with a fill change. Press scale is kept only where the
   motion is the component's point (expanding-arrow-button, expandable-control, card-folder,
   message-bubble, hold/slide action buttons). Popups enter from `scale-98` + opacity.
 
@@ -255,11 +252,22 @@ Fix the code first. If a rule is wrong for a legitimate case, use one
 line only, with a reason. List them with `rg "eslint-disable.*shadcn/"`; each is a design decision to review.
 
 ## Component docs pages
-Every registry:ui item has `content/docs/<name>.ts` (type `ComponentDoc` in lib/doc-types.ts: usage, composition, examples, notes, api) and examples in `registry/base-nova/examples/<name>/<id>.tsx`. After adding or renaming one run `pnpm docs:gen` (regenerates content/docs/index.generated.ts and components/docs/examples.generated.tsx; commit both). API tables list only props the library adds or changes; the rest is `extends` with a Base UI link. Examples render client-only.
+Every registry:ui item has `content/docs/<name>.ts` (type `ComponentDoc` in lib/doc-types.ts: usage, composition, examples, notes, api) and examples in `registry/base-nova/examples/<name>/<id>.tsx`. After adding or renaming one run `pnpm docs:gen` (regenerates content/docs/index.generated.ts and components/docs/examples.generated.tsx; commit both). API tables list only props the library adds or changes; the rest is `extends` with a link to the primitive's docs. Examples render client-only.
 
-## Attribution
+## Wording: no third-party names or provenance
 
-The colours follow BoardUI (https://github.com/BoardUI/boardui), MIT License, Copyright (c) 2026
-Mertcan Dundar Esmergul (BoardUI). The visual style follows Synara (https://github.com/Emanuele-web04/synara), MIT License,
-Copyright (c) 2026 T3 Tools Inc. and Copyright (c) 2026 Emanuele Di Pietro. Full notice in
-`THIRD_PARTY_NOTICES.md`; keep it when moving more values from that source.
+Code comments, UI copy, demo data and docs prose (`content/docs/*.ts`, `app/**`, `components/docs/**`,
+changelog, README, examples, registry descriptions) never name the projects, products or libraries
+this library was modelled on or is built with, and never say "after X", "X-style", "X-like", "port
+of", "inspired by", "based on". Describe what the thing does instead ("block editor", "desktop
+density", "the dialog primitive", "the diff renderer", "the syntax highlighter").
+
+Allowed, because they are needed to work: import statements and package specifiers, `package.json`
+and `registry.json` `dependencies`, the dependency chips the docs generate from them, identifiers and
+public API names (`notion-editor`, `NotionEditor`, the `shadcn/*` lint rule names), the shadcn CLI
+commands users run, the Agent Client Protocol (the standard the agent workspace implements) and the
+agent presets it launches (Claude Code, Codex, Gemini CLI), and the stack users must have (React,
+Next.js, Tailwind CSS 4). Licence attribution lives only in `THIRD_PARTY_NOTICES.md` (keep it and
+`LICENSE`; add a notice there when you adopt values or code from another project). Before
+committing, `rg -i "synara|boardui|maily|notion-style|tiptap|base ui|dicebear|notionists|zoish|react email|remark|pierre|shiki|after "`
+over the changed prose should find nothing new.

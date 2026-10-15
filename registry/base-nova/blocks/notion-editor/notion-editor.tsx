@@ -107,7 +107,7 @@ export type UseNotionEditorOptions = {
   placeholders?: Partial<Record<string, string>>
   slashItems?: SlashItem[]
   uploadImage?: ImageUploader
-  /** Extra Tiptap extensions. */
+  /** Extra editor extensions. */
   extensions?: AnyExtension[]
   autofocus?: boolean | "start" | "end"
   "aria-label"?: string
@@ -285,7 +285,7 @@ export type NotionEditorProps = UseNotionEditorOptions & {
 }
 
 /**
- * A Notion-style block editor: "/" menu, selection bubble, drag handles,
+ * A block editor: "/" menu, selection bubble, drag handles,
  * markdown shortcuts, MDX in and out.
  */
 export function NotionEditor({

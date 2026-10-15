@@ -35,8 +35,8 @@ Toggle`,
     { title: "When to use something else", body: "For a one-of-few value with a raised thumb (billing cycle, view mode) use `SegmentedControl`. Inside a `Toolbar`, use `ToolbarToggle` so the item joins the toolbar's arrow-key loop." },
   ],
   api: [
-    { name: "ToggleGroup", extends: "Base UI ToggleGroup", extendsHref: "https://base-ui.com/react/components/toggle-group#api-reference", props: [variant, size], dataAttributes: [{ name: "data-variant", description: "The group variant." }] },
-    { name: "ToggleGroupItem", description: "Takes `variant` / `size` from the group unless set.", extends: "Base UI Toggle", extendsHref: "https://base-ui.com/react/components/toggle#api-reference", props: [{ name: "value", type: "string", description: "The item's value in the group.", required: true }], dataAttributes: [{ name: "data-pressed", description: "Present when pressed." }] },
-    { name: "Toggle", extends: "Base UI Toggle", extendsHref: "https://base-ui.com/react/components/toggle#api-reference", props: [variant, size] },
+    { name: "ToggleGroup", extends: "ToggleGroup", extendsHref: "https://base-ui.com/react/components/toggle-group#api-reference", props: [variant, size], dataAttributes: [{ name: "data-variant", description: "The group variant." }] },
+    { name: "ToggleGroupItem", description: "Takes `variant` / `size` from the group unless set.", extends: "Toggle", extendsHref: "https://base-ui.com/react/components/toggle#api-reference", props: [{ name: "value", type: "string", description: "The item's value in the group.", required: true }], dataAttributes: [{ name: "data-pressed", description: "Present when pressed." }] },
+    { name: "Toggle", extends: "Toggle", extendsHref: "https://base-ui.com/react/components/toggle#api-reference", props: [variant, size] },
   ],
 } satisfies ComponentDoc

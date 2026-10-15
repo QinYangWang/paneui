@@ -1,6 +1,6 @@
-# Synara "native" style (extracted 2026-10-14)
+# Native desktop style (2026-10-14)
 
-Source: github.com/Emanuele-web04/synara, apps/web/src/index.css (MIT, © T3 Tools Inc. & Emanuele Di Pietro). Fork of t3code, Codex-like desktop look.
+Reference values for the native desktop look (licence notice in `THIRD_PARTY_NOTICES.md`).
 
 ## Tokens
 - Font: `-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`, letter-spacing normal. Mono: JetBrains Mono → SF Mono → Menlo.
@@ -22,7 +22,7 @@ Replaced the flat style outright (no switch). Kept: neutral black/white primary 
   tailwind-merge the text-ui sizes (`@qinyang/utils`, dependency of `@qinyang/theme`).
 - `secondary/muted/accent` became translucent, so every opaque use of `bg-secondary` in the
   library (raised controls, triggers, morph shells, toasts, cards) moved to `bg-card`.
-- Removed press scale from standard controls (Synara has none); kept it on motion showcases.
-- Dialog/drawer/sheet backdrops lost their blur (Synara: plain dim).
+- Removed press scale from standard controls; kept it on motion showcases.
+- Dialog/drawer/sheet backdrops lost their blur (plain dim).
 - Not adopted: grayscale charts, translucent/glass popups (popovers stay opaque `bg-popover`),
   1px CSS borders on controls (we keep the inset/outer hairline shadows, same alphas).

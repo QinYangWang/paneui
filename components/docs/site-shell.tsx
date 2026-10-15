@@ -163,7 +163,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
         <Sidebar variant="sidebar" aria-label="Docs" panelClassName="border-r-0" className="sticky top-12 h-[calc(100svh-3rem)] self-start max-lg:hidden">
           <DocsNav groups={groups} pathname={pathname} />
         </Sidebar>
-        {/* Codex rail: the content is an inset panel on the shell band (see the shell-inset utility). */}
+        {/* Rail layout: the content is an inset panel on the shell band (see the shell-inset utility). */}
         <main className="shell-inset min-w-0 flex-1 px-5 py-8 max-lg:ml-0.75 sm:px-8 lg:px-10 lg:py-10">
           <div className="mx-auto w-full max-w-5xl">{children}</div>
         </main>

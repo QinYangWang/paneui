@@ -65,7 +65,7 @@ const puff = { stroke: "currentColor", strokeWidth: 1.5, strokeLinejoin: "round"
 - **Curves**: corner radii on filled outlines about 1.5–1.8, generous arcs, no hairline spikes or
   needle points.
 - **Export**: `export const NameIcon = (p: IconProps) => (<Icon {...p}>…</Icon>);`, PascalCase ending
-  in `Icon`, using the lucide name when one exists (people search the set by those names). Put it in
+  in `Icon`, using the conventional icon name when one exists (the name people search icon sets by). Put it in
   the matching section of the file: `Basic glyphs (line)` or `Solid shapes (puff)`.
 
 ## Reference examples

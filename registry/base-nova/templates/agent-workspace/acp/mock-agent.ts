@@ -160,7 +160,7 @@ export function createMockTransport({ speed = 1 }: MockTransportOptions = {}): A
       const name = text.trim().slice(1).split(/\s/)[0]
       await wait(400)
       await say("agent_message_chunk", name === "status"
-        ? `**Status**\n\n- Model: \`${s.model}\` · effort \`${s.effort}\`\n- Mode: ${MODES.find((m) => m.id === s.mode)?.name}\n- Branch: \`synara/fix-chat-dragging\` · PR #1526\n- Context: 18% of 1M tokens used`
+        ? `**Status**\n\n- Model: \`${s.model}\` · effort \`${s.effort}\`\n- Mode: ${MODES.find((m) => m.id === s.mode)?.name}\n- Branch: \`feat/fix-chat-dragging\` · PR #1526\n- Context: 18% of 1M tokens used`
         : `Ran \`/${name}\`. In this demo commands are acknowledged only; connect a real agent through the bridge to run them.`)
       update(sessionId, { sessionUpdate: "usage_update", used: 182_000, size: 1_000_000 })
       return stop("end_turn")

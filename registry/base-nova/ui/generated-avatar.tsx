@@ -1,20 +1,19 @@
 import * as React from "react"
 import { createAvatar } from "@dicebear/core"
-import * as notionists from "@dicebear/notionists"
+import * as avatarStyle from "@dicebear/notionists"
 
 import { cn } from "@/lib/utils"
 import { Avatar, type AvatarShape, type AvatarSize } from "@/registry/base-nova/ui/avatar"
 
 /*
- * Deterministic avatars from a seed, drawn with DiceBear's "Notionists" style:
- * art by Zoish (https://heyzoish.gumroad.com/l/notionists, CC0 1.0), rendered by
- * DiceBear (https://www.dicebear.com, MIT). The same seed always draws the same
- * person, on the server and the client alike; nothing is fetched.
+ * Deterministic illustrated avatars from a seed (art and renderer credits in
+ * THIRD_PARTY_NOTICES.md). The same seed always draws the same person, on the
+ * server and the client alike; nothing is fetched.
  *
- * On top of DiceBear this file adds: a closer crop so faces read at 20–32px,
+ * On top of the renderer this file adds: a closer crop so faces read at 20–32px,
  * `gender` (hair restricted to a curated long / short list, no beard for
  * `female`), `accessories` (glasses), our own background (tint / circle / none /
- * hex), DiceBear's <metadata> stripped, and every id inside the SVG prefixed with
+ * hex), the licence <metadata> stripped, and every id inside the SVG prefixed with
  * a hash of the options so many avatars on one page never share a mask id.
  */
 
@@ -56,13 +55,13 @@ type GeneratedAvatarOptions = {
 
 const TINT = "#F6F5F4"
 const NONE = "none"
-const SIZE = 1744 // Notionists' own viewBox
+const SIZE = 1744 // the drawing set's own viewBox
 const VIEWBOX = `0 0 ${SIZE} ${SIZE}`
-// Notionists is a bust; zoom in so the face reads at 20–32px (hair, hats and shoulders still fit).
+// The drawings are busts; zoom in so the face reads at 20–32px (hair, hats and shoulders still fit).
 const FRAME = { scale: 135, translateY: 8 }
 
-type NotionistsOptions = notionists.Options
-const schema = notionists.schema.properties as unknown as Record<string, { default?: string[] }>
+type StyleOptions = avatarStyle.Options
+const schema = avatarStyle.schema.properties as unknown as Record<string, { default?: string[] }>
 const variants = (slot: string) => schema[slot]?.default ?? []
 
 // Hand-classified from a render of all 64 hairstyles: long / feminine vs short / masculine.
@@ -154,8 +153,8 @@ function getAvatarParts(slot: AvatarSlot, gender: AvatarGender = "any"): AvatarP
   return OPTIONAL_SLOTS.includes(slot) ? [{ name: NONE, label: "None" }, ...parts] : parts
 }
 
-/** DiceBear options for our options. Seeded slots keep DiceBear's own list order, so `any` draws what DiceBear draws. */
-function toDiceBearOptions({ seed, gender = "any", accessories = false, selections = {} }: GeneratedAvatarOptions) {
+/** Renderer options for our options. Seeded slots keep the style's own list order, so `any` draws what the style draws. */
+function toRendererOptions({ seed, gender = "any", accessories = false, selections = {} }: GeneratedAvatarOptions) {
   const options: Record<string, unknown> = {
     seed,
     ...FRAME,
@@ -178,17 +177,17 @@ function toDiceBearOptions({ seed, gender = "any", accessories = false, selectio
     options[slot] = [picked]
     if (optional) options[`${slot}Probability`] = 100
   }
-  return options as NotionistsOptions & Record<string, unknown>
+  return options as StyleOptions & Record<string, unknown>
 }
 
 function render(options: GeneratedAvatarOptions) {
-  const diceBear = toDiceBearOptions(options)
-  let avatar = createAvatar(notionists, diceBear)
+  const rendererOptions = toRendererOptions(options)
+  let avatar = createAvatar(avatarStyle, rendererOptions)
   let extra = avatar.toJson().extra as Record<string, unknown>
   // No seeded beard under long hair (`any` can pair them). Every pick draws once from the PRNG,
   // so turning the beard off changes nothing else.
   if (extra.beard && !options.selections?.beard && hairGender(String(extra.hair)) === "female") {
-    avatar = createAvatar(notionists, { ...diceBear, beardProbability: 0 })
+    avatar = createAvatar(avatarStyle, { ...rendererOptions, beardProbability: 0 })
     extra = avatar.toJson().extra as Record<string, unknown>
   }
   const selections = {} as Record<AvatarSlot, string>
@@ -245,7 +244,7 @@ function createGeneratedAvatar(options: GeneratedAvatarOptions) {
       : background === "circle"
         ? `<circle data-slot="generated-avatar-background" cx="${SIZE / 2}" cy="${SIZE / 2}" r="${SIZE / 2}" fill="${tint}"/>`
         : `<rect data-slot="generated-avatar-background" width="${SIZE}" height="${SIZE}" fill="${background === "tint" ? tint : normalizeHex(background)}"/>`
-  const prefix = options.idPrefix ?? `ga${hash(JSON.stringify(toDiceBearOptions(options)))}-`
+  const prefix = options.idPrefix ?? `ga${hash(JSON.stringify(toRendererOptions(options)))}-`
   const content = backdrop + innerMarkup(svg, prefix)
   const toString = (size = 256) =>
     `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="${VIEWBOX}" fill="none">${content}</svg>`

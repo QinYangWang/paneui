@@ -14,7 +14,7 @@ Not fixed yet. One line each.
 - range-slider-ruler: max off step grid → last value can exceed max. tilt-card: perspective fixed at mount. chromatic-text-reveal: SR text only prefix + first word.
 - Lint vs props: loader colour, expanding-arrow-button labelClassName, action-swap text slots, table rowClassName, center-morph-modal backdropClassName all flagged as restyle → allowlist component-owned className props in shadcn lint.
 - Radius/size drift: combobox popup rounded-2xl/items rounded-xl; multi-select rounded-[1.125rem]; CardDescription/PopoverTitle/DialogDescription text-[0.95rem]; IconChip rounded-[10px]; Stepper text-[15px]; Dock rounded-[1.375rem].
-- Hardcoded English: Stepper Decrease/Increase, image-generation error text. Label peer-disabled never applies to Base UI checkbox/radio/switch.
+- Hardcoded English: Stepper Decrease/Increase, image-generation error text. Label peer-disabled never applies to the primitive checkbox/radio/switch.
 - Motion: number-ticker/animated-number springs far outside house range; order-book arrow moves under reduced motion.
 - Duplicate shiki/copy logic in tool-result and agent-code-block.
 

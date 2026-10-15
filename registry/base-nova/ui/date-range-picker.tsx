@@ -139,7 +139,7 @@ function DateRangePicker({
   )
 
   const actions = React.useRef<PopoverPrimitive.Root.Actions | null>(null)
-  // Closes through Base UI so onOpenChange gets proper event details.
+  // Closes through the popover primitive so onOpenChange gets proper event details.
   const close = React.useCallback(() => actions.current?.close(), [])
 
   const setMonth = React.useCallback((m: Date) => {

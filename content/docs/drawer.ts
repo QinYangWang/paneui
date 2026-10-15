@@ -55,14 +55,14 @@ export default {
     },
     {
       title: "Keyboard",
-      body: "Focus moves into the drawer and is trapped there; Esc or a backdrop press closes it, from Base UI Dialog.",
+      body: "Focus moves into the drawer and is trapped there; Esc or a backdrop press closes it.",
     },
   ],
   api: [
     {
       name: "Drawer",
       description: "Root. Holds the open state and the side.",
-      extends: "Base UI Dialog.Root",
+      extends: "Dialog.Root",
       extendsHref: "https://base-ui.com/react/components/dialog#root",
       props: [
         {
@@ -82,14 +82,14 @@ export default {
     },
     {
       name: "DrawerTrigger",
-      extends: "Base UI Dialog.Trigger",
+      extends: "Dialog.Trigger",
       extendsHref: "https://base-ui.com/react/components/dialog#trigger",
       props: [],
     },
     {
       name: "DrawerContent",
       description: "The floating panel (up to 384px wide, 8px from the edges) with its backdrop and portal.",
-      extends: "Base UI Dialog.Popup",
+      extends: "Dialog.Popup",
       extendsHref: "https://base-ui.com/react/components/dialog#popup",
       props: [
         {
@@ -121,19 +121,19 @@ export default {
     },
     {
       name: "DrawerTitle",
-      extends: "Base UI Dialog.Title",
+      extends: "Dialog.Title",
       extendsHref: "https://base-ui.com/react/components/dialog#title",
       props: [],
     },
     {
       name: "DrawerDescription",
-      extends: "Base UI Dialog.Description",
+      extends: "Dialog.Description",
       extendsHref: "https://base-ui.com/react/components/dialog#description",
       props: [],
     },
     {
       name: "DrawerClose",
-      extends: "Base UI Dialog.Close",
+      extends: "Dialog.Close",
       extendsHref: "https://base-ui.com/react/components/dialog#close",
       props: [],
     },

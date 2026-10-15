@@ -21,7 +21,7 @@ export default function ComponentsPage() {
       <section className="flex flex-col items-start gap-3">
         <h1 className="text-3xl font-semibold tracking-tight">Components</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          {total} components, blocks and templates on Base UI, Tailwind 4 and Motion, with live previews. Pick one to see its
+          {total} components, blocks and templates for Tailwind 4, with live previews. Pick one to see its
           usage, examples and API, or start with the installation guide.
         </p>
         <div className="flex flex-wrap gap-2 pt-1">

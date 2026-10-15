@@ -22,7 +22,7 @@ type StepperProps = NumberFieldPrimitive.Root.Props & {
 /**
  * Numeric stepper: − value +. Digits roll up or down as the value changes and
  * the buttons switch off at min / max. Typing, arrow keys and wheel scrub come
- * from Base UI NumberField.
+ * from the NumberField primitive.
  */
 function Stepper({
   className,

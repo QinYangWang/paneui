@@ -38,7 +38,7 @@ export default {
     {
       name: "RangeSliderInline",
       description: "A raised fill inside an inset well, with the label and value printed on the track. Single value only.",
-      extends: "Base UI Slider.Root",
+      extends: "Slider.Root",
       extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
         { name: "value", type: "number", description: "Controlled value." },
@@ -57,7 +57,7 @@ export default {
         { name: "snapToStops", type: "boolean", default: "false", description: "On pointer release, settle onto the nearest of the ten stops." },
       ],
       dataAttributes: [
-        { name: "data-dragging", description: "Present on the root while dragging (Base UI)." },
+        { name: "data-dragging", description: "Present on the root while dragging." },
         { name: "data-disabled", description: "Present when disabled." },
       ],
     },

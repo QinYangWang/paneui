@@ -7,11 +7,11 @@ export default {
     code: `<UsageMeter label="Agent runs" value={8420} max={10000} unit="runs" description="Resets on Nov 1" />`,
   },
   examples: [{ id: "percent", title: "Percent and Thresholds", description: "`readout=\"percent\"` shows the share; `warnAt` and `dangerAt` move the colour thresholds." }],
-  notes: [{ title: "Accessibility", body: "Renders Base UI Meter (`role=\"meter\"`) labelled by `label`, with value text like \"8,420 of 10,000 runs\"." }],
+  notes: [{ title: "Accessibility", body: "Renders a meter (`role=\"meter\"`) labelled by `label`, with value text like \"8,420 of 10,000 runs\"." }],
   api: [
     {
       name: "UsageMeter",
-      extends: "Base UI Meter.Root",
+      extends: "Meter.Root",
       extendsHref: "https://base-ui.com/react/components/meter#root",
       props: [
         { name: "label", type: "ReactNode", required: true, description: "What is being measured." },

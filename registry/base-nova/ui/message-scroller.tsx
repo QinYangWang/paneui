@@ -36,7 +36,7 @@ type MessageScrollerProps = Omit<React.ComponentProps<"div">, "onScroll"> & {
   follow?: boolean
   /** Show the floating "jump to latest" pill when released. Defaults to true. */
   showJumpButton?: boolean
-  /** `pill`: arrow + label (default). `icon`: a round arrow-only button (Synara / Codex style), label kept for screen readers. */
+  /** `pill`: arrow + label (default). `icon`: a round arrow-only button (desktop app style), label kept for screen readers. */
   jumpButton?: "pill" | "icon"
   /** Pill label when there is nothing new below. */
   jumpLabel?: string

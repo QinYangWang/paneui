@@ -1,6 +1,6 @@
 # qinyang/ui
 
-A shadcn registry (`@qinyang/*`, Base UI primitives, Tailwind CSS 4, motion) and its
+A shadcn registry (`@qinyang/*`, headless primitives, Tailwind CSS 4, spring motion) and its
 Next.js docs site. Docs and gallery: https://qinyangwang.github.io/ui
 
 ## Templates in one command

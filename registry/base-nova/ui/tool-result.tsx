@@ -46,7 +46,7 @@ function getHighlighter() {
 }
 
 /**
- * Shiki tokens for `code`, loaded lazily on the client. While a new chunk is
+ * Highlighter tokens for `code`, loaded lazily on the client. While a new chunk is
  * being highlighted the previous lines keep their colours, so streamed output
  * never flashes back to plain text.
  */

@@ -72,7 +72,7 @@ export default {
     {
       name: "Accordion",
       description: "The container. Single-open by default.",
-      extends: "Base UI Accordion.Root",
+      extends: "Accordion.Root",
       extendsHref: "https://base-ui.com/react/components/accordion#root",
       props: [
         {
@@ -109,7 +109,7 @@ export default {
     },
     {
       name: "AccordionItem",
-      extends: "Base UI Accordion.Item",
+      extends: "Accordion.Item",
       extendsHref: "https://base-ui.com/react/components/accordion#item",
       props: [
         {
@@ -133,7 +133,7 @@ export default {
     },
     {
       name: "AccordionTrigger",
-      extends: "Base UI Accordion.Trigger",
+      extends: "Accordion.Trigger",
       extendsHref: "https://base-ui.com/react/components/accordion#trigger",
       props: [
         {
@@ -146,7 +146,7 @@ export default {
     },
     {
       name: "AccordionPanel",
-      extends: "Base UI Accordion.Panel",
+      extends: "Accordion.Panel",
       extendsHref: "https://base-ui.com/react/components/accordion#panel",
       props: [
         {

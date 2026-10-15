@@ -54,7 +54,7 @@ function useDrum(visibleCount: number, itemHeight: number) {
 }
 
 /**
- * iOS-style picker wheel. A real (invisible) scroll container drives a 3D drum,
+ * Scroll-wheel picker. A real (invisible) scroll container drives a 3D drum,
  * so touch and trackpads get native momentum and CSS scroll-snap does the detents.
  * Mouse users can drag; keyboard: Up/Down, PageUp/PageDown, Home/End.
  */

@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({ variable: "--font-jetbrains-mono", subset
 
 export const metadata: Metadata = {
   title: { default: "qinyang/ui", template: "%s · qinyang/ui" },
-  description: "Quiet, precise components on Base UI, distributed via shadcn.",
+  description: "Quiet, precise React components, distributed as a shadcn registry.",
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

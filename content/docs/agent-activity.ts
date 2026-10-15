@@ -53,7 +53,7 @@ export default {
     {
       name: "AgentActivity",
       description: "One adaptive activity stream for an agent run.",
-      extends: "Base UI Collapsible.Root",
+      extends: "Collapsible.Root",
       extendsHref: "https://base-ui.com/react/components/collapsible#root",
       props: [
         { name: "items", type: "AgentActivityItem[]", required: true, description: "Chronological activity. Append or update items as events stream in." },

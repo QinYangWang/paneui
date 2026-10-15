@@ -6,7 +6,7 @@ export default function AvatarDemo() {
     <div className="flex flex-col items-center gap-6">
       <div className="flex items-center gap-4">
         <Avatar size="lg">
-          <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+          <AvatarImage src="https://github.com/QinYangWang.png" alt="Qinyang" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <GeneratedAvatar seed="mika" size="lg">

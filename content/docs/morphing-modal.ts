@@ -65,7 +65,7 @@ export default {
     {
       name: "MorphingModal",
       description: "Dialog root that also holds the view stack.",
-      extends: "Base UI Dialog.Root",
+      extends: "Dialog.Root",
       extendsHref: `${BASE}#root`,
       props: [
         { name: "defaultView", type: "string", default: `"main"`, description: "The view shown when the modal opens." },
@@ -74,15 +74,15 @@ export default {
     },
     {
       name: "MorphingModalTrigger",
-      description: "Base UI `Dialog.Trigger`, re-exported unchanged.",
-      extends: "Base UI Dialog.Trigger",
+      description: "`Dialog.Trigger`, re-exported unchanged.",
+      extends: "Dialog.Trigger",
       extendsHref: `${BASE}#trigger`,
       props: [],
     },
     {
       name: "MorphingModalContent",
       description: "Backdrop and centred popup (max 384px wide). Renders the active `MorphingModalView` child; other children render after it.",
-      extends: "Base UI Dialog.Popup",
+      extends: "Dialog.Popup",
       extendsHref: `${BASE}#popup`,
       props: [
         { name: "showCloseButton", type: "boolean", default: "true", description: "Show the round × in the top-right corner." },
@@ -101,8 +101,8 @@ export default {
       extends: "div",
       props: [],
     },
-    { name: "MorphingModalTitle", extends: "Base UI Dialog.Title", extendsHref: `${BASE}#title`, props: [] },
-    { name: "MorphingModalDescription", extends: "Base UI Dialog.Description", extendsHref: `${BASE}#description`, props: [] },
+    { name: "MorphingModalTitle", extends: "Dialog.Title", extendsHref: `${BASE}#title`, props: [] },
+    { name: "MorphingModalDescription", extends: "Dialog.Description", extendsHref: `${BASE}#description`, props: [] },
     {
       name: "MorphingModalLink",
       description: "A full-width row button that pushes another view.",
@@ -116,7 +116,7 @@ export default {
       props: [],
     },
     { name: "MorphingModalFooter", description: "Right-aligned row of actions.", extends: "div", props: [] },
-    { name: "MorphingModalClose", description: "Base UI `Dialog.Close`, re-exported unchanged.", extends: "Base UI Dialog.Close", extendsHref: `${BASE}#close`, props: [] },
+    { name: "MorphingModalClose", description: "`Dialog.Close`, re-exported unchanged.", extends: "Dialog.Close", extendsHref: `${BASE}#close`, props: [] },
     {
       name: "useMorphingModal",
       description: "Navigation state for custom controls. Use inside `MorphingModal`.",

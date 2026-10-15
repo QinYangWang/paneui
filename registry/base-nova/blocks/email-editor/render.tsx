@@ -19,7 +19,7 @@ import {
 import { render } from "@react-email/render"
 
 /**
- * Email JSON -> email-safe HTML with React Email (tables, inline styles, no CSS
+ * Email JSON -> email-safe HTML (tables, inline styles, no CSS
  * classes). Colours here are hex on purpose: email clients do not know the
  * site's theme tokens.
  */
@@ -342,7 +342,7 @@ function block(n: JSONContent, ctx: Ctx, key: React.Key): React.ReactNode {
   }
 }
 
-/** The email as a React Email tree (render it yourself, or use `renderEmailHtml`). */
+/** The email as an email component tree (render it yourself, or use `renderEmailHtml`). */
 export function EmailTemplate({ email, theme: themeOverride, variables }: { email: EmailDocument } & RenderEmailOptions) {
   const theme = { ...defaultEmailTheme, ...themeOverride }
   const ctx: Ctx = { theme, vars: variables, inner: theme.width - PAD * 2 }
@@ -366,7 +366,7 @@ export function EmailTemplate({ email, theme: themeOverride, variables }: { emai
   )
 }
 
-/** Email JSON -> HTML string (async: React Email renders through react-dom/server). */
+/** Email JSON -> HTML string (async: renders through react-dom/server). */
 export async function renderEmailHtml(email: EmailDocument, options: RenderEmailOptions = {}) {
   const html = await render(<EmailTemplate email={email} {...options} />)
   // React's text separators are noise in an email

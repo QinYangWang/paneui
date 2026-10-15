@@ -40,14 +40,14 @@ export default {
     },
     {
       title: "Keyboard",
-      body: "Click the number to type a value. Arrow Up and Arrow Down step it, from Base UI. The − and + buttons switch off at `min` and `max`.",
+      body: "Click the number to type a value. Arrow Up and Arrow Down step it. The − and + buttons switch off at `min` and `max`.",
     },
   ],
   api: [
     {
       name: "Stepper",
       description: "A − value + control with a rolling number display.",
-      extends: "Base UI NumberField.Root",
+      extends: "NumberField.Root",
       extendsHref: "https://base-ui.com/react/components/number-field#root",
       props: [
         {

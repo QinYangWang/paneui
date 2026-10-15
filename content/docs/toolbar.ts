@@ -28,17 +28,17 @@ export default {
     { title: "Radii", body: "`floating` is `rounded-xl` with `p-1`, so its 28px items take `rounded-inner` (10px). The plain variant falls back to `rounded-lg` items." },
   ],
   api: [
-    { name: "Toolbar", extends: "Base UI Toolbar.Root", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [{ name: "variant", type: `"default" | "floating" | "inset"`, default: `"default"`, description: "`floating` is the popover surface for selection bubbles; `inset` sits in a well." }] },
-    { name: "ToolbarButton", extends: "Base UI Toolbar.Button", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [{ name: "size", type: `"icon" | "label"`, default: `"icon"`, description: "`icon` is a 28px square; `label` adds padding for text." }], dataAttributes: [{ name: "data-pressed", description: "Set it yourself for a toggled look on a non-toggle (an active link)." }] },
-    { name: "ToolbarToggle", description: "A Base UI Toggle inside the toolbar.", extends: "Base UI Toolbar.Button", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [
+    { name: "Toolbar", extends: "Toolbar.Root", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [{ name: "variant", type: `"default" | "floating" | "inset"`, default: `"default"`, description: "`floating` is the popover surface for selection bubbles; `inset` sits in a well." }] },
+    { name: "ToolbarButton", extends: "Toolbar.Button", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [{ name: "size", type: `"icon" | "label"`, default: `"icon"`, description: "`icon` is a 28px square; `label` adds padding for text." }], dataAttributes: [{ name: "data-pressed", description: "Set it yourself for a toggled look on a non-toggle (an active link)." }] },
+    { name: "ToolbarToggle", description: "A toggle inside the toolbar.", extends: "Toolbar.Button", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [
       { name: "pressed", type: "boolean", description: "Controlled pressed state." },
       { name: "defaultPressed", type: "boolean", description: "Uncontrolled initial state." },
       { name: "onPressedChange", type: "(pressed: boolean) => void", description: "Called when toggled." },
       { name: "size", type: `"icon" | "label"`, default: `"icon"`, description: "As on ToolbarButton." },
     ] },
-    { name: "ToolbarSeparator", extends: "Base UI Toolbar.Separator", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [] },
-    { name: "ToolbarGroup", extends: "Base UI Toolbar.Group", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [] },
-    { name: "ToolbarInput", extends: "Base UI Toolbar.Input", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [] },
-    { name: "ToolbarLink", extends: "Base UI Toolbar.Link", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [] },
+    { name: "ToolbarSeparator", extends: "Toolbar.Separator", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [] },
+    { name: "ToolbarGroup", extends: "Toolbar.Group", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [] },
+    { name: "ToolbarInput", extends: "Toolbar.Input", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [] },
+    { name: "ToolbarLink", extends: "Toolbar.Link", extendsHref: "https://base-ui.com/react/components/toolbar#api-reference", props: [] },
   ],
 } satisfies ComponentDoc

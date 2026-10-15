@@ -78,8 +78,8 @@ export default {
   api: [
     {
       name: "Menu",
-      description: "Re-export of the Base UI root.",
-      extends: "Base UI Menu.Root",
+      description: "Re-export of the primitive root.",
+      extends: "Menu.Root",
       extendsHref: "https://base-ui.com/react/components/menu#root",
       props: [
         { name: "open", type: "boolean", description: "Controlled open state." },
@@ -93,20 +93,20 @@ export default {
     {
       name: "MenuTrigger",
       description: "Re-export. Use `render` to make a Button the trigger.",
-      extends: "Base UI Menu.Trigger",
+      extends: "Menu.Trigger",
       extendsHref: "https://base-ui.com/react/components/menu#trigger",
       props: [],
     },
     {
       name: "MenuContent",
       description: "Portal, positioner and popup in one.",
-      extends: "Base UI Menu.Popup",
+      extends: "Menu.Popup",
       extendsHref: "https://base-ui.com/react/components/menu#popup",
       props: positioning,
     },
     {
       name: "MenuItem",
-      extends: "Base UI Menu.Item",
+      extends: "Menu.Item",
       extendsHref: "https://base-ui.com/react/components/menu#item",
       props: [
         {
@@ -127,7 +127,7 @@ export default {
     {
       name: "MenuCheckboxItem",
       description: "Item with a check indicator in the left gutter.",
-      extends: "Base UI Menu.CheckboxItem",
+      extends: "Menu.CheckboxItem",
       extendsHref: "https://base-ui.com/react/components/menu#checkbox-item",
       props: [
         { name: "checked", type: "boolean", description: "Controlled checked state." },
@@ -143,7 +143,7 @@ export default {
     {
       name: "MenuRadioGroup",
       description: "Re-export. Holds the selected value for its `MenuRadioItem`s.",
-      extends: "Base UI Menu.RadioGroup",
+      extends: "Menu.RadioGroup",
       extendsHref: "https://base-ui.com/react/components/menu#radio-group",
       props: [
         { name: "value", type: "any", description: "Controlled selected value." },
@@ -154,27 +154,27 @@ export default {
     {
       name: "MenuRadioItem",
       description: "Item with a primary dot indicator in the left gutter.",
-      extends: "Base UI Menu.RadioItem",
+      extends: "Menu.RadioItem",
       extendsHref: "https://base-ui.com/react/components/menu#radio-item",
       props: [{ name: "value", type: "any", description: "Value selected by this item.", required: true }],
     },
     {
       name: "MenuGroup",
       description: "Re-export. Groups items under a `MenuLabel`.",
-      extends: "Base UI Menu.Group",
+      extends: "Menu.Group",
       extendsHref: "https://base-ui.com/react/components/menu#group",
       props: [],
     },
     {
       name: "MenuLabel",
       description: "Small muted heading for a group. Must sit inside a `MenuGroup`.",
-      extends: "Base UI Menu.GroupLabel",
+      extends: "Menu.GroupLabel",
       extendsHref: "https://base-ui.com/react/components/menu#group-label",
       props: [{ name: "inset", type: "boolean", default: "false", description: "Indent to match inset items." }],
     },
     {
       name: "MenuSeparator",
-      extends: "Base UI Menu.Separator",
+      extends: "Menu.Separator",
       extendsHref: "https://base-ui.com/react/components/menu#separator",
       props: [],
     },
@@ -187,14 +187,14 @@ export default {
     {
       name: "MenuSub",
       description: "Re-export. Root of a nested menu.",
-      extends: "Base UI Menu.SubmenuRoot",
+      extends: "Menu.SubmenuRoot",
       extendsHref: "https://base-ui.com/react/components/menu#submenu-root",
       props: [],
     },
     {
       name: "MenuSubTrigger",
       description: "Item that opens the submenu, with a trailing chevron.",
-      extends: "Base UI Menu.SubmenuTrigger",
+      extends: "Menu.SubmenuTrigger",
       extendsHref: "https://base-ui.com/react/components/menu#submenu-trigger",
       props: [],
       dataAttributes: [{ name: "data-popup-open", description: "Present while its submenu is open." }],

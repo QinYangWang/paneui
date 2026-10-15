@@ -39,7 +39,7 @@ function ToastList() {
       toast={toast}
       data-slot="toast"
       className={cn(
-        // stacking math (Base UI css vars)
+        // stacking math (the primitive's CSS variables)
         "[--gap:0.75rem] [--peek:0.6rem] [--scale:calc(max(0,1_-_(var(--toast-index)_*_0.06)))] [--shrink:calc(1_-_var(--scale))] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)_*_-1_+_(var(--toast-index)_*_var(--gap)_*_-1)_+_var(--toast-swipe-movement-y))]",
         "absolute right-0 bottom-0 left-0 z-[calc(1000_-_var(--toast-index))] h-(--height) origin-bottom select-none",
         "[transform:translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)_-_(var(--toast-index)_*_var(--peek))_-_(var(--shrink)_*_var(--height))))_scale(var(--scale))]",

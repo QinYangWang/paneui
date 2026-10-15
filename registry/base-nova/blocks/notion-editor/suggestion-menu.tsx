@@ -16,7 +16,7 @@ import {
 } from "@/registry/base-nova/ui/menu-list"
 
 /**
- * Glue between Tiptap's suggestion plugin and a MenuList popup: the popup is
+ * Glue between the editor's suggestion plugin and a MenuList popup: the popup is
  * mounted into <body>, positioned by the plugin's floating-ui `mount`, and key
  * presses are forwarded from the editor (focus never leaves the text).
  */
@@ -80,7 +80,7 @@ function SuggestionMenu<I extends SuggestionMenuItem>({
 }
 
 /**
- * `render` for a Tiptap suggestion: mounts `Component` (default SuggestionMenu)
+ * `render` for an editor suggestion: mounts `Component` (default SuggestionMenu)
  * with the plugin's items and forwards keys to its MenuList handle.
  */
 export function suggestionRenderer<I extends SuggestionMenuItem>(

@@ -414,7 +414,7 @@ type ColorPickerChannelProps = ChannelSliderPassthrough & {
   label?: string
 }
 
-/** Hue slider (0–360). Other props go to the Base UI Slider root. */
+/** Hue slider (0–360). Other props go to the Slider root. */
 function ColorPickerHue({ label = "Hue", disabled: disabledProp, ...props }: ColorPickerChannelProps) {
   const { hsva, setHsva, commit, disabled } = useColorPicker()
   return (
@@ -433,7 +433,7 @@ function ColorPickerHue({ label = "Hue", disabled: disabledProp, ...props }: Col
   )
 }
 
-/** Opacity slider. Only meaningful with `alpha` on the root. Other props go to the Base UI Slider root. */
+/** Opacity slider. Only meaningful with `alpha` on the root. Other props go to the Slider root. */
 function ColorPickerAlpha({ label = "Opacity", disabled: disabledProp, ...props }: ColorPickerChannelProps) {
   const { hsva, setHsva, commit, disabled } = useColorPicker()
   const { r, g, b } = hsvaToRgba(hsva)

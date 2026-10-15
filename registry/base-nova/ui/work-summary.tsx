@@ -73,7 +73,7 @@ type WorkSummaryProps = Omit<React.ComponentProps<"div">, "title"> & {
 }
 
 /**
- * Collapsible log of what an agent did in a turn (after Synara's "Worked for
+ * Collapsible log of what an agent did in a turn ("Worked for
  * 25s" row): a quiet header with the elapsed time, opening to the step list.
  * While running the label shimmers and counts up.
  */

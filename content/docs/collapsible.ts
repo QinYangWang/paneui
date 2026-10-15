@@ -47,14 +47,14 @@ export default {
     {
       name: "Collapsible",
       description: "Unstyled vertical stack; bring your own surface.",
-      extends: "Base UI Collapsible.Root",
+      extends: "Collapsible.Root",
       extendsHref: "https://base-ui.com/react/components/collapsible#root",
       props: [],
     },
     {
       name: "CollapsibleTrigger",
       description: "A 36px row that tints while open.",
-      extends: "Base UI Collapsible.Trigger",
+      extends: "Collapsible.Trigger",
       extendsHref: "https://base-ui.com/react/components/collapsible#trigger",
       props: [
         {
@@ -69,7 +69,7 @@ export default {
     {
       name: "CollapsiblePanel",
       description: "Animates its height; the children sit in an inner wrapper that fades and slides.",
-      extends: "Base UI Collapsible.Panel",
+      extends: "Collapsible.Panel",
       extendsHref: "https://base-ui.com/react/components/collapsible#panel",
       props: [],
       dataAttributes: [

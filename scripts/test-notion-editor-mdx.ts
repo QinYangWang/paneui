@@ -1,4 +1,4 @@
-// Round-trip test for the notion editor's MDX helpers.
+// Round-trip test for the block editor's MDX helpers (notion-editor block).
 // Run: esbuild scripts/test-notion-editor-mdx.ts --bundle --platform=node --outfile=/tmp/t.cjs && node /tmp/t.cjs
 import { readFileSync } from "node:fs"
 import path from "node:path"

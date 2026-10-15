@@ -13,7 +13,7 @@ export default function ToolResultStatuses() {
         <ToolResultOutput>{"$ eslint .\n2 errors"}</ToolResultOutput>
       </ToolResult>
       <ToolResult kind="terminal" tool="bash" title="Deploy preview" status="cancelled" duration={12} defaultOpen={false}>
-        <ToolResultOutput>{"$ vercel deploy\nCancelled by user."}</ToolResultOutput>
+        <ToolResultOutput>{"$ pnpm deploy\nCancelled by user."}</ToolResultOutput>
       </ToolResult>
     </div>
   )

@@ -4,7 +4,7 @@
  * light + dark accent from any picked colour, and the CSS a user takes home.
  * Pure and client-safe.
  *
- * After BoardUI, an accent is one `--accent-50…950` ramp; `--primary` (white text on the
+ * An accent is one `--accent-50…950` ramp; `--primary` (white text on the
  * 600 stop, 700 for green and orange), `--primary-foreground` and `--ring` (the 500 stop, used
  * at /50) read it. Blue is the default (no `data-accent`).
  */
@@ -20,7 +20,7 @@ export const DEFAULT_ACCENT: PresetAccent = "blue"
 export const RAMP_STOPS = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"] as const
 const stop = (s: (typeof RAMP_STOPS)[number]) => RAMP_STOPS.indexOf(s)
 
-/** Tailwind's OKLCH ramps (blue-400 is BoardUI's #3392ff, neutral-100/200 its #f7f7f7/#ebebeb). Mirrors app/globals.css. */
+/** Tailwind's OKLCH ramps (blue-400 is #3392ff, neutral-100/200 #f7f7f7/#ebebeb). Mirrors app/globals.css. */
 export const PRESET_RAMPS: Record<PresetAccent, string[]> = {
   blue: [
     "oklch(97% 0.014 254.604)",
@@ -241,7 +241,7 @@ const BLUE_RAMP = PRESET_RAMPS.blue.map((v) => parseOklch(v) as Oklch)
 const NEUTRAL_RAMP = PRESET_RAMPS.neutral.map((v) => parseOklch(v) as Oklch)
 
 /**
- * A ramp for any hue, as BoardUI's accent picker does: each stop keeps the blue ramp's lightness
+ * A ramp for any hue: each stop keeps the blue ramp's lightness
  * (so contrast against the page and white text stays where blue's is), takes the picked hue, and
  * scales blue's chroma by how saturated the pick is next to blue-600, fitted to sRGB.
  */

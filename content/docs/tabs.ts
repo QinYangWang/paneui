@@ -50,7 +50,7 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "A raised indicator slides between tabs (300ms ease-out) using the positions Base UI measures, on x for horizontal lists and on y for vertical ones. Under `prefers-reduced-motion: reduce` it jumps without sliding.",
+      body: "A raised indicator slides between tabs (300ms ease-out) using the measured tab positions, on x for horizontal lists and on y for vertical ones. Under `prefers-reduced-motion: reduce` it jumps without sliding.",
     },
     {
       title: "Keyboard",
@@ -61,7 +61,7 @@ export default {
     {
       name: "Tabs",
       description: "Column wrapper with a 12px gap between list and panels; a row when vertical.",
-      extends: "Base UI Tabs.Root",
+      extends: "Tabs.Root",
       extendsHref: "https://base-ui.com/react/components/tabs#root",
       props: [
         { name: "defaultValue", type: "any", default: "0", description: "Tab selected on first render." },
@@ -82,7 +82,7 @@ export default {
     {
       name: "TabsList",
       description: "Segmented track. Renders the sliding indicator after its children.",
-      extends: "Base UI Tabs.List",
+      extends: "Tabs.List",
       extendsHref: "https://base-ui.com/react/components/tabs#list",
       props: [
         {
@@ -96,7 +96,7 @@ export default {
     },
     {
       name: "TabsTab",
-      extends: "Base UI Tabs.Tab",
+      extends: "Tabs.Tab",
       extendsHref: "https://base-ui.com/react/components/tabs#tab",
       props: [
         { name: "value", type: "any", description: "Matches the `TabsPanel` it shows.", required: true },
@@ -110,7 +110,7 @@ export default {
     },
     {
       name: "TabsPanel",
-      extends: "Base UI Tabs.Panel",
+      extends: "Tabs.Panel",
       extendsHref: "https://base-ui.com/react/components/tabs#panel",
       props: [
         { name: "value", type: "any", description: "The `TabsTab` value that shows this panel.", required: true },

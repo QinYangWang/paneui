@@ -33,7 +33,7 @@ server/acp-bridge.mjs             WebSocket ↔ stdio bridge for real agents`,
   notes: [
     {
       title: "What it is",
-      body: "A Synara-style coding-agent workspace that is a real [Agent Client Protocol](https://agentclientprotocol.com/get-started/introduction) client. Threads are ACP sessions: streamed `session/update` notifications become messages, “Worked for 25s” step logs (`tool_call` / `tool_call_update`), the plan, slash commands (`available_commands_update`), modes and models; `session/request_permission` opens an approval card; `diff` content becomes the Edited files card with Undo and Review.",
+      body: "A multi-provider coding-agent workspace that is a real [Agent Client Protocol](https://agentclientprotocol.com/get-started/introduction) client. Threads are ACP sessions: streamed `session/update` notifications become messages, “Worked for 25s” step logs (`tool_call` / `tool_call_update`), the plan, slash commands (`available_commands_update`), modes and models; `session/request_permission` opens an approval card; `diff` content becomes the Edited files card with Undo and Review.",
     },
     {
       title: "Offline demo",

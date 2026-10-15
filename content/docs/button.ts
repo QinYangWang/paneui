@@ -42,7 +42,7 @@ export default {
   api: [
     {
       name: "Button",
-      extends: "Base UI Button",
+      extends: "Button",
       extendsHref: "https://base-ui.com/react/components/button#api-reference",
       props: [
         {

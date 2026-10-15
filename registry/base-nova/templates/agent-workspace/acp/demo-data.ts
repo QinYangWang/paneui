@@ -17,20 +17,20 @@ export type DemoThread = {
   group: "Recent" | "Today" | "Yesterday"
 }
 
-export const DEMO_CWD = "/Users/you/synara"
+export const DEMO_CWD = "/Users/you/workspace"
 
 export const DEMO_THREADS: DemoThread[] = [
-  { sessionId: "sess_fix_drag", title: "Fix broken chat dragging behavior", provider: "codex", repo: "synara", pr: { number: 1526, status: "open" }, branch: "synara/fix-chat-dragging", group: "Recent" },
-  { sessionId: "sess_split_close", title: "Redesign Split Chats With Close Button", provider: "codex", repo: "synara", pr: { number: 1525, status: "open" }, branch: "synara/simplify-split-chats", group: "Recent" },
-  { sessionId: "sess_hide_empty", title: "Hide Empty Threads From Horizontal Tabs", provider: "codex", repo: "synara", pr: { number: 1522, status: "open" }, branch: "synara/hide-empty-chats", group: "Recent" },
-  { sessionId: "sess_chat_error", title: "Unexpected chat error 52a79f2a-5cfd-4c1e", provider: "codex", repo: "synara", pr: { number: 1521, status: "open" }, branch: "synara/investigate-chat-error", group: "Recent" },
-  { sessionId: "sess_long_chat", title: "Check long-chat and multi-agent bug fixes", provider: "codex", repo: "synara", pr: { number: 1523, status: "open" }, branch: "synara/fix-chat-reliability", group: "Recent" },
-  { sessionId: "sess_scrollbar", title: "Scrollbar orizzontale indesiderata nella sidebar", provider: "codex", repo: "synara", pr: { number: 1519, status: "open" }, branch: "synara/remove-unwanted-scrollbar", group: "Today" },
-  { sessionId: "sess_screenshot", title: "Check if screenshot behavior is normal", provider: "claude", repo: "synara", branch: "main", group: "Today" },
-  { sessionId: "sess_lucide", title: "Sostituire icone search bar con Lucide", provider: "claude", repo: "synara", branch: "main", group: "Today" },
-  { sessionId: "sess_spacing", title: "Aumentare spaziatura icone come archivio", provider: "claude", repo: "synara", branch: "main", group: "Today" },
-  { sessionId: "sess_shortcuts", title: "Personalizzazione shortcut Synara con tastiera", provider: "codex", repo: "synara", pr: { number: 1508, status: "merged" }, branch: "main", group: "Yesterday" },
-  { sessionId: "sess_expiry", title: "Configurable expiry with 24h option", provider: "codex", repo: "synara", pr: { number: 1507, status: "merged" }, branch: "synara/configurable-expiry", group: "Yesterday" },
+  { sessionId: "sess_fix_drag", title: "Fix broken chat dragging behavior", provider: "codex", repo: "workspace", pr: { number: 1526, status: "open" }, branch: "feat/fix-chat-dragging", group: "Recent" },
+  { sessionId: "sess_split_close", title: "Redesign Split Chats With Close Button", provider: "codex", repo: "workspace", pr: { number: 1525, status: "open" }, branch: "feat/simplify-split-chats", group: "Recent" },
+  { sessionId: "sess_hide_empty", title: "Hide Empty Threads From Horizontal Tabs", provider: "codex", repo: "workspace", pr: { number: 1522, status: "open" }, branch: "feat/hide-empty-chats", group: "Recent" },
+  { sessionId: "sess_chat_error", title: "Unexpected chat error 52a79f2a-5cfd-4c1e", provider: "codex", repo: "workspace", pr: { number: 1521, status: "open" }, branch: "feat/investigate-chat-error", group: "Recent" },
+  { sessionId: "sess_long_chat", title: "Check long-chat and multi-agent bug fixes", provider: "codex", repo: "workspace", pr: { number: 1523, status: "open" }, branch: "feat/fix-chat-reliability", group: "Recent" },
+  { sessionId: "sess_scrollbar", title: "Scrollbar orizzontale indesiderata nella sidebar", provider: "codex", repo: "workspace", pr: { number: 1519, status: "open" }, branch: "feat/remove-unwanted-scrollbar", group: "Today" },
+  { sessionId: "sess_screenshot", title: "Check if screenshot behavior is normal", provider: "claude", repo: "workspace", branch: "main", group: "Today" },
+  { sessionId: "sess_icons", title: "Sostituire icone search bar con il set puffy", provider: "claude", repo: "workspace", branch: "main", group: "Today" },
+  { sessionId: "sess_spacing", title: "Aumentare spaziatura icone come archivio", provider: "claude", repo: "workspace", branch: "main", group: "Today" },
+  { sessionId: "sess_shortcuts", title: "Personalizzazione shortcut con tastiera", provider: "codex", repo: "workspace", pr: { number: 1508, status: "merged" }, branch: "main", group: "Yesterday" },
+  { sessionId: "sess_expiry", title: "Configurable expiry with 24h option", provider: "codex", repo: "workspace", pr: { number: 1507, status: "merged" }, branch: "feat/configurable-expiry", group: "Yesterday" },
 ]
 
 export const DEMO_FILES = [
@@ -149,36 +149,36 @@ export const DEMO_TERMINAL = [
   "",
   `${E}31m ▗▄▄▖ ${E}0m   ${E}1mClaude Code${E}0m ${E}2mv2.1.289${E}0m`,
   `${E}31m▐▛██▜▌${E}0m   ${E}2mSonnet 5.5 with high effort · Claude Max${E}0m`,
-  `${E}31m ▘▘▝▝ ${E}0m   ${E}2m~/.synara-canary/worktrees/2d53/synara · /rc${E}0m`,
+  `${E}31m ▘▘▝▝ ${E}0m   ${E}2m~/.workspace-canary/worktrees/2d53/workspace · /rc${E}0m`,
   "",
   `${E}33mYour voice can help guide AI${E}0m`,
   "Take 15 min to share your experiences with Anthropic Interviewer. Start now",
   "(https://clau.de/yourthoughts)",
   "",
-  `${E}7m❯ what is synara? tldr                                                   ${E}0m`,
+  `${E}7m❯ what is this repo? tldr                                                   ${E}0m`,
   "",
-  "● Synara is a multi-provider coding-agent workspace. It runs as a web app,",
+  "● Workspace is a multi-provider coding-agent workspace. It runs as a web app,",
   "  server, CLI, and desktop app (Electron), with adapters for providers such as",
   "  Codex and Claude, so you can drive coding agents from one place.",
   "",
-  `  - Releases: the desktop app ships as Synara (Stable) and Synara Beta from`,
+  `  - Releases: the desktop app ships as Workspace (Stable) and Workspace Beta from`,
   `    the same ${E}34mmain${E}0m branch. The release tag picks which one.`,
   "  - Focus: reliability during streaming, reconnects, cancellation, and",
   "    recovery.",
-  `  - Your branch: ${E}34msynara/fix-chat-dragging${E}0m, which is about resizing split chat`,
+  `  - Your branch: ${E}34mfeat/fix-chat-dragging${E}0m, which is about resizing split chat`,
   "    panes.",
   "",
   `${E}2m✻ Churned for 4s · done 4:54 PM${E}0m`,
   "",
 ].join("\n")
 
-export const DEMO_STATUS = `${E}34mSonnet 5.5${E}0m  ${E}2mhigh${E}0m  ${E}2msynara:synara75/${E}0m${E}35msynara/fix-chat-dragging${E}0m  ${E}34m#1526 pending${E}0m\n${E}32m5%${E}0m  ${E}2m1.0M${E}0m  ${E}32m3%${E}0m  ${E}31m95%${E}0m  ${E}33m▸▸ auto mode on${E}0m ${E}2m(shift+tab to cycle) · PR #1526 · ← 1 agent${E}0m`
+export const DEMO_STATUS = `${E}34mSonnet 5.5${E}0m  ${E}2mhigh${E}0m  ${E}2mworkspace:workspace75/${E}0m${E}35mfeat/fix-chat-dragging${E}0m  ${E}34m#1526 pending${E}0m\n${E}32m5%${E}0m  ${E}2m1.0M${E}0m  ${E}32m3%${E}0m  ${E}31m95%${E}0m  ${E}33m▸▸ auto mode on${E}0m ${E}2m(shift+tab to cycle) · PR #1526 · ← 1 agent${E}0m`
 
 /** Canned replies for the demo terminal's command line. */
 export function demoShell(command: string): string {
   const c = command.trim()
   if (c === "git status")
-    return `On branch synara/fix-chat-dragging\nChanges not staged for commit:\n  ${E}31mmodified:   apps/web/src/components/chat/SplitChatSurface.tsx${E}0m\n  ${E}31mmodified:   docs/core-concepts.md${E}0m\nUntracked files:\n  ${E}31mapps/web/src/components/chat/SplitPaneLayout.tsx${E}0m\n  ${E}31mapps/web/src/components/chat/SplitPaneLayout.browser.tsx${E}0m\n`
+    return `On branch feat/fix-chat-dragging\nChanges not staged for commit:\n  ${E}31mmodified:   apps/web/src/components/chat/SplitChatSurface.tsx${E}0m\n  ${E}31mmodified:   docs/core-concepts.md${E}0m\nUntracked files:\n  ${E}31mapps/web/src/components/chat/SplitPaneLayout.tsx${E}0m\n  ${E}31mapps/web/src/components/chat/SplitPaneLayout.browser.tsx${E}0m\n`
   if (c === "ls") return `${E}34mapps${E}0m  ${E}34mdocs${E}0m  ${E}34mpackages${E}0m  package.json  README.md  turbo.json\n`
   if (c.startsWith("bun") || c.startsWith("pnpm") || c.startsWith("npm"))
     return `${E}2m$ vitest run src/components/chat${E}0m\n ${E}32m✓${E}0m SplitPaneLayout.browser.tsx ${E}2m(12 tests)${E}0m\n ${E}32m✓${E}0m SplitChatSurface.test.tsx ${E}2m(34 tests)${E}0m\n\n ${E}32mTest Files  2 passed${E}0m\n      Tests  46 passed\n`

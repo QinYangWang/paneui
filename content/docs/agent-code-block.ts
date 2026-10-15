@@ -50,11 +50,11 @@ export default {
   api: [
     {
       name: "AgentCodeBlock",
-      description: "Syntax-highlighted code surface (shiki, light and dark themes) for agent output.",
+      description: "Syntax-highlighted code surface (light and dark themes) for agent output.",
       extends: "div",
       props: [
         { name: "code", type: "string", required: true, description: "Source text." },
-        { name: "language", type: "string", description: "Shiki language id. Inferred from `filename` when omitted; unknown ids render as plain text." },
+        { name: "language", type: "string", description: "Syntax language id. Inferred from `filename` when omitted; unknown ids render as plain text." },
         { name: "filename", type: "ReactNode", description: "Shown in a header with the language chip and copy button. Without it the copy button floats." },
         { name: "showLineNumbers", type: "boolean", default: "true", description: "Show the sticky line-number gutter." },
         { name: "startLine", type: "number", default: "1", description: "First line number, for excerpts." },
@@ -101,7 +101,7 @@ export default {
     },
     {
       name: "languageFromFilename",
-      description: "`(filename?: string, fallback = \"text\") => string`. Maps an extension like `.tsx` to a shiki id.",
+      description: "`(filename?: string, fallback = \"text\") => string`. Maps an extension like `.tsx` to a language id.",
       props: [],
     },
   ],

@@ -51,7 +51,7 @@ export default {
   notes: [
     {
       title: "Keyboard",
-      body: "The area thumb is a 2D slider: arrow keys nudge saturation and brightness 1% (Shift for 10%). Hue and alpha are Base UI sliders. The hex field commits on Enter or blur, reverts invalid input, and Escape restores the last value.",
+      body: "The area thumb is a 2D slider: arrow keys nudge saturation and brightness 1% (Shift for 10%). Hue and alpha are sliders. The hex field commits on Enter or blur, reverts invalid input, and Escape restores the last value.",
     },
     {
       title: "Motion",
@@ -66,7 +66,7 @@ export default {
     {
       name: "ColorPicker",
       description: "Colour state plus the popover root. Parts also work inline without trigger and content.",
-      extends: "Base UI Popover.Root",
+      extends: "Popover.Root",
       extendsHref: `${POPOVER}#root`,
       props: [
         { name: "value", type: "string", description: "Controlled hex colour (`#rrggbb` or `#rrggbbaa`)." },
@@ -89,14 +89,14 @@ export default {
     {
       name: "ColorPickerTrigger",
       description: "Raised chip with the swatch and hex. Pass children to replace its content.",
-      extends: "Base UI Popover.Trigger",
+      extends: "Popover.Trigger",
       extendsHref: `${POPOVER}#trigger`,
       props: [{ name: "showHex", type: "boolean", default: "true", description: "Show the hex label next to the swatch." }],
     },
     {
       name: "ColorPickerContent",
       description: "Portal, positioner and 256px popup that grows out of the trigger.",
-      extends: "Base UI Popover.Popup",
+      extends: "Popover.Popup",
       extendsHref: `${POPOVER}#popup`,
       props: [
         { name: "align", type: `"start" | "center" | "end"`, default: `"start"`, description: "Trigger edge the panel lines up with." },
@@ -119,7 +119,7 @@ export default {
     {
       name: "ColorPickerHue",
       description: "Hue slider (0–360). Value, range and change handlers are owned by the picker; other props go to the slider root.",
-      extends: "Base UI Slider.Root",
+      extends: "Slider.Root",
       extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
         { name: "label", type: "string", default: `"Hue"`, description: "Accessible name of the thumb." },
@@ -129,7 +129,7 @@ export default {
     {
       name: "ColorPickerAlpha",
       description: "Opacity slider over a checkerboard. Only meaningful with `alpha` on the root. Other props go to the slider root, as for `ColorPickerHue`.",
-      extends: "Base UI Slider.Root",
+      extends: "Slider.Root",
       extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
         { name: "label", type: "string", default: `"Opacity"`, description: "Accessible name of the thumb." },

@@ -9,7 +9,7 @@ export const GUIDE_PAGES = [
   {
     href: "/docs",
     title: "Introduction",
-    description: "Copy-paste React components on Base UI, Tailwind 4 and Motion, in a quiet native desktop style.",
+    description: "Copy-paste React components for Tailwind 4, in a quiet native desktop style.",
     keywords: ["about", "overview", "start", "principles"],
   },
   {

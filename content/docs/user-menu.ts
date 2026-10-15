@@ -15,7 +15,7 @@ export default {
   api: [
     {
       name: "UserMenu",
-      extends: "Base UI Menu.Trigger",
+      extends: "Menu.Trigger",
       props: [
         { name: "name", type: "string", required: true, description: "Shown and used for initials." },
         { name: "email", type: "string", description: "Second line and the menu's first label." },

@@ -50,7 +50,7 @@ toast.add({ title: "Saved", description: "Your changes are live.", type: "succes
     {
       name: "ToastProvider",
       description: "Wrap your app once. Renders the viewport (fixed bottom-right) and the stacked toasts.",
-      extends: "Base UI Toast.Provider",
+      extends: "Toast.Provider",
       extendsHref: "https://base-ui.com/react/components/toast#provider",
       props: [
         { name: "limit", type: "number", default: "3", description: "Toasts shown at once; older ones are hidden." },
@@ -59,8 +59,8 @@ toast.add({ title: "Saved", description: "Your changes are live.", type: "succes
     },
     {
       name: "useToast",
-      description: "Alias of Base UI `useToastManager`. Returns `{ toasts, add, update, close, promise }`; `add` returns the toast id.",
-      extends: "Base UI Toast.useToastManager",
+      description: "Alias of the toast primitive's `useToastManager`. Returns `{ toasts, add, update, close, promise }`; `add` returns the toast id.",
+      extends: "Toast.useToastManager",
       extendsHref: "https://base-ui.com/react/components/toast#usetoastmanager",
       props: [
         { name: "title", type: "ReactNode", description: "First line, medium weight." },

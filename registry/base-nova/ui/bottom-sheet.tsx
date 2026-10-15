@@ -22,7 +22,7 @@ const FADE: Transition = { duration: 0.2, ease: [0.22, 1, 0.36, 1] }
 
 type SheetContextValue = {
   open: boolean
-  /** Closes through Base UI, so `onOpenChange` gets real event details. */
+  /** Closes through the dialog primitive, so `onOpenChange` gets real event details. */
   close: () => void
   snapPoints: number[]
   snap: number

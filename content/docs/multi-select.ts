@@ -62,7 +62,7 @@ export default {
     {
       name: "MultiSelect",
       description: "`Combobox.Root` with `multiple` always on.",
-      extends: "Base UI Combobox.Root",
+      extends: "Combobox.Root",
       extendsHref: `${BASE}#root`,
       props: [
         { name: "value", type: "Value[]", description: "Controlled selected values." },
@@ -73,7 +73,7 @@ export default {
     {
       name: "MultiSelectTrigger",
       description: "Inset well holding removable chips, the search input and a chevron. The popup anchors to it.",
-      extends: "Base UI Combobox.Chips",
+      extends: "Combobox.Chips",
       extendsHref: `${BASE}#chips`,
       props: [
         { name: "placeholder", type: "string", default: `"Select…"`, description: "Input placeholder while nothing is selected." },
@@ -94,7 +94,7 @@ export default {
     {
       name: "MultiSelectContent",
       description: "Portal, positioner and popup, anchored to the trigger.",
-      extends: "Base UI Combobox.Popup",
+      extends: "Combobox.Popup",
       extendsHref: `${BASE}#popup`,
       props: [
         { name: "side", type: `"top" | "bottom" | "left" | "right" | "inline-start" | "inline-end"`, default: `"bottom"`, description: "Side of the trigger to place the popup on." },
@@ -105,7 +105,7 @@ export default {
     {
       name: "MultiSelectItem",
       description: "Option row with a checkbox-style tick that fills when chosen.",
-      extends: "Base UI Combobox.Item",
+      extends: "Combobox.Item",
       extendsHref: `${BASE}#item`,
       props: [],
       dataAttributes: [
@@ -116,14 +116,14 @@ export default {
     {
       name: "MultiSelectList",
       description: "Alias of `ComboboxList`.",
-      extends: "Base UI Combobox.List",
+      extends: "Combobox.List",
       extendsHref: `${BASE}#list`,
       props: [],
     },
-    { name: "MultiSelectGroup", description: "Alias of `ComboboxGroup`.", extends: "Base UI Combobox.Group", extendsHref: `${BASE}#group`, props: [] },
-    { name: "MultiSelectLabel", description: "Alias of `ComboboxLabel`.", extends: "Base UI Combobox.GroupLabel", extendsHref: `${BASE}#group-label`, props: [] },
-    { name: "MultiSelectSeparator", description: "Alias of `ComboboxSeparator`.", extends: "Base UI Combobox.Separator", extendsHref: `${BASE}#separator`, props: [] },
-    { name: "MultiSelectEmpty", description: "Alias of `ComboboxEmpty`.", extends: "Base UI Combobox.Empty", extendsHref: `${BASE}#empty`, props: [] },
-    { name: "MultiSelectCollection", description: "Alias of `ComboboxCollection`.", extends: "Base UI Combobox.Collection", extendsHref: `${BASE}#collection`, props: [] },
+    { name: "MultiSelectGroup", description: "Alias of `ComboboxGroup`.", extends: "Combobox.Group", extendsHref: `${BASE}#group`, props: [] },
+    { name: "MultiSelectLabel", description: "Alias of `ComboboxLabel`.", extends: "Combobox.GroupLabel", extendsHref: `${BASE}#group-label`, props: [] },
+    { name: "MultiSelectSeparator", description: "Alias of `ComboboxSeparator`.", extends: "Combobox.Separator", extendsHref: `${BASE}#separator`, props: [] },
+    { name: "MultiSelectEmpty", description: "Alias of `ComboboxEmpty`.", extends: "Combobox.Empty", extendsHref: `${BASE}#empty`, props: [] },
+    { name: "MultiSelectCollection", description: "Alias of `ComboboxCollection`.", extends: "Combobox.Collection", extendsHref: `${BASE}#collection`, props: [] },
   ],
 } satisfies ComponentDoc

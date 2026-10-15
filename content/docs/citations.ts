@@ -77,7 +77,7 @@ export default {
     {
       name: "Citation",
       description: "Inline numbered marker with a hover preview.",
-      extends: "Base UI PreviewCard.Trigger (a)",
+      extends: "PreviewCard.Trigger (a)",
       extendsHref: "https://base-ui.com/react/components/preview-card#trigger",
       props: [
         { name: "sourceId", type: "string", description: "Source id to resolve from the surrounding `CitationGroup`." },
@@ -91,7 +91,7 @@ export default {
     {
       name: "Citations",
       description: "Collapsible Sources summary with favicon stack and count. Renders nothing without sources.",
-      extends: "Base UI Collapsible",
+      extends: "Collapsible",
       extendsHref: "https://base-ui.com/react/components/collapsible",
       props: [
         { name: "sources", type: "CitationSource[]", description: "Defaults to the group's sources." },

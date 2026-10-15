@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 /*
  * One modal surface with several inner views. Navigating pushes a view onto a
  * stack; the panel springs to the new view's height while the views slide and
- * blur past each other in the direction of travel. Back pops the stack. Base UI
+ * blur past each other in the direction of travel. Back pops the stack. The dialog primitive
  * Dialog provides the focus trap, Escape, scroll lock and ARIA.
  */
 

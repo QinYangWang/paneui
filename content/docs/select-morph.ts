@@ -54,7 +54,7 @@ export default {
     },
     {
       title: "Keyboard",
-      body: "Base UI Select: Space, Enter and the arrow keys open it, arrows move between options, typing jumps to a match, Enter selects and Escape closes.",
+      body: "Space, Enter and the arrow keys open it, arrows move between options, typing jumps to a match, Enter selects and Escape closes.",
     },
     {
       title: "Related",
@@ -64,29 +64,29 @@ export default {
   api: [
     {
       name: "MorphSelect",
-      description: "Base UI `Select.Root`, re-exported unchanged.",
-      extends: "Base UI Select.Root",
+      description: "`Select.Root`, re-exported unchanged.",
+      extends: "Select.Root",
       extendsHref: `${BASE}#root`,
       props: [],
     },
     {
       name: "MorphSelectTrigger",
       description: "The raised 40px trigger the popup grows out of. Renders a chevron after its children.",
-      extends: "Base UI Select.Trigger",
+      extends: "Select.Trigger",
       extendsHref: `${BASE}#trigger`,
       props: [],
     },
     {
       name: "MorphSelectValue",
       description: "The selected label, truncated; muted while showing the placeholder.",
-      extends: "Base UI Select.Value",
+      extends: "Select.Value",
       extendsHref: `${BASE}#value`,
       props: [],
     },
     {
       name: "MorphSelectContent",
       description: "Portal, positioner and popup laid over the trigger, with a mirrored header row and a scrollable list (max 18rem).",
-      extends: "Base UI Select.Popup",
+      extends: "Select.Popup",
       extendsHref: `${BASE}#popup`,
       props: [
         {
@@ -104,7 +104,7 @@ export default {
     {
       name: "MorphSelectItem",
       description: "An option row with a check indicator on the right.",
-      extends: "Base UI Select.Item",
+      extends: "Select.Item",
       extendsHref: `${BASE}#item`,
       props: [],
       dataAttributes: [
@@ -114,20 +114,20 @@ export default {
     },
     {
       name: "MorphSelectGroup",
-      extends: "Base UI Select.Group",
+      extends: "Select.Group",
       extendsHref: `${BASE}#group`,
       props: [],
     },
     {
       name: "MorphSelectLabel",
       description: "Small muted heading for a group.",
-      extends: "Base UI Select.GroupLabel",
+      extends: "Select.GroupLabel",
       extendsHref: `${BASE}#grouplabel`,
       props: [],
     },
     {
       name: "MorphSelectSeparator",
-      extends: "Base UI Select.Separator",
+      extends: "Select.Separator",
       extendsHref: `${BASE}#separator`,
       props: [],
     },

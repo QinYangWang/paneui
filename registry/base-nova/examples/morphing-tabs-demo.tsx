@@ -13,7 +13,7 @@ const initial: MorphingTabsItem[] = [
     content: (
       <div className="space-y-2 text-sm">
         <p className="font-medium">qinyang/ui</p>
-        <p className="text-muted-foreground">Soft, slightly skeuomorphic components built on Base UI and motion.</p>
+        <p className="text-muted-foreground">Soft, slightly skeuomorphic components with headless primitives and spring motion.</p>
       </div>
     ),
   },

@@ -13,7 +13,7 @@ export const metadata = { title: "Introduction" }
 const CATEGORY_BLURBS: Record<string, string> = {
   Foundations: "The theme tokens, the puffy icon set and the icon chip every header uses.",
   Forms: "Buttons, fields, pickers and confirm controls at a 32px desktop density.",
-  Overlays: "Menus, popovers, dialogs, drawers, sheets and toasts on Base UI.",
+  Overlays: "Menus, popovers, dialogs, drawers, sheets and toasts.",
   Display: "Cards, badges, alerts, accordions, loaders and the theme toggle.",
   Navigation: "Tabs, breadcrumbs, the animated sidebar and a file tree.",
   Text: "Reveals, shimmers, scrambles and rolling digits for copy and numbers.",
@@ -32,11 +32,11 @@ const PRINCIPLES = [
   },
   {
     title: "Native desktop style",
-    body: "System UI font on a 13px scale, translucent fills instead of grey surfaces, hairline borders and near-flat elevation, after Synara and Codex.",
+    body: "System UI font on a 13px scale, translucent fills instead of grey surfaces, hairline borders and near-flat elevation.",
   },
   {
     title: "Accessible primitives",
-    body: "Interactive parts are built on Base UI, so focus management, keyboard support and ARIA come from a maintained headless layer.",
+    body: "Interactive parts are built on a maintained headless primitive layer, so focus management, keyboard support and ARIA come built in.",
   },
   {
     title: "Motion with restraint",
@@ -62,7 +62,7 @@ export default function Introduction() {
     <GuidePage
       href="/docs"
       toc={toc}
-      lede={`${total} copy-paste React components, blocks and templates on Base UI, Tailwind CSS 4 and Motion, in a quiet native desktop style. Install any of them with the shadcn CLI.`}
+      lede={`${total} copy-paste React components, blocks and templates for Tailwind CSS 4, in a quiet native desktop style. Install any of them with the shadcn CLI.`}
     >
       <div className="flex flex-col gap-4 text-muted-foreground">
         <p>
@@ -115,16 +115,14 @@ export default function Introduction() {
         <GuideH2 id="stack">Stack</GuideH2>
         <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
           <li>
-            <TextLink href="https://base-ui.com">Base UI</TextLink> for interactive primitives (the shadcn{" "}
-            <Code>base-nova</Code> style).
+            Headless primitives for interactive parts (the <Code>base-nova</Code> style).
           </li>
           <li>
             <TextLink href="https://tailwindcss.com">Tailwind CSS 4</TextLink> with CSS-variable tokens declared in{" "}
             <Code>@theme inline</Code>.
           </li>
           <li>
-            <TextLink href="https://motion.dev">Motion</TextLink> (<Code>motion/react</Code>) for springs and layout
-            animation.
+            <Code>motion/react</Code> for springs and layout animation.
           </li>
           <li>
             The <TextLink href="https://ui.shadcn.com/docs/cli">shadcn CLI</TextLink> for distribution, and a puffy 18×18
