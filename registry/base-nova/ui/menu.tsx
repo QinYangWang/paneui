@@ -8,9 +8,26 @@ import { cn } from "@/lib/utils"
 
 const Menu = MenuPrimitive.Root
 const MenuTrigger = MenuPrimitive.Trigger
-const MenuGroup = MenuPrimitive.Group
-const MenuRadioGroup = MenuPrimitive.RadioGroup
 const MenuSub = MenuPrimitive.SubmenuRoot
+
+// Labels may sit inside a group (announced as its label) or stand alone as a heading.
+const MenuInGroupContext = React.createContext(false)
+
+function MenuGroup(props: MenuPrimitive.Group.Props) {
+  return (
+    <MenuInGroupContext.Provider value={true}>
+      <MenuPrimitive.Group {...props} />
+    </MenuInGroupContext.Provider>
+  )
+}
+
+function MenuRadioGroup(props: MenuPrimitive.RadioGroup.Props) {
+  return (
+    <MenuInGroupContext.Provider value={true}>
+      <MenuPrimitive.RadioGroup {...props} />
+    </MenuInGroupContext.Provider>
+  )
+}
 
 const popupClass =
   "min-w-44 origin-(--transform-origin) overflow-y-auto overscroll-contain rounded-xl bg-popover p-1 text-popover-foreground shadow-surface outline-none transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0"
@@ -88,10 +105,25 @@ function MenuRadioItem({ className, children, ...props }: MenuPrimitive.RadioIte
 }
 
 function MenuLabel({ className, inset, ...props }: MenuPrimitive.GroupLabel.Props & { inset?: boolean }) {
+  const inGroup = React.useContext(MenuInGroupContext)
+  const base = cn("px-2 pt-1.5 pb-1 text-ui-sm text-muted-foreground", inset && "pl-7.5")
+  if (!inGroup) {
+    // Outside a group the primitive label throws, so render a plain heading.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { render: _render, ...rest } = props
+    return (
+      <div
+        data-slot="menu-label"
+        role="presentation"
+        className={cn(base, typeof className === "string" && className)}
+        {...(rest as React.ComponentProps<"div">)}
+      />
+    )
+  }
   return (
     <MenuPrimitive.GroupLabel
       data-slot="menu-label"
-      className={cn("px-2 pt-1.5 pb-1 text-ui-sm text-muted-foreground", inset && "pl-7.5", className)}
+      className={typeof className === "function" ? (state) => cn(base, className(state)) : cn(base, className)}
       {...props}
     />
   )

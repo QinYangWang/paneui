@@ -1,6 +1,6 @@
 ---
 name: puffy-icons
-description: Draws new icons in the qinyang/ui puffy style (soft, inflated, single-colour glyphs on an 18x18 grid) and adds them to an installed components/icons.tsx. Use when a component needs an icon the set doesn't have, when changing an existing glyph, or when choosing which icons to use together in a nav, toolbar or card header.
+description: Draws new icons for the qinyang/ui icon set (18x18 grid, single colour) in either installed style, puffy (soft, inflated filled glyphs) or outline (1.6px round strokes), and adds them to an installed components/icons.tsx. Use when a component needs an icon the set doesn't have, when changing an existing glyph, or when choosing which icons to use together in a nav, toolbar or card header.
 ---
 
 # Puffy icons
@@ -45,7 +45,53 @@ const puff = { stroke: "currentColor", strokeWidth: 1.5, strokeLinejoin: "round"
 - `line`: no fill, 1.6 stroke, round caps and joins. Open glyphs (chevrons, arrows, check, x) and
   lines drawn inside or next to a shape.
 
-## Style rules
+## Which style is installed
+
+The set ships in two styles with identical export names, both installed as `components/icons.tsx`:
+
+```bash
+npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-outline.json --overwrite  # outline
+npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons.json --overwrite          # puffy
+```
+
+Check the primitives at the top of the file before drawing:
+
+- **Puffy**: `puff` has no `fill` key (filled with `currentColor`, stroke 1.5). Follow the puffy rules below.
+- **Outline**: `puff` is `{ fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" }`
+  and there is also a `solid` primitive (the filled, 1.5-stroke version). Follow "Drawing in the outline style".
+
+Always draw in the style the project has installed, so a new icon matches its neighbours.
+
+## Drawing in the outline style
+
+Same grid, padding and element rules as puffy (18x18, art within about 2.6 to 15.4, `path`/`circle`/`rect`
+only, `currentColor` only, every detail readable at 14px). What changes:
+
+- Shapes are contours: draw the silhouette with `puff` (which is now an outline), details with `line`.
+  Everything reads at one 1.6px weight.
+- No knockouts. Where a puffy icon would cut a hole with `fillRule="evenodd"`, draw the inner detail as a
+  `line` stroke or a separate contour instead. Two concentric contours closer than about 1.4px turn into a
+  blob at 14px; drop one or simplify.
+- Tiny dots (radius 0.6 or less: grip dots, ellipsis, status dots, wheels, eyes) use `solid` so they stay
+  visible; a stroked dot that small closes up.
+- Narrow bars and slots: if a shape is too thin to stay open as a contour (inner gap under about 1.4px),
+  draw it as a single `line` stroke instead (chart bars, pause bars, a cuff).
+- Corner radii about 1.8 on rectangles, matching the line rings in the set.
+
+Reference (outline):
+
+```tsx
+// Bot: outlined head, solid eyes
+<path {...line} d="M9 3.4v2.2" />
+<path {...puff} d="M5.4 6.4h7.2c.9 0 1.6.7 1.6 1.6v4.4c0 .9-.7 1.6-1.6 1.6H5.4c-.9 0-1.6-.7-1.6-1.6V8c0-.9.7-1.6 1.6-1.6z" />
+<circle {...solid} cx="7.1" cy="10.2" r=".4" />
+<circle {...solid} cx="10.9" cy="10.2" r=".4" />
+```
+
+In the outline style the solid vs line family rule in "Using icons" still applies to which glyph you pick
+(`InboxIcon` for nav), even though both now render as outlines.
+
+## Style rules (puffy)
 
 - **Grid**: 18x18 viewBox, centre (9, 9), about 2.5px padding. Artwork stays inside roughly x/y
   2.6–15.4. The puff stroke adds 0.75px on each side, so a filled path's own coordinates sit about
@@ -136,13 +182,14 @@ export const CheckIcon = (p: IconProps) => (
 
 1. **Check it doesn't exist.** List the exports and look for the name and its synonyms:
    `grep -o "export const [A-Za-z]*Icon" components/icons.tsx`.
-2. **Pick the family.** Decide solid or line from where the icon will sit (see Using icons) and
+2. **Check the installed style** (see Which style is installed) and draw in it.
+3. **Pick the family.** Decide solid or line from where the icon will sit (see Using icons) and
    which neighbours it will appear with.
-3. **Sketch on the grid.** Work out coordinates around the centre (9, 9) inside the 2.6–15.4 box,
-   using only `puff` and `line`. Start from the closest reference example.
-4. **Add the export** to the matching section of `components/icons.tsx`, after the existing icons
+4. **Sketch on the grid.** Work out coordinates around the centre (9, 9) inside the 2.6–15.4 box,
+   using only `puff` and `line` (plus `solid` for tiny dots in the outline style). Start from the closest reference example.
+5. **Add the export** to the matching section of `components/icons.tsx`, after the existing icons
    of that section. Don't change the primitives or other icons.
-5. **Render and look at it**, next to three or four existing icons of the same family, at 48px,
+6. **Render and look at it**, next to three or four existing icons of the same family, at 48px,
    18px and 14px. This skill ships `scripts/preview.tsx`, which renders a contact sheet of any
    exports you filter for:
 
@@ -160,15 +207,15 @@ export const CheckIcon = (p: IconProps) => (
    Run it from the project root (it needs the project's `react` and `react-dom`). PNG output needs
    `@resvg/resvg-js` (`npm i -D @resvg/resvg-js`); without it the sheet is written as SVG. Any other
    way of rendering the components to an image works too, such as a scratch page in your dev server.
-6. **Check the sheet** and fix what fails, then render again:
+7. **Check the sheet** and fix what fails, then render again:
    - Padding and optical size match the neighbours (nothing visibly bigger or smaller, nothing
      clipped at the edges).
    - Weight matches: a puff icon looks as heavy as the other puff icons, a line icon as light as the
      other line icons.
    - Holes and gaps are still open at 14px; no detail turns into a blob.
    - Optically centred (a heavy top or a pointed side may need a 0.2–0.4px shift).
-7. **Typecheck** (`npx tsc --noEmit`) and use the icon.
+8. **Typecheck** (`npx tsc --noEmit`) and use the icon.
 
-If you ever re-install `@qinyang/icons` with shadcn, it overwrites `components/icons.tsx`. Keep your
+If you ever re-install or switch the set with shadcn (`--overwrite`), it overwrites `components/icons.tsx`. Keep your
 own glyphs in a separate section at the end of the file (for example `/* My icons */`) so they're
 easy to copy back, or move them to their own file that copies the three primitives above.
