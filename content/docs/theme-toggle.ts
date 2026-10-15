@@ -39,6 +39,7 @@ export default {
       extends: "button",
       props: [
         { name: "iconSize", type: "number", default: "16", description: "Sun / moon icon size in px." },
+        { name: "variant", type: '"raised" | "ghost"', default: '"raised"', description: "Round raised button, or a 28px ghost toolbar button that matches `size=\"icon-sm\"` ghost Buttons." },
         { name: "storageKey", type: "string", default: `"theme"`, description: "`localStorage` key for the saved theme." },
         { name: "duration", type: "number", default: "560", description: "Reveal duration in ms." },
         { name: "onThemeChange", type: `(theme: "light" | "dark") => void`, description: "Called after the theme changes." },

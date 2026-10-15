@@ -179,7 +179,7 @@ export function ThemeControls({ className }: { className?: string }) {
   return (
     <div className={cn("flex items-center gap-1", className)}>
       <AccentControl />
-      <ThemeToggle storageKey={THEME_KEY} />
+      <ThemeToggle variant="ghost" storageKey={THEME_KEY} />
       <Menu>
         <Tooltip>
           <TooltipTrigger

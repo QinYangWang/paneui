@@ -139,6 +139,8 @@ type ThemeToggleProps = Omit<React.ComponentProps<"button">, "children" | "onCli
   UseThemeToggleOptions & {
     /** Icon size in px. Default 16. */
     iconSize?: number
+    /** "raised" (default): round card button. "ghost": 28px toolbar button that sits with icon-sm ghost Buttons. */
+    variant?: "raised" | "ghost"
   }
 
 /**
@@ -146,7 +148,7 @@ type ThemeToggleProps = Omit<React.ComponentProps<"button">, "children" | "onCli
  * circular reveal from the click point. Falls back to an instant swap when the API is
  * missing or the user prefers reduced motion.
  */
-function ThemeToggle({ className, storageKey, duration, onThemeChange, iconSize = 16, ...props }: ThemeToggleProps) {
+function ThemeToggle({ className, storageKey, duration, onThemeChange, iconSize = 16, variant = "raised", ...props }: ThemeToggleProps) {
   const { theme, toggle } = useThemeToggle({ storageKey, duration, onThemeChange })
   const reduceMotion = useReducedMotion()
   const dark = theme === "dark"
@@ -167,7 +169,10 @@ function ThemeToggle({ className, storageKey, duration, onThemeChange, iconSize 
         }
       }}
       className={cn(
-        "relative inline-flex size-8 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-card text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
+        "relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
+        variant === "ghost"
+          ? "size-7 rounded-lg text-foreground hover:bg-secondary [&_svg]:opacity-80"
+          : "size-8 rounded-full bg-card text-secondary-foreground shadow-raised hover:bg-accent hover:shadow-raised-hover",
         className
       )}
       {...props}
