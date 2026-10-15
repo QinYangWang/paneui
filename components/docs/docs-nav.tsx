@@ -48,22 +48,24 @@ function useCollapsed() {
   return [collapsed, toggle] as const
 }
 
-/** One link row: compact, text only; the current page gets a fill and an indicator line. */
+/**
+ * One link row: compact, text only, on the same left edge as the section and group labels. The
+ * current page gets a fill plus an indicator bar in the gutter beside the row.
+ */
 function NavLink({ href, active, children, badge }: { href: string; active: boolean; children: React.ReactNode; badge?: React.ReactNode }) {
   return (
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "group/nav relative flex h-7 min-w-0 items-center gap-2 rounded-md ps-2.5 pe-2 text-ui text-muted-foreground outline-none transition-colors duration-150",
+        "group/nav relative flex h-7 min-w-0 items-center gap-2 rounded-md px-2 text-ui text-muted-foreground outline-none transition-colors duration-150",
         "hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         "aria-[current=page]:bg-secondary aria-[current=page]:font-medium aria-[current=page]:text-foreground",
       )}
     >
-      {/* Indicator on the section's guide line, outside the fill. */}
       <span
         aria-hidden
-        className="absolute inset-y-1.5 -start-2.5 w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
+        className="absolute inset-y-1.5 -start-2 w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
       />
       <span className="min-w-0 flex-1 truncate">{children}</span>
       {badge}
@@ -94,21 +96,22 @@ function NavToggle({
       aria-expanded={open}
       onClick={() => onToggle(id)}
       className={cn(
-        "flex h-7 w-full cursor-pointer items-center gap-1.5 rounded-md px-2 text-start outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
-        level === "section" ? "text-ui font-semibold text-foreground" : "text-ui font-medium text-foreground/88",
+        "flex w-full cursor-pointer items-center gap-1.5 rounded-md px-2 text-start outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
+        level === "section"
+          ? "h-7 text-ui font-semibold text-foreground"
+          : "h-6.5 text-ui-sm font-medium text-muted-foreground hover:text-foreground",
       )}
     >
-      {level === "group" && <Chevron aria-hidden className="size-3 shrink-0 text-muted-foreground" />}
       <span className="truncate">{label}</span>
-      {count !== undefined && <span className="text-ui-xs font-normal text-muted-foreground tabular-nums">{count}</span>}
-      {level === "section" && <Chevron aria-hidden className="ms-auto size-3.5 shrink-0 text-muted-foreground" />}
+      {count !== undefined && <span className="text-ui-xs font-normal text-muted-foreground/80 tabular-nums">{count}</span>}
+      <Chevron aria-hidden className={cn("ms-auto shrink-0 text-muted-foreground", level === "section" ? "size-3.5" : "size-3")} />
     </button>
   )
 }
 
-/** Indented list on a hairline guide (the active row's indicator sits on it). */
+/** A section's or group's rows; no indent, so every label and row shares one left edge. */
 function NavList({ children }: { children: React.ReactNode }) {
-  return <ul className="ms-3.5 flex flex-col gap-px border-s border-border ps-2">{children}</ul>
+  return <ul className="flex flex-col gap-px">{children}</ul>
 }
 
 /**
@@ -167,7 +170,7 @@ export function DocsNav({
       </div>
 
       <nav ref={ref} aria-label="Docs" className="scrollbar-hover min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 pb-4">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           <section className="flex flex-col gap-px">
             <NavToggle id="docs" label="Docs" open={open("docs")} onToggle={toggle} level="section" />
             {open("docs") && (
@@ -200,7 +203,7 @@ export function DocsNav({
                   // A group holding the current page always shows it.
                   const isOpen = open(id) || hasActive
                   return (
-                    <div key={g.category} className="flex flex-col gap-px">
+                    <div key={g.category} className="mt-2 flex flex-col gap-px">
                       <NavToggle id={id} label={g.category} count={g.items.length} open={isOpen} onToggle={toggle} level="group" />
                       {isOpen && (
                         <NavList>

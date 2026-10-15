@@ -2,6 +2,7 @@
   "name": "qinyang-ui-desktop",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "description": "The code editor template as a desktop app.",
   "main": "out/main/index.js",
   "scripts": {

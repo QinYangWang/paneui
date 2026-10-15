@@ -61,3 +61,8 @@ pnpm registry:build    # shadcn build + post-process into public/r
 ```
 
 Design rules for contributors and coding agents: [AGENTS.md](AGENTS.md).
+
+## License
+
+[MIT](LICENSE), © 2026 Wang Qinyang. Notices for bundled work are in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
