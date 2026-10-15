@@ -14,6 +14,7 @@ export default {
     { id: "collapsed", title: "Collapsed", description: "`defaultOpen={false}` shows just the summary; `additions` / `deletions` give counts without any diff text." },
   ],
   notes: [
+    { title: "Narrow widths", body: "The card is a size container: under 20rem (phones, split panes) Undo keeps only its glyph (its accessible name stays “Undo”) and the summary clips instead of running under the buttons." },
     { title: "Counts", body: "Totals come from each file's diff rows, or a line comparison of `oldText` and `newText` (`oldText: null` is a new file). Rows expand to a `FileDiff` in its `row` variant, which loads the highlighter lazily." },
     { title: "ACP", body: "Fed directly from ACP `diff` tool-call content (`path`, `oldText`, `newText`), which is how the agent workspace template builds it at the end of each turn." },
   ],

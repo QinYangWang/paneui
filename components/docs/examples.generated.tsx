@@ -193,6 +193,7 @@ export const examples: Record<string, React.ComponentType> = {
   "icon-chip/sizes": dynamic(() => import("@/registry/base-nova/examples/icon-chip/sizes"), { ssr: false }),
   "icon-chip/tones": dynamic(() => import("@/registry/base-nova/examples/icon-chip/tones"), { ssr: false }),
   "icon-rail/badges": dynamic(() => import("@/registry/base-nova/examples/icon-rail/badges"), { ssr: false }),
+  "icon-rail/horizontal": dynamic(() => import("@/registry/base-nova/examples/icon-rail/horizontal"), { ssr: false }),
   "image-generation/aspect-ratio": dynamic(() => import("@/registry/base-nova/examples/image-generation/aspect-ratio"), { ssr: false }),
   "image-generation/error-retry": dynamic(() => import("@/registry/base-nova/examples/image-generation/error-retry"), { ssr: false }),
   "image-generation/progress": dynamic(() => import("@/registry/base-nova/examples/image-generation/progress"), { ssr: false }),

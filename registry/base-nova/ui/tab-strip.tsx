@@ -24,6 +24,20 @@ function useTabStrip() {
   return ctx
 }
 
+const COARSE_QUERY = "(pointer: coarse)"
+
+function useCoarsePointer() {
+  return React.useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia(COARSE_QUERY)
+      mq.addEventListener("change", onChange)
+      return () => mq.removeEventListener("change", onChange)
+    },
+    () => window.matchMedia(COARSE_QUERY).matches,
+    () => false
+  )
+}
+
 type TabStripProps = Omit<React.ComponentProps<"div">, "onChange" | "defaultValue"> & {
   /** Selected tab. */
   value?: string | null
@@ -31,7 +45,8 @@ type TabStripProps = Omit<React.ComponentProps<"div">, "onChange" | "defaultValu
   onValueChange?: (value: string) => void
   /**
    * Tab order, by value. Pass it with `onReorder` to let people drag tabs
-   * sideways; children must be rendered in this order.
+   * sideways (fine pointers only: on touch screens a swipe scrolls the strip);
+   * children must be rendered in this order.
    */
   order?: string[]
   onReorder?: (order: string[]) => void
@@ -65,7 +80,9 @@ function TabStrip({
   const [valueState, setValueState] = React.useState<string | null>(defaultValue)
   const value = valueProp !== undefined ? valueProp : valueState
   const listRef = React.useRef<HTMLDivElement>(null)
-  const reorderable = !!(order && onReorder)
+  // On touch screens a sideways swipe scrolls the strip, so drag-to-reorder is off there.
+  const coarse = useCoarsePointer()
+  const reorderable = !!(order && onReorder) && !coarse
 
   const select = React.useCallback(
     (next: string) => {
@@ -218,7 +235,7 @@ function TabStripItem({ value, icon, closable, indicator, disabled, className, c
             ctx.close?.(value)
           }}
           className={cn(
-            "-mr-1 flex size-4.5 shrink-0 cursor-pointer items-center justify-center rounded-sm text-muted-foreground opacity-0 transition-[opacity,background-color,color] duration-150 group-hover/tab:opacity-100 group-focus-within/tab:opacity-100 hover:bg-foreground/8 hover:text-foreground",
+            "-mr-1 flex size-4.5 shrink-0 cursor-pointer pointer-coarse:size-6 items-center justify-center rounded-sm text-muted-foreground opacity-0 transition-[opacity,background-color,color] duration-150 group-hover/tab:opacity-100 group-focus-within/tab:opacity-100 hover:bg-foreground/8 hover:text-foreground",
             selected && "opacity-100"
           )}
         >
@@ -239,7 +256,7 @@ function TabStripItem({ value, icon, closable, indicator, disabled, className, c
       }
     },
     className: cn(
-      "group/tab relative flex h-7 max-w-44 min-w-0 shrink-0 cursor-default items-center gap-1.5 rounded-lg px-2 text-ui text-muted-foreground transition-[background-color,color,box-shadow] duration-150 select-none hover:text-foreground has-focus-visible:ring-2 has-focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64",
+      "group/tab relative flex h-7 max-w-44 pointer-coarse:h-8 min-w-0 shrink-0 cursor-default items-center gap-1.5 rounded-lg px-2 text-ui text-muted-foreground transition-[background-color,color,box-shadow] duration-150 select-none hover:text-foreground has-focus-visible:ring-2 has-focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64",
       ctx.variant === "default"
         ? "hover:bg-foreground/5 data-selected:bg-card data-selected:text-foreground data-selected:shadow-raised"
         : "hover:bg-secondary data-selected:bg-foreground/6 data-selected:text-foreground",

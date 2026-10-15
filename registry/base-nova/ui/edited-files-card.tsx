@@ -70,7 +70,7 @@ type EditedFilesCardProps = Omit<React.ComponentProps<"div">, "title"> & {
 }
 
 /**
- * Summary of the files an agent changed in a turn (after Synara): "Edited 4
+ * Summary of the files an agent changed in a turn: "Edited 4
  * files" with total +/-, Undo and Review, and one row per file that expands
  * to its diff (`FileDiff`, row variant).
  */
@@ -95,15 +95,16 @@ function EditedFilesCard({
     <div
       data-slot="edited-files-card"
       data-open={open || undefined}
-      className={cn("frame-xl frame-inset-2 overflow-hidden bg-card text-ui shadow-raised", className)}
+      className={cn("@container/edited-files frame-xl frame-inset-2 overflow-hidden bg-card text-ui shadow-raised", className)}
       {...props}
     >
       <div className="flex items-center gap-2 py-2 pr-2 pl-3">
-        <div className="flex min-w-0 flex-1 flex-col">
+        {/* The summary column clips rather than running under the buttons when the card is narrow. */}
+        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <span className="truncate font-medium">
             {title ?? `Edited ${files.length} ${files.length === 1 ? "file" : "files"}`}
           </span>
-          <span className="flex gap-1.5 font-mono text-ui-sm tabular-nums">
+          <span className="flex gap-1.5 font-mono text-ui-sm whitespace-nowrap tabular-nums">
             <span className="text-success">+{additions}</span>
             <span className="text-destructive">−{deletions}</span>
             <span className="sr-only">
@@ -112,8 +113,9 @@ function EditedFilesCard({
           </span>
         </div>
         {onUndo && (
-          <Button variant="ghost" size="sm" onClick={onUndo} className="rounded-inner text-muted-foreground">
-            Undo
+          <Button variant="ghost" size="sm" aria-label="Undo" onClick={onUndo} className="rounded-inner text-muted-foreground @max-xs/edited-files:px-2">
+            {/* Under 20rem (narrow panes, phones) the button keeps only its glyph. */}
+            <span className="@max-xs/edited-files:hidden">Undo</span>
             <UndoIcon data-icon="inline-end" />
           </Button>
         )}

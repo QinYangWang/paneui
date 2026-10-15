@@ -82,7 +82,7 @@ type AgentComposerProps = Omit<React.ComponentProps<"form">, "onSubmit" | "child
 }
 
 /**
- * Coding-agent composer (after Synara): auto-growing input with `@file`
+ * Coding-agent composer: auto-growing input with `@file`
  * mentions and `/command` suggestions, attach and voice buttons, slots for
  * mode / model / effort pickers, and a send button that turns into stop while
  * the agent works. Enter sends, Shift+Enter adds a line, Esc stops.
@@ -189,7 +189,7 @@ const AgentComposer = React.forwardRef<HTMLTextAreaElement, AgentComposerProps>(
         submit()
       }}
       className={cn(
-        "relative flex w-full flex-col rounded-2xl bg-card shadow-raised transition-shadow duration-150 focus-within:shadow-raised-hover",
+        "relative flex w-full min-w-0 flex-col rounded-2xl bg-card shadow-raised transition-shadow duration-150 focus-within:shadow-raised-hover",
         className
       )}
       {...props}
@@ -279,7 +279,8 @@ const AgentComposer = React.forwardRef<HTMLTextAreaElement, AgentComposerProps>(
         }}
         className="field-sizing-content max-h-60 min-h-14 w-full resize-none bg-transparent px-3.5 pt-3 text-ui-lg outline-none placeholder:text-muted-foreground disabled:opacity-64"
       />
-      <div className="flex items-center gap-1 p-2 pt-1">
+      {/* Named container: mode / effort pickers drop their labels when this row is under 28rem (phones, tablets, split panes). */}
+      <div data-slot="agent-composer-toolbar" className="@container/composer-toolbar flex min-w-0 items-center gap-1 p-2 pt-1">
         <Tooltip>
           <TooltipTrigger
             render={
@@ -290,9 +291,9 @@ const AgentComposer = React.forwardRef<HTMLTextAreaElement, AgentComposerProps>(
           />
           <TooltipContent>Attach files</TooltipContent>
         </Tooltip>
-        {toolbarStart}
+        <div className="flex min-w-0 shrink items-center gap-1">{toolbarStart}</div>
         <div className="flex-1" />
-        {toolbarEnd}
+        <div className="flex min-w-0 shrink items-center justify-end gap-1">{toolbarEnd}</div>
         {onVoice && (
           <Button type="button" variant="ghost" size="icon-sm" aria-label="Dictate" onClick={onVoice} className="text-muted-foreground">
             <MicIcon />

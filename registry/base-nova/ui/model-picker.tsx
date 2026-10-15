@@ -40,6 +40,12 @@ type ComposerPickerProps = {
   className?: string
   /** Extra content under the options (a "Manage models…" item). */
   footer?: React.ReactNode
+  /**
+   * Inside a narrow `AgentComposer` (toolbar under 28rem: phones, tablets, split panes) show only the
+   * glyph and chevron; the label stays the accessible name. Ignored when there is no glyph.
+   * `ModePicker` and `EffortPicker` default to `true`, `ModelPicker` and `ComposerPicker` to `false`.
+   */
+  compact?: boolean
 }
 
 /**
@@ -60,8 +66,10 @@ function ComposerPicker({
   disabled,
   className,
   footer,
+  compact = false,
 }: ComposerPickerProps) {
   const selected = options.find((o) => o.value === value)
+  const glyph = selected?.icon ?? icon
   const groups = React.useMemo(() => {
     const map = new Map<string, PickerOption[]>()
     for (const o of options) {
@@ -82,15 +90,17 @@ function ComposerPicker({
             aria-label={`${label}: ${selected?.label ?? placeholder}`}
             data-slot="composer-picker"
             data-tone={selected?.tone ?? "default"}
+            data-compact={(compact && !!glyph) || undefined}
             className={cn(
-              "min-w-0 px-2 font-normal text-muted-foreground hover:text-foreground data-[tone=destructive]:text-destructive data-[tone=warning]:text-warning",
+              // Shrinks (label truncates) instead of pushing the composer toolbar wider.
+              "min-w-0 shrink px-2 font-normal text-muted-foreground hover:text-foreground data-[tone=destructive]:text-destructive data-[tone=warning]:text-warning",
               className
             )}
           />
         }
       >
-        {(selected?.icon ?? icon) && <span className="flex shrink-0 items-center [&_svg]:size-3.5">{selected?.icon ?? icon}</span>}
-        <span className="min-w-0 truncate">{selected?.label ?? placeholder}</span>
+        {glyph && <span className="flex shrink-0 items-center [&_svg]:size-3.5">{glyph}</span>}
+        <span className={cn("min-w-0 truncate", compact && glyph && "@max-md/composer-toolbar:hidden")}>{selected?.label ?? placeholder}</span>
         <ChevronDownIcon data-icon="inline-end" className="size-3 opacity-64" />
       </MenuTrigger>
       <MenuContent side={side} align={align} className="max-h-80 w-64">
@@ -165,9 +175,10 @@ type EffortPickerProps = Omit<ComposerPickerProps, "options" | "label"> & {
 }
 
 /** Reasoning effort (thought level), with a bolt glyph. */
-function EffortPicker({ levels = DEFAULT_EFFORT, label = "Reasoning effort", icon, heading = "Reasoning effort", ...props }: EffortPickerProps) {
+function EffortPicker({ levels = DEFAULT_EFFORT, label = "Reasoning effort", icon, heading = "Reasoning effort", compact = true, ...props }: EffortPickerProps) {
   return (
     <ComposerPicker
+      compact={compact}
       options={levels.map((l) => ({ ...l }))}
       label={label}
       heading={heading}
@@ -185,7 +196,7 @@ type ModePickerProps = Omit<ComposerPickerProps, "options" | "label"> & {
 }
 
 /** Agent mode / access level ("Ask", "Auto", "Full access"); a mode can colour the trigger with `tone`. */
-function ModePicker({ modes, label = "Mode", icon, ...props }: ModePickerProps) {
+function ModePicker({ modes, label = "Mode", icon, compact = true, ...props }: ModePickerProps) {
   const options = modes.map<PickerOption>((m) => ({
     value: m.id,
     label: m.name,
@@ -193,7 +204,7 @@ function ModePicker({ modes, label = "Mode", icon, ...props }: ModePickerProps) 
     icon: m.icon,
     tone: m.tone,
   }))
-  return <ComposerPicker options={options} label={label} icon={icon ?? <ShieldIcon />} {...props} />
+  return <ComposerPicker options={options} label={label} icon={icon ?? <ShieldIcon />} compact={compact} {...props} />
 }
 
 export {

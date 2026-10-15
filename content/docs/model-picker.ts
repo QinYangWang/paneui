@@ -25,6 +25,7 @@ export default {
         { name: "side", type: `"top" | "bottom"`, default: `"top"`, description: "Menu side (top suits a composer at the bottom)." },
         { name: "align", type: `"start" | "center" | "end"`, default: `"start"`, description: "Menu alignment." },
         { name: "footer", type: "ReactNode", description: "Menu items under the options." },
+        { name: "compact", type: "boolean", default: "false", description: "Inside an `AgentComposer` toolbar narrower than 28rem (phones, tablets, split panes), show only the glyph and chevron; the label stays the accessible name. `ModePicker` and `EffortPicker` default to `true`." },
       ],
     },
     { name: "ModelPicker", description: "Preset grouped by `provider`.", props: [{ name: "models", type: "{ id, name, description?, provider?, icon? }[]", required: true, description: "Models to offer." }] },
