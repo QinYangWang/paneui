@@ -223,7 +223,7 @@ function MultiSelectContent({
 
 /** Option row with a checkbox-style tick that fills when the value is chosen. */
 function MultiSelectItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
-  const size = React.useContext(MultiSelectSizeContext) ?? "default"
+  const size = useMultiSelectSize()
   return (
     <ComboboxPrimitive.Item
       data-slot="multi-select-item"

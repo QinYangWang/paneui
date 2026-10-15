@@ -8,10 +8,8 @@ import { CheckIcon, ChevronsUpDownIcon, SearchIcon, XIcon } from "@/components/i
 import { ControlSizeContext, useControlSize, type ControlSize } from "@/lib/control-size"
 import { cn } from "@/lib/utils"
 
-// Heights match Button (xs 24, sm 28, default 32, lg 36). Set `size` on <Combobox> to size
-// the input or trigger and the rows together.
-const ComboboxItemSizeContext = React.createContext<ControlSize | undefined>(undefined)
-
+// Heights match Button (xs 24, sm 28, default 32, lg 36). Set `size` on <Combobox> (or a
+// Field) to size the input or trigger and the rows together.
 type ComboboxProps<Value, Multiple extends boolean | undefined = false, Item = Value> = ComboboxPrimitive.Root.Props<
   Value,
   Multiple,
@@ -26,11 +24,7 @@ function Combobox<Value, Multiple extends boolean | undefined = false, Item = Va
 }: ComboboxProps<Value, Multiple, Item>) {
   const root = <ComboboxPrimitive.Root<Value, Multiple, Item> {...props} />
   if (!size) return root
-  return (
-    <ControlSizeContext.Provider value={size}>
-      <ComboboxItemSizeContext.Provider value={size}>{root}</ComboboxItemSizeContext.Provider>
-    </ControlSizeContext.Provider>
-  )
+  return <ControlSizeContext.Provider value={size}>{root}</ControlSizeContext.Provider>
 }
 
 const comboboxInputVariants = cva(
@@ -245,7 +239,7 @@ function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
 }
 
 function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
-  const size = React.useContext(ComboboxItemSizeContext) ?? "default"
+  const size = useControlSize()
   return (
     <ComboboxPrimitive.Item
       data-slot="combobox-item"
@@ -312,7 +306,6 @@ export {
   ComboboxSeparator,
   ComboboxEmpty,
   ComboboxCollection,
-  ComboboxItemSizeContext,
   useComboboxFilter,
   comboboxInputVariants,
   comboboxTriggerVariants,

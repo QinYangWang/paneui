@@ -8,9 +8,8 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon, ChevronsUpDownIcon } from "@
 import { ControlSizeContext, useControlSize, type ControlSize } from "@/lib/control-size"
 import { cn } from "@/lib/utils"
 
-// Trigger heights match Button (xs 24, sm 28, default 32, lg 36). Rows grow with the
-// trigger only when the size is set on <Select>, so a small trigger can still open a
-// full-size list.
+// Trigger heights match Button (xs 24, sm 28, default 32, lg 36). Rows follow a size set
+// on <Select> or a sized Field; a size on the trigger alone keeps full-size rows.
 const selectTriggerVariants = cva(
   "inline-flex w-full min-w-36 cursor-pointer items-center gap-2 bg-card shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-popup-open:shadow-raised-hover [&_svg]:shrink-0",
   {
@@ -41,8 +40,6 @@ const selectItemVariants = cva(
   }
 )
 
-const SelectItemSizeContext = React.createContext<ControlSize | undefined>(undefined)
-
 type SelectProps<Value, Multiple extends boolean | undefined = false> = SelectPrimitive.Root.Props<Value, Multiple> & {
   /** Sizes the trigger and the rows together. */
   size?: ControlSize
@@ -51,11 +48,7 @@ type SelectProps<Value, Multiple extends boolean | undefined = false> = SelectPr
 function Select<Value, Multiple extends boolean | undefined = false>({ size, ...props }: SelectProps<Value, Multiple>) {
   const root = <SelectPrimitive.Root<Value, Multiple> {...props} />
   if (!size) return root
-  return (
-    <ControlSizeContext.Provider value={size}>
-      <SelectItemSizeContext.Provider value={size}>{root}</SelectItemSizeContext.Provider>
-    </ControlSizeContext.Provider>
-  )
+  return <ControlSizeContext.Provider value={size}>{root}</ControlSizeContext.Provider>
 }
 
 const SelectGroup = SelectPrimitive.Group
@@ -133,7 +126,7 @@ function SelectContent({
 }
 
 function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Props) {
-  const size = React.useContext(SelectItemSizeContext) ?? "default"
+  const size = useControlSize()
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
