@@ -76,7 +76,29 @@ function ApiPart({ part }: { part: PartDoc }) {
         </p>
       )}
       {part.props.length > 0 && (
-        <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
+        // Phones: one stacked entry per prop (name and default, type, description) instead of a four-column table.
+        <dl className="flex flex-col rounded-xl bg-card text-sm shadow-raised sm:hidden">
+          {part.props.map((p) => (
+            <div key={p.name} className="flex min-w-0 flex-col gap-1 border-b border-border px-4 py-3 last:border-b-0">
+              <dt className="flex min-w-0 items-baseline justify-between gap-3 font-mono text-xs">
+                <span className="min-w-0 break-all text-foreground">
+                  {p.name}
+                  {p.required && <span className="text-destructive">*</span>}
+                </span>
+                {p.default && <span className="shrink-0 text-muted-foreground">= {p.default}</span>}
+              </dt>
+              <dd className="font-mono text-xs break-words text-primary">{p.type}</dd>
+              {p.description && (
+                <dd className="text-pretty text-muted-foreground">
+                  <Inline text={p.description} />
+                </dd>
+              )}
+            </div>
+          ))}
+        </dl>
+      )}
+      {part.props.length > 0 && (
+        <div className="overflow-x-auto rounded-xl bg-card shadow-raised max-sm:hidden">
           <table className="w-full min-w-xl border-collapse text-left text-sm">
             <thead className="text-muted-foreground">
               <tr className="border-b border-border">
@@ -107,7 +129,19 @@ function ApiPart({ part }: { part: PartDoc }) {
         </div>
       )}
       {part.dataAttributes && part.dataAttributes.length > 0 && (
-        <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
+        <dl className="flex flex-col rounded-xl bg-card text-sm shadow-raised sm:hidden">
+          {part.dataAttributes.map((d) => (
+            <div key={d.name} className="flex min-w-0 flex-col gap-1 border-b border-border px-4 py-3 last:border-b-0">
+              <dt className="font-mono text-xs break-all text-foreground">{d.name}</dt>
+              <dd className="text-pretty text-muted-foreground">
+                <Inline text={d.description} />
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      {part.dataAttributes && part.dataAttributes.length > 0 && (
+        <div className="overflow-x-auto rounded-xl bg-card shadow-raised max-sm:hidden">
           <table className="w-full border-collapse text-left text-sm">
             <thead className="text-muted-foreground">
               <tr className="border-b border-border">
@@ -215,7 +249,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
           {doc?.baseUi && (
             <div className="flex flex-wrap gap-1.5">
               <Badge variant="outline" size="sm" render={<a href={doc.baseUi.href} />}>
-                Base UI {doc.baseUi.name}
+                {doc.baseUi.name} primitive
               </Badge>
             </div>
           )}
@@ -344,7 +378,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
               <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">line</code> primitives,
               knockouts), reference icons, a preview script to check the result at 14px, and how to add it to your{" "}
               <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>.
-              Works with Claude Code, Codex, Cursor and any agent that reads Agent Skills.
+              Works with any coding agent that reads Agent Skills.
             </p>
             <IconSkill skill={readSource("skills/puffy-icons/SKILL.md")} />
           </section>
@@ -369,7 +403,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
                     href={`${doc.baseUi.href}#api-reference`}
                     className="font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
                   >
-                    Base UI {doc.baseUi.name}
+                    the {doc.baseUi.name} primitive
                   </a>
                   . Only the props this library adds or changes are listed; everything else passes through.
                 </p>

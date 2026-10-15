@@ -2,6 +2,7 @@
 
 import type * as React from "react"
 
+import { cn } from "@/lib/utils"
 import { Badge } from "@/registry/base-nova/ui/badge"
 
 import { PRESET_THEMES, RAMP_STOPS, type AccentVars } from "./accent-color"
@@ -37,12 +38,12 @@ function ModeSwatch({ kind, value, bg }: { kind: TokenKind; value: string; bg: s
   )
 }
 
-function ValueCell({ kind, value, bg }: { kind: TokenKind; value: string | undefined; bg: string | undefined }) {
+function ValueCell({ kind, value, bg, wrap = false }: { kind: TokenKind; value: string | undefined; bg: string | undefined; wrap?: boolean }) {
   if (!value) return <span className="text-muted-foreground">—</span>
   return (
-    <span className="flex items-center gap-2.5">
+    <span className="flex min-w-0 items-center gap-2.5">
       <ModeSwatch kind={kind} value={value} bg={bg} />
-      <span className="font-mono text-ui-xs whitespace-nowrap text-muted-foreground">{value}</span>
+      <span className={cn("min-w-0 font-mono text-ui-xs text-muted-foreground", wrap ? "break-all" : "whitespace-nowrap")}>{value}</span>
     </span>
   )
 }
@@ -64,7 +65,30 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
+    <>
+      {/* Phones: one entry per token, light and dark stacked, values wrapping inside the card. */}
+      <ul className="flex flex-col rounded-xl bg-card text-sm shadow-raised sm:hidden">
+        {role.tokens.map((t) => (
+          <li key={t.name} className="flex min-w-0 flex-col gap-2 border-b px-4 py-3 last:border-b-0">
+            <span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5">
+              <code className="font-mono text-xs text-foreground">--{t.name}</code>
+              {t.note === "accent" ? (
+                <Badge variant="primary" size="sm">
+                  accent
+                </Badge>
+              ) : null}
+              <code className="basis-full font-mono text-ui-xs break-all text-muted-foreground">{t.cls}</code>
+            </span>
+            {(["light", "dark"] as const).map((mode) => (
+              <span key={mode} className="flex min-w-0 items-center gap-2.5">
+                <span className="w-8 shrink-0 text-ui-xs text-muted-foreground capitalize">{mode}</span>
+                <ValueCell kind={t.kind} value={valueFor(t.name, mode)} bg={valueFor(t.on ?? "background", mode)} wrap />
+              </span>
+            ))}
+          </li>
+        ))}
+      </ul>
+    <div className="overflow-x-auto rounded-xl bg-card shadow-raised max-sm:hidden">
       <table className="w-full min-w-xl table-fixed border-collapse text-left text-sm">
         <thead className="text-muted-foreground">
           <tr className="border-b">
@@ -100,5 +124,6 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
         </tbody>
       </table>
     </div>
+    </>
   )
 }

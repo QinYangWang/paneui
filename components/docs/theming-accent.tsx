@@ -90,7 +90,7 @@ export function ThemingAccent() {
                 )
               })}
             </div>
-            <span aria-hidden className="h-6 w-px bg-border" />
+            <span aria-hidden className="h-6 w-px bg-border max-sm:hidden" />
             <div className="flex items-center gap-2">
               <ColorPicker value={pickerHex} onValueChange={pick}>
                 <ColorPickerTrigger showHex aria-label="Custom accent colour" />
@@ -180,7 +180,7 @@ export function ThemingAccent() {
       </Card>
 
       <div className="flex flex-wrap items-center gap-3">
-        <p className="min-w-0 flex-1 text-sm text-muted-foreground">
+        <p className="min-w-0 flex-1 basis-64 text-sm text-pretty text-muted-foreground">
           Take it home: paste these overrides after the theme variables. The eleven ramp stops plus primary, its text and the ring; nothing else changes.
         </p>
         <Button onClick={() => copy(css)}>
