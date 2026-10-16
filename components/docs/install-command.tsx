@@ -67,7 +67,7 @@ export function CommandPill({ command, className }: { command: string; className
     <div
       data-slot="command-pill"
       className={cn(
-        "flex h-10 min-w-0 items-center gap-2 rounded-xl bg-card pr-1 pl-3 font-mono text-ui text-card-foreground shadow-raised",
+        "flex h-10 min-w-0 items-center gap-2 rounded-xl bg-card ps-3 pe-1 font-mono text-ui text-card-foreground shadow-raised",
         className,
       )}
     >

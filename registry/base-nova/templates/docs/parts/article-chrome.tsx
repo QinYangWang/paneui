@@ -47,10 +47,13 @@ export function ArticleHeader() {
       <div className="flex basis-full flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
         <span>Updated Oct 9, 2026</span>
         <span>6 min read</span>
-        <Button variant="link" size="sm" nativeButton={false} render={<a href="#" />}>
-          <EditIcon data-icon="inline-start" />
+        <a
+          href="#"
+          className="inline-flex items-center gap-1.5 rounded-sm transition-colors duration-150 outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+        >
+          <EditIcon size={14} />
           Edit on GitHub
-        </Button>
+        </a>
       </div>
     </PageHeader>
   )

@@ -115,7 +115,7 @@ export function ThemingAccent() {
                 </Button>
               ) : null}
             </div>
-            <Button variant="ghost" size="sm" className="ml-auto" onClick={() => setAccent(DEFAULT_ACCENT, null)}>
+            <Button variant="ghost" size="sm" className="ms-auto" onClick={() => setAccent(DEFAULT_ACCENT, null)}>
               Reset
             </Button>
           </div>
@@ -136,7 +136,7 @@ export function ThemingAccent() {
                 </div>
               </div>
             ))}
-            <div aria-hidden className="flex pl-11 font-mono text-ui-2xs text-muted-foreground">
+            <div aria-hidden className="flex ps-11 font-mono text-ui-2xs text-muted-foreground">
               {ACCENT_VARS.map((k) => (
                 <span key={k} className="min-w-0 flex-1 truncate text-center">
                   {k === "ring" ? "ring" : k.replace("primary-", "").replace("primary", "solid")}

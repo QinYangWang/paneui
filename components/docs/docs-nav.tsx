@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 
-import { ChevronRightIcon } from "@/components/icons"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import {
   SidebarNav,
@@ -127,15 +126,17 @@ export function DocsNav({
       </SidebarNavContent>
 
       <SidebarNavFooter>
-        <Link
-          href={WHATS_NEW.href}
-          className="flex h-8 items-center gap-2 rounded-lg px-2.5 text-ui font-medium outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50"
-        >
-          <span aria-hidden className="size-1.5 rounded-full bg-success" />
-          What&apos;s new
-          <span className="ms-auto text-ui-xs font-normal text-muted-foreground tabular-nums">{WHATS_NEW.items.length} new</span>
-          <ChevronRightIcon aria-hidden className="size-3.5 text-muted-foreground rtl:-scale-x-100" />
-        </Link>
+        <SidebarNavList>
+          <SidebarNavLink
+            render={<Link href={WHATS_NEW.href} />}
+            badge={<span className="text-ui-xs text-muted-foreground tabular-nums">{WHATS_NEW.items.length} new</span>}
+          >
+            <span className="flex items-center gap-2 font-medium text-foreground">
+              <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-success" />
+              What&apos;s new
+            </span>
+          </SidebarNavLink>
+        </SidebarNavList>
       </SidebarNavFooter>
     </SidebarNav>
   )

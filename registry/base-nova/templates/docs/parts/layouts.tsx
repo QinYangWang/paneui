@@ -27,12 +27,21 @@ import { CURRENT_PAGE, CURRENT_SECTION, SECTIONS } from "./site"
  */
 
 /** Header, article and footer in one column. `outline` adds the sticky "On this page" button above the article. */
-function ArticleColumn({ outline, className }: { outline?: "popover" | "popover-narrow"; className?: string }) {
+function ArticleColumn({
+  outline,
+  outlineTop = "top-14",
+  className,
+}: {
+  outline?: "popover" | "popover-narrow"
+  /** Where the sticky outline button stops: under the header (`top-14`) or under header and tabs (`top-26`). */
+  outlineTop?: "top-14" | "top-26"
+  className?: string
+}) {
   return (
     <article className={cn("flex w-full min-w-0 flex-col gap-10", className)}>
       <ArticleHeader />
       {outline && (
-        <div className={cn("sticky top-14 z-30 -my-4 bg-background py-2", outline === "popover-narrow" && "xl:hidden")}>
+        <div className={cn("sticky z-30 -my-4 bg-background py-2", outlineTop, outline === "popover-narrow" && "xl:hidden")}>
           <OutlinePopover items={toc} activeLine={136} className="max-w-sm" />
         </div>
       )}
@@ -87,7 +96,7 @@ export function NotebookLayout() {
       <div className="flex min-w-0 flex-1">
         <SidebarColumn section={CURRENT_SECTION} top="h-26" />
         <div className="flex min-w-0 flex-1 justify-center gap-12 px-5 py-10 sm:px-8 lg:px-12">
-          <ArticleColumn className="max-w-reading" />
+          <ArticleColumn outline="popover-narrow" outlineTop="top-26" className="max-w-reading" />
           <aside className="sticky top-36 w-56 shrink-0 self-start max-xl:hidden">
             <Outline items={toc} activeLine={176} maxHeight="calc(100svh - 10.5rem)" />
           </aside>
@@ -147,7 +156,7 @@ export function HomeLayout() {
   return (
     <div className="flex min-h-svh flex-col bg-background">
       <DocsHeader menu="none">
-        <SectionTabs className="h-14 max-md:hidden" />
+        <SectionTabs className="h-14 max-lg:hidden" />
       </DocsHeader>
       <main className="flex w-full flex-1 flex-col items-center px-5 sm:px-8">
         <section className="flex w-full max-w-5xl flex-col items-start gap-6 py-16 sm:py-24">

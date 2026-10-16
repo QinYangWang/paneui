@@ -306,7 +306,13 @@ function blocks(node, out = []) {
       const walk = (x) => typeof x !== "string" && (x.tag === "tr" ? rows.push(x) : x.children.forEach(walk))
       walk(n)
       if (rows.length) {
-        const cells = rows.map((r) => r.children.filter((c) => typeof c !== "string" && (c.tag === "td" || c.tag === "th")).map((c) => cell(inlineMd(c.children).trim())))
+        // Cells a SimpleTable marks as code (names, types, defaults) keep their code formatting.
+        const cellMd = (c) => {
+          if (hidden(c)) return ""
+          const t = inlineMd(c.children).trim()
+          return ["code", "code-muted", "type"].includes(c.attrs["data-variant"]) && t && !t.includes("`") && t !== "—" ? codeCell(t) : cell(t)
+        }
+        const cells = rows.map((r) => r.children.filter((c) => typeof c !== "string" && (c.tag === "td" || c.tag === "th")).map(cellMd))
         // A column with no text in any row (a swatch or preview column) is left out.
         const cols = Math.max(...cells.map((c) => c.length))
         const keep = Array.from({ length: cols }, (_, i) => i).filter((i) => cells.some((c) => (c[i] ?? "").trim()))

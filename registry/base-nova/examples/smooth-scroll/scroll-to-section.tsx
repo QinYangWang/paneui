@@ -13,7 +13,7 @@ const SECTIONS = [
 function Nav() {
   const { scrollTo } = useSmoothScroll()
   return (
-    <div className="sticky top-0 z-10 flex gap-1 bg-muted p-2">
+    <div className="sticky top-0 z-10 flex gap-1 bg-muted p-1">
       {SECTIONS.map((s) => (
         <Button key={s.id} size="sm" variant="ghost" onClick={() => scrollTo(`#ss-${s.id}`, { offset: -48 })}>
           {s.title}

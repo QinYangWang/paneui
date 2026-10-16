@@ -130,7 +130,7 @@ export default function CliPage() {
           </p>
           <InstallCommand args={`add ${templateUrl("saas")}`} />
           <p className="text-muted-foreground">Before you run it, check these.</p>
-          <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
+          <ul className="flex list-disc flex-col gap-2 ps-5 text-muted-foreground marker:text-border">
             <li>
               The app uses the App Router and Tailwind CSS 4. If it has no <Code>components.json</Code>, the CLI offers to
               create one first.
@@ -249,14 +249,14 @@ export default function CliPage() {
           When a release changes the theme, update it first, then the components that use it. Commit before you start so
           you can review every change.
         </p>
-        <ol className="flex list-decimal flex-col gap-2 pl-5 text-muted-foreground marker:text-fg-tertiary">
+        <ol className="flex list-decimal flex-col gap-2 ps-5 text-muted-foreground marker:text-fg-tertiary">
           <li>
             Reinstall the theme. <Code>--overwrite</Code> is required: the theme also ships <Code>lib/utils.ts</Code>, and
             without it a non-interactive run stops at that question before the stylesheet is touched.
           </li>
         </ol>
         <InstallCommand args={`add ${ns}/theme --overwrite`} />
-        <ol start={2} className="flex list-decimal flex-col gap-2 pl-5 text-muted-foreground marker:text-fg-tertiary">
+        <ol start={2} className="flex list-decimal flex-col gap-2 ps-5 text-muted-foreground marker:text-fg-tertiary">
           <li>Reinstall your accent and radius presets, if you use them, so they apply on top of the new theme.</li>
           <li>
             Run the upgrade check. It lists tokens the release removed, broken rules from older installs and code that uses
@@ -265,7 +265,7 @@ export default function CliPage() {
         </ol>
         <InstallCommand args={`add ${ns}/upgrade-check`} />
         <DocsCode code={"node scripts/qinyang-upgrade-check.mjs\nnode scripts/qinyang-upgrade-check.mjs --fix"} language="bash" lineNumbers={false} />
-        <ol start={4} className="flex list-decimal flex-col gap-2 pl-5 text-muted-foreground marker:text-fg-tertiary">
+        <ol start={4} className="flex list-decimal flex-col gap-2 ps-5 text-muted-foreground marker:text-fg-tertiary">
           <li>
             Re-add the components you use with <Code>--overwrite</Code>, a few at a time, and re-apply local edits from the
             diff.
@@ -301,7 +301,7 @@ export default function CliPage() {
 
         <div className="flex flex-col gap-4 pt-2">
           <GuideH3 id="cli-limits">What the CLI merges</GuideH3>
-          <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
+          <ul className="flex list-disc flex-col gap-2 ps-5 text-muted-foreground marker:text-border">
             <li>
               Variables in <Code>:root</Code>, <Code>.dark</Code> and <Code>@theme</Code> are added or updated in place, so
               new values replace old ones under the same name.
@@ -346,7 +346,7 @@ export default function CliPage() {
 
       <section className="flex flex-col gap-4">
         <GuideH2 id="item-types">Item types</GuideH2>
-        <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
+        <ul className="flex list-disc flex-col gap-2 ps-5 text-muted-foreground marker:text-border">
           <li>
             <Code>registry:ui</Code> is a component, installed to your <Code>ui</Code> alias.
           </li>

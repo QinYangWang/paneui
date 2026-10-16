@@ -63,16 +63,18 @@ for (const file of files) {
     // Prose with code spans and link targets removed.
     const prose = raw.replace(/`[^`]*`/g, "§").replace(/\]\([^)]*\)/g, "]")
     // Inline code run into the next code span or word: "`--card``bg-card`", "`--card`#fff".
-    if (/\u0003\u0003|\u0003[#A-Za-z0-9]/.test(raw.replace(/`[^`]+`/g, "\u0003"))) add(file, n, "glued-code", raw)
+    // (a plural "s" after a code span, "`MenuItem`s", is English, not glue)
+    if (/\u0003\u0003|\u0003(?!s\b)[#A-Za-z0-9]/.test(raw.replace(/`[^`]+`/g, "\u0003"))) add(file, n, "glued-code", raw)
     // A label run into its description: "shadow-raised Resting controls…", "- `--radius` One base…".
     if (/^(?:[a-z][\w-]*[a-z\d]|- `[^`]+`) [A-Z][a-z]/.test(raw) && !/^- `[^`]+` (?:and|or|to|is|are)\b/.test(raw)) add(file, n, "run-in-label", raw)
-    // The same row shown twice in one section (a list for phones and a table for desktop).
-    const firstCode = /^(?:- |\| )`([^`]+)`/.exec(raw)?.[1]
-    if (firstCode) {
+    // The same row shown twice in one section (a list for phones and a table for desktop): same first two code spans.
+    const codes = /^(?:- |\| )`/.test(raw) ? [...raw.matchAll(/`([^`]+)`/g)].map((m) => m[1]) : []
+    if (codes.length >= 2) {
       const kind = raw.startsWith("|") ? "t" : "l"
-      const other = sectionRows.get(firstCode)
+      const key = codes.slice(0, 2).join("\u0000")
+      const other = sectionRows.get(key)
       if (other && other !== kind) add(file, n, "duplicated-rows", raw)
-      else sectionRows.set(firstCode, kind)
+      else sectionRows.set(key, kind)
     }
     if (/\[\s*\]\(/.test(raw) || /\]\(\s*\)/.test(raw)) add(file, n, "empty-link", raw)
     if (/\S {2,}\S/.test(raw.replace(/^\s+/, "")) && !raw.startsWith("|") && !/^\s*[-*\d]/.test(raw)) add(file, n, "double-space", raw)

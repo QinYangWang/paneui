@@ -117,7 +117,7 @@ export default function Introduction() {
           first component.
         </p>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme @${REGISTRY_NAME}/button`} />
-        <div className="flex flex-wrap gap-2">
+        <div data-md="links" className="flex flex-wrap gap-2">
           <Button nativeButton={false} render={<Link href="/docs/installation" />}>
             Installation
             <ArrowRightIcon data-icon="inline-end" />

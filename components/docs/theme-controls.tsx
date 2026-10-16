@@ -79,7 +79,7 @@ export function AccentControl() {
                   style={{ "--swatch": swatch } as React.CSSProperties}
                 />
                 {l}
-                {a === DEFAULT_ACCENT ? <span className="ml-auto text-ui-xs text-muted-foreground">Default</span> : null}
+                {a === DEFAULT_ACCENT ? <span className="ms-auto text-ui-xs text-muted-foreground">Default</span> : null}
               </MenuRadioItem>
             ))}
             {custom ? (

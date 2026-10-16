@@ -68,3 +68,23 @@ the docs site no longer uses them.
 
 Why: the old rail and inset panel read as a second app inside the page, the header and rail used
 different heights and paddings, and icon+label rows were too large for ~150 items.
+
+## Built from the library (round 24)
+
+The docs chrome is composed from registry items, so the site is the first consumer of each one:
+
+- Header section tabs: `NavigationMenu` + `NavigationMenuLink variant="tab"` (`active` = the 2px bar).
+- Sidebar: `SidebarNav` (`SidebarNavSearch`, `SidebarNavContent`, collapsible `SidebarNavSection` with `level="group"`,
+  `SidebarNavLink` with `render={<Link />}`, `SidebarNavFooter`). Collapsed state still persists through `open` /
+  `onOpenChange` in `docs-nav.tsx`.
+- Outline: `Outline` (rail) and `OutlinePopover` (narrow and wide pages) from `ui/outline.tsx`; `doc-toc.tsx` only maps the
+  site's depth 1/2 entries to depth 2/3. The same component drives the docs and blog templates.
+- Page header: `PageHeader size="lg"` (eyebrow and lede on their own rows, actions beside the title).
+- Prev / next and the Introduction tiles: `Card interactive render={<Link />}`.
+- API, token, theming and CLI tables: `SimpleTable` (`variant` on cells); the phone-only stacked lists are `Card` and carry
+  `data-md-skip`.
+
+Left custom on purpose: `DocHeading` anchors (copy-link behaviour specific to the docs), `InstallCommand` (package-manager
+pill tied to the docs' install store), `PreviewTabs` / `TemplatePreview` / `DeviceFrame` (preview iframes and theme sync),
+the theming widgets' swatches inside `theming-accent.tsx` / `theming-radius.tsx` (they are the demo itself), and the
+sidebar's "What's new" row (a status dot plus count; one row, no list).
