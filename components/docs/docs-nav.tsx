@@ -161,7 +161,8 @@ export function DocsNav({
           type="button"
           onClick={onSearch}
           aria-label="Search docs"
-          className="flex h-8 w-full cursor-pointer items-center gap-2 rounded-lg bg-background px-2.5 text-ui text-muted-foreground shadow-well outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 dark:bg-input/32"
+          // the key cap sits 8px into the field: concentric with it at large radii
+          className="flex h-8 w-full cursor-pointer items-center gap-2 frame-lg frame-inset-2 bg-background px-2.5 [&>[data-slot=kbd]]:rounded-inner-or-2xs text-ui text-muted-foreground shadow-well outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 dark:bg-input/32"
         >
           <SearchIcon className="size-3.5 shrink-0" />
           <span className="flex-1 text-start">Search</span>

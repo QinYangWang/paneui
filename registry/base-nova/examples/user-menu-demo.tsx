@@ -4,7 +4,7 @@ import { UserMenu } from "@/registry/base-nova/ui/user-menu"
 
 export default function UserMenuDemo() {
   return (
-    <div className="w-60 rounded-3xl bg-shell p-2">
+    <div className="w-60 frame-3xl frame-p-2 bg-shell">
       <UserMenu name="Dana Chen" email="dana@northwind.dev" side="bottom">
         <MenuGroup>
           <MenuItem>

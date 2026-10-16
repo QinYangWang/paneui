@@ -48,7 +48,7 @@ function InputGroup({ className, size, ...props }: React.ComponentProps<"div"> &
 }
 
 const addonVariants = cva(
-  "flex shrink-0 cursor-text items-center gap-1.5 text-muted-foreground select-none [&>kbd]:rounded-xs [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 group-data-[size=xs]/input-group:[&_svg:not([class*='size-'])]:size-3.5",
+  "flex shrink-0 cursor-text items-center gap-1.5 text-muted-foreground select-none [&>kbd]:rounded-[max(calc(var(--frame-inner-1)-var(--spacing)*0.5),min(var(--radius-xs),var(--radius-sm)))] [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 group-data-[size=xs]/input-group:[&_svg:not([class*='size-'])]:size-3.5",
   {
     variants: {
       align: {

@@ -8,7 +8,7 @@ export default function FileTreeExplicitValues() {
   const [value, setValue] = React.useState<string | null>("doc-42")
   return (
     <div className="flex w-72 flex-col gap-2">
-      <div className="rounded-xl bg-card p-2 shadow-surface">
+      <div className="frame-xl frame-p-2 bg-card shadow-surface">
         <FileTree label="Documents" value={value} onValueChange={setValue} defaultExpanded={["folder-7"]}>
           <FileTreeFolder value="folder-7" name="Guides">
             <FileTreeFile value="doc-41" name="install.md" />

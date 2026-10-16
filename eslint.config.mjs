@@ -302,7 +302,7 @@ function readBox(opening) {
     if (t.includes(":")) continue; // variants (hover:, sm:, data-…) are state, not the resting shape
     let m;
     if ((m = t.match(/^(?:rounded|frame)-(none|sm|md|lg|xl|2xl|3xl|shell)$/))) radius = RADIUS_PX[m[1]];
-    else if (t === "rounded-inner" || t === "frame-inner") inner = true;
+    else if (t === "rounded-inner" || t.startsWith("rounded-inner-") || t === "frame-inner") inner = true;
     else if ((m = t.match(/^(?:p|frame-p)-([\d.]+)$/))) pad = SPACING_PX(m[1]); // not frame-inset: that inset is only for rounded-inner children
   }
   return { attr, radius, pad, inner };

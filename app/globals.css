@@ -773,6 +773,20 @@ html[data-accent="violet"].dark {
   border-end-end-radius: var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)));
 }
 
+/*
+ * rounded-inner-{token}: rounded-inner for a part whose own radius is not rounded-lg (a 6px row, a 4px
+ * tree row): concentric inside a frame, the token outside one.
+ * rounded-inner-or-{token}: a child whose inset can be too large for concentric (a key cap or a
+ * mark 8px into an 8px button): the frame's inner radius where it is usable, otherwise the token
+ * capped at rounded-sm, so it never ends up rounder than the corner it sits in.
+ */
+@utility rounded-inner-* {
+  border-radius: var(--frame-inner-2, var(--frame-inner-1, --value(--radius-*)));
+}
+@utility rounded-inner-or-* {
+  border-radius: max(var(--frame-inner-2, var(--frame-inner-1, 0px)), min(--value(--radius-*), var(--radius-sm)));
+}
+
 /* Second level: its own radius is the parent's inner radius; it publishes the next one. */
 @utility frame-inner {
   --frame-r: var(--frame-inner-1, var(--radius-lg));

@@ -221,9 +221,14 @@ function Sidebar({
         data-slot="sidebar-panel"
         className={cn(
           "flex h-full w-full flex-col overflow-hidden text-foreground",
+          // Rows sit 8px in from the panel edge: the floating card is their frame; a flush panel has square
+          // corners, so its rows keep rounded-lg unless a rounded host (the app-shell window) sets --sidebar-item-radius.
           variant === "floating"
-            ? "rounded-3xl bg-card shadow-well"
-            : cn("bg-shell", side === "left" ? "border-r border-border" : "border-l border-border"),
+            ? "frame-3xl frame-inset-2 bg-card shadow-well"
+            : cn(
+                "bg-shell [--frame-inner-1:var(--sidebar-item-radius,var(--radius-lg))] [--frame-inner-2:initial]",
+                side === "left" ? "border-r border-border" : "border-l border-border"
+              ),
           panelClassName
         )}
       >
@@ -309,7 +314,7 @@ function ActivePill({ reduce, pillId }: { reduce: boolean; pillId: string }) {
       aria-hidden
       layoutId={pillId}
       transition={reduce ? { duration: 0 } : PILL_SPRING}
-      className="absolute inset-0 rounded-lg bg-foreground/6"
+      className="absolute inset-0 rounded-inner bg-foreground/6"
     />
   )
 }
@@ -416,7 +421,7 @@ function SidebarItem({
           } else setOpen(!open)
         },
         className: cn(
-          "group/sidebar-item relative flex h-8 w-full min-w-0 cursor-pointer items-center gap-2 rounded-lg px-[13px] text-ui outline-none select-none",
+          "group/sidebar-item relative flex h-8 w-full min-w-0 cursor-pointer items-center gap-2 rounded-inner px-[13px] text-ui outline-none select-none",
           "text-foreground transition-[color,background-color] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]",
           "focus-visible:ring-2 focus-visible:ring-ring/50",
           !showPill && "hover:bg-secondary",

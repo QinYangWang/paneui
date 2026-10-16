@@ -5,7 +5,10 @@ import * as React from "react"
 import { customAccentStyle, DEFAULT_ACCENT } from "./accent-color"
 import { readAccentState, readCustomStyle, syncCustomStyle } from "./accent-store"
 import { applyRadius, readRadiusState } from "./radius-store"
-import { ACCENT_KEY, CUSTOM_ACCENT_KEY, CUSTOM_RADIUS_KEY, RADIUS_KEY, THEME_KEY } from "./theme-script"
+import { ACCENT_CHANGE_EVENT, ACCENT_KEY, CUSTOM_ACCENT_KEY, CUSTOM_RADIUS_KEY, RADIUS_CHANGE_EVENT, RADIUS_KEY, THEME_KEY } from "./theme-script"
+
+/** Mirrors THEME_CHANGE_EVENT in the theme toggle (fired once a light/dark switch is done). */
+const THEME_CHANGE_EVENT = "theme-change"
 
 /**
  * Theme state carried on <html>: the `dark` class, `color-scheme` and `data-accent`,
@@ -86,4 +89,39 @@ export function ThemeSync() {
     }
   }, [])
   return null
+}
+
+/**
+ * Keeps a same-origin preview iframe in the docs page's theme: copies the `dark` class, accent,
+ * custom accent <style> and radius from this page's <html> into the frame whenever any of them
+ * change (attribute changes, the custom accent's <style> text, and the same-tab change events),
+ * and once more on every load. Returns the sync function for the iframe's `onLoad`.
+ */
+export function useFrameThemeSync(frameRef: React.RefObject<HTMLIFrameElement | null>, enabled = true) {
+  const sync = React.useCallback(() => {
+    try {
+      const doc = frameRef.current?.contentDocument
+      // about:blank before the frame navigates: the real page applies the stored theme before paint
+      if (!doc?.documentElement || !doc.head || doc.URL === "about:blank") return
+      applyRootTheme(doc, readRootTheme(document.documentElement))
+    } catch {
+      // cross-origin frame: it follows via storage events instead (ThemeSync)
+    }
+  }, [frameRef])
+
+  React.useEffect(() => {
+    if (!enabled) return
+    sync()
+    const mo = new MutationObserver(sync)
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-accent", "data-radius", "style"] })
+    mo.observe(document.head, { childList: true, subtree: true, characterData: true })
+    const events = [ACCENT_CHANGE_EVENT, RADIUS_CHANGE_EVENT, THEME_CHANGE_EVENT, "storage"]
+    for (const e of events) window.addEventListener(e, sync)
+    return () => {
+      mo.disconnect()
+      for (const e of events) window.removeEventListener(e, sync)
+    }
+  }, [enabled, sync])
+
+  return sync
 }

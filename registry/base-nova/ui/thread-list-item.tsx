@@ -84,7 +84,7 @@ function ThreadListItem({
       data-running={running || undefined}
       aria-current={active ? "true" : undefined}
       className={cn(
-        "group/thread flex w-full min-w-0 cursor-pointer flex-col gap-0.5 rounded-lg px-2 py-1.5 text-left outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-active:bg-foreground/6",
+        "group/thread flex w-full min-w-0 cursor-pointer flex-col gap-0.5 rounded-inner px-2 py-1.5 text-left outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-active:bg-foreground/6",
         className
       )}
       {...props}

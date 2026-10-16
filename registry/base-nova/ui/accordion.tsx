@@ -32,7 +32,7 @@ function Accordion({
         data-variant={variant}
         className={cn(
           "flex w-full flex-col gap-1",
-          variant === "default" && "rounded-[calc(var(--radius)*2)] bg-background p-1 shadow-well dark:bg-input/32",
+          variant === "default" && "frame-3xl frame-p-1 bg-background shadow-well dark:bg-input/32",
           className
         )}
         {...props}
@@ -49,7 +49,7 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
       className={cn(
         "group/accordion-item",
         variant === "default" &&
-          "rounded-2xl transition-[background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-open:bg-card data-open:shadow-raised",
+          "rounded-inner transition-[background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-open:bg-card data-open:shadow-raised",
         // Ghost: the item is the frame; the flush trigger follows it via rounded-inner.
         variant === "ghost" &&
           "frame-xl transition-[background-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-open:bg-secondary",
@@ -77,7 +77,7 @@ function AccordionTrigger({
           "group/accordion-trigger flex flex-1 cursor-pointer items-center text-left text-ui font-medium text-foreground transition-[background-color] duration-150 outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none",
           ghost
             ? "min-h-9 gap-2.5 rounded-inner px-3 py-1.5 hover:not-data-panel-open:bg-secondary data-disabled:opacity-64"
-            : "min-h-11 gap-3 rounded-2xl px-3 py-2 hover:not-data-panel-open:bg-card/50 data-disabled:opacity-50",
+            : "min-h-11 gap-3 rounded-inner px-3 py-2 hover:not-data-panel-open:bg-card/50 data-disabled:opacity-50",
           className
         )}
         {...props}

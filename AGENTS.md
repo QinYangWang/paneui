@@ -112,6 +112,8 @@ component only if the design really needs a new treatment.
   | `frame-border` | container | adds the container's 1px border to the inset |
   | `rounded-inner`, `rounded-{t,b,s,e}-inner` | child | radius = frame radius − inset (min 2px, 0 when the frame is square); outside any frame it falls back to `rounded-lg` |
   | `frame-inner` | child that is itself padded | takes `rounded-inner` and publishes its own inner radius (combine with `frame-p-*`/`frame-inset-*`) |
+  | `rounded-inner-{token}` | child whose own radius is not `rounded-lg` | concentric inside a frame, `{token}` outside one (`rounded-inner-md` for a 6px row) |
+  | `rounded-inner-or-{token}` | child whose inset can be too large (a key cap or a mark 8px into a button) | the frame's inner radius where it is usable, else `{token}` capped at `rounded-sm` |
 
   Two levels (`frame-*` → `frame-inner` → `rounded-inner`) are supported; a third must compute its
   value. A component that uses `rounded-inner` puts its `frame-*` on its own root, so it never

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { Button } from "@/registry/base-nova/ui/button"
+import { SegmentedControl, SegmentedControlItem } from "@/registry/base-nova/ui/segmented-control"
 import { ShaderBackground, type ShaderVariant } from "@/registry/base-nova/ui/shader-background"
 
 const VARIANTS: { value: ShaderVariant; label: string }[] = [
@@ -26,19 +26,19 @@ export default function ShaderBackgroundDemo() {
           <p className="mt-1 text-sm text-muted-foreground">Colours come from your theme tokens, so it follows light and dark.</p>
         </div>
       </ShaderBackground>
-      <div role="group" aria-label="Shader variant" className="flex flex-wrap gap-0.5 self-center rounded-lg bg-muted p-1 shadow-well">
+      <SegmentedControl
+        size="sm"
+        aria-label="Shader variant"
+        value={variant}
+        onValueChange={(v) => setVariant(v as ShaderVariant)}
+        className="self-center"
+      >
         {VARIANTS.map((v) => (
-          <Button
-            key={v.value}
-            size="xs"
-            variant={variant === v.value ? "secondary" : "ghost"}
-            aria-pressed={variant === v.value}
-            onClick={() => setVariant(v.value)}
-          >
+          <SegmentedControlItem key={v.value} value={v.value}>
             {v.label}
-          </Button>
+          </SegmentedControlItem>
         ))}
-      </div>
+      </SegmentedControl>
     </div>
   )
 }

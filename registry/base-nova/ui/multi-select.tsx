@@ -149,7 +149,7 @@ function MultiSelectTrigger({
                   <ComboboxPrimitive.Chip
                     data-slot="multi-select-chip"
                     className={cn(
-                      "flex max-w-48 items-center gap-1 bg-card pr-0.5 font-medium shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50",
+                      "frame-inner frame-inset-0.5 flex max-w-48 items-center gap-1 bg-card pr-0.5 font-medium shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50",
                       c.chip
                     )}
                   >
@@ -157,7 +157,7 @@ function MultiSelectTrigger({
                     <ComboboxPrimitive.ChipRemove
                       aria-label="Remove"
                       className={cn(
-                        "flex shrink-0 cursor-pointer items-center justify-center rounded-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                        "flex shrink-0 cursor-pointer items-center justify-center rounded-inner text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
                         c.remove
                       )}
                     >

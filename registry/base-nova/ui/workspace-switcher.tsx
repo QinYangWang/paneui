@@ -45,8 +45,8 @@ function WorkspaceMark({ workspace, className }: { workspace: Workspace; classNa
       aria-hidden
       data-slot="workspace-mark"
       className={cn(
-        "grid size-6 shrink-0 place-items-center overflow-hidden rounded-md bg-primary text-ui-xs font-semibold text-primary-foreground shadow-primary [&_svg]:size-3.5",
-        className
+        "grid size-6 shrink-0 place-items-center overflow-hidden bg-primary text-ui-xs font-semibold text-primary-foreground shadow-primary [&_svg]:size-3.5",
+        className ?? "rounded-md"
       )}
     >
       {workspace.logo ?? workspace.name.slice(0, 1).toUpperCase()}
@@ -73,13 +73,14 @@ function WorkspaceSwitcher({
         data-slot="workspace-switcher"
         aria-label={`Workspace: ${current.name}. Switch workspace`}
         className={cn(
-          "group/ws flex h-10 w-full min-w-0 cursor-pointer items-center gap-2.5 rounded-lg px-2 text-left text-ui outline-none transition-[background-color] duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary",
+          "group/ws frame-inner frame-inset-2 flex h-10 w-full min-w-0 cursor-pointer items-center gap-2.5 px-2 text-left text-ui outline-none transition-[background-color] duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary",
           collapsed && "justify-center gap-0 px-0",
           className
         )}
         {...props}
       >
-        <WorkspaceMark workspace={current} />
+        {/* 8px into the row: concentric with it where that leaves a usable radius */}
+        <WorkspaceMark workspace={current} className="rounded-inner-or-md" />
         <span
           className={cn(
             "flex min-w-0 flex-1 flex-col leading-tight transition-opacity duration-200",

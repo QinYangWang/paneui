@@ -10,15 +10,15 @@ const actions = [
 
 export default function SharedLayoutBgDisabled() {
   return (
-    <div role="menu" aria-label="File actions" className="w-full max-w-52 rounded-xl bg-popover p-1 shadow-surface">
-      <SharedLayoutBg pillClassName="rounded-md">
+    <div role="menu" aria-label="File actions" className="w-full max-w-52 frame-xl frame-p-1 bg-popover shadow-surface">
+      <SharedLayoutBg pillClassName="rounded-inner">
         {actions.map(({ label, icon: Icon, disabled }) => (
           <SharedLayoutBgItem
             key={label}
             role="menuitem"
             tabIndex={disabled ? -1 : 0}
             disabled={disabled}
-            className="h-8 gap-2 rounded-md px-2.5 text-sm outline-none"
+            className="h-8 gap-2 px-2.5 text-sm outline-none"
           >
             <Icon size={16} className="text-muted-foreground" />
             {label}

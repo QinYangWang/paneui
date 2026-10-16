@@ -17,6 +17,7 @@ import { categoryIcons, ComponentsIcon, guideIcons } from "./category-icons"
 import { DocsNav, normalizePath, type NavGroup } from "./docs-nav"
 import { COMPONENTS_HREF, GUIDE_PAGES } from "./docs-pages"
 import { ThemeControls } from "./theme-controls"
+import { ThemeSync } from "./theme-sync"
 
 const GITHUB_URL = "https://github.com/QinYangWang/ui"
 
@@ -106,6 +107,8 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
 
   return (
     <div data-slot="docs-shell" className="min-h-svh bg-background text-foreground">
+      {/* A theme, accent or radius picked in another tab applies here too (the header only follows theme and accent). */}
+      <ThemeSync />
       <header className="sticky top-0 z-40 flex h-12 items-center border-b border-border bg-background">
         <div className="flex h-full shrink-0 items-center gap-1 ps-3 pe-2 lg:w-64 lg:ps-4">
           <Button variant="ghost" size="icon-sm" aria-label="Open navigation" onClick={() => setDrawerOpen(true)} className="lg:hidden">

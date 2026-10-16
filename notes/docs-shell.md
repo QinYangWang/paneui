@@ -20,9 +20,17 @@ the docs site no longer uses them.
     medium muted with a `mt-2` gap above, chevrons on the right for both. Active row = `bg-secondary`
     + a 2px bar in the gutter left of the row (`-start-2`), outside the fill.
 - **Right TOC** (`doc-toc.tsx`) on docs and component pages from `xl`, with back to top.
-- **Previews**: Desktop renders inline; Tablet (768), Mobile (390) and 1024 render `/preview?demo=…`
+- **Previews**: Fit renders inline; Desktop (1024), Tablet (768) and Mobile (390) render `/preview?demo=…`
   or `?example=…` in an iframe so media and container queries react. The toolbar also sets the
   control size (`size=`) and direction (`dir=rtl`). `/preview` renders bare like `/templates/*`.
+  **Theme sync (2026-10-16)**: the framed preview follows the docs page live through
+  `useFrameThemeSync` (`theme-sync.tsx`, shared with the template previews): it copies `dark`, `data-accent`,
+  the custom accent `<style>` and `data-radius` / inline `--radius` from the page's `<html>` on every attribute
+  change, `<head>` change, same-tab accent/radius/theme event, storage event and frame load. The shell mounts
+  `ThemeSync` too, so a theme, accent or radius picked in another tab reaches the page itself (the header only
+  listened for theme and accent, so a radius picked on Customize in another tab moved the iframe but not the
+  toolbar). The toolbar's segmented controls and the Preview / Code tab list are frames (`frame-* frame-p-0.5` +
+  `rounded-inner`), so their thumbs stay concentric at every radius preset.
 
 Why: the old rail and inset panel read as a second app inside the page, the header and rail used
 different heights and paddings, and icon+label rows were too large for ~150 items.

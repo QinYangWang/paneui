@@ -144,3 +144,27 @@ because the padding stays fixed while every token scales. The fix is always `fra
   token around a fixed `p-1`/`p-2`; the consumer lint blocks `frame-*` on library components, so these need
   a plain wrapper frame), `user-menu` demo, kbd inside the header search and input-group addons
   (controls), animated-sidebar inset panel.
+
+## Round 17 (2026-10-16): every preset
+
+Before: `--radius xl` 25 findings (20 must). Pairs that only matched at the default radius (a fixed `p-2`
+around a scaling token) drifted at large presets. Fixed with frames, not allow-list entries:
+
+- New utilities (`app/globals.css`, table in AGENTS.md): `rounded-inner-{token}` (concentric in a frame, the
+  token outside one) and `rounded-inner-or-{token}` (concentric where usable, else the token capped at
+  `rounded-sm`, for key caps and marks whose inset can exceed the corner).
+- Library: accordion root `frame-3xl frame-p-1`, items and triggers `rounded-inner`; tabs list and segmented
+  control are `frame-{sm,lg} frame-p-0.5` with tabs, indicator and thumb `rounded-inner`; animated-sidebar
+  floating panel `frame-3xl frame-inset-2` and rows / active pill `rounded-inner` (a flush panel publishes
+  `--sidebar-item-radius`, default `rounded-lg`; the app-shell window sets it to 3xl − 8px); thread-list-item,
+  user-menu rows `rounded-inner`; workspace-switcher row `frame-inner frame-inset-2` with its mark
+  `rounded-inner-or-md`; file-tree rows `rounded-inner-or-sm`; multi-select chip `frame-inner frame-inset-0.5`
+  with the remove button `rounded-inner`; input-group key caps R − 6px; Button key caps follow the button
+  radius (`[&_[data-slot=kbd]]`); tab-strip tab `frame-lg frame-inset-1`, close `rounded-inner-or-sm`;
+  agent-composer banner `frame-xl frame-inset-1.5`, its buttons `rounded-inner-or-sm`; notion-editor callout
+  `frame-lg frame-inset-2`, style button `rounded-inner-or-md`.
+- Examples: thread-list-item, user-menu, workspace-switcher wrappers `frame-3xl frame-p-2`; file-tree cards
+  `frame-xl frame-p-2`; shared-layout-bg/disabled `frame-xl frame-p-1` + `rounded-inner` pill; shader-background
+  variant picker is a SegmentedControl; message-scroller/custom-jump wraps the card in `frame-2xl frame-inset-2`.
+- Docs: sidebar search field `frame-lg frame-inset-2`, its key cap `rounded-inner-or-2xs`.
+- Allow-listed (scrolling content, no fixed inset): file-diff/accept-reject annotation buttons, todo-list/max-height rows.

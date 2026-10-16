@@ -73,6 +73,22 @@ export default {
       reason: "The diagonal strike of the \"none\" swatch is a 1px line drawn across a round dot, not a nested surface.",
     },
     {
+      page: "file-diff",
+      scope: "accept-reject",
+      selector: "diffs-container",
+      reason:
+        "Accept / reject buttons belong to an inline annotation row inside the scrolling diff body: they only meet the " +
+        "card's bottom corner at the end of the scroll, and the row scrolls past it, so there is no fixed inset to match.",
+    },
+    {
+      page: "todo-list",
+      scope: "max-height",
+      slot: "todo-item",
+      reason:
+        "Rows of a capped, scrolling list: at rest the last visible row sits a few px above the frame's bottom edge " +
+        "because of the scroll position, not a padding; the rows are concentric with the frame's 8px inset.",
+    },
+    {
       page: "email-editor",
       selector: "node-section > div.frame-xl.frame-p-1",
       reason:

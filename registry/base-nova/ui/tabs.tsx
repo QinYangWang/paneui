@@ -11,22 +11,23 @@ function Tabs({ className, ...props }: TabsPrimitive.Root.Props) {
 }
 
 // `default`: segmented track with a sliding raised indicator; outer heights match Button
-// (xs 24, sm 28, default 32, lg 36) with tabs 4px shorter inside the p-0.5 well.
+// (xs 24, sm 28, default 32, lg 36) with tabs 4px shorter inside the p-0.5 well; the well is a
+// frame, so tabs and the indicator stay concentric with it at every radius.
 // `underline`: tabs on a hairline with a sliding 2px bar; tabs take the full height.
 const tabsListVariants = cva(
   "relative z-0 inline-flex w-fit items-center data-[orientation=vertical]:h-fit data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch",
   {
     variants: {
       variant: {
-        default: "gap-0.5 bg-muted p-0.5 shadow-well",
+        default: "gap-0.5 bg-muted frame-p-0.5 shadow-well",
         underline:
           "gap-1 shadow-[inset_0_-1px_0_var(--border)] data-[orientation=vertical]:gap-0.5 data-[orientation=vertical]:shadow-[inset_1px_0_0_var(--border)]",
       },
       size: { xs: "", sm: "", default: "", lg: "" },
     },
     compoundVariants: [
-      { variant: "default", size: "xs", className: "rounded-sm" },
-      { variant: "default", size: ["sm", "default", "lg"], className: "rounded-lg" },
+      { variant: "default", size: "xs", className: "frame-sm" },
+      { variant: "default", size: ["sm", "default", "lg"], className: "frame-lg" },
     ],
     defaultVariants: { variant: "default", size: "default" },
   }
@@ -45,10 +46,10 @@ const tabsTabVariants = cva(
       },
     },
     compoundVariants: [
-      { variant: "default", size: "xs", className: "h-5 rounded-xs" },
-      { variant: "default", size: "sm", className: "h-6 rounded-md" },
-      { variant: "default", size: "default", className: "h-7 rounded-md" },
-      { variant: "default", size: "lg", className: "h-8 rounded-md" },
+      { variant: "default", size: "xs", className: "h-5 rounded-inner" },
+      { variant: "default", size: "sm", className: "h-6 rounded-inner" },
+      { variant: "default", size: "default", className: "h-7 rounded-inner" },
+      { variant: "default", size: "lg", className: "h-8 rounded-inner" },
       { variant: "underline", size: "xs", className: "h-6 px-1.5" },
       { variant: "underline", size: "sm", className: "h-7 px-2" },
       { variant: "underline", size: "default", className: "h-8 px-2.5" },
@@ -93,7 +94,7 @@ function TabsList({ className, children, size = "default", variant = "default", 
           data-slot="tabs-indicator"
           className={cn(
             "absolute top-0 left-0 -z-10 transition-[translate,width,height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-            v === "default" && (s === "xs" ? "rounded-xs" : "rounded-md"),
+            v === "default" && "rounded-inner",
             indicatorClass[v]
           )}
         />

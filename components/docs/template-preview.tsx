@@ -5,7 +5,7 @@ import * as React from "react"
 import { ExternalLinkIcon } from "@/components/icons"
 import { Button } from "@/registry/base-nova/ui/button"
 
-import { applyRootTheme, readRootTheme } from "./theme-sync"
+import { useFrameThemeSync } from "./theme-sync"
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 /** Templates are previewed at a desktop viewport and scaled down to fit the card. */
@@ -34,22 +34,7 @@ export function TemplatePreview({ name, path = `/templates/${name}/`, height = 4
     return () => ro.disconnect()
   }, [])
 
-  const syncTheme = React.useCallback(() => {
-    try {
-      const doc = frameRef.current?.contentDocument
-      if (doc?.documentElement && doc.head) applyRootTheme(doc, readRootTheme(document.documentElement))
-    } catch {
-      // cross-origin frame (custom basePath host): it follows via storage events instead
-    }
-  }, [])
-
-  React.useEffect(() => {
-    if (scale <= 0) return
-    syncTheme()
-    const mo = new MutationObserver(syncTheme)
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-accent", "data-radius", "style"] })
-    return () => mo.disconnect()
-  }, [scale, syncTheme])
+  const syncTheme = useFrameThemeSync(frameRef, scale > 0)
 
   return (
     <div className="flex w-full flex-col gap-3">

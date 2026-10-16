@@ -13,7 +13,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui
 
 import { demos } from "./demos"
 import { examples } from "./examples.generated"
-import { applyRootTheme, readRootTheme } from "./theme-sync"
+import { useFrameThemeSync } from "./theme-sync"
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 
@@ -55,20 +55,7 @@ function DeviceFrame({ src, width, title }: { src: string; width: number; title:
     return () => ro.disconnect()
   }, [])
 
-  const sync = React.useCallback(() => {
-    try {
-      const doc = frameRef.current?.contentDocument
-      if (doc?.documentElement && doc.head) applyRootTheme(doc, readRootTheme(document.documentElement))
-    } catch {
-      // cross-origin frame: it follows via storage events instead
-    }
-  }, [])
-
-  React.useEffect(() => {
-    const mo = new MutationObserver(sync)
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-accent", "data-radius", "style"] })
-    return () => mo.disconnect()
-  }, [sync])
+  const sync = useFrameThemeSync(frameRef)
 
   // Follow the framed page's height (popups and accordions change it).
   const onLoad = React.useCallback(() => {

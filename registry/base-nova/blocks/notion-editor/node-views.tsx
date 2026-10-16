@@ -28,7 +28,8 @@ function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
     <NodeViewWrapper
       data-type="callout"
       data-callout-type={type}
-      className={cn("my-2 flex gap-2 rounded-lg py-2 pr-3 pl-2", calloutTone[type])}
+      // the style button sits 8px into the corner
+      className={cn("my-2 flex gap-2 frame-lg frame-inset-2 py-2 pr-3 pl-2", calloutTone[type])}
     >
       <Menu>
         <MenuTrigger
@@ -36,7 +37,7 @@ function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
           contentEditable={false}
           aria-label="Callout style"
           className={cn(
-            "mt-px inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-base leading-none outline-none select-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-default disabled:hover:bg-transparent",
+            "mt-px inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-inner-or-md text-base leading-none outline-none select-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-default disabled:hover:bg-transparent",
             emojiFont
           )}
         >

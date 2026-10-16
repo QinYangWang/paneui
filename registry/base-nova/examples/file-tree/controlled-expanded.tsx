@@ -19,7 +19,7 @@ export default function FileTreeControlledExpanded() {
           Collapse all
         </Button>
       </div>
-      <div className="rounded-xl bg-card p-2 shadow-surface">
+      <div className="frame-xl frame-p-2 bg-card shadow-surface">
         <FileTree label="Repository" expanded={expanded} onExpandedChange={setExpanded}>
           <FileTreeFolder value="src" name="src">
             <FileTreeFolder value="src/routes" name="routes">

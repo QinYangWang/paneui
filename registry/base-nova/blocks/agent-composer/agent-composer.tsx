@@ -338,7 +338,7 @@ function AgentComposerBanner({ icon, title, actionLabel, onAction, onDismiss, cl
     <div
       data-slot="agent-composer-banner"
       role="status"
-      className={cn("flex min-h-9 items-center gap-2 rounded-xl px-2.5 text-ui text-foreground/90", className)}
+      className={cn("flex min-h-9 items-center gap-2 frame-xl frame-inset-1.5 px-2.5 text-ui text-foreground/90 [&>[data-slot=button]]:rounded-inner-or-sm", className)}
       {...props}
     >
       {icon && <span className="flex shrink-0 text-muted-foreground [&_svg]:size-4">{icon}</span>}

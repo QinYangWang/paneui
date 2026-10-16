@@ -19,7 +19,7 @@ const THREAD = [
 function JumpBar() {
   const { atLiveEdge, hasNew, scrollToLatest } = useMessageScroller()
   return (
-    <div className="flex items-center justify-between gap-3 border-t border-border py-2 pr-2 pl-4">
+    <div className="flex items-center justify-between gap-3 border-t border-border py-2 pr-2 pl-4 [&>[data-slot=button]]:rounded-inner-or-lg">
       <span className="text-xs text-muted-foreground">
         {atLiveEdge ? "Following the conversation" : hasNew ? "New messages below" : "Reading earlier messages"}
       </span>
@@ -33,19 +33,22 @@ function JumpBar() {
 
 export default function MessageScrollerCustomJump() {
   return (
-    <MessageScroller
-      showJumpButton={false}
-      footer={<JumpBar />}
-      className="h-80 w-full max-w-md rounded-2xl bg-card shadow-surface"
-      contentClassName="gap-3"
-    >
-      {THREAD.map((m) => (
-        <Message key={m.id} from={m.from}>
-          <MessageContent>
-            <MessageBubble tone={m.from === "user" ? "primary" : "default"}>{m.text}</MessageBubble>
-          </MessageContent>
-        </Message>
-      ))}
-    </MessageScroller>
+    // The card's frame: the Latest button sits 8px into its bottom corner.
+    <div className="frame-2xl frame-inset-2 w-full max-w-md">
+      <MessageScroller
+        showJumpButton={false}
+        footer={<JumpBar />}
+        className="h-80 w-full rounded-2xl bg-card shadow-surface"
+        contentClassName="gap-3"
+      >
+        {THREAD.map((m) => (
+          <Message key={m.id} from={m.from}>
+            <MessageContent>
+              <MessageBubble tone={m.from === "user" ? "primary" : "default"}>{m.text}</MessageBubble>
+            </MessageContent>
+          </Message>
+        ))}
+      </MessageScroller>
+    </div>
   )
 }
