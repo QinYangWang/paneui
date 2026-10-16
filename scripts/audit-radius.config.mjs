@@ -33,6 +33,10 @@ export default {
   ],
   allow: [
     {
+      ancestorSlot: "skill-avoid",
+      reason: "The Avoid example for the concentric rule on /docs/skill is off concentric on purpose.",
+    },
+    {
       page: "calendar",
       selector: "div[role=\"gridcell\"]",
       level: "should",

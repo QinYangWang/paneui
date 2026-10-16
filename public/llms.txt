@@ -28,7 +28,7 @@ Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/
 - [Combobox](https://qinyangwang.github.io/ui/docs/combobox/): Picks one option from a long list by typing to filter. JSON: https://qinyangwang.github.io/ui/r/combobox.json
 - [Date Picker](https://qinyangwang.github.io/ui/docs/date-picker/): Field that opens a calendar to pick one date. JSON: https://qinyangwang.github.io/ui/r/date-picker.json
 - [Date Range Picker](https://qinyangwang.github.io/ui/docs/date-range-picker/): Picks a start and end date from a calendar. JSON: https://qinyangwang.github.io/ui/r/date-range-picker.json
-- [Expandable Control](https://qinyangwang.github.io/ui/docs/expandable-control/): Button or chip that expands on click to reveal a label or action. JSON: https://qinyangwang.github.io/ui/r/expandable-control.json
+- [Expandable Control](https://qinyangwang.github.io/ui/docs/expandable-control/): Button or chip that expands on click to reveal a label. JSON: https://qinyangwang.github.io/ui/r/expandable-control.json
 - [Expanding Arrow Button](https://qinyangwang.github.io/ui/docs/expanding-arrow-button/): Call-to-action button with an arrow sweep on hover. JSON: https://qinyangwang.github.io/ui/r/expanding-arrow-button.json
 - [Field](https://qinyangwang.github.io/ui/docs/field/): Ties a label, control, hint and error into one form field. JSON: https://qinyangwang.github.io/ui/r/field.json
 - [Hold Action Button](https://qinyangwang.github.io/ui/docs/hold-action-button/): Confirms a risky action by making the user press and hold. JSON: https://qinyangwang.github.io/ui/r/hold-action-button.json
@@ -82,7 +82,7 @@ Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/
 - [Card](https://qinyangwang.github.io/ui/docs/card/): Groups related content and actions on one surface. JSON: https://qinyangwang.github.io/ui/r/card.json
 - [Carousel](https://qinyangwang.github.io/ui/docs/carousel/): Scrolls through slides one at a time. JSON: https://qinyangwang.github.io/ui/r/carousel.json
 - [Collapsible](https://qinyangwang.github.io/ui/docs/collapsible/): Shows and hides a section of content. JSON: https://qinyangwang.github.io/ui/r/collapsible.json
-- [Empty State](https://qinyangwang.github.io/ui/docs/empty-state/): Tells users a list or page is empty and what to do next. JSON: https://qinyangwang.github.io/ui/r/empty-state.json
+- [Empty State](https://qinyangwang.github.io/ui/docs/empty-state/): Tells users a list or page is empty and what to do. JSON: https://qinyangwang.github.io/ui/r/empty-state.json
 - [Kbd](https://qinyangwang.github.io/ui/docs/kbd/): Shows a keyboard key or shortcut. JSON: https://qinyangwang.github.io/ui/r/kbd.json
 - [Loader](https://qinyangwang.github.io/ui/docs/loader/): Shows that something is loading. JSON: https://qinyangwang.github.io/ui/r/loader.json
 - [Page Header](https://qinyangwang.github.io/ui/docs/page-header/): Title, context and actions at the top of an app page. JSON: https://qinyangwang.github.io/ui/r/page-header.json
@@ -155,11 +155,11 @@ Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/
 - [Chat App](https://qinyangwang.github.io/ui/r/chat-app.json): Agent workspace with a sidebar, conversation and prompt bar. JSON: https://qinyangwang.github.io/ui/r/chat-app.json
 - [Citations](https://qinyangwang.github.io/ui/docs/citations/): Links an answer's claims to the sources behind them. JSON: https://qinyangwang.github.io/ui/r/citations.json
 - [Edited Files Card](https://qinyangwang.github.io/ui/docs/edited-files-card/): Summarises the files an agent changed, with undo and review. JSON: https://qinyangwang.github.io/ui/r/edited-files-card.json
-- [File Diff](https://qinyangwang.github.io/ui/docs/file-diff/): Shows one file's changes as a diff, even while an agent streams them. JSON: https://qinyangwang.github.io/ui/r/file-diff.json
+- [File Diff](https://qinyangwang.github.io/ui/docs/file-diff/): Shows one file's changes as a diff, even while streaming. JSON: https://qinyangwang.github.io/ui/r/file-diff.json
 - [Image Generation](https://qinyangwang.github.io/ui/docs/image-generation/): Shows a generated image from queued to finished, with its actions. JSON: https://qinyangwang.github.io/ui/r/image-generation.json
 - [Message](https://qinyangwang.github.io/ui/docs/message/): Lays out chat conversation rows by sender. JSON: https://qinyangwang.github.io/ui/r/message.json
 - [Message Bubble](https://qinyangwang.github.io/ui/docs/message-bubble/): Holds one chat message in a speech bubble. JSON: https://qinyangwang.github.io/ui/r/message-bubble.json
-- [Message Scroller](https://qinyangwang.github.io/ui/docs/message-scroller/): Keeps a chat view pinned to new messages until the reader scrolls up. JSON: https://qinyangwang.github.io/ui/r/message-scroller.json
+- [Message Scroller](https://qinyangwang.github.io/ui/docs/message-scroller/): Keeps a chat pinned to new messages until the reader scrolls up. JSON: https://qinyangwang.github.io/ui/r/message-scroller.json
 - [Model Picker](https://qinyangwang.github.io/ui/docs/model-picker/): Lets users choose an agent's model, effort or mode. JSON: https://qinyangwang.github.io/ui/r/model-picker.json
 - [Reasoning Text](https://qinyangwang.github.io/ui/docs/reasoning-text/): Status line that shows an agent is still working. JSON: https://qinyangwang.github.io/ui/r/reasoning-text.json
 - [Streaming Response](https://qinyangwang.github.io/ui/docs/streaming-response/): Shows an assistant reply as it streams, then offers copy and feedback. JSON: https://qinyangwang.github.io/ui/r/streaming-response.json
@@ -219,4 +219,4 @@ Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/
 - [Personal Blog](https://qinyangwang.github.io/ui/docs/blog/): Personal blog with a post list and an article page. JSON: https://qinyangwang.github.io/ui/r/blog.json
 - [Docs Site](https://qinyangwang.github.io/ui/docs/docs/): Documentation site layout with search, navigation and a page outline. JSON: https://qinyangwang.github.io/ui/r/docs.json
 - [SaaS](https://qinyangwang.github.io/ui/docs/saas/): Starter app with marketing pages, sign-in flows and a dashboard. JSON: https://qinyangwang.github.io/ui/r/saas.json
-- [Code Editor](https://qinyangwang.github.io/ui/docs/vscode/): Edit a project in the browser, with a shell on the same files. JSON: https://qinyangwang.github.io/ui/r/vscode.json
+- [Code Editor](https://qinyangwang.github.io/ui/docs/vscode/): Edit a project in the browser with a shell on its files. JSON: https://qinyangwang.github.io/ui/r/vscode.json

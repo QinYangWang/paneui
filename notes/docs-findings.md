@@ -23,6 +23,7 @@ Groups A–E fixed: composition-chart/status-bar prop collisions, price-target-f
 Second pass: dialog sticky close button, onFill moved to chart-utils, animated-sidebar WIDTH_SPRING in range, tool-approval forgetToolApproval + docs. Dock removed (squircle item dropped).
 
 ## Still open
+- file-tree: `FileTreeFolder`/`FileTreeFile` parts written in a server component render an empty tree (the client sees lazy element types, so `readNodes` matches nothing). Pass `items` from server code (the /docs/skill example does); a fix needs a marker the parts carry across the boundary.
 - animated-sidebar + ai-sidebar on the same key both fire (separate stacks).
 - tool-result and agent-code-block duplicate highlighter.
 

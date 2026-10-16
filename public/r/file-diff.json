@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "file-diff",
   "title": "File Diff",
-  "description": "Shows one file's changes as a diff, even while an agent streams them.",
+  "description": "Shows one file's changes as a diff, even while streaming.",
   "dependencies": [
     "@base-ui/react",
     "@pierre/diffs",

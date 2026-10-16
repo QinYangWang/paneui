@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "empty-state",
   "title": "Empty State",
-  "description": "Tells users a list or page is empty and what to do next.",
+  "description": "Tells users a list or page is empty and what to do.",
   "dependencies": [
     "class-variance-authority"
   ],

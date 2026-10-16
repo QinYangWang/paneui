@@ -22,7 +22,7 @@ import { Badge } from "@/registry/base-nova/ui/badge"
 import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/registry/base-nova/ui/card"
-import { FileTree, FileTreeFile, FileTreeFolder } from "@/registry/base-nova/ui/file-tree"
+import { FileTree } from "@/registry/base-nova/ui/file-tree"
 import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { Input } from "@/registry/base-nova/ui/input"
 import { Switch } from "@/registry/base-nova/ui/switch"
@@ -143,7 +143,7 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
       </div>
     ),
     bad: (
-      <div className="flex w-48 flex-col rounded-2xl bg-popover p-1 shadow-surface">
+      <div data-slot="skill-avoid" className="flex w-48 flex-col rounded-2xl bg-popover p-1 shadow-surface">
         {["Rename", "Duplicate", "Archive"].map((r, i) => (
           <div
             key={r}
@@ -334,14 +334,16 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
     kind: "live",
     good: (
       <div className="w-56 bg-card shadow-raised frame-xl frame-p-2">
-        <FileTree label="Project files" defaultExpanded={["app"]}>
-          <FileTreeFolder name="app">
-            <FileTreeFile name="layout.tsx" />
-            <FileTreeFile name="page.tsx" />
-          </FileTreeFolder>
-          <FileTreeFolder name="public" />
-          <FileTreeFile name="package.json" />
-        </FileTree>
+        {/* Data instead of FileTreeFolder/FileTreeFile parts: this module renders on the server. */}
+        <FileTree
+          label="Project files"
+          defaultExpanded={["app"]}
+          items={[
+            { name: "app", type: "folder", children: [{ name: "layout.tsx", type: "file" }, { name: "page.tsx", type: "file" }] },
+            { name: "public", type: "folder", children: [] },
+            { name: "package.json", type: "file" },
+          ]}
+        />
       </div>
     ),
     bad: (
@@ -419,7 +421,7 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
           <span className="grid size-4 place-items-center rounded-full bg-foreground text-ui-2xs font-bold text-background">G</span>
           Continue with GitHub
         </Button>
-        <span className="grid size-5 place-items-center text-ui-lg">▲</span>
+        <span className="grid size-5 place-items-center rounded-sm bg-foreground text-ui-2xs font-bold text-background">V</span>
       </Row>
     ),
   },
