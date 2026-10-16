@@ -250,7 +250,7 @@ function CustomerDrawer({
               </div>
             </DrawerHeader>
             <DrawerBody className="flex flex-col gap-6">
-              <SettingsGroup aria-label="Customer details">
+              <SettingsGroup aria-label="Customer details" className="shrink-0">
                 {(
                   [
                     ["Company", c.company],
@@ -273,7 +273,7 @@ function CustomerDrawer({
                   </SettingsRow>
                 ))}
               </SettingsGroup>
-              <SettingsSection>
+              <SettingsSection className="shrink-0">
                 <SettingsSectionHeader>
                   <SettingsSectionTitle>Invoices</SettingsSectionTitle>
                 </SettingsSectionHeader>

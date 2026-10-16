@@ -201,3 +201,24 @@ around a scaling token) drifted at large presets. Fixed with frames, not allow-l
   Inside a frame that is not their container (the app-shell window publishes 3xl − 3px), they would pick its radius up.
 - Open (`--radius none`, should): chart legend swatches inside the `rounded-full` legend pill (composition-chart,
   treemap, trend-chart). Square swatch in a pill is the preset's intent; allow-list or round the swatch.
+
+## Round 20 (2026-10-16): the 16px cap
+
+User report: dragging the custom radius to the maximum (then 1.5rem) made nested multi-part components ugly
+(measured bad at 20 and 24px); at 16px the multi-select chips did not line up with the field. Decision: cap,
+not optimise. Every radius token is `min(k × --radius, --radius-max)` with `--radius-max: 1rem`, and the Customize
+slider stops at 1rem (stored larger values read back as 1rem). Details in `notes/foundation-v2.md` › Radius.
+
+- `pnpm audit:radius -- --radius custom:1` audits a custom value (stored the way Customize stores it).
+- Multi-select chip: it had `frame-inner` **and** `rounded-inner`; the second read the chip's own published
+  `--frame-inner-2` and came out one inset (2px) too square at every preset (10 vs 12px at 16px, 2 vs 4px at
+  the default). Chips now take `frame-inner` only; at 16px they are 24px pills inside the 32px pill field.
+  Rule added to AGENTS.md: never `frame-inner` + `rounded-inner` on one element.
+- At the cap: expandable-action-bar and overflow-actions bars are `frame-{lg,2xl} frame-p-1` with
+  `rounded-inner` items (were `rounded-xl p-1` around `rounded-lg`, 4px off at 16px); the animated-sidebar
+  active pill is `rounded-[inherit]` (it read the sidebar frame inside the deeper sub rows); the
+  animated-sidebar demo placeholders are `rounded-xs` 12px into the `rounded-2xl` inset; the collapsible
+  demo frame is `p-1` (menu pattern: `rounded-2xl p-1` around `rounded-lg`).
+- Not reported by the audit but changed with the cap: message bubbles, chat, feedback widget and
+  expanding-arrow-button use `rounded-3xl` / `frame-3xl` (were arbitrary 2x); card-folder and bottom-sheet
+  2.8x radii clamp at `--radius-max`.

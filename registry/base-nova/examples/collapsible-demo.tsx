@@ -7,7 +7,7 @@ import { Label } from "@/registry/base-nova/ui/label"
 
 export default function CollapsibleDemo() {
   return (
-    <Collapsible className="w-full max-w-sm rounded-2xl bg-card p-1.5 shadow-raised">
+    <Collapsible className="w-full max-w-sm rounded-2xl bg-card p-1 shadow-raised">
       <CollapsibleTrigger className="w-full">
         <SettingsIcon className="text-muted-foreground" />
         Advanced settings
