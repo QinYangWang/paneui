@@ -190,9 +190,11 @@ function Calendar(props: CalendarProps) {
 
   const onKeyDown = (e: React.KeyboardEvent, d: Date) => {
     const dow = (d.getDay() - weekStartsOn + 7) % 7
+    // In right-to-left the week runs right to left, so the horizontal arrows swap.
+    const step = getComputedStyle(e.currentTarget).direction === "rtl" ? -1 : 1
     const map: Record<string, () => Date> = {
-      ArrowLeft: () => addDays(d, -1),
-      ArrowRight: () => addDays(d, 1),
+      ArrowLeft: () => addDays(d, -step),
+      ArrowRight: () => addDays(d, step),
       ArrowUp: () => addDays(d, -7),
       ArrowDown: () => addDays(d, 7),
       Home: () => addDays(d, -dow),

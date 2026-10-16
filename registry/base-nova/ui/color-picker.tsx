@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 
@@ -221,8 +222,10 @@ function ColorPickerContent({
     /** Corner radius of the trigger shape the panel starts from (CSS length). Defaults to `var(--radius-lg)`, the radius of `ColorPickerTrigger`. */
     triggerRadius?: string
   }) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <PopoverPrimitive.Portal>
+    <PopoverPrimitive.Portal dir={dir}>
       <PopoverPrimitive.Positioner
         className="z-50 outline-none"
         side="bottom"

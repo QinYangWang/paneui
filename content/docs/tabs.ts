@@ -47,6 +47,11 @@ export default {
     },
     { id: "sizes", title: "Sizes", description: "Match the toolbar the tabs sit in." },
     { id: "underline", title: "Underline", description: "Use for page-level sections, where a filled track would compete with the content." },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+    },
   ],
   notes: [
     {

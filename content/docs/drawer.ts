@@ -47,6 +47,11 @@ export default {
       title: "Scrolling Body",
       description: "Put long content in `DrawerBody`, the only part that scrolls, so the header and footer stay in place.",
     },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+    },
   ],
   notes: [
     {

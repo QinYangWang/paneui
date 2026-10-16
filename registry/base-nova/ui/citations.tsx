@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
 import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
@@ -240,6 +241,8 @@ function Citation({
   ...props
 }: CitationProps) {
   const group = React.useContext(CitationGroupContext)
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   const found = sourceId && group ? group.sources.findIndex((s) => s.id === sourceId) : -1
   const source = sourceProp ?? (found >= 0 ? group!.sources[found] : undefined)
   const index = indexProp ?? (found >= 0 ? found + 1 : undefined)
@@ -273,7 +276,7 @@ function Citation({
       >
         {index ?? "•"}
       </PreviewCardPrimitive.Trigger>
-      <PreviewCardPrimitive.Portal>
+      <PreviewCardPrimitive.Portal dir={dir}>
         <PreviewCardPrimitive.Positioner side="top" sideOffset={8} collisionPadding={8} className="z-50 outline-none">
           <PreviewCardPrimitive.Popup
             data-slot="citation-preview"

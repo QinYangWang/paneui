@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 
 import { XIcon } from "@/components/icons"
@@ -19,8 +20,10 @@ function PopoverContent({
   ...props
 }: PopoverPrimitive.Popup.Props &
   Pick<PopoverPrimitive.Positioner.Props, "side" | "sideOffset" | "align" | "alignOffset" | "collisionPadding">) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <PopoverPrimitive.Portal>
+    <PopoverPrimitive.Portal dir={dir}>
       <PopoverPrimitive.Positioner
         className="z-50 outline-none"
         side={side}
@@ -86,7 +89,7 @@ function PopoverCloseButton({ className, ...props }: PopoverPrimitive.Close.Prop
       data-slot="popover-close-button"
       aria-label="Close"
       className={cn(
-        "absolute top-2 right-2 inline-flex size-6 cursor-pointer items-center justify-center rounded-[max(calc(var(--radius-xl)-var(--spacing)*2),var(--radius-sm))] text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+        "absolute top-2 end-2 inline-flex size-6 cursor-pointer items-center justify-center rounded-[max(calc(var(--radius-xl)-var(--spacing)*2),var(--radius-sm))] text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       )}
       {...props}

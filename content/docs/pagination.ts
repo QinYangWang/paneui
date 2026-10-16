@@ -8,6 +8,11 @@ export default {
   examples: [
     { id: "sizes", title: "Sizes", description: "Use `sm` under dense tables and `lg` on touch screens." },
     { id: "compact", title: "Compact", description: "Use on phones and narrow panels." },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+    },
   ],
   notes: [{ title: "Accessibility", body: "A `nav` labelled Pagination; the current page button has `aria-current=\"page\"`, prev / next are disabled at the ends. `getPageRange` is exported if you build your own." }],
   api: [

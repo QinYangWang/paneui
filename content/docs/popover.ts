@@ -45,6 +45,11 @@ export default {
       title: "Open on Hover",
       description: "Use for previews that should appear on hover, like a hover card.",
     },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+    },
   ],
   notes: [
     {

@@ -58,6 +58,11 @@ export default {
       title: "Disabled",
       description: "Disable a `ComboboxItem` for an unavailable option, or `Combobox` to lock the field.",
     },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+    },
   ],
   notes: [
     {

@@ -64,6 +64,11 @@ export default {
       title: "Inset",
       description: "Set `inset` on `MenuItem` and `MenuLabel` when only some items have an icon or indicator, so the text lines up.",
     },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+    },
   ],
   notes: [
     {

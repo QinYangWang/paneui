@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card"
 
 import { cn } from "@/lib/utils"
@@ -135,8 +136,10 @@ function OverflowHintContent({
   onAuxClick,
   ...props
 }: OverflowHintContentProps) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <PreviewCardPrimitive.Portal>
+    <PreviewCardPrimitive.Portal dir={dir}>
       <PreviewCardPrimitive.Positioner
         className="z-50 outline-none"
         side={side}

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog"
 
 import { cn } from "@/lib/utils"
@@ -25,8 +26,10 @@ function AlertDialogContent({
     () => popupRef.current?.querySelector<HTMLElement>("[data-alert-dialog-cancel]") ?? true,
     []
   )
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <AlertDialogPrimitive.Portal>
+    <AlertDialogPrimitive.Portal dir={dir}>
       <AlertDialogPrimitive.Backdrop
         data-slot="alert-dialog-backdrop"
         className="fixed inset-0 z-50 bg-black/40 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"

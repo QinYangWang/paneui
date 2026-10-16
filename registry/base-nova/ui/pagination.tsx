@@ -67,7 +67,7 @@ function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = fal
   return (
     <nav data-slot="pagination" data-size={size} aria-label="Pagination" className={cn("flex items-center gap-1", className)} {...props}>
       <Button variant="ghost" size={dims.button} aria-label="Previous page" disabled={current <= 1} onClick={() => go(current - 1)}>
-        <ChevronLeftIcon />
+        <ChevronLeftIcon className="rtl:rotate-180" />
       </Button>
       {compact ? (
         <span className={cn("px-2 text-muted-foreground tabular-nums", size === "sm" ? "text-ui-xs" : "text-ui")} aria-live="polite">
@@ -102,7 +102,7 @@ function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = fal
         </ul>
       )}
       <Button variant="ghost" size={dims.button} aria-label="Next page" disabled={current >= count} onClick={() => go(current + 1)}>
-        <ChevronRightIcon />
+        <ChevronRightIcon className="rtl:rotate-180" />
       </Button>
     </nav>
   )

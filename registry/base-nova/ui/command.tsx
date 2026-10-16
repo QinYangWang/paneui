@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
 import { SearchIcon } from "@/components/icons"
@@ -302,9 +303,11 @@ type CommandDialogProps = DialogPrimitive.Root.Props & {
 
 /** The same Command in a centred dialog, for a ⌘K palette. Opening it focuses the input. */
 function CommandDialog({ title = "Command palette", className, children, commandProps, ...props }: CommandDialogProps) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
     <DialogPrimitive.Root {...props}>
-      <DialogPrimitive.Portal>
+      <DialogPrimitive.Portal dir={dir}>
         <DialogPrimitive.Backdrop
           data-slot="command-dialog-backdrop"
           className="fixed inset-0 z-50 bg-black/30 transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0"

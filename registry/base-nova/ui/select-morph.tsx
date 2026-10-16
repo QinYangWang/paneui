@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Select as SelectPrimitive } from "@base-ui/react/select"
 
 import { CheckIcon, ChevronDownIcon } from "@/components/icons"
@@ -92,8 +93,10 @@ function MorphSelectContent({
   /** What the mirrored first row shows. Defaults to the current value; match it to your trigger's content. */
   header?: React.ReactNode
 }) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <SelectPrimitive.Portal>
+    <SelectPrimitive.Portal dir={dir}>
       <SelectPrimitive.Positioner
         className="z-50 outline-none select-none"
         side="bottom"

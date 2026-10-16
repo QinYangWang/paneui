@@ -127,7 +127,7 @@ function Stepper({
                 </span>
               )
             })}
-            {unit ? <span className="ml-1 text-muted-foreground">{unit}</span> : null}
+            {unit ? <span className="ms-1 text-muted-foreground">{unit}</span> : null}
           </span>
         </div>
 

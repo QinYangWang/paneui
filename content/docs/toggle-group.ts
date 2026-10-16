@@ -30,6 +30,11 @@ Toggle`,
     { id: "outline", title: "Outline", description: "Use `outline` with text items in settings panels." },
     { id: "single-toggle", title: "Single Toggle", description: "Use `Toggle` alone for a single on/off option, driven by `pressed` and `onPressedChange`." },
     { id: "sizes", title: "Sizes" },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+    },
   ],
   notes: [
     { title: "One value or many", body: "The value is always an array. Without `multiple` it holds at most one item, so read `value[0]`; to stop the user clearing the choice, ignore empty arrays in `onValueChange`." },

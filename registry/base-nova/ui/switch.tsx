@@ -23,9 +23,9 @@ const switchVariants = cva(
 )
 
 const thumbSize = {
-  sm: "size-3 data-checked:translate-x-2.5",
-  default: "size-4 data-checked:translate-x-3",
-  lg: "size-5 data-checked:translate-x-4",
+  sm: "size-3 data-checked:translate-x-2.5 rtl:data-checked:-translate-x-2.5",
+  default: "size-4 data-checked:translate-x-3 rtl:data-checked:-translate-x-3",
+  lg: "size-5 data-checked:translate-x-4 rtl:data-checked:-translate-x-4",
 } as const
 
 type SwitchSize = keyof typeof thumbSize

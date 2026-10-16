@@ -52,6 +52,11 @@ export default {
       title: "Controlled",
       description: "Use when other UI reacts to the choice.",
     },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+    },
   ],
   notes: [
     {

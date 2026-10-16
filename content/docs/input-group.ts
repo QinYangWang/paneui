@@ -15,6 +15,11 @@ export default {
     {
       "id": "sizes",
       "title": "Sizes"
+    },
+    {
+      "id": "rtl",
+      "title": "RTL",
+      "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root."
     }
   ],
   "notes": [

@@ -14,6 +14,11 @@ export default {
       "id": "disabled-days",
       "title": "Disabled Days",
       "description": "Use `min`, `max` and `disabled` when only some days can be booked."
+    },
+    {
+      "id": "rtl",
+      "title": "RTL",
+      "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and pass a matching `locale`."
     }
   ],
   "notes": [

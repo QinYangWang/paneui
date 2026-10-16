@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox"
 import { cva, type VariantProps } from "class-variance-authority"
 
@@ -32,10 +33,10 @@ const comboboxInputVariants = cva(
   {
     variants: {
       size: {
-        xs: "h-6 gap-1 rounded-sm pr-0.5 pl-2",
-        sm: "h-7 gap-1.5 rounded-lg pr-1 pl-2.5",
-        default: "h-8 gap-1.5 rounded-lg pr-1 pl-2.5",
-        lg: "h-9 gap-2 rounded-lg pr-1 pl-3",
+        xs: "h-6 gap-1 rounded-sm pe-0.5 ps-2",
+        sm: "h-7 gap-1.5 rounded-lg pe-1 ps-2.5",
+        default: "h-8 gap-1.5 rounded-lg pe-1 ps-2.5",
+        lg: "h-9 gap-2 rounded-lg pe-1 ps-3",
       },
     },
     defaultVariants: { size: "default" },
@@ -47,10 +48,10 @@ const comboboxTriggerVariants = cva(
   {
     variants: {
       size: {
-        xs: "h-6 gap-1.5 rounded-sm pr-1.5 pl-2 text-ui-xs [&_svg]:size-3",
-        sm: "h-7 rounded-lg pr-2 pl-2.5 text-ui-sm [&_svg]:size-3.5",
-        default: "h-8 rounded-lg pr-2 pl-2.5 text-ui [&_svg]:size-3.5",
-        lg: "h-9 rounded-lg pr-2.5 pl-3 text-ui-lg [&_svg]:size-4",
+        xs: "h-6 gap-1.5 rounded-sm pe-1.5 ps-2 text-ui-xs [&_svg]:size-3",
+        sm: "h-7 rounded-lg pe-2 ps-2.5 text-ui-sm [&_svg]:size-3.5",
+        default: "h-8 rounded-lg pe-2 ps-2.5 text-ui [&_svg]:size-3.5",
+        lg: "h-9 rounded-lg pe-2.5 ps-3 text-ui-lg [&_svg]:size-4",
       },
     },
     defaultVariants: { size: "default" },
@@ -62,10 +63,10 @@ const comboboxItemVariants = cva(
   {
     variants: {
       size: {
-        xs: "min-h-6 pr-6 pl-1.5 text-ui-xs [&_svg]:size-3",
-        sm: "min-h-6 pr-7 pl-2 text-ui-sm [&_svg]:size-3.5",
-        default: "min-h-6.5 pr-7 pl-2 text-ui [&_svg]:size-3.5",
-        lg: "min-h-8 pr-8 pl-2.5 text-ui-lg [&_svg]:size-4",
+        xs: "min-h-6 pe-6 ps-1.5 text-ui-xs [&_svg]:size-3",
+        sm: "min-h-6 pe-7 ps-2 text-ui-sm [&_svg]:size-3.5",
+        default: "min-h-6.5 pe-7 ps-2 text-ui [&_svg]:size-3.5",
+        lg: "min-h-8 pe-8 ps-2.5 text-ui-lg [&_svg]:size-4",
       },
     },
     defaultVariants: { size: "default" },
@@ -167,7 +168,7 @@ function ComboboxTrigger({
       className={cn(comboboxTriggerVariants({ size }), className)}
       {...props}
     >
-      <span className="flex-1 truncate text-left data-placeholder:text-muted-foreground">{children}</span>
+      <span className="flex-1 truncate text-start data-placeholder:text-muted-foreground">{children}</span>
       <ChevronsUpDownIcon className="text-muted-foreground" />
     </ComboboxPrimitive.Trigger>
   )
@@ -201,8 +202,10 @@ function ComboboxContent({
   ...props
 }: ComboboxPrimitive.Popup.Props &
   Pick<ComboboxPrimitive.Positioner.Props, "side" | "sideOffset" | "align" | "anchor">) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <ComboboxPrimitive.Portal>
+    <ComboboxPrimitive.Portal dir={dir}>
       <ComboboxPrimitive.Positioner
         className="z-50 outline-none"
         side={side}
@@ -249,7 +252,7 @@ function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.
     >
       <span className="flex flex-1 items-center gap-2 truncate">{children}</span>
       <ComboboxPrimitive.ItemIndicator
-        className={cn("absolute flex text-foreground", size === "xs" ? "right-1.5" : size === "lg" ? "right-2.5" : "right-2")}
+        className={cn("absolute flex text-foreground", size === "xs" ? "end-1.5" : size === "lg" ? "end-2.5" : "end-2")}
       >
         <CheckIcon />
       </ComboboxPrimitive.ItemIndicator>

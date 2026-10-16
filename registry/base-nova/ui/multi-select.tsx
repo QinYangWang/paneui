@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
@@ -25,27 +26,27 @@ const MultiSelectSizeContext = React.createContext<MultiSelectSize | undefined>(
 // An inherited `xs` (from a Field) maps to `sm`: chips need at least 20px.
 const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: string; input: string; trigger: string; item: string }> = {
   sm: {
-    well: "frame-inset-0.5 min-h-7 py-0.5 pr-7 pl-0.5",
-    chip: "h-6 pl-2 text-ui-sm",
+    well: "frame-inset-0.5 min-h-7 py-0.5 pe-7 ps-0.5",
+    chip: "h-6 ps-2 text-ui-sm",
     remove: "size-5",
     input: "h-6 md:text-ui",
-    trigger: "top-0.5 right-0.5 size-6 rounded-inner",
+    trigger: "top-0.5 end-0.5 size-6 rounded-inner",
     item: "h-7 text-ui-sm",
   },
   default: {
-    well: "frame-inset-1 min-h-8 py-1 pr-8 pl-1",
-    chip: "h-6 pl-2 text-ui-sm",
+    well: "frame-inset-1 min-h-8 py-1 pe-8 ps-1",
+    chip: "h-6 ps-2 text-ui-sm",
     remove: "size-5",
     input: "h-6 md:text-ui",
-    trigger: "top-1 right-1 size-6 rounded-inner",
+    trigger: "top-1 end-1 size-6 rounded-inner",
     item: "h-8 text-ui",
   },
   lg: {
-    well: "frame-inset-1 min-h-9 py-1 pr-9 pl-1",
-    chip: "h-7 pl-2.5 text-ui",
+    well: "frame-inset-1 min-h-9 py-1 pe-9 ps-1",
+    chip: "h-7 ps-2.5 text-ui",
     remove: "size-6",
     input: "h-7 md:text-ui-lg",
-    trigger: "top-1 right-1 size-7 rounded-inner",
+    trigger: "top-1 end-1 size-7 rounded-inner",
     item: "h-9 text-ui-lg",
   },
 }
@@ -150,7 +151,7 @@ function MultiSelectTrigger({
                   <ComboboxPrimitive.Chip
                     data-slot="multi-select-chip"
                     className={cn(
-                      "frame-inner frame-inset-0.5 flex max-w-48 items-center gap-1 bg-card pr-0.5 font-medium shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50",
+                      "frame-inner frame-inset-0.5 flex max-w-48 items-center gap-1 bg-card pe-0.5 font-medium shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:opacity-50",
                       c.chip
                     )}
                   >
@@ -198,8 +199,10 @@ function MultiSelectContent({
   ...props
 }: ComboboxPrimitive.Popup.Props & Pick<ComboboxPrimitive.Positioner.Props, "side" | "sideOffset" | "align">) {
   const anchorRef = React.useContext(MultiSelectAnchorContext)
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <ComboboxPrimitive.Portal>
+    <ComboboxPrimitive.Portal dir={dir}>
       <ComboboxPrimitive.Positioner
         className="z-50 outline-none"
         side={side}

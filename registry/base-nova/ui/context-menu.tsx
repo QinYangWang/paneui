@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu"
 
 import { cn } from "@/lib/utils"
@@ -41,8 +42,10 @@ function ContextMenuContent({
   ...props
 }: ContextMenuPrimitive.Popup.Props &
   Pick<ContextMenuPrimitive.Positioner.Props, "side" | "sideOffset" | "align" | "alignOffset">) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <ContextMenuPrimitive.Portal>
+    <ContextMenuPrimitive.Portal dir={dir}>
       <ContextMenuPrimitive.Positioner
         className="z-50 outline-none"
         side={side}

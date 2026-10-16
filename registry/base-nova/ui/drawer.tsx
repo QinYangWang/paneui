@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "motion/react"
 
@@ -64,11 +65,13 @@ function DrawerContent({
   const reduce = useReducedMotion()
   const offscreen = side === "right" ? "100%" : "-100%"
 
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
     <AnimatePresence>
       {open && (
         // keepMounted hands unmounting to AnimatePresence so the exit spring can play.
-        <DialogPrimitive.Portal keepMounted>
+        <DialogPrimitive.Portal keepMounted dir={dir}>
           <DialogPrimitive.Backdrop
             data-slot="drawer-backdrop"
             className="fixed inset-0 z-50 bg-black/30"
@@ -97,7 +100,7 @@ function DrawerContent({
               <DialogPrimitive.Close
                 data-slot="drawer-close"
                 aria-label="Close"
-                className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+                className="absolute top-4 end-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 <XIcon size={16} />
               </DialogPrimitive.Close>
@@ -110,7 +113,7 @@ function DrawerContent({
 }
 
 function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="drawer-header" className={cn("flex flex-col gap-1.5 px-6 pt-6 pr-14 pb-4", className)} {...props} />
+  return <div data-slot="drawer-header" className={cn("flex flex-col gap-1.5 px-6 pt-6 pe-14 pb-4", className)} {...props} />
 }
 
 function DrawerBody({ className, ...props }: React.ComponentProps<"div">) {

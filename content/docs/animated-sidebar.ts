@@ -62,6 +62,11 @@ export default {
       title: "Non-collapsible Links",
       description: "Use `collapsible=\"none\"` for short link lists that never fold.",
     },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\`; \`side="left"\` then puts the sidebar on the right.`,
+    },
   ],
   notes: [
     {

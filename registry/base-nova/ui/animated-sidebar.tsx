@@ -227,7 +227,7 @@ function Sidebar({
             ? "frame-3xl frame-inset-2 bg-card shadow-well"
             : cn(
                 "bg-shell [--frame-inner-1:var(--sidebar-item-radius,var(--radius-lg))] [--frame-inner-2:initial]",
-                side === "left" ? "border-r border-border" : "border-l border-border"
+                side === "left" ? "border-e border-border" : "border-s border-border"
               ),
           panelClassName
         )}
@@ -278,7 +278,7 @@ function SidebarGroupLabel({ className, children, ...props }: React.ComponentPro
       <span
         className={cn(
           "truncate whitespace-nowrap transition-[opacity,translate] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
-          collapsed && "-translate-x-1 opacity-0"
+          collapsed && "-translate-x-1 opacity-0 rtl:translate-x-1"
         )}
       >
         {children}
@@ -326,7 +326,7 @@ function Label({ collapsed, reduce, children }: { collapsed: boolean; reduce: bo
       initial={false}
       animate={{ opacity: collapsed ? 0 : 1, x: collapsed ? -4 : 0 }}
       transition={{ duration: reduce ? 0 : collapsed ? 0.12 : 0.2, delay: collapsed || reduce ? 0 : 0.06, ease: EASE }}
-      className="relative min-w-0 flex-1 truncate text-left whitespace-nowrap"
+      className="relative min-w-0 flex-1 truncate text-start whitespace-nowrap"
     >
       {children}
     </motion.span>
@@ -441,7 +441,7 @@ function SidebarItem({
               <span aria-hidden className="relative grid size-[18px] shrink-0 place-items-center text-muted-foreground group-data-active/sidebar-item:text-foreground [&_svg]:size-4">
                 {icon}
                 {childActive && collapsed && !isActive && (
-                  <span className="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-primary" />
+                  <span className="absolute -top-0.5 -end-0.5 size-1.5 rounded-full bg-primary" />
                 )}
               </span>
             )}
@@ -481,7 +481,7 @@ function SidebarItem({
     <li data-slot="sidebar-item" className={cn("relative min-w-0", itemClassName)}>
       <Tooltip disabled={!collapsed || !tip}>
         <TooltipTrigger render={element} />
-        {tip && <TooltipContent side={side === "left" ? "right" : "left"}>{tip}</TooltipContent>}
+        {tip && <TooltipContent side={side === "left" ? "inline-end" : "inline-start"}>{tip}</TooltipContent>}
       </Tooltip>
       {isDisclosure && <ItemContext.Provider value={ctx}>{children}</ItemContext.Provider>}
     </li>
@@ -517,10 +517,10 @@ function SidebarSub({ className, children, ...props }: Omit<React.ComponentProps
       variants={reduce ? undefined : SUB_VARIANTS}
       style={reduce ? { height: shown ? "auto" : 0, opacity: shown ? 1 : 0 } : undefined}
       // overflow-hidden is needed for the height fold, but it would clip the
-      // pill's ring + shadow flush at the row edge. -mr-2/pr-2 pushes the clip
+      // pill's ring + shadow flush at the row edge. -me-2/pe-2 pushes the clip
       // edge out into SidebarContent's px-2 gutter so rows keep the same right
       // edge as top-level items while their shadow stays fully visible.
-      className={cn("relative -mr-2 ml-[21px] flex min-w-0 list-none flex-col gap-0.5 overflow-hidden border-l border-border pr-2 pl-2", className)}
+      className={cn("relative -me-2 ms-[21px] flex min-w-0 list-none flex-col gap-0.5 overflow-hidden border-s border-border pe-2 ps-2", className)}
       {...props}
     >
       {/* spacer keeps the first row clear of the parent */}
@@ -579,7 +579,7 @@ function SidebarSubItem({ isActive = false, href, disabled, icon, render, classN
                 {icon}
               </span>
             )}
-            <span className="relative min-w-0 flex-1 truncate text-left whitespace-nowrap">{children}</span>
+            <span className="relative min-w-0 flex-1 truncate text-start whitespace-nowrap">{children}</span>
           </>
         ),
       }
@@ -632,7 +632,7 @@ function SidebarHideCollapsed({ className, ...props }: React.ComponentProps<"div
       aria-hidden={collapsed || undefined}
       className={cn(
         "min-w-0 transition-[opacity,translate] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
-        collapsed && "pointer-events-none -translate-x-1 opacity-0",
+        collapsed && "pointer-events-none -translate-x-1 opacity-0 rtl:translate-x-1",
         className
       )}
       {...props}

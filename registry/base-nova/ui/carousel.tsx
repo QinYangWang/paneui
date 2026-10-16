@@ -67,12 +67,15 @@ function Carousel({ orientation = "horizontal", loop = false, onIndexChange, cla
     const horizontal = orientation === "horizontal"
     const pos = horizontal ? Math.abs(vp.scrollLeft) : vp.scrollTop
     const max = horizontal ? vp.scrollWidth - vp.clientWidth : vp.scrollHeight - vp.clientHeight
-    const start = horizontal ? vp.getBoundingClientRect().left : vp.getBoundingClientRect().top
+    // Right-to-left slides start at the viewport's right edge.
+    const rtl = horizontal && getComputedStyle(vp).direction === "rtl"
+    const v = vp.getBoundingClientRect()
+    const start = horizontal ? (rtl ? v.right : v.left) : v.top
     let index = 0
     let best = Infinity
     items.forEach((el, i) => {
       const r = el.getBoundingClientRect()
-      const d = Math.abs((horizontal ? r.left : r.top) - start)
+      const d = Math.abs((horizontal ? (rtl ? r.right : r.left) : r.top) - start)
       if (d < best) {
         best = d
         index = i
@@ -99,8 +102,9 @@ function Carousel({ orientation = "horizontal", loop = false, onIndexChange, cla
       const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches
       const r = el.getBoundingClientRect()
       const v = vp.getBoundingClientRect()
+      const rtl = getComputedStyle(vp).direction === "rtl"
       vp.scrollBy({
-        left: orientation === "horizontal" ? r.left - v.left : 0,
+        left: orientation === "horizontal" ? (rtl ? r.right - v.right : r.left - v.left) : 0,
         top: orientation === "vertical" ? r.top - v.top : 0,
         behavior: smooth ? "smooth" : "auto",
       })
@@ -148,8 +152,9 @@ function Carousel({ orientation = "horizontal", loop = false, onIndexChange, cla
         onKeyDown={(e) => {
           onKeyDown?.(e)
           if (e.defaultPrevented || (e.target as HTMLElement).closest("input,textarea,[contenteditable=true]")) return
-          const prev = orientation === "horizontal" ? "ArrowLeft" : "ArrowUp"
-          const next = orientation === "horizontal" ? "ArrowRight" : "ArrowDown"
+          const rtl = getComputedStyle(e.currentTarget).direction === "rtl"
+          const prev = orientation === "horizontal" ? (rtl ? "ArrowRight" : "ArrowLeft") : "ArrowUp"
+          const next = orientation === "horizontal" ? (rtl ? "ArrowLeft" : "ArrowRight") : "ArrowDown"
           if (e.key === prev) {
             e.preventDefault()
             scrollPrev()
@@ -213,7 +218,7 @@ function CarouselPrevious({ className, variant = "secondary", size = "icon-sm", 
       className={cn("rounded-full", orientation === "vertical" && "rotate-90", className)}
       {...props}
     >
-      <ChevronLeftIcon />
+      <ChevronLeftIcon className="rtl:rotate-180" />
     </Button>
   )
 }
@@ -231,7 +236,7 @@ function CarouselNext({ className, variant = "secondary", size = "icon-sm", ...p
       className={cn("rounded-full", orientation === "vertical" && "rotate-90", className)}
       {...props}
     >
-      <ChevronRightIcon />
+      <ChevronRightIcon className="rtl:rotate-180" />
     </Button>
   )
 }

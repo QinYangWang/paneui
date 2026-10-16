@@ -14,6 +14,11 @@ export default {
       "id": "tones",
       "title": "Tones",
       "description": "Use a tone when the bar reports a limit, such as storage or quota."
+    },
+    {
+      "id": "rtl",
+      "title": "RTL",
+      "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root."
     }
   ],
   "notes": [

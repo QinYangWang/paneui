@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu"
 
 import { ChevronDownIcon } from "@/components/icons"
@@ -20,10 +21,12 @@ import { cn } from "@/lib/utils"
  *   </NavigationMenu>
  */
 function NavigationMenu({ className, children, ...props }: NavigationMenuPrimitive.Root.Props) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
     <NavigationMenuPrimitive.Root data-slot="navigation-menu" className={cn("relative min-w-max", className)} {...props}>
       {children}
-      <NavigationMenuPrimitive.Portal>
+      <NavigationMenuPrimitive.Portal dir={dir}>
         <NavigationMenuPrimitive.Positioner
           sideOffset={6}
           collisionPadding={8}

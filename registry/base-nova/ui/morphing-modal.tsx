@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
@@ -152,8 +153,10 @@ function MorphingModalContent({
     exit: (d: number) => ({ opacity: 0, x: d * -offset, filter: reduce ? "blur(0px)" : "blur(4px)" }),
   }
 
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <DialogPrimitive.Portal>
+    <DialogPrimitive.Portal dir={dir}>
       <DialogPrimitive.Backdrop
         data-slot="morphing-modal-backdrop"
         className="fixed inset-0 z-50 bg-black/40 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"

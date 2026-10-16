@@ -35,6 +35,11 @@ toast.add({ title: "Saved", description: "Your changes are live.", type: "succes
       title: "Persistent",
       description: "Use `timeout: 0` for messages the user must act on, and `priority: \"high\"` when they are urgent.",
     },
+    {
+      id: "rtl",
+      title: "RTL",
+      description: `For right-to-left languages, put a \`ToastProvider\` inside \`DirectionProvider\`; its toasts stack at the bottom left.`,
+    },
   ],
   notes: [
     {

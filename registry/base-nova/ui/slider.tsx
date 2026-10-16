@@ -120,10 +120,10 @@ function Slider<Value extends number | readonly number[]>({
                 aria-hidden
                 data-slot="slider-tick"
                 data-active={active || undefined}
-                style={{ [vertical ? "bottom" : "left"]: `calc(${thumbInset} + (100% - 2 * ${thumbInset}) * ${pct / 100})` }}
+                style={{ [vertical ? "bottom" : "insetInlineStart"]: `calc(${thumbInset} + (100% - 2 * ${thumbInset}) * ${pct / 100})` }}
                 className={cn(
                   "pointer-events-none absolute size-1 rounded-full bg-foreground/20 transition-colors duration-150 data-active:bg-primary-foreground/70",
-                  vertical ? "left-1/2 -translate-x-1/2 translate-y-1/2" : "top-1/2 -translate-x-1/2 -translate-y-1/2"
+                  vertical ? "left-1/2 -translate-x-1/2 translate-y-1/2" : "top-1/2 -translate-x-1/2 -translate-y-1/2 rtl:translate-x-1/2"
                 )}
               />
             )

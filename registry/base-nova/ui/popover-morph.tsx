@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 
 import { XIcon } from "@/components/icons"
@@ -53,8 +54,10 @@ function MorphPopoverContent({
   /** Corner radius of the trigger shape the panel starts from (CSS length). Defaults to `var(--radius-lg)`, the radius of `MorphPopoverTrigger`. */
   triggerRadius?: string
 }) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <PopoverPrimitive.Portal>
+    <PopoverPrimitive.Portal dir={dir}>
       <PopoverPrimitive.Positioner
         className={cn(
           "z-50 outline-none",

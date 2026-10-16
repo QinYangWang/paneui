@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
 import { XIcon } from "@/components/icons"
@@ -16,8 +17,10 @@ function DialogContent({
   showClose = true,
   ...props
 }: DialogPrimitive.Popup.Props & { showClose?: boolean }) {
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
-    <DialogPrimitive.Portal>
+    <DialogPrimitive.Portal dir={dir}>
       <DialogPrimitive.Backdrop
         data-slot="dialog-backdrop"
         className="fixed inset-0 z-50 bg-black/40 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
@@ -43,7 +46,7 @@ function DialogContent({
               <DialogPrimitive.Close
                 data-slot="dialog-close"
                 aria-label="Close"
-                className="-mt-1.5 -mr-1.5 inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-popover text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+                className="-mt-1.5 -me-1.5 inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-popover text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 <XIcon size={16} />
               </DialogPrimitive.Close>
@@ -56,7 +59,7 @@ function DialogContent({
 }
 
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="dialog-header" className={cn("flex flex-col gap-1 pr-8", className)} {...props} />
+  return <div data-slot="dialog-header" className={cn("flex flex-col gap-1 pe-8", className)} {...props} />
 }
 
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {

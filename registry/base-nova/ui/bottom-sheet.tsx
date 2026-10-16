@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useDirection } from "@base-ui/react/direction-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import {
   animate,
@@ -143,10 +144,12 @@ function BottomSheetContent({
   ...props
 }: Omit<DialogPrimitive.Popup.Props, "render"> & { showHandle?: boolean }) {
   const { open } = useSheet()
+  // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
+  const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (
     <AnimatePresence>
       {open && (
-        <DialogPrimitive.Portal keepMounted>
+        <DialogPrimitive.Portal keepMounted dir={dir}>
           <SheetSurface className={className} showHandle={showHandle} {...props}>
             {children}
           </SheetSurface>
