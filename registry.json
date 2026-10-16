@@ -52,16 +52,17 @@
           "font-mono": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Noto Sans SC Variable\", ui-monospace, \"SF Mono\", \"SFMono-Regular\", Menlo, Consolas, \"Liberation Mono\", monospace",
           "font-mono--font-feature-settings": "normal",
           "font-serif": "\"Newsreader Variable\", \"Newsreader\", \"Noto Serif SC Variable\", \"Noto Serif SC\", ui-serif, Georgia, \"Songti SC\", \"SimSun\", serif",
-          "radius-2xs": "calc(var(--radius) * 0.25)",
-          "radius-xs": "calc(var(--radius) * 0.25)",
-          "radius-sm": "calc(var(--radius) * 0.5)",
-          "radius-md": "calc(var(--radius) * 0.75)",
-          "radius-xl": "calc(var(--radius) * 1.25)",
-          "radius-2xl": "calc(var(--radius) * 1.5)",
-          "radius-3xl": "calc(var(--radius) * 2)",
-          "radius-4xl": "calc(var(--radius) * 2.5)",
-          "radius-5xl": "calc(var(--radius) * 3)",
-          "radius-shell": "calc(var(--radius) * 1.5)",
+          "radius-2xs": "min(calc(var(--radius) * 0.25), var(--radius-max))",
+          "radius-xs": "min(calc(var(--radius) * 0.25), var(--radius-max))",
+          "radius-sm": "min(calc(var(--radius) * 0.5), var(--radius-max))",
+          "radius-md": "min(calc(var(--radius) * 0.75), var(--radius-max))",
+          "radius-lg": "min(var(--radius), var(--radius-max))",
+          "radius-xl": "min(calc(var(--radius) * 1.25), var(--radius-max))",
+          "radius-2xl": "min(calc(var(--radius) * 1.5), var(--radius-max))",
+          "radius-3xl": "min(calc(var(--radius) * 2), var(--radius-max))",
+          "radius-4xl": "min(calc(var(--radius) * 2.5), var(--radius-max))",
+          "radius-5xl": "min(calc(var(--radius) * 3), var(--radius-max))",
+          "radius-shell": "min(calc(var(--radius) * 1.5), var(--radius-max))",
           "shadow-xs": "var(--shadow-border)",
           "shadow-sm": "var(--shadow-default)",
           "shadow-md": "var(--shadow-lg)",
@@ -97,6 +98,7 @@
         },
         "light": {
           "radius": "0.5rem",
+          "radius-max": "1rem",
           "background": "#fff",
           "card": "#fff",
           "popover": "#fff",
@@ -299,7 +301,7 @@
         "@utility shell-inset": {
           "background-color": "var(--background)",
           "border": "0.5px solid var(--shell-border)",
-          "border-radius": "calc(var(--radius) * 1.3)",
+          "border-radius": "var(--radius-shell)",
           "margin-inline-end": "3px",
           "margin-bottom": "3px"
         },
@@ -532,7 +534,7 @@
       },
       "meta": {
         "category": "Foundations",
-        "version": "2.1"
+        "version": "2.2"
       },
       "registryDependencies": [
         "@qinyang/utils"
@@ -1633,7 +1635,8 @@
         "@qinyang/card",
         "@qinyang/drawer",
         "@qinyang/scroll-area",
-        "@qinyang/settings-section"
+        "@qinyang/settings-section",
+        "@qinyang/code-block"
       ],
       "files": [
         {
@@ -1710,6 +1713,11 @@
           "path": "registry/base-nova/templates/agent-workspace/server/README.md",
           "type": "registry:file",
           "target": "server/README.md"
+        },
+        {
+          "path": "registry/base-nova/templates/agent-workspace/parts/code.ts",
+          "type": "registry:component",
+          "target": "components/agent-workspace/parts/code.ts"
         }
       ],
       "meta": {
@@ -1728,7 +1736,6 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/typeset",
-        "@qinyang/agent-code-block",
         "@qinyang/alert",
         "@qinyang/animated-sidebar",
         "@qinyang/badge",
@@ -1738,10 +1745,10 @@
         "@qinyang/drawer",
         "@qinyang/icon-chip",
         "@qinyang/icons",
-        "@qinyang/tabs",
         "@qinyang/theme-toggle",
         "@qinyang/brand-icon",
-        "@qinyang/kbd"
+        "@qinyang/kbd",
+        "@qinyang/code-block"
       ],
       "files": [
         {
@@ -1768,6 +1775,11 @@
           "path": "registry/base-nova/templates/docs/page.tsx",
           "type": "registry:page",
           "target": "app/docs/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/docs/parts/code.ts",
+          "type": "registry:component",
+          "target": "components/docs-template/parts/code.ts"
         }
       ],
       "meta": {
@@ -1786,7 +1798,6 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/typeset",
-        "@qinyang/agent-code-block",
         "@qinyang/badge",
         "@qinyang/button",
         "@qinyang/icons",
@@ -1794,7 +1805,8 @@
         "@qinyang/scroll-progress",
         "@qinyang/theme-toggle",
         "@qinyang/toast",
-        "@qinyang/brand-icon"
+        "@qinyang/brand-icon",
+        "@qinyang/code-block"
       ],
       "files": [
         {
@@ -1851,6 +1863,11 @@
           "path": "registry/base-nova/templates/blog/post/page.tsx",
           "type": "registry:page",
           "target": "app/blog/post/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/blog/parts/code.ts",
+          "type": "registry:component",
+          "target": "components/blog/parts/code.ts"
         }
       ],
       "meta": {

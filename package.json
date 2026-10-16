@@ -11,6 +11,7 @@
     "registry:build": "node scripts/gen-icon-styles.mjs && shadcn build && node scripts/registry-postbuild.mjs",
     "icons:gen": "node scripts/gen-icon-styles.mjs",
     "docs:gen": "node scripts/gen-docs.mjs",
+    "templates:code": "node scripts/gen-template-code.mjs",
     "audit:radius": "node scripts/audit-radius.mjs"
   },
   "dependencies": {

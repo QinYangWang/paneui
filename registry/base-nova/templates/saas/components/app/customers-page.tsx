@@ -18,6 +18,17 @@ import {
   PageHeaderTitle,
 } from "@/registry/base-nova/ui/page-header"
 import { SegmentedControl, SegmentedControlItem } from "@/registry/base-nova/ui/segmented-control"
+import {
+  SettingsGroup,
+  SettingsRow,
+  SettingsRowControl,
+  SettingsRowDescription,
+  SettingsRowText,
+  SettingsRowTitle,
+  SettingsSection,
+  SettingsSectionHeader,
+  SettingsSectionTitle,
+} from "@/registry/base-nova/ui/settings-section"
 import { useToast } from "@/registry/base-nova/ui/toast"
 
 import { customers as seed, invoicesFor, regions, type Customer, type CustomerStatus } from "../../lib/data"
@@ -239,42 +250,54 @@ function CustomerDrawer({
               </div>
             </DrawerHeader>
             <DrawerBody className="flex flex-col gap-6">
-              <dl className="grid grid-cols-2 gap-x-4 gap-y-3 rounded-xl bg-muted p-4 text-sm">
-                {[
-                  ["Company", c.company],
-                  ["Plan", c.plan],
-                  ["Status", <StatusBadge key="s" status={c.status} />],
-                  ["Seats", c.seats],
-                  ["MRR", usd.format(c.mrr)],
-                  ["Region", c.region],
-                  ["Joined", c.joined],
-                  ["Last active", c.lastActive],
-                ].map(([k, v]) => (
-                  <div key={String(k)} className="flex flex-col gap-0.5">
-                    <dt className="text-xs text-muted-foreground">{k}</dt>
-                    <dd className="font-medium tabular-nums">{v}</dd>
-                  </div>
+              <SettingsGroup aria-label="Customer details">
+                {(
+                  [
+                    ["Company", c.company],
+                    ["Plan", c.plan],
+                    ["Status", <StatusBadge key="s" status={c.status} />],
+                    ["Seats", c.seats],
+                    ["MRR", usd.format(c.mrr)],
+                    ["Region", c.region],
+                    ["Joined", c.joined],
+                    ["Last active", c.lastActive],
+                  ] as const
+                ).map(([k, v]) => (
+                  <SettingsRow key={k}>
+                    <SettingsRowText>
+                      <SettingsRowDescription>{k}</SettingsRowDescription>
+                    </SettingsRowText>
+                    <SettingsRowControl>
+                      <SettingsRowTitle className="tabular-nums">{v}</SettingsRowTitle>
+                    </SettingsRowControl>
+                  </SettingsRow>
                 ))}
-              </dl>
-              <section className="flex flex-col gap-2">
-                <h3 className="text-sm font-semibold">Invoices</h3>
-                <ul className="flex flex-col divide-y divide-border rounded-xl bg-card text-sm shadow-raised">
+              </SettingsGroup>
+              <SettingsSection>
+                <SettingsSectionHeader>
+                  <SettingsSectionTitle>Invoices</SettingsSectionTitle>
+                </SettingsSectionHeader>
+                <SettingsGroup>
                   {invoicesFor(c).map((inv) => (
-                    <li key={inv.id} className="flex items-center gap-3 px-4 py-2.5">
-                      <div className="flex min-w-0 flex-1 flex-col">
-                        <span className="font-mono text-xs">{inv.id}</span>
-                        <span className="text-xs text-muted-foreground">
+                    <SettingsRow key={inv.id}>
+                      <SettingsRowText>
+                        <SettingsRowTitle>
+                          <span className="font-mono">{inv.id}</span>
+                        </SettingsRowTitle>
+                        <SettingsRowDescription>
                           {inv.date} · {inv.description}
-                        </span>
-                      </div>
-                      <Badge size="sm" variant={inv.status === "Paid" ? "success" : inv.status === "Open" ? "warning" : "outline"}>
-                        {inv.status}
-                      </Badge>
-                      <span className="w-16 text-right font-medium tabular-nums">{usd.format(inv.amount)}</span>
-                    </li>
+                        </SettingsRowDescription>
+                      </SettingsRowText>
+                      <SettingsRowControl>
+                        <Badge size="sm" variant={inv.status === "Paid" ? "success" : inv.status === "Open" ? "warning" : "outline"}>
+                          {inv.status}
+                        </Badge>
+                        <SettingsRowTitle className="w-16 text-right tabular-nums">{usd.format(inv.amount)}</SettingsRowTitle>
+                      </SettingsRowControl>
+                    </SettingsRow>
                   ))}
-                </ul>
-              </section>
+                </SettingsGroup>
+              </SettingsSection>
             </DrawerBody>
             <DrawerFooter className="flex gap-2">
               <Button variant="destructive" onClick={() => onRemove(c)}>

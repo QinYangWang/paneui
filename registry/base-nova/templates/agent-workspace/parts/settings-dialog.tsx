@@ -3,11 +3,11 @@
 import * as React from "react"
 
 import { PlusIcon, TrashIcon } from "@/components/icons"
-import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
 import { Alert, AlertContent, AlertDescription } from "@/registry/base-nova/ui/alert"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/base-nova/ui/card"
+import { CodeBlock } from "@/registry/base-nova/ui/code-block"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/registry/base-nova/ui/dialog"
 import { Input } from "@/registry/base-nova/ui/input"
 import { Label } from "@/registry/base-nova/ui/label"
@@ -16,6 +16,7 @@ import { SettingsNav, SettingsNavItem } from "@/registry/base-nova/ui/settings-s
 import { Textarea } from "@/registry/base-nova/ui/textarea"
 import { ThemeToggle } from "@/registry/base-nova/ui/theme-toggle"
 
+import { bridgeCommand } from "./code"
 import { formatEnv, parseArgs, parseEnv, type AgentConfig, type AgentProvider, type BridgeConfig } from "./agents"
 import { ProviderIcon } from "./provider-icon"
 
@@ -166,7 +167,7 @@ export function SettingsDialog({
                     <CardDescription className="text-pretty">Start it in your project, then paste the address and token it prints.</CardDescription>
                   </CardHeader>
                   <CardContent className="flex flex-col gap-2">
-                  <AgentCodeBlock code="node server/acp-bridge.mjs --root ." language="bash" showLineNumbers={false} />
+                  <CodeBlock language="bash" html={bridgeCommand} />
                   <div className="grid gap-2 sm:grid-cols-[1fr_10rem]">
                     <Input value={bridge.url} aria-label="Bridge address" onChange={(e) => onBridgeChange({ ...bridge, url: e.target.value })} />
                     <Input value={bridge.token} aria-label="Bridge token" placeholder="token" onChange={(e) => onBridgeChange({ ...bridge, token: e.target.value })} />

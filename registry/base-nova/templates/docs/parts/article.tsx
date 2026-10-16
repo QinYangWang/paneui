@@ -1,9 +1,9 @@
 "use client"
 
-import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
 import { Alert, AlertContent, AlertDescription, AlertIcon, AlertTitle } from "@/registry/base-nova/ui/alert"
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/base-nova/ui/tabs"
+import { CodeBlock, CodeGroup } from "@/registry/base-nova/ui/code-block"
 
+import { installBun, installNpm, installPnpm, policy } from "./code"
 import type { TocItem } from "./toc"
 
 export const toc: TocItem[] = [
@@ -15,31 +15,6 @@ export const toc: TocItem[] = [
   { id: "remembered", title: "Remembered decisions", depth: 2 },
   { id: "audit", title: "Auditing decisions", depth: 2 },
 ]
-
-const POLICY = `# tessel.toml: committed at the repo root
-[approvals]
-default = "ask"            # ask | allow | deny
-
-[[approvals.rule]]
-tool = "github.create_pull_request"
-when = { base = "main" }
-decision = "ask"
-
-[[approvals.rule]]
-tool = "shell.exec"
-match = "^(pnpm|npm) (test|lint|build)"
-decision = "allow"         # safe, read-only commands
-
-[[approvals.rule]]
-tool = "shell.exec"
-match = "rm -rf|git push --force"
-decision = "deny"`
-
-const install: Record<string, string> = {
-  pnpm: "pnpm add -D @tessel/cli",
-  npm: "npm install --save-dev @tessel/cli",
-  bun: "bun add -d @tessel/cli",
-}
 
 /** Article body. Long-form text uses `typeset typeset-docs`; components inside carry `not-typeset`. */
 export function Article() {
@@ -111,20 +86,11 @@ export function Article() {
 
       <h3 id="install-cli">Install the CLI</h3>
       <div className="not-typeset">
-        <Tabs defaultValue="pnpm">
-          <TabsList aria-label="Package manager">
-            {Object.keys(install).map((k) => (
-              <TabsTab key={k} value={k}>
-                {k}
-              </TabsTab>
-            ))}
-          </TabsList>
-          {Object.entries(install).map(([k, cmd]) => (
-            <TabsPanel key={k} value={k}>
-              <AgentCodeBlock code={cmd} language="bash" filename="Terminal" />
-            </TabsPanel>
-          ))}
-        </Tabs>
+        <CodeGroup storageKey="package-manager">
+          <CodeBlock title="pnpm" language="bash" html={installPnpm} />
+          <CodeBlock title="npm" language="bash" html={installNpm} />
+          <CodeBlock title="bun" language="bash" html={installBun} />
+        </CodeGroup>
       </div>
 
       <h3 id="policy-file">Write tessel.toml</h3>
@@ -133,7 +99,7 @@ export function Article() {
         shell commands outright.
       </p>
       <div className="not-typeset">
-        <AgentCodeBlock filename="tessel.toml" code={POLICY} highlightLines={[[15, 18]]} maxHeight={560} />
+        <CodeBlock title="tessel.toml" language="toml" html={policy} lineNumbers maxHeight={560} />
       </div>
       <p>
         Check it with <code>tessel policy check</code>. The command prints each rule with the calls from your last ten sessions it

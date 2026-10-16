@@ -3,12 +3,13 @@
 import Link from "next/link"
 
 import { ArrowLeftIcon } from "@/components/icons"
-import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
 import { Button } from "@/registry/base-nova/ui/button"
+import { CodeBlock } from "@/registry/base-nova/ui/code-block"
 import { ScrollProgress } from "@/registry/base-nova/ui/scroll-progress"
 
 import { PostMeta, Tags, type BlogHrefs } from "./blog"
 import { Avatar } from "./parts/avatar"
+import { nestedSurface } from "./parts/code"
 import { BlogFooter, BlogHeader, Container, Newsletter } from "./parts/chrome"
 import { CoverArt } from "./parts/cover-art"
 import { author, posts } from "./parts/data"
@@ -24,12 +25,6 @@ const toc: TocItem[] = [
   { id: "when-to-stop", title: "When to stop", depth: 2 },
   { id: "checklist", title: "A short checklist", depth: 3 },
 ]
-
-const CODE = `<div className="frame-3xl frame-p-1">    {/* 16px, 4px in */}
-  <div className="rounded-inner p-4">    {/* 16 − 4 = 12px */}
-    <img className="rounded-lg" />      {/* separate surface: own token */}
-  </div>
-</div>`
 
 /** Blog post: cover, prose article, sticky TOC, author card, related posts and newsletter. */
 export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hrefs?: BlogHrefs }) {
@@ -96,7 +91,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                 sits in a <code>4px</code> frame, so the frame takes <code>16px</code>.
               </p>
               <div className="not-typeset">
-                <AgentCodeBlock filename="nested-surface.tsx" code={CODE} copyable />
+                <CodeBlock title="nested-surface.tsx" language="tsx" html={nestedSurface} />
               </div>
               <p>
                 The image in the middle is not part of the chain. Its padding is <code>16px</code>, which would leave it a radius of

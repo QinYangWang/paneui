@@ -8,6 +8,28 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-radius-cap",
+    date: "October 16, 2026",
+    title: "Radius stops at 16px",
+    tag: "Theme",
+    changes: [
+      <>
+        Theme 2.2: no radius token goes past 16px, and the custom radius on{" "}
+        <TextLink href="/docs/colors#radius">Customize</TextLink> goes up to 1rem. Above that, controls turned into pills
+        and nested parts drifted off their containers. <Code>rounded-4xl</Code> and <Code>rounded-5xl</Code> stay as names
+        at the cap.
+      </>,
+      <>
+        Multi-select chips line up with the field&apos;s corners at every radius; they were 2px too square. Message
+        bubbles, the bottom sheet and the card folder follow the same cap.
+      </>,
+      <>
+        The docs and blog templates show code with <TextLink href="/docs/code-block">Code Block</TextLink> instead of
+        highlighting it in the browser, and the SaaS customer drawer uses settings rows for its details and invoices.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-templates",
     date: "October 16, 2026",
     title: "Brand icons, an upgrade path and refreshed templates",
