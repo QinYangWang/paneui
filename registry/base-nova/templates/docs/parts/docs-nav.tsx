@@ -1,62 +1,62 @@
 "use client"
 
-import { BoltIcon, HomeIcon, KeyIcon, ServerIcon, SettingsIcon, ShieldIcon, TerminalSquareIcon } from "@/components/icons"
 import {
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarItem,
-  SidebarMenu,
-  SidebarSub,
-  SidebarSubItem,
-} from "@/registry/base-nova/ui/animated-sidebar"
+  SidebarNav,
+  SidebarNavContent,
+  SidebarNavLink,
+  SidebarNavList,
+  SidebarNavSection,
+} from "@/registry/base-nova/ui/sidebar-nav"
+import { Badge } from "@/registry/base-nova/ui/badge"
 
-const sections = [
-  {
-    label: "Start here",
-    items: [{ title: "Getting started", icon: <HomeIcon />, pages: ["Introduction", "Quickstart", "Install the GitHub app"] }],
-  },
-  {
-    label: "Guides",
-    items: [
-      { title: "Safety", icon: <ShieldIcon />, pages: ["Approval policies", "Secrets", "Audit log"] },
-      { title: "Sandboxes", icon: <ServerIcon />, pages: ["Images", "Network rules", "Caching"] },
-      { title: "CI auto-fix", icon: <BoltIcon />, pages: ["GitHub Actions", "Buildkite"] },
-    ],
-  },
-  {
-    label: "Reference",
-    items: [
-      { title: "CLI", icon: <TerminalSquareIcon />, pages: ["tessel run", "tessel approve"] },
-      { title: "Configuration", icon: <SettingsIcon />, pages: ["tessel.toml", "Environment"] },
-      { title: "API", icon: <KeyIcon />, pages: ["Authentication", "Sessions", "Webhooks"] },
-    ],
-  },
-]
+import { CURRENT_PAGE, SECTIONS } from "./site"
 
-export const CURRENT_PAGE = "Approval policies"
-
-export function DocsNav() {
+/**
+ * The page tree. `section` limits it to one section's groups (the Notebook layout shows the
+ * other sections as header tabs); without it every section is a collapsible heading.
+ */
+export function DocsNav({ section, className }: { section?: string; className?: string }) {
+  const sections = section ? SECTIONS.filter((s) => s.id === section) : SECTIONS
   return (
-    <SidebarContent className="scrollbar-hover py-3">
-      {sections.map((s) => (
-        <SidebarGroup key={s.label}>
-          <SidebarGroupLabel>{s.label}</SidebarGroupLabel>
-          <SidebarMenu>
-            {s.items.map((item) => (
-              <SidebarItem key={item.title} icon={item.icon} label={item.title} defaultOpen={item.pages.includes(CURRENT_PAGE) || item.title === "Getting started"}>
-                <SidebarSub>
-                  {item.pages.map((p) => (
-                    <SidebarSubItem key={p} href="#" isActive={p === CURRENT_PAGE}>
-                      {p}
-                    </SidebarSubItem>
-                  ))}
-                </SidebarSub>
-              </SidebarItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
-      ))}
-    </SidebarContent>
+    <SidebarNav className={className}>
+      <SidebarNavContent aria-label="Docs" className="pt-3">
+        {sections.map((s) =>
+          section ? (
+            s.groups.map((g) => <Group key={g.label} label={g.label} pages={g.pages} level="section" />)
+          ) : (
+            <SidebarNavSection key={s.id} label={s.title}>
+              {s.groups.map((g) => (
+                <Group key={g.label} label={g.label} pages={g.pages} level="group" />
+              ))}
+            </SidebarNavSection>
+          ),
+        )}
+      </SidebarNavContent>
+    </SidebarNav>
+  )
+}
+
+function Group({ label, pages, level }: { label: string; pages: { title: string; href: string; badge?: string }[]; level: "section" | "group" }) {
+  return (
+    <SidebarNavSection label={label} level={level} collapsible={level === "group"}>
+      <SidebarNavList>
+        {pages.map((p) => (
+          <SidebarNavLink
+            key={p.title}
+            href={p.href}
+            active={p.title === CURRENT_PAGE}
+            badge={
+              p.badge ? (
+                <Badge variant="success" size="sm">
+                  {p.badge}
+                </Badge>
+              ) : undefined
+            }
+          >
+            {p.title}
+          </SidebarNavLink>
+        ))}
+      </SidebarNavList>
+    </SidebarNavSection>
   )
 }

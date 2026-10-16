@@ -1267,6 +1267,93 @@
       }
     },
     {
+      "name": "outline",
+      "type": "registry:ui",
+      "title": "Outline",
+      "description": "Links to the page's headings and follows the section being read.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/button",
+        "@qinyang/overflow-hint",
+        "@qinyang/popover",
+        "@qinyang/scroll-area"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/outline.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "cover-art",
+      "type": "registry:ui",
+      "title": "Cover Art",
+      "description": "Generated cover images for posts and cards, drawn in theme colours.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/cover-art.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "sidebar-nav",
+      "type": "registry:ui",
+      "title": "Sidebar Nav",
+      "description": "Compact text navigation for docs and settings sidebars.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/icons",
+        "@qinyang/kbd"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/sidebar-nav.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "simple-table",
+      "type": "registry:ui",
+      "title": "Simple Table",
+      "description": "A plain table for reference content like props and tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/simple-table.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Data"
+      }
+    },
+    {
       "name": "saas",
       "type": "registry:block",
       "title": "SaaS",
@@ -1797,25 +1884,30 @@
       "title": "Docs Site",
       "description": "Documentation site layout with search, navigation and a page outline.",
       "dependencies": [
-        "motion",
         "simple-icons"
       ],
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/typeset",
         "@qinyang/alert",
-        "@qinyang/animated-sidebar",
         "@qinyang/badge",
         "@qinyang/breadcrumb",
         "@qinyang/button",
+        "@qinyang/card",
+        "@qinyang/code-block",
         "@qinyang/command-palette",
         "@qinyang/drawer",
         "@qinyang/icon-chip",
         "@qinyang/icons",
-        "@qinyang/theme-toggle",
-        "@qinyang/brand-icon",
         "@qinyang/kbd",
-        "@qinyang/code-block"
+        "@qinyang/navigation-menu",
+        "@qinyang/outline",
+        "@qinyang/page-header",
+        "@qinyang/popover",
+        "@qinyang/separator",
+        "@qinyang/sidebar-nav",
+        "@qinyang/theme-toggle",
+        "@qinyang/brand-icon"
       ],
       "files": [
         {
@@ -1829,14 +1921,29 @@
           "target": "components/docs-template/parts/article.tsx"
         },
         {
+          "path": "registry/base-nova/templates/docs/parts/article-chrome.tsx",
+          "type": "registry:component",
+          "target": "components/docs-template/parts/article-chrome.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/docs/parts/chrome.tsx",
+          "type": "registry:component",
+          "target": "components/docs-template/parts/chrome.tsx"
+        },
+        {
           "path": "registry/base-nova/templates/docs/parts/docs-nav.tsx",
           "type": "registry:component",
           "target": "components/docs-template/parts/docs-nav.tsx"
         },
         {
-          "path": "registry/base-nova/templates/docs/parts/toc.tsx",
+          "path": "registry/base-nova/templates/docs/parts/layouts.tsx",
           "type": "registry:component",
-          "target": "components/docs-template/parts/toc.tsx"
+          "target": "components/docs-template/parts/layouts.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/docs/parts/site.ts",
+          "type": "registry:component",
+          "target": "components/docs-template/parts/site.ts"
         },
         {
           "path": "registry/base-nova/templates/docs/page.tsx",
@@ -1873,7 +1980,9 @@
         "@qinyang/theme-toggle",
         "@qinyang/toast",
         "@qinyang/brand-icon",
-        "@qinyang/code-block"
+        "@qinyang/code-block",
+        "@qinyang/outline",
+        "@qinyang/cover-art"
       ],
       "files": [
         {
@@ -1892,11 +2001,6 @@
           "target": "components/blog/parts/chrome.tsx"
         },
         {
-          "path": "registry/base-nova/templates/blog/parts/cover-art.tsx",
-          "type": "registry:component",
-          "target": "components/blog/parts/cover-art.tsx"
-        },
-        {
           "path": "registry/base-nova/templates/blog/parts/data.ts",
           "type": "registry:component",
           "target": "components/blog/parts/data.ts"
@@ -1905,11 +2009,6 @@
           "path": "registry/base-nova/templates/blog/parts/stagger.tsx",
           "type": "registry:component",
           "target": "components/blog/parts/stagger.tsx"
-        },
-        {
-          "path": "registry/base-nova/templates/blog/parts/toc.tsx",
-          "type": "registry:component",
-          "target": "components/blog/parts/toc.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/post.tsx",
@@ -2003,7 +2102,8 @@
         "category": "Display"
       },
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority",
+        "@base-ui/react"
       ]
     },
     {

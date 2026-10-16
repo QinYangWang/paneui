@@ -1,6 +1,16 @@
 import type * as React from "react"
 
+import { Card, CardDescription, CardTitle } from "@/registry/base-nova/ui/card"
+
 import { Code } from "./guide-page"
+import {
+  SimpleTable,
+  SimpleTableBody,
+  SimpleTableCell,
+  SimpleTableHead,
+  SimpleTableHeader,
+  SimpleTableRow,
+} from "@/registry/base-nova/ui/simple-table"
 
 /** Variable → utility → consumer, one row per kind of token in app/globals.css. */
 const LAYERS: { variable: string; value: string; utility: React.ReactNode; usedBy: string }[] = [
@@ -69,31 +79,29 @@ export function ThemingSystem() {
         utilities, so changing a value restyles every component without touching its file.
       </p>
 
-      <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
-        <table className="w-full min-w-xl border-collapse text-left text-sm">
-          <thead className="text-muted-foreground">
-            <tr className="border-b">
-              <th className="px-4 py-2.5 font-medium">Variable</th>
-              <th className="px-4 py-2.5 font-medium">Utility</th>
-              <th className="px-4 py-2.5 font-medium">Read by</th>
-            </tr>
-          </thead>
-          <tbody>
+      <SimpleTable className="min-w-xl">
+          <SimpleTableHeader>
+            <SimpleTableRow>
+              <SimpleTableHead>Variable</SimpleTableHead>
+              <SimpleTableHead>Utility</SimpleTableHead>
+              <SimpleTableHead>Read by</SimpleTableHead>
+            </SimpleTableRow>
+          </SimpleTableHeader>
+          <SimpleTableBody>
             {LAYERS.map((l) => (
-              <tr key={l.variable} className="border-b last:border-b-0">
-                <td className="px-4 py-2.5 align-top">
+              <SimpleTableRow key={l.variable}>
+                <SimpleTableCell>
                   <span className="flex flex-col gap-0.5">
                     <code className="font-mono text-xs text-foreground">{l.variable}</code>
                     <span className="font-mono text-ui-xs whitespace-nowrap text-muted-foreground">{l.value}</span>
                   </span>
-                </td>
-                <td className="px-4 py-2.5 align-top">{l.utility}</td>
-                <td className="px-4 py-2.5 align-top text-muted-foreground">{l.usedBy}</td>
-              </tr>
+                </SimpleTableCell>
+                <SimpleTableCell>{l.utility}</SimpleTableCell>
+                <SimpleTableCell>{l.usedBy}</SimpleTableCell>
+              </SimpleTableRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </SimpleTableBody>
+        </SimpleTable>
 
       <p className="text-muted-foreground">
         Dark mode works the same way. <Code>.dark</Code> on <Code>&lt;html&gt;</Code> points the same variables at dark
@@ -103,11 +111,13 @@ export function ThemingSystem() {
 
       <ol className="grid gap-3 sm:grid-cols-3">
         {STEPS.map((s, i) => (
-          <li key={s.title} className="flex flex-col gap-1.5 rounded-xl bg-card p-4 shadow-raised">
-            <span className="font-mono text-ui-xs text-muted-foreground tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-            <span className="text-ui-lg font-semibold">{s.title}</span>
-            <span className="text-sm text-muted-foreground">{s.body}</span>
-          </li>
+          <Card key={s.title} render={<li />} className="gap-1.5 px-4">
+            <span aria-hidden className="font-mono text-ui-xs text-muted-foreground tabular-nums">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <CardTitle>{s.title}</CardTitle>
+            <CardDescription className="text-sm">{s.body}</CardDescription>
+          </Card>
         ))}
       </ol>
 
@@ -116,7 +126,9 @@ export function ThemingSystem() {
         <ul className="flex flex-col gap-1.5 text-sm text-muted-foreground">
           {EXTRAS.map((e, i) => (
             <li key={i} className="flex gap-3">
-              <span className="w-24 shrink-0">{e.name}</span>
+              <span data-md-after=":" className="w-24 shrink-0">
+                {e.name}
+              </span>
               <span>{e.body}</span>
             </li>
           ))}

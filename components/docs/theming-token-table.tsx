@@ -4,10 +4,19 @@ import type * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/registry/base-nova/ui/badge"
+import { Card } from "@/registry/base-nova/ui/card"
 
 import { ACCENT_VARS, PRESET_THEMES, type AccentVar } from "./accent-color"
 import { useAccentState } from "./accent-store"
 import { modeValue, type ParsedTheme, type TokenKind, type TokenRole } from "./theming-tokens"
+import {
+  SimpleTable,
+  SimpleTableBody,
+  SimpleTableCell,
+  SimpleTableHead,
+  SimpleTableHeader,
+  SimpleTableRow,
+} from "@/registry/base-nova/ui/simple-table"
 
 /** Tokens the accent replaces. */
 const isAccentToken = (name: string): name is AccentVar => (ACCENT_VARS as readonly string[]).includes(name)
@@ -64,9 +73,9 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
   return (
     <>
       {/* Phones: one entry per token, light and dark stacked, values wrapping inside the card. */}
-      <ul className="flex flex-col rounded-xl bg-card text-sm shadow-raised sm:hidden">
+      <Card data-md-skip render={<ul />} className="gap-0 py-0 sm:hidden">
         {role.tokens.map((t) => (
-          <li key={t.name} className="flex min-w-0 flex-col gap-2 border-b px-4 py-3 last:border-b-0">
+          <li key={t.name} className="flex min-w-0 flex-col gap-2 border-b px-4 py-3 text-sm last:border-b-0">
             <span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5">
               <code className="font-mono text-xs text-foreground">--{t.name}</code>
               {t.note === "accent" ? (
@@ -84,20 +93,19 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
             ))}
           </li>
         ))}
-      </ul>
-    <div className="overflow-x-auto rounded-xl bg-card shadow-raised max-sm:hidden">
-      <table className="w-full min-w-xl table-fixed border-collapse text-left text-sm">
-        <thead className="text-muted-foreground">
-          <tr className="border-b">
-            <th className="w-2/5 px-4 py-2.5 font-medium">Token / class</th>
-            <th className="px-4 py-2.5 font-medium">Light</th>
-            <th className="px-4 py-2.5 font-medium">Dark</th>
-          </tr>
-        </thead>
-        <tbody>
+      </Card>
+    <SimpleTable containerClassName="max-sm:hidden" className="min-w-xl table-fixed">
+        <SimpleTableHeader>
+          <SimpleTableRow>
+            <SimpleTableHead className="w-2/5">Token / class</SimpleTableHead>
+            <SimpleTableHead>Light</SimpleTableHead>
+            <SimpleTableHead>Dark</SimpleTableHead>
+          </SimpleTableRow>
+        </SimpleTableHeader>
+        <SimpleTableBody>
           {role.tokens.map((t) => (
-            <tr key={t.name} className="border-b last:border-b-0">
-              <td className="px-4 py-2.5 align-middle whitespace-nowrap">
+            <SimpleTableRow key={t.name}>
+              <SimpleTableCell className="align-middle whitespace-nowrap">
                 <span className="flex flex-col gap-0.5">
                   <span className="flex items-center gap-2">
                     <code className="font-mono text-xs text-foreground">--{t.name}</code>
@@ -109,18 +117,17 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
                   </span>
                   <code className="font-mono text-ui-xs text-muted-foreground">{t.cls}</code>
                 </span>
-              </td>
-              <td className="px-4 py-2.5 align-middle">
+              </SimpleTableCell>
+              <SimpleTableCell className="align-middle">
                 <ValueCell kind={t.kind} value={valueFor(t.name, "light")} bg={valueFor(t.on ?? "background", "light")} />
-              </td>
-              <td className="px-4 py-2.5 align-middle">
+              </SimpleTableCell>
+              <SimpleTableCell className="align-middle">
                 <ValueCell kind={t.kind} value={valueFor(t.name, "dark")} bg={valueFor(t.on ?? "background", "dark")} />
-              </td>
-            </tr>
+              </SimpleTableCell>
+            </SimpleTableRow>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </SimpleTableBody>
+      </SimpleTable>
     </>
   )
 }

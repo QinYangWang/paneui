@@ -39,6 +39,11 @@ Card variant="inset"
         "Use `variant=\"inset\"` to present something, like an image or a featured plan.",
     },
     {
+      id: "link-cards",
+      title: "Link Cards",
+      description: "Use `interactive` with `render` when the whole card is one link, such as previous and next pages.",
+    },
+    {
       id: "inset-code",
       title: "Inset With Code",
       description: "Use a `CardFooter` above the panel as a caption bar for code or a file.",
@@ -54,6 +59,17 @@ Card variant="inset"
           type: `"sm" | "default" | "lg"`,
           default: `"default"`,
           description: "Sets `--card-spacing` (12, 16 or 24px), used by every part for padding and gaps.",
+        },
+        {
+          name: "interactive",
+          type: "boolean",
+          default: "false",
+          description: "The whole card is one link or button: the shadow steps up on hover and focus shows the ring.",
+        },
+        {
+          name: "render",
+          type: "React.ReactElement | (props, state) => React.ReactElement",
+          description: "Render the card as another element, such as `<a href>` or your router's link.",
         },
         {
           name: "variant",

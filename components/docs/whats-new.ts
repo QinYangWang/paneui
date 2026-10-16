@@ -5,8 +5,12 @@
  */
 export const WHATS_NEW = {
   /** Changelog anchor of the release that added them. */
-  href: "/docs/changelog#2026-10-16-foundation",
+  href: "/docs/changelog#2026-10-16-docs-from-the-library",
   items: [
+    "outline",
+    "sidebar-nav",
+    "simple-table",
+    "cover-art",
     "code-block",
     "theme-accents",
     "alert-dialog",

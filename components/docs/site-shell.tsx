@@ -9,9 +9,9 @@ import { CommandPalette, type CommandPaletteItem } from "@/registry/base-nova/bl
 import { Button } from "@/registry/base-nova/ui/button"
 import { Drawer, DrawerContent, DrawerTitle } from "@/registry/base-nova/ui/drawer"
 import { Kbd } from "@/registry/base-nova/ui/kbd"
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/registry/base-nova/ui/navigation-menu"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
-import { cn } from "@/lib/utils"
 
 import { categoryIcons, ComponentsIcon, guideIcons } from "./category-icons"
 import { DocsNav, normalizePath, type NavGroup } from "./docs-nav"
@@ -117,25 +117,20 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
           <Brand />
         </div>
 
-        <nav aria-label="Main" className="flex h-full items-stretch gap-1 max-md:hidden lg:ps-6">
-          {headerLinks.map((l) => {
-            const active = l.isActive(pathname, groups)
-            return (
-              <Link
-                key={l.label}
-                href={l.href}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "group/tab relative flex items-center px-2.5 text-ui font-medium text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:text-foreground",
-                  active && "text-foreground",
-                )}
-              >
-                <span className="rounded-md px-0.5 group-focus-visible/tab:ring-2 group-focus-visible/tab:ring-ring/50">{l.label}</span>
-                <span aria-hidden className={cn("absolute inset-x-2.5 -bottom-px h-0.5 rounded-full", active ? "bg-foreground" : "bg-transparent")} />
-              </Link>
-            )
-          })}
-        </nav>
+        <NavigationMenu aria-label="Main" className="h-full max-md:hidden lg:ms-6">
+          <NavigationMenuList className="h-full items-stretch gap-1">
+            {headerLinks.map((l) => {
+              const active = l.isActive(pathname, groups)
+              return (
+                <NavigationMenuItem key={l.label}>
+                  <NavigationMenuLink variant="tab" active={active} aria-current={active ? "page" : undefined} render={<Link href={l.href} />}>
+                    {l.label}
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              )
+            })}
+          </NavigationMenuList>
+        </NavigationMenu>
 
         <div className="ms-auto flex items-center gap-1.5 pe-3 lg:pe-4">
           <Button

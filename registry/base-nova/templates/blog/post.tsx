@@ -11,14 +11,14 @@ import { PostMeta, Tags, type BlogHrefs } from "./blog"
 import { Avatar } from "./parts/author-avatar"
 import { nestedSurface } from "./parts/code"
 import { BlogFooter, BlogHeader, Container, Newsletter } from "./parts/chrome"
-import { CoverArt } from "./parts/cover-art"
+import { CoverArt } from "@/registry/base-nova/ui/cover-art"
 import { author, posts } from "./parts/data"
 import { Stagger, StaggerItem } from "./parts/stagger"
-import { TableOfContents, type TocItem } from "./parts/toc"
+import { Outline, type OutlineItem } from "@/registry/base-nova/ui/outline"
 
 const post = posts[0]
 
-const toc: TocItem[] = [
+const toc: OutlineItem[] = [
   { id: "the-rule", title: "The rule", depth: 2 },
   { id: "why-it-looks-wrong", title: "Why equal radii look wrong", depth: 2 },
   { id: "in-tailwind", title: "Writing it in Tailwind", depth: 2 },
@@ -57,7 +57,9 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
             </StaggerItem>
           </Stagger>
 
-          <CoverArt variant={post.cover} className="aspect-video w-full rounded-2xl outline -outline-offset-1 outline-(--image-outline) sm:aspect-21/9" />
+          <div className="overflow-hidden rounded-2xl outline -outline-offset-1 outline-(--image-outline)">
+            <CoverArt variant={post.cover} className="aspect-video w-full sm:aspect-21/9" />
+          </div>
 
           <div className="flex justify-between gap-12">
             <article className="typeset typeset-reading min-w-0 flex-1 max-w-reading">
@@ -115,7 +117,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
               </p>
             </article>
             <aside className="sticky top-24 w-56 shrink-0 self-start max-lg:hidden">
-              <TableOfContents items={toc} />
+              <Outline items={toc} maxHeight="calc(100svh - 7.5rem)" />
             </aside>
           </div>
 

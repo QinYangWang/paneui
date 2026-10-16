@@ -43,7 +43,7 @@ export function ThemingRadius() {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card variant="inset">
+      <Card variant="inset" data-md-text="The web page has a live radius picker here: choose a preset or drag for your own value to see it on real controls. The CSS below is for the default radius.">
         <CardPanel className="gap-0 py-0">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-3 border-b px-4 py-3">
             <SegmentedControl

@@ -94,6 +94,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Card](https://qinyangwang.github.io/ui/docs/card.md): Groups related content and actions on one surface. JSON: https://qinyangwang.github.io/ui/r/card.json
 - [Carousel](https://qinyangwang.github.io/ui/docs/carousel.md): Scrolls through slides one at a time. JSON: https://qinyangwang.github.io/ui/r/carousel.json
 - [Collapsible](https://qinyangwang.github.io/ui/docs/collapsible.md): Shows and hides a section of content. JSON: https://qinyangwang.github.io/ui/r/collapsible.json
+- [Cover Art](https://qinyangwang.github.io/ui/docs/cover-art.md): Generated cover images for posts and cards, drawn in theme colours. JSON: https://qinyangwang.github.io/ui/r/cover-art.json
 - [Empty State](https://qinyangwang.github.io/ui/docs/empty-state.md): Tells users a list or page is empty and what to do. JSON: https://qinyangwang.github.io/ui/r/empty-state.json
 - [Kbd](https://qinyangwang.github.io/ui/docs/kbd.md): Shows a keyboard key or shortcut. JSON: https://qinyangwang.github.io/ui/r/kbd.json
 - [Loader](https://qinyangwang.github.io/ui/docs/loader.md): Shows that something is loading. JSON: https://qinyangwang.github.io/ui/r/loader.json
@@ -117,9 +118,11 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Icon Rail](https://qinyangwang.github.io/ui/docs/icon-rail.md): Narrow bar of icon buttons for switching between app sections. JSON: https://qinyangwang.github.io/ui/r/icon-rail.json
 - [Menubar](https://qinyangwang.github.io/ui/docs/menubar.md): Row of menus for a desktop app window. JSON: https://qinyangwang.github.io/ui/r/menubar.json
 - [Navigation Menu](https://qinyangwang.github.io/ui/docs/navigation-menu.md): Site navigation with panels of links. JSON: https://qinyangwang.github.io/ui/r/navigation-menu.json
+- [Outline](https://qinyangwang.github.io/ui/docs/outline.md): Links to the page's headings and follows the section being read. JSON: https://qinyangwang.github.io/ui/r/outline.json
 - [Pagination](https://qinyangwang.github.io/ui/docs/pagination.md): Moves through pages of results in a list or table. JSON: https://qinyangwang.github.io/ui/r/pagination.json
 - [Preview Rail](https://qinyangwang.github.io/ui/docs/preview-rail.md): Compact section navigation that previews each destination. JSON: https://qinyangwang.github.io/ui/r/preview-rail.json
 - [Shared Layout Background](https://qinyangwang.github.io/ui/docs/shared-layout-bg.md): Hover highlight that follows the pointer across a group. JSON: https://qinyangwang.github.io/ui/r/shared-layout-bg.json
+- [Sidebar Nav](https://qinyangwang.github.io/ui/docs/sidebar-nav.md): Compact text navigation for docs and settings sidebars. JSON: https://qinyangwang.github.io/ui/r/sidebar-nav.json
 - [Tab Strip](https://qinyangwang.github.io/ui/docs/tab-strip.md): Switches between open documents or panels, with closing and reordering. JSON: https://qinyangwang.github.io/ui/r/tab-strip.json
 - [Tabs](https://qinyangwang.github.io/ui/docs/tabs.md): Switches between related panels of content in one place. JSON: https://qinyangwang.github.io/ui/r/tabs.json
 - [Toolbar](https://qinyangwang.github.io/ui/docs/toolbar.md): Groups related actions into one keyboard-navigable bar. JSON: https://qinyangwang.github.io/ui/r/toolbar.json
@@ -154,6 +157,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 ## Data
 
 - [Data Table](https://qinyangwang.github.io/ui/docs/data-table.md): Browses, filters and acts on a set of rows. JSON: https://qinyangwang.github.io/ui/r/data-table.json
+- [Simple Table](https://qinyangwang.github.io/ui/docs/simple-table.md): A plain table for reference content like props and tokens. JSON: https://qinyangwang.github.io/ui/r/simple-table.json
 - [Table](https://qinyangwang.github.io/ui/docs/table.md): Shows large data sets that people sort, select and resize. JSON: https://qinyangwang.github.io/ui/r/table.json
 - [Table Async](https://qinyangwang.github.io/ui/docs/table-async.md): Loads table rows page by page as the reader scrolls. JSON: https://qinyangwang.github.io/ui/r/table-async.json
 - [Table Editable](https://qinyangwang.github.io/ui/docs/table-editable.md): Lets people edit cells and add or remove rows and columns. JSON: https://qinyangwang.github.io/ui/r/table-editable.json

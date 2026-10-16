@@ -3,6 +3,14 @@ import { Code, GuideH2, GuideH3, GuidePage, TextLink } from "@/components/docs/g
 import { InstallCommand } from "@/components/docs/install-command"
 import { REGISTRY_NAME, REGISTRY_URL, SITE_URL } from "@/lib/docs"
 import { DocsCode } from "@/components/docs/docs-code"
+import {
+  SimpleTable,
+  SimpleTableBody,
+  SimpleTableCell,
+  SimpleTableHead,
+  SimpleTableHeader,
+  SimpleTableRow,
+} from "@/registry/base-nova/ui/simple-table"
 
 export const metadata = { title: "CLI & registry" }
 
@@ -152,32 +160,30 @@ export default function CliPage() {
             Swap <Code>saas</Code> in either command for another name. Each one also adds its parts under{" "}
             <Code>components/&lt;name&gt;/</Code>.
           </p>
-          <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
-            <table className="w-full min-w-xl border-collapse text-left text-sm">
-              <thead className="text-muted-foreground">
-                <tr className="border-b border-border">
-                  <th className="px-4 py-2.5 font-medium">Template</th>
-                  <th className="px-4 py-2.5 font-medium">You get</th>
-                  <th className="px-4 py-2.5 font-medium">Writes to</th>
-                </tr>
-              </thead>
-              <tbody>
+          <SimpleTable className="min-w-xl">
+              <SimpleTableHeader>
+                <SimpleTableRow>
+                  <SimpleTableHead>Template</SimpleTableHead>
+                  <SimpleTableHead>You get</SimpleTableHead>
+                  <SimpleTableHead>Writes to</SimpleTableHead>
+                </SimpleTableRow>
+              </SimpleTableHeader>
+              <SimpleTableBody>
                 {templates.map((t) => (
-                  <tr key={t.name} className="border-b border-border last:border-b-0">
-                    <td className="px-4 py-2.5 align-top font-mono text-xs whitespace-nowrap text-foreground">{t.name}</td>
-                    <td className="px-4 py-2.5 align-top text-muted-foreground">{t.what}</td>
-                    <td className="px-4 py-2.5 align-top">
+                  <SimpleTableRow key={t.name}>
+                    <SimpleTableCell variant="code">{t.name}</SimpleTableCell>
+                    <SimpleTableCell>{t.what}</SimpleTableCell>
+                    <SimpleTableCell>
                       <span className="flex flex-wrap gap-1">
                         {t.routes.map((r) => (
                           <Code key={r}>{r}</Code>
                         ))}
                       </span>
-                    </td>
-                  </tr>
+                    </SimpleTableCell>
+                  </SimpleTableRow>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </SimpleTableBody>
+            </SimpleTable>
         </div>
       </section>
 
@@ -269,26 +275,24 @@ export default function CliPage() {
         <div className="flex flex-col gap-4 pt-2">
           <GuideH3 id="migrations">Migrations</GuideH3>
           <p className="text-muted-foreground">Newest first. Each step lists only what needs your attention.</p>
-          <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
-            <table className="w-full min-w-xl border-collapse text-left text-sm">
-              <thead className="text-muted-foreground">
-                <tr className="border-b border-border">
-                  <th className="px-4 py-2.5 font-medium">Theme</th>
-                  <th className="px-4 py-2.5 font-medium">What changed</th>
-                  <th className="px-4 py-2.5 font-medium">What to do</th>
-                </tr>
-              </thead>
-              <tbody className="align-top">
+          <SimpleTable className="min-w-xl">
+              <SimpleTableHeader>
+                <SimpleTableRow>
+                  <SimpleTableHead>Theme</SimpleTableHead>
+                  <SimpleTableHead>What changed</SimpleTableHead>
+                  <SimpleTableHead>What to do</SimpleTableHead>
+                </SimpleTableRow>
+              </SimpleTableHeader>
+              <SimpleTableBody>
                 {migrations.map((m) => (
-                  <tr key={m.version} className="border-b border-border last:border-b-0">
-                    <td className="px-4 py-2.5 font-mono text-xs whitespace-nowrap text-foreground">{m.version}</td>
-                    <td className="px-4 py-2.5 text-muted-foreground">{m.changed}</td>
-                    <td className="px-4 py-2.5 text-muted-foreground">{m.todo}</td>
-                  </tr>
+                  <SimpleTableRow key={m.version}>
+                    <SimpleTableCell variant="code">{m.version}</SimpleTableCell>
+                    <SimpleTableCell>{m.changed}</SimpleTableCell>
+                    <SimpleTableCell>{m.todo}</SimpleTableCell>
+                  </SimpleTableRow>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </SimpleTableBody>
+            </SimpleTable>
           <p className="text-muted-foreground">
             The installed version is <Code>meta.version</Code> in <Code>{ns}/theme</Code>; <Code>view {ns}/theme</Code>{" "}
             prints the current one.

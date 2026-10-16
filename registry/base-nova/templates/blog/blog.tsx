@@ -8,7 +8,7 @@ import { Button } from "@/registry/base-nova/ui/button"
 
 import { Avatar } from "./parts/author-avatar"
 import { BlogFooter, BlogHeader, Container, Newsletter } from "./parts/chrome"
-import { CoverArt } from "./parts/cover-art"
+import { CoverArt } from "@/registry/base-nova/ui/cover-art"
 import { author, posts } from "./parts/data"
 import { Stagger, StaggerItem } from "./parts/stagger"
 

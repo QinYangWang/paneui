@@ -29,6 +29,8 @@ const fence = (code, lang = "") => {
   return `${"`".repeat(ticks)}${lang}\n${code}\n${"`".repeat(ticks)}`
 }
 const cell = (s = "") => String(s).replace(/\|/g, "\\|").replace(/\n+/g, " ")
+/** A value as inline code; one that already holds code spans ("true for `icon*` sizes") keeps them as written. */
+const codeCell = (s = "") => (String(s).includes("`") ? cell(s) : `\`${cell(s)}\``)
 /** Inline docs text keeps its `code` and [links](…); site-relative links become absolute. */
 const inline = (s = "") => s.replace(/\]\((\/[^)]*)\)/g, (_, href) => `](${base}${href})`)
 
@@ -84,7 +86,7 @@ for (const item of visible) {
       if (part.props.length) {
         md.push("| Prop | Type | Default | Description |", "| --- | --- | --- | --- |")
         for (const p of part.props)
-          md.push(`| \`${p.name}\`${p.required ? " (required)" : ""} | \`${cell(p.type)}\` | ${p.default ? `\`${cell(p.default)}\`` : "—"} | ${cell(inline(p.description))} |`)
+          md.push(`| \`${p.name}\`${p.required ? " (required)" : ""} | ${codeCell(p.type)} | ${p.default ? codeCell(p.default) : "—"} | ${cell(inline(p.description))} |`)
         md.push("")
       }
       if (part.dataAttributes?.length) {
@@ -156,8 +158,24 @@ const find = (node, pred) => {
     if (hit) return hit
   }
 }
+/*
+ * Markup hooks for this script (see AGENTS.md › Component docs pages):
+ *   data-md-skip, data-md="skip"   leave the element out (page chrome, interactive previews, phone-only duplicates)
+ *   data-md-text="…"               write this Markdown instead of the element's content (a fallback for a widget)
+ *   data-md-only                   visually hidden (`hidden`), written only to the Markdown
+ *   data-md-after="…"              text after the element (": " between a label and its description)
+ *   data-md="links"                link tiles: each <a> inside becomes "- [title](url): description", the title from
+ *                                  [data-md-title] (else the link text), the description from [data-md-desc]
+ */
 const hidden = (n) =>
-  SKIP.has(n.tag) || "data-md-skip" in n.attrs || n.attrs["aria-hidden"] === "true" || "hidden" in n.attrs || n.attrs.class?.split(/\s+/).includes("sr-only") || n.attrs.role === "tabpanel" && n.attrs["data-hidden"] !== undefined
+  !("data-md-only" in n.attrs) &&
+  (SKIP.has(n.tag) ||
+    "data-md-skip" in n.attrs ||
+    n.attrs["data-md"] === "skip" ||
+    n.attrs["aria-hidden"] === "true" ||
+    "hidden" in n.attrs ||
+    n.attrs.class?.split(/\s+/).includes("sr-only") ||
+    (n.attrs.role === "tabpanel" && n.attrs["data-hidden"] !== undefined))
 const textOf = (n) => (typeof n === "string" ? n : n.children.map(textOf).join(""))
 
 /** Inline Markdown for a run of nodes. */
@@ -165,15 +183,21 @@ function inlineMd(nodes) {
   let s = ""
   let prevSpan = false
   for (const n of nodes) {
-    // Two labels laid out side by side (a name and a count, a date and a tag) read as two words.
-    const span = typeof n !== "string" && !["code", "strong", "b", "em", "i", "br"].includes(n.tag)
-    if (span && prevSpan && !/\s$/.test(s)) s += " "
-    prevSpan = span
+    // Two elements laid out side by side (a name and a count, a token and its class) read as two words.
+    const span = typeof n !== "string" && n.tag !== "br" && !hidden(n)
+    if (span && prevSpan && s && !/[\s(]$/.test(s)) s += " "
     if (typeof n === "string") {
+      if (n) prevSpan = false
       s += n.replace(/\s+/g, " ")
       continue
     }
     if (hidden(n)) continue
+    prevSpan = span
+    if ("data-md-text" in n.attrs) {
+      s += n.attrs["data-md-text"]
+      continue
+    }
+    const after = n.attrs["data-md-after"] ?? ""
     const inner = () => inlineMd(n.children)
     if (n.tag === "code") s += "`" + textOf(n).replace(/\s+/g, " ") + "`"
     else if (n.tag === "strong" || n.tag === "b") s += `**${inner().trim()}**`
@@ -184,8 +208,30 @@ function inlineMd(nodes) {
       const label = inner().trim()
       s += label ? `[${label}](${href})` : ""
     } else s += inner()
+    if (after) s = s.replace(/\s+$/, "") + after
   }
   return s
+}
+
+/** Link tiles: one list item per link, title and optional one-line description, no counts or icons. */
+function linkList(node) {
+  const links = []
+  const walk = (x) => {
+    if (typeof x === "string" || hidden(x)) return
+    if (x.tag === "a" && x.attrs.href) links.push(x)
+    else x.children.forEach(walk)
+  }
+  walk(node)
+  return links
+    .map((a) => {
+      const href = a.attrs.href.startsWith("/") ? base + a.attrs.href.replace(/^\/ui(?=\/)/, "") : a.attrs.href
+      const t = find(a, (x) => "data-md-title" in x.attrs)
+      const d = find(a, (x) => "data-md-desc" in x.attrs)
+      const title = inlineMd(t ? t.children : a.children).replace(/\s+/g, " ").trim()
+      const desc = d ? inlineMd(d.children).replace(/\s+/g, " ").trim() : ""
+      return `- [${title}](${href})${desc ? `: ${desc}` : ""}`
+    })
+    .join("\n")
 }
 
 const BLOCK = new Set(["p", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "pre", "table", "blockquote", "section", "div", "header", "footer", "article", "figure", "dl", "li", "hr", "nav", "aside", "main", "details", "summary", "dt", "dd", "figcaption"])
@@ -200,7 +246,8 @@ function blocks(node, out = []) {
     run = []
   }
   for (const n of node.children) {
-    if (typeof n === "string" || (!BLOCK.has(n.tag) && !hasBlock(n) && !n.attrs["data-slot"]?.startsWith("command-pill"))) {
+    const special = typeof n !== "string" && ("data-md-text" in n.attrs || n.attrs["data-md"] === "links")
+    if (typeof n === "string" || (!special && !BLOCK.has(n.tag) && !hasBlock(n) && !n.attrs["data-slot"]?.startsWith("command-pill"))) {
       run.push(n)
       continue
     }
@@ -208,7 +255,23 @@ function blocks(node, out = []) {
     if (hidden(n)) continue
     const h = /^h([1-6])$/.exec(n.tag)
     const slot = n.attrs["data-slot"]
-    if (slot === "command-pill") {
+    if ("data-md-text" in n.attrs) {
+      if (n.attrs["data-md-text"]) out.push(n.attrs["data-md-text"])
+    } else if (n.attrs["data-md"] === "links") {
+      const list = linkList(n)
+      if (list) out.push(list)
+    } else if (n.tag === "dl") {
+      // Term and description pairs: "- **Term**: description".
+      const items = []
+      const walk = (x) => {
+        if (typeof x === "string" || hidden(x)) return
+        if (x.tag === "dt") items.push({ dt: inlineMd(x.children).trim(), dd: [] })
+        else if (x.tag === "dd") items.at(-1)?.dd.push(inlineMd(x.children).trim())
+        else x.children.forEach(walk)
+      }
+      walk(n)
+      out.push(items.map((i) => `- **${i.dt}**${i.dd.length ? `: ${i.dd.join(" ")}` : ""}`).join("\n"))
+    } else if (slot === "command-pill") {
       // An install command: the shell prompt glyph is aria-hidden, the command is the <code>.
       const code = find(n, (x) => x.tag === "code")
       if (code) out.push(fence(textOf(code).trim(), "bash"))
@@ -244,7 +307,11 @@ function blocks(node, out = []) {
       walk(n)
       if (rows.length) {
         const cells = rows.map((r) => r.children.filter((c) => typeof c !== "string" && (c.tag === "td" || c.tag === "th")).map((c) => cell(inlineMd(c.children).trim())))
-        const width = Math.max(...cells.map((c) => c.length))
+        // A column with no text in any row (a swatch or preview column) is left out.
+        const cols = Math.max(...cells.map((c) => c.length))
+        const keep = Array.from({ length: cols }, (_, i) => i).filter((i) => cells.some((c) => (c[i] ?? "").trim()))
+        cells.forEach((c, r) => (cells[r] = keep.map((i) => c[i] ?? "")))
+        const width = keep.length
         const line = (c) => `| ${Array.from({ length: width }, (_, i) => c[i] ?? "").join(" | ")} |`
         out.push([line(cells[0]), line(Array(width).fill("---")), ...cells.slice(1).map(line)].join("\n"))
       }
@@ -288,7 +355,10 @@ for (const g of GUIDES) {
     const fixed = blocks(article)
     const h1 = fixed.findIndex((b) => b.startsWith("# "))
     if (h1 >= 0) fixed.splice(h1 + 1, 0, `Page: ${base}${g.href}/`)
-    md = fixed.slice(Math.max(0, h1)).join("\n\n")
+    md = fixed
+      .slice(Math.max(0, h1))
+      .map((b) => (b.startsWith("`") ? b : b.replace(/[ \t]+$/gm, "").replace(/(\S) {2,}/g, "$1 ")))
+      .join("\n\n")
   }
   fs.writeFileSync(path.join(outDir, g.md), md.trimEnd() + "\n")
   count++

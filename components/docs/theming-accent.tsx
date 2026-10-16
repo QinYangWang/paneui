@@ -62,7 +62,7 @@ export function ThemingAccent() {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card variant="inset">
+      <Card variant="inset" data-md-text="The web page has a live accent picker here: choose a preset or a brand colour to see it on real controls. The CSS below is for the default accent.">
         <CardPanel className="gap-0 py-0">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-3 border-b px-4 py-3">
             <div role="radiogroup" aria-label="Accent preset" className="flex items-center gap-2">

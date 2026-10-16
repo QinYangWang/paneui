@@ -8,6 +8,33 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-docs-from-the-library",
+    date: "October 16, 2026",
+    title: "Docs built from the library, five docs layouts",
+    tag: "Components",
+    changes: [
+      <>
+        New items: <TextLink href="/docs/outline">Outline</TextLink> (the On this page rail and its popover),{" "}
+        <TextLink href="/docs/sidebar-nav">Sidebar Nav</TextLink>, <TextLink href="/docs/simple-table">Simple Table</TextLink> and{" "}
+        <TextLink href="/docs/cover-art">Cover Art</TextLink>. The docs site, the docs template and the blog template now use them
+        instead of their own copies.
+      </>,
+      <>
+        <Code>Card</Code> takes <Code>render</Code> and <Code>interactive</Code> for cards that are one link,{" "}
+        <Code>NavigationMenuLink</Code> has a <Code>tab</Code> variant for header sections, and <Code>PageHeader</Code> has{" "}
+        <Code>size=&quot;lg&quot;</Code> for reading pages.
+      </>,
+      <>
+        The <TextLink href="/docs/docs">Docs Site</TextLink> template takes a <Code>layout</Code>: classic, notebook, flux, spacious or
+        home. Each one has a preview on its page.
+      </>,
+      <>
+        The Markdown copy of each guide page reads cleanly: interactive previews become a short note, link tiles a list, and
+        tables keep only the columns with text.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-docs-pages",
     date: "October 16, 2026",
     title: "Docs pages you can copy, share and follow",
@@ -543,11 +570,14 @@ export default function Changelog() {
     <GuidePage href="/docs/changelog" toc={ENTRIES.map((e) => ({ id: e.id, title: e.title }))}>
       {ENTRIES.map((e) => (
         <section key={e.id} className="flex flex-col gap-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div data-md-skip className="flex items-center gap-2 text-sm text-muted-foreground">
             <time>{e.date}</time>
             {e.tag && <Badge size="sm">{e.tag}</Badge>}
           </div>
           <GuideH2 id={e.id}>{e.title}</GuideH2>
+          <p hidden data-md-only>
+            <em>{e.tag ? `${e.date} · ${e.tag}` : e.date}</em>
+          </p>
           <div className="typeset typeset-docs text-muted-foreground">
             <ul>
               {e.changes.map((c, i) => (

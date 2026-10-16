@@ -9,6 +9,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui
 
 import { demos } from "./demos"
 import { examples } from "./examples.generated"
+import { TemplatePreview } from "./template-preview"
 import { useFrameThemeSync } from "./theme-sync"
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
@@ -88,11 +89,14 @@ function DeviceFrame({ src, width, title }: { src: string; width: number; title:
 export function PreviewTabs({
   name,
   example,
+  templatePath,
   code,
   className,
 }: {
   name?: string
   example?: string
+  /** A full-page template route: the preview is that page in a scaled frame instead of the inline example. */
+  templatePath?: string
   code: React.ReactNode
   className?: string
 }) {
@@ -111,7 +115,7 @@ export function PreviewTabs({
           <TabsTab value="preview">Preview</TabsTab>
           <TabsTab value="code">Code</TabsTab>
         </TabsList>
-        {tab === "preview" && (
+        {tab === "preview" && !templatePath && (
           <div data-slot="preview-toolbar" className="ms-auto flex flex-wrap items-center gap-2">
             {/* Device widths need room to compare against; small screens keep the inline preview. */}
             <Tabs value={viewport} onValueChange={(v) => isViewport(v) && setViewport(v)} className="max-md:hidden">
@@ -146,7 +150,9 @@ export function PreviewTabs({
         )}
       </div>
       <TabsPanel value="preview">
-        {device?.width ? (
+        {templatePath ? (
+          <TemplatePreview name={example ?? name ?? "template"} path={templatePath} height={480} />
+        ) : device?.width ? (
           <div className="frame-2xl frame-p-3 bg-secondary">
             <DeviceFrame key={src + device.width} src={src} width={device.width} title={`${example ?? name} preview, ${device.label}`} />
           </div>

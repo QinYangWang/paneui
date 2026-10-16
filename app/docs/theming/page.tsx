@@ -4,30 +4,37 @@ import { InstallCommand } from "@/components/docs/install-command"
 import { ThemingSystem } from "@/components/docs/theming-system"
 import { REGISTRY_NAME } from "@/lib/docs"
 import { DocsCode } from "@/components/docs/docs-code"
+import { Badge } from "@/registry/base-nova/ui/badge"
+import {
+  SimpleTable,
+  SimpleTableBody,
+  SimpleTableCell,
+  SimpleTableHead,
+  SimpleTableHeader,
+  SimpleTableRow,
+} from "@/registry/base-nova/ui/simple-table"
 
 export const metadata = { title: "Theming" }
 
-const tableCls = "w-full min-w-xl border-collapse text-left text-sm"
-const th = "px-4 py-2.5 font-medium"
-const td = "px-4 py-2.5 align-top"
-const row = "border-b border-border last:border-b-0"
-
 function Table({ head, children }: { head: string[]; children: React.ReactNode }) {
   return (
-    <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
-      <table className={tableCls}>
-        <thead className="text-muted-foreground">
-          <tr className="border-b border-border">
-            {head.map((h) => (
-              <th key={h} className={th}>
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>{children}</tbody>
-      </table>
-    </div>
+    <SimpleTable className="min-w-xl">
+      <SimpleTableHeader>
+        <SimpleTableRow>
+          {head.map((h, i) =>
+            h ? (
+              <SimpleTableHead key={h}>{h}</SimpleTableHead>
+            ) : (
+              // The preview column has nothing to name; the Markdown copy leaves it out.
+              <SimpleTableHead key={i} data-md-skip>
+                <span className="sr-only">Preview</span>
+              </SimpleTableHead>
+            ),
+          )}
+        </SimpleTableRow>
+      </SimpleTableHeader>
+      <SimpleTableBody>{children}</SimpleTableBody>
+    </SimpleTable>
   )
 }
 
@@ -198,14 +205,17 @@ export default function Theming() {
           tokens in components, never palette colours (<Code>bg-zinc-100</Code>) or hex values. Every token&apos;s light and
           dark value is on <TextLink href="/docs/colors">Customize</TextLink>.
         </p>
-        <div className="flex flex-wrap gap-2">
+        {/* Swatches of the main roles; the Markdown copy points at the full list instead. */}
+        <ul data-md-text="Every role, with its light and dark value, is listed on Customize." className="flex flex-wrap gap-2">
           {SWATCHES.map((s) => (
-            <span key={s.token} className="frame-lg frame-p-1.5 flex items-center gap-2 bg-card pr-2.5 shadow-raised">
-              <span className={`block size-5 rounded-inner shadow-chip ${s.swatch}`} />
-              <span className="font-mono text-xs">{s.token}</span>
-            </span>
+            <li key={s.token}>
+              <Badge variant="outline">
+                <span className={`block size-4 rounded-full shadow-chip ${s.swatch}`} />
+                <span className="font-mono">{s.token}</span>
+              </Badge>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       <section className="flex flex-col gap-4">
@@ -231,18 +241,23 @@ export default function Theming() {
           <Code>-subtle-hover</Code> and <Code>-border</Code> variants, plus <Code>ring</Code>. Every preset reads the same
           steps of its own 12-step scale, so surfaces, text and charts stay the same. Install one after the theme.
         </p>
-        <div className="flex flex-wrap gap-2">
+        <ul
+          data-md-text={`The presets are ${ACCENTS.map((a) => `\`theme-${a.name}\`${a.isDefault ? " (the default)" : ""}`).join(", ")}.`}
+          className="flex flex-wrap gap-2"
+        >
           {ACCENTS.map((a) => (
-            <div key={a.name} className="flex items-center gap-2.5 rounded-xl bg-card py-2.5 pr-3.5 pl-3 shadow-raised">
-              <span className="flex">
-                <span className="block size-5 rounded-full bg-(--swatch) ring-2 ring-card" style={{ "--swatch": a.light } as React.CSSProperties} />
-                <span className="-ml-1.5 block size-5 rounded-full bg-(--swatch) ring-2 ring-card" style={{ "--swatch": a.dark } as React.CSSProperties} />
-              </span>
-              <span className="font-mono text-xs">theme-{a.name}</span>
-              {a.isDefault ? <span className="text-ui-xs text-muted-foreground">default</span> : null}
-            </div>
+            <li key={a.name}>
+              <Badge variant="outline">
+                <span className="flex">
+                  <span className="block size-4 rounded-full bg-(--swatch) ring-2 ring-card" style={{ "--swatch": a.light } as React.CSSProperties} />
+                  <span className="-ms-1.5 block size-4 rounded-full bg-(--swatch) ring-2 ring-card" style={{ "--swatch": a.dark } as React.CSSProperties} />
+                </span>
+                <span className="font-mono">theme-{a.name}</span>
+                {a.isDefault ? <span className="text-muted-foreground">default</span> : null}
+              </Badge>
+            </li>
           ))}
-        </div>
+        </ul>
         <InstallCommand args={`add @${REGISTRY_NAME}/theme-violet`} />
         <p className="text-muted-foreground">
           An installed preset overwrites the variables on <Code>:root</Code> and <Code>.dark</Code>, so the accent is fixed.
@@ -265,11 +280,11 @@ export default function Theming() {
         </p>
         <Table head={["Class", "Size", "Use for"]}>
           {TYPE.map((t) => (
-            <tr key={t.cls} className={row}>
-              <td className={`${td} font-mono text-xs whitespace-nowrap text-foreground`}>{t.cls}</td>
-              <td className={`${td} whitespace-nowrap text-muted-foreground tabular-nums`}>{t.size}</td>
-              <td className={`${td} text-muted-foreground`}>{t.use}</td>
-            </tr>
+            <SimpleTableRow key={t.cls}>
+              <SimpleTableCell variant="code">{t.cls}</SimpleTableCell>
+              <SimpleTableCell variant="numeric">{t.size}</SimpleTableCell>
+              <SimpleTableCell>{t.use}</SimpleTableCell>
+            </SimpleTableRow>
           ))}
         </Table>
       </section>
@@ -283,11 +298,11 @@ export default function Theming() {
         </p>
         <Table head={["Utility", "Face", "Use for"]}>
           {FONTS.map((f) => (
-            <tr key={f.cls} className={row}>
-              <td className={`${td} font-mono text-xs whitespace-nowrap text-foreground`}>{f.cls}</td>
-              <td className={`${td} whitespace-nowrap text-muted-foreground`}>{f.face}</td>
-              <td className={`${td} text-muted-foreground`}>{f.use}</td>
-            </tr>
+            <SimpleTableRow key={f.cls}>
+              <SimpleTableCell variant="code">{f.cls}</SimpleTableCell>
+              <SimpleTableCell className="whitespace-nowrap">{f.face}</SimpleTableCell>
+              <SimpleTableCell>{f.use}</SimpleTableCell>
+            </SimpleTableRow>
           ))}
         </Table>
         <InstallCommand args={`add @${REGISTRY_NAME}/fonts`} />
@@ -311,14 +326,14 @@ export default function Theming() {
         </p>
         <Table head={["", "Class", "Size", "Use for"]}>
           {RADII.map((r) => (
-            <tr key={r.cls} className={row}>
-              <td className={`${td} w-12`}>
+            <SimpleTableRow key={r.cls}>
+              <SimpleTableCell data-md-skip className="w-12">
                 <span className={`block size-7 border-t-2 border-l-2 border-foreground/40 ${r.corner}`} />
-              </td>
-              <td className={`${td} font-mono text-xs whitespace-nowrap text-foreground`}>{r.cls}</td>
-              <td className={`${td} whitespace-nowrap text-muted-foreground tabular-nums`}>{r.px}</td>
-              <td className={`${td} text-muted-foreground`}>{r.use}</td>
-            </tr>
+              </SimpleTableCell>
+              <SimpleTableCell variant="code">{r.cls}</SimpleTableCell>
+              <SimpleTableCell variant="numeric">{r.px}</SimpleTableCell>
+              <SimpleTableCell>{r.use}</SimpleTableCell>
+            </SimpleTableRow>
           ))}
         </Table>
       </section>
@@ -332,23 +347,25 @@ export default function Theming() {
         </p>
         <Table head={["", "Class", "Token", "Use for"]}>
           {SHADOW_SCALE.map((s) => (
-            <tr key={s.cls} className={row}>
-              <td className={`${td} w-14`}>
+            <SimpleTableRow key={s.cls}>
+              <SimpleTableCell data-md-skip className="w-14">
                 <span className={`block size-8 rounded-lg bg-popover ${s.cls}`} />
-              </td>
-              <td className={`${td} font-mono text-xs whitespace-nowrap text-foreground`}>{s.cls}</td>
-              <td className={`${td} font-mono text-xs whitespace-nowrap text-muted-foreground`}>{s.token}</td>
-              <td className={`${td} text-muted-foreground`}>{s.use}</td>
-            </tr>
+              </SimpleTableCell>
+              <SimpleTableCell variant="code">{s.cls}</SimpleTableCell>
+              <SimpleTableCell variant="code-muted">{s.token}</SimpleTableCell>
+              <SimpleTableCell>{s.use}</SimpleTableCell>
+            </SimpleTableRow>
           ))}
         </Table>
         <p className="text-muted-foreground">Components read these named levels, each built on the scale above.</p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {SHADOWS.map((s) => (
             <div key={s.cls} className="flex items-start gap-3 rounded-xl p-3">
-              <span className={`block size-10 shrink-0 rounded-lg bg-card ${s.cls}`} />
+              <span aria-hidden className={`block size-10 shrink-0 rounded-lg bg-card ${s.cls}`} />
               <span className="flex min-w-0 flex-col gap-0.5">
-                <span className="font-mono text-xs text-foreground">{s.cls}</span>
+                <code data-md-after=":" className="font-mono text-xs text-foreground">
+                  {s.cls}
+                </code>
                 <span className="text-sm text-muted-foreground">{s.use}</span>
               </span>
             </div>
@@ -361,7 +378,7 @@ export default function Theming() {
         <p className="text-muted-foreground">
           Follow these rules when you build a new component.
         </p>
-        <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
+        <ul className="flex list-disc flex-col gap-2 ps-5 text-muted-foreground marker:text-border">
           <li>
             <Code>secondary</Code>, <Code>muted</Code> and <Code>accent</Code> are fills; use <Code>bg-card</Code>,{" "}
             <Code>bg-popover</Code> or <Code>bg-background</Code> for anything that must be opaque.

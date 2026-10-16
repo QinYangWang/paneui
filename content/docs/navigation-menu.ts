@@ -16,6 +16,11 @@ export default {
       "title": "Links Only"
     },
     {
+      "id": "header-tabs",
+      "title": "Header Tabs",
+      "description": "Use `variant=\"tab\"` for the sections of a site header; set `active` on the current one."
+    },
+    {
       "id": "rtl",
       "title": "RTL",
       "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root."
@@ -60,8 +65,8 @@ export default {
       "props": [
         {
           "name": "variant",
-          "type": "\"panel\" | \"trigger\"",
-          "description": "`trigger` styles a top-level link like a trigger.",
+          "type": "\"panel\" | \"trigger\" | \"tab\"",
+          "description": "`trigger` styles a top-level link like a trigger; `tab` is a full-height header section link with a 2px bar under the `active` one.",
           "default": "\"panel\""
         }
       ]

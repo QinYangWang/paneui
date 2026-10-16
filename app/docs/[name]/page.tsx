@@ -16,6 +16,15 @@ import { demoFile, docSources, getItem, getItems, getPrevNext, lastUpdated, read
 import { DocsCode, highlight } from "@/components/docs/docs-code"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
+import { Card } from "@/registry/base-nova/ui/card"
+import {
+  SimpleTable,
+  SimpleTableBody,
+  SimpleTableCell,
+  SimpleTableHead,
+  SimpleTableHeader,
+  SimpleTableRow,
+} from "@/registry/base-nova/ui/simple-table"
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/base-nova/ui/tabs"
 import { docsContent } from "@/content/docs/index.generated"
 import type { PartDoc } from "@/lib/doc-types"
@@ -27,6 +36,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ name: string }> }) {
   const item = getItem((await params).name)
   return item ? { title: item.title, description: item.summary } : {}
+}
+
+/** The preview route of a template example: `/templates/docs/` for the classic layout, `/templates/docs/flux/` for the others. */
+function templateRoute(name: string, id: string) {
+  return id === "classic" ? `/templates/${name}/` : `/templates/${name}/${id}/`
 }
 
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
@@ -65,9 +79,9 @@ function ApiPart({ part }: { part: PartDoc }) {
       )}
       {part.props.length > 0 && (
         // Phones: one stacked entry per prop (name and default, type, description) instead of a four-column table.
-        <dl className="flex flex-col rounded-xl bg-card text-sm shadow-raised sm:hidden">
+        <Card data-md-skip render={<dl />} className="gap-0 py-0 sm:hidden">
           {part.props.map((p) => (
-            <div key={p.name} className="flex min-w-0 flex-col gap-1 border-b border-border px-4 py-3 last:border-b-0">
+            <div key={p.name} className="flex min-w-0 flex-col gap-1 border-b border-border px-4 py-3 text-sm last:border-b-0">
               <dt className="flex min-w-0 items-baseline justify-between gap-3 font-mono text-xs">
                 <span className="min-w-0 break-all text-foreground">
                   {p.name}
@@ -83,72 +97,68 @@ function ApiPart({ part }: { part: PartDoc }) {
               )}
             </div>
           ))}
-        </dl>
+        </Card>
       )}
       {part.props.length > 0 && (
-        <div className="overflow-x-auto rounded-xl bg-card shadow-raised max-sm:hidden">
-          <table className="w-full min-w-xl border-collapse text-left text-sm">
-            <thead className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <th className="px-4 py-2.5 font-medium">Prop</th>
-                <th className="px-4 py-2.5 font-medium">Type</th>
-                <th className="px-4 py-2.5 font-medium">Default</th>
-                <th className="px-4 py-2.5 font-medium">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {part.props.map((p) => (
-                <tr key={p.name} className="border-b border-border align-top last:border-b-0">
-                  <td className="px-4 py-2.5 font-mono text-xs whitespace-nowrap text-foreground">
-                    {p.name}
-                    {p.required && <span className="text-destructive">*</span>}
-                  </td>
-                  <td className="max-w-64 px-4 py-2.5 font-mono text-xs break-words text-primary">{p.type}</td>
-                  <td className="px-4 py-2.5 font-mono text-xs whitespace-nowrap text-muted-foreground">
-                    {p.default ?? "—"}
-                  </td>
-                  <td className="px-4 py-2.5 text-muted-foreground">
-                    <Inline text={p.description} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <SimpleTable containerClassName="max-sm:hidden" className="min-w-xl">
+          <SimpleTableHeader>
+            <SimpleTableRow>
+              <SimpleTableHead>Prop</SimpleTableHead>
+              <SimpleTableHead>Type</SimpleTableHead>
+              <SimpleTableHead>Default</SimpleTableHead>
+              <SimpleTableHead>Description</SimpleTableHead>
+            </SimpleTableRow>
+          </SimpleTableHeader>
+          <SimpleTableBody>
+            {part.props.map((p) => (
+              <SimpleTableRow key={p.name}>
+                <SimpleTableCell variant="code">
+                  {p.name}
+                  {p.required && <span className="text-destructive">*</span>}
+                </SimpleTableCell>
+                <SimpleTableCell variant="type">{p.type}</SimpleTableCell>
+                <SimpleTableCell variant="code-muted">
+                  {p.default ?? "—"}
+                </SimpleTableCell>
+                <SimpleTableCell>
+                  <Inline text={p.description} />
+                </SimpleTableCell>
+              </SimpleTableRow>
+            ))}
+          </SimpleTableBody>
+        </SimpleTable>
       )}
       {part.dataAttributes && part.dataAttributes.length > 0 && (
-        <dl className="flex flex-col rounded-xl bg-card text-sm shadow-raised sm:hidden">
+        <Card data-md-skip render={<dl />} className="gap-0 py-0 sm:hidden">
           {part.dataAttributes.map((d) => (
-            <div key={d.name} className="flex min-w-0 flex-col gap-1 border-b border-border px-4 py-3 last:border-b-0">
+            <div key={d.name} className="flex min-w-0 flex-col gap-1 border-b border-border px-4 py-3 text-sm last:border-b-0">
               <dt className="font-mono text-xs break-all text-foreground">{d.name}</dt>
               <dd className="text-pretty text-muted-foreground">
                 <Inline text={d.description} />
               </dd>
             </div>
           ))}
-        </dl>
+        </Card>
       )}
       {part.dataAttributes && part.dataAttributes.length > 0 && (
-        <div className="overflow-x-auto rounded-xl bg-card shadow-raised max-sm:hidden">
-          <table className="w-full border-collapse text-left text-sm">
-            <thead className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <th className="px-4 py-2.5 font-medium">Data attribute</th>
-                <th className="px-4 py-2.5 font-medium">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {part.dataAttributes.map((d) => (
-                <tr key={d.name} className="border-b border-border align-top last:border-b-0">
-                  <td className="px-4 py-2.5 font-mono text-xs whitespace-nowrap text-foreground">{d.name}</td>
-                  <td className="px-4 py-2.5 text-muted-foreground">
-                    <Inline text={d.description} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <SimpleTable containerClassName="max-sm:hidden">
+          <SimpleTableHeader>
+            <SimpleTableRow>
+              <SimpleTableHead>Data attribute</SimpleTableHead>
+              <SimpleTableHead>Description</SimpleTableHead>
+            </SimpleTableRow>
+          </SimpleTableHeader>
+          <SimpleTableBody>
+            {part.dataAttributes.map((d) => (
+              <SimpleTableRow key={d.name}>
+                <SimpleTableCell variant="code">{d.name}</SimpleTableCell>
+                <SimpleTableCell>
+                  <Inline text={d.description} />
+                </SimpleTableCell>
+              </SimpleTableRow>
+            ))}
+          </SimpleTableBody>
+        </SimpleTable>
       )}
     </div>
   )
@@ -323,6 +333,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
               )}
               <PreviewTabs
                 example={`${name}/${ex.id}`}
+                templatePath={isTemplate ? templateRoute(name, ex.id) : undefined}
                 code={<DocsCode code={exampleCode(ex.id)} filename={`${ex.id}.tsx`} maxHeight={420} />}
               />
             </div>

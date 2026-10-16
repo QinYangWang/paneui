@@ -6,6 +6,7 @@ import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page
 import { InstallCommand } from "@/components/docs/install-command"
 import { getGroups, getItems, REGISTRY_NAME } from "@/lib/docs"
 import { Button } from "@/registry/base-nova/ui/button"
+import { Card } from "@/registry/base-nova/ui/card"
 
 export const metadata = { title: "Introduction" }
 
@@ -73,21 +74,17 @@ export default function Introduction() {
 
       <section className="flex flex-col gap-4">
         <GuideH2 id="whats-inside">What&apos;s inside</GuideH2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div data-md="links" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {groups.map((g) => {
             const Icon = categoryIcons[g.category]
             return (
-              <Link
-                key={g.category}
-                href={`/#${categorySlug(g.category)}`}
-                className="flex flex-col gap-1.5 rounded-xl bg-card p-4 shadow-raised transition-[box-shadow] duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
-              >
+              <Card key={g.category} interactive size="sm" render={<Link href={`/#${categorySlug(g.category)}`} />} className="px-4">
                 <span className="flex items-center gap-2 font-medium">
                   {Icon && <Icon size={16} className="text-muted-foreground" />}
-                  {g.category}
-                  <span className="ml-auto text-ui-xs text-muted-foreground tabular-nums">{g.items.length}</span>
+                  <span data-md-title>{g.category}</span>
+                  <span className="ms-auto text-ui-xs text-muted-foreground tabular-nums">{g.items.length}</span>
                 </span>
-                              </Link>
+              </Card>
             )
           })}
         </div>
@@ -95,7 +92,7 @@ export default function Introduction() {
 
       <section className="flex flex-col gap-4">
         <GuideH2 id="stack">Stack</GuideH2>
-        <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
+        <ul className="flex list-disc flex-col gap-2 ps-5 text-muted-foreground marker:text-border">
           <li>
             Headless primitives for interactive parts (the <Code>base-nova</Code> style).
           </li>

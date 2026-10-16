@@ -4,9 +4,9 @@ import { Alert, AlertContent, AlertDescription, AlertIcon, AlertTitle } from "@/
 import { CodeBlock, CodeGroup } from "@/registry/base-nova/ui/code-block"
 
 import { installBun, installNpm, installPnpm, policy } from "./code"
-import type { TocItem } from "./toc"
+import type { OutlineItem } from "@/registry/base-nova/ui/outline"
 
-export const toc: TocItem[] = [
+export const toc: OutlineItem[] = [
   { id: "how-it-works", title: "How approvals work", depth: 2 },
   { id: "risk-levels", title: "Risk levels", depth: 3 },
   { id: "configure", title: "Configure a policy", depth: 2 },

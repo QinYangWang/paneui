@@ -40,11 +40,13 @@ import d_combobox from "./combobox"
 import d_command from "./command"
 import d_composition_chart from "./composition-chart"
 import d_context_menu from "./context-menu"
+import d_cover_art from "./cover-art"
 import d_data_table from "./data-table"
 import d_date_picker from "./date-picker"
 import d_date_range_picker from "./date-range-picker"
 import d_dialog from "./dialog"
 import d_digit_swap from "./digit-swap"
+import d_docs from "./docs"
 import d_donut_chart from "./donut-chart"
 import d_drawer from "./drawer"
 import d_edited_files_card from "./edited-files-card"
@@ -83,6 +85,7 @@ import d_native_select from "./native-select"
 import d_navigation_menu from "./navigation-menu"
 import d_notion_editor from "./notion-editor"
 import d_number_ticker from "./number-ticker"
+import d_outline from "./outline"
 import d_overflow_hint from "./overflow-hint"
 import d_page_header from "./page-header"
 import d_pagination from "./pagination"
@@ -107,6 +110,8 @@ import d_separator from "./separator"
 import d_settings_section from "./settings-section"
 import d_shader_background from "./shader-background"
 import d_shared_layout_bg from "./shared-layout-bg"
+import d_sidebar_nav from "./sidebar-nav"
+import d_simple_table from "./simple-table"
 import d_skeleton from "./skeleton"
 import d_slide_action_button from "./slide-action-button"
 import d_slider from "./slider"
@@ -191,11 +196,13 @@ export const docsContent: Record<string, ComponentDoc> = {
   "command": d_command,
   "composition-chart": d_composition_chart,
   "context-menu": d_context_menu,
+  "cover-art": d_cover_art,
   "data-table": d_data_table,
   "date-picker": d_date_picker,
   "date-range-picker": d_date_range_picker,
   "dialog": d_dialog,
   "digit-swap": d_digit_swap,
+  "docs": d_docs,
   "donut-chart": d_donut_chart,
   "drawer": d_drawer,
   "edited-files-card": d_edited_files_card,
@@ -234,6 +241,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "navigation-menu": d_navigation_menu,
   "notion-editor": d_notion_editor,
   "number-ticker": d_number_ticker,
+  "outline": d_outline,
   "overflow-hint": d_overflow_hint,
   "page-header": d_page_header,
   "pagination": d_pagination,
@@ -258,6 +266,8 @@ export const docsContent: Record<string, ComponentDoc> = {
   "settings-section": d_settings_section,
   "shader-background": d_shader_background,
   "shared-layout-bg": d_shared_layout_bg,
+  "sidebar-nav": d_sidebar_nav,
+  "simple-table": d_simple_table,
   "skeleton": d_skeleton,
   "slide-action-button": d_slide_action_button,
   "slider": d_slider,
