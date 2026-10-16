@@ -1,14 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { DirectionProvider } from "@base-ui/react/direction-provider"
 
-import { ExternalLinkIcon } from "@/components/icons"
-import { ControlSizeContext, type ControlSize } from "@/lib/control-size"
+import { ExternalLinkIcon, MaximizeIcon, MonitorIcon, SmartphoneIcon, TabletIcon } from "@/components/icons"
 import { Button } from "@/registry/base-nova/ui/button"
-import { SegmentedControl, SegmentedControlItem } from "@/registry/base-nova/ui/segmented-control"
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/base-nova/ui/tabs"
-import { Toggle } from "@/registry/base-nova/ui/toggle-group"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
 import { demos } from "./demos"
@@ -19,22 +15,14 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 
 /** "fit" renders inline at the card's width; the others load the /preview frame at a device width. */
 type Viewport = "fit" | "desktop" | "tablet" | "mobile"
-const VIEWPORTS: { value: Viewport; label: string; width?: number }[] = [
-  { value: "fit", label: "Fit" },
-  { value: "desktop", label: "Desktop", width: 1024 },
-  { value: "tablet", label: "Tablet", width: 768 },
-  { value: "mobile", label: "Mobile", width: 390 },
-]
-const SIZES: { value: ControlSize | "auto"; label: string }[] = [
-  { value: "auto", label: "Auto" },
-  { value: "xs", label: "XS" },
-  { value: "sm", label: "SM" },
-  { value: "default", label: "MD" },
-  { value: "lg", label: "LG" },
+const VIEWPORTS: { value: Viewport; label: string; icon: React.ComponentType; width?: number }[] = [
+  { value: "fit", label: "Fit", icon: MaximizeIcon },
+  { value: "desktop", label: "Desktop", icon: MonitorIcon, width: 1024 },
+  { value: "tablet", label: "Tablet", icon: TabletIcon, width: 768 },
+  { value: "mobile", label: "Mobile", icon: SmartphoneIcon, width: 390 },
 ]
 
 const isViewport = (v: unknown): v is Viewport => VIEWPORTS.some((x) => x.value === v)
-const isSize = (v: unknown): v is ControlSize | "auto" => SIZES.some((x) => x.value === v)
 
 /**
  * A device-width preview: the /preview frame in an iframe at `width`, scaled down to fit the
@@ -93,8 +81,8 @@ function DeviceFrame({ src, width, title }: { src: string; width: number; title:
 }
 
 /**
- * Preview / Code tabs with a preview toolbar: viewport (fit, or a device width in an iframe so
- * media and container queries react), control size and text direction.
+ * Preview / Code tabs with a viewport switch: fit, or a device width in an iframe so media and
+ * container queries react. The switch is the same tab list as Preview / Code, icon-only.
  * `name` is a gallery demo key; `example` ("<name>/<id>") picks a docs example instead.
  */
 export function PreviewTabs({
@@ -111,16 +99,10 @@ export function PreviewTabs({
   const Demo = example ? examples[example] : name ? demos[name] : undefined
   const [tab, setTab] = React.useState("preview")
   const [viewport, setViewport] = React.useState<Viewport>("fit")
-  const [size, setSize] = React.useState<ControlSize | "auto">("auto")
-  const [rtl, setRtl] = React.useState(false)
-  const dir = rtl ? "rtl" : "ltr"
 
-  const query = new URLSearchParams({ ...(example ? { example } : { demo: name ?? "" }), ...(size !== "auto" ? { size } : {}), ...(rtl ? { dir } : {}) })
+  const query = new URLSearchParams(example ? { example } : { demo: name ?? "" })
   const src = `${BASE_PATH}/preview/?${query.toString()}`
   const device = VIEWPORTS.find((v) => v.value === viewport)
-
-  const inline = Demo ? <Demo /> : null
-  const sized = size === "auto" ? inline : <ControlSizeContext.Provider value={size}>{inline}</ControlSizeContext.Provider>
 
   return (
     <Tabs value={tab} onValueChange={(v) => setTab(String(v))} className={className}>
@@ -132,31 +114,24 @@ export function PreviewTabs({
         {tab === "preview" && (
           <div data-slot="preview-toolbar" className="ms-auto flex flex-wrap items-center gap-2">
             {/* Device widths need room to compare against; small screens keep the inline preview. */}
-            <div className="max-md:hidden">
-              <SegmentedControl size="xs" value={viewport} onValueChange={(v) => isViewport(v) && setViewport(v)} aria-label="Viewport">
+            <Tabs value={viewport} onValueChange={(v) => isViewport(v) && setViewport(v)} className="max-md:hidden">
+              <TabsList aria-label="Viewport">
                 {VIEWPORTS.map((v) => (
-                  <SegmentedControlItem key={v.value} value={v.value}>
-                    {v.label}
-                  </SegmentedControlItem>
+                  <Tooltip key={v.value}>
+                    <TooltipTrigger render={<TabsTab value={v.value} aria-label={v.label} />}>
+                      <v.icon />
+                    </TooltipTrigger>
+                    <TooltipContent>{v.width ? `${v.label}, ${v.width}px` : v.label}</TooltipContent>
+                  </Tooltip>
                 ))}
-              </SegmentedControl>
-            </div>
-            <SegmentedControl size="xs" value={size} onValueChange={(v) => isSize(v) && setSize(v)} aria-label="Control size">
-              {SIZES.map((s) => (
-                <SegmentedControlItem key={s.value} value={s.value}>
-                  {s.label}
-                </SegmentedControlItem>
-              ))}
-            </SegmentedControl>
-            <Toggle size="xs" variant="outline" pressed={rtl} onPressedChange={setRtl} aria-label="Right-to-left">
-              RTL
-            </Toggle>
+              </TabsList>
+            </Tabs>
             <Tooltip>
               <TooltipTrigger
                 render={
                   <Button
                     variant="ghost"
-                    size="icon-xs"
+                    size="icon-sm"
                     nativeButton={false}
                     render={<a href={src} target="_blank" rel="noreferrer" />}
                     aria-label="Open preview in a new tab"
@@ -177,14 +152,13 @@ export function PreviewTabs({
           </div>
         ) : (
           <div
-            dir={dir}
             className={
               example
                 ? "flex min-h-56 items-center justify-center rounded-xl bg-card p-5 shadow-raised sm:p-8"
                 : "flex min-h-80 items-center justify-center rounded-xl bg-card p-5 shadow-raised sm:p-10"
             }
           >
-            <DirectionProvider direction={dir}>{sized}</DirectionProvider>
+            {Demo ? <Demo /> : null}
           </div>
         )}
       </TabsPanel>
