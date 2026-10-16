@@ -14,7 +14,7 @@ import {
 import { Button } from "@/registry/base-nova/ui/button"
 import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 import { Input } from "@/registry/base-nova/ui/input"
-import { Menu, MenuContent, MenuItem, MenuLabel, MenuSeparator, MenuTrigger } from "@/registry/base-nova/ui/menu"
+import { Menu, MenuContent, MenuGroup, MenuItem, MenuLabel, MenuSeparator, MenuTrigger } from "@/registry/base-nova/ui/menu"
 import { ThreadList, ThreadListGroup, ThreadListItem, type PullRequestStatus } from "@/registry/base-nova/ui/thread-list-item"
 import { Tooltip, TooltipContent, TooltipKbd, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
@@ -92,14 +92,16 @@ export function ThreadsSidebar({
             <ChevronDownIcon data-icon="inline-end" className="size-3 opacity-64" />
           </MenuTrigger>
           <MenuContent className="w-60">
-            <MenuLabel>Agent</MenuLabel>
-            {agents.map((a) => (
-              <MenuItem key={a.id} onClick={() => onSelectAgent(a.id)}>
-                <ProviderIcon provider={a.provider} />
-                <span className="min-w-0 flex-1 truncate">{a.name}</span>
-                {a.id === agentId && <CheckIcon className="!text-foreground" />}
-              </MenuItem>
-            ))}
+            <MenuGroup>
+              <MenuLabel>Agent</MenuLabel>
+              {agents.map((a) => (
+                <MenuItem key={a.id} onClick={() => onSelectAgent(a.id)}>
+                  <ProviderIcon provider={a.provider} />
+                  <span className="min-w-0 flex-1 truncate">{a.name}</span>
+                  {a.id === agentId && <CheckIcon className="!text-foreground" />}
+                </MenuItem>
+              ))}
+            </MenuGroup>
             <MenuSeparator />
             <MenuItem onClick={onOpenSettings}>
               <SettingsIcon />

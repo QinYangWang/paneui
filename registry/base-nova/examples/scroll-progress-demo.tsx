@@ -17,7 +17,7 @@ export default function ScrollProgressDemo() {
         <ScrollProgress variant="ring" size={44} showValue className="pointer-events-auto" />
       </div>
       <article className="-mt-11 flex flex-col gap-4 px-6 pt-4 pb-8">
-        <h3 className="pr-14 text-lg font-semibold tracking-tight">A calmer week, in five steps</h3>
+        <h3 className="pr-14 text-lg font-semibold">A calmer week, in five steps</h3>
         {PARAGRAPHS.map((p) => (
           <p key={p.slice(0, 16)} className="text-sm leading-relaxed text-muted-foreground">
             {p}

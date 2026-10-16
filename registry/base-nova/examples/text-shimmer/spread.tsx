@@ -8,7 +8,7 @@ export default function TextShimmerSpread() {
       {SPREADS.map((spread) => (
         <div key={spread} className="flex items-center gap-3">
           <span className="w-20 text-xs text-muted-foreground tabular-nums">spread {spread}</span>
-          <TextShimmer spread={spread} className="text-lg font-semibold tracking-tight">
+          <TextShimmer spread={spread} className="text-lg font-semibold">
             Searching the web
           </TextShimmer>
         </div>

@@ -61,7 +61,7 @@ export function RecommendationCard({
         <CardTitle className="text-lg">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription className="text-[1.05rem] leading-9">
+        <CardDescription className="text-base leading-9">
           Reorder waffle cones from{" "}
           <Badge className="mx-0.5 align-middle">
             <BadgeAvatar>{vendor.charAt(0)}</BadgeAvatar>

@@ -15,6 +15,10 @@ Install the set first if the project doesn't have it:
 npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons.json
 ```
 
+
+Which icons to use where (families, sizes, chips, brand marks) is part of the `qinyang-design` skill
+(`references/icons.md`); this skill is for drawing them.
+
 ## The primitives
 
 Every icon is built from three things defined at the top of `components/icons.tsx`. Use them as-is;

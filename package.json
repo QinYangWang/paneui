@@ -12,7 +12,8 @@
     "icons:gen": "node scripts/gen-icon-styles.mjs",
     "docs:gen": "node scripts/gen-docs.mjs",
     "templates:code": "node scripts/gen-template-code.mjs",
-    "audit:radius": "node scripts/audit-radius.mjs"
+    "audit:radius": "node scripts/audit-radius.mjs",
+    "design:check": "node skills/qinyang-design/scripts/check.mjs"
   },
   "dependencies": {
     "@agentclientprotocol/sdk": "^1.8.0",

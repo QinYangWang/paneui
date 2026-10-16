@@ -8,7 +8,7 @@ import { CodeBlock } from "@/registry/base-nova/ui/code-block"
 import { ScrollProgress } from "@/registry/base-nova/ui/scroll-progress"
 
 import { PostMeta, Tags, type BlogHrefs } from "./blog"
-import { Avatar } from "./parts/avatar"
+import { Avatar } from "./parts/author-avatar"
 import { nestedSurface } from "./parts/code"
 import { BlogFooter, BlogHeader, Container, Newsletter } from "./parts/chrome"
 import { CoverArt } from "./parts/cover-art"

@@ -7,6 +7,9 @@ description: Copy-density rules for the qinyang/ui site and registry. Use whenev
 
 The preview explains the component. Text only covers what the preview can't show.
 
+These rules are also part of the `qinyang-design` skill (rules 27–30, `references/copy.md`), which covers
+the rest of the design system and ships a check for them (`scripts/check.mjs`).
+
 ## Rules
 
 1. **Component cards: name and preview only.** A card on the gallery or any overview grid has no description. Never write the colon-list pattern ("X: a, b, c and d") anywhere.

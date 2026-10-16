@@ -6,7 +6,7 @@ import Editor, { loader, type Monaco, type OnMount } from "@monaco-editor/react"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Loader } from "@/registry/base-nova/ui/loader"
 
-import type { Docs } from "./docs"
+import type { Docs } from "./buffers"
 import { applyEditorTheme, EDITOR_THEME, monoFont, TYPE_SHIMS } from "./editor-theme"
 import { languageOf } from "./languages"
 import { basename, inWorkspace, type Workspace } from "./workspace"

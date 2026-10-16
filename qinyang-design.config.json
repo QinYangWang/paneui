@@ -1,0 +1,89 @@
+{
+  "$comment": "Design check settings for this repo (skills/qinyang-design/scripts/check.mjs). nameHashes: words that must not appear in prose, stored hashed so this file doesn't name them; add one with --hash \"word\".",
+  "ignore": [
+    "registry/base-nova/icons/outline/**",
+    "scripts/fixtures/**",
+    "**/parts/code.ts"
+  ],
+  "nameHashes": [
+    "53ac35dacc1f",
+    "c5734b8826de",
+    "298197da0b92",
+    "3adc798ed8ac",
+    "0cf32a0449d2",
+    "8055e5cdb06f",
+    "6ef4f9666c09",
+    "151f5e50d000",
+    "623d432426b3",
+    "c9b03dd709d2",
+    "2d0e66d94352",
+    "e3412ac2adfc",
+    "6c3422f72fc8",
+    "1ffcd59e7328",
+    "d5a5d66b94e8",
+    "e854a938df91",
+    "6f67dd896a68",
+    "512e9792eee6",
+    "cfcd416ab058",
+    "95eab1bcb85d",
+    "eb2b6a620a21",
+    "1a67cddc4536",
+    "91f961ddda55",
+    "a582828807e5",
+    "7a3cf84a7484",
+    "1d9c7cdd874b",
+    "3cdd61111d0c",
+    "2be7a151e93b",
+    "a4e788de04aa",
+    "34004a3eda48",
+    "18b3c9962297",
+    "da7f85eaf3d0",
+    "e7bbb56d624e",
+    "8870e6cbc014",
+    "907b78a82c28",
+    "b9a4c6153a6e",
+    "df8a9e65759f"
+  ],
+  "allow": [
+    {
+      "rule": "no-palette-colors",
+      "file": "registry/base-nova/ui/file-tree.tsx",
+      "reason": "file-type icon colours are a fixed code-editor convention, tuned per mode"
+    },
+    {
+      "rule": "radius-cap",
+      "file": "app/docs/theming/page.tsx",
+      "reason": "the radius table documents the 4xl/5xl aliases"
+    },
+    {
+      "rule": "type-scale",
+      "file": "registry/base-nova/blocks/card-folder/card-folder.tsx",
+      "reason": "payment card artwork, sized to the card"
+    },
+    {
+      "rule": "tracking",
+      "file": "registry/base-nova/blocks/card-folder/card-folder.tsx",
+      "reason": "payment card artwork"
+    },
+    {
+      "rule": "type-scale",
+      "file": "registry/base-nova/blocks/file-upload/file-upload.tsx",
+      "reason": "file extension tag drawn on the file glyph"
+    },
+    {
+      "rule": "tracking",
+      "file": "registry/base-nova/blocks/file-upload/file-upload.tsx",
+      "reason": "file extension tag drawn on the file glyph"
+    },
+    {
+      "rule": "tracking",
+      "file": "registry/base-nova/ui/{menu,menu-list,command}.tsx",
+      "reason": "keyboard shortcut glyphs"
+    },
+    {
+      "rule": "tracking",
+      "file": "registry/base-nova/examples/text-scramble-demo.tsx",
+      "reason": "mono scramble effect"
+    }
+  ]
+}

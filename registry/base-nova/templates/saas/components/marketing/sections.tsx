@@ -126,7 +126,7 @@ export function LogoStrip() {
       <p className="text-center text-sm text-muted-foreground">Trusted by 2,400 engineering teams</p>
       <Marquee duration={40} gap="3.5rem" repeat={3}>
         {logos.map((l) => (
-          <span key={l} className="flex shrink-0 items-center gap-2 text-lg font-semibold tracking-tight whitespace-nowrap text-muted-foreground">
+          <span key={l} className="flex shrink-0 items-center gap-2 text-lg font-semibold whitespace-nowrap text-muted-foreground">
             <span aria-hidden className="size-4 rounded-md bg-muted-foreground/40" />
             {l}
           </span>

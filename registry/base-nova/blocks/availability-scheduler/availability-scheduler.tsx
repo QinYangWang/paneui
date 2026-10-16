@@ -10,6 +10,7 @@ import {
   Menu,
   MenuCheckboxItem,
   MenuContent,
+  MenuGroup,
   MenuItem,
   MenuLabel,
   MenuSeparator,
@@ -455,19 +456,21 @@ function CopyMenu({
         <MenuItem onClick={() => onCopy(days.map((d) => d.key))}>Copy to all days</MenuItem>
         <MenuItem onClick={() => onCopy(WEEKDAYS)}>Copy to weekdays</MenuItem>
         <MenuSeparator />
-        <MenuLabel>Copy {day.short} to…</MenuLabel>
-        {others.map((d) => (
-          <MenuCheckboxItem
-            key={d.key}
-            closeOnClick={false}
-            checked={picked.includes(d.key)}
-            onCheckedChange={(checked) =>
-              setPicked((p) => (checked ? [...p, d.key] : p.filter((k) => k !== d.key)))
-            }
-          >
-            {d.label}
-          </MenuCheckboxItem>
-        ))}
+        <MenuGroup>
+          <MenuLabel>Copy {day.short} to…</MenuLabel>
+          {others.map((d) => (
+            <MenuCheckboxItem
+              key={d.key}
+              closeOnClick={false}
+              checked={picked.includes(d.key)}
+              onCheckedChange={(checked) =>
+                setPicked((p) => (checked ? [...p, d.key] : p.filter((k) => k !== d.key)))
+              }
+            >
+              {d.label}
+            </MenuCheckboxItem>
+          ))}
+        </MenuGroup>
         <MenuSeparator />
         <MenuItem
           disabled={picked.length === 0}

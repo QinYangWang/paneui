@@ -271,7 +271,8 @@ const designSystemRules = [
 // Only unprefixed literal classes are read (cn("…") / template strings included,
 // conditional branches too); anything computed is left to the runtime audit.
 // ───────────────────────────────────────────────────────────────────────────
-const RADIUS_PX = { none: 0, sm: 6, md: 8, lg: 10, xl: 14, "2xl": 18, "3xl": 22, shell: 13 };
+// Default-theme px (--radius 0.5rem); keep in step with skills/qinyang-design/scripts/check.mjs.
+const RADIUS_PX = { none: 0, xs: 2, "2xs": 2, sm: 4, md: 6, lg: 8, xl: 10, "2xl": 12, "3xl": 16, "4xl": 16, "5xl": 16, shell: 12 };
 const SPACING_PX = (n) => (/^\d+(\.\d+)?$/.test(n) ? parseFloat(n) * 4 : null);
 
 function classTokens(attr) {
@@ -301,7 +302,7 @@ function readBox(opening) {
   for (const t of tokens) {
     if (t.includes(":")) continue; // variants (hover:, sm:, data-…) are state, not the resting shape
     let m;
-    if ((m = t.match(/^(?:rounded|frame)-(none|sm|md|lg|xl|2xl|3xl|shell)$/))) radius = RADIUS_PX[m[1]];
+    if ((m = t.match(/^(?:rounded|frame)-(none|xs|2xs|sm|md|lg|xl|2xl|3xl|4xl|5xl|shell)$/))) radius = RADIUS_PX[m[1]];
     else if (t === "rounded-inner" || t.startsWith("rounded-inner-") || t === "frame-inner") inner = true;
     else if ((m = t.match(/^(?:p|frame-p)-([\d.]+)$/))) pad = SPACING_PX(m[1]); // not frame-inset: that inset is only for rounded-inner children
   }

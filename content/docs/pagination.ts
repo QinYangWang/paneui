@@ -15,7 +15,7 @@ export default {
       name: "Pagination",
       extends: "nav",
       props: [
-        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Button size: 24, 28 or 32px." },
+        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Height of the page buttons, from 24 to 32px." },
         { name: "page", type: "number", required: true, description: "Current page, 1-based." },
         { name: "pageCount", type: "number", required: true, description: "Number of pages." },
         { name: "onPageChange", type: "(page: number) => void", required: true, description: "Called with the page to show (clamped)." },

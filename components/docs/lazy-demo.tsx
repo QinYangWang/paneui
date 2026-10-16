@@ -15,7 +15,7 @@ const UNMOUNT_MARGIN = "800px 0px"
 /**
  * One gallery preview, rendered only while it is near the viewport.
  *
- * The gallery holds ~150 live demos (infinite motion loops, canvases, Lenis
+ * The gallery holds ~150 live demos (infinite motion loops, canvases, smooth-scroll
  * instances, timers). Keeping them all mounted kept every loop running and the
  * DOM at ~20k nodes, so the page got steadily slower. Here a demo mounts when it
  * comes within MOUNT_MARGIN of the viewport and unmounts (stopping its loops and

@@ -9,7 +9,7 @@ import { getFileKind } from "@/registry/base-nova/ui/file-tree"
 import { Input } from "@/registry/base-nova/ui/input"
 import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 
-import type { Docs } from "./docs"
+import type { Docs } from "./buffers"
 import { IconAction, SidebarHeader } from "./sidebar-header"
 import { basename, dirname, rel, type Workspace } from "./workspace"
 

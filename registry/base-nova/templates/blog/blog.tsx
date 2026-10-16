@@ -6,7 +6,7 @@ import { ArrowRightIcon } from "@/components/icons"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
 
-import { Avatar } from "./parts/avatar"
+import { Avatar } from "./parts/author-avatar"
 import { BlogFooter, BlogHeader, Container, Newsletter } from "./parts/chrome"
 import { CoverArt } from "./parts/cover-art"
 import { author, posts } from "./parts/data"
@@ -84,7 +84,7 @@ export function BlogHome({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                   >
                     <time className="text-sm text-muted-foreground tabular-nums sm:pt-0.5">{p.date}</time>
                     <div className="flex min-w-0 flex-col gap-2">
-                      <h3 className="text-lg leading-snug font-medium tracking-tight text-balance">{p.title}</h3>
+                      <h3 className="text-lg leading-snug font-medium text-balance">{p.title}</h3>
                       <p className="text-pretty text-muted-foreground">{p.excerpt}</p>
                       <div className="flex flex-wrap items-center gap-3 pt-1">
                         <Tags tags={p.tags} />

@@ -11,7 +11,7 @@ import { Input } from "@/registry/base-nova/ui/input"
 import { ThemeToggle } from "@/registry/base-nova/ui/theme-toggle"
 import { useToast } from "@/registry/base-nova/ui/toast"
 
-import { Avatar } from "./avatar"
+import { Avatar } from "./author-avatar"
 import { author } from "./data"
 
 export function Container({ className = "", children }: { className?: string; children: React.ReactNode }) {
@@ -60,7 +60,7 @@ export function Newsletter({ compact = false }: { compact?: boolean }) {
       }
     >
       <div className="flex max-w-md flex-col gap-2">
-        <h2 id="newsletter-title" className="text-lg font-semibold tracking-tight text-balance">
+        <h2 id="newsletter-title" className="text-lg font-semibold text-balance">
           A short letter, once a month
         </h2>
         <p className="text-sm leading-relaxed text-pretty text-muted-foreground">

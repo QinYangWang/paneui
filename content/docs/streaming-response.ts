@@ -50,7 +50,7 @@ export default {
   api: [
     {
       name: "StreamingResponse",
-      description: "Surface for an assistant reply: streamed text, then actions and sources.",
+      description: "Surface for an assistant reply, with actions and sources under the text.",
       extends: "div",
       props: [
         { name: "text", type: "string", description: "Markdown subset (headings, lists, fenced and inline code, bold, italic, links, `[n]` citations), streamed in by appending." },

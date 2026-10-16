@@ -37,7 +37,7 @@ export default function CodeEditorPage() {
     },
     {
       title: "Buffers and saving",
-      body: "Open files are buffers (`parts/docs.ts`). A tab shows a dot while its buffer differs from the file, ⌘S writes it and closing a dirty tab asks first. When a terminal command changes a file whose buffer is clean, the buffer follows it.",
+      body: "Open files are buffers (`parts/buffers.ts`). A tab shows a dot while its buffer differs from the file, ⌘S writes it and closing a dirty tab asks first. When a terminal command changes a file whose buffer is clean, the buffer follows it.",
     },
     {
       title: "The editor",

@@ -29,7 +29,7 @@ export function GuideH2({ id, children }: { id: string; children: React.ReactNod
 
 export function GuideH3({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h3 id={id} className="scroll-mt-20 text-lg font-semibold tracking-tight">
+    <h3 id={id} className="scroll-mt-20 text-lg font-semibold">
       {children}
     </h3>
   )

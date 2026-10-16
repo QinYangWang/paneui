@@ -58,7 +58,7 @@ export default {
         { name: "onThemeChange", type: `(theme: "light" | "dark") => void`, description: "Called after the theme changes." },
         { name: "modes", type: '"binary" | "tri"', default: '"binary"', description: "`binary` flips light and dark. `tri` cycles light, dark and system and shows the stored choice (a monitor icon for system)." },
       ],
-      dataAttributes: [{ name: "data-mode", description: "With `modes=\"tri\"`: `light`, `dark` or `system`." }],
+      dataAttributes: [{ name: "data-mode", description: "The current mode when `modes=\"tri\"`." }],
     },
     {
       name: "useTheme",

@@ -87,7 +87,7 @@ function ExpandingArrowButton({
       </span>
       <span
         className={cn(
-          "relative ml-15 mr-5 text-base font-medium tracking-[-0.01em] whitespace-nowrap transition-[opacity,translate] duration-200 group-hover/arrow:translate-x-2 group-hover/arrow:opacity-0 group-focus-visible/arrow:translate-x-2 group-focus-visible/arrow:opacity-0 motion-reduce:translate-x-0",
+          "relative ml-15 mr-5 text-base font-medium whitespace-nowrap transition-[opacity,translate] duration-200 group-hover/arrow:translate-x-2 group-hover/arrow:opacity-0 group-focus-visible/arrow:translate-x-2 group-focus-visible/arrow:opacity-0 motion-reduce:translate-x-0",
           EASE,
           labelClassName
         )}

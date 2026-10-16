@@ -12,7 +12,7 @@ type ScrollToProps = Omit<React.ComponentProps<typeof Button>, "onClick"> &
     to: ScrollTarget
     /** Extra px from the target, e.g. -64 to clear a sticky header. */
     offset?: number
-    /** Ease duration in seconds (Lenis path only). */
+    /** Ease duration in seconds (eased path only). */
     duration?: number
     /** Move keyboard focus to the target after scrolling (selector / element targets). */
     focusTarget?: boolean

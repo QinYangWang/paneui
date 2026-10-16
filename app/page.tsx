@@ -36,7 +36,7 @@ export default function ComponentsPage() {
       {groups.map((g, gi) => {
         return (
           <section key={g.category} id={categorySlug(g.category)} className="flex scroll-mt-20 flex-col gap-5">
-            <h2 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
+            <h2 className="flex items-center gap-2.5 text-lg font-semibold">
               {g.category}
               <Badge size="sm">{g.items.length}</Badge>
             </h2>

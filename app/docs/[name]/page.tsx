@@ -344,7 +344,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
             <H2 id="examples">Examples</H2>
             {doc.examples.map((ex) => (
               <div key={ex.id} className="flex flex-col gap-3">
-                <h3 id={`example-${ex.id}`} className="scroll-mt-20 text-lg font-semibold tracking-tight">
+                <h3 id={`example-${ex.id}`} className="scroll-mt-20 text-lg font-semibold">
                   {ex.title}
                 </h3>
                 {ex.description && (

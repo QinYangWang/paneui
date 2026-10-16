@@ -41,7 +41,7 @@ import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
 
 import { BottomPanel, type OutputLine, type PanelTab } from "./parts/bottom-panel"
 import { CodeEditor, type CodeEditorHandle, type Problem } from "./parts/code-editor"
-import { Docs } from "./parts/docs"
+import { Docs } from "./parts/buffers"
 import { Explorer, type ExplorerHandle } from "./parts/explorer"
 import { ExtensionsView } from "./parts/extensions-view"
 import type { HostCommand, VsCodeHost } from "./parts/host"

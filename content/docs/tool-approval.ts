@@ -71,7 +71,7 @@ export default {
         { name: "icon", type: "ReactNode", description: "Icon in the tile. Defaults to a shield, or a warning sign for `risk=\"high\"`." },
         { name: "args", type: "unknown", description: "Arguments preview behind a toggle. Objects are pretty-printed as JSON; strings are shown as-is." },
         { name: "argsLanguage", type: "CodeLanguage", default: `"bash"`, description: "Highlight grammar for a string `args`." },
-        { name: "risk", type: `"low" | "medium" | "high"`, default: `"medium"`, description: "Tile tone: neutral, warning or destructive. Announced as Read only, Makes changes or Destructive." },
+        { name: "risk", type: `"low" | "medium" | "high"`, default: `"medium"`, description: "Sets the tile tone and the risk announced to screen readers." },
         { name: "decision", type: `"once" | "always" | "deny" | null`, description: "Controlled decision; `null` is pending. Approve sets `\"once\"`." },
         { name: "defaultDecision", type: `"once" | "always" | "deny" | null`, default: "null", description: "Initial decision when uncontrolled; `revocable={false}` then hides Undo." },
         { name: "onDecisionChange", type: `(decision: "once" | "always" | "deny" | null) => void`, description: "Called on Approve, Always allow, Deny, Undo and when a remembered permission is found." },

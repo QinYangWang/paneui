@@ -26,7 +26,7 @@ export default {
         {
           "name": "shape",
           "type": "\"default\" | \"circle\" | \"card\"",
-          "description": "Corner: `rounded-lg`, round (avatars) or `rounded-xl` (media).",
+          "description": "Corner shape; round suits avatars and `rounded-xl` suits media.",
           "default": "\"default\""
         }
       ]

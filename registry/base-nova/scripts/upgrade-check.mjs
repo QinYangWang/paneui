@@ -121,6 +121,7 @@ const RULES = [
   {
     re: /className="[^"]*\bbg-primary\b[^"]*\btext-white\b[^"]*"|className="[^"]*\btext-white\b[^"]*\bbg-primary\b[^"]*"/g,
     level: "warn",
+    // design-check-ignore on-solid-text -- this rule describes the pattern
     message: "text-white on bg-primary",
     hint: "Use text-primary-foreground: the neutral accent's solid is near-white in dark mode.",
   },

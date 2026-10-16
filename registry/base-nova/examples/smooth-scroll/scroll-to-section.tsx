@@ -30,7 +30,7 @@ export default function SmoothScrollScrollToSection() {
       <div className="flex flex-col gap-3 px-3">
         {SECTIONS.map((s) => (
           <section key={s.id} id={`ss-${s.id}`} className="rounded-xl bg-card p-4 shadow-raised">
-            <h3 className="text-sm font-semibold tracking-tight text-foreground">{s.title}</h3>
+            <h3 className="text-sm font-semibold text-foreground">{s.title}</h3>
             <p className="mt-1 text-sm text-pretty text-muted-foreground">{s.body}</p>
           </section>
         ))}

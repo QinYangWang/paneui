@@ -16,7 +16,7 @@ export default function TextCascadeStagger() {
         {STAGGERS.map((stagger) => (
           <div key={stagger} className="flex items-baseline gap-3">
             <span className="w-24 text-xs text-muted-foreground tabular-nums">stagger {stagger}</span>
-            <TextCascade text={WORDS[i]} stagger={stagger} className="text-lg font-semibold tracking-tight" />
+            <TextCascade text={WORDS[i]} stagger={stagger} className="text-lg font-semibold" />
           </div>
         ))}
       </div>

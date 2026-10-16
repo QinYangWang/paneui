@@ -104,6 +104,7 @@ function ComposerPicker({
         <ChevronDownIcon data-icon="inline-end" className="size-3 opacity-64" />
       </MenuTrigger>
       <MenuContent side={side} align={align} className="max-h-80 w-64">
+        {/* design-check-ignore menu-label-group -- a title above the groups renders as a plain heading */}
         {heading && <MenuLabel>{heading}</MenuLabel>}
         {groups.map(([group, items], gi) => (
           <React.Fragment key={group || gi}>

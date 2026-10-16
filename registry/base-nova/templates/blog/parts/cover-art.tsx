@@ -18,7 +18,7 @@ export function CoverArt({ variant, className }: { variant: 0 | 1 | 2 | 3; class
       {variant === 0 && (
         // Nested rounded squares, drawn concentric: 32 = 16 + 16, 16 = 10 + 6.
         <div className="absolute inset-0 grid place-items-center">
-          <div className="grid size-3/5 max-w-72 place-items-center rounded-4xl bg-card/70 p-4 shadow-surface">
+          <div className="grid size-3/5 max-w-72 place-items-center rounded-3xl bg-card/70 p-4 shadow-surface">
             <div className="grid size-full place-items-center rounded-xl bg-primary-subtle p-1.5 shadow-well">
               <div className="size-full rounded-md bg-primary shadow-primary" />
             </div>

@@ -1462,7 +1462,7 @@
       "name": "vscode",
       "type": "registry:block",
       "title": "Code Editor",
-      "description": "Edit a project in the browser, with a shell on the same files.",
+      "description": "Edit a project in the browser with a shell on its files.",
       "dependencies": [
         "@monaco-editor/react",
         "motion",
@@ -1516,9 +1516,9 @@
           "target": "components/vscode/parts/code-editor.tsx"
         },
         {
-          "path": "registry/base-nova/templates/vscode/parts/docs.ts",
+          "path": "registry/base-nova/templates/vscode/parts/buffers.ts",
           "type": "registry:component",
-          "target": "components/vscode/parts/docs.ts"
+          "target": "components/vscode/parts/buffers.ts"
         },
         {
           "path": "registry/base-nova/templates/vscode/parts/editor-theme.ts",
@@ -1815,9 +1815,9 @@
           "target": "components/blog/blog.tsx"
         },
         {
-          "path": "registry/base-nova/templates/blog/parts/avatar.tsx",
+          "path": "registry/base-nova/templates/blog/parts/author-avatar.tsx",
           "type": "registry:component",
-          "target": "components/blog/parts/avatar.tsx"
+          "target": "components/blog/parts/author-avatar.tsx"
         },
         {
           "path": "registry/base-nova/templates/blog/parts/chrome.tsx",
@@ -2577,7 +2577,7 @@
       "name": "expandable-control",
       "type": "registry:ui",
       "title": "Expandable Control",
-      "description": "Button or chip that expands on click to reveal a label or action.",
+      "description": "Button or chip that expands on click to reveal a label.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3284,7 +3284,7 @@
       "name": "message-scroller",
       "type": "registry:ui",
       "title": "Message Scroller",
-      "description": "Keeps a chat view pinned to new messages until the reader scrolls up.",
+      "description": "Keeps a chat pinned to new messages until the reader scrolls up.",
       "dependencies": [
         "motion"
       ],
@@ -3358,7 +3358,7 @@
       "name": "file-diff",
       "type": "registry:ui",
       "title": "File Diff",
-      "description": "Shows one file's changes as a diff, even while an agent streams them.",
+      "description": "Shows one file's changes as a diff, even while streaming.",
       "dependencies": [
         "@base-ui/react",
         "@pierre/diffs",
@@ -4636,7 +4636,7 @@
       "name": "empty-state",
       "type": "registry:ui",
       "title": "Empty State",
-      "description": "Tells users a list or page is empty and what to do next.",
+      "description": "Tells users a list or page is empty and what to do.",
       "dependencies": [
         "class-variance-authority"
       ],

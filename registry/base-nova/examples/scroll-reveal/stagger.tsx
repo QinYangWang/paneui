@@ -15,7 +15,7 @@ export default function ScrollRevealStagger() {
           <ScrollReveal key={p.name} delay={i * 0.1} distance={12} blur={4} amount="all">
             <div className="flex h-full flex-col gap-1 rounded-xl bg-card p-3 shadow-raised">
               <p className="text-sm font-medium text-foreground">{p.name}</p>
-              <p className="text-base font-semibold tracking-tight tabular-nums">{p.price}</p>
+              <p className="text-base font-semibold tabular-nums">{p.price}</p>
               <p className="text-xs text-pretty text-muted-foreground">{p.note}</p>
             </div>
           </ScrollReveal>
