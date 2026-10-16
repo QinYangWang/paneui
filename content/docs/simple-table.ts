@@ -44,11 +44,11 @@ export default {
     },
     {
       title: "Overflow",
-      body: "The surface scrolls sideways when the columns don't fit. Give the table a `min-w-*` class to keep columns readable on phones.",
+      body: "Inline code never breaks inside a word, and body text keeps a minimum width, so when the columns don't fit the surface scrolls sideways instead of squeezing them. Give the table a `min-w-*` class to set a wider floor.",
     },
     {
       title: "Inline code and alignment",
-      body: "Bare `<code>` in `default` and `numeric` cells and in headers gets the inline-code chip, inside or outside prose; code with its own `className` keeps it. `align` (what Markdown writes for `:-:` and `--:`) maps to start, center and end, so it flips under RTL.",
+      body: "Bare `<code>` in `default` and `numeric` cells and in headers gets the inline-code chip, inside or outside prose; code with its own `className` keeps it. `align` takes the values Markdown and HTML write: `left` (`:--`), `center` (`:-:`) and `right` (`--:`) map to the start edge, the center and the end edge, so they flip under RTL. `justify` justifies the text and `char` is accepted and falls back to start.",
     },
   ],
   api: [
@@ -63,7 +63,7 @@ export default {
     {
       name: "SimpleTableHead",
       extends: "th",
-      props: [{ name: "align", type: `"left" | "center" | "right" | "justify"`, description: "Text alignment; `left` is the start edge and `right` the end edge. Without it, start." }],
+      props: [{ name: "align", type: `"left" | "center" | "right" | "justify" | "char"`, description: "The Markdown or HTML value: `left` maps to start, `center` to center, `right` to end; `justify` and `char` are accepted. Without it, start." }],
     },
     {
       name: "SimpleTableCell",
@@ -75,7 +75,7 @@ export default {
           default: `"default"`,
           description: "`code` for names, `code-muted` for defaults, `type` for long type strings, `numeric` for aligned numbers.",
         },
-        { name: "align", type: `"left" | "center" | "right" | "justify"`, description: "Same as `SimpleTableHead`. Without it, the cell follows the table." },
+        { name: "align", type: `"left" | "center" | "right" | "justify" | "char"`, description: "Same as `SimpleTableHead`. Without it, the cell follows the table." },
       ],
     },
   ],

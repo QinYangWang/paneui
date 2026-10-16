@@ -15,6 +15,12 @@
  * 2. Strip `eslint-disable` comments for this repo's own lint rules (`shadcn/*`, `qinyang/*`)
  * from shipped file contents: those plugins do not exist in the user's app, and Next 15's
  * build-time lint fails on "Definition for rule … was not found".
+ *
+ * 2b. Ship the client directive as `"use client";`. In projects with `rsc: false` the shadcn CLI
+ * tries to strip a bare `"use client"`, but its directive test keeps state between files, so it
+ * strips every other file and the result depends on which items you install together. With the
+ * semicolon the test never matches: every file keeps its directive in every project, the same on
+ * every reinstall (a no-op outside React Server Components).
  */
 import fs from "node:fs"
 import path from "node:path"
@@ -27,6 +33,8 @@ const dir = path.join(root, "public/r")
 
 const OWN_RULE_COMMENT = /^[ \t]*(?:\/\/|\{?\/\*) eslint-disable(?:-next-line|-line)? (?:shadcn|qinyang)\/[^\n]*\n/gm
 const stripOwnRules = (content) => content.replace(OWN_RULE_COMMENT, "")
+const USE_CLIENT = /^(["'])use client\1;?[ \t]*\n/
+const stableDirective = (content) => content.replace(USE_CLIENT, '"use client";\n')
 
 const rewrite = (dep) => (typeof dep === "string" && dep.startsWith(ns) ? `${base}/r/${dep.slice(ns.length)}.json` : dep)
 
@@ -37,7 +45,7 @@ for (const file of fs.readdirSync(dir)) {
   const item = JSON.parse(fs.readFileSync(p, "utf8"))
   const before = JSON.stringify(item)
   if (Array.isArray(item.registryDependencies)) item.registryDependencies = item.registryDependencies.map(rewrite)
-  for (const f of item.files ?? []) if (typeof f.content === "string") f.content = stripOwnRules(f.content)
+  for (const f of item.files ?? []) if (typeof f.content === "string") f.content = stableDirective(stripOwnRules(f.content))
   if (JSON.stringify(item) !== before) {
     fs.writeFileSync(p, JSON.stringify(item, null, 2))
     changed++

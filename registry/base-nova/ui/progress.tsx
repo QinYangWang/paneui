@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
 import { cva, type VariantProps } from "class-variance-authority"

@@ -102,7 +102,7 @@ function ExpandableButton({
         "inline-flex h-10 shrink-0 cursor-pointer items-center rounded-full p-0.5 text-ui font-medium whitespace-nowrap outline-none select-none",
         "transition-[box-shadow,background-color,color,scale] duration-150 ease-out focus-visible:ring-2 focus-visible:ring-ring/50 active:scale-96 disabled:pointer-events-none disabled:opacity-50",
         SURFACE,
-        "data-expanded:bg-primary data-expanded:text-primary-foreground data-expanded:shadow-primary data-expanded:hover:bg-primary/90",
+        "data-expanded:bg-primary data-expanded:text-primary-foreground data-expanded:shadow-primary data-expanded:hover:bg-primary-hover",
         className
       )}
       {...props}

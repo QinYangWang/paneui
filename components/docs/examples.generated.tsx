@@ -387,6 +387,7 @@ export const examples: Record<string, React.ComponentType> = {
   "shared-layout-bg/disabled": dynamic(() => import("@/registry/base-nova/examples/shared-layout-bg/disabled"), { ssr: false }),
   "shared-layout-bg/horizontal": dynamic(() => import("@/registry/base-nova/examples/shared-layout-bg/horizontal"), { ssr: false }),
   "shared-layout-bg/pill-style": dynamic(() => import("@/registry/base-nova/examples/shared-layout-bg/pill-style"), { ssr: false }),
+  "sidebar-nav/icon-groups": dynamic(() => import("@/registry/base-nova/examples/sidebar-nav/icon-groups"), { ssr: false }),
   "sidebar-nav/icons": dynamic(() => import("@/registry/base-nova/examples/sidebar-nav/icons"), { ssr: false }),
   "sidebar-nav/linked-groups": dynamic(() => import("@/registry/base-nova/examples/sidebar-nav/linked-groups"), { ssr: false }),
   "sidebar-nav/persisted": dynamic(() => import("@/registry/base-nova/examples/sidebar-nav/persisted"), { ssr: false }),

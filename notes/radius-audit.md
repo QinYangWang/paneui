@@ -222,3 +222,10 @@ slider stops at 1rem (stored larger values read back as 1rem). Details in `notes
 - Not reported by the audit but changed with the cap: message bubbles, chat, feedback widget and
   expanding-arrow-button use `rounded-3xl` / `frame-3xl` (were arbitrary 2x); card-folder and bottom-sheet
   2.8x radii clamp at `--radius-max`.
+
+## 2026-10-17 (round 27)
+
+- Fixed the round 25 `tab-bar` MUST (latent, `tab-bar-item` `rounded-lg` 1px under the `rounded-3xl` example
+  frame, want 15). The item fills the bar edge to edge and often sits inside a rounded screen, so it has no
+  corners of its own now; hover, press and the focus ring all sit on the round icon pill. Default audit: 0
+  findings (14 allow-listed) across 159 pages.

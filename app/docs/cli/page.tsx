@@ -270,7 +270,7 @@ export default function CliPage() {
           <li>Reinstall your accent and radius presets, if you use them, so they apply on top of the new theme.</li>
           <li>
             Run the upgrade check. It lists tokens the release removed, broken rules from older installs and code that uses
-            a changed API, with a fix for each. <Code>--fix</Code> cleans the stylesheet; it never edits your source.
+            a changed API, with a fix for each. <Code>--fix</Code> cleans the stylesheet, then checks again and lists only what is left; it never edits your source.
           </li>
         </ol>
         <InstallCommand args={`add ${ns}/upgrade-check`} />

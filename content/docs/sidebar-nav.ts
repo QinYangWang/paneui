@@ -25,13 +25,14 @@ export default {
   composition: `SidebarNav
 ├── SidebarNavSearch
 ├── SidebarNavContent
-│   └── SidebarNavSection            label, count, href, active
+│   └── SidebarNavSection            label, count, href, active, icon
 │       ├── SidebarNavList
 │       │   └── SidebarNavLink       active, icon, badge
 │       └── SidebarNavSection level="group"
 └── SidebarNavFooter`,
   examples: [
     { id: "icons", title: "Icons", description: "Use `icon` for a short app-style list where each page has a symbol." },
+    { id: "icon-groups", title: "Icons and Groups", description: "Use `icon` on a group label when the rows beside it have icons." },
     { id: "linked-groups", title: "Linked Groups", description: "Use `href` or `labelRender` when a section or group has an overview page of its own." },
     { id: "persisted", title: "Remembered Sections", description: "Use `open` and `onOpenChange` to keep folded sections folded across visits." },
     { id: "rtl", title: "RTL", description: "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root." },
@@ -40,6 +41,10 @@ export default {
     {
       title: "When to use",
       body: "For long page trees in docs, settings and admin sidebars. For an app rail with icons that folds to a strip, use [Animated Sidebar](/docs/animated-sidebar).",
+    },
+    {
+      title: "Icon alignment",
+      body: "When a list, or the rows of a section, holds a row or group label with an `icon`, the rows and group labels beside it that have none start at the icon rows' text, and so do the rows inside those groups. This happens on its own. To force or cancel it, set `--sidebar-nav-inset` (for example `[--sidebar-nav-inset:1.5rem]` or `[--sidebar-nav-inset:0px]`) on a wrapper.",
     },
     {
       title: "Keyboard",
@@ -67,6 +72,7 @@ export default {
         { name: "href", type: "string", description: "Makes the label a link to the section's own page; the chevron beside it still folds the rows." },
         { name: "labelRender", type: "React.ReactElement | (props) => React.ReactElement", description: "Renders the label link with your router's link, such as `<Link href=\"…\" />`." },
         { name: "active", type: "boolean", default: "false", description: "Marks the label's page as current with the fill, the bar and `aria-current=\"page\"`." },
+        { name: "icon", type: "React.ReactNode", description: "Leading icon in the same 16px slot as `SidebarNavLink`, muted until the label is hovered or current." },
       ],
     },
     { name: "SidebarNavList", extends: "ul", props: [] },

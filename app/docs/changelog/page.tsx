@@ -8,6 +8,35 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-17-tables-and-nav-icons",
+    date: "October 17, 2026",
+    title: "Table overflow, group icons and stable installs",
+    tag: "Components",
+    changes: [
+      <>
+        Inline code in <TextLink href="/docs/simple-table">Simple Table</TextLink> no longer breaks inside a word, and body
+        text keeps a minimum width, so a narrow table scrolls sideways instead of squeezing its columns.
+      </>,
+      <>
+        <Code>SidebarNavSection</Code> takes an <Code>icon</Code>. When rows or group labels beside each other mix icons
+        and none, the ones without start at the icon rows&apos; text, and so do the rows inside those groups.
+      </>,
+      <>
+        <Code>TabBarItem</Code> draws its focus ring around the icon pill and has no corners of its own, so it sits cleanly
+        inside a rounded screen. The jump-to-latest button in <Code>MessageScroller</Code> and an expanded{" "}
+        <Code>ExpandableControl</Code> hover to the accent&apos;s own hover colour.
+      </>,
+      <>
+        Reinstalling items now writes the same files every time, in projects with or without Server Components: shipped
+        files keep <Code>&quot;use client&quot;</Code> where they use client APIs, and files that don&apos;t, such as{" "}
+        <Code>Label</Code>, <Code>Separator</Code> and <Code>Timeline</Code>, no longer have it.
+      </>,
+      <>
+        The upgrade check with <Code>--fix</Code> checks again after fixing and lists only what is left.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-17-docs-parts",
     date: "October 17, 2026",
     title: "Cover seeds, linked nav groups and Markdown tables",
@@ -25,8 +54,9 @@ const ENTRIES: Entry[] = [
         chevron beside it still folds the rows.
       </>,
       <>
-        <Code>SimpleTableHead</Code> and <Code>SimpleTableCell</Code> follow <Code>align</Code>, and bare <Code>code</Code> in
-        body cells gets the inline-code chip, so MDX tables map straight onto them.
+        <Code>SimpleTableHead</Code> and <Code>SimpleTableCell</Code> take the <Code>align</Code> values Markdown writes:{" "}
+        <Code>left</Code>, <Code>center</Code> and <Code>right</Code> map to the start edge, the center and the end edge.
+        Bare <Code>code</Code> in body cells gets the inline-code chip, so MDX tables map straight onto them.
       </>,
       <>
         The <Code>Outline</Code> divider above Back to top now fades in with the link instead of showing on its own.

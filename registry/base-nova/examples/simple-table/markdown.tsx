@@ -1,4 +1,4 @@
-import type * as React from "react"
+import * as React from "react"
 
 import {
   SimpleTable,
@@ -22,15 +22,13 @@ const mdxTableComponents = {
 /*
  * What MDX writes for this table:
  *
- *   | Key   | Action               | Since |
- *   | :---- | :------------------- | ----: |
- *   | `⌘K`  | Opens the `palette`  |   1.2 |
+ *   | Option        | Default |                                          Values |
+ *   | :------------ | :-----: | :---------------------------------------------- |
+ *   | `description` |         | Meta description and home lede                  |
+ *   | `accent`      | `blue`  | `blue`, `neutral`, `green`, `orange`, `rose` or `violet` |
+ *   | `editLink`    |         | Adds "Edit this page"                           |
  */
-const rows = [
-  { key: "⌘K", action: "palette", verb: "Opens the", since: "1.2" },
-  { key: "⌘/", action: "sidebar", verb: "Toggles the", since: "1.4" },
-  { key: "⌘.", action: "outline", verb: "Shows the", since: "2.0" },
-]
+const accents = ["blue", "neutral", "green", "orange", "rose"]
 
 export default function SimpleTableMarkdown() {
   const { table: Table, thead: Thead, tbody: Tbody, tr: Tr, th: Th, td: Td } = mdxTableComponents
@@ -38,23 +36,43 @@ export default function SimpleTableMarkdown() {
     <Table>
       <Thead>
         <Tr>
-          <Th align="left">Key</Th>
-          <Th align="left">Action</Th>
-          <Th align="right">Since</Th>
+          <Th align="left">Option</Th>
+          <Th align="center">Default</Th>
+          <Th align="left">Values</Th>
         </Tr>
       </Thead>
       <Tbody>
-        {rows.map((r) => (
-          <Tr key={r.key}>
-            <Td align="left">
-              <code>{r.key}</code>
-            </Td>
-            <Td align="left">
-              {r.verb} <code>{r.action}</code>
-            </Td>
-            <Td align="right">{r.since}</Td>
-          </Tr>
-        ))}
+        <Tr>
+          <Td align="left">
+            <code>description</code>
+          </Td>
+          <Td align="center" />
+          <Td align="left">Meta description and home lede</Td>
+        </Tr>
+        <Tr>
+          <Td align="left">
+            <code>accent</code>
+          </Td>
+          <Td align="center">
+            <code>blue</code>
+          </Td>
+          <Td align="left">
+            {accents.map((a, i) => (
+              <React.Fragment key={a}>
+                {i > 0 && ", "}
+                <code>{a}</code>
+              </React.Fragment>
+            ))}{" "}
+            or <code>violet</code>
+          </Td>
+        </Tr>
+        <Tr>
+          <Td align="left">
+            <code>editLink</code>
+          </Td>
+          <Td align="center" />
+          <Td align="left">Adds &quot;Edit this page&quot;</Td>
+        </Tr>
       </Tbody>
     </Table>
   )

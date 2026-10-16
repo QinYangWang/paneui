@@ -15,7 +15,7 @@ export default {
   notes: [
     { title: "Phones", body: "The bar adds the bottom safe-area inset as padding, so it can sit flush with the screen edge; add `viewport-fit=cover` to the viewport meta tag for the inset to apply. Labels show under each icon, so there are no tooltips." },
     { title: "Wider screens", body: "Swap to `IconRail` from `md` up, where a column of icons with tooltips fits better." },
-    { title: "Accessibility", body: "The active item gets `aria-current=\"page\"`. Give the `TabBar` an `aria-label` when the page has more than one navigation region." },
+    { title: "Accessibility", body: "The active item gets `aria-current=\"page\"`. The keyboard focus ring draws around the icon pill, so it never clashes with rounded screen corners. Give the `TabBar` an `aria-label` when the page has more than one navigation region." },
   ],
   api: [
     { name: "TabBar", extends: "nav", props: [] },
