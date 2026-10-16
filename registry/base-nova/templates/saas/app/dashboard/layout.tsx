@@ -1,5 +1,5 @@
-import { AppShell } from "@/registry/base-nova/templates/saas/components/app/app-shell"
+import { DashboardShell } from "@/registry/base-nova/templates/saas/components/app/dashboard-shell"
 
-export default function AppShellLayout({ children }: { children: React.ReactNode }) {
-  return <AppShell>{children}</AppShell>
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return <DashboardShell>{children}</DashboardShell>
 }

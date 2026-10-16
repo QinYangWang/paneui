@@ -27,6 +27,49 @@ export default function CliPage() {
     { name: "docs", what: "A docs site", routes: ["app/docs/page.tsx"] },
     { name: "blog", what: "A blog with a post page", routes: ["app/blog"] },
   ]
+  const migrations: { version: string; changed: React.ReactNode; todo: React.ReactNode }[] = [
+    {
+      version: "2.1",
+      changed: (
+        <>
+          Wide-gamut colours and the layered popover shadow now apply. Older installs wrote them without the leading{" "}
+          <Code>--</Code>, so browsers ignored them.
+        </>
+      ),
+      todo: <>Reinstall the theme, then run the upgrade check with <Code>--fix</Code> to delete the broken lines.</>,
+    },
+    {
+      version: "2",
+      changed: (
+        <>
+          New foundation. The <Code>--accent-50</Code> to <Code>--accent-950</Code> ramp is replaced by eight role tokens;{" "}
+          <Code>--radius</Code> goes from 0.625rem to 0.5rem; alpha grey text and borders; four shadow levels; Inter,
+          JetBrains Mono and Newsreader font stacks; <Code>frame-*</Code> and <Code>rounded-inner</Code> utilities.
+        </>
+      ),
+      todo: (
+        <>
+          Move <Code>accent-*</Code> classes to <Code>primary</Code> roles, then delete the ramp (<Code>--fix</Code>). Keep
+          0.625rem with <Code>theme-radius-lg</Code> if you prefer it. Install <Code>fonts</Code> to self-host the fonts.
+          Reinstall components so nested corners use the frame utilities.
+        </>
+      ),
+    },
+    {
+      version: "1.x",
+      changed: (
+        <>
+          <Code>size</Code> on <Code>Input</Code> and <Code>NativeSelect</Code> became the control size; the native
+          attribute moved to <Code>htmlSize</Code>.
+        </>
+      ),
+      todo: (
+        <>
+          Rename numeric <Code>size</Code> props to <Code>htmlSize</Code>. The upgrade check lists each one.
+        </>
+      ),
+    },
+  ]
   const toc: TocEntry[] = [
     { id: "templates", title: "Templates in one command" },
     { id: "new-project", title: "New project", depth: 2 },
@@ -37,6 +80,9 @@ export default function CliPage() {
     { id: "search", title: "search" },
     { id: "by-url", title: "Install by URL" },
     { id: "updating", title: "Updating" },
+    { id: "upgrading", title: "Upgrading after a theme change" },
+    { id: "migrations", title: "Migrations", depth: 2 },
+    { id: "cli-limits", title: "What the CLI merges", depth: 2 },
     { id: "icon-style", title: "Switch the icon style" },
     { id: "item-types", title: "Item types" },
   ]
@@ -179,6 +225,91 @@ export default function CliPage() {
           <TextLink href="/docs/changelog">Changelog</TextLink> for what moved.
         </p>
         <InstallCommand args={`add ${ns}/button --diff components/ui/button.tsx`} />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <GuideH2 id="upgrading">Upgrading after a theme change</GuideH2>
+        <p className="text-muted-foreground">
+          When a release changes the theme, update it first, then the components that use it. Commit before you start so
+          you can review every change.
+        </p>
+        <ol className="flex list-decimal flex-col gap-2 pl-5 text-muted-foreground marker:text-fg-tertiary">
+          <li>
+            Reinstall the theme. <Code>--overwrite</Code> is required: the theme also ships <Code>lib/utils.ts</Code>, and
+            without it a non-interactive run stops at that question before the stylesheet is touched.
+          </li>
+        </ol>
+        <InstallCommand args={`add ${ns}/theme --overwrite`} />
+        <ol start={2} className="flex list-decimal flex-col gap-2 pl-5 text-muted-foreground marker:text-fg-tertiary">
+          <li>Reinstall your accent and radius presets, if you use them, so they apply on top of the new theme.</li>
+          <li>
+            Run the upgrade check. It lists tokens the release removed, broken rules from older installs and code that uses
+            a changed API, with a fix for each. <Code>--fix</Code> cleans the stylesheet; it never edits your source.
+          </li>
+        </ol>
+        <InstallCommand args={`add ${ns}/upgrade-check`} />
+        <AgentCodeBlock code={"node scripts/qinyang-upgrade-check.mjs\nnode scripts/qinyang-upgrade-check.mjs --fix"} language="bash" showLineNumbers={false} />
+        <ol start={4} className="flex list-decimal flex-col gap-2 pl-5 text-muted-foreground marker:text-fg-tertiary">
+          <li>
+            Re-add the components you use with <Code>--overwrite</Code>, a few at a time, and re-apply local edits from the
+            diff.
+          </li>
+        </ol>
+
+        <div className="flex flex-col gap-4 pt-2">
+          <GuideH3 id="migrations">Migrations</GuideH3>
+          <p className="text-muted-foreground">Newest first. Each step lists only what needs your attention.</p>
+          <div className="overflow-x-auto rounded-xl bg-card shadow-raised">
+            <table className="w-full min-w-xl border-collapse text-left text-sm">
+              <thead className="text-muted-foreground">
+                <tr className="border-b border-border">
+                  <th className="px-4 py-2.5 font-medium">Theme</th>
+                  <th className="px-4 py-2.5 font-medium">What changed</th>
+                  <th className="px-4 py-2.5 font-medium">What to do</th>
+                </tr>
+              </thead>
+              <tbody className="align-top">
+                {migrations.map((m) => (
+                  <tr key={m.version} className="border-b border-border last:border-b-0">
+                    <td className="px-4 py-2.5 font-mono text-xs whitespace-nowrap text-foreground">{m.version}</td>
+                    <td className="px-4 py-2.5 text-muted-foreground">{m.changed}</td>
+                    <td className="px-4 py-2.5 text-muted-foreground">{m.todo}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-muted-foreground">
+            The installed version is <Code>meta.version</Code> in <Code>{ns}/theme</Code>; <Code>view {ns}/theme</Code>{" "}
+            prints the current one.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-4 pt-2">
+          <GuideH3 id="cli-limits">What the CLI merges</GuideH3>
+          <ul className="flex list-disc flex-col gap-2 pl-5 text-muted-foreground marker:text-border">
+            <li>
+              Variables in <Code>:root</Code>, <Code>.dark</Code> and <Code>@theme</Code> are added or updated in place, so
+              new values replace old ones under the same name.
+            </li>
+            <li>
+              Nothing is ever removed. A token a release drops stays in your stylesheet, along with any utility it generates;
+              the upgrade check finds them.
+            </li>
+            <li>
+              Rules inside <Code>@supports</Code> and <Code>@media</Code> blocks merge by selector and property, the same as
+              variables.
+            </li>
+            <li>
+              <Code>@property</Code> rules are appended again on every reinstall. The copies are identical and harmless; the
+              upgrade check removes them.
+            </li>
+            <li>
+              Component files are replaced whole with <Code>--overwrite</Code>, or skipped after a prompt without it. Use{" "}
+              <Code>--diff</Code> or <Code>--dry-run</Code> first; there is no three-way merge of your edits.
+            </li>
+          </ul>
+        </div>
       </section>
 
       <section className="flex flex-col gap-4">

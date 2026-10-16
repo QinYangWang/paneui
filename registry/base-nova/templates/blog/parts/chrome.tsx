@@ -2,8 +2,10 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { siGithub } from "simple-icons"
 
-import { GithubIcon, MailIcon } from "@/components/icons"
+import { MailIcon } from "@/components/icons"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Input } from "@/registry/base-nova/ui/input"
 import { ThemeToggle } from "@/registry/base-nova/ui/theme-toggle"
@@ -35,9 +37,9 @@ export function BlogHeader({ homeHref }: { homeHref: string }) {
             About
           </Button>
           <Button variant="ghost" size="icon-sm" nativeButton={false} render={<a href="#" />} aria-label="GitHub">
-            <GithubIcon />
+            <BrandIcon icon={siGithub} />
           </Button>
-          <ThemeToggle className="size-8" />
+          <ThemeToggle variant="ghost" modes="tri" />
         </nav>
       </Container>
     </header>
@@ -53,8 +55,8 @@ export function Newsletter({ compact = false }: { compact?: boolean }) {
       aria-labelledby="newsletter-title"
       className={
         compact
-          ? "flex flex-col gap-4 rounded-3xl bg-card p-6 shadow-surface sm:p-8"
-          : "flex flex-col gap-6 rounded-3xl bg-card p-6 shadow-surface sm:flex-row sm:items-end sm:justify-between sm:p-8"
+          ? "flex flex-col gap-4 rounded-2xl bg-card p-6 shadow-raised sm:p-8"
+          : "flex flex-col gap-6 rounded-2xl bg-card p-6 shadow-raised sm:flex-row sm:items-end sm:justify-between sm:p-8"
       }
     >
       <div className="flex max-w-md flex-col gap-2">

@@ -3,14 +3,16 @@
 import * as React from "react"
 
 import { PlusIcon, TrashIcon } from "@/components/icons"
-import { cn } from "@/lib/utils"
 import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
+import { Alert, AlertContent, AlertDescription } from "@/registry/base-nova/ui/alert"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/base-nova/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/registry/base-nova/ui/dialog"
 import { Input } from "@/registry/base-nova/ui/input"
 import { Label } from "@/registry/base-nova/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/base-nova/ui/select"
+import { SettingsNav, SettingsNavItem } from "@/registry/base-nova/ui/settings-section"
 import { Textarea } from "@/registry/base-nova/ui/textarea"
 import { ThemeToggle } from "@/registry/base-nova/ui/theme-toggle"
 
@@ -78,25 +80,20 @@ export function SettingsDialog({
 
         <div className="grid gap-4 md:grid-cols-[13rem_1fr]">
           <div className="flex flex-col gap-1">
-            <ul aria-label="Agents" className="flex flex-col gap-0.5">
+            <SettingsNav aria-label="Agents">
               {agents.map((a) => (
-                <li key={a.id}>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedId(a.id)}
-                    aria-current={a.id === selected?.id}
-                    className={cn(
-                      "flex h-8 w-full cursor-pointer items-center gap-2 rounded-lg px-2 text-left text-ui outline-none transition-colors hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
-                      a.id === selected?.id && "bg-foreground/6"
-                    )}
-                  >
-                    <ProviderIcon provider={a.provider} className="size-4" />
-                    <span className="min-w-0 flex-1 truncate">{a.name}</span>
-                    {a.id === activeAgentId && connection === "ready" && <span aria-label="Connected" className="size-1.5 rounded-full bg-success" />}
-                  </button>
-                </li>
+                <SettingsNavItem
+                  key={a.id}
+                  icon={<ProviderIcon provider={a.provider} />}
+                  isActive={a.id === selected?.id}
+                  render={<button type="button" />}
+                  onClick={() => setSelectedId(a.id)}
+                >
+                  <span className="min-w-0 flex-1 truncate text-start">{a.name}</span>
+                  {a.id === activeAgentId && connection === "ready" && <span aria-label="Connected" className="size-1.5 rounded-full bg-success" />}
+                </SettingsNavItem>
               ))}
-            </ul>
+            </SettingsNav>
             <Button variant="ghost" size="sm" className="justify-start text-muted-foreground" onClick={add}>
               <PlusIcon data-icon="inline-start" />
               Add agent
@@ -163,21 +160,27 @@ export function SettingsDialog({
               )}
 
               {!selected.builtin && (
-                <div className="flex flex-col gap-2 rounded-xl bg-secondary p-3">
-                  <span className="text-ui font-medium">Bridge</span>
-                  <p className="text-ui-sm text-pretty text-muted-foreground">Start it in your project, then paste the address and token it prints:</p>
+                <Card variant="outline" size="sm">
+                  <CardHeader>
+                    <CardTitle>Bridge</CardTitle>
+                    <CardDescription className="text-pretty">Start it in your project, then paste the address and token it prints.</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex flex-col gap-2">
                   <AgentCodeBlock code="node server/acp-bridge.mjs --root ." language="bash" showLineNumbers={false} />
                   <div className="grid gap-2 sm:grid-cols-[1fr_10rem]">
                     <Input value={bridge.url} aria-label="Bridge address" onChange={(e) => onBridgeChange({ ...bridge, url: e.target.value })} />
                     <Input value={bridge.token} aria-label="Bridge token" placeholder="token" onChange={(e) => onBridgeChange({ ...bridge, token: e.target.value })} />
                   </div>
-                </div>
+                  </CardContent>
+                </Card>
               )}
 
               {error && selected.id === activeAgentId && (
-                <p role="alert" className="text-ui text-pretty text-destructive">
-                  {error}
-                </p>
+                <Alert variant="destructive" size="sm">
+                  <AlertContent>
+                    <AlertDescription className="text-pretty">{error}</AlertDescription>
+                  </AlertContent>
+                </Alert>
               )}
 
               <div className="flex items-center gap-2">
@@ -217,7 +220,7 @@ export function SettingsDialog({
 
         <DialogFooter className="items-center justify-between">
           <span className="flex items-center gap-2 text-ui text-muted-foreground">
-            Appearance <ThemeToggle className="size-8" />
+            Appearance <ThemeToggle variant="ghost" modes="tri" />
           </span>
           <Button variant="secondary" onClick={() => onOpenChange(false)}>
             Done

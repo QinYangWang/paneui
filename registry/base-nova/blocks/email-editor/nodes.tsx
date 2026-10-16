@@ -589,7 +589,7 @@ function VariableView({ node }: ReactNodeViewProps) {
     <NodeViewWrapper
       as="span"
       data-type="email-variable"
-      className="mx-px inline-flex items-center gap-0.5 rounded-md bg-primary/12 px-1 align-baseline font-mono text-[0.85em] leading-normal text-foreground [&_svg]:text-primary"
+      className="mx-px inline-flex items-center gap-0.5 rounded-md bg-primary-subtle px-1 align-baseline font-mono text-[0.85em] leading-normal text-foreground [&_svg]:text-primary"
     >
       <BracesIcon className="size-3" />
       {id}

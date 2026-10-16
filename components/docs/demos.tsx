@@ -7,6 +7,7 @@ import CardDemo from "@/registry/base-nova/examples/card-demo"
 import ChatDemo from "@/registry/base-nova/examples/chat-demo"
 import DialogDemo from "@/registry/base-nova/examples/dialog-demo"
 import IconChipDemo from "@/registry/base-nova/examples/icon-chip-demo"
+import BrandIconDemo from "@/registry/base-nova/examples/brand-icon-demo"
 import IconsDemo from "@/registry/base-nova/examples/icons-demo"
 import InputDemo from "@/registry/base-nova/examples/input-demo"
 import LabelDemo from "@/registry/base-nova/examples/label-demo"
@@ -222,6 +223,7 @@ export const demos: Record<string, React.ComponentType> = {
   "overflow-hint": OverflowHintDemo,
   icons: IconsDemo,
   "icon-chip": IconChipDemo,
+  "brand-icon": BrandIconDemo,
   button: ButtonDemo,
   badge: BadgeDemo,
   card: CardDemo,

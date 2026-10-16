@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { siGithub } from "simple-icons"
 
 import {
   ArrowLeftIcon,
@@ -8,7 +9,6 @@ import {
   BoltIcon,
   BotIcon,
   EditIcon,
-  GithubIcon,
   HomeIcon,
   KeyIcon,
   MenuIcon,
@@ -30,7 +30,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/base-nova/ui/breadcrumb"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { Button } from "@/registry/base-nova/ui/button"
+import { Kbd } from "@/registry/base-nova/ui/kbd"
 import { Drawer, DrawerContent, DrawerTitle } from "@/registry/base-nova/ui/drawer"
 import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { ThemeToggle } from "@/registry/base-nova/ui/theme-toggle"
@@ -85,12 +87,12 @@ export function DocsTemplate() {
             >
               <SearchIcon />
               <span className="hidden sm:inline">Search docs…</span>
-              <kbd className="ml-auto hidden rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground shadow-chip sm:inline">⌘K</kbd>
+              <Kbd className="ml-auto max-sm:hidden">⌘K</Kbd>
             </Button>
             <Button variant="ghost" size="icon-sm" nativeButton={false} render={<a href="#" />} aria-label="GitHub">
-              <GithubIcon />
+              <BrandIcon icon={siGithub} />
             </Button>
-            <ThemeToggle className="size-8" />
+            <ThemeToggle variant="ghost" modes="tri" />
           </div>
         </div>
       </header>

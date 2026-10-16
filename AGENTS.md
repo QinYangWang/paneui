@@ -172,6 +172,10 @@ or margin on the child, not padding on a component.
 ## Icons (summary of `notes/icon-usage.md` + puffy rules)
 
 - All icons come from `@/components/icons` (`@qinyang/icons`), never another icon package or ad-hoc SVG.
+- Third-party logos (sign-in providers, integrations, agent vendors, languages) use `<BrandIcon icon={siGithub} />`
+  (`@qinyang/brand-icon`, the `simple-icons` package), one named import per logo, never `import *` or a slug lookup.
+  `color="brand"` where the logo is the content (lists of apps), the default `current` in toolbars and nav. Brands the
+  package leaves out (Microsoft and its products, AWS, OpenAI, Slack, …) get a neutral icon from the set, never a redrawn mark.
 - Outline style: never edit `registry/base-nova/icons/outline/icons.tsx`; change `components/icons.tsx`
   or the override map, run `pnpm icons:gen`, and check new icons in both styles (`notes/icon-usage.md` › Outline variant).
 - Drawing: 18×18 grid, ~2.5px padding, only the `puff` (filled, 1.5 round stroke)

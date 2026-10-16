@@ -48,7 +48,7 @@ export function BlogHome({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
             </h2>
             <Link
               href={hrefs.post}
-              className="group grid grid-cols-1 overflow-hidden rounded-3xl bg-card shadow-surface outline-none focus-visible:ring-2 focus-visible:ring-ring/50 md:grid-cols-2"
+              className="group grid grid-cols-1 overflow-hidden rounded-2xl bg-card shadow-raised transition-shadow duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 md:grid-cols-2"
             >
               <CoverArt variant={featured.cover} className="aspect-video md:aspect-auto md:min-h-72" />
               <div className="flex flex-col justify-between gap-6 p-6 sm:p-8">
@@ -80,7 +80,7 @@ export function BlogHome({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                 <li key={p.slug} className="border-t border-border first:border-t-0">
                   <Link
                     href={hrefs.post}
-                    className="group -mx-4 grid grid-cols-1 gap-2 rounded-2xl px-4 py-5 transition-colors duration-150 outline-none hover:bg-muted/60 focus-visible:ring-2 focus-visible:ring-ring/50 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-6"
+                    className="group -mx-4 grid grid-cols-1 gap-2 rounded-2xl px-4 py-5 transition-colors duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-6"
                   >
                     <time className="text-sm text-muted-foreground tabular-nums sm:pt-0.5">{p.date}</time>
                     <div className="flex min-w-0 flex-col gap-2">

@@ -21,6 +21,15 @@ type DatePickerProps = Omit<Extract<CalendarProps, { mode?: "single" }>, "mode" 
   "aria-label"?: string
 }
 
+const subscribeNothing = () => () => {}
+/** The given locale, or en-US until hydration, so the server and the first client render print the same text. */
+function useStableLocale(locale?: string) {
+  const hydrated = React.useSyncExternalStore(subscribeNothing, () => true, () => false)
+  return locale ?? (hydrated ? undefined : "en-US")
+}
+/** ICU versions differ on thin / narrow no-break spaces around range dashes; print plain spaces. */
+const plainSpaces = (s: string) => s.replace(/[\u2009\u202f]/g, " ")
+
 /** A field that opens a calendar for one date. */
 function DatePicker({
   value,
@@ -30,16 +39,17 @@ function DatePicker({
   formatOptions = { dateStyle: "medium" },
   size,
   keepOpen = false,
-  locale,
+  locale: localeProp,
   className,
   "aria-label": ariaLabel,
   ...calendarProps
 }: DatePickerProps) {
   const resolved = useControlSize(size)
+  const locale = useStableLocale(localeProp)
   const [open, setOpen] = React.useState(false)
   const [inner, setInner] = React.useState<Date | null>(defaultValue ?? null)
   const date = value !== undefined ? value : inner
-  const text = date ? new Intl.DateTimeFormat(locale, formatOptions).format(date) : ""
+  const text = date ? plainSpaces(new Intl.DateTimeFormat(locale, formatOptions).format(date)) : ""
 
   return (
     <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
@@ -58,7 +68,7 @@ function DatePicker({
         <Calendar
           mode="single"
           value={date}
-          locale={locale}
+          locale={localeProp}
           onValueChange={(d) => {
             if (value === undefined) setInner(d)
             onValueChange?.(d)

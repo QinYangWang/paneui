@@ -8,6 +8,37 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-templates",
+    date: "October 16, 2026",
+    title: "Brand icons, an upgrade path and refreshed templates",
+    tag: "Templates",
+    changes: [
+      <>
+        New <TextLink href="/docs/brand-icon">Brand Icon</TextLink> draws third-party logos at the icon set&apos;s sizes, in
+        the text colour or the brand&apos;s own. Import logos one at a time so only those reach the bundle.
+      </>,
+      <>
+        Theme 2.1: the wide-gamut colours and the layered popover shadow now take effect after install. Reinstall{" "}
+        <Code>theme</Code> with <Code>--overwrite</Code>, then run the new <Code>upgrade-check</Code> to clean up what
+        earlier versions left behind. Steps and a migration list are on{" "}
+        <TextLink href="/docs/cli#upgrading">CLI &amp; registry</TextLink>.
+      </>,
+      <>
+        The SaaS dashboard runs on <Code>AppShell</Code>, with the workspace menu, breadcrumb, search and theme in the
+        header band, and gains an Integrations page. Settings is one sidebar link; its sections stay in the page&apos;s own
+        nav. Sign-in offers GitHub and Google.
+      </>,
+      <>
+        Date pickers print the same text on the server and in the browser, which fixes a hydration error on pages that
+        render one (the analytics dashboard among them) and the dark and radius settings it reset.
+      </>,
+      <>
+        Templates use the library for scroll areas, keys, alerts and the three-way theme toggle, and drop leftover
+        translucent colours for the <Code>-subtle</Code> tokens.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-charts",
     date: "October 16, 2026",
     title: "Chart colours match the theme",

@@ -71,7 +71,7 @@ function SiteHeader() {
               </Button>
             </>
           )}
-          <ThemeToggle />
+          <ThemeToggle variant="ghost" modes="tri" />
           <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open menu" onClick={() => setOpen(true)}>
             <MenuIcon />
           </Button>

@@ -25,6 +25,7 @@ export const routes = {
   settingsAccount: "/dashboard/settings/account",
   settingsBilling: "/dashboard/settings/billing",
   settingsTeam: "/dashboard/settings/team",
+  settingsIntegrations: "/dashboard/settings/integrations",
   settingsNotifications: "/dashboard/settings/notifications",
   settingsAppearance: "/dashboard/settings/appearance",
 } as const

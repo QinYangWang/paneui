@@ -18,6 +18,7 @@ import {
   XIcon,
 } from "@/components/icons"
 import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
+import { ScrollArea } from "@/registry/base-nova/ui/scroll-area"
 import { Button } from "@/registry/base-nova/ui/button"
 import { FileTree, type FileTreeNode } from "@/registry/base-nova/ui/file-tree"
 import { Input } from "@/registry/base-nova/ui/input"
@@ -218,21 +219,21 @@ function ExplorerDock({ client, state, selected, onSelect }: { client: AcpClient
               <RefreshIcon />
             </Button>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto px-2 pb-2 scrollbar-thin">
+          <ScrollArea className="min-h-0 flex-1" viewportClassName="px-2 pb-2">
             {tree.length ? (
               <FileTree items={tree} value={selected} onValueChange={(v, n) => n.type === "file" && onSelect(v)} expanded={open} onExpandedChange={setOpen} label="Workspace files" />
             ) : (
               <p className="px-2 py-6 text-center text-ui text-muted-foreground">No files yet.</p>
             )}
-          </div>
+          </ScrollArea>
         </div>
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel id="preview" minSize={15} collapsible>
         {selected ? (
-          <div className="h-full overflow-auto p-2">
+          <ScrollArea className="h-full" viewportClassName="p-2">
             <AgentCodeBlock code={content ?? ""} filename={selected} maxHeight={2000} streaming={content === null} />
-          </div>
+          </ScrollArea>
         ) : (
           <p className="p-6 text-center text-ui text-muted-foreground">Select a file to preview it.</p>
         )}

@@ -25,9 +25,9 @@ const toc: TocItem[] = [
   { id: "checklist", title: "A short checklist", depth: 3 },
 ]
 
-const CODE = `<div className="rounded-3xl p-1">     {/* 24px = 20 + 4 */}
-  <div className="rounded-2xl p-4">   {/* 20px */}
-    <img className="rounded-lg" />    {/* separate surface: own token */}
+const CODE = `<div className="frame-3xl frame-p-1">    {/* 16px, 4px in */}
+  <div className="rounded-inner p-4">    {/* 16 − 4 = 12px */}
+    <img className="rounded-lg" />      {/* separate surface: own token */}
   </div>
 </div>`
 
@@ -62,7 +62,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
             </StaggerItem>
           </Stagger>
 
-          <CoverArt variant={post.cover} className="aspect-video w-full rounded-3xl outline -outline-offset-1 outline-black/10 sm:aspect-21/9 dark:outline-white/10" />
+          <CoverArt variant={post.cover} className="aspect-video w-full rounded-2xl outline -outline-offset-1 outline-(--image-outline) sm:aspect-21/9" />
 
           <div className="flex justify-between gap-12">
             <article className="typeset typeset-reading min-w-0 flex-1 max-w-reading">
@@ -92,8 +92,8 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
               </ul>
               <h2 id="in-tailwind">Writing it in Tailwind</h2>
               <p>
-                With a radius scale, pick the inner token first and walk up the scale by the padding. Here a <code>20px</code> panel
-                sits in a <code>4px</code> frame, so the frame takes <code>24px</code>.
+                With a radius scale, pick the inner token first and walk up the scale by the padding. Here a <code>12px</code> panel
+                sits in a <code>4px</code> frame, so the frame takes <code>16px</code>.
               </p>
               <div className="not-typeset">
                 <AgentCodeBlock filename="nested-surface.tsx" code={CODE} copyable />
@@ -124,7 +124,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
             </aside>
           </div>
 
-          <section aria-label="About the author" className="flex max-w-reading flex-col gap-4 rounded-3xl bg-card p-6 shadow-surface sm:flex-row sm:items-center sm:gap-5">
+          <section aria-label="About the author" className="flex max-w-reading flex-col gap-4 rounded-2xl bg-card p-6 shadow-raised sm:flex-row sm:items-center sm:gap-5">
             <Avatar name={author.name} size="lg" />
             <div className="flex flex-col gap-1">
               <p className="font-semibold">{author.name}</p>
@@ -144,7 +144,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                 <Link
                   key={p.slug}
                   href={hrefs.post}
-                  className="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-surface outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+                  className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-raised transition-shadow duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <CoverArt variant={p.cover} className="aspect-video" />
                   <div className="flex flex-col gap-2 p-5">

@@ -226,3 +226,22 @@ The `vscode` template depends on `@monaco-editor/react` (https://github.com/sure
 MIT; Copyright (c) 2018 Suren Atoyan), which loads `monaco-editor` (https://github.com/microsoft/monaco-editor,
 MIT; Copyright (c) 2016 - present Microsoft Corporation) from the jsDelivr CDN at runtime. No code from
 either is vendored in this repository.
+
+## Simple Icons (runtime dependency of `brand-icon` and the templates)
+
+`brand-icon` renders logo paths from the `simple-icons` npm package
+(https://github.com/simple-icons/simple-icons, https://simpleicons.org), installed as a dependency
+and imported one icon at a time; no icon data is copied into this repository. The package is
+released under CC0 1.0 Universal (public domain dedication):
+https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md. Some individual icons carry
+their own licence in the package's data file (`simple-icons/data/simple-icons.json`).
+
+**Trademarks.** The brand names and logos shown by `brand-icon`, its examples and the templates
+(GitHub, GitLab, Google, Linear, Jira, Notion, Figma, Sentry, Vercel, Stripe, Discord, Zapier,
+Claude, Gemini and others) are trademarks of their respective owners. CC0 covers the drawings in the
+package, not the marks: it grants no trademark rights and implies no endorsement or affiliation.
+Follow each brand's own guidelines (the package links them in its data) when you use a logo or its
+colour. Brands whose owners asked the package to remove their marks or have not given permission
+(for example Microsoft and its products, Amazon/AWS, OpenAI, Salesforce/Slack, Adobe, Oracle, IBM,
+Twilio, Yahoo) are not in the package; the templates show a neutral icon from this library's set
+in their place and do not redraw those marks.

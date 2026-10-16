@@ -7,35 +7,28 @@ import {
   BellIcon,
   BookmarkIcon,
   ChartIcon,
+  CheckIcon,
+  ChevronsUpDownIcon,
   CreditCardIcon,
   HomeIcon,
   LogOutIcon,
-  MenuIcon,
   MoonIcon,
   PaletteIcon,
   PlusIcon,
   SearchIcon,
   SettingsIcon,
-  SunIcon,
   UserIcon,
   UsersIcon,
 } from "@/components/icons"
 import { CommandPalette, type CommandPaletteItem } from "@/registry/base-nova/blocks/command-palette/command-palette"
 import {
-  Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarItem,
   SidebarMenu,
-  SidebarProvider,
-  SidebarSub,
-  SidebarSubItem,
-  SidebarTrigger,
-  useSidebar,
 } from "@/registry/base-nova/ui/animated-sidebar"
+import { AppShell as Frame, AppShellHeader, AppShellMain, AppShellSidebar } from "@/registry/base-nova/ui/app-shell"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -45,18 +38,17 @@ import {
   BreadcrumbSeparator,
 } from "@/registry/base-nova/ui/breadcrumb"
 import { Button } from "@/registry/base-nova/ui/button"
-import { Drawer, DrawerContent, DrawerTitle } from "@/registry/base-nova/ui/drawer"
-import { MenuGroup, MenuItem, MenuSeparator } from "@/registry/base-nova/ui/menu"
+import { Kbd } from "@/registry/base-nova/ui/kbd"
+import { Menu, MenuContent, MenuGroup, MenuItem, MenuLabel, MenuSeparator, MenuTrigger } from "@/registry/base-nova/ui/menu"
+import { ThemeToggle, useThemeToggle } from "@/registry/base-nova/ui/theme-toggle"
 import { useToast } from "@/registry/base-nova/ui/toast"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
-import { useThemeToggle } from "@/registry/base-nova/ui/theme-toggle"
 import { UserMenu } from "@/registry/base-nova/ui/user-menu"
-import { WorkspaceSwitcher } from "@/registry/base-nova/ui/workspace-switcher"
 
 import { REQUIRE_AUTH, signOut, useSession } from "../../lib/auth"
 import { workspaces } from "../../lib/data"
 import { AppLink, routes, useHref, useRoute } from "../../lib/routes"
-import { SaasProviders } from "../providers"
+import { BrandMark, SaasProviders } from "../providers"
 
 /* ───────────────────────── Navigation model ───────────────────────── */
 
@@ -65,6 +57,7 @@ const settingsPages = [
   { href: routes.settingsAccount, label: "Account" },
   { href: routes.settingsBilling, label: "Billing" },
   { href: routes.settingsTeam, label: "Team" },
+  { href: routes.settingsIntegrations, label: "Integrations" },
   { href: routes.settingsNotifications, label: "Notifications" },
   { href: routes.settingsAppearance, label: "Appearance" },
 ]
@@ -78,26 +71,31 @@ const titles: Record<string, string> = {
 }
 
 function crumbsFor(route: string) {
-  const out: { href: string; label: string }[] = [{ href: routes.dashboard, label: "Dashboard" }]
+  const out: { href: string; label: string }[] = []
   if (route.startsWith(routes.settings)) out.push({ href: routes.settings, label: "Settings" })
-  if (route !== routes.dashboard) out.push({ href: route, label: titles[route] ?? "Page" })
-  else out.push({ href: route, label: "Overview" })
+  out.push({ href: route, label: titles[route] ?? "Page" })
   return out
 }
 
 /* ───────────────────────── Shell ───────────────────────── */
 
-/** Dashboard chrome: collapsible sidebar, top bar with breadcrumb and ⌘K search, mobile drawer. */
-export function AppShell({ children }: { children: React.ReactNode }) {
+/**
+ * Dashboard chrome on the app shell: a header band with the workspace menu, breadcrumb and
+ * ⌘K search, a collapsible sidebar (⌘B; a drawer below lg) and the page in an inset panel.
+ */
+export function DashboardShell({ children }: { children: React.ReactNode }) {
   return (
     <SaasProviders>
       <AuthGate>
-        <SidebarProvider className="min-h-svh bg-background text-foreground">
-          <Sidebar variant="sidebar" aria-label="App" className="sticky top-0 h-svh self-start max-lg:hidden">
+        <Frame>
+          <TopBar />
+          <AppShellSidebar aria-label="App" mobileTitle={<BrandMark href={routes.dashboard} />}>
             <AppNav />
-          </Sidebar>
-          <Shell>{children}</Shell>
-        </SidebarProvider>
+          </AppShellSidebar>
+          <AppShellMain>
+            <div className="mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-6 px-4 pt-6 pb-10 sm:px-6 lg:px-8 lg:pt-8">{children}</div>
+          </AppShellMain>
+        </Frame>
       </AuthGate>
     </SaasProviders>
   )
@@ -115,56 +113,17 @@ function AuthGate({ children }: { children: React.ReactNode }) {
   return children
 }
 
-function Shell({ children }: { children: React.ReactNode }) {
-  const [navOpen, setNavOpen] = React.useState(false)
-  const route = useRoute()
-  // close the mobile drawer after navigating
-  React.useEffect(() => setNavOpen(false), [route])
-  return (
-    <div className="flex min-w-0 flex-1 flex-col">
-      <TopBar onOpenNav={() => setNavOpen(true)} />
-      <main className="mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">{children}</main>
-      <Drawer side="left" open={navOpen} onOpenChange={setNavOpen}>
-        <DrawerContent className="w-72">
-          <DrawerTitle className="sr-only">Navigation</DrawerTitle>
-          <SidebarProvider shortcut={null} className="min-h-0 flex-1 [--sidebar-width:100%]">
-            <Sidebar variant="sidebar" collapsible="none" aria-label="App" panelClassName="border-r-0 bg-transparent">
-              <AppNav />
-            </Sidebar>
-          </SidebarProvider>
-        </DrawerContent>
-      </Drawer>
-    </div>
-  )
-}
-
 /* ───────────────────────── Sidebar ───────────────────────── */
 
 function AppNav() {
   const route = useRoute()
-  const { state } = useSidebar()
-  const toast = useToast()
-  const [workspace, setWorkspace] = React.useState(workspaces[0].id)
   const link = (href: string) => <AppLink href={href} />
   const inSettings = route.startsWith(routes.settings)
 
   return (
     <>
-      <SidebarHeader>
-        <WorkspaceSwitcher
-          workspaces={workspaces}
-          value={workspace}
-          onValueChange={(id) => {
-            setWorkspace(id)
-            toast.add({ title: `Switched to ${workspaces.find((w) => w.id === id)?.name}`, type: "success" })
-          }}
-          onCreate={() => toast.add({ title: "New workspace", description: "Hook this up to your create-workspace flow." })}
-          collapsed={state === "collapsed"}
-        />
-      </SidebarHeader>
       <SidebarContent className="scrollbar-hover">
         <SidebarGroup>
-          <SidebarGroupLabel>Workspace</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarItem icon={<HomeIcon />} label="Overview" isActive={route === routes.dashboard} render={link(routes.dashboard)} />
             <SidebarItem icon={<ChartIcon />} label="Analytics" isActive={route === routes.analytics} render={link(routes.analytics)} />
@@ -174,35 +133,65 @@ function AppNav() {
         <SidebarGroup>
           <SidebarGroupLabel>Manage</SidebarGroupLabel>
           <SidebarMenu>
-            <SidebarItem icon={<SettingsIcon />} label="Settings" defaultOpen={inSettings}>
-              <SidebarSub>
-                {settingsPages.map((p) => (
-                  <SidebarSubItem key={p.href} isActive={route === p.href} render={link(p.href)}>
-                    {p.label}
-                  </SidebarSubItem>
-                ))}
-              </SidebarSub>
-            </SidebarItem>
+            <SidebarItem icon={<SettingsIcon />} label="Settings" isActive={inSettings} render={link(routes.settings)} />
             <SidebarItem icon={<BookmarkIcon />} label="Pricing page" render={link(routes.pricing)} />
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <AccountMenu collapsed={state === "collapsed"} />
-      </SidebarFooter>
     </>
   )
 }
 
-/** Avatar + name at the foot of the sidebar: profile, billing, theme, sign out. */
-function AccountMenu({ collapsed }: { collapsed: boolean }) {
+/* ───────────────────────── Header ───────────────────────── */
+
+/** The current workspace by name; the menu lists the others and "New workspace". */
+function WorkspaceMenu() {
+  const toast = useToast()
+  const [value, setValue] = React.useState(workspaces[0].id)
+  const current = workspaces.find((w) => w.id === value) ?? workspaces[0]
+  return (
+    <Menu>
+      <MenuTrigger render={<Button variant="ghost" size="sm" className="-ms-2.5 min-w-0" />}>
+        <span className="truncate font-semibold">{current.name}</span>
+        <ChevronsUpDownIcon data-icon="inline-end" className="text-muted-foreground" />
+      </MenuTrigger>
+      <MenuContent align="start" className="min-w-56">
+        <MenuGroup>
+          <MenuLabel>Workspaces</MenuLabel>
+          {workspaces.map((w) => (
+            <MenuItem
+              key={w.id}
+              onClick={() => {
+                setValue(w.id)
+                if (w.id !== value) toast.add({ title: `Switched to ${w.name}`, type: "success" })
+              }}
+            >
+              <span className="flex min-w-0 flex-1 flex-col">
+                <span className="truncate">{w.name}</span>
+                <span className="truncate text-ui-xs text-muted-foreground">{w.plan}</span>
+              </span>
+              {w.id === value && <CheckIcon />}
+            </MenuItem>
+          ))}
+        </MenuGroup>
+        <MenuSeparator />
+        <MenuItem onClick={() => toast.add({ title: "New workspace", description: "Hook this up to your create-workspace flow." })}>
+          <PlusIcon />
+          New workspace
+        </MenuItem>
+      </MenuContent>
+    </Menu>
+  )
+}
+
+/** Avatar in the header: profile, billing, appearance, sign out. */
+function AccountMenu() {
   const { user } = useSession()
   const router = useRouter()
   const href = useHref()
-  const { theme, toggle } = useThemeToggle()
   if (!user) return null
   return (
-    <UserMenu name={user.name} email={user.email} collapsed={collapsed}>
+    <UserMenu name={user.name} email={user.email} variant="compact" side="bottom" align="end">
       <MenuGroup>
         <MenuItem render={<AppLink href={routes.settings} />}>
           <UserIcon />
@@ -215,10 +204,6 @@ function AccountMenu({ collapsed }: { collapsed: boolean }) {
         <MenuItem render={<AppLink href={routes.settingsAppearance} />}>
           <PaletteIcon />
           Appearance
-        </MenuItem>
-        <MenuItem closeOnClick={false} onClick={() => toggle()}>
-          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-          {theme === "dark" ? "Light theme" : "Dark theme"}
         </MenuItem>
       </MenuGroup>
       <MenuSeparator />
@@ -236,9 +221,7 @@ function AccountMenu({ collapsed }: { collapsed: boolean }) {
   )
 }
 
-/* ───────────────────────── Top bar ───────────────────────── */
-
-function TopBar({ onOpenNav }: { onOpenNav: () => void }) {
+function TopBar() {
   const route = useRoute()
   const router = useRouter()
   const href = useHref()
@@ -268,14 +251,11 @@ function TopBar({ onOpenNav }: { onOpenNav: () => void }) {
   }, [router, href, toast, toggle])
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-2 border-b border-border bg-background/80 px-3 backdrop-blur sm:px-4">
-      <Tooltip>
-        <TooltipTrigger render={<SidebarTrigger className="max-lg:hidden" />} />
-        <TooltipContent side="bottom">Toggle sidebar · ⌘B</TooltipContent>
-      </Tooltip>
-      <Button variant="ghost" size="icon-sm" className="lg:hidden" aria-label="Open navigation" onClick={onOpenNav}>
-        <MenuIcon />
-      </Button>
+    <AppShellHeader>
+      <WorkspaceMenu />
+      <span aria-hidden className="text-ui text-fg-tertiary max-sm:hidden">
+        /
+      </span>
       <Breadcrumb className="min-w-0 max-sm:hidden">
         <BreadcrumbList>
           {crumbs.map((c, i) => (
@@ -292,9 +272,8 @@ function TopBar({ onOpenNav }: { onOpenNav: () => void }) {
           ))}
         </BreadcrumbList>
       </Breadcrumb>
-      <span className="truncate text-sm font-medium sm:hidden">{crumbs[crumbs.length - 1].label}</span>
 
-      <div className="ml-auto flex items-center gap-1.5">
+      <div className="ml-auto flex items-center gap-1">
         <Button
           variant="secondary"
           size="sm"
@@ -302,11 +281,11 @@ function TopBar({ onOpenNav }: { onOpenNav: () => void }) {
           aria-label="Search"
           aria-keyshortcuts="Meta+K"
           // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (below md) to a 256px field (md+)
-          className="w-8 px-0 text-muted-foreground md:w-64 md:justify-start md:px-3"
+          className="me-1 w-7 px-0 text-muted-foreground md:w-60 md:justify-start md:px-2.5"
         >
           <SearchIcon />
           <span className="hidden md:inline">Search or run a command…</span>
-          <kbd className="ml-auto hidden rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground shadow-chip md:inline">⌘K</kbd>
+          <Kbd className="ml-auto max-md:hidden">⌘K</Kbd>
         </Button>
         <Tooltip>
           <TooltipTrigger
@@ -323,9 +302,12 @@ function TopBar({ onOpenNav }: { onOpenNav: () => void }) {
           </TooltipTrigger>
           <TooltipContent side="bottom">Notifications</TooltipContent>
         </Tooltip>
+        <ThemeToggle variant="ghost" modes="tri" />
+        <AccountMenu />
       </div>
 
       <CommandPalette items={items} open={searchOpen} onOpenChange={setSearchOpen} placeholder="Search pages, customers, settings…" />
-    </header>
+    </AppShellHeader>
   )
 }
+

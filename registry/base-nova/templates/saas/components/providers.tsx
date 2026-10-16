@@ -5,7 +5,6 @@ import * as React from "react"
 import { BotIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { AccentPresets } from "@/registry/base-nova/ui/accent-picker"
-import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { ToastProvider } from "@/registry/base-nova/ui/toast"
 import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
 
@@ -36,11 +35,9 @@ export function BrandMark({ className, href = "/", showName = true }: { classNam
   return (
     <AppLink
       href={href}
-      className={cn("flex items-center gap-2.5 rounded-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50", className)}
+      className={cn("flex items-center gap-2 rounded-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50", className)}
     >
-      <IconChip size="sm" tone="solid">
-        <BotIcon />
-      </IconChip>
+      <BotIcon size={18} className="text-primary" />
       {showName ? <span>{brand.name}</span> : <span className="sr-only">{brand.name}</span>}
     </AppLink>
   )

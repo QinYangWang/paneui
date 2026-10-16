@@ -94,7 +94,8 @@ function TerminalArea({ terms, visible, compact }: { terms: Terminals; visible: 
         })}
       </div>
       {showList && (
-        <ul aria-label="Terminals" className="flex w-40 shrink-0 flex-col gap-px overflow-y-auto border-l border-border p-1 scrollbar-thin">
+        <ScrollArea className="w-40 shrink-0 border-l border-border">
+        <ul aria-label="Terminals" className="flex flex-col gap-px p-1">
           {terms.groups.map((g) =>
             g.map((id, i) => {
               const s = sessions.find((x) => x.id === id)!
@@ -124,6 +125,7 @@ function TerminalArea({ terms, visible, compact }: { terms: Terminals; visible: 
             })
           )}
         </ul>
+        </ScrollArea>
       )}
     </div>
   )

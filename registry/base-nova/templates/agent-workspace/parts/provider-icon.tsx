@@ -1,18 +1,20 @@
-import { ApertureIcon, AsteriskIcon, BotIcon, SparklesIcon } from "@/components/icons"
+import { siClaude, siGooglegemini } from "simple-icons"
+
+import { ApertureIcon, BotIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 
 import type { AgentProvider } from "./agents"
 
-const TONE: Record<AgentProvider, string> = {
-  codex: "text-foreground",
-  claude: "text-chart-5",
-  gemini: "text-chart-1",
-  custom: "text-muted-foreground",
-}
-
-/** Glyph for an agent provider (stand-ins, not the vendors' logos). */
+/**
+ * Mark for an agent provider: the vendor's logo where the brand icon package has one, a
+ * neutral glyph from the icon set where it does not (some vendors do not distribute their
+ * mark in icon packs) and for custom agents.
+ */
 export function ProviderIcon({ provider, className }: { provider: string | undefined; className?: string }) {
   const p = (provider ?? "custom") as AgentProvider
-  const Icon = p === "codex" ? ApertureIcon : p === "claude" ? AsteriskIcon : p === "gemini" ? SparklesIcon : BotIcon
-  return <Icon className={cn(TONE[p] ?? TONE.custom, className)} />
+  if (p === "claude") return <BrandIcon icon={siClaude} color="brand" className={className} />
+  if (p === "gemini") return <BrandIcon icon={siGooglegemini} color="brand" className={className} />
+  const Icon = p === "codex" ? ApertureIcon : BotIcon
+  return <Icon className={cn(p === "codex" ? "text-foreground" : "text-muted-foreground", className)} />
 }

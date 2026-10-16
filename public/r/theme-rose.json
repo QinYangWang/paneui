@@ -32,24 +32,24 @@
     "@supports (color: color(display-p3 1 1 1))": {
       "@media (color-gamut: p3)": {
         ":root": {
-          "primary": "color(display-p3 .843 .298 .507)",
-          "primary-hover": "color(display-p3 .807 .266 .468)",
-          "primary-active": "color(display-p3 .731 .195 .388)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .859 .008 .294/.083)",
-          "primary-subtle-hover": "color(display-p3 .827 .008 .298/.134)",
-          "primary-border": "color(display-p3 .682 .004 .247/.244)",
-          "ring": "color(display-p3 .6 .004 .251/.408)"
+          "--primary": "color(display-p3 .843 .298 .507)",
+          "--primary-hover": "color(display-p3 .807 .266 .468)",
+          "--primary-active": "color(display-p3 .731 .195 .388)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .859 .008 .294/.083)",
+          "--primary-subtle-hover": "color(display-p3 .827 .008 .298/.134)",
+          "--primary-border": "color(display-p3 .682 .004 .247/.244)",
+          "--ring": "color(display-p3 .6 .004 .251/.408)"
         },
         ".dark": {
-          "primary": "color(display-p3 .843 .298 .507)",
-          "primary-hover": "color(display-p3 .864 .364 .539)",
-          "primary-active": "color(display-p3 1 .56 .66)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .996 .227 .573/.148)",
-          "primary-subtle-hover": "color(display-p3 1 .157 .569/.227)",
-          "primary-border": "color(display-p3 1 .337 .643/.349)",
-          "ring": "color(display-p3 1 .345 .596/.832)"
+          "--primary": "color(display-p3 .843 .298 .507)",
+          "--primary-hover": "color(display-p3 .864 .364 .539)",
+          "--primary-active": "color(display-p3 1 .56 .66)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .996 .227 .573/.148)",
+          "--primary-subtle-hover": "color(display-p3 1 .157 .569/.227)",
+          "--primary-border": "color(display-p3 1 .337 .643/.349)",
+          "--ring": "color(display-p3 1 .345 .596/.832)"
         }
       }
     }

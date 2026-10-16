@@ -66,7 +66,7 @@ function Toggle({ label, pressed, onClick, children }: { label: string; pressed:
       onClick={onClick}
       className={cn(
         "flex h-5 min-w-5 items-center justify-center rounded-sm px-1 font-mono text-ui-xs text-muted-foreground transition-colors duration-150 outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
-        pressed && "bg-primary/12 text-primary hover:bg-primary/16 hover:text-primary"
+        pressed && "bg-primary-subtle text-primary hover:bg-primary-subtle-hover hover:text-primary"
       )}
     >
       {children}

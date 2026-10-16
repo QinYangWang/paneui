@@ -2,11 +2,14 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { siGithub, siGoogle } from "simple-icons"
 
-import { ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon, GithubIcon, InboxIcon } from "@/components/icons"
+import { ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon, InboxIcon, WarningIcon } from "@/components/icons"
 import { OTPInput, type OTPStatus } from "@/registry/base-nova/blocks/otp-input/otp-input"
 import { SignupForm } from "@/registry/base-nova/blocks/signup-form/signup-form"
+import { Alert, AlertContent, AlertDescription, AlertIcon } from "@/registry/base-nova/ui/alert"
 import { Avatar, AvatarFallback } from "@/registry/base-nova/ui/avatar"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { Button } from "@/registry/base-nova/ui/button"
 import { StatefulButton, type ButtonState } from "@/registry/base-nova/ui/button-stateful"
 import { Checkbox } from "@/registry/base-nova/ui/checkbox"
@@ -35,7 +38,7 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
         <div className="flex flex-col px-5 py-6 sm:px-10">
           <div className="flex items-center justify-between">
             <BrandMark />
-            <ThemeToggle />
+            <ThemeToggle variant="ghost" modes="tri" />
           </div>
           <div className="flex flex-1 items-center justify-center py-12">
             <div className="w-full max-w-sm">{children}</div>
@@ -87,10 +90,16 @@ function AuthHeading({ title, description }: { title: string; description: React
 function OAuthButtons({ onSelect }: { onSelect: () => void }) {
   return (
     <div className="flex flex-col gap-4">
-      <Button variant="outline" size="lg" className="w-full" onClick={onSelect}>
-        <GithubIcon data-icon="inline-start" />
-        Continue with GitHub
-      </Button>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <Button variant="outline" size="lg" className="w-full" onClick={onSelect}>
+          <BrandIcon icon={siGithub} data-icon="inline-start" />
+          GitHub
+        </Button>
+        <Button variant="outline" size="lg" className="w-full" onClick={onSelect}>
+          <BrandIcon icon={siGoogle} color="brand" data-icon="inline-start" />
+          Google
+        </Button>
+      </div>
       <div className="flex items-center gap-3 text-xs text-muted-foreground">
         <span className="h-px flex-1 bg-border" />
         or with email
@@ -212,9 +221,14 @@ export function LoginPage() {
             </label>
           </FieldGroup>
           {errors.form && (
-            <p role="alert" className="rounded-xl bg-destructive/10 px-3 py-2 text-sm text-destructive">
-              {errors.form}
-            </p>
+            <Alert variant="destructive" size="sm">
+              <AlertIcon>
+                <WarningIcon />
+              </AlertIcon>
+              <AlertContent>
+                <AlertDescription>{errors.form}</AlertDescription>
+              </AlertContent>
+            </Alert>
           )}
           <StatefulButton
             type="submit"

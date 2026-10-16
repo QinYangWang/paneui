@@ -46,9 +46,9 @@ function StepBody({ tc, terminals }: { tc: ToolCallState; terminals: ClientState
         )
     } else if (c.type === "content" && c.content.type === "text" && c.content.text) {
       parts.push(
-        <pre key={i} className="max-h-32 overflow-auto rounded-lg bg-code px-2.5 py-1.5 font-mono text-ui-xs whitespace-pre-wrap text-muted-foreground shadow-well">
-          {c.content.text}
-        </pre>
+        <Terminal key={i} variant="embedded">
+          <TerminalOutput text={c.content.text} className="max-h-32" />
+        </Terminal>
       )
     }
   }

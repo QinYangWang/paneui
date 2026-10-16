@@ -32,24 +32,24 @@
     "@supports (color: color(display-p3 1 1 1))": {
       "@media (color-gamut: p3)": {
         ":root": {
-          "primary": "color(display-p3 .247 .556 .969)",
-          "primary-hover": "color(display-p3 .234 .523 .912)",
-          "primary-active": "color(display-p3 .15 .44 .84)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .012 .506 .914/.087)",
-          "primary-subtle-hover": "color(display-p3 .008 .545 1/.146)",
-          "primary-border": "color(display-p3 .004 .463 .922/.291)",
-          "ring": "color(display-p3 0 .427 .851/.55)"
+          "--primary": "color(display-p3 .247 .556 .969)",
+          "--primary-hover": "color(display-p3 .234 .523 .912)",
+          "--primary-active": "color(display-p3 .15 .44 .84)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .012 .506 .914/.087)",
+          "--primary-subtle-hover": "color(display-p3 .008 .545 1/.146)",
+          "--primary-border": "color(display-p3 .004 .463 .922/.291)",
+          "--ring": "color(display-p3 0 .427 .851/.55)"
         },
         ".dark": {
-          "primary": "color(display-p3 .247 .556 .969)",
-          "primary-hover": "color(display-p3 .344 .612 .973)",
-          "primary-active": "color(display-p3 .49 .72 1)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .122 .463 1/.219)",
-          "primary-subtle-hover": "color(display-p3 0 .467 1/.324)",
-          "primary-border": "color(display-p3 .224 .557 1/.475)",
-          "ring": "color(display-p3 .251 .573 .996/.967)"
+          "--primary": "color(display-p3 .247 .556 .969)",
+          "--primary-hover": "color(display-p3 .344 .612 .973)",
+          "--primary-active": "color(display-p3 .49 .72 1)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .122 .463 1/.219)",
+          "--primary-subtle-hover": "color(display-p3 0 .467 1/.324)",
+          "--primary-border": "color(display-p3 .224 .557 1/.475)",
+          "--ring": "color(display-p3 .251 .573 .996/.967)"
         }
       }
     }

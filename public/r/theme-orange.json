@@ -32,24 +32,24 @@
     "@supports (color: color(display-p3 1 1 1))": {
       "@media (color-gamut: p3)": {
         ":root": {
-          "primary": "color(display-p3 .9 .45 .2)",
-          "primary-hover": "color(display-p3 .87 .409 .164)",
-          "primary-active": "color(display-p3 .76 .34 0)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .922 .584 .008/.15)",
-          "primary-subtle-hover": "color(display-p3 1 .604 .004/.314)",
-          "primary-border": "color(display-p3 .949 .494 .004/.455)",
-          "ring": "color(display-p3 .804 .349 0/.62)"
+          "--primary": "color(display-p3 .9 .45 .2)",
+          "--primary-hover": "color(display-p3 .87 .409 .164)",
+          "--primary-active": "color(display-p3 .76 .34 0)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .922 .584 .008/.15)",
+          "--primary-subtle-hover": "color(display-p3 1 .604 .004/.314)",
+          "--primary-border": "color(display-p3 .949 .494 .004/.455)",
+          "--ring": "color(display-p3 .804 .349 0/.62)"
         },
         ".dark": {
-          "primary": "color(display-p3 .9 .45 .2)",
-          "primary-hover": "color(display-p3 .98 .51 .23)",
-          "primary-active": "color(display-p3 1 .63 .38)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .996 .486 0/.131)",
-          "primary-subtle-hover": "color(display-p3 .996 .384 0/.211)",
-          "primary-border": "color(display-p3 1 .529 .129/.332)",
-          "ring": "color(display-p3 1 .494 .216/.895)"
+          "--primary": "color(display-p3 .9 .45 .2)",
+          "--primary-hover": "color(display-p3 .98 .51 .23)",
+          "--primary-active": "color(display-p3 1 .63 .38)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .996 .486 0/.131)",
+          "--primary-subtle-hover": "color(display-p3 .996 .384 0/.211)",
+          "--primary-border": "color(display-p3 1 .529 .129/.332)",
+          "--ring": "color(display-p3 1 .494 .216/.895)"
         }
       }
     }

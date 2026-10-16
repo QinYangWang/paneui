@@ -21,6 +21,7 @@ import d_avatar_generator from "./avatar-generator"
 import d_badge from "./badge"
 import d_bar_list from "./bar-list"
 import d_bottom_sheet from "./bottom-sheet"
+import d_brand_icon from "./brand-icon"
 import d_breadcrumb from "./breadcrumb"
 import d_button from "./button"
 import d_button_group from "./button-group"
@@ -171,6 +172,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "badge": d_badge,
   "bar-list": d_bar_list,
   "bottom-sheet": d_bottom_sheet,
+  "brand-icon": d_brand_icon,
   "breadcrumb": d_breadcrumb,
   "button": d_button,
   "button-group": d_button_group,

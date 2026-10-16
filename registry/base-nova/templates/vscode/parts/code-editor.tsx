@@ -300,7 +300,7 @@ function FallbackEditor({ docs, path, onSave }: { docs: Docs; path: string | nul
   if (!path) return <EmptyEditor />
   return (
     <div className="flex h-full flex-col">
-      <div className="flex h-8 shrink-0 items-center gap-2 border-b border-border bg-warning/8 px-3 text-ui-sm text-muted-foreground">
+      <div className="flex h-8 shrink-0 items-center gap-2 border-b border-warning-border bg-warning-subtle px-3 text-ui-sm text-muted-foreground">
         <span className="min-w-0 flex-1 truncate">The editor could not load. Editing as plain text.</span>
         <Button variant="ghost" size="xs" onClick={() => window.location.reload()}>
           Retry

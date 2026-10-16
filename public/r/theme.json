@@ -310,94 +310,160 @@
     },
     "@supports (color: color(display-p3 1 1 1))": {
       "@media (color-gamut: p3)": {
+        ":root": {
+          "--primary": "color(display-p3 .247 .556 .969)",
+          "--primary-hover": "color(display-p3 .234 .523 .912)",
+          "--primary-active": "color(display-p3 .15 .44 .84)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .012 .506 .914/.087)",
+          "--primary-subtle-hover": "color(display-p3 .008 .545 1/.146)",
+          "--primary-border": "color(display-p3 .004 .463 .922/.291)",
+          "--ring": "color(display-p3 0 .427 .851/.55)",
+          "--destructive": "color(display-p3 .831 .345 .231)",
+          "--destructive-hover": "color(display-p3 .802 .313 .2)",
+          "--destructive-foreground": "color(display-p3 .998 .989 .988)",
+          "--destructive-subtle": "color(display-p3 .831 .184 .012/.091)",
+          "--destructive-border": "color(display-p3 .847 .173 .004/.302)",
+          "--success": "color(display-p3 .332 .634 .442)",
+          "--success-hover": "color(display-p3 .308 .595 .417)",
+          "--success-foreground": "color(display-p3 .986 .996 .989)",
+          "--success-subtle": "color(display-p3 .012 .596 .145/.087)",
+          "--success-border": "color(display-p3 .004 .518 .157/.283)",
+          "--warning": "color(display-p3 .9 .45 .2)",
+          "--warning-hover": "color(display-p3 .87 .409 .164)",
+          "--warning-foreground": "color(display-p3 .995 .988 .985)",
+          "--warning-subtle": "color(display-p3 .922 .584 .008/.15)",
+          "--warning-border": "color(display-p3 .949 .494 .004/.455)",
+          "--chart-1": "color(display-p3 .247 .556 .969)",
+          "--chart-2": "color(display-p3 .87 .409 .164)",
+          "--chart-3": "color(display-p3 .417 .341 .784)",
+          "--chart-4": "color(display-p3 .332 .634 .442)",
+          "--chart-5": "color(display-p3 .775 .297 .61)",
+          "--chart-6": "color(display-p3 .64 .4 0)",
+          "--chart-7": "color(display-p3 .282 .627 .765)",
+          "--chart-8": "color(display-p3 .553 .553 .553)"
+        },
+        ".dark": {
+          "--primary": "color(display-p3 .247 .556 .969)",
+          "--primary-hover": "color(display-p3 .344 .612 .973)",
+          "--primary-active": "color(display-p3 .49 .72 1)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .122 .463 1/.219)",
+          "--primary-subtle-hover": "color(display-p3 0 .467 1/.324)",
+          "--primary-border": "color(display-p3 .224 .557 1/.475)",
+          "--ring": "color(display-p3 .251 .573 .996/.967)",
+          "--destructive": "color(display-p3 .831 .345 .231)",
+          "--destructive-hover": "color(display-p3 .862 .415 .298)",
+          "--destructive-foreground": "#fff",
+          "--destructive-subtle": "color(display-p3 .996 .282 .176/.148)",
+          "--destructive-border": "color(display-p3 1 .392 .278/.353)",
+          "--success": "color(display-p3 .332 .634 .442)",
+          "--success-hover": "color(display-p3 .357 .682 .474)",
+          "--success-foreground": "#fff",
+          "--success-subtle": "color(display-p3 .376 .996 .655/.114)",
+          "--success-border": "color(display-p3 .475 1 .706/.29)",
+          "--warning": "color(display-p3 .9 .45 .2)",
+          "--warning-hover": "color(display-p3 .98 .51 .23)",
+          "--warning-foreground": "#fff",
+          "--warning-subtle": "color(display-p3 .996 .486 0/.131)",
+          "--warning-border": "color(display-p3 1 .529 .129/.332)",
+          "--chart-1": "color(display-p3 .247 .556 .969)",
+          "--chart-2": "color(display-p3 .9 .45 .2)",
+          "--chart-3": "color(display-p3 .417 .341 .784)",
+          "--chart-4": "color(display-p3 .332 .634 .442)",
+          "--chart-5": "color(display-p3 .775 .297 .61)",
+          "--chart-6": "color(display-p3 1 .77 .26)",
+          "--chart-7": "color(display-p3 .282 .627 .765)",
+          "--chart-8": "color(display-p3 .431 .431 .431)"
+        },
         "html[data-accent=\"green\"]": {
-          "primary": "color(display-p3 .332 .634 .442)",
-          "primary-hover": "color(display-p3 .308 .595 .417)",
-          "primary-active": "color(display-p3 .19 .5 .32)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .012 .596 .145/.087)",
-          "primary-subtle-hover": "color(display-p3 .008 .588 .145/.142)",
-          "primary-border": "color(display-p3 .004 .518 .157/.283)",
-          "ring": "color(display-p3 0 .478 .2/.55)"
+          "--primary": "color(display-p3 .332 .634 .442)",
+          "--primary-hover": "color(display-p3 .308 .595 .417)",
+          "--primary-active": "color(display-p3 .19 .5 .32)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .012 .596 .145/.087)",
+          "--primary-subtle-hover": "color(display-p3 .008 .588 .145/.142)",
+          "--primary-border": "color(display-p3 .004 .518 .157/.283)",
+          "--ring": "color(display-p3 0 .478 .2/.55)"
         },
         "html[data-accent=\"green\"].dark": {
-          "primary": "color(display-p3 .332 .634 .442)",
-          "primary-hover": "color(display-p3 .357 .682 .474)",
-          "primary-active": "color(display-p3 .434 .828 .573)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .376 .996 .655/.114)",
-          "primary-subtle-hover": "color(display-p3 .341 .996 .635/.173)",
-          "primary-border": "color(display-p3 .475 1 .706/.29)",
-          "ring": "color(display-p3 .502 .996 .682/.61)"
+          "--primary": "color(display-p3 .332 .634 .442)",
+          "--primary-hover": "color(display-p3 .357 .682 .474)",
+          "--primary-active": "color(display-p3 .434 .828 .573)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .376 .996 .655/.114)",
+          "--primary-subtle-hover": "color(display-p3 .341 .996 .635/.173)",
+          "--primary-border": "color(display-p3 .475 1 .706/.29)",
+          "--ring": "color(display-p3 .502 .996 .682/.61)"
         },
         "html[data-accent=\"orange\"]": {
-          "primary": "color(display-p3 .9 .45 .2)",
-          "primary-hover": "color(display-p3 .87 .409 .164)",
-          "primary-active": "color(display-p3 .76 .34 0)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .922 .584 .008/.15)",
-          "primary-subtle-hover": "color(display-p3 1 .604 .004/.314)",
-          "primary-border": "color(display-p3 .949 .494 .004/.455)",
-          "ring": "color(display-p3 .804 .349 0/.62)"
+          "--primary": "color(display-p3 .9 .45 .2)",
+          "--primary-hover": "color(display-p3 .87 .409 .164)",
+          "--primary-active": "color(display-p3 .76 .34 0)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .922 .584 .008/.15)",
+          "--primary-subtle-hover": "color(display-p3 1 .604 .004/.314)",
+          "--primary-border": "color(display-p3 .949 .494 .004/.455)",
+          "--ring": "color(display-p3 .804 .349 0/.62)"
         },
         "html[data-accent=\"orange\"].dark": {
-          "primary": "color(display-p3 .9 .45 .2)",
-          "primary-hover": "color(display-p3 .98 .51 .23)",
-          "primary-active": "color(display-p3 1 .63 .38)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .996 .486 0/.131)",
-          "primary-subtle-hover": "color(display-p3 .996 .384 0/.211)",
-          "primary-border": "color(display-p3 1 .529 .129/.332)",
-          "ring": "color(display-p3 1 .494 .216/.895)"
+          "--primary": "color(display-p3 .9 .45 .2)",
+          "--primary-hover": "color(display-p3 .98 .51 .23)",
+          "--primary-active": "color(display-p3 1 .63 .38)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .996 .486 0/.131)",
+          "--primary-subtle-hover": "color(display-p3 .996 .384 0/.211)",
+          "--primary-border": "color(display-p3 1 .529 .129/.332)",
+          "--ring": "color(display-p3 1 .494 .216/.895)"
         },
         "html[data-accent=\"rose\"]": {
-          "primary": "color(display-p3 .843 .298 .507)",
-          "primary-hover": "color(display-p3 .807 .266 .468)",
-          "primary-active": "color(display-p3 .731 .195 .388)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .859 .008 .294/.083)",
-          "primary-subtle-hover": "color(display-p3 .827 .008 .298/.134)",
-          "primary-border": "color(display-p3 .682 .004 .247/.244)",
-          "ring": "color(display-p3 .6 .004 .251/.408)"
+          "--primary": "color(display-p3 .843 .298 .507)",
+          "--primary-hover": "color(display-p3 .807 .266 .468)",
+          "--primary-active": "color(display-p3 .731 .195 .388)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .859 .008 .294/.083)",
+          "--primary-subtle-hover": "color(display-p3 .827 .008 .298/.134)",
+          "--primary-border": "color(display-p3 .682 .004 .247/.244)",
+          "--ring": "color(display-p3 .6 .004 .251/.408)"
         },
         "html[data-accent=\"rose\"].dark": {
-          "primary": "color(display-p3 .843 .298 .507)",
-          "primary-hover": "color(display-p3 .864 .364 .539)",
-          "primary-active": "color(display-p3 1 .56 .66)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .996 .227 .573/.148)",
-          "primary-subtle-hover": "color(display-p3 1 .157 .569/.227)",
-          "primary-border": "color(display-p3 1 .337 .643/.349)",
-          "ring": "color(display-p3 1 .345 .596/.832)"
+          "--primary": "color(display-p3 .843 .298 .507)",
+          "--primary-hover": "color(display-p3 .864 .364 .539)",
+          "--primary-active": "color(display-p3 1 .56 .66)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .996 .227 .573/.148)",
+          "--primary-subtle-hover": "color(display-p3 1 .157 .569/.227)",
+          "--primary-border": "color(display-p3 1 .337 .643/.349)",
+          "--ring": "color(display-p3 1 .345 .596/.832)"
         },
         "html[data-accent=\"violet\"]": {
-          "primary": "color(display-p3 .417 .341 .784)",
-          "primary-hover": "color(display-p3 .381 .306 .741)",
-          "primary-active": "color(display-p3 .383 .317 .702)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .204 .004 .871/.059)",
-          "primary-subtle-hover": "color(display-p3 .196 .004 1/.102)",
-          "primary-border": "color(display-p3 .153 .004 .906/.208)",
-          "ring": "color(display-p3 .133 .004 .753/.397)"
+          "--primary": "color(display-p3 .417 .341 .784)",
+          "--primary-hover": "color(display-p3 .381 .306 .741)",
+          "--primary-active": "color(display-p3 .383 .317 .702)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .204 .004 .871/.059)",
+          "--primary-subtle-hover": "color(display-p3 .196 .004 1/.102)",
+          "--primary-border": "color(display-p3 .153 .004 .906/.208)",
+          "--ring": "color(display-p3 .133 .004 .753/.397)"
         },
         "html[data-accent=\"violet\"].dark": {
-          "primary": "color(display-p3 .417 .341 .784)",
-          "primary-hover": "color(display-p3 .477 .402 .823)",
-          "primary-active": "color(display-p3 .72 .65 1)",
-          "primary-foreground": "#fff",
-          "primary-subtle": "color(display-p3 .494 .337 .996/.202)",
-          "primary-subtle-hover": "color(display-p3 .49 .345 1/.299)",
-          "primary-border": "color(display-p3 .569 .455 1/.408)",
-          "ring": "color(display-p3 .522 .424 1/.769)"
+          "--primary": "color(display-p3 .417 .341 .784)",
+          "--primary-hover": "color(display-p3 .477 .402 .823)",
+          "--primary-active": "color(display-p3 .72 .65 1)",
+          "--primary-foreground": "#fff",
+          "--primary-subtle": "color(display-p3 .494 .337 .996/.202)",
+          "--primary-subtle-hover": "color(display-p3 .49 .345 1/.299)",
+          "--primary-border": "color(display-p3 .569 .455 1/.408)",
+          "--ring": "color(display-p3 .522 .424 1/.769)"
         }
       }
     },
     "@supports (color: color-mix(in oklab, red, red))": {
       ":root": {
-        "shadow-lg": "0 0 0 0.5px color-mix(in oklab, #0000000f, #f0f0f0 25%), 0 2px 3px -2px #0000000f, 0 3px 12px -4px #0000001a, 0 4px 16px -8px #0000000d"
+        "--shadow-lg": "0 0 0 0.5px color-mix(in oklab, #0000000f, #f0f0f0 25%), 0 2px 3px -2px #0000000f, 0 3px 12px -4px #0000001a, 0 4px 16px -8px #0000000d"
       },
       ".dark": {
-        "shadow-lg": "0 0 0 1px color-mix(in oklab, #ffffff12, #3a3a3a 25%), 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080"
+        "--shadow-lg": "0 0 0 1px color-mix(in oklab, #ffffff12, #3a3a3a 25%), 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080"
       }
     },
     "@property --frame-r": {
@@ -463,7 +529,8 @@
     }
   },
   "meta": {
-    "category": "Foundations"
+    "category": "Foundations",
+    "version": "2.1"
   },
   "type": "registry:theme"
 }

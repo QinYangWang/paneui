@@ -26,6 +26,13 @@ const sameMonth = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a
 const monthIndex = (d: Date) => d.getFullYear() * 12 + d.getMonth()
 const isoKey = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
 
+const subscribeNothing = () => () => {}
+/** The given locale, or en-US until hydration, so the server and the first client render print the same text. */
+function useStableLocale(locale?: string) {
+  const hydrated = React.useSyncExternalStore(subscribeNothing, () => true, () => false)
+  return locale ?? (hydrated ? undefined : "en-US")
+}
+
 function localeWeekStart(locale?: string): number {
   try {
     const loc = new Intl.Locale(locale ?? navigator.language) as Intl.Locale & {
@@ -103,12 +110,13 @@ function Calendar(props: CalendarProps) {
     max,
     disabled,
     weekStartsOn: weekStartsOnProp,
-    locale,
+    locale: localeProp,
     showOutsideDays = true,
     className,
     ...rest
   } = props
   const isRange = mode === "range"
+  const locale = useStableLocale(localeProp)
 
   const [single, setSingle] = useControllable<Date | null>(
     isRange ? undefined : (value as Date | null | undefined),
@@ -131,7 +139,7 @@ function Calendar(props: CalendarProps) {
   const [hovered, setHovered] = React.useState<Date>()
   const focusRequest = React.useRef(false)
   const [weekStartsOn, setWeekStartsOn] = React.useState(weekStartsOnProp ?? 0)
-  React.useEffect(() => setWeekStartsOn(weekStartsOnProp ?? localeWeekStart(locale)), [weekStartsOnProp, locale])
+  React.useEffect(() => setWeekStartsOn(weekStartsOnProp ?? localeWeekStart(localeProp)), [weekStartsOnProp, localeProp])
 
   const isDisabled = React.useCallback(
     (d: Date) => (!!min && dayNum(d) < dayNum(min)) || (!!max && dayNum(d) > dayNum(max)) || !!disabled?.(d),

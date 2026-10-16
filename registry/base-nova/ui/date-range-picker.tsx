@@ -31,6 +31,15 @@ const isoKey = (d: Date) =>
 /** Whole days between two dates (nights for a stay). */
 const daysBetween = (a: Date, b: Date) => Math.abs(dayNum(b) - dayNum(a))
 
+const subscribeNothing = () => () => {}
+/** The given locale, or en-US until hydration, so the server and the first client render print the same text. */
+function useStableLocale(locale?: string) {
+  const hydrated = React.useSyncExternalStore(subscribeNothing, () => true, () => false)
+  return locale ?? (hydrated ? undefined : "en-US")
+}
+/** ICU versions differ on thin / narrow no-break spaces around range dashes; print plain spaces. */
+const plainSpaces = (s: string) => s.replace(/[\u2009\u202f]/g, " ")
+
 function localeWeekStart(locale?: string): number {
   try {
     const loc = new Intl.Locale(locale ?? navigator.language) as Intl.Locale & {
@@ -104,7 +113,7 @@ function DateRangePicker({
   value,
   defaultValue,
   onValueChange,
-  locale,
+  locale: localeProp,
   weekStartsOn: weekStartsOnProp,
   numberOfMonths = 1,
   min,
@@ -117,6 +126,7 @@ function DateRangePicker({
   children,
   ...props
 }: DateRangePickerProps) {
+  const locale = useStableLocale(localeProp)
   const [internal, setInternal] = React.useState<DateRange>(defaultValue ?? {})
   const range = value ?? internal
   const [openState, setOpenState] = React.useState(defaultOpen)
@@ -130,8 +140,8 @@ function DateRangePicker({
   const focusRequest = React.useRef(false)
   const [weekStartsOn, setWeekStartsOn] = React.useState(weekStartsOnProp ?? 0)
   React.useEffect(() => {
-    setWeekStartsOn(weekStartsOnProp ?? localeWeekStart(locale))
-  }, [weekStartsOnProp, locale])
+    setWeekStartsOn(weekStartsOnProp ?? localeWeekStart(localeProp))
+  }, [weekStartsOnProp, localeProp])
 
   const isDisabled = React.useCallback(
     (d: Date) => (min ? dayNum(d) < dayNum(min) : false) || (max ? dayNum(d) > dayNum(max) : false) || !!isDateDisabled?.(d),
@@ -249,8 +259,8 @@ function DateRangePicker({
 
 function formatRange(range: DateRange, locale?: string, opts?: Intl.DateTimeFormatOptions) {
   const fmt = new Intl.DateTimeFormat(locale, opts ?? { month: "short", day: "numeric", year: "numeric" })
-  if (range.from && range.to) return fmt.formatRange(range.from, range.to)
-  if (range.from) return `${fmt.format(range.from)} – …`
+  if (range.from && range.to) return plainSpaces(fmt.formatRange(range.from, range.to))
+  if (range.from) return `${plainSpaces(fmt.format(range.from))} – …`
   return ""
 }
 

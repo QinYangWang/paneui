@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { BellIcon, CreditCardIcon, PaletteIcon, ShieldIcon, UserIcon, UsersIcon } from "@/components/icons"
+import { BellIcon, CreditCardIcon, GridIcon, PaletteIcon, ShieldIcon, UserIcon, UsersIcon } from "@/components/icons"
 import { PageHeader, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@/registry/base-nova/ui/page-header"
 import { SettingsNav, SettingsNavItem } from "@/registry/base-nova/ui/settings-section"
 
@@ -13,6 +13,7 @@ const pages = [
   { href: routes.settingsAccount, label: "Account", icon: <ShieldIcon /> },
   { href: routes.settingsBilling, label: "Billing", icon: <CreditCardIcon /> },
   { href: routes.settingsTeam, label: "Team", icon: <UsersIcon /> },
+  { href: routes.settingsIntegrations, label: "Integrations", icon: <GridIcon /> },
   { href: routes.settingsNotifications, label: "Notifications", icon: <BellIcon /> },
   { href: routes.settingsAppearance, label: "Appearance", icon: <PaletteIcon /> },
 ]
