@@ -241,6 +241,7 @@ function MenuListShortcut({ className, ...props }: React.ComponentProps<"span">)
   return (
     <span
       data-slot="menu-list-shortcut"
+      // design-check-ignore tracking -- shortcut glyphs are spaced wide (rule 11 allows it)
       className={cn("ml-auto pl-4 font-sans text-ui-xs tracking-widest text-muted-foreground/72", className)}
       {...props}
     />

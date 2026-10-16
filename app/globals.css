@@ -743,22 +743,15 @@ html[data-accent="violet"].dark {
  *
  * Two levels deep (frame → frame-inner → rounded-inner) is supported; beyond that, compute the
  * value explicitly. `frame-xl` on an element that has no children to fit is just `rounded-xl`.
- * Inputs are registered as non-inheriting so a frame never picks up an ancestor's padding.
+ * Every element resets the inputs (in the base layer, under every utility), so a frame never picks up
+ * an ancestor's padding. A plain rule rather than @property, so reinstalling the theme stays idempotent.
  */
-@property --frame-r {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-@property --frame-p {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-@property --frame-b {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
+@layer base {
+  *, ::before, ::after {
+    --frame-r: 0px;
+    --frame-p: 0px;
+    --frame-b: 0px;
+  }
 }
 
 @utility frame-* {

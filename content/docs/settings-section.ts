@@ -60,7 +60,17 @@ SettingsSection
       ],
       dataAttributes: [{ name: "data-interactive", description: "Present on an interactive row." }],
     },
-    { name: "SettingsRowLink", extends: "SettingsRow", description: "Interactive row that renders an `<a>`; pass `href`, or `render` for a router link.", props: [{ name: "href", type: "string", description: "Link target." }] },
+    {
+      name: "SettingsRowLink",
+      extends: "a",
+      description: "Interactive row that renders an `<a>` and takes every anchor attribute; pass `render` for a router link.",
+      props: [
+        { name: "target", type: "string", description: "`_blank` without `rel` adds `rel=\"noopener noreferrer\"`." },
+        { name: "external", type: "boolean", default: "false", description: "An external-link icon instead of the chevron." },
+        { name: "detail", type: "React.ReactNode", description: "Same as `SettingsRow`." },
+        { name: "chevron", type: "boolean", default: "true", description: "Same as `SettingsRow`." },
+      ],
+    },
     { name: "SettingsGroupFooter", extends: "div", description: "Muted band for Save / Cancel; with a `SettingsFooterNote` the note sits left.", props: [] },
     { name: "SettingsNavItem", extends: "a (useRender)", props: [{ name: "isActive", type: "boolean", description: "Current page." }, { name: "icon", type: "ReactNode", description: "16px solid icon." }, { name: "render", type: "ReactElement", description: "Your router link." }] },
   ],

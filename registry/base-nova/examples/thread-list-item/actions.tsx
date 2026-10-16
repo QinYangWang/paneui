@@ -22,6 +22,7 @@ export default function ThreadListItemActions() {
           {THREADS.map((t) => (
             <ThreadListItem
               key={t.id}
+              data-thread={t.id}
               title={t.title}
               description={t.description}
               meta={t.meta}

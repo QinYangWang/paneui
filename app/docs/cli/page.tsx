@@ -37,6 +37,16 @@ export default function CliPage() {
   ]
   const migrations: { version: string; changed: React.ReactNode; todo: React.ReactNode }[] = [
     {
+      version: "2.3",
+      changed: (
+        <>
+          The frame inputs (<Code>--frame-r</Code>, <Code>--frame-p</Code>, <Code>--frame-b</Code>) reset on every element in{" "}
+          <Code>@layer base</Code> instead of <Code>@property</Code>, so reinstalling the theme leaves the stylesheet unchanged.
+        </>
+      ),
+      todo: <>Reinstall the theme, then run the upgrade check with <Code>--fix</Code> to delete the old <Code>@property</Code> rules.</>,
+    },
+    {
       version: "2.2",
       changed: (
         <>
@@ -315,8 +325,12 @@ export default function CliPage() {
               variables.
             </li>
             <li>
-              <Code>@property</Code> rules are appended again on every reinstall. The copies are identical and harmless; the
-              upgrade check removes them.
+              <Code>@property</Code> rules are appended again on every reinstall, so the theme ships none. Copies left by
+              theme 2.2 and earlier are harmless; the upgrade check removes them.
+            </li>
+            <li>
+              Files with a <Code>~/</Code> target, such as the design skill and the upgrade check, land at the project root
+              even when your components live under <Code>src/</Code>.
             </li>
             <li>
               Component files are replaced whole with <Code>--overwrite</Code>, or skipped after a prompt without it. Use{" "}

@@ -77,11 +77,6 @@
     },
     {
       "rule": "tracking",
-      "file": "registry/base-nova/ui/{menu,menu-list,command}.tsx",
-      "reason": "keyboard shortcut glyphs"
-    },
-    {
-      "rule": "tracking",
       "file": "registry/base-nova/examples/text-scramble-demo.tsx",
       "reason": "mono scramble effect"
     },

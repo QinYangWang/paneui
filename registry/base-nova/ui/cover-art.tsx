@@ -203,9 +203,9 @@ function CoverArt({ variant, seed, mirror, ramp, className, ...props }: CoverArt
       {v === 6 && (
         // A fanned stack of cards.
         <div className={cn("absolute inset-0", flip)}>
-          <div className={cn("absolute inset-y-1/4 start-1/3 end-1/12 rounded-xl shadow-raised @xs:rounded-2xl", tone(r, 2))} />
-          <div className={cn("absolute inset-y-1/6 start-1/5 end-1/6 rounded-xl shadow-raised @xs:rounded-2xl", tone(r, 1))} />
-          <div className="absolute inset-y-1/12 start-1/10 end-1/4 flex flex-col justify-end gap-1.5 rounded-xl bg-card p-3 shadow-surface @xs:gap-2 @xs:rounded-2xl @xs:p-5">
+          <div className={cn("absolute inset-y-1/3 start-1/3 end-1/12 rounded-xl shadow-raised @xs:rounded-2xl", tone(r, 2))} />
+          <div className={cn("absolute inset-y-1/4 start-1/5 end-1/6 rounded-xl shadow-raised @xs:rounded-2xl", tone(r, 1))} />
+          <div className="absolute inset-y-1/6 start-1/8 end-1/4 flex flex-col justify-end gap-1.5 rounded-xl bg-card p-3 shadow-surface @xs:gap-2 @xs:rounded-2xl @xs:p-5">
             <div className={cn("h-2 w-3/5 rounded-full @xs:h-3", tone(r, 0))} />
             <div className="h-1.5 w-4/5 rounded-full bg-foreground/12 @xs:h-2" />
             <div className="h-1.5 w-2/5 rounded-full bg-foreground/12 @xs:h-2" />

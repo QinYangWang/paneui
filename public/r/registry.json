@@ -271,6 +271,11 @@
           },
           "code, kbd, pre, samp": {
             "font-feature-settings": "normal"
+          },
+          "*, ::before, ::after": {
+            "--frame-r": "0px",
+            "--frame-p": "0px",
+            "--frame-b": "0px"
           }
         },
         "@utility scrollbar-thin": {
@@ -470,21 +475,6 @@
             "--shadow-lg": "0 0 0 1px color-mix(in oklab, #ffffff12, #3a3a3a 25%), 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080"
           }
         },
-        "@property --frame-r": {
-          "syntax": "\"<length>\"",
-          "inherits": "false",
-          "initial-value": "0px"
-        },
-        "@property --frame-p": {
-          "syntax": "\"<length>\"",
-          "inherits": "false",
-          "initial-value": "0px"
-        },
-        "@property --frame-b": {
-          "syntax": "\"<length>\"",
-          "inherits": "false",
-          "initial-value": "0px"
-        },
         "@utility frame-*": {
           "--frame-r": "--value(--radius-*, [length])",
           "border-radius": "--value(--radius-*, [length])",
@@ -534,7 +524,7 @@
       },
       "meta": {
         "category": "Foundations",
-        "version": "2.2"
+        "version": "2.3"
       },
       "registryDependencies": [
         "@qinyang/utils"
@@ -1059,7 +1049,7 @@
         {
           "path": "registry/base-nova/scripts/upgrade-check.mjs",
           "type": "registry:file",
-          "target": "scripts/qinyang-upgrade-check.mjs"
+          "target": "~/scripts/qinyang-upgrade-check.mjs"
         }
       ],
       "meta": {
@@ -1076,57 +1066,57 @@
         {
           "path": "skills/qinyang-design/SKILL.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/SKILL.md"
+          "target": "~/.agents/skills/qinyang-design/SKILL.md"
         },
         {
           "path": "skills/qinyang-design/references/charts.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/references/charts.md"
+          "target": "~/.agents/skills/qinyang-design/references/charts.md"
         },
         {
           "path": "skills/qinyang-design/references/components.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/references/components.md"
+          "target": "~/.agents/skills/qinyang-design/references/components.md"
         },
         {
           "path": "skills/qinyang-design/references/copy.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/references/copy.md"
+          "target": "~/.agents/skills/qinyang-design/references/copy.md"
         },
         {
           "path": "skills/qinyang-design/references/foundations.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/references/foundations.md"
+          "target": "~/.agents/skills/qinyang-design/references/foundations.md"
         },
         {
           "path": "skills/qinyang-design/references/icons.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/references/icons.md"
+          "target": "~/.agents/skills/qinyang-design/references/icons.md"
         },
         {
           "path": "skills/qinyang-design/references/layout.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/references/layout.md"
+          "target": "~/.agents/skills/qinyang-design/references/layout.md"
         },
         {
           "path": "skills/qinyang-design/references/motion-a11y.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/references/motion-a11y.md"
+          "target": "~/.agents/skills/qinyang-design/references/motion-a11y.md"
         },
         {
           "path": "skills/qinyang-design/references/registry.md",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/references/registry.md"
+          "target": "~/.agents/skills/qinyang-design/references/registry.md"
         },
         {
           "path": "skills/qinyang-design/scripts/check.mjs",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/scripts/check.mjs"
+          "target": "~/.agents/skills/qinyang-design/scripts/check.mjs"
         },
         {
           "path": "skills/qinyang-design/scripts/radius-probe.js",
           "type": "registry:file",
-          "target": ".agents/skills/qinyang-design/scripts/radius-probe.js"
+          "target": "~/.agents/skills/qinyang-design/scripts/radius-probe.js"
         }
       ],
       "meta": {

@@ -21,6 +21,11 @@ export default function SettingsSectionInteractiveRows() {
           <SettingsRowTitle>Source code</SettingsRowTitle>
         </SettingsRowText>
       </SettingsRowLink>
+      <SettingsRowLink href="https://github.com/QinYangWang/ui" target="_blank" external>
+        <SettingsRowText>
+          <SettingsRowTitle>Report an issue</SettingsRowTitle>
+        </SettingsRowText>
+      </SettingsRowLink>
     </SettingsGroup>
   )
 }

@@ -26,7 +26,7 @@ export default {
   ],
   notes: [
     { title: "Truncation", body: "Title, repo and branch truncate independently; the branch gives way first so the PR number stays readable in a narrow sidebar." },
-    { title: "Actions", body: "With `actions` the item is a list item holding the row button and the actions side by side, so a menu button never nests inside the row and its clicks don't reach the row. The actions show on hover, keyboard focus, while the row is active and while a menu they opened is open; on touch screens they always show and `meta` moves left of them. Then `className` and `data-active` sit on the list item." },
+    { title: "Actions", body: "With `actions` the item is a list item holding the row button and the actions side by side, so a menu button never nests inside the row and its clicks don't reach the row. The actions show on hover, keyboard focus, while the row is active and while a menu they opened is open; on touch screens they always show and `meta` moves left of them. Then `className`, `id`, `style` and `data-*` go to the list item, and everything else (`onClick`, `aria-*`, `disabled`) to the row button; `buttonProps` reaches the button directly. Without `actions` the button is the item and takes everything." },
   ],
   api: [
     { name: "ThreadList", extends: "div", props: [] },
@@ -46,6 +46,7 @@ export default {
         { name: "description", type: "ReactNode", description: "Free second line; truncates. Shown above `repo` / `pr` / `branch`." },
         { name: "meta", type: "ReactNode", description: "Quiet text at the end of the title line, such as a relative time. `actions` replace it on hover." },
         { name: "actions", type: "ReactNode", description: "Row controls, placed over the end of the row outside its button." },
+        { name: "buttonProps", type: `React.ComponentProps<"button">`, description: "Props for the row button, including its `className`. Merged last, so they win over the rest." },
         { name: "trailing", type: "ReactNode", description: "Non-interactive content at the end of the title line, inside the row button." },
       ],
       dataAttributes: [

@@ -49,10 +49,24 @@ function checkCss(file) {
       "Reinstall the theme to get the working copies, then --fix deletes the broken lines.")
   if (fix) css = css.replace(UNDASHED, "")
 
+  // Theme 2.3 resets the frame inputs on every element in the base layer instead of registering them
+  // with @property (the CLI appended a fresh copy of each @property on every reinstall).
+  const FRAME_PROP = /^[ \t]*@property --frame-[rpb] \{[^}]*\}[ \t]*\n?/gm
+  const frameReset = /--frame-p:\s*0px/.test(css)
+  const frameProps = css.match(FRAME_PROP) ?? []
+  if (frameProps.length && frameReset)
+    note("warn", file, `${frameProps.length} @property --frame-* rules left from theme 2.2 or earlier`,
+      "The theme now resets these in @layer base, so the rules are unused. Harmless; --fix deletes them.")
+  else if (frameProps.length > 3)
+    note("warn", file, `${frameProps.length - 3} repeated @property --frame-* rules (each reinstall of theme 2.2 or earlier appended them)`,
+      "Reinstall the theme (2.3 no longer uses @property), then --fix deletes the old rules.")
+  if (fix && frameProps.length && frameReset) css = css.replace(FRAME_PROP, "")
+
   const props = [...css.matchAll(/^[ \t]*@property (--[\w-]+) \{[^}]*\}[ \t]*\n?/gm)]
   const seen = new Set()
   let dupes = 0
   for (const m of props) {
+    if (m[1].startsWith("--frame-")) continue
     if (seen.has(m[1])) dupes++
     seen.add(m[1])
   }
@@ -60,7 +74,7 @@ function checkCss(file) {
     note("warn", file, `${dupes} repeated @property rules (each theme reinstall appends them again)`, "Harmless; --fix keeps the first of each.")
   if (fix && dupes) {
     const kept = new Set()
-    css = css.replace(/^[ \t]*@property (--[\w-]+) \{[^}]*\}[ \t]*\n?/gm, (all, name) => (kept.has(name) ? "" : (kept.add(name), all)))
+    css = css.replace(/^[ \t]*@property (--[\w-]+) \{[^}]*\}[ \t]*\n?/gm, (all, name) => (name.startsWith("--frame-") || !kept.has(name) ? (kept.add(name), all) : ""))
   }
 
   const radius = css.match(/:root\s*\{[^}]*?--radius:\s*([^;]+);/)

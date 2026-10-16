@@ -31,6 +31,23 @@ const ENTRIES: Entry[] = [
       <>
         The <Code>Outline</Code> divider above Back to top now fades in with the link instead of showing on its own.
       </>,
+      <>
+        <Code>ThreadListItem</Code> with <Code>actions</Code> sends <Code>className</Code>, <Code>id</Code>,{" "}
+        <Code>style</Code> and <Code>data-*</Code> to the list item and the rest to the row button, and takes{" "}
+        <Code>buttonProps</Code>. <Code>SettingsRowLink</Code> takes every anchor attribute, adds{" "}
+        <Code>rel=&quot;noopener noreferrer&quot;</Code> to <Code>target=&quot;_blank&quot;</Code> links and shows an
+        external icon with <Code>external</Code>.
+      </>,
+      <>
+        Read-only checkboxes, such as task items in <Code>ResponseMarkdown</Code>, no longer show a pointer. The menu and
+        command shortcuts no longer trip the design check in your project.
+      </>,
+      <>
+        Theme 2.3: reinstalling the theme leaves your stylesheet unchanged, because it no longer ships{" "}
+        <Code>@property</Code> rules. Run the upgrade check with <Code>--fix</Code> once to delete the old copies. The
+        design skill and the upgrade check now land at the project root in projects with <Code>src/</Code>; move an
+        earlier <Code>src/.agents</Code> copy up, or delete it and reinstall.
+      </>,
     ],
   },
   {

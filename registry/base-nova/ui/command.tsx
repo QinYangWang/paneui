@@ -290,6 +290,7 @@ function textOf(node: React.ReactNode): string {
 }
 
 function CommandShortcut({ className, ...props }: React.ComponentProps<"span">) {
+  // design-check-ignore tracking -- shortcut glyphs are spaced wide (rule 11 allows it)
   return <span data-slot="command-shortcut" className={cn("ms-auto ps-4 text-ui-xs tracking-widest text-muted-foreground/72", className)} {...props} />
 }
 
