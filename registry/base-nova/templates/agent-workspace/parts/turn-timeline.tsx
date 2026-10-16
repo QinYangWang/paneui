@@ -10,7 +10,7 @@ import { ResponseMarkdown } from "@/registry/base-nova/ui/streaming-response"
 import { Terminal, TerminalOutput } from "@/registry/base-nova/ui/terminal-view"
 import { ToolApproval, type ToolApprovalDecision } from "@/registry/base-nova/ui/tool-approval"
 import { MessageAction, MessageActions } from "@/registry/base-nova/ui/message"
-import { WorkSummary, WorkSummaryStep, type WorkStepKind } from "@/registry/base-nova/ui/work-summary"
+import { WorkSummary, WorkSummaryStep, WorkSummaryThought, type WorkStepKind } from "@/registry/base-nova/ui/work-summary"
 
 import type { AcpClient, ClientState, SessionState, TimelineItem, ToolCallState } from "../acp/client"
 
@@ -70,7 +70,7 @@ function WorkGroup({
   return (
     <WorkSummary running={running} startedAt={item.startedAt} duration={duration}>
       {item.thoughts && (
-        <li className="py-0.5 text-ui text-pretty text-muted-foreground italic">{item.thoughts}</li>
+        <WorkSummaryThought>{item.thoughts}</WorkSummaryThought>
       )}
       {item.toolCallIds.map((id) => {
         const tc = session.toolCalls[id]

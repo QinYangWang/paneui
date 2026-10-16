@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { Calendar, type CalendarProps } from "@/registry/base-nova/ui/calendar"
 import { PopoverContent } from "@/registry/base-nova/ui/popover"
 import { selectTriggerVariants } from "@/registry/base-nova/ui/select"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 type DatePickerProps = Omit<Extract<CalendarProps, { mode?: "single" }>, "mode" | "className"> & {
   className?: string
@@ -35,7 +36,7 @@ function DatePicker({
   value,
   defaultValue,
   onValueChange,
-  placeholder = "Pick a date",
+  placeholder: placeholderProp,
   formatOptions = { dateStyle: "medium" },
   size,
   keepOpen = false,
@@ -44,6 +45,8 @@ function DatePicker({
   "aria-label": ariaLabel,
   ...calendarProps
 }: DatePickerProps) {
+  const { labels } = useLocale()
+  const placeholder = placeholderProp ?? labels.pickDate
   const resolved = useControlSize(size)
   const locale = useStableLocale(localeProp)
   const [open, setOpen] = React.useState(false)

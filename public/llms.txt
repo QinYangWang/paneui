@@ -24,6 +24,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Brand Icon](https://qinyangwang.github.io/ui/docs/brand-icon.md): Shows a third-party logo at the icon set's sizes. JSON: https://qinyangwang.github.io/ui/r/brand-icon.json
 - [Icon Chip](https://qinyangwang.github.io/ui/docs/icon-chip.md): Frames an icon so card and section headers match. JSON: https://qinyangwang.github.io/ui/r/icon-chip.json
 - [Icons](https://qinyangwang.github.io/ui/docs/icons.md): Rounded outline icon set used across the library. JSON: https://qinyangwang.github.io/ui/r/icons.json
+- [Locale Provider](https://qinyangwang.github.io/ui/docs/locale-provider.md): Sets the language of every built-in label. JSON: https://qinyangwang.github.io/ui/r/locale-provider.json
 - [Theme](https://qinyangwang.github.io/ui/docs/theme.md): Design tokens, type scale and utilities every component in the library reads. JSON: https://qinyangwang.github.io/ui/r/theme.json
 - [Theme Accents](https://qinyangwang.github.io/ui/docs/theme-accents.md): Switches the accent colour at runtime with one attribute. JSON: https://qinyangwang.github.io/ui/r/theme-accents.json
 - [Typeset](https://qinyangwang.github.io/ui/docs/typeset.md): Styles long-form text in docs, articles and chat messages. JSON: https://qinyangwang.github.io/ui/r/typeset.json
@@ -107,6 +108,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Skeleton](https://qinyangwang.github.io/ui/docs/skeleton.md): Placeholder shape while content loads. JSON: https://qinyangwang.github.io/ui/r/skeleton.json
 - [Stat Card](https://qinyangwang.github.io/ui/docs/stat-card.md): Card for a key metric and how it changed. JSON: https://qinyangwang.github.io/ui/r/stat-card.json
 - [Theme Toggle](https://qinyangwang.github.io/ui/docs/theme-toggle.md): Switches the page between light and dark themes. JSON: https://qinyangwang.github.io/ui/r/theme-toggle.json
+- [Timeline](https://qinyangwang.github.io/ui/docs/timeline.md): Lists entries in time order along a line. JSON: https://qinyangwang.github.io/ui/r/timeline.json
 - [Usage Meter](https://qinyangwang.github.io/ui/docs/usage-meter.md): Shows how much of a quota has been used. JSON: https://qinyangwang.github.io/ui/r/usage-meter.json
 
 ## Navigation
@@ -123,6 +125,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Preview Rail](https://qinyangwang.github.io/ui/docs/preview-rail.md): Compact section navigation that previews each destination. JSON: https://qinyangwang.github.io/ui/r/preview-rail.json
 - [Shared Layout Background](https://qinyangwang.github.io/ui/docs/shared-layout-bg.md): Hover highlight that follows the pointer across a group. JSON: https://qinyangwang.github.io/ui/r/shared-layout-bg.json
 - [Sidebar Nav](https://qinyangwang.github.io/ui/docs/sidebar-nav.md): Compact text navigation for docs and settings sidebars. JSON: https://qinyangwang.github.io/ui/r/sidebar-nav.json
+- [Tab Bar](https://qinyangwang.github.io/ui/docs/tab-bar.md): Bottom navigation for phones, with a label under each icon. JSON: https://qinyangwang.github.io/ui/r/tab-bar.json
 - [Tab Strip](https://qinyangwang.github.io/ui/docs/tab-strip.md): Switches between open documents or panels, with closing and reordering. JSON: https://qinyangwang.github.io/ui/r/tab-strip.json
 - [Tabs](https://qinyangwang.github.io/ui/docs/tabs.md): Switches between related panels of content in one place. JSON: https://qinyangwang.github.io/ui/r/tabs.json
 - [Toolbar](https://qinyangwang.github.io/ui/docs/toolbar.md): Groups related actions into one keyboard-navigable bar. JSON: https://qinyangwang.github.io/ui/r/toolbar.json

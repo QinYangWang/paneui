@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/registry/base-nova/ui/button"
 import { MessageBubbleGroup, MessageSideContext, type MessageSide } from "@/registry/base-nova/ui/message-bubble"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 type MessageFrom = "user" | "assistant" | "system"
 
@@ -46,6 +47,7 @@ function Message({
   animateIn?: boolean
   children?: React.ReactNode
 }) {
+  const { labels } = useLocale()
   const reduce = useReducedMotion() ?? false
   const side = sideOf(from)
   return (
@@ -54,7 +56,7 @@ function Message({
         <motion.article
           data-slot="message"
           data-from={from}
-          aria-label={props["aria-label"] ?? `${from} message`}
+          aria-label={props["aria-label"] ?? labels.messageFrom(from)}
           initial={animateIn ? (reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.94 }) : false}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={reduce ? { duration: 0.15 } : { type: "spring", stiffness: 480, damping: 32, mass: 0.6 }}
@@ -198,7 +200,9 @@ function MessageAction({
 }
 
 /** Three-dot typing indicator in a bubble-shaped chip. */
-function MessageTyping({ label = "Typing", className, ...props }: React.ComponentProps<"div"> & { label?: string }) {
+function MessageTyping({ label: labelProp, className, ...props }: React.ComponentProps<"div"> & { label?: string }) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.typing
   const reduce = useReducedMotion() ?? false
   return (
     <div

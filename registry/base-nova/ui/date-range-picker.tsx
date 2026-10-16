@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { PopoverContent } from "@/registry/base-nova/ui/popover"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 /* ─────────────────────────── date helpers (no library) ─────────────────────────── */
 
@@ -267,11 +268,13 @@ function formatRange(range: DateRange, locale?: string, opts?: Intl.DateTimeForm
 /** Raised pill showing the formatted range (Intl.formatRange) or a placeholder. */
 function DateRangePickerTrigger({
   className,
-  placeholder = "Pick dates",
+  placeholder: placeholderProp,
   formatOptions,
   children,
   ...props
 }: PopoverPrimitive.Trigger.Props & { placeholder?: string; formatOptions?: Intl.DateTimeFormatOptions }) {
+  const { labels } = useLocale()
+  const placeholder = placeholderProp ?? labels.pickDates
   const { range, locale } = useDateRangePicker()
   const text = formatRange(range, locale, formatOptions)
   return (
@@ -312,6 +315,7 @@ const navButton =
 
 /** Header (month names + prev/next) and one grid per visible month. */
 function DateRangePickerCalendar({ className, ...props }: React.ComponentProps<"div">) {
+  const { labels } = useLocale()
   const { month, numberOfMonths, setMonth, min, max, locale, direction } = useDateRangePicker()
   const reduce = useReducedMotion()
   const months = Array.from({ length: numberOfMonths }, (_, i) => addMonths(month, i))
@@ -324,7 +328,7 @@ function DateRangePickerCalendar({ className, ...props }: React.ComponentProps<"
     <div data-slot="date-range-picker-calendar" className={cn("relative flex gap-5", className)} {...props}>
       <button
         type="button"
-        aria-label="Previous month"
+        aria-label={labels.previousMonth}
         disabled={!canPrev}
         onClick={() => setMonth(addMonths(month, -1))}
         className={cn(navButton, "absolute top-0 left-0 z-10")}
@@ -333,7 +337,7 @@ function DateRangePickerCalendar({ className, ...props }: React.ComponentProps<"
       </button>
       <button
         type="button"
-        aria-label="Next month"
+        aria-label={labels.nextMonth}
         disabled={!canNext}
         onClick={() => setMonth(addMonths(month, 1))}
         className={cn(navButton, "absolute top-0 right-0 z-10")}
@@ -599,7 +603,9 @@ function DateRangePickerFooter({ className, ...props }: React.ComponentProps<"di
   )
 }
 
-function DateRangePickerClear({ className, children = "Clear", onClick, ...props }: React.ComponentProps<"button">) {
+function DateRangePickerClear({ className, children: childrenProp, onClick, ...props }: React.ComponentProps<"button">) {
+  const { labels } = useLocale()
+  const children = childrenProp ?? labels.clear
   const { range, clear } = useDateRangePicker()
   return (
     <button
@@ -622,10 +628,11 @@ function DateRangePickerClear({ className, children = "Clear", onClick, ...props
 }
 
 function DateRangePickerPresets({ className, ...props }: React.ComponentProps<"div">) {
+  const { labels } = useLocale()
   return (
     <div
       role="group"
-      aria-label="Presets"
+      aria-label={labels.presets}
       data-slot="date-range-picker-presets"
       className={cn("flex flex-col gap-0.5", className)}
       {...props}

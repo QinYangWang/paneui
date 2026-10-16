@@ -6,6 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "@/compone
 import { cn } from "@/lib/utils"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/base-nova/ui/select"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 /*
  * Page controls for a list or table.
@@ -60,18 +61,19 @@ type PaginationProps = Omit<React.ComponentProps<"nav">, "children"> & {
 }
 
 function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = false, size = "default", className, ...props }: PaginationProps) {
+  const { labels } = useLocale()
   const dims = paginationSizes[size]
   const count = Math.max(1, pageCount)
   const current = Math.min(Math.max(1, page), count)
   const go = (p: number) => onPageChange(Math.min(Math.max(1, p), count))
   return (
-    <nav data-slot="pagination" data-size={size} aria-label="Pagination" className={cn("flex items-center gap-1", className)} {...props}>
-      <Button variant="ghost" size={dims.button} aria-label="Previous page" disabled={current <= 1} onClick={() => go(current - 1)}>
+    <nav data-slot="pagination" data-size={size} aria-label={labels.pagination} className={cn("flex items-center gap-1", className)} {...props}>
+      <Button variant="ghost" size={dims.button} aria-label={labels.previousPage} disabled={current <= 1} onClick={() => go(current - 1)}>
         <ChevronLeftIcon className="rtl:rotate-180" />
       </Button>
       {compact ? (
         <span className={cn("px-2 text-muted-foreground tabular-nums", size === "sm" ? "text-ui-xs" : "text-ui")} aria-live="polite">
-          Page {current} of {count}
+          {labels.pageOf(current, count)}
         </span>
       ) : (
         <ul className="flex items-center gap-0.5">
@@ -85,7 +87,7 @@ function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = fal
                 <Button
                   variant="ghost"
                   size={dims.button}
-                  aria-label={`Page ${p}`}
+                  aria-label={labels.page(p)}
                   aria-current={p === current ? "page" : undefined}
                   onClick={() => go(p)}
                   // The current page reads as selected: the row-active fill from the sidebar.
@@ -101,7 +103,7 @@ function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = fal
           )}
         </ul>
       )}
-      <Button variant="ghost" size={dims.button} aria-label="Next page" disabled={current >= count} onClick={() => go(current + 1)}>
+      <Button variant="ghost" size={dims.button} aria-label={labels.nextPage} disabled={current >= count} onClick={() => go(current + 1)}>
         <ChevronRightIcon className="rtl:rotate-180" />
       </Button>
     </nav>
@@ -132,7 +134,7 @@ function PaginationPageSize({
   value,
   onValueChange,
   options = [10, 20, 50],
-  label = "Rows per page",
+  label: labelProp,
   size = "default",
   className,
 }: {
@@ -144,6 +146,8 @@ function PaginationPageSize({
   size?: PaginationSize
   className?: string
 }) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.rowsPerPage
   const id = React.useId()
   return (
     <div

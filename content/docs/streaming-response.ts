@@ -12,6 +12,11 @@ export default {
       description: "Use for model replies; `text` renders a markdown subset as it streams.",
     },
     {
+      id: "lists-and-links",
+      title: "Lists and Links",
+      description: "Use when replies continue numbered lists, paste URLs or keep checklists.",
+    },
+    {
       id: "error",
       title: "Error",
       description: "Use when a stream fails; set `onRetry` to offer a Retry button.",
@@ -38,6 +43,10 @@ export default {
     },
   ],
   notes: [
+    {
+      title: "Markdown",
+      body: "The renderer covers paragraphs, `#` headings, bullet and numbered lists, fenced code, inline code, bold, italics, links and `[n]` citations. A numbered list keeps its first number (`<ol start>`), bare `http(s)` URLs become links without their trailing punctuation, and `- [ ]` / `- [x]` items show a read-only checkbox.",
+    },
     {
       title: "Layout",
       body: "The actions row keeps its height while streaming (hidden and `inert`), so the reply doesn't jump when it completes. Sources appear only after streaming ends.",

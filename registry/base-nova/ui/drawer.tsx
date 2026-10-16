@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion, type Transition } from "moti
 
 import { XIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 type DrawerSide = "left" | "right"
 
@@ -61,6 +62,7 @@ function DrawerContent({
   showClose = true,
   ...props
 }: Omit<DialogPrimitive.Popup.Props, "render"> & { showClose?: boolean }) {
+  const { labels } = useLocale()
   const { open, side } = useDrawer()
   const reduce = useReducedMotion()
   const offscreen = side === "right" ? "100%" : "-100%"
@@ -99,7 +101,7 @@ function DrawerContent({
             {showClose && (
               <DialogPrimitive.Close
                 data-slot="drawer-close"
-                aria-label="Close"
+                aria-label={labels.close}
                 className="absolute top-4 end-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 <XIcon size={16} />

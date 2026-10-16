@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { MinusIcon, PlusIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 type StepperProps = NumberFieldPrimitive.Root.Props & {
   /** Accessible label for the value input. */
@@ -33,11 +34,14 @@ function Stepper({
   locale,
   unit,
   size = "default",
-  decrementLabel = "Decrease",
-  incrementLabel = "Increase",
+  decrementLabel: decrementLabelProp,
+  incrementLabel: incrementLabelProp,
   "aria-label": ariaLabel,
   ...props
 }: StepperProps) {
+  const { labels } = useLocale()
+  const incrementLabel = incrementLabelProp ?? labels.increase
+  const decrementLabel = decrementLabelProp ?? labels.decrease
   const [current, setCurrent] = React.useState<number | null>(value ?? defaultValue ?? null)
   const [direction, setDirection] = React.useState<1 | -1>(1)
   const [editing, setEditing] = React.useState(false)

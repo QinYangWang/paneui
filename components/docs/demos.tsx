@@ -149,6 +149,9 @@ import TabStripDemo from "@/registry/base-nova/examples/tab-strip-demo"
 import IconRailDemo from "@/registry/base-nova/examples/icon-rail-demo"
 import TerminalViewDemo from "@/registry/base-nova/examples/terminal-view-demo"
 import ThreadListItemDemo from "@/registry/base-nova/examples/thread-list-item-demo"
+import TabBarDemo from "@/registry/base-nova/examples/tab-bar-demo"
+import LocaleProviderDemo from "@/registry/base-nova/examples/locale-provider-demo"
+import TimelineDemo from "@/registry/base-nova/examples/timeline-demo"
 import WorkSummaryDemo from "@/registry/base-nova/examples/work-summary-demo"
 import EditedFilesCardDemo from "@/registry/base-nova/examples/edited-files-card-demo"
 import ModelPickerDemo from "@/registry/base-nova/examples/model-picker-demo"
@@ -209,6 +212,9 @@ export const demos: Record<string, React.ComponentType> = {
   "icon-rail": IconRailDemo,
   "terminal-view": TerminalViewDemo,
   "thread-list-item": ThreadListItemDemo,
+  "tab-bar": TabBarDemo,
+  "locale-provider": LocaleProviderDemo,
+  "timeline": TimelineDemo,
   "work-summary": WorkSummaryDemo,
   "edited-files-card": EditedFilesCardDemo,
   "model-picker": ModelPickerDemo,

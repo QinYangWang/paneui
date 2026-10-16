@@ -24,6 +24,7 @@ export default function AgentComposerDemo() {
           window.setTimeout(() => setBusy(false), 2500)
         }}
         onStop={() => setBusy(false)}
+        onAttach={() => undefined}
         onVoice={() => undefined}
         mentions={["app/page.tsx", "app/layout.tsx", "components/split-pane.tsx", "lib/utils.ts"].map((value) => ({ value }))}
         commands={[

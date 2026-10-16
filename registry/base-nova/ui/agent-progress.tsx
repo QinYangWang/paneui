@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 /** Diagonal wave through a 3×3 grid: each cell's delay is its distance from the top-left. */
 const CELLS = Array.from({ length: 9 }, (_, i) => ({ i, delay: ((i % 3) + Math.floor(i / 3)) * 0.16 }))
@@ -34,7 +35,7 @@ type AgentProgressProps = Omit<React.HTMLAttributes<HTMLSpanElement>, "children"
 
 /** Compact "agent is working" readout: a pulsing 3×3 glyph, an action verb and a live tabular timer. */
 function AgentProgress({
-  label = "Working",
+  label: labelProp,
   elapsed,
   initialElapsed = 0,
   running = true,
@@ -42,6 +43,8 @@ function AgentProgress({
   className,
   ...props
 }: AgentProgressProps) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.working
   const reduce = useReducedMotion()
   const [seconds, setSeconds] = React.useState(initialElapsed)
   const baseRef = React.useRef(initialElapsed)
@@ -60,7 +63,7 @@ function AgentProgress({
   return (
     <span
       role="status"
-      aria-label={`${label}${running ? ", in progress" : ""}`}
+      aria-label={running ? `${label}, ${labels.inProgress}` : label}
       data-slot="agent-progress"
       data-running={running || undefined}
       className={cn("inline-flex items-center gap-2.5 text-ui text-muted-foreground", className)}

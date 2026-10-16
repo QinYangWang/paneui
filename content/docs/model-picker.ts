@@ -7,9 +7,14 @@ export default {
 <ModelPicker models={models} value={model} onValueChange={setModel} />
 <EffortPicker value={effort} onValueChange={setEffort} />`,
   },
-  examples: [{ id: "composer-picker", title: "Composer Picker", description: "Use `ComposerPicker` directly for an option list the presets don't cover." }],
+  examples: [
+    { id: "searchable", title: "Searchable", description: "Use when the list runs past a screen, such as a model router's catalogue." },
+    { id: "composer-picker", title: "Composer Picker", description: "Use `ComposerPicker` directly for an option list the presets don't cover." },
+  ],
   notes: [
     { title: "ACP", body: "Feed `ModePicker` from an agent's `SessionModeState`, `ModelPicker` from a config option with `category: \"model\"` (grouped options map to `provider`), and `EffortPicker` from `category: \"thought_level\"`." },
+    { title: "Search", body: "With `searchable` focus stays in the search field: arrow keys move the highlight, Enter picks, Escape closes. Words match the label, value and group in any order. `maxPerGroup` caps each group until you search or press its “Show all” row; the current choice stays visible past the cap." },
+    { title: "Testing", body: "Every option carries its value as `data-value`, so tests can pick one without matching its label." },
     { title: "Tone", body: "A mode with `tone: \"warning\"` (full access) or `\"destructive\"` colours the trigger while selected, so a risky setting is visible at a glance." },
   ],
   api: [
@@ -24,7 +29,11 @@ export default {
         { name: "heading", type: "string", description: "Label above the options." },
         { name: "side", type: `"top" | "bottom"`, default: `"top"`, description: "Menu side (top suits a composer at the bottom)." },
         { name: "align", type: `"start" | "center" | "end"`, default: `"start"`, description: "Menu alignment." },
-        { name: "footer", type: "ReactNode", description: "Menu items under the options." },
+        { name: "footer", type: "ReactNode", description: "Menu items under the options; with `searchable`, a plain button or link." },
+        { name: "searchable", type: "boolean", default: "false", description: "Search field at the top of the list." },
+        { name: "searchPlaceholder", type: "string", default: `"Search"`, description: "Placeholder and accessible name of the search field." },
+        { name: "emptyLabel", type: "ReactNode", default: `"No results"`, description: "Shown when nothing matches." },
+        { name: "maxPerGroup", type: "number", description: "With `searchable`, options shown per group before “Show all”." },
         { name: "compact", type: "boolean", default: "false", description: "Inside an `AgentComposer` toolbar narrower than 28rem (phones, tablets, split panes), show only the glyph and chevron; the label stays the accessible name. `ModePicker` and `EffortPicker` default to `true`." },
       ],
     },

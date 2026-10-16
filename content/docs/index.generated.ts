@@ -7,6 +7,7 @@ import d_action_swap_blur from "./action-swap-blur"
 import d_action_swap_roll from "./action-swap-roll"
 import d_agent_activity from "./agent-activity"
 import d_agent_code_block from "./agent-code-block"
+import d_agent_composer from "./agent-composer"
 import d_agent_progress from "./agent-progress"
 import d_agent_workspace from "./agent-workspace"
 import d_ai_sidebar from "./ai-sidebar"
@@ -70,6 +71,7 @@ import d_input_otp from "./input-otp"
 import d_kbd from "./kbd"
 import d_label from "./label"
 import d_loader from "./loader"
+import d_locale_provider from "./locale-provider"
 import d_magnetic from "./magnetic"
 import d_marquee from "./marquee"
 import d_menu from "./menu"
@@ -124,6 +126,7 @@ import d_stepper from "./stepper"
 import d_streaming_response from "./streaming-response"
 import d_swatch_picker from "./swatch-picker"
 import d_switch from "./switch"
+import d_tab_bar from "./tab-bar"
 import d_tab_strip from "./tab-strip"
 import d_table from "./table"
 import d_table_async from "./table-async"
@@ -139,6 +142,7 @@ import d_textarea from "./textarea"
 import d_theme_accents from "./theme-accents"
 import d_theme_toggle from "./theme-toggle"
 import d_thread_list_item from "./thread-list-item"
+import d_timeline from "./timeline"
 import d_toast from "./toast"
 import d_todo_list from "./todo-list"
 import d_toggle_group from "./toggle-group"
@@ -163,6 +167,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "action-swap-roll": d_action_swap_roll,
   "agent-activity": d_agent_activity,
   "agent-code-block": d_agent_code_block,
+  "agent-composer": d_agent_composer,
   "agent-progress": d_agent_progress,
   "agent-workspace": d_agent_workspace,
   "ai-sidebar": d_ai_sidebar,
@@ -226,6 +231,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "kbd": d_kbd,
   "label": d_label,
   "loader": d_loader,
+  "locale-provider": d_locale_provider,
   "magnetic": d_magnetic,
   "marquee": d_marquee,
   "menu": d_menu,
@@ -280,6 +286,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "streaming-response": d_streaming_response,
   "swatch-picker": d_swatch_picker,
   "switch": d_switch,
+  "tab-bar": d_tab_bar,
   "tab-strip": d_tab_strip,
   "table": d_table,
   "table-async": d_table_async,
@@ -295,6 +302,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "theme-accents": d_theme_accents,
   "theme-toggle": d_theme_toggle,
   "thread-list-item": d_thread_list_item,
+  "timeline": d_timeline,
   "toast": d_toast,
   "todo-list": d_todo_list,
   "toggle-group": d_toggle_group,

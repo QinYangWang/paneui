@@ -52,6 +52,10 @@ export default {
       body: "The result opens when a run starts and, with `collapseOnComplete` (default), folds to its header only after a `success`. While running the duration ticks on its own and the log follows its tail.",
     },
     {
+      title: "Highlighting",
+      body: "`CodeHighlight` loads the highlighter core, the two themes and each grammar on first use. Only the seven `CodeLanguage` grammars reach your bundle, each as its own chunk.",
+    },
+    {
       title: "Motion",
       body: "Under reduced motion the panel opens without a height transition, the spinner stops and the log tail jumps instead of smooth-scrolling.",
     },

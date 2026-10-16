@@ -5,6 +5,7 @@ import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { Button } from "@/registry/base-nova/ui/button"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 /*
  * Slides on native scroll snapping: touch, trackpad and wheel scroll as the platform does,
@@ -206,13 +207,14 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function CarouselPrevious({ className, variant = "secondary", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
+  const { labels } = useLocale()
   const { canPrev, scrollPrev, orientation } = useCarousel()
   return (
     <Button
       data-slot="carousel-previous"
       variant={variant}
       size={size}
-      aria-label="Previous slide"
+      aria-label={labels.previousSlide}
       disabled={!canPrev}
       onClick={scrollPrev}
       className={cn("rounded-full", orientation === "vertical" && "rotate-90", className)}
@@ -224,13 +226,14 @@ function CarouselPrevious({ className, variant = "secondary", size = "icon-sm", 
 }
 
 function CarouselNext({ className, variant = "secondary", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
+  const { labels } = useLocale()
   const { canNext, scrollNext, orientation } = useCarousel()
   return (
     <Button
       data-slot="carousel-next"
       variant={variant}
       size={size}
-      aria-label="Next slide"
+      aria-label={labels.nextSlide}
       disabled={!canNext}
       onClick={scrollNext}
       className={cn("rounded-full", orientation === "vertical" && "rotate-90", className)}

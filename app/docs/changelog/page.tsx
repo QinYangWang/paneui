@@ -8,6 +8,39 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-app-gaps",
+    date: "October 16, 2026",
+    title: "Tab bar, timeline, locales and agent fixes",
+    tag: "Components",
+    changes: [
+      <>
+        New items: <TextLink href="/docs/tab-bar">Tab Bar</TextLink> for phone navigation,{" "}
+        <TextLink href="/docs/timeline">Timeline</TextLink> for schedules and{" "}
+        <TextLink href="/docs/locale-provider">Locale Provider</TextLink>, which switches the built-in labels of overlays,
+        fields, navigation and agent parts to another language at once. English stays the default; Chinese is built in.
+      </>,
+      <>
+        <Code>ModelPicker</Code> and <Code>ComposerPicker</Code> take <Code>searchable</Code> and <Code>maxPerGroup</Code>{" "}
+        for long model lists, and every option carries <Code>data-value</Code>. <Code>AgentComposer</Code> hides its attach
+        button without <Code>onAttach</Code> and takes <Code>labels</Code> and <Code>inputProps</Code>.
+      </>,
+      <>
+        <Code>ThreadListItem</Code> takes <Code>description</Code>, <Code>meta</Code> and <Code>actions</Code>; actions sit
+        outside the row button, so a row menu no longer nests a button in a button. <Code>SettingsRow</Code> takes{" "}
+        <Code>interactive</Code> and <Code>detail</Code>, and <Code>SettingsRowLink</Code> renders a link row.
+      </>,
+      <>
+        <Code>WorkSummaryStep</Code> can fold its output with <Code>collapsible</Code>, and{" "}
+        <Code>WorkSummaryThought</Code> shows the model&apos;s thinking. <Code>ResponseMarkdown</Code> keeps a numbered
+        list&apos;s first number, links bare URLs and shows task items with a checkbox. <Code>CodeHighlight</Code> loads only
+        its seven grammars, each on first use.
+      </>,
+      <>
+        The design check no longer crashes when TypeScript 7 is installed; it falls back to its line checks.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-docs-from-the-library",
     date: "October 16, 2026",
     title: "Docs built from the library, five docs layouts",

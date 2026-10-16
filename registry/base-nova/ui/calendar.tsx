@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 /*
  * A month grid for picking one date or a range. Arrow keys move by day and week, Home/End
@@ -97,6 +98,7 @@ const navButton =
   "inline-flex size-7 cursor-pointer items-center justify-center rounded-lg text-muted-foreground transition-colors duration-150 outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40 [&_svg]:size-4"
 
 function Calendar(props: CalendarProps) {
+  const { labels } = useLocale()
   const {
     mode = "single",
     value,
@@ -219,10 +221,10 @@ function Calendar(props: CalendarProps) {
       onPointerLeave={() => setHovered(undefined)}
       {...rest}
     >
-      <button type="button" aria-label="Previous month" disabled={!canPrev} onClick={() => setMonthState(addMonths(month, -1))} className={cn(navButton, "absolute start-0 top-0 z-10")}>
+      <button type="button" aria-label={labels.previousMonth} disabled={!canPrev} onClick={() => setMonthState(addMonths(month, -1))} className={cn(navButton, "absolute start-0 top-0 z-10")}>
         <ChevronLeftIcon className="rtl:rotate-180" />
       </button>
-      <button type="button" aria-label="Next month" disabled={!canNext} onClick={() => setMonthState(addMonths(month, 1))} className={cn(navButton, "absolute end-0 top-0 z-10")}>
+      <button type="button" aria-label={labels.nextMonth} disabled={!canNext} onClick={() => setMonthState(addMonths(month, 1))} className={cn(navButton, "absolute end-0 top-0 z-10")}>
         <ChevronRightIcon className="rtl:rotate-180" />
       </button>
       {months.map((m, mi) => {

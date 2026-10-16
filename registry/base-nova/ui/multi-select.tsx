@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from "@/components/icons"
 import { useControlSize } from "@/lib/control-size"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import {
   ComboboxCollection,
   ComboboxEmpty,
@@ -106,7 +107,7 @@ type ChipValue = any
 
 function MultiSelectTrigger({
   className,
-  placeholder = "Select…",
+  placeholder: placeholderProp,
   renderChip = defaultChipLabel,
   getKey = chipKey,
   size: sizeProp,
@@ -117,6 +118,8 @@ function MultiSelectTrigger({
   getKey?: (value: ChipValue, index: number) => React.Key
   size?: MultiSelectSize
 }) {
+  const { labels } = useLocale()
+  const placeholder = placeholderProp ?? labels.selectPlaceholder
   const anchorRef = React.useContext(MultiSelectAnchorContext)
   const reduce = useReducedMotion()
   const size = useMultiSelectSize(sizeProp)
@@ -157,7 +160,7 @@ function MultiSelectTrigger({
                   >
                     <span className="truncate">{renderChip(value)}</span>
                     <ComboboxPrimitive.ChipRemove
-                      aria-label="Remove"
+                      aria-label={labels.remove}
                       className={cn(
                         "flex shrink-0 cursor-pointer items-center justify-center rounded-inner text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
                         c.remove
@@ -178,7 +181,7 @@ function MultiSelectTrigger({
         )}
       </ComboboxPrimitive.Value>
       <ComboboxPrimitive.Trigger
-        aria-label="Show options"
+        aria-label={labels.showOptions}
         className={cn(
           "absolute flex cursor-pointer items-center justify-center text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
           c.trigger

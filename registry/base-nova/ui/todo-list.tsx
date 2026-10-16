@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { ChevronDownIcon, ListIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { DigitSwap } from "@/registry/base-nova/ui/digit-swap"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 type TodoStatus = "pending" | "in-progress" | "done" | "failed"
 
@@ -120,7 +121,7 @@ type TodoListProps = Omit<React.HTMLAttributes<HTMLDivElement>, "title"> & {
 /** A collapsible agent task plan with morphing status marks and a live completion count. */
 function TodoList({
   items,
-  title = "Plan",
+  title: titleProp,
   open: openProp,
   defaultOpen = true,
   onOpenChange,
@@ -129,6 +130,8 @@ function TodoList({
   className,
   ...props
 }: TodoListProps) {
+  const { labels } = useLocale()
+  const title = titleProp ?? labels.plan
   const reduce = useReducedMotion()
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen)
   const open = openProp ?? internalOpen

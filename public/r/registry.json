@@ -1849,9 +1849,9 @@
           "target": "components/agent-workspace/parts/threads-sidebar.tsx"
         },
         {
-          "path": "registry/base-nova/templates/agent-workspace/parts/timeline.tsx",
+          "path": "registry/base-nova/templates/agent-workspace/parts/turn-timeline.tsx",
           "type": "registry:component",
-          "target": "components/agent-workspace/parts/timeline.tsx"
+          "target": "components/agent-workspace/parts/turn-timeline.tsx"
         },
         {
           "path": "registry/base-nova/templates/agent-workspace/page.tsx",
@@ -2224,7 +2224,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -2268,7 +2269,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -2314,7 +2316,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -2360,7 +2363,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/icon-chip"
+        "@qinyang/icon-chip",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -2428,7 +2432,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/menu"
+        "@qinyang/menu",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -2574,7 +2579,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/control-size"
+        "@qinyang/control-size",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -2593,7 +2599,8 @@
       "description": "Shows that something is loading.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -2618,7 +2625,8 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/combobox",
-        "@qinyang/control-size"
+        "@qinyang/control-size",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -2904,7 +2912,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3013,7 +3022,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/popover"
+        "@qinyang/popover",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3435,7 +3445,8 @@
         "@qinyang/theme",
         "@qinyang/button",
         "@qinyang/tooltip",
-        "@qinyang/message-bubble"
+        "@qinyang/message-bubble",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3457,7 +3468,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3483,7 +3495,8 @@
         "@qinyang/icons",
         "@qinyang/scroll-area",
         "@qinyang/tabs",
-        "@qinyang/file-tree"
+        "@qinyang/file-tree",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3562,7 +3575,8 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/action-swap-roll",
-        "@qinyang/icon-chip"
+        "@qinyang/icon-chip",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3585,7 +3599,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3610,7 +3625,9 @@
         "@qinyang/typeset",
         "@qinyang/icons",
         "@qinyang/citations",
-        "@qinyang/tool-result"
+        "@qinyang/tool-result",
+        "@qinyang/locale-provider",
+        "@qinyang/checkbox"
       ],
       "files": [
         {
@@ -3731,7 +3748,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3755,7 +3773,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/digit-swap"
+        "@qinyang/digit-swap",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -4042,7 +4061,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -4133,7 +4153,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -4869,11 +4890,30 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/icons"
       ],
       "files": [
         {
           "path": "registry/base-nova/ui/settings-section.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Lists entries in time order along a line.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/timeline.tsx",
           "type": "registry:ui"
         }
       ],
@@ -4916,7 +4956,8 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/input",
-        "@qinyang/control-size"
+        "@qinyang/control-size",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -4983,7 +5024,8 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/button",
-        "@qinyang/select"
+        "@qinyang/select",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -5403,7 +5445,8 @@
       "description": "Narrow bar of icon buttons for switching between app sections.",
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/tooltip"
+        "@qinyang/tooltip",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -5413,6 +5456,46 @@
       ],
       "meta": {
         "category": "Navigation"
+      }
+    },
+    {
+      "name": "tab-bar",
+      "type": "registry:ui",
+      "title": "Tab Bar",
+      "description": "Bottom navigation for phones, with a label under each icon.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme",
+        "@qinyang/locale-provider"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/tab-bar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
+      }
+    },
+    {
+      "name": "locale-provider",
+      "type": "registry:ui",
+      "title": "Locale Provider",
+      "description": "Sets the language of every built-in label.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/locale-provider.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Foundations"
       }
     },
     {
@@ -5475,7 +5558,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/loader"
+        "@qinyang/loader",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -5499,7 +5583,8 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/loader",
-        "@qinyang/text-shimmer"
+        "@qinyang/text-shimmer",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -5544,7 +5629,9 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/button",
-        "@qinyang/menu"
+        "@qinyang/menu",
+        "@qinyang/locale-provider",
+        "@qinyang/combobox"
       ],
       "files": [
         {
@@ -5554,7 +5641,10 @@
       ],
       "meta": {
         "category": "Agents"
-      }
+      },
+      "dependencies": [
+        "@base-ui/react"
+      ]
     },
     {
       "name": "agent-composer",
@@ -5568,7 +5658,8 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/button",
-        "@qinyang/tooltip"
+        "@qinyang/tooltip",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -5631,7 +5722,8 @@
       "description": "Month grid for picking a date or a range.",
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -5657,7 +5749,8 @@
         "@qinyang/control-size",
         "@qinyang/calendar",
         "@qinyang/popover",
-        "@qinyang/select"
+        "@qinyang/select",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -5894,7 +5987,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/button"
+        "@qinyang/button",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {

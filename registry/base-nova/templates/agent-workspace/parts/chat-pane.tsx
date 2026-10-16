@@ -12,7 +12,7 @@ import { TodoList } from "@/registry/base-nova/ui/todo-list"
 import { configByCategory, flatOptions, type AcpClient, type ClientState, type SessionState, type TimelineItem } from "../acp/client"
 import { ProviderIcon } from "./provider-icon"
 import type { ThreadSummary } from "./threads-sidebar"
-import { Timeline } from "./timeline"
+import { Timeline } from "./turn-timeline"
 
 const isRisky = (id: string, name: string) => /full|bypass|yolo|danger/i.test(`${id} ${name}`)
 

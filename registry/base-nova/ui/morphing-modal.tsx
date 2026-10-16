@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { ChevronLeftIcon, XIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 /*
  * One modal surface with several inner views. Navigating pushes a view onto a
@@ -122,6 +123,7 @@ function MorphingModalContent({
   showCloseButton = true,
   ...props
 }: DialogPrimitive.Popup.Props & { showCloseButton?: boolean; children?: React.ReactNode }) {
+  const { labels } = useLocale()
   const { view, direction } = useMorphingModal()
   const reduce = useReducedMotion()
   // the popup (and this node) only mounts while open, so track it as state
@@ -198,7 +200,7 @@ function MorphingModalContent({
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="morphing-modal-close"
-            aria-label="Close"
+            aria-label={labels.close}
             className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <XIcon size={16} />
@@ -275,13 +277,14 @@ function MorphingModalDescription({ className, ...props }: DialogPrimitive.Descr
 
 /** Round back chevron that pops to the previous view. Renders nothing on the first view. */
 function MorphingModalBack({ className, onClick, ...props }: React.ComponentProps<"button">) {
+  const { labels } = useLocale()
   const { back, canGoBack } = useMorphingModal()
   if (!canGoBack) return null
   return (
     <button
       type="button"
       data-slot="morphing-modal-back"
-      aria-label="Back"
+      aria-label={labels.back}
       onClick={(e) => {
         onClick?.(e)
         if (!e.defaultPrevented) back()
