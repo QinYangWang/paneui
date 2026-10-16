@@ -85,7 +85,7 @@ export default function AnimatedSidebarDemo() {
           </SidebarMenu>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset className="gap-3 rounded-2xl bg-muted/50 p-3 shadow-well">
+      <SidebarInset className="gap-3 rounded-2xl bg-muted/50 p-2 shadow-well">
         <div className="flex items-center gap-2">
           <SidebarTrigger />
           <span className="text-sm font-medium">{title}</span>
@@ -93,9 +93,9 @@ export default function AnimatedSidebarDemo() {
           <BellIcon className="size-4 text-muted-foreground" />
         </div>
         <div className="grid flex-1 grid-cols-2 gap-3">
-          <div className="rounded-md bg-card shadow-raised" />
-          <div className="rounded-md bg-card shadow-raised" />
-          <div className="col-span-2 rounded-md bg-card shadow-raised" />
+          <div className="rounded-sm bg-card shadow-raised" />
+          <div className="rounded-sm bg-card shadow-raised" />
+          <div className="col-span-2 rounded-sm bg-card shadow-raised" />
         </div>
       </SidebarInset>
     </SidebarProvider>

@@ -12,16 +12,17 @@ export type RadiusState = { radius: RadiusChoice; custom: number | null }
 export const RADIUS_VALUES: Record<RadiusPreset, number> = { none: 0, sm: 0.375, default: 0.5, lg: 0.625, xl: 0.875 }
 export const RADIUS_LABELS: Record<RadiusPreset, string> = { none: "None", sm: "Small", default: "Default", lg: "Large", xl: "Extra large" }
 export const DEFAULT_RADIUS: RadiusPreset = "default"
-/** Bounds of the custom slider, in rem. */
+/** Bounds of the custom slider, in rem. 1rem matches --radius-max in app/globals.css: no token goes past 16px. */
 export const RADIUS_MIN = 0
-export const RADIUS_MAX = 1.5
+export const RADIUS_MAX = 1
 
 const isPreset = (v: unknown): v is RadiusPreset => typeof v === "string" && (RADII as readonly string[]).includes(v)
 
 export function parseCustomRadius(raw: string | null): number | null {
   if (raw == null) return null
   const n = Number.parseFloat(raw)
-  return Number.isFinite(n) && n >= RADIUS_MIN && n <= 2 ? n : null
+  // Values saved before the cap (up to 1.5rem) come back as the new maximum.
+  return Number.isFinite(n) && n >= RADIUS_MIN && n <= 2 ? Math.min(n, RADIUS_MAX) : null
 }
 
 export function readRadiusState(): RadiusState {

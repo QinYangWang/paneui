@@ -85,18 +85,22 @@
     "Newsreader Variable", "Newsreader", "Noto Serif SC Variable", "Noto Serif SC", ui-serif, Georgia, "Songti SC",
     "SimSun", serif;
 
-  /* Every radius is a multiple of --radius (0.5rem): xs 2, sm 4, md 6, lg 8, xl 10, 2xl 12, 3xl 16, 4xl 20, 5xl 24px. */
-  --radius-2xs: calc(var(--radius) * 0.25);
-  --radius-xs: calc(var(--radius) * 0.25);
-  --radius-sm: calc(var(--radius) * 0.5);
-  --radius-md: calc(var(--radius) * 0.75);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.25);
-  --radius-2xl: calc(var(--radius) * 1.5);
-  --radius-3xl: calc(var(--radius) * 2);
-  --radius-4xl: calc(var(--radius) * 2.5);
-  --radius-5xl: calc(var(--radius) * 3);
-  --radius-shell: calc(var(--radius) * 1.5);
+  /*
+   * Every radius is a multiple of --radius (0.5rem): xs 2, sm 4, md 6, lg 8, xl 10, 2xl 12, 3xl 16px, and none goes
+   * past --radius-max (16px): larger corners read as pills on controls and break nested parts. 4xl and 5xl stay as
+   * names for old code and sit at the cap from the default radius up.
+   */
+  --radius-2xs: min(calc(var(--radius) * 0.25), var(--radius-max));
+  --radius-xs: min(calc(var(--radius) * 0.25), var(--radius-max));
+  --radius-sm: min(calc(var(--radius) * 0.5), var(--radius-max));
+  --radius-md: min(calc(var(--radius) * 0.75), var(--radius-max));
+  --radius-lg: min(var(--radius), var(--radius-max));
+  --radius-xl: min(calc(var(--radius) * 1.25), var(--radius-max));
+  --radius-2xl: min(calc(var(--radius) * 1.5), var(--radius-max));
+  --radius-3xl: min(calc(var(--radius) * 2), var(--radius-max));
+  --radius-4xl: min(calc(var(--radius) * 2.5), var(--radius-max));
+  --radius-5xl: min(calc(var(--radius) * 3), var(--radius-max));
+  --radius-shell: min(calc(var(--radius) * 1.5), var(--radius-max));
 
   /* Shadow scale: xs a 1px ring, sm resting controls, md/lg floating menus, xl dialogs. */
   --shadow-xs: var(--shadow-border);
@@ -138,6 +142,8 @@
 
 :root {
   --radius: 0.5rem;
+  /* The largest radius any token reaches, whatever --radius is (the Customize slider stops at 1rem). */
+  --radius-max: 1rem;
 
   /* Surfaces: page, container (card) and modal (popover), opaque. */
   --background: #fff;
@@ -390,7 +396,8 @@
 
 /*
  * Radius presets: `data-radius` on <html> swaps the one base value every radius token multiplies
- * (default, no attribute, is 0.5rem). A custom value is set inline as `--radius` on <html>.
+ * (default, no attribute, is 0.5rem). A custom value is set inline as `--radius` on <html> (0 to 1rem); every
+ * token stops at --radius-max (16px), so a larger value only makes controls rounder up to that cap.
  */
 html[data-radius="none"] {
   --radius: 0rem;
@@ -690,7 +697,7 @@ html[data-accent="violet"].dark {
 @utility shell-inset {
   background-color: var(--background);
   border: 0.5px solid var(--shell-border);
-  border-radius: calc(var(--radius) * 1.5);
+  border-radius: var(--radius-shell);
   margin-inline-end: 3px;
   margin-bottom: 3px;
 }
@@ -707,8 +714,8 @@ html[data-accent="violet"].dark {
 
 /* Sticky top edge for a shell-inset panel that scrolls with the page (docs shell). */
 @utility shell-cap {
-  border-top-left-radius: calc(var(--radius) * 1.5);
-  border-top-right-radius: calc(var(--radius) * 1.5);
+  border-top-left-radius: var(--radius-shell);
+  border-top-right-radius: var(--radius-shell);
 }
 
 /*

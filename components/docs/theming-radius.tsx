@@ -115,7 +115,7 @@ export function ThemingRadius() {
 
       <div className="flex flex-wrap items-center gap-3">
         <p className="min-w-0 flex-1 basis-64 text-sm text-pretty text-muted-foreground">
-          Every radius token is a multiple of this one value, so the override is a single line.
+          Every radius token is a multiple of this one value and stops at 16px, so the override is a single line.
         </p>
         <Button onClick={() => copy(css)}>
           {copied ? <CheckIcon /> : <CopyIcon />}

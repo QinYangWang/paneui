@@ -57,7 +57,7 @@ const opt = (n, d) => {
 }
 const BASE = (process.env.BASE_URL || opt("--base", "http://localhost:3123")).replace(/\/$/, "")
 const THEME = flag("--dark") ? "dark" : "light"
-// --radius <none|sm|lg|xl>: audit under a radius preset (stored the way the Customize page stores it)
+// --radius <none|sm|lg|xl|custom:REM>: audit under a radius preset or a custom value (stored the way the Customize page stores it)
 const RADIUS = opt("--radius", "")
 const OUT = path.resolve(ROOT, opt("--out", "node_modules/.cache/radius-audit"))
 const CONCURRENCY = Number(opt("--concurrency", "3"))
@@ -282,7 +282,10 @@ const context = await browser.newContext({
 await context.addInitScript(([theme, radius]) => {
   try {
     localStorage.setItem("theme", theme)
-    if (radius) localStorage.setItem("radius", radius)
+    if (radius && radius.startsWith("custom:")) {
+      localStorage.setItem("radius", "custom")
+      localStorage.setItem("radius-custom", radius.slice(7))
+    } else if (radius) localStorage.setItem("radius", radius)
   } catch {}
 }, [THEME, RADIUS])
 

@@ -76,8 +76,8 @@ const RADII: { cls: string; corner: string; px: string; use: string }[] = [
   { cls: "rounded-xl", corner: "rounded-tl-xl", px: "10px", use: "Cards, tables and code blocks." },
   { cls: "rounded-2xl", corner: "rounded-tl-2xl", px: "12px", use: "Menus and popups, two-layer inset cards." },
   { cls: "rounded-3xl", corner: "rounded-tl-3xl", px: "16px", use: "Dialogs, drawers and big panels." },
-  { cls: "rounded-4xl", corner: "rounded-tl-4xl", px: "20px", use: "Hero media and large sheets." },
-  { cls: "rounded-5xl", corner: "rounded-tl-5xl", px: "24px", use: "Marketing panels." },
+  { cls: "rounded-4xl", corner: "rounded-tl-4xl", px: "16px", use: "Kept for older code; sits at the 16px cap." },
+  { cls: "rounded-5xl", corner: "rounded-tl-5xl", px: "16px", use: "Kept for older code; sits at the 16px cap." },
 ]
 
 const SHADOW_SCALE: { cls: string; token: string; use: string }[] = [
@@ -103,6 +103,7 @@ const SHADOWS: { cls: string; use: string }[] = [
 
 const CSS_EXAMPLE = `:root {
   --radius: 0.5rem;
+  --radius-max: 1rem;             /* no token goes past 16px */
   --background: #fff;
   --foreground: #000000df;        /* gray a12 */
   --muted-foreground: #0000009b;  /* gray a11 */
@@ -128,7 +129,7 @@ const CSS_EXAMPLE = `:root {
 @theme inline {
   --color-background: var(--background);
   --color-primary: var(--primary);
-  --radius-xl: calc(var(--radius) * 1.25);
+  --radius-xl: min(calc(var(--radius) * 1.25), var(--radius-max));
   --shadow-lg: var(--shadow-lg);
   /* … */
 }`
@@ -301,7 +302,8 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="radius">Radius</GuideH2>
         <p className="text-muted-foreground">
-          Every step is a multiple of <Code>--radius</Code>, so change the base and the whole scale follows. Keep nested
+          Every step is a multiple of <Code>--radius</Code>, so change the base and the whole scale follows. No step goes
+          past <Code>--radius-max</Code> (16px): larger corners turn controls into pills and push nested parts apart. Keep nested
           corners concentric, with the inner radius equal to the outer radius minus the padding between them. That is why{" "}
           <Code>p-1</Code> menus (<Code>rounded-2xl</Code>) hold <Code>rounded-lg</Code> rows. Use <Code>rounded-full</Code>{" "}
           only for shapes that are actually round. Sizes below are at the default <Code>0.5rem</Code>; try other

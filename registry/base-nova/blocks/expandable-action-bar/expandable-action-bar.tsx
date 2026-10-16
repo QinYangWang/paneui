@@ -55,8 +55,8 @@ const BADGE_OVERHANG = 8
 
 const sizes = {
   // Concentric radii: bar radius = item radius + bar padding (md 14 = 10 + 4, sm 10 = 6 + 4).
-  sm: { bar: "gap-0.5 rounded-lg p-1", item: "h-7 min-w-7 rounded-sm px-1.5 text-ui-sm", icon: "[&_svg]:size-3.5", radius: "rounded-sm" },
-  md: { bar: "gap-0.5 rounded-xl p-1", item: "h-9 min-w-9 rounded-lg px-2.5 text-ui", icon: "[&_svg]:size-4", radius: "rounded-lg" },
+  sm: { bar: "gap-0.5 frame-lg frame-p-1", item: "h-7 min-w-7 rounded-inner px-1.5 text-ui-sm", icon: "[&_svg]:size-3.5", radius: "rounded-inner" },
+  md: { bar: "gap-0.5 frame-2xl frame-p-1", item: "h-9 min-w-9 rounded-inner px-2.5 text-ui", icon: "[&_svg]:size-4", radius: "rounded-inner" },
 }
 
 export function ExpandableActionBar({

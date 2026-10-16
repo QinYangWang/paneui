@@ -44,7 +44,7 @@ function ExpandingArrowButton({
     <ButtonPrimitive
       data-slot="expanding-arrow-button"
       className={cn(
-        "group/arrow relative inline-flex h-14 min-w-64 shrink-0 cursor-pointer items-center overflow-hidden frame-[calc(var(--radius)*2)] frame-p-1.5 bg-card text-secondary-foreground shadow-raised outline-none select-none",
+        "group/arrow relative inline-flex h-14 min-w-64 shrink-0 cursor-pointer items-center overflow-hidden frame-3xl frame-p-1.5 bg-card text-secondary-foreground shadow-raised outline-none select-none",
         "transition-[box-shadow,background-color,scale] duration-150 ease-out hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 active:scale-96",
         "disabled:pointer-events-none disabled:opacity-50",
         className

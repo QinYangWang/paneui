@@ -68,6 +68,13 @@ function checkCss(file) {
     note("info", file, "--radius is 0.625rem, the default before 2026-10-16 (now 0.5rem)",
       "Keep it if you like the rounder corners (it is the lg preset), or reinstall the theme for 0.5rem.")
 
+  if (/--primary-subtle\s*:/.test(css) && !/--radius-max\s*:/.test(css))
+    note("info", file, "radius tokens without the 16px cap (--radius-max, theme 2.2): a --radius above 0.5rem grows cards and menus past 16px",
+      "Reinstall the theme to clamp every radius token at --radius-max.")
+  const base = radius ?? css.match(/--radius:\s*([\d.]+)rem/)
+  if (base && Number.parseFloat(base[1]) > 1)
+    note("warn", file, `--radius is ${base[1].trim()}, above the supported 1rem`, "Controls turn into pills and nested parts stop lining up; use 1rem or less.")
+
   if (!/--primary-subtle\s*:/.test(css) || !/--shadow-border\s*:/.test(css))
     note("error", file, "theme tokens from 2026-10-16 are missing (--primary-subtle, --shadow-border, …)", "Reinstall the theme: shadcn add <registry>/r/theme.json --overwrite")
   else if (!/@utility frame-\*/.test(css))

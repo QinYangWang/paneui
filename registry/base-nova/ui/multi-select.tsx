@@ -26,7 +26,7 @@ const MultiSelectSizeContext = React.createContext<MultiSelectSize | undefined>(
 const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: string; input: string; trigger: string; item: string }> = {
   sm: {
     well: "frame-inset-0.5 min-h-7 py-0.5 pr-7 pl-0.5",
-    chip: "h-6 rounded-inner pl-2 text-ui-sm",
+    chip: "h-6 pl-2 text-ui-sm",
     remove: "size-5",
     input: "h-6 md:text-ui",
     trigger: "top-0.5 right-0.5 size-6 rounded-inner",
@@ -34,7 +34,7 @@ const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: s
   },
   default: {
     well: "frame-inset-1 min-h-8 py-1 pr-8 pl-1",
-    chip: "h-6 rounded-inner pl-2 text-ui-sm",
+    chip: "h-6 pl-2 text-ui-sm",
     remove: "size-5",
     input: "h-6 md:text-ui",
     trigger: "top-1 right-1 size-6 rounded-inner",
@@ -42,7 +42,7 @@ const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: s
   },
   lg: {
     well: "frame-inset-1 min-h-9 py-1 pr-9 pl-1",
-    chip: "h-7 rounded-inner pl-2.5 text-ui",
+    chip: "h-7 pl-2.5 text-ui",
     remove: "size-6",
     input: "h-7 md:text-ui-lg",
     trigger: "top-1 right-1 size-7 rounded-inner",
@@ -97,7 +97,8 @@ function chipKey(value: unknown, index: number): React.Key {
 /**
  * Inset well holding the chosen values as removable raised chips, with the
  * search input trailing them. Chips sit 4px inside the rounded-lg well, so they
- * take rounded-inner (radius − inset) and the same 1px hairline as the well. Backspace in an empty input removes the last chip.
+ * take frame-inner (radius − inset; never also rounded-inner, which would read the chip's own
+ * inner radius and come out 2px too square) and the same 1px hairline as the well. Backspace in an empty input removes the last chip.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- chip values are the Combobox item type; callers annotate their own callbacks
 type ChipValue = any

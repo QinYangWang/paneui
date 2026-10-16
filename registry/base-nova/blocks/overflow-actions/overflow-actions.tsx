@@ -41,8 +41,8 @@ const SHELL: Transition = { type: "spring", stiffness: 240, damping: 22, mass: 0
 
 const sizes = {
   // Concentric radii: rail radius = item radius + rail padding (md 14 = 10 + 4, sm 10 = 6 + 4).
-  sm: { rail: "gap-1 rounded-lg p-1", action: "h-8 min-w-8 gap-1.5 rounded-sm px-3 text-ui-sm [&_svg]:size-3.5", toggle: "size-8 rounded-sm [&_svg]:size-3.5" },
-  md: { rail: "gap-1 rounded-xl p-1", action: "h-9 min-w-9 gap-2 rounded-lg px-3.5 text-ui [&_svg]:size-4", toggle: "size-9 rounded-lg [&_svg]:size-4" },
+  sm: { rail: "gap-1 frame-lg frame-p-1", action: "h-8 min-w-8 gap-1.5 rounded-inner px-3 text-ui-sm [&_svg]:size-3.5", toggle: "size-8 rounded-inner [&_svg]:size-3.5" },
+  md: { rail: "gap-1 frame-2xl frame-p-1", action: "h-9 min-w-9 gap-2 rounded-inner px-3.5 text-ui [&_svg]:size-4", toggle: "size-9 rounded-inner [&_svg]:size-4" },
 }
 
 const actionClass =

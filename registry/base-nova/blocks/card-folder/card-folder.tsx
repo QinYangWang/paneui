@@ -158,10 +158,10 @@ export function CardFolder({
         aria-expanded={open}
         aria-label={open ? `Tuck ${title} into its pocket` : `Pull ${title} out of its pocket`}
         onClick={() => setOpen(!open)}
-        className="group/pocket relative h-60 w-full cursor-pointer rounded-[calc(var(--radius)*2.8)] outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-60"
+        className="group/pocket relative h-60 w-full cursor-pointer rounded-[min(calc(var(--radius)*2.8),var(--radius-max))] outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {/* Inside of the pocket */}
-        <span aria-hidden className="absolute inset-x-0 top-10 bottom-0 rounded-[calc(var(--radius)*2.8)] bg-muted shadow-well" />
+        <span aria-hidden className="absolute inset-x-0 top-10 bottom-0 rounded-[min(calc(var(--radius)*2.8),var(--radius-max))] bg-muted shadow-well" />
 
         {/* The card */}
         <motion.span
@@ -217,12 +217,12 @@ export function CardFolder({
         {/* Front of the pocket: compresses into its bottom seam as the card lifts */}
         <motion.span
           aria-hidden
-          className="absolute inset-x-0 bottom-0 z-10 block overflow-hidden rounded-[calc(var(--radius)*2.8)] bg-card shadow-raised"
+          className="absolute inset-x-0 bottom-0 z-10 block overflow-hidden rounded-[min(calc(var(--radius)*2.8),var(--radius-max))] bg-card shadow-raised"
           initial={false}
           animate={{ height: open ? 52 : 150 }}
           transition={reduce ? { duration: 0.15 } : SPRING}
         >
-          <span className="absolute inset-2 rounded-[max(0px,calc(var(--radius)*2.8-8px))] border-[1.5px] border-dashed border-foreground/15" />
+          <span className="absolute inset-2 rounded-[max(0px,calc(min(var(--radius)*2.8,var(--radius-max))-8px))] border-[1.5px] border-dashed border-foreground/15" />
           <span className="absolute inset-x-0 bottom-0 flex h-[52px] items-center justify-center text-ui-sm font-medium text-muted-foreground">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span

@@ -49,7 +49,7 @@ export default function Colors() {
         <GuideH2 id="radius">One radius, every corner</GuideH2>
         <p className="text-muted-foreground">
           Every radius token multiplies <Code>--radius</Code>, and nested surfaces subtract their padding from it, so
-          corners stay concentric at any value. Pick a preset or drag for your own, then copy the override, or install
+          corners stay concentric at any value up to the 16px cap. Pick a preset or drag for your own, then copy the override, or install
           a preset with <Code>theme-radius-none</Code>, <Code>-sm</Code>, <Code>-lg</Code> or <Code>-xl</Code>.
         </p>
         <ThemingRadius />

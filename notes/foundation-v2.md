@@ -59,8 +59,20 @@ on purpose (bold 13px labels on filled buttons).
 ## Radius
 
 `--radius: 0.5rem`; `xs` 0.25x (2px), `sm` 0.5x (4), `md` 0.75x (6), `lg` 1x (8), `xl` 1.25x (10),
-`2xl` 1.5x (12), `3xl` 2x (16), `4xl` 2.5x (20), `5xl` 3x (24), `shell` 1.5x (12). `2xs` is now an alias of
+`2xl` 1.5x (12), `3xl` 2x (16), `shell` 1.5x (12). `2xs` is now an alias of
 `xs`. Presets: none 0, sm 0.375rem, default 0.5rem, lg 0.625rem (the old default), xl 0.875rem.
+
+**16px cap (theme 2.2, round 20).** Every token is `min(k × --radius, --radius-max)` with `--radius-max: 1rem`
+(shipped in the theme's light vars, together with `radius-lg`, which the theme now overrides as well). The custom
+slider on Customize stops at 1rem (it went to 1.5rem); stored values above it are read back as 1rem, both in
+`radius-store.ts` and in the pre-paint script. Why: at a 20–24px base, controls are pills, containers reach 40–72px
+and every literal inner token (rows `rounded-lg` in `rounded-2xl p-1` menus, composer parts in `rounded-3xl p-2`)
+sits far off concentric. With the cap, from base 16px every container is 16px and `rounded-inner` children get
+16 − inset; children with literal tokens are at worst pills (fine) or within the audit tolerance. `4xl`/`5xl`
+were unused apart from the blog cover art and the theming table, so they stay as names at the cap rather than
+being removed (installed code keeps compiling). Arbitrary radii that went past 3xl (card folder and bottom sheet
+2.8x) use `min(…, var(--radius-max))`; 2x arbitrary values (message bubbles, chat, feedback widget, expanding
+arrow button) became `rounded-3xl` / `frame-3xl`.
 
 ## Shadows
 

@@ -180,7 +180,7 @@ export function FeedbackWidget({
                   aria-haspopup="dialog"
                   aria-expanded={false}
                   onClick={() => setStatus("open")}
-                  className="inline-flex h-10 items-center gap-2 rounded-[calc(var(--radius)*2)] px-4 text-ui font-medium whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset [&_svg]:size-4"
+                  className="inline-flex h-10 items-center gap-2 rounded-3xl px-4 text-ui font-medium whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset [&_svg]:size-4"
                 >
                   <ChatIcon />
                   {label}

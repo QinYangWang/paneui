@@ -29,6 +29,16 @@ export default function CliPage() {
   ]
   const migrations: { version: string; changed: React.ReactNode; todo: React.ReactNode }[] = [
     {
+      version: "2.2",
+      changed: (
+        <>
+          Every radius token stops at <Code>--radius-max</Code> (16px), and the supported <Code>--radius</Code> range is 0
+          to 1rem. Old <Code>rounded-4xl</Code> and <Code>rounded-5xl</Code> corners come out at 16px.
+        </>
+      ),
+      todo: <>Reinstall the theme. The upgrade check flags a stylesheet without the cap or a base above 1rem.</>,
+    },
+    {
       version: "2.1",
       changed: (
         <>

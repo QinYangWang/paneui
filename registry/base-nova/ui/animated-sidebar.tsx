@@ -314,7 +314,7 @@ function ActivePill({ reduce, pillId }: { reduce: boolean; pillId: string }) {
       aria-hidden
       layoutId={pillId}
       transition={reduce ? { duration: 0 } : PILL_SPRING}
-      className="absolute inset-0 rounded-inner bg-foreground/6"
+      className="absolute inset-0 rounded-[inherit] bg-foreground/6"
     />
   )
 }
