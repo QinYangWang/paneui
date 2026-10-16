@@ -5,13 +5,13 @@ import { notFound } from "next/navigation"
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons"
 import { categorySlug } from "@/components/docs/category-icons"
 import { IconGrid } from "@/components/docs/icon-grid"
-import { IconSkill } from "@/components/docs/icon-skill"
+import { AgentSkill } from "@/components/docs/agent-skill"
 import { Inline } from "@/components/docs/doc-inline"
 import { DocToc, type TocEntry } from "@/components/docs/doc-toc"
 import { InstallCommand, PackageInstall } from "@/components/docs/install-command"
 import { PreviewTabs } from "@/components/docs/preview-tabs"
 import { demoFile, getItem, getItems, getNavGroups, readSource, REGISTRY_NAME, SITE_URL } from "@/lib/docs"
-import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
+import { DocsCode, highlight } from "@/components/docs/docs-code"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import {
   Breadcrumb,
@@ -179,6 +179,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
   const usage = readSource(demoFile(name))
   const doc = docsContent[name]
   const exampleCode = (id: string) => readSource(`registry/base-nova/examples/${name}/${id}.tsx`)
+  const iconSkill = name === "icons" ? readSource("skills/puffy-icons/SKILL.md") : ""
   const toc: TocEntry[] = [
     { id: "installation", title: "Installation" },
     ...(doc ? [{ id: "usage", title: "Usage" }] : []),
@@ -279,7 +280,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
           )}
         </header>
 
-        <PreviewTabs name={name} code={<AgentCodeBlock code={usage} filename={`${name}-demo.tsx`} maxHeight={520} />} />
+        <PreviewTabs name={name} code={<DocsCode code={usage} filename={`${name}-demo.tsx`} maxHeight={520} />} />
 
         <section className="flex flex-col gap-4">
           <H2 id="installation">Installation</H2>
@@ -315,7 +316,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
               <div className="flex flex-col gap-2.5">
                 <p className="font-medium">Copy the source into your project:</p>
                 {item.files.map((f) => (
-                  <AgentCodeBlock key={f} code={readSource(f)} filename={f} maxHeight={420} />
+                  <DocsCode key={f} code={readSource(f)} filename={f} maxHeight={420} />
                 ))}
               </div>
               <p className="text-muted-foreground">Update the import paths to match your project setup.</p>
@@ -326,15 +327,15 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         {doc && (
           <section className="flex flex-col gap-4">
             <H2 id="usage">Usage</H2>
-            <AgentCodeBlock code={doc.usage.imports} language="tsx" />
-            <AgentCodeBlock code={doc.usage.code} language="tsx" />
+            <DocsCode code={doc.usage.imports} language="tsx" />
+            <DocsCode code={doc.usage.code} language="tsx" />
           </section>
         )}
 
         {doc?.composition && (
           <section className="flex flex-col gap-4">
             <H2 id="composition">Composition</H2>
-            <AgentCodeBlock code={doc.composition} language="text" />
+            <DocsCode code={doc.composition} language="text" />
           </section>
         )}
 
@@ -355,7 +356,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
                 )}
                 <PreviewTabs
                   example={`${name}/${ex.id}`}
-                  code={<AgentCodeBlock code={exampleCode(ex.id)} filename={`${ex.id}.tsx`} maxHeight={420} />}
+                  code={<DocsCode code={exampleCode(ex.id)} filename={`${ex.id}.tsx`} maxHeight={420} />}
                 />
               </div>
             ))}
@@ -408,7 +409,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
               <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>.
               Works with any coding agent that reads Agent Skills.
             </p>
-            <IconSkill skill={readSource("skills/puffy-icons/SKILL.md")} />
+            <AgentSkill name="puffy-icons" skill={iconSkill} html={await highlight(iconSkill, "markdown")} />
           </section>
         )}
 

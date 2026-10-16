@@ -2,7 +2,7 @@ import type { TocEntry } from "@/components/docs/doc-toc"
 import { Code, GuideH2, GuideH3, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
 import { REGISTRY_NAME, REGISTRY_URL, SITE_URL } from "@/lib/docs"
-import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
+import { DocsCode } from "@/components/docs/docs-code"
 
 export const metadata = { title: "CLI & registry" }
 
@@ -187,7 +187,7 @@ export default function CliPage() {
           qinyang/ui is published as one static JSON file per item at <Code>{SITE_URL}/r/&lt;name&gt;.json</Code>. Register
           the namespace so every command below accepts short names like <Code>{ns}/button</Code>.
         </p>
-        <AgentCodeBlock code={config} filename="components.json" language="json" />
+        <DocsCode code={config} filename="components.json" language="json" />
       </section>
 
       <section className="flex flex-col gap-4">
@@ -258,7 +258,7 @@ export default function CliPage() {
           </li>
         </ol>
         <InstallCommand args={`add ${ns}/upgrade-check`} />
-        <AgentCodeBlock code={"node scripts/qinyang-upgrade-check.mjs\nnode scripts/qinyang-upgrade-check.mjs --fix"} language="bash" showLineNumbers={false} />
+        <DocsCode code={"node scripts/qinyang-upgrade-check.mjs\nnode scripts/qinyang-upgrade-check.mjs --fix"} language="bash" lineNumbers={false} />
         <ol start={4} className="flex list-decimal flex-col gap-2 pl-5 text-muted-foreground marker:text-fg-tertiary">
           <li>
             Re-add the components you use with <Code>--overwrite</Code>, a few at a time, and re-apply local edits from the
@@ -360,7 +360,7 @@ export default function CliPage() {
           </li>
         </ul>
         <p className="text-muted-foreground">This is a trimmed item file as the CLI receives it.</p>
-        <AgentCodeBlock code={itemJson} filename={itemUrl.replace(/^https?:\/\//, "")} language="json" />
+        <DocsCode code={itemJson} filename={itemUrl.replace(/^https?:\/\//, "")} language="json" />
       </section>
     </GuidePage>
   )

@@ -3,7 +3,8 @@
 import * as React from "react"
 
 import { CheckIcon, CopyIcon } from "@/components/icons"
-import { AgentCodeBlock, useCopy } from "@/registry/base-nova/ui/agent-code-block"
+import { LiveCodeBlock } from "@/components/docs/live-code-block"
+import { useCopy } from "@/registry/base-nova/ui/code-block"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Card, CardPanel } from "@/registry/base-nova/ui/card"
@@ -199,7 +200,7 @@ export function ThemingAccent() {
           {copied ? "Copied" : "Copy theme CSS"}
         </Button>
       </div>
-      <AgentCodeBlock code={css} filename="globals.css" language="css" showLineNumbers={false} copyable={false} />
+      <LiveCodeBlock code={css} title="globals.css" copyable={false} />
     </div>
   )
 }

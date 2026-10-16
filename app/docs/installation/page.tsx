@@ -1,7 +1,7 @@
 import { Code, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
 import { REGISTRY_NAME, REGISTRY_URL } from "@/lib/docs"
-import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
+import { DocsCode } from "@/components/docs/docs-code"
 import { Alert, AlertContent, AlertDescription, AlertIcon, AlertTitle } from "@/registry/base-nova/ui/alert"
 
 export const metadata = { title: "Installation" }
@@ -53,7 +53,7 @@ export default function Installation() {
 
       <Step n={1} id="add-the-registry" title="Add the registry">
         <p className="text-muted-foreground">Add the namespace to your components.json.</p>
-        <AgentCodeBlock code={config} filename="components.json" language="json" />
+        <DocsCode code={config} filename="components.json" language="json" />
       </Step>
 
       <Step n={2} id="install-the-theme" title="Install the theme">
@@ -81,7 +81,7 @@ export default function Installation() {
           Import from the path your components.json aliases point to. Every component page lists its parts and props under
           API Reference.
         </p>
-        <AgentCodeBlock code={USAGE} filename="save.tsx" language="tsx" />
+        <DocsCode code={USAGE} filename="save.tsx" language="tsx" />
         <p className="text-muted-foreground">
           For other commands, see <TextLink href="/docs/cli">CLI &amp; registry</TextLink>.
         </p>

@@ -3,7 +3,7 @@ import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page
 import { InstallCommand } from "@/components/docs/install-command"
 import { ThemingSystem } from "@/components/docs/theming-system"
 import { REGISTRY_NAME } from "@/lib/docs"
-import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
+import { DocsCode } from "@/components/docs/docs-code"
 
 export const metadata = { title: "Theming" }
 
@@ -188,7 +188,7 @@ export default function Theming() {
           whose <Code>cn()</Code> merges the <Code>text-ui-*</Code> sizes as font sizes. For a tinted wash, use the{" "}
           <Code>-subtle</Code> token, such as <Code>bg-success-subtle</Code>.
         </p>
-        <AgentCodeBlock code={CSS_EXAMPLE} filename="globals.css (excerpt)" language="css" maxHeight={360} />
+        <DocsCode code={CSS_EXAMPLE} filename="globals.css (excerpt)" language="css" maxHeight={360} />
       </section>
 
       <section className="flex flex-col gap-4">
@@ -216,7 +216,7 @@ export default function Theming() {
           scrollbars and form controls follow. Pair <Code>primary</Code> with <Code>text-primary-foreground</Code>, never <Code>text-white</Code>, because the
           neutral preset makes it near-white in dark mode.
         </p>
-        <AgentCodeBlock code={DARK_SCRIPT} filename="theme-script.js" language="js" />
+        <DocsCode code={DARK_SCRIPT} filename="theme-script.js" language="js" />
         <p className="text-muted-foreground">
           To let users switch, use <TextLink href="/docs/theme-toggle">Theme Toggle</TextLink>, which stores the choice for
           the script above.
@@ -253,7 +253,7 @@ export default function Theming() {
           For a brand colour, use the picker on <TextLink href="/docs/colors#accent">Customize</TextLink> to derive the eight
           roles and copy them.
         </p>
-        <AgentCodeBlock code={ACCENT_RUNTIME} filename="globals.css" language="css" />
+        <DocsCode code={ACCENT_RUNTIME} filename="globals.css" language="css" />
       </section>
 
       <section className="flex flex-col gap-4">
@@ -389,7 +389,7 @@ export default function Theming() {
         <p className="text-muted-foreground">
           Define a new token with a value for both modes, then map it in <Code>@theme inline</Code> to get the utilities.
         </p>
-        <AgentCodeBlock code={NEW_TOKEN} filename="globals.css" language="css" />
+        <DocsCode code={NEW_TOKEN} filename="globals.css" language="css" />
       </section>
     </GuidePage>
   )
