@@ -26,7 +26,7 @@ const ENTRIES: Entry[] = [
       <>
         Fixed in right-to-left: switch thumbs, slider ticks, carousel arrows and keys, calendar arrow keys, the
         chevrons in breadcrumbs, pagination and submenus, and the padding of select, combobox, multi-select, menu,
-        dialog, drawer and sidebar parts.
+        dialog, drawer and sidebar parts. Submenus open toward the end side, and shortcut keys keep their order.
       </>,
       <>
         The viewport switch is an icon tab list that matches Preview / Code. New <Code>TabletIcon</Code> and{" "}

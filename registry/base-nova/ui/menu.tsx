@@ -142,6 +142,8 @@ function MenuShortcut({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="menu-shortcut"
+      // Key glyphs keep their order in right-to-left text.
+      dir="ltr"
       className={cn("ms-auto ps-4 font-sans text-ui-xs tracking-widest text-muted-foreground/72", className)}
       {...props}
     />
@@ -162,7 +164,7 @@ function MenuSubTrigger({ className, children, ...props }: MenuPrimitive.Submenu
 }
 
 function MenuSubContent(props: React.ComponentProps<typeof MenuContent>) {
-  return <MenuContent side="right" align="start" sideOffset={4} alignOffset={-4} {...props} />
+  return <MenuContent side="inline-end" align="start" sideOffset={4} alignOffset={-4} {...props} />
 }
 
 export {
