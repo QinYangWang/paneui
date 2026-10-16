@@ -84,6 +84,11 @@
       "rule": "tracking",
       "file": "registry/base-nova/examples/text-scramble-demo.tsx",
       "reason": "mono scramble effect"
+    },
+    {
+      "rule": "*",
+      "file": "components/docs/skill-examples.tsx",
+      "reason": "the Avoid previews on /docs/skill break the rules on purpose"
     }
   ]
 }

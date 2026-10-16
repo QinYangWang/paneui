@@ -37,6 +37,12 @@ export const GUIDE_PAGES = [
     keywords: ["shadcn", "cli", "add", "view", "search", "registry", "json"],
   },
   {
+    href: "/docs/skill",
+    title: "Design skill",
+    description: "Rules and checks that keep every screen on one style.",
+    keywords: ["design", "skill", "agent", "rules", "guidelines", "lint", "check", "review", "best practices"],
+  },
+  {
     href: "/docs/changelog",
     title: "Changelog",
     description: "What changed in qinyang/ui, newest first.",

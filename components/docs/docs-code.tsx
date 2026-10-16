@@ -34,14 +34,15 @@ export function highlight(code: string, language = "text") {
   return html
 }
 
-type DocsCodeProps = Omit<CodeBlockProps, "html" | "children" | "title"> & {
+type DocsCodeProps = Omit<CodeBlockProps, "html" | "children"> & {
   code: string
   /** Title bar text, usually the file name; also picks the language when `language` is not set. */
   filename?: string
 }
 
 /** A CodeBlock for code known at build time. */
-export async function DocsCode({ code, filename, language, lineNumbers = Boolean(filename), ...props }: DocsCodeProps) {
+export async function DocsCode({ code, filename, title, language, lineNumbers = Boolean(filename), ...props }: DocsCodeProps) {
   const lang = language ?? languageOf(filename)
-  return <CodeBlock html={await highlight(code, lang)} title={filename} language={filename ? lang : undefined} lineNumbers={lineNumbers} {...props} />
+  const head = title ?? filename
+  return <CodeBlock html={await highlight(code, lang)} title={head} language={head !== undefined ? lang : undefined} lineNumbers={lineNumbers} {...props} />
 }

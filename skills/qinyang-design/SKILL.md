@@ -93,9 +93,9 @@ Use `rounded-sm` … `rounded-3xl`; every token clamps at `--radius-max`. Never 
 code or an arbitrary radius above 1rem. `rounded-full` only for round things: avatars, dots, switches,
 slider thumbs, badges and tags, icon-only circular buttons, progress bars.
 
-### 8. Derive every radius from `--radius`
+### 8. Derive every radius from the base radius
 
-Presets and the radius slider rescale tokens, never literal pixel radii.
+Presets and the radius slider rescale `--radius` and the tokens built on it, never literal pixel radii.
 
 Use a token, or `rounded-[calc(var(--radius)*k)]` (clamped with `min(…, var(--radius-max))` above 2×).
 Only 1–2px caret radii, `rounded-full` and `rounded-[inherit]` stay literal.
@@ -170,7 +170,7 @@ at one level line up.
 
 ### 19. Draw icons from one family per group
 
-Solid and line glyphs side by side look like two products.
+Two glyph families in one group look like two different products.
 
 Navigation, rails, docks, tab bars and palettes use the solid family (`InboxIcon`, `CalendarDaysIcon`,
 `TerminalSquareIcon`); line glyphs are for controls (chevrons, close, add, search). Icons come from

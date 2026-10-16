@@ -8,6 +8,32 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-design-skill",
+    date: "October 16, 2026",
+    title: "A design skill for coding agents",
+    tag: "Docs",
+    changes: [
+      <>
+        The <TextLink href="/docs/skill">design skill</TextLink> collects the library&apos;s rules in one place, each with
+        a recommended and an avoid example. Install it with <Code>npx skills add QinYangWang/ui --skill qinyang-design</Code>{" "}
+        or as the <Code>design-skill</Code> registry item.
+      </>,
+      <>
+        It ships a check that runs without dependencies and reports broken rules before you commit, plus a console
+        snippet for nested corners as rendered.
+      </>,
+      <>
+        Fixes the check found here: menu labels outside their groups, press scale on two controls, tight tracking on
+        small headings, five descriptions over 12 words. Template parts no longer share a name with an item: the blog
+        avatar is <Code>parts/author-avatar.tsx</Code> and the editor buffers are <Code>parts/buffers.ts</Code>.
+      </>,
+      <>
+        Code on the guide and component pages is highlighted when the site builds; Customize highlights its CSS as you
+        change it.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-radius-cap",
     date: "October 16, 2026",
     title: "Radius stops at 16px",

@@ -481,8 +481,12 @@ function checkUpgrade() {
 /* ────────────────────────────── run ────────────────────────────── */
 
 const SELF = path.resolve(new URL(import.meta.url).pathname)
+const SKILL_DIR = path.dirname(path.dirname(SELF)) + path.sep
 for (const file of files) {
   if (path.resolve(file) === SELF) continue
+  // Installed copies of this skill are reference text, not project code.
+  if (path.resolve(file).startsWith(SKILL_DIR) && !/\.md$/.test(file)) continue
+  if (/[\\/]skills[\\/]qinyang-design[\\/]/.test(file) && !path.resolve(file).startsWith(SKILL_DIR)) continue
   const text = fs.readFileSync(file, "utf8")
   if (/^\s*(\/\/|\/\*|#)\s*GENERATED\b/.test(text.slice(0, 200))) continue
   fileLines.set(file, text.split("\n"))
