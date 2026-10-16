@@ -8,6 +8,32 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-17-docs-parts",
+    date: "October 17, 2026",
+    title: "Cover seeds, linked nav groups and Markdown tables",
+    tag: "Components",
+    changes: [
+      <>
+        <TextLink href="/docs/cover-art">Cover Art</TextLink> has eight compositions, and a <Code>seed</Code> now also sets a
+        mirror, a tone offset and a pattern, so posts next to each other no longer share a cover. Seeded covers change once;{" "}
+        <Code>variant</Code> <Code>0</Code> to <Code>3</Code> look as before. <Code>coverArtStyle(seed)</Code> returns
+        everything a seed decides.
+      </>,
+      <>
+        <Code>SidebarNavLink</Code> takes an <Code>icon</Code>. A <Code>SidebarNavSection</Code> label can be a link to the
+        section&apos;s own page with <Code>href</Code> or <Code>labelRender</Code>, marked current with <Code>active</Code>; the
+        chevron beside it still folds the rows.
+      </>,
+      <>
+        <Code>SimpleTableHead</Code> and <Code>SimpleTableCell</Code> follow <Code>align</Code>, and bare <Code>code</Code> in
+        body cells gets the inline-code chip, so MDX tables map straight onto them.
+      </>,
+      <>
+        The <Code>Outline</Code> divider above Back to top now fades in with the link instead of showing on its own.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-app-gaps",
     date: "October 16, 2026",
     title: "Tab bar, timeline, locales and agent fixes",

@@ -34,6 +34,7 @@ export default {
         └── SimpleTableCell   variant`,
   examples: [
     { id: "numbers", title: "Numbers", description: "Use the `numeric` cell for sizes and counts that should line up." },
+    { id: "markdown", title: "Markdown Tables", description: "Map the table elements in your MDX components so GFM tables render as SimpleTable." },
     { id: "rtl", title: "RTL", description: "For right-to-left pages, set `dir=\"rtl\"` on a parent; headers align to the start edge." },
   ],
   notes: [
@@ -45,6 +46,10 @@ export default {
       title: "Overflow",
       body: "The surface scrolls sideways when the columns don't fit. Give the table a `min-w-*` class to keep columns readable on phones.",
     },
+    {
+      title: "Inline code and alignment",
+      body: "Bare `<code>` in `default` and `numeric` cells and in headers gets the inline-code chip, inside or outside prose; code with its own `className` keeps it. `align` (what Markdown writes for `:-:` and `--:`) maps to start, center and end, so it flips under RTL.",
+    },
   ],
   api: [
     {
@@ -55,7 +60,11 @@ export default {
     { name: "SimpleTableHeader", extends: "thead", props: [] },
     { name: "SimpleTableBody", extends: "tbody", props: [] },
     { name: "SimpleTableRow", extends: "tr", props: [] },
-    { name: "SimpleTableHead", extends: "th", props: [] },
+    {
+      name: "SimpleTableHead",
+      extends: "th",
+      props: [{ name: "align", type: `"left" | "center" | "right" | "justify"`, description: "Text alignment; `left` is the start edge and `right` the end edge. Without it, start." }],
+    },
     {
       name: "SimpleTableCell",
       extends: "td",
@@ -66,6 +75,7 @@ export default {
           default: `"default"`,
           description: "`code` for names, `code-muted` for defaults, `type` for long type strings, `numeric` for aligned numbers.",
         },
+        { name: "align", type: `"left" | "center" | "right" | "justify"`, description: "Same as `SimpleTableHead`. Without it, the cell follows the table." },
       ],
     },
   ],

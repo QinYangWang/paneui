@@ -15,7 +15,8 @@
     "docs:md:audit": "node scripts/audit-docs-md.mjs",
     "templates:code": "node scripts/gen-template-code.mjs",
     "audit:radius": "node scripts/audit-radius.mjs",
-    "design:check": "node skills/qinyang-design/scripts/check.mjs"
+    "design:check": "node skills/qinyang-design/scripts/check.mjs",
+    "test:cover-art": "node scripts/test-cover-art-seeds.mjs"
   },
   "dependencies": {
     "@agentclientprotocol/sdk": "^1.8.0",
