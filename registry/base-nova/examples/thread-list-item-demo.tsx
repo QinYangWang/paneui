@@ -8,7 +8,7 @@ import { ThreadList, ThreadListGroup, ThreadListItem } from "@/registry/base-nov
 export default function ThreadListItemDemo() {
   const [active, setActive] = React.useState("1")
   return (
-    <div className="w-72 rounded-2xl bg-shell p-2">
+    <div className="w-72 rounded-3xl bg-shell p-2">
       <ThreadList>
         <ThreadListGroup label="Recent">
           <ThreadListItem title="Fix broken chat dragging behavior" icon={<ApertureIcon />} repo="workspace" pr={{ number: 1526, status: "open" }} branch="feat/fix-chat-dragging" active={active === "1"} onClick={() => setActive("1")} />

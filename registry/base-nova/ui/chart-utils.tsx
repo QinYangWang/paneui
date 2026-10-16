@@ -394,7 +394,7 @@ function ChartSwatch({
     <span
       aria-hidden
       data-slot="chart-swatch"
-      className={cn("size-2.5 shrink-0 rounded-xs shadow-chip", className)}
+      className={cn("size-2.5 shrink-0 rounded-sm shadow-chip", className)}
       style={{ background: color, ...style }}
       {...props}
     />

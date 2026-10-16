@@ -1,6 +1,8 @@
 # Native desktop style (2026-10-14)
 
 Reference values for the native desktop look (licence notice in `THIRD_PARTY_NOTICES.md`).
+Since 2026-10-16 the font, colour, radius and shadow values below are superseded by `notes/foundation-v2.md`;
+the type scale, densities and shell layout still apply.
 
 ## Tokens
 - Font: `-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`, letter-spacing normal. Mono: JetBrains Mono → SF Mono → Menlo.

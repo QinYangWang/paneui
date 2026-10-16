@@ -433,7 +433,7 @@ function FileDiff<A = undefined>({
       aria-busy={streaming || undefined}
       className={cn(
         "overflow-hidden text-ui",
-        variant === "card" ? "rounded-xl bg-code shadow-raised" : "bg-transparent",
+        variant === "card" ? "rounded-2xl bg-code shadow-raised" : "bg-transparent",
         className
       )}
       style={style}

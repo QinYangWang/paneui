@@ -5,12 +5,12 @@ import type * as React from "react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/registry/base-nova/ui/badge"
 
-import { PRESET_THEMES, RAMP_STOPS, type AccentVars } from "./accent-color"
+import { ACCENT_VARS, PRESET_THEMES, type AccentVar } from "./accent-color"
 import { useAccentState } from "./accent-store"
 import { modeValue, type ParsedTheme, type TokenKind, type TokenRole } from "./theming-tokens"
 
-/** Tokens the accent replaces, mapped to their AccentVars key. */
-const ACCENT_TOKENS: Record<string, keyof AccentVars> = { primary: "primary", "primary-foreground": "foreground", ring: "ring" }
+/** Tokens the accent replaces. */
+const isAccentToken = (name: string): name is AccentVar => (ACCENT_VARS as readonly string[]).includes(name)
 
 /**
  * One mode's preview: a tile painted with that mode's own page background (so translucent
@@ -50,17 +50,14 @@ function ValueCell({ kind, value, bg, wrap = false }: { kind: TokenKind; value: 
 
 /**
  * Token tables by role: token and Tailwind class, light and dark value with a live swatch each.
- * Values come from app/globals.css (parsed at build time); primary, primary-foreground, ring
- * and the accent ramp follow the accent you pick, in both modes, as resolved colours.
+ * Values come from app/globals.css (parsed at build time); the eight accent roles follow the
+ * accent you pick, in both modes, as resolved colours.
  */
 export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: ParsedTheme }) {
   const { accent, custom } = useAccentState()
   const accentTheme = accent === "custom" ? custom : PRESET_THEMES[accent]
   const valueFor = (name: string, which: "light" | "dark") => {
-    const key = ACCENT_TOKENS[name]
-    if (key && accentTheme) return accentTheme[which][key]
-    const stop = name.startsWith("accent-") ? (RAMP_STOPS as readonly string[]).indexOf(name.slice(7)) : -1
-    if (stop >= 0 && accentTheme?.ramp) return accentTheme.ramp[stop]
+    if (isAccentToken(name) && accentTheme) return accentTheme[which][name]
     return modeValue(theme, name, which)
   }
 

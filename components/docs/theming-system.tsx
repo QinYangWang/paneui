@@ -4,10 +4,10 @@ import { Code } from "./guide-page"
 
 /** Variable → utility → consumer, one row per kind of token in app/globals.css. */
 const LAYERS: { variable: string; value: string; utility: React.ReactNode; usedBy: string }[] = [
-  { variable: "--background", value: "oklch(100% 0 0)", utility: <Code>bg-background</Code>, usedBy: "Page canvas" },
+  { variable: "--background", value: "#fff", utility: <Code>bg-background</Code>, usedBy: "Page canvas" },
   {
     variable: "--primary",
-    value: "var(--accent-600)",
+    value: "#0090ff",
     utility: (
       <>
         <Code>bg-primary</Code> <Code>text-primary-foreground</Code>
@@ -15,9 +15,9 @@ const LAYERS: { variable: string; value: string; utility: React.ReactNode; usedB
     ),
     usedBy: "Filled buttons, switches, checks, selection",
   },
-  { variable: "--border", value: "oklch(0% 0 0 / 8%)", utility: <Code>border-border</Code>, usedBy: "Every divider" },
-  { variable: "--radius", value: "0.625rem", utility: <Code>rounded-sm … rounded-3xl</Code>, usedBy: "All corners" },
-  { variable: "--skeuo-raised", value: "ring + 1px drop", utility: <Code>shadow-raised</Code>, usedBy: "Resting cards and controls" },
+  { variable: "--border", value: "#0000000f", utility: <Code>border-border</Code>, usedBy: "Every divider" },
+  { variable: "--radius", value: "0.5rem", utility: <Code>rounded-sm … rounded-3xl</Code>, usedBy: "All corners" },
+  { variable: "--shadow-default", value: "hairline + 1px drop", utility: <Code>shadow-raised</Code>, usedBy: "Resting cards and controls" },
   { variable: "--text-ui", value: "0.8125rem", utility: <Code>text-ui</Code>, usedBy: "Buttons, inputs, menus, nav" },
 ]
 
@@ -51,7 +51,8 @@ const STEPS: { title: string; body: React.ReactNode }[] = [
 const EXTRAS: { name: React.ReactNode; body: string }[] = [
   { name: <Code>--radius</Code>, body: "One base that every corner multiplies, so nested corners stay concentric." },
   { name: <Code>text-ui-*</Code>, body: "The type scale for text inside components." },
-  { name: <Code>--skeuo-*</Code>, body: "The shadows behind the shadow-* utilities." },
+  { name: <Code>--shadow-*</Code>, body: "Four shadow levels behind shadow-xs to shadow-xl and the named elevation." },
+  { name: <Code>--font-*</Code>, body: "The UI, code and reading font stacks." },
   { name: <Code>--shell</Code>, body: "Colours for app chrome around the content panel." },
   { name: <Code>--scrollbar</Code>, body: "Scrollbar thumb colours." },
 ]
@@ -96,8 +97,8 @@ export function ThemingSystem() {
 
       <p className="text-muted-foreground">
         Dark mode works the same way. <Code>.dark</Code> on <Code>&lt;html&gt;</Code> points the same variables at dark
-        values, so a component written once is right in both modes. The accent sits one level up, where{" "}
-        <Code>--primary</Code> and <Code>--ring</Code> read an <Code>--accent-50…950</Code> ramp that a preset swaps.
+        values, so a component written once is right in both modes. The accent is eight of those variables,{" "}
+        <Code>--primary</Code> to <Code>--ring</Code>, which a preset swaps together.
       </p>
 
       <ol className="grid gap-3 sm:grid-cols-3">

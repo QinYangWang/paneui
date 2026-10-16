@@ -216,7 +216,7 @@ function SheetSurface({
       <DialogPrimitive.Popup
         data-slot="bottom-sheet-content"
         className={cn(
-          "fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-xl flex-col rounded-t-[calc(var(--radius)*2.8)] bg-popover text-popover-foreground shadow-surface outline-none",
+          "fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-xl flex-col rounded-t-[calc(var(--radius)*2.8)] bg-popover text-popover-foreground shadow-xl outline-none",
           // Extends below the viewport so an upward overdrag never shows a gap.
           "after:absolute after:inset-x-0 after:top-full after:h-[50vh] after:bg-popover",
           className

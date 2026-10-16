@@ -162,12 +162,12 @@ function TodoList({
       onOpenChange={setOpen}
       data-slot="todo-list"
       data-complete={complete || undefined}
-      className={cn("flex w-full flex-col frame-2xl frame-inset-2 bg-card shadow-raised", className)}
+      className={cn("flex w-full flex-col frame-3xl frame-inset-2 bg-card shadow-raised", className)}
       {...props}
     >
       <CollapsiblePrimitive.Trigger
         data-slot="todo-list-trigger"
-        className="group/todo flex w-full cursor-pointer items-center gap-2.5 rounded-2xl px-3.5 py-2.5 text-left outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50"
+        className="group/todo flex w-full cursor-pointer items-center gap-2.5 rounded-3xl px-3.5 py-2.5 text-left outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50"
       >
         <span className="relative grid size-5 shrink-0 place-items-center">
           <AnimatePresence initial={false} mode="popLayout">

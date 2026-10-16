@@ -22,7 +22,7 @@ export default function ModelPickerDemo() {
   const [model, setModel] = React.useState("gpt-6.1-sol")
   const [effort, setEffort] = React.useState("high")
   return (
-    <div className="flex items-center gap-1 rounded-2xl bg-card p-2 shadow-raised">
+    <div className="flex items-center gap-1 rounded-3xl bg-card p-2 shadow-raised">
       <ModePicker modes={MODES} value={mode} onValueChange={setMode} label="Access" side="bottom" />
       <ModelPicker models={MODELS} value={model} onValueChange={setModel} side="bottom" />
       <EffortPicker value={effort} onValueChange={setEffort} side="bottom" />

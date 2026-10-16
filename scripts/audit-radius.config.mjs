@@ -40,10 +40,9 @@ export default {
         "Range endpoints: the day button stays fully round over the range strip, whose cell is square on the side that continues the range.",
     },
     {
-      page: "terminal",
       slot: "terminal-viewport",
       reason:
-        "The emulator's own scroll layers are square; the demo card clips them with overflow-hidden, so no corner paints outside the frame.",
+        "The emulator's own scroll layers are square; the demo card (and the gallery tile) clips them with overflow-hidden, so no corner paints outside the frame.",
     },
     {
       control: true,

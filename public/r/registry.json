@@ -10,11 +10,33 @@
       "description": "Design tokens, type scale and utilities every component in the library reads.",
       "cssVars": {
         "theme": {
-          "color-code": "var(--code)",
-          "font-sans": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Noto Color Emoji\", sans-serif",
-          "font-mono": "var(--font-jetbrains-mono, \"JetBrains Mono\"), \"JetBrains Mono\", \"SF Mono\", \"SFMono-Regular\", Menlo, Consolas, \"Liberation Mono\", monospace",
+          "color-primary-hover": "var(--primary-hover)",
+          "color-primary-active": "var(--primary-active)",
+          "color-primary-subtle": "var(--primary-subtle)",
+          "color-primary-subtle-hover": "var(--primary-subtle-hover)",
+          "color-primary-border": "var(--primary-border)",
+          "color-fg-tertiary": "var(--fg-tertiary)",
+          "color-fg-disabled": "var(--fg-disabled)",
+          "color-destructive-hover": "var(--destructive-hover)",
+          "color-destructive-foreground": "var(--destructive-foreground)",
+          "color-destructive-subtle": "var(--destructive-subtle)",
+          "color-destructive-border": "var(--destructive-border)",
           "color-success": "var(--success)",
+          "color-success-hover": "var(--success-hover)",
+          "color-success-foreground": "var(--success-foreground)",
+          "color-success-subtle": "var(--success-subtle)",
+          "color-success-border": "var(--success-border)",
           "color-warning": "var(--warning)",
+          "color-warning-hover": "var(--warning-hover)",
+          "color-warning-foreground": "var(--warning-foreground)",
+          "color-warning-subtle": "var(--warning-subtle)",
+          "color-warning-border": "var(--warning-border)",
+          "color-surface-sunken": "var(--surface-sunken)",
+          "color-surface-standout": "var(--surface-standout)",
+          "color-standout-foreground": "var(--standout-foreground)",
+          "color-border-subtle": "var(--border-subtle)",
+          "color-border-strong": "var(--border-strong)",
+          "color-code": "var(--code)",
           "color-chart-1": "var(--chart-1)",
           "color-chart-2": "var(--chart-2)",
           "color-chart-3": "var(--chart-3)",
@@ -25,14 +47,28 @@
           "color-chart-8": "var(--chart-8)",
           "color-shell": "var(--shell)",
           "color-shell-border": "var(--shell-border)",
-          "radius-2xs": "calc(var(--radius) * 0.3)",
-          "radius-xs": "calc(var(--radius) * 0.4)",
-          "radius-sm": "calc(var(--radius) * 0.6)",
-          "radius-md": "calc(var(--radius) * 0.8)",
-          "radius-xl": "calc(var(--radius) * 1.4)",
-          "radius-2xl": "calc(var(--radius) * 1.8)",
-          "radius-3xl": "calc(var(--radius) * 2.2)",
-          "radius-shell": "calc(var(--radius) * 1.3)",
+          "font-sans": "\"Inter Variable\", \"Inter\", \"Noto Sans SC Variable\", \"Noto Sans SC\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, \"PingFang SC\", \"Microsoft YaHei\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Noto Color Emoji\"",
+          "font-sans--font-feature-settings": "\"ss03\"",
+          "font-mono": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Noto Sans SC Variable\", ui-monospace, \"SF Mono\", \"SFMono-Regular\", Menlo, Consolas, \"Liberation Mono\", monospace",
+          "font-mono--font-feature-settings": "normal",
+          "font-serif": "\"Newsreader Variable\", \"Newsreader\", \"Noto Serif SC Variable\", \"Noto Serif SC\", ui-serif, Georgia, \"Songti SC\", \"SimSun\", serif",
+          "radius-2xs": "calc(var(--radius) * 0.25)",
+          "radius-xs": "calc(var(--radius) * 0.25)",
+          "radius-sm": "calc(var(--radius) * 0.5)",
+          "radius-md": "calc(var(--radius) * 0.75)",
+          "radius-xl": "calc(var(--radius) * 1.25)",
+          "radius-2xl": "calc(var(--radius) * 1.5)",
+          "radius-3xl": "calc(var(--radius) * 2)",
+          "radius-4xl": "calc(var(--radius) * 2.5)",
+          "radius-5xl": "calc(var(--radius) * 3)",
+          "radius-shell": "calc(var(--radius) * 1.5)",
+          "shadow-xs": "var(--shadow-border)",
+          "shadow-sm": "var(--shadow-default)",
+          "shadow-md": "var(--shadow-lg)",
+          "shadow-lg": "var(--shadow-lg)",
+          "shadow-xl": "var(--shadow-xl)",
+          "shadow-border": "var(--shadow-border)",
+          "shadow-default": "var(--shadow-default)",
           "shadow-raised": "var(--skeuo-raised)",
           "shadow-raised-hover": "var(--skeuo-raised-hover)",
           "shadow-pressed": "var(--skeuo-pressed)",
@@ -50,43 +86,61 @@
           "text-ui--line-height": "1.125rem",
           "text-ui-lg": "0.875rem",
           "text-ui-lg--line-height": "1.25rem",
+          "font-weight-normal": "400",
+          "font-weight-semimedium": "450",
+          "font-weight-medium": "500",
+          "font-weight-semibold": "600",
+          "font-weight-bold": "700",
           "container-reading": "68ch",
           "container-page": "76rem",
-          "radius": "0.625rem"
+          "radius": "0.5rem"
         },
         "light": {
-          "radius": "0.625rem",
-          "accent-50": "oklch(97% 0.014 254.604)",
-          "accent-100": "oklch(93.2% 0.032 255.585)",
-          "accent-200": "oklch(88.2% 0.059 254.128)",
-          "accent-300": "oklch(80.9% 0.105 251.813)",
-          "accent-400": "oklch(66% 0.184 254.753)",
-          "accent-500": "oklch(62.3% 0.214 259.815)",
-          "accent-600": "oklch(54.6% 0.245 262.881)",
-          "accent-700": "oklch(48.8% 0.243 264.376)",
-          "accent-800": "oklch(42.4% 0.199 265.638)",
-          "accent-900": "oklch(37.9% 0.146 265.522)",
-          "accent-950": "oklch(28.2% 0.091 267.935)",
-          "background": "oklch(100% 0 0)",
-          "card": "oklch(100% 0 0)",
-          "popover": "oklch(100% 0 0)",
-          "foreground": "oklch(14.5% 0 0)",
-          "card-foreground": "oklch(14.5% 0 0)",
-          "popover-foreground": "oklch(14.5% 0 0)",
-          "muted-foreground": "oklch(55.6% 0 0)",
-          "primary": "var(--accent-600)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "secondary": "oklch(0% 0 0 / 3%)",
-          "secondary-foreground": "oklch(14.5% 0 0)",
-          "muted": "oklch(0% 0 0 / 3%)",
-          "accent": "oklch(0% 0 0 / 3%)",
-          "accent-foreground": "oklch(14.5% 0 0)",
-          "destructive": "oklch(63.7% 0.237 25.331)",
-          "success": "oklch(64.8% 0.2 131.684)",
-          "warning": "oklch(68.1% 0.162 75.834)",
-          "border": "oklch(0% 0 0 / 8%)",
-          "input": "oklch(0% 0 0 / 8%)",
-          "ring": "var(--accent-500)",
+          "radius": "0.5rem",
+          "background": "#fff",
+          "card": "#fff",
+          "popover": "#fff",
+          "surface-sunken": "#0000000d",
+          "surface-standout": "#202020",
+          "standout-foreground": "#fff",
+          "foreground": "#000000df",
+          "card-foreground": "#000000df",
+          "popover-foreground": "#000000df",
+          "muted-foreground": "#0000009b",
+          "fg-tertiary": "#00000072",
+          "fg-disabled": "#0004",
+          "primary": "#0090ff",
+          "primary-hover": "#0588f0",
+          "primary-active": "#0d74ce",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#008ff519",
+          "primary-subtle-hover": "#009eff2a",
+          "primary-border": "#0088f653",
+          "ring": "#0084e6a1",
+          "secondary": "#0000000f",
+          "secondary-foreground": "#000000df",
+          "muted": "#0000000f",
+          "accent": "#00000017",
+          "accent-foreground": "#000000df",
+          "destructive": "#e54d2e",
+          "destructive-hover": "#dd4425",
+          "destructive-foreground": "#fffcfc",
+          "destructive-subtle": "#f52b0018",
+          "destructive-border": "#f92d0050",
+          "success": "#30a46c",
+          "success-hover": "#2b9a66",
+          "success-foreground": "#fbfefc",
+          "success-subtle": "#00a43319",
+          "success-border": "#00963c52",
+          "warning": "#f76b15",
+          "warning-hover": "#ef5f00",
+          "warning-foreground": "#fefcfb",
+          "warning-subtle": "#ff9c0029",
+          "warning-border": "#ff81007d",
+          "border": "#0000000f",
+          "border-subtle": "#00000006",
+          "border-strong": "#00000026",
+          "input": "#00000026",
           "chart-1": "oklch(77.7% 0.152 181.912)",
           "chart-2": "oklch(84.1% 0.238 128.85)",
           "chart-3": "oklch(71.8% 0.202 349.761)",
@@ -95,50 +149,85 @@
           "chart-6": "oklch(66% 0.184 254.753)",
           "chart-7": "oklch(76.5% 0.177 163.223)",
           "chart-8": "oklch(85.2% 0.199 91.936)",
-          "code": "oklch(97.6% 0 0)",
-          "scrollbar": "oklch(0% 0 0 / 16%)",
-          "scrollbar-hover": "oklch(0% 0 0 / 28%)",
-          "shell": "oklch(97.6% 0 0)",
+          "code": "#f9f9f9",
+          "scrollbar": "#00000026",
+          "scrollbar-hover": "#0004",
+          "shell": "oklch(97.3% 0 0)",
           "shell-border": "oklch(0% 0 0 / 10%)",
-          "skeuo-raised": "0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%)",
-          "skeuo-raised-hover": "0 0 0 1px oklch(0% 0 0 / 17%), 0 1px 1px oklch(0% 0 0 / 5%)",
-          "skeuo-pressed": "0 0 0 1px oklch(0% 0 0 / 8%)",
-          "skeuo-primary": "0 1px 2px oklch(0% 0 0 / 8%)",
-          "skeuo-well": "inset 0 0 0 1px oklch(0% 0 0 / 8%)",
-          "skeuo-surface": "0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 2px oklch(0% 0 0 / 6%), 0 4px 10px -4px oklch(0% 0 0 / 8%)",
-          "skeuo-chip": "0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%)",
+          "shadow-border": "0 0 0 1px #00000012",
+          "shadow-default": "0 0 0 0.5px #0000 inset, 0 0 0 0.5px #0000000f, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d",
+          "shadow-lg": "0 0 0 0.5px #0000000f, 0 2px 3px -2px #0000000f, 0 3px 12px -4px #0000001a, 0 4px 16px -8px #0000000d",
+          "shadow-xl": "0 0 0 0.5px #0000 inset, 0 0 0 0.5px #0000000f, 0 8px 40px 0 #0000000d, 0 12px 32px -16px #00000026",
+          "skeuo-raised": "var(--shadow-default)",
+          "skeuo-raised-hover": "0 0 0 0.5px #0000 inset, 0 0 0 0.5px #00000026, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d",
+          "skeuo-pressed": "var(--shadow-border)",
+          "skeuo-primary": "0 1px 2px #0000000d",
+          "skeuo-well": "inset 0 0 0 1px var(--input)",
+          "skeuo-surface": "var(--shadow-lg)",
+          "skeuo-chip": "var(--shadow-border)",
           "image-outline": "oklch(0 0 0 / 0.1)"
         },
         "dark": {
-          "background": "oklch(18.2% 0 0)",
-          "card": "oklch(26.9% 0 0)",
-          "popover": "oklch(26.9% 0 0)",
-          "foreground": "oklch(98.5% 0 0)",
-          "card-foreground": "oklch(98.5% 0 0)",
-          "popover-foreground": "oklch(98.5% 0 0)",
-          "muted-foreground": "oklch(70.8% 0 0)",
-          "secondary": "oklch(100% 0 0 / 7%)",
-          "secondary-foreground": "oklch(98.5% 0 0)",
-          "muted": "oklch(100% 0 0 / 5%)",
-          "accent": "oklch(100% 0 0 / 7%)",
-          "accent-foreground": "oklch(98.5% 0 0)",
-          "destructive": "oklch(63.7% 0.237 25.331)",
-          "success": "oklch(84.1% 0.238 128.85)",
-          "warning": "oklch(79.5% 0.184 86.047)",
-          "border": "oklch(100% 0 0 / 8%)",
-          "input": "oklch(100% 0 0 / 12%)",
-          "code": "oklch(20.5% 0 0)",
-          "scrollbar": "oklch(100% 0 0 / 14%)",
-          "scrollbar-hover": "oklch(100% 0 0 / 24%)",
-          "shell": "oklch(20.5% 0 0)",
+          "background": "oklch(15% 0 0)",
+          "card": "#111",
+          "popover": "oklch(25.2% 0 0)",
+          "surface-sunken": "#0006",
+          "surface-standout": "#222",
+          "standout-foreground": "#ffffffed",
+          "foreground": "#ffffffed",
+          "card-foreground": "#ffffffed",
+          "popover-foreground": "#ffffffed",
+          "muted-foreground": "#ffffffaf",
+          "fg-tertiary": "#ffffff64",
+          "fg-disabled": "#fff5",
+          "primary": "#0090ff",
+          "primary-hover": "#3b9eff",
+          "primary-active": "#70b8ff",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#0077ff3a",
+          "primary-subtle-hover": "#0075ff57",
+          "primary-border": "#0f89fd7f",
+          "ring": "#0090ff",
+          "secondary": "#ffffff12",
+          "secondary-foreground": "#ffffffed",
+          "muted": "#ffffff12",
+          "accent": "#ffffff1b",
+          "accent-foreground": "#ffffffed",
+          "destructive": "#e54d2e",
+          "destructive-hover": "#ec6142",
+          "destructive-foreground": "#fff",
+          "destructive-subtle": "#ff35232b",
+          "destructive-border": "#ff4f3864",
+          "success": "#30a46c",
+          "success-hover": "#33b074",
+          "success-foreground": "#fff",
+          "success-subtle": "#22ff991e",
+          "success-border": "#44ffaa4b",
+          "warning": "#f76b15",
+          "warning-hover": "#ff801f",
+          "warning-foreground": "#fff",
+          "warning-subtle": "#fb6a0025",
+          "warning-border": "#fd75045c",
+          "border": "#ffffff12",
+          "border-subtle": "#ffffff09",
+          "border-strong": "#ffffff2c",
+          "input": "#ffffff2c",
+          "code": "#191919",
+          "scrollbar": "#ffffff2c",
+          "scrollbar-hover": "#fff5",
+          "shell": "#000",
           "shell-border": "oklch(100% 0 0 / 9%)",
-          "skeuo-raised": "0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 1px oklch(0% 0 0 / 14%)",
-          "skeuo-raised-hover": "0 0 0 1px oklch(100% 0 0 / 20%), 0 1px 1px oklch(0% 0 0 / 14%)",
-          "skeuo-pressed": "0 0 0 1px oklch(100% 0 0 / 8%)",
+          "shadow-border": "0 0 0 1px #ffffff12",
+          "shadow-default": "0 0 0 0.5px #ffffff12 inset, 0 0 0 0.5px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000",
+          "shadow-lg": "0 0 0 1px #ffffff2c, 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080",
+          "shadow-xl": "0 0 0 0.5px #ffffff12 inset, 0 0 0 0.5px #0000, 0 8px 40px 0 #0000000d, 0 12px 32px -16px #00000026",
+          "skeuo-raised": "var(--shadow-default)",
+          "skeuo-raised-hover": "0 0 0 0.5px #ffffff2c inset, 0 0 0 0.5px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000",
+          "skeuo-pressed": "var(--shadow-border)",
           "skeuo-primary": "0 0 0 0 transparent",
-          "skeuo-well": "inset 0 0 0 1px oklch(100% 0 0 / 12%)",
-          "skeuo-surface": "0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 2px oklch(0% 0 0 / 18%), 0 4px 12px -4px oklch(0% 0 0 / 36%)",
-          "skeuo-chip": "0 0 0 1px oklch(100% 0 0 / 10%)",
+          "skeuo-well": "inset 0 0 0 1px var(--input)",
+          "skeuo-surface": "var(--shadow-lg)",
+          "skeuo-chip": "var(--shadow-border)",
           "image-outline": "oklch(1 0 0 / 0.1)"
         }
       },
@@ -169,6 +258,9 @@
           },
           "body": {
             "letter-spacing": "normal"
+          },
+          "code, kbd, pre, samp": {
+            "font-feature-settings": "normal"
           }
         },
         "@utility scrollbar-thin": {
@@ -209,6 +301,98 @@
         },
         "@utility window-no-drag": {
           "-webkit-app-region": "no-drag"
+        },
+        "@supports (color: color(display-p3 1 1 1))": {
+          "@media (color-gamut: p3)": {
+            "html[data-accent=\"green\"]": {
+              "primary": "color(display-p3 .332 .634 .442)",
+              "primary-hover": "color(display-p3 .308 .595 .417)",
+              "primary-active": "color(display-p3 .19 .5 .32)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .012 .596 .145/.087)",
+              "primary-subtle-hover": "color(display-p3 .008 .588 .145/.142)",
+              "primary-border": "color(display-p3 .004 .518 .157/.283)",
+              "ring": "color(display-p3 0 .478 .2/.55)"
+            },
+            "html[data-accent=\"green\"].dark": {
+              "primary": "color(display-p3 .332 .634 .442)",
+              "primary-hover": "color(display-p3 .357 .682 .474)",
+              "primary-active": "color(display-p3 .434 .828 .573)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .376 .996 .655/.114)",
+              "primary-subtle-hover": "color(display-p3 .341 .996 .635/.173)",
+              "primary-border": "color(display-p3 .475 1 .706/.29)",
+              "ring": "color(display-p3 .502 .996 .682/.61)"
+            },
+            "html[data-accent=\"orange\"]": {
+              "primary": "color(display-p3 .9 .45 .2)",
+              "primary-hover": "color(display-p3 .87 .409 .164)",
+              "primary-active": "color(display-p3 .76 .34 0)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .922 .584 .008/.15)",
+              "primary-subtle-hover": "color(display-p3 1 .604 .004/.314)",
+              "primary-border": "color(display-p3 .949 .494 .004/.455)",
+              "ring": "color(display-p3 .804 .349 0/.62)"
+            },
+            "html[data-accent=\"orange\"].dark": {
+              "primary": "color(display-p3 .9 .45 .2)",
+              "primary-hover": "color(display-p3 .98 .51 .23)",
+              "primary-active": "color(display-p3 1 .63 .38)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .996 .486 0/.131)",
+              "primary-subtle-hover": "color(display-p3 .996 .384 0/.211)",
+              "primary-border": "color(display-p3 1 .529 .129/.332)",
+              "ring": "color(display-p3 1 .494 .216/.895)"
+            },
+            "html[data-accent=\"rose\"]": {
+              "primary": "color(display-p3 .843 .298 .507)",
+              "primary-hover": "color(display-p3 .807 .266 .468)",
+              "primary-active": "color(display-p3 .731 .195 .388)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .859 .008 .294/.083)",
+              "primary-subtle-hover": "color(display-p3 .827 .008 .298/.134)",
+              "primary-border": "color(display-p3 .682 .004 .247/.244)",
+              "ring": "color(display-p3 .6 .004 .251/.408)"
+            },
+            "html[data-accent=\"rose\"].dark": {
+              "primary": "color(display-p3 .843 .298 .507)",
+              "primary-hover": "color(display-p3 .864 .364 .539)",
+              "primary-active": "color(display-p3 1 .56 .66)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .996 .227 .573/.148)",
+              "primary-subtle-hover": "color(display-p3 1 .157 .569/.227)",
+              "primary-border": "color(display-p3 1 .337 .643/.349)",
+              "ring": "color(display-p3 1 .345 .596/.832)"
+            },
+            "html[data-accent=\"violet\"]": {
+              "primary": "color(display-p3 .417 .341 .784)",
+              "primary-hover": "color(display-p3 .381 .306 .741)",
+              "primary-active": "color(display-p3 .383 .317 .702)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .204 .004 .871/.059)",
+              "primary-subtle-hover": "color(display-p3 .196 .004 1/.102)",
+              "primary-border": "color(display-p3 .153 .004 .906/.208)",
+              "ring": "color(display-p3 .133 .004 .753/.397)"
+            },
+            "html[data-accent=\"violet\"].dark": {
+              "primary": "color(display-p3 .417 .341 .784)",
+              "primary-hover": "color(display-p3 .477 .402 .823)",
+              "primary-active": "color(display-p3 .72 .65 1)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .494 .337 .996/.202)",
+              "primary-subtle-hover": "color(display-p3 .49 .345 1/.299)",
+              "primary-border": "color(display-p3 .569 .455 1/.408)",
+              "ring": "color(display-p3 .522 .424 1/.769)"
+            }
+          }
+        },
+        "@supports (color: color-mix(in oklab, red, red))": {
+          ":root": {
+            "shadow-lg": "0 0 0 0.5px color-mix(in oklab, #0000000f, #f0f0f0 25%), 0 2px 3px -2px #0000000f, 0 3px 12px -4px #0000001a, 0 4px 16px -8px #0000000d"
+          },
+          ".dark": {
+            "shadow-lg": "0 0 0 1px color-mix(in oklab, #ffffff12, #3a3a3a 25%), 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080"
+          }
         }
       },
       "meta": {
@@ -281,25 +465,24 @@
       ],
       "cssVars": {
         "light": {
-          "accent-50": "oklch(98.5% 0 0)",
-          "accent-100": "oklch(97.6% 0 0)",
-          "accent-200": "oklch(94% 0 0)",
-          "accent-300": "oklch(87% 0 0)",
-          "accent-400": "oklch(70.8% 0 0)",
-          "accent-500": "oklch(55.6% 0 0)",
-          "accent-600": "oklch(43.9% 0 0)",
-          "accent-700": "oklch(37.1% 0 0)",
-          "accent-800": "oklch(26.9% 0 0)",
-          "accent-900": "oklch(20.5% 0 0)",
-          "accent-950": "oklch(14.5% 0 0)",
-          "primary": "var(--accent-900)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-400)"
+          "primary": "#000000f2",
+          "primary-hover": "#000c",
+          "primary-active": "#000000b3",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#0000000f",
+          "primary-subtle-hover": "#00000017",
+          "primary-border": "#00000026",
+          "ring": "#0004"
         },
         "dark": {
-          "primary": "var(--accent-100)",
-          "primary-foreground": "var(--accent-900)",
-          "ring": "var(--accent-500)"
+          "primary": "#fffffff2",
+          "primary-hover": "#fffc",
+          "primary-active": "#ffffffb3",
+          "primary-foreground": "#000",
+          "primary-subtle": "#ffffff12",
+          "primary-subtle-hover": "#ffffff1b",
+          "primary-border": "#ffffff2c",
+          "ring": "#fff5"
         }
       },
       "meta": {
@@ -317,30 +500,55 @@
       ],
       "cssVars": {
         "light": {
-          "accent-50": "oklch(97% 0.014 254.604)",
-          "accent-100": "oklch(93.2% 0.032 255.585)",
-          "accent-200": "oklch(88.2% 0.059 254.128)",
-          "accent-300": "oklch(80.9% 0.105 251.813)",
-          "accent-400": "oklch(66% 0.184 254.753)",
-          "accent-500": "oklch(62.3% 0.214 259.815)",
-          "accent-600": "oklch(54.6% 0.245 262.881)",
-          "accent-700": "oklch(48.8% 0.243 264.376)",
-          "accent-800": "oklch(42.4% 0.199 265.638)",
-          "accent-900": "oklch(37.9% 0.146 265.522)",
-          "accent-950": "oklch(28.2% 0.091 267.935)",
-          "primary": "var(--accent-600)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#0090ff",
+          "primary-hover": "#0588f0",
+          "primary-active": "#0d74ce",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#008ff519",
+          "primary-subtle-hover": "#009eff2a",
+          "primary-border": "#0088f653",
+          "ring": "#0084e6a1"
         },
         "dark": {
-          "primary": "var(--accent-600)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#0090ff",
+          "primary-hover": "#3b9eff",
+          "primary-active": "#70b8ff",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#0077ff3a",
+          "primary-subtle-hover": "#0075ff57",
+          "primary-border": "#0f89fd7f",
+          "ring": "#0090ff"
         }
       },
       "meta": {
         "category": "Foundations",
         "hidden": true
+      },
+      "css": {
+        "@supports (color: color(display-p3 1 1 1))": {
+          "@media (color-gamut: p3)": {
+            ":root": {
+              "primary": "color(display-p3 .247 .556 .969)",
+              "primary-hover": "color(display-p3 .234 .523 .912)",
+              "primary-active": "color(display-p3 .15 .44 .84)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .012 .506 .914/.087)",
+              "primary-subtle-hover": "color(display-p3 .008 .545 1/.146)",
+              "primary-border": "color(display-p3 .004 .463 .922/.291)",
+              "ring": "color(display-p3 0 .427 .851/.55)"
+            },
+            ".dark": {
+              "primary": "color(display-p3 .247 .556 .969)",
+              "primary-hover": "color(display-p3 .344 .612 .973)",
+              "primary-active": "color(display-p3 .49 .72 1)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .122 .463 1/.219)",
+              "primary-subtle-hover": "color(display-p3 0 .467 1/.324)",
+              "primary-border": "color(display-p3 .224 .557 1/.475)",
+              "ring": "color(display-p3 .251 .573 .996/.967)"
+            }
+          }
+        }
       }
     },
     {
@@ -353,30 +561,55 @@
       ],
       "cssVars": {
         "light": {
-          "accent-50": "oklch(98.2% 0.018 155.826)",
-          "accent-100": "oklch(96.2% 0.044 156.743)",
-          "accent-200": "oklch(92.5% 0.084 155.995)",
-          "accent-300": "oklch(87.1% 0.150 154.449)",
-          "accent-400": "oklch(79.2% 0.209 151.711)",
-          "accent-500": "oklch(72.3% 0.219 149.579)",
-          "accent-600": "oklch(62.7% 0.194 149.214)",
-          "accent-700": "oklch(52.7% 0.154 150.069)",
-          "accent-800": "oklch(44.8% 0.119 151.328)",
-          "accent-900": "oklch(39.3% 0.095 152.535)",
-          "accent-950": "oklch(26.6% 0.065 152.934)",
-          "primary": "var(--accent-700)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#30a46c",
+          "primary-hover": "#2b9a66",
+          "primary-active": "#218358",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#00a43319",
+          "primary-subtle-hover": "#00a83829",
+          "primary-border": "#00963c52",
+          "ring": "#00924ba4"
         },
         "dark": {
-          "primary": "var(--accent-700)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#30a46c",
+          "primary-hover": "#33b074",
+          "primary-active": "#3dd68c",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#22ff991e",
+          "primary-subtle-hover": "#11ff992d",
+          "primary-border": "#44ffaa4b",
+          "ring": "#44ffa49e"
         }
       },
       "meta": {
         "category": "Foundations",
         "hidden": true
+      },
+      "css": {
+        "@supports (color: color(display-p3 1 1 1))": {
+          "@media (color-gamut: p3)": {
+            ":root": {
+              "primary": "color(display-p3 .332 .634 .442)",
+              "primary-hover": "color(display-p3 .308 .595 .417)",
+              "primary-active": "color(display-p3 .19 .5 .32)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .012 .596 .145/.087)",
+              "primary-subtle-hover": "color(display-p3 .008 .588 .145/.142)",
+              "primary-border": "color(display-p3 .004 .518 .157/.283)",
+              "ring": "color(display-p3 0 .478 .2/.55)"
+            },
+            ".dark": {
+              "primary": "color(display-p3 .332 .634 .442)",
+              "primary-hover": "color(display-p3 .357 .682 .474)",
+              "primary-active": "color(display-p3 .434 .828 .573)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .376 .996 .655/.114)",
+              "primary-subtle-hover": "color(display-p3 .341 .996 .635/.173)",
+              "primary-border": "color(display-p3 .475 1 .706/.29)",
+              "ring": "color(display-p3 .502 .996 .682/.61)"
+            }
+          }
+        }
       }
     },
     {
@@ -389,30 +622,55 @@
       ],
       "cssVars": {
         "light": {
-          "accent-50": "oklch(98% 0.016 73.684)",
-          "accent-100": "oklch(95.4% 0.038 75.164)",
-          "accent-200": "oklch(90.1% 0.076 70.697)",
-          "accent-300": "oklch(83.7% 0.128 66.290)",
-          "accent-400": "oklch(75% 0.183 55.934)",
-          "accent-500": "oklch(70.5% 0.213 47.604)",
-          "accent-600": "oklch(64.6% 0.222 41.116)",
-          "accent-700": "oklch(55.3% 0.195 38.402)",
-          "accent-800": "oklch(47% 0.157 37.304)",
-          "accent-900": "oklch(40.8% 0.123 38.172)",
-          "accent-950": "oklch(26.6% 0.079 36.259)",
-          "primary": "var(--accent-700)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#f76b15",
+          "primary-hover": "#ef5f00",
+          "primary-active": "#cc4e00",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#ff9c0029",
+          "primary-subtle-hover": "#ff91014a",
+          "primary-border": "#ff81007d",
+          "ring": "#e35f00aa"
         },
         "dark": {
-          "primary": "var(--accent-700)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#f76b15",
+          "primary-hover": "#ff801f",
+          "primary-active": "#ffa057",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#fb6a0025",
+          "primary-subtle-hover": "#ff590039",
+          "primary-border": "#fd75045c",
+          "ring": "#fe6d15f7"
         }
       },
       "meta": {
         "category": "Foundations",
         "hidden": true
+      },
+      "css": {
+        "@supports (color: color(display-p3 1 1 1))": {
+          "@media (color-gamut: p3)": {
+            ":root": {
+              "primary": "color(display-p3 .9 .45 .2)",
+              "primary-hover": "color(display-p3 .87 .409 .164)",
+              "primary-active": "color(display-p3 .76 .34 0)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .922 .584 .008/.15)",
+              "primary-subtle-hover": "color(display-p3 1 .604 .004/.314)",
+              "primary-border": "color(display-p3 .949 .494 .004/.455)",
+              "ring": "color(display-p3 .804 .349 0/.62)"
+            },
+            ".dark": {
+              "primary": "color(display-p3 .9 .45 .2)",
+              "primary-hover": "color(display-p3 .98 .51 .23)",
+              "primary-active": "color(display-p3 1 .63 .38)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .996 .486 0/.131)",
+              "primary-subtle-hover": "color(display-p3 .996 .384 0/.211)",
+              "primary-border": "color(display-p3 1 .529 .129/.332)",
+              "ring": "color(display-p3 1 .494 .216/.895)"
+            }
+          }
+        }
       }
     },
     {
@@ -425,30 +683,55 @@
       ],
       "cssVars": {
         "light": {
-          "accent-50": "oklch(96.9% 0.015 12.422)",
-          "accent-100": "oklch(94.1% 0.030 12.580)",
-          "accent-200": "oklch(89.2% 0.058 10.001)",
-          "accent-300": "oklch(81% 0.117 11.638)",
-          "accent-400": "oklch(71.2% 0.194 13.428)",
-          "accent-500": "oklch(64.5% 0.246 16.439)",
-          "accent-600": "oklch(58.6% 0.253 17.585)",
-          "accent-700": "oklch(51.4% 0.222 16.935)",
-          "accent-800": "oklch(45.5% 0.188 13.697)",
-          "accent-900": "oklch(41% 0.159 10.272)",
-          "accent-950": "oklch(27.1% 0.105 12.094)",
-          "primary": "var(--accent-600)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#e93d82",
+          "primary-hover": "#df3478",
+          "primary-active": "#cb1d63",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#ff005216",
+          "primary-subtle-hover": "#f8005123",
+          "primary-border": "#d0004b41",
+          "ring": "#b6004a6c"
         },
         "dark": {
-          "primary": "var(--accent-600)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#e93d82",
+          "primary-hover": "#ee518a",
+          "primary-active": "#ff92ad",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#fe2a8b2a",
+          "primary-subtle-hover": "#fd158741",
+          "primary-border": "#fe459763",
+          "ring": "#fe418de8"
         }
       },
       "meta": {
         "category": "Foundations",
         "hidden": true
+      },
+      "css": {
+        "@supports (color: color(display-p3 1 1 1))": {
+          "@media (color-gamut: p3)": {
+            ":root": {
+              "primary": "color(display-p3 .843 .298 .507)",
+              "primary-hover": "color(display-p3 .807 .266 .468)",
+              "primary-active": "color(display-p3 .731 .195 .388)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .859 .008 .294/.083)",
+              "primary-subtle-hover": "color(display-p3 .827 .008 .298/.134)",
+              "primary-border": "color(display-p3 .682 .004 .247/.244)",
+              "ring": "color(display-p3 .6 .004 .251/.408)"
+            },
+            ".dark": {
+              "primary": "color(display-p3 .843 .298 .507)",
+              "primary-hover": "color(display-p3 .864 .364 .539)",
+              "primary-active": "color(display-p3 1 .56 .66)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .996 .227 .573/.148)",
+              "primary-subtle-hover": "color(display-p3 1 .157 .569/.227)",
+              "primary-border": "color(display-p3 1 .337 .643/.349)",
+              "ring": "color(display-p3 1 .345 .596/.832)"
+            }
+          }
+        }
       }
     },
     {
@@ -461,30 +744,55 @@
       ],
       "cssVars": {
         "light": {
-          "accent-50": "oklch(96.9% 0.016 293.756)",
-          "accent-100": "oklch(94.3% 0.029 294.588)",
-          "accent-200": "oklch(89.4% 0.057 293.283)",
-          "accent-300": "oklch(81.1% 0.111 293.571)",
-          "accent-400": "oklch(70.2% 0.183 293.541)",
-          "accent-500": "oklch(60.6% 0.250 292.717)",
-          "accent-600": "oklch(54.1% 0.281 293.009)",
-          "accent-700": "oklch(49.1% 0.270 292.581)",
-          "accent-800": "oklch(43.2% 0.232 292.759)",
-          "accent-900": "oklch(38% 0.189 293.745)",
-          "accent-950": "oklch(28.3% 0.141 291.089)",
-          "primary": "var(--accent-600)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#6e56cf",
+          "primary-hover": "#654dc4",
+          "primary-active": "#6550b9",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#4400ee0f",
+          "primary-subtle-hover": "#4300ff1b",
+          "primary-border": "#3100fb35",
+          "ring": "#2b00d066"
         },
         "dark": {
-          "primary": "var(--accent-600)",
-          "primary-foreground": "oklch(100% 0 0)",
-          "ring": "var(--accent-500)"
+          "primary": "#6e56cf",
+          "primary-hover": "#7d66d9",
+          "primary-active": "#baa7ff",
+          "primary-foreground": "#fff",
+          "primary-subtle": "#8354fe36",
+          "primary-subtle-hover": "#7d51fd50",
+          "primary-border": "#8f6cfd6d",
+          "ring": "#8668ffcc"
         }
       },
       "meta": {
         "category": "Foundations",
         "hidden": true
+      },
+      "css": {
+        "@supports (color: color(display-p3 1 1 1))": {
+          "@media (color-gamut: p3)": {
+            ":root": {
+              "primary": "color(display-p3 .417 .341 .784)",
+              "primary-hover": "color(display-p3 .381 .306 .741)",
+              "primary-active": "color(display-p3 .383 .317 .702)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .204 .004 .871/.059)",
+              "primary-subtle-hover": "color(display-p3 .196 .004 1/.102)",
+              "primary-border": "color(display-p3 .153 .004 .906/.208)",
+              "ring": "color(display-p3 .133 .004 .753/.397)"
+            },
+            ".dark": {
+              "primary": "color(display-p3 .417 .341 .784)",
+              "primary-hover": "color(display-p3 .477 .402 .823)",
+              "primary-active": "color(display-p3 .72 .65 1)",
+              "primary-foreground": "#fff",
+              "primary-subtle": "color(display-p3 .494 .337 .996/.202)",
+              "primary-subtle-hover": "color(display-p3 .49 .345 1/.299)",
+              "primary-border": "color(display-p3 .569 .455 1/.408)",
+              "ring": "color(display-p3 .522 .424 1/.769)"
+            }
+          }
+        }
       }
     },
     {
@@ -533,7 +841,7 @@
       ],
       "cssVars": {
         "light": {
-          "radius": "0.625rem"
+          "radius": "0.5rem"
         }
       },
       "meta": {
@@ -551,7 +859,7 @@
       ],
       "cssVars": {
         "light": {
-          "radius": "0.875rem"
+          "radius": "0.625rem"
         }
       },
       "meta": {
@@ -569,9 +877,36 @@
       ],
       "cssVars": {
         "light": {
-          "radius": "1.125rem"
+          "radius": "0.875rem"
         }
       },
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
+      }
+    },
+    {
+      "name": "fonts",
+      "type": "registry:file",
+      "title": "Fonts",
+      "description": "Self-hosted UI, code and reading fonts the theme's font stacks name.",
+      "dependencies": [
+        "@fontsource-variable/inter",
+        "@fontsource-variable/noto-sans-sc",
+        "@fontsource-variable/jetbrains-mono",
+        "@fontsource-variable/newsreader",
+        "@fontsource-variable/noto-serif-sc"
+      ],
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "app/fonts.css",
+          "type": "registry:file",
+          "target": "app/fonts.css"
+        }
+      ],
       "meta": {
         "category": "Foundations",
         "hidden": true

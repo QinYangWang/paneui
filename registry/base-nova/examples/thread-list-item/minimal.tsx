@@ -3,7 +3,7 @@ import { ThreadList, ThreadListGroup, ThreadListItem } from "@/registry/base-nov
 
 export default function ThreadListItemMinimal() {
   return (
-    <div className="w-64 rounded-2xl bg-card p-2 shadow-raised">
+    <div className="w-64 rounded-3xl bg-card p-2 shadow-raised">
       <ThreadList>
         <ThreadListGroup label="Chats">
           <ThreadListItem title="Plan the offsite agenda" icon={<ChatIcon />} />

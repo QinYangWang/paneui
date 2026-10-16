@@ -8,7 +8,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 // A roving-focus row of controls (arrow keys move between items). `floating` is the
-// popover surface used for selection bubbles: rounded-xl, p-1, rows concentric at 10px.
+// popover surface used for selection bubbles: frame-xl, p-1, rows follow the frame (rounded-inner).
 const toolbarVariants = cva("flex items-center gap-0.5 outline-none data-[orientation=vertical]:flex-col", {
   variants: {
     variant: {

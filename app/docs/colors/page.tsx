@@ -1,7 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
 
-import { DEFAULT_ACCENT, PRESET_RAMPS, RAMP_STOPS } from "@/components/docs/accent-color"
+import { ACCENT_VARS, DEFAULT_ACCENT, PRESET_THEMES } from "@/components/docs/accent-color"
 import { Code, GuideH2, GuidePage } from "@/components/docs/guide-page"
 import { ThemingAccent } from "@/components/docs/theming-accent"
 import { ThemingRadius } from "@/components/docs/theming-radius"
@@ -13,10 +13,10 @@ export const metadata = { title: "Customize" }
 /** Light/dark values straight from the theme, read once at build time. */
 function readTheme() {
   const theme = parseThemeTokens(fs.readFileSync(path.join(process.cwd(), "app/globals.css"), "utf8"))
-  // The default ramp in accent-color.ts mirrors the --accent-* stops on :root; flag drift in the build log.
-  const ramp = PRESET_RAMPS[DEFAULT_ACCENT]
-  if (RAMP_STOPS.some((s, i) => theme.light[`accent-${s}`] !== ramp[i]) || theme.light.primary !== "var(--accent-600)") {
-    console.warn("[docs/colors] accent-color.ts default ramp no longer matches app/globals.css")
+  // The generated presets mirror the accent roles on :root and .dark; flag drift in the build log.
+  const preset = PRESET_THEMES[DEFAULT_ACCENT]
+  if (ACCENT_VARS.some((k) => theme.light[k] !== preset.light[k] || theme.dark[k] !== preset.dark[k])) {
+    console.warn("[docs/colors] accent-presets.generated.ts no longer matches app/globals.css (run regen-theme)")
   }
   return theme
 }
@@ -37,9 +37,10 @@ export default function Colors() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent">One accent, every control</GuideH2>
         <p className="text-muted-foreground">
-          Every accented control reads <Code>--primary</Code> and <Code>--ring</Code>, and both read one{" "}
-          <Code>--accent-50…950</Code> ramp. Pick a preset or a brand colour below to try it, then copy the overrides. A
-          custom colour is darkened or lifted only if it would fall under 3:1 contrast against the page.
+          Every accented control reads eight variables, <Code>--primary</Code> and its variants plus{" "}
+          <Code>--ring</Code>, and a preset swaps all eight per mode. Pick a preset or a brand colour below to try it,
+          then copy the overrides. A custom colour is darkened or lifted only if it would fall under 3:1 contrast against
+          the page.
         </p>
         <ThemingAccent />
       </section>

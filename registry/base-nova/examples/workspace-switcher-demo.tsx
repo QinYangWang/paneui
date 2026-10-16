@@ -13,7 +13,7 @@ const workspaces = [
 export default function WorkspaceSwitcherDemo() {
   const [value, setValue] = React.useState("northwind")
   return (
-    <div className="w-60 rounded-2xl bg-shell p-2">
+    <div className="w-60 rounded-3xl bg-shell p-2">
       <WorkspaceSwitcher workspaces={workspaces} value={value} onValueChange={setValue} onCreate={() => {}} />
     </div>
   )

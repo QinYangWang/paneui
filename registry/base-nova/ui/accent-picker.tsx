@@ -9,11 +9,11 @@ import { cn } from "@/lib/utils"
 
 /*
  * Accent colour picker for an app's appearance settings. Switches the
- * `--accent-50…950` ramp the theme's `primary` and `ring` read, by setting
+ * eight accent roles (`--primary` … `--ring`) the theme defines, by setting
  * `data-accent` on <html> (blue, the default, has no attribute), and remembers
  * the pick in localStorage["accent"].
  *
- * The preset ramps ship inside this file (the same values as the
+ * The preset roles ship inside this file (the same values as the
  * `html[data-accent]` blocks in the qinyang/ui theme), injected once as a
  * <style>, so it works in any app that installed @qinyang/theme.
  *
@@ -35,19 +35,19 @@ const ACCENT_LABELS: Record<Accent, string> = {
 
 /** Each preset's light-mode primary (neutral follows the foreground). */
 const SWATCH: Record<Accent, string> = {
-  blue: "oklch(54.6% 0.245 262.881)",
   neutral: "var(--foreground)",
-  green: "oklch(52.7% 0.154 150.069)",
-  orange: "oklch(55.3% 0.195 38.402)",
-  rose: "oklch(58.6% 0.253 17.585)",
-  violet: "oklch(54.1% 0.281 293.009)",
+  blue: "#0090ff",
+  green: "#30a46c",
+  orange: "#f76b15",
+  rose: "#e93d82",
+  violet: "#6e56cf",
 }
 
 const STORAGE_KEY = "accent"
 const STYLE_ID = "qy-accent-presets"
 /** Same-tab broadcast so every picker (and the qinyang/ui docs header) stays in step. */
 const ACCENT_CHANGE_EVENT = "qy-accent-change"
-const PRESETS_CSS = `html[data-accent="neutral"] { --accent-50: oklch(98.5% 0 0); --accent-100: oklch(97.6% 0 0); --accent-200: oklch(94% 0 0); --accent-300: oklch(87% 0 0); --accent-400: oklch(70.8% 0 0); --accent-500: oklch(55.6% 0 0); --accent-600: oklch(43.9% 0 0); --accent-700: oklch(37.1% 0 0); --accent-800: oklch(26.9% 0 0); --accent-900: oklch(20.5% 0 0); --accent-950: oklch(14.5% 0 0); --primary: var(--accent-900); --primary-foreground: oklch(100% 0 0); --ring: var(--accent-400); } html[data-accent="neutral"].dark { --primary: var(--accent-100); --primary-foreground: var(--accent-900); --ring: var(--accent-500); } html[data-accent="green"] { --accent-50: oklch(98.2% 0.018 155.826); --accent-100: oklch(96.2% 0.044 156.743); --accent-200: oklch(92.5% 0.084 155.995); --accent-300: oklch(87.1% 0.150 154.449); --accent-400: oklch(79.2% 0.209 151.711); --accent-500: oklch(72.3% 0.219 149.579); --accent-600: oklch(62.7% 0.194 149.214); --accent-700: oklch(52.7% 0.154 150.069); --accent-800: oklch(44.8% 0.119 151.328); --accent-900: oklch(39.3% 0.095 152.535); --accent-950: oklch(26.6% 0.065 152.934); --primary: var(--accent-700); } html[data-accent="orange"] { --accent-50: oklch(98% 0.016 73.684); --accent-100: oklch(95.4% 0.038 75.164); --accent-200: oklch(90.1% 0.076 70.697); --accent-300: oklch(83.7% 0.128 66.290); --accent-400: oklch(75% 0.183 55.934); --accent-500: oklch(70.5% 0.213 47.604); --accent-600: oklch(64.6% 0.222 41.116); --accent-700: oklch(55.3% 0.195 38.402); --accent-800: oklch(47% 0.157 37.304); --accent-900: oklch(40.8% 0.123 38.172); --accent-950: oklch(26.6% 0.079 36.259); --primary: var(--accent-700); } html[data-accent="rose"] { --accent-50: oklch(96.9% 0.015 12.422); --accent-100: oklch(94.1% 0.030 12.580); --accent-200: oklch(89.2% 0.058 10.001); --accent-300: oklch(81% 0.117 11.638); --accent-400: oklch(71.2% 0.194 13.428); --accent-500: oklch(64.5% 0.246 16.439); --accent-600: oklch(58.6% 0.253 17.585); --accent-700: oklch(51.4% 0.222 16.935); --accent-800: oklch(45.5% 0.188 13.697); --accent-900: oklch(41% 0.159 10.272); --accent-950: oklch(27.1% 0.105 12.094); } html[data-accent="violet"] { --accent-50: oklch(96.9% 0.016 293.756); --accent-100: oklch(94.3% 0.029 294.588); --accent-200: oklch(89.4% 0.057 293.283); --accent-300: oklch(81.1% 0.111 293.571); --accent-400: oklch(70.2% 0.183 293.541); --accent-500: oklch(60.6% 0.250 292.717); --accent-600: oklch(54.1% 0.281 293.009); --accent-700: oklch(49.1% 0.270 292.581); --accent-800: oklch(43.2% 0.232 292.759); --accent-900: oklch(38% 0.189 293.745); --accent-950: oklch(28.3% 0.141 291.089); }`
+const PRESETS_CSS = `html[data-accent="neutral"] { --primary: #000000f2; --primary-hover: #000c; --primary-active: #000000b3; --primary-foreground: #fff; --primary-subtle: #0000000f; --primary-subtle-hover: #00000017; --primary-border: #00000026; --ring: #0004; }} html[data-accent="neutral"].dark { --primary: #fffffff2; --primary-hover: #fffc; --primary-active: #ffffffb3; --primary-foreground: #000; --primary-subtle: #ffffff12; --primary-subtle-hover: #ffffff1b; --primary-border: #ffffff2c; --ring: #fff5; }} html[data-accent="green"] { --primary: #30a46c; --primary-hover: #2b9a66; --primary-active: #218358; --primary-foreground: #fff; --primary-subtle: #00a43319; --primary-subtle-hover: #00a83829; --primary-border: #00963c52; --ring: #00924ba4; }} html[data-accent="green"].dark { --primary: #30a46c; --primary-hover: #33b074; --primary-active: #3dd68c; --primary-foreground: #fff; --primary-subtle: #22ff991e; --primary-subtle-hover: #11ff992d; --primary-border: #44ffaa4b; --ring: #44ffa49e; }} html[data-accent="orange"] { --primary: #f76b15; --primary-hover: #ef5f00; --primary-active: #cc4e00; --primary-foreground: #fff; --primary-subtle: #ff9c0029; --primary-subtle-hover: #ff91014a; --primary-border: #ff81007d; --ring: #e35f00aa; }} html[data-accent="orange"].dark { --primary: #f76b15; --primary-hover: #ff801f; --primary-active: #ffa057; --primary-foreground: #fff; --primary-subtle: #fb6a0025; --primary-subtle-hover: #ff590039; --primary-border: #fd75045c; --ring: #fe6d15f7; }} html[data-accent="rose"] { --primary: #e93d82; --primary-hover: #df3478; --primary-active: #cb1d63; --primary-foreground: #fff; --primary-subtle: #ff005216; --primary-subtle-hover: #f8005123; --primary-border: #d0004b41; --ring: #b6004a6c; }} html[data-accent="rose"].dark { --primary: #e93d82; --primary-hover: #ee518a; --primary-active: #ff92ad; --primary-foreground: #fff; --primary-subtle: #fe2a8b2a; --primary-subtle-hover: #fd158741; --primary-border: #fe459763; --ring: #fe418de8; }} html[data-accent="violet"] { --primary: #6e56cf; --primary-hover: #654dc4; --primary-active: #6550b9; --primary-foreground: #fff; --primary-subtle: #4400ee0f; --primary-subtle-hover: #4300ff1b; --primary-border: #3100fb35; --ring: #2b00d066; }} html[data-accent="violet"].dark { --primary: #6e56cf; --primary-hover: #7d66d9; --primary-active: #baa7ff; --primary-foreground: #fff; --primary-subtle: #8354fe36; --primary-subtle-hover: #7d51fd50; --primary-border: #8f6cfd6d; --ring: #8668ffcc; }}`
 
 const isAccent = (v: unknown): v is Accent => typeof v === "string" && (ACCENTS as readonly string[]).includes(v)
 
@@ -113,7 +113,7 @@ function useAccent(): [Accent, (accent: Accent) => void] {
 const ACCENT_SCRIPT = `(function(){try{var a=localStorage.getItem("${STORAGE_KEY}");if(a&&a!=="blue"&&${JSON.stringify(ACCENTS)}.indexOf(a)>-1)document.documentElement.setAttribute("data-accent",a)}catch(e){}})()`
 
 /**
- * The preset ramps as a <style> plus a tiny pre-paint script that applies the stored
+ * The preset roles as a <style> plus a tiny pre-paint script that applies the stored
  * accent before first paint. Render once near the top of your root layout's <body>
  * (or <head>) so a reload never flashes the default blue.
  */

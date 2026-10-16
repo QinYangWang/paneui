@@ -21,7 +21,7 @@ export default function TabStripDemo() {
     if (active === id && rest[0]) setActive(rest[0].id)
   }
   return (
-    <div className="w-full max-w-xl rounded-2xl bg-shell p-1.5">
+    <div className="w-full max-w-xl rounded-3xl bg-shell p-1.5">
       <TabStrip
         value={active}
         onValueChange={setActive}

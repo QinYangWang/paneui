@@ -55,7 +55,7 @@ function ContextMenuContent({
           className={cn(
             // Positioned against the pointer, so --transform-origin is the click point:
             // the menu grows out from exactly where the user right-clicked.
-            "min-w-44 origin-(--transform-origin) rounded-xl bg-popover p-1 text-popover-foreground shadow-surface outline-none",
+            "min-w-44 origin-(--transform-origin) rounded-2xl bg-popover p-1 text-popover-foreground shadow-surface outline-none",
             "transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-120",
             "data-starting-style:scale-96 data-starting-style:opacity-0 data-ending-style:scale-98 data-ending-style:opacity-0",
             "motion-reduce:data-starting-style:scale-100",

@@ -372,7 +372,7 @@ function ToolResult({
       aria-busy={running}
       {...props}
       className={cn(
-        "w-full overflow-hidden frame-2xl frame-inset-2 bg-card text-ui text-card-foreground shadow-raised",
+        "w-full overflow-hidden frame-3xl frame-inset-2 bg-card text-ui text-card-foreground shadow-raised",
         className
       )}
     >

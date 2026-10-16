@@ -2,12 +2,12 @@
 
 ## Synara (visual style reference)
 
-The library's default visual style ("native desktop": system UI font on a 13px scale,
-translucent fills, hairline borders, near-flat elevation, 0.625rem radius steps, the Codex
+The library's native desktop structure (the 13px UI type scale, translucent fills, the Codex
 rail shell layout, control densities) is adapted from the design tokens and UI components of
 Synara, https://github.com/Emanuele-web04/synara (`apps/web/src/index.css`,
 `apps/web/src/components/ui/*`, `apps/web/src/lib/appTypography.ts`). Values were re-expressed
-as this project's own tokens and Tailwind classes; no source files were copied verbatim.
+as this project's own tokens and Tailwind classes; no source files were copied verbatim. Since
+2026-10-16 the font, colour, radius and shadow values come from the foundation reference below.
 
 MIT License
 
@@ -32,15 +32,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## BoardUI (colour system)
+## BoardUI (chart palette; colour system until 2026-10-16)
 
-The theme colours in `app/globals.css` (and the `theme` / `theme-<accent>` registry items) follow
-BoardUI's colour system, https://github.com/BoardUI/boardui (`styles/theme.css`, commit
-ec5c5eb, and https://www.boardui.com/components/color): the Tailwind neutral OKLCH ramp with
-BoardUI's primitive overrides (neutral-100 #f7f7f7, neutral-200 #ebebeb, neutral-925 #121212,
-blue-400 #3392ff), the role mapping of text, background, border and focus tokens, the
-`--accent-50…950` ramp that drives the call-to-action colour (blue by default), and the
-categorical chart palette. Values were re-expressed under this project's shadcn token names;
+The categorical chart palette (`chart-1`…`chart-8`) in `app/globals.css` comes from BoardUI's
+colour system, https://github.com/BoardUI/boardui (`styles/theme.css`, commit ec5c5eb, and
+https://www.boardui.com/components/color). From 2026-10-14 to 2026-10-16 the rest of the theme
+colours followed it too: the Tailwind neutral OKLCH ramp with BoardUI's primitive overrides
+(neutral-100 #f7f7f7, neutral-200 #ebebeb, neutral-925 #121212, blue-400 #3392ff), the role
+mapping of text, background, border and focus tokens, and an `--accent-50…950` ramp behind the
+call-to-action colour. Values were re-expressed under this project's shadcn token names;
 no source files were copied verbatim.
 
 MIT License
@@ -64,6 +64,62 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Foundation reference (colour roles, radius, shadow and type parameters, since 2026-10-16)
+
+The default foundation in `app/globals.css` (and the `theme`, `theme-<accent>`, `theme-radius-*`
+and `fonts` registry items) re-expresses design parameters published at
+https://design.interfere.com (Colors, Radius, Shadows and Fonts pages, read 2026-10-16): the role
+mapping of surfaces, text, fills, borders and the brand/positive/warning/danger colours onto
+12-step scale steps, the page/shell/container/modal surface values, the 2–24px radius scale, the
+four shadow strings (border, default, large, extra large) and the 400/450/500/600/700 weight
+scale. Values were mapped onto this project's own shadcn token names; no stylesheet, script or
+font file was copied. The reference's commercial typefaces are not used: this project
+substitutes the open-licence fonts listed below. No licence is published for the reference
+site; this notice records provenance only.
+
+## Radix Colors (colour scales)
+
+The gray, blue, green, orange, tomato, crimson and violet scales (and the black/white alpha
+scales), in sRGB hex and display-p3, whose steps the theme colours and accent presets use, are
+from Radix Colors, https://github.com/radix-ui/colors. Only the individual step values are
+used, written directly into the theme tokens.
+
+MIT License
+
+Copyright (c) 2022 WorkOS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Fonts (Inter, Noto Sans SC, JetBrains Mono, Newsreader, Noto Serif SC)
+
+The theme's font stacks name these typefaces. The docs site and the `fonts` registry item
+install them from npm as the Fontsource packages (`@fontsource-variable/inter`,
+`@fontsource-variable/noto-sans-sc`, `@fontsource-variable/jetbrains-mono`,
+`@fontsource-variable/newsreader`, `@fontsource-variable/noto-serif-sc`); the font files are not
+vendored or modified. All five are licensed under the SIL Open Font License, Version 1.1
+(https://openfontlicense.org); each package ships the full licence text in its `LICENSE` file.
+
+- Inter: Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
+- Noto Sans SC and Noto Serif SC: Copyright Google Inc. (https://github.com/notofonts/noto-cjk)
+- JetBrains Mono: Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+- Newsreader: Copyright 2020 The Newsreader Project Authors (https://github.com/productiontype/Newsreader)
 
 ## @pierre/diffs (runtime dependency of `file-diff`)
 

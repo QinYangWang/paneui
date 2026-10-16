@@ -21,7 +21,7 @@ export default {
   notes: [
     {
       title: "Presets",
-      body: "Use `typeset-docs` for notes and guides (14px), `typeset-reading` for articles (16px) and `typeset-chat` for messages and streamed answers (14px, tighter flow). Each preset only sets `--typeset-size`, `--typeset-leading` and `--typeset-flow`, so a one-off works too: `className=\"typeset [--typeset-flow:1.5em]\"`.",
+      body: "Use `typeset-docs` for notes and guides (14px), `typeset-reading` for articles (16px, set in the serif face) and `typeset-chat` for messages and streamed answers (14px, tighter flow). Each preset sets `--typeset-size`, `--typeset-leading` and `--typeset-flow` (reading also sets `--typeset-font-body`), so a one-off works too: `className=\"typeset [--typeset-flow:1.5em]\"`.",
     },
     {
       title: "Components inside prose",

@@ -18,7 +18,7 @@ export default function IconChipDemo() {
         <IconChip size="lg"><ShieldIcon /></IconChip>
         <IconChip size="lg" tone="solid"><QinyangLogoIcon /></IconChip>
       </div>
-      <ul className="flex flex-col gap-1 frame-2xl frame-p-2 bg-card shadow-surface">
+      <ul className="flex flex-col gap-1 frame-3xl frame-p-2 bg-card shadow-surface">
         {rows.map(({ icon: Icon, title, body, tone }) => (
           <li key={title} className="flex items-center gap-3 rounded-inner px-2 py-2">
             <IconChip tone={tone}><Icon /></IconChip>

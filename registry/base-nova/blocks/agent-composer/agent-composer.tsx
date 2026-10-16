@@ -189,7 +189,7 @@ const AgentComposer = React.forwardRef<HTMLTextAreaElement, AgentComposerProps>(
         submit()
       }}
       className={cn(
-        "relative flex w-full min-w-0 flex-col rounded-2xl bg-card shadow-raised transition-shadow duration-150 focus-within:shadow-raised-hover",
+        "relative flex w-full min-w-0 flex-col rounded-3xl bg-card shadow-raised transition-shadow duration-150 focus-within:shadow-raised-hover",
         className
       )}
       {...props}

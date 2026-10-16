@@ -21,17 +21,19 @@ import { Radio, RadioGroup } from "@/registry/base-nova/ui/radio"
 import { Slider } from "@/registry/base-nova/ui/slider"
 import { Switch } from "@/registry/base-nova/ui/switch"
 
-import { DEFAULT_ACCENT, oklchToHex, parseOklch, PRESET_LABELS, PRESET_THEMES, RAMP_STOPS, themeCss, type PresetAccent } from "./accent-color"
+import { ACCENT_VARS, DEFAULT_ACCENT, opaqueHex, PRESET_LABELS, PRESET_THEMES, themeCss, type PresetAccent } from "./accent-color"
 import { setAccent, setCustomAccent, useAccentState } from "./accent-store"
 
 const PRESETS = Object.keys(PRESET_THEMES) as PresetAccent[]
+/** Each mode's page colour, so translucent roles read as they do there. Mirrors --background. */
+const PAGE = { light: "#fff", dark: "oklch(15% 0 0)" } as const
 const CHARTS = ["bg-chart-1", "bg-chart-2", "bg-chart-3", "bg-chart-4", "bg-chart-5", "bg-chart-6", "bg-chart-7", "bg-chart-8"]
 
 
 /**
  * Live accent: presets and a custom colour recolour the whole site (header, demos,
  * template previews) by switching `data-accent` on <html>; "Copy theme CSS" exports
- * the exact ramp and :root/.dark overrides for the current pick.
+ * the exact :root/.dark role overrides for the current pick.
  */
 export function ThemingAccent() {
   const { accent, custom } = useAccentState()
@@ -42,8 +44,7 @@ export function ThemingAccent() {
   const css = themeCss(theme, label)
 
   // The picker shows the custom colour once there is one, otherwise the current light primary.
-  const pickerHex = custom?.hex ?? oklchToHex(parseOklch(preset.light.primary) ?? { l: 0.546, c: 0.245, h: 262.9 })
-  const ramp = theme.ramp ?? preset.ramp ?? []
+  const pickerHex = custom?.hex ?? opaqueHex(preset.light.primary)
 
   // Coalesce drag updates to one per frame (each writes localStorage and re-syncs template iframes).
   const frame = React.useRef<number | null>(null)
@@ -119,15 +120,25 @@ export function ThemingAccent() {
           </div>
 
           <div className="flex flex-col gap-1.5 border-b px-4 py-3">
-            <div className="flex h-6 overflow-hidden rounded-md shadow-chip" role="img" aria-label="Accent ramp, 50 to 950">
-              {ramp.map((v, i) => (
-                <span key={RAMP_STOPS[i]} className="flex-1 bg-(--stop)" style={{ "--stop": v } as React.CSSProperties} />
-              ))}
-            </div>
-            <div aria-hidden className="flex font-mono text-ui-2xs text-muted-foreground tabular-nums">
-              {RAMP_STOPS.map((s) => (
-                <span key={s} className="flex-1 text-center">
-                  {s}
+            {(["light", "dark"] as const).map((mode) => (
+              <div key={mode} className="flex items-center gap-3">
+                <span className="w-8 shrink-0 text-ui-xs text-muted-foreground capitalize">{mode}</span>
+                <div
+                  className="flex h-6 flex-1 overflow-hidden rounded-md bg-(--page) shadow-chip"
+                  style={{ "--page": PAGE[mode] } as React.CSSProperties}
+                  role="img"
+                  aria-label={`Accent roles, ${mode} mode`}
+                >
+                  {ACCENT_VARS.map((k) => (
+                    <span key={k} title={`--${k}`} className="flex-1 bg-(--stop)" style={{ "--stop": theme[mode][k] } as React.CSSProperties} />
+                  ))}
+                </div>
+              </div>
+            ))}
+            <div aria-hidden className="flex pl-11 font-mono text-ui-2xs text-muted-foreground">
+              {ACCENT_VARS.map((k) => (
+                <span key={k} className="min-w-0 flex-1 truncate text-center">
+                  {k === "ring" ? "ring" : k.replace("primary-", "").replace("primary", "solid")}
                 </span>
               ))}
             </div>

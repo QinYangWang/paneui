@@ -35,10 +35,15 @@ function Table({ head, children }: { head: string[]; children: React.ReactNode }
 const SWATCHES: { token: string; swatch: string }[] = [
   { token: "background", swatch: "bg-background" },
   { token: "card", swatch: "bg-card" },
+  { token: "surface-sunken", swatch: "bg-surface-sunken" },
+  { token: "surface-standout", swatch: "bg-surface-standout" },
   { token: "primary", swatch: "bg-primary" },
+  { token: "primary-subtle", swatch: "bg-primary-subtle" },
   { token: "secondary", swatch: "bg-secondary" },
   { token: "muted-foreground", swatch: "bg-muted-foreground" },
+  { token: "fg-tertiary", swatch: "bg-fg-tertiary" },
   { token: "border", swatch: "bg-border" },
+  { token: "border-strong", swatch: "bg-border-strong" },
   { token: "ring", swatch: "bg-ring" },
   { token: "destructive", swatch: "bg-destructive" },
   { token: "success", swatch: "bg-success" },
@@ -64,50 +69,67 @@ const TYPE: { cls: string; size: string; use: string }[] = [
 ]
 
 const RADII: { cls: string; corner: string; px: string; use: string }[] = [
-  { cls: "rounded-2xs", corner: "rounded-tl-2xs", px: "3px", use: "Search highlights and favicons." },
-  { cls: "rounded-xs", corner: "rounded-tl-xs", px: "4px", use: "Checkboxes and extra-small segments and tabs." },
-  { cls: "rounded-sm", corner: "rounded-tl-sm", px: "6px", use: "Extra-small buttons, keys and small chips." },
-  { cls: "rounded-md", corner: "rounded-tl-md", px: "8px", use: "Tab indicators inside a p-0.5 list." },
-  { cls: "rounded-lg", corner: "rounded-tl-lg", px: "10px", use: "Controls and menu rows." },
-  { cls: "rounded-xl", corner: "rounded-tl-xl", px: "14px", use: "Menus, popups, cards, tables and code blocks." },
-  { cls: "rounded-2xl", corner: "rounded-tl-2xl", px: "18px", use: "Two-layer inset cards and big panels." },
-  { cls: "rounded-3xl", corner: "rounded-tl-3xl", px: "22px", use: "Dialogs." },
+  { cls: "rounded-xs", corner: "rounded-tl-xs", px: "2px", use: "Search highlights, favicons and tiny segments." },
+  { cls: "rounded-sm", corner: "rounded-tl-sm", px: "4px", use: "Checkboxes, extra-small buttons, keys and small chips." },
+  { cls: "rounded-md", corner: "rounded-tl-md", px: "6px", use: "Tab indicators inside a p-0.5 list." },
+  { cls: "rounded-lg", corner: "rounded-tl-lg", px: "8px", use: "Controls and menu rows." },
+  { cls: "rounded-xl", corner: "rounded-tl-xl", px: "10px", use: "Cards, tables and code blocks." },
+  { cls: "rounded-2xl", corner: "rounded-tl-2xl", px: "12px", use: "Menus and popups, two-layer inset cards." },
+  { cls: "rounded-3xl", corner: "rounded-tl-3xl", px: "16px", use: "Dialogs, drawers and big panels." },
+  { cls: "rounded-4xl", corner: "rounded-tl-4xl", px: "20px", use: "Hero media and large sheets." },
+  { cls: "rounded-5xl", corner: "rounded-tl-5xl", px: "24px", use: "Marketing panels." },
+]
+
+const SHADOW_SCALE: { cls: string; token: string; use: string }[] = [
+  { cls: "shadow-xs", token: "--shadow-border", use: "A 1px ring, no lift." },
+  { cls: "shadow-sm", token: "--shadow-default", use: "Resting controls and cards." },
+  { cls: "shadow-lg", token: "--shadow-lg", use: "Menus, popovers and floating panels (shadow-md is the same)." },
+  { cls: "shadow-xl", token: "--shadow-xl", use: "Dialogs, drawers and sheets." },
+]
+
+const FONTS: { cls: string; face: string; use: string }[] = [
+  { cls: "font-sans", face: "Inter, Noto Sans SC", use: "All UI text. Inter's ss03 set is on." },
+  { cls: "font-mono", face: "JetBrains Mono", use: "Code, keys, terminals and tabular IDs." },
+  { cls: "font-serif", face: "Newsreader, Noto Serif SC", use: "Long-form reading (the reading typeset preset)." },
 ]
 
 const SHADOWS: { cls: string; use: string }[] = [
-  { cls: "shadow-raised", use: "Resting controls and cards. Hover steps to shadow-raised-hover." },
-  { cls: "shadow-surface", use: "Popovers, menus, dialogs and floating panels only." },
+  { cls: "shadow-raised", use: "Resting controls and cards (reads shadow-sm). Hover steps to shadow-raised-hover." },
+  { cls: "shadow-surface", use: "Popovers, menus and floating panels (reads shadow-lg)." },
   { cls: "shadow-well", use: "Inset hairline for fields and tracks." },
   { cls: "shadow-chip", use: "Keys and small chips." },
   { cls: "shadow-primary", use: "Filled primary buttons (none in dark)." },
 ]
 
 const CSS_EXAMPLE = `:root {
-  --radius: 0.625rem;
-  --accent-500: oklch(62.3% 0.214 259.815);  /* blue ramp, 50 … 950 */
-  --accent-600: oklch(54.6% 0.245 262.881);
-  --background: oklch(100% 0 0);             /* white */
-  --foreground: oklch(14.5% 0 0);            /* neutral-950 */
-  --muted-foreground: oklch(55.6% 0 0);      /* neutral-500 */
-  --primary: var(--accent-600);
-  --ring: var(--accent-500);
-  --border: oklch(0% 0 0 / 8%);              /* neutral-200 on white */
+  --radius: 0.5rem;
+  --background: #fff;
+  --foreground: #000000df;        /* gray a12 */
+  --muted-foreground: #0000009b;  /* gray a11 */
+  --primary: #0090ff;             /* blue 9 */
+  --primary-hover: #0588f0;       /* blue 10 */
+  --primary-subtle: #008ff519;    /* blue a3 */
+  --ring: #0084e6a1;              /* blue a8 */
+  --border: #0000000f;            /* gray a3 */
+  --shadow-lg: 0 0 0 0.5px #0000000f, 0 2px 3px -2px #0000000f, …;
   /* … */
 }
 
 .dark {
-  --background: oklch(18.2% 0 0);            /* #121212 */
-  --card: oklch(26.9% 0 0);                  /* neutral-800 */
-  --foreground: oklch(98.5% 0 0);            /* neutral-50 */
-  --muted-foreground: oklch(70.8% 0 0);      /* neutral-400 */
-  --border: oklch(100% 0 0 / 8%);            /* neutral-800 on the page */
+  --background: oklch(15% 0 0);
+  --card: #111;                   /* gray 1 */
+  --popover: oklch(25.2% 0 0);
+  --foreground: #ffffffed;        /* gray a12 */
+  --primary-hover: #3b9eff;       /* blue 10 */
+  --border: #ffffff12;            /* gray a3 */
   /* … */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-primary: var(--primary);
-  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-xl: calc(var(--radius) * 1.25);
+  --shadow-lg: var(--shadow-lg);
   /* … */
 }`
 
@@ -117,21 +139,21 @@ const dark = mode === "dark" || (mode === "system" && matchMedia("(prefers-color
 document.documentElement.classList.toggle("dark", dark)
 document.documentElement.style.colorScheme = dark ? "dark" : "light"`
 
-const ACCENT_RUNTIME = `/* Switch at runtime by setting data-accent on <html>: swap the ramp, primary and ring follow */
+const ACCENT_RUNTIME = `/* Switch at runtime by setting data-accent on <html>: one block per mode swaps the eight roles */
 html[data-accent="violet"] {
-  --accent-50: oklch(96.9% 0.016 293.756);
-  /* … 100 … 900 … */
-  --accent-500: oklch(60.6% 0.250 292.717);
-  --accent-600: oklch(54.1% 0.281 293.009);
-  --accent-950: oklch(28.3% 0.141 291.089);
+  --primary: #6e56cf;               /* violet 9 */
+  --primary-hover: #654dc4;         /* violet 10 */
+  --primary-active: #6550b9;        /* violet 11 */
+  --primary-foreground: #fff;
+  --primary-subtle: #4400ee0f;      /* violet a3 */
+  --primary-subtle-hover: #4300ff1b;
+  --primary-border: #3100fb35;      /* violet a6 */
+  --ring: #2b00d066;                /* violet a8 */
 }
-
-/* Neutral also re-points primary: near-black in light, near-white with dark text in dark */
-html[data-accent="neutral"] { /* neutral ramp … */ --primary: var(--accent-900); --ring: var(--accent-400); }
-html[data-accent="neutral"].dark {
-  --primary: var(--accent-100);
-  --primary-foreground: var(--accent-900);
-  --ring: var(--accent-500);
+html[data-accent="violet"].dark {
+  --primary-hover: #7d66d9;
+  --primary-active: #baa7ff;
+  /* … */
 }`
 
 const NEW_TOKEN = `:root  { --info: oklch(0.6 0.12 230); }
@@ -148,6 +170,7 @@ export default function Theming() {
     { id: "dark-mode", title: "Dark mode" },
     { id: "accent-presets", title: "Accent presets" },
     { id: "typography", title: "Typography" },
+    { id: "fonts", title: "Fonts" },
     { id: "radius", title: "Radius" },
     { id: "elevation", title: "Elevation" },
     { id: "native-style", title: "Native style rules" },
@@ -161,8 +184,8 @@ export default function Theming() {
         <InstallCommand args={`add @${REGISTRY_NAME}/theme`} />
         <p className="text-muted-foreground">
           <Code>@{REGISTRY_NAME}/theme</Code> writes the variables below and installs <Code>@{REGISTRY_NAME}/utils</Code>,
-          whose <Code>cn()</Code> merges the <Code>text-ui-*</Code> sizes as font sizes. For a tinted wash, add an opacity
-          modifier such as <Code>bg-success/12</Code>.
+          whose <Code>cn()</Code> merges the <Code>text-ui-*</Code> sizes as font sizes. For a tinted wash, use the{" "}
+          <Code>-subtle</Code> token, such as <Code>bg-success-subtle</Code>.
         </p>
         <AgentCodeBlock code={CSS_EXAMPLE} filename="globals.css (excerpt)" language="css" maxHeight={360} />
       </section>
@@ -202,9 +225,10 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent-presets">Accent presets</GuideH2>
         <p className="text-muted-foreground">
-          The accent is one <Code>--accent-50…950</Code> ramp, blue by default. <Code>primary</Code> reads the 600 stop
-          (700 for green and orange, so white text keeps 4.5:1 contrast) and <Code>ring</Code> the 500 stop. A preset
-          swaps only the ramp, so surfaces, text and charts stay the same. Install one after the theme.
+          The accent is eight role variables per mode, blue by default: <Code>primary</Code> and its{" "}
+          <Code>-hover</Code>, <Code>-active</Code>, <Code>-foreground</Code>, <Code>-subtle</Code>,{" "}
+          <Code>-subtle-hover</Code> and <Code>-border</Code> variants, plus <Code>ring</Code>. Every preset reads the same
+          steps of its own 12-step scale, so surfaces, text and charts stay the same. Install one after the theme.
         </p>
         <div className="flex flex-wrap gap-2">
           {ACCENTS.map((a) => (
@@ -221,12 +245,12 @@ export default function Theming() {
         <InstallCommand args={`add @${REGISTRY_NAME}/theme-violet`} />
         <p className="text-muted-foreground">
           An installed preset overwrites the variables on <Code>:root</Code> and <Code>.dark</Code>, so the accent is fixed.
-          To let users switch, keep the default ramp on <Code>:root</Code>, add one block per accent keyed on an attribute,
+          To let users switch, keep the default roles on <Code>:root</Code>, add one block per accent keyed on an attribute,
           and apply the saved choice in the same pre-paint script as dark mode.
         </p>
         <p className="text-muted-foreground">
-          For a brand colour, use the picker on <TextLink href="/docs/colors#accent">Customize</TextLink> to build a ramp and
-          copy its overrides.
+          For a brand colour, use the picker on <TextLink href="/docs/colors#accent">Customize</TextLink> to derive the eight
+          roles and copy them.
         </p>
         <AgentCodeBlock code={ACCENT_RUNTIME} filename="globals.css" language="css" />
       </section>
@@ -234,9 +258,9 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="typography">Typography</GuideH2>
         <p className="text-muted-foreground">
-          UI text uses the system font and code uses a monospace font. Use the <Code>text-ui*</Code> sizes inside
-          components, and keep <Code>text-sm</Code> to <Code>text-2xl</Code> for reading copy and page headings. Set titles
-          in <Code>font-semibold</Code> and labels and buttons in <Code>font-medium</Code>.
+          Use the <Code>text-ui*</Code> sizes inside components, and keep <Code>text-sm</Code> to <Code>text-2xl</Code> for
+          reading copy and page headings. Set titles in <Code>font-semibold</Code>, labels and buttons in{" "}
+          <Code>font-medium</Code>, and use <Code>font-semimedium</Code> (450) where 400 reads too light on a dense row.
         </p>
         <Table head={["Class", "Size", "Use for"]}>
           {TYPE.map((t) => (
@@ -250,12 +274,37 @@ export default function Theming() {
       </section>
 
       <section className="flex flex-col gap-4">
+        <GuideH2 id="fonts">Fonts</GuideH2>
+        <p className="text-muted-foreground">
+          The theme names its faces in <Code>--font-sans</Code>, <Code>--font-mono</Code> and <Code>--font-serif</Code>, each
+          with a CJK face and the system stack behind it. Without the font files it renders in system fonts, so installing
+          them is optional.
+        </p>
+        <Table head={["Utility", "Face", "Use for"]}>
+          {FONTS.map((f) => (
+            <tr key={f.cls} className={row}>
+              <td className={`${td} font-mono text-xs whitespace-nowrap text-foreground`}>{f.cls}</td>
+              <td className={`${td} whitespace-nowrap text-muted-foreground`}>{f.face}</td>
+              <td className={`${td} text-muted-foreground`}>{f.use}</td>
+            </tr>
+          ))}
+        </Table>
+        <InstallCommand args={`add @${REGISTRY_NAME}/fonts`} />
+        <p className="text-muted-foreground">
+          This adds the font packages and <Code>app/fonts.css</Code>; import that file once in your root layout. Each face is
+          split by unicode range, so a page downloads only the glyph sets it shows. For code that lines up with Chinese text,
+          install a CJK-aligned monospace such as Sarasa Gothic or Maple Mono yourself and put it first in{" "}
+          <Code>--font-mono</Code>.
+        </p>
+      </section>
+
+      <section className="flex flex-col gap-4">
         <GuideH2 id="radius">Radius</GuideH2>
         <p className="text-muted-foreground">
           Every step is a multiple of <Code>--radius</Code>, so change the base and the whole scale follows. Keep nested
           corners concentric, with the inner radius equal to the outer radius minus the padding between them. That is why{" "}
-          <Code>p-1</Code> menus (<Code>rounded-xl</Code>) hold <Code>rounded-lg</Code> rows. Use <Code>rounded-full</Code>{" "}
-          only for shapes that are actually round. Sizes below are at the default <Code>0.625rem</Code>; try other
+          <Code>p-1</Code> menus (<Code>rounded-2xl</Code>) hold <Code>rounded-lg</Code> rows. Use <Code>rounded-full</Code>{" "}
+          only for shapes that are actually round. Sizes below are at the default <Code>0.5rem</Code>; try other
           values on <TextLink href="/docs/colors#radius">Customize</TextLink>.
         </p>
         <Table head={["", "Class", "Size", "Use for"]}>
@@ -275,9 +324,23 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="elevation">Elevation</GuideH2>
         <p className="text-muted-foreground">
-          Give resting cards, tables and code blocks <Code>shadow-raised</Code>, never <Code>shadow-surface</Code>. Show
-          hover on rows, menu items and ghost buttons with a fill (<Code>bg-secondary</Code>), not a ring.
+          Four shadow levels back Tailwind&apos;s <Code>shadow-xs</Code> to <Code>shadow-xl</Code>, so plain utilities pick
+          them up. Give resting cards, tables and code blocks <Code>shadow-raised</Code>, never a floating level. Show hover
+          on rows, menu items and ghost buttons with a fill (<Code>bg-secondary</Code>), not a ring.
         </p>
+        <Table head={["", "Class", "Token", "Use for"]}>
+          {SHADOW_SCALE.map((s) => (
+            <tr key={s.cls} className={row}>
+              <td className={`${td} w-14`}>
+                <span className={`block size-8 rounded-lg bg-popover ${s.cls}`} />
+              </td>
+              <td className={`${td} font-mono text-xs whitespace-nowrap text-foreground`}>{s.cls}</td>
+              <td className={`${td} font-mono text-xs whitespace-nowrap text-muted-foreground`}>{s.token}</td>
+              <td className={`${td} text-muted-foreground`}>{s.use}</td>
+            </tr>
+          ))}
+        </Table>
+        <p className="text-muted-foreground">Components read these named levels, each built on the scale above.</p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {SHADOWS.map((s) => (
             <div key={s.cls} className="flex items-start gap-3 rounded-xl p-3">
@@ -322,8 +385,7 @@ export default function Theming() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="adding-tokens">Adding tokens</GuideH2>
         <p className="text-muted-foreground">
-          Define a new token in OKLCH with a value for both modes, then map it in <Code>@theme inline</Code> to get the
-          utilities.
+          Define a new token with a value for both modes, then map it in <Code>@theme inline</Code> to get the utilities.
         </p>
         <AgentCodeBlock code={NEW_TOKEN} filename="globals.css" language="css" />
       </section>

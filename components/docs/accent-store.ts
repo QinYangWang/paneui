@@ -2,28 +2,27 @@
 
 import * as React from "react"
 
-import { customAccentStyle, DEFAULT_ACCENT, deriveAccent, RAMP_STOPS, type AccentTheme, type PresetAccent } from "./accent-color"
+import { ACCENT_VARS, customAccentStyle, DEFAULT_ACCENT, deriveAccent, type AccentTheme, type PresetAccent } from "./accent-color"
 import { ACCENT_CHANGE_EVENT, ACCENT_KEY, ACCENTS, CUSTOM_ACCENT_KEY, CUSTOM_ACCENT_STYLE_ID } from "./theme-script"
 
-/** A custom accent as stored in localStorage[CUSTOM_ACCENT_KEY]. */
-export type CustomAccent = AccentTheme & { hex: string }
+/** A custom accent as stored in localStorage[CUSTOM_ACCENT_KEY]. `v: 2` is the eight-role format. */
+export type CustomAccent = AccentTheme & { hex: string; v: 2 }
 export type AccentChoice = PresetAccent | "custom"
 export type AccentState = { accent: AccentChoice; custom: CustomAccent | null }
 
 const isPreset = (v: unknown): v is PresetAccent => typeof v === "string" && (ACCENTS as readonly string[]).includes(v)
 const isVars = (v: unknown) => {
   const o = v as Record<string, unknown> | null
-  return !!o && typeof o.primary === "string" && typeof o.foreground === "string" && typeof o.ring === "string"
+  return !!o && ACCENT_VARS.every((k) => typeof o[k] === "string")
 }
 
 export function parseCustomAccent(raw: string | null): CustomAccent | null {
   if (!raw) return null
   try {
     const v = JSON.parse(raw) as Partial<CustomAccent>
-    if (typeof v.hex !== "string" || !isVars(v.light) || !isVars(v.dark)) return null
-    // Accents saved before the ramp existed carry only primary/foreground/ring.
-    const ramp = Array.isArray(v.ramp) && v.ramp.length === RAMP_STOPS.length && v.ramp.every((x) => typeof x === "string") ? v.ramp : undefined
-    return { hex: v.hex, light: v.light as CustomAccent["light"], dark: v.dark as CustomAccent["dark"], ramp }
+    // Accents saved in the earlier three-variable format are dropped (the page falls back to the default).
+    if (v.v !== 2 || typeof v.hex !== "string" || !isVars(v.light) || !isVars(v.dark)) return null
+    return { v: 2, hex: v.hex, light: v.light as CustomAccent["light"], dark: v.dark as CustomAccent["dark"] }
   } catch {
     return null
   }
@@ -94,10 +93,10 @@ export function setAccent(accent: AccentChoice, custom?: CustomAccent | null) {
   window.dispatchEvent(new CustomEvent<AccentState>(ACCENT_CHANGE_EVENT, { detail: state }))
 }
 
-/** Pick a custom colour (hex): derives its ramp and light and dark variants and applies them. */
+/** Pick a custom colour (hex): derives its light and dark roles and applies them. */
 export function setCustomAccent(hex: string) {
   const theme = deriveAccent(hex)
-  if (theme) setAccent("custom", { hex, ...theme })
+  if (theme) setAccent("custom", { v: 2, hex, ...theme })
 }
 
 /** Current accent, kept in step with other controls on the page and other tabs. */

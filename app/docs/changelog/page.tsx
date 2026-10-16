@@ -8,6 +8,35 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-foundation",
+    date: "October 16, 2026",
+    title: "New foundation: Inter, alpha greys, four shadows and a tighter radius",
+    tag: "Theme",
+    changes: [
+      <>
+        UI text is set in Inter with a Chinese fallback, code in JetBrains Mono and reading prose in Newsreader. Install{" "}
+        <Code>fonts</Code> to self-host them; without it the theme uses system fonts.
+      </>,
+      <>
+        Text, fills and borders are translucent greys, so they read the same on any surface. New tokens cover tertiary
+        text, sunken and standout surfaces and subtle and strong borders, and the accent and each state colour gain{" "}
+        <Code>-hover</Code>, <Code>-subtle</Code> and <Code>-border</Code> variants.
+      </>,
+      <>
+        The accent is eight role variables instead of a ramp. Presets and custom colours on{" "}
+        <TextLink href="/docs/colors">Customize</TextLink> swap all eight; a custom colour saved before today resets to blue.
+      </>,
+      <>
+        <Code>--radius</Code> is now 0.5rem, so controls are 8px, cards 10px and dialogs 16px. New{" "}
+        <Code>rounded-4xl</Code> and <Code>rounded-5xl</Code>.
+      </>,
+      <>
+        <Code>shadow-xs</Code> to <Code>shadow-xl</Code> read four shadow levels. Dialogs, drawers and sheets use the
+        deepest one.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-novon",
     date: "October 16, 2026",
     title: "Static code blocks, a system theme and prose in panels",

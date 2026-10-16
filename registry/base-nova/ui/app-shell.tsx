@@ -120,7 +120,7 @@ function AppShell({
           variant === "page"
             ? "min-h-svh grid-rows-[auto_1fr]"
             : // window corners: the panel sits 3px in from the bottom-right edge, so it follows the frame
-              "frame-2xl frame-inset-0.75 grid-rows-[auto_minmax(0,1fr)] overflow-hidden shadow-raised",
+              "frame-3xl frame-inset-0.75 grid-rows-[auto_minmax(0,1fr)] overflow-hidden shadow-raised",
           className
         )}
         {...props}

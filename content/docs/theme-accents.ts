@@ -16,7 +16,7 @@ export default {
   notes: [
     {
       title: "Presets",
-      body: "`blue` (the default, also what no attribute gives), `neutral`, `green`, `orange`, `rose` and `violet`. Each sets the `--accent-50…950` ramp plus `--primary`, `--primary-foreground` and `--ring`, in light and under `.dark`. The values are the same as the single `theme-<name>` items, which bake one accent into the theme instead.",
+      body: "`blue` (the default, also what no attribute gives), `neutral`, `green`, `orange`, `rose` and `violet`. Each sets the eight accent roles (`--primary` with its `-hover`, `-active`, `-foreground`, `-subtle`, `-subtle-hover` and `-border` variants, plus `--ring`), in light and under `.dark`. The values are the same as the single `theme-<name>` items, which bake one accent into the theme instead.",
     },
     {
       title: "Switching",

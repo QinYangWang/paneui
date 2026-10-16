@@ -12,16 +12,25 @@ export type TokenKind = "surface" | "fill" | "text" | "line"
 export type TokenRow = { name: string; cls: string; kind: TokenKind; note?: string; on?: string }
 export type TokenRole = { id: string; title: string; description: string; tokens: TokenRow[] }
 
+const stateTokens = (n: string): TokenRow[] => [
+  { name: n, cls: `bg-${n}`, kind: "fill" },
+  { name: `${n}-hover`, cls: `bg-${n}-hover`, kind: "fill" },
+  { name: `${n}-subtle`, cls: `bg-${n}-subtle`, kind: "fill" },
+  { name: `${n}-border`, cls: `border-${n}-border`, kind: "line" },
+  { name: `${n}-foreground`, cls: `text-${n}-foreground`, kind: "text", on: n },
+]
+
 export const TOKEN_ROLES: TokenRole[] = [
   {
     id: "background",
     title: "Background",
-    description:
-      "Use these for anything that must be opaque. shell is the app chrome band and code is the code block well.",
+    description: "Use these for anything that must be opaque, and sunken for wells inside a surface.",
     tokens: [
       { name: "background", cls: "bg-background", kind: "surface" },
       { name: "card", cls: "bg-card", kind: "surface" },
       { name: "popover", cls: "bg-popover", kind: "surface" },
+      { name: "surface-sunken", cls: "bg-surface-sunken", kind: "fill" },
+      { name: "surface-standout", cls: "bg-surface-standout", kind: "surface" },
       { name: "shell", cls: "bg-shell", kind: "surface" },
       { name: "code", cls: "bg-code", kind: "surface" },
     ],
@@ -39,28 +48,31 @@ export const TOKEN_ROLES: TokenRole[] = [
     ],
   },
   {
-    id: "accent-ramp",
-    title: "Accent ramp",
-    description:
-      "The ramp behind primary and ring. Presets and custom colours swap only these stops, and components never read them directly.",
-    tokens: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"].map((s) => ({
-      name: `accent-${s}`,
-      cls: `var(--accent-${s})`,
-      kind: "fill" as const,
-      note: "accent",
-    })),
+    id: "accent-roles",
+    title: "Accent roles",
+    description: "Use hover and active for pressed solids, and subtle for selected rows and tinted chips.",
+    tokens: [
+      { name: "primary-hover", cls: "bg-primary-hover", kind: "fill", note: "accent" },
+      { name: "primary-active", cls: "bg-primary-active", kind: "fill", note: "accent" },
+      { name: "primary-subtle", cls: "bg-primary-subtle", kind: "fill", note: "accent" },
+      { name: "primary-subtle-hover", cls: "bg-primary-subtle-hover", kind: "fill", note: "accent" },
+      { name: "primary-border", cls: "border-primary-border", kind: "line", note: "accent" },
+    ],
   },
   {
     id: "text",
     title: "Text",
     description:
-      "Use foreground for primary text and muted-foreground for captions, meta and nav icons. Both keep 4.5:1 contrast on every surface. Put each fill's *-foreground on top of it.",
+      "Use foreground for primary text, muted-foreground for captions and nav icons, and fg-tertiary only for placeholders and hints.",
     tokens: [
       { name: "foreground", cls: "text-foreground", kind: "text" },
       { name: "muted-foreground", cls: "text-muted-foreground", kind: "text" },
+      { name: "fg-tertiary", cls: "text-fg-tertiary", kind: "text" },
+      { name: "fg-disabled", cls: "text-fg-disabled", kind: "text" },
       { name: "card-foreground", cls: "text-card-foreground", kind: "text" },
       { name: "popover-foreground", cls: "text-popover-foreground", kind: "text" },
       { name: "primary-foreground", cls: "text-primary-foreground", kind: "text", note: "accent", on: "primary" },
+      { name: "standout-foreground", cls: "text-standout-foreground", kind: "text", on: "surface-standout" },
       { name: "secondary-foreground", cls: "text-secondary-foreground", kind: "text" },
       { name: "accent-foreground", cls: "text-accent-foreground", kind: "text" },
     ],
@@ -68,10 +80,11 @@ export const TOKEN_ROLES: TokenRole[] = [
   {
     id: "border",
     title: "Border",
-    description:
-      "border is the divider every element inherits, input outlines fields, and shell-border edges the inset panel. Use ring at /50 for focus.",
+    description: "Use border for dividers, border-strong or input for field outlines, and ring at /50 for focus.",
     tokens: [
       { name: "border", cls: "border-border", kind: "line" },
+      { name: "border-subtle", cls: "border-border-subtle", kind: "line" },
+      { name: "border-strong", cls: "border-border-strong", kind: "line" },
       { name: "input", cls: "border-input", kind: "line" },
       { name: "shell-border", cls: "border-shell-border", kind: "line" },
       { name: "ring", cls: "ring-ring/50", kind: "line", note: "accent" },
@@ -82,13 +95,8 @@ export const TOKEN_ROLES: TokenRole[] = [
   {
     id: "state",
     title: "State",
-    description:
-      "These keep their meaning under every accent. Use them solid for icons and text, or as washes with an opacity modifier such as bg-success/12.",
-    tokens: [
-      { name: "destructive", cls: "bg-destructive", kind: "fill" },
-      { name: "success", cls: "bg-success", kind: "fill" },
-      { name: "warning", cls: "bg-warning", kind: "fill" },
-    ],
+    description: "These keep their meaning under every accent. Use subtle for alert and badge washes, and the solid for icons and text.",
+    tokens: [...stateTokens("destructive"), ...stateTokens("success"), ...stateTokens("warning")],
   },
   {
     id: "chart",
@@ -109,7 +117,7 @@ export type ParsedTheme = { light: ModeValues; dark: ModeValues }
  */
 export function parseThemeTokens(css: string): ParsedTheme {
   const out: ParsedTheme = { light: {}, dark: {} }
-  const src = css.replace(/\/\*[\s\S]*?\*\//g, "")
+  const src = stripAtSupports(css.replace(/\/\*[\s\S]*?\*\//g, ""))
   const block = /(?:^|[\n}])\s*(:root|\.dark)\s*\{([^{}]*)\}/g
   for (let m = block.exec(src); m; m = block.exec(src)) {
     const target = m[1] === ":root" ? out.light : out.dark
@@ -121,6 +129,23 @@ export function parseThemeTokens(css: string): ParsedTheme {
     }
   }
   return out
+}
+
+/** Drop `@supports { … }` blocks (wide-gamut and color-mix overrides) so the tables show the base values. */
+function stripAtSupports(css: string): string {
+  let out = ""
+  let i = 0
+  for (let at = css.indexOf("@supports", i); at >= 0; at = css.indexOf("@supports", i)) {
+    out += css.slice(i, at)
+    let j = css.indexOf("{", at)
+    let depth = 0
+    for (; j < css.length; j++) {
+      if (css[j] === "{") depth++
+      else if (css[j] === "}" && --depth === 0) break
+    }
+    i = j + 1
+  }
+  return out + css.slice(i)
 }
 
 /** A token's value in one mode: dark falls back to the light value when `.dark` does not redeclare it. */

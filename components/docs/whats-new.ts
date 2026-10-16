@@ -5,7 +5,7 @@
  */
 export const WHATS_NEW = {
   /** Changelog anchor of the release that added them. */
-  href: "/docs/changelog#2026-10-16-novon",
+  href: "/docs/changelog#2026-10-16-foundation",
   items: [
     "code-block",
     "theme-accents",

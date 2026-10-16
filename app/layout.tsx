@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { JetBrains_Mono } from "next/font/google"
 
 import { themeScript } from "@/components/docs/theme-script"
 import { getNavGroups } from "@/lib/docs"
@@ -8,10 +7,8 @@ import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
 
 import { RouteShell } from "./route-shell"
 
+import "./fonts.css"
 import "./globals.css"
-
-// UI text uses the system font stack (globals.css); only the mono face is loaded.
-const jetbrainsMono = JetBrains_Mono({ variable: "--font-jetbrains-mono", subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: { default: "qinyang/ui", template: "%s · qinyang/ui" },
@@ -28,7 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${jetbrainsMono.variable} antialiased`}>
+      <body className="antialiased">
         <ToastProvider>
           <TooltipProvider>
             <RouteShell groups={groups}>{children}</RouteShell>

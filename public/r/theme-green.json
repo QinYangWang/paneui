@@ -8,25 +8,50 @@
   ],
   "cssVars": {
     "light": {
-      "accent-50": "oklch(98.2% 0.018 155.826)",
-      "accent-100": "oklch(96.2% 0.044 156.743)",
-      "accent-200": "oklch(92.5% 0.084 155.995)",
-      "accent-300": "oklch(87.1% 0.150 154.449)",
-      "accent-400": "oklch(79.2% 0.209 151.711)",
-      "accent-500": "oklch(72.3% 0.219 149.579)",
-      "accent-600": "oklch(62.7% 0.194 149.214)",
-      "accent-700": "oklch(52.7% 0.154 150.069)",
-      "accent-800": "oklch(44.8% 0.119 151.328)",
-      "accent-900": "oklch(39.3% 0.095 152.535)",
-      "accent-950": "oklch(26.6% 0.065 152.934)",
-      "primary": "var(--accent-700)",
-      "primary-foreground": "oklch(100% 0 0)",
-      "ring": "var(--accent-500)"
+      "primary": "#30a46c",
+      "primary-hover": "#2b9a66",
+      "primary-active": "#218358",
+      "primary-foreground": "#fff",
+      "primary-subtle": "#00a43319",
+      "primary-subtle-hover": "#00a83829",
+      "primary-border": "#00963c52",
+      "ring": "#00924ba4"
     },
     "dark": {
-      "primary": "var(--accent-700)",
-      "primary-foreground": "oklch(100% 0 0)",
-      "ring": "var(--accent-500)"
+      "primary": "#30a46c",
+      "primary-hover": "#33b074",
+      "primary-active": "#3dd68c",
+      "primary-foreground": "#fff",
+      "primary-subtle": "#22ff991e",
+      "primary-subtle-hover": "#11ff992d",
+      "primary-border": "#44ffaa4b",
+      "ring": "#44ffa49e"
+    }
+  },
+  "css": {
+    "@supports (color: color(display-p3 1 1 1))": {
+      "@media (color-gamut: p3)": {
+        ":root": {
+          "primary": "color(display-p3 .332 .634 .442)",
+          "primary-hover": "color(display-p3 .308 .595 .417)",
+          "primary-active": "color(display-p3 .19 .5 .32)",
+          "primary-foreground": "#fff",
+          "primary-subtle": "color(display-p3 .012 .596 .145/.087)",
+          "primary-subtle-hover": "color(display-p3 .008 .588 .145/.142)",
+          "primary-border": "color(display-p3 .004 .518 .157/.283)",
+          "ring": "color(display-p3 0 .478 .2/.55)"
+        },
+        ".dark": {
+          "primary": "color(display-p3 .332 .634 .442)",
+          "primary-hover": "color(display-p3 .357 .682 .474)",
+          "primary-active": "color(display-p3 .434 .828 .573)",
+          "primary-foreground": "#fff",
+          "primary-subtle": "color(display-p3 .376 .996 .655/.114)",
+          "primary-subtle-hover": "color(display-p3 .341 .996 .635/.173)",
+          "primary-border": "color(display-p3 .475 1 .706/.29)",
+          "ring": "color(display-p3 .502 .996 .682/.61)"
+        }
+      }
     }
   },
   "meta": {

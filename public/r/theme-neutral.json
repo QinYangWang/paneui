@@ -8,25 +8,24 @@
   ],
   "cssVars": {
     "light": {
-      "accent-50": "oklch(98.5% 0 0)",
-      "accent-100": "oklch(97.6% 0 0)",
-      "accent-200": "oklch(94% 0 0)",
-      "accent-300": "oklch(87% 0 0)",
-      "accent-400": "oklch(70.8% 0 0)",
-      "accent-500": "oklch(55.6% 0 0)",
-      "accent-600": "oklch(43.9% 0 0)",
-      "accent-700": "oklch(37.1% 0 0)",
-      "accent-800": "oklch(26.9% 0 0)",
-      "accent-900": "oklch(20.5% 0 0)",
-      "accent-950": "oklch(14.5% 0 0)",
-      "primary": "var(--accent-900)",
-      "primary-foreground": "oklch(100% 0 0)",
-      "ring": "var(--accent-400)"
+      "primary": "#000000f2",
+      "primary-hover": "#000c",
+      "primary-active": "#000000b3",
+      "primary-foreground": "#fff",
+      "primary-subtle": "#0000000f",
+      "primary-subtle-hover": "#00000017",
+      "primary-border": "#00000026",
+      "ring": "#0004"
     },
     "dark": {
-      "primary": "var(--accent-100)",
-      "primary-foreground": "var(--accent-900)",
-      "ring": "var(--accent-500)"
+      "primary": "#fffffff2",
+      "primary-hover": "#fffc",
+      "primary-active": "#ffffffb3",
+      "primary-foreground": "#000",
+      "primary-subtle": "#ffffff12",
+      "primary-subtle-hover": "#ffffff1b",
+      "primary-border": "#ffffff2c",
+      "ring": "#fff5"
     }
   },
   "meta": {

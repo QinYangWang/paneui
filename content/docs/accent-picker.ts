@@ -12,7 +12,7 @@ export default {
   },
   examples: [],
   notes: [
-    { title: "How it works", body: "It sets `data-accent` on `<html>` (blue, the default, has no attribute) and stores the pick in `localStorage[\"accent\"]`. The preset ramps ship inside the component as CSS and are injected once, so it works in any app with `@qinyang/theme`. `AccentPresets` renders that CSS plus a pre-paint script so a reload never flashes the default." },
+    { title: "How it works", body: "It sets `data-accent` on `<html>` (blue, the default, has no attribute) and stores the pick in `localStorage[\"accent\"]`. The preset roles ship inside the component as CSS and are injected once, so it works in any app with `@qinyang/theme`. `AccentPresets` renders that CSS plus a pre-paint script so a reload never flashes the default." },
     { title: "Custom control", body: "`useAccent()` returns `[accent, setAccent]` for a menu or select of your own." },
   ],
   api: [

@@ -1,128 +1,36 @@
 /**
- * Accent colour model for the docs: the preset ramps (mirroring `:root` and the
- * `html[data-accent]` blocks in app/globals.css), OKLCH maths to derive a ramp and a
- * light + dark accent from any picked colour, and the CSS a user takes home.
- * Pure and client-safe.
+ * Accent colour model for the docs: the preset roles (generated from the `html[data-accent]`
+ * blocks in app/globals.css), OKLCH maths to derive a light + dark accent from any picked
+ * colour, and the CSS a user takes home. Pure and client-safe.
  *
- * An accent is one `--accent-50…950` ramp; `--primary` (white text on the
- * 600 stop, 700 for green and orange), `--primary-foreground` and `--ring` (the 500 stop, used
- * at /50) read it. Blue is the default (no `data-accent`).
+ * An accent is eight role variables per mode: `--primary` (solid), `--primary-hover`,
+ * `--primary-active`, `--primary-foreground` (text on the solid), `--primary-subtle` and
+ * `--primary-subtle-hover` (tinted fills), `--primary-border` and `--ring` (focus). Presets
+ * read the same steps of their own 12-step scale. Blue is the default (no `data-accent`).
  */
 
-export type AccentVars = { primary: string; foreground: string; ring: string }
-/** `ramp`: the eleven stops 50…950 (same in both modes). */
-export type AccentTheme = { light: AccentVars; dark: AccentVars; ramp?: string[] }
+import { PRESET_ROLES } from "./accent-presets.generated"
+
+export const ACCENT_VARS = [
+  "primary",
+  "primary-hover",
+  "primary-active",
+  "primary-foreground",
+  "primary-subtle",
+  "primary-subtle-hover",
+  "primary-border",
+  "ring",
+] as const
+export type AccentVar = (typeof ACCENT_VARS)[number]
+export type AccentVars = Record<AccentVar, string>
+export type AccentTheme = { light: AccentVars; dark: AccentVars }
 export type PresetAccent = "blue" | "neutral" | "green" | "orange" | "rose" | "violet"
 
-/** The accent with no `data-accent` attribute: its ramp is the one on `:root`. */
+/** The accent with no `data-accent` attribute: its roles are the ones on `:root` and `.dark`. */
 export const DEFAULT_ACCENT: PresetAccent = "blue"
 
-export const RAMP_STOPS = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"] as const
-const stop = (s: (typeof RAMP_STOPS)[number]) => RAMP_STOPS.indexOf(s)
-
-/** Tailwind's OKLCH ramps (blue-400 is #3392ff, neutral-100/200 #f7f7f7/#ebebeb). Mirrors app/globals.css. */
-export const PRESET_RAMPS: Record<PresetAccent, string[]> = {
-  blue: [
-    "oklch(97% 0.014 254.604)",
-    "oklch(93.2% 0.032 255.585)",
-    "oklch(88.2% 0.059 254.128)",
-    "oklch(80.9% 0.105 251.813)",
-    "oklch(66% 0.184 254.753)",
-    "oklch(62.3% 0.214 259.815)",
-    "oklch(54.6% 0.245 262.881)",
-    "oklch(48.8% 0.243 264.376)",
-    "oklch(42.4% 0.199 265.638)",
-    "oklch(37.9% 0.146 265.522)",
-    "oklch(28.2% 0.091 267.935)",
-  ],
-  neutral: [
-    "oklch(98.5% 0 0)",
-    "oklch(97.6% 0 0)",
-    "oklch(94% 0 0)",
-    "oklch(87% 0 0)",
-    "oklch(70.8% 0 0)",
-    "oklch(55.6% 0 0)",
-    "oklch(43.9% 0 0)",
-    "oklch(37.1% 0 0)",
-    "oklch(26.9% 0 0)",
-    "oklch(20.5% 0 0)",
-    "oklch(14.5% 0 0)",
-  ],
-  green: [
-    "oklch(98.2% 0.018 155.826)",
-    "oklch(96.2% 0.044 156.743)",
-    "oklch(92.5% 0.084 155.995)",
-    "oklch(87.1% 0.150 154.449)",
-    "oklch(79.2% 0.209 151.711)",
-    "oklch(72.3% 0.219 149.579)",
-    "oklch(62.7% 0.194 149.214)",
-    "oklch(52.7% 0.154 150.069)",
-    "oklch(44.8% 0.119 151.328)",
-    "oklch(39.3% 0.095 152.535)",
-    "oklch(26.6% 0.065 152.934)",
-  ],
-  orange: [
-    "oklch(98% 0.016 73.684)",
-    "oklch(95.4% 0.038 75.164)",
-    "oklch(90.1% 0.076 70.697)",
-    "oklch(83.7% 0.128 66.290)",
-    "oklch(75% 0.183 55.934)",
-    "oklch(70.5% 0.213 47.604)",
-    "oklch(64.6% 0.222 41.116)",
-    "oklch(55.3% 0.195 38.402)",
-    "oklch(47% 0.157 37.304)",
-    "oklch(40.8% 0.123 38.172)",
-    "oklch(26.6% 0.079 36.259)",
-  ],
-  rose: [
-    "oklch(96.9% 0.015 12.422)",
-    "oklch(94.1% 0.030 12.580)",
-    "oklch(89.2% 0.058 10.001)",
-    "oklch(81% 0.117 11.638)",
-    "oklch(71.2% 0.194 13.428)",
-    "oklch(64.5% 0.246 16.439)",
-    "oklch(58.6% 0.253 17.585)",
-    "oklch(51.4% 0.222 16.935)",
-    "oklch(45.5% 0.188 13.697)",
-    "oklch(41% 0.159 10.272)",
-    "oklch(27.1% 0.105 12.094)",
-  ],
-  violet: [
-    "oklch(96.9% 0.016 293.756)",
-    "oklch(94.3% 0.029 294.588)",
-    "oklch(89.4% 0.057 293.283)",
-    "oklch(81.1% 0.111 293.571)",
-    "oklch(70.2% 0.183 293.541)",
-    "oklch(60.6% 0.250 292.717)",
-    "oklch(54.1% 0.281 293.009)",
-    "oklch(49.1% 0.270 292.581)",
-    "oklch(43.2% 0.232 292.759)",
-    "oklch(38% 0.189 293.745)",
-    "oklch(28.3% 0.141 291.089)",
-  ],
-}
-
-const WHITE_CSS = "oklch(100% 0 0)"
-
-/** primary = a ramp stop with white text, ring = 500, the same in both modes. */
-function rampTheme(ramp: string[], primaryStop: (typeof RAMP_STOPS)[number] = "600"): AccentTheme {
-  const vars: AccentVars = { primary: ramp[stop(primaryStop)], foreground: WHITE_CSS, ring: ramp[stop("500")] }
-  return { light: vars, dark: vars, ramp }
-}
-
-/** Resolved values of each preset (globals.css writes them as var(--accent-…) references). */
-export const PRESET_THEMES: Record<PresetAccent, AccentTheme> = {
-  blue: rampTheme(PRESET_RAMPS.blue),
-  neutral: {
-    light: { primary: PRESET_RAMPS.neutral[stop("900")], foreground: WHITE_CSS, ring: PRESET_RAMPS.neutral[stop("400")] },
-    dark: { primary: PRESET_RAMPS.neutral[stop("100")], foreground: PRESET_RAMPS.neutral[stop("900")], ring: PRESET_RAMPS.neutral[stop("500")] },
-    ramp: PRESET_RAMPS.neutral,
-  },
-  green: rampTheme(PRESET_RAMPS.green, "700"),
-  orange: rampTheme(PRESET_RAMPS.orange, "700"),
-  rose: rampTheme(PRESET_RAMPS.rose),
-  violet: rampTheme(PRESET_RAMPS.violet),
-}
+/** Resolved roles of each preset, mirroring app/globals.css. */
+export const PRESET_THEMES: Record<PresetAccent, AccentTheme> = PRESET_ROLES
 
 /** Display names for the presets. */
 export const PRESET_LABELS: Record<PresetAccent, string> = {
@@ -132,6 +40,13 @@ export const PRESET_LABELS: Record<PresetAccent, string> = {
   orange: "Orange",
   rose: "Rose",
   violet: "Violet",
+}
+
+/** `#rrggbb` of a hex colour, alpha dropped (`#000000f2` → `#000000`, `#fff` → `#ffffff`). */
+export function opaqueHex(hex: string): string {
+  let h = hex.trim().replace(/^#/, "")
+  if (h.length <= 4) h = [...h.slice(0, 3)].map((ch) => ch + ch).join("")
+  return `#${h.slice(0, 6)}`
 }
 
 /* ─────────────────────────── OKLCH maths ─────────────────────────── */
@@ -217,7 +132,7 @@ const fmt = (c: Oklch) => {
 }
 
 const BG_LIGHT: Oklch = { l: 1, c: 0, h: 0 } // --background, light (white)
-const BG_DARK: Oklch = { l: 0.182, c: 0, h: 0 } // --background, dark (#121212)
+const BG_DARK: Oklch = { l: 0.15, c: 0, h: 0 } // --background, dark
 const WHITE: Oklch = { l: 1, c: 0, h: 0 }
 
 /**
@@ -237,70 +152,59 @@ function ensureContrast(c: Oklch, bg: Oklch, step: number): Oklch {
   return out
 }
 
-const BLUE_RAMP = PRESET_RAMPS.blue.map((v) => parseOklch(v) as Oklch)
-const NEUTRAL_RAMP = PRESET_RAMPS.neutral.map((v) => parseOklch(v) as Oklch)
+const fmtA = (c: Oklch, alpha: number) => fmt(c).replace(/\)$/, ` / ${Math.round(alpha * 1000) / 10}%)`)
+const shift = (c: Oklch, dl: number) => fitGamut({ ...c, l: clamp(c.l + dl, 0, 1) })
 
 /**
- * A ramp for any hue: each stop keeps the blue ramp's lightness
- * (so contrast against the page and white text stays where blue's is), takes the picked hue, and
- * scales blue's chroma by how saturated the pick is next to blue-600, fitted to sRGB.
- */
-export function deriveRamp(base: Oklch): string[] {
-  if (base.c < 0.03) return NEUTRAL_RAMP.map((n) => fmt(fitGamut({ l: n.l, c: base.c * 0.5, h: base.h })))
-  const k = clamp(base.c / BLUE_RAMP[stop("600")].c, 0.2, 1.4)
-  return BLUE_RAMP.map((b) => fmt(fitGamut({ l: b.l, c: b.c * k, h: base.h })))
-}
-
-/**
- * Derive both modes from one picked colour.
- * The primary is the colour as picked, in both modes like the presets (darkened in light mode, or
- * lifted in dark mode, only if it would fall under 3:1 against that page), with white or dark text
- * by contrast; the ring is the derived ramp's 500 stop. A near-grey pick mirrors the neutral
- * preset instead (ramp 900 with white text in light, 100 with dark text in dark).
+ * Derive both modes from one picked colour, on the same role pattern as the presets: the solid is
+ * the colour as picked (darkened in light mode, or lifted in dark mode, only if it would fall under
+ * 3:1 against that page); hover and active step darker in light and lighter in dark; subtle fills,
+ * border and ring are the hue at fixed alphas. A near-grey pick mirrors the neutral preset.
  */
 export function deriveAccent(hex: string): AccentTheme | null {
   const base = hexToOklch(hex)
   if (!base) return null
-  const ramp = deriveRamp(base)
-  const at = (s: (typeof RAMP_STOPS)[number]) => ramp[stop(s)]
-  if (base.c < 0.03) {
+  if (base.c < 0.03) return PRESET_THEMES.neutral
+  const mode = (bg: Oklch, dir: 1 | -1, a: { subtle: number; hover: number; border: number; ring: number }): AccentVars => {
+    const fill = ensureContrast(base, bg, dir * 0.01)
     return {
-      light: { primary: at("900"), foreground: fmt(WHITE), ring: at("400") },
-      dark: { primary: at("100"), foreground: at("900"), ring: at("500") },
-      ramp,
+      primary: fmt(fill),
+      "primary-hover": fmt(shift(fill, dir * 0.03)),
+      "primary-active": fmt(shift(fill, dir * (dir < 0 ? 0.1 : 0.16))),
+      "primary-foreground": fmt(pickForeground(fill)),
+      "primary-subtle": fmtA(fill, a.subtle),
+      "primary-subtle-hover": fmtA(fill, a.hover),
+      "primary-border": fmtA(fill, a.border),
+      ring: fmtA(fill, a.ring),
     }
   }
-  const vars = (fill: Oklch): AccentVars => ({ primary: fmt(fill), foreground: fmt(pickForeground(fill)), ring: at("500") })
-  return { light: vars(ensureContrast(base, BG_LIGHT, -0.01)), dark: vars(ensureContrast(base, BG_DARK, 0.01)), ramp }
+  return {
+    light: mode(BG_LIGHT, -1, { subtle: 0.1, hover: 0.16, border: 0.33, ring: 0.63 }),
+    dark: mode(BG_DARK, 1, { subtle: 0.23, hover: 0.34, border: 0.5, ring: 1 }),
+  }
 }
 
 /* ─────────────────────────── CSS output ─────────────────────────── */
 
-const declarations = (v: AccentVars, indent = "") =>
-  [`--primary: ${v.primary};`, `--primary-foreground: ${v.foreground};`, `--ring: ${v.ring};`].map((d) => indent + d)
-
-const rampDeclarations = (ramp: string[] | undefined, indent = "") =>
-  (ramp ?? []).map((v, i) => `${indent}--accent-${RAMP_STOPS[i]}: ${v};`)
-
-const sameVars = (a: AccentVars, b: AccentVars) => a.primary === b.primary && a.foreground === b.foreground && a.ring === b.ring
+const declarations = (v: AccentVars, indent = "") => ACCENT_VARS.map((k) => `${indent}--${k}: ${v[k]};`)
 
 /** The overrides a user pastes after the theme variables: exactly what this page applies. */
 export function themeCss(theme: AccentTheme, label: string): string {
-  const dark = sameVars(theme.light, theme.dark) ? [] : ["", ".dark {", ...declarations(theme.dark, "  "), "}"]
   return [
     `/* qinyang/ui accent: ${label} */`,
     "/* Paste after the theme variables in globals.css. */",
     ":root {",
-    ...rampDeclarations(theme.ramp, "  "),
     ...declarations(theme.light, "  "),
     "}",
-    ...dark,
+    "",
+    ".dark {",
+    ...declarations(theme.dark, "  "),
+    "}",
   ].join("\n")
 }
 
 /** Runtime stylesheet for a custom accent, keyed on `data-accent="custom"` like the preset blocks. */
 export function customAccentStyle(theme: AccentTheme): string {
-  const one = (v: AccentVars) => `--primary:${v.primary};--primary-foreground:${v.foreground};--ring:${v.ring}`
-  const ramp = (theme.ramp ?? []).map((v, i) => `--accent-${RAMP_STOPS[i]}:${v};`).join("")
-  return `html[data-accent="custom"]{${ramp}${one(theme.light)}}html[data-accent="custom"].dark{${one(theme.dark)}}`
+  const one = (v: AccentVars) => ACCENT_VARS.map((k) => `--${k}:${v[k]}`).join(";")
+  return `html[data-accent="custom"]{${one(theme.light)}}html[data-accent="custom"].dark{${one(theme.dark)}}`
 }

@@ -8,25 +8,50 @@
   ],
   "cssVars": {
     "light": {
-      "accent-50": "oklch(96.9% 0.015 12.422)",
-      "accent-100": "oklch(94.1% 0.030 12.580)",
-      "accent-200": "oklch(89.2% 0.058 10.001)",
-      "accent-300": "oklch(81% 0.117 11.638)",
-      "accent-400": "oklch(71.2% 0.194 13.428)",
-      "accent-500": "oklch(64.5% 0.246 16.439)",
-      "accent-600": "oklch(58.6% 0.253 17.585)",
-      "accent-700": "oklch(51.4% 0.222 16.935)",
-      "accent-800": "oklch(45.5% 0.188 13.697)",
-      "accent-900": "oklch(41% 0.159 10.272)",
-      "accent-950": "oklch(27.1% 0.105 12.094)",
-      "primary": "var(--accent-600)",
-      "primary-foreground": "oklch(100% 0 0)",
-      "ring": "var(--accent-500)"
+      "primary": "#e93d82",
+      "primary-hover": "#df3478",
+      "primary-active": "#cb1d63",
+      "primary-foreground": "#fff",
+      "primary-subtle": "#ff005216",
+      "primary-subtle-hover": "#f8005123",
+      "primary-border": "#d0004b41",
+      "ring": "#b6004a6c"
     },
     "dark": {
-      "primary": "var(--accent-600)",
-      "primary-foreground": "oklch(100% 0 0)",
-      "ring": "var(--accent-500)"
+      "primary": "#e93d82",
+      "primary-hover": "#ee518a",
+      "primary-active": "#ff92ad",
+      "primary-foreground": "#fff",
+      "primary-subtle": "#fe2a8b2a",
+      "primary-subtle-hover": "#fd158741",
+      "primary-border": "#fe459763",
+      "ring": "#fe418de8"
+    }
+  },
+  "css": {
+    "@supports (color: color(display-p3 1 1 1))": {
+      "@media (color-gamut: p3)": {
+        ":root": {
+          "primary": "color(display-p3 .843 .298 .507)",
+          "primary-hover": "color(display-p3 .807 .266 .468)",
+          "primary-active": "color(display-p3 .731 .195 .388)",
+          "primary-foreground": "#fff",
+          "primary-subtle": "color(display-p3 .859 .008 .294/.083)",
+          "primary-subtle-hover": "color(display-p3 .827 .008 .298/.134)",
+          "primary-border": "color(display-p3 .682 .004 .247/.244)",
+          "ring": "color(display-p3 .6 .004 .251/.408)"
+        },
+        ".dark": {
+          "primary": "color(display-p3 .843 .298 .507)",
+          "primary-hover": "color(display-p3 .864 .364 .539)",
+          "primary-active": "color(display-p3 1 .56 .66)",
+          "primary-foreground": "#fff",
+          "primary-subtle": "color(display-p3 .996 .227 .573/.148)",
+          "primary-subtle-hover": "color(display-p3 1 .157 .569/.227)",
+          "primary-border": "color(display-p3 1 .337 .643/.349)",
+          "ring": "color(display-p3 1 .345 .596/.832)"
+        }
+      }
     }
   },
   "meta": {

@@ -9,38 +9,57 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Visual direction: native desktop.
- * System UI font on a 13px scale, near-flat elevation and a 0.625rem radius with multiplier steps.
- * Colours: Tailwind's neutral OKLCH ramp (with neutral-100 #f7f7f7, neutral-200 #ebebeb,
- * neutral-925 #121212 and blue-400 #3392ff), one --accent-50…950 ramp (blue by default) behind primary and ring, and a
- * categorical chart palette. The role of each token is in the comments below.
+ * Visual direction: native desktop on the foundation set (since 2026-10-16).
+ * Inter on a 13px UI scale, alpha greys from one 12-step scale (text, fills, borders), a blue
+ * accent read through eight roles, four shadow levels and a 0.5rem radius with multiplier steps.
+ * The role of each token is in the comments below.
  */
 @theme inline {
   --color-background: var(--background);
-  --color-code: var(--code);
   --color-foreground: var(--foreground);
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-  --font-mono:
-    var(--font-jetbrains-mono, "JetBrains Mono"), "JetBrains Mono", "SF Mono", "SFMono-Regular", Menlo,
-    Consolas, "Liberation Mono", monospace;
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-subtle-hover: var(--primary-subtle-hover);
+  --color-primary-border: var(--primary-border);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-fg-tertiary: var(--fg-tertiary);
+  --color-fg-disabled: var(--fg-disabled);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-destructive-border: var(--destructive-border);
   --color-success: var(--success);
+  --color-success-hover: var(--success-hover);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-border: var(--success-border);
   --color-warning: var(--warning);
+  --color-warning-hover: var(--warning-hover);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-border: var(--warning-border);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-standout: var(--surface-standout);
+  --color-standout-foreground: var(--standout-foreground);
   --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-code: var(--code);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -52,18 +71,43 @@
   /* App chrome: the window band/sidebar tone and the hairline of the inset content panel. */
   --color-shell: var(--shell);
   --color-shell-border: var(--shell-border);
-  /* Every radius is a multiple of --radius, so one value (or a data-radius preset) rescales them all. */
-  --radius-2xs: calc(var(--radius) * 0.3);
-  --radius-xs: calc(var(--radius) * 0.4);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-shell: calc(var(--radius) * 1.3);
 
-  /* Elevation tokens: near-flat hairlines. Names kept from the old skeuomorphic set. */
+  /* Inter for UI text, JetBrains Mono for code, Newsreader for reading, each with a CJK face behind it; all fall back to system faces when the fonts are not installed. */
+  --font-sans:
+    "Inter Variable", "Inter", "Noto Sans SC Variable", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    system-ui, "PingFang SC", "Microsoft YaHei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+  --font-sans--font-feature-settings: "ss03";
+  --font-mono:
+    "JetBrains Mono Variable", "JetBrains Mono", "Noto Sans SC Variable", ui-monospace, "SF Mono", "SFMono-Regular",
+    Menlo, Consolas, "Liberation Mono", monospace;
+  --font-mono--font-feature-settings: normal;
+  --font-serif:
+    "Newsreader Variable", "Newsreader", "Noto Serif SC Variable", "Noto Serif SC", ui-serif, Georgia, "Songti SC",
+    "SimSun", serif;
+
+  /* Every radius is a multiple of --radius (0.5rem): xs 2, sm 4, md 6, lg 8, xl 10, 2xl 12, 3xl 16, 4xl 20, 5xl 24px. */
+  --radius-2xs: calc(var(--radius) * 0.25);
+  --radius-xs: calc(var(--radius) * 0.25);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.25);
+  --radius-2xl: calc(var(--radius) * 1.5);
+  --radius-3xl: calc(var(--radius) * 2);
+  --radius-4xl: calc(var(--radius) * 2.5);
+  --radius-5xl: calc(var(--radius) * 3);
+  --radius-shell: calc(var(--radius) * 1.5);
+
+  /* Shadow scale: xs a 1px ring, sm resting controls, md/lg floating menus, xl dialogs. */
+  --shadow-xs: var(--shadow-border);
+  --shadow-sm: var(--shadow-default);
+  --shadow-md: var(--shadow-lg);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-border: var(--shadow-border);
+  --shadow-default: var(--shadow-default);
+
+  /* Named elevation used by the components; each reads the scale above. */
   --shadow-raised: var(--skeuo-raised);
   --shadow-raised-hover: var(--skeuo-raised-hover);
   --shadow-pressed: var(--skeuo-pressed);
@@ -73,7 +117,7 @@
   --shadow-chip: var(--skeuo-chip);
 }
 
-/* Native 13px type scale: text-ui is the default UI size (base 13). */
+/* Desktop type scale (text-ui is the default UI size, 13px) and the weight scale. */
 @theme {
   --text-ui-2xs: 0.625rem;
   --text-ui-2xs--line-height: 0.875rem;
@@ -85,59 +129,68 @@
   --text-ui--line-height: 1.125rem;
   --text-ui-lg: 0.875rem;
   --text-ui-lg--line-height: 1.25rem;
+  --font-weight-normal: 400;
+  --font-weight-semimedium: 450;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.5rem;
 
-  /*
-   * Accent ramp (--accent-50…950): the CTA hue. primary, primary-foreground and
-   * ring read it, so a preset (html[data-accent]) or a custom colour only swaps these eleven
-   * stops. Default blue = Tailwind blue with #3392ff at 400. Not to be confused with
-   * --accent below, which is the hover/selected fill.
-   */
-  --accent-50: oklch(97% 0.014 254.604);
-  --accent-100: oklch(93.2% 0.032 255.585);
-  --accent-200: oklch(88.2% 0.059 254.128);
-  --accent-300: oklch(80.9% 0.105 251.813);
-  --accent-400: oklch(66% 0.184 254.753);
-  --accent-500: oklch(62.3% 0.214 259.815);
-  --accent-600: oklch(54.6% 0.245 262.881);
-  --accent-700: oklch(48.8% 0.243 264.376);
-  --accent-800: oklch(42.4% 0.199 265.638);
-  --accent-900: oklch(37.9% 0.146 265.522);
-  --accent-950: oklch(28.2% 0.091 267.935);
-
-  /* Surfaces: page, card and popover are white. */
-  --background: oklch(100% 0 0);
-  --card: oklch(100% 0 0);
-  --popover: oklch(100% 0 0);
-  /* Text: text/primary neutral-950, text/secondary neutral-500 (4.7:1 on white). */
-  --foreground: oklch(14.5% 0 0);
-  --card-foreground: oklch(14.5% 0 0);
-  --popover-foreground: oklch(14.5% 0 0);
-  --muted-foreground: oklch(55.6% 0 0);
-  /* Primary: the accent's 600 stop with white text. */
-  --primary: var(--accent-600);
-  --primary-foreground: oklch(100% 0 0);
-  /*
-   * Fills stay translucent so they read on any surface: black 3% is neutral-100 (#f7f7f7) on white.
-   */
-  --secondary: oklch(0% 0 0 / 3%);
-  --secondary-foreground: oklch(14.5% 0 0);
-  --muted: oklch(0% 0 0 / 3%);
-  --accent: oklch(0% 0 0 / 3%);
-  --accent-foreground: oklch(14.5% 0 0);
-  /* State: red-500, lime-600 (notification success), yellow-600. */
-  --destructive: oklch(63.7% 0.237 25.331);
-  --success: oklch(64.8% 0.2 131.684);
-  --warning: oklch(68.1% 0.162 75.834);
-  /* Borders: black 8% is neutral-200 (#ebebeb) on white (border/button/default, separator). */
-  --border: oklch(0% 0 0 / 8%);
-  --input: oklch(0% 0 0 / 8%);
-  /* Focus: border/focus-ring = accent-500, used at /50. */
-  --ring: var(--accent-500);
-  /* Charts: chart-1…8 (teal, lime, pink, sky, purple, blue, emerald, yellow, all 400). */
+  /* Surfaces: page, container (card) and modal (popover), opaque. */
+  --background: #fff;
+  --card: #fff;
+  --popover: #fff;
+  /* Sunken wells, and the inverted standout surface (dark callouts, toasts). */
+  --surface-sunken: #0000000d;
+  --surface-standout: #202020;
+  --standout-foreground: #fff;
+  /* Text: primary gray a12, secondary a11, tertiary a9, disabled a8. All translucent, so they sit on any surface. */
+  --foreground: #000000df;
+  --card-foreground: #000000df;
+  --popover-foreground: #000000df;
+  --muted-foreground: #0000009b;
+  --fg-tertiary: #00000072;
+  --fg-disabled: #0004;
+  /* Accent (blue): solid 9, hover 10, active 11, subtle a3 / a4, border a6, focus ring a8 (a9 in dark). Presets swap these eight. */
+  --primary: #0090ff;
+  --primary-hover: #0588f0;
+  --primary-active: #0d74ce;
+  --primary-foreground: #fff;
+  --primary-subtle: #008ff519;
+  --primary-subtle-hover: #009eff2a;
+  --primary-border: #0088f653;
+  --ring: #0084e6a1;
+  /* Fills, translucent: component default a3 (secondary, muted), hover a4 (accent). Never surfaces. */
+  --secondary: #0000000f;
+  --secondary-foreground: #000000df;
+  --muted: #0000000f;
+  --accent: #00000017;
+  --accent-foreground: #000000df;
+  /* State: danger, positive and warning scales, each solid 9 / hover 10 / subtle a3 / border a6. */
+  --destructive: #e54d2e;
+  --destructive-hover: #dd4425;
+  --destructive-foreground: #fffcfc;
+  --destructive-subtle: #f52b0018;
+  --destructive-border: #f92d0050;
+  --success: #30a46c;
+  --success-hover: #2b9a66;
+  --success-foreground: #fbfefc;
+  --success-subtle: #00a43319;
+  --success-border: #00963c52;
+  --warning: #f76b15;
+  --warning-hover: #ef5f00;
+  --warning-foreground: #fefcfb;
+  --warning-subtle: #ff9c0029;
+  --warning-border: #ff81007d;
+  /* Borders: default a3 (every divider), subtle a2, strong a6 (field outlines = input). */
+  --border: #0000000f;
+  --border-subtle: #00000006;
+  --border-strong: #00000026;
+  --input: #00000026;
+  /* Charts: chart-1…8 (teal, lime, pink, sky, purple, blue, emerald, yellow). They never follow the accent. */
   --chart-1: oklch(77.7% 0.152 181.912);
   --chart-2: oklch(84.1% 0.238 128.85);
   --chart-3: oklch(71.8% 0.202 349.761);
@@ -146,83 +199,173 @@
   --chart-6: oklch(66% 0.184 254.753);
   --chart-7: oklch(76.5% 0.177 163.223);
   --chart-8: oklch(85.2% 0.199 91.936);
-  /* Code well: neutral-100. */
-  --code: oklch(97.6% 0 0);
-  --scrollbar: oklch(0% 0 0 / 16%);
-  --scrollbar-hover: oklch(0% 0 0 / 28%);
-  /* Shell band: background/secondary neutral-100; inset panel hairline black/10%. */
-  --shell: oklch(97.6% 0 0);
+  /* Code well gray 2; scrollbar thumb a6 → a8. */
+  --code: #f9f9f9;
+  --scrollbar: #00000026;
+  --scrollbar-hover: #0004;
+  /* Shell band (window chrome, rail sidebar) and the inset panel hairline. */
+  --shell: oklch(97.3% 0 0);
   --shell-border: oklch(0% 0 0 / 10%);
 
-  /*
-   * Elevation: a neutral-200 hairline (black 8%) with a 0 1px 1px 5% contact shadow; hover
-   * steps the ring to neutral-300 (border/button/hover); popups add shadow-dropdown and a soft lift.
-   */
-  --skeuo-raised: 0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%);
-  --skeuo-raised-hover: 0 0 0 1px oklch(0% 0 0 / 17%), 0 1px 1px oklch(0% 0 0 / 5%);
-  --skeuo-pressed: 0 0 0 1px oklch(0% 0 0 / 8%);
-  --skeuo-primary: 0 1px 2px oklch(0% 0 0 / 8%);
-  --skeuo-well: inset 0 0 0 1px oklch(0% 0 0 / 8%);
-  --skeuo-surface:
-    0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 2px oklch(0% 0 0 / 6%), 0 4px 10px -4px oklch(0% 0 0 / 8%);
-  --skeuo-chip: 0 0 0 1px oklch(0% 0 0 / 8%), 0 1px 1px oklch(0% 0 0 / 5%);
+  /* Shadow scale: border ring, default (resting), lg (menus, popovers), xl (dialogs). */
+  --shadow-border: 0 0 0 1px #00000012;
+  --shadow-default: 0 0 0 0.5px #0000 inset, 0 0 0 0.5px #0000000f, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d;
+  --shadow-lg: 0 0 0 0.5px #0000000f, 0 2px 3px -2px #0000000f, 0 3px 12px -4px #0000001a, 0 4px 16px -8px #0000000d;
+  --shadow-xl: 0 0 0 0.5px #0000 inset, 0 0 0 0.5px #0000000f, 0 8px 40px 0 #0000000d, 0 12px 32px -16px #00000026;
+  /* Named elevation (components use these), restated in .dark so they resolve per mode. */
+  --skeuo-raised: var(--shadow-default);
+  --skeuo-raised-hover: 0 0 0 0.5px #0000 inset, 0 0 0 0.5px #00000026, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d;
+  --skeuo-pressed: var(--shadow-border);
+  --skeuo-primary: 0 1px 2px #0000000d;
+  --skeuo-well: inset 0 0 0 1px var(--input);
+  --skeuo-surface: var(--shadow-lg);
+  --skeuo-chip: var(--shadow-border);
 }
 
 .dark {
-  /* Page background/full neutral-925 (#121212); cards, popovers, fields background/primary neutral-800. */
-  --background: oklch(18.2% 0 0);
-  --card: oklch(26.9% 0 0);
-  --popover: oklch(26.9% 0 0);
-  /*
-   * text/primary neutral-50. text/secondary at neutral-500 would be 3.2:1 on a
-   * neutral-800 card, so it moves one step to neutral-400 (5.8:1 on cards, 7.2:1 on the page).
-   */
-  --foreground: oklch(98.5% 0 0);
-  --card-foreground: oklch(98.5% 0 0);
-  --popover-foreground: oklch(98.5% 0 0);
-  --muted-foreground: oklch(70.8% 0 0);
-  /* Primary keeps the light value (the CTA does not change with mode). */
-  /* Fills: white 7% ≈ neutral-700 / 60% on a neutral-800 card (background/primary/hover). */
-  --secondary: oklch(100% 0 0 / 7%);
-  --secondary-foreground: oklch(98.5% 0 0);
-  --muted: oklch(100% 0 0 / 5%);
-  --accent: oklch(100% 0 0 / 7%);
-  --accent-foreground: oklch(98.5% 0 0);
-  /*
-   * State: lime-400, yellow-500. destructive stays red-500 rather than red-400:
-   * it also fills the destructive button, where white text on red-400 is 2.9:1 (the dark
-   * danger button keeps its red-500 → 600 gradient).
-   */
-  --destructive: oklch(63.7% 0.237 25.331);
-  --success: oklch(84.1% 0.238 128.85);
-  --warning: oklch(79.5% 0.184 86.047);
-  /*
-   * Borders: white 8% is neutral-800 on the page (separator, table), still visible on a card;
-   * input white 12% is neutral-700 on a card (border/button/default).
-   */
-  --border: oklch(100% 0 0 / 8%);
-  --input: oklch(100% 0 0 / 12%);
-  --code: oklch(20.5% 0 0);
-  --scrollbar: oklch(100% 0 0 / 14%);
-  --scrollbar-hover: oklch(100% 0 0 / 24%);
-  /* Shell band: background/secondary neutral-900; inset panel hairline white/9%. */
-  --shell: oklch(20.5% 0 0);
+  /* Surfaces: page, container (card) and modal (popover), opaque. */
+  --background: oklch(15% 0 0);
+  --card: #111;
+  --popover: oklch(25.2% 0 0);
+  /* Sunken wells, and the inverted standout surface (dark callouts, toasts). */
+  --surface-sunken: #0006;
+  --surface-standout: #222;
+  --standout-foreground: #ffffffed;
+  /* Text: primary gray a12, secondary a11, tertiary a9, disabled a8. All translucent, so they sit on any surface. */
+  --foreground: #ffffffed;
+  --card-foreground: #ffffffed;
+  --popover-foreground: #ffffffed;
+  --muted-foreground: #ffffffaf;
+  --fg-tertiary: #ffffff64;
+  --fg-disabled: #fff5;
+  /* Accent (blue): solid 9, hover 10, active 11, subtle a3 / a4, border a6, focus ring a8 (a9 in dark). Presets swap these eight. */
+  --primary: #0090ff;
+  --primary-hover: #3b9eff;
+  --primary-active: #70b8ff;
+  --primary-foreground: #fff;
+  --primary-subtle: #0077ff3a;
+  --primary-subtle-hover: #0075ff57;
+  --primary-border: #0f89fd7f;
+  --ring: #0090ff;
+  /* Fills, translucent: component default a3 (secondary, muted), hover a4 (accent). Never surfaces. */
+  --secondary: #ffffff12;
+  --secondary-foreground: #ffffffed;
+  --muted: #ffffff12;
+  --accent: #ffffff1b;
+  --accent-foreground: #ffffffed;
+  /* State: danger, positive and warning scales, each solid 9 / hover 10 / subtle a3 / border a6. */
+  --destructive: #e54d2e;
+  --destructive-hover: #ec6142;
+  --destructive-foreground: #fff;
+  --destructive-subtle: #ff35232b;
+  --destructive-border: #ff4f3864;
+  --success: #30a46c;
+  --success-hover: #33b074;
+  --success-foreground: #fff;
+  --success-subtle: #22ff991e;
+  --success-border: #44ffaa4b;
+  --warning: #f76b15;
+  --warning-hover: #ff801f;
+  --warning-foreground: #fff;
+  --warning-subtle: #fb6a0025;
+  --warning-border: #fd75045c;
+  /* Borders: default a3 (every divider), subtle a2, strong a6 (field outlines = input). */
+  --border: #ffffff12;
+  --border-subtle: #ffffff09;
+  --border-strong: #ffffff2c;
+  --input: #ffffff2c;
+  /* Code well gray 2; scrollbar thumb a6 → a8. */
+  --code: #191919;
+  --scrollbar: #ffffff2c;
+  --scrollbar-hover: #fff5;
+  /* Shell band (window chrome, rail sidebar) and the inset panel hairline. */
+  --shell: #000;
   --shell-border: oklch(100% 0 0 / 9%);
 
-  /* Hairline neutral-700 on a card (white 12%) plus a darker contact shadow; hover neutral-600-ish. */
-  --skeuo-raised: 0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 1px oklch(0% 0 0 / 14%);
-  --skeuo-raised-hover: 0 0 0 1px oklch(100% 0 0 / 20%), 0 1px 1px oklch(0% 0 0 / 14%);
-  --skeuo-pressed: 0 0 0 1px oklch(100% 0 0 / 8%);
+  /* Shadow scale: border ring, default (resting), lg (menus, popovers), xl (dialogs). */
+  --shadow-border: 0 0 0 1px #ffffff12;
+  --shadow-default: 0 0 0 0.5px #ffffff12 inset, 0 0 0 0.5px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000;
+  --shadow-lg: 0 0 0 1px #ffffff2c, 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080;
+  --shadow-xl: 0 0 0 0.5px #ffffff12 inset, 0 0 0 0.5px #0000, 0 8px 40px 0 #0000000d, 0 12px 32px -16px #00000026;
+  /* Named elevation (components use these), restated in .dark so they resolve per mode. */
+  --skeuo-raised: var(--shadow-default);
+  --skeuo-raised-hover: 0 0 0 0.5px #ffffff2c inset, 0 0 0 0.5px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000;
+  --skeuo-pressed: var(--shadow-border);
   --skeuo-primary: 0 0 0 0 transparent;
-  --skeuo-well: inset 0 0 0 1px oklch(100% 0 0 / 12%);
-  --skeuo-surface:
-    0 0 0 1px oklch(100% 0 0 / 12%), 0 1px 2px oklch(0% 0 0 / 18%), 0 4px 12px -4px oklch(0% 0 0 / 36%);
-  --skeuo-chip: 0 0 0 1px oklch(100% 0 0 / 10%);
+  --skeuo-well: inset 0 0 0 1px var(--input);
+  --skeuo-surface: var(--shadow-lg);
+  --skeuo-chip: var(--shadow-border);
+}
+
+/* Wide-gamut displays get the same scales in display-p3 (accent and state colours only; greys are identical). */
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    :root {
+      --primary: color(display-p3 .247 .556 .969);
+      --primary-hover: color(display-p3 .234 .523 .912);
+      --primary-active: color(display-p3 .15 .44 .84);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .012 .506 .914/.087);
+      --primary-subtle-hover: color(display-p3 .008 .545 1/.146);
+      --primary-border: color(display-p3 .004 .463 .922/.291);
+      --ring: color(display-p3 0 .427 .851/.55);
+      --destructive: color(display-p3 .831 .345 .231);
+      --destructive-hover: color(display-p3 .802 .313 .2);
+      --destructive-foreground: color(display-p3 .998 .989 .988);
+      --destructive-subtle: color(display-p3 .831 .184 .012/.091);
+      --destructive-border: color(display-p3 .847 .173 .004/.302);
+      --success: color(display-p3 .332 .634 .442);
+      --success-hover: color(display-p3 .308 .595 .417);
+      --success-foreground: color(display-p3 .986 .996 .989);
+      --success-subtle: color(display-p3 .012 .596 .145/.087);
+      --success-border: color(display-p3 .004 .518 .157/.283);
+      --warning: color(display-p3 .9 .45 .2);
+      --warning-hover: color(display-p3 .87 .409 .164);
+      --warning-foreground: color(display-p3 .995 .988 .985);
+      --warning-subtle: color(display-p3 .922 .584 .008/.15);
+      --warning-border: color(display-p3 .949 .494 .004/.455);
+    }
+    .dark {
+      --primary: color(display-p3 .247 .556 .969);
+      --primary-hover: color(display-p3 .344 .612 .973);
+      --primary-active: color(display-p3 .49 .72 1);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .122 .463 1/.219);
+      --primary-subtle-hover: color(display-p3 0 .467 1/.324);
+      --primary-border: color(display-p3 .224 .557 1/.475);
+      --ring: color(display-p3 .251 .573 .996/.967);
+      --destructive: color(display-p3 .831 .345 .231);
+      --destructive-hover: color(display-p3 .862 .415 .298);
+      --destructive-foreground: #fff;
+      --destructive-subtle: color(display-p3 .996 .282 .176/.148);
+      --destructive-border: color(display-p3 1 .392 .278/.353);
+      --success: color(display-p3 .332 .634 .442);
+      --success-hover: color(display-p3 .357 .682 .474);
+      --success-foreground: #fff;
+      --success-subtle: color(display-p3 .376 .996 .655/.114);
+      --success-border: color(display-p3 .475 1 .706/.29);
+      --warning: color(display-p3 .9 .45 .2);
+      --warning-hover: color(display-p3 .98 .51 .23);
+      --warning-foreground: #fff;
+      --warning-subtle: color(display-p3 .996 .486 0/.131);
+      --warning-border: color(display-p3 1 .529 .129/.332);
+    }
+  }
+}
+
+/* The lg ring mixes toward the step-3 grey where color-mix is supported. */
+@supports (color: color-mix(in oklab, red, red)) {
+  :root {
+    --shadow-lg: 0 0 0 0.5px color-mix(in oklab, #0000000f, #f0f0f0 25%), 0 2px 3px -2px #0000000f, 0 3px 12px -4px #0000001a, 0 4px 16px -8px #0000000d;
+  }
+  .dark {
+    --shadow-lg: 0 0 0 1px color-mix(in oklab, #ffffff12, #3a3a3a 25%), 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080;
+  }
 }
 
 /*
  * Radius presets: `data-radius` on <html> swaps the one base value every radius token multiplies
- * (default, no attribute, is 0.625rem). A custom value is set inline as `--radius` on <html>.
+ * (default, no attribute, is 0.5rem). A custom value is set inline as `--radius` on <html>.
  */
 html[data-radius="none"] {
   --radius: 0rem;
@@ -231,93 +374,201 @@ html[data-radius="sm"] {
   --radius: 0.375rem;
 }
 html[data-radius="lg"] {
-  --radius: 0.875rem;
+  --radius: 0.625rem;
 }
 html[data-radius="xl"] {
-  --radius: 1.125rem;
+  --radius: 0.875rem;
 }
 
 /*
- * Accent presets: `data-accent` on <html> swaps the --accent-* ramp (default, no attribute, is blue).
- * primary follows the 600 stop with white text; green and orange use 700, the first stop where
- * white text reaches 4.5:1. Neutral is the old black/white primary: neutral-900 with white text in
- * light, neutral-100 with neutral-900 text in dark. The docs header persists the pick in
- * localStorage["accent"]; registry items theme-<name> ship the same values.
+ * Accent presets: `data-accent` on <html> swaps the eight accent roles (default, no attribute, is blue).
+ * Each preset reads the same steps of its own scale: solid 9, hover 10, active 11, subtle a3 / a4,
+ * border a6, ring a8 (a9 in dark). Neutral is the inverted black / white solid. The docs header
+ * persists the pick in localStorage["accent"]; registry items theme-<name> ship the same values.
  */
 html[data-accent="neutral"] {
-  --accent-50: oklch(98.5% 0 0);
-  --accent-100: oklch(97.6% 0 0);
-  --accent-200: oklch(94% 0 0);
-  --accent-300: oklch(87% 0 0);
-  --accent-400: oklch(70.8% 0 0);
-  --accent-500: oklch(55.6% 0 0);
-  --accent-600: oklch(43.9% 0 0);
-  --accent-700: oklch(37.1% 0 0);
-  --accent-800: oklch(26.9% 0 0);
-  --accent-900: oklch(20.5% 0 0);
-  --accent-950: oklch(14.5% 0 0);
-  --primary: var(--accent-900);
-  --primary-foreground: oklch(100% 0 0);
-  --ring: var(--accent-400);
+  --primary: #000000f2;
+  --primary-hover: #000c;
+  --primary-active: #000000b3;
+  --primary-foreground: #fff;
+  --primary-subtle: #0000000f;
+  --primary-subtle-hover: #00000017;
+  --primary-border: #00000026;
+  --ring: #0004;
 }
 html[data-accent="neutral"].dark {
-  --primary: var(--accent-100);
-  --primary-foreground: var(--accent-900);
-  --ring: var(--accent-500);
+  --primary: #fffffff2;
+  --primary-hover: #fffc;
+  --primary-active: #ffffffb3;
+  --primary-foreground: #000;
+  --primary-subtle: #ffffff12;
+  --primary-subtle-hover: #ffffff1b;
+  --primary-border: #ffffff2c;
+  --ring: #fff5;
 }
 html[data-accent="green"] {
-  --accent-50: oklch(98.2% 0.018 155.826);
-  --accent-100: oklch(96.2% 0.044 156.743);
-  --accent-200: oklch(92.5% 0.084 155.995);
-  --accent-300: oklch(87.1% 0.150 154.449);
-  --accent-400: oklch(79.2% 0.209 151.711);
-  --accent-500: oklch(72.3% 0.219 149.579);
-  --accent-600: oklch(62.7% 0.194 149.214);
-  --accent-700: oklch(52.7% 0.154 150.069);
-  --accent-800: oklch(44.8% 0.119 151.328);
-  --accent-900: oklch(39.3% 0.095 152.535);
-  --accent-950: oklch(26.6% 0.065 152.934);
-  --primary: var(--accent-700);
+  --primary: #30a46c;
+  --primary-hover: #2b9a66;
+  --primary-active: #218358;
+  --primary-foreground: #fff;
+  --primary-subtle: #00a43319;
+  --primary-subtle-hover: #00a83829;
+  --primary-border: #00963c52;
+  --ring: #00924ba4;
+}
+html[data-accent="green"].dark {
+  --primary: #30a46c;
+  --primary-hover: #33b074;
+  --primary-active: #3dd68c;
+  --primary-foreground: #fff;
+  --primary-subtle: #22ff991e;
+  --primary-subtle-hover: #11ff992d;
+  --primary-border: #44ffaa4b;
+  --ring: #44ffa49e;
 }
 html[data-accent="orange"] {
-  --accent-50: oklch(98% 0.016 73.684);
-  --accent-100: oklch(95.4% 0.038 75.164);
-  --accent-200: oklch(90.1% 0.076 70.697);
-  --accent-300: oklch(83.7% 0.128 66.290);
-  --accent-400: oklch(75% 0.183 55.934);
-  --accent-500: oklch(70.5% 0.213 47.604);
-  --accent-600: oklch(64.6% 0.222 41.116);
-  --accent-700: oklch(55.3% 0.195 38.402);
-  --accent-800: oklch(47% 0.157 37.304);
-  --accent-900: oklch(40.8% 0.123 38.172);
-  --accent-950: oklch(26.6% 0.079 36.259);
-  --primary: var(--accent-700);
+  --primary: #f76b15;
+  --primary-hover: #ef5f00;
+  --primary-active: #cc4e00;
+  --primary-foreground: #fff;
+  --primary-subtle: #ff9c0029;
+  --primary-subtle-hover: #ff91014a;
+  --primary-border: #ff81007d;
+  --ring: #e35f00aa;
+}
+html[data-accent="orange"].dark {
+  --primary: #f76b15;
+  --primary-hover: #ff801f;
+  --primary-active: #ffa057;
+  --primary-foreground: #fff;
+  --primary-subtle: #fb6a0025;
+  --primary-subtle-hover: #ff590039;
+  --primary-border: #fd75045c;
+  --ring: #fe6d15f7;
 }
 html[data-accent="rose"] {
-  --accent-50: oklch(96.9% 0.015 12.422);
-  --accent-100: oklch(94.1% 0.030 12.580);
-  --accent-200: oklch(89.2% 0.058 10.001);
-  --accent-300: oklch(81% 0.117 11.638);
-  --accent-400: oklch(71.2% 0.194 13.428);
-  --accent-500: oklch(64.5% 0.246 16.439);
-  --accent-600: oklch(58.6% 0.253 17.585);
-  --accent-700: oklch(51.4% 0.222 16.935);
-  --accent-800: oklch(45.5% 0.188 13.697);
-  --accent-900: oklch(41% 0.159 10.272);
-  --accent-950: oklch(27.1% 0.105 12.094);
+  --primary: #e93d82;
+  --primary-hover: #df3478;
+  --primary-active: #cb1d63;
+  --primary-foreground: #fff;
+  --primary-subtle: #ff005216;
+  --primary-subtle-hover: #f8005123;
+  --primary-border: #d0004b41;
+  --ring: #b6004a6c;
+}
+html[data-accent="rose"].dark {
+  --primary: #e93d82;
+  --primary-hover: #ee518a;
+  --primary-active: #ff92ad;
+  --primary-foreground: #fff;
+  --primary-subtle: #fe2a8b2a;
+  --primary-subtle-hover: #fd158741;
+  --primary-border: #fe459763;
+  --ring: #fe418de8;
 }
 html[data-accent="violet"] {
-  --accent-50: oklch(96.9% 0.016 293.756);
-  --accent-100: oklch(94.3% 0.029 294.588);
-  --accent-200: oklch(89.4% 0.057 293.283);
-  --accent-300: oklch(81.1% 0.111 293.571);
-  --accent-400: oklch(70.2% 0.183 293.541);
-  --accent-500: oklch(60.6% 0.250 292.717);
-  --accent-600: oklch(54.1% 0.281 293.009);
-  --accent-700: oklch(49.1% 0.270 292.581);
-  --accent-800: oklch(43.2% 0.232 292.759);
-  --accent-900: oklch(38% 0.189 293.745);
-  --accent-950: oklch(28.3% 0.141 291.089);
+  --primary: #6e56cf;
+  --primary-hover: #654dc4;
+  --primary-active: #6550b9;
+  --primary-foreground: #fff;
+  --primary-subtle: #4400ee0f;
+  --primary-subtle-hover: #4300ff1b;
+  --primary-border: #3100fb35;
+  --ring: #2b00d066;
+}
+html[data-accent="violet"].dark {
+  --primary: #6e56cf;
+  --primary-hover: #7d66d9;
+  --primary-active: #baa7ff;
+  --primary-foreground: #fff;
+  --primary-subtle: #8354fe36;
+  --primary-subtle-hover: #7d51fd50;
+  --primary-border: #8f6cfd6d;
+  --ring: #8668ffcc;
+}
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    html[data-accent="green"] {
+      --primary: color(display-p3 .332 .634 .442);
+      --primary-hover: color(display-p3 .308 .595 .417);
+      --primary-active: color(display-p3 .19 .5 .32);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .012 .596 .145/.087);
+      --primary-subtle-hover: color(display-p3 .008 .588 .145/.142);
+      --primary-border: color(display-p3 .004 .518 .157/.283);
+      --ring: color(display-p3 0 .478 .2/.55);
+    }
+    html[data-accent="green"].dark {
+      --primary: color(display-p3 .332 .634 .442);
+      --primary-hover: color(display-p3 .357 .682 .474);
+      --primary-active: color(display-p3 .434 .828 .573);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .376 .996 .655/.114);
+      --primary-subtle-hover: color(display-p3 .341 .996 .635/.173);
+      --primary-border: color(display-p3 .475 1 .706/.29);
+      --ring: color(display-p3 .502 .996 .682/.61);
+    }
+    html[data-accent="orange"] {
+      --primary: color(display-p3 .9 .45 .2);
+      --primary-hover: color(display-p3 .87 .409 .164);
+      --primary-active: color(display-p3 .76 .34 0);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .922 .584 .008/.15);
+      --primary-subtle-hover: color(display-p3 1 .604 .004/.314);
+      --primary-border: color(display-p3 .949 .494 .004/.455);
+      --ring: color(display-p3 .804 .349 0/.62);
+    }
+    html[data-accent="orange"].dark {
+      --primary: color(display-p3 .9 .45 .2);
+      --primary-hover: color(display-p3 .98 .51 .23);
+      --primary-active: color(display-p3 1 .63 .38);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .996 .486 0/.131);
+      --primary-subtle-hover: color(display-p3 .996 .384 0/.211);
+      --primary-border: color(display-p3 1 .529 .129/.332);
+      --ring: color(display-p3 1 .494 .216/.895);
+    }
+    html[data-accent="rose"] {
+      --primary: color(display-p3 .843 .298 .507);
+      --primary-hover: color(display-p3 .807 .266 .468);
+      --primary-active: color(display-p3 .731 .195 .388);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .859 .008 .294/.083);
+      --primary-subtle-hover: color(display-p3 .827 .008 .298/.134);
+      --primary-border: color(display-p3 .682 .004 .247/.244);
+      --ring: color(display-p3 .6 .004 .251/.408);
+    }
+    html[data-accent="rose"].dark {
+      --primary: color(display-p3 .843 .298 .507);
+      --primary-hover: color(display-p3 .864 .364 .539);
+      --primary-active: color(display-p3 1 .56 .66);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .996 .227 .573/.148);
+      --primary-subtle-hover: color(display-p3 1 .157 .569/.227);
+      --primary-border: color(display-p3 1 .337 .643/.349);
+      --ring: color(display-p3 1 .345 .596/.832);
+    }
+    html[data-accent="violet"] {
+      --primary: color(display-p3 .417 .341 .784);
+      --primary-hover: color(display-p3 .381 .306 .741);
+      --primary-active: color(display-p3 .383 .317 .702);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .204 .004 .871/.059);
+      --primary-subtle-hover: color(display-p3 .196 .004 1/.102);
+      --primary-border: color(display-p3 .153 .004 .906/.208);
+      --ring: color(display-p3 .133 .004 .753/.397);
+    }
+    html[data-accent="violet"].dark {
+      --primary: color(display-p3 .417 .341 .784);
+      --primary-hover: color(display-p3 .477 .402 .823);
+      --primary-active: color(display-p3 .72 .65 1);
+      --primary-foreground: #fff;
+      --primary-subtle: color(display-p3 .494 .337 .996/.202);
+      --primary-subtle-hover: color(display-p3 .49 .345 1/.299);
+      --primary-border: color(display-p3 .569 .455 1/.408);
+      --ring: color(display-p3 .522 .424 1/.769);
+    }
+  }
 }
 
 @layer base {
@@ -333,8 +584,14 @@ html[data-accent="violet"] {
   }
   body {
     @apply bg-background font-sans text-foreground antialiased;
-    /* Let the system UI font use its own optical tracking. */
     letter-spacing: normal;
+  }
+  /* Code faces never take the UI font's stylistic set. */
+  code,
+  kbd,
+  pre,
+  samp {
+    font-feature-settings: normal;
   }
 
   /* Scrollbars: thin, rounded, token-colored pill thumb on a transparent track. */
@@ -402,13 +659,13 @@ html[data-accent="violet"] {
 
 /*
  * Rail layout: the window band and sidebar sit on `bg-shell`; the content is an inset panel
- * with a 0.5px hairline (one device pixel on Retina), a 1.3x radius and a 3px gap to the
+ * with a 0.5px hairline (one device pixel on Retina), a 1.5x radius and a 3px gap to the
  * window's right and bottom edges.
  */
 @utility shell-inset {
   background-color: var(--background);
   border: 0.5px solid var(--shell-border);
-  border-radius: calc(var(--radius) * 1.3);
+  border-radius: calc(var(--radius) * 1.5);
   margin-inline-end: 3px;
   margin-bottom: 3px;
 }
@@ -425,8 +682,8 @@ html[data-accent="violet"] {
 
 /* Sticky top edge for a shell-inset panel that scrolls with the page (docs shell). */
 @utility shell-cap {
-  border-top-left-radius: calc(var(--radius) * 1.3);
-  border-top-right-radius: calc(var(--radius) * 1.3);
+  border-top-left-radius: calc(var(--radius) * 1.5);
+  border-top-right-radius: calc(var(--radius) * 1.5);
 }
 
 /*
@@ -436,11 +693,11 @@ html[data-accent="violet"] {
  * the inset (inner = outer − padding − border), or the corners visibly drift apart.
  * Instead of computing that by hand in every component:
  *
- *   <div class="frame-xl frame-p-1">          radius xl (14px), padding 4px
- *     <button class="rounded-inner">…</button>   → 14 − 4 = 10px
+ *   <div class="frame-2xl frame-p-1">         radius 2xl (12px), padding 4px
+ *     <button class="rounded-inner">…</button>   → 12 − 4 = 8px
  *   </div>
  *
- *   frame-{sm…3xl|shell|[len]}  the container: sets its border-radius and publishes the radius
+ *   frame-{sm…5xl|shell|[len]}  the container: sets its border-radius and publishes the radius
  *                               its children should use (--frame-inner-1).
  *   frame-p-{n|[len]}           padding on all sides AND the inset used in the calculation.
  *   frame-inset-{n|[len]}       only the inset (when the gap comes from px/py, a gap, or a

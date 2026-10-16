@@ -8,25 +8,50 @@
   ],
   "cssVars": {
     "light": {
-      "accent-50": "oklch(96.9% 0.016 293.756)",
-      "accent-100": "oklch(94.3% 0.029 294.588)",
-      "accent-200": "oklch(89.4% 0.057 293.283)",
-      "accent-300": "oklch(81.1% 0.111 293.571)",
-      "accent-400": "oklch(70.2% 0.183 293.541)",
-      "accent-500": "oklch(60.6% 0.250 292.717)",
-      "accent-600": "oklch(54.1% 0.281 293.009)",
-      "accent-700": "oklch(49.1% 0.270 292.581)",
-      "accent-800": "oklch(43.2% 0.232 292.759)",
-      "accent-900": "oklch(38% 0.189 293.745)",
-      "accent-950": "oklch(28.3% 0.141 291.089)",
-      "primary": "var(--accent-600)",
-      "primary-foreground": "oklch(100% 0 0)",
-      "ring": "var(--accent-500)"
+      "primary": "#6e56cf",
+      "primary-hover": "#654dc4",
+      "primary-active": "#6550b9",
+      "primary-foreground": "#fff",
+      "primary-subtle": "#4400ee0f",
+      "primary-subtle-hover": "#4300ff1b",
+      "primary-border": "#3100fb35",
+      "ring": "#2b00d066"
     },
     "dark": {
-      "primary": "var(--accent-600)",
-      "primary-foreground": "oklch(100% 0 0)",
-      "ring": "var(--accent-500)"
+      "primary": "#6e56cf",
+      "primary-hover": "#7d66d9",
+      "primary-active": "#baa7ff",
+      "primary-foreground": "#fff",
+      "primary-subtle": "#8354fe36",
+      "primary-subtle-hover": "#7d51fd50",
+      "primary-border": "#8f6cfd6d",
+      "ring": "#8668ffcc"
+    }
+  },
+  "css": {
+    "@supports (color: color(display-p3 1 1 1))": {
+      "@media (color-gamut: p3)": {
+        ":root": {
+          "primary": "color(display-p3 .417 .341 .784)",
+          "primary-hover": "color(display-p3 .381 .306 .741)",
+          "primary-active": "color(display-p3 .383 .317 .702)",
+          "primary-foreground": "#fff",
+          "primary-subtle": "color(display-p3 .204 .004 .871/.059)",
+          "primary-subtle-hover": "color(display-p3 .196 .004 1/.102)",
+          "primary-border": "color(display-p3 .153 .004 .906/.208)",
+          "ring": "color(display-p3 .133 .004 .753/.397)"
+        },
+        ".dark": {
+          "primary": "color(display-p3 .417 .341 .784)",
+          "primary-hover": "color(display-p3 .477 .402 .823)",
+          "primary-active": "color(display-p3 .72 .65 1)",
+          "primary-foreground": "#fff",
+          "primary-subtle": "color(display-p3 .494 .337 .996/.202)",
+          "primary-subtle-hover": "color(display-p3 .49 .345 1/.299)",
+          "primary-border": "color(display-p3 .569 .455 1/.408)",
+          "ring": "color(display-p3 .522 .424 1/.769)"
+        }
+      }
     }
   },
   "meta": {
