@@ -94,7 +94,7 @@ Fix the code first. If a rule is wrong for a legitimate case, use one
 line only, with a reason. List them with `rg "eslint-disable.*shadcn/"`; each is a design decision to review.
 
 ## Component docs pages
-Every registry:ui item has `content/docs/<name>.ts` (type `ComponentDoc` in lib/doc-types.ts: usage, composition, examples, notes, api) and examples in `registry/base-nova/examples/<name>/<id>.tsx`. After adding or renaming one run `pnpm docs:gen` (regenerates content/docs/index.generated.ts and components/docs/examples.generated.tsx; commit both). API tables list only props the library adds or changes; the rest is `extends` with a link to the primitive's docs. Examples render client-only.
+Every registry:ui item has `content/docs/<name>.ts` (type `ComponentDoc` in lib/doc-types.ts: usage, composition, examples, notes, api) and examples in `registry/base-nova/examples/<name>/<id>.tsx`. After adding or renaming one run `pnpm docs:gen` (regenerates content/docs/index.generated.ts and components/docs/examples.generated.tsx; commit both). API tables list only props the library adds or changes; the rest is `extends` with a link to the primitive's docs. Examples render client-only. Each docs page gets a Markdown copy (`out/docs/<name>.md`) from `pnpm docs:md` (`scripts/gen-docs-md.mjs`) after `next build`; mark page chrome that should stay out of it with `data-md-skip`.
 
 
 ## Wording: no third-party names or provenance

@@ -1,3 +1,4 @@
+import { DocHeading } from "@/components/docs/doc-heading"
 import { Code, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
 import { REGISTRY_NAME, REGISTRY_URL } from "@/lib/docs"
@@ -9,10 +10,10 @@ export const metadata = { title: "Installation" }
 function Step({ n, id, title, children }: { n: number; id: string; title: string; children: React.ReactNode }) {
   return (
     <section className="flex flex-col gap-3">
-      <h2 id={id} className="flex scroll-mt-20 items-center gap-3 text-lg font-semibold">
-        <span className="grid size-7 shrink-0 place-items-center rounded-full bg-card text-ui tabular-nums shadow-raised">{n}</span>
+      <DocHeading id={id} className="flex items-center gap-3 text-lg tracking-normal">
+        <span data-md-skip className="grid size-7 shrink-0 place-items-center rounded-full bg-card text-ui tabular-nums shadow-raised">{n}</span>
         {title}
-      </h2>
+      </DocHeading>
       <div className="flex flex-col gap-3 sm:pl-10">{children}</div>
     </section>
   )

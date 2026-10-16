@@ -1,37 +1,24 @@
 import type * as React from "react"
 import Link from "next/link"
 
-import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/registry/base-nova/ui/breadcrumb"
-import { Button } from "@/registry/base-nova/ui/button"
+import { getPrevNext, lastUpdated } from "@/lib/docs"
 
+import { DocHeading } from "./doc-heading"
 import { codeContent, INLINE_CODE_CLS } from "./doc-inline"
-import { DocToc, type TocEntry } from "./doc-toc"
-import { COMPONENTS_HREF, GUIDE_PAGES } from "./docs-pages"
+import { DocFooter, DocHeader, DocLayout } from "./doc-layout"
+import type { TocEntry } from "./doc-toc"
+import { GUIDE_PAGES } from "./docs-pages"
 
-/** Section heading with a self-link, matching the component pages. */
+/** Section heading with a copy-link anchor, matching the component pages. */
 export function GuideH2({ id, children }: { id: string; children: React.ReactNode }) {
-  return (
-    <h2 id={id} className="scroll-mt-20 text-xl font-semibold tracking-tight">
-      <a href={`#${id}`} className="outline-none focus-visible:underline">
-        {children}
-      </a>
-    </h2>
-  )
+  return <DocHeading id={id}>{children}</DocHeading>
 }
 
 export function GuideH3({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h3 id={id} className="scroll-mt-20 text-lg font-semibold">
+    <DocHeading as="h3" id={id}>
       {children}
-    </h3>
+    </DocHeading>
   )
 }
 
@@ -54,60 +41,27 @@ export function TextLink({ href, children }: { href: string; children: React.Rea
   )
 }
 
+/** The files a guide page is made from, for its "Last updated" date. */
+function guideSources(href: string) {
+  const page = href === "/docs" ? "app/docs/page.tsx" : `app${href}/page.tsx`
+  if (href === "/docs/skill") return [page, "skills/qinyang-design", "components/docs/skill-examples.tsx"]
+  return [page]
+}
+
 /**
- * Layout for the "Getting started" pages: breadcrumb, title and lede from
- * GUIDE_PAGES, the page body, prev/next through the guide (the last page
- * continues to the components overview) and an "On this page" rail.
+ * Layout for the "Getting started" pages: eyebrow, title, page actions and lede from
+ * GUIDE_PAGES, the page body, previous / next in sidebar order with the last-updated date, and
+ * the "On this page" outline.
  */
 export function GuidePage({ href, toc, lede, children }: { href: string; toc?: TocEntry[]; lede?: React.ReactNode; children: React.ReactNode }) {
-  const index = GUIDE_PAGES.findIndex((p) => p.href === href)
-  const page = GUIDE_PAGES[index]
-  const prev = GUIDE_PAGES[index - 1]
-  const next: { href: string; title: string } = GUIDE_PAGES[index + 1] ?? { href: COMPONENTS_HREF, title: "Components" }
+  const page = GUIDE_PAGES.find((p) => p.href === href)!
+  const { prev, next } = getPrevNext(href)
 
   return (
-    <div className="mx-auto flex max-w-6xl gap-12">
-      <article className="mx-auto flex min-w-0 max-w-3xl flex-1 flex-col gap-10">
-        <header className="flex flex-col gap-3">
-          <Breadcrumb className="-ml-2">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink render={<Link href="/docs" />}>Getting started</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{page.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-          <h1 className="text-3xl font-semibold tracking-tight">{page.title}</h1>
-          <p className="text-lg text-muted-foreground">{lede ?? page.description}</p>
-        </header>
-
-        {children}
-
-        <nav aria-label="Pagination" className="flex items-center justify-between gap-3 border-t border-border pt-6">
-          {prev ? (
-            <Button variant="secondary" nativeButton={false} render={<Link href={prev.href} />} className="min-w-0">
-              <ArrowLeftIcon data-icon="inline-start" />
-              <span className="truncate">{prev.title}</span>
-            </Button>
-          ) : (
-            <span />
-          )}
-          <Button variant="secondary" nativeButton={false} render={<Link href={next.href} />} className="min-w-0">
-            <span className="truncate">{next.title}</span>
-            <ArrowRightIcon data-icon="inline-end" />
-          </Button>
-        </nav>
-      </article>
-      {toc && toc.length > 0 && (
-        <aside className="hidden w-48 shrink-0 xl:block">
-          <div className="sticky top-20">
-            <DocToc entries={toc} />
-          </div>
-        </aside>
-      )}
-    </div>
+    <DocLayout toc={toc}>
+      <DocHeader href={href} eyebrow="Getting started" eyebrowHref="/docs" title={page.title} lede={lede ?? page.description} />
+      {children}
+      <DocFooter prev={prev} next={next} updated={lastUpdated(guideSources(href))} />
+    </DocLayout>
   )
 }

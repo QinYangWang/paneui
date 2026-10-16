@@ -1,8 +1,10 @@
 import "server-only"
 
+import { execFileSync } from "node:child_process"
 import fs from "node:fs"
 import path from "node:path"
 
+import { COMPONENTS_HREF, COMPONENTS_TITLE, GUIDE_PAGES } from "@/components/docs/docs-pages"
 import registry from "@/registry.json"
 
 export type Category = (typeof ORDER)[number]
@@ -85,4 +87,58 @@ export function readSource(file: string) {
 
 export function demoFile(name: string) {
   return `registry/base-nova/examples/${name}-demo.tsx`
+}
+
+/** One docs page in sidebar order: its section (the page eyebrow) and its title. */
+export type DocsPageRef = { href: string; title: string; section: string }
+
+/**
+ * Every docs page in sidebar order: the Getting started pages, the components overview, each
+ * component category (A–Z inside it), then templates. Drives the prev/next cards.
+ */
+export function getDocsSequence(): DocsPageRef[] {
+  return [
+    ...GUIDE_PAGES.map((p) => ({ href: p.href, title: p.title, section: "Getting started" })),
+    { href: COMPONENTS_HREF, title: COMPONENTS_TITLE, section: "Components" },
+    ...getNavGroups().flatMap((g) => g.items.map((i) => ({ href: `/docs/${i.name}`, title: i.title, section: g.category }))),
+  ]
+}
+
+export function getPrevNext(href: string) {
+  const seq = getDocsSequence()
+  const i = seq.findIndex((p) => p.href === href)
+  return { prev: i > 0 ? seq[i - 1] : undefined, next: i >= 0 ? seq[i + 1] : undefined }
+}
+
+/**
+ * Last commit date touching any of these paths, read from git at build time. Returns undefined when
+ * git is missing, the checkout is shallow or the paths have no history yet, so the page simply
+ * leaves the date out.
+ */
+export function lastUpdated(paths: string[]): Date | undefined {
+  const existing = paths.filter((p) => fs.existsSync(path.join(process.cwd(), p)))
+  if (existing.length === 0) return undefined
+  try {
+    const out = execFileSync("git", ["log", "-1", "--format=%ct", "--", ...existing], {
+      cwd: process.cwd(),
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+      timeout: 5000,
+    }).trim()
+    const seconds = Number(out)
+    return out && Number.isFinite(seconds) ? new Date(seconds * 1000) : undefined
+  } catch {
+    return undefined
+  }
+}
+
+/** The source files behind a component or template page, for its "Last updated" date. */
+export function docSources(name: string) {
+  const item = getItem(name)
+  return [
+    `content/docs/${name}.ts`,
+    `registry/base-nova/examples/${name}`,
+    demoFile(name),
+    ...(item?.files ?? []),
+  ]
 }

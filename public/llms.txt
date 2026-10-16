@@ -7,216 +7,228 @@ Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/
 - [Registry index](https://qinyangwang.github.io/ui/r/registry.json)
 - [Docs](https://qinyangwang.github.io/ui/docs/)
 
+Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.md`); the links below point at them.
+
+## Getting started
+
+- [Introduction](https://qinyangwang.github.io/ui/docs/index.md): React components you install as source with the shadcn CLI.
+- [Installation](https://qinyangwang.github.io/ui/docs/installation.md): Register the namespace, install the theme, then add components.
+- [Theming](https://qinyangwang.github.io/ui/docs/theming.md): How the theme tokens work and how to change them.
+- [Customize](https://qinyangwang.github.io/ui/docs/colors.md): Pick an accent and a radius, and see every colour token by role.
+- [CLI & registry](https://qinyangwang.github.io/ui/docs/cli.md): Find, inspect and install registry items from the command line.
+- [Design skill](https://qinyangwang.github.io/ui/docs/skill.md): Rules and checks that keep every screen on one style.
+- [Changelog](https://qinyangwang.github.io/ui/docs/changelog.md): What changed in qinyang/ui, newest first.
+
 ## Foundations
 
-- [Brand Icon](https://qinyangwang.github.io/ui/docs/brand-icon/): Shows a third-party logo at the icon set's sizes. JSON: https://qinyangwang.github.io/ui/r/brand-icon.json
-- [Icon Chip](https://qinyangwang.github.io/ui/docs/icon-chip/): Frames an icon so card and section headers match. JSON: https://qinyangwang.github.io/ui/r/icon-chip.json
-- [Icons](https://qinyangwang.github.io/ui/r/icons.json): Rounded outline icon set used across the library. JSON: https://qinyangwang.github.io/ui/r/icons.json
-- [Theme](https://qinyangwang.github.io/ui/r/theme.json): Design tokens, type scale and utilities every component in the library reads. JSON: https://qinyangwang.github.io/ui/r/theme.json
-- [Theme Accents](https://qinyangwang.github.io/ui/docs/theme-accents/): Switches the accent colour at runtime with one attribute. JSON: https://qinyangwang.github.io/ui/r/theme-accents.json
-- [Typeset](https://qinyangwang.github.io/ui/docs/typeset/): Styles long-form text in docs, articles and chat messages. JSON: https://qinyangwang.github.io/ui/r/typeset.json
+- [Brand Icon](https://qinyangwang.github.io/ui/docs/brand-icon.md): Shows a third-party logo at the icon set's sizes. JSON: https://qinyangwang.github.io/ui/r/brand-icon.json
+- [Icon Chip](https://qinyangwang.github.io/ui/docs/icon-chip.md): Frames an icon so card and section headers match. JSON: https://qinyangwang.github.io/ui/r/icon-chip.json
+- [Icons](https://qinyangwang.github.io/ui/docs/icons.md): Rounded outline icon set used across the library. JSON: https://qinyangwang.github.io/ui/r/icons.json
+- [Theme](https://qinyangwang.github.io/ui/docs/theme.md): Design tokens, type scale and utilities every component in the library reads. JSON: https://qinyangwang.github.io/ui/r/theme.json
+- [Theme Accents](https://qinyangwang.github.io/ui/docs/theme-accents.md): Switches the accent colour at runtime with one attribute. JSON: https://qinyangwang.github.io/ui/r/theme-accents.json
+- [Typeset](https://qinyangwang.github.io/ui/docs/typeset.md): Styles long-form text in docs, articles and chat messages. JSON: https://qinyangwang.github.io/ui/r/typeset.json
 
 ## Forms
 
-- [Accent Picker](https://qinyangwang.github.io/ui/docs/accent-picker/): Lets people choose the theme's accent colour, remembered across visits. JSON: https://qinyangwang.github.io/ui/r/accent-picker.json
-- [Button](https://qinyangwang.github.io/ui/docs/button/): Triggers an action or submits a form. JSON: https://qinyangwang.github.io/ui/r/button.json
-- [Button Group](https://qinyangwang.github.io/ui/docs/button-group/): Joins related buttons into one control. JSON: https://qinyangwang.github.io/ui/r/button-group.json
-- [Button Stateful](https://qinyangwang.github.io/ui/docs/button-stateful/): A button that shows loading, success and error after a press. JSON: https://qinyangwang.github.io/ui/r/button-stateful.json
-- [Calendar](https://qinyangwang.github.io/ui/docs/calendar/): Month grid for picking a date or a range. JSON: https://qinyangwang.github.io/ui/r/calendar.json
-- [Checkbox](https://qinyangwang.github.io/ui/docs/checkbox/): Toggles a single option on or off. JSON: https://qinyangwang.github.io/ui/r/checkbox.json
-- [Color Picker](https://qinyangwang.github.io/ui/docs/color-picker/): Picks a colour by dragging, entering hex or choosing a preset. JSON: https://qinyangwang.github.io/ui/r/color-picker.json
-- [Combobox](https://qinyangwang.github.io/ui/docs/combobox/): Picks one option from a long list by typing to filter. JSON: https://qinyangwang.github.io/ui/r/combobox.json
-- [Date Picker](https://qinyangwang.github.io/ui/docs/date-picker/): Field that opens a calendar to pick one date. JSON: https://qinyangwang.github.io/ui/r/date-picker.json
-- [Date Range Picker](https://qinyangwang.github.io/ui/docs/date-range-picker/): Picks a start and end date from a calendar. JSON: https://qinyangwang.github.io/ui/r/date-range-picker.json
-- [Expandable Control](https://qinyangwang.github.io/ui/docs/expandable-control/): Button or chip that expands on click to reveal a label. JSON: https://qinyangwang.github.io/ui/r/expandable-control.json
-- [Expanding Arrow Button](https://qinyangwang.github.io/ui/docs/expanding-arrow-button/): Call-to-action button with an arrow sweep on hover. JSON: https://qinyangwang.github.io/ui/r/expanding-arrow-button.json
-- [Field](https://qinyangwang.github.io/ui/docs/field/): Ties a label, control, hint and error into one form field. JSON: https://qinyangwang.github.io/ui/r/field.json
-- [Hold Action Button](https://qinyangwang.github.io/ui/docs/hold-action-button/): Confirms a risky action by making the user press and hold. JSON: https://qinyangwang.github.io/ui/r/hold-action-button.json
-- [Input](https://qinyangwang.github.io/ui/docs/input/): Single-line text field. JSON: https://qinyangwang.github.io/ui/r/input.json
-- [Input Group](https://qinyangwang.github.io/ui/docs/input-group/): Input with icons, text or buttons inside the field. JSON: https://qinyangwang.github.io/ui/r/input-group.json
-- [Input OTP](https://qinyangwang.github.io/ui/docs/input-otp/): Enters a one-time code, one character per slot. JSON: https://qinyangwang.github.io/ui/r/input-otp.json
-- [Label](https://qinyangwang.github.io/ui/docs/label/): Names a form control. JSON: https://qinyangwang.github.io/ui/r/label.json
-- [Multi Select](https://qinyangwang.github.io/ui/docs/multi-select/): Searchable picker for choosing several options at once. JSON: https://qinyangwang.github.io/ui/r/multi-select.json
-- [Native Select](https://qinyangwang.github.io/ui/docs/native-select/): The browser's own select, styled as a field. JSON: https://qinyangwang.github.io/ui/r/native-select.json
-- [Password Input](https://qinyangwang.github.io/ui/docs/password-input/): Password field with a button to show or hide it. JSON: https://qinyangwang.github.io/ui/r/password-input.json
-- [Radio](https://qinyangwang.github.io/ui/docs/radio/): Picks exactly one option from a short list. JSON: https://qinyangwang.github.io/ui/r/radio.json
-- [Range Slider Inline](https://qinyangwang.github.io/ui/docs/range-slider-inline/): Slider that shows its label and value on the track. JSON: https://qinyangwang.github.io/ui/r/range-slider-inline.json
-- [Segmented Control](https://qinyangwang.github.io/ui/docs/segmented-control/): Switches a setting between a few options. JSON: https://qinyangwang.github.io/ui/r/segmented-control.json
-- [Select](https://qinyangwang.github.io/ui/docs/select/): Picks one option from a list. JSON: https://qinyangwang.github.io/ui/r/select.json
-- [Select Morph](https://qinyangwang.github.io/ui/docs/select-morph/): Select whose trigger unfolds into its option list. JSON: https://qinyangwang.github.io/ui/r/select-morph.json
-- [Slide Action Button](https://qinyangwang.github.io/ui/docs/slide-action-button/): Confirms an action when the user slides it to the end. JSON: https://qinyangwang.github.io/ui/r/slide-action-button.json
-- [Slider](https://qinyangwang.github.io/ui/docs/slider/): Picks a value or range by dragging. JSON: https://qinyangwang.github.io/ui/r/slider.json
-- [Stepper](https://qinyangwang.github.io/ui/docs/stepper/): Adjusts a number up or down in fixed steps. JSON: https://qinyangwang.github.io/ui/r/stepper.json
-- [Swatch Picker](https://qinyangwang.github.io/ui/docs/swatch-picker/): Picks one colour from a fixed palette. JSON: https://qinyangwang.github.io/ui/r/swatch-picker.json
-- [Switch](https://qinyangwang.github.io/ui/docs/switch/): Turns a single setting on or off. JSON: https://qinyangwang.github.io/ui/r/switch.json
-- [Textarea](https://qinyangwang.github.io/ui/docs/textarea/): Takes multi-line text input that grows with its content. JSON: https://qinyangwang.github.io/ui/r/textarea.json
-- [Toggle Group](https://qinyangwang.github.io/ui/docs/toggle-group/): Turns formatting or view options on and off. JSON: https://qinyangwang.github.io/ui/r/toggle-group.json
-- [Wheel Picker](https://qinyangwang.github.io/ui/docs/wheel-picker/): Picks a value by scrolling a wheel, as for times and dates. JSON: https://qinyangwang.github.io/ui/r/wheel-picker.json
+- [Accent Picker](https://qinyangwang.github.io/ui/docs/accent-picker.md): Lets people choose the theme's accent colour, remembered across visits. JSON: https://qinyangwang.github.io/ui/r/accent-picker.json
+- [Button](https://qinyangwang.github.io/ui/docs/button.md): Triggers an action or submits a form. JSON: https://qinyangwang.github.io/ui/r/button.json
+- [Button Group](https://qinyangwang.github.io/ui/docs/button-group.md): Joins related buttons into one control. JSON: https://qinyangwang.github.io/ui/r/button-group.json
+- [Button Stateful](https://qinyangwang.github.io/ui/docs/button-stateful.md): A button that shows loading, success and error after a press. JSON: https://qinyangwang.github.io/ui/r/button-stateful.json
+- [Calendar](https://qinyangwang.github.io/ui/docs/calendar.md): Month grid for picking a date or a range. JSON: https://qinyangwang.github.io/ui/r/calendar.json
+- [Checkbox](https://qinyangwang.github.io/ui/docs/checkbox.md): Toggles a single option on or off. JSON: https://qinyangwang.github.io/ui/r/checkbox.json
+- [Color Picker](https://qinyangwang.github.io/ui/docs/color-picker.md): Picks a colour by dragging, entering hex or choosing a preset. JSON: https://qinyangwang.github.io/ui/r/color-picker.json
+- [Combobox](https://qinyangwang.github.io/ui/docs/combobox.md): Picks one option from a long list by typing to filter. JSON: https://qinyangwang.github.io/ui/r/combobox.json
+- [Date Picker](https://qinyangwang.github.io/ui/docs/date-picker.md): Field that opens a calendar to pick one date. JSON: https://qinyangwang.github.io/ui/r/date-picker.json
+- [Date Range Picker](https://qinyangwang.github.io/ui/docs/date-range-picker.md): Picks a start and end date from a calendar. JSON: https://qinyangwang.github.io/ui/r/date-range-picker.json
+- [Expandable Control](https://qinyangwang.github.io/ui/docs/expandable-control.md): Button or chip that expands on click to reveal a label. JSON: https://qinyangwang.github.io/ui/r/expandable-control.json
+- [Expanding Arrow Button](https://qinyangwang.github.io/ui/docs/expanding-arrow-button.md): Call-to-action button with an arrow sweep on hover. JSON: https://qinyangwang.github.io/ui/r/expanding-arrow-button.json
+- [Field](https://qinyangwang.github.io/ui/docs/field.md): Ties a label, control, hint and error into one form field. JSON: https://qinyangwang.github.io/ui/r/field.json
+- [Hold Action Button](https://qinyangwang.github.io/ui/docs/hold-action-button.md): Confirms a risky action by making the user press and hold. JSON: https://qinyangwang.github.io/ui/r/hold-action-button.json
+- [Input](https://qinyangwang.github.io/ui/docs/input.md): Single-line text field. JSON: https://qinyangwang.github.io/ui/r/input.json
+- [Input Group](https://qinyangwang.github.io/ui/docs/input-group.md): Input with icons, text or buttons inside the field. JSON: https://qinyangwang.github.io/ui/r/input-group.json
+- [Input OTP](https://qinyangwang.github.io/ui/docs/input-otp.md): Enters a one-time code, one character per slot. JSON: https://qinyangwang.github.io/ui/r/input-otp.json
+- [Label](https://qinyangwang.github.io/ui/docs/label.md): Names a form control. JSON: https://qinyangwang.github.io/ui/r/label.json
+- [Multi Select](https://qinyangwang.github.io/ui/docs/multi-select.md): Searchable picker for choosing several options at once. JSON: https://qinyangwang.github.io/ui/r/multi-select.json
+- [Native Select](https://qinyangwang.github.io/ui/docs/native-select.md): The browser's own select, styled as a field. JSON: https://qinyangwang.github.io/ui/r/native-select.json
+- [Password Input](https://qinyangwang.github.io/ui/docs/password-input.md): Password field with a button to show or hide it. JSON: https://qinyangwang.github.io/ui/r/password-input.json
+- [Radio](https://qinyangwang.github.io/ui/docs/radio.md): Picks exactly one option from a short list. JSON: https://qinyangwang.github.io/ui/r/radio.json
+- [Range Slider Inline](https://qinyangwang.github.io/ui/docs/range-slider-inline.md): Slider that shows its label and value on the track. JSON: https://qinyangwang.github.io/ui/r/range-slider-inline.json
+- [Segmented Control](https://qinyangwang.github.io/ui/docs/segmented-control.md): Switches a setting between a few options. JSON: https://qinyangwang.github.io/ui/r/segmented-control.json
+- [Select](https://qinyangwang.github.io/ui/docs/select.md): Picks one option from a list. JSON: https://qinyangwang.github.io/ui/r/select.json
+- [Select Morph](https://qinyangwang.github.io/ui/docs/select-morph.md): Select whose trigger unfolds into its option list. JSON: https://qinyangwang.github.io/ui/r/select-morph.json
+- [Slide Action Button](https://qinyangwang.github.io/ui/docs/slide-action-button.md): Confirms an action when the user slides it to the end. JSON: https://qinyangwang.github.io/ui/r/slide-action-button.json
+- [Slider](https://qinyangwang.github.io/ui/docs/slider.md): Picks a value or range by dragging. JSON: https://qinyangwang.github.io/ui/r/slider.json
+- [Stepper](https://qinyangwang.github.io/ui/docs/stepper.md): Adjusts a number up or down in fixed steps. JSON: https://qinyangwang.github.io/ui/r/stepper.json
+- [Swatch Picker](https://qinyangwang.github.io/ui/docs/swatch-picker.md): Picks one colour from a fixed palette. JSON: https://qinyangwang.github.io/ui/r/swatch-picker.json
+- [Switch](https://qinyangwang.github.io/ui/docs/switch.md): Turns a single setting on or off. JSON: https://qinyangwang.github.io/ui/r/switch.json
+- [Textarea](https://qinyangwang.github.io/ui/docs/textarea.md): Takes multi-line text input that grows with its content. JSON: https://qinyangwang.github.io/ui/r/textarea.json
+- [Toggle Group](https://qinyangwang.github.io/ui/docs/toggle-group.md): Turns formatting or view options on and off. JSON: https://qinyangwang.github.io/ui/r/toggle-group.json
+- [Wheel Picker](https://qinyangwang.github.io/ui/docs/wheel-picker.md): Picks a value by scrolling a wheel, as for times and dates. JSON: https://qinyangwang.github.io/ui/r/wheel-picker.json
 
 ## Overlays
 
-- [Alert Dialog](https://qinyangwang.github.io/ui/docs/alert-dialog/): Interrupts to confirm a destructive or important action. JSON: https://qinyangwang.github.io/ui/r/alert-dialog.json
-- [Bottom Sheet](https://qinyangwang.github.io/ui/docs/bottom-sheet/): A panel that slides up from the bottom and snaps to heights. JSON: https://qinyangwang.github.io/ui/r/bottom-sheet.json
-- [Command](https://qinyangwang.github.io/ui/docs/command/): Searchable list of actions, inline or in a dialog. JSON: https://qinyangwang.github.io/ui/r/command.json
-- [Context Menu](https://qinyangwang.github.io/ui/docs/context-menu/): Opens actions for an item on right-click or long-press. JSON: https://qinyangwang.github.io/ui/r/context-menu.json
-- [Dialog](https://qinyangwang.github.io/ui/docs/dialog/): Asks for a decision or input in a modal window. JSON: https://qinyangwang.github.io/ui/r/dialog.json
-- [Drawer](https://qinyangwang.github.io/ui/docs/drawer/): Side panel for navigation or secondary tasks over the page. JSON: https://qinyangwang.github.io/ui/r/drawer.json
-- [Hover Card](https://qinyangwang.github.io/ui/docs/hover-card/): Previews a linked item while it is hovered. JSON: https://qinyangwang.github.io/ui/r/hover-card.json
-- [Menu](https://qinyangwang.github.io/ui/docs/menu/): Dropdown of actions or options opened from a trigger. JSON: https://qinyangwang.github.io/ui/r/menu.json
-- [Menu List](https://qinyangwang.github.io/ui/docs/menu-list/): Keyboard-driven option list that leaves focus in the text field. JSON: https://qinyangwang.github.io/ui/r/menu-list.json
-- [Morphing Modal](https://qinyangwang.github.io/ui/docs/morphing-modal/): Dialog that moves between several views inside one panel. JSON: https://qinyangwang.github.io/ui/r/morphing-modal.json
-- [Overflow Hint](https://qinyangwang.github.io/ui/docs/overflow-hint/): Shows the full text of a truncated label on hover. JSON: https://qinyangwang.github.io/ui/r/overflow-hint.json
-- [Popover](https://qinyangwang.github.io/ui/docs/popover/): Floating panel for extra content or actions near a trigger. JSON: https://qinyangwang.github.io/ui/r/popover.json
-- [Popover Morph](https://qinyangwang.github.io/ui/docs/popover-morph/): Popover that grows out of its trigger and folds back. JSON: https://qinyangwang.github.io/ui/r/popover-morph.json
-- [Toast](https://qinyangwang.github.io/ui/docs/toast/): Shows brief notifications that dismiss themselves. JSON: https://qinyangwang.github.io/ui/r/toast.json
-- [Tooltip](https://qinyangwang.github.io/ui/docs/tooltip/): Labels a control with a short hint on hover or focus. JSON: https://qinyangwang.github.io/ui/r/tooltip.json
+- [Alert Dialog](https://qinyangwang.github.io/ui/docs/alert-dialog.md): Interrupts to confirm a destructive or important action. JSON: https://qinyangwang.github.io/ui/r/alert-dialog.json
+- [Bottom Sheet](https://qinyangwang.github.io/ui/docs/bottom-sheet.md): A panel that slides up from the bottom and snaps to heights. JSON: https://qinyangwang.github.io/ui/r/bottom-sheet.json
+- [Command](https://qinyangwang.github.io/ui/docs/command.md): Searchable list of actions, inline or in a dialog. JSON: https://qinyangwang.github.io/ui/r/command.json
+- [Context Menu](https://qinyangwang.github.io/ui/docs/context-menu.md): Opens actions for an item on right-click or long-press. JSON: https://qinyangwang.github.io/ui/r/context-menu.json
+- [Dialog](https://qinyangwang.github.io/ui/docs/dialog.md): Asks for a decision or input in a modal window. JSON: https://qinyangwang.github.io/ui/r/dialog.json
+- [Drawer](https://qinyangwang.github.io/ui/docs/drawer.md): Side panel for navigation or secondary tasks over the page. JSON: https://qinyangwang.github.io/ui/r/drawer.json
+- [Hover Card](https://qinyangwang.github.io/ui/docs/hover-card.md): Previews a linked item while it is hovered. JSON: https://qinyangwang.github.io/ui/r/hover-card.json
+- [Menu](https://qinyangwang.github.io/ui/docs/menu.md): Dropdown of actions or options opened from a trigger. JSON: https://qinyangwang.github.io/ui/r/menu.json
+- [Menu List](https://qinyangwang.github.io/ui/docs/menu-list.md): Keyboard-driven option list that leaves focus in the text field. JSON: https://qinyangwang.github.io/ui/r/menu-list.json
+- [Morphing Modal](https://qinyangwang.github.io/ui/docs/morphing-modal.md): Dialog that moves between several views inside one panel. JSON: https://qinyangwang.github.io/ui/r/morphing-modal.json
+- [Overflow Hint](https://qinyangwang.github.io/ui/docs/overflow-hint.md): Shows the full text of a truncated label on hover. JSON: https://qinyangwang.github.io/ui/r/overflow-hint.json
+- [Popover](https://qinyangwang.github.io/ui/docs/popover.md): Floating panel for extra content or actions near a trigger. JSON: https://qinyangwang.github.io/ui/r/popover.json
+- [Popover Morph](https://qinyangwang.github.io/ui/docs/popover-morph.md): Popover that grows out of its trigger and folds back. JSON: https://qinyangwang.github.io/ui/r/popover-morph.json
+- [Toast](https://qinyangwang.github.io/ui/docs/toast.md): Shows brief notifications that dismiss themselves. JSON: https://qinyangwang.github.io/ui/r/toast.json
+- [Tooltip](https://qinyangwang.github.io/ui/docs/tooltip.md): Labels a control with a short hint on hover or focus. JSON: https://qinyangwang.github.io/ui/r/tooltip.json
 
 ## Display
 
-- [Accordion](https://qinyangwang.github.io/ui/docs/accordion/): Stacks sections that expand one at a time or several together. JSON: https://qinyangwang.github.io/ui/r/accordion.json
-- [Alert](https://qinyangwang.github.io/ui/docs/alert/): Shows an inline message that can animate in and be dismissed. JSON: https://qinyangwang.github.io/ui/r/alert.json
-- [Aspect Ratio](https://qinyangwang.github.io/ui/docs/aspect-ratio/): Keeps content at a set ratio and animates ratio changes. JSON: https://qinyangwang.github.io/ui/r/aspect-ratio.json
-- [Avatar](https://qinyangwang.github.io/ui/docs/avatar/): Shows a person's photo or initials, alone or in a group. JSON: https://qinyangwang.github.io/ui/r/avatar.json
-- [Avatar Generator](https://qinyangwang.github.io/ui/docs/avatar-generator/): Draws a consistent illustrated avatar from a seed, with an editor. JSON: https://qinyangwang.github.io/ui/r/avatar-generator.json
-- [Badge](https://qinyangwang.github.io/ui/docs/badge/): Labels an item with a short status or category. JSON: https://qinyangwang.github.io/ui/r/badge.json
-- [Card](https://qinyangwang.github.io/ui/docs/card/): Groups related content and actions on one surface. JSON: https://qinyangwang.github.io/ui/r/card.json
-- [Carousel](https://qinyangwang.github.io/ui/docs/carousel/): Scrolls through slides one at a time. JSON: https://qinyangwang.github.io/ui/r/carousel.json
-- [Collapsible](https://qinyangwang.github.io/ui/docs/collapsible/): Shows and hides a section of content. JSON: https://qinyangwang.github.io/ui/r/collapsible.json
-- [Empty State](https://qinyangwang.github.io/ui/docs/empty-state/): Tells users a list or page is empty and what to do. JSON: https://qinyangwang.github.io/ui/r/empty-state.json
-- [Kbd](https://qinyangwang.github.io/ui/docs/kbd/): Shows a keyboard key or shortcut. JSON: https://qinyangwang.github.io/ui/r/kbd.json
-- [Loader](https://qinyangwang.github.io/ui/docs/loader/): Shows that something is loading. JSON: https://qinyangwang.github.io/ui/r/loader.json
-- [Page Header](https://qinyangwang.github.io/ui/docs/page-header/): Title, context and actions at the top of an app page. JSON: https://qinyangwang.github.io/ui/r/page-header.json
-- [Progress](https://qinyangwang.github.io/ui/docs/progress/): Shows how far a task has come. JSON: https://qinyangwang.github.io/ui/r/progress.json
-- [Resizable](https://qinyangwang.github.io/ui/docs/resizable/): Split panes the user can resize or collapse. JSON: https://qinyangwang.github.io/ui/r/resizable.json
-- [Scroll Area](https://qinyangwang.github.io/ui/docs/scroll-area/): Scroll container with thin scrollbars that stay inside its frame. JSON: https://qinyangwang.github.io/ui/r/scroll-area.json
-- [Separator](https://qinyangwang.github.io/ui/docs/separator/): Divides groups of content with a hairline. JSON: https://qinyangwang.github.io/ui/r/separator.json
-- [Settings Section](https://qinyangwang.github.io/ui/docs/settings-section/): Layout for grouped settings pages. JSON: https://qinyangwang.github.io/ui/r/settings-section.json
-- [Skeleton](https://qinyangwang.github.io/ui/docs/skeleton/): Placeholder shape while content loads. JSON: https://qinyangwang.github.io/ui/r/skeleton.json
-- [Stat Card](https://qinyangwang.github.io/ui/docs/stat-card/): Card for a key metric and how it changed. JSON: https://qinyangwang.github.io/ui/r/stat-card.json
-- [Theme Toggle](https://qinyangwang.github.io/ui/docs/theme-toggle/): Switches the page between light and dark themes. JSON: https://qinyangwang.github.io/ui/r/theme-toggle.json
-- [Usage Meter](https://qinyangwang.github.io/ui/docs/usage-meter/): Shows how much of a quota has been used. JSON: https://qinyangwang.github.io/ui/r/usage-meter.json
+- [Accordion](https://qinyangwang.github.io/ui/docs/accordion.md): Stacks sections that expand one at a time or several together. JSON: https://qinyangwang.github.io/ui/r/accordion.json
+- [Alert](https://qinyangwang.github.io/ui/docs/alert.md): Shows an inline message that can animate in and be dismissed. JSON: https://qinyangwang.github.io/ui/r/alert.json
+- [Aspect Ratio](https://qinyangwang.github.io/ui/docs/aspect-ratio.md): Keeps content at a set ratio and animates ratio changes. JSON: https://qinyangwang.github.io/ui/r/aspect-ratio.json
+- [Avatar](https://qinyangwang.github.io/ui/docs/avatar.md): Shows a person's photo or initials, alone or in a group. JSON: https://qinyangwang.github.io/ui/r/avatar.json
+- [Avatar Generator](https://qinyangwang.github.io/ui/docs/avatar-generator.md): Draws a consistent illustrated avatar from a seed, with an editor. JSON: https://qinyangwang.github.io/ui/r/avatar-generator.json
+- [Badge](https://qinyangwang.github.io/ui/docs/badge.md): Labels an item with a short status or category. JSON: https://qinyangwang.github.io/ui/r/badge.json
+- [Card](https://qinyangwang.github.io/ui/docs/card.md): Groups related content and actions on one surface. JSON: https://qinyangwang.github.io/ui/r/card.json
+- [Carousel](https://qinyangwang.github.io/ui/docs/carousel.md): Scrolls through slides one at a time. JSON: https://qinyangwang.github.io/ui/r/carousel.json
+- [Collapsible](https://qinyangwang.github.io/ui/docs/collapsible.md): Shows and hides a section of content. JSON: https://qinyangwang.github.io/ui/r/collapsible.json
+- [Empty State](https://qinyangwang.github.io/ui/docs/empty-state.md): Tells users a list or page is empty and what to do. JSON: https://qinyangwang.github.io/ui/r/empty-state.json
+- [Kbd](https://qinyangwang.github.io/ui/docs/kbd.md): Shows a keyboard key or shortcut. JSON: https://qinyangwang.github.io/ui/r/kbd.json
+- [Loader](https://qinyangwang.github.io/ui/docs/loader.md): Shows that something is loading. JSON: https://qinyangwang.github.io/ui/r/loader.json
+- [Page Header](https://qinyangwang.github.io/ui/docs/page-header.md): Title, context and actions at the top of an app page. JSON: https://qinyangwang.github.io/ui/r/page-header.json
+- [Progress](https://qinyangwang.github.io/ui/docs/progress.md): Shows how far a task has come. JSON: https://qinyangwang.github.io/ui/r/progress.json
+- [Resizable](https://qinyangwang.github.io/ui/docs/resizable.md): Split panes the user can resize or collapse. JSON: https://qinyangwang.github.io/ui/r/resizable.json
+- [Scroll Area](https://qinyangwang.github.io/ui/docs/scroll-area.md): Scroll container with thin scrollbars that stay inside its frame. JSON: https://qinyangwang.github.io/ui/r/scroll-area.json
+- [Separator](https://qinyangwang.github.io/ui/docs/separator.md): Divides groups of content with a hairline. JSON: https://qinyangwang.github.io/ui/r/separator.json
+- [Settings Section](https://qinyangwang.github.io/ui/docs/settings-section.md): Layout for grouped settings pages. JSON: https://qinyangwang.github.io/ui/r/settings-section.json
+- [Skeleton](https://qinyangwang.github.io/ui/docs/skeleton.md): Placeholder shape while content loads. JSON: https://qinyangwang.github.io/ui/r/skeleton.json
+- [Stat Card](https://qinyangwang.github.io/ui/docs/stat-card.md): Card for a key metric and how it changed. JSON: https://qinyangwang.github.io/ui/r/stat-card.json
+- [Theme Toggle](https://qinyangwang.github.io/ui/docs/theme-toggle.md): Switches the page between light and dark themes. JSON: https://qinyangwang.github.io/ui/r/theme-toggle.json
+- [Usage Meter](https://qinyangwang.github.io/ui/docs/usage-meter.md): Shows how much of a quota has been used. JSON: https://qinyangwang.github.io/ui/r/usage-meter.json
 
 ## Navigation
 
-- [Animated Sidebar](https://qinyangwang.github.io/ui/docs/animated-sidebar/): App navigation sidebar that folds into an icon rail. JSON: https://qinyangwang.github.io/ui/r/animated-sidebar.json
-- [App Shell](https://qinyangwang.github.io/ui/docs/app-shell/): App frame with a header, rail sidebar and inset content panel. JSON: https://qinyangwang.github.io/ui/r/app-shell.json
-- [Breadcrumb](https://qinyangwang.github.io/ui/docs/breadcrumb/): Shows where the current page sits in the site hierarchy. JSON: https://qinyangwang.github.io/ui/r/breadcrumb.json
-- [File Tree](https://qinyangwang.github.io/ui/docs/file-tree/): Browses files and folders in a keyboard-navigable tree. JSON: https://qinyangwang.github.io/ui/r/file-tree.json
-- [Icon Rail](https://qinyangwang.github.io/ui/docs/icon-rail/): Narrow bar of icon buttons for switching between app sections. JSON: https://qinyangwang.github.io/ui/r/icon-rail.json
-- [Menubar](https://qinyangwang.github.io/ui/docs/menubar/): Row of menus for a desktop app window. JSON: https://qinyangwang.github.io/ui/r/menubar.json
-- [Navigation Menu](https://qinyangwang.github.io/ui/docs/navigation-menu/): Site navigation with panels of links. JSON: https://qinyangwang.github.io/ui/r/navigation-menu.json
-- [Pagination](https://qinyangwang.github.io/ui/docs/pagination/): Moves through pages of results in a list or table. JSON: https://qinyangwang.github.io/ui/r/pagination.json
-- [Preview Rail](https://qinyangwang.github.io/ui/docs/preview-rail/): Compact section navigation that previews each destination. JSON: https://qinyangwang.github.io/ui/r/preview-rail.json
-- [Shared Layout Background](https://qinyangwang.github.io/ui/docs/shared-layout-bg/): Hover highlight that follows the pointer across a group. JSON: https://qinyangwang.github.io/ui/r/shared-layout-bg.json
-- [Tab Strip](https://qinyangwang.github.io/ui/docs/tab-strip/): Switches between open documents or panels, with closing and reordering. JSON: https://qinyangwang.github.io/ui/r/tab-strip.json
-- [Tabs](https://qinyangwang.github.io/ui/docs/tabs/): Switches between related panels of content in one place. JSON: https://qinyangwang.github.io/ui/r/tabs.json
-- [Toolbar](https://qinyangwang.github.io/ui/docs/toolbar/): Groups related actions into one keyboard-navigable bar. JSON: https://qinyangwang.github.io/ui/r/toolbar.json
-- [User Menu](https://qinyangwang.github.io/ui/docs/user-menu/): Opens account actions for the signed-in user. JSON: https://qinyangwang.github.io/ui/r/user-menu.json
-- [Workspace Switcher](https://qinyangwang.github.io/ui/docs/workspace-switcher/): Switches between workspaces or teams from the sidebar header. JSON: https://qinyangwang.github.io/ui/r/workspace-switcher.json
+- [Animated Sidebar](https://qinyangwang.github.io/ui/docs/animated-sidebar.md): App navigation sidebar that folds into an icon rail. JSON: https://qinyangwang.github.io/ui/r/animated-sidebar.json
+- [App Shell](https://qinyangwang.github.io/ui/docs/app-shell.md): App frame with a header, rail sidebar and inset content panel. JSON: https://qinyangwang.github.io/ui/r/app-shell.json
+- [Breadcrumb](https://qinyangwang.github.io/ui/docs/breadcrumb.md): Shows where the current page sits in the site hierarchy. JSON: https://qinyangwang.github.io/ui/r/breadcrumb.json
+- [File Tree](https://qinyangwang.github.io/ui/docs/file-tree.md): Browses files and folders in a keyboard-navigable tree. JSON: https://qinyangwang.github.io/ui/r/file-tree.json
+- [Icon Rail](https://qinyangwang.github.io/ui/docs/icon-rail.md): Narrow bar of icon buttons for switching between app sections. JSON: https://qinyangwang.github.io/ui/r/icon-rail.json
+- [Menubar](https://qinyangwang.github.io/ui/docs/menubar.md): Row of menus for a desktop app window. JSON: https://qinyangwang.github.io/ui/r/menubar.json
+- [Navigation Menu](https://qinyangwang.github.io/ui/docs/navigation-menu.md): Site navigation with panels of links. JSON: https://qinyangwang.github.io/ui/r/navigation-menu.json
+- [Pagination](https://qinyangwang.github.io/ui/docs/pagination.md): Moves through pages of results in a list or table. JSON: https://qinyangwang.github.io/ui/r/pagination.json
+- [Preview Rail](https://qinyangwang.github.io/ui/docs/preview-rail.md): Compact section navigation that previews each destination. JSON: https://qinyangwang.github.io/ui/r/preview-rail.json
+- [Shared Layout Background](https://qinyangwang.github.io/ui/docs/shared-layout-bg.md): Hover highlight that follows the pointer across a group. JSON: https://qinyangwang.github.io/ui/r/shared-layout-bg.json
+- [Tab Strip](https://qinyangwang.github.io/ui/docs/tab-strip.md): Switches between open documents or panels, with closing and reordering. JSON: https://qinyangwang.github.io/ui/r/tab-strip.json
+- [Tabs](https://qinyangwang.github.io/ui/docs/tabs.md): Switches between related panels of content in one place. JSON: https://qinyangwang.github.io/ui/r/tabs.json
+- [Toolbar](https://qinyangwang.github.io/ui/docs/toolbar.md): Groups related actions into one keyboard-navigable bar. JSON: https://qinyangwang.github.io/ui/r/toolbar.json
+- [User Menu](https://qinyangwang.github.io/ui/docs/user-menu.md): Opens account actions for the signed-in user. JSON: https://qinyangwang.github.io/ui/r/user-menu.json
+- [Workspace Switcher](https://qinyangwang.github.io/ui/docs/workspace-switcher.md): Switches between workspaces or teams from the sidebar header. JSON: https://qinyangwang.github.io/ui/r/workspace-switcher.json
 
 ## Text
 
-- [Action Swap Blur](https://qinyangwang.github.io/ui/docs/action-swap-blur/): A button that blurs its label and icon into the next state. JSON: https://qinyangwang.github.io/ui/r/action-swap-blur.json
-- [Action Swap Roll](https://qinyangwang.github.io/ui/docs/action-swap-roll/): A button that rolls its label and icon into the next state. JSON: https://qinyangwang.github.io/ui/r/action-swap-roll.json
-- [Animated Number](https://qinyangwang.github.io/ui/docs/animated-number/): Counts up to a number when it scrolls into view. JSON: https://qinyangwang.github.io/ui/r/animated-number.json
-- [Code Block](https://qinyangwang.github.io/ui/docs/code-block/): Shows code highlighted at build time, alone or in tabs. JSON: https://qinyangwang.github.io/ui/r/code-block.json
-- [Digit Swap](https://qinyangwang.github.io/ui/docs/digit-swap/): Animates a changing number by rolling only the characters that change. JSON: https://qinyangwang.github.io/ui/r/digit-swap.json
-- [Marquee](https://qinyangwang.github.io/ui/docs/marquee/): Scrolls content past in an endless loop. JSON: https://qinyangwang.github.io/ui/r/marquee.json
-- [Number Ticker](https://qinyangwang.github.io/ui/docs/number-ticker/): Number whose digits roll to each new value. JSON: https://qinyangwang.github.io/ui/r/number-ticker.json
-- [Text Cascade](https://qinyangwang.github.io/ui/docs/text-cascade/): Rolls text letter by letter whenever its value changes. JSON: https://qinyangwang.github.io/ui/r/text-cascade.json
-- [Text Reveal](https://qinyangwang.github.io/ui/docs/text-reveal/): Reveals a headline word by word on load or scroll. JSON: https://qinyangwang.github.io/ui/r/text-reveal.json
-- [Text Scramble](https://qinyangwang.github.io/ui/docs/text-scramble/): Scrambles text into its new value when it changes. JSON: https://qinyangwang.github.io/ui/r/text-scramble.json
-- [Text Shimmer](https://qinyangwang.github.io/ui/docs/text-shimmer/): Marks text as in progress with a moving highlight. JSON: https://qinyangwang.github.io/ui/r/text-shimmer.json
+- [Action Swap Blur](https://qinyangwang.github.io/ui/docs/action-swap-blur.md): A button that blurs its label and icon into the next state. JSON: https://qinyangwang.github.io/ui/r/action-swap-blur.json
+- [Action Swap Roll](https://qinyangwang.github.io/ui/docs/action-swap-roll.md): A button that rolls its label and icon into the next state. JSON: https://qinyangwang.github.io/ui/r/action-swap-roll.json
+- [Animated Number](https://qinyangwang.github.io/ui/docs/animated-number.md): Counts up to a number when it scrolls into view. JSON: https://qinyangwang.github.io/ui/r/animated-number.json
+- [Code Block](https://qinyangwang.github.io/ui/docs/code-block.md): Shows code highlighted at build time, alone or in tabs. JSON: https://qinyangwang.github.io/ui/r/code-block.json
+- [Digit Swap](https://qinyangwang.github.io/ui/docs/digit-swap.md): Animates a changing number by rolling only the characters that change. JSON: https://qinyangwang.github.io/ui/r/digit-swap.json
+- [Marquee](https://qinyangwang.github.io/ui/docs/marquee.md): Scrolls content past in an endless loop. JSON: https://qinyangwang.github.io/ui/r/marquee.json
+- [Number Ticker](https://qinyangwang.github.io/ui/docs/number-ticker.md): Number whose digits roll to each new value. JSON: https://qinyangwang.github.io/ui/r/number-ticker.json
+- [Text Cascade](https://qinyangwang.github.io/ui/docs/text-cascade.md): Rolls text letter by letter whenever its value changes. JSON: https://qinyangwang.github.io/ui/r/text-cascade.json
+- [Text Reveal](https://qinyangwang.github.io/ui/docs/text-reveal.md): Reveals a headline word by word on load or scroll. JSON: https://qinyangwang.github.io/ui/r/text-reveal.json
+- [Text Scramble](https://qinyangwang.github.io/ui/docs/text-scramble.md): Scrambles text into its new value when it changes. JSON: https://qinyangwang.github.io/ui/r/text-scramble.json
+- [Text Shimmer](https://qinyangwang.github.io/ui/docs/text-shimmer.md): Marks text as in progress with a moving highlight. JSON: https://qinyangwang.github.io/ui/r/text-shimmer.json
 
 ## Motion
 
-- [Magnetic](https://qinyangwang.github.io/ui/docs/magnetic/): Makes any element lean toward a nearby cursor. JSON: https://qinyangwang.github.io/ui/r/magnetic.json
-- [Pull to Refresh](https://qinyangwang.github.io/ui/docs/pull-to-refresh/): Refreshes a scrolling list when the user pulls it down. JSON: https://qinyangwang.github.io/ui/r/pull-to-refresh.json
-- [Scroll Progress](https://qinyangwang.github.io/ui/docs/scroll-progress/): Shows how far the reader has scrolled. JSON: https://qinyangwang.github.io/ui/r/scroll-progress.json
-- [Scroll Reveal](https://qinyangwang.github.io/ui/docs/scroll-reveal/): Brings content into view as it scrolls onscreen. JSON: https://qinyangwang.github.io/ui/r/scroll-reveal.json
-- [Scroll To](https://qinyangwang.github.io/ui/docs/scroll-to/): Button that scrolls to a section or position. JSON: https://qinyangwang.github.io/ui/r/scroll-to.json
-- [Shader Background](https://qinyangwang.github.io/ui/docs/shader-background/): Animated backdrop for hero sections and empty states. JSON: https://qinyangwang.github.io/ui/r/shader-background.json
-- [Smooth Scroll](https://qinyangwang.github.io/ui/docs/smooth-scroll/): Eases scrolling for a page or a scroll container. JSON: https://qinyangwang.github.io/ui/r/smooth-scroll.json
-- [Sortable Stack](https://qinyangwang.github.io/ui/docs/sortable-stack/): List the user can reorder by dragging or keyboard. JSON: https://qinyangwang.github.io/ui/r/sortable-stack.json
+- [Magnetic](https://qinyangwang.github.io/ui/docs/magnetic.md): Makes any element lean toward a nearby cursor. JSON: https://qinyangwang.github.io/ui/r/magnetic.json
+- [Pull to Refresh](https://qinyangwang.github.io/ui/docs/pull-to-refresh.md): Refreshes a scrolling list when the user pulls it down. JSON: https://qinyangwang.github.io/ui/r/pull-to-refresh.json
+- [Scroll Progress](https://qinyangwang.github.io/ui/docs/scroll-progress.md): Shows how far the reader has scrolled. JSON: https://qinyangwang.github.io/ui/r/scroll-progress.json
+- [Scroll Reveal](https://qinyangwang.github.io/ui/docs/scroll-reveal.md): Brings content into view as it scrolls onscreen. JSON: https://qinyangwang.github.io/ui/r/scroll-reveal.json
+- [Scroll To](https://qinyangwang.github.io/ui/docs/scroll-to.md): Button that scrolls to a section or position. JSON: https://qinyangwang.github.io/ui/r/scroll-to.json
+- [Shader Background](https://qinyangwang.github.io/ui/docs/shader-background.md): Animated backdrop for hero sections and empty states. JSON: https://qinyangwang.github.io/ui/r/shader-background.json
+- [Smooth Scroll](https://qinyangwang.github.io/ui/docs/smooth-scroll.md): Eases scrolling for a page or a scroll container. JSON: https://qinyangwang.github.io/ui/r/smooth-scroll.json
+- [Sortable Stack](https://qinyangwang.github.io/ui/docs/sortable-stack.md): List the user can reorder by dragging or keyboard. JSON: https://qinyangwang.github.io/ui/r/sortable-stack.json
 
 ## Data
 
-- [Data Table](https://qinyangwang.github.io/ui/docs/data-table/): Browses, filters and acts on a set of rows. JSON: https://qinyangwang.github.io/ui/r/data-table.json
-- [Table](https://qinyangwang.github.io/ui/docs/table/): Shows large data sets that people sort, select and resize. JSON: https://qinyangwang.github.io/ui/r/table.json
-- [Table Async](https://qinyangwang.github.io/ui/docs/table-async/): Loads table rows page by page as the reader scrolls. JSON: https://qinyangwang.github.io/ui/r/table-async.json
-- [Table Editable](https://qinyangwang.github.io/ui/docs/table-editable/): Lets people edit cells and add or remove rows and columns. JSON: https://qinyangwang.github.io/ui/r/table-editable.json
+- [Data Table](https://qinyangwang.github.io/ui/docs/data-table.md): Browses, filters and acts on a set of rows. JSON: https://qinyangwang.github.io/ui/r/data-table.json
+- [Table](https://qinyangwang.github.io/ui/docs/table.md): Shows large data sets that people sort, select and resize. JSON: https://qinyangwang.github.io/ui/r/table.json
+- [Table Async](https://qinyangwang.github.io/ui/docs/table-async.md): Loads table rows page by page as the reader scrolls. JSON: https://qinyangwang.github.io/ui/r/table-async.json
+- [Table Editable](https://qinyangwang.github.io/ui/docs/table-editable.md): Lets people edit cells and add or remove rows and columns. JSON: https://qinyangwang.github.io/ui/r/table-editable.json
 
 ## Agents
 
-- [Agent Activity](https://qinyangwang.github.io/ui/docs/agent-activity/): Shows what an agent did during a run as one activity stream. JSON: https://qinyangwang.github.io/ui/r/agent-activity.json
-- [Agent Code Block](https://qinyangwang.github.io/ui/docs/agent-code-block/): Displays code from an agent, including code still streaming in. JSON: https://qinyangwang.github.io/ui/r/agent-code-block.json
-- [Agent Progress](https://qinyangwang.github.io/ui/docs/agent-progress/): Shows that an agent is working, with a running timer. JSON: https://qinyangwang.github.io/ui/r/agent-progress.json
-- [AI Sidebar](https://qinyangwang.github.io/ui/docs/ai-sidebar/): Navigates folders, projects and files in an AI workspace. JSON: https://qinyangwang.github.io/ui/r/ai-sidebar.json
-- [Chat App](https://qinyangwang.github.io/ui/r/chat-app.json): Agent workspace with a sidebar, conversation and prompt bar. JSON: https://qinyangwang.github.io/ui/r/chat-app.json
-- [Citations](https://qinyangwang.github.io/ui/docs/citations/): Links an answer's claims to the sources behind them. JSON: https://qinyangwang.github.io/ui/r/citations.json
-- [Edited Files Card](https://qinyangwang.github.io/ui/docs/edited-files-card/): Summarises the files an agent changed, with undo and review. JSON: https://qinyangwang.github.io/ui/r/edited-files-card.json
-- [File Diff](https://qinyangwang.github.io/ui/docs/file-diff/): Shows one file's changes as a diff, even while streaming. JSON: https://qinyangwang.github.io/ui/r/file-diff.json
-- [Image Generation](https://qinyangwang.github.io/ui/docs/image-generation/): Shows a generated image from queued to finished, with its actions. JSON: https://qinyangwang.github.io/ui/r/image-generation.json
-- [Message](https://qinyangwang.github.io/ui/docs/message/): Lays out chat conversation rows by sender. JSON: https://qinyangwang.github.io/ui/r/message.json
-- [Message Bubble](https://qinyangwang.github.io/ui/docs/message-bubble/): Holds one chat message in a speech bubble. JSON: https://qinyangwang.github.io/ui/r/message-bubble.json
-- [Message Scroller](https://qinyangwang.github.io/ui/docs/message-scroller/): Keeps a chat pinned to new messages until the reader scrolls up. JSON: https://qinyangwang.github.io/ui/r/message-scroller.json
-- [Model Picker](https://qinyangwang.github.io/ui/docs/model-picker/): Lets users choose an agent's model, effort or mode. JSON: https://qinyangwang.github.io/ui/r/model-picker.json
-- [Reasoning Text](https://qinyangwang.github.io/ui/docs/reasoning-text/): Status line that shows an agent is still working. JSON: https://qinyangwang.github.io/ui/r/reasoning-text.json
-- [Streaming Response](https://qinyangwang.github.io/ui/docs/streaming-response/): Shows an assistant reply as it streams, then offers copy and feedback. JSON: https://qinyangwang.github.io/ui/r/streaming-response.json
-- [Terminal](https://qinyangwang.github.io/ui/docs/terminal/): Runs a shell in the page or on your machine. JSON: https://qinyangwang.github.io/ui/r/terminal.json
-- [Terminal View](https://qinyangwang.github.io/ui/docs/terminal-view/): Shows command output and takes commands in a terminal panel. JSON: https://qinyangwang.github.io/ui/r/terminal-view.json
-- [Thread List Item](https://qinyangwang.github.io/ui/docs/thread-list-item/): Lists agent or chat threads in a sidebar. JSON: https://qinyangwang.github.io/ui/r/thread-list-item.json
-- [Todo List](https://qinyangwang.github.io/ui/docs/todo-list/): Shows an agent's step-by-step plan and its progress. JSON: https://qinyangwang.github.io/ui/r/todo-list.json
-- [Tool Approval](https://qinyangwang.github.io/ui/docs/tool-approval/): Asks the user to allow or deny an agent tool call. JSON: https://qinyangwang.github.io/ui/r/tool-approval.json
-- [Tool Result](https://qinyangwang.github.io/ui/docs/tool-result/): Shows what an agent tool call ran and what it returned. JSON: https://qinyangwang.github.io/ui/r/tool-result.json
-- [Work Summary](https://qinyangwang.github.io/ui/docs/work-summary/): Summarises the steps an agent took during one turn. JSON: https://qinyangwang.github.io/ui/r/work-summary.json
+- [Agent Activity](https://qinyangwang.github.io/ui/docs/agent-activity.md): Shows what an agent did during a run as one activity stream. JSON: https://qinyangwang.github.io/ui/r/agent-activity.json
+- [Agent Code Block](https://qinyangwang.github.io/ui/docs/agent-code-block.md): Displays code from an agent, including code still streaming in. JSON: https://qinyangwang.github.io/ui/r/agent-code-block.json
+- [Agent Progress](https://qinyangwang.github.io/ui/docs/agent-progress.md): Shows that an agent is working, with a running timer. JSON: https://qinyangwang.github.io/ui/r/agent-progress.json
+- [AI Sidebar](https://qinyangwang.github.io/ui/docs/ai-sidebar.md): Navigates folders, projects and files in an AI workspace. JSON: https://qinyangwang.github.io/ui/r/ai-sidebar.json
+- [Chat App](https://qinyangwang.github.io/ui/docs/chat-app.md): Agent workspace with a sidebar, conversation and prompt bar. JSON: https://qinyangwang.github.io/ui/r/chat-app.json
+- [Citations](https://qinyangwang.github.io/ui/docs/citations.md): Links an answer's claims to the sources behind them. JSON: https://qinyangwang.github.io/ui/r/citations.json
+- [Edited Files Card](https://qinyangwang.github.io/ui/docs/edited-files-card.md): Summarises the files an agent changed, with undo and review. JSON: https://qinyangwang.github.io/ui/r/edited-files-card.json
+- [File Diff](https://qinyangwang.github.io/ui/docs/file-diff.md): Shows one file's changes as a diff, even while streaming. JSON: https://qinyangwang.github.io/ui/r/file-diff.json
+- [Image Generation](https://qinyangwang.github.io/ui/docs/image-generation.md): Shows a generated image from queued to finished, with its actions. JSON: https://qinyangwang.github.io/ui/r/image-generation.json
+- [Message](https://qinyangwang.github.io/ui/docs/message.md): Lays out chat conversation rows by sender. JSON: https://qinyangwang.github.io/ui/r/message.json
+- [Message Bubble](https://qinyangwang.github.io/ui/docs/message-bubble.md): Holds one chat message in a speech bubble. JSON: https://qinyangwang.github.io/ui/r/message-bubble.json
+- [Message Scroller](https://qinyangwang.github.io/ui/docs/message-scroller.md): Keeps a chat pinned to new messages until the reader scrolls up. JSON: https://qinyangwang.github.io/ui/r/message-scroller.json
+- [Model Picker](https://qinyangwang.github.io/ui/docs/model-picker.md): Lets users choose an agent's model, effort or mode. JSON: https://qinyangwang.github.io/ui/r/model-picker.json
+- [Reasoning Text](https://qinyangwang.github.io/ui/docs/reasoning-text.md): Status line that shows an agent is still working. JSON: https://qinyangwang.github.io/ui/r/reasoning-text.json
+- [Streaming Response](https://qinyangwang.github.io/ui/docs/streaming-response.md): Shows an assistant reply as it streams, then offers copy and feedback. JSON: https://qinyangwang.github.io/ui/r/streaming-response.json
+- [Terminal](https://qinyangwang.github.io/ui/docs/terminal.md): Runs a shell in the page or on your machine. JSON: https://qinyangwang.github.io/ui/r/terminal.json
+- [Terminal View](https://qinyangwang.github.io/ui/docs/terminal-view.md): Shows command output and takes commands in a terminal panel. JSON: https://qinyangwang.github.io/ui/r/terminal-view.json
+- [Thread List Item](https://qinyangwang.github.io/ui/docs/thread-list-item.md): Lists agent or chat threads in a sidebar. JSON: https://qinyangwang.github.io/ui/r/thread-list-item.json
+- [Todo List](https://qinyangwang.github.io/ui/docs/todo-list.md): Shows an agent's step-by-step plan and its progress. JSON: https://qinyangwang.github.io/ui/r/todo-list.json
+- [Tool Approval](https://qinyangwang.github.io/ui/docs/tool-approval.md): Asks the user to allow or deny an agent tool call. JSON: https://qinyangwang.github.io/ui/r/tool-approval.json
+- [Tool Result](https://qinyangwang.github.io/ui/docs/tool-result.md): Shows what an agent tool call ran and what it returned. JSON: https://qinyangwang.github.io/ui/r/tool-result.json
+- [Work Summary](https://qinyangwang.github.io/ui/docs/work-summary.md): Summarises the steps an agent took during one turn. JSON: https://qinyangwang.github.io/ui/r/work-summary.json
 
 ## Charts
 
-- [Bar List](https://qinyangwang.github.io/ui/docs/bar-list/): Ranks items by one measure with a bar behind each label. JSON: https://qinyangwang.github.io/ui/r/bar-list.json
-- [Candlestick Chart](https://qinyangwang.github.io/ui/docs/candlestick-chart/): Charts price movement over time with volume. JSON: https://qinyangwang.github.io/ui/r/candlestick-chart.json
-- [Chart Utils](https://qinyangwang.github.io/ui/docs/chart-utils/): Shared helpers for building and styling your own charts. JSON: https://qinyangwang.github.io/ui/r/chart-utils.json
-- [Composition Chart](https://qinyangwang.github.io/ui/docs/composition-chart/): Charts how each part's share of a whole changes over time. JSON: https://qinyangwang.github.io/ui/r/composition-chart.json
-- [Donut Chart](https://qinyangwang.github.io/ui/docs/donut-chart/): Shows how parts make up a whole as a ring. JSON: https://qinyangwang.github.io/ui/r/donut-chart.json
-- [Funnel Chart](https://qinyangwang.github.io/ui/docs/funnel-chart/): Shows how much drops off at each step of a process. JSON: https://qinyangwang.github.io/ui/r/funnel-chart.json
-- [Heat Calendar](https://qinyangwang.github.io/ui/docs/heat-calendar/): Shows daily activity over weeks or months as a calendar heat map. JSON: https://qinyangwang.github.io/ui/r/heat-calendar.json
-- [Sparkline](https://qinyangwang.github.io/ui/docs/sparkline/): Small inline chart that shows a trend. JSON: https://qinyangwang.github.io/ui/r/sparkline.json
-- [Status Bar](https://qinyangwang.github.io/ui/docs/status-bar/): Shows a service's status history and uptime. JSON: https://qinyangwang.github.io/ui/r/status-bar.json
-- [Treemap](https://qinyangwang.github.io/ui/docs/treemap/): Compares parts of a total as sized tiles. JSON: https://qinyangwang.github.io/ui/r/treemap.json
-- [Trend Chart](https://qinyangwang.github.io/ui/docs/trend-chart/): Plots how values change over time. JSON: https://qinyangwang.github.io/ui/r/trend-chart.json
+- [Bar List](https://qinyangwang.github.io/ui/docs/bar-list.md): Ranks items by one measure with a bar behind each label. JSON: https://qinyangwang.github.io/ui/r/bar-list.json
+- [Candlestick Chart](https://qinyangwang.github.io/ui/docs/candlestick-chart.md): Charts price movement over time with volume. JSON: https://qinyangwang.github.io/ui/r/candlestick-chart.json
+- [Chart Utils](https://qinyangwang.github.io/ui/docs/chart-utils.md): Shared helpers for building and styling your own charts. JSON: https://qinyangwang.github.io/ui/r/chart-utils.json
+- [Composition Chart](https://qinyangwang.github.io/ui/docs/composition-chart.md): Charts how each part's share of a whole changes over time. JSON: https://qinyangwang.github.io/ui/r/composition-chart.json
+- [Donut Chart](https://qinyangwang.github.io/ui/docs/donut-chart.md): Shows how parts make up a whole as a ring. JSON: https://qinyangwang.github.io/ui/r/donut-chart.json
+- [Funnel Chart](https://qinyangwang.github.io/ui/docs/funnel-chart.md): Shows how much drops off at each step of a process. JSON: https://qinyangwang.github.io/ui/r/funnel-chart.json
+- [Heat Calendar](https://qinyangwang.github.io/ui/docs/heat-calendar.md): Shows daily activity over weeks or months as a calendar heat map. JSON: https://qinyangwang.github.io/ui/r/heat-calendar.json
+- [Sparkline](https://qinyangwang.github.io/ui/docs/sparkline.md): Small inline chart that shows a trend. JSON: https://qinyangwang.github.io/ui/r/sparkline.json
+- [Status Bar](https://qinyangwang.github.io/ui/docs/status-bar.md): Shows a service's status history and uptime. JSON: https://qinyangwang.github.io/ui/r/status-bar.json
+- [Treemap](https://qinyangwang.github.io/ui/docs/treemap.md): Compares parts of a total as sized tiles. JSON: https://qinyangwang.github.io/ui/r/treemap.json
+- [Trend Chart](https://qinyangwang.github.io/ui/docs/trend-chart.md): Plots how values change over time. JSON: https://qinyangwang.github.io/ui/r/trend-chart.json
 
 ## Blocks
 
-- [Agent Composer](https://qinyangwang.github.io/ui/docs/agent-composer/): Prompt input for coding agents with file mentions and commands. JSON: https://qinyangwang.github.io/ui/r/agent-composer.json
-- [Approval Card](https://qinyangwang.github.io/ui/docs/approval-card/): Asks the user to approve or decline an agent's action. JSON: https://qinyangwang.github.io/ui/r/approval-card.json
-- [Attachment Upload](https://qinyangwang.github.io/ui/docs/attachment-upload/): Attaches files, images and links to a message or form. JSON: https://qinyangwang.github.io/ui/r/attachment-upload.json
-- [Availability Scheduler](https://qinyangwang.github.io/ui/docs/availability-scheduler/): Edits weekly hours when someone is available. JSON: https://qinyangwang.github.io/ui/r/availability-scheduler.json
-- [Card Folder](https://qinyangwang.github.io/ui/docs/card-folder/): Shows a saved payment card and reveals its details on request. JSON: https://qinyangwang.github.io/ui/r/card-folder.json
-- [Chat](https://qinyangwang.github.io/ui/docs/chat/): Message thread between a user and an agent. JSON: https://qinyangwang.github.io/ui/r/chat.json
-- [Command Palette](https://qinyangwang.github.io/ui/docs/command-palette/): Keyboard-first launcher for searching and running commands. JSON: https://qinyangwang.github.io/ui/r/command-palette.json
-- [Email Editor](https://qinyangwang.github.io/ui/docs/email-editor/): Edits email templates and exports them as email-safe HTML. JSON: https://qinyangwang.github.io/ui/r/email-editor.json
-- [Expandable Action Bar](https://qinyangwang.github.io/ui/docs/expandable-action-bar/): Icon toolbar that reveals labels when the user reaches for it. JSON: https://qinyangwang.github.io/ui/r/expandable-action-bar.json
-- [Expandable Tabs](https://qinyangwang.github.io/ui/docs/expandable-tabs/): Icon tab bar for switching panels in tight spaces. JSON: https://qinyangwang.github.io/ui/r/expandable-tabs.json
-- [Feedback Widget](https://qinyangwang.github.io/ui/docs/feedback-widget/): Collects a short message and mood from users without leaving the page. JSON: https://qinyangwang.github.io/ui/r/feedback-widget.json
-- [File Upload](https://qinyangwang.github.io/ui/docs/file-upload/): Upload queue for dropping files and tracking each one. JSON: https://qinyangwang.github.io/ui/r/file-upload.json
-- [Morphing Search](https://qinyangwang.github.io/ui/docs/morphing-search/): Search field that opens into a list of results. JSON: https://qinyangwang.github.io/ui/r/morphing-search.json
-- [Morphing Tabs](https://qinyangwang.github.io/ui/docs/morphing-tabs/): Tabs the user can reorder, with content attached to the active tab. JSON: https://qinyangwang.github.io/ui/r/morphing-tabs.json
-- [404 Terminal](https://qinyangwang.github.io/ui/docs/not-found-terminal/): 404 page styled as a terminal session. JSON: https://qinyangwang.github.io/ui/r/not-found-terminal.json
-- [Notification Stack](https://qinyangwang.github.io/ui/docs/notification-stack/): Collapses many notifications into one stack that opens on demand. JSON: https://qinyangwang.github.io/ui/r/notification-stack.json
-- [Block Editor](https://qinyangwang.github.io/ui/docs/notion-editor/): Block editor for writing documents that save as MDX. JSON: https://qinyangwang.github.io/ui/r/notion-editor.json
-- [OTP Input](https://qinyangwang.github.io/ui/docs/otp-input/): Enters a one-time sign-in or verification code. JSON: https://qinyangwang.github.io/ui/r/otp-input.json
-- [Overflow Actions](https://qinyangwang.github.io/ui/docs/overflow-actions/): Keeps primary actions visible and tucks extra ones behind a toggle. JSON: https://qinyangwang.github.io/ui/r/overflow-actions.json
-- [Project Folder](https://qinyangwang.github.io/ui/docs/project-folder/): Folder that previews its files and opens into a file view. JSON: https://qinyangwang.github.io/ui/r/project-folder.json
-- [Prompt Bar](https://qinyangwang.github.io/ui/docs/prompt-bar/): Input where the user writes and sends a prompt to an agent. JSON: https://qinyangwang.github.io/ui/r/prompt-bar.json
-- [Recommendation Card](https://qinyangwang.github.io/ui/docs/recommendation-card/): Shows an agent's suggestion for the user to accept or swap. JSON: https://qinyangwang.github.io/ui/r/recommendation-card.json
-- [Sign-up Form](https://qinyangwang.github.io/ui/docs/signup-form/): Account sign-up form with inline validation and password strength. JSON: https://qinyangwang.github.io/ui/r/signup-form.json
-- [Swipeable List](https://qinyangwang.github.io/ui/docs/swipeable-list/): List rows with actions revealed by swiping, for touch screens. JSON: https://qinyangwang.github.io/ui/r/swipeable-list.json
-- [Task Row](https://qinyangwang.github.io/ui/docs/task-row/): Shows the progress of one background task. JSON: https://qinyangwang.github.io/ui/r/task-row.json
+- [Agent Composer](https://qinyangwang.github.io/ui/docs/agent-composer.md): Prompt input for coding agents with file mentions and commands. JSON: https://qinyangwang.github.io/ui/r/agent-composer.json
+- [Approval Card](https://qinyangwang.github.io/ui/docs/approval-card.md): Asks the user to approve or decline an agent's action. JSON: https://qinyangwang.github.io/ui/r/approval-card.json
+- [Attachment Upload](https://qinyangwang.github.io/ui/docs/attachment-upload.md): Attaches files, images and links to a message or form. JSON: https://qinyangwang.github.io/ui/r/attachment-upload.json
+- [Availability Scheduler](https://qinyangwang.github.io/ui/docs/availability-scheduler.md): Edits weekly hours when someone is available. JSON: https://qinyangwang.github.io/ui/r/availability-scheduler.json
+- [Card Folder](https://qinyangwang.github.io/ui/docs/card-folder.md): Shows a saved payment card and reveals its details on request. JSON: https://qinyangwang.github.io/ui/r/card-folder.json
+- [Chat](https://qinyangwang.github.io/ui/docs/chat.md): Message thread between a user and an agent. JSON: https://qinyangwang.github.io/ui/r/chat.json
+- [Command Palette](https://qinyangwang.github.io/ui/docs/command-palette.md): Keyboard-first launcher for searching and running commands. JSON: https://qinyangwang.github.io/ui/r/command-palette.json
+- [Email Editor](https://qinyangwang.github.io/ui/docs/email-editor.md): Edits email templates and exports them as email-safe HTML. JSON: https://qinyangwang.github.io/ui/r/email-editor.json
+- [Expandable Action Bar](https://qinyangwang.github.io/ui/docs/expandable-action-bar.md): Icon toolbar that reveals labels when the user reaches for it. JSON: https://qinyangwang.github.io/ui/r/expandable-action-bar.json
+- [Expandable Tabs](https://qinyangwang.github.io/ui/docs/expandable-tabs.md): Icon tab bar for switching panels in tight spaces. JSON: https://qinyangwang.github.io/ui/r/expandable-tabs.json
+- [Feedback Widget](https://qinyangwang.github.io/ui/docs/feedback-widget.md): Collects a short message and mood from users without leaving the page. JSON: https://qinyangwang.github.io/ui/r/feedback-widget.json
+- [File Upload](https://qinyangwang.github.io/ui/docs/file-upload.md): Upload queue for dropping files and tracking each one. JSON: https://qinyangwang.github.io/ui/r/file-upload.json
+- [Morphing Search](https://qinyangwang.github.io/ui/docs/morphing-search.md): Search field that opens into a list of results. JSON: https://qinyangwang.github.io/ui/r/morphing-search.json
+- [Morphing Tabs](https://qinyangwang.github.io/ui/docs/morphing-tabs.md): Tabs the user can reorder, with content attached to the active tab. JSON: https://qinyangwang.github.io/ui/r/morphing-tabs.json
+- [404 Terminal](https://qinyangwang.github.io/ui/docs/not-found-terminal.md): 404 page styled as a terminal session. JSON: https://qinyangwang.github.io/ui/r/not-found-terminal.json
+- [Notification Stack](https://qinyangwang.github.io/ui/docs/notification-stack.md): Collapses many notifications into one stack that opens on demand. JSON: https://qinyangwang.github.io/ui/r/notification-stack.json
+- [Block Editor](https://qinyangwang.github.io/ui/docs/notion-editor.md): Block editor for writing documents that save as MDX. JSON: https://qinyangwang.github.io/ui/r/notion-editor.json
+- [OTP Input](https://qinyangwang.github.io/ui/docs/otp-input.md): Enters a one-time sign-in or verification code. JSON: https://qinyangwang.github.io/ui/r/otp-input.json
+- [Overflow Actions](https://qinyangwang.github.io/ui/docs/overflow-actions.md): Keeps primary actions visible and tucks extra ones behind a toggle. JSON: https://qinyangwang.github.io/ui/r/overflow-actions.json
+- [Project Folder](https://qinyangwang.github.io/ui/docs/project-folder.md): Folder that previews its files and opens into a file view. JSON: https://qinyangwang.github.io/ui/r/project-folder.json
+- [Prompt Bar](https://qinyangwang.github.io/ui/docs/prompt-bar.md): Input where the user writes and sends a prompt to an agent. JSON: https://qinyangwang.github.io/ui/r/prompt-bar.json
+- [Recommendation Card](https://qinyangwang.github.io/ui/docs/recommendation-card.md): Shows an agent's suggestion for the user to accept or swap. JSON: https://qinyangwang.github.io/ui/r/recommendation-card.json
+- [Sign-up Form](https://qinyangwang.github.io/ui/docs/signup-form.md): Account sign-up form with inline validation and password strength. JSON: https://qinyangwang.github.io/ui/r/signup-form.json
+- [Swipeable List](https://qinyangwang.github.io/ui/docs/swipeable-list.md): List rows with actions revealed by swiping, for touch screens. JSON: https://qinyangwang.github.io/ui/r/swipeable-list.json
+- [Task Row](https://qinyangwang.github.io/ui/docs/task-row.md): Shows the progress of one background task. JSON: https://qinyangwang.github.io/ui/r/task-row.json
 
 ## Templates
 
-- [Agent Workspace](https://qinyangwang.github.io/ui/docs/agent-workspace/): A full app for chatting with and supervising coding agents. JSON: https://qinyangwang.github.io/ui/r/agent-workspace.json
-- [Personal Blog](https://qinyangwang.github.io/ui/docs/blog/): Personal blog with a post list and an article page. JSON: https://qinyangwang.github.io/ui/r/blog.json
-- [Docs Site](https://qinyangwang.github.io/ui/docs/docs/): Documentation site layout with search, navigation and a page outline. JSON: https://qinyangwang.github.io/ui/r/docs.json
-- [SaaS](https://qinyangwang.github.io/ui/docs/saas/): Starter app with marketing pages, sign-in flows and a dashboard. JSON: https://qinyangwang.github.io/ui/r/saas.json
-- [Code Editor](https://qinyangwang.github.io/ui/docs/vscode/): Edit a project in the browser with a shell on its files. JSON: https://qinyangwang.github.io/ui/r/vscode.json
+- [Agent Workspace](https://qinyangwang.github.io/ui/docs/agent-workspace.md): A full app for chatting with and supervising coding agents. JSON: https://qinyangwang.github.io/ui/r/agent-workspace.json
+- [Personal Blog](https://qinyangwang.github.io/ui/docs/blog.md): Personal blog with a post list and an article page. JSON: https://qinyangwang.github.io/ui/r/blog.json
+- [Docs Site](https://qinyangwang.github.io/ui/docs/docs.md): Documentation site layout with search, navigation and a page outline. JSON: https://qinyangwang.github.io/ui/r/docs.json
+- [SaaS](https://qinyangwang.github.io/ui/docs/saas.md): Starter app with marketing pages, sign-in flows and a dashboard. JSON: https://qinyangwang.github.io/ui/r/saas.json
+- [Code Editor](https://qinyangwang.github.io/ui/docs/vscode.md): Edit a project in the browser with a shell on its files. JSON: https://qinyangwang.github.io/ui/r/vscode.json

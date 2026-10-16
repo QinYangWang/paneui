@@ -8,6 +8,27 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-docs-pages",
+    date: "October 16, 2026",
+    title: "Docs pages you can copy, share and follow",
+    tag: "Docs",
+    changes: [
+      <>
+        Every docs page has a Markdown copy at the same address with <Code>.md</Code>, for example{" "}
+        <Code>/docs/button.md</Code>. Copy page next to the title copies it; its menu opens it, hands it to a chat
+        assistant or copies the page link. <Code>llms.txt</Code> links to these files.
+      </>,
+      <>
+        The outline&apos;s line steps in for nested entries and back out, and the stretch beside the current section
+        slides as you read. On narrow screens and template pages it folds into an On this page button above the content.
+      </>,
+      <>
+        Hover a heading to copy a link to it. The section name sits above each title, and each page ends with the
+        previous and next page in sidebar order and the date its sources last changed.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-rtl-examples",
     date: "October 16, 2026",
     title: "Right-to-left examples and a calmer preview toolbar",

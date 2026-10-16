@@ -6,6 +6,7 @@ import { CheckCircleIcon, XCircleIcon } from "@/components/icons"
 import { AgentSkill } from "@/components/docs/agent-skill"
 import type { TocEntry } from "@/components/docs/doc-toc"
 import { DocsCode, highlight } from "@/components/docs/docs-code"
+import { DocHeading } from "@/components/docs/doc-heading"
 import { Code, GuideH2, GuidePage } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
 import { ruleSlug, SKILL_EXAMPLES } from "@/components/docs/skill-examples"
@@ -114,12 +115,10 @@ export default async function SkillPage() {
         <GuideH2 id="rules">Rules</GuideH2>
         {rules.map((r) => (
           <section key={r.id} className="flex flex-col gap-3">
-            <h3 id={r.id} className="flex scroll-mt-20 gap-2 text-lg font-semibold text-balance">
-              <span className="text-muted-foreground tabular-nums">{r.n}.</span>
-              <a href={`#${r.id}`} className="outline-none focus-visible:underline">
-                <Md text={r.title} />
-              </a>
-            </h3>
+            <DocHeading as="h3" id={r.id} className="text-balance">
+              <span className="me-2 text-muted-foreground tabular-nums">{r.n}.</span>
+              <Md text={r.title} />
+            </DocHeading>
             <p className="text-pretty text-muted-foreground">
               <Md text={r.why} />
             </p>

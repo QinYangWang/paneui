@@ -25,6 +25,32 @@ the docs site no longer uses them.
   reduced motion). Titles are single-line and truncate with an `OverflowHint` (opens to the left). Depth-2 entries
   are `ps-6 text-ui-sm`. The current section is the last heading above 112px, or the last entry at the page end.
   Back to top sits under the list, outside the scroll area, and fades in after 320px of page scroll.
+- **Docs page chrome (round 23)**, in `components/docs/doc-layout.tsx` (`DocLayout`, `DocHeader`, `DocFooter`), shared by
+  the component pages (`app/docs/[name]`) and the guide pages (`GuidePage`):
+  - **Eyebrow, not breadcrumb**: the section name (component category, "Templates" or "Getting started") sits above the
+    title as a muted `text-ui` link to that section. The breadcrumb repeated the sidebar and the header tab, so it went.
+  - **Page actions** (`page-actions.tsx`): a `ButtonGroup` of "Copy page" plus a `Menu` (Copy as Markdown, View as
+    Markdown, Open in ChatGPT, Open in Claude, Copy page link), top-right of the title row; it wraps under the title on
+    phones. All actions read the static `/docs/<slug>.md` (`/docs/index.md` for the introduction) written after
+    `next build` by `scripts/gen-docs-md.mjs` (`pnpm docs:md`, part of `pnpm build` and the Pages workflow): component
+    and template pages from registry.json, `content/docs/<name>.ts` and the example files (install commands, usage,
+    composition, examples' code, notes, API tables); guide pages from their built HTML (elements with `data-md-skip`
+    are left out), the design skill page from `SKILL.md`. `public/llms.txt` links to the `.md` files. The ChatGPT mark is
+    not in the brand icon package, so that item uses the neutral chat glyph.
+  - **Footer**: previous / next cards in sidebar order (`getDocsSequence()` in `lib/docs.ts`: Getting started, the
+    overview, categories A–Z inside each, templates), then "Last updated" from `git log -1 --format=%ct` over the
+    page's sources (`docSources(name)`: content file, examples folder, demo, item files; guide pages: their
+    `page.tsx`, plus the skill folder for /docs/skill). No date when git or history is missing; the workflow checks out
+    with `fetch-depth: 0`.
+  - **Heading anchors** (`doc-heading.tsx`, `DocHeading`): every h2/h3 shows a link button on hover or focus (always on
+    coarse pointers); pressing it copies the URL with the hash, replaces the hash and says "Copied" inline for 1.6s.
+    Headings use `scroll-mt-24` below `xl` (sticky outline bar) and `scroll-mt-20` above.
+- **Outline track (round 23)**: the TOC's `border-s` rail and sliding bar became an SVG track built from the links'
+  offsets: depth-1 entries at x=1, depth-2 at x=13, a short diagonal (8px) at the top of the entry where the depth
+  changes. The same path drawn 2px in `foreground` is clipped (`clip-path: inset`) to the current entry and transitions
+  300ms ease-out; under reduced motion it jumps. Below `xl`, and always on template pages (`DocLayout wide`, the content
+  takes the rail's width), the outline is a sticky "On this page · <current section>" button under the header that
+  opens the same list in a popover (the anchor's width, max 24rem / 60svh, Back to top once scrolled).
 - **Previews**: Fit renders inline; Desktop (1024), Tablet (768) and Mobile (390) render `/preview?demo=…`
   or `?example=…` in an iframe so media and container queries react. The viewport switch is a second `Tabs`
   list (default size, icon-only `TabsTab`s with `aria-label` + tooltip: Maximize, Monitor, Tablet, Smartphone),

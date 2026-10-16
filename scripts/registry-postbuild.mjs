@@ -48,7 +48,10 @@ console.log(`registry-postbuild: ${changed} items rewritten (dependencies → ${
 // 3. public/llms.txt: an index of the items with their one-line descriptions, for agents.
 {
   const order = ["Foundations", "Forms", "Overlays", "Display", "Navigation", "Text", "Motion", "Data", "Agents", "Charts", "Blocks", "Templates"]
-  const docsDir = path.join(root, "content/docs")
+  // Getting started pages, read from components/docs/docs-pages.ts (href, title, description in order).
+  const guideSrc = fs.readFileSync(path.join(root, "components/docs/docs-pages.ts"), "utf8")
+  const guides = [...guideSrc.matchAll(/href: "([^"]+)",\s*title: "([^"]+)",\s*description: "([^"]+)"/g)].map(([, href, title, description]) => ({ href, title, description }))
+  const mdOf = (href) => (href === "/docs" ? "/docs/index.md" : `${href}.md`)
   const visible = registry.items.filter((i) => !i.meta?.hidden)
   const byCat = new Map()
   for (const item of visible) {
@@ -67,13 +70,19 @@ console.log(`registry-postbuild: ${changed} items rewritten (dependencies → ${
     `- [Registry index](${base}/r/registry.json)`,
     `- [Docs](${base}/docs/)`,
     "",
+    "Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.md`); the links below point at them.",
+    "",
+    "## Getting started",
+    "",
+    // Written after `next build` by scripts/gen-docs-md.mjs.
+    ...guides.map((g) => `- [${g.title}](${base}${mdOf(g.href)}): ${g.description}`),
+    "",
   ]
   for (const cat of cats) {
     lines.push(`## ${cat}`, "")
     for (const item of byCat.get(cat).sort((a, b) => a.name.localeCompare(b.name))) {
-      const hasDocs = fs.existsSync(path.join(docsDir, `${item.name}.ts`)) || cat === "Templates" || cat === "Blocks"
-      const link = hasDocs ? `${base}/docs/${item.name}/` : `${base}/r/${item.name}.json`
-      lines.push(`- [${item.title ?? item.name}](${link}): ${item.description ?? ""} JSON: ${base}/r/${item.name}.json`)
+      // Every visible item has a docs page (app/docs/[name]) and so a Markdown twin.
+      lines.push(`- [${item.title ?? item.name}](${base}/docs/${item.name}.md): ${item.description ?? ""} JSON: ${base}/r/${item.name}.json`)
     }
     lines.push("")
   }
