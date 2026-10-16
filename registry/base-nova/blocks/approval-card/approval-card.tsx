@@ -43,9 +43,9 @@ export function ApprovalCard({
         <CardTitle className="text-lg">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <dl className="flex flex-col gap-0.5 rounded-2xl bg-background dark:bg-input/32 p-1 shadow-well">
+        <dl className="flex flex-col gap-0.5 frame-2xl frame-p-1 bg-background dark:bg-input/32 shadow-well">
           {details.map((d) => (
-            <div key={d.label} className="flex items-center justify-between rounded-xl px-3 py-2">
+            <div key={d.label} className="flex items-center justify-between rounded-inner px-3 py-2">
               <dt className="text-muted-foreground">{d.label}</dt>
               <dd className="font-medium tabular-nums">{d.value}</dd>
             </div>

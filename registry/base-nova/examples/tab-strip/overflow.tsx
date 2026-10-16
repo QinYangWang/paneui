@@ -10,7 +10,7 @@ const FILES = ["page.tsx", "layout.tsx", "globals.css", "utils.ts", "button.tsx"
 export default function TabStripOverflow() {
   const [tab, setTab] = React.useState("page.tsx")
   return (
-    <div className="w-full max-w-sm rounded-2xl bg-shell p-1.5">
+    <div className="w-full max-w-sm frame-2xl frame-inset-1.75 bg-shell p-1.5">
       <TabStrip value={tab} onValueChange={setTab} aria-label="Open files">
         {FILES.map((f, i) => (
           <TabStripItem key={f} value={f} icon={<FileIcon />} indicator={i === 2}>

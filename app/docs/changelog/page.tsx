@@ -8,6 +8,23 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-radius",
+    date: "October 16, 2026",
+    title: "Nested corners stay concentric after install",
+    tag: "Theme",
+    changes: [
+      <>
+        The <Code>theme</Code> item now ships <Code>frame-*</Code>, <Code>rounded-inner</Code>,{" "}
+        <Code>rounded-inner-*</Code> and <Code>rounded-inner-or-*</Code>. Reinstall it so installed components keep
+        their nested corners.
+      </>,
+      <>
+        Icon rail items, tab strip tabs, the popover close button, the inline range slider and approval card details
+        follow their container at every radius.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-foundation",
     date: "October 16, 2026",
     title: "New foundation: Inter, alpha greys, four shadows and a tighter radius",

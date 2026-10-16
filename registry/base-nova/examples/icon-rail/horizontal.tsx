@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
 export default function IconRailHorizontal() {
   return (
     <TooltipProvider>
-      <div className="w-full max-w-xs overflow-hidden rounded-2xl bg-shell shadow-raised">
+      <div className="w-full max-w-xs overflow-hidden frame-2xl frame-inset-2 bg-shell shadow-raised">
         <IconRail aria-label="App" orientation="horizontal">
           <IconRailGroup>
             <IconRailItem label="Home" icon={<HomeIcon />} active />

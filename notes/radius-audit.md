@@ -168,3 +168,36 @@ around a scaling token) drifted at large presets. Fixed with frames, not allow-l
   variant picker is a SegmentedControl; message-scroller/custom-jump wraps the card in `frame-2xl frame-inset-2`.
 - Docs: sidebar search field `frame-lg frame-inset-2`, its key cap `rounded-inner-or-2xs`.
 - Allow-listed (scrolling content, no fixed inset): file-diff/accept-reject annotation buttons, todo-list/max-height rows.
+
+### Round 17 follow-up: counts after the last fixes
+
+| Preset | Before | After |
+| --- | --- | --- |
+| default | 2 must, 1 should | 0 (10 allow-listed) |
+| `--radius sm` | 3 must | 0 (4 allow-listed) |
+| `--radius lg` | 7 must, 2 should | 0 (8 allow-listed) |
+| `--radius xl` | 0 must | 0 (13 allow-listed) |
+| `--radius none` | 0 must, 6 should | 0 must, 3 should |
+| `--dark` | 0 must | 0 (11 allow-listed) |
+
+- `icon-rail` item `rounded-inner`; demo wrappers `frame-2xl frame-inset-2` (badges, horizontal) and
+  `frame-3xl frame-inset-2` (main).
+- `swatch-picker` letter item is `frame-lg frame-inset-0.5` with the tile `rounded-inner` (the dot item stays round).
+- `approval-card` details well `frame-2xl frame-p-1`, rows `rounded-inner`.
+- `range-slider-inline` control `frame-2xl frame-inset-1`, fill `rounded-inner`.
+- `agent-composer` banner `frame-[calc(var(--radius-3xl)-var(--spacing))] frame-inset-1.5`: concentric with the
+  composer around the header's `p-1`, and still the frame for its own buttons.
+- `popover` close button `max(xl − 8px, sm)` (it sits 8px in; the content's `p-3` is not its inset).
+- `tab-strip` tab `frame-inner frame-inset-1` (`rounded-lg` outside a frame, follows one inside), action buttons
+  `rounded-inner`; demo wrappers `frame-{3xl,2xl} frame-inset-1.75` (6px padding + the scroller's 1px).
+- `icon-chip` demo rows lost their radius: they never paint.
+- Allow-listed: `email-editor` variable chip, an inline token whose offset from the block corner comes from the
+  line box, not from padding.
+- Theme item: `regen-theme.py` copies `@property --frame-*`, `frame-*`, `frame-p-*`, `frame-inset-*`,
+  `frame-border`, `frame-inner`, `rounded-inner`, `rounded-{t,b,s,e}-inner`, `rounded-inner-*` and
+  `rounded-inner-or-*` from `app/globals.css` into the `theme` item's `css`. The field is a JSON object, so
+  `frame-p-*` / `frame-inset-*` ship their spacing form only (no `[length]` arbitrary values outside this repo).
+- Caveat: `IconRailItem` and `TabStripItem` now follow an enclosing frame, like the thread-list and user-menu rows.
+  Inside a frame that is not their container (the app-shell window publishes 3xl − 3px), they would pick its radius up.
+- Open (`--radius none`, should): chart legend swatches inside the `rounded-full` legend pill (composition-chart,
+  treemap, trend-chart). Square swatch in a pill is the preset's intent; allow-list or round the swatch.

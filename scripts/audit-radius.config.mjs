@@ -53,6 +53,13 @@ export default {
         "concentric is enforced for surfaces (rows, panels, media) and for any inset ≤ 8px.",
     },
     {
+      page: "email-editor",
+      selector: "span.react-renderer.node-variable",
+      reason:
+        "A variable chip is an inline token in running text: its distance from the block corner comes from the line box " +
+        "and wrapping (13px across, 2px down), not from a padded inset, so it keeps its own token.",
+    },
+    {
       slot: "citation-favicon",
       selector: "img",
       reason: "A square favicon (3px corners) shown inside a round badge: the round frame is the shape, the glyph keeps its own.",

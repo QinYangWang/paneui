@@ -179,7 +179,7 @@ function TabStrip({
           )}
         </div>
         {actions && (
-          <div data-slot="tab-strip-actions" className="flex shrink-0 items-center gap-0.5">
+          <div data-slot="tab-strip-actions" className="flex shrink-0 items-center gap-0.5 [&>[data-slot=button]]:rounded-inner">
             {actions}
           </div>
         )}
@@ -267,7 +267,7 @@ function TabStripItem({ value, icon, closable, indicator, disabled, hint, classN
       }
     },
     className: cn(
-      "group/tab relative flex h-7 max-w-44 pointer-coarse:h-8 min-w-0 shrink-0 cursor-default items-center gap-1.5 frame-lg frame-inset-1 px-2 text-ui text-muted-foreground transition-[background-color,color,box-shadow] duration-150 select-none hover:text-foreground has-focus-visible:ring-2 has-focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64",
+      "group/tab relative flex h-7 max-w-44 pointer-coarse:h-8 min-w-0 shrink-0 cursor-default items-center gap-1.5 frame-inner frame-inset-1 px-2 text-ui text-muted-foreground transition-[background-color,color,box-shadow] duration-150 select-none hover:text-foreground has-focus-visible:ring-2 has-focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64",
       ctx.variant === "default"
         ? "hover:bg-foreground/5 data-selected:bg-card data-selected:text-foreground data-selected:shadow-raised"
         : "hover:bg-secondary data-selected:bg-foreground/6 data-selected:text-foreground",

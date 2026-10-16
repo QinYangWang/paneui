@@ -20,7 +20,7 @@ export default function IconChipDemo() {
       </div>
       <ul className="flex flex-col gap-1 frame-3xl frame-p-2 bg-card shadow-surface">
         {rows.map(({ icon: Icon, title, body, tone }) => (
-          <li key={title} className="flex items-center gap-3 rounded-inner px-2 py-2">
+          <li key={title} className="flex items-center gap-3 px-2 py-2">
             <IconChip tone={tone}><Icon /></IconChip>
             <div className="min-w-0">
               <p className="text-sm font-medium">{title}</p>

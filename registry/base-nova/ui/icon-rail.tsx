@@ -60,7 +60,7 @@ type IconRailItemProps = Omit<React.ComponentProps<"button">, "children"> & {
 function IconRailItem({ label, icon, shortcut, active = false, badge, render, className, ...props }: IconRailItemProps) {
   const { side } = React.useContext(RailContext)
   const classes = cn(
-    "relative flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors duration-150 hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-active:bg-foreground/6 data-active:text-foreground [&_svg]:size-4.5 [&_svg]:shrink-0",
+    "relative flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-inner text-muted-foreground outline-none transition-colors duration-150 hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-active:bg-foreground/6 data-active:text-foreground [&_svg]:size-4.5 [&_svg]:shrink-0",
     className
   )
   const content = (

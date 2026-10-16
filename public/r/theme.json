@@ -391,6 +391,67 @@
       ".dark": {
         "shadow-lg": "0 0 0 1px color-mix(in oklab, #ffffff12, #3a3a3a 25%), 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080"
       }
+    },
+    "@property --frame-r": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "0px"
+    },
+    "@property --frame-p": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "0px"
+    },
+    "@property --frame-b": {
+      "syntax": "\"<length>\"",
+      "inherits": "false",
+      "initial-value": "0px"
+    },
+    "@utility frame-*": {
+      "--frame-r": "--value(--radius-*, [length])",
+      "border-radius": "--value(--radius-*, [length])",
+      "--frame-inner-1": "max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), min(2px, var(--frame-r)))",
+      "--frame-inner-2": "initial"
+    },
+    "@utility frame-p-*": {
+      "--frame-p": "--spacing(--value(integer, number))",
+      "padding": "--spacing(--value(integer, number))"
+    },
+    "@utility frame-inset-*": {
+      "--frame-p": "--spacing(--value(integer, number))"
+    },
+    "@utility frame-border": {
+      "--frame-b": "1px"
+    },
+    "@utility rounded-inner": {
+      "border-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))"
+    },
+    "@utility rounded-t-inner": {
+      "border-top-left-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))",
+      "border-top-right-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))"
+    },
+    "@utility rounded-b-inner": {
+      "border-bottom-left-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))",
+      "border-bottom-right-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))"
+    },
+    "@utility rounded-s-inner": {
+      "border-start-start-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))",
+      "border-end-start-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))"
+    },
+    "@utility rounded-e-inner": {
+      "border-start-end-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))",
+      "border-end-end-radius": "var(--frame-inner-2, var(--frame-inner-1, var(--radius-lg)))"
+    },
+    "@utility rounded-inner-*": {
+      "border-radius": "var(--frame-inner-2, var(--frame-inner-1, --value(--radius-*)))"
+    },
+    "@utility rounded-inner-or-*": {
+      "border-radius": "max(var(--frame-inner-2, var(--frame-inner-1, 0px)), min(--value(--radius-*), var(--radius-sm)))"
+    },
+    "@utility frame-inner": {
+      "--frame-r": "var(--frame-inner-1, var(--radius-lg))",
+      "border-radius": "var(--frame-inner-1, var(--radius-lg))",
+      "--frame-inner-2": "max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), min(2px, var(--frame-r)))"
     }
   },
   "meta": {

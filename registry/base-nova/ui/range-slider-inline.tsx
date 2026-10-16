@@ -129,7 +129,7 @@ function RangeSliderInline({
       <SliderPrimitive.Control
         data-slot="range-slider-inline-control"
         className={cn(
-          "relative flex h-11 w-full cursor-pointer items-center rounded-2xl bg-muted px-2.5 shadow-well outline-none",
+          "relative flex h-11 w-full cursor-pointer items-center frame-2xl frame-inset-1 bg-muted px-2.5 shadow-well outline-none",
           "has-focus-visible:ring-2 has-focus-visible:ring-ring/50 data-disabled:cursor-not-allowed"
         )}
       >
@@ -139,7 +139,7 @@ function RangeSliderInline({
             data-slot="range-slider-inline-fill"
             style={{ width: `calc(${EDGE * 2}px + ${p} * (100% - ${EDGE * 2}px))` }}
             className={cn(
-              "absolute inset-y-0 left-0 rounded-xl bg-card shadow-raised",
+              "absolute inset-y-0 left-0 rounded-inner bg-card shadow-raised",
               "transition-[width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-dragging/ris:transition-none motion-reduce:transition-none"
             )}
           />

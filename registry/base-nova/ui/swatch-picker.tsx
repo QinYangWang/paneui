@@ -57,13 +57,17 @@ function SwatchPickerItem({ swatch, variant }: { swatch: Swatch; variant: "dot" 
       aria-label={swatch.label}
       title={swatch.label}
       data-slot="swatch-picker-item"
-      className="group/swatch inline-flex size-6 cursor-pointer items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:cursor-not-allowed data-disabled:opacity-64"
+      className={cn(
+        "group/swatch inline-flex size-6 cursor-pointer items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:cursor-not-allowed data-disabled:opacity-64",
+        // letter tiles sit 2px inside the item, so its focus ring follows them
+        variant === "letter" ? "frame-lg frame-inset-0.5" : "rounded-full"
+      )}
     >
       {variant === "letter" ? (
         <span
           aria-hidden
           className={cn(
-            "flex size-5 items-center justify-center rounded-md text-ui font-semibold shadow-[inset_0_0_0_1px_var(--border)] transition-[box-shadow,background-color] duration-150 group-hover/swatch:bg-secondary",
+            "flex size-5 items-center justify-center rounded-inner text-ui font-semibold shadow-[inset_0_0_0_1px_var(--border)] transition-[box-shadow,background-color] duration-150 group-hover/swatch:bg-secondary",
             "group-data-checked/swatch:shadow-[inset_0_0_0_1px_var(--border),0_0_0_1.5px_var(--popover),0_0_0_3px_var(--foreground)]",
             none && "text-foreground"
           )}

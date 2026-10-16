@@ -18,7 +18,7 @@ export default function IconRailDemo() {
   const [active, setActive] = React.useState("projects")
   return (
     <TooltipProvider>
-      <div className="h-96 overflow-hidden rounded-3xl bg-shell shadow-raised">
+      <div className="h-96 overflow-hidden frame-3xl frame-inset-2 bg-shell shadow-raised">
         <IconRail aria-label="App">
           <IconRailGroup>
             {ITEMS.map((i) => (
