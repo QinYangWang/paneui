@@ -165,8 +165,8 @@ function inlineMd(nodes) {
   let s = ""
   let prevSpan = false
   for (const n of nodes) {
-    // Two labels laid out side by side (a name and a count) read as two words.
-    const span = typeof n !== "string" && (n.tag === "span" || n.tag === "a")
+    // Two labels laid out side by side (a name and a count, a date and a tag) read as two words.
+    const span = typeof n !== "string" && !["code", "strong", "b", "em", "i", "br"].includes(n.tag)
     if (span && prevSpan && !/\s$/.test(s)) s += " "
     prevSpan = span
     if (typeof n === "string") {
