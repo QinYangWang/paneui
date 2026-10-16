@@ -190,15 +190,15 @@
   --border-subtle: #00000006;
   --border-strong: #00000026;
   --input: #00000026;
-  /* Charts: chart-1…8 (teal, lime, pink, sky, purple, blue, emerald, yellow). They never follow the accent. */
-  --chart-1: oklch(77.7% 0.152 181.912);
-  --chart-2: oklch(84.1% 0.238 128.85);
-  --chart-3: oklch(71.8% 0.202 349.761);
-  --chart-4: oklch(74.6% 0.16 232.661);
-  --chart-5: oklch(71.4% 0.203 305.504);
-  --chart-6: oklch(66% 0.184 254.753);
-  --chart-7: oklch(76.5% 0.177 163.223);
-  --chart-8: oklch(85.2% 0.199 91.936);
+  /* Charts: chart-1…8 = blue, orange, violet, green, pink, amber, cyan, gray, step 9 (light orange 10, amber 11 for 3:1 on white). Never follow the accent. */
+  --chart-1: #0090ff;
+  --chart-2: #ef5f00;
+  --chart-3: #6e56cf;
+  --chart-4: #30a46c;
+  --chart-5: #d6409f;
+  --chart-6: #ab6400;
+  --chart-7: #00a2c7;
+  --chart-8: #8d8d8d;
   /* Code well gray 2; scrollbar thumb a6 → a8. */
   --code: #f9f9f9;
   --scrollbar: #00000026;
@@ -274,6 +274,15 @@
   --border-subtle: #ffffff09;
   --border-strong: #ffffff2c;
   --input: #ffffff2c;
+  /* Charts: chart-1…8 = blue, orange, violet, green, pink, amber, cyan, gray, step 9 (light orange 10, amber 11 for 3:1 on white). Never follow the accent. */
+  --chart-1: #0090ff;
+  --chart-2: #f76b15;
+  --chart-3: #6e56cf;
+  --chart-4: #30a46c;
+  --chart-5: #d6409f;
+  --chart-6: #ffc53d;
+  --chart-7: #00a2c7;
+  --chart-8: #6e6e6e;
   /* Code well gray 2; scrollbar thumb a6 → a8. */
   --code: #191919;
   --scrollbar: #ffffff2c;
@@ -297,7 +306,7 @@
   --skeuo-chip: var(--shadow-border);
 }
 
-/* Wide-gamut displays get the same scales in display-p3 (accent and state colours only; greys are identical). */
+/* Wide-gamut displays get the same scales in display-p3 (accent, state and chart colours; greys are identical). */
 @supports (color: color(display-p3 1 1 1)) {
   @media (color-gamut: p3) {
     :root {
@@ -324,6 +333,14 @@
       --warning-foreground: color(display-p3 .995 .988 .985);
       --warning-subtle: color(display-p3 .922 .584 .008/.15);
       --warning-border: color(display-p3 .949 .494 .004/.455);
+      --chart-1: color(display-p3 .247 .556 .969);
+      --chart-2: color(display-p3 .87 .409 .164);
+      --chart-3: color(display-p3 .417 .341 .784);
+      --chart-4: color(display-p3 .332 .634 .442);
+      --chart-5: color(display-p3 .775 .297 .61);
+      --chart-6: color(display-p3 .64 .4 0);
+      --chart-7: color(display-p3 .282 .627 .765);
+      --chart-8: color(display-p3 .553 .553 .553);
     }
     .dark {
       --primary: color(display-p3 .247 .556 .969);
@@ -349,6 +366,14 @@
       --warning-foreground: #fff;
       --warning-subtle: color(display-p3 .996 .486 0/.131);
       --warning-border: color(display-p3 1 .529 .129/.332);
+      --chart-1: color(display-p3 .247 .556 .969);
+      --chart-2: color(display-p3 .9 .45 .2);
+      --chart-3: color(display-p3 .417 .341 .784);
+      --chart-4: color(display-p3 .332 .634 .442);
+      --chart-5: color(display-p3 .775 .297 .61);
+      --chart-6: color(display-p3 1 .77 .26);
+      --chart-7: color(display-p3 .282 .627 .765);
+      --chart-8: color(display-p3 .431 .431 .431);
     }
   }
 }

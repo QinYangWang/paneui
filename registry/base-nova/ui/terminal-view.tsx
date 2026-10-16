@@ -135,7 +135,7 @@ const FG: Record<AnsiColor, string> = {
   yellow: "text-warning",
   blue: "text-primary",
   magenta: "text-chart-5",
-  cyan: "text-chart-1",
+  cyan: "text-chart-7",
   white: "text-foreground",
   gray: "text-muted-foreground",
 }
@@ -147,7 +147,7 @@ const BG: Record<AnsiColor, string> = {
   yellow: "bg-warning/16",
   blue: "bg-primary/16",
   magenta: "bg-chart-5/16",
-  cyan: "bg-chart-1/16",
+  cyan: "bg-chart-7/16",
   white: "bg-foreground/8",
   gray: "bg-muted-foreground/16",
 }

@@ -95,7 +95,7 @@ const PALETTE: [keyof ITheme, string][] = [
   ["yellow", "var(--warning)"],
   ["blue", "var(--primary)"],
   ["magenta", "var(--chart-5)"],
-  ["cyan", "var(--chart-1)"],
+  ["cyan", "var(--chart-7)"],
   ["white", "var(--foreground)"],
   ["brightBlack", "var(--muted-foreground)"],
   ["brightRed", "var(--destructive)"],
@@ -103,7 +103,7 @@ const PALETTE: [keyof ITheme, string][] = [
   ["brightYellow", "var(--warning)"],
   ["brightBlue", "var(--ring)"],
   ["brightMagenta", "var(--chart-3)"],
-  ["brightCyan", "var(--chart-4)"],
+  ["brightCyan", "var(--chart-1)"],
   ["brightWhite", "var(--foreground)"],
 ]
 

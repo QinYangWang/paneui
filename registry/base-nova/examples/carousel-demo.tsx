@@ -1,10 +1,10 @@
 import { Carousel, CarouselContent, CarouselDots, CarouselItem, CarouselNext, CarouselPrevious } from "@/registry/base-nova/ui/carousel"
 
 const slides = [
-  { title: "Plan", tone: "bg-chart-4/20" },
-  { title: "Build", tone: "bg-chart-2/20" },
-  { title: "Ship", tone: "bg-chart-3/20" },
-  { title: "Measure", tone: "bg-chart-5/20" },
+  { title: "Plan", tone: "bg-chart-1/20" },
+  { title: "Build", tone: "bg-chart-4/20" },
+  { title: "Ship", tone: "bg-chart-5/20" },
+  { title: "Measure", tone: "bg-chart-3/20" },
 ]
 
 export default function CarouselDemo() {

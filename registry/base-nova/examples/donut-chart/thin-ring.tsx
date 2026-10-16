@@ -3,7 +3,7 @@
 import { DonutChart } from "@/registry/base-nova/ui/donut-chart"
 
 const segments = [
-  { id: "used", label: "Used", value: 68, color: "var(--primary)" },
+  { id: "used", label: "Used", value: 68, color: "var(--chart-1)" },
   { id: "free", label: "Free", value: 32, color: "var(--muted-foreground)" },
 ]
 

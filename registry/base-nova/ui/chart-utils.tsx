@@ -17,18 +17,21 @@ import { cn } from "@/lib/utils"
 /* -------------------------------------------------------------------------- */
 
 /**
- * Series palette. Uses --chart-1..5 when the theme defines them, otherwise
- * falls back to the semantic tokens so light and dark both stay on-theme.
+ * Series palette: the theme's --chart-1..8, each with a semantic fallback for
+ * themes that do not define them.
  */
 const CHART_COLORS = [
   "var(--chart-1, var(--primary))",
-  "var(--chart-2, var(--success))",
-  "var(--chart-3, var(--warning))",
-  "var(--chart-4, var(--destructive))",
-  "var(--chart-5, var(--muted-foreground))",
+  "var(--chart-2, var(--warning))",
+  "var(--chart-3, var(--primary))",
+  "var(--chart-4, var(--success))",
+  "var(--chart-5, var(--destructive))",
+  "var(--chart-6, var(--warning))",
+  "var(--chart-7, var(--primary))",
+  "var(--chart-8, var(--muted-foreground))",
 ] as const
 
-/** Colour for series `index`; past five it blends the base palette for more hues. */
+/** Colour for series `index`; past eight it blends the base palette for more hues. */
 function chartColor(index: number) {
   const base = CHART_COLORS.length
   const i = ((index % (base * 3)) + base * 3) % (base * 3)
@@ -50,7 +53,7 @@ function chartAlpha(color: string, percent: number) {
  * class so browsers without relative colour keep white labels.
  */
 function onFill(fill: string) {
-  return `oklch(from ${fill} clamp(0.2435, calc((0.65 - l) * 1000), 1) 0 0)`
+  return `oklch(from ${fill} clamp(0.2435, calc((0.72 - l) * 100000), 1) 0 0)`
 }
 
 /* -------------------------------------------------------------------------- */
@@ -394,7 +397,7 @@ function ChartSwatch({
     <span
       aria-hidden
       data-slot="chart-swatch"
-      className={cn("size-2.5 shrink-0 rounded-sm shadow-chip", className)}
+      className={cn("size-2.5 shrink-0 rounded-full shadow-chip", className)}
       style={{ background: color, ...style }}
       {...props}
     />

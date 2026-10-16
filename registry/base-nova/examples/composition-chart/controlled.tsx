@@ -6,9 +6,9 @@ import { Button } from "@/registry/base-nova/ui/button"
 import { CompositionChart } from "@/registry/base-nova/ui/composition-chart"
 
 const series = [
-  { id: "new", label: "New", color: "var(--primary)" },
-  { id: "returning", label: "Returning", color: "var(--success)" },
-  { id: "reactivated", label: "Reactivated", color: "var(--warning)" },
+  { id: "new", label: "New", color: "var(--chart-1)" },
+  { id: "returning", label: "Returning", color: "var(--chart-4)" },
+  { id: "reactivated", label: "Reactivated", color: "var(--chart-2)" },
 ]
 
 const months = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"]

@@ -138,7 +138,7 @@ function HeatCalendar({
   weeks = 26,
   weekStartsOn = 0,
   unit = "contributions",
-  color = "var(--chart-2, var(--success))",
+  color = "var(--chart-4, var(--success))",
   maxCount,
   cellSize = 12,
   gap = 3,

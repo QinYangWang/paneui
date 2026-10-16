@@ -32,39 +32,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## BoardUI (chart palette; colour system until 2026-10-16)
-
-The categorical chart palette (`chart-1`…`chart-8`) in `app/globals.css` comes from BoardUI's
-colour system, https://github.com/BoardUI/boardui (`styles/theme.css`, commit ec5c5eb, and
-https://www.boardui.com/components/color). From 2026-10-14 to 2026-10-16 the rest of the theme
-colours followed it too: the Tailwind neutral OKLCH ramp with BoardUI's primitive overrides
-(neutral-100 #f7f7f7, neutral-200 #ebebeb, neutral-925 #121212, blue-400 #3392ff), the role
-mapping of text, background, border and focus tokens, and an `--accent-50…950` ramp behind the
-call-to-action colour. Values were re-expressed under this project's shadcn token names;
-no source files were copied verbatim.
-
-MIT License
-
-Copyright (c) 2026 Mertcan Dundar Esmergul (BoardUI)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 ## Foundation reference (colour roles, radius, shadow and type parameters, since 2026-10-16)
 
 The default foundation in `app/globals.css` (and the `theme`, `theme-<accent>`, `theme-radius-*`
@@ -80,9 +47,10 @@ site; this notice records provenance only.
 
 ## Radix Colors (colour scales)
 
-The gray, blue, green, orange, tomato, crimson and violet scales (and the black/white alpha
-scales), in sRGB hex and display-p3, whose steps the theme colours and accent presets use, are
-from Radix Colors, https://github.com/radix-ui/colors. Only the individual step values are
+The gray, blue, green, orange, tomato, crimson, violet, pink, amber and cyan scales (and the
+black/white alpha scales), in sRGB hex and display-p3, whose steps the theme colours, accent
+presets and chart palette (`chart-1`…`chart-8`) use, are from Radix Colors,
+https://github.com/radix-ui/colors. Only the individual step values are
 used, written directly into the theme tokens.
 
 MIT License

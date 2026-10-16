@@ -172,7 +172,7 @@ export function AnalyticsPage() {
               </CardHeader>
               <CardContent>
                 <TrendChart
-                  series={[{ id: "signups", label: "Sign-ups", color: "var(--chart-5)" }]}
+                  series={[{ id: "signups", label: "Sign-ups", color: "var(--chart-3)" }]}
                   data={signups}
                   variant="bar"
                   height={300}

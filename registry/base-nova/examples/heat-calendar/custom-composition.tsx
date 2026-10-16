@@ -21,7 +21,7 @@ export default function HeatCalendarCustomComposition() {
         data={data}
         endDate="2026-10-13"
         weeks={26}
-        color="var(--warning)"
+        color="var(--chart-2)"
         unit="minutes"
         label="Reading time, last 26 weeks"
       >

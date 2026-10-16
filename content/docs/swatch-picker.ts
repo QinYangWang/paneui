@@ -8,8 +8,8 @@ export default {
   label="Tag colour"
   swatches={[
     { value: "none", label: "None" },
-    { value: "teal", label: "Teal", color: "var(--chart-1)" },
-    { value: "pink", label: "Pink", color: "var(--chart-3)" },
+    { value: "blue", label: "Blue", color: "var(--chart-1)" },
+    { value: "pink", label: "Pink", color: "var(--chart-5)" },
   ]}
   value={color}
   onValueChange={setColor}

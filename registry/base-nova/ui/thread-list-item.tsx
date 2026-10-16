@@ -11,7 +11,7 @@ type PullRequestStatus = "open" | "draft" | "merged" | "closed"
 const PR_TONE: Record<PullRequestStatus, string> = {
   open: "text-success",
   draft: "text-muted-foreground",
-  merged: "text-chart-5",
+  merged: "text-chart-3",
   closed: "text-destructive",
 }
 

@@ -8,8 +8,8 @@ const textColors: Swatch[] = [
   { value: "red", label: "Red", color: "var(--destructive)" },
   { value: "yellow", label: "Yellow", color: "var(--warning)" },
   { value: "green", label: "Green", color: "var(--success)" },
-  { value: "blue", label: "Blue", color: "var(--chart-6)" },
-  { value: "purple", label: "Purple", color: "var(--chart-5)" },
+  { value: "blue", label: "Blue", color: "var(--chart-1)" },
+  { value: "purple", label: "Purple", color: "var(--chart-3)" },
 ]
 
 export default function SwatchPickerLetter() {

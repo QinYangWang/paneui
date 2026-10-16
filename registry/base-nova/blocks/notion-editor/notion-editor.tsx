@@ -46,7 +46,7 @@ export const editorContentClass = cn(
   "[&_.hljs-comment]:text-muted-foreground [&_.hljs-comment]:italic [&_.hljs-quote]:text-muted-foreground",
   "[&_.hljs-keyword]:text-destructive [&_.hljs-selector-tag]:text-destructive [&_.hljs-meta]:text-destructive",
   "[&_.hljs-string]:text-success [&_.hljs-regexp]:text-success [&_.hljs-addition]:text-success",
-  "[&_.hljs-title]:text-chart-5 [&_.hljs-section]:text-chart-5 [&_.hljs-name]:text-success",
+  "[&_.hljs-title]:text-chart-3 [&_.hljs-section]:text-chart-3 [&_.hljs-name]:text-success",
   "[&_.hljs-number]:text-primary [&_.hljs-literal]:text-primary [&_.hljs-attr]:text-primary [&_.hljs-attribute]:text-primary [&_.hljs-variable]:text-primary [&_.hljs-property]:text-primary",
   "[&_.hljs-built_in]:text-warning [&_.hljs-type]:text-warning [&_.hljs-symbol]:text-warning [&_.hljs-deletion]:text-destructive",
   // table
@@ -61,8 +61,8 @@ export const editorContentClass = cn(
   "[&_summary]:list-none [&_summary]:font-medium [&_summary::-webkit-details-marker]:hidden [&_[data-type=detailsContent]>*:first-child]:mt-0",
   // inline
   "[&_a]:text-primary [&_a]:underline [&_a]:decoration-primary/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-primary",
-  "[&_mark]:rounded-sm [&_mark]:bg-chart-8/30 [&_mark]:box-decoration-clone [&_mark]:px-0.5 [&_mark]:text-inherit",
-  "[&_code[data-type=mdx-inline]]:text-chart-5",
+  "[&_mark]:rounded-sm [&_mark]:bg-chart-6/30 [&_mark]:box-decoration-clone [&_mark]:px-0.5 [&_mark]:text-inherit",
+  "[&_code[data-type=mdx-inline]]:text-chart-3",
   // states
   "[&_.ProseMirror-selectednode]:outline-none [&_[data-type=callout].ProseMirror-selectednode]:ring-2 [&_[data-type=callout].ProseMirror-selectednode]:ring-ring/50",
   "[&_.is-empty]:before:pointer-events-none [&_.is-empty]:before:float-left [&_.is-empty]:before:h-0 [&_.is-empty]:before:text-muted-foreground/60 [&_.is-empty]:before:content-[attr(data-placeholder)]",

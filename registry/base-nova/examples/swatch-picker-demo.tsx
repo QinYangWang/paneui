@@ -6,13 +6,13 @@ import { SwatchPicker, type Swatch } from "@/registry/base-nova/ui/swatch-picker
 
 const colors: Swatch[] = [
   { value: "none", label: "None" },
-  { value: "teal", label: "Teal", color: "var(--chart-1)" },
-  { value: "lime", label: "Lime", color: "var(--chart-2)" },
-  { value: "pink", label: "Pink", color: "var(--chart-3)" },
-  { value: "sky", label: "Sky", color: "var(--chart-4)" },
-  { value: "purple", label: "Purple", color: "var(--chart-5)" },
-  { value: "blue", label: "Blue", color: "var(--chart-6)" },
-  { value: "yellow", label: "Yellow", color: "var(--chart-8)" },
+  { value: "blue", label: "Blue", color: "var(--chart-1)" },
+  { value: "orange", label: "Orange", color: "var(--chart-2)" },
+  { value: "violet", label: "Violet", color: "var(--chart-3)" },
+  { value: "green", label: "Green", color: "var(--chart-4)" },
+  { value: "pink", label: "Pink", color: "var(--chart-5)" },
+  { value: "amber", label: "Amber", color: "var(--chart-6)" },
+  { value: "cyan", label: "Cyan", color: "var(--chart-7)" },
 ]
 
 export default function SwatchPickerDemo() {

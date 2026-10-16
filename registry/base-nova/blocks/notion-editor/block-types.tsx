@@ -48,10 +48,10 @@ export const textColors: Swatch[] = [
   { value: "var(--destructive)", label: "Red", color: "var(--destructive)" },
   { value: "var(--warning)", label: "Yellow", color: "var(--warning)" },
   { value: "var(--success)", label: "Green", color: "var(--success)" },
-  { value: "var(--chart-1)", label: "Teal", color: "var(--chart-1)" },
-  { value: "var(--chart-6)", label: "Blue", color: "var(--chart-6)" },
-  { value: "var(--chart-5)", label: "Purple", color: "var(--chart-5)" },
-  { value: "var(--chart-3)", label: "Pink", color: "var(--chart-3)" },
+  { value: "var(--chart-7)", label: "Teal", color: "var(--chart-7)" },
+  { value: "var(--chart-1)", label: "Blue", color: "var(--chart-1)" },
+  { value: "var(--chart-3)", label: "Purple", color: "var(--chart-3)" },
+  { value: "var(--chart-5)", label: "Pink", color: "var(--chart-5)" },
 ]
 
 const wash = (token: string) => `color-mix(in oklch, var(${token}) 28%, transparent)`
@@ -61,10 +61,10 @@ export const highlightColors: Swatch[] = [
   { value: "default", label: "None" },
   { value: wash("--muted-foreground"), label: "Gray", color: wash("--muted-foreground") },
   { value: wash("--destructive"), label: "Red", color: wash("--destructive") },
-  { value: wash("--chart-8"), label: "Yellow", color: wash("--chart-8") },
-  { value: wash("--chart-2"), label: "Green", color: wash("--chart-2") },
-  { value: wash("--chart-1"), label: "Teal", color: wash("--chart-1") },
-  { value: wash("--chart-4"), label: "Blue", color: wash("--chart-4") },
-  { value: wash("--chart-5"), label: "Purple", color: wash("--chart-5") },
-  { value: wash("--chart-3"), label: "Pink", color: wash("--chart-3") },
+  { value: wash("--chart-6"), label: "Yellow", color: wash("--chart-6") },
+  { value: wash("--chart-4"), label: "Green", color: wash("--chart-4") },
+  { value: wash("--chart-7"), label: "Teal", color: wash("--chart-7") },
+  { value: wash("--chart-1"), label: "Blue", color: wash("--chart-1") },
+  { value: wash("--chart-3"), label: "Purple", color: wash("--chart-3") },
+  { value: wash("--chart-5"), label: "Pink", color: wash("--chart-5") },
 ]

@@ -61,7 +61,7 @@ export default {
         { name: "weeks", type: "number", default: "26", description: "Number of week columns." },
         { name: "weekStartsOn", type: "0 | 1", default: "0", description: "0 = Sunday, 1 = Monday." },
         { name: "unit", type: "string", default: `"contributions"`, description: "Noun after every count." },
-        { name: "color", type: "string", default: `"var(--chart-2, var(--success))"`, description: "The single hue; strength maps to count." },
+        { name: "color", type: "string", default: `"var(--chart-4, var(--success))"`, description: "The single hue; strength maps to count." },
         { name: "maxCount", type: "number", default: "visible maximum", description: "Count that maps to the strongest level." },
         { name: "cellSize", type: "number", default: "12", description: "Cell size in px." },
         { name: "gap", type: "number", default: "3", description: "Gap between cells in px." },

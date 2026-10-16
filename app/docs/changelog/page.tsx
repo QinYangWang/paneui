@@ -8,6 +8,20 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-charts",
+    date: "October 16, 2026",
+    title: "Chart colours match the theme",
+    tag: "Theme",
+    changes: [
+      <>
+        <Code>--chart-1</Code> to <Code>--chart-8</Code> now come from the same colour scales as the UI: blue,
+        orange, violet, green, pink, amber, cyan and gray, with wide-gamut values. Reinstall <Code>theme</Code> to
+        pick them up; series that relied on a token number change hue.
+      </>,
+      <>Legend and tooltip swatches are round dots at every radius.</>,
+    ],
+  },
+  {
     id: "2026-10-16-radius",
     date: "October 16, 2026",
     title: "Nested corners stay concentric after install",

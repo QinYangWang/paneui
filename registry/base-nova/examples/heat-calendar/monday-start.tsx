@@ -15,7 +15,7 @@ export default function HeatCalendarMondayStart() {
         weekStartsOn={1}
         cellSize={16}
         gap={4}
-        color="var(--primary)"
+        color="var(--chart-1)"
         unit="workouts"
         label="Workouts, last 16 weeks"
       />

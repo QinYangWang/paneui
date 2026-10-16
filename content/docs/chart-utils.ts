@@ -107,7 +107,7 @@ export default {
     },
     {
       name: "chartColor",
-      description: "`chartColor(index)` returns the series colour, `--chart-1…5` first (falling back to semantic tokens), then blends for indexes past five. `CHART_COLORS` holds the base five.",
+      description: "`chartColor(index)` returns the series colour, `--chart-1…8` first (each falls back to a semantic token), then blends for indexes past eight. `CHART_COLORS` holds the base eight.",
       props: [{ name: "index", type: "number", required: true, description: "Series index." }],
     },
     {

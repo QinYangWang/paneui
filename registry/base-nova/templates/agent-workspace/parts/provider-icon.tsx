@@ -5,8 +5,8 @@ import type { AgentProvider } from "./agents"
 
 const TONE: Record<AgentProvider, string> = {
   codex: "text-foreground",
-  claude: "text-chart-3",
-  gemini: "text-chart-4",
+  claude: "text-chart-5",
+  gemini: "text-chart-1",
   custom: "text-muted-foreground",
 }
 

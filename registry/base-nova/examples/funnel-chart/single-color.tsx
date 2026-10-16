@@ -13,7 +13,7 @@ const stages = [
 export default function FunnelChartSingleColor() {
   return (
     <div className="w-full max-w-xl">
-      <FunnelChart stages={stages} color="var(--primary)" unit="candidates" label="Hiring funnel, Q3" />
+      <FunnelChart stages={stages} color="var(--chart-1)" unit="candidates" label="Hiring funnel, Q3" />
     </div>
   )
 }

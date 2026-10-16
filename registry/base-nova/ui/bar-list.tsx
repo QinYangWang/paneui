@@ -27,7 +27,7 @@ type BarListProps = Omit<React.ComponentProps<"ul">, "children" | "color"> & {
   formatValue?: (value: number) => string
   /** Sort by value, largest first (default) or keep the given order. */
   sort?: "desc" | "none"
-  /** Chart token for the bars: 1–8 (chart-1…chart-8). Default 4 (sky). */
+  /** Chart token for the bars: 1–8 (chart-1…chart-8). Default 1 (blue). */
   color?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
   /** Optional header labels, e.g. ["Page", "Visitors"]. */
   labels?: [string, string]
@@ -44,7 +44,7 @@ const WASH: Record<number, string> = {
   8: "bg-chart-8/20",
 }
 
-function BarList({ items, formatValue = (v) => String(v), sort = "desc", color = 4, labels, className, ...props }: BarListProps) {
+function BarList({ items, formatValue = (v) => String(v), sort = "desc", color = 1, labels, className, ...props }: BarListProps) {
   const reduce = useReducedMotion()
   const list = sort === "desc" ? [...items].sort((a, b) => b.value - a.value) : items
   const max = Math.max(1, ...list.map((i) => i.value))

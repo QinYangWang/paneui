@@ -59,7 +59,10 @@ component only if the design really needs a new treatment.
   them for hover/selected/track fills, and `bg-card` / `bg-popover` / `bg-background` for anything opaque.
   `border` gray a3, `border-subtle` a2, `border-strong` and `input` a6. States: `destructive` = tomato 9,
   `success` = green 9, `warning` = orange 9, each `-hover` 10, `-subtle` a3, `-border` a6. Charts `chart-1`…`chart-8`
-  unchanged (teal, lime, pink, sky, purple, blue, emerald, yellow). No gradient sheens, inset highlights, text-shadows or
+  (since 2026-10-16, round 18) = blue, orange, violet, green, pink, amber, cyan, gray at step 9 of the same scales
+  (light orange 10 and amber 11, so every series is ≥ 3:1 on white), P3 included; fixed, never the accent. Series
+  colours in components and demos are always `var(--chart-N)` / `*-chart-N` (semantic `success`/`warning`/`destructive`
+  only where the colour means a status); legend and tooltip swatches are `rounded-full` dots (`ChartSwatch`). No gradient sheens, inset highlights, text-shadows or
   glows. App chrome: `bg-shell` and the `shell-inset` utility (0.5px `shell-border` hairline, `rounded-shell`, 3px gap).
 - **Accent = eight roles (since 2026-10-16)**: `primary` (solid, step 9), `primary-hover` (10), `primary-active` (11),
   `primary-foreground` (white), `primary-subtle` (a3), `primary-subtle-hover` (a4), `primary-border` (a6), `ring`
@@ -295,5 +298,5 @@ commands users run, the Agent Client Protocol (the standard the agent workspace 
 agent presets it launches (Claude Code, Codex, Gemini CLI), and the stack users must have (React,
 Next.js, Tailwind CSS 4). Licence attribution lives only in `THIRD_PARTY_NOTICES.md` (keep it and
 `LICENSE`; add a notice there when you adopt values or code from another project). Before
-committing, `rg -i "synara|boardui|maily|notion-style|tiptap|base ui|dicebear|notionists|zoish|react email|remark|pierre|shiki|after "`
+committing, `rg -i "synara|maily|notion-style|tiptap|base ui|dicebear|notionists|zoish|react email|remark|pierre|shiki|after "`
 over the changed prose should find nothing new.

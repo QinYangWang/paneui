@@ -46,7 +46,9 @@ control densities and shell layout from `notes/native-style.md` are unchanged. L
 | `warning-subtle` / `-border` | `#ff9c0029` / `#ff81007d` | `#fb6a0025` / `#fd75045c` | orange a3 / a6 |
 | `code` | `#f9f9f9` | `#191919` | gray 2 |
 | `scrollbar` / `-hover` | gray a6 / a8 | gray a6 / a8 | |
-| `chart-1…8`, `shell-border`, `image-outline` | unchanged | unchanged | |
+| `chart-1` / `-2` / `-3` / `-4` | `#0090ff` / `#ef5f00` / `#6e56cf` / `#30a46c` | `#0090ff` / `#f76b15` / `#6e56cf` / `#30a46c` | blue 9, orange 10 (9 dark), violet 9, green 9 |
+| `chart-5` / `-6` / `-7` / `-8` | `#d6409f` / `#ab6400` / `#00a2c7` / `#8d8d8d` | `#d6409f` / `#ffc53d` / `#00a2c7` / `#6e6e6e` | pink 9, amber 11 (9 dark), cyan 9, gray 9 |
+| `shell-border`, `image-outline` | unchanged | unchanged | |
 
 Accent presets swap the eight `primary*` + `ring` roles on the same steps: green, orange, rose (crimson
 scale) and violet; neutral uses the inverted solid (black a12 / a10 / a9 with white text, white a12 / a10 / a9
@@ -94,3 +96,17 @@ fonts; no control needed a size change.
   `rounded-xs` → `rounded-sm`.
 - The custom accent format in localStorage is now `{ v: 2, hex, light, dark }` with the eight roles; older
   saved custom accents are ignored (the page falls back to blue).
+
+## Chart palette (round 18, 2026-10-16)
+
+`chart-1…8` moved onto the same 12-step scales as the rest of the foundation (generator:
+`CHARTS` in `/workspace/work/round16/gen/build_globals.py`, P3 values from the same scales).
+Order: blue, orange, violet, green, pink, amber, cyan, gray. Step 9 everywhere, except in light
+where step 9 is under 3:1 on white: orange uses 10 (3.3:1) and amber 11 (4.6:1). The order keeps
+neighbouring series far apart (OKLab distance ≥ 12 between neighbours in both modes) and keeps the
+first pair blue/orange, which survives red-green colour blindness; green and pink are not neighbours.
+`chart-1` stays blue and does not follow the accent preset: charts read the same under every accent,
+and a neutral or green accent would otherwise collide with gray or green series.
+`chartColor()` cycles all eight (it used five) before blending. Legend and tooltip swatches are round dots
+so they read the same at every radius preset; the heat-calendar "Less … More" scale keeps the
+cell shape on purpose because it is a key to the cells.
