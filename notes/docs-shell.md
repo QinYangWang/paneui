@@ -19,10 +19,18 @@ the docs site no longer uses them.
     and spacing instead: section labels `text-ui` semibold foreground, group labels `text-ui-sm`
     medium muted with a `mt-2` gap above, chevrons on the right for both. Active row = `bg-secondary`
     + a 2px bar in the gutter left of the row (`-start-2`), outside the fill.
-- **Right TOC** (`doc-toc.tsx`) on docs and component pages from `xl`, with back to top.
+- **Right TOC** (`doc-toc.tsx`) on docs and component pages from `xl`. **Round 22**: capped at the viewport
+  (`100svh` minus the 5rem sticky offset and 1.5rem air); the list scrolls in its own `ScrollArea` with `fade`,
+  scrolls the current entry into view, and one 2px indicator slides along the rail (`translate`, 300ms, off under
+  reduced motion). Titles are single-line and truncate with an `OverflowHint` (opens to the left). Depth-2 entries
+  are `ps-6 text-ui-sm`. The current section is the last heading above 112px, or the last entry at the page end.
+  Back to top sits under the list, outside the scroll area, and fades in after 320px of page scroll.
 - **Previews**: Fit renders inline; Desktop (1024), Tablet (768) and Mobile (390) render `/preview?demo=…`
-  or `?example=…` in an iframe so media and container queries react. The toolbar also sets the
-  control size (`size=`) and direction (`dir=rtl`). `/preview` renders bare like `/templates/*`.
+  or `?example=…` in an iframe so media and container queries react. The viewport switch is a second `Tabs`
+  list (default size, icon-only `TabsTab`s with `aria-label` + tooltip: Maximize, Monitor, Tablet, Smartphone),
+  the same component and size as Preview / Code. **Round 22** removed the control-size switch (`size=`) and the
+  RTL toggle (`dir=`): direction is shown by an "RTL" example at the end of each component's examples instead
+  (`examples/<name>/rtl.tsx`, `DirectionProvider` + `dir="rtl"`, Arabic copy). `/preview` renders bare like `/templates/*`.
   **Theme sync (2026-10-16)**: the framed preview follows the docs page live through
   `useFrameThemeSync` (`theme-sync.tsx`, shared with the template previews): it copies `dark`, `data-accent`,
   the custom accent `<style>` and `data-radius` / inline `--radius` from the page's `<html>` on every attribute

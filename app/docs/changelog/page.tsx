@@ -8,6 +8,37 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-16-rtl-examples",
+    date: "October 16, 2026",
+    title: "Right-to-left examples and a calmer preview toolbar",
+    tag: "Docs",
+    changes: [
+      <>
+        Twenty component pages end their examples with an RTL one in Arabic, among them{" "}
+        <TextLink href="/docs/select">Select</TextLink>, <TextLink href="/docs/menu">Menu</TextLink>,{" "}
+        <TextLink href="/docs/tabs">Tabs</TextLink> and <TextLink href="/docs/animated-sidebar">Animated Sidebar</TextLink>.
+        The toolbar&apos;s RTL toggle and control-size switch are gone.
+      </>,
+      <>
+        Popups, dialogs, drawers and toasts carry the <Code>DirectionProvider</Code> direction into their portal, so
+        they read right to left with the page. Toasts stack at the bottom left and swipe out to the left.
+      </>,
+      <>
+        Fixed in right-to-left: switch thumbs, slider ticks, carousel arrows and keys, calendar arrow keys, the
+        chevrons in breadcrumbs, pagination and submenus, and the padding of select, combobox, multi-select, menu,
+        dialog, drawer and sidebar parts.
+      </>,
+      <>
+        The viewport switch is an icon tab list that matches Preview / Code. New <Code>TabletIcon</Code> and{" "}
+        <Code>MaximizeIcon</Code> in every icon style; a tab whose only child is an icon is square.
+      </>,
+      <>
+        The page outline stays inside the window on long pages: its list scrolls on its own, keeps the current
+        section in view, and shows long titles in full on hover. Back to top appears once you scroll.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-16-design-skill",
     date: "October 16, 2026",
     title: "A design skill for coding agents",
@@ -196,7 +227,7 @@ const ENTRIES: Entry[] = [
         logo is now a capital Q.
       </>,
       <>
-        Component previews switch between device widths, control sizes and right-to-left, and open in a new tab.
+        Component previews switch between device widths and open in a new tab.
       </>,
     ],
   },
