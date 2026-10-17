@@ -27,18 +27,21 @@ node .agents/skills/qinyang-design/scripts/check.mjs            # wherever the s
 node .agents/skills/qinyang-design/scripts/check.mjs app src    # only these paths
 ```
 
-Static checks for most of the rules below (tokens, radius cap and concentric nesting, type scale,
-tracking, press scale, transitions, icon imports, menu labels, copy density, provenance, registry
-names, stale theme). No dependencies; with TypeScript in the project it reads JSX exactly (the native
+Static checks for most of the rules below (tokens, radius, type, motion, icons, hit areas, copy,
+registry names, stale theme; `--list` names each one). No dependencies; with TypeScript in the project it reads JSX exactly (the native
 TypeScript 7 compiler has no parser API, so there it falls back to line checks). Exit code 1
 on errors (`--strict`: warnings too), `--json` for tools, `--list` for the rule ids. Configure it in
 `qinyang-design.config.json` (allow-list a file with a reason, add names that must not appear in copy);
 silence one line with a comment `design-check-ignore <rule> -- <reason>` above it.
 
-Nested radii also need a runtime look: open the screen in a browser (menus open, a row hovered) and
-paste `scripts/radius-probe.js` into the console. It lists every rounded element more than 2px off
-concentric. Run the check before you commit and fix what it reports; a finding you keep gets an
-allow-list entry with its reason.
+Some rules need the rendered page: open the screen in a browser (menus open, a row hovered) and paste
+`scripts/radius-probe.js` into the console for corners more than 2px off concentric, and
+`scripts/polish-probe.js` for small or overlapping hit areas, button padding, image outlines, heading
+wrap, live numbers, smoothing and compositing hints. Run the check before you commit and fix what it
+reports; a finding you keep gets an allow-list entry with its reason.
+
+`examples/<rule>/good.tsx` and `bad.tsx` show each motion, icon and polish check on the library's own
+components; `--self-test` checks them against their rule.
 
 ## Rules
 
@@ -125,8 +128,9 @@ The type is spaced for its size; tightening small text makes it harder to read.
 
 Proportional digits make columns and counters jump.
 
-`tabular-nums` on prices, timers, tickers, table columns and counts. `text-balance` on headings,
-`text-pretty` on paragraphs.
+`tabular-nums` on prices, timers, tickers, table columns and counts, not on phone numbers, versions or a
+count fixed in a sentence. `text-balance` on headings (never on code), `text-pretty` on paragraphs,
+`antialiased` once on `<body>` (the theme sets it), never per element.
 
 ### 13. Size controls for desktop density
 
@@ -211,7 +215,7 @@ where the motion is the component's point (hold or slide actions, expanding cont
 
 `transition-colors` or `transition-[box-shadow,background-color]`; `duration-150` for hover and press,
 `200` for state changes, `300` for reveals; ease `cubic-bezier(0.22,1,0.36,1)`. Springs stay bounce-free:
-stiffness 380–520, damping 26–42, mass 0.5–0.7.
+`bounce: 0`, or stiffness 380–520, damping 26–42, mass 0.5–0.7 (never under 0.6 of critical damping).
 
 ### 25. Gate movement on reduced motion
 
@@ -267,6 +271,69 @@ The CLI adds and updates theme variables but never deletes one, so removed token
 `npx shadcn@latest add @qinyang/upgrade-check`, then `node scripts/qinyang-upgrade-check.mjs` (`--fix`
 cleans the stylesheet). The design check runs it for you when it is installed.
 
+### 33. Give every target 24px to land on
+
+A 16px checkbox or close button is hard to hit with a trackpad and harder with a finger.
+
+Keep the visible size and extend the target with a pseudo-element: `relative after:absolute after:-inset-1`
+takes 16px to 24px, `pointer-coarse:after:-inset-3.5` to 44px on touch. Shrink the extension where it
+would reach a neighbour; two targets never share pixels. Checkbox and radio already do this.
+
+### 34. Trim the icon side of a button
+
+An icon's side bearing adds space, so equal padding pushes the content off centre.
+
+Mark the glyph `data-icon="inline-start"` or `"inline-end"`; Button takes 2px off that side at every
+size. House icons are drawn optically centred (the play triangle sits right of centre), so don't
+nudge them with margins.
+
+### 35. Outline images with a neutral hairline
+
+Without an edge a pale photo melts into a white card; a grey border picks up the surface tint.
+
+`media-outline` on `img` and `video`: a 1px inset line, black at 10%, white at 10% in dark. Leave it
+off transparent marks such as favicons and logos.
+
+### 36. Cross-fade icon swaps
+
+A glyph that cuts from copy to check is easy to miss; one that changes in place reads as a new state.
+
+Both glyphs move between `opacity 0, scale 0.25, blur 4px` and `opacity 1, scale 1, blur 0` on
+`{ type: "spring", duration: 0.3, bounce: 0 }`, inside `<AnimatePresence initial={false} mode="popLayout">`;
+`<ActionSwapBlurIcon value>` is that recipe as a component. A library file without motion keeps both
+glyphs in one grid cell and toggles `opacity-0 motion-safe:scale-25 motion-safe:blur-xs`.
+
+### 37. Transition states, keyframe one-offs
+
+A transition retargets when a state flips mid-way; a keyframe restarts and snaps.
+
+Hover, open, checked and pressed use transitions; keyframes only for loops and one-time sequences.
+Hover answers within 150ms with a fill or opacity change. Motion never carries a change alone: a colour,
+icon or label changes with it. `will-change` names only `transform`, `opacity` or `filter`, and only
+after a stutter you saw.
+
+### 38. Leave quieter than you arrive
+
+The eye has moved on to what comes next; a big exit pulls it back.
+
+Exits fade with a short fixed offset (`y: -8` to `-12`, blur 4px) in about 150ms, never a half-scale
+shrink or a full-height flight. A drawer or sheet sliding back to its edge is the exception.
+
+### 39. Recolour icons with CSS, keep their stroke and grid
+
+A thicker stroke, an off-grid size or a baked-in fill makes one glyph look like another set.
+
+Icons paint with `currentColor`; hover, selected and disabled are text colours and opacity. No
+`strokeWidth` on an instance. Sizes stay on the grid (12, 14, 16, 18, 20, 24px). Arrows, chevrons, send
+and reply glyphs take `rtl:-scale-x-100`; checkmarks, clocks and media controls never flip.
+
+### 40. Name every icon-only button
+
+A screen reader announces an unnamed icon button as "button" and nothing else.
+
+`aria-label` on the button, with the same text as its tooltip. Icons beside a label stay hidden from
+assistive tech (house icons already are).
+
 ## References
 
 | File | Covers |
@@ -278,4 +345,5 @@ cleans the stylesheet). The design check runs it for you when it is installed.
 | `references/icons.md` | Icon families, sizes, chips, brand marks, drawing new icons |
 | `references/charts.md` | Chart palette, order, swatches, labels |
 | `references/motion-a11y.md` | Springs, durations, press, reduced motion, focus, dark mode |
+| `references/polish.md` | Hit areas, optical alignment, image outlines, icon swaps, exits, compositing, reviewing a screen, where this skill differs from common polish advice |
 | `references/registry.md` | Installing, upgrading, adding items, the checks |

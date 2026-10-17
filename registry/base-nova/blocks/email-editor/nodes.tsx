@@ -153,7 +153,7 @@ function ImageView({ node, selected }: ReactNodeViewProps) {
           src={src}
           alt={alt}
           style={{ width: `${width}%` }}
-          className={cn("block max-w-full rounded-lg", selected && "ring-2 ring-ring/50")}
+          className={cn("block max-w-full rounded-lg media-outline", selected && "ring-2 ring-ring/50")}
         />
       ) : (
         <div
@@ -210,7 +210,7 @@ function LogoView({ node, selected }: ReactNodeViewProps) {
           src={src}
           alt="Logo"
           style={{ height: size }}
-          className={cn("block w-auto rounded-md", selected && "ring-2 ring-ring/50")}
+          className={cn("block w-auto rounded-md media-outline", selected && "ring-2 ring-ring/50")}
         />
       ) : (
         <div

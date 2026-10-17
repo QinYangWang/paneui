@@ -315,6 +315,13 @@
     "@utility window-no-drag": {
       "-webkit-app-region": "no-drag"
     },
+    "@utility media-outline": {
+      "outline": "1px solid oklch(0 0 0 / 0.1)",
+      "outline-offset": "-1px",
+      "&:is(.dark *)": {
+        "outline-color": "oklch(1 0 0 / 0.1)"
+      }
+    },
     "@supports (color: color(display-p3 1 1 1))": {
       "@media (color-gamut: p3)": {
         ":root": {

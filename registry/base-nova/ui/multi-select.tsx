@@ -147,7 +147,7 @@ function MultiSelectTrigger({
                   layout={!reduce}
                   initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.9, transition: { duration: 0.12 } }}
                   transition={reduce ? { duration: 0.12 } : CHIP_SPRING}
                   className="flex"
                 >

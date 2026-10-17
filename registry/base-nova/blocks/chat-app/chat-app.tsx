@@ -423,7 +423,7 @@ function ChatApp({
         actions={(open) =>
           open ? (
             <Button variant="secondary" size="sm" className="w-full justify-start" onClick={newChat}>
-              <PlusIcon />
+              <PlusIcon data-icon="inline-start" />
               New chat
             </Button>
           ) : (

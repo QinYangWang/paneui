@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { GitBranchIcon, MoonIcon, SunIcon, WarningIcon, XCircleIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { ActionSwapBlurIcon } from "@/registry/base-nova/ui/action-swap-blur"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui/tooltip"
 
 const ITEM =
@@ -96,7 +97,9 @@ export function StatusLine({
         </Item>
       )}
       <Item label={dark ? "Light theme" : "Dark theme"} onClick={onTheme}>
-        {dark ? <SunIcon /> : <MoonIcon />}
+        <ActionSwapBlurIcon value={dark ? "light" : "dark"} className="size-3">
+          {dark ? <SunIcon /> : <MoonIcon />}
+        </ActionSwapBlurIcon>
       </Item>
     </footer>
   )

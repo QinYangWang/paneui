@@ -5,6 +5,7 @@ import type * as acp from "@agentclientprotocol/sdk"
 
 import { CheckIcon, CopyIcon, CornerDownRightIcon, GitBranchIcon, PinIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { ActionSwapBlurIcon } from "@/registry/base-nova/ui/action-swap-blur"
 import { EditedFilesCard } from "@/registry/base-nova/ui/edited-files-card"
 import { ResponseMarkdown } from "@/registry/base-nova/ui/streaming-response"
 import { Terminal, TerminalOutput } from "@/registry/base-nova/ui/terminal-view"
@@ -108,7 +109,9 @@ function AssistantMessage({ item, onFork }: { item: Extract<TimelineItem, { kind
               window.setTimeout(() => setCopied(false), 1400)
             }}
           >
-            {copied ? <CheckIcon /> : <CopyIcon />}
+            <ActionSwapBlurIcon value={copied ? "copied" : "copy"} className="size-3.5">
+              {copied ? <CheckIcon /> : <CopyIcon />}
+            </ActionSwapBlurIcon>
           </MessageAction>
           <MessageAction label="Branch into a new thread" onClick={onFork}>
             <GitBranchIcon />

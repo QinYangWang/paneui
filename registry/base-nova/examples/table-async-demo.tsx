@@ -96,7 +96,7 @@ export default function TableAsyncDemo() {
           {status.count === 0 ? "connecting…" : `${status.count} of ${PAGE_SIZE * PAGES} loaded`}
         </span>
         <Button size="xs" variant="secondary" onClick={() => setReloads((n) => n + 1)} disabled={status.status === "loading"}>
-          <RefreshIcon />
+          <RefreshIcon data-icon="inline-start" />
           Reload
         </Button>
       </div>

@@ -171,10 +171,10 @@ export function OverflowActions({
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={expanded ? "close" : "more"}
-            initial={reduce ? { opacity: 0 } : { opacity: 0, rotate: -90, scale: 0.6 }}
-            animate={{ opacity: 1, rotate: 0, scale: 1 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, rotate: 90, scale: 0.6 }}
-            transition={reduce ? { duration: 0.1 } : { type: "spring", stiffness: 500, damping: 30 }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, rotate: -90, scale: 0.25, filter: "blur(4px)" }}
+            animate={{ opacity: 1, rotate: 0, scale: 1, filter: "blur(0px)" }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, rotate: 90, scale: 0.25, filter: "blur(4px)" }}
+            transition={reduce ? { duration: 0.1 } : { type: "spring", duration: 0.3, bounce: 0 }}
             className="inline-flex"
           >
             {expanded ? <XIcon /> : <MoreHorizontalIcon />}

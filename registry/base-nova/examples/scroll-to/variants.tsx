@@ -21,7 +21,7 @@ export default function ScrollToVariants() {
       </div>
       <div className="h-96" />
       <section id="scroll-to-variants-pricing" className="m-4 rounded-xl bg-card p-5 shadow-raised">
-        <h3 className="text-base font-semibold">Pricing</h3>
+        <h3 className="text-balance text-base font-semibold">Pricing</h3>
         <p className="mt-1 text-sm text-muted-foreground">Free for one person. $8 a month for households of up to five.</p>
       </section>
     </SmoothScroll>

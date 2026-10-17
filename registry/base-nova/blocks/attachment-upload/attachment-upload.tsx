@@ -192,10 +192,10 @@ function StatusMark({ status }: { status: AttachmentStatus }) {
       {status === "success" && (
         <motion.span
           key="ok"
-          initial={reduce ? { opacity: 0 } : { scale: 0.3, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.3, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 520, damping: 22 }}
+          initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+          animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+          exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+          transition={{ type: "spring", duration: 0.3, bounce: 0 }}
           className="inline-flex size-4 items-center justify-center rounded-full bg-success/14 text-success"
           aria-label="Uploaded"
         >
@@ -650,7 +650,7 @@ export function AttachmentUpload({
                   <div className="flex min-w-0 items-center gap-2">
                     <ImageIcon size={16} className="shrink-0 text-muted-foreground" />
                     <DialogPrimitive.Title className="truncate text-ui font-medium">{preview.name}</DialogPrimitive.Title>
-                    <span className="shrink-0 text-ui-sm text-muted-foreground">{formatBytes(preview.size)}</span>
+                    <span className="tabular-nums shrink-0 text-ui-sm text-muted-foreground">{formatBytes(preview.size)}</span>
                   </div>
                   <DialogPrimitive.Close aria-label="Close preview" className={iconButton}>
                     <XIcon size={15} />

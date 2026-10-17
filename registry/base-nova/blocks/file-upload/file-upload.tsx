@@ -223,7 +223,7 @@ function FileUploadRow({
           <StatusBadge status={status} />
         </div>
         {status === "error" ? (
-          <span className="truncate text-ui-sm text-destructive/90">
+          <span className="tabular-nums truncate text-ui-sm text-destructive/90">
             {item.error ?? "Upload failed"} · {formatBytes(item.size)}
           </span>
         ) : (
@@ -427,7 +427,7 @@ export function FileUpload({
       >
         <motion.span
           animate={reduce ? undefined : { y: dragging ? -4 : 0 }}
-          transition={{ type: "spring", stiffness: 500, damping: 22 }}
+          transition={{ type: "spring", stiffness: 500, damping: 32 }}
           className={cn(
             "inline-flex size-11 items-center justify-center rounded-2xl bg-card shadow-raised",
             dragging ? "text-primary" : "text-muted-foreground"

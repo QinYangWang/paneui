@@ -141,7 +141,7 @@ function AsyncTable<T>({ loadPage, resetKey, endMessage, onStatusChange, ref, ..
       <div role="alert" className="flex h-full items-center justify-center gap-3 text-ui text-muted-foreground">
         Couldn&apos;t load more rows.
         <Button size="xs" variant="secondary" onClick={rows.length ? retry : reload}>
-          <RefreshIcon />
+          <RefreshIcon data-icon="inline-start" />
           Retry
         </Button>
       </div>
@@ -173,7 +173,7 @@ function AsyncTable<T>({ loadPage, resetKey, endMessage, onStatusChange, ref, ..
           <div role="alert" className="flex flex-col items-center gap-3">
             Couldn&apos;t load this table.
             <Button size="sm" variant="secondary" onClick={reload}>
-              <RefreshIcon />
+              <RefreshIcon data-icon="inline-start" />
               Try again
             </Button>
           </div>

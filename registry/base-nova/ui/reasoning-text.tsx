@@ -146,6 +146,7 @@ function ReasoningText({
     body = (
       <span className="relative inline-grid overflow-hidden align-bottom">
         <AnimatePresence initial={false} mode="popLayout">
+          {/* design-check-ignore exit-subtle -- the status line rolls up out of its one-line slot; the travel is the effect */}
           <motion.span
             key={phrase}
             className="col-start-1 row-start-1 whitespace-pre"

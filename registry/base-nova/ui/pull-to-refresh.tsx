@@ -229,7 +229,7 @@ function PullToRefresh({
         >
           <motion.span
             animate={reduce ? undefined : { scale: ready ? 1.1 : 1 }}
-            transition={{ type: "spring", stiffness: 500, damping: 18, mass: 0.5 }}
+            transition={{ type: "spring", stiffness: 500, damping: 24, mass: 0.5 }}
             className={cn(
               "relative flex size-9 items-center justify-center rounded-full shadow-raised transition-colors duration-200",
               ready || busy ? "bg-primary text-primary-foreground shadow-primary" : "bg-card text-muted-foreground"

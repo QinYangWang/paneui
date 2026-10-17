@@ -30,7 +30,7 @@ type MorphingTabsProps = {
   contentClassName?: string
 }
 
-const SURFACE: Transition = { type: "spring", duration: 0.5, bounce: 0.14 }
+const SURFACE: Transition = { type: "spring", duration: 0.5, bounce: 0 }
 
 /** Keep the user's order for ids that still exist, append ids that are new. */
 function reconcile(order: string[], ids: string[]) {
@@ -309,7 +309,7 @@ function MorphingTabs({
                       onPointerDownCapture={(event) => event.stopPropagation()}
                       onClick={() => close(id)}
                       className={cn(
-                        "mr-1.5 flex size-5 cursor-pointer items-center justify-center rounded-full text-muted-foreground opacity-0 transition-[opacity,background-color,color] duration-150 group-hover/tab:opacity-100 hover:bg-muted hover:text-foreground focus-visible:opacity-100",
+                        "relative mr-1.5 flex size-5 cursor-pointer after:absolute after:-inset-0.5 items-center justify-center rounded-full text-muted-foreground opacity-0 transition-[opacity,background-color,color] duration-150 group-hover/tab:opacity-100 hover:bg-muted hover:text-foreground focus-visible:opacity-100",
                         selected && "opacity-100"
                       )}
                     >

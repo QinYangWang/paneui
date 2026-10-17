@@ -635,6 +635,22 @@ function Lede({ title, text }: { title: string; text: string }) {
 }
 
 /** Slug of a rule title, the key into SKILL_EXAMPLES. */
+/**
+ * Rules whose Recommended / Avoid pair is the one the skill ships in
+ * skills/qinyang-design/examples/<dir>/{good,bad}.tsx (shown as code; the design check's
+ * --self-test keeps them honest).
+ */
+export const SKILL_EXAMPLE_FILES: Record<string, string> = {
+  "give-every-target-24px-to-land-on": "hit-area",
+  "trim-the-icon-side-of-a-button": "optical-icon-padding",
+  "outline-images-with-a-neutral-hairline": "media-outline",
+  "cross-fade-icon-swaps": "icon-swap",
+  "transition-states-keyframe-one-offs": "keyframes-on-state",
+  "leave-quieter-than-you-arrive": "exit-subtle",
+  "recolour-icons-with-css-keep-their-stroke-and-grid": "icon-color",
+  "name-every-icon-only-button": "icon-button-label",
+}
+
 export function ruleSlug(title: string) {
   return title
     .toLowerCase()

@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { CheckIcon, CopyIcon, DownloadIcon, FileIcon } from "@/components/icons"
 import { CommandPill } from "@/components/docs/install-command"
+import { ActionSwapBlurIcon } from "@/registry/base-nova/ui/action-swap-blur"
 import { Button } from "@/registry/base-nova/ui/button"
 import { CodeBlock } from "@/registry/base-nova/ui/code-block"
 import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@/registry/base-nova/ui/collapsible"
@@ -46,11 +47,13 @@ export function AgentSkill({ name, skill, html }: { name: string; skill: string;
               }
             }}
           >
-            {copied ? <CheckIcon className="text-success" /> : <CopyIcon />}
+            <ActionSwapBlurIcon value={copied ? "copied" : "copy"}>
+              {copied ? <CheckIcon data-icon="inline-start" className="text-success" /> : <CopyIcon data-icon="inline-start" />}
+            </ActionSwapBlurIcon>
             {copied ? "Copied" : "Copy"}
           </Button>
           <Button variant="ghost" size="sm" nativeButton={false} render={<a href={skillUrl} download="SKILL.md" />}>
-            <DownloadIcon />
+            <DownloadIcon data-icon="inline-start" />
             Download
           </Button>
         </div>

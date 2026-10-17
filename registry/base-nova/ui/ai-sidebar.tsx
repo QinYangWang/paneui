@@ -568,7 +568,7 @@ function AISidebar({
                     setQuery("")
                     searchRef.current?.focus()
                   }}
-                  className="grid size-5 cursor-pointer place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+                  className="relative grid size-5 cursor-pointer place-items-center rounded-full text-muted-foreground after:absolute after:-inset-0.5 hover:bg-muted hover:text-foreground"
                 >
                   <XIcon size={12} />
                 </button>

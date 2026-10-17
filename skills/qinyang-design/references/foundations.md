@@ -53,6 +53,7 @@ the same steps of their own scale; neutral is the inverted black/white solid. Ea
 | lg | `shadow-md`, `shadow-lg` | `shadow-surface` | popovers, menus, floating panels |
 | xl | `shadow-xl` | | dialogs, alert dialogs, drawers, sheets, command palette |
 | inset | | `shadow-well` | fields and tracks |
+| media | `media-outline` | | images and video: 1px inset black/10, white/10 in dark |
 | primary | | `shadow-primary` | filled primary |
 
 Each level includes its hairline (a 0.5–1px ring), so don't add a CSS border to a shadowed surface. Dark
@@ -122,5 +123,5 @@ through the `fonts` item; the theme falls back to system fonts without it.
 Tailwind's `text-sm`–`text-2xl` are for reading copy and page or section headings; `text-3xl`+ only for
 heroes. Weights: 400, 450 (`font-semimedium`), 500, 600, 700. Titles semibold (`tracking-tight` only from
 `text-xl`), labels and buttons medium, secondary text `text-muted-foreground`. `text-balance` on headings,
-`text-pretty` on paragraphs, `tabular-nums` on numbers that change or align. Inline code in prose sits a
+`text-pretty` on paragraphs, `tabular-nums` on numbers that change or align, `antialiased` once on `<body>`. Inline code in prose sits a
 little smaller than the text around it (`0.85em`–`0.9em`).

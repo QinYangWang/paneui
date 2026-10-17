@@ -158,10 +158,10 @@ function OTPInput({
           {status === "success" ? (
             <motion.span
               aria-hidden
-              initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.6 }}
-              transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 26 }}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+              transition={reduce ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0 }}
               className="absolute -right-9 grid size-6 place-items-center rounded-full bg-success text-white"
             >
               <svg viewBox="0 0 18 18" fill="none" className="size-4">

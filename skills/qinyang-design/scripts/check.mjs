@@ -11,6 +11,7 @@
  *   --json     machine-readable output
  *   --rules    run only these rule ids
  *   --list     print the rules and exit
+ *   --self-test  check the skill's examples/<rule>/{bad,good}.tsx against their rule
  *
  * No dependencies. TypeScript, when the project has it, gives exact JSX checks (nesting,
  * comments, text); without it, or with a native compiler build that has no parser API
@@ -21,6 +22,7 @@
  *     "theme": "app/globals.css",
  *     "ignore": ["**\/generated\/**"],
  *     "pressScale": ["expanding-arrow-button"],          // file names allowed a press scale
+ *     "rtl": true,                                        // check that directional icons flip
  *     "names": ["acme"],                                  // words that must not appear in prose
  *     "nameHashes": ["<sha256 prefix>"],                  // same, stored as hashes (see --hash)
  *     "allow": [{ "rule": "type-scale", "file": "blocks/card/**", "reason": "card art" }]
@@ -64,6 +66,28 @@ const RULES = {
   "forbidden-names": ["error", "No third-party names or provenance in comments, copy or prose."],
   "registry-name-collision": ["warn", "A template part's file name must not equal a registry item name."],
   "upgrade": ["warn", "The installed theme is current (stale tokens, missing radius cap)."],
+  // Polish rules (references/polish.md).
+  "tabular-nums": ["warn", "Numbers that change on screen use tabular-nums so the layout doesn't shift."],
+  "text-wrap": ["warn", "Headings balance (text-balance); code and preformatted text never balance or pretty-wrap."],
+  "font-smoothing": ["warn", "Antialiased text is set once on the root, never per element."],
+  "border-and-shadow": ["warn", "A shadowed surface has no CSS border: the shadow level carries the hairline."],
+  "media-outline": ["warn", "Images and video get the media-outline hairline so they sit on any surface."],
+  "hit-area": ["warn", "Controls under 24px extend their hit area with a pseudo-element (44px under a coarse pointer)."],
+  "keyframes-on-state": ["warn", "Hover, open and toggle states use transitions (interruptible), not keyframe animations."],
+  "press-scale-floor": ["error", "Where a press scale is allowed it is 0.96, never below 0.95."],
+  "spring-bounce": ["error", "Springs are bounce-free (bounce 0)."],
+  "spring-damping": ["warn", "Stiffness/damping springs stay near critical damping (ratio 0.6 or more), so they settle without wobble."],
+  "presence-initial": ["warn", "AnimatePresence around a state swap takes initial={false} so nothing animates on load."],
+  "exit-subtle": ["warn", "Exits are smaller than entrances: a short fixed offset, no deep scale-down."],
+  "icon-swap": ["warn", "A state icon swap cross-fades (opacity, scale 0.25, blur 4px) instead of cutting."],
+  "icon-stroke": ["warn", "House icons keep their drawn stroke; don't override strokeWidth per instance."],
+  "icon-size": ["warn", "Icons render on their grid sizes (12, 14, 16, 18, 20, 24px…), not arbitrary fractions."],
+  "icon-color": ["warn", "SVG glyphs paint with currentColor or a token; states come from CSS, not separate colours."],
+  "icon-rtl": ["warn", "Directional icons flip in right-to-left (rtl:-scale-x-100). Opt in with \"rtl\": true."],
+  "optical-icon-padding": ["warn", "A Button with an icon and a label marks the icon data-icon=\"inline-start|inline-end\" so that side's padding trims 2px."],
+  "icon-button-label": ["error", "An icon-only button has an accessible name (aria-label or sr-only text)."],
+  "will-change": ["error", "will-change only names compositor properties (transform, opacity, filter), never all."],
+  "motion-restraint": ["warn", "High-frequency interactions (hover) get a quick fill or opacity change, not a long or keyframed animation."],
 }
 
 if (flag("--list")) {
@@ -249,6 +273,49 @@ function checkClasses(s, file, line) {
   if (wide && !tokens.includes("uppercase") && !/shortcut|kbd/.test(s)) report("tracking", file, line, `${wide} on mixed-case text; keep the font's tracking.`)
   if (/(?:^|\s)(?:[\w-]+:)*active:(?:-?scale|scale-)/.test(s) && !PRESS_SCALE_OK.has(base)) report("no-press-scale", file, line, "active:scale on a control; answer the press with a fill (bg-secondary / -hover / -active) instead.")
   if (/(?:^|\s)(?:[\w-]+:)*transition-all\b/.test(s)) report("no-transition-all", file, line, "transition-all: name the properties (transition-colors, transition-[box-shadow,background-color]).")
+  checkPolishClasses(s, tokens, file, line)
+}
+
+/* ────────────────────────────── polish checks (classes) ────────────────────────────── */
+
+const COMPOSITED = new Set(["transform", "opacity", "filter", "translate", "scale", "rotate", "backdrop-filter", "scroll-position", "auto"])
+const SHADOW_LEVEL = /^shadow-(raised|surface|well|chip|primary|sm|md|lg|xl|2xl)$/
+const STATE_VARIANT = /(?:^|:)(?:group-|peer-)?(?:hover|focus|focus-visible|active|open|data-(?:open|closed|checked|unchecked|active|pressed|expanded|state)|data-\[(?:state|open|checked|pressed|expanded)[^\]]*\]|aria-(?:expanded|pressed|checked|selected)):/
+
+function checkPolishClasses(s, tokens, file, line) {
+  const base = path.basename(file).replace(/\.\w+$/, "")
+  for (const t of tokens) {
+    const wc = t.match(/(?:^|:)will-change-(?:\[([^\]]+)\]|(\w+))$/)
+    if (wc) {
+      const props = (wc[1] ?? wc[2]).split(",").map((x) => x.trim())
+      if (props.includes("all")) report("will-change", file, line, `${t}: never will-change all; name transform, opacity or filter.`)
+      else {
+        const bad = props.filter((x) => !COMPOSITED.has(x))
+        if (bad.length) report("will-change", file, line, `${t}: ${bad.join(", ")} can't be composited, so the hint only costs memory.`)
+      }
+    }
+    // Press scale below 0.95, even where a press scale is allowed.
+    const ps = t.match(/(?:^|:)active:-?scale(?:-[xy])?-(?:\[(0?\.\d+)\]|(\d+))$/)
+    if (ps) {
+      const v = ps[1] ? parseFloat(ps[1]) : parseInt(ps[2], 10) / 100
+      if (v < 0.95 && PRESS_SCALE_OK.has(base)) report("press-scale-floor", file, line, `${t}: a press scale is 0.96 (scale-[0.96]); below 0.95 it looks like a bug.`)
+    }
+    if (/(?:^|:)animate-(?!none$)[\w[\]-]+$/.test(t)) {
+      if (/(?:^|:)(?:group-|peer-)?hover:/.test(t)) report("motion-restraint", file, line, `${t}: a keyframe animation on hover replays on every pass; use a transition-colors / opacity change at duration-150.`)
+      // Loops (spinners, pulses) shown in a state are fine; a one-shot keyframe per state is not.
+      else if (STATE_VARIANT.test(t) && !/^motion-/.test(t) && !/animate-(spin|pulse|ping|bounce)$/.test(t)) report("keyframes-on-state", file, line, `${t}: keyframes restart when the state flips mid-way; drive the state with a transition (data-starting-style / data-ending-style or transition-[…]).`)
+    }
+  }
+  // A full CSS border on a surface that already has a shadow level (rule 4).
+  const border = tokens.find((t) => /^border(?:-[0-9.]+|-\[[^\]]+\])?$/.test(t))
+  const shadow = tokens.find((t) => SHADOW_LEVEL.test(t))
+  if (border && shadow && !tokens.some((t) => /^border-(0|none|transparent)$/.test(t)))
+    report("border-and-shadow", file, line, `${border} with ${shadow}: the shadow level already draws the hairline; drop the border (dividers stay border-b / border-t).`)
+  // Long transitions on hover-only styles.
+  const dur = tokens.map((t) => t.match(/^duration-(\d+)$/)?.[1]).find(Boolean)
+  if (dur && Number(dur) >= 300 && tokens.some((t) => /^(?:group-)?hover:/.test(t)) && !tokens.some((t) => STATE_VARIANT.test(t) && !/^(?:group-)?hover:/.test(t)) && !/\b(open|expanded|closed|starting|ending)\b/.test(s))
+    report("motion-restraint", file, line, `duration-${dur} on a hover style: hover answers within 150ms.`)
+  if (tokens.includes("subpixel-antialiased")) report("font-smoothing", file, line, "subpixel-antialiased per element makes this text heavier than the rest; smoothing is set once on the root.")
 }
 
 /* ────────────────────────────── prose checks ────────────────────────────── */
@@ -416,10 +483,205 @@ function checkSourceTs(file, text) {
         }
       }
     }
+    if (name) checkPolishJsx(node, name, ancestors)
+    if (ts.isConditionalExpression(node)) {
+      const branch = (b) => {
+        while (b && ts.isParenthesizedExpression(b)) b = b.expression
+        return b && tagName(b)
+      }
+      const a = branch(node.whenTrue), b = branch(node.whenFalse)
+      const inChildren = ts.isJsxExpression(node.parent) && (ts.isJsxElement(node.parent.parent) || ts.isJsxFragment(node.parent.parent))
+      const stateful = /copied|open|expand|collaps|active|show|reveal|visible|checked|selected|playing|paused|muted|done|complete|loading|pending|busy|liked|saved|pinned|starred|enabled|dark|theme|on\b|toggled|status|phase|success/i.test(node.condition.getText(sf))
+      if (a && b && a !== b && /Icon$/.test(a) && /Icon$/.test(b) && inChildren && stateful) {
+        const animated = ancestors.some((x) => /^(AnimatePresence|motion\.|m\.|\w*Swap\w*)/.test(tagName(x) ?? "") || /\b(transition-|animate-)/.test(classAttr(opening(x)) ?? ""))
+        if (!animated) report("icon-swap", file, lineOf(node.getStart(sf)), `<${a}> / <${b}> swap cuts between glyphs; cross-fade them (both in the DOM, opacity + scale 0.25 + blur 4px, or AnimatePresence initial={false}).`)
+      }
+    }
     const next = name ? [...ancestors, node] : ancestors
     ts.forEachChild(node, (c) => visit(c, next))
   }
+
+  // One side of `cond ? <A/> : <B/>`: the element is swapped for another, not removed.
+  function isSwapBranch(n) {
+    let p = n.parent
+    while (p && ts.isParenthesizedExpression(p)) p = p.parent
+    return !!p && ts.isConditionalExpression(p)
+  }
+
+  /* Polish checks on one JSX element. */
+  function checkPolishJsx(node, name, ancestors) {
+    const o = opening(node)
+    if (!o) return
+    const attrs = new Map()
+    let spread = false
+    for (const a of o.attributes.properties) {
+      if (ts.isJsxSpreadAttribute(a)) spread = true
+      else attrs.set(a.name.getText(sf), a.initializer ? (ts.isStringLiteral(a.initializer) ? a.initializer.text : a.initializer.getText(sf)) : "true")
+    }
+    const cls = classAttr(o)
+    const toks = cls.split(/\s+/).filter(Boolean)
+    const chain = () => [cls, ...ancestors.map((x) => classAttr(opening(x)))].join(" ")
+    const at = lineOf(o.getStart(sf))
+    const kids = ts.isJsxElement(node) ? node.children.filter((c) => !(ts.isJsxText(c) && !c.getText(sf).trim())) : []
+    const intrinsic = /^[a-z]/.test(name)
+
+    // Changing numbers: a JSX child expression that formats or names a number.
+    for (const c of kids) {
+      if (!ts.isJsxExpression(c) || !c.expression) continue
+      const e = c.expression.getText(sf)
+      if (/^(children|props\.children|label|title|name|text|description)$/.test(e)) continue
+      // Only a plain value or a formatter call: no markup, callbacks, branches or string building.
+      if (e.length > 60 || /\.\.\.|\{|<|=>|\?|&&|\|\||`|["']/.test(e) || /\.(map|filter|length\b)/.test(e)) continue
+      if (NUMERIC_EXPR.test(e) && !/\b(tabular-nums|font-mono|font-code|slashed-zero|sr-only)\b/.test(chain()) && !/^(NumberFlow|Counter|DigitSwap|AnimatedNumber|SlidingNumber|Kbd|Badge|\w*Count|\w*Number)$/.test(name))
+        report("tabular-nums", file, lineOf(c.getStart(sf)), `{${e.length > 40 ? e.slice(0, 40) + "…" : e}} changes on screen; add tabular-nums to <${name}> so the digits keep their width.`)
+    }
+
+    // Headings balance; code never balances.
+    if (/^h[1-3]$/.test(name) && toks.some((t) => /^text-(sm|base|lg|[2-9]?xl|ui(-lg)?)$/.test(t)) && !toks.some((t) => /^(text-balance|text-pretty|text-nowrap|truncate|line-clamp-\d+|whitespace-nowrap|text-wrap|sr-only)$/.test(t)))
+      report("text-wrap", file, at, `<${name}> without text-balance: a heading that wraps leaves one word on the last line.`)
+    if (/^(pre|code)$/.test(name) && toks.some((t) => /^text-(balance|pretty)$/.test(t)))
+      report("text-wrap", file, at, `text-balance / text-pretty on <${name}>: code keeps its own line breaks.`)
+
+    // Media hairline.
+    if ((name === "img" || name === "video" || name === "Image" || name === "picture") && !/\bmedia-outline\b/.test(chain()) && attrs.get("aria-hidden") !== "true" && !attrs.has("data-no-outline"))
+      report("media-outline", file, at, `<${name}> without media-outline: add the class (a 1px inset black/10, white/10 in dark) so the image edge holds on any surface.`)
+
+    // Hit area under 24px on an interactive element.
+    const interactive = (intrinsic && (name === "button" || (name === "a" && attrs.has("href")) || attrs.get("role") === "button")) || (!intrinsic && /(^|\.)(Root|Trigger|Thumb)$/.test(name) && /Checkbox|Radio|Switch|Toggle/.test(name))
+    if (interactive) {
+      const px = sizePx(toks)
+      const extended = toks.some((t) => /^(after|before):(absolute|-?inset|size-|h-|w-|-m)/.test(t)) || /\bhit-area\b/.test(cls)
+      if (px != null && px < 24 && !extended)
+        report("hit-area", file, at, `<${name}> is ${px}px: extend the target to 24px with a pseudo-element (after:absolute after:-inset-1) and to 44px under pointer-coarse:, without overlapping a neighbour.`)
+    }
+
+    // Icon-only buttons need a name.
+    const iconOnly = kids.length === 1 && (() => {
+      const k = kids[0]
+      const t = tagName(k)
+      return !!t && /Icon$/.test(t)
+    })()
+    const isButton = name === "button" || name === "Button" || /IconButton$|Toggle$|ToolbarButton$/.test(name)
+    if (isButton && (iconOnly || (/^icon/.test(attrs.get("size") ?? "") && kids.length === 0 && !attrs.has("children"))) && !spread && !["aria-label", "aria-labelledby", "title", "label", "render"].some((a) => attrs.has(a)))
+      report("icon-button-label", file, at, `Icon-only <${name}> has no accessible name; add aria-label (and a Tooltip with the same text).`)
+
+    // Root smoothing: the root layout's <html>/<body> (or the theme) sets antialiased.
+    if ((name === "body" || name === "html") && /(^|\/)layout\.(tsx|jsx)$|_document\.(tsx|jsx)$/.test(file) && !THEME_SMOOTHS()) {
+      if (name === "body" && !/\bantialiased\b/.test(chain()))
+        report("font-smoothing", file, at, "The root layout doesn't set antialiased (and the theme stylesheet doesn't either); add it to <body> so text renders the same weight everywhere.")
+    }
+
+    // Icon + label in a Button: the icon side trims its padding (optical centring).
+    if (name === "Button" && kids.length >= 2 && attrs.get("variant") !== "link") {
+      const first = kids[0], last = kids[kids.length - 1]
+      // A label: text, an expression, or an element that isn't a glyph or a key cap.
+      const textLike = (k) => ts.isJsxText(k) || (ts.isJsxExpression(k) && !!k.expression && !tagName(k.expression)) || (!!tagName(k) && !/Icon$|^(Kbd|KbdGroup|svg|Spinner|Loader)$/.test(tagName(k)))
+      for (const [k, side, other] of [[first, "inline-start", last], [last, "inline-end", first]]) {
+        const t = tagName(k)
+        if (!t || !/Icon$/.test(t) || !textLike(other)) continue
+        const ko = opening(k)
+        // On the icon itself, or on the glyphs inside a wrapper (an icon-swap component).
+        const marked = ko.attributes.properties.some((a) => ts.isJsxAttribute(a) && a.name.getText(sf) === "data-icon") || /\bdata-icon=/.test(k.getText(sf))
+        if (!marked) report("optical-icon-padding", file, lineOf(k.getStart(sf)), `<${t}> beside a label: add data-icon="${side}" so the Button trims 2px on the icon side and the content looks centred.`)
+      }
+    }
+
+    // House icons: stroke, size, colour.
+    if (/Icon$/.test(name) && !intrinsic) {
+      if (attrs.has("strokeWidth") || toks.some((t) => /^(stroke-\[|stroke-\d|\[stroke-width)/.test(t)))
+        report("icon-stroke", file, at, `strokeWidth on <${name}>: the set's stroke is tuned to the text beside it; switch the icon style instead of thickening one glyph.`)
+      const sz = toks.map((t) => t.match(/^(?:size|h|w)-\[(\d*\.?\d+)px\]$/)?.[1]).find(Boolean)
+      if (sz && !ICON_GRID.has(Number(sz))) report("icon-size", file, at, `${sz}px icon: render on the grid (12, 14, 16, 18, 20, 24…) so strokes land on whole pixels.`)
+      if (config.rtl && /^(Chevron|Arrow|Caret)(Left|Right)|^(Undo|Redo|Reply|Send|Forward|Back)\w*Icon$|ArrowUpRight|ExternalLink/.test(name) && !/\brtl:/.test(chain()))
+        report("icon-rtl", file, at, `<${name}> points in the reading direction; add rtl:-scale-x-100 so it flips in right-to-left.`)
+    }
+    if (/^(svg|path|circle|rect|line|polyline|polygon|ellipse|g)$/.test(name))
+      for (const k of ["fill", "stroke"]) {
+        const v = attrs.get(k)
+        if (v && /^(#|rgb|hsl|oklch\()|^(black|white|red|blue|green|gray|grey)$/i.test(v.replace(/^\{?["'`]?/, "")))
+          report("icon-color", file, at, `${k}="${v}" on <${name}>: paint with currentColor (or a token var) and set the colour with a text-* class.`)
+      }
+
+    // AnimatePresence around a keyed swap.
+    if (name === "AnimatePresence" && !attrs.has("initial")) {
+      const keyed = kids.some((k) => {
+        let e = k
+        if (ts.isJsxExpression(e) && e.expression) e = e.expression
+        const ko = opening(e)
+        const key = ko?.attributes.properties.find((a) => ts.isJsxAttribute(a) && a.name.getText(sf) === "key")
+        return !!key?.initializer && /\?|state|mode|active|status|copied|checked|open/.test(key.initializer.getText(sf))
+      })
+      if (keyed || /popLayout|wait/.test(attrs.get("mode") ?? ""))
+        report("presence-initial", file, at, `<AnimatePresence> around a state swap without initial={false}: the current state animates in on page load.`)
+    }
+
+    // Icon swaps use one recipe; other exits stay small (no deep scale-down or full-height travel).
+    const exit = attrs.get("exit")
+    if (/^motion\./.test(name) && (exit || attrs.has("initial"))) {
+      const only = kids.length === 1 ? kids[0] : null
+      const onlyTag = only && (tagName(only) ?? (ts.isJsxExpression(only) && only.expression && /^(icon|Icon|glyph)\b|Icon\b/.test(only.expression.getText(sf)) ? "Icon" : null))
+      const key = attrs.get("key") ?? ""
+      const iconish = (!!onlyTag && /^(svg|Icon|\w+Icon)$/.test(onlyTag)) || (only && ts.isJsxExpression(only) && only.expression && ts.isConditionalExpression(only.expression) && /Icon\b/.test(only.expression.getText(sf)))
+      if (iconish) {
+        const scales = [attrs.get("initial"), exit].filter(Boolean).flatMap((v) => [...v.matchAll(/\bscale\s*:\s*(\d*\.?\d+)/g)].map((m) => parseFloat(m[1])))
+        if (scales.some((v) => v !== 0.25 && v < 0.95))
+          report("icon-swap", file, at, `Icon enters/exits at scale ${scales.find((v) => v !== 0.25)}: an icon swap starts from scale 0.25 with blur(4px) and opacity 0 (spring duration 0.3, bounce 0).`)
+      } else if (exit && !/\?|status|phase|state/.test(key) && !isSwapBranch(node)) {
+        const sc = exit.match(/\bscale\s*:\s*(\d*\.?\d+)/)
+        if ((sc && parseFloat(sc[1]) < 0.9) || /\b[xy]\s*:\s*["'`]-?\d+%/.test(exit))
+          report("exit-subtle", file, at, `exit ${exit.replace(/\s+/g, " ").slice(0, 60)}: leave with a short fixed offset (y: -8…-12) and opacity, shorter than the entrance.`)
+      }
+    }
+  }
   visit(sf, [])
+}
+
+let themeSmooths
+function THEME_SMOOTHS() {
+  if (themeSmooths === undefined) {
+    const css = themeFile()
+    themeSmooths = !!css && /\bantialiased\b|-webkit-font-smoothing\s*:\s*antialiased/.test(fs.readFileSync(css, "utf8"))
+  }
+  return themeSmooths
+}
+const NUMERIC_EXPR = /(?:^|[^\w.])(?:count|total|price|amount|percent(?:age)?|progress|elapsed|remaining|seconds|secs|minutes|mins|duration|score|balance|quantity|qty|votes|likes|views|downloads|stars|unread(?:Count)?|tokens|cost|usage|files?Count|\w+Count|\w+Total)\b|\.toFixed\(|\.toLocaleString\(|NumberFormat|\bformat(?:Number|Currency|Price|Bytes|Size|Duration|Time|Elapsed|Percent|Count|Compact|Tokens|Cost)\w*\(|\bMath\.(?:round|floor|ceil)\(/
+const ICON_GRID = new Set([10, 12, 14, 16, 18, 20, 22, 24, 28, 32, 40, 48, 64])
+const SPACING_PX = (n) => parseFloat(n) * 4
+function sizePx(toks) {
+  let w = null, h = null
+  for (const t of toks) {
+    if (t.includes(":")) continue
+    let m
+    if ((m = t.match(/^size-([\d.]+)$/))) w = h = SPACING_PX(m[1])
+    else if ((m = t.match(/^size-\[(\d+)px\]$/))) w = h = Number(m[1])
+    else if ((m = t.match(/^w-([\d.]+)$/))) w = SPACING_PX(m[1])
+    else if ((m = t.match(/^h-([\d.]+)$/))) h = SPACING_PX(m[1])
+  }
+  return w != null && h != null ? Math.min(w, h) : null
+}
+
+function checkSourceText(file, text) {
+  const lines = text.split("\n")
+  const base = path.basename(file).replace(/\.\w+$/, "")
+  lines.forEach((l, i) => {
+    if (/^\s*(\/\/|\*|\/\*)/.test(l)) return
+    for (const m of l.matchAll(/\bbounce\s*:\s*(\d*\.?\d+)/g))
+      if (parseFloat(m[1]) > 0) report("spring-bounce", file, i + 1, `bounce: ${m[1]}; springs are bounce-free (bounce: 0, or stiffness 380–520 / damping 26–42).`)
+    const st = l.match(/\bstiffness\s*:\s*(\d+(?:\.\d+)?)/), dm = l.match(/\bdamping\s*:\s*(\d+(?:\.\d+)?)/)
+    if (st && dm) {
+      const mass = parseFloat(l.match(/\bmass\s*:\s*(\d*\.?\d+)/)?.[1] ?? "1")
+      const ratio = parseFloat(dm[1]) / (2 * Math.sqrt(parseFloat(st[1]) * mass))
+      if (ratio < 0.6) report("spring-damping", file, i + 1, `stiffness ${st[1]} / damping ${dm[1]}${mass !== 1 ? ` / mass ${mass}` : ""} is ${ratio.toFixed(2)} of critical damping and overshoots; raise damping to ${Math.ceil(1.6 * Math.sqrt(parseFloat(st[1]) * mass))} or more.`)
+    }
+    const tap = l.match(/whileTap\s*=\s*\{\{[^}]*\bscale\s*:\s*(\d*\.?\d+)/)
+    if (tap && parseFloat(tap[1]) < 0.95 && PRESS_SCALE_OK.has(base)) report("press-scale-floor", file, i + 1, `whileTap scale ${tap[1]}: a press scale is 0.96; below 0.95 it looks like a bug.`)
+    const wc = l.match(/willChange\s*:\s*["'`]([^"'`]+)["'`]/)
+    if (wc) {
+      const props = wc[1].split(",").map((x) => x.trim())
+      if (props.includes("all")) report("will-change", file, i + 1, "willChange: all; name transform, opacity or filter.")
+      else if (props.some((x) => !COMPOSITED.has(x))) report("will-change", file, i + 1, `willChange: ${wc[1]}; only transform, opacity and filter can be composited.`)
+    }
+  })
 }
 
 function checkSourcePlain(file, text) {
@@ -438,6 +700,7 @@ function checkSourcePlain(file, text) {
 
 function checkCss(file, text) {
   let inComment = false
+  selector = ""
   text.split("\n").forEach((l, i) => {
     const line = i + 1
     const comments = l.match(/\/\*.*?(\*\/|$)/g)
@@ -447,8 +710,21 @@ function checkCss(file, text) {
     const apply = l.match(/@apply\s+([^;]+);/)
     if (apply) checkClasses(apply[1], file, line)
     if (/\btransition(?:-property)?\s*:\s*all\b/.test(l)) report("no-transition-all", file, line, "transition: all; name the properties.")
+    const sel = l.match(/^\s*([^@{}/][^{}]*?)\s*\{\s*$/)
+    if (sel) selector = sel[1]
+    const wc = l.match(/\bwill-change\s*:\s*([^;]+);?/)
+    if (wc) {
+      const props = wc[1].split(",").map((x) => x.trim())
+      if (props.includes("all")) report("will-change", file, line, "will-change: all; name transform, opacity or filter.")
+      else if (props.some((x) => !COMPOSITED.has(x))) report("will-change", file, line, `will-change: ${wc[1].trim()}; only transform, opacity and filter can be composited.`)
+    }
+    if (/^\s*animation(?:-name)?\s*:/.test(l) && !/\bnone\b/.test(l) && /:hover|:focus|:active|\[data-(?:state|open|checked|pressed|expanded)|\[aria-(?:expanded|pressed|checked)|\[open\]|\.open\b|\.is-open\b/.test(selector))
+      report(/:hover/.test(selector) ? "motion-restraint" : "keyframes-on-state", file, line, `animation on "${selector.trim()}": state changes use a transition, which retargets when the state flips mid-way.`)
+    if (/-webkit-font-smoothing\s*:\s*(antialiased|subpixel-antialiased|auto)|-moz-osx-font-smoothing\s*:/.test(l) && !/^(html|body|:root|html,\s*body|:root,\s*html|\*)$/.test(selector.trim()))
+      report("font-smoothing", file, line, `font smoothing on "${selector.trim()}": set it once on html or body so all text renders the same.`)
   })
 }
+let selector = ""
 
 function checkMarkdown(file, text) {
   let fence = false
@@ -516,6 +792,47 @@ function checkUpgrade() {
 /* ────────────────────────────── run ────────────────────────────── */
 
 const SELF = path.resolve(new URL(import.meta.url).pathname)
+
+// Rules that read JSX structure, so they only run with the TypeScript parser.
+const JSX_RULES = new Set(["concentric-radius", "menu-label-group", "tabular-nums", "text-wrap", "media-outline", "hit-area", "presence-initial", "exit-subtle", "icon-swap", "icon-stroke", "icon-size", "icon-color", "icon-rtl", "optical-icon-padding", "icon-button-label"])
+
+// --self-test: every examples/<rule>/bad.tsx must trip <rule>; every good.tsx must be clean.
+if (flag("--self-test")) {
+  const dir = path.join(path.dirname(path.dirname(SELF)), "examples")
+  PRESS_SCALE_OK.add("good").add("bad")
+  config.rtl = true
+  themeSmooths = false
+  let failed = 0, cases = 0
+  for (const rule of fs.readdirSync(dir).sort()) {
+    if (!RULES[rule]) {
+      console.log(`  ?  examples/${rule}: no rule with this id`)
+      failed++
+      continue
+    }
+    if (!ts && JSX_RULES.has(rule)) {
+      console.log(`  --  ${rule}: needs TypeScript to read JSX, skipped`)
+      continue
+    }
+    for (const kind of ["bad", "good"]) {
+      const file = path.join(dir, rule, `${kind}.tsx`)
+      if (!fs.existsSync(file)) continue
+      cases++
+      findings.length = 0
+      seenFindings.clear()
+      const text = fs.readFileSync(file, "utf8")
+      fileLines.set(file, text.split("\n"))
+      checkSourceText(file, text)
+      if (ts) checkSourceTs(file, text)
+      else checkSourcePlain(file, text)
+      const hit = findings.filter((f) => f.rule === rule)
+      const ok = kind === "bad" ? hit.length > 0 : findings.length === 0
+      if (!ok) failed++
+      console.log(`  ${ok ? "ok" : "FAIL"}  ${rule}/${kind}${ok ? "" : `: ${kind === "bad" ? "not reported" : findings.map((f) => `${f.rule} (line ${f.line})`).join(", ")}`}`)
+    }
+  }
+  console.log(`\n${cases} examples, ${failed} failed${ts ? "" : ` (${tsNote}: JSX checks skipped)`}`)
+  process.exit(failed ? 1 : 0)
+}
 const SKILL_DIR = path.dirname(path.dirname(SELF)) + path.sep
 let tsFailures = 0
 for (const file of files) {
@@ -526,6 +843,7 @@ for (const file of files) {
   const text = fs.readFileSync(file, "utf8")
   if (/^\s*(\/\/|\/\*|#)\s*GENERATED\b/.test(text.slice(0, 200))) continue
   fileLines.set(file, text.split("\n"))
+  if (/\.(tsx|jsx|ts|js|mjs|cjs)$/.test(file)) checkSourceText(file, text)
   if (file.endsWith("registry.json")) checkRegistry(file, text)
   else if (/\.css$/.test(file)) checkCss(file, text)
   else if (/\.mdx?$/.test(file)) checkMarkdown(file, text)

@@ -12,7 +12,7 @@ export default function ActionSwapRollCustomSlots() {
   return (
     <Button variant="ghost" onClick={() => setAsc((v) => !v)}>
       <ActionSwapRollText value={value}>{asc ? "Oldest first" : "Newest first"}</ActionSwapRollText>
-      <ActionSwapRollIcon value={value}>{asc ? <ArrowUpIcon /> : <ArrowDownIcon />}</ActionSwapRollIcon>
+      <ActionSwapRollIcon value={value}>{asc ? <ArrowUpIcon data-icon="inline-end" /> : <ArrowDownIcon data-icon="inline-end" />}</ActionSwapRollIcon>
     </Button>
   )
 }

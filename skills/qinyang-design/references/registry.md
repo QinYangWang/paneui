@@ -64,6 +64,8 @@ runs it when it is installed.
 | --- | --- | --- |
 | `scripts/check.mjs` | Static rules (see `--list`) | `node <skill>/scripts/check.mjs [paths]` |
 | `scripts/radius-probe.js` | Nested radii as rendered, including open menus and hovered rows | paste in the console on the page |
+| `scripts/polish-probe.js` | Hit areas and overlaps, button padding, image outlines, heading wrap, live numbers, smoothing, compositing hints | paste in the console on the page |
+| `check.mjs --self-test` | The `examples/<rule>/` pairs still trip (bad) and pass (good) their rule | `node <skill>/scripts/check.mjs --self-test` |
 | Upgrade check | Stale theme leftovers | `node scripts/qinyang-upgrade-check.mjs` |
 | Linter (`@shadcn/lint` + the concentric rule) | Restyles, raw colours, arbitrary values | `eslint .` |
 

@@ -33,8 +33,10 @@ Check a new icon in every style at 14px.
 
 `IconChip` sizes `sm` 24 / `default` 32 / `lg` 40 / `xl` 48; tones neutral, primary, success, warning,
 destructive, solid. One size per list. Chips are squircles, never circles (circles are avatars and status
-dots). On an icon, `className` takes size, layout, a token colour, opacity and motion only. Inline icons
-align with the first line of text.
+dots). On an icon, `className` takes size, layout, a token colour, opacity and motion only, never a
+stroke width or an off-grid pixel size. Inline icons align with the first line of text. Icons beside a
+Button label take `data-icon="inline-start"` / `"inline-end"`; glyphs that point along the reading
+direction take `rtl:-scale-x-100` (`polish.md` › Icons).
 
 ## Brand marks
 

@@ -178,7 +178,7 @@ export function HomeLayout() {
         </section>
 
         <section aria-labelledby="sections" className="flex w-full max-w-5xl flex-col gap-4 pb-16">
-          <h2 id="sections" className="text-xl font-semibold tracking-tight">
+          <h2 id="sections" className="text-balance text-xl font-semibold tracking-tight">
             Browse the docs
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -197,7 +197,7 @@ export function HomeLayout() {
         </section>
 
         <section aria-labelledby="popular" className="flex w-full max-w-5xl flex-col gap-4 pb-20">
-          <h2 id="popular" className="text-xl font-semibold tracking-tight">
+          <h2 id="popular" className="text-balance text-xl font-semibold tracking-tight">
             Popular guides
           </h2>
           <Card className="gap-0 py-1">

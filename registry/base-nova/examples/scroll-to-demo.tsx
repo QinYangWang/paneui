@@ -25,7 +25,7 @@ export default function ScrollToDemo() {
             id={s.id}
             className="flex min-h-56 flex-col justify-end rounded-2xl bg-card p-5 shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           >
-            <h3 className="text-base font-semibold">{s.title}</h3>
+            <h3 className="text-balance text-base font-semibold">{s.title}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
           </section>
         ))}

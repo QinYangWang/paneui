@@ -140,7 +140,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
             aria-label="Search docs"
             aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
             // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a field (sm+)
-            className="w-7 justify-center px-0 text-muted-foreground sm:w-52 sm:justify-start sm:px-2.5"
+            className="w-7 justify-center px-0 text-muted-foreground sm:w-52 sm:justify-start sm:ps-2 sm:pe-2.5"
           >
             <SearchIcon />
             <span className="hidden sm:inline">Search docs…</span>

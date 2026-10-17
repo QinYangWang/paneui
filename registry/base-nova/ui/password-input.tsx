@@ -56,9 +56,9 @@ function PasswordInput({ revealed: revealedProp, defaultRevealed = false, onReve
         <AnimatePresence initial={false} mode="popLayout">
           <motion.span
             key={revealed ? "hide" : "show"}
-            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
             transition={{ type: "spring", duration: 0.3, bounce: 0 }}
             className="flex"
           >

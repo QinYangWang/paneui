@@ -61,7 +61,7 @@ export default function AISidebarDemo() {
         actions={(open) =>
           open ? (
             <Button variant="secondary" size="sm" className="w-full justify-start">
-              <PlusIcon />
+              <PlusIcon data-icon="inline-start" />
               New chat
             </Button>
           ) : (

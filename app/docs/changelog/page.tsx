@@ -8,6 +8,36 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-17-polish-rules",
+    date: "October 17, 2026",
+    title: "Polish rules, checks and examples in the design skill",
+    tag: "Design skill",
+    changes: [
+      <>
+        The <TextLink href="/docs/skill">design skill</TextLink> has eight new rules (33–40) for the details that make a
+        screen feel finished, from target sizes to icon swaps and exits. Each comes with a Recommended and Avoid pair,
+        shipped with the skill in <Code>examples/</Code>.
+      </>,
+      <>
+        The check gains 21 rules (run <Code>--list</Code>) and <Code>--self-test</Code>, which runs the examples.{" "}
+        <Code>scripts/polish-probe.js</Code> checks hit areas, image edges, heading wrap and live numbers on the
+        rendered page.
+      </>,
+      <>
+        The theme adds <Code>media-outline</Code>. Reinstall <Code>@qinyang/theme</Code> to get it.
+      </>,
+      <>
+        Checkbox and radio reach a 24px target; carousel dots, tab and chip close buttons extend theirs without
+        overlapping. Button trims 2px on the icon side at every size, using start and end padding so it holds in
+        right-to-left.
+      </>,
+      <>
+        Icon swaps in the copy button, password reveal, theme toggle, overflow actions, status marks and slide action
+        share one cross-fade, and springs that bounced now settle once.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-17-descenders-and-default-labels",
     date: "October 17, 2026",
     title: "Whole descenders and default labels that stay",

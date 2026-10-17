@@ -4,6 +4,7 @@ import * as React from "react"
 import { siClaude } from "simple-icons"
 
 import { ChatIcon, CheckIcon, ChevronDownIcon, CopyIcon, ExternalLinkIcon, FileIcon, LinkIcon } from "@/components/icons"
+import { ActionSwapBlurIcon } from "@/registry/base-nova/ui/action-swap-blur"
 import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { Button } from "@/registry/base-nova/ui/button"
 import { ButtonGroup, ButtonGroupSeparator } from "@/registry/base-nova/ui/button-group"
@@ -73,7 +74,9 @@ export function PageActions({ markdownPath, pagePath, title }: { markdownPath: s
   return (
     <ButtonGroup data-md-skip className="shrink-0">
       <Button variant="secondary" size="sm" onClick={copyMarkdown}>
-        {copied ? <CheckIcon data-icon="inline-start" /> : <CopyIcon data-icon="inline-start" />}
+        <ActionSwapBlurIcon value={copied ? "copied" : "copy"} className="size-3.5">
+          {copied ? <CheckIcon data-icon="inline-start" /> : <CopyIcon data-icon="inline-start" />}
+        </ActionSwapBlurIcon>
         Copy page
       </Button>
       <ButtonGroupSeparator />

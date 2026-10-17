@@ -9,7 +9,7 @@ import { DocsCode, highlight } from "@/components/docs/docs-code"
 import { DocHeading } from "@/components/docs/doc-heading"
 import { Code, GuideH2, GuidePage } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
-import { ruleSlug, SKILL_EXAMPLES } from "@/components/docs/skill-examples"
+import { ruleSlug, SKILL_EXAMPLE_FILES, SKILL_EXAMPLES } from "@/components/docs/skill-examples"
 import { REGISTRY_NAME } from "@/lib/docs"
 
 export const metadata = { title: "Design skill" }
@@ -28,7 +28,7 @@ function readSkill() {
     const why = rest.join("\n").trim().split(/\n\s*\n/)[0].replace(/\s+/g, " ")
     rules.push({ n: Number(m[1]), title: m[2], why, id: ruleSlug(m[2]) })
   }
-  const missing = rules.filter((r) => !SKILL_EXAMPLES[r.id]).map((r) => r.id)
+  const missing = rules.filter((r) => !SKILL_EXAMPLES[r.id] && !SKILL_EXAMPLE_FILES[r.id]).map((r) => r.id)
   if (missing.length) console.warn(`[docs/skill] rules without an example in skill-examples.tsx: ${missing.join(", ")}`)
   return { skill, rules }
 }
@@ -59,8 +59,14 @@ function LiveExample({ tone, children }: { tone: keyof typeof LABEL; children: R
   )
 }
 
+/** The good/bad pair the skill ships in examples/<dir>/. */
+function fileExample(dir: string) {
+  const read = (kind: string) => fs.readFileSync(path.join(process.cwd(), "skills/qinyang-design/examples", dir, `${kind}.tsx`), "utf8").trim()
+  return { kind: "code" as const, lang: "tsx", good: read("good"), bad: read("bad") }
+}
+
 function RuleExamples({ id }: { id: string }) {
-  const ex = SKILL_EXAMPLES[id]
+  const ex = SKILL_EXAMPLES[id] ?? (SKILL_EXAMPLE_FILES[id] ? fileExample(SKILL_EXAMPLE_FILES[id]) : undefined)
   if (!ex) return null
   if (ex.kind === "code")
     return (
@@ -106,8 +112,9 @@ export default async function SkillPage() {
         </p>
         <DocsCode code={CHECK} language="bash" />
         <p className="text-muted-foreground">
-          For nested corners as rendered, open the screen, then paste <Code>scripts/radius-probe.js</Code> into the
-          browser console.
+          For what only the rendered page shows, open the screen and paste <Code>scripts/radius-probe.js</Code> (nested
+          corners) or <Code>scripts/polish-probe.js</Code> (hit areas, image edges, live numbers) into the browser
+          console.
         </p>
       </section>
 

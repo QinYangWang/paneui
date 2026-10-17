@@ -81,7 +81,7 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
 function AuthHeading({ title, description }: { title: string; description: React.ReactNode }) {
   return (
     <div className="mb-6 flex flex-col gap-1.5">
-      <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+      <h1 className="text-balance text-2xl font-semibold tracking-tight">{title}</h1>
       <p className="text-sm text-pretty text-muted-foreground">{description}</p>
     </div>
   )

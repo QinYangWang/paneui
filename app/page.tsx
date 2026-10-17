@@ -19,8 +19,9 @@ export default function ComponentsPage() {
   return (
     <div className="flex flex-col gap-14">
       <section className="flex flex-col items-start gap-3">
-        <h1 className="text-3xl font-semibold tracking-tight">Components</h1>
+        <h1 className="text-balance text-3xl font-semibold tracking-tight">Components</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
+          {/* design-check-ignore tabular-nums -- the item count is fixed at build time and sits in a sentence */}
           {total} components, blocks and templates for Tailwind 4.
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
@@ -36,7 +37,7 @@ export default function ComponentsPage() {
       {groups.map((g, gi) => {
         return (
           <section key={g.category} id={categorySlug(g.category)} className="flex scroll-mt-20 flex-col gap-5">
-            <h2 className="flex items-center gap-2.5 text-lg font-semibold">
+            <h2 className="text-balance flex items-center gap-2.5 text-lg font-semibold">
               {g.category}
               <Badge size="sm">{g.items.length}</Badge>
             </h2>

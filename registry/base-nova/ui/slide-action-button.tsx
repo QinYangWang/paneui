@@ -205,9 +205,9 @@ function SlideActionButton({
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={phase}
-            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.5, rotate: -45 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.5 }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
             transition={SPRING}
             className="grid place-items-center"
           >

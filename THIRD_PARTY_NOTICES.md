@@ -245,3 +245,35 @@ colour. Brands whose owners asked the package to remove their marks or have not 
 (for example Microsoft and its products, Amazon/AWS, OpenAI, Salesforce/Slack, Adobe, Oracle, IBM,
 Twilio, Yahoo) are not in the package; the templates show a neutral icon from this library's set
 in their place and do not redraw those marks.
+
+## make-interfaces-feel-better (interface-polish guidance for the design skill, since 2026-10-17)
+
+Parts of `skills/qinyang-design` (rules 33–40, `references/polish.md`, the polish checks in
+`scripts/check.mjs`, `scripts/polish-probe.js` and `examples/`) restate interface-polish guidance from
+the agent skill at https://github.com/jakubkrehel/make-interfaces-feel-better (commit 35545ea): icon-swap
+values, image outlines, optical button padding, hit-area extension, exit and motion restraint, compositing
+hints and the review report shape. The text, checks and examples were written for this library; where the
+guidance conflicts with the library's rules (press scale, desktop target size, icon stroke and fill), the
+library's rules apply. No files were copied verbatim.
+
+MIT License
+
+Copyright (c) 2026 Jakub Krehel
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

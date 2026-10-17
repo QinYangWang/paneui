@@ -28,6 +28,7 @@ type ActionSwapItem = {
 
 const BLUR_TRANSITION = { duration: 0.22, ease: EASE_OUT } as const
 const ROLL_EXIT = { duration: 0.15, ease: EASE_OUT } as const
+const ICON_SPRING = { type: "spring", duration: 0.3, bounce: 0 } as const
 
 const TEXT_VARIANTS: Record<"blur" | "roll", Variants> = {
   blur: {
@@ -49,9 +50,9 @@ const TEXT_VARIANTS: Record<"blur" | "roll", Variants> = {
 
 const ICON_VARIANTS: Record<"blur" | "roll", Variants> = {
   blur: {
-    initial: { opacity: 0, scale: 0.3, filter: "blur(6px)" },
-    animate: { opacity: 1, scale: 1, filter: "blur(0px)", transition: BLUR_TRANSITION },
-    exit: { opacity: 0, scale: 0.3, filter: "blur(6px)", transition: BLUR_TRANSITION },
+    initial: { opacity: 0, scale: 0.25, filter: "blur(4px)" },
+    animate: { opacity: 1, scale: 1, filter: "blur(0px)", transition: ICON_SPRING },
+    exit: { opacity: 0, scale: 0.25, filter: "blur(4px)", transition: ICON_SPRING },
   },
   roll: {
     initial: { opacity: 0, y: "110%", filter: "blur(3px)" },

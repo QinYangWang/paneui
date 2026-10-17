@@ -174,7 +174,7 @@ function SignupForm({
     >
       {(title || description) && (
         <div className="flex flex-col gap-1">
-          {title && <h2 className="text-lg font-semibold">{title}</h2>}
+          {title && <h2 className="text-balance text-lg font-semibold">{title}</h2>}
           {description && <p className="text-ui text-muted-foreground">{description}</p>}
         </div>
       )}
@@ -207,10 +207,10 @@ function SignupForm({
               <AnimatePresence initial={false} mode="popLayout">
                 <motion.span
                   key={reveal ? "hide" : "show"}
-                  initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6, rotate: -30 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6, rotate: 30 }}
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+                  transition={{ type: "spring", duration: 0.3, bounce: 0 }}
                   className="flex"
                 >
                   {reveal ? <EyeOffIcon /> : <EyeIcon />}

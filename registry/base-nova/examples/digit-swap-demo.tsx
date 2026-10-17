@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import { EyeIcon, EyeOffIcon, MinusIcon, PlusIcon } from "@/components/icons"
+import { ActionSwapBlurIcon } from "@/registry/base-nova/ui/action-swap-blur"
 import { Button } from "@/registry/base-nova/ui/button"
 import { DigitSwap } from "@/registry/base-nova/ui/digit-swap"
 
@@ -30,7 +31,9 @@ export default function DigitSwapDemo() {
       <div className="flex items-center gap-2 rounded-2xl bg-muted py-1.5 pr-1.5 pl-4 font-mono text-sm shadow-well">
         <DigitSwap value={shown ? "4111 2045 7731 4242" : "•••• •••• •••• 4242"} stagger={0.015} />
         <Button variant="ghost" size="icon-sm" aria-label={shown ? "Hide card number" : "Show card number"} onClick={() => setShown((s) => !s)}>
-          {shown ? <EyeOffIcon /> : <EyeIcon />}
+          <ActionSwapBlurIcon value={shown ? "hide" : "show"}>
+            {shown ? <EyeOffIcon /> : <EyeIcon />}
+          </ActionSwapBlurIcon>
         </Button>
       </div>
     </div>

@@ -31,8 +31,8 @@ type ExpandableTabsProps = {
   "aria-label"?: string
 }
 
-const SHELL: Transition = { type: "spring", duration: 0.55, bounce: 0.08 }
-const PILL: Transition = { type: "spring", duration: 0.45, bounce: 0.12 }
+const SHELL: Transition = { type: "spring", duration: 0.55, bounce: 0 }
+const PILL: Transition = { type: "spring", duration: 0.45, bounce: 0 }
 const SLIDE = 28
 
 /** Callback ref that tracks an element's height while it is mounted. */

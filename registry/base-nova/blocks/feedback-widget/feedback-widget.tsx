@@ -293,9 +293,9 @@ export function FeedbackWidget({
                         />
                       ))}
                     <motion.span
-                      initial={reduce ? false : { scale: 0.3, rotate: -30 }}
+                      initial={reduce ? false : { scale: 0.25, rotate: -30 }}
                       animate={{ scale: 1, rotate: 0 }}
-                      transition={{ type: "spring", stiffness: 480, damping: 18 }}
+                      transition={{ type: "spring", stiffness: 480, damping: 32 }}
                       className="inline-flex size-11 items-center justify-center rounded-full bg-success text-white"
                     >
                       <CheckIcon size={22} />

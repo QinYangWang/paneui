@@ -178,9 +178,9 @@ function TodoList({
               <motion.span
                 key="complete"
                 className="absolute inset-0 grid place-items-center"
-                initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
+                initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
                 transition={SPRING}
               >
                 <TodoStatusMark status="done" />
@@ -189,9 +189,9 @@ function TodoList({
               <motion.span
                 key="plan"
                 className="absolute inset-0 grid place-items-center text-muted-foreground"
-                initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.6 }}
+                initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
                 transition={SPRING}
               >
                 <ListIcon size={16} />

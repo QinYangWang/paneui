@@ -357,6 +357,8 @@ const eslintConfig = [
       ".agents/**",
       ".claude/**",
       "agent/**",
+      // The design skill's good/bad snippets, written against a consumer project's paths.
+      "skills/*/examples/**",
     ],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript"),

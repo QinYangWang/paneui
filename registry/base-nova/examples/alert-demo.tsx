@@ -58,7 +58,7 @@ export default function AlertDemo() {
         </AlertContent>
         <AlertAction>
           <Button size="xs" variant="secondary">
-            <RefreshIcon />
+            <RefreshIcon data-icon="inline-start" />
             Retry
           </Button>
         </AlertAction>

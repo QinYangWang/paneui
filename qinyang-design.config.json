@@ -84,6 +84,16 @@
       "rule": "*",
       "file": "components/docs/skill-examples.tsx",
       "reason": "the Avoid previews on /docs/skill break the rules on purpose"
+    },
+    {
+      "rule": "media-outline",
+      "file": "registry/base-nova/ui/og-image.tsx",
+      "reason": "rendered to a PNG by the share-card renderer, which has no outline support; the card draws its own edges"
+    },
+    {
+      "rule": "icon-color",
+      "file": "registry/base-nova/examples/image-generation-demo.tsx",
+      "reason": "placeholder illustration standing in for a generated image, not an icon"
     }
   ]
 }

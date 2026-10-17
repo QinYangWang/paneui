@@ -385,7 +385,7 @@ function ToolApproval({
                 ) : null}
                 {revocable && status == null ? (
                   <Button size="xs" variant="ghost" onClick={() => decide(null)} className="rounded-inner text-muted-foreground">
-                    <UndoIcon />
+                    <UndoIcon data-icon="inline-start" />
                     {decision === "always" ? "Revoke" : "Undo"}
                   </Button>
                 ) : null}

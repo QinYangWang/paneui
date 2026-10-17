@@ -256,7 +256,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
           aria-label={`Go to slide ${i + 1}`}
           aria-current={i === index ? "true" : undefined}
           onClick={() => scrollTo(i)}
-          className="size-1.5 cursor-pointer rounded-full bg-foreground/16 transition-[background-color,width] duration-200 outline-none hover:bg-foreground/32 focus-visible:ring-2 focus-visible:ring-ring/50 aria-current:w-4 aria-current:bg-foreground/72 motion-reduce:transition-none"
+          className="relative size-1.5 cursor-pointer rounded-full after:absolute after:-inset-x-[3px] after:-inset-y-[9px] bg-foreground/16 transition-[background-color,width] duration-200 outline-none hover:bg-foreground/32 focus-visible:ring-2 focus-visible:ring-ring/50 aria-current:w-4 aria-current:bg-foreground/72 motion-reduce:transition-none"
         />
       ))}
     </div>

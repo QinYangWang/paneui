@@ -116,7 +116,7 @@ function TerminalArea({ terms, visible, compact }: { terms: Terminals; visible: 
                     type="button"
                     aria-label={`Kill ${s.title}`}
                     onClick={() => terms.kill(id)}
-                    className="flex size-5 shrink-0 items-center justify-center rounded-sm text-muted-foreground opacity-0 outline-none group-hover/term:opacity-100 hover:bg-foreground/8 hover:text-foreground focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50"
+                    className="relative flex size-5 shrink-0 items-center justify-center rounded-sm text-muted-foreground opacity-0 after:absolute after:-inset-0.5 outline-none group-hover/term:opacity-100 hover:bg-foreground/8 hover:text-foreground focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
                     <TrashIcon className="size-3" />
                   </button>

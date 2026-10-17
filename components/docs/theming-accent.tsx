@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { CheckIcon, CopyIcon } from "@/components/icons"
 import { LiveCodeBlock } from "@/components/docs/live-code-block"
+import { ActionSwapBlurIcon } from "@/registry/base-nova/ui/action-swap-blur"
 import { useCopy } from "@/registry/base-nova/ui/code-block"
 import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
@@ -196,7 +197,9 @@ export function ThemingAccent() {
           Paste these overrides after the theme variables to keep this accent in your project.
         </p>
         <Button onClick={() => copy(css)}>
-          {copied ? <CheckIcon /> : <CopyIcon />}
+          <ActionSwapBlurIcon value={copied ? "copied" : "copy"}>
+            {copied ? <CheckIcon data-icon="inline-start" /> : <CopyIcon data-icon="inline-start" />}
+          </ActionSwapBlurIcon>
           {copied ? "Copied" : "Copy theme CSS"}
         </Button>
       </div>

@@ -46,7 +46,7 @@ export default function AppShellHeaderActions() {
       </AppShellSidebar>
       <AppShellMain>
         <div className="flex flex-col items-start gap-3 p-6">
-          <h2 className="text-lg font-semibold">{tab}</h2>
+          <h2 className="text-balance text-lg font-semibold">{tab}</h2>
           <Button variant="secondary" size="sm" onClick={() => setOpen(!open)}>
             {open ? "Collapse to rail" : "Expand sidebar"}
           </Button>

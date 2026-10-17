@@ -169,7 +169,7 @@ function CitationFavicon({
       {source.icon ? (
         source.icon
       ) : showImg ? (
-        // eslint-disable-next-line @next/next/no-img-element
+        // eslint-disable-next-line @next/next/no-img-element -- remote favicon; design-check-ignore media-outline -- favicons are transparent marks, a frame would box them
         <img
           src={src}
           alt=""
@@ -442,7 +442,7 @@ function Citations({
 /** Small "N sources" chip, e.g. for a toolbar. */
 function CitationCount({ count, className }: { count: number; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-1 text-ui-sm text-muted-foreground", className)}>
+    <span className={cn("tabular-nums inline-flex items-center gap-1 text-ui-sm text-muted-foreground", className)}>
       <BookmarkIcon className="size-3.5" />
       {count} {count === 1 ? "source" : "sources"}
     </span>

@@ -217,7 +217,7 @@ function AvatarGenerator({
                 onClick={() => update({ seed: randomSeed(), selections: {} })}
                 aria-label="Shuffle seed"
               >
-                <RefreshIcon />
+                <RefreshIcon data-icon="inline-start" />
                 Shuffle
               </Button>
             </div>
@@ -283,11 +283,14 @@ function AvatarGenerator({
 
           <div className="mt-auto flex flex-wrap justify-end gap-2 pt-1">
             <Button variant="outline" onClick={download} className="grow @sm/avatar-generator-controls:grow-0">
-              <DownloadIcon />
+              <DownloadIcon data-icon="inline-start" />
               Download SVG
             </Button>
             <Button onClick={copy} aria-live="polite" className="grow @sm/avatar-generator-controls:grow-0">
-              {copied ? <CheckIcon /> : <CopyIcon />}
+              <span className="relative inline-grid shrink-0 place-items-center *:col-start-1 *:row-start-1 *:transition-[opacity,scale,filter] *:duration-300 *:ease-[cubic-bezier(0.22,1,0.36,1)]">
+                <CheckIcon className={!copied ? "opacity-0 motion-safe:scale-25 motion-safe:blur-xs" : undefined} />
+                <CopyIcon className={copied ? "opacity-0 motion-safe:scale-25 motion-safe:blur-xs" : undefined} />
+              </span>
               {copied ? "Copied" : "Copy code"}
             </Button>
           </div>

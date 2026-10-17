@@ -712,6 +712,18 @@ html[data-accent="violet"].dark {
   -webkit-app-region: no-drag;
 }
 
+/*
+ * Hairline on images and video: pure black (white in dark) at 10%, inset so it adds no size.
+ * A neutral edge, never a palette grey, so it reads the same on any surface behind the image.
+ */
+@utility media-outline {
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
+  &:is(.dark *) {
+    outline-color: oklch(1 0 0 / 0.1);
+  }
+}
+
 /* Sticky top edge for a shell-inset panel that scrolls with the page (docs shell). */
 @utility shell-cap {
   border-top-left-radius: var(--radius-shell);

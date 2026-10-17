@@ -246,7 +246,7 @@ function TabStripItem({ value, icon, closable, indicator, disabled, hint, classN
             ctx.close?.(value)
           }}
           className={cn(
-            "-mr-1 flex size-4.5 shrink-0 cursor-pointer pointer-coarse:size-6 items-center justify-center rounded-inner-or-sm text-muted-foreground opacity-0 transition-[opacity,background-color,color] duration-150 group-hover/tab:opacity-100 group-focus-within/tab:opacity-100 hover:bg-foreground/8 hover:text-foreground",
+            "relative -mr-1 flex size-4.5 shrink-0 cursor-pointer pointer-coarse:size-6 after:absolute after:-inset-[3px] items-center justify-center rounded-inner-or-sm text-muted-foreground opacity-0 transition-[opacity,background-color,color] duration-150 group-hover/tab:opacity-100 group-focus-within/tab:opacity-100 hover:bg-foreground/8 hover:text-foreground",
             selected && "opacity-100"
           )}
         >

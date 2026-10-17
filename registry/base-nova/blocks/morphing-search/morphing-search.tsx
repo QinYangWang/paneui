@@ -46,7 +46,7 @@ type MorphingSearchProps = {
   surfaceClassName?: string
 }
 
-const MORPH: Transition = { type: "spring", duration: 0.52, bounce: 0.2 }
+const MORPH: Transition = { type: "spring", duration: 0.52, bounce: 0 }
 
 /** Score an item: title prefix > word start > substring > keyword/description hit. */
 function defaultFilter(item: MorphingSearchItem, query: string): number | null {
@@ -362,7 +362,7 @@ function MorphingSearch({
                               {selected && (
                                 <motion.span
                                   layoutId={`${surfaceId}-highlight`}
-                                  transition={reduceMotion ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0.1 }}
+                                  transition={reduceMotion ? { duration: 0 } : { type: "spring", duration: 0.3, bounce: 0 }}
                                   className="absolute inset-0 rounded-lg bg-secondary"
                                 />
                               )}

@@ -327,10 +327,10 @@ function ThemeToggle({
         <motion.span
           key={shown ?? "pending"}
           className="flex items-center justify-center"
-          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: -90, scale: 0.5 }}
-          animate={{ opacity: shown === null ? 0 : 1, rotate: 0, scale: 1 }}
-          exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 90, scale: 0.5 }}
-          transition={{ type: "spring", duration: 0.45, bounce: 0.3 }}
+          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: -90, scale: 0.25, filter: "blur(4px)" }}
+          animate={{ opacity: shown === null ? 0 : 1, rotate: 0, scale: 1, filter: "blur(0px)" }}
+          exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 90, scale: 0.25, filter: "blur(4px)" }}
+          transition={{ type: "spring", duration: 0.3, bounce: 0 }}
         >
           <Icon size={iconSize} />
         </motion.span>

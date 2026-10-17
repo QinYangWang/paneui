@@ -154,7 +154,7 @@ export function ProjectFolder({
             <span className="flex items-end justify-between gap-3">
               <span className="flex min-w-0 flex-col">
                 <span className="truncate text-ui-lg font-semibold">{title}</span>
-                <span className="truncate text-ui-sm text-primary-foreground/75">
+                <span className="tabular-nums truncate text-ui-sm text-primary-foreground/75">
                   {description ? `${description} · ` : ""}
                   {total} {itemLabel}
                 </span>
@@ -201,7 +201,7 @@ export function ProjectFolder({
                     <DialogPrimitive.Title className="truncate text-lg leading-snug font-semibold">
                       {title}
                     </DialogPrimitive.Title>
-                    <DialogPrimitive.Description className="text-ui text-muted-foreground">
+                    <DialogPrimitive.Description className="tabular-nums text-ui text-muted-foreground">
                       {description ? `${description} · ` : ""}
                       {total} {itemLabel}
                     </DialogPrimitive.Description>

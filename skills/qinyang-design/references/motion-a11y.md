@@ -3,15 +3,19 @@
 ## Motion
 
 - Springs are bounce-free and close to critically damped: `{ type: "spring", stiffness: 380–520,
-  damping: 26–42, mass: 0.5–0.7 }` (420/38/0.6 for settles, 500/30 for snappy toggles). Icon cross-fades:
-  `{ type: "spring", duration: 0.3, bounce: 0 }`.
+  damping: 26–42, mass: 0.5–0.7 }` (420/38/0.6 for settles, 500/30 for snappy toggles), never under 0.6 of
+  critical damping. Icon swaps go between opacity 0, scale 0.25, blur 4px and the resting glyph on
+  `{ type: "spring", duration: 0.3, bounce: 0 }` (`polish.md` › Motion).
 - CSS: `duration-150` for press, hover and other high-frequency changes, `duration-200` for state changes,
   `duration-300` for reveals and panels; easing `cubic-bezier(0.22,1,0.36,1)` (`EASE = [0.22, 1, 0.36, 1]`).
   The overshoot curve `cubic-bezier(0.34,1.56,0.64,1)` only for playful pops.
 - Transition named properties (`transition-colors`, `transition-[box-shadow,background-color,color]`,
   `transition-transform`), never `transition-all`. `will-change` only for a stutter you saw, naming the
   property.
-- Staggered entrances 100ms apart (opacity + 4px blur + 12px rise, 300ms ease-out); exits shorter (150ms).
+- Hover, open and toggle states are transitions, which retarget mid-way; keyframes only for loops and
+  one-time sequences. Hover answers within 150ms.
+- Staggered entrances 100ms apart (opacity + 4px blur + 12px rise, 300ms ease-out), only for infrequent
+  moments; exits shorter (150ms) with a short fixed offset, never a deep scale-down.
   `initial={false}` on `AnimatePresence` state swaps. Popups enter from `scale-98` plus opacity.
 - **No press scale on standard controls** (buttons, triggers, toggles, nav rows, checkboxes, radios):
   they answer with a fill change. A press scale (to `0.96` over 150ms) stays only where the motion is the
@@ -29,7 +33,8 @@ stop.
 - `focus-visible:ring-2 focus-visible:ring-ring/50` on every interactive element; `outline-none` only
   together with that ring. Inside scroll frames use `focus-visible:ring-inset`.
 - Every control has an accessible name (visible label, `aria-label` on icon-only buttons, a `label` on
-  sliders). Menus, selects, tabs and trees keep their primitive's keyboard model.
+  sliders). Targets are at least 24px (44px under a coarse pointer), extended with a pseudo-element when
+  the control is smaller (`polish.md` › Targets). Menus, selects, tabs and trees keep their primitive's keyboard model.
 - Hotkeys show their shortcut in a `Kbd`; one listener per shortcut, not one per instance.
 
 ## Light and dark

@@ -64,7 +64,7 @@ export default function AppShellDemo() {
       </AppShellSidebar>
       <AppShellMain>
         <div className="flex flex-col gap-4 p-6">
-          <h2 className="text-lg font-semibold">{ALL.find((i) => i.id === active)?.label}</h2>
+          <h2 className="text-balance text-lg font-semibold">{ALL.find((i) => i.id === active)?.label}</h2>
           <div className="grid grid-cols-2 gap-3">
             <div className="h-24 rounded-xl bg-secondary" />
             <div className="h-24 rounded-xl bg-secondary" />

@@ -21,10 +21,10 @@ function StatusMark({ status }: { status: TaskStatus }) {
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={status}
-          initial={{ scale: 0.4, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.4, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 500, damping: 28 }}
+          initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+          animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+          transition={{ type: "spring", duration: 0.3, bounce: 0 }}
           className={cn(
             "inline-flex size-7 items-center justify-center rounded-full",
             status === "done" && "bg-success text-white",
