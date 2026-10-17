@@ -87,6 +87,7 @@ import d_native_select from "./native-select"
 import d_navigation_menu from "./navigation-menu"
 import d_notion_editor from "./notion-editor"
 import d_number_ticker from "./number-ticker"
+import d_og_image from "./og-image"
 import d_outline from "./outline"
 import d_overflow_hint from "./overflow-hint"
 import d_page_header from "./page-header"
@@ -247,6 +248,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "navigation-menu": d_navigation_menu,
   "notion-editor": d_notion_editor,
   "number-ticker": d_number_ticker,
+  "og-image": d_og_image,
   "outline": d_outline,
   "overflow-hint": d_overflow_hint,
   "page-header": d_page_header,

@@ -1270,7 +1270,8 @@
         "@qinyang/button",
         "@qinyang/overflow-hint",
         "@qinyang/popover",
-        "@qinyang/scroll-area"
+        "@qinyang/scroll-area",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -1289,12 +1290,30 @@
       "description": "Generated cover images for posts and cards, drawn in theme colours.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@qinyang/theme",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
           "path": "registry/base-nova/ui/cover-art.tsx",
           "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
+      }
+    },
+    {
+      "name": "og-image",
+      "type": "registry:ui",
+      "title": "OG Image",
+      "description": "A share card for pages, rendered to PNG at build time.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/og-image.tsx",
+          "type": "registry:component"
         }
       ],
       "meta": {
@@ -1312,7 +1331,8 @@
       "registryDependencies": [
         "@qinyang/theme",
         "@qinyang/icons",
-        "@qinyang/kbd"
+        "@qinyang/kbd",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -3964,7 +3984,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {
@@ -4279,7 +4300,8 @@
       ],
       "registryDependencies": [
         "@qinyang/theme",
-        "@qinyang/icons"
+        "@qinyang/icons",
+        "@qinyang/locale-provider"
       ],
       "files": [
         {

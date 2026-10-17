@@ -99,6 +99,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Empty State](https://qinyangwang.github.io/ui/docs/empty-state.md): Tells users a list or page is empty and what to do. JSON: https://qinyangwang.github.io/ui/r/empty-state.json
 - [Kbd](https://qinyangwang.github.io/ui/docs/kbd.md): Shows a keyboard key or shortcut. JSON: https://qinyangwang.github.io/ui/r/kbd.json
 - [Loader](https://qinyangwang.github.io/ui/docs/loader.md): Shows that something is loading. JSON: https://qinyangwang.github.io/ui/r/loader.json
+- [OG Image](https://qinyangwang.github.io/ui/docs/og-image.md): A share card for pages, rendered to PNG at build time. JSON: https://qinyangwang.github.io/ui/r/og-image.json
 - [Page Header](https://qinyangwang.github.io/ui/docs/page-header.md): Title, context and actions at the top of an app page. JSON: https://qinyangwang.github.io/ui/r/page-header.json
 - [Progress](https://qinyangwang.github.io/ui/docs/progress.md): Shows how far a task has come. JSON: https://qinyangwang.github.io/ui/r/progress.json
 - [Resizable](https://qinyangwang.github.io/ui/docs/resizable.md): Split panes the user can resize or collapse. JSON: https://qinyangwang.github.io/ui/r/resizable.json

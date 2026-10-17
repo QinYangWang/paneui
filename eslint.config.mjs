@@ -371,6 +371,11 @@ const eslintConfig = [
     files: [...LIBRARY_FILES, ...CONSUMER_FILES],
     rules: { "qinyang/concentric-radius": "warn" },
   },
+  {
+    // The share card is rendered to SVG at build time, never served as a page image.
+    files: ["registry/base-nova/ui/og-image.tsx"],
+    rules: { "@next/next/no-img-element": "off" },
+  },
 ];
 
 export default eslintConfig;

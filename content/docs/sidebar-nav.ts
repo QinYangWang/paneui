@@ -48,7 +48,7 @@ export default {
     },
     {
       title: "Keyboard",
-      body: "Section headings are buttons with `aria-expanded`. A linked heading is a link plus a separate chevron button named “Toggle” and the label. The current row has `aria-current=\"page\"`, and on mount the list scrolls it into view when it would start below the fold.",
+      body: "Section headings are buttons with `aria-expanded`. A linked heading is a link plus a separate chevron button named by the locale’s `toggleNamed(label)` (“Toggle Guides”), or `toggleSection` when the label is not text; `toggleLabel` overrides it. The current row has `aria-current=\"page\"`, and on mount the list scrolls it into view when it would start below the fold.",
     },
   ],
   api: [
@@ -57,7 +57,10 @@ export default {
       name: "SidebarNavSearch",
       extends: "button",
       description: "A field-shaped button that opens your search.",
-      props: [{ name: "shortcut", type: "React.ReactNode", description: "Key cap at the end, such as `⌘K`." }],
+      props: [
+        { name: "shortcut", type: "React.ReactNode", description: "Key cap at the end, such as `⌘K`." },
+        { name: "children", type: "React.ReactNode", default: "`labels.searchPlaceholder`", description: "The field text. The default comes from the locale." },
+      ],
     },
     { name: "SidebarNavContent", extends: "nav", description: "The scrolling list. Give it an `aria-label`.", props: [] },
     {
@@ -73,6 +76,7 @@ export default {
         { name: "labelRender", type: "React.ReactElement | (props) => React.ReactElement", description: "Renders the label link with your router's link, such as `<Link href=\"…\" />`." },
         { name: "active", type: "boolean", default: "false", description: "Marks the label's page as current with the fill, the bar and `aria-current=\"page\"`." },
         { name: "icon", type: "React.ReactNode", description: "Leading icon in the same 16px slot as `SidebarNavLink`, muted until the label is hovered or current." },
+        { name: "toggleLabel", type: "string", description: "Name of the chevron button beside a linked label. Defaults to the locale's `toggleNamed(label)`." },
       ],
     },
     { name: "SidebarNavList", extends: "ul", props: [] },

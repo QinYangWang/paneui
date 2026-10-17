@@ -41,6 +41,10 @@ export default {
       body: "The choice is saved to `localStorage` under `storageKey` (`\"light\"` or `\"dark\"`); choosing System removes the key, and no key means the page follows the OS, including OS changes while it is open. A `theme-change` window event (`THEME_CHANGE_EVENT`) fires, so several toggles stay in sync, and other tabs follow through the storage event.",
     },
     {
+      title: "Labels",
+      body: "The button is named by the locale: `switchToLightTheme` or `switchToDarkTheme`, `themeCycle(current, next)` with `themeLight`, `themeDark` and `themeSystem` in the tri-state mode, and `toggleTheme` before the theme is known. An `aria-label` prop wins.",
+    },
+    {
       title: "Pre-paint script",
       body: "Inline `getThemeScript()` in a `<script>` at the top of `<head>` so the first paint has the right theme: `<script dangerouslySetInnerHTML={{ __html: getThemeScript() }} />` (pass your `storageKey` if you changed it). It sets the `.dark` class and `color-scheme`, and with no stored value keeps following OS changes even before the page hydrates.",
     },

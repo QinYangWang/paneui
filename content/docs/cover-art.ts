@@ -14,7 +14,7 @@ export default {
   notes: [
     {
       title: "Accessibility",
-      body: "The art is `role=\"img\"` with the label “Abstract cover illustration”. Pass `aria-label` with the post title, or `aria-hidden` when a caption next to it already names the post.",
+      body: "The art is `role=\"img\"`, named by the locale’s `coverArt` label (“Abstract cover illustration” in English) through a hidden element, so it works without client code. Pass `aria-label` with the post title, or `aria-hidden` when a caption next to it already names the post.",
     },
     {
       title: "Colours",

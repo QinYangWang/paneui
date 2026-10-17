@@ -170,6 +170,7 @@ import ProgressDemo from "@/registry/base-nova/examples/progress-demo"
 import SkeletonDemo from "@/registry/base-nova/examples/skeleton-demo"
 import OutlineDemo from "@/registry/base-nova/examples/outline-demo"
 import CoverArtDemo from "@/registry/base-nova/examples/cover-art-demo"
+import OgImageDemo from "@/registry/base-nova/examples/og-image-demo"
 import SidebarNavDemo from "@/registry/base-nova/examples/sidebar-nav-demo"
 import SimpleTableDemo from "@/registry/base-nova/examples/simple-table-demo"
 import SeparatorDemo from "@/registry/base-nova/examples/separator-demo"
@@ -365,6 +366,7 @@ export const demos: Record<string, React.ComponentType> = {
   "separator": SeparatorDemo,
   "outline": OutlineDemo,
   "cover-art": CoverArtDemo,
+  "og-image": OgImageDemo,
   "sidebar-nav": SidebarNavDemo,
   "simple-table": SimpleTableDemo,
   "kbd": KbdDemo,

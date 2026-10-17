@@ -8,6 +8,28 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-17-share-cards-and-labels",
+    date: "October 17, 2026",
+    title: "Share cards, fitting tables and more translated labels",
+    tag: "Components",
+    changes: [
+      <>
+        <TextLink href="/docs/og-image">OG Image</TextLink> is a 1200 × 630 share card you render to PNG at build time. Its
+        colours come from <Code>OG_IMAGE_TOKENS</Code>, generated from the theme for every accent in both modes.
+      </>,
+      <>
+        <TextLink href="/docs/simple-table">Simple Table</TextLink> body cells keep their minimum width only on small
+        screens, so short tables with many columns fit a reading column on desktop; empty cells never get one.{" "}
+        <Code>cellMinWidth</Code> keeps the floor everywhere or removes it.
+      </>,
+      <>
+        The outline, sidebar nav, command palette, theme toggle and cover art read their built-in text from{" "}
+        <TextLink href="/docs/locale-provider">Locale Provider</TextLink>, in English and Simplified Chinese. Their props
+        still win, and <Code>SidebarNavSection</Code> takes a <Code>toggleLabel</Code>.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-17-tables-and-nav-icons",
     date: "October 17, 2026",
     title: "Table overflow, group icons and stable installs",

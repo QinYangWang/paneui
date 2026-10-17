@@ -34,6 +34,7 @@ export default {
         └── SimpleTableCell   variant`,
   examples: [
     { id: "numbers", title: "Numbers", description: "Use the `numeric` cell for sizes and counts that should line up." },
+    { id: "comparison", title: "Comparisons", description: "Short values across many columns fit a reading column without scrolling." },
     { id: "markdown", title: "Markdown Tables", description: "Map the table elements in your MDX components so GFM tables render as SimpleTable." },
     { id: "rtl", title: "RTL", description: "For right-to-left pages, set `dir=\"rtl\"` on a parent; headers align to the start edge." },
   ],
@@ -44,7 +45,7 @@ export default {
     },
     {
       title: "Overflow",
-      body: "Inline code never breaks inside a word, and body text keeps a minimum width, so when the columns don't fit the surface scrolls sideways instead of squeezing them. Give the table a `min-w-*` class to set a wider floor.",
+      body: "Inline code never breaks inside a word. On screens narrower than 40rem, body-text cells keep an 8rem floor, so a table that doesn't fit scrolls sideways instead of squeezing its prose; wider screens drop the floor, so short tables fit a reading column. Empty cells never get one. `cellMinWidth=\"always\"` keeps the floor everywhere, `\"none\"` removes it, and a `min-w-*` class on the table sets a wider floor for the whole table.",
     },
     {
       title: "Inline code and alignment",
@@ -55,7 +56,11 @@ export default {
     {
       name: "SimpleTable",
       extends: "table",
-      props: [{ name: "containerClassName", type: "string", description: "Class for the raised, scrolling surface around the table." }],
+      props: [
+        { name: "containerClassName", type: "string", description: "Class for the raised, scrolling surface around the table." },
+        { name: "cellMinWidth", type: `"auto" | "always" | "none"`, default: `"auto"`, description: "Floor for body-text cells: 8rem below 40rem of viewport with `auto`, always with `always`, never with `none`." },
+      ],
+      dataAttributes: [{ name: "data-cell-min-width", description: "On the container, the `cellMinWidth` in use." }],
     },
     { name: "SimpleTableHeader", extends: "thead", props: [] },
     { name: "SimpleTableBody", extends: "tbody", props: [] },
