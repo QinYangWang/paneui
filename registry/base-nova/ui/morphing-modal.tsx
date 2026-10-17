@@ -295,7 +295,7 @@ function MorphingModalBack({ className, onClick, ...props }: React.ComponentProp
       {...props}
       aria-label={props["aria-label"] ?? labels.back}
     >
-      <ChevronLeftIcon size={16} />
+      <ChevronLeftIcon className="rtl:-scale-x-100" size={16} />
     </button>
   )
 }

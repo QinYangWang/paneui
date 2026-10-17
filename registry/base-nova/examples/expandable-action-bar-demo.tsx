@@ -12,7 +12,7 @@ const items: ExpandableActionBarItem[] = [
   { id: "like", label: "Like", icon: <HeartIcon />, shortcut: "L" },
   { id: "reply", label: "Reply", icon: <ChatIcon />, badge: 3, shortcut: "R" },
   { id: "save", label: "Save", icon: <BookmarkIcon /> },
-  { id: "share", label: "Share", icon: <SendIcon /> },
+  { id: "share", label: "Share", icon: <SendIcon className="rtl:-scale-x-100" /> },
   { id: "copy", label: "Copy link", icon: <LinkIcon /> },
 ]
 

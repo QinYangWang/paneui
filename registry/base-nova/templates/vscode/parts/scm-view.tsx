@@ -103,7 +103,7 @@ export function ScmView({
                   </button>
                   <span className="opacity-0 transition-opacity duration-150 group-focus-within/change:opacity-100 group-hover/change:opacity-100 pointer-coarse:opacity-100">
                     <IconAction label="Discard changes" onClick={() => ws.discard(path)}>
-                      <UndoIcon />
+                      <UndoIcon className="rtl:-scale-x-100" />
                     </IconAction>
                   </span>
                   <span title={status.label} className={cn("w-3 shrink-0 text-center font-mono text-ui-xs font-medium", status.className)}>

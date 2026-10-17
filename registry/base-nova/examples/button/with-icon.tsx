@@ -10,7 +10,7 @@ export default function ButtonWithIcon() {
       </Button>
       <Button>
         Continue
-        <ArrowRightIcon data-icon="inline-end" />
+        <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
       </Button>
     </div>
   )

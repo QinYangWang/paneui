@@ -53,7 +53,7 @@ export function Hero() {
               <Badge variant="chip" size="sm" render={<AppLink href={routes.changelog} />}>
                 <BoltIcon />
                 New: reviews that cite the line
-                <ArrowRightIcon />
+                <ArrowRightIcon className="rtl:-scale-x-100" />
               </Badge>
             </StaggerItem>
           </Stagger>
@@ -72,7 +72,7 @@ export function Hero() {
             <StaggerItem className="flex flex-wrap items-center justify-center gap-3">
               <Button size="lg" nativeButton={false} render={<AppLink href={routes.signup} />}>
                 Start free
-                <ArrowRightIcon data-icon="inline-end" />
+                <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
               </Button>
               <Button size="lg" variant="secondary" nativeButton={false} render={<AppLink href={routes.pricing} />}>
                 See pricing
@@ -275,7 +275,7 @@ export function PricingSection() {
         <PlanCards cycle={cycle} />
         <Button variant="link" nativeButton={false} render={<AppLink href={routes.pricing} />}>
           Compare every feature
-          <ArrowRightIcon data-icon="inline-end" />
+          <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
         </Button>
       </Container>
     </section>
@@ -347,7 +347,7 @@ export function Cta() {
           <div className="flex flex-wrap justify-center gap-3">
             <Button size="lg" nativeButton={false} render={<AppLink href={routes.signup} />}>
               Start free
-              <ArrowRightIcon data-icon="inline-end" />
+              <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
             </Button>
             <Button size="lg" variant="secondary" nativeButton={false} render={<AppLink href={routes.login} />}>
               Sign in

@@ -21,7 +21,8 @@ import { cn } from "@/lib/utils"
  * File / folder primitives. <FileTreeFolder> and <FileTreeFile> are
  * declarative: <FileTree> reads them into one flattened, keyboard-navigable
  * collection (WAI-ARIA tree pattern, roving tabindex, typeahead). Density and
- * geometry: 22px rows, 12px indent per level and one 16px leading slot per
+ * geometry: 22px rows (under the 24px target floor on purpose: editor density,
+ * full-width rows, arrow-key navigation), 12px indent per level and one 16px leading slot per
  * row. A folder's slot holds its chevron, a file's slot holds its file-type
  * icon, so at the same level chevrons and file icons share one column. A thin
  * indent guide runs under each open folder's chevron. Rows spring in and out as folders open and the selection
@@ -398,7 +399,7 @@ function FileTree({
                   animate={{ rotate: isOpen ? 90 : 0 }}
                   transition={reduce ? { duration: 0 } : POP}
                   className={cn(
-                    "relative z-10 grid size-4 shrink-0 place-items-center text-muted-foreground transition-colors [&_svg]:size-3",
+                    "relative z-10 grid size-4 shrink-0 place-items-center text-muted-foreground transition-colors rtl:-scale-x-100 [&_svg]:size-3",
                     isOpen && "text-foreground"
                   )}
                 >

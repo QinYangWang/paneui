@@ -62,7 +62,7 @@ export function TaskRow({
       data-status={status}
       onClick={onClick}
       className={cn(
-        "group/task flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-[background-color,box-shadow] outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring/50",
+        "group/task flex w-full cursor-pointer items-center gap-3 rounded-2xl ps-3 pe-2.5 py-2.5 text-start transition-[background-color,box-shadow] outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       )}
     >
@@ -72,7 +72,7 @@ export function TaskRow({
         {detail && <span className="truncate text-ui text-muted-foreground">{detail}</span>}
       </span>
       <span className="text-ui text-muted-foreground tabular-nums">{statusText[status]}</span>
-      <ChevronRightIcon size={16} className="text-muted-foreground transition-transform group-hover/task:translate-x-0.5" />
+      <ChevronRightIcon size={16} className="text-muted-foreground transition-transform group-hover/task:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover/task:-translate-x-0.5" />
     </button>
   )
 }

@@ -8,6 +8,25 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-17-right-to-left-icons",
+    date: "October 17, 2026",
+    title: "Icons that point the right way in right-to-left",
+    tag: "Components",
+    changes: [
+      <>
+        Arrows, chevrons, send, undo, external-link and log-out icons flip in right-to-left across components, blocks,
+        templates and examples. Disclosure chevrons still turn down when open.
+      </>,
+      <>
+        <TextLink href="/docs/carousel">Carousel</TextLink> dots sit further apart so each one is a full 24px target.
+      </>,
+      <>
+        The upgrade check warns when your theme is missing <Code>media-outline</Code>. Reinstall{" "}
+        <Code>@qinyang/theme</Code> to fix it.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-17-polish-rules",
     date: "October 17, 2026",
     title: "Polish rules, checks and examples in the design skill",

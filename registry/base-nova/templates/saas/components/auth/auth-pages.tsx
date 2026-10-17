@@ -237,7 +237,7 @@ export function LoginPage() {
             loadingText="Signing in"
             successText="Signed in"
             errorText="Try again"
-            icon={<ArrowRightIcon />}
+            icon={<ArrowRightIcon className="rtl:-scale-x-100" />}
             className="w-full"
           >
             Sign in
@@ -358,7 +358,7 @@ export function ForgotPasswordPage() {
           Send reset link
         </StatefulButton>
         <Button variant="ghost" nativeButton={false} render={<AppLink href={routes.login} />} className="self-center">
-          <ArrowLeftIcon data-icon="inline-start" />
+          <ArrowLeftIcon className="rtl:-scale-x-100" data-icon="inline-start" />
           Back to sign in
         </Button>
       </form>

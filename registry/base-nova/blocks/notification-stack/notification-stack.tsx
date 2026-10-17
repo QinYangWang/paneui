@@ -207,7 +207,7 @@ export function NotificationStack({
               className="inline-flex h-7 items-center gap-1 rounded-md px-2.5 text-ui-sm font-medium text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               View all
-              <ArrowUpRightIcon size={13} />
+              <ArrowUpRightIcon className="rtl:-scale-x-100" size={13} />
             </motion.button>
           )}
         </AnimatePresence>

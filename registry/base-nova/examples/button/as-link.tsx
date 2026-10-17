@@ -5,7 +5,7 @@ export default function ButtonAsLink() {
   return (
     <Button variant="secondary" nativeButton={false} render={<a href="#api-reference" />}>
       API reference
-      <ArrowRightIcon data-icon="inline-end" />
+      <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
     </Button>
   )
 }

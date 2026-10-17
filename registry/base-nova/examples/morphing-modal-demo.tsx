@@ -28,12 +28,12 @@ export default function MorphingModalDemo() {
             <MorphingModalLink to="invite">
               <UsersIcon className="text-muted-foreground" />
               <span className="flex-1">Invite teammates</span>
-              <ChevronRightIcon className="text-muted-foreground" />
+              <ChevronRightIcon className="text-muted-foreground rtl:-scale-x-100" />
             </MorphingModalLink>
             <MorphingModalLink to="link">
               <LinkIcon className="text-muted-foreground" />
               <span className="flex-1">Get a share link</span>
-              <ChevronRightIcon className="text-muted-foreground" />
+              <ChevronRightIcon className="text-muted-foreground rtl:-scale-x-100" />
             </MorphingModalLink>
           </div>
         </MorphingModalView>

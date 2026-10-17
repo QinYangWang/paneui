@@ -592,7 +592,7 @@ function checkSourceTs(file, text) {
         report("icon-stroke", file, at, `strokeWidth on <${name}>: the set's stroke is tuned to the text beside it; switch the icon style instead of thickening one glyph.`)
       const sz = toks.map((t) => t.match(/^(?:size|h|w)-\[(\d*\.?\d+)px\]$/)?.[1]).find(Boolean)
       if (sz && !ICON_GRID.has(Number(sz))) report("icon-size", file, at, `${sz}px icon: render on the grid (12, 14, 16, 18, 20, 24…) so strokes land on whole pixels.`)
-      if (config.rtl && /^(Chevron|Arrow|Caret)(Left|Right)|^(Undo|Redo|Reply|Send|Forward|Back)\w*Icon$|ArrowUpRight|ExternalLink/.test(name) && !/\brtl:/.test(chain()))
+      if (config.rtl && /^(Chevron|Arrow|Caret)(Left|Right)|^(Undo|Redo|Reply|Send|Forward|Back|LogOut|LogIn)\w*Icon$|^Corner\w*(Left|Right)Icon$|ArrowUpRight|ExternalLink/.test(name) && !/\brtl:/.test(chain()))
         report("icon-rtl", file, at, `<${name}> points in the reading direction; add rtl:-scale-x-100 so it flips in right-to-left.`)
     }
     if (/^(svg|path|circle|rect|line|polyline|polygon|ellipse|g)$/.test(name))

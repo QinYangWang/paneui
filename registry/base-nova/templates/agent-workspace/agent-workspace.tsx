@@ -528,10 +528,10 @@ export function AgentWorkspace() {
                     <SidebarIcon />
                   </ToolbarButton>
                   <ToolbarButton label="Back" onClick={() => go(-1)}>
-                    <ArrowLeftIcon />
+                    <ArrowLeftIcon className="rtl:-scale-x-100" />
                   </ToolbarButton>
                   <ToolbarButton label="Forward" onClick={() => go(1)}>
-                    <ArrowRightIcon />
+                    <ArrowRightIcon className="rtl:-scale-x-100" />
                   </ToolbarButton>
                 </div>
                 <div className="min-h-0 flex-1">{sidebar}</div>

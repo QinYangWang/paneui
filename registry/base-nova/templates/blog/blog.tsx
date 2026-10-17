@@ -61,7 +61,7 @@ export function BlogHome({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                   <Tags tags={featured.tags} />
                   <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
                     Read
-                    <ArrowRightIcon size={14} className="transition-transform duration-150 group-hover:translate-x-0.5" />
+                    <ArrowRightIcon size={14} className="transition-transform duration-150 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
                   </span>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export function BlogHome({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
             </ul>
             <Button variant="secondary" className="self-start">
               Browse the archive
-              <ArrowRightIcon data-icon="inline-end" />
+              <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
             </Button>
           </section>
 

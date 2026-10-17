@@ -415,11 +415,11 @@ function EditableTable({
           </MenuTrigger>
           <MenuContent align="end">
             <MenuItem onClick={() => insertColumn(index)}>
-              <ArrowLeftIcon />
+              <ArrowLeftIcon className="rtl:-scale-x-100" />
               Insert left
             </MenuItem>
             <MenuItem onClick={() => insertColumn(index + 1)}>
-              <ArrowRightIcon />
+              <ArrowRightIcon className="rtl:-scale-x-100" />
               Insert right
             </MenuItem>
             <MenuItem onClick={() => setRenaming({ key, draft: String(ctx.column.header) })}>

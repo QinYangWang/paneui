@@ -116,7 +116,7 @@ function EditedFilesCard({
           <Button variant="ghost" size="sm" aria-label="Undo" onClick={onUndo} className="rounded-inner text-muted-foreground @max-xs/edited-files:px-2">
             {/* Under 20rem (narrow panes, phones) the button keeps only its glyph. */}
             <span className="@max-xs/edited-files:hidden">Undo</span>
-            <UndoIcon data-icon="inline-end" />
+            <UndoIcon className="rtl:-scale-x-100" data-icon="inline-end" />
           </Button>
         )}
         {onReview && (

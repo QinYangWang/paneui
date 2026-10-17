@@ -7,10 +7,10 @@ export default function ButtonGroupNested() {
     <ButtonGroup aria-label="Pages">
       <ButtonGroup>
         <Button variant="outline" size="icon-sm" aria-label="Previous page">
-          <ChevronLeftIcon />
+          <ChevronLeftIcon className="rtl:-scale-x-100" />
         </Button>
         <Button variant="outline" size="icon-sm" aria-label="Next page">
-          <ChevronRightIcon />
+          <ChevronRightIcon className="rtl:-scale-x-100" />
         </Button>
       </ButtonGroup>
       <ButtonGroup>

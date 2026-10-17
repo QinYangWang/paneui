@@ -62,7 +62,7 @@ export default function MenuRtl() {
             </MenuSub>
             <MenuSeparator />
             <MenuItem>
-              <LogOutIcon />
+              <LogOutIcon className="rtl:-scale-x-100" />
               تسجيل الخروج
             </MenuItem>
           </MenuContent>

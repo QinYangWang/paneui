@@ -251,10 +251,10 @@ export function NotionEditorToolbar({ editor, fileName = "document.mdx", childre
     >
       <ToolbarGroup>
         <TipButton label="Undo" kbd={`${mod}Z`} disabled={!state?.canUndo} onClick={() => editor?.chain().focus().undo().run()}>
-          <UndoIcon />
+          <UndoIcon className="rtl:-scale-x-100" />
         </TipButton>
         <TipButton label="Redo" kbd={`${mod}⇧Z`} disabled={!state?.canRedo} onClick={() => editor?.chain().focus().redo().run()}>
-          <UndoIcon className="-scale-x-100" />
+          <UndoIcon className="-scale-x-100 rtl:scale-x-100" />
         </TipButton>
       </ToolbarGroup>
       {children}

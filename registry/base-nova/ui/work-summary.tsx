@@ -124,8 +124,8 @@ function WorkSummary({
         {hasSteps && (
           <ChevronRightIcon
             className={cn(
-              "size-3.5 transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-              open && "rotate-90"
+              "size-3.5 transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none rtl:-scale-x-100",
+              open && "rotate-90 rtl:-rotate-90"
             )}
           />
         )}

@@ -18,7 +18,7 @@ export default function UserMenuDemo() {
         </MenuGroup>
         <MenuSeparator />
         <MenuItem variant="destructive">
-          <LogOutIcon />
+          <LogOutIcon className="rtl:-scale-x-100" />
           Sign out
         </MenuItem>
       </UserMenu>

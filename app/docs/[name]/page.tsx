@@ -234,7 +234,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
           <div className="flex flex-wrap gap-2 pt-1">
             <Button nativeButton={false} render={<Link href={`/templates/${item.name}/`} />}>
               Open template
-              <ArrowRightIcon data-icon="inline-end" />
+              <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
             </Button>
           </div>
         )}

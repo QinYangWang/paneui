@@ -465,7 +465,7 @@ function SidebarItem({
                 initial={false}
                 animate={{ rotate: open && !collapsed ? 90 : 0, opacity: collapsed ? 0 : 1 }}
                 transition={sidebar.reduce ? { duration: 0 } : PILL_SPRING}
-                className="relative grid size-4 shrink-0 place-items-center text-muted-foreground [&_svg]:size-3.5"
+                className="relative grid size-4 shrink-0 place-items-center text-muted-foreground rtl:-scale-x-100 [&_svg]:size-3.5"
               >
                 <ChevronRightIcon />
               </motion.span>

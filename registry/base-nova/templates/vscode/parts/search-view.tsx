@@ -144,7 +144,7 @@ export function SearchView({
           onClick={() => setShowReplace((s) => !s)}
           className="flex w-4 shrink-0 items-start justify-center rounded-sm pt-2 text-muted-foreground outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
         >
-          <ChevronRightIcon className={cn("size-3 transition-transform duration-150", showReplace && "rotate-90")} />
+          <ChevronRightIcon className={cn("size-3 transition-transform duration-150 rtl:-scale-x-100", showReplace && "rotate-90 rtl:-rotate-90")} />
         </button>
         <div className="flex min-w-0 flex-1 flex-col gap-1.5">
           <div className="flex items-center gap-1">
@@ -211,7 +211,7 @@ export function SearchView({
                   }
                   className="flex h-6 w-full items-center gap-1.5 rounded-sm px-1 text-start text-ui outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
                 >
-                  <ChevronRightIcon className={cn("size-3 shrink-0 text-muted-foreground transition-transform duration-150", open && "rotate-90")} />
+                  <ChevronRightIcon className={cn("size-3 shrink-0 text-muted-foreground transition-transform duration-150 rtl:-scale-x-100", open && "rotate-90 rtl:-rotate-90")} />
                   <span className={cn("flex size-4 shrink-0 items-center justify-center", kind.className)}>{kind.icon}</span>
                   <span className="truncate">{basename(path)}</span>
                   <span className="min-w-0 flex-1 truncate text-ui-xs text-muted-foreground">{rel(dirname(path))}</span>

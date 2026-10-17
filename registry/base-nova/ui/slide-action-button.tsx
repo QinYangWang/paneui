@@ -216,6 +216,7 @@ function SlideActionButton({
             ) : phase === "pending" ? (
               <LoaderIcon className="animate-spin motion-reduce:animate-none" />
             ) : (
+              // design-check-ignore icon-rtl -- the thumb drags left to right in every direction, so the chevron keeps pointing right
               (thumbIcon ?? <ChevronRightIcon />)
             )}
           </motion.span>

@@ -13,7 +13,7 @@ export default function OverflowActionsDemo() {
         aria-label="Document actions"
         primaryActions={[
           { id: "edit", label: "Edit", icon: <EditIcon /> },
-          { id: "share", label: "Share", icon: <SendIcon /> },
+          { id: "share", label: "Share", icon: <SendIcon className="rtl:-scale-x-100" /> },
         ]}
         overflowActions={[
           { id: "copy", label: "Duplicate", icon: <CopyIcon />, iconOnly: true, ariaLabel: "Duplicate" },

@@ -61,7 +61,7 @@ export default function MenuDemo() {
           </MenuSub>
           <MenuSeparator />
           <MenuItem>
-            <LogOutIcon />
+            <LogOutIcon className="rtl:-scale-x-100" />
             Sign out
           </MenuItem>
         </MenuContent>

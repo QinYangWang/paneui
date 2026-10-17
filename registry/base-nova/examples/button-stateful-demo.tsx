@@ -30,7 +30,7 @@ export default function ButtonStatefulDemo() {
         onClick={send}
         loadingText="Sending"
         successText="Invite sent"
-        icon={<SendIcon />}
+        icon={<SendIcon className="rtl:-scale-x-100" />}
       >
         Send invite
       </StatefulButton>

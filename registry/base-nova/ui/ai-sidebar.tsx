@@ -245,8 +245,8 @@ function ResourceTree({ label, items, query, expanded, onToggle, activeId, onAct
                     <ChevronRightIcon
                       size={13}
                       className={cn(
-                        "transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-                        open && "rotate-90"
+                        "transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none rtl:-scale-x-100",
+                        open && "rotate-90 rtl:-rotate-90"
                       )}
                     />
                   )}

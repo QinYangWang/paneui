@@ -142,7 +142,7 @@ export function PreviewTabs({
                   />
                 }
               >
-                <ExternalLinkIcon />
+                <ExternalLinkIcon className="rtl:-scale-x-100" />
               </TooltipTrigger>
               <TooltipContent>Open in a new tab</TooltipContent>
             </Tooltip>

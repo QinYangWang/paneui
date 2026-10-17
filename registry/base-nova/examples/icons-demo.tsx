@@ -8,7 +8,7 @@ export default function IconsDemo() {
       <SparklesIcon />
       <BotIcon size={24} />
       <BellIcon className="text-primary" />
-      <SendIcon className="text-success" />
+      <SendIcon className="text-success rtl:-scale-x-100" />
     </div>
   )
 }

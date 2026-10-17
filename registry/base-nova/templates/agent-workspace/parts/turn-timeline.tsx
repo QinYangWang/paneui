@@ -199,7 +199,7 @@ export function Timeline({
               <div key={item.id} className="flex flex-col items-end gap-1.5">
                 {item.steering && (
                   <span className="flex items-center gap-1.5 text-ui text-muted-foreground">
-                    <CornerDownRightIcon className="size-3.5" />
+                    <CornerDownRightIcon className="size-3.5 rtl:-scale-x-100" />
                     Steering conversation
                   </span>
                 )}

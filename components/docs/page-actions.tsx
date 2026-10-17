@@ -101,12 +101,12 @@ export function PageActions({ markdownPath, pagePath, title }: { markdownPath: s
               {/* The brand icon package leaves this mark out, so it gets a neutral chat glyph. */}
               <ChatIcon />
               Open in ChatGPT
-              <ExternalLinkIcon className="ms-auto" />
+              <ExternalLinkIcon className="ms-auto rtl:-scale-x-100" />
             </MenuItem>
             <MenuItem onClick={() => openChat("https://claude.ai/new?q=")}>
               <BrandIcon icon={siClaude} />
               Open in Claude
-              <ExternalLinkIcon className="ms-auto" />
+              <ExternalLinkIcon className="ms-auto rtl:-scale-x-100" />
             </MenuItem>
           </MenuGroup>
           <MenuSeparator />

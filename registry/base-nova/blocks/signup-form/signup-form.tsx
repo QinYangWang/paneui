@@ -281,7 +281,7 @@ function SignupForm({
           loadingText="Creating account"
           successText={successLabel}
           errorText="Try again"
-          icon={<ArrowRightIcon />}
+          icon={<ArrowRightIcon className="rtl:-scale-x-100" />}
           className="w-full"
         >
           {submitLabel}

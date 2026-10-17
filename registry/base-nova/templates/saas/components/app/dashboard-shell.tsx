@@ -214,7 +214,7 @@ function AccountMenu() {
           router.push(href(routes.login))
         }}
       >
-        <LogOutIcon />
+        <LogOutIcon className="rtl:-scale-x-100" />
         Sign out
       </MenuItem>
     </UserMenu>

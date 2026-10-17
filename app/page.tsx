@@ -27,7 +27,7 @@ export default function ComponentsPage() {
         <div className="flex flex-wrap gap-2 pt-1">
           <Button nativeButton={false} render={<Link href="/docs/installation" />}>
             Installation
-            <ArrowRightIcon data-icon="inline-end" />
+            <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
           </Button>
           <Button variant="secondary" nativeButton={false} render={<Link href="/docs" />}>
             Introduction
@@ -62,7 +62,7 @@ export default function ComponentsPage() {
                         <CardTitle className="font-medium">{item.title}</CardTitle>
                         <ArrowRightIcon
                           size={16}
-                          className="col-start-2 shrink-0 text-muted-foreground transition-transform group-hover/gallery:translate-x-0.5 group-hover/gallery:text-foreground"
+                          className="col-start-2 shrink-0 text-muted-foreground transition-transform group-hover/gallery:translate-x-0.5 group-hover/gallery:text-foreground rtl:-scale-x-100 rtl:group-hover/gallery:-translate-x-0.5"
                         />
                       </CardHeader>
                     </Link>

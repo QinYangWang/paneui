@@ -45,9 +45,12 @@ Express every fix in the project's own system: Tailwind classes and theme tokens
   | 20px | `after:absolute after:-inset-0.5` | 24px |
   | 16px, touch | `pointer-coarse:after:-inset-3.5` | 44px |
 
-- **No shared pixels.** When an extension would reach the next target (dots 6px apart, a close button at a
-  tab's edge), extend only as far as half the gap, on that axis. Carousel dots extend 9px vertically and
-  3px sideways.
+- **No shared pixels.** When an extension would reach the next target (a close button at a tab's edge),
+  extend only as far as half the gap, on that axis. If half the gap can't reach 24px, widen the gap
+  instead: carousel dots stay 6px, sit 18px apart and extend 9px on every side, so neighbouring 24px
+  targets meet without overlapping.
+- **Dense rows.** File-tree rows are 22px and touch, so the spacing exception can't apply. They stay 22px
+  (the code-editor density); the whole row width is the target and the tree moves by arrow keys.
 - A control inside a `<label>` counts the label as its target. Inline text links are exempt.
 - Checks: `hit-area` (static size classes); probe: `hit-area`, `hit-overlap` (as rendered, pseudo-elements
   included).
@@ -107,8 +110,12 @@ Express every fix in the project's own system: Tailwind classes and theme tokens
 - Render on the grid (12, 14, 16, 18, 20, 24px); check every new glyph at its smallest size. Check:
   `icon-size`.
 - In right-to-left, flip glyphs that point along the reading direction (back/forward arrows, chevrons,
-  send, reply, indent) with `rtl:-scale-x-100`; never flip checkmarks, clocks, media controls or brand
-  marks. Check: `icon-rtl`, on when `qinyang-design.config.json` sets `"rtl": true`.
+  send, reply, undo, external-link, log-out, corner arrows) with `rtl:-scale-x-100`; never flip checkmarks,
+  clocks, media controls, text-alignment glyphs or brand marks. A redo drawn as a mirrored undo takes
+  `-scale-x-100 rtl:scale-x-100`. A chevron that rotates 90° when open takes `rtl:-rotate-90` on the open
+  state, and a hover nudge takes `rtl:group-hover:-translate-x-0.5`. A control that moves left to right in
+  every direction (a slide-to-confirm thumb) keeps its arrow. Check: `icon-rtl`, on when
+  `qinyang-design.config.json` sets `"rtl": true`.
 - Icon-only controls have an `aria-label`; icons beside a label are hidden from assistive tech. Check:
   `icon-button-label` (error).
 
@@ -120,6 +127,7 @@ Common polish advice that this library deliberately doesn't follow, and why:
 | --- | --- | --- |
 | Scale every button to 0.96 on press, with an opt-out prop | No press scale on standard controls (rule 23) | Native desktop controls answer a press with a fill; scaling every button makes dense screens feel springy. The 0.96 value and the 0.95 floor are kept where a press scale is allowed. |
 | 40px minimum targets in dense desktop UI, 44px on touch | 24px on desktop, 44px under `pointer-coarse:` | Controls are 24–32px tall by design (rule 13); 24px is the accessibility floor, and the touch size still applies on touch. |
+| Every target at least 24px, including list rows | File-tree rows stay 22px | Code-editor density; the full-width row is the target and arrow keys move through the tree. |
 | Icon stroke follows the weight of the text beside it | One stroke per icon style | The set is tuned as a family; per-instance strokes mix two looks in one row. |
 | Outline icons by default, filled for the active state | Solid family for navigation, line family for controls (rule 19) | Families split by role; the active state is a fill on the row, not a different glyph. |
 | `cubic-bezier(0.2, 0, 0, 1)` for CSS icon cross-fades | `cubic-bezier(0.22, 1, 0.36, 1)` | One ease-out curve for the whole library. |

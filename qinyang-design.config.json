@@ -5,6 +5,7 @@
     "scripts/fixtures/**",
     "**/parts/code.ts"
   ],
+  "rtl": true,
   "nameHashes": [
     "53ac35dacc1f",
     "c5734b8826de",

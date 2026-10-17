@@ -9,10 +9,10 @@ export default function ToolbarDocumentBar() {
       <Toolbar aria-label="Document" className="h-11">
         <ToolbarGroup>
           <ToolbarButton aria-label="Undo">
-            <UndoIcon />
+            <UndoIcon className="rtl:-scale-x-100" />
           </ToolbarButton>
           <ToolbarButton aria-label="Redo" disabled>
-            <UndoIcon className="-scale-x-100" />
+            <UndoIcon className="-scale-x-100 rtl:scale-x-100" />
           </ToolbarButton>
         </ToolbarGroup>
         <span className="ml-auto px-2 text-xs text-muted-foreground tabular-nums">128 words</span>

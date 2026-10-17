@@ -33,17 +33,17 @@ export default function MorphingModalViewChange() {
               <MorphingModalLink to="profile">
                 <UserIcon className="text-muted-foreground" />
                 <span className="flex-1">Profile</span>
-                <ChevronRightIcon className="text-muted-foreground" />
+                <ChevronRightIcon className="text-muted-foreground rtl:-scale-x-100" />
               </MorphingModalLink>
               <MorphingModalLink to="notifications">
                 <BellIcon className="text-muted-foreground" />
                 <span className="flex-1">Notifications</span>
-                <ChevronRightIcon className="text-muted-foreground" />
+                <ChevronRightIcon className="text-muted-foreground rtl:-scale-x-100" />
               </MorphingModalLink>
               <MorphingModalLink to="security">
                 <LockIcon className="text-muted-foreground" />
                 <span className="flex-1">Security</span>
-                <ChevronRightIcon className="text-muted-foreground" />
+                <ChevronRightIcon className="text-muted-foreground rtl:-scale-x-100" />
               </MorphingModalLink>
             </div>
           </MorphingModalView>

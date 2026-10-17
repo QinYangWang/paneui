@@ -38,7 +38,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
           <Stagger className="flex max-w-3xl flex-col items-start gap-5">
             <StaggerItem>
               <Button variant="ghost" size="sm" nativeButton={false} render={<Link href={hrefs.home} />} className="-ms-3 text-muted-foreground">
-                <ArrowLeftIcon data-icon="inline-start" />
+                <ArrowLeftIcon className="rtl:-scale-x-100" data-icon="inline-start" />
                 All writing
               </Button>
             </StaggerItem>

@@ -96,6 +96,10 @@ function checkCss(file, fix) {
     note("error", file, "theme tokens from 2026-10-16 are missing (--primary-subtle, --shadow-border, …)", "Reinstall the theme: shadcn add <registry>/r/theme.json --overwrite")
   else if (!/@utility frame-\*/.test(css))
     note("error", file, "the frame-* and rounded-inner utilities are missing, so nested corners fall back to fixed radii", "Reinstall the theme.")
+  // The theme added the image hairline on 2026-10-17; components put media-outline on <img> and <video>.
+  if (/--primary-subtle\s*:/.test(css) && !/@utility\s+media-outline\b/.test(css))
+    note("warn", file, "the media-outline utility is missing, so images and video in components render without their 1px edge",
+      "Reinstall @qinyang/theme: shadcn add <registry>/r/theme.json --overwrite")
   if (!/--primary:\s*color\(display-p3/.test(css))
     note("info", file, "no wide-gamut values: colours render in sRGB on P3 screens", "Reinstall the theme to add them.")
 

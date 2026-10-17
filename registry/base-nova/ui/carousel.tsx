@@ -244,11 +244,14 @@ function CarouselNext({ className, variant = "secondary", size = "icon-sm", ...p
   )
 }
 
-/** One dot per slide; the current one is filled. */
+/**
+ * One dot per slide; the current one is filled. Dots stay 6px but sit 18px apart, so each
+ * one's 24px target (the ::after) meets its neighbour's without overlapping.
+ */
 function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
   const { count, index, scrollTo } = useCarousel()
   return (
-    <div data-slot="carousel-dots" className={cn("flex items-center justify-center gap-1.5", className)} {...props}>
+    <div data-slot="carousel-dots" className={cn("flex items-center justify-center gap-4.5", className)} {...props}>
       {Array.from({ length: count }, (_, i) => (
         <button
           key={i}
@@ -256,7 +259,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
           aria-label={`Go to slide ${i + 1}`}
           aria-current={i === index ? "true" : undefined}
           onClick={() => scrollTo(i)}
-          className="relative size-1.5 cursor-pointer rounded-full after:absolute after:-inset-x-[3px] after:-inset-y-[9px] bg-foreground/16 transition-[background-color,width] duration-200 outline-none hover:bg-foreground/32 focus-visible:ring-2 focus-visible:ring-ring/50 aria-current:w-4 aria-current:bg-foreground/72 motion-reduce:transition-none"
+          className="relative size-1.5 cursor-pointer rounded-full after:absolute after:-inset-[9px] bg-foreground/16 transition-[background-color,width] duration-200 outline-none hover:bg-foreground/32 focus-visible:ring-2 focus-visible:ring-ring/50 aria-current:w-4 aria-current:bg-foreground/72 motion-reduce:transition-none"
         />
       ))}
     </div>

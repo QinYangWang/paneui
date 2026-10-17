@@ -333,7 +333,7 @@ function DateRangePickerCalendar({ className, ...props }: React.ComponentProps<"
         onClick={() => setMonth(addMonths(month, -1))}
         className={cn(navButton, "absolute top-0 left-0 z-10")}
       >
-        <ChevronLeftIcon size={16} />
+        <ChevronLeftIcon className="rtl:-scale-x-100" size={16} />
       </button>
       <button
         type="button"
@@ -342,7 +342,7 @@ function DateRangePickerCalendar({ className, ...props }: React.ComponentProps<"
         onClick={() => setMonth(addMonths(month, 1))}
         className={cn(navButton, "absolute top-0 right-0 z-10")}
       >
-        <ChevronRightIcon size={16} />
+        <ChevronRightIcon className="rtl:-scale-x-100" size={16} />
       </button>
       {months.map((m, i) => (
         <div key={i} className="flex w-[17.5rem] flex-col gap-2 overflow-hidden">

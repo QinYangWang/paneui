@@ -308,7 +308,7 @@ function Citation({
                     className="inline-flex shrink-0 items-center gap-0.5 rounded-full px-1.5 py-0.5 font-medium text-primary outline-none hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
                     Open
-                    <ArrowUpRightIcon className="size-3" />
+                    <ArrowUpRightIcon className="size-3 rtl:-scale-x-100" />
                   </a>
                 ) : null}
               </div>
@@ -371,7 +371,7 @@ function CitationList({
                   {domain ? <span className="truncate text-ui-sm text-muted-foreground">{domain}</span> : null}
                 </span>
                 {source.url ? (
-                  <ArrowUpRightIcon className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover/citation-row:opacity-100 group-focus-visible/citation-row:opacity-100" />
+                  <ArrowUpRightIcon className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover/citation-row:opacity-100 group-focus-visible/citation-row:opacity-100 rtl:-scale-x-100" />
                 ) : null}
               </Row>
             </motion.li>

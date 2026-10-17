@@ -172,7 +172,7 @@ export function ThreadsSidebar({
           <Menu>
             <MenuTrigger render={<Button variant="ghost" size="sm" className="text-muted-foreground" />}>
               <span className="font-normal">{FILTERS.find((f) => f.id === filter)?.label}</span>
-              <ChevronRightIcon data-icon="inline-end" className="size-3" />
+              <ChevronRightIcon data-icon="inline-end" className="size-3 rtl:-scale-x-100" />
             </MenuTrigger>
             <MenuContent className="w-48">
               {FILTERS.map((f) => (

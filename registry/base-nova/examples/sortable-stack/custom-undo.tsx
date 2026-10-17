@@ -23,7 +23,7 @@ function Footer() {
     <div className="flex items-center justify-between gap-3">
       <span className="text-xs text-muted-foreground tabular-nums">{ids.length} steps</span>
       <Button variant="ghost" size="sm" disabled={!canUndo} onClick={undo}>
-        <UndoIcon data-icon="inline-start" />
+        <UndoIcon className="rtl:-scale-x-100" data-icon="inline-start" />
         Revert order
       </Button>
     </div>

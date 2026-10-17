@@ -120,7 +120,7 @@ export default function Introduction() {
         <div data-md="links" className="flex flex-wrap gap-2">
           <Button nativeButton={false} render={<Link href="/docs/installation" />}>
             Installation
-            <ArrowRightIcon data-icon="inline-end" />
+            <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
           </Button>
           <Button variant="secondary" nativeButton={false} render={<Link href="/" />}>
             Browse components

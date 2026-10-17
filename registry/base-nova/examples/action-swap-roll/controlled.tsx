@@ -23,7 +23,7 @@ export default function ActionSwapRollControlled() {
         )
       }}
       items={[
-        { value: "draft", label: "Send reply", icon: <SendIcon /> },
+        { value: "draft", label: "Send reply", icon: <SendIcon className="rtl:-scale-x-100" /> },
         { value: "sending", label: "Sending", icon: <LoaderIcon className="animate-spin motion-reduce:animate-none" /> },
         { value: "sent", label: "Reply sent", icon: <CheckIcon /> },
       ]}

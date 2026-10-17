@@ -22,7 +22,7 @@ export default function AlertDialogSmall() {
         <AlertDialogHeader>
           <AlertDialogMedia>
             <IconChip size="lg">
-              <LogOutIcon />
+              <LogOutIcon className="rtl:-scale-x-100" />
             </IconChip>
           </AlertDialogMedia>
           <AlertDialogTitle>Sign out of all devices?</AlertDialogTitle>

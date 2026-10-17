@@ -304,7 +304,7 @@ function SortableStackUndo({ className, children, onClick, ...props }: React.Com
     >
       {children ?? (
         <>
-          <UndoIcon size={14} />
+          <UndoIcon className="rtl:-scale-x-100" size={14} />
           Undo
         </>
       )}

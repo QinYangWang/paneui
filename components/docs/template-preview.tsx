@@ -61,7 +61,7 @@ export function TemplatePreview({ name, path = `/templates/${name}/`, height = 4
       <div className="flex justify-end">
         <Button variant="secondary" size="sm" nativeButton={false} render={<a href={src} target="_blank" rel="noreferrer" />}>
           Open full page
-          <ExternalLinkIcon data-icon="inline-end" />
+          <ExternalLinkIcon className="rtl:-scale-x-100" data-icon="inline-end" />
         </Button>
       </div>
     </div>

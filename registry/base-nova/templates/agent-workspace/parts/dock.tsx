@@ -258,10 +258,10 @@ function BrowserDock() {
         }}
       >
         <Button type="button" variant="ghost" size="icon-sm" aria-label="Back" onClick={() => frameRef.current?.contentWindow?.history.back()} className="text-muted-foreground">
-          <ArrowLeftIcon />
+          <ArrowLeftIcon className="rtl:-scale-x-100" />
         </Button>
         <Button type="button" variant="ghost" size="icon-sm" aria-label="Forward" onClick={() => frameRef.current?.contentWindow?.history.forward()} className="text-muted-foreground">
-          <ArrowRightIcon />
+          <ArrowRightIcon className="rtl:-scale-x-100" />
         </Button>
         <Button type="button" variant="ghost" size="icon-sm" aria-label="Reload" onClick={() => setUrl((u) => (u ? `${u.split("#")[0]}#${Date.now()}` : u))} className="text-muted-foreground">
           <RefreshIcon />
@@ -269,7 +269,7 @@ function BrowserDock() {
         <Input value={draft} onChange={(e) => setDraft(e.target.value)} aria-label="Address" className="h-7 flex-1" />
         {url && (
           <Button type="button" variant="ghost" size="icon-sm" aria-label="Open in a new window" onClick={() => window.open(url, "_blank", "noopener")} className="text-muted-foreground">
-            <ExternalLinkIcon />
+            <ExternalLinkIcon className="rtl:-scale-x-100" />
           </Button>
         )}
       </form>

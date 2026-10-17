@@ -164,7 +164,7 @@ export function ProjectFolder({
                 animate={reduce ? undefined : { scale: fanned ? 1 : 0.85, opacity: fanned ? 1 : 0.7 }}
                 transition={SPRING}
               >
-                <ArrowUpRightIcon size={15} />
+                <ArrowUpRightIcon className="rtl:-scale-x-100" size={15} />
               </motion.span>
             </span>
           </motion.span>
