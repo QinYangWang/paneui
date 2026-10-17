@@ -78,7 +78,6 @@ function OTPInput({
           defaultValue={defaultValue}
           mask={mask}
           disabled={disabled}
-          aria-labelledby={label ? labelId : undefined}
           aria-label={label ? undefined : (ariaLabel ?? "One-time code")}
           aria-invalid={status === "error" || undefined}
           onValueChange={(next, details) => {
@@ -86,6 +85,7 @@ function OTPInput({
             onValueChange?.(next, details)
           }}
           {...props}
+          aria-labelledby={props["aria-labelledby"] ?? (label ? labelId : undefined)}
           ref={rowRef}
           className="flex items-center gap-2"
         >

@@ -95,9 +95,9 @@ function TextReveal({
     <Comp
       ref={ref}
       data-slot="text-reveal"
-      aria-label={lines.join(" ")}
       className={cn(as === "span" ? "inline-block" : "block", className)}
       {...props}
+      aria-label={props["aria-label"] ?? lines.join(" ")}
     >
       {lines.map((line, li) => (
         <span key={li} aria-hidden className="block">

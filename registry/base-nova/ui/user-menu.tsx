@@ -59,13 +59,13 @@ function UserMenu({
     <Menu>
       <MenuTrigger
         data-slot="user-menu"
-        aria-label={`Account menu for ${name}`}
         className={cn(
           "flex min-w-0 cursor-pointer items-center rounded-inner text-left text-ui outline-none transition-[background-color] duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary",
           compact ? (variant === "compact" ? "size-8 justify-center" : "h-10 w-full justify-center") : "h-11 w-full gap-2.5 px-2",
           className
         )}
         {...props}
+        aria-label={props["aria-label"] ?? `Account menu for ${name}`}
       >
         <Avatar size={variant === "compact" ? "sm" : "md"} className={variant === "row" ? "size-7" : undefined}>
           {image && <AvatarImage src={image} alt="" />}

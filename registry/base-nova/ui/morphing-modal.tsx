@@ -284,7 +284,6 @@ function MorphingModalBack({ className, onClick, ...props }: React.ComponentProp
     <button
       type="button"
       data-slot="morphing-modal-back"
-      aria-label={labels.back}
       onClick={(e) => {
         onClick?.(e)
         if (!e.defaultPrevented) back()
@@ -294,6 +293,7 @@ function MorphingModalBack({ className, onClick, ...props }: React.ComponentProp
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? labels.back}
     >
       <ChevronLeftIcon size={16} />
     </button>

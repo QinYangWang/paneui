@@ -63,11 +63,11 @@ function AgentProgress({
   return (
     <span
       role="status"
-      aria-label={running ? `${label}, ${labels.inProgress}` : label}
       data-slot="agent-progress"
       data-running={running || undefined}
       className={cn("inline-flex items-center gap-2.5 text-ui text-muted-foreground", className)}
       {...props}
+      aria-label={props["aria-label"] ?? (running ? `${label}, ${labels.inProgress}` : label)}
     >
       <span aria-hidden className={cn("grid size-4 shrink-0 grid-cols-3 gap-[2px]", running ? "text-primary" : "text-muted-foreground/60")}>
         {CELLS.map(({ i, delay }) => (

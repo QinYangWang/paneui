@@ -67,7 +67,7 @@ function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = fal
   const current = Math.min(Math.max(1, page), count)
   const go = (p: number) => onPageChange(Math.min(Math.max(1, p), count))
   return (
-    <nav data-slot="pagination" data-size={size} aria-label={labels.pagination} className={cn("flex items-center gap-1", className)} {...props}>
+    <nav data-slot="pagination" data-size={size} className={cn("flex items-center gap-1", className)} {...props} aria-label={props["aria-label"] ?? labels.pagination}>
       <Button variant="ghost" size={dims.button} aria-label={labels.previousPage} disabled={current <= 1} onClick={() => go(current - 1)}>
         <ChevronLeftIcon className="rtl:rotate-180" />
       </Button>

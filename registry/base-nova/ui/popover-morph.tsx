@@ -150,12 +150,12 @@ function MorphPopoverCloseButton({ className, ...props }: PopoverPrimitive.Close
   return (
     <PopoverPrimitive.Close
       data-slot="morph-popover-close-button"
-      aria-label="Close"
       className={cn(
         "absolute top-3 right-3 inline-flex size-7 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? "Close"}
     >
       <XIcon size={14} />
     </PopoverPrimitive.Close>

@@ -17,7 +17,8 @@
     "templates:code": "node scripts/gen-template-code.mjs",
     "audit:radius": "node scripts/audit-radius.mjs",
     "design:check": "node skills/qinyang-design/scripts/check.mjs",
-    "test:cover-art": "node scripts/test-cover-art-seeds.mjs"
+    "test:cover-art": "node scripts/test-cover-art-seeds.mjs",
+    "test:labels": "node scripts/run-tsx.mjs scripts/test-default-labels.tsx"
   },
   "dependencies": {
     "@agentclientprotocol/sdk": "^1.8.0",
@@ -86,6 +87,7 @@
     "@typescript-eslint/parser": "^8.71.2",
     "eslint": "^9.32.0",
     "eslint-config-next": "15.3.1",
+    "jiti": "2.5.1",
     "mdast-util-mdx": "^3.0.0",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.9.2"

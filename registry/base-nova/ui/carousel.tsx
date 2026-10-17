@@ -147,7 +147,6 @@ function Carousel({ orientation = "horizontal", loop = false, onIndexChange, cla
     <CarouselContext.Provider value={ctx}>
       <div
         role="region"
-        aria-roledescription="carousel"
         data-slot="carousel"
         data-orientation={orientation}
         onKeyDown={(e) => {
@@ -166,6 +165,7 @@ function Carousel({ orientation = "horizontal", loop = false, onIndexChange, cla
         }}
         className={cn("group/carousel relative", className)}
         {...props}
+        aria-roledescription={props["aria-roledescription"] ?? "carousel"}
       >
         {children}
       </div>
@@ -198,10 +198,10 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       role="group"
-      aria-roledescription="slide"
       data-slot="carousel-item"
       className={cn("min-w-0 shrink-0 grow-0 basis-full snap-start", className)}
       {...props}
+      aria-roledescription={props["aria-roledescription"] ?? "slide"}
     />
   )
 }
@@ -214,11 +214,11 @@ function CarouselPrevious({ className, variant = "secondary", size = "icon-sm", 
       data-slot="carousel-previous"
       variant={variant}
       size={size}
-      aria-label={labels.previousSlide}
       disabled={!canPrev}
       onClick={scrollPrev}
       className={cn("rounded-full", orientation === "vertical" && "rotate-90", className)}
       {...props}
+      aria-label={props["aria-label"] ?? labels.previousSlide}
     >
       <ChevronLeftIcon className="rtl:rotate-180" />
     </Button>
@@ -233,11 +233,11 @@ function CarouselNext({ className, variant = "secondary", size = "icon-sm", ...p
       data-slot="carousel-next"
       variant={variant}
       size={size}
-      aria-label={labels.nextSlide}
       disabled={!canNext}
       onClick={scrollNext}
       className={cn("rounded-full", orientation === "vertical" && "rotate-90", className)}
       {...props}
+      aria-label={props["aria-label"] ?? labels.nextSlide}
     >
       <ChevronRightIcon className="rtl:rotate-180" />
     </Button>

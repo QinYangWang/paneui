@@ -632,10 +632,10 @@ function DateRangePickerPresets({ className, ...props }: React.ComponentProps<"d
   return (
     <div
       role="group"
-      aria-label={labels.presets}
       data-slot="date-range-picker-presets"
       className={cn("flex flex-col gap-0.5", className)}
       {...props}
+      aria-label={props["aria-label"] ?? labels.presets}
     />
   )
 }

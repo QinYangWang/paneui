@@ -246,7 +246,6 @@ function SortableStackHandle({ className, onPointerDown, onKeyDown, children, ..
       type="button"
       data-slot="sortable-stack-handle"
       data-sortable-handle={item.id}
-      aria-label={`Reorder ${labelOf(item.id)}, position ${index + 1} of ${ids.length}`}
       aria-describedby={instructionsId}
       disabled={disabled}
       onPointerDown={(e) => {
@@ -270,6 +269,7 @@ function SortableStackHandle({ className, onPointerDown, onKeyDown, children, ..
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? `Reorder ${labelOf(item.id)}, position ${index + 1} of ${ids.length}`}
     >
       {children ?? <GripVerticalIcon size={16} />}
     </button>

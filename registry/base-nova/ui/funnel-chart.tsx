@@ -158,11 +158,11 @@ function FunnelChart({
 
   return (
     <section
-      aria-label={label}
       data-slot="funnel-chart"
       data-direction={direction}
       className={cn("w-full min-w-0", className)}
       {...props}
+      aria-label={props["aria-label"] ?? label}
     >
       <div
         className={cn(

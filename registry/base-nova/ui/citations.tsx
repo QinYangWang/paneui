@@ -261,7 +261,6 @@ function Citation({
         href={href}
         target={group ? undefined : "_blank"}
         rel={group ? undefined : "noreferrer noopener"}
-        aria-label={`Source ${index ?? ""}: ${typeof source.title === "string" ? source.title : (domain ?? "")}`.trim()}
         onClick={(event) => {
           onClick?.(event)
           if (group && !event.defaultPrevented) {
@@ -274,6 +273,7 @@ function Citation({
           className
         )}
         {...props}
+        aria-label={props["aria-label"] ?? `Source ${index ?? ""}: ${typeof source.title === "string" ? source.title : (domain ?? "")}`.trim()}
       >
         {index ?? "•"}
       </PreviewCardPrimitive.Trigger>

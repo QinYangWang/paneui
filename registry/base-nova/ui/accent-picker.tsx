@@ -138,11 +138,11 @@ function AccentPicker({ accents = ACCENTS, showLabels = false, className, ...pro
   return (
     <RadioGroupPrimitive
       data-slot="accent-picker"
-      aria-label="Accent colour"
       value={accent}
       onValueChange={(v) => isAccent(v) && setAccent(v)}
       className={cn("flex flex-wrap items-start gap-3", className)}
       {...props}
+      aria-label={props["aria-label"] ?? "Accent colour"}
     >
       {accents.map((a) => (
         <label key={a} className="flex cursor-pointer flex-col items-center gap-1.5 text-ui-sm text-muted-foreground has-data-checked:text-foreground">

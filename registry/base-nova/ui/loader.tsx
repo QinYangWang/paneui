@@ -279,13 +279,13 @@ function Loader({
       </style>
       <span
         role="status"
-        aria-label={label}
         data-slot="loader"
         data-variant={variant}
         data-size={size === "default" ? "md" : size}
         className={cn("inline-flex shrink-0 items-center justify-center text-current", className)}
         style={{ "--qy-fade": `${d(1.4)}s`, ...style } as React.CSSProperties}
         {...props}
+        aria-label={props["aria-label"] ?? label}
       >
         <Part s={s} d={d} />
       </span>

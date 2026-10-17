@@ -262,10 +262,10 @@ function Treemap({
 
   return (
     <section
-      aria-label={label}
       data-slot="treemap"
       className={cn("w-full min-w-0 space-y-4", className)}
       {...props}
+      aria-label={props["aria-label"] ?? label}
     >
       <div
         ref={ref}

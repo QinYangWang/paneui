@@ -148,7 +148,7 @@ function TrendChart({
   const revealKey = `${variant}-${stacked}-${n}`
 
   return (
-    <figure data-slot="trend-chart" data-variant={variant} className={cn("flex min-w-0 flex-col gap-3", className)} aria-label={label} {...props}>
+    <figure data-slot="trend-chart" data-variant={variant} className={cn("flex min-w-0 flex-col gap-3", className)} {...props} aria-label={props["aria-label"] ?? label}>
       <div ref={ref} className="relative w-full" style={{ height }}>
         {size.width > 0 && (
           <svg width={size.width} height={height} aria-hidden className="block overflow-visible">

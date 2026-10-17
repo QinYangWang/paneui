@@ -256,7 +256,6 @@ function BottomSheetHandle({ className, ...props }: React.ComponentProps<"button
     <button
       type="button"
       data-slot="bottom-sheet-handle"
-      aria-label={multiple ? (snap === snapPoints.length - 1 ? "Collapse sheet" : "Expand sheet") : "Drag to close"}
       onPointerDown={(e) => dragControls.start(e)}
       onClick={() => multiple && setSnap(snap === snapPoints.length - 1 ? 0 : snap + 1)}
       className={cn(
@@ -264,6 +263,7 @@ function BottomSheetHandle({ className, ...props }: React.ComponentProps<"button
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? (multiple ? (snap === snapPoints.length - 1 ? "Collapse sheet" : "Expand sheet") : "Drag to close")}
     >
       <span className="h-1.5 w-10 rounded-full bg-muted shadow-well transition-[width,background-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/handle:w-12 group-focus-visible/handle:bg-primary/60 group-active/handle:w-14" />
     </button>

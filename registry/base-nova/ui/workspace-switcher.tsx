@@ -71,13 +71,13 @@ function WorkspaceSwitcher({
     <Menu>
       <MenuTrigger
         data-slot="workspace-switcher"
-        aria-label={`Workspace: ${current.name}. Switch workspace`}
         className={cn(
           "group/ws frame-inner frame-inset-2 flex h-10 w-full min-w-0 cursor-pointer items-center gap-2.5 px-2 text-left text-ui outline-none transition-[background-color] duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary",
           collapsed && "justify-center gap-0 px-0",
           className
         )}
         {...props}
+        aria-label={props["aria-label"] ?? `Workspace: ${current.name}. Switch workspace`}
       >
         {/* 8px into the row: concentric with it where that leaves a usable radius */}
         <WorkspaceMark workspace={current} className="rounded-inner-or-md" />

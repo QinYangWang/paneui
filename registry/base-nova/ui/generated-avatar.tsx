@@ -301,11 +301,11 @@ function GeneratedAvatarImage({
       viewBox={avatar.viewBox}
       fill="none"
       role={title ? "img" : undefined}
-      aria-label={title}
       aria-hidden={title ? undefined : true}
       className={cn("size-full overflow-hidden rounded-[inherit]", className)}
       dangerouslySetInnerHTML={{ __html: (title ? `<title>${escapeText(title)}</title>` : "") + avatar.content }}
       {...props}
+      aria-label={props["aria-label"] ?? title}
     />
   )
 }

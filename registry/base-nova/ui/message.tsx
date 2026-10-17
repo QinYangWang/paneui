@@ -56,7 +56,6 @@ function Message({
         <motion.article
           data-slot="message"
           data-from={from}
-          aria-label={props["aria-label"] ?? labels.messageFrom(from)}
           initial={animateIn ? (reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.94 }) : false}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={reduce ? { duration: 0.15 } : { type: "spring", stiffness: 480, damping: 32, mass: 0.6 }}
@@ -67,6 +66,7 @@ function Message({
             className
           )}
           {...props}
+          aria-label={props["aria-label"] ?? labels.messageFrom(from)}
         >
           {children}
         </motion.article>
@@ -186,9 +186,9 @@ function MessageAction({
           <Button
             variant="ghost"
             size="icon-xs"
-            aria-label={label}
             className={cn("size-7 text-muted-foreground hover:text-foreground [&_svg]:size-3.5", className)}
             {...props}
+            aria-label={label}
           />
         }
       >
@@ -207,13 +207,13 @@ function MessageTyping({ label: labelProp, className, ...props }: React.Componen
   return (
     <div
       role="status"
-      aria-label={label}
       data-slot="message-typing"
       className={cn(
         "flex h-10 w-16 items-center justify-center gap-1 self-start rounded-3xl rounded-bl-md bg-card shadow-[var(--skeuo-well),var(--skeuo-primary)]",
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? label}
     >
       {[0, 1, 2].map((i) => (
         <motion.span

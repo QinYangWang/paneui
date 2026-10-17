@@ -257,7 +257,6 @@ function TerminalInput({ prompt = "❯", onSubmit, className, onKeyDown, ...prop
         value={value}
         spellCheck={false}
         autoComplete="off"
-        aria-label="Terminal command"
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => {
           onKeyDown?.(e)
@@ -279,6 +278,7 @@ function TerminalInput({ prompt = "❯", onSubmit, className, onKeyDown, ...prop
         }}
         className="min-w-0 flex-1 bg-transparent caret-foreground outline-none placeholder:text-muted-foreground"
         {...props}
+        aria-label={props["aria-label"] ?? "Terminal command"}
       />
     </label>
   )

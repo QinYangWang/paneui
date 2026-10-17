@@ -37,9 +37,9 @@ function SwatchPicker({ swatches, variant = "dot", label, className, ...props }:
         </div>
       )}
       <RadioGroupPrimitive
-        aria-labelledby={label ? labelId : undefined}
         className="-m-0.75 flex flex-wrap gap-0.5"
         {...props}
+        aria-labelledby={props["aria-labelledby"] ?? (label ? labelId : undefined)}
       >
         {swatches.map((s) => (
           <SwatchPickerItem key={s.value} swatch={s} variant={variant} />

@@ -96,9 +96,9 @@ function IconRailItem({ label, icon, shortcut, active = false, badge, render, cl
       data-slot="icon-rail-item"
       data-active={active || undefined}
       aria-current={active ? "page" : undefined}
-      aria-label={label}
       className={classes}
       {...props}
+      aria-label={props["aria-label"] ?? label}
     >
       {content}
     </button>
@@ -135,12 +135,12 @@ function IconRailAvatar({ label, status = "offline", hint, className, children, 
             type="button"
             data-slot="icon-rail-avatar"
             data-status={status}
-            aria-label={hint ? `${label}, ${hint}` : label}
             className={cn(
               "flex size-7 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-card shadow-raised outline-none transition-shadow duration-150 focus-visible:ring-2 focus-visible:ring-ring/50 data-[status=busy]:ring-2 data-[status=busy]:ring-warning/70 data-[status=error]:ring-2 data-[status=error]:ring-destructive/60 data-[status=online]:ring-2 data-[status=online]:ring-success/70 [&_svg]:size-3.5",
               className
             )}
             {...props}
+            aria-label={props["aria-label"] ?? (hint ? `${label}, ${hint}` : label)}
           >
             {children}
           </button>

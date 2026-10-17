@@ -504,7 +504,6 @@ function AISidebar({
 
   return (
     <motion.nav
-      aria-label="AI workspace"
       data-slot="ai-sidebar"
       data-state={open ? "open" : "collapsed"}
       initial={false}
@@ -523,6 +522,7 @@ function AISidebar({
         onPointerDownCapture?.(e)
       }}
       {...(props as React.ComponentProps<typeof motion.nav>)}
+      aria-label={props["aria-label"] ?? "AI workspace"}
     >
       {/* Header */}
       <div className={cn("flex h-12 shrink-0 items-center gap-2 px-2.5", !open && "justify-center px-0")}>

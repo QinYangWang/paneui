@@ -27,7 +27,7 @@ type ThreadListGroupProps = React.ComponentProps<"div"> & { label: React.ReactNo
 function ThreadListGroup({ label, action, className, children, ...props }: ThreadListGroupProps) {
   const id = React.useId()
   return (
-    <div data-slot="thread-list-group" role="group" aria-labelledby={id} className={cn("flex flex-col gap-px", className)} {...props}>
+    <div data-slot="thread-list-group" role="group" className={cn("flex flex-col gap-px", className)} {...props} aria-labelledby={props["aria-labelledby"] ?? id}>
       <div className="flex h-7 items-center justify-between px-2">
         <span id={id} className="text-ui-sm text-muted-foreground">
           {label}

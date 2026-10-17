@@ -187,7 +187,7 @@ function TipButton({
 }: React.ComponentProps<typeof ToolbarButton> & { label: string; kbd?: string }) {
   return (
     <Tooltip>
-      <TooltipTrigger render={<ToolbarButton aria-label={label} {...props} />} />
+      <TooltipTrigger render={<ToolbarButton {...props} aria-label={props["aria-label"] ?? label} />} />
       <TooltipContent side="bottom">
         {label}
         {kbd && <TooltipKbd>{kbd}</TooltipKbd>}

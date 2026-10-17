@@ -248,7 +248,6 @@ function ToolApproval({
   return (
     <div
       role="group"
-      aria-label={`Permission request for ${tool}`}
       data-slot="tool-approval"
       data-decision={decision ?? "pending"}
       data-status={pending ? undefined : (status ?? undefined)}
@@ -257,6 +256,7 @@ function ToolApproval({
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? `Permission request for ${tool}`}
     >
       <div ref={outerRef} className="relative overflow-hidden">
         <div ref={innerRef} className="relative p-2">

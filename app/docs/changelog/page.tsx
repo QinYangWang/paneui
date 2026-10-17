@@ -8,6 +8,22 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-17-descenders-and-default-labels",
+    date: "October 17, 2026",
+    title: "Whole descenders and default labels that stay",
+    tag: "Components",
+    changes: [
+      <>
+        <TextLink href="/docs/og-image">OG Image</TextLink> titles and descriptions no longer cut off the bottom of g, y and
+        p on their last line.
+      </>,
+      <>
+        Passing <Code>{"aria-label={undefined}"}</Code> (or <Code>title</Code>, <Code>aria-labelledby</Code>) to a component
+        keeps its default or translated label instead of removing it. A label you pass still wins.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-17-share-cards-and-labels",
     date: "October 17, 2026",
     title: "Share cards, fitting tables and more translated labels",

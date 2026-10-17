@@ -74,10 +74,10 @@ function BrandIcon({ icon, size = 18, color = "current", title, inset = true, cl
       fill="currentColor"
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}
-      aria-labelledby={title ? id : undefined}
       className={cn("shrink-0", brand && brandTone(icon.hex), className)}
       style={brand && icon.hex ? ({ "--brand": `#${icon.hex}`, ...style } as React.CSSProperties) : style}
       {...props}
+      aria-labelledby={props["aria-labelledby"] ?? (title ? id : undefined)}
     >
       {title && <title id={id}>{title}</title>}
       <path d={icon.path} />

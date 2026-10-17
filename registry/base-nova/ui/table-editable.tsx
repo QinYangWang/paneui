@@ -548,13 +548,13 @@ function InsertPill({
     <button
       type="button"
       data-no-drag
-      aria-label={label}
       className={cn(
         "absolute z-30 flex size-4 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground shadow-primary outline-none",
         "scale-50 opacity-0 transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-125 focus-visible:scale-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50 motion-reduce:transition-none",
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? label}
     >
       <PlusIcon className="size-2.5" />
     </button>

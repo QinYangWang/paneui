@@ -167,7 +167,6 @@ function AppShellTrigger({ className, onClick, ...props }: React.ComponentProps<
       type="button"
       data-slot="app-shell-trigger"
       data-state={open ? "expanded" : "collapsed"}
-      aria-label={label}
       aria-expanded={isMobile ? mobileOpen : open}
       onClick={(e) => {
         onClick?.(e)
@@ -182,6 +181,7 @@ function AppShellTrigger({ className, onClick, ...props }: React.ComponentProps<
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? label}
     >
       <SidebarIcon className="max-lg:hidden" />
       <MenuIcon className="lg:hidden" />

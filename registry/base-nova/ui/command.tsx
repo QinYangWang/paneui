@@ -216,10 +216,10 @@ function CommandGroup({ className, heading, children, ...props }: React.Componen
   return (
     <div
       role="group"
-      aria-labelledby={heading ? id : undefined}
       data-slot="command-group"
       className={cn("[&:not(:has([data-slot=command-item]))]:hidden not-first:mt-1", className)}
       {...props}
+      aria-labelledby={props["aria-labelledby"] ?? (heading ? id : undefined)}
     >
       {heading && (
         <div id={id} data-slot="command-group-heading" className="px-2 pt-1.5 pb-1 text-ui-sm text-muted-foreground">

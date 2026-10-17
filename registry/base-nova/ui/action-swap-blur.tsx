@@ -211,7 +211,6 @@ function ActionSwapButton({
     <Button
       data-slot="action-swap-button"
       size={size}
-      aria-label={iconOnly ? labelText : active.ariaLabel}
       className={cn("overflow-hidden", className)}
       onClick={(event) => {
         onClick?.(event)
@@ -219,6 +218,7 @@ function ActionSwapButton({
         select(items[(index + 1) % items.length])
       }}
       {...props}
+      aria-label={props["aria-label"] ?? (iconOnly ? labelText : active.ariaLabel)}
     >
       {hasIcon ? (
         <ActionSwapIcon value={active.value} animation={animation}>

@@ -87,8 +87,8 @@ function StatCardDelta({ value, unit = "%", invert = false, precision = 1, class
       size="sm"
       variant={variant}
       className={cn("tabular-nums", className)}
-      aria-label={`${value >= 0 ? "Up" : "Down"} ${Math.abs(value).toFixed(precision)}${unit}`}
       {...props}
+      aria-label={props["aria-label"] ?? `${value >= 0 ? "Up" : "Down"} ${Math.abs(value).toFixed(precision)}${unit}`}
     >
       {value !== 0 && <Arrow />}
       {Math.abs(value).toFixed(precision)}

@@ -550,10 +550,10 @@ function ColorPickerPresets({ className, ...props }: React.ComponentProps<"div">
   return (
     <div
       role="group"
-      aria-label="Presets"
       data-slot="color-picker-presets"
       className={cn("-m-0.75 flex flex-wrap gap-0.5", className)}
       {...props}
+      aria-label={props["aria-label"] ?? "Presets"}
     />
   )
 }
@@ -576,7 +576,6 @@ function ColorPickerPreset({
     <button
       type="button"
       data-slot="color-picker-preset"
-      aria-label={label ?? value}
       aria-pressed={active}
       disabled={disabled || !rgba}
       onClick={(e) => {
@@ -588,6 +587,7 @@ function ColorPickerPreset({
         className
       )}
       {...props}
+      aria-label={props["aria-label"] ?? label ?? value}
     >
       <span
         aria-hidden

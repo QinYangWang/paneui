@@ -142,10 +142,10 @@ function StatusBar({
 
   return (
     <section
-      aria-label={label}
       data-slot="status-bar"
       className={cn("w-full min-w-0 space-y-2.5", className)}
       {...props}
+      aria-label={props["aria-label"] ?? label}
     >
       {showHeader && (
         <div className="flex items-center gap-2 text-ui">
