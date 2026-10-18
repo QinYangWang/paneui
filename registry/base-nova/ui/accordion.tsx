@@ -77,7 +77,8 @@ function AccordionTrigger({
           "group/accordion-trigger flex flex-1 cursor-pointer items-center text-start text-ui font-medium text-foreground transition-[background-color] duration-150 outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none",
           ghost
             ? "min-h-9 gap-2.5 rounded-inner px-3 py-1.5 hover:not-data-panel-open:bg-secondary data-disabled:opacity-64"
-            : "min-h-11 gap-3 rounded-inner px-3 py-2 hover:not-data-panel-open:bg-card/50 data-disabled:opacity-50",
+            : // The trigger publishes its 8px inset so the icon chip follows the row's corner.
+              "frame-inner frame-inset-2 min-h-11 gap-3 px-3 py-2 hover:not-data-panel-open:bg-card/50 data-disabled:opacity-50",
           className
         )}
         {...props}
@@ -95,7 +96,7 @@ function AccordionTrigger({
           <span
             data-slot="accordion-icon"
             aria-hidden
-            className="flex size-7 shrink-0 items-center justify-center rounded-full bg-card text-muted-foreground shadow-raised transition-colors duration-200 group-data-panel-open/accordion-trigger:text-primary [&_svg]:size-4"
+            className="flex size-7 shrink-0 items-center justify-center rounded-inner-or-lg bg-card text-muted-foreground shadow-raised transition-colors duration-200 group-data-panel-open/accordion-trigger:text-primary [&_svg]:size-4"
           >
             {icon}
           </span>

@@ -38,6 +38,7 @@ import {
   BreadcrumbSeparator,
 } from "@/registry/base-nova/ui/breadcrumb"
 import { Button } from "@/registry/base-nova/ui/button"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { Kbd } from "@/registry/base-nova/ui/kbd"
 import { Menu, MenuContent, MenuGroup, MenuItem, MenuLabel, MenuSeparator, MenuTrigger } from "@/registry/base-nova/ui/menu"
 import { ThemeToggle, useThemeToggle } from "@/registry/base-nova/ui/theme-toggle"
@@ -48,7 +49,7 @@ import { UserMenu } from "@/registry/base-nova/ui/user-menu"
 import { REQUIRE_AUTH, signOut, useSession } from "../../lib/auth"
 import { workspaces } from "../../lib/data"
 import { AppLink, routes, useHref, useRoute } from "../../lib/routes"
-import { BrandMark, SaasProviders } from "../providers"
+import { BrandMark, initials, SaasProviders } from "../providers"
 
 /* ───────────────────────── Navigation model ───────────────────────── */
 
@@ -152,6 +153,9 @@ function WorkspaceMenu() {
   return (
     <Menu>
       <MenuTrigger render={<Button variant="ghost" size="sm" className="-ms-2.5 min-w-0" />}>
+        <IconChip tone="solid" size="sm" data-icon="inline-start">
+          <span className="text-ui-2xs font-semibold">{initials(current.name)}</span>
+        </IconChip>
         <span className="truncate font-semibold">{current.name}</span>
         <ChevronsUpDownIcon data-icon="inline-end" className="text-muted-foreground" />
       </MenuTrigger>

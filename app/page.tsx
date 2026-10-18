@@ -9,7 +9,7 @@ import { Badge } from "@/registry/base-nova/ui/badge"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Card, CardHeader, CardPanel, CardTitle } from "@/registry/base-nova/ui/card"
 
-const wide = new Set(["saas", "vscode", "agent-workspace", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
+const wide = new Set(["file-diff", "heat-calendar", "saas", "vscode", "agent-workspace", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
 export const metadata: Metadata = { title: "Components" }
 

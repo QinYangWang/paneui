@@ -153,7 +153,7 @@ around a scaling token) drifted at large presets. Fixed with frames, not allow-l
 - New utilities (`app/globals.css`, table in AGENTS.md): `rounded-inner-{token}` (concentric in a frame, the
   token outside one) and `rounded-inner-or-{token}` (concentric where usable, else the token capped at
   `rounded-sm`, for key caps and marks whose inset can exceed the corner).
-- Library: accordion root `frame-3xl frame-p-1`, items and triggers `rounded-inner`; tabs list and segmented
+- Library: accordion root `frame-3xl frame-p-1`, items `rounded-inner`, triggers `frame-inner frame-inset-2` so the icon chip is `rounded-inner-or-lg` (2026-10-18; it was round, rounder than the 12px row corner); tabs list and segmented
   control are `frame-{sm,lg} frame-p-0.5` with tabs, indicator and thumb `rounded-inner`; animated-sidebar
   floating panel `frame-3xl frame-inset-2` and rows / active pill `rounded-inner` (a flush panel publishes
   `--sidebar-item-radius`, default `rounded-lg`; the app-shell window sets it to 3xl − 8px); thread-list-item,

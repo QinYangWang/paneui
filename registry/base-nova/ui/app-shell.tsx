@@ -44,8 +44,11 @@ function useIsMobileShell() {
   )
 }
 
+type AppShellLayout = "inset" | "sidebar" | "floating"
+
 type AppShellContextValue = {
   variant: "page" | "window"
+  layout: AppShellLayout
   isMobile: boolean
   mobileOpen: boolean
   setMobileOpen: (open: boolean) => void
@@ -63,7 +66,7 @@ function useAppShellContext() {
 function useAppShell() {
   const shell = useAppShellContext()
   const sidebar = useSidebar()
-  return { ...sidebar, variant: shell.variant, isMobile: shell.isMobile, mobileOpen: shell.mobileOpen, setMobileOpen: shell.setMobileOpen }
+  return { ...sidebar, variant: shell.variant, layout: shell.layout, isMobile: shell.isMobile, mobileOpen: shell.mobileOpen, setMobileOpen: shell.setMobileOpen }
 }
 
 type AppShellProps = React.ComponentProps<"div"> & {
@@ -72,6 +75,13 @@ type AppShellProps = React.ComponentProps<"div"> & {
    * `window`: a bounded, rounded frame whose panel scrolls on its own (give it a height).
    */
   variant?: "page" | "window"
+  /**
+   * `inset`: the page sits in a rounded panel on the band.
+   * `sidebar`: flush; a hairline under the header and beside the rail.
+   * `floating`: the rail is a rounded panel of its own beside the page.
+   * Leave out `AppShellSidebar` for a header-only shell.
+   */
+  layout?: AppShellLayout
   open?: boolean
   defaultOpen?: boolean
   onOpenChange?: (open: boolean) => void
@@ -81,6 +91,7 @@ type AppShellProps = React.ComponentProps<"div"> & {
 
 function AppShell({
   variant = "page",
+  layout = "inset",
   open,
   defaultOpen = true,
   onOpenChange,
@@ -97,7 +108,10 @@ function AppShell({
     if (!isMobile) setMobileOpen(false)
   }, [isMobile])
 
-  const ctx = React.useMemo(() => ({ variant, isMobile, mobileOpen, setMobileOpen }), [variant, isMobile, mobileOpen])
+  const ctx = React.useMemo(
+    () => ({ variant, layout, isMobile, mobileOpen, setMobileOpen }),
+    [variant, layout, isMobile, mobileOpen]
+  )
 
   return (
     <AppShellContext.Provider value={ctx}>
@@ -108,6 +122,7 @@ function AppShell({
         shortcut={shortcut}
         data-slot="app-shell"
         data-variant={variant}
+        data-layout={layout}
         style={
           {
             "--app-shell-header-height": "3rem",
@@ -117,6 +132,8 @@ function AppShell({
         }
         className={cn(
           "grid grid-cols-[auto_minmax(0,1fr)] bg-shell text-foreground",
+          // Header-only shell: with no rail the panel takes the band's left gutter too.
+          "[&:not(:has(>[data-slot=sidebar]))>[data-slot=app-shell-main]]:ms-0.75",
           variant === "page"
             ? "min-h-svh grid-rows-[auto_1fr]"
             : // window corners: the panel sits 3px in from the bottom-right edge, so it follows the frame
@@ -136,13 +153,14 @@ type AppShellHeaderProps = React.ComponentProps<"header"> & {
 }
 
 function AppShellHeader({ leading = <AppShellTrigger />, className, children, ...props }: AppShellHeaderProps) {
-  const { variant } = useAppShellContext()
+  const { variant, layout } = useAppShellContext()
   return (
     <header
       data-slot="app-shell-header"
       className={cn(
         "col-span-full flex h-(--app-shell-header-height) min-w-0 items-center bg-shell pe-3",
         variant === "page" && "sticky top-0 z-40",
+        layout === "sidebar" && "border-b border-border",
         className
       )}
       {...props}
@@ -202,16 +220,29 @@ function AppShellSidebar({
   "aria-label": ariaLabel = "Sidebar",
   ...props
 }: AppShellSidebarProps) {
-  const { variant, isMobile, mobileOpen, setMobileOpen } = useAppShellContext()
+  const { variant, layout, isMobile, mobileOpen, setMobileOpen } = useAppShellContext()
   return (
     <>
       <Sidebar
         variant="sidebar"
         aria-label={ariaLabel}
-        // on the band with no seam: the panel's hairline draws the edge
-        panelClassName={cn("border-x-0", panelClassName)}
+        panelClassName={cn(
+          // inset: on the band with no seam, the page panel's hairline draws the edge
+          layout === "inset" && "border-x-0",
+          // floating: a panel shaped like the page panel; rows sit 8px in, so they follow its corner
+          layout === "floating" &&
+            cn(
+              "border-x-0 bg-background inset-ring-[0.5px] inset-ring-shell-border",
+              variant === "page"
+                ? "rounded-shell [--frame-inner-1:max(calc(var(--radius-shell)-var(--spacing)*2),2px)]"
+                : // the window's inner radius, written out: the panel re-publishes --frame-inner-1 for its rows
+                  "rounded-[calc(var(--radius-3xl)-var(--spacing)*0.75)] [--frame-inner-1:max(calc(var(--radius-3xl)-var(--spacing)*2.75),2px)]"
+            ),
+          panelClassName
+        )}
         className={cn(
           "col-start-1 row-start-2 max-lg:hidden",
+          layout === "floating" && "ps-0.75 pb-0.75",
           variant === "page" &&
             // eslint-disable-next-line shadcn/no-arbitrary-values -- the viewport below the header row
             "sticky top-(--app-shell-header-height) h-[calc(100svh-var(--app-shell-header-height))] self-start",
@@ -262,7 +293,8 @@ function AppShellSidebar({
  * rounded top under the header; keep at least 1rem of top padding in your content.
  */
 function AppShellMain({ className, children, ...props }: React.ComponentProps<"main">) {
-  const { variant } = useAppShellContext()
+  const { variant, layout } = useAppShellContext()
+  const panel = layout !== "sidebar"
   return (
     <main
       data-slot="app-shell-main"
@@ -270,13 +302,16 @@ function AppShellMain({ className, children, ...props }: React.ComponentProps<"m
         // The hairline is an inset ring, not a border: a 0.5px border is snapped to a whole pixel
         // in some browsers, which would shift the cap below off the panel's edge.
         // eslint-disable-next-line shadcn/no-arbitrary-values -- 0.5px hairline: one device pixel on high-density screens
-        "relative col-start-2 row-start-2 min-w-0 bg-background inset-ring-[0.5px] inset-ring-shell-border me-0.75 mb-0.75 max-lg:ms-0.75",
-        variant === "page" ? "rounded-shell" : "overflow-y-auto overscroll-contain rounded-inner",
+        "relative col-start-2 row-start-2 min-w-0 bg-background",
+        panel && "inset-ring-[0.5px] inset-ring-shell-border me-0.75 mb-0.75 max-lg:ms-0.75",
+        layout === "floating" && "lg:ms-0.75",
+        variant === "window" && "overflow-y-auto overscroll-contain",
+        panel && (variant === "page" ? "rounded-shell" : "rounded-inner"),
         className
       )}
       {...props}
     >
-      {variant === "page" && (
+      {variant === "page" && panel && (
         <div aria-hidden data-slot="app-shell-cap" className="pointer-events-none sticky top-(--app-shell-header-height) z-30 h-0">
           {/* The band colour fills the square corners; the taller rounded face is clipped to the cap so its ring has no bottom edge. */}
           <div className="absolute inset-x-0 top-0 h-4 overflow-hidden bg-shell">
@@ -291,4 +326,4 @@ function AppShellMain({ className, children, ...props }: React.ComponentProps<"m
 }
 
 export { AppShell, AppShellHeader, AppShellTrigger, AppShellSidebar, AppShellMain, useAppShell }
-export type { AppShellProps, AppShellHeaderProps, AppShellSidebarProps }
+export type { AppShellProps, AppShellLayout, AppShellHeaderProps, AppShellSidebarProps }

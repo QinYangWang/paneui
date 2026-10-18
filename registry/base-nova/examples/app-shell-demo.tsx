@@ -13,6 +13,7 @@ import {
   SidebarMenu,
 } from "@/registry/base-nova/ui/animated-sidebar"
 import { Button } from "@/registry/base-nova/ui/button"
+import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 type NavItem = { id: string; label: string; icon: React.ComponentType; badge?: number }
 
@@ -43,6 +44,9 @@ export default function AppShellDemo() {
   return (
     <AppShell variant="window" shortcut={null} className="h-104 w-full max-w-3xl">
       <AppShellHeader>
+        <IconChip tone="solid" size="sm">
+          <span className="text-ui-2xs font-semibold">N</span>
+        </IconChip>
         <span className="text-ui font-semibold">Northwind</span>
         <Button variant="ghost" size="icon-sm" aria-label="Search" className="ml-auto">
           <SearchIcon />

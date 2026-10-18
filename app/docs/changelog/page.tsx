@@ -8,6 +8,74 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-18-app-shell-layouts",
+    date: "October 18, 2026",
+    title: "App shell layouts and smaller fixes",
+    tag: "Components",
+    changes: [
+      <>
+        <TextLink href="/docs/app-shell">App Shell</TextLink> takes <Code>layout</Code>: <Code>inset</Code> (the default,
+        unchanged), <Code>sidebar</Code> for a flush shell with hairlines, and <Code>floating</Code> for a rail on its own
+        panel. Leave out <Code>AppShellSidebar</Code> for a header-only shell.
+      </>,
+      <>
+        <TextLink href="/docs/accordion">Accordion</TextLink> icon chips follow the row&apos;s corner instead of sitting
+        round inside it.
+      </>,
+      <>
+        <TextLink href="/docs/agent-code-block">Agent Code Block</TextLink> <Code>wrap</Code> now wraps long lines; before,
+        the block still scrolled sideways.
+      </>,
+      <>
+        The SaaS dashboard header shows the workspace mark beside its name.
+      </>,
+    ],
+  },
+  {
+    id: "2026-10-18-icon-weight",
+    date: "October 18, 2026",
+    title: "Icon stroke that matches the text, and filled nav icons",
+    tag: "Icons",
+    changes: [
+      <>
+        Icons take <Code>{'weight="bold"'}</Code> for a 20% heavier stroke, or sit inside <Code>icon-bold</Code>. Badges,
+        card, dialog, drawer and popover titles, page headers, empty states and settings sections use it so icons match
+        semibold text. Buttons keep the regular stroke. Reinstall <Code>@qinyang/theme</Code> for the utility; the upgrade
+        check warns when it is missing.
+      </>,
+      <>
+        Home, Inbox, Chat, Calendar Days, Bell, User, Settings and Folder have filled versions in every icon style.{" "}
+        <TextLink href="/docs/tab-bar">Tab Bar</TextLink> items take <Code>activeIcon</Code> to show one on the current tab.
+      </>,
+      <>
+        The <TextLink href="/docs/skill">design skill</TextLink> adds rules 41–43 (stroke weight, filled active glyphs,
+        logical text alignment) and three checks: <Code>icon-weight</Code>, <Code>nav-active-icon</Code> and{" "}
+        <Code>text-align-logical</Code>.
+      </>,
+    ],
+  },
+  {
+    id: "2026-10-18-direction-and-labels",
+    date: "October 18, 2026",
+    title: "Start and end alignment, and more translated labels",
+    tag: "Components",
+    changes: [
+      <>
+        Text aligned left or right now aligns to the start or end, so it flips in right-to-left. In{" "}
+        <TextLink href="/docs/table">Table</TextLink>, <Code>{'align="left"'}</Code> and <Code>{'"right"'}</Code> map to
+        start and end.
+      </>,
+      <>
+        <TextLink href="/docs/table-editable">Editable Table</TextLink> column menus say Insert before and Insert after,
+        and the insert marker sits on the correct side in right-to-left.
+      </>,
+      <>
+        Tool approval, edited files, file diff, AI sidebar, colour picker, chart and pagination summary labels come from
+        the <TextLink href="/docs/locale-provider">locale provider</TextLink>, in English and Simplified Chinese.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-17-right-to-left-icons",
     date: "October 17, 2026",
     title: "Icons that point the right way in right-to-left",

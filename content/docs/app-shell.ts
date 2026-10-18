@@ -28,6 +28,21 @@ import { SidebarContent, SidebarItem, SidebarMenu } from "@/components/ui/animat
 └── AppShellMain`,
   examples: [
     {
+      id: "sidebar",
+      title: "Sidebar",
+      description: "Use `layout=\"sidebar\"` for dense tools where a panel edge would waste space.",
+    },
+    {
+      id: "floating",
+      title: "Floating",
+      description: "Use `layout=\"floating\"` when the navigation should read as its own surface.",
+    },
+    {
+      id: "top-nav",
+      title: "Top Nav",
+      description: "Leave out `AppShellSidebar` when a few sections fit in the header.",
+    },
+    {
       id: "icon-rail",
       title: "Icon Rail",
       description: "Use `defaultOpen={false}` when the content needs the width from the start.",
@@ -67,6 +82,7 @@ import { SidebarContent, SidebarItem, SidebarMenu } from "@/components/ui/animat
       extends: "div",
       props: [
         { name: "variant", type: `"page" | "window"`, default: `"page"`, description: "`page` fills the viewport and sticks to it; `window` is a rounded frame whose panel scrolls inside." },
+        { name: "layout", type: `"inset" | "sidebar" | "floating"`, default: `"inset"`, description: "`inset` puts the page in a rounded panel on the band; `sidebar` is flush, with hairlines under the header and beside the rail; `floating` makes the rail a rounded panel of its own." },
         { name: "open", type: "boolean", description: "Controlled expanded state of the rail." },
         { name: "defaultOpen", type: "boolean", default: "true", description: "Initial expanded state when uncontrolled." },
         { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the rail expands or collapses." },
@@ -75,6 +91,7 @@ import { SidebarContent, SidebarItem, SidebarMenu } from "@/components/ui/animat
       dataAttributes: [
         { name: "data-state", description: "`expanded` or `collapsed`." },
         { name: "data-variant", description: "`page` or `window`." },
+        { name: "data-layout", description: "`inset`, `sidebar` or `floating`." },
       ],
     },
     {

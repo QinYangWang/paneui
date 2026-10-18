@@ -253,7 +253,7 @@ function AgentCodeBlock({
         </div>
       )}
       <ScrollArea
-        orientation="both"
+        orientation={wrap ? "vertical" : "both"}
         viewportRef={viewportRef}
         viewportProps={{
           "data-slot": "agent-code-block-viewport",
@@ -265,7 +265,8 @@ function AgentCodeBlock({
         }}
         className={filename !== undefined ? "rounded-b-[inherit]" : "rounded-[inherit]"}
       >
-        <pre className="m-0 w-max min-w-full py-3 font-mono leading-[1.65]">
+        {/* Wrapping needs a pre as wide as the viewport; w-max would grow it to the longest line. */}
+        <pre data-wrap={wrap || undefined} className={cn("m-0 py-3 font-mono leading-[1.65]", wrap ? "w-full" : "w-max min-w-full")}>
           <code className="block">
             {lines.map((line, i) => {
               const n = startLine + i
@@ -296,7 +297,7 @@ function AgentCodeBlock({
                       {n}
                     </span>
                   )}
-                  <span className={cn("min-w-0 flex-1", wrap ? "whitespace-pre-wrap break-all" : "whitespace-pre")}>
+                  <span className={cn("min-w-0 flex-1", wrap ? "whitespace-pre-wrap wrap-anywhere" : "whitespace-pre")}>
                     <CodeLine text={line} tokens={tokens?.[i]} />
                     {streaming && last && (
                       <span
