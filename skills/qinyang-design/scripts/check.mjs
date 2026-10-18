@@ -91,6 +91,7 @@ const RULES = {
   "icon-button-label": ["error", "An icon-only button has an accessible name (aria-label or sr-only text)."],
   "will-change": ["error", "will-change only names compositor properties (transform, opacity, filter), never all."],
   "motion-restraint": ["warn", "High-frequency interactions (hover) get a quick fill or opacity change, not a long or keyframed animation."],
+  "viewport-zoom": ["error", "Never turn off zoom for the whole page; lock it only while a field has focus (IosZoomLock)."],
 }
 
 if (flag("--list")) {
@@ -702,6 +703,11 @@ function checkSourceText(file, text) {
     }
     const tap = l.match(/whileTap\s*=\s*\{\{[^}]*\bscale\s*:\s*(\d*\.?\d+)/)
     if (tap && parseFloat(tap[1]) < 0.95 && PRESS_SCALE_OK.has(base)) report("press-scale-floor", file, i + 1, `whileTap scale ${tap[1]}: a press scale is 0.96; below 0.95 it looks like a bug.`)
+    const vz = l.match(/\bmaximumScale\s*:\s*1(?:\.0*)?(?![\d.])|\buserScalable\s*:\s*false\b/) ??
+      (/\bname\s*[=:]\s*["'`{]*viewport\b/.test(l) || /\bviewport\b.*\bcontent\s*[=:]/.test(l)
+        ? l.match(/maximum-scale\s*=\s*1(?:\.0*)?(?![\d.])|user-scalable\s*=\s*(?:no|0)\b/)
+        : null)
+    if (vz) report("viewport-zoom", file, i + 1, `${vz[0]} turns off zoom for the whole page; drop it and mount IosZoomLock, which locks only while a field has focus.`)
     const wc = l.match(/willChange\s*:\s*["'`]([^"'`]+)["'`]/)
     if (wc) {
       const props = wc[1].split(",").map((x) => x.trim())

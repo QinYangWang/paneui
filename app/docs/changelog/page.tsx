@@ -8,6 +8,23 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-18-ios-zoom-lock",
+    date: "October 18, 2026",
+    title: "iOS Zoom Lock",
+    tag: "Components",
+    changes: [
+      <>
+        New: <TextLink href="/docs/ios-zoom-lock">iOS Zoom Lock</TextLink>. Mount it once and iOS stops zooming into a
+        focused field, while pinch zoom keeps working. It&apos;s opt-in; nothing mounts it for you.
+      </>,
+      <>
+        The <TextLink href="/docs/input">Input</TextLink> and <TextLink href="/docs/textarea">Textarea</TextLink> notes
+        now recommend it for phone forms. <Code>max-md:text-base</Code> still works when you&apos;d rather have 16px
+        text on phones.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-18-phone-fixes",
     date: "October 18, 2026",
     title: "Phone fixes for fields, the outline and the arrow button",

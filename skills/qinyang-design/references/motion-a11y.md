@@ -36,6 +36,9 @@ stop.
   sliders). Targets are at least 24px (44px under a coarse pointer), extended with a pseudo-element when
   the control is smaller (`polish.md` › Targets). Menus, selects, tabs and trees keep their primitive's keyboard model.
 - Hotkeys show their shortcut in a `Kbd`; one listener per shortcut, not one per instance.
+- Never turn zoom off for the whole page (`maximumScale: 1`, `userScalable: false`, `maximum-scale=1` or
+  `user-scalable=no` in the viewport). To stop the iOS focus zoom on 13px fields, mount the opt-in `IosZoomLock`,
+  which adds `maximum-scale=1` only while a field has focus. Check: `viewport-zoom`.
 
 ## Light and dark
 

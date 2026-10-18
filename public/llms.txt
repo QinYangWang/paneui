@@ -48,6 +48,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Input](https://qinyangwang.github.io/ui/docs/input.md): Single-line text field. JSON: https://qinyangwang.github.io/ui/r/input.json
 - [Input Group](https://qinyangwang.github.io/ui/docs/input-group.md): Input with icons, text or buttons inside the field. JSON: https://qinyangwang.github.io/ui/r/input-group.json
 - [Input OTP](https://qinyangwang.github.io/ui/docs/input-otp.md): Enters a one-time code, one character per slot. JSON: https://qinyangwang.github.io/ui/r/input-otp.json
+- [iOS Zoom Lock](https://qinyangwang.github.io/ui/docs/ios-zoom-lock.md): Stops iOS from zooming into small text fields on focus. JSON: https://qinyangwang.github.io/ui/r/ios-zoom-lock.json
 - [Label](https://qinyangwang.github.io/ui/docs/label.md): Names a form control. JSON: https://qinyangwang.github.io/ui/r/label.json
 - [Multi Select](https://qinyangwang.github.io/ui/docs/multi-select.md): Searchable picker for choosing several options at once. JSON: https://qinyangwang.github.io/ui/r/multi-select.json
 - [Native Select](https://qinyangwang.github.io/ui/docs/native-select.md): The browser's own select, styled as a field. JSON: https://qinyangwang.github.io/ui/r/native-select.json

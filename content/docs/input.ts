@@ -34,7 +34,7 @@ export default {
   notes: [
     {
       title: "Text size on phones",
-      body: "Field text matches the control size on every screen (13px at the default size), the same as the button beside it. iOS Safari zooms into a focused field whose text is under 16px; where that zoom matters more than density, such as a sign-in form on a phone, add `max-md:text-base` to the field.",
+      body: "Field text matches the control size on every screen (13px at the default size), the same as the button beside it. iOS Safari zooms into a focused field whose text is under 16px. To stop that, mount [iOS Zoom Lock](/docs/ios-zoom-lock) once (recommended, opt-in); or add `max-md:text-base` to a field to give it 16px text on phones.",
     },
   ],
   api: [

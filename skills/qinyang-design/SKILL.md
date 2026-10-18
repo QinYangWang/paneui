@@ -137,7 +137,10 @@ count fixed in a sentence. `text-balance` on headings (never on code), `text-pre
 Desktop screens hold more per view; touch-sized controls waste it.
 
 Buttons and inputs `h-8` (sm `h-7`, xs `h-6`, lg `h-9`), menu rows 26px, sidebar rows `h-8` (sub rows
-`h-7`), checkbox 16px, switch 32×20, disabled `opacity-64`. Use component sizes, not heights.
+`h-7`), checkbox 16px, switch 32×20, disabled `opacity-64`. Use component sizes, not heights. Field text stays
+at the control size on phones too; where iOS focus zoom gets in the way, mount the opt-in `IosZoomLock` once
+(recommended) or give that field `max-md:text-base`; never turn zoom off for the whole page (check:
+`viewport-zoom`).
 
 ### 14. Space related things closer
 

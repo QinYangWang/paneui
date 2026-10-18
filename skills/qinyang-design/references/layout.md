@@ -5,7 +5,7 @@
 | Thing | Size |
 | --- | --- |
 | Button | `h-8` default, `sm` `h-7`, `xs`/`icon-xs` `h-6`, `lg` `h-9`; `icon` 32, `icon-sm` 28 |
-| Input, select and combobox trigger | `h-8` (`sm` `h-7`), `px-2.5`; text at the control size on every screen (no 16px phone step; opt in with `max-md:text-base` where iOS focus zoom matters) |
+| Input, select and combobox trigger | `h-8` (`sm` `h-7`), `px-2.5`; text at the control size on every screen (no 16px phone step; where iOS focus zoom matters, mount the opt-in `IosZoomLock` (`@qinyang/ios-zoom-lock`), or give the field `max-md:text-base`) |
 | Menu, select and combobox row | `min-h-6.5` (26px), `px-2`, popup `p-1` |
 | Tooltip | `px-2 py-1 text-ui-sm` |
 | Sidebar row | `h-8` (sub rows `h-7`), `text-ui`, muted icons, hover `bg-secondary`, active `bg-foreground/6` |

@@ -258,6 +258,7 @@ export const examples: Record<string, React.ComponentType> = {
   "input/sizes": dynamic(() => import("@/registry/base-nova/examples/input/sizes"), { ssr: false }),
   "input/types": dynamic(() => import("@/registry/base-nova/examples/input/types"), { ssr: false }),
   "input/with-button": dynamic(() => import("@/registry/base-nova/examples/input/with-button"), { ssr: false }),
+  "ios-zoom-lock/scoped": dynamic(() => import("@/registry/base-nova/examples/ios-zoom-lock/scoped"), { ssr: false }),
   "kbd/in-button": dynamic(() => import("@/registry/base-nova/examples/kbd/in-button"), { ssr: false }),
   "kbd/sizes": dynamic(() => import("@/registry/base-nova/examples/kbd/sizes"), { ssr: false }),
   "label/disabled": dynamic(() => import("@/registry/base-nova/examples/label/disabled"), { ssr: false }),

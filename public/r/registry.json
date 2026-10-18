@@ -1380,6 +1380,16 @@
           "path": "skills/qinyang-design/examples/will-change/good.tsx",
           "type": "registry:file",
           "target": "~/.agents/skills/qinyang-design/examples/will-change/good.tsx"
+        },
+        {
+          "path": "skills/qinyang-design/examples/viewport-zoom/bad.tsx",
+          "type": "registry:file",
+          "target": "~/.agents/skills/qinyang-design/examples/viewport-zoom/bad.tsx"
+        },
+        {
+          "path": "skills/qinyang-design/examples/viewport-zoom/good.tsx",
+          "type": "registry:file",
+          "target": "~/.agents/skills/qinyang-design/examples/viewport-zoom/good.tsx"
         }
       ],
       "meta": {
@@ -2425,6 +2435,24 @@
       "dependencies": [
         "class-variance-authority"
       ]
+    },
+    {
+      "name": "ios-zoom-lock",
+      "type": "registry:ui",
+      "title": "iOS Zoom Lock",
+      "description": "Stops iOS from zooming into small text fields on focus.",
+      "registryDependencies": [
+        "@qinyang/theme"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/ui/ios-zoom-lock.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Forms"
+      }
     },
     {
       "name": "label",

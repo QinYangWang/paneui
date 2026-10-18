@@ -27,7 +27,7 @@ export default {
     },
     {
       title: "Text size on phones",
-      body: "Text matches Input on every screen. iOS Safari zooms into a focused field whose text is under 16px; add `max-md:text-base` where that zoom matters more than density.",
+      body: "Text matches Input on every screen. iOS Safari zooms into a focused field whose text is under 16px; mount [iOS Zoom Lock](/docs/ios-zoom-lock) to stop it, or add `max-md:text-base` for 16px text on phones.",
     },
   ],
   api: [

@@ -21,6 +21,7 @@ import SwitchDemo from "@/registry/base-nova/examples/switch-demo"
 import TabsDemo from "@/registry/base-nova/examples/tabs-demo"
 import TaskRowDemo from "@/registry/base-nova/examples/task-row-demo"
 import TextareaDemo from "@/registry/base-nova/examples/textarea-demo"
+import IosZoomLockDemo from "@/registry/base-nova/examples/ios-zoom-lock-demo"
 import ThemeDemo from "@/registry/base-nova/examples/theme-demo"
 import AppShellDemo from "@/registry/base-nova/examples/app-shell-demo"
 import OverflowHintDemo from "@/registry/base-nova/examples/overflow-hint-demo"
@@ -240,6 +241,7 @@ export const demos: Record<string, React.ComponentType> = {
   card: CardDemo,
   input: InputDemo,
   textarea: TextareaDemo,
+  "ios-zoom-lock": IosZoomLockDemo,
   label: LabelDemo,
   switch: SwitchDemo,
   tabs: TabsDemo,

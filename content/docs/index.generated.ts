@@ -68,6 +68,7 @@ import d_image_generation from "./image-generation"
 import d_input from "./input"
 import d_input_group from "./input-group"
 import d_input_otp from "./input-otp"
+import d_ios_zoom_lock from "./ios-zoom-lock"
 import d_kbd from "./kbd"
 import d_label from "./label"
 import d_loader from "./loader"
@@ -229,6 +230,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "input": d_input,
   "input-group": d_input_group,
   "input-otp": d_input_otp,
+  "ios-zoom-lock": d_ios_zoom_lock,
   "kbd": d_kbd,
   "label": d_label,
   "loader": d_loader,
