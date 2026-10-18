@@ -407,7 +407,7 @@ function OutlinePopover({
               </>
             )}
           </span>
-          <ChevronDownIcon className="size-3.5 text-muted-foreground transition-transform duration-200 group-aria-expanded/button:rotate-180 motion-reduce:transition-none" />
+          <ChevronDownIcon data-icon="inline-end" className="size-3.5 text-muted-foreground transition-transform duration-200 group-aria-expanded/button:rotate-180 motion-reduce:transition-none" />
         </PopoverTrigger>
         <PopoverContent align="start" sideOffset={6} className="w-(--anchor-width) gap-2 p-2">
           <ScrollArea
