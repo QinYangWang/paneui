@@ -234,7 +234,7 @@ function SignupForm({
                 </span>
               ))}
             </div>
-            <span className="w-24 text-right text-ui-sm text-muted-foreground">
+            <span className="w-24 text-end text-ui-sm text-muted-foreground">
               {values.password ? `${STRENGTH[score].label} password` : `${minPasswordLength}+ characters`}
             </span>
           </div>

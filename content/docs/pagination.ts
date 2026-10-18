@@ -28,7 +28,7 @@ export default {
         { name: "compact", type: "boolean", default: "false", description: "Prev / next and a \"Page x of y\" label only." },
       ],
     },
-    { name: "PaginationSummary", extends: "p", props: [{ name: "page", type: "number", required: true, description: "Current page." }, { name: "pageSize", type: "number", required: true, description: "Rows per page." }, { name: "total", type: "number", required: true, description: "Total rows." }, { name: "noun", type: "string", default: `"results"`, description: "What is being counted." }] },
+    { name: "PaginationSummary", extends: "p", props: [{ name: "page", type: "number", required: true, description: "Current page." }, { name: "pageSize", type: "number", required: true, description: "Rows per page." }, { name: "total", type: "number", required: true, description: "Total rows." }, { name: "noun", type: "string", default: "the locale's", description: "What is being counted." }] },
     { name: "PaginationPageSize", props: [
         { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Matches `Pagination`; the select is 24, 28 or 32px tall." },
         { name: "value", type: "number", required: true, description: "Rows per page." },

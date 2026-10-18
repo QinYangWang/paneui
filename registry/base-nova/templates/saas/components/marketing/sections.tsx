@@ -96,7 +96,7 @@ export function Hero() {
 /** A slice of the real dashboard, built from the same components, as the product shot. */
 function ProductShot() {
   return (
-    <Card variant="inset" aria-hidden className="text-left">
+    <Card variant="inset" aria-hidden className="text-start">
       <CardPanel className="gap-4 px-4">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {kpis.slice(0, 3).map((k) => (

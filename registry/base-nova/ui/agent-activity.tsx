@@ -279,7 +279,7 @@ function ActivityGroupView({
       {/* timeline rail */}
       {!last ? <span aria-hidden className="absolute top-7 bottom-0 left-[0.6875rem] w-px bg-border" /> : null}
       {/* Concentric with the round 20px icon: 4px inset all round (h-7, pl-1), so 10px + 4px = rounded-xl (14px). */}
-      <CollapsiblePrimitive.Trigger className="group/activity-group -ml-1 flex h-7 w-fit max-w-full cursor-pointer items-center gap-2 rounded-xl pr-2.5 pl-1 text-left text-ui outline-none select-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50">
+      <CollapsiblePrimitive.Trigger className="group/activity-group -ml-1 flex h-7 w-fit max-w-full cursor-pointer items-center gap-2 rounded-xl pr-2.5 pl-1 text-start text-ui outline-none select-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50">
         <span
           aria-hidden
           className={cn(
@@ -402,7 +402,7 @@ function AgentActivity({
     >
       <CollapsiblePrimitive.Trigger
         disabled={working}
-        className="group/activity -ml-1.5 flex h-8 w-fit max-w-full cursor-pointer items-center gap-2 rounded-md px-1.5 text-left outline-none select-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:cursor-default data-disabled:hover:bg-transparent"
+        className="group/activity -ml-1.5 flex h-8 w-fit max-w-full cursor-pointer items-center gap-2 rounded-md px-1.5 text-start outline-none select-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:cursor-default data-disabled:hover:bg-transparent"
       >
         <span role="status" className="flex min-w-0 items-center gap-2">
           {working ? (

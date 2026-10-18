@@ -724,6 +724,18 @@ html[data-accent="violet"].dark {
   }
 }
 
+/*
+ * Icon stroke tier: line icons inside take 1.2x their style's stroke, to match semibold or bold text
+ * beside them (rounded 1.75 -> 2.1, outline 1.6 -> 1.92). icon-regular resets it inside a bold area.
+ */
+@utility icon-bold {
+  --icon-stroke-scale: 1.2;
+}
+
+@utility icon-regular {
+  --icon-stroke-scale: 1;
+}
+
 /* Sticky top edge for a shell-inset panel that scrolls with the page (docs shell). */
 @utility shell-cap {
   border-top-left-radius: var(--radius-shell);

@@ -172,7 +172,7 @@ function compareValues(a: unknown, b: unknown) {
 }
 
 function alignClass(align: TableColumn<unknown>["align"]) {
-  return align === "right" ? "justify-end text-right" : align === "center" ? "justify-center text-center" : "justify-start text-left"
+  return align === "right" ? "justify-end text-end" : align === "center" ? "justify-center text-center" : "justify-start text-start"
 }
 
 function moveItem<V>(list: readonly V[], from: number, to: number) {

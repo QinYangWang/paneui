@@ -54,7 +54,7 @@ function EmptyStateIcon({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function EmptyStateTitle({ className, ...props }: React.ComponentProps<"h3">) {
-  return <h3 data-slot="empty-state-title" className={cn("text-ui-lg font-semibold text-balance", className)} {...props} />
+  return <h3 data-slot="empty-state-title" className={cn("text-ui-lg font-semibold icon-bold text-balance", className)} {...props} />
 }
 
 function EmptyStateDescription({ className, ...props }: React.ComponentProps<"p">) {

@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import {
   ChartDataTable,
   chartAlpha,
@@ -53,7 +54,7 @@ const defaultTime = (t: number) =>
 
 function CandlestickChart({
   candles,
-  label = "Candlestick chart",
+  label: labelProp,
   height = 320,
   lastPrice,
   formatPrice = defaultPrice,
@@ -65,6 +66,8 @@ function CandlestickChart({
   className,
   ...props
 }: CandlestickChartProps) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.candlestickChart
   const [ref, size] = useChartSize<HTMLDivElement>()
   const transition = useChartTransition()
   const [hover, setHover] = React.useState<{ index: number; y: number | null } | null>(null)
@@ -166,7 +169,7 @@ function CandlestickChart({
           </span>
           {shown.volume !== undefined && (
             <span>
-              Vol <b className="font-medium text-foreground">{formatVolume(shown.volume)}</b>
+              {labels.volumeShort} <b className="font-medium text-foreground">{formatVolume(shown.volume)}</b>
             </span>
           )}
           <span className="ml-auto">{formatTime(shown.time)}</span>
@@ -379,8 +382,8 @@ function CandlestickChart({
       </div>
 
       <ChartDataTable
-        caption={`${label} data`}
-        columns={["Time", "Open", "High", "Low", "Close", "Volume"]}
+        caption={labels.chartData(label)}
+        columns={[labels.time, labels.priceOpen, labels.priceHigh, labels.priceLow, labels.priceClose, labels.volume]}
         rows={candles.map((c) => [
           formatTime(c.time),
           formatPrice(c.open),

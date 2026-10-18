@@ -100,6 +100,10 @@ function checkCss(file, fix) {
   if (/--primary-subtle\s*:/.test(css) && !/@utility\s+media-outline\b/.test(css))
     note("warn", file, "the media-outline utility is missing, so images and video in components render without their 1px edge",
       "Reinstall @qinyang/theme: shadcn add <registry>/r/theme.json --overwrite")
+  // The theme added the icon stroke tier on 2026-10-18; Badge, titles and headings use icon-bold.
+  if (/--primary-subtle\s*:/.test(css) && !/@utility\s+icon-bold\b/.test(css))
+    note("warn", file, "the icon-bold utility is missing, so icons beside semibold text keep the regular stroke",
+      "Reinstall @qinyang/theme: shadcn add <registry>/r/theme.json --overwrite")
   if (!/--primary:\s*color\(display-p3/.test(css))
     note("info", file, "no wide-gamut values: colours render in sRGB on P3 screens", "Reinstall the theme to add them.")
 

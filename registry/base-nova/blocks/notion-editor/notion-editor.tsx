@@ -52,7 +52,7 @@ export const editorContentClass = cn(
   // table
   "[&_.tableWrapper]:my-3 [&_.tableWrapper]:overflow-x-auto",
   "[&_table]:w-full [&_table]:border-collapse [&_table]:text-sm [&_table]:leading-6",
-  "[&_td]:border [&_td]:border-border [&_td]:px-2.5 [&_td]:py-1 [&_td]:align-top [&_th]:border [&_th]:border-border [&_th]:bg-muted [&_th]:px-2.5 [&_th]:py-1 [&_th]:text-left [&_th]:font-medium",
+  "[&_td]:border [&_td]:border-border [&_td]:px-2.5 [&_td]:py-1 [&_td]:align-top [&_th]:border [&_th]:border-border [&_th]:bg-muted [&_th]:px-2.5 [&_th]:py-1 [&_th]:text-start [&_th]:font-medium",
   "[&_td>p]:my-0 [&_th>p]:my-0 [&_.selectedCell]:bg-primary/8",
   // toggle (details)
   "[&_[data-type=details]]:my-1 [&_[data-type=details]]:flex [&_[data-type=details]]:items-start [&_[data-type=details]]:gap-1",

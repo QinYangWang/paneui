@@ -57,11 +57,11 @@ export function PricingPage() {
               </caption>
               <thead>
                 <tr className="border-b border-border">
-                  <th scope="col" className="w-2/5 px-5 py-4 text-left font-medium text-muted-foreground">
+                  <th scope="col" className="w-2/5 px-5 py-4 text-start font-medium text-muted-foreground">
                     Feature
                   </th>
                   {plans.map((p) => (
-                    <th key={p.id} scope="col" className="px-5 py-4 text-left font-semibold">
+                    <th key={p.id} scope="col" className="px-5 py-4 text-start font-semibold">
                       <span className="flex items-center gap-2">
                         {p.name}
                         {p.featured && (
@@ -77,13 +77,13 @@ export function PricingPage() {
               {comparison.map((g) => (
                 <tbody key={g.group}>
                   <tr className="bg-muted">
-                    <th scope="colgroup" colSpan={plans.length + 1} className="px-5 py-2 text-left text-xs font-medium text-muted-foreground">
+                    <th scope="colgroup" colSpan={plans.length + 1} className="px-5 py-2 text-start text-xs font-medium text-muted-foreground">
                       {g.group}
                     </th>
                   </tr>
                   {g.rows.map((r) => (
                     <tr key={r.label} className="border-t border-border">
-                      <th scope="row" className="px-5 py-3 text-left font-normal">
+                      <th scope="row" className="px-5 py-3 text-start font-normal">
                         {r.label}
                       </th>
                       {plans.map((p) => {

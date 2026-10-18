@@ -83,7 +83,7 @@ function MessageBubble({ className, tone, size, align, tail = true, render, ...p
               ? "[[data-slot=message-bubble]+&]:rounded-tr-md"
               : "[[data-slot=message-bubble]+&]:rounded-tl-md"),
           interactive &&
-            "cursor-pointer text-left no-underline select-none active:scale-98",
+            "cursor-pointer text-start no-underline select-none active:scale-98",
           className
         ),
       },

@@ -324,6 +324,12 @@
             "outline-color": "oklch(1 0 0 / 0.1)"
           }
         },
+        "@utility icon-bold": {
+          "--icon-stroke-scale": "1.2"
+        },
+        "@utility icon-regular": {
+          "--icon-stroke-scale": "1"
+        },
         "@supports (color: color(display-p3 1 1 1))": {
           "@media (color-gamut: p3)": {
             ":root": {
@@ -1224,6 +1230,36 @@
           "path": "skills/qinyang-design/examples/icon-stroke/good.tsx",
           "type": "registry:file",
           "target": "~/.agents/skills/qinyang-design/examples/icon-stroke/good.tsx"
+        },
+        {
+          "path": "skills/qinyang-design/examples/icon-weight/bad.tsx",
+          "type": "registry:file",
+          "target": "~/.agents/skills/qinyang-design/examples/icon-weight/bad.tsx"
+        },
+        {
+          "path": "skills/qinyang-design/examples/icon-weight/good.tsx",
+          "type": "registry:file",
+          "target": "~/.agents/skills/qinyang-design/examples/icon-weight/good.tsx"
+        },
+        {
+          "path": "skills/qinyang-design/examples/nav-active-icon/bad.tsx",
+          "type": "registry:file",
+          "target": "~/.agents/skills/qinyang-design/examples/nav-active-icon/bad.tsx"
+        },
+        {
+          "path": "skills/qinyang-design/examples/nav-active-icon/good.tsx",
+          "type": "registry:file",
+          "target": "~/.agents/skills/qinyang-design/examples/nav-active-icon/good.tsx"
+        },
+        {
+          "path": "skills/qinyang-design/examples/text-align-logical/bad.tsx",
+          "type": "registry:file",
+          "target": "~/.agents/skills/qinyang-design/examples/text-align-logical/bad.tsx"
+        },
+        {
+          "path": "skills/qinyang-design/examples/text-align-logical/good.tsx",
+          "type": "registry:file",
+          "target": "~/.agents/skills/qinyang-design/examples/text-align-logical/good.tsx"
         },
         {
           "path": "skills/qinyang-design/examples/icon-swap/bad.tsx",

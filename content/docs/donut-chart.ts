@@ -70,7 +70,7 @@ export default {
           default: "formatNumber",
           description: "Formats values in the centre, legend and tooltip.",
         },
-        { name: "totalLabel", type: "string", default: `"Total"`, description: "Centre caption when nothing is hovered." },
+        { name: "totalLabel", type: "string", default: "the locale's", description: "Centre caption when nothing is hovered." },
         { name: "maxSize", type: "number", default: "240", description: "Max ring diameter in px; it shrinks with its container." },
         { name: "showLegend", type: "boolean", default: "true", description: "Show the value / share legend." },
         {

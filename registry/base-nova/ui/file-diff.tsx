@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils"
 import { CodeCopyButton } from "@/registry/base-nova/ui/agent-code-block"
 import { CollapsiblePanel } from "@/registry/base-nova/ui/collapsible"
 import { Loader } from "@/registry/base-nova/ui/loader"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 /* -------------------------------------------------------------------------- */
 /*  Rows (our own unified-diff model, kept for streaming and the API)          */
@@ -195,10 +196,11 @@ function DiffStat({ additions, deletions }: { additions: number; deletions: numb
 type FileDiffStyle = "unified" | "split"
 
 function DiffStyleToggle({ value, onChange }: { value: FileDiffStyle; onChange: (next: FileDiffStyle) => void }) {
+  const { labels } = useLocale()
   return (
     <div
       role="radiogroup"
-      aria-label="Diff layout"
+      aria-label={labels.diffLayout}
       data-slot="file-diff-style-toggle"
       className="frame-md frame-p-0.5 flex shrink-0 bg-secondary"
     >
@@ -210,11 +212,11 @@ function DiffStyleToggle({ value, onChange }: { value: FileDiffStyle; onChange: 
           aria-checked={value === style}
           onClick={() => onChange(style)}
           className={cn(
-            "h-6 cursor-pointer rounded-inner px-2 text-ui-xs font-medium text-muted-foreground capitalize transition-[background-color,color,box-shadow] duration-150 outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+            "h-6 cursor-pointer rounded-inner px-2 text-ui-xs font-medium text-muted-foreground transition-[background-color,color,box-shadow] duration-150 outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
             value === style && "bg-card text-foreground shadow-raised"
           )}
         >
-          {style}
+          {style === "split" ? labels.diffSplit : labels.diffUnified}
         </button>
       ))}
     </div>
@@ -311,6 +313,7 @@ function FileDiff<A = undefined>({
   style,
   ...props
 }: FileDiffProps<A>) {
+  const { labels } = useLocale()
   const reduce = useReducedMotion() ?? false
   const dark = useHtmlDark()
   const renderer = useDiffRenderer()
@@ -439,14 +442,14 @@ function FileDiff<A = undefined>({
       style={style}
       {...props}
     >
-      <div className={cn("flex items-center gap-1 pr-1.5 pl-1.5", variant === "card" ? "h-10" : "h-9")}>
+      <div className={cn("flex items-center gap-1 px-1.5", variant === "card" ? "h-10" : "h-9")}>
         <CollapsiblePrimitive.Trigger
           data-slot="file-diff-trigger"
-          className="group/trigger flex h-7 min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-lg px-2 text-left outline-none select-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="group/trigger flex h-7 min-w-0 flex-1 cursor-pointer items-center gap-2 rounded-lg px-2 text-start outline-none select-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {variant === "card" && <ChevronDownIcon className="size-4 shrink-0 -rotate-90 text-muted-foreground transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/trigger:rotate-0 motion-reduce:transition-none" />}
           {streaming ? (
-            <Loader size="sm" label="Writing changes" className="size-4 text-primary" />
+            <Loader size="sm" label={labels.writingChanges} className="size-4 text-primary" />
           ) : (
             <FileIcon className="size-4 shrink-0 text-muted-foreground" />
           )}
@@ -457,18 +460,16 @@ function FileDiff<A = undefined>({
           <span className="flex shrink-0 items-center gap-1.5 font-mono text-ui-sm tabular-nums">
             {additions > 0 && <span className="text-success">+{additions}</span>}
             {deletions > 0 && <span className="text-destructive">−{deletions}</span>}
-            <span className="sr-only">
-              {additions} additions, {deletions} deletions
-            </span>
+            <span className="sr-only">{labels.diffStats(additions, deletions)}</span>
             {variant === "card" && <DiffStat additions={additions} deletions={deletions} />}
           </span>
         </CollapsiblePrimitive.Trigger>
         {diffStyleToggle && <DiffStyleToggle value={diffStyle} onChange={setDiffStyle} />}
         {actions}
-        {copyable && <CodeCopyButton value={newText} label="Copy new file contents" />}
+        {copyable && <CodeCopyButton value={newText} label={labels.copyNewFile} />}
         {variant === "row" && (
           <CollapsiblePrimitive.Trigger
-            aria-label={open ? "Hide changes" : "Show changes"}
+            aria-label={open ? labels.hideChanges : labels.showChanges}
             className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <ChevronDownIcon className={cn("size-3.5 transition-transform duration-200 motion-reduce:transition-none", open && "rotate-180")} />
@@ -485,7 +486,7 @@ function FileDiff<A = undefined>({
             pinned.current = el.scrollHeight - el.scrollTop - el.clientHeight < 24
           }}
           role="region"
-          aria-label={`Changes to ${filename}`}
+          aria-label={labels.changesTo(filename)}
           className="overflow-auto border-t border-border scrollbar-thin"
         >
           {RendererFileDiff && metadata ? (

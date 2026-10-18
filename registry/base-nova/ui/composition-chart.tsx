@@ -4,6 +4,7 @@ import * as React from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import {
   CHART_EASE,
   ChartDataTable,
@@ -86,7 +87,7 @@ function CompositionChart({
   series,
   data,
   mode = "bar",
-  label = "Composition chart",
+  label: labelProp,
   height = 260,
   formatValue = formatNumber,
   showLegend = true,
@@ -96,6 +97,8 @@ function CompositionChart({
   className,
   ...props
 }: CompositionChartProps) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.compositionChart
   const [ref, size] = useChartSize<HTMLDivElement>()
   const reduce = useReducedMotion()
   const transition = useChartTransition()
@@ -346,7 +349,7 @@ function CompositionChart({
                 </span>
               </ChartTooltipTitle>
               {activeStack.total === 0 ? (
-                <p className="text-muted-foreground">No data for this period</p>
+                <p className="text-muted-foreground">{labels.noDataForPeriod}</p>
               ) : (
                 [...visible].reverse().map((s) => {
                   const [a, b] = activeStack.spans[s.id]
@@ -364,7 +367,7 @@ function CompositionChart({
                           <ChartNumber
                             value={b - a}
                             format={(v) => formatPercent(v, 0)}
-                            className="w-9 text-right"
+                            className="w-9 text-end"
                           />
                         </span>
                       }
@@ -402,8 +405,8 @@ function CompositionChart({
       )}
 
       <ChartDataTable
-        caption={`${label} data (share of visible series)`}
-        columns={["Period", ...visible.map((s) => s.label)]}
+        caption={labels.chartDataShare(label)}
+        columns={[labels.period, ...visible.map((s) => s.label)]}
         rows={data.map((p, i) => [
           p.label,
           ...visible.map((s) => {

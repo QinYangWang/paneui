@@ -22,7 +22,7 @@ export default function PreviewRailDemo() {
   return (
     <div className="flex w-full max-w-md items-center gap-6">
       <PreviewRail items={sections} value={value} onValueChange={setValue} label="On this page" />
-      <div className="min-w-0 flex-1 text-right">
+      <div className="min-w-0 flex-1 text-end">
         <p className="text-xs text-muted-foreground">Reading</p>
         <p className="text-sm font-medium">{current?.label}</p>
       </div>

@@ -115,6 +115,120 @@ type LocaleLabels = {
   themeCycle: (current: string, next: string) => string
   /* Art */
   coverArt: string
+  /* Editable table */
+  columnN: (n: number) => string
+  columnName: string
+  columnHeaderHint: string
+  columnOptions: (column: string) => string
+  insertBefore: string
+  insertAfter: string
+  insertColumnAfter: (column: string) => string
+  rename: string
+  renameNamed: (name: string) => string
+  deleteColumn: string
+  rowOptions: (row: number) => string
+  insertAbove: string
+  insertBelow: string
+  insertRowBelow: (row: number) => string
+  deleteRow: string
+  noRows: string
+  addFirstRow: string
+  newRow: string
+  cellLabel: (column: string, row: number) => string
+  /* Tool approval */
+  allowToolQuestion: string
+  permissionRequest: (tool: string) => string
+  riskLow: string
+  riskMedium: string
+  riskHigh: string
+  showArguments: string
+  hideArguments: string
+  deny: string
+  alwaysAllow: string
+  approve: string
+  approved: string
+  alwaysAllowed: string
+  denied: string
+  revoke: string
+  undo: string
+  /* Files and diffs */
+  editedFiles: (count: number) => string
+  diffStats: (added: number, removed: number) => string
+  review: string
+  showFiles: string
+  hideFiles: string
+  revealFile: (path: string) => string
+  diffLayout: string
+  diffUnified: string
+  diffSplit: string
+  writingChanges: string
+  copyNewFile: string
+  showChanges: string
+  hideChanges: string
+  changesTo: (file: string) => string
+  /* Workspace sidebar */
+  workspace: string
+  aiWorkspace: string
+  bookmarks: string
+  collapseSidebar: string
+  expandSidebar: string
+  searchWorkspace: string
+  clearSearch: string
+  nothingMatches: (query: string) => string
+  /* Colour picker */
+  saturationBrightness: string
+  saturationBrightnessValue: (saturation: number, brightness: number) => string
+  slider2d: string
+  hue: string
+  opacity: string
+  hexColour: string
+  /* Charts */
+  chart: string
+  candlestickChart: string
+  compositionChart: string
+  donutChart: string
+  funnelChart: string
+  treemapChart: string
+  activityCalendar: string
+  total: string
+  value: string
+  valueIn: (unit: string) => string
+  share: string
+  shareOfTotal: string
+  shareOf: (group: string) => string
+  item: string
+  segment: string
+  description: string
+  period: string
+  noDataForPeriod: string
+  stage: string
+  start: string
+  ofFirst: string
+  ofNamed: (label: string) => string
+  ofPrevious: string
+  dropOff: string
+  stepRate: (percent: string) => string
+  ofPreviousPercent: (percent: string) => string
+  percentOf: (percent: string, of: string) => string
+  chartData: (chart: string) => string
+  chartDataShare: (chart: string) => string
+  time: string
+  priceOpen: string
+  priceHigh: string
+  priceLow: string
+  priceClose: string
+  volume: string
+  volumeShort: string
+  contributions: string
+  ofBusiestDay: string
+  less: string
+  more: string
+  activeDays: (active: number, total: number) => string
+  inLastWeeks: (weeks: number) => string
+  /* Pagination summary */
+  results: string
+  noItems: (noun: string) => string
+  itemRange: (from: string, to: string, total: string, noun: string) => string
 }
 
 const en: LocaleLabels = {
@@ -214,6 +328,113 @@ const en: LocaleLabels = {
   themeSystem: "System",
   themeCycle: (current, next) => `Theme: ${current}. Switch to ${next.toLowerCase()}`,
   coverArt: "Abstract cover illustration",
+  columnN: (n) => `Column ${n}`,
+  columnName: "Column name",
+  columnHeaderHint: "Enter renames, Alt plus arrow keys moves the column",
+  columnOptions: (c) => `${c} column options`,
+  insertBefore: "Insert before",
+  insertAfter: "Insert after",
+  insertColumnAfter: (c) => `Insert column after ${c}`,
+  rename: "Rename",
+  renameNamed: (n) => `Rename ${n}`,
+  deleteColumn: "Delete column",
+  rowOptions: (r) => `Row ${r} options`,
+  insertAbove: "Insert above",
+  insertBelow: "Insert below",
+  insertRowBelow: (r) => `Insert row below row ${r}`,
+  deleteRow: "Delete row",
+  noRows: "No rows",
+  addFirstRow: "Add the first row",
+  newRow: "New row",
+  cellLabel: (c, r) => `${c}, row ${r}`,
+  allowToolQuestion: "Allow this tool to run?",
+  permissionRequest: (t) => `Permission request for ${t}`,
+  riskLow: "Read only",
+  riskMedium: "Makes changes",
+  riskHigh: "Destructive",
+  showArguments: "Show arguments",
+  hideArguments: "Hide arguments",
+  deny: "Deny",
+  alwaysAllow: "Always allow",
+  approve: "Approve",
+  approved: "Approved",
+  alwaysAllowed: "Always allowed",
+  denied: "Denied",
+  revoke: "Revoke",
+  undo: "Undo",
+  editedFiles: (n) => `Edited ${n} ${n === 1 ? "file" : "files"}`,
+  diffStats: (a, r) => `${a} additions, ${r} deletions`,
+  review: "Review",
+  showFiles: "Show files",
+  hideFiles: "Hide files",
+  revealFile: (p) => `Reveal ${p}`,
+  diffLayout: "Diff layout",
+  diffUnified: "Unified",
+  diffSplit: "Split",
+  writingChanges: "Writing changes",
+  copyNewFile: "Copy new file contents",
+  showChanges: "Show changes",
+  hideChanges: "Hide changes",
+  changesTo: (f) => `Changes to ${f}`,
+  workspace: "Workspace",
+  aiWorkspace: "AI workspace",
+  bookmarks: "Bookmarks",
+  collapseSidebar: "Collapse sidebar",
+  expandSidebar: "Expand sidebar",
+  searchWorkspace: "Search workspace",
+  clearSearch: "Clear search",
+  nothingMatches: (q) => `Nothing matches “${q}”.`,
+  saturationBrightness: "Saturation and brightness",
+  saturationBrightnessValue: (s, b) => `Saturation ${s}%, brightness ${b}%`,
+  slider2d: "2D slider",
+  hue: "Hue",
+  opacity: "Opacity",
+  hexColour: "Hex colour",
+  chart: "Chart",
+  candlestickChart: "Candlestick chart",
+  compositionChart: "Composition chart",
+  donutChart: "Donut chart",
+  funnelChart: "Funnel",
+  treemapChart: "Treemap",
+  activityCalendar: "Activity calendar",
+  total: "Total",
+  value: "Value",
+  valueIn: (u) => `Value (${u})`,
+  share: "Share",
+  shareOfTotal: "Share of total",
+  shareOf: (g) => `Share of ${g}`,
+  item: "Item",
+  segment: "Segment",
+  description: "Description",
+  period: "Period",
+  noDataForPeriod: "No data for this period",
+  stage: "Stage",
+  start: "Start",
+  ofFirst: "Of first",
+  ofNamed: (l) => `Of ${l}`,
+  ofPrevious: "Of previous",
+  dropOff: "Drop-off",
+  stepRate: (p) => `${p} step`,
+  ofPreviousPercent: (p) => `${p} of previous`,
+  percentOf: (p, of) => `${p} of ${of.toLowerCase()}`,
+  chartData: (c) => `${c} data`,
+  chartDataShare: (c) => `${c} data (share of visible series)`,
+  time: "Time",
+  priceOpen: "Open",
+  priceHigh: "High",
+  priceLow: "Low",
+  priceClose: "Close",
+  volume: "Volume",
+  volumeShort: "Vol",
+  contributions: "contributions",
+  ofBusiestDay: "Of busiest day",
+  less: "Less",
+  more: "More",
+  activeDays: (a, t) => `${a}/${t} active days`,
+  inLastWeeks: (w) => `in the last ${w} weeks`,
+  results: "results",
+  noItems: (n) => `No ${n}`,
+  itemRange: (f, t, total, n) => `${f}–${t} of ${total} ${n}`,
 }
 
 const zhCN: LocaleLabels = {
@@ -313,6 +534,113 @@ const zhCN: LocaleLabels = {
   themeSystem: "跟随系统",
   themeCycle: (current, next) => `主题：${current}，切换到${next}`,
   coverArt: "抽象封面插图",
+  columnN: (n) => `第 ${n} 列`,
+  columnName: "列名",
+  columnHeaderHint: "按回车重命名，按 Alt 加方向键移动列",
+  columnOptions: (c) => `“${c}”列选项`,
+  insertBefore: "在前面插入",
+  insertAfter: "在后面插入",
+  insertColumnAfter: (c) => `在“${c}”后插入列`,
+  rename: "重命名",
+  renameNamed: (n) => `重命名“${n}”`,
+  deleteColumn: "删除列",
+  rowOptions: (r) => `第 ${r} 行选项`,
+  insertAbove: "在上方插入",
+  insertBelow: "在下方插入",
+  insertRowBelow: (r) => `在第 ${r} 行下方插入行`,
+  deleteRow: "删除行",
+  noRows: "没有数据",
+  addFirstRow: "添加第一行",
+  newRow: "新建行",
+  cellLabel: (c, r) => `${c}，第 ${r} 行`,
+  allowToolQuestion: "允许运行这个工具吗？",
+  permissionRequest: (t) => `${t} 的权限请求`,
+  riskLow: "只读",
+  riskMedium: "会修改内容",
+  riskHigh: "破坏性操作",
+  showArguments: "显示参数",
+  hideArguments: "隐藏参数",
+  deny: "拒绝",
+  alwaysAllow: "始终允许",
+  approve: "允许",
+  approved: "已允许",
+  alwaysAllowed: "已始终允许",
+  denied: "已拒绝",
+  revoke: "撤销授权",
+  undo: "撤销",
+  editedFiles: (n) => `编辑了 ${n} 个文件`,
+  diffStats: (a, r) => `新增 ${a} 行，删除 ${r} 行`,
+  review: "查看",
+  showFiles: "显示文件",
+  hideFiles: "隐藏文件",
+  revealFile: (p) => `定位到 ${p}`,
+  diffLayout: "对比布局",
+  diffUnified: "合并",
+  diffSplit: "并排",
+  writingChanges: "正在写入改动",
+  copyNewFile: "复制新文件内容",
+  showChanges: "显示改动",
+  hideChanges: "隐藏改动",
+  changesTo: (f) => `${f} 的改动`,
+  workspace: "工作区",
+  aiWorkspace: "AI 工作区",
+  bookmarks: "书签",
+  collapseSidebar: "收起侧边栏",
+  expandSidebar: "展开侧边栏",
+  searchWorkspace: "搜索工作区",
+  clearSearch: "清除搜索",
+  nothingMatches: (q) => `没有匹配“${q}”的内容。`,
+  saturationBrightness: "饱和度和亮度",
+  saturationBrightnessValue: (s, b) => `饱和度 ${s}%，亮度 ${b}%`,
+  slider2d: "二维滑块",
+  hue: "色相",
+  opacity: "不透明度",
+  hexColour: "十六进制颜色",
+  chart: "图表",
+  candlestickChart: "K 线图",
+  compositionChart: "构成图",
+  donutChart: "环形图",
+  funnelChart: "漏斗图",
+  treemapChart: "矩形树图",
+  activityCalendar: "活动日历",
+  total: "合计",
+  value: "数值",
+  valueIn: (u) => `数值（${u}）`,
+  share: "占比",
+  shareOfTotal: "占总数",
+  shareOf: (g) => `占${g}`,
+  item: "项目",
+  segment: "分段",
+  description: "说明",
+  period: "时段",
+  noDataForPeriod: "这段时间没有数据",
+  stage: "阶段",
+  start: "起点",
+  ofFirst: "占第一步",
+  ofNamed: (l) => `占${l}`,
+  ofPrevious: "占上一步",
+  dropOff: "流失",
+  stepRate: (p) => `本步 ${p}`,
+  ofPreviousPercent: (p) => `占上一步 ${p}`,
+  percentOf: (p, of) => `占${of} ${p}`,
+  chartData: (c) => `${c}数据`,
+  chartDataShare: (c) => `${c}数据（占可见系列的比例）`,
+  time: "时间",
+  priceOpen: "开盘",
+  priceHigh: "最高",
+  priceLow: "最低",
+  priceClose: "收盘",
+  volume: "成交量",
+  volumeShort: "量",
+  contributions: "次贡献",
+  ofBusiestDay: "占最忙一天",
+  less: "少",
+  more: "多",
+  activeDays: (a, t) => `活跃 ${a}/${t} 天`,
+  inLastWeeks: (w) => `（最近 ${w} 周）`,
+  results: "结果",
+  noItems: (n) => `没有${n}`,
+  itemRange: (f, t, total, n) => `${f}–${t}，共 ${total} 个${n}`,
 }
 
 /** Built-in label sets, keyed by BCP 47 tag. */

@@ -229,7 +229,7 @@ function FileUploadRow({
         ) : (
           <div className="flex items-center gap-2.5">
             <UploadProgress status={status} progress={progress} />
-            <span className="w-24 shrink-0 text-right text-ui-sm text-muted-foreground tabular-nums">
+            <span className="w-24 shrink-0 text-end text-ui-sm text-muted-foreground tabular-nums">
               {status === "uploading"
                 ? `${Math.round(progress)}% · ${formatBytes(item.size)}`
                 : formatBytes(item.size)}

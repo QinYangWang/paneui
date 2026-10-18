@@ -177,9 +177,11 @@ at one level line up.
 
 Two glyph families in one group look like two different products.
 
-Navigation, rails, docks, tab bars and palettes use the solid family (`InboxIcon`, `CalendarDaysIcon`,
-`TerminalSquareIcon`); line glyphs are for controls (chevrons, close, add, search). Icons come from
-`@/components/icons` only, 16px and muted in navigation.
+Navigation, rails, docks, tab bars and palettes use the nav glyphs (`InboxIcon`, `CalendarDaysIcon`,
+`TerminalSquareIcon`), outline at rest like the controls beside them. A nav with a row fill (sidebar,
+rail) keeps the outline glyph when active; one without (a tab bar) swaps to the filled pair,
+`activeIcon={<InboxFilledIcon />}`. Icons come from `@/components/icons` only, 16px and muted in
+navigation.
 
 ### 20. Frame title icons, keep nav icons bare
 
@@ -324,8 +326,9 @@ shrink or a full-height flight. A drawer or sheet sliding back to its edge is th
 A thicker stroke, an off-grid size or a baked-in fill makes one glyph look like another set.
 
 Icons paint with `currentColor`; hover, selected and disabled are text colours and opacity. No
-`strokeWidth` on an instance. Sizes stay on the grid (12, 14, 16, 18, 20, 24px). Arrows, chevrons, send
-and reply glyphs take `rtl:-scale-x-100`; checkmarks, clocks and media controls never flip.
+`strokeWidth` on an instance: stroke comes in two tiers (rule 41). Sizes stay on the grid (12, 14, 16, 18,
+20, 24px). Arrows, chevrons, send and reply glyphs take `rtl:-scale-x-100`; checkmarks, clocks and media
+controls never flip.
 
 ### 40. Name every icon-only button
 
@@ -333,6 +336,30 @@ A screen reader announces an unnamed icon button as "button" and nothing else.
 
 `aria-label` on the button, with the same text as its tooltip. Icons beside a label stay hidden from
 assistive tech (house icons already are).
+
+### 41. Match the icon stroke to the text weight
+
+A regular stroke beside semibold type looks faint, as if the icon were disabled.
+
+Line icons have two stroke tiers: regular, and bold at 1.2x (rounded 1.75 → 2.1, outline 1.6 → 1.92).
+Put `icon-bold` on semibold or bold text that holds icons (titles, Badge and section labels already
+carry it), or `weight="bold"` on a lone icon; `icon-regular` resets it inside. Medium text (buttons,
+menu rows) stays regular.
+
+### 42. Fill the active glyph where there's no row fill
+
+Colour alone is a weak signal for where you are, especially on a phone in sunlight.
+
+Nav glyphs are outline at rest. In a tab bar, which has no row fill, the active item shows the filled
+pair (`HomeFilledIcon` for `HomeIcon`) through `activeIcon`. Sidebars and rails mark the active row with
+a fill, so their glyph stays outline.
+
+### 43. Align text to the reading direction
+
+`text-left` stays left in Arabic and Hebrew, where the text starts on the right.
+
+`text-start` / `text-end`, like `ps-*` / `pe-*` for padding. Physical alignment only where the content
+itself is left to right (code gutters) or a stored setting is physical (an email block's alignment).
 
 ## References
 

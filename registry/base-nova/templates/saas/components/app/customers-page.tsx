@@ -292,7 +292,7 @@ function CustomerDrawer({
                         <Badge size="sm" variant={inv.status === "Paid" ? "success" : inv.status === "Open" ? "warning" : "outline"}>
                           {inv.status}
                         </Badge>
-                        <SettingsRowTitle className="w-16 text-right tabular-nums">{usd.format(inv.amount)}</SettingsRowTitle>
+                        <SettingsRowTitle className="w-16 text-end tabular-nums">{usd.format(inv.amount)}</SettingsRowTitle>
                       </SettingsRowControl>
                     </SettingsRow>
                   ))}

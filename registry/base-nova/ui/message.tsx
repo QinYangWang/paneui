@@ -90,7 +90,7 @@ function MessageAvatar({
       data-slot="message-avatar"
       aria-hidden={placeholder || undefined}
       className={cn(
-        "relative mb-0.5 grid size-8 shrink-0 place-items-center overflow-hidden rounded-full bg-card text-ui-sm font-semibold text-muted-foreground shadow-raised [&_img]:size-full [&_img]:object-cover [&_svg]:size-4",
+        "relative mb-0.5 grid size-8 shrink-0 place-items-center overflow-hidden rounded-full bg-card text-ui-sm font-semibold icon-bold text-muted-foreground shadow-raised [&_img]:size-full [&_img]:object-cover [&_svg]:size-4",
         placeholder && "invisible",
         className
       )}

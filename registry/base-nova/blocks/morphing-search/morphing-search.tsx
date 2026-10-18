@@ -260,7 +260,7 @@ function MorphingSearch({
             </motion.span>
             {!iconOnly && (
               <>
-                <span className="flex-1 truncate text-left">{placeholder}</span>
+                <span className="flex-1 truncate text-start">{placeholder}</span>
                 {shortcutLabel && (
                   <kbd className="rounded-md bg-card px-1.5 py-0.5 font-sans text-ui-xs text-muted-foreground shadow-chip">
                     {shortcutLabel}

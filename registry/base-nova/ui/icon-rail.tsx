@@ -21,8 +21,8 @@ const RailContext = React.createContext<{ side: RailSide; orientation: RailOrien
 /**
  * Narrow app rail: a column (or, with `orientation="horizontal"`, a row) of
  * 32px icon buttons with tooltips. Put `IconRailSpacer` between the leading
- * and trailing groups. Icons follow the nav rules: solid family, 16px, muted,
- * active foreground. A horizontal rail scrolls sideways when it runs out of room.
+ * and trailing groups. Icons follow the nav rules: outline glyphs, 16px, muted;
+ * the active item is a row fill and foreground, so it keeps the outline glyph. A horizontal rail scrolls sideways when it runs out of room.
  */
 function IconRail({ orientation = "vertical", tooltipSide, className, ...props }: IconRailProps) {
   const side = tooltipSide ?? (orientation === "horizontal" ? "top" : "right")

@@ -14,7 +14,7 @@ export default function SharedLayoutBgPillStyle() {
         <SharedLayoutBgItem
           key={p.name}
           render={<button type="button" />}
-          className="h-11 justify-between gap-3 text-left text-sm outline-none"
+          className="h-11 justify-between gap-3 text-start text-sm outline-none"
         >
           <span className="font-medium">{p.name}</span>
           <span className="text-muted-foreground">{p.role}</span>

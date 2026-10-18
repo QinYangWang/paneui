@@ -62,7 +62,7 @@ export default {
         { name: "open", type: "boolean", description: "Controlled state, expanded (`true`) or icon rail (`false`)." },
         { name: "defaultOpen", type: "boolean", default: "true", description: "Initial state when uncontrolled. Closed, the sidebar is a 56px icon rail with tooltips, and clicking a folder or project expands it." },
         { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the sidebar expands or collapses." },
-        { name: "title", type: "ReactNode", default: `"Workspace"`, description: "Title row content." },
+        { name: "title", type: "ReactNode", default: "the locale's", description: "Title row content." },
         { name: "actions", type: "(open: boolean) => ReactNode", description: "Rendered under the title, e.g. a New chat button." },
         { name: "footer", type: "(open: boolean) => ReactNode", description: "Pinned to the bottom, e.g. the account row." },
         { name: "searchable", type: "boolean", default: "true", description: "Show the search field." },

@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import {
   ChartNumber,
   ChartTooltip,
@@ -137,12 +138,12 @@ function HeatCalendar({
   endDate,
   weeks = 26,
   weekStartsOn = 0,
-  unit = "contributions",
+  unit: unitProp,
   color = "var(--chart-4, var(--success))",
   maxCount,
   cellSize = 12,
   gap = 3,
-  label = "Activity calendar",
+  label: labelProp,
   selection: selectionProp,
   defaultSelection = null,
   onSelectionChange,
@@ -150,6 +151,9 @@ function HeatCalendar({
   children,
   ...props
 }: HeatCalendarProps) {
+  const { labels } = useLocale()
+  const unit = unitProp ?? labels.contributions
+  const label = labelProp ?? labels.activityCalendar
   const counts = React.useMemo(() => {
     const m = new Map<string, number>()
     for (const d of data) {
@@ -486,6 +490,7 @@ function HeatCalendarTooltip({
   /** Custom body for the hovered/focused day. */
   children?: (day: HeatCalendarDay) => React.ReactNode
 }) {
+  const { labels } = useLocale()
   const { hot, unit, levelColor, cellSize, geo, weeks, max } = useHeatCalendar()
   const x = hot ? geo.labelW + hot.week * geo.pitch + cellSize / 2 - geo.scrollLeft : 0
   const y = hot ? geo.monthH + hot.day * geo.pitch : 0
@@ -513,7 +518,7 @@ function HeatCalendarTooltip({
               value={formatNumber(hot.count)}
             />
             {max > 0 && hot.count > 0 && (
-              <ChartTooltipRow label="Of busiest day" value={`${Math.round((hot.count / max) * 100)}%`} />
+              <ChartTooltipRow label={labels.ofBusiestDay} value={`${Math.round((hot.count / max) * 100)}%`} />
             )}
           </>
         ))}
@@ -526,6 +531,7 @@ function HeatCalendarTooltip({
 /* -------------------------------------------------------------------------- */
 
 function HeatCalendarLegend({ className, ...props }: React.ComponentProps<"div">) {
+  const { labels } = useLocale()
   const { levelColor } = useHeatCalendar()
   return (
     <div
@@ -534,7 +540,7 @@ function HeatCalendarLegend({ className, ...props }: React.ComponentProps<"div">
       className={cn("flex items-center gap-1 text-ui-2xs text-muted-foreground", className)}
       {...props}
     >
-      <span className="mr-1">Less</span>
+      <span className="me-1">{labels.less}</span>
       {[0, 1, 2, 3, 4].map((l) => (
         <span
           key={l}
@@ -542,12 +548,13 @@ function HeatCalendarLegend({ className, ...props }: React.ComponentProps<"div">
           style={{ background: levelColor(l) }}
         />
       ))}
-      <span className="ml-1">More</span>
+      <span className="ms-1">{labels.more}</span>
     </div>
   )
 }
 
 function HeatCalendarSummary({ className, ...props }: React.ComponentProps<"div">) {
+  const { labels } = useLocale()
   const { selection, total, unit, days, weeks, setSelection } = useHeatCalendar()
   const real = days.filter((d) => !d.future)
   let content: React.ReactNode
@@ -566,21 +573,21 @@ function HeatCalendarSummary({ className, ...props }: React.ComponentProps<"div"
           <ChartNumber value={sum} className="font-medium text-foreground" /> {unit}
         </span>
         <span>
-          · {active}/{span.length} active days
+          · {labels.activeDays(active, span.length)}
         </span>
         <button
           type="button"
           onClick={() => setSelection(null)}
           className="ml-1 rounded-md bg-card px-2 py-0.5 text-ui-xs font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
         >
-          Clear
+          {labels.clear}
         </button>
       </>
     )
   } else {
     content = (
       <span>
-        <ChartNumber value={total} className="font-medium text-foreground" /> {unit} in the last {weeks} weeks
+        <ChartNumber value={total} className="font-medium text-foreground" /> {unit} {labels.inLastWeeks(weeks)}
       </span>
     )
   }

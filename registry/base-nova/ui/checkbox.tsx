@@ -36,11 +36,12 @@ function Checkbox({ className, size: sizeProp, ...props }: CheckboxPrimitive.Roo
       data-size={size}
       className={cn(
         checkboxVariants({ size }),
-        "peer group/checkbox relative inline-flex shrink-0 cursor-pointer after:absolute after:-inset-1 items-center justify-center bg-background text-primary-foreground shadow-well outline-none dark:bg-input/32",
+        "peer group/checkbox relative inline-flex shrink-0 cursor-pointer after:absolute after:-inset-1 items-center justify-center bg-background text-primary-foreground shadow-well outline-none",
+        // The dark well only applies while unchecked, so no variant order can paint it over the checked fill.
+        "dark:not-data-checked:not-data-indeterminate:bg-input/32",
         "transition-[background-color,box-shadow] duration-150 ease-out motion-reduce:transition-none",
         "focus-visible:ring-2 focus-visible:ring-ring/50",
-        // dark:bg-input/32 above is as specific as data-checked:bg-primary and sorts after it, so the dark checked fill is restated.
-        "data-checked:bg-primary data-checked:shadow-primary data-indeterminate:bg-primary data-indeterminate:shadow-primary dark:data-checked:bg-primary dark:data-indeterminate:bg-primary",
+        "data-checked:bg-primary data-checked:shadow-primary data-indeterminate:bg-primary data-indeterminate:shadow-primary",
         "data-invalid:shadow-[inset_0_0_0_1px_var(--destructive)] data-disabled:cursor-not-allowed data-disabled:opacity-64 data-readonly:cursor-default",
         className
       )}

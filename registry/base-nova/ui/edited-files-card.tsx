@@ -7,6 +7,7 @@ import { ChevronDownIcon, FolderIcon, UndoIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { Button } from "@/registry/base-nova/ui/button"
 import { FileDiff, parseUnifiedDiff } from "@/registry/base-nova/ui/file-diff"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -84,6 +85,7 @@ function EditedFilesCard({
   className,
   ...props
 }: EditedFilesCardProps) {
+  const { labels } = useLocale()
   const reduce = useReducedMotion()
   const [open, setOpen] = React.useState(defaultOpen)
   const stats = React.useMemo(() => files.map(fileStats), [files])
@@ -98,30 +100,28 @@ function EditedFilesCard({
       className={cn("@container/edited-files frame-xl frame-inset-2 overflow-hidden bg-card text-ui shadow-raised", className)}
       {...props}
     >
-      <div className="flex items-center gap-2 py-2 pr-2 pl-3">
+      <div className="flex items-center gap-2 py-2 ps-3 pe-2">
         {/* The summary column clips rather than running under the buttons when the card is narrow. */}
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <span className="truncate font-medium">
-            {title ?? `Edited ${files.length} ${files.length === 1 ? "file" : "files"}`}
+            {title ?? labels.editedFiles(files.length)}
           </span>
           <span className="flex gap-1.5 font-mono text-ui-sm whitespace-nowrap tabular-nums">
             <span className="text-success">+{additions}</span>
             <span className="text-destructive">−{deletions}</span>
-            <span className="sr-only">
-              {additions} additions, {deletions} deletions
-            </span>
+            <span className="sr-only">{labels.diffStats(additions, deletions)}</span>
           </span>
         </div>
         {onUndo && (
-          <Button variant="ghost" size="sm" aria-label="Undo" onClick={onUndo} className="rounded-inner text-muted-foreground @max-xs/edited-files:px-2">
+          <Button variant="ghost" size="sm" aria-label={labels.undo} onClick={onUndo} className="rounded-inner text-muted-foreground @max-xs/edited-files:px-2">
             {/* Under 20rem (narrow panes, phones) the button keeps only its glyph. */}
-            <span className="@max-xs/edited-files:hidden">Undo</span>
+            <span className="@max-xs/edited-files:hidden">{labels.undo}</span>
             <UndoIcon className="rtl:-scale-x-100" data-icon="inline-end" />
           </Button>
         )}
         {onReview && (
           <Button variant="outline" size="sm" onClick={onReview} className="rounded-inner">
-            Review
+            {labels.review}
           </Button>
         )}
         <Button
@@ -129,7 +129,7 @@ function EditedFilesCard({
           size="icon-sm"
           aria-expanded={open}
           aria-controls={listId}
-          aria-label={open ? "Hide files" : "Show files"}
+          aria-label={open ? labels.hideFiles : labels.showFiles}
           onClick={() => setOpen(!open)}
           className="rounded-inner text-muted-foreground"
         >
@@ -163,7 +163,7 @@ function EditedFilesCard({
                         <Button
                           variant="ghost"
                           size="icon-xs"
-                          aria-label={`Reveal ${file.path}`}
+                          aria-label={labels.revealFile(file.path)}
                           onClick={() => onRevealFile(file.path)}
                           className="text-muted-foreground"
                         >

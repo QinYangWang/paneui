@@ -8,23 +8,48 @@
  *   pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-outline.json --overwrite
  * and switch back with the same command and icons.json.
  */
-import type { SVGProps } from "react";
+import type { CSSProperties, SVGProps } from "react";
 
-type IconProps = Omit<SVGProps<SVGSVGElement>, "children"> & { size?: number };
+type IconProps = Omit<SVGProps<SVGSVGElement>, "children"> & {
+  size?: number;
+  /**
+   * Stroke tier. `bold` draws line strokes 1.2x thicker so the glyph matches semibold or bold text
+   * beside it. Unset, the icon inherits the tier from an ancestor's `icon-bold` class.
+   */
+  weight?: "regular" | "bold";
+};
 
-function Icon({ size = 18, children, ...props }: IconProps & { children: React.ReactNode }) {
+const WEIGHT = { regular: 1, bold: 1.2 } as const;
+
+// Line width, scaled by the weight tier (--icon-stroke-scale). The attribute is the fallback for
+// renderers without CSS.
+const stroke = (w: number) => ({ strokeWidth: w, style: { strokeWidth: `calc(${w}px * var(--icon-stroke-scale, 1))` } });
+
+function Icon({ size = 18, weight, style, children, ...props }: IconProps & { children: React.ReactNode }) {
+  const tier = stroke(1.6);
   return (
-    <svg width={size} height={size} viewBox="0 0 18 18" fill="currentColor" aria-hidden {...props}>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 18 18"
+      fill="currentColor"
+      aria-hidden
+      data-weight={weight}
+      strokeWidth={tier.strokeWidth}
+      style={{ ...tier.style, ...(weight ? ({ "--icon-stroke-scale": WEIGHT[weight] } as CSSProperties) : null), ...style }}
+      {...props}
+    >
       {children}
     </svg>
   );
 }
 
-// Thin round stroke for open glyphs.
-const line = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+// Thin round stroke for open glyphs. Its width comes from the <svg> (see `stroke`).
+const line = { fill: "none", stroke: "currentColor", strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
-// Outline style: every shape that is filled in the puffy set is traced as a round 1.6px contour.
-const puff = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+// Outline style: every shape that is filled in the puffy set is traced as a round contour, the same
+// width as line (1.6, set on the <svg>).
+const puff = { fill: "none", stroke: "currentColor", strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
 // Tiny dots stay filled so they keep their weight.
 const solid = { stroke: "currentColor", strokeWidth: 1.5, strokeLinejoin: "round" } as const;
@@ -184,8 +209,8 @@ export const CarIcon = (p: IconProps) => (
 
 export const SearchIcon = (p: IconProps) => (
   <Icon {...p}>
-    <circle {...line} strokeWidth={1.7} cx="8" cy="8" r="4.8" />
-    <path {...line} strokeWidth={1.9} d="M11.6 11.6l2.8 2.8" />
+    <circle {...line} {...stroke(1.7)} cx="8" cy="8" r="4.8" />
+    <path {...line} {...stroke(1.9)} d="M11.6 11.6l2.8 2.8" />
   </Icon>
 );
 
@@ -363,7 +388,7 @@ export const LoaderIcon = (p: IconProps) => (
 
 export const BoldIcon = (p: IconProps) => (
   <Icon {...p}>
-    <path {...line} strokeWidth={1.9} d="M5.8 4.2h3.7a2.3 2.3 0 010 4.6H5.8zM5.8 8.8h4.3a2.5 2.5 0 010 5H5.8z" />
+    <path {...line} {...stroke(1.9)} d="M5.8 4.2h3.7a2.3 2.3 0 010 4.6H5.8zM5.8 8.8h4.3a2.5 2.5 0 010 5H5.8z" />
   </Icon>
 );
 
@@ -630,10 +655,23 @@ export const HomeIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const HomeFilledIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...solid} d="M8.3 3.9a1.1 1.1 0 011.4 0l4 3.3c.3.2.4.5.4.9v5.1c0 .6-.5 1.1-1.1 1.1H5c-.6 0-1.1-.5-1.1-1.1V8.1c0-.4.1-.7.4-.9z" />
+  </Icon>
+);
+
 export const UserIcon = (p: IconProps) => (
   <Icon {...p}>
     <circle {...puff} cx="9" cy="6" r="2.3" />
     <path {...puff} d="M4.4 13.8c0-2.2 2-3.6 4.6-3.6s4.6 1.4 4.6 3.6c0 .4-.3.6-.7.6H5.1c-.4 0-.7-.2-.7-.6z" />
+  </Icon>
+);
+
+export const UserFilledIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <circle {...solid} cx="9" cy="6" r="2.3" />
+    <path {...solid} d="M4.4 13.8c0-2.2 2-3.6 4.6-3.6s4.6 1.4 4.6 3.6c0 .4-.3.6-.7.6H5.1c-.4 0-.7-.2-.7-.6z" />
   </Icon>
 );
 
@@ -664,9 +702,26 @@ export const SettingsIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const SettingsFilledIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...solid}
+      fillRule="evenodd"
+      d="M7.99 3.51 L10.01 3.51 L10.46 5.19 L11.69 5.86 L13.37 5.42 L14.38 7.1 L13.14 8.33 L13.14 9.67 L14.38 10.9 L13.37 12.58 L11.69 12.14 L10.46 12.81 L10.01 14.49 L7.99 14.49 L7.54 12.81 L6.31 12.14 L4.63 12.58 L3.62 10.9 L4.86 9.67 L4.86 8.33 L3.62 7.1 L4.63 5.42 L6.31 5.86 L7.54 5.19zM9 6.95a2.05 2.05 0 100 4.1 2.05 2.05 0 000-4.1z"
+    />
+  </Icon>
+);
+
 export const BellIcon = (p: IconProps) => (
   <Icon {...p}>
     <path {...puff} d="M9 3.6c-2.2 0-3.9 1.8-3.9 4v2.1l-.9 1.4c-.3.5 0 1 .5 1h8.6c.5 0 .8-.5.5-1l-.9-1.4V7.6c0-2.2-1.7-4-3.9-4z" />
+    <path {...line} d="M7.6 14.4h2.8" />
+  </Icon>
+);
+
+export const BellFilledIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...solid} d="M9 3.6c-2.2 0-3.9 1.8-3.9 4v2.1l-.9 1.4c-.3.5 0 1 .5 1h8.6c.5 0 .8-.5.5-1l-.9-1.4V7.6c0-2.2-1.7-4-3.9-4z" />
     <path {...line} d="M7.6 14.4h2.8" />
   </Icon>
 );
@@ -730,6 +785,12 @@ export const FolderIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const FolderFilledIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...solid} d="M3.8 5.4c0-.6.5-1.1 1.1-1.1h2.6c.3 0 .6.1.8.4l.9 1h4c.6 0 1.1.5 1.1 1.1v6c0 .6-.5 1.1-1.1 1.1H4.9c-.6 0-1.1-.5-1.1-1.1z" />
+  </Icon>
+);
+
 export const FileIcon = (p: IconProps) => (
   <Icon {...p}>
     <path {...puff} d="M5.6 3.6h3.9c.3 0 .5.1.7.3l3 3c.2.2.3.4.3.7v6.2c0 .6-.5 1.1-1.1 1.1H5.6c-.6 0-1.1-.5-1.1-1.1V4.7c0-.6.5-1.1 1.1-1.1z" />
@@ -757,6 +818,12 @@ export const CameraIcon = (p: IconProps) => (
 export const ChatIcon = (p: IconProps) => (
   <Icon {...p}>
     <path {...puff} d="M5.1 4h7.8c.9 0 1.7.8 1.7 1.7v4.8c0 .9-.8 1.7-1.7 1.7H8.7l-2.6 2c-.3.2-.7 0-.7-.3v-1.7h-.3c-.9 0-1.7-.8-1.7-1.7V5.7C3.4 4.8 4.2 4 5.1 4z" />
+  </Icon>
+);
+
+export const ChatFilledIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...solid} d="M5.1 4h7.8c.9 0 1.7.8 1.7 1.7v4.8c0 .9-.8 1.7-1.7 1.7H8.7l-2.6 2c-.3.2-.7 0-.7-.3v-1.7h-.3c-.9 0-1.7-.8-1.7-1.7V5.7C3.4 4.8 4.2 4 5.1 4z" />
   </Icon>
 );
 
@@ -939,11 +1006,33 @@ export const InboxIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const InboxFilledIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path
+      {...solid}
+      fillRule="evenodd"
+      d="M5.2 3.6h7.6a1.8 1.8 0 011.8 1.8v7.2a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V5.4a1.8 1.8 0 011.8-1.8zM5.4 4.6h7.2a1 1 0 011 1v4.8h-1.9l-.7 1.7H7l-.7-1.7H4.4V5.6a1 1 0 011-1z"
+    />
+  </Icon>
+);
+
 export const CalendarDaysIcon = (p: IconProps) => (
   <Icon {...p}>
     <path {...line} d="M6.4 3v1.6M11.6 3v1.6M3.6 7.9h10.8" />
     <path {...puff} d="M5.2 4.6h7.6a1.8 1.8 0 011.8 1.8v6.4a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V6.4a1.8 1.8 0 011.8-1.8z" />
     <circle {...solid} cx="7" cy="11.1" r=".45" />
+  </Icon>
+);
+
+export const CalendarDaysFilledIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path {...line} d="M6.4 3v1.6M11.6 3v1.6" />
+    <path
+      {...solid}
+      fillRule="evenodd"
+      d="M5.2 4.6h7.6a1.8 1.8 0 011.8 1.8v6.4a1.8 1.8 0 01-1.8 1.8H5.2a1.8 1.8 0 01-1.8-1.8V6.4a1.8 1.8 0 011.8-1.8zM5.6 8.1h6.8a.7.7 0 01.7.7v4.1a.7.7 0 01-.7.7H5.6a.7.7 0 01-.7-.7V8.8a.7.7 0 01.7-.7z"
+    />
+    <circle {...solid} cx="7.4" cy="10.85" r=".75" />
   </Icon>
 );
 

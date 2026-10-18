@@ -45,7 +45,7 @@ function WorkspaceMark({ workspace, className }: { workspace: Workspace; classNa
       aria-hidden
       data-slot="workspace-mark"
       className={cn(
-        "grid size-6 shrink-0 place-items-center overflow-hidden bg-primary text-ui-xs font-semibold text-primary-foreground shadow-primary [&_svg]:size-3.5",
+        "grid size-6 shrink-0 place-items-center overflow-hidden bg-primary text-ui-xs font-semibold icon-bold text-primary-foreground shadow-primary [&_svg]:size-3.5",
         className ?? "rounded-md"
       )}
     >
@@ -72,7 +72,7 @@ function WorkspaceSwitcher({
       <MenuTrigger
         data-slot="workspace-switcher"
         className={cn(
-          "group/ws frame-inner frame-inset-2 flex h-10 w-full min-w-0 cursor-pointer items-center gap-2.5 px-2 text-left text-ui outline-none transition-[background-color] duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary",
+          "group/ws frame-inner frame-inset-2 flex h-10 w-full min-w-0 cursor-pointer items-center gap-2.5 px-2 text-start text-ui outline-none transition-[background-color] duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary",
           collapsed && "justify-center gap-0 px-0",
           className
         )}

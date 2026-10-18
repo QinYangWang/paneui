@@ -166,7 +166,7 @@ export function CardFolder({
         {/* The card */}
         <motion.span
           className={cn(
-            "absolute top-5 left-1/2 block aspect-[1.586] w-[17.5rem] overflow-hidden rounded-2xl text-left text-primary-foreground shadow-raised",
+            "absolute top-5 left-1/2 block aspect-[1.586] w-[17.5rem] overflow-hidden rounded-2xl text-start text-primary-foreground shadow-raised",
             cardClassName
           )}
           initial={false}

@@ -113,7 +113,7 @@ export default {
       name: "ColorPickerArea",
       description: "Saturation (x) by brightness (y) plane with a draggable thumb.",
       extends: "div",
-      props: [{ name: "label", type: "string", default: `"Saturation and brightness"`, description: "Accessible name of the thumb." }],
+      props: [{ name: "label", type: "string", default: "the locale's", description: "Accessible name of the thumb." }],
       dataAttributes: [{ name: "data-disabled", description: "Present when the picker is disabled." }],
     },
     {
@@ -122,7 +122,7 @@ export default {
       extends: "Slider.Root",
       extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
-        { name: "label", type: "string", default: `"Hue"`, description: "Accessible name of the thumb." },
+        { name: "label", type: "string", default: "the locale's", description: "Accessible name of the thumb." },
         { name: "disabled", type: "boolean", default: "false", description: "Disable this slider; the root's `disabled` also applies." },
       ],
     },
@@ -132,7 +132,7 @@ export default {
       extends: "Slider.Root",
       extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
-        { name: "label", type: "string", default: `"Opacity"`, description: "Accessible name of the thumb." },
+        { name: "label", type: "string", default: "the locale's", description: "Accessible name of the thumb." },
         { name: "disabled", type: "boolean", default: "false", description: "Disable this slider; the root's `disabled` also applies." },
       ],
     },
@@ -140,7 +140,7 @@ export default {
       name: "ColorPickerHexInput",
       description: "Hex field in an inset well; full 6 or 8-digit values apply while typing, and values below full opacity come out as 8-digit hex.",
       extends: "input",
-      props: [{ name: "aria-label", type: "string", default: `"Hex colour"`, description: "Accessible name of the field." }],
+      props: [{ name: "aria-label", type: "string", default: "the locale's", description: "Accessible name of the field." }],
     },
     {
       name: "ColorPickerSwatch",

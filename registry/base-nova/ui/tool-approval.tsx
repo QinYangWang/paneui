@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { ActionSwapRollText } from "@/registry/base-nova/ui/action-swap-roll"
 import { Button } from "@/registry/base-nova/ui/button"
 import { IconChip } from "@/registry/base-nova/ui/icon-chip"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import { AGENT_EASE, CodeHighlight, ToolStatusIcon, type CodeLanguage } from "@/registry/base-nova/ui/tool-result"
 
 type ToolApprovalDecision = "once" | "always" | "deny"
@@ -15,13 +16,11 @@ type ToolApprovalRisk = "low" | "medium" | "high"
 /** What happened after an approval: the call is running, finished or failed. */
 type ToolApprovalStatus = "running" | "done" | "failed"
 
-const RISK: Record<ToolApprovalRisk, { label: string; tone: "neutral" | "warning" | "destructive" }> = {
-  low: { label: "Read only", tone: "neutral" },
-  medium: { label: "Makes changes", tone: "warning" },
-  high: { label: "Destructive", tone: "destructive" },
+const RISK: Record<ToolApprovalRisk, { label: "riskLow" | "riskMedium" | "riskHigh"; tone: "neutral" | "warning" | "destructive" }> = {
+  low: { label: "riskLow", tone: "neutral" },
+  medium: { label: "riskMedium", tone: "warning" },
+  high: { label: "riskHigh", tone: "destructive" },
 }
-
-const DEFAULT_TITLE = "Allow this tool to run?"
 const HEIGHT_SPRING = { type: "spring", stiffness: 420, damping: 38, mass: 0.6 } as const
 
 function readRemembered(key?: string) {
@@ -146,7 +145,7 @@ type ToolApprovalProps = Omit<React.ComponentProps<"div">, "title"> & {
  */
 function ToolApproval({
   tool,
-  title = DEFAULT_TITLE,
+  title: titleProp,
   description,
   resultTitle,
   icon,
@@ -164,6 +163,8 @@ function ToolApproval({
   className,
   ...props
 }: ToolApprovalProps) {
+  const { labels } = useLocale()
+  const title = titleProp ?? labels.allowToolQuestion
   const reduce = useReducedMotion()
   const argsId = React.useId()
   const [internal, setInternal] = React.useState<ToolApprovalDecision | null>(defaultDecision)
@@ -229,16 +230,16 @@ function ToolApproval({
   const tileIcon = icon ?? (risk === "high" ? <WarningIcon /> : <ShieldIcon />)
   const lineTitle =
     resultTitle ??
-    (typeof title === "string" && title !== DEFAULT_TITLE ? title.replace(/\s*\?$/, "") : title === DEFAULT_TITLE ? tool : title)
+    (titleProp === undefined ? tool : typeof titleProp === "string" ? titleProp.replace(/\s*[?？]$/, "") : titleProp)
 
   const outcome = pending ? null : decision === "deny" ? "denied" : (status ?? (decision === "always" ? "always" : "approved"))
   const OUTCOME: Record<NonNullable<typeof outcome>, { label: string; tone: string; icon: React.ReactNode }> = {
-    approved: { label: "Approved", tone: "text-success", icon: <CheckIcon className="size-3.5" /> },
-    always: { label: "Always allowed", tone: "text-success", icon: <CheckIcon className="size-3.5" /> },
-    running: { label: "Running", tone: "text-primary", icon: <ToolStatusIcon status="running" /> },
-    done: { label: "Done", tone: "text-success", icon: <ToolStatusIcon status="success" /> },
-    failed: { label: "Failed", tone: "text-destructive", icon: <ToolStatusIcon status="error" /> },
-    denied: { label: "Denied", tone: "text-muted-foreground", icon: <ToolStatusIcon status="cancelled" /> },
+    approved: { label: labels.approved, tone: "text-success", icon: <CheckIcon className="size-3.5" /> },
+    always: { label: labels.alwaysAllowed, tone: "text-success", icon: <CheckIcon className="size-3.5" /> },
+    running: { label: labels.toolRunning, tone: "text-primary", icon: <ToolStatusIcon status="running" /> },
+    done: { label: labels.toolDone, tone: "text-success", icon: <ToolStatusIcon status="success" /> },
+    failed: { label: labels.toolFailed, tone: "text-destructive", icon: <ToolStatusIcon status="error" /> },
+    denied: { label: labels.denied, tone: "text-muted-foreground", icon: <ToolStatusIcon status="cancelled" /> },
   }
 
   const enter = { opacity: 0 }
@@ -256,7 +257,7 @@ function ToolApproval({
         className
       )}
       {...props}
-      aria-label={props["aria-label"] ?? `Permission request for ${tool}`}
+      aria-label={props["aria-label"] ?? labels.permissionRequest(tool)}
     >
       <div ref={outerRef} className="relative overflow-hidden">
         <div ref={innerRef} className="relative p-2">
@@ -295,7 +296,7 @@ function ToolApproval({
                         className={cn("text-ui-sm text-pretty text-muted-foreground", description == null && "truncate font-mono")}
                       >
                         {description ?? tool}
-                        <span className="sr-only">. {riskInfo.label}.</span>
+                        <span className="sr-only">. {labels[riskInfo.label]}.</span>
                       </span>
                     </div>
                     {argsText ? (
@@ -304,8 +305,8 @@ function ToolApproval({
                         variant="ghost"
                         aria-expanded={argsOpen}
                         aria-controls={argsOpen ? argsId : undefined}
-                        aria-label={argsOpen ? "Hide arguments" : "Show arguments"}
-                        title={argsOpen ? "Hide arguments" : "Show arguments"}
+                        aria-label={argsOpen ? labels.hideArguments : labels.showArguments}
+                        title={argsOpen ? labels.hideArguments : labels.showArguments}
                         onClick={toggleArgs}
                         className="text-muted-foreground"
                       >
@@ -326,15 +327,15 @@ function ToolApproval({
                     )}
                   >
                     <Button size="sm" variant="outline" onClick={() => decide("deny")}>
-                      Deny
+                      {labels.deny}
                     </Button>
                     {showAlways ? (
                       <Button size="sm" variant="secondary" onClick={() => decide("always")}>
-                        Always allow
+                        {labels.alwaysAllow}
                       </Button>
                     ) : null}
                     <Button size="sm" onClick={() => decide("once")}>
-                      Approve
+                      {labels.approve}
                     </Button>
                   </div>
                 </div>
@@ -386,7 +387,7 @@ function ToolApproval({
                 {revocable && status == null ? (
                   <Button size="xs" variant="ghost" onClick={() => decide(null)} className="rounded-inner text-muted-foreground">
                     <UndoIcon className="rtl:-scale-x-100" data-icon="inline-start" />
-                    {decision === "always" ? "Revoke" : "Undo"}
+                    {decision === "always" ? labels.revoke : labels.undo}
                   </Button>
                 ) : null}
               </motion.div>

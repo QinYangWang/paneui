@@ -207,7 +207,7 @@ function TopCustomers() {
               <Badge size="sm" variant={c.plan === "Enterprise" ? "primary" : "outline"}>
                 {c.plan}
               </Badge>
-              <span className="w-20 text-right font-medium tabular-nums">{usd.format(c.mrr)}</span>
+              <span className="w-20 text-end font-medium tabular-nums">{usd.format(c.mrr)}</span>
             </li>
           ))}
         </ul>

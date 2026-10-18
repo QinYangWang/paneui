@@ -40,7 +40,7 @@ function SettingsSectionHeader({ className, ...props }: React.ComponentProps<"di
 }
 
 function SettingsSectionTitle({ className, ...props }: React.ComponentProps<"h2">) {
-  return <h2 data-slot="settings-section-title" className={cn("text-balance text-ui-lg font-semibold", className)} {...props} />
+  return <h2 data-slot="settings-section-title" className={cn("text-balance text-ui-lg font-semibold icon-bold", className)} {...props} />
 }
 
 function SettingsSectionDescription({ className, ...props }: React.ComponentProps<"p">) {

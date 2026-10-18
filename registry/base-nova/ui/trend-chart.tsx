@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import {
   chartAlpha,
   chartColor,
@@ -76,11 +77,13 @@ function TrendChart({
   maxXLabels = 6,
   showLegend = true,
   showYAxis = true,
-  label = "Chart",
+  label: labelProp,
   defaultHidden = [],
   className,
   ...props
 }: TrendChartProps) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.chart
   const reduce = useReducedMotion()
   const id = useChartId("trend")
   const [ref, size] = useChartSize<HTMLDivElement>()
@@ -279,7 +282,7 @@ function TrendChart({
                 <ChartTooltipRow key={s.id} color={s.color} label={s.label} value={formatValue(val(hp, s.id))} />
               ))}
               {stacked && visible.length > 1 && (
-                <ChartTooltipRow label="Total" value={formatValue(visible.reduce((sum, s) => sum + val(hp, s.id), 0))} />
+                <ChartTooltipRow label={labels.total} value={formatValue(visible.reduce((sum, s) => sum + val(hp, s.id), 0))} />
               )}
             </>
           )}

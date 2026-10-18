@@ -80,7 +80,10 @@ const RULES = {
   "presence-initial": ["warn", "AnimatePresence around a state swap takes initial={false} so nothing animates on load."],
   "exit-subtle": ["warn", "Exits are smaller than entrances: a short fixed offset, no deep scale-down."],
   "icon-swap": ["warn", "A state icon swap cross-fades (opacity, scale 0.25, blur 4px) instead of cutting."],
-  "icon-stroke": ["warn", "House icons keep their drawn stroke; don't override strokeWidth per instance."],
+  "icon-stroke": ["warn", "House icons keep their stroke tiers; don't override strokeWidth per instance."],
+  "icon-weight": ["warn", "A line icon beside semibold or bold text takes the bold stroke tier (icon-bold on the text, or weight=\"bold\")."],
+  "nav-active-icon": ["warn", "An active nav item without a row fill swaps to the filled glyph (activeIcon={<NameFilledIcon />})."],
+  "text-align-logical": ["warn", "Align text with text-start / text-end so it follows the reading direction; text-left / text-right only for physical alignment."],
   "icon-size": ["warn", "Icons render on their grid sizes (12, 14, 16, 18, 20, 24px…), not arbitrary fractions."],
   "icon-color": ["warn", "SVG glyphs paint with currentColor or a token; states come from CSS, not separate colours."],
   "icon-rtl": ["warn", "Directional icons flip in right-to-left (rtl:-scale-x-100). Opt in with \"rtl\": true."],
@@ -315,6 +318,12 @@ function checkPolishClasses(s, tokens, file, line) {
   const dur = tokens.map((t) => t.match(/^duration-(\d+)$/)?.[1]).find(Boolean)
   if (dur && Number(dur) >= 300 && tokens.some((t) => /^(?:group-)?hover:/.test(t)) && !tokens.some((t) => STATE_VARIANT.test(t) && !/^(?:group-)?hover:/.test(t)) && !/\b(open|expanded|closed|starting|ending)\b/.test(s))
     report("motion-restraint", file, line, `duration-${dur} on a hover style: hover answers within 150ms.`)
+  // Icons styled through [&_svg] in a semibold/bold class list take the bold stroke tier.
+  if (tokens.some((t) => /^font-(semibold|bold|extrabold|black)$/.test(t)) && tokens.some((t) => /^\[&(?:_|>)svg/.test(t)) && !tokens.some((t) => /^icon-(bold|regular)$/.test(t)))
+    report("icon-weight", file, line, "font-semibold with icons styled by [&_svg]: add icon-bold so the line icons take the bold stroke tier.")
+  // Physical text alignment flips the wrong way in right-to-left.
+  const phys = tokens.find((t) => /^(?:\S*:)?text-(left|right)$/.test(t) && !/(?:^|:)(?:ltr|rtl):/.test(t))
+  if (phys) report("text-align-logical", file, line, `${phys}: use ${phys.replace(/text-left$/, "text-start").replace(/text-right$/, "text-end")} so the alignment follows the reading direction.`)
   if (tokens.includes("subpixel-antialiased")) report("font-smoothing", file, line, "subpixel-antialiased per element makes this text heavier than the rest; smoothing is set once on the root.")
 }
 
@@ -589,12 +598,30 @@ function checkSourceTs(file, text) {
     // House icons: stroke, size, colour.
     if (/Icon$/.test(name) && !intrinsic) {
       if (attrs.has("strokeWidth") || toks.some((t) => /^(stroke-\[|stroke-\d|\[stroke-width)/.test(t)))
-        report("icon-stroke", file, at, `strokeWidth on <${name}>: the set's stroke is tuned to the text beside it; switch the icon style instead of thickening one glyph.`)
+        report("icon-stroke", file, at, `strokeWidth on <${name}>: strokes come in tiers, not per glyph; use weight="bold" (or icon-bold on the text) beside semibold text, or switch the icon style.`)
       const sz = toks.map((t) => t.match(/^(?:size|h|w)-\[(\d*\.?\d+)px\]$/)?.[1]).find(Boolean)
       if (sz && !ICON_GRID.has(Number(sz))) report("icon-size", file, at, `${sz}px icon: render on the grid (12, 14, 16, 18, 20, 24…) so strokes land on whole pixels.`)
       if (config.rtl && /^(Chevron|Arrow|Caret)(Left|Right)|^(Undo|Redo|Reply|Send|Forward|Back|LogOut|LogIn)\w*Icon$|^Corner\w*(Left|Right)Icon$|ArrowUpRight|ExternalLink/.test(name) && !/\brtl:/.test(chain()))
         report("icon-rtl", file, at, `<${name}> points in the reading direction; add rtl:-scale-x-100 so it flips in right-to-left.`)
     }
+    // Stroke tier: a line icon whose nearest weighted text is semibold or bold.
+    if (/Icon$/.test(name) && !intrinsic && !/FilledIcon$|LogoIcon$|^BrandIcon$/.test(name) && !attrs.has("weight") && !/\bicon-(bold|regular)\b/.test(cls)) {
+      for (const a of [...ancestors].reverse()) {
+        const at2 = classAttr(opening(a)).split(/\s+/)
+        if (at2.some((t) => /^icon-(bold|regular)$/.test(t))) break
+        const w = at2.map((t) => t.match(/^font-(thin|extralight|light|normal|medium|semibold|bold|extrabold|black)$/)?.[1]).find(Boolean)
+        if (!w) continue
+        const texty = ts.isJsxElement(a) && a.children.some((c) => (ts.isJsxText(c) && c.getText(sf).trim()) || (ts.isJsxExpression(c) && !!c.expression && !tagName(c.expression)))
+        if (/^(semibold|bold|extrabold|black)$/.test(w) && texty)
+          report("icon-weight", file, at, `<${name}> beside font-${w} text: add icon-bold to the text's element (or weight="bold") so the stroke matches the type.`)
+        break
+      }
+    }
+
+    // Active nav item without a row fill: the filled glyph carries the state.
+    if (name === "TabBarItem" && attrs.has("active") && attrs.get("active") !== "{false}" && attrs.has("icon") && !attrs.has("activeIcon") && !spread)
+      report("nav-active-icon", file, at, `<TabBarItem active> keeps its outline glyph: the bar has no row fill, so pass activeIcon={<…FilledIcon />}.`)
+
     if (/^(svg|path|circle|rect|line|polyline|polygon|ellipse|g)$/.test(name))
       for (const k of ["fill", "stroke"]) {
         const v = attrs.get(k)
@@ -794,7 +821,7 @@ function checkUpgrade() {
 const SELF = path.resolve(new URL(import.meta.url).pathname)
 
 // Rules that read JSX structure, so they only run with the TypeScript parser.
-const JSX_RULES = new Set(["concentric-radius", "menu-label-group", "tabular-nums", "text-wrap", "media-outline", "hit-area", "presence-initial", "exit-subtle", "icon-swap", "icon-stroke", "icon-size", "icon-color", "icon-rtl", "optical-icon-padding", "icon-button-label"])
+const JSX_RULES = new Set(["concentric-radius", "menu-label-group", "tabular-nums", "text-wrap", "media-outline", "hit-area", "presence-initial", "exit-subtle", "icon-swap", "icon-stroke", "icon-weight", "nav-active-icon", "icon-size", "icon-color", "icon-rtl", "optical-icon-padding", "icon-button-label"])
 
 // --self-test: every examples/<rule>/bad.tsx must trip <rule>; every good.tsx must be clean.
 if (flag("--self-test")) {

@@ -36,7 +36,7 @@ function MorphSelectValue({ className, ...props }: SelectPrimitive.Value.Props) 
   return (
     <SelectPrimitive.Value
       data-slot="morph-select-value"
-      className={cn("flex-1 truncate text-left data-placeholder:text-muted-foreground", className)}
+      className={cn("flex-1 truncate text-start data-placeholder:text-muted-foreground", className)}
       {...props}
     />
   )
@@ -124,7 +124,7 @@ function MorphSelectContent({
           <MorphContent>
             {/* Mirrors the trigger row; clicks fall through to the trigger beneath, which closes the menu. */}
             <div aria-hidden className={cn(ROW, "pointer-events-none shrink-0")}>
-              {header ?? <SelectPrimitive.Value className="flex-1 truncate text-left data-placeholder:text-muted-foreground" />}
+              {header ?? <SelectPrimitive.Value className="flex-1 truncate text-start data-placeholder:text-muted-foreground" />}
               <ChevronDownIcon className="text-muted-foreground transition-transform duration-300 rotate-180 group-data-ending-style/morph:rotate-0 group-data-starting-style/morph:rotate-0" />
             </div>
             <div

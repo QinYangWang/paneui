@@ -14,6 +14,7 @@ import {
   TrashIcon,
 } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import { Menu, MenuContent, MenuItem, MenuSeparator, MenuTrigger } from "@/registry/base-nova/ui/menu"
 import {
   Table,
@@ -120,6 +121,7 @@ function EditableTable({
   ref,
   ...tableProps
 }: EditableTableProps) {
+  const { labels } = useLocale()
   const [rows, setRows] = useControllableState<readonly EditableRow[]>(rowsProp, defaultRows, onRowsChange ? (r) => onRowsChange(r.slice()) : undefined)
   const [columns, setColumns] = useControllableState<readonly EditableColumn[]>(
     columnsProp,
@@ -223,7 +225,7 @@ function EditableTable({
   const insertColumn = (index: number) => {
     const column = createColumn
       ? createColumn(columns)
-      : { key: nextId("col"), header: `Column ${columns.length + 1}`, width: 140 }
+      : { key: nextId("col"), header: labels.columnN(columns.length + 1), width: 140 }
     setColumns((prev) => {
       const next = prev.slice()
       next.splice(index, 0, column)
@@ -264,7 +266,7 @@ function EditableTable({
         grow: c.grow,
         align: c.align ?? (c.type === "number" ? "right" : "left"),
         className: "px-0",
-        headerClassName: "has-[[data-insert-col]:hover]:shadow-[inset_-2px_0_0_var(--primary)]",
+        headerClassName: "has-[[data-insert-col]:hover]:shadow-[inset_-2px_0_0_var(--primary)] rtl:has-[[data-insert-col]:hover]:shadow-[inset_2px_0_0_var(--primary)]",
       })),
     [columns]
   )
@@ -282,7 +284,7 @@ function EditableTable({
       return (
         <input
           autoFocus
-          aria-label={`${column?.header ?? pos.key}, row ${pos.row + 1}`}
+          aria-label={labels.cellLabel(String(column?.header ?? pos.key), pos.row + 1)}
           value={editing.draft}
           inputMode={column?.type === "number" ? "decimal" : undefined}
           onChange={(e) => setEditing({ pos, draft: e.target.value })}
@@ -303,7 +305,7 @@ function EditableTable({
           }}
           className={cn(
             "absolute inset-1 min-w-0 rounded-lg bg-background px-2 text-ui text-foreground shadow-well ring-2 ring-primary/45 outline-none",
-            alignRight && "text-right tabular-nums"
+            alignRight && "text-end tabular-nums"
           )}
         />
       )
@@ -360,7 +362,7 @@ function EditableTable({
       return (
         <input
           autoFocus
-          aria-label="Column name"
+          aria-label={labels.columnName}
           value={renaming.draft}
           onChange={(e) => setRenaming({ key, draft: e.target.value })}
           onFocus={(e) => e.currentTarget.select()}
@@ -379,7 +381,7 @@ function EditableTable({
         {...labelProps}
         role="button"
         tabIndex={0}
-        aria-description={readOnly ? undefined : "Enter renames, Alt plus arrow keys moves the column"}
+        aria-description={readOnly ? undefined : labels.columnHeaderHint}
         onDoubleClick={() => !readOnly && setRenaming({ key, draft: String(ctx.column.header) })}
         onKeyDown={(e) => {
           onKeyDown?.(e)
@@ -388,7 +390,7 @@ function EditableTable({
             setRenaming({ key, draft: String(ctx.column.header) })
           }
         }}
-        className={cn(tableHeaderLabelClass, "touch-none pr-8", ctx.column.align === "right" && "justify-end")}
+        className={cn(tableHeaderLabelClass, "touch-none pe-8", ctx.column.align === "right" && "justify-end")}
       >
         <span className="truncate">{ctx.column.header}</span>
       </div>
@@ -404,9 +406,9 @@ function EditableTable({
         <Menu>
           <MenuTrigger
             data-no-drag
-            aria-label={`${ctx.column.header} column options`}
+            aria-label={labels.columnOptions(String(ctx.column.header))}
             className={cn(
-              "absolute right-2 flex size-6 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none",
+              "absolute end-2 flex size-6 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none",
               "opacity-0 transition-[opacity,background-color,box-shadow] duration-150 group-hover/header:opacity-100 hover:bg-secondary",
               "focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-secondary data-popup-open:opacity-100"
             )}
@@ -416,31 +418,31 @@ function EditableTable({
           <MenuContent align="end">
             <MenuItem onClick={() => insertColumn(index)}>
               <ArrowLeftIcon className="rtl:-scale-x-100" />
-              Insert left
+              {labels.insertBefore}
             </MenuItem>
             <MenuItem onClick={() => insertColumn(index + 1)}>
               <ArrowRightIcon className="rtl:-scale-x-100" />
-              Insert right
+              {labels.insertAfter}
             </MenuItem>
             <MenuItem onClick={() => setRenaming({ key, draft: String(ctx.column.header) })}>
               <EditIcon />
-              Rename
+              {labels.rename}
             </MenuItem>
             <MenuSeparator />
             <MenuItem variant="destructive" disabled={columns.length <= 1} onClick={() => deleteColumn(key)}>
               <TrashIcon />
-              Delete column
+              {labels.deleteColumn}
             </MenuItem>
           </MenuContent>
         </Menu>
         {/* On the last column the pill would hang past the table and add horizontal
-            scroll; "Insert right" in the menu appends there instead. */}
+            scroll; "Insert after" in the menu appends there instead. */}
         {index < columns.length - 1 ? (
           <InsertPill
             data-insert-col
-            label={`Insert column after ${ctx.column.header}`}
+            label={labels.insertColumnAfter(String(ctx.column.header))}
             onClick={() => insertColumn(index + 1)}
-            className="top-1/2 -right-2 -translate-y-1/2 group-hover/header:scale-100 group-hover/header:opacity-100"
+            className="top-1/2 -end-2 -translate-y-1/2 group-hover/header:scale-100 group-hover/header:opacity-100"
           />
         ) : null}
       </>
@@ -455,7 +457,7 @@ function EditableTable({
           <>
             <Menu>
               <MenuTrigger
-                aria-label={`Row ${dataIndex + 1} options`}
+                aria-label={labels.rowOptions(dataIndex + 1)}
                 className={cn(
                   "flex h-6 w-4 cursor-pointer items-center justify-center rounded-md text-muted-foreground outline-none",
                   "opacity-0 transition-[opacity,background-color,box-shadow] duration-150 group-hover/row:opacity-100 hover:bg-secondary",
@@ -464,25 +466,25 @@ function EditableTable({
               >
                 <GripVerticalIcon className="size-3.5" />
               </MenuTrigger>
-              <MenuContent side="right" align="start" sideOffset={4}>
+              <MenuContent side="inline-end" align="start" sideOffset={4}>
                 <MenuItem onClick={() => insertRow(dataIndex)}>
                   <ArrowUpIcon />
-                  Insert above
+                  {labels.insertAbove}
                 </MenuItem>
                 <MenuItem onClick={() => insertRow(dataIndex + 1)}>
                   <ArrowDownIcon />
-                  Insert below
+                  {labels.insertBelow}
                 </MenuItem>
                 <MenuSeparator />
                 <MenuItem variant="destructive" onClick={() => deleteRow(dataIndex)}>
                   <TrashIcon />
-                  Delete row
+                  {labels.deleteRow}
                 </MenuItem>
               </MenuContent>
             </Menu>
             <InsertPill
               data-insert-row
-              label={`Insert row below row ${dataIndex + 1}`}
+              label={labels.insertRowBelow(dataIndex + 1)}
               onClick={() => insertRow(dataIndex + 1)}
               className="-bottom-2 left-1/2 -translate-x-1/2 group-hover/row:scale-100 group-hover/row:opacity-100"
             />
@@ -510,7 +512,7 @@ function EditableTable({
       emptyState={
         tableProps.emptyState ??
         (readOnly ? (
-          "No rows"
+          labels.noRows
         ) : (
           <button
             type="button"
@@ -518,7 +520,7 @@ function EditableTable({
             className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-card px-2.5 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <PlusIcon className="size-3.5" />
-            Add the first row
+            {labels.addFirstRow}
           </button>
         ))
       }
@@ -530,7 +532,7 @@ function EditableTable({
             className="flex h-full w-full cursor-pointer items-center gap-2 px-3 text-ui text-muted-foreground outline-none transition-colors duration-150 hover:bg-muted/45 hover:text-foreground focus-visible:bg-muted/45 focus-visible:text-foreground"
           >
             <PlusIcon className="size-4" />
-            New row
+            {labels.newRow}
           </button>
         ) : undefined
       }

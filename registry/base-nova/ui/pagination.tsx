@@ -115,16 +115,18 @@ function PaginationSummary({
   page,
   pageSize,
   total,
-  noun = "results",
+  noun: nounProp,
   className,
   ...props
 }: Omit<React.ComponentProps<"p">, "children"> & { page: number; pageSize: number; total: number; noun?: string }) {
+  const { locale, labels } = useLocale()
+  const noun = nounProp ?? labels.results
   const from = total === 0 ? 0 : (page - 1) * pageSize + 1
   const to = Math.min(total, page * pageSize)
-  const nf = new Intl.NumberFormat("en-US")
+  const nf = new Intl.NumberFormat(locale)
   return (
     <p data-slot="pagination-summary" className={cn("text-ui text-muted-foreground tabular-nums", className)} {...props}>
-      {total === 0 ? `No ${noun}` : `${nf.format(from)}–${nf.format(to)} of ${nf.format(total)} ${noun}`}
+      {total === 0 ? labels.noItems(noun) : labels.itemRange(nf.format(from), nf.format(to), nf.format(total), noun)}
     </p>
   )
 }

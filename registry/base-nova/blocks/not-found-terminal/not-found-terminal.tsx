@@ -141,7 +141,7 @@ function NotFoundTerminal({
       {...props}
     >
       <style>{`@keyframes nf-caret{0%,100%{opacity:1}50%{opacity:0}}`}</style>
-      <div className="w-full max-w-md overflow-hidden rounded-xl bg-card text-left shadow-raised">
+      <div className="w-full max-w-md overflow-hidden rounded-xl bg-card text-start shadow-raised">
         <div className="flex h-9 items-center gap-1.5 border-b border-border/70 px-3.5">
           <span className="size-2.5 rounded-full bg-destructive/80" />
           <span className="size-2.5 rounded-full bg-warning/80" />

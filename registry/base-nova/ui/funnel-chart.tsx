@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import {
   ChartDataTable,
   ChartNumber,
@@ -112,7 +113,7 @@ function stagePath(
 function FunnelChart({
   stages,
   direction = "vertical",
-  label = "Funnel",
+  label: labelProp,
   unit,
   formatValue = formatNumber,
   size,
@@ -125,6 +126,8 @@ function FunnelChart({
   className,
   ...props
 }: FunnelChartProps) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.funnelChart
   const [ref, box] = useChartSize<HTMLDivElement>()
   const [activeId, setActiveId] = useActiveId(activeIdProp, defaultActiveId, onActiveChange)
   const [pointer, setPointer] = React.useState<{ x: number; y: number } | null>(null)
@@ -183,7 +186,7 @@ function FunnelChart({
               >
                 <span className="truncate font-medium text-foreground">{s.label}</span>
                 <span className="text-ui-sm text-muted-foreground tabular-nums">
-                  {s.index === 0 ? "Start" : `${formatPercent(s.ofPrevious, 0)} of previous`}
+                  {s.index === 0 ? labels.start : labels.ofPreviousPercent(formatPercent(s.ofPrevious, 0))}
                 </span>
               </li>
             ))}
@@ -289,21 +292,21 @@ function FunnelChart({
                 <ChartTooltipTitle>{active.label}</ChartTooltipTitle>
                 <ChartTooltipRow
                   color={active.color}
-                  label={unit ? `Value (${unit})` : "Value"}
+                  label={unit ? labels.valueIn(unit) : labels.value}
                   value={<ChartNumber value={active.value} format={formatValue} />}
                 />
                 <ChartTooltipRow
-                  label={`Of ${placed[0]?.label ?? "first"}`}
+                  label={placed[0] ? labels.ofNamed(placed[0].label) : labels.ofFirst}
                   value={<ChartNumber value={active.ofFirst} format={(v) => formatPercent(v)} />}
                 />
                 {active.index > 0 && (
                   <>
                     <ChartTooltipRow
-                      label="Of previous"
+                      label={labels.ofPrevious}
                       value={<ChartNumber value={active.ofPrevious} format={(v) => formatPercent(v)} />}
                     />
                     <ChartTooltipRow
-                      label="Drop-off"
+                      label={labels.dropOff}
                       value={
                         <span className="text-destructive">
                           <ChartNumber
@@ -354,7 +357,7 @@ function FunnelChart({
                 <ChartNumber value={s.value} format={formatValue} className="text-ui font-semibold text-foreground" />
                 {s.index > 0 && (
                   <div className="text-ui-xs text-muted-foreground tabular-nums">
-                    {formatPercent(s.ofPrevious, 0)} step
+                    {labels.stepRate(formatPercent(s.ofPrevious, 0))}
                   </div>
                 )}
               </li>
@@ -364,8 +367,8 @@ function FunnelChart({
       </div>
 
       <ChartDataTable
-        caption={`${label} data`}
-        columns={["Stage", unit ? `Value (${unit})` : "Value", "Of first", "Of previous"]}
+        caption={labels.chartData(label)}
+        columns={[labels.stage, unit ? labels.valueIn(unit) : labels.value, labels.ofFirst, labels.ofPrevious]}
         rows={placed.map((s) => [s.label, formatValue(s.value), formatPercent(s.ofFirst), formatPercent(s.ofPrevious)])}
       />
     </section>

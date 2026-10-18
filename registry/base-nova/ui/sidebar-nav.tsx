@@ -138,7 +138,7 @@ function SidebarNavSection({
   const { labels } = useLocale()
   const isLink = href !== undefined || labelRender !== undefined
   const labelClass =
-    level === "section" ? "h-7 text-ui font-semibold text-foreground" : "h-6.5 text-ui-sm font-medium text-muted-foreground hover:text-foreground"
+    level === "section" ? "h-7 text-ui font-semibold text-foreground icon-bold" : "h-6.5 text-ui-sm font-medium text-muted-foreground hover:text-foreground"
   const pad = icon ? "gap-2 px-2" : cn("gap-1.5", insetStart)
   const iconEl = (hover: string) =>
     icon && (

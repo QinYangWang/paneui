@@ -60,8 +60,9 @@ const header = `/*
  */
 `
 
-const outlinePrimitives = `// Outline style: every shape that is filled in the puffy set is traced as a round 1.6px contour.
-const puff = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+const outlinePrimitives = `// Outline style: every shape that is filled in the puffy set is traced as a round contour, the same
+// width as line (1.6, set on the <svg>).
+const puff = { fill: "none", stroke: "currentColor", strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
 // Tiny dots stay filled so they keep their weight.
 const solid = { stroke: "currentColor", strokeWidth: 1.5, strokeLinejoin: "round" } as const;
@@ -76,6 +77,8 @@ const indent = (body) =>
 
 let out = src.replace(HEADER, header).replace(PUFF, outlinePrimitives)
 out = out.replace(EXPORT, (whole, name) => {
+  // Filled nav variants (the active state) keep the puffy fill: `solid` is the filled puff.
+  if (name.endsWith("FilledIcon")) return whole.replace(/\{\.\.\.puff\}/g, "{...solid}")
   const o = outlineOverrides[name]
   if (o === undefined) return whole
   return `export const ${name} = (p: IconProps) => (\n  <Icon {...p}>\n${indent(o)}\n  </Icon>\n);`

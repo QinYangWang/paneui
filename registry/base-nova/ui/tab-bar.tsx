@@ -11,9 +11,12 @@ import { useLocale } from "@/registry/base-nova/ui/locale-provider"
  * Bottom navigation for phones: evenly spaced items, each an icon above its label. The bar pads
  * itself by the bottom safe-area inset, so it can sit flush with the screen edge.
  *
+ * The bar has no row fill, so the active item swaps its outline glyph for the filled one
+ * (`activeIcon`) as well as turning foreground.
+ *
  *   <TabBar className="fixed inset-x-0 bottom-0">
- *     <TabBarItem icon={<InboxIcon />} label="Inbox" active />
- *     <TabBarItem icon={<CalendarDaysIcon />} label="Calendar" render={<Link href="/calendar" />} />
+ *     <TabBarItem icon={<InboxIcon />} activeIcon={<InboxFilledIcon />} label="Inbox" active />
+ *     <TabBarItem icon={<CalendarDaysIcon />} activeIcon={<CalendarDaysFilledIcon />} label="Calendar" render={<Link href="/calendar" />} />
  *   </TabBar>
  */
 function TabBar({ className, ...props }: React.ComponentProps<"nav">) {
@@ -30,7 +33,10 @@ function TabBar({ className, ...props }: React.ComponentProps<"nav">) {
 }
 
 type TabBarItemProps = Omit<useRender.ComponentProps<"button">, "children"> & {
+  /** Outline glyph for the resting state. */
   icon: React.ReactNode
+  /** Filled glyph shown while the item is active (`HomeFilledIcon` for `HomeIcon`). */
+  activeIcon?: React.ReactNode
   /** Visible label under the icon; also the accessible name. */
   label: React.ReactNode
   active?: boolean
@@ -43,7 +49,7 @@ type TabBarItemProps = Omit<useRender.ComponentProps<"button">, "children"> & {
  * corners of its own (it fills the bar edge to edge, often inside a rounded screen); hover, press
  * and the keyboard focus ring all sit on the round icon pill.
  */
-function TabBarItem({ icon, label, active = false, badge, render, className, ...props }: TabBarItemProps) {
+function TabBarItem({ icon, activeIcon, label, active = false, badge, render, className, ...props }: TabBarItemProps) {
   const { labels } = useLocale()
   const showBadge = badge !== undefined && badge !== false && badge !== 0
   return useRender({
@@ -63,7 +69,7 @@ function TabBarItem({ icon, label, active = false, badge, render, className, ...
               data-slot="tab-bar-icon"
               className="relative flex h-7 w-12 items-center justify-center rounded-full transition-[box-shadow,background-color] duration-150 group-hover/tab:bg-secondary group-focus-visible/tab:ring-2 group-focus-visible/tab:ring-ring/50 group-active/tab:bg-foreground/10 [&_svg]:size-5 [&_svg]:shrink-0"
             >
-              {icon}
+              {active && activeIcon ? activeIcon : icon}
               {showBadge && (
                 <span
                   data-slot="tab-bar-badge"

@@ -238,7 +238,7 @@ function AppShellSidebar({
               {/* Same height as the close button's band; an 18px mark leading the title centres on the icon column. */}
               {/* eslint-disable-next-line shadcn/no-arbitrary-values -- half the rail minus half the 18px mark */}
               <div className="flex h-16 shrink-0 items-center ps-[calc(var(--sidebar-width-icon)/2_-_0.5625rem)] pe-14">
-                <DrawerTitle className="flex min-w-0 items-center gap-2 text-ui-lg font-semibold">{mobileTitle ?? "Navigation"}</DrawerTitle>
+                <DrawerTitle className="flex min-w-0 items-center gap-2 text-ui-lg font-semibold icon-bold">{mobileTitle ?? "Navigation"}</DrawerTitle>
               </div>
               <Sidebar
                 variant="sidebar"

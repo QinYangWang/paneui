@@ -136,6 +136,7 @@ const contentClass = cn(
   "[&_.highlighted-word]:rounded-2xs [&_.highlighted-word]:bg-primary/12 [&_.highlighted-word]:shadow-[0_0_0_2px_color-mix(in_oklab,var(--primary)_12%,transparent)]",
   // Line numbers (CSS counters, so copying skips them).
   "data-line-numbers:[&_code]:[counter-reset:line] data-line-numbers:[&_pre:not(:has(code))]:[counter-reset:line]",
+  // design-check-ignore text-align-logical -- line numbers sit against code, which reads left to right
   "data-line-numbers:[&_.line]:before:mr-4 data-line-numbers:[&_.line]:before:inline-block data-line-numbers:[&_.line]:before:w-(--code-gutter) data-line-numbers:[&_.line]:before:text-right data-line-numbers:[&_.line]:before:text-muted-foreground/60 data-line-numbers:[&_.line]:before:tabular-nums data-line-numbers:[&_.line]:before:content-[counter(line)] data-line-numbers:[&_.line]:before:select-none data-line-numbers:[&_.line]:before:[counter-increment:line]",
   "data-line-numbers:[&_.line.highlighted]:before:text-primary",
   // Wrap long lines instead of scrolling.

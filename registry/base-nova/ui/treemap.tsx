@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import {
   ChartDataTable,
   ChartLegend,
@@ -210,7 +211,7 @@ type TreemapProps = Omit<React.ComponentProps<"section">, "children"> & {
 
 function Treemap({
   data,
-  label = "Treemap",
+  label: labelProp,
   height = 320,
   formatValue = formatNumber,
   gap = 3,
@@ -223,6 +224,8 @@ function Treemap({
   className,
   ...props
 }: TreemapProps) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.treemapChart
   const [ref, size] = useChartSize<HTMLDivElement>()
   const [activeId, setActiveId] = useActiveId(activeIdProp, defaultActiveId, onActiveChange)
   const [legendGroup, setLegendGroup] = React.useState<string | null>(null)
@@ -381,11 +384,11 @@ function Treemap({
                 )}
                 {active.label}
               </ChartTooltipTitle>
-              <ChartTooltipRow color={active.color} label="Value" value={formatValue(active.value)} />
-              <ChartTooltipRow label="Share of total" value={formatPercent(active.share)} />
+              <ChartTooltipRow color={active.color} label={labels.value} value={formatValue(active.value)} />
+              <ChartTooltipRow label={labels.shareOfTotal} value={formatPercent(active.share)} />
               {active.group && (
                 <ChartTooltipRow
-                  label={`Share of ${active.group.label}`}
+                  label={labels.shareOf(active.group.label)}
                   value={formatPercent(active.groupShare)}
                 />
               )}
@@ -420,8 +423,8 @@ function Treemap({
       )}
 
       <ChartDataTable
-        caption={`${label} data`}
-        columns={["Item", "Value", "Share of total"]}
+        caption={labels.chartData(label)}
+        columns={[labels.item, labels.value, labels.shareOfTotal]}
         rows={tiles.map((t) => [
           t.group ? `${t.group.label} / ${t.label}` : t.label,
           formatValue(t.value),

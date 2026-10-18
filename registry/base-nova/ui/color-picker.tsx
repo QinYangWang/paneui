@@ -6,6 +6,7 @@ import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 import { Slider as SliderPrimitive } from "@base-ui/react/slider"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 /* ─────────────────────────── colour math ─────────────────────────── */
 
@@ -263,9 +264,11 @@ function ColorPickerContent({
 function ColorPickerArea({
   className,
   style,
-  label = "Saturation and brightness",
+  label: labelProp,
   ...props
 }: Omit<React.ComponentProps<"div">, "children"> & { label?: string }) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.saturationBrightness
   const { hsva, setHsva, commit, disabled } = useColorPicker()
   const ref = React.useRef<HTMLDivElement>(null)
   const thumb = React.useRef<HTMLDivElement>(null)
@@ -331,11 +334,11 @@ function ColorPickerArea({
         role="slider"
         tabIndex={disabled ? -1 : 0}
         aria-label={label}
-        aria-roledescription="2D slider"
+        aria-roledescription={labels.slider2d}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(hsva.s * 100)}
-        aria-valuetext={`Saturation ${Math.round(hsva.s * 100)}%, brightness ${Math.round(hsva.v * 100)}%`}
+        aria-valuetext={labels.saturationBrightnessValue(Math.round(hsva.s * 100), Math.round(hsva.v * 100))}
         onKeyDown={onKeyDown}
         data-dragging={dragging || undefined}
         className={cn(
@@ -418,12 +421,13 @@ type ColorPickerChannelProps = ChannelSliderPassthrough & {
 }
 
 /** Hue slider (0–360). Other props go to the Slider root. */
-function ColorPickerHue({ label = "Hue", disabled: disabledProp, ...props }: ColorPickerChannelProps) {
+function ColorPickerHue({ label, disabled: disabledProp, ...props }: ColorPickerChannelProps) {
+  const { labels } = useLocale()
   const { hsva, setHsva, commit, disabled } = useColorPicker()
   return (
     <ChannelSlider
       {...props}
-      label={label}
+      label={label ?? labels.hue}
       value={hsva.h}
       max={360}
       step={1}
@@ -437,13 +441,14 @@ function ColorPickerHue({ label = "Hue", disabled: disabledProp, ...props }: Col
 }
 
 /** Opacity slider. Only meaningful with `alpha` on the root. Other props go to the Slider root. */
-function ColorPickerAlpha({ label = "Opacity", disabled: disabledProp, ...props }: ColorPickerChannelProps) {
+function ColorPickerAlpha({ label, disabled: disabledProp, ...props }: ColorPickerChannelProps) {
+  const { labels } = useLocale()
   const { hsva, setHsva, commit, disabled } = useColorPicker()
   const { r, g, b } = hsvaToRgba(hsva)
   return (
     <ChannelSlider
       {...props}
-      label={label}
+      label={label ?? labels.opacity}
       value={Math.round(hsva.a * 100)}
       max={100}
       step={1}
@@ -462,9 +467,11 @@ function ColorPickerAlpha({ label = "Opacity", disabled: disabledProp, ...props 
 /** Hex field in an inset well. Commits on Enter or blur; invalid input reverts. */
 function ColorPickerHexInput({
   className,
-  "aria-label": ariaLabel = "Hex colour",
+  "aria-label": ariaLabelProp,
   ...props
 }: Omit<React.ComponentProps<"input">, "value" | "defaultValue" | "onChange">) {
+  const { labels } = useLocale()
+  const ariaLabel = ariaLabelProp ?? labels.hexColour
   const { hex, hsva, setHsva, disabled } = useColorPicker()
   const [draft, setDraft] = React.useState(hex.slice(1))
   const [focused, setFocused] = React.useState(false)
@@ -547,13 +554,14 @@ function ColorPickerSwatch({ className, style, ...props }: React.ComponentProps<
 }
 
 function ColorPickerPresets({ className, ...props }: React.ComponentProps<"div">) {
+  const { labels } = useLocale()
   return (
     <div
       role="group"
       data-slot="color-picker-presets"
       className={cn("-m-0.75 flex flex-wrap gap-0.5", className)}
       {...props}
-      aria-label={props["aria-label"] ?? "Presets"}
+      aria-label={props["aria-label"] ?? labels.presets}
     />
   )
 }

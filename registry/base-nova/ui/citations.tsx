@@ -162,7 +162,7 @@ function CitationFavicon({
       aria-hidden
       data-slot="citation-favicon"
       className={cn(
-        "relative grid size-5 shrink-0 place-items-center overflow-hidden rounded-md bg-muted text-ui-2xs font-semibold text-muted-foreground uppercase shadow-chip [&>svg]:size-3",
+        "relative grid size-5 shrink-0 place-items-center overflow-hidden rounded-md bg-muted text-ui-2xs font-semibold icon-bold text-muted-foreground uppercase shadow-chip [&>svg]:size-3",
         className
       )}
     >
@@ -362,7 +362,7 @@ function CitationList({
                 {...(source.url ? { href: source.url, target: "_blank", rel: "noreferrer noopener" } : {})}
                 className="group/citation-row flex scroll-m-4 items-center gap-2.5 rounded-xl px-2 py-1.5 transition-[background-color,box-shadow] duration-300 outline-none hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring/50 data-highlighted:bg-primary/10 data-highlighted:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary)_30%,transparent)]"
               >
-                <span className="w-4 shrink-0 text-right font-mono text-ui-xs text-muted-foreground tabular-nums">{i + 1}</span>
+                <span className="w-4 shrink-0 text-end font-mono text-ui-xs text-muted-foreground tabular-nums">{i + 1}</span>
                 <CitationFavicon source={source} favicon={favicon} />
                 <span className="flex min-w-0 flex-1 flex-col sm:flex-row sm:items-baseline sm:gap-2">
                   <span className="truncate text-ui font-medium text-foreground/90 group-hover/citation-row:text-foreground">

@@ -120,7 +120,7 @@ function MorphPopoverTitle({ className, ...props }: PopoverPrimitive.Title.Props
   return (
     <PopoverPrimitive.Title
       data-slot="morph-popover-title"
-      className={cn("text-ui-lg leading-snug font-semibold", className)}
+      className={cn("text-ui-lg leading-snug font-semibold icon-bold", className)}
       {...props}
     />
   )

@@ -15,6 +15,16 @@ new glyphs live at the top of `components/icons.tsx` (puffy 18x18 grid).
   instead of `CalendarIcon`, `TerminalSquareIcon` instead of `TerminalIcon`.
 - Line glyphs stay for controls: chevrons, close, add, search fields, toolbar
   buttons.
+- Nav glyphs are outline at rest in the rounded and outline styles. A nav
+  without a row fill (TabBar) shows the filled pair when active through
+  `activeIcon` (`HomeFilledIcon` … `FolderFilledIcon`); sidebars and rails fill
+  the row and keep the outline glyph.
+
+## Stroke tiers
+Line icons draw at the style's stroke (rounded 1.75, outline/puffy lines 1.6),
+or 1.2x beside semibold or bold text: `icon-bold` on the text's element (titles,
+Badge, section labels carry it) or `weight="bold"` on one icon. The width lives
+on the `<svg>` as `calc(w * var(--icon-stroke-scale, 1))`; never on an instance.
 
 ## Sizes and colour by context
 | Context | Size | Colour | Frame |

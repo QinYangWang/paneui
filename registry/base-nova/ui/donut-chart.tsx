@@ -4,6 +4,7 @@ import * as React from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import {
   CHART_EASE,
   ChartDataTable,
@@ -96,11 +97,11 @@ function placeSegments(
 
 function DonutChart({
   segments,
-  label = "Donut chart",
+  label: labelProp,
   thickness = 22,
   gap = 4,
   formatValue = formatNumber,
-  totalLabel = "Total",
+  totalLabel: totalLabelProp,
   maxSize = 240,
   showLegend = true,
   legendPosition = "side",
@@ -110,6 +111,9 @@ function DonutChart({
   className,
   ...props
 }: DonutChartProps) {
+  const { labels } = useLocale()
+  const label = labelProp ?? labels.donutChart
+  const totalLabel = totalLabelProp ?? labels.total
   const [activeId, setActiveId] = useActiveId(activeIdProp, defaultActiveId, onActiveChange)
   const reduce = useReducedMotion()
   const baseId = React.useId().replace(/[^a-zA-Z0-9_-]/g, "")
@@ -251,7 +255,7 @@ function DonutChart({
             transition={{ duration: 0.15 }}
             className="max-w-[64%] truncate text-[min(0.8125rem,7cqw)] text-muted-foreground tabular-nums"
           >
-            {active ? `${formatPercent(active.share)} of ${totalLabel.toLowerCase()}` : "\u00a0"}
+            {active ? labels.percentOf(formatPercent(active.share), totalLabel) : "\u00a0"}
           </motion.span>
         </div>
       </div>
@@ -273,7 +277,7 @@ function DonutChart({
                   onFocus={() => setActiveId(s.id)}
                   onBlur={() => setActiveId(null)}
                   className={cn(
-                    "relative flex w-full items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-left text-ui outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+                    "relative flex w-full items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-start text-ui outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                     active && !isActive && "opacity-55",
                     "transition-opacity duration-200"
                   )}
@@ -295,7 +299,7 @@ function DonutChart({
                   <span className="relative text-muted-foreground tabular-nums">
                     {formatValue(s.value)}
                   </span>
-                  <span className="relative w-12 text-right font-medium text-foreground tabular-nums">
+                  <span className="relative w-12 text-end font-medium text-foreground tabular-nums">
                     {formatPercent(s.share, 0)}
                   </span>
                 </button>
@@ -306,8 +310,8 @@ function DonutChart({
       )}
 
       <ChartDataTable
-        caption={`${label} data`}
-        columns={["Segment", "Value", "Share", ...(hasDescriptions ? ["Description"] : [])]}
+        caption={labels.chartData(label)}
+        columns={[labels.segment, labels.value, labels.share, ...(hasDescriptions ? [labels.description] : [])]}
         rows={placed.map((s) => [
           s.label,
           formatValue(s.value),

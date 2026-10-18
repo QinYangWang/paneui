@@ -18,7 +18,7 @@ export default function SelectMorphWithIcons() {
   const [theme, setTheme] = React.useState<Theme>("system")
   const current = themes[theme]
   const row = (
-    <span className="flex flex-1 items-center gap-2 truncate text-left">
+    <span className="flex flex-1 items-center gap-2 truncate text-start">
       {current.icon}
       {current.label}
     </span>

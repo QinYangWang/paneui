@@ -25,24 +25,35 @@ Every icon is built from three things defined at the top of `components/icons.ts
 never add your own stroke widths or wrappers.
 
 ```tsx
-import type { SVGProps } from "react";
+import type { CSSProperties, SVGProps } from "react";
 
-type IconProps = Omit<SVGProps<SVGSVGElement>, "children"> & { size?: number };
+type IconProps = Omit<SVGProps<SVGSVGElement>, "children"> & { size?: number; weight?: "regular" | "bold" };
 
-function Icon({ size = 18, children, ...props }: IconProps & { children: React.ReactNode }) {
+const WEIGHT = { regular: 1, bold: 1.2 } as const;
+const stroke = (w: number) => ({ strokeWidth: w, style: { strokeWidth: `calc(${w}px * var(--icon-stroke-scale, 1))` } });
+
+function Icon({ size = 18, weight, style, children, ...props }: IconProps & { children: React.ReactNode }) {
+  const tier = stroke(1.6);
   return (
-    <svg width={size} height={size} viewBox="0 0 18 18" fill="currentColor" aria-hidden {...props}>
+    <svg width={size} height={size} viewBox="0 0 18 18" fill="currentColor" aria-hidden data-weight={weight}
+      strokeWidth={tier.strokeWidth}
+      style={{ ...tier.style, ...(weight ? ({ "--icon-stroke-scale": WEIGHT[weight] } as CSSProperties) : null), ...style }}
+      {...props}>
       {children}
     </svg>
   );
 }
 
-// Thin round stroke for open glyphs.
-const line = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+// Thin round stroke for open glyphs. Its width comes from the <svg>.
+const line = { fill: "none", stroke: "currentColor", strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
 // Trace every filled shape with this. It puffs the shape out a little and rounds all of its corners.
 const puff = { stroke: "currentColor", strokeWidth: 1.5, strokeLinejoin: "round" } as const;
 ```
+
+The line width sits on the `<svg>` so the stroke tier (`weight="bold"`, or `icon-bold` on an ancestor)
+thickens every line at once. A glyph that needs a different line width spreads `{...stroke(1.9)}` after
+`{...line}`; never a bare `strokeWidth`.
 
 - `puff`: filled with `currentColor` and traced with a 1.5 round-join stroke. Every **filled** shape
   uses it, which is what rounds the corners and gives the inflated look.
@@ -61,9 +72,9 @@ npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-outline.json --ov
 
 Check the top of the file before drawing:
 
-- **Rounded**: `viewBox="0 0 24 24"` and primitives `line` (stroke 1.75), `dot` and `solid`, no `puff`. Follow "Drawing in the rounded style".
+- **Rounded**: `viewBox="0 0 24 24"` and primitives `line` (stroke 1.75, set on the `<svg>`), `fillShape`, `dot` and `solid`, no `puff`. Follow "Drawing in the rounded style".
 - **Puffy**: 18x18, `puff` has no `fill` key (filled with `currentColor`, stroke 1.5). Follow the puffy rules below.
-- **Outline**: 18x18, `puff` is `{ fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" }`
+- **Outline**: 18x18, `puff` is `{ fill: "none", stroke: "currentColor", strokeLinecap: "round", strokeLinejoin: "round" }` (1.6 from the `<svg>`)
   and there is also a `solid` primitive (the filled, 1.5-stroke version). Follow "Drawing in the outline style".
 
 The primitives section above describes the puffy file; the rounded file defines its own at the top.
@@ -72,14 +83,9 @@ Always draw in the style the project has installed, so a new icon matches its ne
 ## Drawing in the rounded style
 
 ```tsx
-function Icon({ size = 18, children, ...props }: IconProps & { children: React.ReactNode }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden {...props}>
-      {children}
-    </svg>
-  );
-}
-const line = { fill: "none", stroke: "currentColor", strokeWidth: 1.75, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+// Same Icon wrapper as above with viewBox="0 0 24 24", fill="none" and stroke(1.75).
+const line = { fill: "none", stroke: "currentColor", strokeLinecap: "round", strokeLinejoin: "round" } as const; // 1.75 from the <svg>
+const fillShape = { fill: "currentColor", stroke: "currentColor", strokeLinecap: "round", strokeLinejoin: "round", fillRule: "evenodd" } as const; // filled pairs
 const dot = { fill: "currentColor", stroke: "none" } as const;   // small dots only
 const solid = { fill: "currentColor", stroke: "none" } as const; // brand marks only
 ```
@@ -92,6 +98,13 @@ const solid = { fill: "currentColor", stroke: "none" } as const; // brand marks 
 - Keep parallel strokes at least 2.25 apart and at most about three details inside a shape, so the
   icon reads at 16px. Circles sit a little smaller than squares (r=10 next to a 19 to 20 square).
 - Shapes the puffy style fills are outlines here.
+- **Filled pairs** (`<Name>FilledIcon`, the active state of a tab bar): the same outer edge as the
+  outline glyph, drawn with `fillShape` (filled and stroked, so the silhouette matches). Inner details
+  become `fillRule="evenodd"` holes in the same path, drawn 0.875 larger per side because the stroke
+  runs along the hole too (a dot r 1.0 is a hole of r 1.875). Parts that stay open (calendar rings, a
+  bell's clapper) keep `line`. A door or slot that meets the edge is cut into the outline path itself
+  (Home: the bottom edge runs up and around the door). Add the pair to the puffy file as the same
+  drawing (that style is filled throughout); the outline style generates its filled pair from it.
 
 ```tsx
 export const MailIcon = (p: IconProps) => (

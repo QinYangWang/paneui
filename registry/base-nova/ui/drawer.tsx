@@ -142,7 +142,7 @@ function DrawerTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
     <DialogPrimitive.Title
       data-slot="drawer-title"
-      className={cn("text-lg leading-snug font-semibold", className)}
+      className={cn("text-lg leading-snug font-semibold icon-bold", className)}
       {...props}
     />
   )

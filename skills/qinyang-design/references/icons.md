@@ -15,12 +15,25 @@ Check a new icon in every style at 14px.
 ## Families
 
 - **Solid**: filled silhouettes with knockouts (`HomeIcon`, `BotIcon`, `SettingsIcon`, `InboxIcon`,
-  `CalendarDaysIcon`, `ServerIcon`, `TerminalSquareIcon`).
+  `CalendarDaysIcon`, `ServerIcon`, `TerminalSquareIcon` in the puffy style).
 - **Line / ring**: open glyphs and outlined objects (chevrons, arrows, check, x, search, `MailIcon`,
   `CalendarIcon`, `InfoIcon`, `ClockIcon`).
 - A set shown side by side (nav list, rail, dock, tab bar, palette group, a feed of cards) uses one family.
-  Navigation uses solid: `InboxIcon` not `MailIcon`, `CalendarDaysIcon` not `CalendarIcon`,
-  `TerminalSquareIcon` not `TerminalIcon`. Line glyphs are for controls.
+  Navigation uses the nav glyphs: `InboxIcon` not `MailIcon`, `CalendarDaysIcon` not `CalendarIcon`,
+  `TerminalSquareIcon` not `TerminalIcon`. In the rounded and outline styles they are outline like the
+  controls; the puffy style draws them solid.
+- **Filled pairs**: `HomeFilledIcon`, `InboxFilledIcon`, `ChatFilledIcon`, `CalendarDaysFilledIcon`,
+  `BellFilledIcon`, `UserFilledIcon`, `SettingsFilledIcon`, `FolderFilledIcon`, for the active item of a
+  nav without a row fill (`TabBarItem activeIcon`). A row fill already marks the active item in sidebars
+  and rails, so they keep the outline glyph. Add a pair in all three styles when a new glyph goes in a tab
+  bar (the outline style generates it from the puffy drawing).
+
+## Stroke tiers
+
+Line strokes have a regular and a bold tier (1.2x). The `<svg>` sets the width as
+`calc(<style stroke> * var(--icon-stroke-scale, 1))`, so `icon-bold` on an ancestor or `weight="bold"` on
+the icon switches every line in the glyph at once. Use bold beside semibold or bold text (titles, Badge,
+section labels), regular beside regular and medium text. Never set `strokeWidth` on an instance.
 
 ## Sizes and colour
 

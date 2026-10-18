@@ -259,7 +259,7 @@ function MorphingModalTitle({ className, ...props }: DialogPrimitive.Title.Props
   return (
     <DialogPrimitive.Title
       data-slot="morphing-modal-title"
-      className={cn("text-lg leading-8 font-semibold", className)}
+      className={cn("text-lg leading-8 font-semibold icon-bold", className)}
       {...props}
     />
   )
@@ -317,7 +317,7 @@ function MorphingModalLink({
         if (!e.defaultPrevented) push(to)
       }}
       className={cn(
-        "flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left text-ui font-medium transition-[background-color,box-shadow] duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-4 [&_svg]:shrink-0",
+        "flex w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-start text-ui font-medium transition-[background-color,box-shadow] duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

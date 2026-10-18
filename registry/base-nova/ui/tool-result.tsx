@@ -402,7 +402,7 @@ function ToolResult({
     >
       <CollapsiblePrimitive.Trigger
         data-slot="tool-result-trigger"
-        className="group/tool-result flex min-h-11 w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-left outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
+        className="group/tool-result flex min-h-11 w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-start outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
       >
         <IconChip size="sm" tone={status === "error" ? "destructive" : "neutral"}>
           {icon ?? <KindIcon />}

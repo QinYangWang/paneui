@@ -69,7 +69,7 @@ export function ThemingRadius() {
                 aria-label="Custom radius"
                 className="flex-1"
               />
-              <span className="w-24 shrink-0 text-right font-mono text-ui-sm text-muted-foreground tabular-nums">
+              <span className="w-24 shrink-0 text-end font-mono text-ui-sm text-muted-foreground tabular-nums">
                 {rem}rem · {px(rem)}px
               </span>
             </div>

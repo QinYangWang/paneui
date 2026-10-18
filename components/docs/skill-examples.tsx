@@ -8,8 +8,8 @@ import {
   ChevronRightIcon,
   FileIcon,
   FolderIcon,
+  InboxFilledIcon,
   InboxIcon,
-  MailIcon,
   RefreshIcon,
   ServerIcon,
   TerminalIcon,
@@ -375,7 +375,7 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
     ),
     bad: (
       <Panel>
-        <NavRow icon={<MailIcon />} label="Inbox" active />
+        <NavRow icon={<InboxFilledIcon />} label="Inbox" active />
         <NavRow icon={<CalendarIcon />} label="Calendar" />
         <NavRow icon={<TerminalIcon />} label="Terminal" />
       </Panel>
@@ -649,6 +649,9 @@ export const SKILL_EXAMPLE_FILES: Record<string, string> = {
   "leave-quieter-than-you-arrive": "exit-subtle",
   "recolour-icons-with-css-keep-their-stroke-and-grid": "icon-color",
   "name-every-icon-only-button": "icon-button-label",
+  "match-the-icon-stroke-to-the-text-weight": "icon-weight",
+  "fill-the-active-glyph-where-there-s-no-row-fill": "nav-active-icon",
+  "align-text-to-the-reading-direction": "text-align-logical",
 }
 
 export function ruleSlug(title: string) {

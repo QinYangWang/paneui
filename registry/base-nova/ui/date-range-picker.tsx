@@ -668,7 +668,7 @@ function DateRangePickerPreset({
         }
       }}
       className={cn(
-        "inline-flex h-8 cursor-pointer items-center rounded-lg px-3 text-left text-ui-sm font-medium whitespace-nowrap text-muted-foreground transition-[background-color,color,box-shadow] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+        "inline-flex h-8 cursor-pointer items-center rounded-lg px-3 text-start text-ui-sm font-medium whitespace-nowrap text-muted-foreground transition-[background-color,color,box-shadow] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
         "aria-pressed:bg-card aria-pressed:text-foreground aria-pressed:shadow-raised",
         className
       )}

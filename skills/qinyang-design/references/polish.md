@@ -105,8 +105,20 @@ Express every fix in the project's own system: Tailwind classes and theme tokens
 
 - One SVG per glyph, painted with `currentColor`; hover, selected and disabled come from text colour and
   opacity, never a second asset or a baked-in fill. Check: `icon-color`.
-- Keep the set's stroke; switching style (`icons`, `icons-puffy`, `icons-outline`) is how the weight
-  changes. Check: `icon-stroke`.
+- **Stroke follows the text weight, in tiers.** Line icons draw at the style's regular stroke beside
+  regular and medium text, and at the bold tier (1.2x: rounded 1.75 → 2.1, outline 1.6 → 1.92) beside
+  semibold or bold text. The tier is a context, not a per-glyph width: `icon-bold` (theme utility, sets
+  `--icon-stroke-scale: 1.2`) on the text's element, or `weight="bold"` on one icon; `icon-regular` resets
+  it. Titles, Badge, section labels and avatar initials carry `icon-bold`; Button stays regular because
+  its label is medium. Filled shapes (the puffy style, brand marks) keep their edge. Checks: `icon-weight`
+  (a line icon whose nearest weighted text is semibold or bold, or a semibold class list styling
+  `[&_svg]`, without the tier), `icon-stroke` (a `strokeWidth` on an instance).
+- **Outline at rest, filled when active, where there's no row fill.** Nav glyphs are outline; every one
+  has a `<Name>FilledIcon` pair drawn in each style (the puffy style is filled throughout, so its pair is
+  the same drawing). A tab bar has no row fill, so its active item swaps glyphs through `activeIcon`;
+  sidebars and rails fill the active row and keep the outline glyph, since a fill plus a filled glyph says
+  the same thing twice. Swap instantly (it's a tab switch); the colour changes too. Check:
+  `nav-active-icon`.
 - Render on the grid (12, 14, 16, 18, 20, 24px); check every new glyph at its smallest size. Check:
   `icon-size`.
 - In right-to-left, flip glyphs that point along the reading direction (back/forward arrows, chevrons,
@@ -115,7 +127,9 @@ Express every fix in the project's own system: Tailwind classes and theme tokens
   `-scale-x-100 rtl:scale-x-100`. A chevron that rotates 90° when open takes `rtl:-rotate-90` on the open
   state, and a hover nudge takes `rtl:group-hover:-translate-x-0.5`. A control that moves left to right in
   every direction (a slide-to-confirm thumb) keeps its arrow. Check: `icon-rtl`, on when
-  `qinyang-design.config.json` sets `"rtl": true`.
+  `qinyang-design.config.json` sets `"rtl": true`. Text alignment is logical too: `text-start` /
+  `text-end`, never `text-left` / `text-right` unless the content is itself left to right (code
+  gutters). Check: `text-align-logical`.
 - Icon-only controls have an `aria-label`; icons beside a label are hidden from assistive tech. Check:
   `icon-button-label` (error).
 
@@ -128,9 +142,11 @@ Common polish advice that this library deliberately doesn't follow, and why:
 | Scale every button to 0.96 on press, with an opt-out prop | No press scale on standard controls (rule 23) | Native desktop controls answer a press with a fill; scaling every button makes dense screens feel springy. The 0.96 value and the 0.95 floor are kept where a press scale is allowed. |
 | 40px minimum targets in dense desktop UI, 44px on touch | 24px on desktop, 44px under `pointer-coarse:` | Controls are 24–32px tall by design (rule 13); 24px is the accessibility floor, and the touch size still applies on touch. |
 | Every target at least 24px, including list rows | File-tree rows stay 22px | Code-editor density; the full-width row is the target and arrow keys move through the tree. |
-| Icon stroke follows the weight of the text beside it | One stroke per icon style | The set is tuned as a family; per-instance strokes mix two looks in one row. |
-| Outline icons by default, filled for the active state | Solid family for navigation, line family for controls (rule 19) | Families split by role; the active state is a fill on the row, not a different glyph. |
 | `cubic-bezier(0.2, 0, 0, 1)` for CSS icon cross-fades | `cubic-bezier(0.22, 1, 0.36, 1)` | One ease-out curve for the whole library. |
+
+Two former differences now follow the advice: icon stroke follows the text weight (as two tiers, not a
+width per glyph) and nav glyphs are outline with a filled active state where the row has no fill (Icons,
+above; rules 41 and 42).
 
 ## Reviewing a screen
 

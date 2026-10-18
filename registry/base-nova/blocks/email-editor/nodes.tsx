@@ -433,6 +433,7 @@ function SectionView({ node, updateAttributes, editor }: ReactNodeViewProps) {
         className={cn(
           "rounded-inner px-4 pb-3 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
           align === "center" && "text-center",
+          // design-check-ignore text-align-logical -- the email block stores a physical alignment
           align === "right" && "text-right"
         )}
       />

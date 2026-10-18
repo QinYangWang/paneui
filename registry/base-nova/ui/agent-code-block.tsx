@@ -288,6 +288,7 @@ function AgentCodeBlock({
                       aria-hidden
                       style={{ width: `${gutter + 2.5}ch` }}
                       className={cn(
+                        // design-check-ignore text-align-logical -- line numbers sit against code, which reads left to right
                         "sticky left-0 shrink-0 bg-code pr-3 pl-3 text-right text-muted-foreground/60 tabular-nums select-none",
                         isMarked && "bg-[color-mix(in_oklch,var(--code),var(--primary)_8%)] text-primary"
                       )}

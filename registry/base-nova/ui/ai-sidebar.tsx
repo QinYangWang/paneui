@@ -16,6 +16,7 @@ import {
   XIcon,
 } from "@/components/icons"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 import { TooltipContent } from "@/registry/base-nova/ui/tooltip"
 
 type SidebarResourceKind = "folder" | "project" | "file" | "bookmark"
@@ -110,6 +111,7 @@ type ResourceTreeProps = {
 }
 
 function ResourceTree({ label, items, query, expanded, onToggle, activeId, onActivate, onRename }: ResourceTreeProps) {
+  const { labels } = useLocale()
   const reduce = useReducedMotion()
   const rows = React.useMemo(() => flatten(items, expanded), [items, expanded])
   const [focusId, setFocusId] = React.useState<string | null>(null)
@@ -273,7 +275,7 @@ function ResourceTree({ label, items, query, expanded, onToggle, activeId, onAct
                   <button
                     type="button"
                     tabIndex={-1}
-                    aria-label={`Rename ${item.label}`}
+                    aria-label={labels.renameNamed(item.label)}
                     onClick={(e) => {
                       e.stopPropagation()
                       setEditingId(item.id)
@@ -293,6 +295,7 @@ function ResourceTree({ label, items, query, expanded, onToggle, activeId, onAct
 }
 
 function RenameField({ initial, onDone }: { initial: string; onDone: (value: string | null) => void }) {
+  const { labels } = useLocale()
   const [value, setValue] = React.useState(initial)
   const done = React.useRef(false)
   const finish = (v: string | null) => {
@@ -303,7 +306,7 @@ function RenameField({ initial, onDone }: { initial: string; onDone: (value: str
   return (
     <input
       autoFocus
-      aria-label="Rename"
+      aria-label={labels.rename}
       value={value}
       onFocus={(e) => e.currentTarget.select()}
       onChange={(e) => setValue(e.target.value)}
@@ -429,7 +432,7 @@ function AISidebar({
   open: openProp,
   defaultOpen = true,
   onOpenChange,
-  title = "Workspace",
+  title: titleProp,
   actions,
   footer,
   searchable = true,
@@ -442,6 +445,8 @@ function AISidebar({
   onPointerDownCapture,
   ...props
 }: AISidebarProps) {
+  const { labels } = useLocale()
+  const title = titleProp ?? labels.workspace
   const reduce = useReducedMotion()
   const [innerItems, setInnerItems] = React.useState(defaultItems)
   const items = itemsProp ?? innerItems
@@ -522,15 +527,15 @@ function AISidebar({
         onPointerDownCapture?.(e)
       }}
       {...(props as React.ComponentProps<typeof motion.nav>)}
-      aria-label={props["aria-label"] ?? "AI workspace"}
+      aria-label={props["aria-label"] ?? labels.aiWorkspace}
     >
       {/* Header */}
       <div className={cn("flex h-12 shrink-0 items-center gap-2 px-2.5", !open && "justify-center px-0")}>
-        {open && <div className="min-w-0 flex-1 truncate pl-1 text-ui-lg font-semibold">{title}</div>}
-        <RailTip label={open ? "Collapse sidebar" : "Expand sidebar"} enabled>
+        {open && <div className="min-w-0 flex-1 truncate ps-1 text-ui-lg font-semibold icon-bold">{title}</div>}
+        <RailTip label={open ? labels.collapseSidebar : labels.expandSidebar} enabled>
           <button
             type="button"
-            aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
+            aria-label={open ? labels.collapseSidebar : labels.expandSidebar}
             aria-expanded={open}
             onClick={() => setOpen(!open)}
             className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
@@ -556,14 +561,14 @@ function AISidebar({
                 onKeyDown={(e) => {
                   if (e.key === "Escape") setQuery("")
                 }}
-                placeholder="Search"
-                aria-label="Search workspace"
+                placeholder={labels.searchPlaceholder}
+                aria-label={labels.searchWorkspace}
                 className="min-w-0 flex-1 bg-transparent text-ui outline-none placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden"
               />
               {query ? (
                 <button
                   type="button"
-                  aria-label="Clear search"
+                  aria-label={labels.clearSearch}
                   onClick={() => {
                     setQuery("")
                     searchRef.current?.focus()
@@ -582,10 +587,10 @@ function AISidebar({
               )}
             </label>
           ) : (
-            <RailTip label="Search" enabled>
+            <RailTip label={labels.searchPlaceholder} enabled>
               <button
                 type="button"
-                aria-label="Search"
+                aria-label={labels.searchPlaceholder}
                 onClick={() => {
                   setOpen(true)
                   requestAnimationFrame(() => searchRef.current?.focus())
@@ -611,9 +616,9 @@ function AISidebar({
             style={{ width }}
           >
             {filteredBookmarks.length > 0 && (
-              <Section label="Bookmarks">
+              <Section label={labels.bookmarks}>
                 <ResourceTree
-                  label="Bookmarks"
+                  label={labels.bookmarks}
                   items={filteredBookmarks}
                   query={q}
                   expanded={shownExpanded}
@@ -625,9 +630,9 @@ function AISidebar({
               </Section>
             )}
             {filtered.length > 0 && (
-              <Section label="Workspace">
+              <Section label={labels.workspace}>
                 <ResourceTree
-                  label="Workspace"
+                  label={labels.workspace}
                   items={filtered}
                   query={q}
                   expanded={shownExpanded}
@@ -640,12 +645,12 @@ function AISidebar({
             )}
             {q && !filtered.length && !filteredBookmarks.length && (
               <p className="px-4 py-6 text-center text-ui text-muted-foreground">
-                Nothing matches “{query.trim()}”.
+                {labels.nothingMatches(query.trim())}
               </p>
             )}
           </motion.div>
         ) : (
-          <ul className="flex flex-col items-center gap-1" aria-label="Workspace">
+          <ul className="flex flex-col items-center gap-1" aria-label={labels.workspace}>
             {railItems.map((item) => {
               const active = item.id === activeId || hasDescendant(item, activeId)
               return (
