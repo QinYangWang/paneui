@@ -29,6 +29,8 @@ import { setAccent, setCustomAccent, useAccentState } from "./accent-store"
 const PRESETS = Object.keys(PRESET_THEMES) as PresetAccent[]
 /** Each mode's page colour, so translucent roles read as they do there. Mirrors --background. */
 const PAGE = { light: "#fff", dark: "oklch(15% 0 0)" } as const
+/** Short role name under the strip: `primary-subtle-hover` → `subtle-hover`, `primary` → `solid`. */
+const roleLabel = (k: string) => (k === "ring" ? "ring" : k.replace("primary-", "").replace("primary", "solid"))
 const CHARTS = ["bg-chart-1", "bg-chart-2", "bg-chart-3", "bg-chart-4", "bg-chart-5", "bg-chart-6", "bg-chart-7", "bg-chart-8"]
 
 
@@ -121,7 +123,7 @@ export function ThemingAccent() {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-1.5 border-b px-4 py-3">
+          <div className="flex flex-col gap-1.5 border-b px-4 py-3 max-sm:hidden">
             {(["light", "dark"] as const).map((mode) => (
               <div key={mode} className="flex items-center gap-3">
                 <span className="w-8 shrink-0 text-ui-xs text-muted-foreground capitalize">{mode}</span>
@@ -140,10 +142,34 @@ export function ThemingAccent() {
             <div aria-hidden className="flex ps-11 font-mono text-ui-2xs text-muted-foreground">
               {ACCENT_VARS.map((k) => (
                 <span key={k} className="min-w-0 flex-1 truncate text-center">
-                  {k === "ring" ? "ring" : k.replace("primary-", "").replace("primary", "solid")}
+                  {roleLabel(k)}
                 </span>
               ))}
             </div>
+          </div>
+
+          {/* Phones: one row per role, so every label fits in full. */}
+          <div data-md-skip className="grid grid-cols-[auto_1fr_1fr] items-center gap-x-3 gap-y-1 border-b px-4 py-3 sm:hidden">
+            <span />
+            {(["light", "dark"] as const).map((mode) => (
+              <span key={mode} className="text-ui-xs text-muted-foreground capitalize">{mode}</span>
+            ))}
+            {ACCENT_VARS.map((k) => (
+              <React.Fragment key={k}>
+                <span className="font-mono text-ui-2xs whitespace-nowrap text-muted-foreground">{roleLabel(k)}</span>
+                {(["light", "dark"] as const).map((mode) => (
+                  <span
+                    key={mode}
+                    role="img"
+                    aria-label={`--${k}, ${mode} mode`}
+                    className="flex h-5 overflow-hidden rounded-sm bg-(--page) shadow-chip"
+                    style={{ "--page": PAGE[mode] } as React.CSSProperties}
+                  >
+                    <span className="flex-1 bg-(--stop)" style={{ "--stop": theme[mode][k] } as React.CSSProperties} />
+                  </span>
+                ))}
+              </React.Fragment>
+            ))}
           </div>
 
           <div className="grid gap-x-8 gap-y-5 px-4 py-5 sm:grid-cols-2">

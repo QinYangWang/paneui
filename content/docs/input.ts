@@ -31,6 +31,12 @@ export default {
     },
     { id: "sizes", title: "Sizes", description: "Match the size of the button beside it." },
   ],
+  notes: [
+    {
+      title: "Text size on phones",
+      body: "Field text matches the control size on every screen (13px at the default size), the same as the button beside it. iOS Safari zooms into a focused field whose text is under 16px; where that zoom matters more than density, such as a sign-in form on a phone, add `max-md:text-base` to the field.",
+    },
+  ],
   api: [
     {
       name: "Input",

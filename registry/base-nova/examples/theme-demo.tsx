@@ -2,7 +2,7 @@ const surfaces = ["raised", "pressed", "primary", "well", "surface", "chip"] as 
 
 export default function ThemeDemo() {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-2 gap-x-2 gap-y-4 sm:grid-cols-3">
       {surfaces.map((s) => (
         <div key={s} className="flex flex-col items-center gap-2">
           <div
@@ -13,7 +13,7 @@ export default function ThemeDemo() {
             }
             style={s === "primary" ? undefined : { boxShadow: `var(--skeuo-${s})` }}
           />
-          <code className="text-xs text-muted-foreground">shadow-{s}</code>
+          <code className="text-center text-xs whitespace-nowrap text-muted-foreground">shadow-{s}</code>
         </div>
       ))}
     </div>

@@ -9,14 +9,14 @@ import { cn } from "@/lib/utils"
 
 // Same well, heights and text as Input; the browser draws the option list.
 const nativeSelectVariants = cva(
-  "w-full min-w-0 cursor-pointer appearance-none bg-background text-base shadow-well transition-[box-shadow,background-color] outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-64 dark:bg-input/32 aria-invalid:ring-2 aria-invalid:ring-destructive/30 [&>option]:bg-popover [&>option]:text-popover-foreground",
+  "w-full min-w-0 cursor-pointer appearance-none bg-background shadow-well transition-[box-shadow,background-color] outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-64 dark:bg-input/32 aria-invalid:ring-2 aria-invalid:ring-destructive/30 [&>option]:bg-popover [&>option]:text-popover-foreground",
   {
     variants: {
       size: {
-        xs: "h-6 rounded-sm ps-2 pe-6 md:text-ui-xs",
-        sm: "h-7 rounded-lg ps-2.5 pe-7 md:text-ui",
-        default: "h-8 rounded-lg ps-2.5 pe-8 md:text-ui",
-        lg: "h-9 rounded-lg ps-3 pe-8 md:text-ui-lg",
+        xs: "h-6 rounded-sm ps-2 pe-6 text-ui-xs",
+        sm: "h-7 rounded-lg ps-2.5 pe-7 text-ui",
+        default: "h-8 rounded-lg ps-2.5 pe-8 text-ui",
+        lg: "h-9 rounded-lg ps-3 pe-8 text-ui-lg",
       },
     },
     defaultVariants: { size: "default" },

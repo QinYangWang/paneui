@@ -13,10 +13,10 @@ const textareaVariants = cva(
   {
     variants: {
       size: {
-        xs: "min-h-12 rounded-sm px-2 py-1 text-base md:text-ui-xs",
-        sm: "min-h-14 rounded-lg px-2.5 py-1 text-base md:text-ui",
-        default: "min-h-16 rounded-lg px-2.5 py-1.5 text-base md:text-ui",
-        lg: "min-h-20 rounded-lg px-3 py-2 text-base md:text-ui-lg",
+        xs: "min-h-12 rounded-sm px-2 py-1 text-ui-xs",
+        sm: "min-h-14 rounded-lg px-2.5 py-1 text-ui",
+        default: "min-h-16 rounded-lg px-2.5 py-1.5 text-ui",
+        lg: "min-h-20 rounded-lg px-3 py-2 text-ui-lg",
       },
     },
     defaultVariants: { size: "default" },

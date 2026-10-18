@@ -183,7 +183,7 @@ function CommandInput({ className, onChange, ...props }: Omit<React.ComponentPro
           onChange?.(e)
           setSearch(e.target.value)
         }}
-        className={cn("h-full min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground/72 md:text-ui", className)}
+        className={cn("h-full min-w-0 flex-1 bg-transparent text-ui outline-none placeholder:text-muted-foreground/72", className)}
         {...props}
       />
     </div>

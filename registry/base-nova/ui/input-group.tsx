@@ -86,7 +86,7 @@ function InputGroupAddon({
 }
 
 const controlClass =
-  "min-w-0 flex-1 border-0 bg-transparent text-base outline-none placeholder:text-muted-foreground/72 disabled:pointer-events-none md:text-[length:inherit]"
+  "min-w-0 flex-1 border-0 bg-transparent text-[length:inherit] outline-none placeholder:text-muted-foreground/72 disabled:pointer-events-none"
 
 function InputGroupInput({ className, ...props }: React.ComponentProps<"input">) {
   return (

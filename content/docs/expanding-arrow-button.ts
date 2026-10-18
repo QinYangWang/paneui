@@ -22,13 +22,13 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "The sweep runs on hover and on keyboard focus, over 500ms. With reduced motion the tile changes width instantly and nothing slides.",
+      body: "The sweep runs on hover and on keyboard focus, over 500ms. Touch screens have no hover, so a tap plays it once and the tile returns after 900ms. With reduced motion the tile changes width instantly and nothing slides.",
     },
   ],
   api: [
     {
       name: "ExpandingArrowButton",
-      description: "Button whose accent tile sweeps across on hover or focus.",
+      description: "Button whose accent tile sweeps across on hover, focus or a tap.",
       extends: "Button",
       extendsHref: "https://base-ui.com/react/components/button#api-reference",
       props: [

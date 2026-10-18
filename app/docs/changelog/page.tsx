@@ -8,6 +8,33 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-18-phone-fixes",
+    date: "October 18, 2026",
+    title: "Phone fixes for fields, the outline and the arrow button",
+    tag: "Components",
+    changes: [
+      <>
+        <TextLink href="/docs/input">Input</TextLink>, <TextLink href="/docs/textarea">Textarea</TextLink>, Input Group,
+        Combobox, Command, Multi Select and Native Select keep the control text size on phones too; they no longer step
+        up to 16px under 768px. Add <Code>max-md:text-base</Code> to a field where the browser&apos;s focus zoom matters
+        more than density.
+      </>,
+      <>
+        <TextLink href="/docs/outline">Outline</TextLink> no longer flickers between sections while the page scrolls.
+        A heading has to be clearly past the line before the section changes, and a clicked entry holds while the page
+        scrolls to it.
+      </>,
+      <>
+        <TextLink href="/docs/expanding-arrow-button">Expanding Arrow Button</TextLink> plays its sweep on a tap, since
+        touch screens have no hover.
+      </>,
+      <>
+        The shadow swatches on <TextLink href="/docs/theme">Theme</TextLink> and the accent role strip on{" "}
+        <TextLink href="/docs/colors">Customize</TextLink> keep every label whole and centred on a phone.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-18-app-shell-layouts",
     date: "October 18, 2026",
     title: "App shell layouts and smaller fixes",

@@ -82,10 +82,10 @@ const inputButton: Record<ControlSize, [string, number]> = {
   lg: ["size-7 rounded-md", 14],
 }
 const inputText: Record<ControlSize, string> = {
-  xs: "md:text-ui-xs",
-  sm: "md:text-ui",
-  default: "md:text-ui",
-  lg: "md:text-ui-lg",
+  xs: "text-ui-xs",
+  sm: "text-ui",
+  default: "text-ui",
+  lg: "text-ui-lg",
 }
 
 const ComboboxValue = ComboboxPrimitive.Value
@@ -121,7 +121,7 @@ function ComboboxInput({
       {showSearchIcon && <SearchIcon size={size === "xs" ? 14 : 16} className="shrink-0 text-muted-foreground" />}
       <ComboboxPrimitive.Input
         data-slot="combobox-input"
-        className={cn("h-full min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground/72", inputText[size])}
+        className={cn("h-full min-w-0 flex-1 bg-transparent outline-none placeholder:text-muted-foreground/72", inputText[size])}
         {...props}
       />
       {showClear && (

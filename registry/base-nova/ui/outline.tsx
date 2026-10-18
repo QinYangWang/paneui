@@ -36,8 +36,37 @@ const DEFAULT_LINE = 112
 
 const reducedMotion = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
+/** Px a heading has to travel past the line before the current section changes back. */
+const HYSTERESIS = 8
+/** Quiet time after a click before scrolling picks the section again. */
+const SETTLE_MS = 150
+
 function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE) {
-  const [active, setActive] = React.useState<string | undefined>(ids[0])
+  const [active, setActiveState] = React.useState<string | undefined>(ids[0])
+  const activeRef = React.useRef(active)
+  // A clicked entry holds while its jump or smooth scroll runs, so the track doesn't march
+  // through every section in between (or land on a neighbour the page can't scroll past).
+  const locked = React.useRef(false)
+  const settle = React.useRef<ReturnType<typeof setTimeout>>(undefined)
+  // Runs once the click's scroll has settled: the clicked heading stays current while it is on
+  // screen, otherwise (the reader kept scrolling) the line picks again.
+  const onSettled = React.useRef<() => void>(() => {})
+  const unlockSoon = React.useCallback(() => {
+    clearTimeout(settle.current)
+    settle.current = setTimeout(() => {
+      locked.current = false
+      onSettled.current()
+    }, SETTLE_MS)
+  }, [])
+  const select = React.useCallback(
+    (id: string | undefined) => {
+      activeRef.current = id
+      setActiveState(id)
+      locked.current = true
+      unlockSoon()
+    },
+    [unlockSoon]
+  )
   const key = ids.join("\u0000")
   React.useEffect(() => {
     const els = key
@@ -47,13 +76,36 @@ function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE) {
     let frame = 0
     const update = () => {
       frame = 0
-      const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
-      let current = els[0]?.id
-      if (atEnd && els.length) current = els[els.length - 1].id
-      else for (const el of els) if (el.getBoundingClientRect().top < line) current = el.id
-      setActive(current)
+      if (!els.length) return
+      const root = document.documentElement
+      // clientHeight stays put while a phone's toolbar slides; the clamp ignores rubber-band overscroll.
+      const view = root.clientHeight
+      const maxScroll = Math.max(0, root.scrollHeight - view)
+      const remaining = maxScroll - Math.min(Math.max(window.scrollY, 0), maxScroll)
+      // Over the last screen of scroll the line slides down to the bottom edge, so the short
+      // sections at the end take their turn in order instead of the last one jumping in.
+      const range = Math.min(view, maxScroll)
+      const progress = range > 0 && remaining < range ? 1 - remaining / range : 0
+      const at = line + Math.max(0, view - line) * progress
+      const tops = els.map((el) => el.getBoundingClientRect().top)
+      const indexAt = (y: number) => tops.reduce((found, top, i) => (top < y ? i : found), 0)
+      let next = indexAt(at)
+      // Keep the current section until a heading is clearly past the line, so a heading
+      // resting on it (or a toolbar nudging the page) can't flip the track back and forth.
+      const current = els.findIndex((el) => el.id === activeRef.current)
+      if (current >= 0 && next !== current && indexAt(at - HYSTERESIS) <= current && current <= indexAt(at + HYSTERESIS)) next = current
+      const id = els[next].id
+      if (id !== activeRef.current) {
+        activeRef.current = id
+        setActiveState(id)
+      }
+    }
+    onSettled.current = () => {
+      const top = activeRef.current ? document.getElementById(activeRef.current)?.getBoundingClientRect().top : undefined
+      if (top === undefined || top < 0 || top > document.documentElement.clientHeight) update()
     }
     const onScroll = () => {
+      if (locked.current) return unlockSoon()
       if (!frame) frame = requestAnimationFrame(update)
     }
     update()
@@ -64,13 +116,15 @@ function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE) {
       window.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onScroll)
     }
-  }, [key, line])
-  return [active, setActive] as const
+  }, [key, line, unlockSoon])
+  React.useEffect(() => () => clearTimeout(settle.current), [])
+  return [active, select] as const
 }
 
 /**
  * The id of the section being read: the last heading whose top is above `line` (px from the top
- * of the viewport), or the last heading once the page is scrolled to the end.
+ * of the viewport). Over the last screen of scroll the line moves down to the bottom edge, so the
+ * sections at the end of the page each become current in turn.
  */
 function useActiveHeading(ids: readonly string[], { line = DEFAULT_LINE }: { line?: number } = {}) {
   return useActiveHeadingState(ids, line)[0]
@@ -194,7 +248,11 @@ function OutlineList({
   )
 }
 
-/** Keeps the current entry inside the scroll viewport, about a third of the way down. */
+/**
+ * Keeps the current entry inside the scroll viewport. It moves the list only as far as the entry
+ * needs and without animation: a smooth scroll restarted on every section change while the page
+ * is still scrolling makes the list lurch.
+ */
 function useKeepInView(
   viewportRef: React.RefObject<HTMLDivElement | null>,
   listRef: React.RefObject<HTMLUListElement | null>,
@@ -208,9 +266,8 @@ function useKeepInView(
     const pad = 24
     const top = link.offsetTop
     const bottom = top + link.offsetHeight
-    if (top - pad < vp.scrollTop || bottom + pad > vp.scrollTop + vp.clientHeight) {
-      vp.scrollTo({ top: Math.max(0, top - vp.clientHeight / 3), behavior: reducedMotion() ? "auto" : "smooth" })
-    }
+    if (top - pad < vp.scrollTop) vp.scrollTop = Math.max(0, top - pad)
+    else if (bottom + pad > vp.scrollTop + vp.clientHeight) vp.scrollTop = bottom + pad - vp.clientHeight
   }, [active, enabled, listRef, viewportRef])
 }
 

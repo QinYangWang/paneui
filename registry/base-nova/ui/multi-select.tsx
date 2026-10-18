@@ -30,7 +30,7 @@ const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: s
     well: "frame-inset-0.5 min-h-7 py-0.5 pe-7 ps-0.5",
     chip: "h-6 ps-2 text-ui-sm",
     remove: "size-5",
-    input: "h-6 md:text-ui",
+    input: "h-6 text-ui",
     trigger: "top-0.5 end-0.5 size-6 rounded-inner",
     item: "h-7 text-ui-sm",
   },
@@ -38,7 +38,7 @@ const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: s
     well: "frame-inset-1 min-h-8 py-1 pe-8 ps-1",
     chip: "h-6 ps-2 text-ui-sm",
     remove: "size-5",
-    input: "h-6 md:text-ui",
+    input: "h-6 text-ui",
     trigger: "top-1 end-1 size-6 rounded-inner",
     item: "h-8 text-ui",
   },
@@ -46,7 +46,7 @@ const sizeClass: Record<MultiSelectSize, { well: string; chip: string; remove: s
     well: "frame-inset-1 min-h-9 py-1 pe-9 ps-1",
     chip: "h-7 ps-2.5 text-ui",
     remove: "size-6",
-    input: "h-7 md:text-ui-lg",
+    input: "h-7 text-ui-lg",
     trigger: "top-1 end-1 size-7 rounded-inner",
     item: "h-9 text-ui-lg",
   },
@@ -175,7 +175,7 @@ function MultiSelectTrigger({
             <ComboboxPrimitive.Input
               data-slot="multi-select-input"
               placeholder={selected.length ? undefined : placeholder}
-              className={cn("min-w-16 flex-1 bg-transparent px-2 text-base outline-none placeholder:text-muted-foreground", c.input)}
+              className={cn("min-w-16 flex-1 bg-transparent px-2 outline-none placeholder:text-muted-foreground", c.input)}
             />
           </>
         )}

@@ -29,11 +29,11 @@ useActiveHeading     the id of the section being read`,
     },
     {
       title: "Current section",
-      body: "A heading is current once its top passes `activeLine` (px from the top of the viewport); at the end of the page the last heading wins. Set `activeLine` below your sticky header.",
+      body: "A heading is current once its top passes `activeLine` (px from the top of the viewport) by 8px, and stays current until it moves back 8px, so a heading resting on the line never flickers. Over the last screen of scroll the line slides to the bottom edge, so short sections at the end each light up in turn. A clicked entry holds while the page scrolls to it. Set `activeLine` below your sticky header.",
     },
     {
       title: "Motion",
-      body: "The lit stretch of the track slides between entries over 300ms. Under reduced motion it moves without a transition, and scrolling the list to keep the entry in view jumps instead of gliding.",
+      body: "The lit stretch of the track slides between entries over 300ms; under reduced motion it moves without a transition. When the list scrolls, it moves only as far as the current entry needs and without animation, so it never fights the page scroll.",
     },
   ],
   api: [

@@ -25,6 +25,10 @@ export default {
       title: "Auto height",
       body: "The field uses `field-sizing: content`, so it grows with its text from an 80px minimum in browsers that support it.",
     },
+    {
+      title: "Text size on phones",
+      body: "Text matches Input on every screen. iOS Safari zooms into a focused field whose text is under 16px; add `max-md:text-base` where that zoom matters more than density.",
+    },
   ],
   api: [
     {

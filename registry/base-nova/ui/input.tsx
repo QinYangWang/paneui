@@ -14,10 +14,10 @@ const inputVariants = cva(
   {
     variants: {
       size: {
-        xs: "h-6 rounded-sm px-2 py-0.5 text-base file:h-5 file:text-ui-xs md:text-ui-xs",
-        sm: "h-7 rounded-lg px-2.5 py-0.5 text-base file:h-5 file:text-ui-sm md:text-ui",
-        default: "h-8 rounded-lg px-2.5 py-1 text-base file:h-6 file:text-ui-sm md:text-ui",
-        lg: "h-9 rounded-lg px-3 py-1 text-base file:h-7 file:text-ui md:text-ui-lg",
+        xs: "h-6 rounded-sm px-2 py-0.5 text-ui-xs file:h-5 file:text-ui-xs",
+        sm: "h-7 rounded-lg px-2.5 py-0.5 text-ui file:h-5 file:text-ui-sm",
+        default: "h-8 rounded-lg px-2.5 py-1 text-ui file:h-6 file:text-ui-sm",
+        lg: "h-9 rounded-lg px-3 py-1 text-ui-lg file:h-7 file:text-ui",
       },
     },
     defaultVariants: { size: "default" },
