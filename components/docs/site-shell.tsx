@@ -32,7 +32,7 @@ const headerLinks: { label: string; href: string; isActive: (pathname: string, g
     href: COMPONENTS_HREF,
     isActive: (p, groups) => p === COMPONENTS_HREF || (p.startsWith("/docs/") && !GUIDE_PAGES.some((g) => g.href === p) && !isTemplate(p, groups)),
   },
-  { label: "Templates", href: "/#templates", isActive: isTemplate },
+  { label: "Templates", href: "/docs/components#templates", isActive: isTemplate },
 ]
 
 function useIsMac() {

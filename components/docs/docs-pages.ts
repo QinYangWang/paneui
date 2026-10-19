@@ -51,5 +51,5 @@ export const GUIDE_PAGES = [
 ] as const satisfies readonly GuidePage[]
 
 /** The components overview (all live previews, by category). */
-export const COMPONENTS_HREF = "/"
+export const COMPONENTS_HREF = "/docs/components"
 export const COMPONENTS_TITLE = "Overview"

@@ -78,7 +78,7 @@ export default function Introduction() {
           {groups.map((g) => {
             const Icon = categoryIcons[g.category]
             return (
-              <Card key={g.category} interactive size="sm" render={<Link href={`/#${categorySlug(g.category)}`} />} className="px-4">
+              <Card key={g.category} interactive size="sm" render={<Link href={`/docs/components#${categorySlug(g.category)}`} />} className="px-4">
                 <span className="flex items-center gap-2 font-medium">
                   {Icon && <Icon size={16} className="text-muted-foreground" />}
                   <span data-md-title>{g.category}</span>
@@ -122,7 +122,7 @@ export default function Introduction() {
             Installation
             <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
           </Button>
-          <Button variant="secondary" nativeButton={false} render={<Link href="/" />}>
+          <Button variant="secondary" nativeButton={false} render={<Link href="/docs/components" />}>
             Browse components
           </Button>
         </div>
