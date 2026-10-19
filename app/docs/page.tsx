@@ -51,7 +51,7 @@ export default function Introduction() {
     >
       <div className="flex flex-col gap-4 text-muted-foreground">
         <p>
-          qinyang/ui is a shadcn registry, not an npm package. Add the <Code>@{REGISTRY_NAME}</Code> namespace to your
+          taimatsu/ui is a shadcn registry, not an npm package. Add the <Code>@{REGISTRY_NAME}</Code> namespace to your
           project once, then the CLI copies each component and its dependencies into your codebase. From then on the code
           is yours.
         </p>

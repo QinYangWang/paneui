@@ -129,7 +129,7 @@ const COMMON_HELP = [
 function mainHelp() {
   const w = Math.max(...Object.values(commands).map((cmd) => cmd.usage.split(" ")[0].length)) + 2
   return [
-    `${c.bold(CLI_NAME)} ${c.dim(CLI_VERSION)}  qinyang/ui components and themes, on top of the shadcn CLI`,
+    `${c.bold(CLI_NAME)} ${c.dim(CLI_VERSION)}  taimatsu/ui components and themes, on top of the shadcn CLI`,
     "",
     `Usage: ${CLI_NAME} <command> [options]`,
     "",

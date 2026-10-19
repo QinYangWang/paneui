@@ -1,11 +1,11 @@
 ---
 name: qinyang-design
-description: Design rules, limits and checks for interfaces built with qinyang/ui (the @qinyang shadcn registry). Use when building, reviewing or restyling any screen, component, block or template on it, when writing UI copy or registry descriptions, when picking colours, radii, type, icons, charts or motion, and before committing UI changes (run the check script).
+description: Design rules, limits and checks for interfaces built with taimatsu/ui (the @taimatsu shadcn registry). Use when building, reviewing or restyling any screen, component, block or template on it, when writing UI copy or registry descriptions, when picking colours, radii, type, icons, charts or motion, and before committing UI changes (run the check script).
 ---
 
-# qinyang/ui design
+# taimatsu/ui design
 
-qinyang/ui is a desktop-density component library: a 13px type scale, translucent fills on opaque
+taimatsu/ui is a desktop-density component library: a 13px type scale, translucent fills on opaque
 surfaces, alpha hairlines, four elevation levels, corners that derive from one `--radius` and stop at
 16px, one accent swapped through eight role tokens. These rules keep every screen and every coding
 agent on that one style. Each rule is a short instruction, the reason, and what to write; the
@@ -17,7 +17,7 @@ references hold the exact values.
 npx skills add QinYangWang/ui --skill qinyang-design
 ```
 
-The library itself installs with the shadcn CLI (`npx shadcn@latest add @qinyang/theme`, then any
+The library itself installs with the shadcn CLI (`npx shadcn@latest add @taimatsu/theme`, then any
 item). See `references/registry.md`.
 
 ## Check
@@ -273,7 +273,7 @@ Name parts for their job: `parts/author-avatar.tsx`, `parts/buffers.ts`.
 
 The CLI adds and updates theme variables but never deletes one, so removed tokens linger.
 
-`npx shadcn@latest add @qinyang/upgrade-check`, then `node scripts/qinyang-upgrade-check.mjs` (`--fix`
+`npx shadcn@latest add @taimatsu/upgrade-check`, then `node scripts/qinyang-upgrade-check.mjs` (`--fix`
 cleans the stylesheet). The design check runs it for you when it is installed.
 
 ### 33. Give every target 24px to land on

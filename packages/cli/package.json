@@ -1,7 +1,7 @@
 {
-  "name": "@qinyang/ui",
+  "name": "@taimatsu/ui",
   "version": "0.1.0",
-  "description": "Add, search and update qinyang/ui registry components and themes. Works alongside the shadcn CLI.",
+  "description": "Add, search and update taimatsu/ui registry components and themes. Works alongside the shadcn CLI.",
   "keywords": [
     "shadcn",
     "registry",
@@ -21,7 +21,7 @@
   "bugs": "https://github.com/QinYangWang/ui/issues",
   "type": "module",
   "bin": {
-    "qinyang": "./dist/index.js"
+    "taimatsu": "./dist/index.js"
   },
   "files": [
     "dist",

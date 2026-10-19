@@ -46,7 +46,7 @@ export interface RegistrySource {
   headers?: Record<string, string>
 }
 
-/** Order: --registry, $QINYANG_REGISTRY, components.json registries["@qinyang"], qinyang.json, default. */
+/** Order: --registry, $TAIMATSU_REGISTRY, components.json registries["@taimatsu"], taimatsu.json, default. */
 export function resolveRegistry(opts: {
   flag?: string
   componentsJson?: { registries?: Record<string, RegistryEntry> } | null
@@ -119,7 +119,7 @@ export class Registry {
     return p
   }
 
-  /** Accepts "button", "@qinyang/button" or this registry's item URL; returns the bare name, or null for anything else. */
+  /** Accepts "button", "@taimatsu/button" or this registry's item URL; returns the bare name, or null for anything else. */
   nameOf(address: string): string | null {
     if (address.startsWith(`${NAMESPACE}/`)) return address.slice(NAMESPACE.length + 1)
     if (/^https?:\/\//.test(address)) {

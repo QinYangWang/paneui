@@ -89,7 +89,7 @@ export class Project {
     return url === templateFromBase(base)
   }
 
-  /** Adds or updates registries["@qinyang"]. Returns false when it was already set to this base. */
+  /** Adds or updates registries["@taimatsu"]. Returns false when it was already set to this base. */
   registerNamespace(base: string): boolean {
     const json = this.componentsJson()
     if (!json) throw new CliError("components.json not found")

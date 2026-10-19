@@ -4,7 +4,7 @@
   "title": "Theme: Rose accent",
   "description": "Accent preset that sets the primary colour to rose.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "@qinyang/theme"
   ],
   "cssVars": {
     "light": {

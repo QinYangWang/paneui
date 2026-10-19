@@ -11,7 +11,7 @@
     "@fontsource-variable/noto-serif-sc"
   ],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "@qinyang/theme"
   ],
   "files": [
     {

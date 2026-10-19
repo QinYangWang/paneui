@@ -2,10 +2,10 @@
 /**
  * Post-process `shadcn build` output (run as `pnpm registry:build`).
  *
- * 1. Absolute dependency URLs, so every item installs with no registry config. Items list their siblings as `@qinyang/<name>` in registryDependencies. That only
+ * 1. Absolute dependency URLs, so every item installs with no registry config. Items list their siblings as `@taimatsu/<name>` in registryDependencies. That only
  * resolves when the user has added the namespace to components.json, which breaks the
  * one-command template install (`shadcn init <url>` into a fresh app). This rewrites each
- * `@qinyang/<name>` in public/r/*.json to the absolute item URL
+ * `@taimatsu/<name>` in public/r/*.json to the absolute item URL
  * `${SITE_URL}/r/<name>.json`, which the CLI fetches directly. Users who did register
  * the namespace are unaffected (same files, fetched by URL).
  *

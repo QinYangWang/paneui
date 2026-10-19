@@ -109,9 +109,9 @@ export function CommandPill({ command, className }: { command: string; className
 
 /**
  * CLI command with pnpm / npm / yarn / bun tabs. `args` is everything after the CLI, e.g. "add @x/button".
- * `cli="qinyang"` runs the library's own CLI instead of shadcn.
+ * `cli="taimatsu"` runs the library's own CLI instead of shadcn.
  */
-export function InstallCommand({ args, cli = "shadcn", className }: { args: string; cli?: "shadcn" | "qinyang"; className?: string }) {
+export function InstallCommand({ args, cli = "shadcn", className }: { args: string; cli?: "shadcn" | "taimatsu"; className?: string }) {
   const pm = usePackageManager()
   const runner = (m: Manager) => (cli === "shadcn" ? MANAGERS[m] : `${RUNNERS[m]} ${CLI_NAME}@latest`)
   return (

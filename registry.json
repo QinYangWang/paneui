@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "qinyang",
+  "name": "taimatsu",
   "homepage": "https://qinyangwang.github.io/ui",
   "items": [
     {
@@ -540,6 +540,7 @@
         "version": "2.3"
       },
       "registryDependencies": [
+        "@taimatsu/utils",
         "@qinyang/utils"
       ]
     },
@@ -1496,7 +1497,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -1517,7 +1518,7 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -1542,13 +1543,13 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/overflow-hint",
-        "@qinyang/popover",
-        "@qinyang/scroll-area",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/overflow-hint",
+        "@taimatsu/popover",
+        "@taimatsu/scroll-area",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -1567,8 +1568,8 @@
       "description": "Generated cover images for posts and cards, drawn in theme colours.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -1604,7 +1605,7 @@
       "description": "Site share image files for the app folder.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/og-image"
+        "@taimatsu/og-image"
       ],
       "files": [
         {
@@ -1630,7 +1631,7 @@
       "description": "Per-post share image with seeded cover art.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/og-image"
+        "@taimatsu/og-image"
       ],
       "files": [
         {
@@ -1653,10 +1654,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/kbd",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/kbd",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -1675,7 +1676,7 @@
       "description": "A plain table for reference content like props and tokens.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -1697,57 +1698,57 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/otp-input",
-        "@qinyang/signup-form",
-        "@qinyang/avatar",
-        "@qinyang/button",
-        "@qinyang/button-stateful",
-        "@qinyang/checkbox",
-        "@qinyang/field",
-        "@qinyang/icon-chip",
-        "@qinyang/input",
-        "@qinyang/password-input",
-        "@qinyang/stat-card",
-        "@qinyang/theme-toggle",
-        "@qinyang/drawer",
-        "@qinyang/badge",
-        "@qinyang/accordion",
-        "@qinyang/card",
-        "@qinyang/marquee",
-        "@qinyang/number-ticker",
-        "@qinyang/segmented-control",
-        "@qinyang/shader-background",
-        "@qinyang/text-reveal",
-        "@qinyang/trend-chart",
-        "@qinyang/accent-picker",
-        "@qinyang/toast",
-        "@qinyang/tooltip",
-        "@qinyang/page-header",
-        "@qinyang/settings-section",
-        "@qinyang/data-table",
-        "@qinyang/dialog",
-        "@qinyang/menu",
-        "@qinyang/radio",
-        "@qinyang/select",
-        "@qinyang/switch",
-        "@qinyang/table",
-        "@qinyang/textarea",
-        "@qinyang/usage-meter",
-        "@qinyang/bar-list",
-        "@qinyang/date-range-picker",
-        "@qinyang/donut-chart",
-        "@qinyang/empty-state",
-        "@qinyang/command-palette",
-        "@qinyang/animated-sidebar",
-        "@qinyang/breadcrumb",
-        "@qinyang/user-menu",
-        "@qinyang/alert",
-        "@qinyang/app-shell",
-        "@qinyang/brand-icon",
-        "@qinyang/input-group",
-        "@qinyang/kbd"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/otp-input",
+        "@taimatsu/signup-form",
+        "@taimatsu/avatar",
+        "@taimatsu/button",
+        "@taimatsu/button-stateful",
+        "@taimatsu/checkbox",
+        "@taimatsu/field",
+        "@taimatsu/icon-chip",
+        "@taimatsu/input",
+        "@taimatsu/password-input",
+        "@taimatsu/stat-card",
+        "@taimatsu/theme-toggle",
+        "@taimatsu/drawer",
+        "@taimatsu/badge",
+        "@taimatsu/accordion",
+        "@taimatsu/card",
+        "@taimatsu/marquee",
+        "@taimatsu/number-ticker",
+        "@taimatsu/segmented-control",
+        "@taimatsu/shader-background",
+        "@taimatsu/text-reveal",
+        "@taimatsu/trend-chart",
+        "@taimatsu/accent-picker",
+        "@taimatsu/toast",
+        "@taimatsu/tooltip",
+        "@taimatsu/page-header",
+        "@taimatsu/settings-section",
+        "@taimatsu/data-table",
+        "@taimatsu/dialog",
+        "@taimatsu/menu",
+        "@taimatsu/radio",
+        "@taimatsu/select",
+        "@taimatsu/switch",
+        "@taimatsu/table",
+        "@taimatsu/textarea",
+        "@taimatsu/usage-meter",
+        "@taimatsu/bar-list",
+        "@taimatsu/date-range-picker",
+        "@taimatsu/donut-chart",
+        "@taimatsu/empty-state",
+        "@taimatsu/command-palette",
+        "@taimatsu/animated-sidebar",
+        "@taimatsu/breadcrumb",
+        "@taimatsu/user-menu",
+        "@taimatsu/alert",
+        "@taimatsu/app-shell",
+        "@taimatsu/brand-icon",
+        "@taimatsu/input-group",
+        "@taimatsu/kbd"
       ],
       "files": [
         {
@@ -1956,31 +1957,31 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/command-palette",
-        "@qinyang/bottom-sheet",
-        "@qinyang/breadcrumb",
-        "@qinyang/button",
-        "@qinyang/context-menu",
-        "@qinyang/dialog",
-        "@qinyang/drawer",
-        "@qinyang/file-tree",
-        "@qinyang/icon-rail",
-        "@qinyang/input",
-        "@qinyang/loader",
-        "@qinyang/menu",
-        "@qinyang/resizable",
-        "@qinyang/scroll-area",
-        "@qinyang/switch",
-        "@qinyang/tab-strip",
-        "@qinyang/terminal",
-        "@qinyang/textarea",
-        "@qinyang/theme-toggle",
-        "@qinyang/tooltip",
-        "@qinyang/badge",
-        "@qinyang/brand-icon",
-        "@qinyang/action-swap-blur"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/command-palette",
+        "@taimatsu/bottom-sheet",
+        "@taimatsu/breadcrumb",
+        "@taimatsu/button",
+        "@taimatsu/context-menu",
+        "@taimatsu/dialog",
+        "@taimatsu/drawer",
+        "@taimatsu/file-tree",
+        "@taimatsu/icon-rail",
+        "@taimatsu/input",
+        "@taimatsu/loader",
+        "@taimatsu/menu",
+        "@taimatsu/resizable",
+        "@taimatsu/scroll-area",
+        "@taimatsu/switch",
+        "@taimatsu/tab-strip",
+        "@taimatsu/terminal",
+        "@taimatsu/textarea",
+        "@taimatsu/theme-toggle",
+        "@taimatsu/tooltip",
+        "@taimatsu/badge",
+        "@taimatsu/brand-icon",
+        "@taimatsu/action-swap-blur"
       ],
       "files": [
         {
@@ -2085,47 +2086,47 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/typeset",
-        "@qinyang/icons",
-        "@qinyang/agent-composer",
-        "@qinyang/agent-code-block",
-        "@qinyang/badge",
-        "@qinyang/button",
-        "@qinyang/command-palette",
-        "@qinyang/dialog",
-        "@qinyang/edited-files-card",
-        "@qinyang/file-diff",
-        "@qinyang/file-tree",
-        "@qinyang/icon-rail",
-        "@qinyang/input",
-        "@qinyang/label",
-        "@qinyang/loader",
-        "@qinyang/menu",
-        "@qinyang/message",
-        "@qinyang/message-scroller",
-        "@qinyang/model-picker",
-        "@qinyang/resizable",
-        "@qinyang/select",
-        "@qinyang/streaming-response",
-        "@qinyang/tab-strip",
-        "@qinyang/terminal-view",
-        "@qinyang/textarea",
-        "@qinyang/theme-toggle",
-        "@qinyang/thread-list-item",
-        "@qinyang/todo-list",
-        "@qinyang/tool-approval",
-        "@qinyang/tooltip",
-        "@qinyang/work-summary",
-        "@qinyang/alert",
-        "@qinyang/bottom-sheet",
-        "@qinyang/brand-icon",
-        "@qinyang/card",
-        "@qinyang/drawer",
-        "@qinyang/scroll-area",
-        "@qinyang/settings-section",
-        "@qinyang/code-block",
-        "@qinyang/action-swap-blur"
+        "@taimatsu/theme",
+        "@taimatsu/typeset",
+        "@taimatsu/icons",
+        "@taimatsu/agent-composer",
+        "@taimatsu/agent-code-block",
+        "@taimatsu/badge",
+        "@taimatsu/button",
+        "@taimatsu/command-palette",
+        "@taimatsu/dialog",
+        "@taimatsu/edited-files-card",
+        "@taimatsu/file-diff",
+        "@taimatsu/file-tree",
+        "@taimatsu/icon-rail",
+        "@taimatsu/input",
+        "@taimatsu/label",
+        "@taimatsu/loader",
+        "@taimatsu/menu",
+        "@taimatsu/message",
+        "@taimatsu/message-scroller",
+        "@taimatsu/model-picker",
+        "@taimatsu/resizable",
+        "@taimatsu/select",
+        "@taimatsu/streaming-response",
+        "@taimatsu/tab-strip",
+        "@taimatsu/terminal-view",
+        "@taimatsu/textarea",
+        "@taimatsu/theme-toggle",
+        "@taimatsu/thread-list-item",
+        "@taimatsu/todo-list",
+        "@taimatsu/tool-approval",
+        "@taimatsu/tooltip",
+        "@taimatsu/work-summary",
+        "@taimatsu/alert",
+        "@taimatsu/bottom-sheet",
+        "@taimatsu/brand-icon",
+        "@taimatsu/card",
+        "@taimatsu/drawer",
+        "@taimatsu/scroll-area",
+        "@taimatsu/settings-section",
+        "@taimatsu/code-block",
+        "@taimatsu/action-swap-blur"
       ],
       "files": [
         {
@@ -2222,27 +2223,27 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/typeset",
-        "@qinyang/alert",
-        "@qinyang/badge",
-        "@qinyang/breadcrumb",
-        "@qinyang/button",
-        "@qinyang/card",
-        "@qinyang/code-block",
-        "@qinyang/command-palette",
-        "@qinyang/drawer",
-        "@qinyang/icon-chip",
-        "@qinyang/icons",
-        "@qinyang/kbd",
-        "@qinyang/navigation-menu",
-        "@qinyang/outline",
-        "@qinyang/page-header",
-        "@qinyang/popover",
-        "@qinyang/separator",
-        "@qinyang/sidebar-nav",
-        "@qinyang/theme-toggle",
-        "@qinyang/brand-icon"
+        "@taimatsu/theme",
+        "@taimatsu/typeset",
+        "@taimatsu/alert",
+        "@taimatsu/badge",
+        "@taimatsu/breadcrumb",
+        "@taimatsu/button",
+        "@taimatsu/card",
+        "@taimatsu/code-block",
+        "@taimatsu/command-palette",
+        "@taimatsu/drawer",
+        "@taimatsu/icon-chip",
+        "@taimatsu/icons",
+        "@taimatsu/kbd",
+        "@taimatsu/navigation-menu",
+        "@taimatsu/outline",
+        "@taimatsu/page-header",
+        "@taimatsu/popover",
+        "@taimatsu/separator",
+        "@taimatsu/sidebar-nav",
+        "@taimatsu/theme-toggle",
+        "@taimatsu/brand-icon"
       ],
       "files": [
         {
@@ -2305,19 +2306,19 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/typeset",
-        "@qinyang/badge",
-        "@qinyang/button",
-        "@qinyang/icons",
-        "@qinyang/input",
-        "@qinyang/scroll-progress",
-        "@qinyang/theme-toggle",
-        "@qinyang/toast",
-        "@qinyang/brand-icon",
-        "@qinyang/code-block",
-        "@qinyang/outline",
-        "@qinyang/cover-art"
+        "@taimatsu/theme",
+        "@taimatsu/typeset",
+        "@taimatsu/badge",
+        "@taimatsu/button",
+        "@taimatsu/icons",
+        "@taimatsu/input",
+        "@taimatsu/scroll-progress",
+        "@taimatsu/theme-toggle",
+        "@taimatsu/toast",
+        "@taimatsu/brand-icon",
+        "@taimatsu/code-block",
+        "@taimatsu/outline",
+        "@taimatsu/cover-art"
       ],
       "files": [
         {
@@ -2385,7 +2386,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2407,7 +2408,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2425,7 +2426,7 @@
       "title": "Card",
       "description": "Groups related content and actions on one surface.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2451,8 +2452,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -2470,8 +2471,8 @@
       "title": "Textarea",
       "description": "Takes multi-line text input that grows with its content.",
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -2492,7 +2493,7 @@
       "title": "iOS Zoom Lock",
       "description": "Stops iOS from zooming into small text fields on focus.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2529,8 +2530,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -2553,8 +2554,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -2576,9 +2577,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -2599,8 +2600,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -2621,9 +2622,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -2644,9 +2645,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/menu"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/menu"
       ],
       "files": [
         {
@@ -2668,9 +2669,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -2692,7 +2693,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2714,10 +2715,10 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/icon-chip",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/icon-chip",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -2738,8 +2739,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -2760,8 +2761,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -2783,10 +2784,10 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/menu",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/menu",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -2807,7 +2808,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2826,7 +2827,7 @@
       "description": "Marks text as in progress with a moving highlight.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2847,7 +2848,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2868,7 +2869,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2889,7 +2890,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2908,7 +2909,7 @@
       "description": "Scrolls content past in an endless loop.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -2930,10 +2931,10 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/control-size",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/control-size",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -2952,8 +2953,8 @@
       "description": "Shows that something is loading.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -2975,11 +2976,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/combobox",
-        "@qinyang/control-size",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/combobox",
+        "@taimatsu/control-size",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -3001,9 +3002,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button"
       ],
       "files": [
         {
@@ -3024,7 +3025,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3045,7 +3046,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3066,9 +3067,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/text-shimmer"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/text-shimmer"
       ],
       "files": [
         {
@@ -3089,7 +3090,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3111,7 +3112,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3132,7 +3133,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3153,9 +3154,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button",
-        "@qinyang/text-cascade"
+        "@taimatsu/theme",
+        "@taimatsu/button",
+        "@taimatsu/text-cascade"
       ],
       "files": [
         {
@@ -3176,8 +3177,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/action-swap-blur"
+        "@taimatsu/theme",
+        "@taimatsu/action-swap-blur"
       ],
       "files": [
         {
@@ -3198,7 +3199,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3219,8 +3220,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -3241,8 +3242,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -3264,9 +3265,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -3288,7 +3289,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3309,7 +3310,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3330,7 +3331,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3351,7 +3352,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3373,10 +3374,10 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/popover",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/popover",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -3397,8 +3398,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -3419,7 +3420,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3441,10 +3442,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/loader",
-        "@qinyang/scroll-area"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/loader",
+        "@taimatsu/scroll-area"
       ],
       "files": [
         {
@@ -3467,8 +3468,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/scroll-area"
+        "@taimatsu/theme",
+        "@taimatsu/scroll-area"
       ],
       "files": [
         {
@@ -3489,7 +3490,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3511,8 +3512,8 @@
         "lenis"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/smooth-scroll"
+        "@taimatsu/theme",
+        "@taimatsu/smooth-scroll"
       ],
       "files": [
         {
@@ -3535,9 +3536,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button",
-        "@qinyang/smooth-scroll"
+        "@taimatsu/theme",
+        "@taimatsu/button",
+        "@taimatsu/smooth-scroll"
       ],
       "files": [
         {
@@ -3559,8 +3560,8 @@
         "lenis"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/smooth-scroll"
+        "@taimatsu/theme",
+        "@taimatsu/smooth-scroll"
       ],
       "files": [
         {
@@ -3582,7 +3583,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3603,7 +3604,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -3625,9 +3626,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/tooltip"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/tooltip"
       ],
       "files": [
         {
@@ -3648,8 +3649,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -3670,8 +3671,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icon-chip"
+        "@taimatsu/theme",
+        "@taimatsu/icon-chip"
       ],
       "files": [
         {
@@ -3694,11 +3695,11 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/checkbox",
-        "@qinyang/loader",
-        "@qinyang/scroll-area"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/checkbox",
+        "@taimatsu/loader",
+        "@taimatsu/scroll-area"
       ],
       "files": [
         {
@@ -3721,10 +3722,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/table",
-        "@qinyang/menu"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/table",
+        "@taimatsu/menu"
       ],
       "files": [
         {
@@ -3747,10 +3748,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/table",
-        "@qinyang/button"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/table",
+        "@taimatsu/button"
       ],
       "files": [
         {
@@ -3772,8 +3773,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -3795,11 +3796,11 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button",
-        "@qinyang/tooltip",
-        "@qinyang/message-bubble",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/button",
+        "@taimatsu/tooltip",
+        "@taimatsu/message-bubble",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -3820,9 +3821,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -3844,12 +3845,12 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/scroll-area",
-        "@qinyang/tabs",
-        "@qinyang/file-tree",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/scroll-area",
+        "@taimatsu/tabs",
+        "@taimatsu/file-tree",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -3872,10 +3873,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/scroll-area",
-        "@qinyang/code-block"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/scroll-area",
+        "@taimatsu/code-block"
       ],
       "files": [
         {
@@ -3898,11 +3899,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/agent-code-block",
-        "@qinyang/collapsible",
-        "@qinyang/loader"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/agent-code-block",
+        "@taimatsu/collapsible",
+        "@taimatsu/loader"
       ],
       "files": [
         {
@@ -3925,11 +3926,11 @@
         "shiki"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/action-swap-roll",
-        "@qinyang/icon-chip",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/action-swap-roll",
+        "@taimatsu/icon-chip",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -3951,9 +3952,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -3974,13 +3975,13 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/typeset",
-        "@qinyang/icons",
-        "@qinyang/citations",
-        "@qinyang/tool-result",
-        "@qinyang/locale-provider",
-        "@qinyang/checkbox"
+        "@taimatsu/theme",
+        "@taimatsu/typeset",
+        "@taimatsu/icons",
+        "@taimatsu/citations",
+        "@taimatsu/tool-result",
+        "@taimatsu/locale-provider",
+        "@taimatsu/checkbox"
       ],
       "files": [
         {
@@ -4001,9 +4002,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/tool-result"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/tool-result"
       ],
       "files": [
         {
@@ -4025,12 +4026,12 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/tool-result",
-        "@qinyang/icon-chip",
-        "@qinyang/action-swap-roll"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/tool-result",
+        "@taimatsu/icon-chip",
+        "@taimatsu/action-swap-roll"
       ],
       "files": [
         {
@@ -4052,11 +4053,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/text-shimmer",
-        "@qinyang/citations",
-        "@qinyang/tool-result"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/text-shimmer",
+        "@taimatsu/citations",
+        "@taimatsu/tool-result"
       ],
       "files": [
         {
@@ -4077,10 +4078,10 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/text-shimmer",
-        "@qinyang/text-cascade",
-        "@qinyang/text-scramble"
+        "@taimatsu/theme",
+        "@taimatsu/text-shimmer",
+        "@taimatsu/text-cascade",
+        "@taimatsu/text-scramble"
       ],
       "files": [
         {
@@ -4101,8 +4102,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -4124,10 +4125,10 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/digit-swap",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/digit-swap",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -4149,9 +4150,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/tooltip"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/tooltip"
       ],
       "files": [
         {
@@ -4172,8 +4173,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
+        "@taimatsu/theme",
+        "@taimatsu/chart-utils"
       ],
       "files": [
         {
@@ -4194,8 +4195,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
+        "@taimatsu/theme",
+        "@taimatsu/chart-utils"
       ],
       "files": [
         {
@@ -4216,8 +4217,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
+        "@taimatsu/theme",
+        "@taimatsu/chart-utils"
       ],
       "files": [
         {
@@ -4238,8 +4239,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
+        "@taimatsu/theme",
+        "@taimatsu/chart-utils"
       ],
       "files": [
         {
@@ -4260,8 +4261,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
+        "@taimatsu/theme",
+        "@taimatsu/chart-utils"
       ],
       "files": [
         {
@@ -4282,8 +4283,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
+        "@taimatsu/theme",
+        "@taimatsu/chart-utils"
       ],
       "files": [
         {
@@ -4304,8 +4305,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
+        "@taimatsu/theme",
+        "@taimatsu/chart-utils"
       ],
       "files": [
         {
@@ -4326,9 +4327,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -4346,9 +4347,9 @@
       "title": "Recommendation Card",
       "description": "Shows an agent's suggestion for the user to accept or swap.",
       "registryDependencies": [
-        "@qinyang/card",
-        "@qinyang/badge",
-        "@qinyang/button"
+        "@taimatsu/card",
+        "@taimatsu/badge",
+        "@taimatsu/button"
       ],
       "files": [
         {
@@ -4370,8 +4371,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -4393,7 +4394,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -4414,9 +4415,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -4437,8 +4438,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4459,9 +4460,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/kbd"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/kbd"
       ],
       "files": [
         {
@@ -4483,9 +4484,9 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -4506,9 +4507,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -4529,8 +4530,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/button",
-        "@qinyang/icons"
+        "@taimatsu/button",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4551,7 +4552,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -4572,11 +4573,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/card",
-        "@qinyang/badge",
-        "@qinyang/button",
-        "@qinyang/icons",
-        "@qinyang/icon-chip"
+        "@taimatsu/card",
+        "@taimatsu/badge",
+        "@taimatsu/button",
+        "@taimatsu/icons",
+        "@taimatsu/icon-chip"
       ],
       "files": [
         {
@@ -4597,8 +4598,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4620,7 +4621,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -4642,9 +4643,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -4666,16 +4667,16 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/chat",
-        "@qinyang/prompt-bar",
-        "@qinyang/ai-sidebar",
-        "@qinyang/todo-list",
-        "@qinyang/reasoning-text",
-        "@qinyang/agent-progress",
-        "@qinyang/icon-chip"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/chat",
+        "@taimatsu/prompt-bar",
+        "@taimatsu/ai-sidebar",
+        "@taimatsu/todo-list",
+        "@taimatsu/reasoning-text",
+        "@taimatsu/agent-progress",
+        "@taimatsu/icon-chip"
       ],
       "files": [
         {
@@ -4696,9 +4697,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/icon-chip"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/icon-chip"
       ],
       "files": [
         {
@@ -4720,9 +4721,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button-stateful"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button-stateful"
       ],
       "files": [
         {
@@ -4744,7 +4745,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -4766,8 +4767,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4788,8 +4789,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4810,8 +4811,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4832,8 +4833,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4854,8 +4855,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4877,9 +4878,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/icon-chip"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/icon-chip"
       ],
       "files": [
         {
@@ -4900,8 +4901,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4923,8 +4924,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4945,8 +4946,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -4968,12 +4969,12 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/switch",
-        "@qinyang/select",
-        "@qinyang/menu"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/switch",
+        "@taimatsu/select",
+        "@taimatsu/menu"
       ],
       "files": [
         {
@@ -4995,12 +4996,12 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/input",
-        "@qinyang/checkbox",
-        "@qinyang/button",
-        "@qinyang/button-stateful"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/input",
+        "@taimatsu/checkbox",
+        "@taimatsu/button",
+        "@taimatsu/button-stateful"
       ],
       "files": [
         {
@@ -5022,7 +5023,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5045,13 +5046,13 @@
         "@dicebear/notionists@^9.4.3"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/avatar",
-        "@qinyang/button",
-        "@qinyang/input",
-        "@qinyang/select",
-        "@qinyang/tabs",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/avatar",
+        "@taimatsu/button",
+        "@taimatsu/input",
+        "@taimatsu/select",
+        "@taimatsu/tabs",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -5076,7 +5077,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5097,8 +5098,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/chart-utils"
+        "@taimatsu/theme",
+        "@taimatsu/chart-utils"
       ],
       "files": [
         {
@@ -5119,7 +5120,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5138,10 +5139,10 @@
       "description": "Card for a key metric and how it changed.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/badge",
-        "@qinyang/sparkline"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/badge",
+        "@taimatsu/sparkline"
       ],
       "files": [
         {
@@ -5162,7 +5163,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5181,7 +5182,7 @@
       "description": "Title, context and actions at the top of an app page.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5202,7 +5203,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5223,8 +5224,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -5242,7 +5243,7 @@
       "title": "Timeline",
       "description": "Lists entries in time order along a line.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5264,8 +5265,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -5286,11 +5287,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/input",
-        "@qinyang/control-size",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/input",
+        "@taimatsu/control-size",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -5313,7 +5314,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5334,8 +5335,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -5354,11 +5355,11 @@
       "description": "Moves through pages of results in a list or table.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/select",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/select",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -5377,9 +5378,9 @@
       "description": "Switches between workspaces or teams from the sidebar header.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/menu"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/menu"
       ],
       "files": [
         {
@@ -5398,10 +5399,10 @@
       "description": "Opens account actions for the signed-in user.",
       "dependencies": [],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/avatar",
-        "@qinyang/menu"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/avatar",
+        "@taimatsu/menu"
       ],
       "files": [
         {
@@ -5422,14 +5423,14 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/empty-state",
-        "@qinyang/input",
-        "@qinyang/menu",
-        "@qinyang/pagination",
-        "@qinyang/table"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/empty-state",
+        "@taimatsu/input",
+        "@taimatsu/menu",
+        "@taimatsu/pagination",
+        "@taimatsu/table"
       ],
       "files": [
         {
@@ -5451,7 +5452,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5473,7 +5474,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5494,7 +5495,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5515,7 +5516,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5560,16 +5561,16 @@
         "@types/mdast"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/input",
-        "@qinyang/menu",
-        "@qinyang/popover",
-        "@qinyang/tooltip",
-        "@qinyang/toolbar",
-        "@qinyang/menu-list",
-        "@qinyang/swatch-picker"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/input",
+        "@taimatsu/menu",
+        "@taimatsu/popover",
+        "@taimatsu/tooltip",
+        "@taimatsu/toolbar",
+        "@taimatsu/menu-list",
+        "@taimatsu/swatch-picker"
       ],
       "files": [
         {
@@ -5644,18 +5645,18 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/notion-editor",
-        "@qinyang/button",
-        "@qinyang/input",
-        "@qinyang/menu",
-        "@qinyang/select",
-        "@qinyang/switch",
-        "@qinyang/segmented-control",
-        "@qinyang/swatch-picker",
-        "@qinyang/toggle-group",
-        "@qinyang/toolbar"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/notion-editor",
+        "@taimatsu/button",
+        "@taimatsu/input",
+        "@taimatsu/menu",
+        "@taimatsu/select",
+        "@taimatsu/switch",
+        "@taimatsu/segmented-control",
+        "@taimatsu/swatch-picker",
+        "@taimatsu/toggle-group",
+        "@taimatsu/toolbar"
       ],
       "files": [
         {
@@ -5689,7 +5690,7 @@
       "title": "Resizable",
       "description": "Split panes the user can resize or collapse.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5710,7 +5711,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5732,12 +5733,12 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/animated-sidebar",
-        "@qinyang/drawer",
-        "@qinyang/menu",
-        "@qinyang/separator"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/animated-sidebar",
+        "@taimatsu/drawer",
+        "@taimatsu/menu",
+        "@taimatsu/separator"
       ],
       "files": [
         {
@@ -5759,9 +5760,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/overflow-hint"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/overflow-hint"
       ],
       "files": [
         {
@@ -5779,9 +5780,9 @@
       "title": "Icon Rail",
       "description": "Narrow bar of icon buttons for switching between app sections.",
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/tooltip",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/tooltip",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -5802,8 +5803,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -5821,7 +5822,7 @@
       "title": "Locale Provider",
       "description": "Sets the language of every built-in label.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5845,7 +5846,7 @@
         "ws"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5873,7 +5874,7 @@
       "title": "Terminal View",
       "description": "Shows command output and takes commands in a terminal panel.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -5891,10 +5892,10 @@
       "title": "Thread List Item",
       "description": "Lists agent or chat threads in a sidebar.",
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/loader",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/loader",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -5915,11 +5916,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/loader",
-        "@qinyang/text-shimmer",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/loader",
+        "@taimatsu/text-shimmer",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -5940,10 +5941,10 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/file-diff"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/file-diff"
       ],
       "files": [
         {
@@ -5961,12 +5962,12 @@
       "title": "Model Picker",
       "description": "Lets users choose an agent's model, effort or mode.",
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/menu",
-        "@qinyang/locale-provider",
-        "@qinyang/combobox"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/menu",
+        "@taimatsu/locale-provider",
+        "@taimatsu/combobox"
       ],
       "files": [
         {
@@ -5990,11 +5991,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/tooltip",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/tooltip",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -6015,8 +6016,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button"
+        "@taimatsu/theme",
+        "@taimatsu/button"
       ],
       "files": [
         {
@@ -6037,8 +6038,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -6056,9 +6057,9 @@
       "title": "Calendar",
       "description": "Month grid for picking a date or a range.",
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -6079,13 +6080,13 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/control-size",
-        "@qinyang/calendar",
-        "@qinyang/popover",
-        "@qinyang/select",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/control-size",
+        "@taimatsu/calendar",
+        "@taimatsu/popover",
+        "@taimatsu/select",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -6107,7 +6108,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -6125,7 +6126,7 @@
       "title": "Skeleton",
       "description": "Placeholder shape while content loads.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -6146,7 +6147,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -6167,7 +6168,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -6189,9 +6190,9 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -6212,9 +6213,9 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/control-size",
-        "@qinyang/button"
+        "@taimatsu/theme",
+        "@taimatsu/control-size",
+        "@taimatsu/button"
       ],
       "files": [
         {
@@ -6235,7 +6236,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {
@@ -6256,9 +6257,9 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/control-size"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/control-size"
       ],
       "files": [
         {
@@ -6279,8 +6280,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/menu"
+        "@taimatsu/theme",
+        "@taimatsu/menu"
       ],
       "files": [
         {
@@ -6301,8 +6302,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons"
+        "@taimatsu/theme",
+        "@taimatsu/icons"
       ],
       "files": [
         {
@@ -6320,10 +6321,10 @@
       "title": "Carousel",
       "description": "Scrolls through slides one at a time.",
       "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/icons",
-        "@qinyang/button",
-        "@qinyang/locale-provider"
+        "@taimatsu/theme",
+        "@taimatsu/icons",
+        "@taimatsu/button",
+        "@taimatsu/locale-provider"
       ],
       "files": [
         {
@@ -6344,7 +6345,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@taimatsu/theme"
       ],
       "files": [
         {

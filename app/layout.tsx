@@ -11,12 +11,12 @@ import { RouteShell } from "./route-shell"
 import "./fonts.css"
 import "./globals.css"
 
-const OG_IMAGE = { ...ogImageSize, type: "image/png", alt: "qinyang/ui: desktop-density React components" }
+const OG_IMAGE = { ...ogImageSize, type: "image/png", alt: "taimatsu/ui: desktop-density React components" }
 
 export const metadata: Metadata = {
   // share image URLs are absolute
   metadataBase: new URL(new URL(process.env.SITE_URL ?? "https://qinyangwang.github.io/ui").origin),
-  title: { default: "qinyang/ui", template: "%s · qinyang/ui" },
+  title: { default: "taimatsu/ui", template: "%s · taimatsu/ui" },
   description: "Quiet, precise React components, distributed as a shadcn registry.",
   // Metadata image URLs don't get the base path, so it is added here.
   openGraph: { images: [{ url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/og.png`, ...OG_IMAGE }] },

@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils"
  * the pick in localStorage["accent"].
  *
  * The preset roles ship inside this file (the same values as the
- * `html[data-accent]` blocks in the qinyang/ui theme), injected once as a
- * <style>, so it works in any app that installed @qinyang/theme.
+ * `html[data-accent]` blocks in the taimatsu/ui theme), injected once as a
+ * <style>, so it works in any app that installed @taimatsu/theme.
  *
  *   <AccentPicker />                              ← self-contained
  *   const [accent, setAccent] = useAccent()       ← your own control
@@ -45,7 +45,7 @@ const SWATCH: Record<Accent, string> = {
 
 const STORAGE_KEY = "accent"
 const STYLE_ID = "qy-accent-presets"
-/** Same-tab broadcast so every picker (and the qinyang/ui docs header) stays in step. */
+/** Same-tab broadcast so every picker (and the taimatsu/ui docs header) stays in step. */
 const ACCENT_CHANGE_EVENT = "qy-accent-change"
 const PRESETS_CSS = `html[data-accent="neutral"] { --primary: #000000f2; --primary-hover: #000c; --primary-active: #000000b3; --primary-foreground: #fff; --primary-subtle: #0000000f; --primary-subtle-hover: #00000017; --primary-border: #00000026; --ring: #0004; }} html[data-accent="neutral"].dark { --primary: #fffffff2; --primary-hover: #fffc; --primary-active: #ffffffb3; --primary-foreground: #000; --primary-subtle: #ffffff12; --primary-subtle-hover: #ffffff1b; --primary-border: #ffffff2c; --ring: #fff5; }} html[data-accent="green"] { --primary: #30a46c; --primary-hover: #2b9a66; --primary-active: #218358; --primary-foreground: #fff; --primary-subtle: #00a43319; --primary-subtle-hover: #00a83829; --primary-border: #00963c52; --ring: #00924ba4; }} html[data-accent="green"].dark { --primary: #30a46c; --primary-hover: #33b074; --primary-active: #3dd68c; --primary-foreground: #fff; --primary-subtle: #22ff991e; --primary-subtle-hover: #11ff992d; --primary-border: #44ffaa4b; --ring: #44ffa49e; }} html[data-accent="orange"] { --primary: #f76b15; --primary-hover: #ef5f00; --primary-active: #cc4e00; --primary-foreground: #fff; --primary-subtle: #ff9c0029; --primary-subtle-hover: #ff91014a; --primary-border: #ff81007d; --ring: #e35f00aa; }} html[data-accent="orange"].dark { --primary: #f76b15; --primary-hover: #ff801f; --primary-active: #ffa057; --primary-foreground: #fff; --primary-subtle: #fb6a0025; --primary-subtle-hover: #ff590039; --primary-border: #fd75045c; --ring: #fe6d15f7; }} html[data-accent="rose"] { --primary: #e93d82; --primary-hover: #df3478; --primary-active: #cb1d63; --primary-foreground: #fff; --primary-subtle: #ff005216; --primary-subtle-hover: #f8005123; --primary-border: #d0004b41; --ring: #b6004a6c; }} html[data-accent="rose"].dark { --primary: #e93d82; --primary-hover: #ee518a; --primary-active: #ff92ad; --primary-foreground: #fff; --primary-subtle: #fe2a8b2a; --primary-subtle-hover: #fd158741; --primary-border: #fe459763; --ring: #fe418de8; }} html[data-accent="violet"] { --primary: #6e56cf; --primary-hover: #654dc4; --primary-active: #6550b9; --primary-foreground: #fff; --primary-subtle: #4400ee0f; --primary-subtle-hover: #4300ff1b; --primary-border: #3100fb35; --ring: #2b00d066; }} html[data-accent="violet"].dark { --primary: #6e56cf; --primary-hover: #7d66d9; --primary-active: #baa7ff; --primary-foreground: #fff; --primary-subtle: #8354fe36; --primary-subtle-hover: #7d51fd50; --primary-border: #8f6cfd6d; --ring: #8668ffcc; }}`
 

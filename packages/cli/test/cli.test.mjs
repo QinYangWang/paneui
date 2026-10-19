@@ -33,16 +33,16 @@ describe("units", () => {
   })
 
   test("registry precedence: flag, env, components.json, lockfile, default", () => {
-    const cj = { registries: { "@qinyang": "https://cj.dev/r/{name}.json" } }
-    const prev = process.env.QINYANG_REGISTRY
-    process.env.QINYANG_REGISTRY = "https://env.dev/r"
+    const cj = { registries: { "@taimatsu": "https://cj.dev/r/{name}.json" } }
+    const prev = process.env.TAIMATSU_REGISTRY
+    process.env.TAIMATSU_REGISTRY = "https://env.dev/r"
     assert.equal(resolveRegistry({ flag: "https://flag.dev/r", componentsJson: cj }).base, "https://flag.dev/r")
     assert.equal(resolveRegistry({ componentsJson: cj }).from, "env")
-    delete process.env.QINYANG_REGISTRY
+    delete process.env.TAIMATSU_REGISTRY
     assert.equal(resolveRegistry({ componentsJson: cj }).base, "https://cj.dev/r")
     assert.equal(resolveRegistry({ lockRegistry: "https://lock.dev/r" }).from, "lockfile")
     assert.equal(resolveRegistry({}).base, "https://qinyangwang.github.io/ui/r")
-    if (prev !== undefined) process.env.QINYANG_REGISTRY = prev
+    if (prev !== undefined) process.env.TAIMATSU_REGISTRY = prev
   })
 
   test("search ranks name matches first and hides hidden items", () => {
@@ -104,7 +104,7 @@ describe("commands", () => {
 
   test("add delegates to shadcn by URL, then presets and icon styles, and records them", async () => {
     const cwd = project()
-    const r = await run(["add", "button", "@qinyang/card", "theme-violet", "icons-outline", "--yes", "-r", registry.base], { cwd })
+    const r = await run(["add", "button", "@taimatsu/card", "theme-violet", "icons-outline", "--yes", "-r", registry.base], { cwd })
     assert.equal(r.code, 0, r.stderr)
     assert.deepEqual(
       r.calls.map((c) => c.args),
@@ -114,18 +114,18 @@ describe("commands", () => {
         ["add", `${registry.base}/icons-outline.json`, "--yes"],
       ],
     )
-    const lock = readJson(path.join(cwd, "qinyang.json"))
+    const lock = readJson(path.join(cwd, "taimatsu.json"))
     assert.deepEqual(lock.items, ["button", "card"])
     assert.deepEqual(lock.theme, { accent: "violet" })
     assert.equal(lock.icons, "icons-outline")
     assert.equal(lock.registry, registry.base)
   })
 
-  test("add uses @qinyang/<name> when components.json registers this registry", async () => {
-    const cwd = project({ components: { registries: { "@qinyang": `${registry.base}/{name}.json` } } })
+  test("add uses @taimatsu/<name> when components.json registers this registry", async () => {
+    const cwd = project({ components: { registries: { "@taimatsu": `${registry.base}/{name}.json` } } })
     const r = await run(["add", "card", "--overwrite"], { cwd })
     assert.equal(r.code, 0, r.stderr)
-    assert.deepEqual(r.calls[0].args, ["add", "@qinyang/card", "--overwrite"])
+    assert.deepEqual(r.calls[0].args, ["add", "@taimatsu/card", "--overwrite"])
   })
 
   test("add --dry-run passes through and records nothing", async () => {
@@ -133,7 +133,7 @@ describe("commands", () => {
     const r = await run(["add", "card", "--dry-run", "-r", registry.base], { cwd })
     assert.equal(r.code, 0, r.stderr)
     assert.deepEqual(r.calls[0].args, ["add", `${registry.base}/card.json`, "--dry-run"])
-    assert.ok(!existsSync(path.join(cwd, "qinyang.json")))
+    assert.ok(!existsSync(path.join(cwd, "taimatsu.json")))
   })
 
   test("init registers the namespace for the shadcn CLI", async () => {
@@ -141,7 +141,7 @@ describe("commands", () => {
     const r = await run(["init", "--no-theme", "-r", registry.base], { cwd })
     assert.equal(r.code, 0, r.stderr)
     const cj = readJson(path.join(cwd, "components.json"))
-    assert.equal(cj.registries["@qinyang"], `${registry.base}/{name}.json`)
+    assert.equal(cj.registries["@taimatsu"], `${registry.base}/{name}.json`)
     assert.equal(cj.style, "base-nova")
     assert.equal(r.calls.length, 0)
   })
@@ -150,7 +150,7 @@ describe("commands", () => {
     const cwd = project()
     const r = await run(["init", "-r", registry.base], { cwd })
     assert.equal(r.code, 0, r.stderr)
-    assert.deepEqual(r.calls[0].args, ["add", "@qinyang/theme", "--overwrite", "--yes"])
+    assert.deepEqual(r.calls[0].args, ["add", "@taimatsu/theme", "--overwrite", "--yes"])
   })
 
   test("theme <accent> reinstalls the theme, then the presets", async () => {
@@ -164,7 +164,7 @@ describe("commands", () => {
         ["add", `${registry.base}/theme-violet.json`, `${registry.base}/theme-radius-lg.json`, "--overwrite", "--yes"],
       ],
     )
-    assert.deepEqual(readJson(path.join(cwd, "qinyang.json")).theme, { accent: "violet", radius: "lg" })
+    assert.deepEqual(readJson(path.join(cwd, "taimatsu.json")).theme, { accent: "violet", radius: "lg" })
     const bad = await run(["theme", "pink", "-r", registry.base], { cwd })
     assert.equal(bad.code, 1)
     assert.match(bad.stderr, /Choose one of: blue, violet/)
@@ -198,26 +198,26 @@ describe("commands", () => {
   })
 
   test("update --yes reinstalls recorded items in order and keeps the lockfile", async () => {
-    const cwd = project({ components: { registries: { "@qinyang": `${registry.base}/{name}.json` } } })
-    write(cwd, "qinyang.json", JSON.stringify({ items: ["card", "gone-item"], theme: { accent: "violet" } }))
+    const cwd = project({ components: { registries: { "@taimatsu": `${registry.base}/{name}.json` } } })
+    write(cwd, "taimatsu.json", JSON.stringify({ items: ["card", "gone-item"], theme: { accent: "violet" } }))
     const r = await run(["update", "--yes", "--no-detect"], { cwd })
     assert.equal(r.code, 0, r.stderr)
     assert.match(r.stderr, /No longer in the registry, skipped: gone-item/)
     assert.deepEqual(
       r.calls.map((c) => c.args),
       [
-        ["add", "@qinyang/theme", "@qinyang/card", "--overwrite", "--yes"],
-        ["add", "@qinyang/theme-violet", "--overwrite", "--yes"],
+        ["add", "@taimatsu/theme", "@taimatsu/card", "--overwrite", "--yes"],
+        ["add", "@taimatsu/theme-violet", "--overwrite", "--yes"],
       ],
     )
-    const lock = readJson(path.join(cwd, "qinyang.json"))
+    const lock = readJson(path.join(cwd, "taimatsu.json"))
     assert.deepEqual(lock.items, ["card"])
     assert.deepEqual(lock.theme, { accent: "violet" })
   })
 
   test("update --theme-only touches only the theme and presets", async () => {
     const cwd = project()
-    write(cwd, "qinyang.json", JSON.stringify({ registry: registry.base, items: ["card"], theme: { radius: "lg" }, icons: "icons-outline" }))
+    write(cwd, "taimatsu.json", JSON.stringify({ registry: registry.base, items: ["card"], theme: { radius: "lg" }, icons: "icons-outline" }))
     const r = await run(["update", "--theme-only", "--yes", "--no-detect"], { cwd })
     assert.equal(r.code, 0, r.stderr)
     assert.deepEqual(
@@ -227,7 +227,7 @@ describe("commands", () => {
         ["add", `${registry.base}/theme-radius-lg.json`, "--overwrite", "--yes"],
       ],
     )
-    const lock = readJson(path.join(cwd, "qinyang.json"))
+    const lock = readJson(path.join(cwd, "taimatsu.json"))
     assert.deepEqual(lock.items, ["card"])
     assert.equal(lock.icons, "icons-outline")
   })

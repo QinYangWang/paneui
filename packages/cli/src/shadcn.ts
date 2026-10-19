@@ -3,7 +3,7 @@ import { spawn } from "node:child_process"
 import { SHADCN_ENV } from "./meta.js"
 import { CliError, c } from "./ui.js"
 
-/** How to launch the shadcn CLI: $QINYANG_SHADCN (split on spaces) or `npx --yes shadcn@latest`. */
+/** How to launch the shadcn CLI: $TAIMATSU_SHADCN (split on spaces) or `npx --yes shadcn@latest`. */
 export function shadcnCommand(): string[] {
   const env = process.env[SHADCN_ENV]?.trim()
   if (env) return env.split(/\s+/)

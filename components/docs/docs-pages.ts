@@ -45,7 +45,7 @@ export const GUIDE_PAGES = [
   {
     href: "/docs/changelog",
     title: "Changelog",
-    description: "What changed in qinyang/ui, newest first.",
+    description: "What changed in taimatsu/ui, newest first.",
     keywords: ["releases", "updates", "history", "news"],
   },
 ] as const satisfies readonly GuidePage[]

@@ -47,14 +47,14 @@ export const ITEMS = [
     cssVars: { light: { primary: "#0090ff", "primary-subtle": "#008ff519", radius: "0.5rem" }, dark: { primary: "#0090ff" } },
     meta: { category: "Foundations", version: "2.3" },
   },
-  { name: "theme-blue", type: "registry:theme", title: "Theme: Blue", description: "Blue accent.", cssVars: { light: { primary: "#0090ff" } }, registryDependencies: ["@qinyang/theme"], meta: { category: "Foundations", hidden: true } },
-  { name: "theme-violet", type: "registry:theme", title: "Theme: Violet", description: "Violet accent.", cssVars: { light: { primary: "#6e56cf" } }, registryDependencies: ["@qinyang/theme"], meta: { category: "Foundations", hidden: true } },
+  { name: "theme-blue", type: "registry:theme", title: "Theme: Blue", description: "Blue accent.", cssVars: { light: { primary: "#0090ff" } }, registryDependencies: ["@taimatsu/theme"], meta: { category: "Foundations", hidden: true } },
+  { name: "theme-violet", type: "registry:theme", title: "Theme: Violet", description: "Violet accent.", cssVars: { light: { primary: "#6e56cf" } }, registryDependencies: ["@taimatsu/theme"], meta: { category: "Foundations", hidden: true } },
   { name: "theme-radius-default", type: "registry:theme", title: "Radius default", description: "Default radius.", cssVars: { light: { radius: "0.5rem" } }, meta: { category: "Foundations", hidden: true } },
   { name: "theme-radius-lg", type: "registry:theme", title: "Radius lg", description: "Large radius.", cssVars: { light: { radius: "0.625rem" } }, meta: { category: "Foundations", hidden: true } },
   { name: "icons", type: "registry:component", title: "Icons", description: "Icon set.", files: [{ path: "components/icons.tsx", type: "registry:component", target: "components/icons.tsx", content: "export const A = 1\nexport const B = 2\n// rounded\n" }], meta: { category: "Foundations" } },
   { name: "icons-outline", type: "registry:component", title: "Icons outline", description: "Outline icon set.", files: [{ path: "registry/base-nova/icons/outline/icons.tsx", type: "registry:component", target: "components/icons.tsx", content: "export const A = 1\nexport const B = 2\n// outline\n// thin strokes\n" }], meta: { category: "Foundations", hidden: true } },
-  { name: "button", type: "registry:ui", title: "Button", description: "Triggers an action or submits a form.", dependencies: ["class-variance-authority"], registryDependencies: ["@qinyang/theme"], files: [{ path: "registry/base-nova/ui/button.tsx", type: "registry:ui", content: button }], meta: { category: "Forms" } },
-  { name: "card", type: "registry:ui", title: "Card", description: "Groups related content on a surface.", registryDependencies: ["@qinyang/theme"], files: [{ path: "registry/base-nova/ui/card.tsx", type: "registry:ui", content: card }], meta: { category: "Display" } },
+  { name: "button", type: "registry:ui", title: "Button", description: "Triggers an action or submits a form.", dependencies: ["class-variance-authority"], registryDependencies: ["@taimatsu/theme"], files: [{ path: "registry/base-nova/ui/button.tsx", type: "registry:ui", content: button }], meta: { category: "Forms" } },
+  { name: "card", type: "registry:ui", title: "Card", description: "Groups related content on a surface.", registryDependencies: ["@taimatsu/theme"], files: [{ path: "registry/base-nova/ui/card.tsx", type: "registry:ui", content: card }], meta: { category: "Display" } },
   { name: "donut-chart", type: "registry:ui", title: "Donut Chart", description: "Shows how parts make up a whole as a ring.", files: [{ path: "registry/base-nova/ui/donut-chart.tsx", type: "registry:ui", content: "export function DonutChart() { return null }\n" }], meta: { category: "Charts" } },
   { name: "blog", type: "registry:block", title: "Blog", description: "A blog template.", files: [{ path: "registry/base-nova/templates/blog/app/blog/page.tsx", type: "registry:page", target: "app/blog/page.tsx", content: "export default function Page() {\n  return <main>Blog</main>\n}\n" }], meta: { category: "Templates" } },
 ]
@@ -81,7 +81,7 @@ export async function startRegistry() {
 
 /** A project directory with components.json, tsconfig paths and a global stylesheet. */
 export function makeProject({ components = {}, files = {} } = {}) {
-  const dir = mkdtempSync(path.join(os.tmpdir(), "qinyang-cli-"))
+  const dir = mkdtempSync(path.join(os.tmpdir(), "taimatsu-cli-"))
   const json = {
     $schema: "https://ui.shadcn.com/schema.json",
     style: "base-nova",
@@ -112,7 +112,7 @@ export function run(args, { cwd, env = {} } = {}) {
       [BIN, ...args],
       {
         cwd,
-        env: { ...process.env, NO_COLOR: "1", QINYANG_REGISTRY: "", QINYANG_SHADCN: `${process.execPath} ${FAKE_SHADCN}`, FAKE_SHADCN_CALLS: callsFile, ...env },
+        env: { ...process.env, NO_COLOR: "1", TAIMATSU_REGISTRY: "", TAIMATSU_SHADCN: `${process.execPath} ${FAKE_SHADCN}`, FAKE_SHADCN_CALLS: callsFile, ...env },
       },
       (err, stdout, stderr) => {
         let calls = []

@@ -1,8 +1,8 @@
-# qinyang/ui
+# taimatsu/ui
 
 > A shadcn registry of desktop-density components, agent interfaces and page templates.
 
-Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/<name>.json`, or add `"@qinyang": "https://qinyangwang.github.io/ui/r/{name}.json"` to `registries` in components.json and run `npx shadcn@latest add @qinyang/<name>`.
+Install any item with `npx shadcn@latest add https://qinyangwang.github.io/ui/r/<name>.json`, or add `"@taimatsu": "https://qinyangwang.github.io/ui/r/{name}.json"` to `registries` in components.json and run `npx shadcn@latest add @taimatsu/<name>`.
 
 - [Registry index](https://qinyangwang.github.io/ui/r/registry.json)
 - [Docs](https://qinyangwang.github.io/ui/docs/)
@@ -17,7 +17,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Customize](https://qinyangwang.github.io/ui/docs/colors.md): Pick an accent and a radius, and see every colour token by role.
 - [CLI & registry](https://qinyangwang.github.io/ui/docs/cli.md): Find, inspect and install registry items from the command line.
 - [Design skill](https://qinyangwang.github.io/ui/docs/skill.md): Rules and checks that keep every screen on one style.
-- [Changelog](https://qinyangwang.github.io/ui/docs/changelog.md): What changed in qinyang/ui, newest first.
+- [Changelog](https://qinyangwang.github.io/ui/docs/changelog.md): What changed in taimatsu/ui, newest first.
 
 ## Foundations
 

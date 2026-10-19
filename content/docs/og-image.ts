@@ -24,7 +24,7 @@ export default async function Image() {
   notes: [
     {
       title: "Route files",
-      body: "`npx shadcn@latest add @qinyang/og-image-route` writes `app/opengraph-image.tsx` and `app/twitter-image.tsx`; edit the `SITE` object at the top. Next.js links the image from every page under that folder and renders it at build time. `@qinyang/og-image-post-route` writes `app/blog/[slug]/opengraph-image.tsx`, which reads `params` and draws `OgCoverArt` from the slug behind the title. For several images in one route, export `generateImageMetadata` and read `id` in the image function.",
+      body: "`npx shadcn@latest add @taimatsu/og-image-route` writes `app/opengraph-image.tsx` and `app/twitter-image.tsx`; edit the `SITE` object at the top. Next.js links the image from every page under that folder and renders it at build time. `@taimatsu/og-image-post-route` writes `app/blog/[slug]/opengraph-image.tsx`, which reads `params` and draws `OgCoverArt` from the slug behind the title. For several images in one route, export `generateImageMetadata` and read `id` in the image function.",
     },
     {
       title: "Static export",

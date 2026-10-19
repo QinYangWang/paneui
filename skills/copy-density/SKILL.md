@@ -1,6 +1,6 @@
 ---
 name: copy-density
-description: Copy-density rules for the qinyang/ui site and registry. Use whenever you write or edit any user-facing text, including component cards, page ledes, example intros, notes, registry descriptions, guide pages and the changelog.
+description: Copy-density rules for the taimatsu/ui site and registry. Use whenever you write or edit any user-facing text, including component cards, page ledes, example intros, notes, registry descriptions, guide pages and the changelog.
 ---
 
 # Copy density

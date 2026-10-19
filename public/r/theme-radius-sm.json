@@ -4,7 +4,7 @@
   "title": "Theme: Small radius",
   "description": "Radius preset with tighter corners everywhere.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "@qinyang/theme"
   ],
   "cssVars": {
     "light": {

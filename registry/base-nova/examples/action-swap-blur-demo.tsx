@@ -3,7 +3,7 @@
 import { CheckIcon, CopyIcon, LinkIcon } from "@/components/icons"
 import { ActionSwapBlurButton } from "@/registry/base-nova/ui/action-swap-blur"
 
-const INSTALL = "pnpm dlx shadcn@latest add @qinyang/action-swap-blur"
+const INSTALL = "pnpm dlx shadcn@latest add @taimatsu/action-swap-blur"
 
 export default function ActionSwapBlurDemo() {
   const copy = (text: string) => navigator.clipboard?.writeText(text).catch(() => {})

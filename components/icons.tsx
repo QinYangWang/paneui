@@ -1,5 +1,5 @@
 /*
- * qinyang/ui icon set. Rounded outline icons on a 24x24 grid (the default style).
+ * taimatsu/ui icon set. Rounded outline icons on a 24x24 grid (the default style).
  *
  * Drawing rules: artwork spans about 2-22 (a full circle is r=10); every shape
  * uses `line` (stroke 1.75, round caps and joins, no fill); `dot` only for small
@@ -13,7 +13,7 @@
  *
  * Usage system (full version in notes/icon-usage.md):
  * - Nav / sidebar / palette icons: 16px, muted; active = foreground; bare.
- * - Title / header / card icons sit in an IconChip (@qinyang/icon-chip).
+ * - Title / header / card icons sit in an IconChip (@taimatsu/icon-chip).
  * - Inline icons inherit size and colour from their button, badge or text.
  * - <Name>FilledIcon: the filled glyph for the active item of a nav without a row fill (tab bar).
  * - Stroke tier: `weight="bold"` or an ancestor's `icon-bold` class thickens line strokes 1.2x
@@ -984,12 +984,11 @@ export const ClipboardListIcon = (p: IconProps) => (
   </Icon>
 );
 
-export const QinyangLogoIcon = (p: IconProps) => (
-  // Rounded square holding an uppercase Q.
+export const TaimatsuLogoIcon = (p: IconProps) => (
+  // Rounded square holding an uppercase T.
   <Icon {...p}>
     <rect {...line} x="2" y="2" width="20" height="20" rx="6" />
-    <circle {...line} cx="11.6" cy="11.5" r="4.6" />
-    <path {...line} d="M13.2 13.2l3.8 3.8" />
+    <path {...line} d="M7.5 7.75h9M12 7.75v8.75" />
   </Icon>
 );
 

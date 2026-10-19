@@ -8,7 +8,7 @@ export default function CardInsetCode() {
         <span className="text-xs text-muted-foreground">pnpm</span>
       </CardFooter>
       <CardPanel className="px-4 font-mono text-xs">
-        pnpm dlx shadcn@latest add @qinyang/card
+        pnpm dlx shadcn@latest add @taimatsu/card
       </CardPanel>
     </Card>
   )

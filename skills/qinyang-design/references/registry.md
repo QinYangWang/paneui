@@ -5,24 +5,24 @@
 Add the namespace to `components.json`, then install the theme and any item:
 
 ```json
-{ "registries": { "@qinyang": "https://qinyangwang.github.io/ui/r/{name}.json" } }
+{ "registries": { "@taimatsu": "https://qinyangwang.github.io/ui/r/{name}.json" } }
 ```
 
 ```bash
-npx shadcn@latest add @qinyang/theme
-npx shadcn@latest add @qinyang/button @qinyang/menu
-npx shadcn@latest view @qinyang/card        # inspect before installing
+npx shadcn@latest add @taimatsu/theme
+npx shadcn@latest add @taimatsu/button @taimatsu/menu
+npx shadcn@latest view @taimatsu/card        # inspect before installing
 ```
 
-Templates install whole screens (`@qinyang/saas`, `@qinyang/agent-workspace`, `@qinyang/docs`,
-`@qinyang/blog`, `@qinyang/vscode`). Components list the icon set as a dependency: when the CLI asks to
+Templates install whole screens (`@taimatsu/saas`, `@taimatsu/agent-workspace`, `@taimatsu/docs`,
+`@taimatsu/blog`, `@taimatsu/vscode`). Components list the icon set as a dependency: when the CLI asks to
 overwrite `components/icons.tsx`, answer no to keep your icon style.
 
 ## This skill
 
 ```bash
 npx skills add QinYangWang/ui --skill qinyang-design   # agent skill (rules, references, checks)
-npx shadcn@latest add @qinyang/design-skill            # same files through the shadcn CLI
+npx shadcn@latest add @taimatsu/design-skill            # same files through the shadcn CLI
 ```
 
 The registry copy lands in `.agents/skills/qinyang-design/` at the project root, also in projects with `src/`.
@@ -35,8 +35,8 @@ The CLI merges a newer theme into your stylesheet: it adds and updates variables
 After a theme update:
 
 ```bash
-npx shadcn@latest add @qinyang/theme --overwrite
-npx shadcn@latest add @qinyang/upgrade-check
+npx shadcn@latest add @taimatsu/theme --overwrite
+npx shadcn@latest add @taimatsu/upgrade-check
 node scripts/qinyang-upgrade-check.mjs          # report; exit 1 when something needs fixing
 node scripts/qinyang-upgrade-check.mjs --fix    # cleans the stylesheet, then reports only what is left
 ```
@@ -52,7 +52,7 @@ runs it when it is installed.
    variants with `cva`, `className` through `cn`.
 2. One demo per item, written as a consumer (tokens only, layout classes on components).
 3. The `registry.json` entry: `name`, `type`, `title`, a one-sentence `description` (12 words or fewer),
-   `dependencies`, `registryDependencies` (`@qinyang/theme`, `@qinyang/icons`, `@qinyang/icon-chip` …),
+   `dependencies`, `registryDependencies` (`@taimatsu/theme`, `@taimatsu/icons`, `@taimatsu/icon-chip` …),
    `files`, `meta.category`.
 4. Template parts are named for their job and never share a name with a registry item.
 5. Run the linter, the type check, this skill's check, and rebuild the registry. After changing radii or

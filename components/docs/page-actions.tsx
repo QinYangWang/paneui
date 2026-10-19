@@ -67,7 +67,7 @@ export function PageActions({ markdownPath, pagePath, title }: { markdownPath: s
   }
 
   const openChat = (base: string) => {
-    const prompt = `Read ${absolute(markdownPath)} so I can ask questions about ${title} in qinyang/ui.`
+    const prompt = `Read ${absolute(markdownPath)} so I can ask questions about ${title} in taimatsu/ui.`
     window.open(`${base}${encodeURIComponent(prompt)}`, "_blank", "noopener,noreferrer")
   }
 

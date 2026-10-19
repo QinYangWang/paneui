@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Finds what an earlier install of the qinyang/ui theme and components left behind after the
+ * Finds what an earlier install of the taimatsu/ui theme and components left behind after the
  * theme moved on, and says how to fix each finding.
  *
  *   node scripts/qinyang-upgrade-check.mjs          report only (exit code 1 when something needs fixing)
@@ -99,11 +99,11 @@ function checkCss(file, fix) {
   // The theme added the image hairline on 2026-10-17; components put media-outline on <img> and <video>.
   if (/--primary-subtle\s*:/.test(css) && !/@utility\s+media-outline\b/.test(css))
     note("warn", file, "the media-outline utility is missing, so images and video in components render without their 1px edge",
-      "Reinstall @qinyang/theme: shadcn add <registry>/r/theme.json --overwrite")
+      "Reinstall @taimatsu/theme: shadcn add <registry>/r/theme.json --overwrite")
   // The theme added the icon stroke tier on 2026-10-18; Badge, titles and headings use icon-bold.
   if (/--primary-subtle\s*:/.test(css) && !/@utility\s+icon-bold\b/.test(css))
     note("warn", file, "the icon-bold utility is missing, so icons beside semibold text keep the regular stroke",
-      "Reinstall @qinyang/theme: shadcn add <registry>/r/theme.json --overwrite")
+      "Reinstall @taimatsu/theme: shadcn add <registry>/r/theme.json --overwrite")
   if (!/--primary:\s*color\(display-p3/.test(css))
     note("info", file, "no wide-gamut values: colours render in sRGB on P3 screens", "Reinstall the theme to add them.")
 

@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 
-import { GithubIcon, MenuIcon, QinyangLogoIcon, SearchIcon } from "@/components/icons"
+import { GithubIcon, MenuIcon, TaimatsuLogoIcon, SearchIcon } from "@/components/icons"
 import { CommandPalette, type CommandPaletteItem } from "@/registry/base-nova/blocks/command-palette/command-palette"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Drawer, DrawerContent, DrawerTitle } from "@/registry/base-nova/ui/drawer"
@@ -48,8 +48,8 @@ function Brand() {
       href="/"
       className="-ms-1 flex h-8 items-center gap-2 rounded-lg ps-1 pe-2 text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
     >
-      <QinyangLogoIcon size={20} className="text-foreground" />
-      qinyang/ui
+      <TaimatsuLogoIcon size={20} className="text-foreground" />
+      taimatsu/ui
     </Link>
   )
 }
@@ -194,8 +194,8 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
         >
           <div className="flex h-14 shrink-0 items-center px-4">
             <DrawerTitle className="flex items-center gap-2 text-ui-lg font-semibold">
-              <QinyangLogoIcon size={20} />
-              qinyang/ui
+              <TaimatsuLogoIcon size={20} />
+              taimatsu/ui
             </DrawerTitle>
           </div>
           <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
