@@ -1,0 +1,40 @@
+{
+  "name": "qinyang",
+  "version": "0.1.0",
+  "description": "Add, search and update qinyang/ui registry components and themes. Works alongside the shadcn CLI.",
+  "keywords": ["shadcn", "registry", "cli", "components", "react", "tailwindcss"],
+  "license": "MIT",
+  "author": "Wang Qinyang",
+  "homepage": "https://qinyangwang.github.io/ui/docs/cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QinYangWang/ui.git",
+    "directory": "packages/cli"
+  },
+  "bugs": "https://github.com/QinYangWang/ui/issues",
+  "type": "module",
+  "bin": {
+    "qinyang": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json && chmod +x dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && node --test test/*.test.mjs",
+    "prepublishOnly": "pnpm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.9",
+    "typescript": "^5.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

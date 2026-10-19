@@ -31,6 +31,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
+      - run: pnpm cli:test
       - run: pnpm registry:build
       - run: pnpm next build
       - run: pnpm docs:md

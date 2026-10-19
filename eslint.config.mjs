@@ -353,6 +353,8 @@ const eslintConfig = [
       "next-env.d.ts",
       // The desktop example: its own install and toolchain.
       "apps/",
+      // Build output of the workspace packages.
+      "packages/*/dist/**",
       // Vendored agent skills (installed via skills-lock.json), not our code.
       ".agents/**",
       ".claude/**",

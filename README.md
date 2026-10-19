@@ -34,6 +34,19 @@ If you scaffold the app yourself with `create-next-app` and pnpm 10+, approve it
 (`pnpm approve-builds`, or `allowBuilds` in `pnpm-workspace.yaml`) or pnpm stops with
 `ERR_PNPM_IGNORED_BUILDS`; `shadcn init -d` already does this.
 
+## The qinyang CLI
+
+`packages/cli` publishes `qinyang`, which runs the shadcn CLI and remembers what you installed:
+
+```bash
+npx qinyang@latest init           # register @qinyang in components.json, install the theme
+npx qinyang@latest add button     # or: npx shadcn@latest add @qinyang/button
+npx qinyang@latest search chart
+npx qinyang@latest update         # reinstall the theme and every installed item (--dry-run first)
+```
+
+See [packages/cli/README.md](packages/cli/README.md).
+
 ## Icon style
 
 The icon set ships in two styles with the same exports, both installed to `components/icons.tsx`.
@@ -58,7 +71,11 @@ pnpm install
 pnpm lint && pnpm exec tsc --noEmit -p .
 pnpm docs:gen          # regenerate docs indexes after adding content/docs or examples
 pnpm registry:build    # shadcn build + post-process into public/r
+pnpm cli:test          # build and test packages/cli
 ```
+
+The root is a pnpm workspace: the docs site and registry at the root, publishable packages in
+`packages/`. `apps/desktop` installs on its own (`cd apps/desktop && pnpm install`).
 
 Design rules for contributors and coding agents: [AGENTS.md](AGENTS.md).
 

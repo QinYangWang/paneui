@@ -1,6 +1,6 @@
 import type { TocEntry } from "@/components/docs/doc-toc"
 import { Code, GuideH2, GuideH3, GuidePage, TextLink } from "@/components/docs/guide-page"
-import { InstallCommand } from "@/components/docs/install-command"
+import { CLI_NAME, InstallCommand } from "@/components/docs/install-command"
 import { REGISTRY_NAME, REGISTRY_URL, SITE_URL } from "@/lib/docs"
 import { DocsCode } from "@/components/docs/docs-code"
 import {
@@ -98,11 +98,19 @@ export default function CliPage() {
       ),
     },
   ]
+  const cliCommands: { usage: string; what: React.ReactNode }[] = [
+    { usage: "add <items...>", what: <>Adds items and records them in <Code>qinyang.json</Code>.</> },
+    { usage: "search [query]", what: <>Finds items by name, title, description or category. <Code>list</Code> shows them all.</> },
+    { usage: "info <item>", what: "Lists an item's dependencies and files, and where the files go." },
+    { usage: "update", what: "Reinstalls the theme and every installed item, then your accent, radius and icon style." },
+    { usage: "theme [accent]", what: <>Reinstalls the theme with an accent and <Code>--radius</Code>. <Code>--list</Code> shows the choices.</> },
+  ]
   const toc: TocEntry[] = [
     { id: "templates", title: "Templates in one command" },
     { id: "new-project", title: "New project", depth: 2 },
     { id: "existing-project", title: "Existing project", depth: 2 },
     { id: "the-registry", title: "The registry" },
+    { id: "own-cli", title: `The ${CLI_NAME} CLI` },
     { id: "add", title: "add" },
     { id: "view", title: "view" },
     { id: "search", title: "search" },
@@ -207,6 +215,41 @@ export default function CliPage() {
       </section>
 
       <section className="flex flex-col gap-4">
+        <GuideH2 id="own-cli">The {CLI_NAME} CLI</GuideH2>
+        <p className="text-muted-foreground">
+          Runs the shadcn CLI for you and records what it installs, so one command updates every item and the theme. Both
+          CLIs write the same files; use either.
+        </p>
+        <InstallCommand cli="qinyang" args="init" />
+        <p className="text-muted-foreground">
+          Registers the namespace above in <Code>components.json</Code>, running <Code>shadcn init</Code> first if there
+          is none, and installs the theme.
+        </p>
+        <SimpleTable className="min-w-xl">
+          <SimpleTableHeader>
+            <SimpleTableRow>
+              <SimpleTableHead>Command</SimpleTableHead>
+              <SimpleTableHead>What it does</SimpleTableHead>
+            </SimpleTableRow>
+          </SimpleTableHeader>
+          <SimpleTableBody>
+            {cliCommands.map((cmd) => (
+              <SimpleTableRow key={cmd.usage}>
+                <SimpleTableCell variant="code">{cmd.usage}</SimpleTableCell>
+                <SimpleTableCell>{cmd.what}</SimpleTableCell>
+              </SimpleTableRow>
+            ))}
+          </SimpleTableBody>
+        </SimpleTable>
+        <p className="text-muted-foreground">
+          <Code>update</Code> replaces files whole, so commit first and preview with <Code>--dry-run</Code>. It also finds
+          items you added with the shadcn CLI. Templates are skipped unless you pass <Code>--templates</Code>, because
+          reinstalling one replaces its routes.
+        </p>
+        <InstallCommand cli="qinyang" args="update --dry-run" />
+      </section>
+
+      <section className="flex flex-col gap-4">
         <GuideH2 id="add">add</GuideH2>
         <p className="text-muted-foreground">
           Copies one or more items into your project, along with their <Code>registryDependencies</Code> (other{" "}
@@ -251,6 +294,9 @@ export default function CliPage() {
           <TextLink href="/docs/changelog">Changelog</TextLink> for what moved.
         </p>
         <InstallCommand args={`add ${ns}/button --diff components/ui/button.tsx`} />
+        <p className="text-muted-foreground">
+          To update everything at once, run <Code>update</Code> from the <TextLink href="#own-cli">{CLI_NAME} CLI</TextLink>.
+        </p>
       </section>
 
       <section className="flex flex-col gap-4">

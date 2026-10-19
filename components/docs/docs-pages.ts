@@ -34,7 +34,7 @@ export const GUIDE_PAGES = [
     href: "/docs/cli",
     title: "CLI & registry",
     description: "Find, inspect and install registry items from the command line.",
-    keywords: ["shadcn", "cli", "add", "view", "search", "registry", "json"],
+    keywords: ["shadcn", "cli", "qinyang", "add", "view", "search", "update", "registry", "json"],
   },
   {
     href: "/docs/skill",

@@ -6,6 +6,7 @@ import { CheckIcon, CopyIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { ActionSwapBlurButton, type ActionSwapItem } from "@/registry/base-nova/ui/action-swap-blur"
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/base-nova/ui/tabs"
+import cliPackage from "@/packages/cli/package.json"
 
 const MANAGERS = {
   pnpm: "pnpm dlx shadcn@latest",
@@ -14,6 +15,15 @@ const MANAGERS = {
   bun: "bunx --bun shadcn@latest",
 } as const
 type Manager = keyof typeof MANAGERS
+
+/** The library's own CLI (packages/cli); its npm name is the one field to change when it is renamed. */
+export const CLI_NAME = cliPackage.name
+const RUNNERS = {
+  pnpm: "pnpm dlx",
+  npm: "npx",
+  yarn: "yarn dlx",
+  bun: "bunx",
+} as const satisfies Record<Manager, string>
 const PM_KEY = "package-manager"
 const isManager = (v: unknown): v is Manager => typeof v === "string" && v in MANAGERS
 
@@ -97,9 +107,13 @@ export function CommandPill({ command, className }: { command: string; className
   )
 }
 
-/** shadcn CLI command with pnpm / npm / yarn / bun tabs. `args` is everything after the CLI, e.g. "add @x/button". */
-export function InstallCommand({ args, className }: { args: string; className?: string }) {
+/**
+ * CLI command with pnpm / npm / yarn / bun tabs. `args` is everything after the CLI, e.g. "add @x/button".
+ * `cli="qinyang"` runs the library's own CLI instead of shadcn.
+ */
+export function InstallCommand({ args, cli = "shadcn", className }: { args: string; cli?: "shadcn" | "qinyang"; className?: string }) {
   const pm = usePackageManager()
+  const runner = (m: Manager) => (cli === "shadcn" ? MANAGERS[m] : `${RUNNERS[m]} ${CLI_NAME}@latest`)
   return (
     <Tabs value={pm} onValueChange={(v) => isManager(v) && setManager(v)} className={cn("gap-2.5", className)}>
       <TabsList className="p-0.5">
@@ -112,7 +126,7 @@ export function InstallCommand({ args, className }: { args: string; className?: 
       </TabsList>
       {(Object.keys(MANAGERS) as Manager[]).map((m) => (
         <TabsPanel key={m} value={m}>
-          <CommandPill command={`${MANAGERS[m]} ${args}`} />
+          <CommandPill command={`${runner(m)} ${args}`} />
         </TabsPanel>
       ))}
     </Tabs>

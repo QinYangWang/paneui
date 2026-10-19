@@ -1,3 +1,9 @@
+# The docs site and registry live at the root; publishable packages in packages/.
+# apps/desktop is deliberately not a member: it has its own pnpm-workspace.yaml and lockfile, so
+# installing here never downloads Electron or compiles node-pty (CI only builds the site).
+packages:
+  - "packages/*"
+
 allowBuilds:
   "@tailwindcss/oxide": true
   sharp: true
