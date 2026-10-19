@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shared helpers for building and styling your own charts.", "zh": "为图表提供通用工具。"},
   usage: {
     imports: `import { chartColor, ChartLegend, ChartLegendItem } from "@/components/ui/chart-utils"`,
     code: `<ChartLegend>
@@ -10,23 +11,19 @@ export default {
   examples: [
     {
       id: "number",
-      title: "Chart Number",
-      description: "Use `ChartNumber` for headline values that change with the selection.",
+      title: { en: "Chart Number", zh: "图表数值" },
     },
     {
       id: "tooltip",
-      title: "Tooltip",
-      description: "Use `ChartTooltip` when you build your own chart from the scales and the size hook.",
+      title: { en: "Tooltip", zh: "提示" },
     },
     {
       id: "legend",
-      title: "Legend",
-      description: "Use `inactive` for series toggled off and `highlighted` for the hovered one.",
+      title: { en: "Legend", zh: "图例" },
     },
     {
       id: "scales",
-      title: "Scales and Ticks",
-      description: "Use `niceDomain` before `scale.ticks()` so axes land on round numbers.",
+      title: { en: "Scales and Ticks", zh: "刻度" },
     },
   ],
   notes: [

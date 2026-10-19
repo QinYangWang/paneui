@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Refreshes a scrolling list when the user pulls it down.", "zh": "下拉刷新列表。"},
   usage: {
     imports: `import { PullToRefresh } from "@/components/ui/pull-to-refresh"`,
     code: `<PullToRefresh onRefresh={() => fetchInbox()} className="h-80">
@@ -10,22 +11,22 @@ export default {
   examples: [
     {
       id: "custom-labels",
-      title: "Labels and Distances",
-      description: "Use to match your app's wording or change how far the pull must go.",
+      title: { en: "Labels and Distances", zh: "标签与距离" },
+      description: { en: "Use to match your app's wording or change how far the pull must go.", zh: "适用于需要调整文案或触发距离的场景。" },
     },
     {
       id: "external-refreshing",
-      title: "External Refreshing",
-      description: "Use when a refresh can also start elsewhere, like a Sync button, and should hold the spinner open.",
+      title: { en: "External Refreshing", zh: "外部刷新" },
+      description: { en: "Use when a refresh can also start elsewhere, like a Sync button, and should hold the spinner open.", zh: "适用于刷新也能由其他控件触发的场景。" },
     },
     {
       id: "status-change",
-      title: "Status Changes",
-      description: "Use to drive your own indicator from the gesture.",
+      title: { en: "Status Changes", zh: "状态变化" },
+      description: { en: "Use to drive your own indicator from the gesture.", zh: "适用于根据手势驱动自定义指示器。" },
     },
     {
       id: "disabled",
-      title: "Disabled",
+      title: { en: "Disabled", zh: "禁用" },
     },
   ],
   notes: [

@@ -3,6 +3,7 @@ import type { ComponentDoc } from "@/lib/doc-types"
 const BASE = "https://base-ui.com/react/components/popover"
 
 export default {
+  summary: {"en": "Popover that grows out of its trigger and folds back.", "zh": "从触发控件展开浮层。"},
   baseUi: { name: "Popover", href: BASE },
   usage: {
     imports: `import { MorphPopover, MorphPopoverContent, MorphPopoverTitle, MorphPopoverTrigger } from "@/components/ui/popover-morph"`,
@@ -25,13 +26,12 @@ export default {
   examples: [
     {
       id: "placement",
-      title: "Placement",
-      description: "Use `side=\"top\"` when the trigger sits near the bottom of the screen.",
+      title: { en: "Placement", zh: "位置" },
     },
     {
       id: "form",
-      title: "Controlled Form",
-      description: "Use when the panel should close after a submit.",
+      title: { en: "Controlled Form", zh: "受控表单" },
+      description: { en: "Use when the panel should close after a submit.", zh: "适用于提交后需要关闭的面板。" },
     },
   ],
   notes: [

@@ -1,5 +1,5 @@
 /*
- * taimatsu/ui icon set. Rounded outline icons on a 24x24 grid (the default style).
+ * paneui icon set. Rounded outline icons on a 24x24 grid (the default style).
  *
  * Drawing rules: artwork spans about 2-22 (a full circle is r=10); every shape
  * uses `line` (stroke 1.75, round caps and joins, no fill); `dot` only for small
@@ -13,7 +13,7 @@
  *
  * Usage system (full version in notes/icon-usage.md):
  * - Nav / sidebar / palette icons: 16px, muted; active = foreground; bare.
- * - Title / header / card icons sit in an IconChip (@taimatsu/icon-chip).
+ * - Title / header / card icons sit in an IconChip (@paneui/icon-chip).
  * - Inline icons inherit size and colour from their button, badge or text.
  * - <Name>FilledIcon: the filled glyph for the active item of a nav without a row fill (tab bar).
  * - Stroke tier: `weight="bold"` or an ancestor's `icon-bold` class thickens line strokes 1.2x
@@ -984,11 +984,11 @@ export const ClipboardListIcon = (p: IconProps) => (
   </Icon>
 );
 
-export const TaimatsuLogoIcon = (p: IconProps) => (
-  // Rounded square holding an uppercase T.
+export const PaneuiLogoIcon = (p: IconProps) => (
+  // Four panes in a rounded window frame.
   <Icon {...p}>
     <rect {...line} x="2" y="2" width="20" height="20" rx="6" />
-    <path {...line} d="M7.5 7.75h9M12 7.75v8.75" />
+    <path {...line} d="M2 12h20M12 2v20" />
   </Icon>
 );
 

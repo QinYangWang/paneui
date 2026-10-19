@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows code highlighted at build time, alone or in tabs.", "zh": "显示高亮代码。"},
   usage: {
     imports: `import { CodeBlock, CodeGroup } from "@/components/ui/code-block"`,
     code: `// html: a <pre> highlighted at build time with a light and a dark theme
@@ -16,27 +17,25 @@ export default {
   examples: [
     {
       id: "code-group",
-      title: "Code Group",
-      description: "Use a group when the same step has several files or variants.",
+      title: { en: "Code Group", zh: "代码组" },
+      description: { en: "Use a group when the same step has several files or variants.", zh: "适用于同一步骤涉及多个文件的场景。" },
     },
     {
       id: "remember-tab",
-      title: "Remember the Tab",
-      description: "Give groups one `storageKey` when readers pick a variant once for the whole site.",
+      title: { en: "Remember the Tab", zh: "记住标签页" },
     },
     {
       id: "highlighted-lines",
-      title: "Highlighted Lines",
+      title: { en: "Highlighted Lines", zh: "高亮行" },
     },
     {
       id: "without-title",
-      title: "Without Title",
-      description: "Use a bare block for short commands; the copy button shows on hover.",
+      title: { en: "Without Title", zh: "无标题" },
+      description: { en: "Use a bare block for short commands; the copy button shows on hover.", zh: "适用于短命令。" },
     },
     {
       id: "children",
-      title: "Markup as Children",
-      description: "Pass elements instead of `html` when a custom `pre` in your content pipeline already renders them.",
+      title: { en: "Markup as Children", zh: "使用子元素" },
     },
   ],
   notes: [

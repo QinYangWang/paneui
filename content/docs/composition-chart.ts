@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Charts how each part's share of a whole changes over time.", "zh": "展示各部分占比随时间的变化。"},
   usage: {
     imports: `import { CompositionChart } from "@/components/ui/composition-chart"`,
     code: `<CompositionChart
@@ -18,18 +19,15 @@ export default {
   examples: [
     {
       id: "area",
-      title: "Area",
-      description: "Use `mode=\"area\"` for many periods, where the trend matters more than any single one.",
+      title: { en: "Area", zh: "面积图" },
     },
     {
       id: "default-hidden",
-      title: "Default Hidden",
-      description: "Use `defaultHidden` to start minor series switched off.",
+      title: { en: "Default Hidden", zh: "默认隐藏" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `hidden` with `onHiddenChange` to reset series from outside, like a Show all button.",
+      title: { en: "Controlled", zh: "受控" },
     },
   ],
   notes: [

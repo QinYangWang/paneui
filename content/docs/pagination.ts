@@ -1,17 +1,17 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Moves through pages of results in a list or table.", "zh": "切换列表或表格的页码。"},
   usage: {
     imports: `import { Pagination, PaginationPageSize, PaginationSummary } from "@/components/ui/pagination"`,
     code: `<Pagination page={page} pageCount={12} onPageChange={setPage} />`,
   },
   examples: [
-    { id: "sizes", title: "Sizes", description: "Use `sm` under dense tables and `lg` on touch screens." },
-    { id: "compact", title: "Compact", description: "Use on phones and narrow panels." },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" },  },
+    { id: "compact", title: { en: "Compact", zh: "紧凑" }, description: { en: "Use on phones and narrow panels.", zh: "适用于手机或窄面板。" } },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [{ title: "Accessibility", body: "A `nav` labelled Pagination; the current page button has `aria-current=\"page\"`, prev / next are disabled at the ends. `getPageRange` is exported if you build your own." }],

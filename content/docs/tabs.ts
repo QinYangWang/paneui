@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Switches between related panels of content in one place.", "zh": "在相关内容面板间切换。"},
   baseUi: {
     name: "Tabs",
     href: "https://base-ui.com/react/components/tabs",
@@ -23,34 +24,31 @@ export default {
   examples: [
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when the URL or other UI decides which tab is open.",
+      title: { en: "Controlled", zh: "受控" },
+      description: { en: "Use when the URL or other UI decides which tab is open.", zh: "适用于标签页由网址或其他控件决定的场景。" },
     },
     {
       id: "disabled",
-      title: "Disabled",
+      title: { en: "Disabled", zh: "禁用" },
     },
     {
       id: "full-width",
-      title: "Full Width",
-      description: "Use as a segmented control, with `w-full` on `TabsList` and `flex-1` on each `TabsTab`.",
+      title: { en: "Full Width", zh: "全宽" },
     },
     {
       id: "vertical",
-      title: "Vertical",
-      description: "Use for settings pages with many sections.",
+      title: { en: "Vertical", zh: "纵向" },
+      description: { en: "Use for settings pages with many sections.", zh: "适用于包含多个分区的设置页。" },
     },
     {
       id: "icon-only",
-      title: "Icon Only",
-      description: "Use in tight toolbars, giving each icon-only tab an `aria-label`.",
+      title: { en: "Icon Only", zh: "仅图标" },
     },
-    { id: "sizes", title: "Sizes", description: "Match the toolbar the tabs sit in." },
-    { id: "underline", title: "Underline", description: "Use for page-level sections, where a filled track would compete with the content." },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" }, description: { en: "Match the toolbar the tabs sit in.", zh: "与所在工具栏的样式保持一致。" } },
+    { id: "underline", title: { en: "Underline", zh: "下划线" }, description: { en: "Use for page-level sections, where a filled track would compete with the content.", zh: "适用于页面级分区。" } },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

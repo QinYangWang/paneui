@@ -1,11 +1,12 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Ranks items by a single measure.", "zh": "按数值排列并比较项目。"},
   usage: {
     imports: `import { BarList } from "@/components/ui/bar-list"`,
     code: `<BarList items={[{ name: "/pricing", value: 18420 }, { name: "/", value: 15210 }]} labels={["Page", "Visitors"]} />`,
   },
-  examples: [{ id: "colors", title: "Colour and Icons", description: "Use `icon` and `href` when each row leads to its own detail page." }],
+  examples: [{ id: "colors", title: { en: "Colour and Icons", zh: "颜色与图标" },  }],
   notes: [{ title: "When to use", body: "Use it for a ranked breakdown of one measure, such as top pages or referrers. It sorts largest first unless `sort=\"none\"`, and under reduced motion the bars appear without growing." }],
   api: [
     {

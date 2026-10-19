@@ -3,6 +3,7 @@ import type { ComponentDoc } from "@/lib/doc-types"
 const ITEM_TYPE = "`{ value: string; label: ReactNode; icon?: ReactNode; ariaLabel?: string }`"
 
 export default {
+  summary: {"en": "Blurs between button states.", "zh": "通过模糊过渡切换按钮状态。"},
   usage: {
     imports: `import { ActionSwapBlurButton } from "@/components/ui/action-swap-blur"`,
     code: `<ActionSwapBlurButton
@@ -16,28 +17,25 @@ export default {
   examples: [
     {
       id: "cycle",
-      title: "Cycle",
-      description: "Use when one button steps through several states in turn.",
+      title: { en: "Cycle", zh: "循环" },
+      description: { en: "Use when one button steps through several states in turn.", zh: "适用于一个按钮依次切换多个状态的场景。" },
     },
     {
       id: "text-only",
-      title: "Text Only",
-      description: "Use when the states need words but no icon.",
+      title: { en: "Text Only", zh: "仅文字" },
+      description: { en: "Use when the states need words but no icon.", zh: "适用于只需文字说明的状态。" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `cycle={false}` when an async task, like an upload, decides the state.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "custom-slots",
-      title: "Custom Slots",
-      description: "Use the slots when the button needs your own layout; a new `value` triggers the swap.",
+      title: { en: "Custom Slots", zh: "自定义插槽" },
     },
     {
       id: "animations",
-      title: "Animations",
-      description: "Use `ActionSwapButton` when you pick the animation per button.",
+      title: { en: "Animations", zh: "动画" },
     },
   ],
   notes: [

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Names a form control.", "zh": "为表单控件命名。"},
   usage: {
     imports: `import { Label } from "@/components/ui/label"`,
     code: `<Label htmlFor="email">Email</Label>`,
@@ -8,19 +9,15 @@ export default {
   examples: [
     {
       id: "with-input",
-      title: "With Input",
-      description: "Point `htmlFor` at the field's `id` when the label sits apart from the control.",
+      title: { en: "With Input", zh: "带输入框" },
     },
     {
       id: "with-checkbox",
-      title: "With Checkbox",
-      description: "Wrap a control when the whole row should be clickable, with `font-normal` for option labels.",
+      title: { en: "With Checkbox", zh: "带复选框" },
     },
     {
       id: "disabled",
-      title: "Disabled",
-      description:
-        "For a field row, mark a `group` parent with `data-disabled=\"true\"` so the label dims with its control.",
+      title: { en: "Disabled", zh: "禁用" },
     },
   ],
   notes: [

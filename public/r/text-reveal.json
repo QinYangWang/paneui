@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-reveal",
   "title": "Text Reveal",
-  "description": "Reveals a headline word by word on load or scroll.",
+  "description": "Reveals a headline in sequence.",
   "dependencies": [
     "motion"
   ],

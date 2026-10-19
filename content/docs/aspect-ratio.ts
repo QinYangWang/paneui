@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Keeps content at a set ratio and animates ratio changes.", "zh": "保持内容的宽高比。"},
   usage: {
     imports: `import { AspectRatio } from "@/components/ui/aspect-ratio"`,
     code: `<AspectRatio ratio={16 / 9}>
@@ -12,23 +13,19 @@ export default {
   examples: [
     {
       id: "ratios",
-      title: "Ratios",
-      description: "Use `contentClassName` to style the content layer, such as centring a label.",
+      title: { en: "Ratios", zh: "宽高比" },
     },
     {
       id: "with-image",
-      title: "With Image",
-      description: "Use `AspectRatioImage` for photos so the crop scales cleanly when the ratio changes.",
+      title: { en: "With Image", zh: "带图片" },
     },
     {
       id: "radius",
-      title: "Radius",
-      description: "Use `radius` instead of a `rounded-*` class so corners stay true mid-animation.",
+      title: { en: "Radius", zh: "圆角" },
     },
     {
       id: "not-animated",
-      title: "Without Animation",
-      description: "Use `animated={false}` when ratio changes shouldn't draw attention.",
+      title: { en: "Without Animation", zh: "无动画" },
     },
   ],
   notes: [

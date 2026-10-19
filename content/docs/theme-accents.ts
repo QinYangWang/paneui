@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Switches the accent colour at runtime with one attribute.", "zh": "在运行时切换主题色。"},
   usage: {
     imports: `/* your Tailwind CSS file, after the theme */
 @import "./theme-accents.css";`,
@@ -9,8 +10,8 @@ export default {
   examples: [
     {
       id: "switch",
-      title: "Switch at Runtime",
-      description: "Use the attribute on a section when one part of a page needs its own accent.",
+      title: { en: "Switch at Runtime", zh: "运行时切换" },
+      description: { en: "Use the attribute on a section when one part of a page needs its own accent.", zh: "适用于局部区域需要独立主题色的场景。" },
     },
   ],
   notes: [

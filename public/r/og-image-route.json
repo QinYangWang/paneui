@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "og-image-route",
   "title": "OG Image Route",
-  "description": "Site share image files for the app folder.",
+  "description": "Adds a site share image route.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/og-image.json"

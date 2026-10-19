@@ -3,6 +3,7 @@ import type { ComponentDoc } from "@/lib/doc-types"
 const BASE = "https://base-ui.com/react/components/combobox"
 
 export default {
+  summary: {"en": "Searchable picker for choosing several options at once.", "zh": "搜索并选择多个选项。"},
   baseUi: { name: "Combobox", href: BASE },
   usage: {
     imports: `import { MultiSelect, MultiSelectContent, MultiSelectEmpty, MultiSelectItem, MultiSelectList, MultiSelectTrigger } from "@/components/ui/multi-select"`,
@@ -34,20 +35,19 @@ export default {
   examples: [
     {
       id: "groups",
-      title: "Groups",
-      description: "Use when the options fall into categories.",
+      title: { en: "Groups", zh: "分组" },
+      description: { en: "Use when the options fall into categories.", zh: "适用于按类别组织的选项。" },
     },
     {
       id: "objects",
-      title: "Object Values",
-      description: "Use when items are objects, with `itemToStringLabel`, `renderChip` and `getKey` turning them into text and keys.",
+      title: { en: "Object Values", zh: "对象值" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when other UI sets or reads the selection.",
+      title: { en: "Controlled", zh: "受控" },
+      description: { en: "Use when other UI sets or reads the selection.", zh: "适用于选择值与其他界面联动的场景。" },
     },
-    { id: "sizes", title: "Sizes" },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" } },
   ],
   notes: [
     {

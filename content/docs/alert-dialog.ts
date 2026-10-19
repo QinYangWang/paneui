@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Interrupts to confirm a destructive or important action.", "zh": "在重要操作前请求确认。"},
   "baseUi": {
     "name": "Alert Dialog",
     "href": "https://base-ui.com/react/components/alert-dialog"
@@ -13,8 +14,7 @@ export default {
   "examples": [
     {
       "id": "small",
-      "title": "Small",
-      "description": "Use `size=\"sm\"` for a short question with an icon and two equal buttons."
+      "title": {"en":"Small","zh":"小尺寸"},
     }
   ],
   "notes": [

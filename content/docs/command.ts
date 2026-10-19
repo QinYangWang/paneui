@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Searchable list of actions, inline or in a dialog.", "zh": "搜索并选择操作。"},
   "usage": {
     "imports": "import {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n  CommandShortcut,\n} from \"@/components/ui/command\"",
     "code": "<Command>\n  <CommandInput placeholder=\"Type a command…\" />\n  <CommandList>\n    <CommandEmpty>No results.</CommandEmpty>\n    <CommandGroup heading=\"Files\">\n      <CommandItem onSelect={() => createFile()}>\n        New file\n        <CommandShortcut>⌘N</CommandShortcut>\n      </CommandItem>\n    </CommandGroup>\n  </CommandList>\n</Command>"
@@ -9,8 +10,8 @@ export default {
   "examples": [
     {
       "id": "dialog",
-      "title": "Dialog",
-      "description": "Use `CommandDialog` for an app-wide palette bound to a shortcut."
+      "title": {"en":"Dialog","zh":"对话框"},
+      "description": {"en":"Use for an app-wide palette opened with a shortcut.","zh":"适用于通过快捷键打开的全局命令面板。"}
     }
   ],
   "notes": [

@@ -1,3 +1,5 @@
+import { LocalizedText } from "@/components/docs/localized"
+
 import { DocHeading } from "@/components/docs/doc-heading"
 import { Code, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
@@ -12,7 +14,7 @@ function Step({ n, id, title, children }: { n: number; id: string; title: string
     <section className="flex flex-col gap-3">
       <DocHeading id={id} className="flex items-center gap-3 text-lg tracking-normal">
         <span data-md-skip className="grid size-7 shrink-0 place-items-center rounded-full bg-card text-ui tabular-nums shadow-raised">{n}</span>
-        {title}
+        <LocalizedText text={title} />
       </DocHeading>
       <div className="flex flex-col gap-3 sm:pl-10">{children}</div>
     </section>
@@ -38,12 +40,12 @@ export default function Installation() {
     <GuidePage
       href="/docs/installation"
       toc={toc}
-      lede="Add the registry namespace once, then install any item with the shadcn CLI."
+      lede={{ en: "Install the theme, then add components.", zh: "安装主题，再添加组件。" }}
     >
       <Alert variant="info" id="requirements" className="scroll-mt-20">
         <AlertIcon />
         <AlertContent>
-          <AlertTitle>Requirements</AlertTitle>
+          <AlertTitle><LocalizedText text="Requirements" /></AlertTitle>
           <AlertDescription>
             A React project with Tailwind CSS 4 and shadcn initialised with the base-nova style. Run <Code>shadcn init</Code>{" "}
             first if you have no components.json yet. To start a new app from a template, see{" "}

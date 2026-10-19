@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows image generation progress and results.", "zh": "展示图片生成进度与结果。"},
   usage: {
     imports: `import { ImageGeneration } from "@/components/ui/image-generation"`,
     code: `<ImageGeneration status="generating" progress={0.4} prompt="A lighthouse at dusk">
@@ -10,23 +11,19 @@ export default {
   examples: [
     {
       id: "statuses",
-      title: "Statuses",
-      description: "Set `status` from your generation job, with `queuePosition` while it waits.",
+      title: { en: "Statuses", zh: "状态" },
     },
     {
       id: "progress",
-      title: "Controlled Progress",
-      description: "Pass `progress` when your backend reports it; without it, each status uses a default.",
+      title: { en: "Controlled Progress", zh: "受控进度" },
     },
     {
       id: "aspect-ratio",
-      title: "Aspect Ratio",
-      description: "Set `aspectRatio` to the image ratio so nothing shifts when the image lands.",
+      title: { en: "Aspect Ratio", zh: "宽高比" },
     },
     {
       id: "error-retry",
-      title: "Error and Retry",
-      description: "Pass `onRetry` when a failed or finished image can be generated again, and `onDownload` to offer a download.",
+      title: { en: "Error and Retry", zh: "错误与重试" },
     },
   ],
   notes: [

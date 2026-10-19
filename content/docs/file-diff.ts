@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows one file's changes as a diff, even while streaming.", "zh": "显示文件修改差异。"},
   baseUi: {
     name: "Collapsible",
     href: "https://base-ui.com/react/components/collapsible",
@@ -12,38 +13,31 @@ export default {
   examples: [
     {
       id: "split",
-      title: "Split View",
-      description: "Use `defaultDiffStyle=\"split\"` on wide layouts, and add `diffStyleToggle` to let the reader switch.",
+      title: { en: "Split View", zh: "分栏视图" },
     },
     {
       id: "two-files",
-      title: "Two Files",
-      description: "Pass `oldFile` and `newFile` when you have both versions instead of a patch, so unchanged stretches can fold away.",
+      title: { en: "Two Files", zh: "两个文件" },
     },
     {
       id: "accept-reject",
-      title: "Accept or Reject Changes",
-      description: "Use `lineAnnotations` and `renderAnnotation` for review controls under each change, and `diffAcceptRejectHunk` to apply the choice to a `fileDiff` in state.",
+      title: { en: "Accept or Reject Changes", zh: "接受或拒绝修改" },
     },
     {
       id: "collapse-on-complete",
-      title: "Collapse on Complete",
-      description: "Set `collapseOnComplete` when finished diffs should fold away once the agent stops streaming.",
+      title: { en: "Collapse on Complete", zh: "完成后收起" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Control `open` and `onOpenChange` when other UI opens the diff, e.g. an expand-all button.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "plain",
-      title: "Without Line Numbers or Copy",
-      description: "Turn off `showLineNumbers` and `copyable` for compact read-only views.",
+      title: { en: "Without Line Numbers or Copy", zh: "无行号或复制" },
     },
     {
       id: "pre-parsed",
-      title: "Pre-parsed Lines",
-      description: "Pass `lines` when you build rows yourself, and set `language` when the filename has no extension.",
+      title: { en: "Pre-parsed Lines", zh: "预解析行" },
     },
   ],
   notes: [

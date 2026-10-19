@@ -1,6 +1,6 @@
 # Icons and brand marks
 
-All glyphs come from the house set (`@taimatsu/icons`, installed as `components/icons.tsx`), never another
+All glyphs come from the house set (`@paneui/icons`, installed as `components/icons.tsx`), never another
 icon package or an ad-hoc SVG. Drawing new glyphs is the `puffy-icons` skill
 (`npx skills add QinYangWang/ui --skill puffy-icons`); it covers the grids, primitives and preview script
 for every style.
@@ -54,7 +54,7 @@ direction take `rtl:-scale-x-100` (`polish.md` › Icons).
 ## Brand marks
 
 Other products' logos (sign-in providers, integrations, agents, languages) use
-`<BrandIcon icon={siGithub} />` from `@taimatsu/brand-icon`, with one named import per logo (never
+`<BrandIcon icon={siGithub} />` from `@paneui/brand-icon`, with one named import per logo (never
 `import *` or a lookup by slug). `color="brand"` where the logo is the content (a list of apps), the
 default `current` in toolbars and nav. AI vendors the package leaves out (OpenAI, xAI) come from
 `@/lib/brand-marks` (`markOpenai`, `markXai`), the vendor's published mark in the same shape; any other

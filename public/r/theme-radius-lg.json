@@ -4,7 +4,7 @@
   "title": "Theme: Large radius",
   "description": "Radius preset with rounder corners everywhere.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "@paneui/theme"
   ],
   "cssVars": {
     "light": {

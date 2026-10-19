@@ -1,51 +1,53 @@
+import type { Localized } from "@/lib/site-locale"
+
 /**
  * The docs' "Getting started" pages, in sidebar order. Shared by the sidebar,
  * the ⌘K palette, breadcrumbs and the guide pages' prev/next links, so the
  * names stay identical everywhere. Client-safe (no server-only imports).
  */
-export type GuidePage = { href: string; title: string; description: string; keywords: string[] }
+export type GuidePage = { href: string; title: string; description: Localized; keywords: string[] }
 
 export const GUIDE_PAGES = [
   {
     href: "/docs",
     title: "Introduction",
-    description: "React components you install as source with the shadcn CLI.",
+    description: { en: "React components you own and edit.", zh: "将组件源码加入你的项目。" },
     keywords: ["about", "overview", "start", "principles"],
   },
   {
     href: "/docs/installation",
     title: "Installation",
-    description: "Register the namespace, install the theme, then add components.",
+    description: { en: "Install the theme, then add components.", zh: "安装主题，再添加组件。" },
     keywords: ["setup", "install", "components.json", "registry"],
   },
   {
     href: "/docs/theming",
     title: "Theming",
-    description: "How the theme tokens work and how to change them.",
+    description: { en: "Change the theme tokens.", zh: "了解并调整主题变量。" },
     keywords: ["theme", "tokens", "dark mode", "accent", "colors", "css variables", "radius", "shadow", "typography"],
   },
   {
     href: "/docs/colors",
     title: "Customize",
-    description: "Pick an accent and a radius, and see every colour token by role.",
+    description: { en: "Choose an accent and corner radius.", zh: "选择主题色与圆角。" },
     keywords: ["customize", "radius", "corners", "rounded", "color", "colour", "tokens", "palette", "accent", "primary", "custom accent", "oklch", "dark mode", "css variables"],
   },
   {
     href: "/docs/cli",
     title: "CLI & registry",
-    description: "Find, inspect and install registry items from the command line.",
+    description: { en: "Find, inspect and install components from the command line.", zh: "在命令行查找、查看和安装组件。" },
     keywords: ["shadcn", "cli", "qinyang", "add", "view", "search", "update", "registry", "json"],
   },
   {
     href: "/docs/skill",
     title: "Design skill",
-    description: "Rules and checks that keep every screen on one style.",
+    description: { en: "Design rules and checks for consistent interfaces.", zh: "让界面遵循统一设计规则。" },
     keywords: ["design", "skill", "agent", "rules", "guidelines", "lint", "check", "review", "best practices"],
   },
   {
     href: "/docs/changelog",
     title: "Changelog",
-    description: "What changed in taimatsu/ui, newest first.",
+    description: { en: "Updates to paneui.", zh: "查看 paneui 的更新。" },
     keywords: ["releases", "updates", "history", "news"],
   },
 ] as const satisfies readonly GuidePage[]

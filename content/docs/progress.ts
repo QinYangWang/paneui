@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows how far a task has come.", "zh": "显示任务完成进度。"},
   "baseUi": {
     "name": "Progress",
     "href": "https://base-ui.com/react/components/progress"
@@ -12,13 +13,12 @@ export default {
   "examples": [
     {
       "id": "tones",
-      "title": "Tones",
-      "description": "Use a tone when the bar reports a limit, such as storage or quota."
+      "title": {"en":"Tones","zh":"色调"},
+      "description": {"en":"Use when a bar reports a storage or quota limit.","zh":"适用于提示存储或配额上限的进度条。"}
     },
     {
       "id": "rtl",
-      "title": "RTL",
-      "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root."
+      "title": {"en":"RTL","zh":"从右到左"},
     }
   ],
   "notes": [

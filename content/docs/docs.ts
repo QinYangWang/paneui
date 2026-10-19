@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Documentation site layout with search, navigation and a page outline.", "zh": "为文档站点提供导航和搜索。"},
   usage: {
     imports: `// One command, into a new app:
 // pnpm dlx shadcn@latest init -d -n my-docs https://qinyangwang.github.io/ui/r/docs.json
@@ -24,11 +25,11 @@ export default function DocsPage() {
 ├── parts/site.ts            sections, pages, search items
 └── Outline / OutlinePopover the page outline`,
   examples: [
-    { id: "classic", title: "Classic", description: "Use for most product docs: the page tree stays in view and the outline sits beside the text." },
-    { id: "notebook", title: "Notebook", description: "Use when the docs split into a few large sections, so the sidebar only lists the current one." },
-    { id: "flux", title: "Flux", description: "Use for short docs or a single guide, where the text should own the screen." },
-    { id: "spacious", title: "Spacious", description: "Use for long-form reading such as tutorials and essays." },
-    { id: "home", title: "Home", description: "Use as the landing page that sends readers to each section." },
+    { id: "classic", title: { en: "Classic", zh: "经典" }, description: { en: "Use for most product docs: the page tree stays in view and the outline sits beside the text.", zh: "适用于需要持续显示页面树的产品文档。" } },
+    { id: "notebook", title: { en: "Notebook", zh: "笔记本" }, description: { en: "Use when the docs split into a few large sections, so the sidebar only lists the current one.", zh: "适用于按大章节组织的文档。" } },
+    { id: "flux", title: { en: "Flux", zh: "流式" }, description: { en: "Use for short docs or a single guide, where the text should own the screen.", zh: "适用于短文档或单篇指南。" } },
+    { id: "spacious", title: { en: "Spacious", zh: "宽松" }, description: { en: "Use for long-form reading such as tutorials and essays.", zh: "适用于教程和长篇文章。" } },
+    { id: "home", title: { en: "Home", zh: "首页" }, description: { en: "Use as the landing page that sends readers to each section.", zh: "适用于引导读者进入各章节的首页。" } },
   ],
   notes: [
     {

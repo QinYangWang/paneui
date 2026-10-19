@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Button that scrolls to a section or position.", "zh": "滚动到指定位置。"},
   usage: {
     imports: `import { ScrollTo } from "@/components/ui/scroll-to"`,
     code: `<ScrollTo to="#pricing" offset={-64}>See pricing</ScrollTo>`,
@@ -8,17 +9,15 @@ export default {
   examples: [
     {
       id: "variants",
-      title: "Variants and Sizes",
+      title: { en: "Variants and Sizes", zh: "样式与尺寸" },
     },
     {
       id: "duration",
-      title: "Duration",
-      description: "Use a longer `duration` for long jumps so the motion stays easy to follow.",
+      title: { en: "Duration", zh: "时长" },
     },
     {
       id: "window",
-      title: "Outside a Provider",
-      description: "Use on pages that scroll natively; without a `SmoothScroll` it falls back to the window.",
+      title: { en: "Outside a Provider", zh: "独立使用" },
     },
   ],
   notes: [

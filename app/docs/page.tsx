@@ -4,7 +4,7 @@ import { ArrowRightIcon } from "@/components/icons"
 import { categoryIcons, categorySlug } from "@/components/docs/category-icons"
 import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { InstallCommand } from "@/components/docs/install-command"
-import { getGroups, getItems, REGISTRY_NAME } from "@/lib/docs"
+import { getGroups, REGISTRY_NAME } from "@/lib/docs"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Card } from "@/registry/base-nova/ui/card"
 
@@ -35,7 +35,6 @@ const PRINCIPLES = [
 
 export default function Introduction() {
   const groups = getGroups()
-  const total = getItems().length
   const toc = [
     { id: "principles", title: "Principles" },
     { id: "whats-inside", title: "What's inside" },
@@ -47,11 +46,11 @@ export default function Introduction() {
     <GuidePage
       href="/docs"
       toc={toc}
-      lede={`${total} React components, blocks and templates you install as source with the shadcn CLI.`}
+      lede={{ en: "React components you own and edit.", zh: "将组件源码加入你的项目。" }}
     >
       <div className="flex flex-col gap-4 text-muted-foreground">
         <p>
-          taimatsu/ui is a shadcn registry, not an npm package. Add the <Code>@{REGISTRY_NAME}</Code> namespace to your
+          paneui is a shadcn registry, not an npm package. Add the <Code>@{REGISTRY_NAME}</Code> namespace to your
           project once, then the CLI copies each component and its dependencies into your codebase. From then on the code
           is yours.
         </p>

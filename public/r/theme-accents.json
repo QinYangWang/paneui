@@ -4,7 +4,7 @@
   "title": "Theme Accents",
   "description": "Switches the accent colour at runtime with one attribute.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "@paneui/theme"
   ],
   "files": [
     {

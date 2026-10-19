@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "notification-stack",
   "title": "Notification Stack",
-  "description": "Collapses many notifications into one stack that opens on demand.",
+  "description": "Groups notifications for review.",
   "dependencies": [
     "motion"
   ],

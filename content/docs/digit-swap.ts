@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Rolls only the digits that change.", "zh": "仅滚动发生变化的数字。"},
   usage: {
     imports: `import { DigitSwap } from "@/components/ui/digit-swap"`,
     code: `<DigitSwap value={count} />`,
@@ -8,23 +9,19 @@ export default {
   examples: [
     {
       id: "auto-direction",
-      title: "Auto Direction",
-      description: "Keep the default `direction=\"auto\"` for values that can rise or fall.",
+      title: { en: "Auto Direction", zh: "自动方向" },
     },
     {
       id: "odometer",
-      title: "Odometer",
-      description: "Use `staggerFrom=\"end\"` for counters, so a carry ripples right to left.",
+      title: { en: "Odometer", zh: "计数器" },
     },
     {
       id: "fixed-direction",
-      title: "Fixed Direction",
-      description: "Pin `direction=\"down\"` (or `\"up\"`) for clocks and countdowns, where every tick should move the same way.",
+      title: { en: "Fixed Direction", zh: "固定方向" },
     },
     {
       id: "replay",
-      title: "Replay",
-      description: "Change `animationKey` to replay the roll on reveal when the value hasn't changed.",
+      title: { en: "Replay", zh: "重播" },
     },
   ],
   notes: [

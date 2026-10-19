@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "control-size",
   "title": "Control size",
-  "description": "Shares one size between a field and the controls inside it.",
+  "description": "Keeps field controls the same size.",
   "dependencies": [],
   "files": [
     {

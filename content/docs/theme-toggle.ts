@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Switches the page between light and dark themes.", "zh": "切换明暗主题。"},
   usage: {
     imports: `import { ThemeToggle } from "@/components/ui/theme-toggle"`,
     code: `<ThemeToggle />`,
@@ -8,27 +9,24 @@ export default {
   examples: [
     {
       id: "tri-state",
-      title: "Light, Dark and System",
-      description: "Use `modes=\"tri\"` when people should be able to go back to following the OS.",
+      title: { en: "Light, Dark and System", zh: "浅色、深色与跟随系统" },
     },
     {
       id: "use-theme",
-      title: "useTheme",
-      description: "Use the hook for a menu or segmented control of your own.",
+      title: { en: "useTheme", zh: "useTheme" },
+      description: { en: "Use the hook for a menu or segmented control of your own.", zh: "适用于自定义菜单或分段控件。" },
     },
     {
       id: "sizes",
-      title: "Sizes",
-      description: "Use a smaller `size-*` class in dense toolbars, matching the glyph with `iconSize`.",
+      title: { en: "Sizes", zh: "尺寸" },
     },
     {
       id: "slow-reveal",
-      title: "Reveal Duration",
+      title: { en: "Reveal Duration", zh: "显示时长" },
     },
     {
       id: "use-theme-toggle",
-      title: "useThemeToggle",
-      description: "Use the hook to build your own control; `setTheme(theme, { origin })` starts the reveal from any point.",
+      title: { en: "useThemeToggle", zh: "useThemeToggle" },
     },
   ],
   notes: [

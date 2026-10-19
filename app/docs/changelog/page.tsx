@@ -20,8 +20,8 @@ const ENTRIES: Entry[] = [
         URL, a faint grid or dot backdrop and an accent glow.
       </>,
       <>
-        <Code>@taimatsu/og-image-route</Code> adds <Code>app/opengraph-image.tsx</Code> and <Code>app/twitter-image.tsx</Code>;{" "}
-        <Code>@taimatsu/og-image-post-route</Code> adds a per-post image under <Code>app/blog/[slug]</Code>. The docs site
+        <Code>@paneui/og-image-route</Code> adds <Code>app/opengraph-image.tsx</Code> and <Code>app/twitter-image.tsx</Code>;{" "}
+        <Code>@paneui/og-image-post-route</Code> adds a per-post image under <Code>app/blog/[slug]</Code>. The docs site
         draws its own share image the same way and writes it to <Code>/og.png</Code>, so static hosts serve it as an
         image; the OG Image notes show how.
       </>,
@@ -151,7 +151,7 @@ const ENTRIES: Entry[] = [
       <>
         Icons take <Code>{'weight="bold"'}</Code> for a 20% heavier stroke, or sit inside <Code>icon-bold</Code>. Badges,
         card, dialog, drawer and popover titles, page headers, empty states and settings sections use it so icons match
-        semibold text. Buttons keep the regular stroke. Reinstall <Code>@taimatsu/theme</Code> for the utility; the upgrade
+        semibold text. Buttons keep the regular stroke. Reinstall <Code>@paneui/theme</Code> for the utility; the upgrade
         check warns when it is missing.
       </>,
       <>
@@ -201,7 +201,7 @@ const ENTRIES: Entry[] = [
       </>,
       <>
         The upgrade check warns when your theme is missing <Code>media-outline</Code>. Reinstall{" "}
-        <Code>@taimatsu/theme</Code> to fix it.
+        <Code>@paneui/theme</Code> to fix it.
       </>,
     ],
   },
@@ -222,7 +222,7 @@ const ENTRIES: Entry[] = [
         rendered page.
       </>,
       <>
-        The theme adds <Code>media-outline</Code>. Reinstall <Code>@taimatsu/theme</Code> to get it.
+        The theme adds <Code>media-outline</Code>. Reinstall <Code>@paneui/theme</Code> to get it.
       </>,
       <>
         Checkbox and radio reach a 24px target; carousel dots, tab and chip close buttons extend theirs without

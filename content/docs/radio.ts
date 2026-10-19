@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Picks exactly one option from a short list.", "zh": "从一组选项中选择一项。"},
   baseUi: {
     name: "Radio Group",
     href: "https://base-ui.com/react/components/radio",
@@ -25,25 +26,24 @@ import { Radio, RadioGroup } from "@/components/ui/radio"`,
   examples: [
     {
       id: "horizontal",
-      title: "Horizontal",
-      description: "Use for two or three short options that fit on one line.",
+      title: { en: "Horizontal", zh: "横向" },
+      description: { en: "Use for two or three short options that fit on one line.", zh: "适用于可放在同一行的少量短选项。" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when other UI reacts to the choice.",
+      title: { en: "Controlled", zh: "受控" },
+      description: { en: "Use when other UI reacts to the choice.", zh: "适用于选择值与其他界面联动的场景。" },
     },
     {
       id: "choice-cards",
-      title: "Choice Cards",
-      description: "Use when each option needs a description or price beside it.",
+      title: { en: "Choice Cards", zh: "选项卡片" },
+      description: { en: "Use when each option needs a description or price beside it.", zh: "适用于需要补充说明或价格的选项。" },
     },
     {
       id: "disabled",
-      title: "Disabled",
-      description: "Use `disabled` on one `Radio` to block a single option, or on the group to block them all.",
+      title: { en: "Disabled", zh: "禁用" },
     },
-    { id: "sizes", title: "Sizes" },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" } },
   ],
   notes: [
     {

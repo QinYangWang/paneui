@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Chooses and remembers an accent colour.", "zh": "选择并记住主题色。"},
   baseUi: { name: "Radio Group", href: "https://base-ui.com/react/components/radio" },
   usage: {
     imports: `import { AccentPicker, AccentPresets } from "@/components/ui/accent-picker"`,
@@ -12,7 +13,7 @@ export default {
   },
   examples: [],
   notes: [
-    { title: "How it works", body: "It sets `data-accent` on `<html>` (blue, the default, has no attribute) and stores the pick in `localStorage[\"accent\"]`. The preset roles ship inside the component as CSS and are injected once, so it works in any app with `@taimatsu/theme`. `AccentPresets` renders that CSS plus a pre-paint script so a reload never flashes the default." },
+    { title: "How it works", body: "It sets `data-accent` on `<html>` (blue, the default, has no attribute) and stores the pick in `localStorage[\"accent\"]`. The preset roles ship inside the component as CSS and are injected once, so it works in any app with `@paneui/theme`. `AccentPresets` renders that CSS plus a pre-paint script so a reload never flashes the default." },
     { title: "Custom control", body: "`useAccent()` returns `[accent, setAccent]` for a menu or select of your own." },
   ],
   api: [

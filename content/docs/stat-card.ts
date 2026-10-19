@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Card for a key metric and how it changed.", "zh": "展示关键指标与变化。"},
   usage: {
     imports: `import {
   StatCard,
@@ -33,7 +34,7 @@ export default {
     ├── StatCardHint
     └── StatCardSparkline`,
   examples: [
-    { id: "with-ticker", title: "With Number Ticker", description: "Use for live numbers that change while the page is open." },
+    { id: "with-ticker", title: { en: "With Number Ticker", zh: "带滚动数值" }, description: { en: "Use for live numbers that change while the page is open.", zh: "适用于页面打开后持续变化的指标。" } },
   ],
   notes: [
     { title: "Tone", body: "`StatCardDelta` takes its tone from the sign, success for a rise, destructive for a fall and neutral at zero. Pass `invert` for metrics where up is bad (churn, latency, errors). `StatCardSparkline` follows the same tone unless you give it a text colour." },

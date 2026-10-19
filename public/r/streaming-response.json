@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "streaming-response",
   "title": "Streaming Response",
-  "description": "Shows an assistant reply as it streams, then offers copy and feedback.",
+  "description": "Shows a reply as it arrives.",
   "dependencies": [
     "motion"
   ],

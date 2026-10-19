@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Connects form labels, controls and feedback.", "zh": "关联表单标签、输入与提示。"},
   baseUi: { name: "Field", href: "https://base-ui.com/react/components/field" },
   usage: {
     imports: `import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"`,
@@ -18,8 +19,8 @@ export default {
     ├── FieldDescription
     └── FieldError`,
   examples: [
-    { id: "sizes", title: "Sizes", description: "Set `size` on the field instead of on each control." },
-    { id: "textarea", title: "Any Control", description: "Use `FieldControl render={<Textarea />}` when the control isn't field-aware, so it still gets the label, `aria-invalid` and descriptions." },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" },  },
+    { id: "textarea", title: { en: "Any Control", zh: "任意控件" },  },
   ],
   notes: [
     { title: "Validation", body: "Validate however you like and pass the message to `FieldError`; it renders only while it has children. `invalid` on `Field` sets `aria-invalid` on the control, which turns its ring destructive." },

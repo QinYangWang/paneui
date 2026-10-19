@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Creates page share images.", "zh": "生成页面分享图片。"},
   usage: {
     imports: `import { ImageResponse } from "next/og"
 import { OgImage, ogImageContentType, ogImageSize } from "@/components/ui/og-image"`,
@@ -17,14 +18,14 @@ export default async function Image() {
 }`,
   },
   examples: [
-    { id: "modes", title: "Accents and Modes", description: "Pass the site's `accent` and `mode` so the image matches the pages it links to." },
-    { id: "cover-art", title: "Cover Art", description: "Use `OgCoverArt` for a post with no title image; the slug picks the art." },
-    { id: "cjk", title: "CJK Titles" },
+    { id: "modes", title: { en: "Accents and Modes", zh: "主题色与模式" },  },
+    { id: "cover-art", title: { en: "Cover Art", zh: "封面" },  },
+    { id: "cjk", title: { en: "CJK Titles", zh: "中日韩文标题" } },
   ],
   notes: [
     {
       title: "Route files",
-      body: "`npx shadcn@latest add @taimatsu/og-image-route` writes `app/opengraph-image.tsx` and `app/twitter-image.tsx`; edit the `SITE` object at the top. Next.js links the image from every page under that folder and renders it at build time. `@taimatsu/og-image-post-route` writes `app/blog/[slug]/opengraph-image.tsx`, which reads `params` and draws `OgCoverArt` from the slug behind the title. For several images in one route, export `generateImageMetadata` and read `id` in the image function.",
+      body: "`npx shadcn@latest add @paneui/og-image-route` writes `app/opengraph-image.tsx` and `app/twitter-image.tsx`; edit the `SITE` object at the top. Next.js links the image from every page under that folder and renders it at build time. `@paneui/og-image-post-route` writes `app/blog/[slug]/opengraph-image.tsx`, which reads `params` and draws `OgCoverArt` from the slug behind the title. For several images in one route, export `generateImageMetadata` and read `id` in the image function.",
     },
     {
       title: "Static export",

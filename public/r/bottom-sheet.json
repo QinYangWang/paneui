@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "bottom-sheet",
   "title": "Bottom Sheet",
-  "description": "A panel that slides up from the bottom and snaps to heights.",
+  "description": "Opens a panel from the bottom of the page.",
   "dependencies": [
     "@base-ui/react",
     "motion"

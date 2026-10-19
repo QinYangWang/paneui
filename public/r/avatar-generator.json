@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "avatar-generator",
   "title": "Avatar Generator",
-  "description": "Draws a consistent illustrated avatar from a seed, with an editor.",
+  "description": "Creates and edits avatars.",
   "dependencies": [
     "@base-ui/react",
     "@dicebear/core@^9.4.3",

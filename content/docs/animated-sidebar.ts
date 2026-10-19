@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "App navigation sidebar that folds into an icon rail.", "zh": "可收起为图标栏的侧边导航。"},
   usage: {
     imports: `import {
   Sidebar,
@@ -44,28 +45,23 @@ export default {
   examples: [
     {
       id: "collapsed",
-      title: "Icon Rail",
-      description: "Use `defaultOpen={false}` on the provider when the content needs the width; rail items show their `label` or `tooltip` as a tooltip.",
+      title: { en: "Icon Rail", zh: "图标栏" },
     },
     {
       id: "flush-right",
-      title: "Flush, Right Side",
-      description: "Use `variant=\"sidebar\"` for full-height app shells, and `side=\"right\"` for secondary panels.",
+      title: { en: "Flush, Right Side", zh: "右侧贴边" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `open` and `onOpenChange` when other UI must fold the rail or a disclosure item.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "static",
-      title: "Non-collapsible Links",
-      description: "Use `collapsible=\"none\"` for short link lists that never fold.",
+      title: { en: "Non-collapsible Links", zh: "始终展开的链接" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\`; \`side="left"\` then puts the sidebar on the right.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

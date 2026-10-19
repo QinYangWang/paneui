@@ -1,7 +1,7 @@
 {
-  "name": "@taimatsu/ui",
+  "name": "paneui",
   "version": "0.1.0",
-  "description": "Add, search and update taimatsu/ui registry components and themes. Works alongside the shadcn CLI.",
+  "description": "Find, install and update paneui components.",
   "keywords": [
     "shadcn",
     "registry",
@@ -21,7 +21,7 @@
   "bugs": "https://github.com/QinYangWang/ui/issues",
   "type": "module",
   "bin": {
-    "taimatsu": "dist/index.js"
+    "paneui": "dist/index.js"
   },
   "files": [
     "dist",

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Layout for grouped settings pages.", "zh": "将相关设置分组。"},
   usage: {
     imports: `import {
   SettingsGroup,
@@ -41,9 +42,9 @@ SettingsSection
     └── SettingsGroupFooter
         └── SettingsFooterNote`,
   examples: [
-    { id: "danger-zone", title: "Danger Zone", description: "Use for actions that delete data or can't be undone." },
-    { id: "interactive-rows", title: "Interactive Rows", description: "Use when a row opens a page, a dialog or a link." },
-    { id: "nav", title: "Settings Nav", description: "Use when settings span several pages; pass your router link with `render`." },
+    { id: "danger-zone", title: { en: "Danger Zone", zh: "危险操作区" }, description: { en: "Use for actions that delete data or can't be undone.", zh: "适用于删除数据或无法撤销的操作。" } },
+    { id: "interactive-rows", title: { en: "Interactive Rows", zh: "可交互行" }, description: { en: "Use when a row opens a page, a dialog or a link.", zh: "适用于点击后打开页面或对话框的设置行。" } },
+    { id: "nav", title: { en: "Settings Nav", zh: "设置导航" },  },
   ],
   notes: [{ title: "Rows", body: "A row wraps its control under the text on narrow screens. Render it as a `<label>` (`render={<label />}`) so clicking anywhere toggles its switch." }, { title: "Nav", body: "Below `md` the settings nav becomes a horizontally scrolling strip." }, { title: "Interactive rows", body: "An `interactive` row is one `<button>` (or the element `render` gives): it takes the hover and press fill, an inset focus ring and a trailing chevron that flips in right-to-left layouts. Keep other controls out of it." }],
   api: [

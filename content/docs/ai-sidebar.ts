@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Navigates folders, projects and files in an AI workspace.", "zh": "浏览工作区的项目与文件。"},
   usage: {
     imports: `import { AISidebar } from "@/components/ui/ai-sidebar"`,
     code: `<AISidebar
@@ -11,28 +12,23 @@ export default {
   examples: [
     {
       id: "collapsed-rail",
-      title: "Collapsed Rail",
-      description: "Use `defaultOpen={false}` when the main content needs the width.",
+      title: { en: "Collapsed Rail", zh: "收起为图标栏" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `open` and `activeId` with their change handlers when routing or other UI owns the sidebar state.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "with-footer",
-      title: "With Footer",
-      description: "Use the `footer` and `actions` render props when they must switch to icon-only in the rail.",
+      title: { en: "With Footer", zh: "带底栏" },
     },
     {
       id: "minimal",
-      title: "Minimal",
-      description: "Use `searchable={false}` for short lists that don't need search.",
+      title: { en: "Minimal", zh: "简洁" },
     },
     {
       id: "search-hotkey",
-      title: "Search Hotkey",
-      description: "Use `searchHotkey` when your app already uses ⌘K, or pass `null` to disable it.",
+      title: { en: "Search Hotkey", zh: "搜索快捷键" },
     },
   ],
   notes: [

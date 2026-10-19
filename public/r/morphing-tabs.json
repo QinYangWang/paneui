@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "morphing-tabs",
   "title": "Morphing Tabs",
-  "description": "Tabs the user can reorder, with content attached to the active tab.",
+  "description": "Reorders tabs and switches their content.",
   "dependencies": [
     "motion"
   ],

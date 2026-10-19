@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "image-generation",
   "title": "Image Generation",
-  "description": "Shows a generated image from queued to finished, with its actions.",
+  "description": "Shows image generation progress and results.",
   "dependencies": [
     "motion"
   ],

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Rolls between button states.", "zh": "通过滚动过渡切换按钮状态。"},
   usage: {
     imports: `import { ActionSwapRollButton } from "@/components/ui/action-swap-roll"`,
     code: `<ActionSwapRollButton
@@ -13,22 +14,20 @@ export default {
   examples: [
     {
       id: "copy-reset",
-      title: "Copy With Reset",
-      description: "Use `resetAfter` for copy buttons that should return to their first state.",
+      title: { en: "Copy With Reset", zh: "复制后重置" },
     },
     {
       id: "sizes",
-      title: "Sizes",
+      title: { en: "Sizes", zh: "尺寸" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `cycle={false}` when an async task, like sending, decides the state.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "custom-slots",
-      title: "Custom Slots",
-      description: "Use the slots when you need your own button layout or slot order.",
+      title: { en: "Custom Slots", zh: "自定义插槽" },
+      description: { en: "Use the slots when you need your own button layout or slot order.", zh: "适用于需要自定义按钮布局的场景。" },
     },
   ],
   notes: [

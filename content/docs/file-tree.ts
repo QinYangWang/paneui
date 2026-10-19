@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Browses files and folders in a keyboard-navigable tree.", "zh": "浏览文件与文件夹。"},
   usage: {
     imports: `import { FileTree, FileTreeFile, FileTreeFolder } from "@/components/ui/file-tree"`,
     code: `<FileTree defaultExpanded={["app"]}>
@@ -18,23 +19,19 @@ export default {
   examples: [
     {
       id: "explicit-values",
-      title: "Explicit Values",
-      description: "Set `value` when selection or expansion is keyed by ids from your data rather than paths.",
+      title: { en: "Explicit Values", zh: "明确数值" },
     },
     {
       id: "items",
-      title: "From Data",
-      description: "Pass a nested `items` array of `FileTreeNode` when the tree comes from data.",
+      title: { en: "From Data", zh: "根据数据" },
     },
     {
       id: "controlled-expanded",
-      title: "Controlled Expanded",
-      description: "Control `expanded` and `onExpandedChange` when other UI opens or closes folders.",
+      title: { en: "Controlled Expanded", zh: "受控展开" },
     },
     {
       id: "open-file",
-      title: "Open File and Icons",
-      description: "Use `onOpenFile` to open a file on click or Enter, and a file's `icon` to override its type icon.",
+      title: { en: "Open File and Icons", zh: "打开文件与图标" },
     },
   ],
   notes: [

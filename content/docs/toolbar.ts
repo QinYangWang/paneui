@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Groups related actions into one keyboard-navigable bar.", "zh": "集中相关操作并支持键盘导航。"},
   baseUi: { name: "Toolbar", href: "https://base-ui.com/react/components/toolbar" },
   usage: {
     imports: `import { Toolbar, ToolbarButton, ToolbarSeparator, ToolbarToggle } from "@/components/ui/toolbar"`,
@@ -20,8 +21,8 @@ export default {
 ├── ToolbarLink
 └── ToolbarInput`,
   examples: [
-    { id: "document-bar", title: "Document Bar", description: "Use the default variant in card and document headers, with `size=\"label\"` for text actions." },
-    { id: "inset", title: "Inset", description: "Use `inset` for a compact control group inside a panel." },
+    { id: "document-bar", title: { en: "Document Bar", zh: "文档工具栏" },  },
+    { id: "inset", title: { en: "Inset", zh: "内嵌" },  },
   ],
   notes: [
     { title: "Keyboard", body: "The toolbar is one tab stop. Arrow keys move between items (looping) and `Home` / `End` jump to the ends. Menu and popover triggers join the loop with `render={<ToolbarButton />}`." },

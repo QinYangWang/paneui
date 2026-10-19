@@ -3,6 +3,7 @@ import type { ComponentDoc } from "@/lib/doc-types"
 const BASE = "https://base-ui.com/react/components/combobox"
 
 export default {
+  summary: {"en": "Picks one option from a long list by typing to filter.", "zh": "通过搜索从长列表中选择一项。"},
   baseUi: { name: "Combobox", href: BASE },
   usage: {
     imports: `import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@/components/ui/combobox"`,
@@ -35,33 +36,28 @@ export default {
   examples: [
     {
       id: "popup-search",
-      title: "Search In Popup",
-      description: "Use `ComboboxTrigger` with `ComboboxSearch` when the field should look like a select.",
+      title: { en: "Search In Popup", zh: "在浮层中搜索" },
     },
     {
       id: "sizes",
-      title: "Sizes",
-      description: "Set `size` on `Combobox` to size the input and its rows together.",
+      title: { en: "Sizes", zh: "尺寸" },
     },
     {
       id: "input-options",
-      title: "Input Options",
-      description: "Turn off controls a field doesn't need, like the clear button when a choice is required.",
+      title: { en: "Input Options", zh: "输入选项" },
+      description: { en: "Turn off controls a field doesn't need, like the clear button when a choice is required.", zh: "必选字段通常无需清除按钮。" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `value` and `onValueChange` when the selection drives other UI; clearing sets it to `null`.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "disabled",
-      title: "Disabled",
-      description: "Disable a `ComboboxItem` for an unavailable option, or `Combobox` to lock the field.",
+      title: { en: "Disabled", zh: "禁用" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

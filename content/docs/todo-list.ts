@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows an agent's step-by-step plan and its progress.", "zh": "展示助手的计划与进度。"},
   baseUi: {
     name: "Collapsible",
     href: "https://base-ui.com/react/components/collapsible",
@@ -18,28 +19,26 @@ export default {
   examples: [
     {
       id: "statuses",
-      title: "Statuses",
-      description: "Use `detail` and `meta` when a step needs a reason, a count or a duration.",
+      title: { en: "Statuses", zh: "状态" },
     },
     {
       id: "collapsed",
-      title: "Collapsed",
-      description: "Use `defaultOpen={false}` where space is tight; the header still shows the in-progress item.",
+      title: { en: "Collapsed", zh: "收起" },
     },
     {
       id: "collapse-on-complete",
-      title: "Collapse on Complete",
-      description: "Use when a finished plan should get out of the way of the reply.",
+      title: { en: "Collapse on Complete", zh: "完成后收起" },
+      description: { en: "Use when a finished plan should get out of the way of the reply.", zh: "适用于完成后应让位给回复的计划。" },
     },
     {
       id: "max-height",
-      title: "Max Height",
-      description: "Use for long plans inside a fixed-height panel.",
+      title: { en: "Max Height", zh: "最大高度" },
+      description: { en: "Use for long plans inside a fixed-height panel.", zh: "适用于固定高度面板中的长计划。" },
     },
     {
       id: "status-mark",
-      title: "Status Mark",
-      description: "Use the mark alone in your own step lists.",
+      title: { en: "Status Mark", zh: "状态标记" },
+      description: { en: "Use the mark alone in your own step lists.", zh: "适用于自定义步骤列表。" },
     },
   ],
   notes: [

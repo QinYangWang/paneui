@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Side panel for navigation or secondary tasks over the page.", "zh": "在侧边处理导航或次要任务。"},
   baseUi: {
     name: "Dialog",
     href: "https://base-ui.com/react/components/dialog",
@@ -29,28 +30,23 @@ export default {
   examples: [
     {
       id: "navigation",
-      title: "Navigation",
-      description: "Use `side=\"left\"` for a nav menu, and make each link a `DrawerClose` so picking one closes the drawer.",
+      title: { en: "Navigation", zh: "导航" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Control `open` when another control opens the drawer or an action should close it.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "no-close-button",
-      title: "Without Close Button",
-      description: "Hide the × with `showClose={false}` only when another control, like a Done button, closes the drawer.",
+      title: { en: "Without Close Button", zh: "无关闭按钮" },
     },
     {
       id: "scrolling",
-      title: "Scrolling Body",
-      description: "Put long content in `DrawerBody`, the only part that scrolls, so the header and footer stay in place.",
+      title: { en: "Scrolling Body", zh: "正文滚动" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

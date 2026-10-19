@@ -3,6 +3,7 @@ import type { ComponentDoc } from "@/lib/doc-types"
 const BASE = "https://base-ui.com/react/components/select"
 
 export default {
+  summary: {"en": "Select whose trigger unfolds into its option list.", "zh": "将选择控件展开为选项列表。"},
   baseUi: { name: "Select", href: BASE },
   usage: {
     imports: `import { MorphSelect, MorphSelectContent, MorphSelectItem, MorphSelectTrigger, MorphSelectValue } from "@/components/ui/select-morph"`,
@@ -28,23 +29,20 @@ export default {
   examples: [
     {
       id: "placeholder",
-      title: "Placeholder",
-      description: "Use when the field starts empty, with an item whose `value` is `null` as the prompt.",
+      title: { en: "Placeholder", zh: "占位内容" },
     },
     {
       id: "with-icons",
-      title: "With Icons",
-      description: "Use when icons help tell options apart, passing the same row to `header` so the popup matches the trigger.",
+      title: { en: "With Icons", zh: "带图标" },
     },
     {
       id: "disabled",
-      title: "Disabled",
-      description: "Use `disabled` on `MorphSelectItem` to block one option, or on `MorphSelect` to block the whole select.",
+      title: { en: "Disabled", zh: "禁用" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when other UI sets the value or opens the popup.",
+      title: { en: "Controlled", zh: "受控" },
+      description: { en: "Use when other UI sets the value or opens the popup.", zh: "适用于选择值或展开状态与其他界面联动的场景。" },
     },
   ],
   notes: [

@@ -1,12 +1,13 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows how much of a quota has been used.", "zh": "显示配额使用量。"},
   baseUi: { name: "Meter", href: "https://base-ui.com/react/components/meter" },
   usage: {
     imports: `import { UsageMeter } from "@/components/ui/usage-meter"`,
     code: `<UsageMeter label="Agent runs" value={8420} max={10000} unit="runs" description="Resets on Nov 1" />`,
   },
-  examples: [{ id: "percent", title: "Percent and Thresholds", description: "Use `percent` when the share matters more than the raw count, moving the thresholds with `warnAt` and `dangerAt`." }],
+  examples: [{ id: "percent", title: { en: "Percent and Thresholds", zh: "百分比与阈值" },  }],
   notes: [{ title: "Accessibility", body: "Renders a meter (`role=\"meter\"`) labelled by `label`, with value text like \"8,420 of 10,000 runs\"." }],
   api: [
     {

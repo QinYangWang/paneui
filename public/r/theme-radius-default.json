@@ -4,7 +4,7 @@
   "title": "Theme: Default radius",
   "description": "Radius preset that restores the default corner rounding.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "@paneui/theme"
   ],
   "cssVars": {
     "light": {

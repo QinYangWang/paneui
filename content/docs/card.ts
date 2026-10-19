@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Groups related content and actions on one surface.", "zh": "将相关内容与操作放在一起。"},
   usage: {
     imports: `import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"`,
     code: `<Card>
@@ -25,28 +26,23 @@ Card variant="inset"
 │   └── CardContent
 └── CardFooter`,
   examples: [
-    { id: "variants", title: "Variants", description: "Use `outline` for cards placed on another card, and `ghost` to keep the card rhythm without a surface." },
-    { id: "sizes", title: "Sizes", description: "Use `sm` in dense dashboards and `lg` for a single featured card." },
+    { id: "variants", title: { en: "Variants", zh: "样式" },  },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" },  },
     {
       id: "with-form",
-      title: "With Form",
-      description: "Space fields with `gap` on `CardContent`, since the parts already own their padding.",
+      title: { en: "With Form", zh: "带表单" },
     },
     {
       id: "inset-media",
-      title: "Inset With Media",
-      description:
-        "Use `variant=\"inset\"` to present something, like an image or a featured plan.",
+      title: { en: "Inset With Media", zh: "内嵌媒体" },
     },
     {
       id: "link-cards",
-      title: "Link Cards",
-      description: "Use `interactive` with `render` when the whole card is one link, such as previous and next pages.",
+      title: { en: "Link Cards", zh: "链接卡片" },
     },
     {
       id: "inset-code",
-      title: "Inset With Code",
-      description: "Use a `CardFooter` above the panel as a caption bar for code or a file.",
+      title: { en: "Inset With Code", zh: "内嵌代码" },
     },
   ],
   api: [

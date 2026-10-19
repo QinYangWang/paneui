@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Writes and saves documents.", "zh": "编写并保存文档。"},
   usage: {
     imports: `import { NotionEditor, toMDX, fromMDX } from "@/components/notion-editor/notion-editor"`,
     code: `const [mdx, setMdx] = React.useState("# Hello\\n\\nType **/** for blocks.")
@@ -18,9 +19,9 @@ toMDX(editor | json) / fromMDX(source)
 moveBlock(editor, from, to) · moveSelectedBlock(editor, "up" | "down")
 SlashCommand · defaultSlashItems · suggestionRenderer`,
   examples: [
-    { id: "controlled-mdx", title: "Controlled MDX", description: "Use when the document lives in your own state as an MDX string." },
-    { id: "read-only", title: "Read Only", description: "Use to show a finished document that no one should edit." },
-    { id: "custom-slash-items", title: "Custom Slash Items", description: "Use to add your own blocks or commands to the `/` menu." },
+    { id: "controlled-mdx", title: { en: "Controlled MDX", zh: "受控 MDX" }, description: { en: "Use when the document lives in your own state as an MDX string.", zh: "适用于由应用状态管理的 MDX 文档。" } },
+    { id: "read-only", title: { en: "Read Only", zh: "只读" }, description: { en: "Use to show a finished document that no one should edit.", zh: "适用于已完成且不允许修改的文档。" } },
+    { id: "custom-slash-items", title: { en: "Custom Slash Items", zh: "自定义斜杠命令" },  },
   ],
   notes: [
     { title: "Blocks and shortcuts", body: "Text, headings 1–3 (4–6 kept from MDX), bulleted, numbered and to-do lists, toggle, quote, callout, divider, code block (with syntax highlighting), image and table. Markdown input rules cover `#`, `-`, `1.`, `[ ]`, `>`, three backticks, `---`, `**bold**`, `_italic_`, backtick code, `~~strike~~`. `⌘B` `⌘I` `⌘U` `⌘⇧S` `⌘E` for marks, `⌘K` for a link, `⌘⇧H` highlight, `⌘⌥1–3` headings, `⌘⇧7/8/9` lists, `⌘⇧↑` / `⌘⇧↓` move the block." },

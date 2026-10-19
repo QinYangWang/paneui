@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Loads table rows page by page as the reader scrolls.", "zh": "随滚动逐页加载数据。"},
   usage: {
     imports: `import { AsyncTable } from "@/components/ui/table-async"`,
     code: `<AsyncTable
@@ -15,18 +16,17 @@ export default {
   examples: [
     {
       id: "error-retry",
-      title: "Error and Retry",
-      description: "Use when the source can fail mid-list; page 3 fails once here, so scroll down.",
+      title: { en: "Error and Retry", zh: "错误与重试" },
+      description: { en: "Use when the source can fail mid-list; page 3 fails once here, so scroll down.", zh: "适用于分页过程中可能加载失败的数据源。" },
     },
     {
       id: "reset-key",
-      title: "Reset Key and End Message",
-      description: "Use `resetKey` when a filter or search changes the result set.",
+      title: { en: "Reset Key and End Message", zh: "重置键与结束消息" },
     },
     {
       id: "use-async-pages",
-      title: "useAsyncPages",
-      description: "Use for paged lists that are not a table.",
+      title: { en: "useAsyncPages", zh: "useAsyncPages" },
+      description: { en: "Use for paged lists that are not a table.", zh: "适用于表格以外的分页列表。" },
     },
   ],
   notes: [

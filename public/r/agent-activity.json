@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "agent-activity",
   "title": "Agent Activity",
-  "description": "Shows what an agent did during a run as one activity stream.",
+  "description": "Summarises an agent’s work.",
   "dependencies": [
     "@base-ui/react",
     "motion"

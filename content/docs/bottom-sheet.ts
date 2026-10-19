@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Opens a panel from the bottom of the page.", "zh": "从底部打开面板。"},
   baseUi: {
     name: "Dialog",
     href: "https://base-ui.com/react/components/dialog",
@@ -37,23 +38,21 @@ export default {
   examples: [
     {
       id: "single-snap",
-      title: "Single Snap",
-      description: "Use one snap point for short content; the handle then only drags to close.",
+      title: { en: "Single Snap", zh: "单个停靠点" },
+      description: { en: "Use one snap point for short content; the handle then only drags to close.", zh: "短内容只需一个停靠点。" },
     },
     {
       id: "controlled-snap",
-      title: "Controlled Snap",
-      description: "Use `snap` and `onSnapChange` when your own buttons move the sheet between heights.",
+      title: { en: "Controlled Snap", zh: "受控停靠点" },
     },
     {
       id: "non-dismissible",
-      title: "Non-dismissible",
-      description: "Use `dismissible={false}` when the reader must finish or cancel explicitly with `BottomSheetClose`.",
+      title: { en: "Non-dismissible", zh: "不可直接关闭" },
     },
     {
       id: "without-handle",
-      title: "Without Handle",
-      description: "Hide the handle when the sheet shouldn't be resized by dragging.",
+      title: { en: "Without Handle", zh: "无拖动柄" },
+      description: { en: "Hide the handle when the sheet shouldn't be resized by dragging.", zh: "适用于不允许拖动调整高度的面板。" },
     },
   ],
   notes: [

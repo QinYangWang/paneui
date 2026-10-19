@@ -1,4 +1,4 @@
-import { BellIcon, BotIcon, TaimatsuLogoIcon, ShieldIcon, SparklesIcon, TerminalSquareIcon, ThumbsUpIcon } from "@/components/icons"
+import { BellIcon, BotIcon, PaneuiLogoIcon, ShieldIcon, SparklesIcon, TerminalSquareIcon, ThumbsUpIcon } from "@/components/icons"
 import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 
 const rows = [
@@ -16,7 +16,7 @@ export default function IconChipDemo() {
         <IconChip size="sm"><BellIcon /></IconChip>
         <IconChip><BotIcon /></IconChip>
         <IconChip size="lg"><ShieldIcon /></IconChip>
-        <IconChip size="lg" tone="solid"><TaimatsuLogoIcon /></IconChip>
+        <IconChip size="lg" tone="solid"><PaneuiLogoIcon /></IconChip>
       </div>
       <ul className="flex flex-col gap-1 frame-3xl frame-p-2 bg-card shadow-surface">
         {rows.map(({ icon: Icon, title, body, tone }) => (

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Labels a control with a short hint on hover or focus.", "zh": "在悬停或聚焦时显示提示。"},
   baseUi: {
     name: "Tooltip",
     href: "https://base-ui.com/react/components/tooltip",
@@ -26,23 +27,19 @@ export default {
   examples: [
     {
       id: "sides",
-      title: "Sides",
-      description: "Use another `side` when the default top placement would cover nearby content.",
+      title: { en: "Sides", zh: "方向" },
     },
     {
       id: "align",
-      title: "Align",
-      description: "Use `start` or `end` for triggers at the edge of a toolbar or panel.",
+      title: { en: "Align", zh: "对齐" },
     },
     {
       id: "with-icon",
-      title: "With Icon",
-      description: "Use `render` to make any focusable element the trigger.",
+      title: { en: "With Icon", zh: "带图标" },
     },
     {
       id: "delay",
-      title: "Delay",
-      description: "Use a separate `TooltipProvider` with its own `delay` for a group that needs faster or slower hints.",
+      title: { en: "Delay", zh: "延迟" },
     },
   ],
   notes: [

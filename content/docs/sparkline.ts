@@ -1,13 +1,14 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Small inline chart that shows a trend.", "zh": "在行内显示趋势。"},
   usage: {
     imports: `import { Sparkline } from "@/components/ui/sparkline"`,
     code: `<Sparkline values={[12, 14, 13, 17, 19, 22]} label="Revenue, up 83%" className="h-8 w-24 text-success" />`,
   },
   examples: [
-    { id: "variants", title: "Variants", description: "Use `bar` for discrete counts and `area` or `line` for continuous trends." },
-    { id: "gaps", title: "Gaps", description: "Use `gap=\"break\"` when a missing reading should read as an outage." },
+    { id: "variants", title: { en: "Variants", zh: "样式" },  },
+    { id: "gaps", title: { en: "Gaps", zh: "缺失数据" },  },
   ],
   notes: [
     { title: "Colour and size", body: "The chart draws in `currentColor`, so tint it with a text token (`text-success`, `text-chart-1`). It stretches to its box, so size it with `h-*` and `w-*` (default 36px tall, full width)." },

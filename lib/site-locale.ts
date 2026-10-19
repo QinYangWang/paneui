@@ -66,4 +66,4 @@ export function T({ en, zh }: { en: string; zh: string }) {
 }
 
 /** Inline script for <head>: sets <html lang> before paint from the stored choice. */
-export const siteLocaleScript = `try{if(localStorage.getItem("${KEY}")==="zh")document.documentElement.lang="zh-CN"}catch(e){}`
+export { siteLocaleScript } from "./site-locale-script"

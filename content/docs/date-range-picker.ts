@@ -3,6 +3,7 @@ import type { ComponentDoc } from "@/lib/doc-types"
 const POPOVER = "https://base-ui.com/react/components/popover"
 
 export default {
+  summary: {"en": "Picks a start and end date from a calendar.", "zh": "在日历中选择起止日期。"},
   baseUi: { name: "Popover", href: POPOVER },
   usage: {
     imports: `import { DateRangePicker, DateRangePickerCalendar, DateRangePickerContent, DateRangePickerTrigger } from "@/components/ui/date-range-picker"`,
@@ -26,23 +27,20 @@ export default {
   examples: [
     {
       id: "inline",
-      title: "Inline",
-      description: "Leave out the trigger and content when the calendar should sit in the page instead of a popup.",
+      title: { en: "Inline", zh: "行内" },
+      description: { en: "Leave out the trigger and content when the calendar should sit in the page instead of a popup.", zh: "适用于日历直接放在页面中的场景。" },
     },
     {
       id: "unavailable-dates",
-      title: "Unavailable Dates",
-      description: "Use `min` and `isDateDisabled` when some days can't be booked; a range can't span a disabled day.",
+      title: { en: "Unavailable Dates", zh: "不可选日期" },
     },
     {
       id: "locale",
-      title: "Locale",
-      description: "Set `locale` and `weekStartsOn` when the picker should follow the reader's language and calendar.",
+      title: { en: "Locale", zh: "语言" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Control `value` and `open` when other UI needs to read or set the range or the popup.",
+      title: { en: "Controlled", zh: "受控" },
     },
   ],
   notes: [

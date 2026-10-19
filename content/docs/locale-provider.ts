@@ -1,13 +1,14 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Sets the language of every built-in label.", "zh": "设置组件内置标签的语言。"},
   usage: {
     imports: `import { LocaleProvider } from "@/components/ui/locale-provider"`,
     code: `<LocaleProvider locale="zh-CN">
   <App />
 </LocaleProvider>`,
   },
-  examples: [{ id: "overrides", title: "Overrides", description: "Use `labels` to reword a few strings and keep the rest." }],
+  examples: [{ id: "overrides", title: { en: "Overrides", zh: "覆盖设置" },  }],
   notes: [
     { title: "Locales", body: "Built in are `en` (the default without a provider) and `zh-CN`; a tag matches by language too, so `zh-Hans` and `zh-TW` get `zh-CN`. Any other tag keeps the parent's strings, which you can replace with `labels`." },
     { title: "Merging", body: "`labels` is merged over the locale's set key by key, and nested providers merge over their parent. A component prop such as `label` or `jumpLabel` still wins over the provider." },

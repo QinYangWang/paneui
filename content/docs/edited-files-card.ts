@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Reviews and undoes an agent’s file changes.", "zh": "查看并撤销助手的文件修改。"},
   usage: {
     imports: `import { EditedFilesCard } from "@/components/ui/edited-files-card"`,
     code: `<EditedFilesCard
@@ -10,8 +11,8 @@ export default {
 />`,
   },
   examples: [
-    { id: "unified-diff", title: "Unified Diff", description: "Pass a unified `diff` per file when you have a patch instead of both versions." },
-    { id: "collapsed", title: "Collapsed", description: "Set `defaultOpen={false}` to show only the summary, and pass `additions` / `deletions` when you have counts but no diff." },
+    { id: "unified-diff", title: { en: "Unified Diff", zh: "统一差异" },  },
+    { id: "collapsed", title: { en: "Collapsed", zh: "收起" },  },
   ],
   notes: [
     { title: "Narrow widths", body: "Below 20rem of card width (phones, split panes), Undo shows only its glyph (its accessible name stays “Undo”) and the summary clips instead of running under the buttons." },

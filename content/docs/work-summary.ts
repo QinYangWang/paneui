@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Summarises the steps an agent took during one turn.", "zh": "汇总助手本轮的工作步骤。"},
   usage: {
     imports: `import { WorkSummary, WorkSummaryStep, WorkSummaryThought } from "@/components/ui/work-summary"`,
     code: `<WorkSummary duration={25}>
@@ -12,9 +13,9 @@ export default {
 ├── WorkSummaryThought
 └── WorkSummaryStep`,
   examples: [
-    { id: "running", title: "Running", description: "Use `running` with `startedAt` while the agent is still working." },
-    { id: "with-output", title: "With Output", description: "Use step children for command output, a diff or an error." },
-    { id: "collapsible-steps", title: "Collapsible Steps", description: "Use when a turn has many steps with long output." },
+    { id: "running", title: { en: "Running", zh: "运行中" },  },
+    { id: "with-output", title: { en: "With Output", zh: "带输出" }, description: { en: "Use step children for command output, a diff or an error.", zh: "适用于包含命令输出、差异或错误的步骤。" } },
+    { id: "collapsible-steps", title: { en: "Collapsible Steps", zh: "可收起步骤" }, description: { en: "Use when a turn has many steps with long output.", zh: "适用于步骤多且输出较长的工作过程。" } },
   ],
   notes: [
     { title: "ACP", body: "`kind` and `status` use the Agent Client Protocol's `ToolKind` and `ToolCallStatus` values, so `tool_call` updates map straight onto steps." },

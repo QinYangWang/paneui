@@ -3,6 +3,7 @@ import type { ComponentDoc } from "@/lib/doc-types"
 const BASE = "https://base-ui.com/react/components/dialog"
 
 export default {
+  summary: {"en": "Dialog that moves between several views inside one panel.", "zh": "在同一对话框中切换视图。"},
   baseUi: { name: "Dialog", href: BASE },
   usage: {
     imports: `import { MorphingModal, MorphingModalContent, MorphingModalLink, MorphingModalTitle, MorphingModalTrigger, MorphingModalView } from "@/components/ui/morphing-modal"`,
@@ -33,18 +34,16 @@ export default {
   examples: [
     {
       id: "steps",
-      title: "Multi-step Flow",
-      description: "Use for a wizard whose own buttons call `push` from `useMorphingModal()`.",
+      title: { en: "Multi-step Flow", zh: "多步流程" },
     },
     {
       id: "view-change",
-      title: "Nested Settings",
-      description: "Use when you need to know which view the user is on, through `onViewChange`.",
+      title: { en: "Nested Settings", zh: "嵌套设置" },
     },
     {
       id: "no-close-button",
-      title: "Without Close Button",
-      description: "Use for confirmations that should end with an explicit choice.",
+      title: { en: "Without Close Button", zh: "无关闭按钮" },
+      description: { en: "Use for confirmations that should end with an explicit choice.", zh: "适用于必须明确作出选择的确认流程。" },
     },
   ],
   notes: [

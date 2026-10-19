@@ -1,6 +1,6 @@
 # Foundations
 
-Every value lives in the theme stylesheet (`app/globals.css` in a project that installed `@taimatsu/theme`).
+Every value lives in the theme stylesheet (`app/globals.css` in a project that installed `@paneui/theme`).
 Use the tokens below; add a new one only in its own reviewed change, with a light and a `.dark` value and
 an `@theme inline` mapping.
 

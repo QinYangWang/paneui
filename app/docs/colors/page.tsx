@@ -32,7 +32,7 @@ export default function Colors() {
     <GuidePage
       href="/docs/colors"
       toc={toc}
-      lede="Pick an accent and a radius for the whole site, then copy the CSS."
+      lede={{ en: "Choose an accent and corner radius.", zh: "选择主题色与圆角。" }}
     >
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent">One accent, every control</GuideH2>

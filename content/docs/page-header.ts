@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Title, context and actions at the top of an app page.", "zh": "显示页面标题与操作。"},
   usage: {
     imports: `import {
   PageHeader,
@@ -26,11 +27,10 @@ export default {
 │   └── PageHeaderDescription
 └── PageHeaderActions`,
   examples: [
-    { id: "basic", title: "Basic" },
+    { id: "basic", title: { en: "Basic", zh: "基础" } },
     {
       id: "reading",
-      title: "Reading Page",
-      description: "Use `size=\"lg\"` on docs and guide pages, with the eyebrow and description straight under `PageHeader`.",
+      title: { en: "Reading Page", zh: "阅读页面" },
     },
   ],
   notes: [{ title: "Layout", body: "Actions wrap under the title on narrow screens. The title is the page's `h1`." }],

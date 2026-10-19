@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "tab-strip",
   "title": "Tab Strip",
-  "description": "Switches between open documents or panels, with closing and reordering.",
+  "description": "Switches, closes and reorders document tabs.",
   "dependencies": [
     "motion",
     "@base-ui/react"

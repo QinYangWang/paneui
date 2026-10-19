@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "og-image-post-route",
   "title": "OG Image Post Route",
-  "description": "Per-post share image with seeded cover art.",
+  "description": "Creates a share image for each post.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/og-image.json"

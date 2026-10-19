@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Styles long-form text in docs, articles and chat messages.", "zh": "为长篇正文设置排版。"},
   usage: {
     imports: `/* app/globals.css, after Tailwind */
 @import "./typeset.css";`,
@@ -9,12 +10,11 @@ export default {
   examples: [
     {
       id: "content-slots",
-      title: "Prose in Tabs",
-      description: "Use `typeset` on a tab, accordion or collapsible panel (or `CardContent`) when its content is prose.",
+      title: { en: "Prose in Tabs", zh: "标签页正文" },
     },
     {
       id: "nested",
-      title: "Nested Panels",
+      title: { en: "Nested Panels", zh: "嵌套面板" },
     },
   ],
   api: [],

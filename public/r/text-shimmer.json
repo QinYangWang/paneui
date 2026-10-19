@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "text-shimmer",
   "title": "Text Shimmer",
-  "description": "Marks text as in progress with a moving highlight.",
+  "description": "Highlights text while work is in progress.",
   "dependencies": [],
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/theme.json"

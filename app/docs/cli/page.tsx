@@ -1,3 +1,5 @@
+import { T } from "@/lib/site-locale"
+
 import type { TocEntry } from "@/components/docs/doc-toc"
 import { Code, GuideH2, GuideH3, GuidePage, TextLink } from "@/components/docs/guide-page"
 import { CLI_NAME, InstallCommand } from "@/components/docs/install-command"
@@ -99,7 +101,7 @@ export default function CliPage() {
     },
   ]
   const cliCommands: { usage: string; what: React.ReactNode }[] = [
-    { usage: "add <items...>", what: <>Adds items and records them in <Code>taimatsu.json</Code>.</> },
+    { usage: "add <items...>", what: <>Adds items and records them in <Code>paneui.json</Code>.</> },
     { usage: "search [query]", what: <>Finds items by name, title, description or category. <Code>list</Code> shows them all.</> },
     { usage: "info <item>", what: "Lists an item's dependencies and files, and where the files go." },
     { usage: "update", what: "Reinstalls the theme and every installed item, then your accent, radius and icon style." },
@@ -208,19 +210,19 @@ export default function CliPage() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="the-registry">The registry</GuideH2>
         <p className="text-muted-foreground">
-          taimatsu/ui is published as one static JSON file per item at <Code>{SITE_URL}/r/&lt;name&gt;.json</Code>. Register
+          paneui is published as one static JSON file per item at <Code>{SITE_URL}/r/&lt;name&gt;.json</Code>. Register
           the namespace so every command below accepts short names like <Code>{ns}/button</Code>.
         </p>
         <DocsCode code={config} filename="components.json" language="json" />
       </section>
 
       <section className="flex flex-col gap-4">
-        <GuideH2 id="own-cli">The {CLI_NAME} CLI</GuideH2>
+        <GuideH2 id="own-cli"><T en={`The ${CLI_NAME} CLI`} zh={`${CLI_NAME} 命令行工具`} /></GuideH2>
         <p className="text-muted-foreground">
           Runs the shadcn CLI for you and records what it installs, so one command updates every item and the theme. Both
           CLIs write the same files; use either.
         </p>
-        <InstallCommand cli="taimatsu" args="init" />
+        <InstallCommand cli="paneui" args="init" />
         <p className="text-muted-foreground">
           Registers the namespace above in <Code>components.json</Code>, running <Code>shadcn init</Code> first if there
           is none, and installs the theme.
@@ -246,7 +248,7 @@ export default function CliPage() {
           items you added with the shadcn CLI. Templates are skipped unless you pass <Code>--templates</Code>, because
           reinstalling one replaces its routes.
         </p>
-        <InstallCommand cli="taimatsu" args="update --dry-run" />
+        <InstallCommand cli="paneui" args="update --dry-run" />
       </section>
 
       <section className="flex flex-col gap-4">

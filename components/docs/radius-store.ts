@@ -95,5 +95,5 @@ export function useRadiusState(): RadiusState {
 
 /** CSS to paste into a project for a radius (the `--radius` override). */
 export function radiusCss(rem: number, label: string) {
-  return `/* taimatsu/ui radius: ${label} */\n:root {\n  --radius: ${rem}rem;\n}\n`
+  return `/* paneui radius: ${label} */\n:root {\n  --radius: ${rem}rem;\n}\n`
 }

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "textarea",
   "title": "Textarea",
-  "description": "Takes multi-line text input that grows with its content.",
+  "description": "A text field that grows with your writing.",
   "dependencies": [
     "class-variance-authority"
   ],

@@ -4,7 +4,7 @@ export default function SeparatorDemo() {
   return (
     <div className="flex w-full max-w-xs flex-col gap-3 text-ui">
       <div className="flex flex-col gap-1">
-        <p className="font-medium">taimatsu/ui</p>
+        <p className="font-medium">paneui</p>
         <p className="text-muted-foreground">Components for desktop-density apps.</p>
       </div>
       <Separator />

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Lets people edit cells and add or remove rows and columns.", "zh": "编辑表格内容与结构。"},
   usage: {
     imports: `import { EditableTable } from "@/components/ui/table-editable"`,
     code: `<EditableTable
@@ -12,18 +13,18 @@ export default {
   examples: [
     {
       id: "read-only",
-      title: "Read Only",
-      description: "Use when people should browse the data but not change it.",
+      title: { en: "Read Only", zh: "只读" },
+      description: { en: "Use when people should browse the data but not change it.", zh: "适用于只允许浏览的数据。" },
     },
     {
       id: "cell-edit",
-      title: "Cell Edit Callback",
-      description: "Use when you save each edit as it commits instead of holding every row in state.",
+      title: { en: "Cell Edit Callback", zh: "单元格编辑回调" },
+      description: { en: "Use when you save each edit as it commits instead of holding every row in state.", zh: "适用于每次修改后立即保存的场景。" },
     },
     {
       id: "create-row",
-      title: "Custom New Rows",
-      description: "Use when new rows or columns need ids or defaults from your own data.",
+      title: { en: "Custom New Rows", zh: "自定义新行" },
+      description: { en: "Use when new rows or columns need ids or defaults from your own data.", zh: "适用于新增数据需要自定义标识或默认值的场景。" },
     },
   ],
   notes: [

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Makes any element lean toward a nearby cursor.", "zh": "让元素响应附近的指针。"},
   usage: {
     imports: `import { Magnetic } from "@/components/ui/magnetic"`,
     code: `<Magnetic>
@@ -10,16 +11,15 @@ export default {
   examples: [
     {
       id: "strength",
-      title: "Strength",
+      title: { en: "Strength", zh: "强度" },
     },
     {
       id: "range",
-      title: "Range",
+      title: { en: "Range", zh: "范围" },
     },
     {
       id: "spring",
-      title: "Spring and Disabled",
-      description: "Use `disabled` to switch the effect off without unwrapping, e.g. while a button is busy.",
+      title: { en: "Spring and Disabled", zh: "弹簧动画与禁用" },
     },
   ],
   notes: [

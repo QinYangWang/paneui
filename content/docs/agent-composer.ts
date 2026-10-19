@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Prompt input for coding agents with file mentions and commands.", "zh": "输入提示并引用文件或命令。"},
   usage: {
     imports: `import { AgentComposer, AgentComposerBanner } from "@/components/agent-composer"`,
     code: `<AgentComposer
@@ -15,8 +16,8 @@ export default {
   composition: `AgentComposer
 └── AgentComposerBanner (in header)`,
   examples: [
-    { id: "minimal", title: "Minimal", description: "Use for plain chat; without `onAttach` and `onVoice` there are no extra buttons." },
-    { id: "labels", title: "Labels and Input Props", description: "Use `labels` for another language and `inputProps` for an id, a name or the Enter key hint." },
+    { id: "minimal", title: { en: "Minimal", zh: "简洁" },  },
+    { id: "labels", title: { en: "Labels and Input Props", zh: "标签与输入属性" },  },
   ],
   notes: [
     { title: "Keyboard", body: "Enter sends, Shift+Enter adds a line and Escape stops a busy agent. With suggestions open, arrow keys move, Enter or Tab inserts and Escape closes them." },

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Single-line text field.", "zh": "输入单行文本。"},
   baseUi: {
     name: "Input",
     href: "https://base-ui.com/react/components/input",
@@ -12,24 +13,22 @@ export default {
   examples: [
     {
       id: "types",
-      title: "Types",
+      title: { en: "Types", zh: "类型" },
     },
     {
       id: "file",
-      title: "File",
+      title: { en: "File", zh: "文件" },
     },
-    { id: "disabled", title: "Disabled" },
+    { id: "disabled", title: { en: "Disabled", zh: "禁用" } },
     {
       id: "invalid",
-      title: "Invalid",
-      description: "Set `aria-invalid` when validation fails, and point `aria-describedby` at the error text.",
+      title: { en: "Invalid", zh: "无效" },
     },
     {
       id: "with-button",
-      title: "With Button",
-      description: "Use for search or subscribe rows; the input fills the row (`w-full`) and the button keeps its width.",
+      title: { en: "With Button", zh: "带按钮" },
     },
-    { id: "sizes", title: "Sizes", description: "Match the size of the button beside it." },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" }, description: { en: "Match the size of the button beside it.", zh: "与相邻按钮使用相同尺寸。" } },
   ],
   notes: [
     {

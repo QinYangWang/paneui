@@ -1,5 +1,8 @@
 "use client"
 
+import { useT } from "@/lib/site-locale"
+import { siteCopy } from "@/lib/site-copy"
+
 import * as React from "react"
 import { useSearchParams } from "next/navigation"
 
@@ -9,6 +12,8 @@ import { ThemeSync } from "./theme-sync"
 
 /** The demo or example named in the query string, centred on the page background. */
 export function PreviewFrame() {
+  const t = useT()
+  const label = (text: string) => t(siteCopy(text))
   const params = useSearchParams()
   const demo = params.get("demo")
   const example = params.get("example")
@@ -17,7 +22,7 @@ export function PreviewFrame() {
     <>
       <ThemeSync />
       <div data-slot="preview-frame" className="flex min-h-svh items-center justify-center p-6 sm:p-10">
-        {Demo ? <Demo /> : <p className="text-ui text-muted-foreground">Nothing to preview.</p>}
+        {Demo ? <Demo /> : <p className="text-ui text-muted-foreground">{label("Nothing to preview.")}</p>}
       </div>
     </>
   )

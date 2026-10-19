@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Picks values with a scrolling wheel.", "zh": "通过滚轮选择数值。"},
   usage: {
     imports: `import { WheelPicker } from "@/components/ui/wheel-picker"`,
     code: `<WheelPicker aria-label="Size" options={["S", "M", "L"]} defaultValue="M" />`,
@@ -10,25 +11,23 @@ export default {
   examples: [
     {
       id: "single",
-      title: "Single Wheel",
-      description: "Use a single wheel for one short list, such as sizes or quantities.",
+      title: { en: "Single Wheel", zh: "单个滚轮" },
+      description: { en: "Use a single wheel for one short list, such as sizes or quantities.", zh: "适用于尺码或数量等短列表。" },
     },
     {
       id: "disabled-options",
-      title: "Disabled Options",
-      description: "Use for options that exist but can't be picked right now.",
+      title: { en: "Disabled Options", zh: "禁用选项" },
+      description: { en: "Use for options that exist but can't be picked right now.", zh: "适用于暂时无法选择的选项。" },
     },
     {
       id: "visible-count",
-      title: "Rows and Height",
-      description: "Use an odd `visibleCount` so the selected row sits in the middle.",
+      title: { en: "Rows and Height", zh: "行数与高度" },
     },
     {
       id: "form",
-      title: "In a Form",
-      description: "Use `name` on each wheel to submit its value with a form.",
+      title: { en: "In a Form", zh: "用于表单" },
     },
-    { id: "disabled", title: "Disabled" },
+    { id: "disabled", title: { en: "Disabled", zh: "禁用" } },
   ],
   notes: [
     {

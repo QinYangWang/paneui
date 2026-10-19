@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Picks a value or range by dragging.", "zh": "拖动选择数值或范围。"},
   baseUi: {
     name: "Slider",
     href: "https://base-ui.com/react/components/slider",
@@ -12,25 +13,24 @@ export default {
   examples: [
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when the value is shown or used elsewhere.",
+      title: { en: "Controlled", zh: "受控" },
+      description: { en: "Use when the value is shown or used elsewhere.", zh: "适用于数值与其他界面联动的场景。" },
     },
     {
       id: "vertical",
-      title: "Vertical",
-      description: "Use in tall, narrow spaces such as a mixer column.",
+      title: { en: "Vertical", zh: "纵向" },
+      description: { en: "Use in tall, narrow spaces such as a mixer column.", zh: "适用于混音器等狭长空间。" },
     },
     {
       id: "tick-count",
-      title: "Tick Count",
-      description: "Use when the steps matter, such as a rating.",
+      title: { en: "Tick Count", zh: "刻度数量" },
+      description: { en: "Use when the steps matter, such as a rating.", zh: "适用于评分等固定步长的数值。" },
     },
-    { id: "disabled", title: "Disabled" },
-    { id: "sizes", title: "Sizes" },
+    { id: "disabled", title: { en: "Disabled", zh: "禁用" } },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" } },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

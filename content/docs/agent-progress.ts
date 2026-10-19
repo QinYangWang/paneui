@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows how long an agent has been working.", "zh": "显示助手的运行时间。"},
   usage: {
     imports: `import { AgentProgress } from "@/components/ui/agent-progress"`,
     code: `<AgentProgress label="Searching" />`,
@@ -8,23 +9,19 @@ export default {
   examples: [
     {
       id: "with-meta",
-      title: "With Meta",
-      description: "Use `meta` for a trailing detail such as a token or file count.",
+      title: { en: "With Meta", zh: "附加信息" },
     },
     {
       id: "controlled",
-      title: "Controlled Elapsed",
-      description: "Pass `elapsed` in seconds when the timer must match your own clock.",
+      title: { en: "Controlled Elapsed", zh: "受控计时" },
     },
     {
       id: "stopped",
-      title: "Stopped",
-      description: "Set `running={false}` when the run pauses or ends; the timer freezes at its last value.",
+      title: { en: "Stopped", zh: "已停止" },
     },
     {
       id: "formats",
-      title: "Timer Formats",
-      description: "Use `initialElapsed` when resuming a run that already started.",
+      title: { en: "Timer Formats", zh: "计时格式" },
     },
   ],
   notes: [

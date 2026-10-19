@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows a keyboard key or shortcut.", "zh": "显示按键或快捷键。"},
   "usage": {
     "imports": "import { Kbd, KbdGroup } from \"@/components/ui/kbd\"",
     "code": "<KbdGroup>\n  <Kbd>⌘</Kbd>\n  <Kbd>K</Kbd>\n</KbdGroup>"
@@ -8,11 +9,11 @@ export default {
   "examples": [
     {
       "id": "sizes",
-      "title": "Sizes"
+      "title": {"en":"Sizes","zh":"尺寸"}
     },
     {
       "id": "in-button",
-      "title": "In a Button"
+      "title": {"en":"In a Button","zh":"用于按钮"}
     }
   ],
   "notes": [

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Edits and exports email templates.", "zh": "编辑邮件模板并导出。"},
   usage: {
     imports: `import { EmailEditor, renderEmailHtml } from "@/components/email-editor/email-editor"
 import { defaultEmailVariables, welcomeEmail } from "@/components/email-editor/templates"`,
@@ -22,9 +23,9 @@ const html = await renderEmailHtml(email, { variables: { first_name: "Ada" } })`
 
 renderEmailHtml(email, options) · renderEmailText · EmailTemplate (email component tree)`,
   examples: [
-    { id: "blank", title: "Blank", description: "Leave out `defaultValue` to start from an empty email, then press `/` for blocks and `{{` for variables." },
-    { id: "mobile-preview", title: "Mobile Preview", description: "Set `defaultView=\"preview\"` and `defaultDevice=\"mobile\"` when the editor opens for review on a phone layout." },
-    { id: "render-html", title: "Render HTML", description: "Call `renderEmailHtml` without values to hand a template to your email provider, or with `variables` for final HTML." },
+    { id: "blank", title: { en: "Blank", zh: "空白" },  },
+    { id: "mobile-preview", title: { en: "Mobile Preview", zh: "手机预览" },  },
+    { id: "render-html", title: { en: "Render HTML", zh: "渲染 HTML" },  },
   ],
   notes: [
     { title: "Blocks", body: "Show if renders a block only when a variable is set, and Repeat renders it once per item of a list variable. Selecting a button, image, logo or spacer opens its settings." },

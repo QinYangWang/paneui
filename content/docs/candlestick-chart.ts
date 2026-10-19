@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Charts price movement over time with volume.", "zh": "展示价格走势与成交量。"},
   usage: {
     imports: `import { CandlestickChart, generateCandles } from "@/components/ui/candlestick-chart"`,
     code: `<CandlestickChart candles={generateCandles(40)} label="ACME one-minute candles" />`,
@@ -8,28 +9,23 @@ export default {
   examples: [
     {
       id: "daily",
-      title: "Daily Candles",
-      description: "Pass `formatTime` and `formatPrice` to match your interval and currency.",
+      title: { en: "Daily Candles", zh: "日线" },
     },
     {
       id: "without-volume",
-      title: "Without Volume",
-      description: "Use `showVolume={false}` when candles have no `volume` or price needs the whole plot.",
+      title: { en: "Without Volume", zh: "无成交量" },
     },
     {
       id: "compact",
-      title: "Compact",
-      description: "Use `showReadout={false}` and a smaller `height` for small cards.",
+      title: { en: "Compact", zh: "紧凑" },
     },
     {
       id: "last-price",
-      title: "Last Price",
-      description: "Use `lastPrice` for a quote newer than the final close, like after hours.",
+      title: { en: "Last Price", zh: "最新价格" },
     },
     {
       id: "volume-ratio",
-      title: "Volume Ratio",
-      description: "Use `volumeRatio` to give volume more or less of the plot.",
+      title: { en: "Volume Ratio", zh: "成交量占比" },
     },
   ],
   notes: [

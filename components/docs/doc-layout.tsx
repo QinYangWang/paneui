@@ -1,3 +1,6 @@
+import { LocalizedDate, LocalizedText } from "./localized"
+import type { Localized } from "@/lib/site-locale"
+
 import type * as React from "react"
 import Link from "next/link"
 
@@ -33,7 +36,7 @@ export function DocHeader({
   eyebrow: string
   eyebrowHref: string
   title: string
-  lede?: React.ReactNode
+  lede?: React.ReactNode | Localized
   children?: React.ReactNode
 }) {
   return (
@@ -43,22 +46,20 @@ export function DocHeader({
           href={eyebrowHref}
           className="rounded-sm font-medium transition-colors duration-150 outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
         >
-          {eyebrow}
+          <LocalizedText text={eyebrow} />
         </Link>
       </PageHeaderEyebrow>
       <PageHeaderContent>
-        <PageHeaderTitle>{title}</PageHeaderTitle>
+        <PageHeaderTitle><LocalizedText text={title} /></PageHeaderTitle>
       </PageHeaderContent>
       <PageHeaderActions>
         <PageActions markdownPath={markdownPath(href)} pagePath={href === "/docs" ? "/docs/" : `${href}/`} title={title} />
       </PageHeaderActions>
-      {lede && <PageHeaderDescription>{lede}</PageHeaderDescription>}
+      {lede && <PageHeaderDescription>{typeof lede === "object" && "en" in lede ? <LocalizedText text={lede} /> : typeof lede === "string" ? <LocalizedText text={lede} /> : lede}</PageHeaderDescription>}
       {children && <div className="flex basis-full flex-col gap-3">{children}</div>}
     </PageHeader>
   )
 }
-
-const dateFormat = new Intl.DateTimeFormat("en", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })
 
 function PageCard({ page, dir }: { page: DocsPageRef; dir: "prev" | "next" }) {
   const Arrow = dir === "prev" ? ArrowLeftIcon : ArrowRightIcon
@@ -71,11 +72,11 @@ function PageCard({ page, dir }: { page: DocsPageRef; dir: "prev" | "next" }) {
     >
       <span className="flex items-center gap-1 text-ui-sm text-muted-foreground">
         {dir === "prev" && <Arrow className="size-3.5" />}
-        {dir === "prev" ? "Previous" : "Next"}
+        <LocalizedText text={dir === "prev" ? "Previous" : "Next"} />
         {dir === "next" && <Arrow className="size-3.5" />}
       </span>
-      <span className="w-full truncate text-ui-lg font-medium text-foreground">{page.title}</span>
-      <span className="w-full truncate text-ui-sm text-muted-foreground">{page.section}</span>
+      <span className="w-full truncate text-ui-lg font-medium text-foreground"><LocalizedText text={page.title} /></span>
+      <span className="w-full truncate text-ui-sm text-muted-foreground"><LocalizedText text={page.section} /></span>
     </Card>
   )
 }
@@ -91,7 +92,7 @@ export function DocFooter({ prev, next, updated }: { prev?: DocsPageRef; next?: 
       </nav>
       {updated && (
         <p className="text-ui-sm text-muted-foreground">
-          Last updated <time dateTime={updated.toISOString()}>{dateFormat.format(updated)}</time>
+          <LocalizedText text="Last updated" /> <LocalizedDate iso={updated.toISOString()} />
         </p>
       )}
     </footer>

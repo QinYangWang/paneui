@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Displays code from an agent, including code still streaming in.", "zh": "显示编码助手输出的代码。"},
   usage: {
     imports: `import { AgentCodeBlock } from "@/components/ui/agent-code-block"`,
     code: `<AgentCodeBlock filename="lib/greet.ts" code={code} />`,
@@ -8,33 +9,29 @@ export default {
   examples: [
     {
       id: "without-header",
-      title: "Without Header",
-      description: "Use a bare block for inline snippets, passing `language` since there is no `filename`.",
+      title: { en: "Without Header", zh: "无标题栏" },
     },
     {
       id: "excerpt",
-      title: "Excerpt",
-      description: "Use `startLine` and `highlightLines` when quoting part of a larger file.",
+      title: { en: "Excerpt", zh: "片段" },
     },
     {
       id: "no-line-numbers",
-      title: "Without Line Numbers",
-      description: "Turn line numbers off for shell commands and short snippets.",
+      title: { en: "Without Line Numbers", zh: "无行号" },
+      description: { en: "Turn line numbers off for shell commands and short snippets.", zh: "适用于命令和短代码片段。" },
     },
     {
       id: "wrap",
-      title: "Wrap",
-      description: "Use `wrap` for prose-like output where horizontal scrolling hides the point.",
+      title: { en: "Wrap", zh: "换行" },
     },
     {
       id: "not-copyable",
-      title: "Not Copyable",
-      description: "Turn copying off for read-only output that shouldn't be pasted back.",
+      title: { en: "Not Copyable", zh: "禁止复制" },
+      description: { en: "Turn copying off for read-only output that shouldn't be pasted back.", zh: "适用于不应再次粘贴执行的只读输出。" },
     },
     {
       id: "copy-button",
-      title: "Copy Button",
-      description: "Use `CodeCopyButton` to add the same copy action to your own surfaces.",
+      title: { en: "Copy Button", zh: "复制按钮" },
     },
   ],
   notes: [

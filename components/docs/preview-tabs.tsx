@@ -1,5 +1,8 @@
 "use client"
 
+import { useT } from "@/lib/site-locale"
+import { siteCopy } from "@/lib/site-copy"
+
 import * as React from "react"
 
 import { ExternalLinkIcon, MaximizeIcon, MonitorIcon, SmartphoneIcon, TabletIcon } from "@/components/icons"
@@ -100,6 +103,8 @@ export function PreviewTabs({
   code: React.ReactNode
   className?: string
 }) {
+  const t = useT()
+  const label = (text: string) => t(siteCopy(text))
   const Demo = example ? examples[example] : name ? demos[name] : undefined
   const [tab, setTab] = React.useState("preview")
   const [viewport, setViewport] = React.useState<Viewport>("fit")
@@ -112,20 +117,20 @@ export function PreviewTabs({
     <Tabs value={tab} onValueChange={(v) => setTab(String(v))} className={className}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <TabsList>
-          <TabsTab value="preview">Preview</TabsTab>
-          <TabsTab value="code">Code</TabsTab>
+          <TabsTab value="preview">{label("Preview")}</TabsTab>
+          <TabsTab value="code">{label("Code")}</TabsTab>
         </TabsList>
         {tab === "preview" && !templatePath && (
           <div data-slot="preview-toolbar" className="ms-auto flex flex-wrap items-center gap-2">
             {/* Device widths need room to compare against; small screens keep the inline preview. */}
             <Tabs value={viewport} onValueChange={(v) => isViewport(v) && setViewport(v)} className="max-md:hidden">
-              <TabsList aria-label="Viewport">
+              <TabsList aria-label={label("Viewport")}>
                 {VIEWPORTS.map((v) => (
                   <Tooltip key={v.value}>
-                    <TooltipTrigger render={<TabsTab value={v.value} aria-label={v.label} />}>
+                    <TooltipTrigger render={<TabsTab value={v.value} aria-label={label(v.label)} />}>
                       <v.icon />
                     </TooltipTrigger>
-                    <TooltipContent>{v.width ? `${v.label}, ${v.width}px` : v.label}</TooltipContent>
+                    <TooltipContent>{v.width ? `${label(v.label)}, ${v.width}px` : label(v.label)}</TooltipContent>
                   </Tooltip>
                 ))}
               </TabsList>
@@ -138,13 +143,13 @@ export function PreviewTabs({
                     size="icon-sm"
                     nativeButton={false}
                     render={<a href={src} target="_blank" rel="noreferrer" />}
-                    aria-label="Open preview in a new tab"
+                    aria-label={label("Open preview in a new tab")}
                   />
                 }
               >
                 <ExternalLinkIcon className="rtl:-scale-x-100" />
               </TooltipTrigger>
-              <TooltipContent>Open in a new tab</TooltipContent>
+              <TooltipContent>{label("Open in a new tab")}</TooltipContent>
             </Tooltip>
           </div>
         )}

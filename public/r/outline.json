@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "outline",
   "title": "Outline",
-  "description": "Links to the page's headings and follows the section being read.",
+  "description": "Follows your reading position in the page outline.",
   "dependencies": [
     "@base-ui/react",
     "motion"

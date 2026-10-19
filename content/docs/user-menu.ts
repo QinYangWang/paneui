@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Opens account actions for the signed-in user.", "zh": "打开账户操作菜单。"},
   baseUi: { name: "Menu", href: "https://base-ui.com/react/components/menu" },
   usage: {
     imports: `import { UserMenu } from "@/components/ui/user-menu"`,
@@ -10,7 +11,7 @@ export default {
   <MenuItem variant="destructive">Sign out</MenuItem>
 </UserMenu>`,
   },
-  examples: [{ id: "compact", title: "Compact", description: "Use `compact` in a top bar." }],
+  examples: [{ id: "compact", title: { en: "Compact", zh: "紧凑" },  }],
   notes: [{ title: "In a sidebar", body: "Put it in `SidebarFooter`; `collapsed` shows only the avatar in the icon rail. The menu opens upward by default (`side=\"top\"`)." }],
   api: [
     {

@@ -1,15 +1,16 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Generated cover images for posts and cards, drawn in theme colours.", "zh": "为文章和卡片生成封面。"},
   usage: {
     imports: `import { CoverArt } from "@/components/ui/cover-art"`,
     code: `<CoverArt variant={2} className="aspect-video" />
 <CoverArt seed={post.slug} aria-label={post.title} className="aspect-video rounded-xl" />`,
   },
   examples: [
-    { id: "seed", title: "From a Seed", description: "Use `seed` for lists of posts or projects, so each one keeps the same cover on every render." },
-    { id: "tones", title: "Mirror and Tones", description: "Use `mirror` and `ramp` to vary a fixed composition across a series." },
-    { id: "rtl", title: "RTL", description: "For right-to-left pages, set `dir=\"rtl\"` on a parent; the digits stay left to right." },
+    { id: "seed", title: { en: "From a Seed", zh: "按种子生成" },  },
+    { id: "tones", title: { en: "Mirror and Tones", zh: "镜像与色调" },  },
+    { id: "rtl", title: { en: "RTL", zh: "从右到左" },  },
   ],
   notes: [
     {

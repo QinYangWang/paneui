@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Turns a single setting on or off.", "zh": "开启或关闭一项设置。"},
   baseUi: {
     name: "Switch",
     href: "https://base-ui.com/react/components/switch",
@@ -12,28 +13,24 @@ export default {
   examples: [
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Pair `checked` with `onCheckedChange` when the rest of the UI reacts to the value.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "with-description",
-      title: "With Description",
-      description: "Use in settings rows; point a `Label` at the switch with `htmlFor` and its `id`.",
+      title: { en: "With Description", zh: "带说明" },
     },
     {
       id: "disabled",
-      title: "Disabled",
+      title: { en: "Disabled", zh: "禁用" },
     },
     {
       id: "read-only",
-      title: "Read Only",
-      description: "Use `readOnly` for values the user can see but not change; it stays focusable.",
+      title: { en: "Read Only", zh: "只读" },
     },
-    { id: "sizes", title: "Sizes" },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" } },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

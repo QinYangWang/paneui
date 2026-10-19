@@ -1,5 +1,5 @@
 /*
- * taimatsu/ui icon set. Puffy, single-colour icons on an 18x18 grid.
+ * paneui icon set. Puffy, single-colour icons on an 18x18 grid.
  *
  * Drawing rules: ~2.5px padding; filled shapes use `puff` (stroke 1.5, round
  * join, fill currentColor), open glyphs use `line` (stroke 1.6, round caps and
@@ -14,7 +14,7 @@
  *   Navigation uses the solid family (InboxIcon, CalendarDaysIcon,
  *   TerminalSquareIcon instead of the ring/line Mail, Calendar, Terminal).
  * - Nav / sidebar / palette icons: 16px, muted; active = foreground; bare.
- * - Title / header / card icons sit in an IconChip (@taimatsu/icon-chip): a
+ * - Title / header / card icons sit in an IconChip (@paneui/icon-chip): a
  *   raised squircle, sm 24 / default 32 / lg 40 / xl 48, tone neutral,
  *   primary, success, warning, destructive or solid.
  * - Inline icons inherit size and colour from their button, badge or text.
@@ -1085,16 +1085,14 @@ export const ClipboardListIcon = (p: IconProps) => (
 
 /* ───────────────────────── Brand marks (puff) ───────────────────────── */
 
-/** The taimatsu/ui mark: a soft rounded square with a "q" knocked out. */
-export const TaimatsuLogoIcon = (p: IconProps) => (
+/** The paneui mark: a window with four panes. */
+export const PaneuiLogoIcon = (p: IconProps) => (
   <Icon {...p}>
-    {/* Outlined rounded square holding a stroked uppercase T. */}
-    <rect {...line} x="2.6" y="2.6" width="12.8" height="12.8" rx="3.6" />
-    <path {...line} d="M5.9 6.3h6.2M9 6.3v5.6" />
+    <rect {...line} x="2" y="2" width="14" height="14" rx="4" />
+    <path {...line} d="M2 9h14M9 2v14" />
   </Icon>
 );
 
-/** GitHub's octocat, simplified to a single puffy silhouette with its tail. */
 export const GithubIcon = (p: IconProps) => (
   <Icon {...p}>
     <path

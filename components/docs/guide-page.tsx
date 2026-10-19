@@ -1,3 +1,5 @@
+import type { Localized } from "@/lib/site-locale"
+
 import type * as React from "react"
 import Link from "next/link"
 
@@ -53,7 +55,7 @@ function guideSources(href: string) {
  * GUIDE_PAGES, the page body, previous / next in sidebar order with the last-updated date, and
  * the "On this page" outline.
  */
-export function GuidePage({ href, toc, lede, children }: { href: string; toc?: TocEntry[]; lede?: React.ReactNode; children: React.ReactNode }) {
+export function GuidePage({ href, toc, lede, children }: { href: string; toc?: TocEntry[]; lede?: React.ReactNode | Localized; children: React.ReactNode }) {
   const page = GUIDE_PAGES.find((p) => p.href === href)!
   const { prev, next } = getPrevNext(href)
 

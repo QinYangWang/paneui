@@ -12,7 +12,7 @@ const initial: MorphingTabsItem[] = [
     icon: <FileIcon />,
     content: (
       <div className="space-y-2 text-sm">
-        <p className="font-medium">taimatsu/ui</p>
+        <p className="font-medium">paneui</p>
         <p className="text-muted-foreground">Soft, slightly skeuomorphic components with headless primitives and spring motion.</p>
       </div>
     ),
@@ -50,7 +50,7 @@ const initial: MorphingTabsItem[] = [
     id: "terminal",
     label: "Terminal",
     icon: <TerminalIcon />,
-    content: <p className="font-mono text-xs text-muted-foreground">$ pnpm dlx shadcn add @taimatsu/morphing-tabs</p>,
+    content: <p className="font-mono text-xs text-muted-foreground">$ pnpm dlx shadcn add @paneui/morphing-tabs</p>,
   },
 ]
 

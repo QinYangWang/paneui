@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Field that opens a calendar to pick one date.", "zh": "打开日历选择日期。"},
   "usage": {
     "imports": "import { DatePicker } from \"@/components/ui/date-picker\"",
     "code": "const [date, setDate] = React.useState<Date | null>(null)\n\n<DatePicker value={date} onValueChange={setDate} />"
@@ -8,7 +9,7 @@ export default {
   "examples": [
     {
       "id": "sizes",
-      "title": "Sizes"
+      "title": {"en":"Sizes","zh":"尺寸"}
     }
   ],
   "notes": [

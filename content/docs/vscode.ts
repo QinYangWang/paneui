@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Edit projects and run commands in the browser.", "zh": "在浏览器中编辑项目并运行命令。"},
   usage: {
     imports: `// One command, into a new app:
 // pnpm dlx shadcn@latest init -d -n my-editor https://qinyangwang.github.io/ui/r/vscode.json

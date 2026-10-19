@@ -2,10 +2,10 @@
 /**
  * Post-process `shadcn build` output (run as `pnpm registry:build`).
  *
- * 1. Absolute dependency URLs, so every item installs with no registry config. Items list their siblings as `@taimatsu/<name>` in registryDependencies. That only
+ * 1. Absolute dependency URLs, so every item installs with no registry config. Items list their siblings as `@paneui/<name>` in registryDependencies. That only
  * resolves when the user has added the namespace to components.json, which breaks the
  * one-command template install (`shadcn init <url>` into a fresh app). This rewrites each
- * `@taimatsu/<name>` in public/r/*.json to the absolute item URL
+ * `@paneui/<name>` in public/r/*.json to the absolute item URL
  * `${SITE_URL}/r/<name>.json`, which the CLI fetches directly. Users who did register
  * the namespace are unaffected (same files, fetched by URL).
  *
@@ -58,7 +58,7 @@ console.log(`registry-postbuild: ${changed} items rewritten (dependencies → ${
   const order = ["Foundations", "Forms", "Overlays", "Display", "Navigation", "Text", "Motion", "Data", "Agents", "Charts", "Blocks", "Templates"]
   // Getting started pages, read from components/docs/docs-pages.ts (href, title, description in order).
   const guideSrc = fs.readFileSync(path.join(root, "components/docs/docs-pages.ts"), "utf8")
-  const guides = [...guideSrc.matchAll(/href: "([^"]+)",\s*title: "([^"]+)",\s*description: "([^"]+)"/g)].map(([, href, title, description]) => ({ href, title, description }))
+  const guides = [...guideSrc.matchAll(/href: "([^"]+)",\s*title: "([^"]+)",\s*description: (?:\{ en: )?"([^"]+)"/g)].map(([, href, title, description]) => ({ href, title, description }))
   const mdOf = (href) => (href === "/docs" ? "/docs/index.md" : `${href}.md`)
   const visible = registry.items.filter((i) => !i.meta?.hidden)
   const byCat = new Map()

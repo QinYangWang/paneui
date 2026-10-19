@@ -89,7 +89,7 @@ export class Project {
     return url === templateFromBase(base)
   }
 
-  /** Adds or updates registries["@taimatsu"]. Returns false when it was already set to this base. */
+  /** Adds or updates registries["@paneui"]. Returns false when it was already set to this base. */
   registerNamespace(base: string): boolean {
     const json = this.componentsJson()
     if (!json) throw new CliError("components.json not found")
@@ -102,12 +102,15 @@ export class Project {
   }
 
   lockfile(): Lockfile | null {
-    if (!existsSync(this.lockfilePath)) return null
+    // Read the previous config name for one release; always write the new name.
+    const legacyName = "\u0074aimatsu.json"
+    const source = existsSync(this.lockfilePath) ? this.lockfilePath : path.join(this.cwd, legacyName)
+    if (!existsSync(source)) return null
     try {
-      const lock = JSON.parse(readFileSync(this.lockfilePath, "utf8")) as Partial<Lockfile>
+      const lock = JSON.parse(readFileSync(source, "utf8")) as Partial<Lockfile>
       return { ...lock, items: Array.isArray(lock.items) ? lock.items : [] }
     } catch (err) {
-      throw new CliError(`${LOCKFILE} is not valid JSON: ${(err as Error).message}`)
+      throw new CliError(`${path.basename(source)} is not valid JSON: ${(err as Error).message}`)
     }
   }
 

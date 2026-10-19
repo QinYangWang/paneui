@@ -1,10 +1,14 @@
 "use client"
 
+import { useT, useSiteLocale } from "@/lib/site-locale"
+import { siteCopy } from "@/lib/site-copy"
+import { LocaleProvider } from "@/registry/base-nova/ui/locale-provider"
+
 import * as React from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 
-import { GithubIcon, MenuIcon, TaimatsuLogoIcon, SearchIcon } from "@/components/icons"
+import { GithubIcon, MenuIcon, PaneuiLogoIcon, SearchIcon } from "@/components/icons"
 import { CommandPalette, type CommandPaletteItem } from "@/registry/base-nova/blocks/command-palette/command-palette"
 import { Button } from "@/registry/base-nova/ui/button"
 import { Drawer, DrawerContent, DrawerTitle } from "@/registry/base-nova/ui/drawer"
@@ -16,6 +20,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/base-nova/ui
 import { categoryIcons, ComponentsIcon, guideIcons } from "./category-icons"
 import { DocsNav, normalizePath, type NavGroup } from "./docs-nav"
 import { COMPONENTS_HREF, GUIDE_PAGES } from "./docs-pages"
+import { LanguageToggle } from "./language-toggle"
 import { ThemeControls } from "./theme-controls"
 import { ThemeSync } from "./theme-sync"
 
@@ -48,8 +53,8 @@ function Brand() {
       href="/"
       className="-ms-1 flex h-8 items-center gap-2 rounded-lg ps-1 pe-2 text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
     >
-      <TaimatsuLogoIcon size={20} className="text-foreground" />
-      taimatsu/ui
+      <PaneuiLogoIcon size={20} className="text-foreground" />
+      paneui
     </Link>
   )
 }
@@ -61,6 +66,12 @@ function Brand() {
  * Notes: notes/docs-shell.md.
  */
 export function SiteShell({ groups, children }: { groups: NavGroup[]; children: React.ReactNode }) {
+  const t = useT()
+  const locale = useSiteLocale()
+  React.useEffect(() => {
+    document.documentElement.lang = locale === "zh" ? "zh-CN" : "en"
+  }, [locale])
+  const label = React.useCallback((text: string) => t(siteCopy(text)), [t])
   const pathname = normalizePath(usePathname())
   const router = useRouter()
   const mac = useIsMac()
@@ -72,16 +83,16 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
     return [
       ...GUIDE_PAGES.map((p) => ({
         id: p.href,
-        label: p.title,
-        group: "Getting started",
+        label: label(p.title),
+        group: label("Getting started"),
         icon: guideIcons[p.href],
-        keywords: [...p.keywords, p.description],
+        keywords: [...p.keywords, t(p.description)],
         onSelect: go(p.href),
       })),
       {
         id: COMPONENTS_HREF,
-        label: "Components overview",
-        group: "Getting started",
+        label: label("Components overview"),
+        group: label("Getting started"),
         icon: ComponentsIcon,
         keywords: ["components", "all", "gallery", "previews", "home"],
         onSelect: go(COMPONENTS_HREF),
@@ -90,14 +101,14 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
         g.items.map((i) => ({
           id: i.name,
           label: i.title,
-          group: g.category,
+          group: label(g.category),
           icon: categoryIcons[g.category],
-          keywords: [i.name, i.description],
+          keywords: [i.name, t(i.description)],
           onSelect: go(`/docs/${i.name}`),
         }))
       ),
     ]
-  }, [groups, router])
+  }, [groups, router, t, label])
 
   const shortcut = mac ? "⌘K" : "Ctrl K"
   const openSearch = React.useCallback(() => {
@@ -106,103 +117,106 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
   }, [])
 
   return (
-    <div data-slot="docs-shell" className="min-h-svh bg-background text-foreground">
-      {/* A theme, accent or radius picked in another tab applies here too (the header only follows theme and accent). */}
-      <ThemeSync />
-      <header className="sticky top-0 z-40 flex h-12 items-center border-b border-border bg-background">
-        <div className="flex h-full shrink-0 items-center gap-1 ps-3 pe-2 lg:w-64 lg:ps-4">
-          <Button variant="ghost" size="icon-sm" aria-label="Open navigation" onClick={() => setDrawerOpen(true)} className="lg:hidden">
-            <MenuIcon />
-          </Button>
-          <Brand />
-        </div>
+    <LocaleProvider locale={locale}>
+      <div data-slot="docs-shell" className="min-h-svh bg-background text-foreground">
+        {/* A theme, accent or radius picked in another tab applies here too (the header only follows theme and accent). */}
+        <ThemeSync />
+        <header className="sticky top-0 z-40 flex h-12 items-center border-b border-border bg-background">
+          <div className="flex h-full shrink-0 items-center gap-1 ps-3 pe-2 lg:w-64 lg:ps-4">
+            <Button variant="ghost" size="icon-sm" aria-label={label("Open navigation")} onClick={() => setDrawerOpen(true)} className="lg:hidden">
+              <MenuIcon />
+            </Button>
+            <Brand />
+          </div>
 
-        <NavigationMenu aria-label="Main" className="h-full max-md:hidden lg:ms-6">
-          <NavigationMenuList className="h-full items-stretch gap-1">
-            {headerLinks.map((l) => {
-              const active = l.isActive(pathname, groups)
-              return (
-                <NavigationMenuItem key={l.label}>
-                  <NavigationMenuLink variant="tab" active={active} aria-current={active ? "page" : undefined} render={<Link href={l.href} />}>
-                    {l.label}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              )
-            })}
-          </NavigationMenuList>
-        </NavigationMenu>
+          <NavigationMenu aria-label={label("Main")} className="h-full max-md:hidden lg:ms-6">
+            <NavigationMenuList className="h-full items-stretch gap-1">
+              {headerLinks.map((l) => {
+                const active = l.isActive(pathname, groups)
+                return (
+                  <NavigationMenuItem key={l.label}>
+                    <NavigationMenuLink variant="tab" active={active} aria-current={active ? "page" : undefined} render={<Link href={l.href} />}>
+                      {label(l.label)}
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                )
+              })}
+            </NavigationMenuList>
+          </NavigationMenu>
 
-        <div className="ms-auto flex items-center gap-1.5 pe-3 lg:pe-4">
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={openSearch}
-            aria-label="Search docs"
-            aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
-            // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a field (sm+)
-            className="w-7 justify-center px-0 text-muted-foreground sm:w-52 sm:justify-start sm:ps-2 sm:pe-2.5"
-          >
-            <SearchIcon />
-            <span className="hidden sm:inline">Search docs…</span>
-            <Kbd size="sm" className="ms-auto hidden sm:inline-flex">
-              {shortcut}
-            </Kbd>
-          </Button>
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  nativeButton={false}
-                  render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}
-                  aria-label="GitHub repository"
-                />
-              }
+          <div className="ms-auto flex items-center gap-1.5 pe-3 lg:pe-4">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={openSearch}
+              aria-label={label("Search docs")}
+              aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
+              // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a field (sm+)
+              className="w-7 justify-center px-0 text-muted-foreground sm:w-52 sm:justify-start sm:ps-2 sm:pe-2.5"
             >
-              <GithubIcon className="size-4.5" />
-            </TooltipTrigger>
-            <TooltipContent side="bottom">GitHub</TooltipContent>
-          </Tooltip>
-          <ThemeControls />
+              <SearchIcon />
+              <span className="hidden sm:inline">{label("Search docs…")}</span>
+              <Kbd size="sm" className="ms-auto hidden sm:inline-flex">
+                {shortcut}
+              </Kbd>
+            </Button>
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    nativeButton={false}
+                    render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}
+                    aria-label={label("GitHub repository")}
+                  />
+                }
+              >
+                <GithubIcon className="size-4.5" />
+              </TooltipTrigger>
+              <TooltipContent side="bottom">GitHub</TooltipContent>
+            </Tooltip>
+            <LanguageToggle />
+            <ThemeControls />
+          </div>
+        </header>
+
+        <div className="flex">
+          <aside
+            // Fills the viewport under the header and sticks while the page scrolls.
+            style={{ "--docs-aside-h": "calc(100svh - 3rem)" } as React.CSSProperties}
+            className="sticky top-12 hidden h-(--docs-aside-h) w-64 shrink-0 flex-col border-e border-border lg:flex"
+          >
+            <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
+          </aside>
+
+          <main className="min-w-0 flex-1">
+            <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+              <div className="mx-auto w-full max-w-6xl">{children}</div>
+            </div>
+          </main>
         </div>
-      </header>
 
-      <div className="flex">
-        <aside
-          // Fills the viewport under the header and sticks while the page scrolls.
-          style={{ "--docs-aside-h": "calc(100svh - 3rem)" } as React.CSSProperties}
-          className="sticky top-12 hidden h-(--docs-aside-h) w-64 shrink-0 flex-col border-e border-border lg:flex"
-        >
-          <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
-        </aside>
+        <Drawer side="left" open={drawerOpen} onOpenChange={setDrawerOpen}>
+          <DrawerContent
+            className="w-80"
+            // a link inside the drawer navigates, so the drawer has done its job
+            onClickCapture={(e) => {
+              if ((e.target as HTMLElement).closest("a[href]")) setDrawerOpen(false)
+            }}
+          >
+            <div className="flex h-14 shrink-0 items-center px-4">
+              <DrawerTitle className="flex items-center gap-2 text-ui-lg font-semibold">
+                <PaneuiLogoIcon size={20} />
+                paneui
+              </DrawerTitle>
+            </div>
+            <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
+          </DrawerContent>
+        </Drawer>
 
-        <main className="min-w-0 flex-1">
-          <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
-            <div className="mx-auto w-full max-w-6xl">{children}</div>
-          </div>
-        </main>
+        <CommandPalette items={items} open={searchOpen} onOpenChange={setSearchOpen} placeholder={label("Search docs and components…")} />
       </div>
-
-      <Drawer side="left" open={drawerOpen} onOpenChange={setDrawerOpen}>
-        <DrawerContent
-          className="w-80"
-          // a link inside the drawer navigates, so the drawer has done its job
-          onClickCapture={(e) => {
-            if ((e.target as HTMLElement).closest("a[href]")) setDrawerOpen(false)
-          }}
-        >
-          <div className="flex h-14 shrink-0 items-center px-4">
-            <DrawerTitle className="flex items-center gap-2 text-ui-lg font-semibold">
-              <TaimatsuLogoIcon size={20} />
-              taimatsu/ui
-            </DrawerTitle>
-          </div>
-          <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
-        </DrawerContent>
-      </Drawer>
-
-      <CommandPalette items={items} open={searchOpen} onOpenChange={setSearchOpen} placeholder="Search docs and components…" />
-    </div>
+    </LocaleProvider>
   )
 }

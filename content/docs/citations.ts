@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Links an answer's claims to the sources behind them.", "zh": "将回答与参考来源关联。"},
   baseUi: {
     name: "Preview Card",
     href: "https://base-ui.com/react/components/preview-card",
@@ -21,33 +22,28 @@ export default {
   examples: [
     {
       id: "standalone",
-      title: "Standalone Marker",
-      description: "Use without a `CitationGroup` when there is no reference list, passing `source` and `index` directly.",
+      title: { en: "Standalone Marker", zh: "独立标记" },
     },
     {
       id: "file-sources",
-      title: "File Sources",
-      description: "Give non-web sources, like files, an `icon` and `meta`.",
+      title: { en: "File Sources", zh: "文件来源" },
     },
     {
       id: "open-list",
-      title: "Open by Default",
-      description: "Use `defaultOpen` when the sources matter as much as the answer.",
+      title: { en: "Open by Default", zh: "默认展开" },
     },
     {
       id: "streaming",
-      title: "Streaming Sources",
-      description: "Append to `sources` while the agent is still reading.",
+      title: { en: "Streaming Sources", zh: "逐步添加来源" },
     },
     {
       id: "no-remote-favicons",
-      title: "No Remote Favicons",
-      description: "Use `favicon={false}` when domains must not leave your app, or pass a function to use your own icon service.",
+      title: { en: "No Remote Favicons", zh: "禁用远程站点图标" },
     },
     {
       id: "list-and-count",
-      title: "List, Stack and Count",
-      description: "Use the parts on their own for custom layouts, like a sidebar.",
+      title: { en: "List, Stack and Count", zh: "列表、堆叠与计数" },
+      description: { en: "Use the parts on their own for custom layouts, like a sidebar.", zh: "适用于侧栏等自定义来源布局。" },
     },
   ],
   notes: [

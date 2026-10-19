@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "List the user can reorder by dragging or keyboard.", "zh": "通过拖动或键盘调整列表顺序。"},
   usage: {
     imports: `import { SortableStack, SortableStackContent, SortableStackHandle, SortableStackItem } from "@/components/ui/sortable-stack"`,
     code: `<SortableStack defaultItems={tasks} getItemLabel={(t) => t.title}>
@@ -22,22 +23,21 @@ export default {
   examples: [
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when you save the order or show it elsewhere.",
+      title: { en: "Controlled", zh: "受控" },
+      description: { en: "Use when you save the order or show it elsewhere.", zh: "适用于需要保存或共享排序的场景。" },
     },
     {
       id: "move-to-top",
-      title: "Move to Top",
-      description: "Use for shortcut buttons like Move to top, which `moveItem` makes undoable too.",
+      title: { en: "Move to Top", zh: "移至顶部" },
     },
     {
       id: "custom-undo",
-      title: "Custom Undo",
-      description: "Use when undo belongs in your own control instead of the built-in pill.",
+      title: { en: "Custom Undo", zh: "自定义撤销" },
+      description: { en: "Use when undo belongs in your own control instead of the built-in pill.", zh: "适用于由外部控件处理撤销的场景。" },
     },
     {
       id: "disabled",
-      title: "Disabled",
+      title: { en: "Disabled", zh: "禁用" },
     },
   ],
   notes: [

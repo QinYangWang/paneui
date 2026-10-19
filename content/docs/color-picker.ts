@@ -3,6 +3,7 @@ import type { ComponentDoc } from "@/lib/doc-types"
 const POPOVER = "https://base-ui.com/react/components/popover"
 
 export default {
+  summary: {"en": "Picks a colour by dragging, entering hex or choosing a preset.", "zh": "选择或输入颜色。"},
   baseUi: { name: "Popover", href: POPOVER },
   usage: {
     imports: `import { ColorPicker, ColorPickerArea, ColorPickerContent, ColorPickerHue, ColorPickerTrigger } from "@/components/ui/color-picker"`,
@@ -28,25 +29,21 @@ export default {
   examples: [
     {
       id: "with-alpha",
-      title: "With Alpha",
-      description: "Use `alpha` with `ColorPickerAlpha` when the colour may be translucent.",
+      title: { en: "With Alpha", zh: "带透明度" },
     },
     {
       id: "inline",
-      title: "Inline",
-      description: "Render the parts inline for settings panels, reading the colour with `useColorPicker()` for custom parts.",
+      title: { en: "Inline", zh: "行内" },
     },
     {
       id: "commit",
-      title: "Change vs Commit",
-      description: "Use `onValueCommit` for saves and history, and `onValueChange` for live previews.",
+      title: { en: "Change vs Commit", zh: "实时变化与提交" },
     },
     {
       id: "swatch-trigger",
-      title: "Swatch Trigger",
-      description: "Use `showHex={false}` in tight toolbars, with an `aria-label` on the trigger.",
+      title: { en: "Swatch Trigger", zh: "色块触发器" },
     },
-    { id: "disabled", title: "Disabled", description: "`disabled` on the root disables the trigger and every part." },
+    { id: "disabled", title: { en: "Disabled", zh: "禁用" },  },
   ],
   notes: [
     {

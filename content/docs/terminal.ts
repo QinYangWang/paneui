@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Runs a shell in the page or on your machine.", "zh": "在页面中运行命令。"},
   usage: {
     imports: `import { Terminal, createLocalShell, createMemoryFs } from "@/components/ui/terminal"`,
     code: `const [shell] = React.useState(() =>
@@ -10,9 +11,9 @@ export default {
 <Terminal transport={shell} className="h-80" />`,
   },
   examples: [
-    { id: "custom-commands", title: "Custom commands", description: "Use `commands` to add app-specific commands next to the builtins." },
-    { id: "shared-files", title: "Shared files", description: "Use one `ShellFs` when an editor or file tree shows the same files as the shell." },
-    { id: "websocket", title: "Real shell", description: "Use the WebSocket transport to drive a shell on your machine through the PTY bridge." },
+    { id: "custom-commands", title: { en: "Custom commands", zh: "自定义命令" },  },
+    { id: "shared-files", title: { en: "Shared files", zh: "共享文件" },  },
+    { id: "websocket", title: { en: "Real shell", zh: "本机终端" }, description: { en: "Use the WebSocket transport to drive a shell on your machine through the PTY bridge.", zh: "适用于通过桥接服务连接本机终端的场景。" } },
   ],
   notes: [
     {

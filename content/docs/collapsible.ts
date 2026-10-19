@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows and hides a section of content.", "zh": "展开或收起一段内容。"},
   baseUi: {
     name: "Collapsible",
     href: "https://base-ui.com/react/components/collapsible",
@@ -18,21 +19,19 @@ export default {
   examples: [
     {
       id: "default-open",
-      title: "Default Open",
+      title: { en: "Default Open", zh: "默认展开" },
     },
     {
       id: "show-more",
-      title: "Show More",
-      description: "Use `chevron={false}` for a show-more button below a truncated panel.",
+      title: { en: "Show More", zh: "显示更多" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `open` and `onOpenChange` when something else also toggles the panel.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "disabled",
-      title: "Disabled",
+      title: { en: "Disabled", zh: "禁用" },
     },
   ],
   notes: [

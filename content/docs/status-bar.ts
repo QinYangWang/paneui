@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows a service's status history and uptime.", "zh": "展示服务状态历史。"},
   usage: {
     imports: `import { StatusBar } from "@/components/ui/status-bar"`,
     code: `<StatusBar
@@ -16,23 +17,23 @@ export default {
   examples: [
     {
       id: "custom-statuses",
-      title: "Custom Statuses",
-      description: "Use when your states differ from the defaults.",
+      title: { en: "Custom Statuses", zh: "自定义状态" },
+      description: { en: "Use when your states differ from the defaults.", zh: "适用于需要自定义状态的服务。" },
     },
     {
       id: "hourly",
-      title: "Hourly",
-      description: "Use for short windows such as the last 24 hours.",
+      title: { en: "Hourly", zh: "每小时" },
+      description: { en: "Use for short windows such as the last 24 hours.", zh: "适用于最近一天等较短的时间窗口。" },
     },
     {
       id: "compact",
-      title: "Compact",
-      description: "Use when stacking several services in one view.",
+      title: { en: "Compact", zh: "紧凑" },
+      description: { en: "Use when stacking several services in one view.", zh: "适用于同屏查看多个服务。" },
     },
     {
       id: "no-data",
-      title: "No Data",
-      description: "Use for periods before monitoring started.",
+      title: { en: "No Data", zh: "无数据" },
+      description: { en: "Use for periods before monitoring started.", zh: "适用于监控开始前的时间段。" },
     },
   ],
   notes: [

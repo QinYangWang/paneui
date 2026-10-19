@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Keyboard-driven option list that leaves focus in the text field.", "zh": "选择选项并保持输入框焦点。"},
   usage: {
     imports: `import { MenuList, MenuListItem, type MenuListHandle } from "@/components/ui/menu-list"`,
     code: `const list = React.useRef<MenuListHandle>(null)
@@ -19,7 +20,7 @@ export default {
 │       └── MenuListShortcut
 ├── MenuListSeparator
 └── MenuListEmpty`,
-  examples: [{ id: "plain", title: "Plain", description: "Use `variant=\"plain\"` when the list sits in the page instead of a popup; with `tabIndex={0}` it handles arrow keys itself." }],
+  examples: [{ id: "plain", title: { en: "Plain", zh: "纯文本" },  }],
   notes: [
     { title: "Why not Menu", body: "`Menu` moves focus into its popup. Slash menus, mention pickers and autocomplete need focus to stay in the text, so `MenuList` tracks a highlighted value and exposes it with `aria-activedescendant`. The block and email editors use it for `/` and `{{`." },
     { title: "Keyboard", body: "`ref.current.onKeyDown(event)` handles `ArrowUp` / `ArrowDown` (looping), `Home` / `End`, and `Enter` / `Tab` (clicks the highlighted item); it returns true when it used the key. The highlight resets to the first item when the list changes under it." },

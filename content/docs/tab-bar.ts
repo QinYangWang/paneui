@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Bottom navigation for phones, with a label under each icon.", "zh": "为手机提供底部导航。"},
   usage: {
     imports: `import { TabBar, TabBarItem } from "@/components/ui/tab-bar"`,
     code: `<TabBar aria-label="App" className="fixed inset-x-0 bottom-0">
@@ -11,7 +12,7 @@ export default {
   },
   composition: `TabBar
 └── TabBarItem`,
-  examples: [{ id: "links", title: "Links", description: "Use with your router: pass its link to `render`." }],
+  examples: [{ id: "links", title: { en: "Links", zh: "链接" },  }],
   notes: [
     { title: "Phones", body: "The bar adds the bottom safe-area inset as padding, so it can sit flush with the screen edge; add `viewport-fit=cover` to the viewport meta tag for the inset to apply. Labels show under each icon, so there are no tooltips." },
     { title: "Active glyph", body: "The bar has no row fill, so the active item swaps to the filled glyph as well as the foreground colour. Every nav icon has a `<Name>FilledIcon` pair." },

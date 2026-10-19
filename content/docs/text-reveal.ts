@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Reveals a headline in sequence.", "zh": "逐步显示标题。"},
   usage: {
     imports: `import { TextReveal } from "@/components/ui/text-reveal"`,
     code: `<TextReveal as="h2" text="Your week, handled." className="text-2xl font-semibold" />`,
@@ -8,24 +9,22 @@ export default {
   examples: [
     {
       id: "split-char",
-      title: "By Character",
-      description: "Use for short headlines; letters of a word stay together when lines wrap.",
+      title: { en: "By Character", zh: "逐字" },
+      description: { en: "Use for short headlines; letters of a word stay together when lines wrap.", zh: "适用于较短的标题。" },
     },
     {
       id: "lines",
-      title: "Multiple Lines",
-      description: "Use for multi-line headlines that should reveal as one sequence.",
+      title: { en: "Multiple Lines", zh: "多行" },
+      description: { en: "Use for multi-line headlines that should reveal as one sequence.", zh: "适用于需要连续显示的多行标题。" },
     },
     {
       id: "on-view",
-      title: "On Scroll Into View",
-      description:
-        "Use for content below the fold, with `once={false}` to replay it on every visit.",
+      title: { en: "On Scroll Into View", zh: "进入视野时" },
     },
     {
       id: "custom-timing",
-      title: "Custom Timing",
-      description: "Use when the reveal has to match the pace of surrounding motion.",
+      title: { en: "Custom Timing", zh: "自定义时序" },
+      description: { en: "Use when the reveal has to match the pace of surrounding motion.", zh: "适用于需要与周围动画同步的场景。" },
     },
   ],
   notes: [

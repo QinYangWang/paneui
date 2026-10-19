@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows large data sets that people sort, select and resize.", "zh": "浏览和整理大量数据。"},
   usage: {
     imports: `import { Table, type TableColumn } from "@/components/ui/table"`,
     code: `<Table
@@ -17,23 +18,21 @@ export default {
   examples: [
     {
       id: "basic",
-      title: "Basic",
-      description: "Start here for a static list, adding `cell` only where a value needs custom rendering.",
+      title: { en: "Basic", zh: "基础" },
     },
     {
       id: "loading-empty",
-      title: "Loading and Empty",
-      description: "Use while the first rows load or when a filter returns nothing.",
+      title: { en: "Loading and Empty", zh: "加载与空白状态" },
+      description: { en: "Use while the first rows load or when a filter returns nothing.", zh: "适用于首次加载或筛选后无结果的场景。" },
     },
     {
       id: "row-click",
-      title: "Row Click and Density",
-      description: "Use when rows open a detail view, or in dense panels with smaller `rowHeight` and `headerHeight`.",
+      title: { en: "Row Click and Density", zh: "行点击与密度" },
     },
     {
       id: "scroll-to-index",
-      title: "Scroll to Row",
-      description: "Use to jump to a search hit or a newly added row in a long list.",
+      title: { en: "Scroll to Row", zh: "滚动到指定行" },
+      description: { en: "Use to jump to a search hit or a newly added row in a long list.", zh: "适用于跳转到搜索结果或新增行。" },
     },
   ],
   notes: [

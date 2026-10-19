@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Asks the user to allow or deny an agent tool call.", "zh": "请求用户批准工具调用。"},
   usage: {
     imports: `import { ToolApproval } from "@/components/ui/tool-approval"`,
     code: `<ToolApproval
@@ -16,28 +17,23 @@ export default {
   examples: [
     {
       id: "risks",
-      title: "Risk Levels",
-      description: "Use `risk` to match what the tool can do to the user's data.",
+      title: { en: "Risk Levels", zh: "风险等级" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when the decision lives in your agent state; `null` means pending.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "resolved",
-      title: "Outcomes",
-      description: "Use `status` to report the call after approval, or when replaying history.",
+      title: { en: "Outcomes", zh: "结果" },
     },
     {
       id: "remembered",
-      title: "Remembered",
-      description: "Use `rememberKey` when Always allow should survive reloads.",
+      title: { en: "Remembered", zh: "记住选择" },
     },
     {
       id: "command",
-      title: "Arguments",
-      description: "Use `defaultArgsOpen` when the user should read the call before deciding.",
+      title: { en: "Arguments", zh: "参数" },
     },
   ],
   notes: [

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Animated backdrop for hero sections and empty states.", "zh": "为页面提供动态背景。"},
   usage: {
     imports: `import { ShaderBackground } from "@/components/ui/shader-background"`,
     code: `<ShaderBackground className="h-64 rounded-3xl p-6">
@@ -10,18 +11,17 @@ export default {
   examples: [
     {
       id: "custom-colors",
-      title: "Custom Colors",
-      description: "Use to match a brand palette instead of the theme.",
+      title: { en: "Custom Colors", zh: "自定义颜色" },
+      description: { en: "Use to match a brand palette instead of the theme.", zh: "适用于需要使用品牌色板的场景。" },
     },
     {
       id: "paused",
-      title: "Speed and Paused",
-      description: "Use `paused` or a lower `speed` behind content that needs a calm backdrop.",
+      title: { en: "Speed and Paused", zh: "速度与暂停" },
     },
     {
       id: "shader-props",
-      title: "Shader Props",
-      description: "Use to tune a shader beyond the built-in props.",
+      title: { en: "Shader Props", zh: "着色器属性" },
+      description: { en: "Use to tune a shader beyond the built-in props.", zh: "适用于需要进一步调整着色器的场景。" },
     },
   ],
   notes: [

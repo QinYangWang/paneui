@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows where the current page sits in the site hierarchy.", "zh": "显示当前页面的位置。"},
   usage: {
     imports: `import {
   Breadcrumb,
@@ -34,30 +35,26 @@ BreadcrumbTrail (renders all of the above from items)`,
   examples: [
     {
       id: "custom-separator",
-      title: "Custom Separator",
-      description: "Use a custom separator, like a slash, for file paths.",
+      title: { en: "Custom Separator", zh: "自定义分隔符" },
+      description: { en: "Use a custom separator, like a slash, for file paths.", zh: "文件路径可使用斜杠分隔。" },
     },
     {
       id: "with-icons",
-      title: "With Icons",
-      description: "Use an icon for the root crumb, and give icon-only links an `aria-label`.",
+      title: { en: "With Icons", zh: "带图标" },
     },
     {
       id: "trail-options",
-      title: "Trail Options",
-      description:
-        "Use `BreadcrumbTrail` options when deep paths need to fold past `maxItems`.",
+      title: { en: "Trail Options", zh: "路径选项" },
     },
     {
       id: "static-ellipsis",
-      title: "Static Ellipsis",
-      description: "Use a static ellipsis when the hidden crumbs aren't worth navigating to.",
+      title: { en: "Static Ellipsis", zh: "静态省略号" },
+      description: { en: "Use a static ellipsis when the hidden crumbs aren't worth navigating to.", zh: "适用于无需访问被省略路径的场景。" },
     },
-    { id: "sizes", title: "Sizes", description: "Use `sm` in panel headers and `lg` as a page title row." },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" },  },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

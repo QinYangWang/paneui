@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "agent-workspace",
   "title": "Agent Workspace",
-  "description": "A full app for chatting with and supervising coding agents.",
+  "description": "Chat with coding agents and review their work.",
   "dependencies": [
     "@agentclientprotocol/sdk",
     "ws",

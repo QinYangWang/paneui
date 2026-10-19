@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "heat-calendar",
   "title": "Heat Calendar",
-  "description": "Shows daily activity over weeks or months as a calendar heat map.",
+  "description": "Shows daily activity on a calendar.",
   "dependencies": [
     "motion"
   ],

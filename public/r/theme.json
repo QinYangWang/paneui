@@ -2,10 +2,10 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "theme",
   "title": "Theme",
-  "description": "Design tokens, type scale and utilities every component in the library reads.",
+  "description": "Shared design tokens for every component.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/utils.json",
-    "@qinyang/utils"
+    "@paneui/utils"
   ],
   "cssVars": {
     "theme": {

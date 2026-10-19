@@ -1,12 +1,13 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Password field with a button to show or hide it.", "zh": "输入密码并按需显示。"},
   usage: {
     imports: `import { PasswordInput } from "@/components/ui/password-input"`,
     code: `<PasswordInput autoComplete="current-password" />`,
   },
   examples: [
-    { id: "sizes", title: "Sizes" },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" } },
   ],
   notes: [{ title: "Accessibility", body: "The reveal button is labelled \"Show password\" / \"Hide password\" and reports `aria-pressed`. Inside a `Field` the input is wired like any other control." }],
   api: [

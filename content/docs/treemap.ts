@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Compares parts of a total as sized tiles.", "zh": "用面积比较各部分的占比。"},
   usage: {
     imports: `import { Treemap } from "@/components/ui/treemap"`,
     code: `<Treemap
@@ -14,28 +15,25 @@ export default {
   examples: [
     {
       id: "flat",
-      title: "Flat",
-      description: "Use when the data has no natural groups.",
+      title: { en: "Flat", zh: "扁平" },
+      description: { en: "Use when the data has no natural groups.", zh: "适用于没有自然分组的数据。" },
     },
     {
       id: "custom-colors",
-      title: "Custom Colors",
-      description: "Use `color` when a category has a fixed meaning, with token colours like `var(--success)`.",
+      title: { en: "Custom Colors", zh: "自定义颜色" },
     },
     {
       id: "spacing",
-      title: "Gap, Padding and Radius",
-      description: "Use a smaller `gap` and `radius` when the chart holds many small tiles.",
+      title: { en: "Gap, Padding and Radius", zh: "间距、内边距与圆角" },
     },
     {
       id: "controlled",
-      title: "Controlled Active Tile",
-      description: "Use when a list outside the chart should highlight the same tile.",
+      title: { en: "Controlled Active Tile", zh: "受控高亮区域" },
+      description: { en: "Use when a list outside the chart should highlight the same tile.", zh: "适用于与外部列表联动高亮的图表。" },
     },
     {
       id: "compact",
-      title: "Compact",
-      description: "Use in dashboard cards, with `showLegend={false}` and a smaller `height`.",
+      title: { en: "Compact", zh: "紧凑" },
     },
   ],
   notes: [

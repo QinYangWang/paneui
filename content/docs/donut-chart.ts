@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows how parts make up a whole as a ring.", "zh": "展示各部分的占比。"},
   usage: {
     imports: `import { DonutChart } from "@/components/ui/donut-chart"`,
     code: `<DonutChart
@@ -16,28 +17,23 @@ export default {
   examples: [
     {
       id: "legend-bottom",
-      title: "Legend Below",
-      description: "Use `legendPosition=\"bottom\"` in narrow cards, with `maxSize` to cap the ring.",
+      title: { en: "Legend Below", zh: "底部图例" },
     },
     {
       id: "custom-colors",
-      title: "Custom Colors",
-      description: "Give a segment `color` (any CSS colour, ideally a theme token) when the colour carries meaning.",
+      title: { en: "Custom Colors", zh: "自定义颜色" },
     },
     {
       id: "thin-ring",
-      title: "Thin Ring",
-      description: "Lower `thickness` and set `showLegend={false}` for small inline charts.",
+      title: { en: "Thin Ring", zh: "细环" },
     },
     {
       id: "descriptions",
-      title: "Descriptions",
-      description: "Add a segment `description` when its label needs a second line of context.",
+      title: { en: "Descriptions", zh: "说明" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `activeId` and `onActiveChange` when something outside the chart drives the highlight, e.g. to keep one segment selected.",
+      title: { en: "Controlled", zh: "受控" },
     },
   ],
   notes: [

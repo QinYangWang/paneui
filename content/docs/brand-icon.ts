@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows brand logos.", "zh": "显示品牌标志。"},
   usage: {
     imports: `import { siGithub } from "simple-icons"
 
@@ -8,11 +9,11 @@ import { BrandIcon } from "@/components/ui/brand-icon"`,
     code: `<BrandIcon icon={siGithub} />`,
   },
   examples: [
-    { id: "colors", title: "Colors", description: "Use the brand colour where the logo is the content, such as a list of apps; keep `current` in toolbars and nav." },
-    { id: "sizes", title: "Sizes" },
-    { id: "sign-in", title: "Sign-in Buttons" },
-    { id: "integrations", title: "Integrations" },
-    { id: "own-marks", title: "Your Own Marks", description: "Use for a brand the package leaves out, or for your own product." },
+    { id: "colors", title: { en: "Colors", zh: "颜色" },  },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" } },
+    { id: "sign-in", title: { en: "Sign-in Buttons", zh: "登录按钮" } },
+    { id: "integrations", title: { en: "Integrations", zh: "集成" } },
+    { id: "own-marks", title: { en: "Your Own Marks", zh: "自定义标志" }, description: { en: "Use for a brand the package leaves out, or for your own product.", zh: "适用于自己的产品或图标集中没有的品牌。" } },
   ],
   notes: [
     {

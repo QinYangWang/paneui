@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "field",
   "title": "Field",
-  "description": "Ties a label, control, hint and error into one form field.",
+  "description": "Connects form labels, controls and feedback.",
   "dependencies": [
     "@base-ui/react",
     "motion"

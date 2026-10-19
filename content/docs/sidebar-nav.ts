@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Compact text navigation for docs and settings sidebars.", "zh": "为文档和设置页提供侧栏导航。"},
   usage: {
     imports: `import {
   SidebarNav,
@@ -31,11 +32,11 @@ export default {
 │       └── SidebarNavSection level="group"
 └── SidebarNavFooter`,
   examples: [
-    { id: "icons", title: "Icons", description: "Use `icon` for a short app-style list where each page has a symbol." },
-    { id: "icon-groups", title: "Icons and Groups", description: "Use `icon` on a group label when the rows beside it have icons." },
-    { id: "linked-groups", title: "Linked Groups", description: "Use `href` or `labelRender` when a section or group has an overview page of its own." },
-    { id: "persisted", title: "Remembered Sections", description: "Use `open` and `onOpenChange` to keep folded sections folded across visits." },
-    { id: "rtl", title: "RTL", description: "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root." },
+    { id: "icons", title: { en: "Icons", zh: "图标" },  },
+    { id: "icon-groups", title: { en: "Icons and Groups", zh: "图标与分组" },  },
+    { id: "linked-groups", title: { en: "Linked Groups", zh: "分组链接" },  },
+    { id: "persisted", title: { en: "Remembered Sections", zh: "记住展开状态" },  },
+    { id: "rtl", title: { en: "RTL", zh: "从右到左" },  },
   ],
   notes: [
     {

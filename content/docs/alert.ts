@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows a message that needs attention.", "zh": "显示需要用户留意的消息。"},
   usage: {
     imports: `import { Alert, AlertClose, AlertContent, AlertDescription, AlertIcon, AlertTitle } from "@/components/ui/alert"`,
     code: `<Alert variant="info">
@@ -20,28 +21,24 @@ export default {
 ├── AlertAction
 └── AlertClose`,
   examples: [
-    { id: "variants", title: "Variants", description: "Use `warning` and `destructive` only when the user has to act; they are announced as alerts." },
+    { id: "variants", title: { en: "Variants", zh: "样式" },  },
     {
       id: "default-variant",
-      title: "Default",
-      description: "Use `default` for plain notices that carry no status.",
+      title: { en: "Default", zh: "默认" },
     },
     {
       id: "custom-icon",
-      title: "Custom Icon",
-      description: "Pass an icon to `AlertIcon` when the message needs a more specific glyph than the variant's.",
+      title: { en: "Custom Icon", zh: "自定义图标" },
     },
     {
       id: "actions",
-      title: "Actions",
-      description: "Use `AlertAction` when the reader can act on the message right away.",
+      title: { en: "Actions", zh: "操作" },
     },
     {
       id: "use-alert",
-      title: "Custom Dismiss",
-      description: "Call `useAlert().dismiss` when a child, like an action button, should close the alert.",
+      title: { en: "Custom Dismiss", zh: "自定义关闭" },
     },
-    { id: "small", title: "Small", description: "Use inside cards, dialogs and forms." },
+    { id: "small", title: { en: "Small", zh: "小尺寸" }, description: { en: "Use inside cards, dialogs and forms.", zh: "适用于卡片、对话框或表单内的提示。" } },
   ],
   notes: [
     {

@@ -4,7 +4,7 @@
   "title": "Theme: Square radius",
   "description": "Radius preset with square corners everywhere.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "@paneui/theme"
   ],
   "cssVars": {
     "light": {

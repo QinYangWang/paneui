@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Summarises an agent’s work.", "zh": "汇总助手的工作过程。"},
   baseUi: {
     name: "Collapsible",
     href: "https://base-ui.com/react/components/collapsible",
@@ -15,28 +16,24 @@ export default {
   examples: [
     {
       id: "item-types",
-      title: "Item Types",
-      description: "Use to show every kind of work in one run; consecutive items of one type fold into a group.",
+      title: { en: "Item Types", zh: "条目类型" },
+      description: { en: "Use to show every kind of work in one run; consecutive items of one type fold into a group.", zh: "适用于汇总一次运行中的各类工作。" },
     },
     {
       id: "completed",
-      title: "Completed",
-      description: "Set `status=\"complete\"` once the run ends, with `duration` for the total time.",
+      title: { en: "Completed", zh: "已完成" },
     },
     {
       id: "custom-labels",
-      title: "Custom Labels",
-      description: "Use `activeLabel` and `summary` when the default headers don't match your product's wording.",
+      title: { en: "Custom Labels", zh: "自定义标签" },
     },
     {
       id: "errors",
-      title: "Errors",
-      description: "Set `status: \"error\"` on items that failed.",
+      title: { en: "Errors", zh: "错误" },
     },
     {
       id: "keep-open",
-      title: "Keep Open",
-      description: "Use `collapseOnComplete={false}` when readers should review the work after the run ends.",
+      title: { en: "Keep Open", zh: "保持展开" },
     },
   ],
   notes: [

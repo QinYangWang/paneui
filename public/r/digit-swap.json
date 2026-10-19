@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "digit-swap",
   "title": "Digit Swap",
-  "description": "Animates a changing number by rolling only the characters that change.",
+  "description": "Rolls only the digits that change.",
   "dependencies": [
     "motion"
   ],

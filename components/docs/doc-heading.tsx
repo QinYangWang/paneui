@@ -1,5 +1,8 @@
 "use client"
 
+import { useT } from "@/lib/site-locale"
+import { siteCopy } from "@/lib/site-copy"
+
 import * as React from "react"
 
 import { CheckIcon, LinkIcon } from "@/components/icons"
@@ -25,6 +28,8 @@ export function DocHeading({
   className?: string
   children: React.ReactNode
 }) {
+  const t = useT()
+  const label = (text: string) => t(siteCopy(text))
   const [copied, setCopied] = React.useState(false)
   const timer = React.useRef<number | undefined>(undefined)
   React.useEffect(() => () => window.clearTimeout(timer.current), [])
@@ -50,11 +55,11 @@ export function DocHeading({
 
   return (
     <Tag id={id} className={cn("group/heading scroll-mt-24 xl:scroll-mt-20", sizes[Tag], className)}>
-      {children}
+      {typeof children === "string" ? label(children) : children}
       <a
         href={`#${id}`}
         onClick={onClick}
-        aria-label={copied ? "Link copied" : "Copy link to section"}
+        aria-label={copied ? label("Link copied") : label("Copy link to section")}
         data-md-skip
         className={cn(
           "ms-2 inline-flex items-center gap-1 rounded-sm align-middle text-ui font-normal tracking-normal text-muted-foreground opacity-0 transition-[opacity,color] duration-150 outline-none select-none hover:text-foreground focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50 group-hover/heading:opacity-100 pointer-coarse:opacity-100",
@@ -63,7 +68,7 @@ export function DocHeading({
       >
         {copied ? <CheckIcon className="size-3.5" /> : <LinkIcon className="size-3.5" />}
         <span aria-live="polite" className={cn("text-ui-sm", !copied && "sr-only")}>
-          {copied ? "Copied" : ""}
+          {copied ? label("Copied") : ""}
         </span>
       </a>
     </Tag>

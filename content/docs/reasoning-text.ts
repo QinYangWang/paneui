@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Status line that shows an agent is still working.", "zh": "提示助手仍在处理。"},
   usage: {
     imports: `import { ReasoningText } from "@/components/ui/reasoning-text"`,
     code: `<ReasoningText phrases={["Thinking", "Reading the docs", "Drafting a reply"]} />`,
@@ -8,28 +9,27 @@ export default {
   examples: [
     {
       id: "spinners",
-      title: "Spinners",
-      description: "Use to match the spinner to the tone of your interface.",
+      title: { en: "Spinners", zh: "加载图标" },
+      description: { en: "Use to match the spinner to the tone of your interface.", zh: "让加载图标与界面风格保持一致。" },
     },
     {
       id: "controlled",
-      title: "Controlled Index",
-      description: "Use when you know the agent's real current step; it then stops cycling on its own.",
+      title: { en: "Controlled Index", zh: "受控索引" },
+      description: { en: "Use when you know the agent's real current step; it then stops cycling on its own.", zh: "适用于已知助手当前工作步骤的场景。" },
     },
     {
       id: "custom-indicator",
-      title: "Custom Indicator",
-      description: "Use when your product already has its own loading mark.",
+      title: { en: "Custom Indicator", zh: "自定义指示器" },
+      description: { en: "Use when your product already has its own loading mark.", zh: "适用于产品已有加载标志的场景。" },
     },
     {
       id: "no-ellipsis",
-      title: "Without Ellipsis",
-      description: "Use when your phrases carry their own punctuation.",
+      title: { en: "Without Ellipsis", zh: "无省略号" },
+      description: { en: "Use when your phrases carry their own punctuation.", zh: "适用于文本自带标点的场景。" },
     },
     {
       id: "ascii-spinner",
-      title: "ASCII Spinner",
-      description: "Use `AsciiSpinner` on its own for inline loading marks, such as in a log view.",
+      title: { en: "ASCII Spinner", zh: "字符加载图标" },
     },
   ],
   notes: [

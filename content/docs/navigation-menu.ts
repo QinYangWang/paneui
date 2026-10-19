@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Site navigation with panels of links.", "zh": "为站点提供导航菜单。"},
   "baseUi": {
     "name": "Navigation Menu",
     "href": "https://base-ui.com/react/components/navigation-menu"
@@ -13,17 +14,15 @@ export default {
   "examples": [
     {
       "id": "links-only",
-      "title": "Links Only"
+      "title": {"en":"Links Only","zh":"仅链接"}
     },
     {
       "id": "header-tabs",
-      "title": "Header Tabs",
-      "description": "Use `variant=\"tab\"` for the sections of a site header; set `active` on the current one."
+      "title": {"en":"Header Tabs","zh":"顶部标签"},
     },
     {
       "id": "rtl",
-      "title": "RTL",
-      "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root."
+      "title": {"en":"RTL","zh":"从右到左"},
     }
   ],
   "notes": [

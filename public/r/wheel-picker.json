@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "wheel-picker",
   "title": "Wheel Picker",
-  "description": "Picks a value by scrolling a wheel, as for times and dates.",
+  "description": "Picks values with a scrolling wheel.",
   "dependencies": [
     "motion"
   ],

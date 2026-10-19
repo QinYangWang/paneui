@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "notion-editor",
   "title": "Block Editor",
-  "description": "Block editor for writing documents that save as MDX.",
+  "description": "Writes and saves documents.",
   "dependencies": [
     "@tiptap/core",
     "@tiptap/pm",

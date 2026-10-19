@@ -1,3 +1,6 @@
+import type { Localized } from "@/lib/site-locale"
+import { LocalizedInline } from "./localized-inline"
+
 import * as React from "react"
 
 /** Tokens up to this length never break inside; longer ones (URLs, paths) may wrap anywhere. */
@@ -44,7 +47,11 @@ export function codeContent(children: React.ReactNode): React.ReactNode {
 }
 
 /** Renders `code` spans and [text](href) links in hand-written doc strings. */
-export function Inline({ text }: { text: string }) {
+export function Inline({ text }: { text: Localized }) {
+  return <LocalizedInline text={text} />
+}
+
+export function InlineText({ text }: { text: string }) {
   const parts: React.ReactNode[] = []
   const re = /`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g
   let last = 0

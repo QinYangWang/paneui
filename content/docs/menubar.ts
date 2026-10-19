@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Row of menus for a desktop app window.", "zh": "为桌面应用提供菜单栏。"},
   "baseUi": {
     "name": "Menubar",
     "href": "https://base-ui.com/react/components/menubar"
@@ -13,7 +14,7 @@ export default {
   "examples": [
     {
       "id": "radio-items",
-      "title": "Radio Items"
+      "title": {"en":"Radio Items","zh":"单选菜单项"}
     }
   ],
   "notes": [

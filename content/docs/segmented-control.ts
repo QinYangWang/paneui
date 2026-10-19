@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Switches a setting between a few options.", "zh": "在少量选项间切换。"},
   baseUi: { name: "Radio Group", href: "https://base-ui.com/react/components/radio" },
   usage: {
     imports: `import { SegmentedControl, SegmentedControlItem } from "@/components/ui/segmented-control"`,
@@ -11,7 +12,7 @@ export default {
   },
   composition: `SegmentedControl
 └── SegmentedControlItem`,
-  examples: [{ id: "sizes", title: "Sizes", description: "Use `sm` in card headers and toolbars." }],
+  examples: [{ id: "sizes", title: { en: "Sizes", zh: "尺寸" },  }],
   notes: [
     { title: "Tabs or segmented control?", body: "Use Tabs when the options switch panels of content. Use a segmented control when they change a value, like a billing cycle or theme. It is a radio group, so arrow keys move the selection." },
     { title: "Motion", body: "Under reduced motion the thumb moves instantly." },

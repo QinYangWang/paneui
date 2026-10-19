@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "email-editor",
   "title": "Email Editor",
-  "description": "Edits email templates and exports them as email-safe HTML.",
+  "description": "Edits and exports email templates.",
   "dependencies": [
     "@tiptap/core",
     "@tiptap/pm",

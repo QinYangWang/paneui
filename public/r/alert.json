@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "alert",
   "title": "Alert",
-  "description": "Shows an inline message that can animate in and be dismissed.",
+  "description": "Shows a message that needs attention.",
   "dependencies": [
     "motion",
     "class-variance-authority"

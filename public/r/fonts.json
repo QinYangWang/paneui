@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "fonts",
   "title": "Fonts",
-  "description": "Self-hosted UI, code and reading fonts the theme's font stacks name.",
+  "description": "Fonts for interfaces, code and reading.",
   "dependencies": [
     "@fontsource-variable/inter",
     "@fontsource-variable/noto-sans-sc",
@@ -11,7 +11,7 @@
     "@fontsource-variable/noto-serif-sc"
   ],
   "registryDependencies": [
-    "@qinyang/theme"
+    "@paneui/theme"
   ],
   "files": [
     {

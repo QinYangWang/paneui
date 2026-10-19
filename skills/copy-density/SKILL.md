@@ -1,6 +1,6 @@
 ---
 name: copy-density
-description: Copy-density rules for the taimatsu/ui site and registry. Use whenever you write or edit any user-facing text, including component cards, page ledes, example intros, notes, registry descriptions, guide pages and the changelog.
+description: Keep paneui interface copy short and useful.
 ---
 
 # Copy density

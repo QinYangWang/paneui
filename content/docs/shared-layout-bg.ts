@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Hover highlight that follows the pointer across a group.", "zh": "让高亮跟随指针移动。"},
   usage: {
     imports: `import { SharedLayoutBg, SharedLayoutBgItem } from "@/components/ui/shared-layout-bg"`,
     code: `<SharedLayoutBg>
@@ -13,17 +14,17 @@ export default {
   examples: [
     {
       id: "horizontal",
-      title: "Horizontal",
-      description: "Use for nav bars laid out in a row.",
+      title: { en: "Horizontal", zh: "横向" },
+      description: { en: "Use for nav bars laid out in a row.", zh: "适用于横向导航栏。" },
     },
     {
       id: "pill-style",
-      title: "Pill Style",
-      description: "Use when the highlight should match a different surface or reach past each item.",
+      title: { en: "Pill Style", zh: "胶囊样式" },
+      description: { en: "Use when the highlight should match a different surface or reach past each item.", zh: "适用于需要调整高亮范围或底色的场景。" },
     },
     {
       id: "disabled",
-      title: "Disabled",
+      title: { en: "Disabled", zh: "禁用" },
     },
   ],
   notes: [

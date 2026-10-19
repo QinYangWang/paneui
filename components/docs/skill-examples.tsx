@@ -536,16 +536,16 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
     lang: "text",
     good: `components/blog/parts/author-avatar.tsx
 components/vscode/parts/buffers.ts`,
-    bad: `components/blog/parts/avatar.tsx     # same name as @taimatsu/avatar
-components/vscode/parts/docs.ts       # same name as @taimatsu/docs`,
+    bad: `components/blog/parts/avatar.tsx     # same name as @paneui/avatar
+components/vscode/parts/docs.ts       # same name as @paneui/docs`,
   },
   "run-the-upgrade-check-after-a-theme-update": {
     kind: "code",
     lang: "bash",
-    good: `npx shadcn@latest add @taimatsu/theme --overwrite
-npx shadcn@latest add @taimatsu/upgrade-check
+    good: `npx shadcn@latest add @paneui/theme --overwrite
+npx shadcn@latest add @paneui/upgrade-check
 node scripts/qinyang-upgrade-check.mjs --fix`,
-    bad: `npx shadcn@latest add @taimatsu/theme --overwrite
+    bad: `npx shadcn@latest add @paneui/theme --overwrite
 # removed tokens stay in globals.css`,
   },
 }

@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "action-swap-blur",
   "title": "Action Swap Blur",
-  "description": "A button that blurs its label and icon into the next state.",
+  "description": "Blurs between button states.",
   "dependencies": [
     "motion"
   ],

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Switches, closes and reorders document tabs.", "zh": "切换、关闭或重排文档标签。"},
   usage: {
     imports: `import { TabStrip, TabStripItem } from "@/components/ui/tab-strip"`,
     code: `<TabStrip value={active} onValueChange={setActive} order={order} onReorder={setOrder} onClose={close}>
@@ -12,8 +13,8 @@ export default {
   composition: `TabStrip
 └── TabStripItem`,
   examples: [
-    { id: "pill", title: "Pill", description: "Use `pill` for panel tabs inside a surface." },
-    { id: "overflow", title: "Overflow", description: "Use `indicator` to mark tabs with unsaved changes." },
+    { id: "pill", title: { en: "Pill", zh: "胶囊" },  },
+    { id: "overflow", title: { en: "Overflow", zh: "溢出" },  },
   ],
   notes: [
     { title: "Reorder", body: "Pass `order` and `onReorder` and render children in that order to enable dragging; with reduced motion tabs move instantly. On touch screens a swipe scrolls the strip instead, so dragging is off and tabs and close buttons grow to 32px and 24px targets. Without them the strip is static." },

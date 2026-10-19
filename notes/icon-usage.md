@@ -1,4 +1,4 @@
-# Icon usage (taimatsu/ui)
+# Icon usage (paneui)
 
 One system for every icon in the library and the docs site. Drawing rules for
 new glyphs live at the top of `components/icons.tsx` (puffy 18x18 grid).
@@ -6,7 +6,7 @@ new glyphs live at the top of `components/icons.tsx` (puffy 18x18 grid).
 ## Two families, never mixed in one group
 - **Solid (puff)**: filled silhouettes traced with `puff`, knockouts via
   `fillRule="evenodd"` (Home, Bot, Settings, Inbox, CalendarDays, Navigation,
-  Server, TerminalSquare, Shapes, TaimatsuLogo, Github…).
+  Server, TerminalSquare, Shapes, paneuiLogo, Github…).
 - **Line / ring**: open glyphs with `line` (chevrons, arrows, check, x, search)
   and outlined objects (Mail, Calendar, Info, Clock, Globe, Image, Monitor).
 - A set of icons shown side by side (a nav list, a rail, a dock, a tab bar, a
@@ -34,7 +34,7 @@ on the `<svg>` as `calc(w * var(--icon-stroke-scale, 1))`; never on an instance.
 | Title / header / card / notification / alert icon | chip sets it | chip tone | `IconChip` |
 | Brand mark in the docs header | 22px | `text-foreground` | bare |
 
-## IconChip (`@taimatsu/icon-chip`)
+## IconChip (`@paneui/icon-chip`)
 The only frame for title-level icons. Raised squircle, never a circle (circles
 are for avatars and status dots).
 - sizes: `sm` 24px r8 (icon 14) · `default` 32px r10 (icon 16) · `lg` 40px r12 (icon 20) · `xl` 48px r16 (icon 24)
@@ -54,12 +54,12 @@ checkbox / otp-input / animated-badge (these share CheckIcon's path and round
 caps; checkbox/otp use a 2px stroke because they sit on a filled box).
 
 ## Brand
-- `TaimatsuLogoIcon`: soft rounded square with a "q" knocked out. Docs header,
+- `PaneuiLogoIcon`: soft rounded square with a "q" knocked out. Docs header,
   mobile drawer title, favicon (`app/icon.svg`, same path, light/dark aware).
 - `GithubIcon`: simplified puffy octocat silhouette, used for the repo link.
 
 ## Outline variant
-The set ships in a second style, outline (`@taimatsu/icons-outline`), with the same
+The set ships in a second style, outline (`@paneui/icons-outline`), with the same
 exports, `IconProps` and `Icon` wrapper. Both registry items target
 `components/icons.tsx`, so `shadcn add <site>/r/icons-outline.json --overwrite`
 switches a project and `.../icons.json --overwrite` switches back.
@@ -75,7 +75,7 @@ switches a project and `.../icons.json --overwrite` switches back.
 - **Override map**: `scripts/icon-outline-overrides.mjs` maps an export name to
   the JSX inside `<Icon>` for icons whose automatic outline does not read: evenodd
   knockouts that would double up (Bot, Inbox, Server, TerminalSquare,
-  ClipboardList, Palette, TaimatsuLogo, History, CalendarDays), shapes too narrow to
+  ClipboardList, Palette, paneuiLogo, History, CalendarDays), shapes too narrow to
   keep an open middle (Chart, Pause, the thumbs cuffs, Sliders knobs) and tiny dots
   that stay filled (Grip, More, Cart wheels, CircleDot centre). Overrides may use
   `solid` (the filled puff) for dots of r ≤ ~0.6. The generator fails if an

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Frames an icon so card and section headers match.", "zh": "为标题图标提供统一的底框。"},
   usage: {
     imports: `import { IconChip } from "@/components/ui/icon-chip"`,
     code: `<IconChip tone="primary">
@@ -10,19 +11,15 @@ export default {
   examples: [
     {
       id: "tones",
-      title: "Tones",
-      description:
-        "Use `neutral` by default, a tinted tone when the icon carries a status, and `solid` for a brand mark.",
+      title: { en: "Tones", zh: "色调" },
     },
     {
       id: "sizes",
-      title: "Sizes",
-      description: "Use one `size` per list so the icons line up.",
+      title: { en: "Sizes", zh: "尺寸" },
     },
     {
       id: "card-header",
-      title: "Card Header",
-      description: "Use next to `CardTitle` for title-level icons, so headers read as one family.",
+      title: { en: "Card Header", zh: "卡片标题栏" },
     },
   ],
   notes: [

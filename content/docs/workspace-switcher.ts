@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Switches between workspaces or teams from the sidebar header.", "zh": "切换工作区或团队。"},
   baseUi: { name: "Menu", href: "https://base-ui.com/react/components/menu" },
   usage: {
     imports: `import { WorkspaceSwitcher } from "@/components/ui/workspace-switcher"`,

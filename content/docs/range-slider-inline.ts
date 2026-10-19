@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Slider that shows its label and value on the track.", "zh": "在滑轨上显示标签与数值。"},
   baseUi: { name: "Slider", href: "https://base-ui.com/react/components/slider" },
   usage: {
     imports: `import { RangeSliderInline } from "@/components/ui/range-slider-inline"`,
@@ -9,20 +10,18 @@ export default {
   examples: [
     {
       id: "stops",
-      title: "Stops",
-      description: "Use `snapToStops` when values should land on round steps.",
+      title: { en: "Stops", zh: "停靠点" },
     },
     {
       id: "format",
-      title: "Custom Range and Format",
-      description: "Use for units such as prices or percentages.",
+      title: { en: "Custom Range and Format", zh: "自定义范围与格式" },
+      description: { en: "Use for units such as prices or percentages.", zh: "适用于价格或百分比等带单位的数值。" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `onValueCommitted` when saving should wait until the drag ends.",
+      title: { en: "Controlled", zh: "受控" },
     },
-    { id: "disabled", title: "Disabled" },
+    { id: "disabled", title: { en: "Disabled", zh: "禁用" } },
   ],
   notes: [
     {

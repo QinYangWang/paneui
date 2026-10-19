@@ -11,7 +11,7 @@ const compat = new FlatCompat({
 });
 
 // ───────────────────────────────────────────────────────────────────────────
-// taimatsu/ui design-system rules
+// paneui design-system rules
 //
 // One consistent style across every coding agent working in this repo.
 // Rule reference: https://github.com/shadcn-ui/lint/blob/main/docs/rules.md
@@ -149,7 +149,7 @@ const designSystemRules = [
       shadcn: {
         ui: ["@/registry/base-nova/ui", "@/registry/base-nova/blocks"],
         componentImports: ["^@/components/icons$"],
-        note: "See AGENTS.md for taimatsu/ui design rules.",
+        note: "See AGENTS.md for paneui design rules.",
       },
     },
   },

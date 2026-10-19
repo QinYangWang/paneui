@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Follows new messages until the reader scrolls up.", "zh": "在阅读历史消息前跟随新消息。"},
   usage: {
     imports: `import { MessageScroller } from "@/components/ui/message-scroller"`,
     code: `<MessageScroller className="h-96">
@@ -10,28 +11,23 @@ export default {
   examples: [
     {
       id: "labels",
-      title: "Pill Labels",
-      description: "Set `jumpLabel` and `newLabel` to match your product's wording or language.",
+      title: { en: "Pill Labels", zh: "提示标签" },
     },
     {
       id: "custom-jump",
-      title: "Custom Jump Control",
-      description: "Set `showJumpButton={false}` when you need your own control, built with `useMessageScroller()` and passed as `footer` or `overlay`.",
+      title: { en: "Custom Jump Control", zh: "自定义跳转控件" },
     },
     {
       id: "live-edge-change",
-      title: "Live Edge Callback",
-      description: "Use `onLiveEdgeChange` to react when the reader detaches or re-attaches, e.g. to pause read receipts.",
+      title: { en: "Live Edge Callback", zh: "最新位置回调" },
     },
     {
       id: "start-at-top",
-      title: "Start at Top",
-      description: "`startAtEnd={false}` opens at the first message, for transcripts read from the beginning.",
+      title: { en: "Start at Top", zh: "从顶部开始" },
     },
     {
       id: "no-follow",
-      title: "No Follow",
-      description: "Set `follow={false}` when new content shouldn't move the reader; the pill tells them it arrived.",
+      title: { en: "No Follow", zh: "不跟随" },
     },
   ],
   notes: [

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows command output and takes commands in a terminal panel.", "zh": "展示命令输出并接收输入。"},
   usage: {
     imports: `import { Terminal, TerminalInput, TerminalOutput, TerminalStatusLine } from "@/components/ui/terminal-view"`,
     code: `<Terminal className="h-80">
@@ -14,8 +15,8 @@ export default {
 ├── TerminalInput
 └── TerminalStatusLine`,
   examples: [
-    { id: "progress", title: "Progress", description: "Use for installs and downloads whose progress lines rewrite in place." },
-    { id: "embedded", title: "Embedded", description: "Use `embedded` for command output inside chat steps." },
+    { id: "progress", title: { en: "Progress", zh: "进度" }, description: { en: "Use for installs and downloads whose progress lines rewrite in place.", zh: "适用于会原地更新进度的安装或下载输出。" } },
+    { id: "embedded", title: { en: "Embedded", zh: "嵌入" },  },
   ],
   notes: [
     { title: "ANSI", body: "`TerminalOutput` parses SGR colour codes plus bold, dim, italic, underline and inverse; 256-colour and 24-bit colours map to the nearest base colour. Colours map to theme tokens (red → destructive, green → success, yellow → warning, blue → primary, magenta / cyan → chart colours), so output follows the theme and accent. A carriage return rewrites the current line, and cursor movement and OSC sequences are dropped. `parseAnsi` and `stripAnsi` are exported." },

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows the full text of a truncated label on hover.", "zh": "显示被截断的完整文本。"},
   baseUi: {
     name: "Preview Card",
     href: "https://base-ui.com/react/components/preview-card",
@@ -15,8 +16,8 @@ export default {
 
 OverflowHintText`,
   examples: [
-    { id: "lines", title: "Line Clamp", description: "Use `lines` for descriptions and previews that keep two or three lines." },
-    { id: "parts", title: "Parts", description: "Use the parts when the hint shows something other than the label." },
+    { id: "lines", title: { en: "Line Clamp", zh: "行数限制" },  },
+    { id: "parts", title: { en: "Parts", zh: "组成部分" }, description: { en: "Use the parts when the hint shows something other than the label.", zh: "适用于提示内容与标签不同的场景。" } },
   ],
   notes: [
     {

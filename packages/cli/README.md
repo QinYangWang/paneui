@@ -1,13 +1,12 @@
-# @taimatsu/ui
+# paneui
 
-Add, search and update [taimatsu/ui](https://qinyangwang.github.io/ui) components and themes from the
-command line. It runs the shadcn CLI to write files and install dependencies, so the result is the
-same as `shadcn add`, and it remembers what you installed so one command can update all of it.
+Find, install and update [paneui](https://qinyangwang.github.io/ui) components.
+Installed source files are yours to edit.
 
 ```bash
-npx @taimatsu/ui@latest init            # register @taimatsu in components.json, install the theme
-npx @taimatsu/ui@latest add button card # add items
-npx @taimatsu/ui@latest update          # reinstall the theme and every installed item
+npx paneui@latest init            # register @paneui in components.json, install the theme
+npx paneui@latest add button card # add items
+npx paneui@latest update          # reinstall the theme and every installed item
 ```
 
 Requires Node.js 18.17 or later and a project the shadcn CLI supports (React, Tailwind CSS 4).
@@ -16,8 +15,8 @@ Requires Node.js 18.17 or later and a project the shadcn CLI supports (React, Ta
 
 | Command | What it does |
 | --- | --- |
-| `init` | Runs `shadcn init` if there is no `components.json`, registers `@taimatsu`, installs the theme. `--no-theme`, `--accent <name>`, `--radius <size>`; arguments after `--` go to `shadcn init`. |
-| `add <items...>` | Runs `shadcn add` for the items and records them in `taimatsu.json`. Accepts `button`, `@taimatsu/button` or an item URL. `--overwrite`, `--yes`, `--path`, `--dry-run`. |
+| `init` | Runs `shadcn init` if there is no `components.json`, registers `@paneui`, installs the theme. `--no-theme`, `--accent <name>`, `--radius <size>`; arguments after `--` go to `shadcn init`. |
+| `add <items...>` | Runs `shadcn add` for the items and records them in `paneui.json`. Accepts `button`, `@paneui/button` or an item URL. `--overwrite`, `--yes`, `--path`, `--dry-run`. |
 | `search [query]` | Matches name, title, description and category. `--category`, `--type`, `--all` (hidden presets), `--limit`, `--json`. |
 | `list` | Every item, same options as `search`. |
 | `info <item>` | Dependencies, files and where they install, and the install commands. `--json`. |
@@ -28,7 +27,10 @@ Every command takes `--cwd <dir>` and `--registry <url>`.
 
 ## How update finds your items
 
-`add` writes `taimatsu.json` next to `components.json`:
+`add` writes `paneui.json` next to `components.json`.
+For one release, the CLI also reads the previous configuration filename.
+New writes always use `paneui.json`:
+
 
 ```json
 {
@@ -48,27 +50,27 @@ pass `--templates`, because reinstalling one replaces its routes.
 
 ## With the shadcn CLI
 
-`init` adds this to `components.json`, so `npx shadcn@latest add @taimatsu/<name>` works too:
+`init` adds this to `components.json`, so `npx shadcn@latest add @paneui/<name>` works too:
 
 ```json
-{ "registries": { "@taimatsu": "https://qinyangwang.github.io/ui/r/{name}.json" } }
+{ "registries": { "@paneui": "https://qinyangwang.github.io/ui/r/{name}.json" } }
 ```
 
-Items added with the shadcn CLI are not in `taimatsu.json`, but `update` still finds them.
+Items added with the shadcn CLI are not in `paneui.json`, but `update` still finds them.
 
 ## Configuration
 
 | Setting | Default |
 | --- | --- |
-| Registry: `--registry`, then `$TAIMATSU_REGISTRY`, then `registries["@taimatsu"]` in components.json | `https://qinyangwang.github.io/ui/r` |
-| shadcn command: `$TAIMATSU_SHADCN` | `npx --yes shadcn@latest` |
+| Registry: `--registry`, then `$PANEUI_REGISTRY`, then `registries["@paneui"]` in components.json | `https://qinyangwang.github.io/ui/r` |
+| shadcn command: `$PANEUI_SHADCN` | `npx --yes shadcn@latest` |
 | Colours: `NO_COLOR`, `FORCE_COLOR` | on in a terminal |
 
 ## Development
 
 ```bash
-pnpm --filter @taimatsu/ui build
-pnpm --filter @taimatsu/ui test   # builds, then runs node:test against a mock registry
+pnpm --filter paneui build
+pnpm --filter paneui test   # builds, then runs node:test against a mock registry
 node packages/cli/dist/index.js search chart
 ```
 

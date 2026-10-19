@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Floating panel for extra content or actions near a trigger.", "zh": "在触发控件附近显示补充内容。"},
   baseUi: {
     name: "Popover",
     href: "https://base-ui.com/react/components/popover",
@@ -27,28 +28,25 @@ export default {
   examples: [
     {
       id: "sides",
-      title: "Sides",
-      description: "Use `side` to keep the popover off content it would cover; it flips when there is no room.",
+      title: { en: "Sides", zh: "方向" },
     },
     {
       id: "align",
-      title: "Align",
-      description: "Use `start` or `end` when the trigger sits near an edge of the layout.",
+      title: { en: "Align", zh: "对齐" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when the popover should close after a form submits.",
+      title: { en: "Controlled", zh: "受控" },
+      description: { en: "Use when the popover should close after a form submits.", zh: "适用于表单提交后需要关闭的浮层。" },
     },
     {
       id: "hover",
-      title: "Open on Hover",
-      description: "Use for previews that should appear on hover, like a hover card.",
+      title: { en: "Open on Hover", zh: "悬停打开" },
+      description: { en: "Use for previews that should appear on hover, like a hover card.", zh: "适用于悬停查看的内容预览。" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

@@ -13,6 +13,7 @@ const positioning = [
 ]
 
 export default {
+  summary: {"en": "Dropdown of actions or options opened from a trigger.", "zh": "打开操作或选项菜单。"},
   baseUi: {
     name: "Menu",
     href: "https://base-ui.com/react/components/menu",
@@ -46,28 +47,23 @@ export default {
   examples: [
     {
       id: "checkbox-items",
-      title: "Checkbox Items",
-      description: "Use `MenuCheckboxItem` for options that toggle independently; the menu stays open so several can be toggled.",
+      title: { en: "Checkbox Items", zh: "复选菜单项" },
     },
     {
       id: "radio-items",
-      title: "Radio Items",
-      description: "Wrap `MenuRadioItem`s in a `MenuRadioGroup` with `value` and `onValueChange` for one-of-many choices.",
+      title: { en: "Radio Items", zh: "单选菜单项" },
     },
     {
       id: "disabled-and-destructive",
-      title: "Disabled and Destructive",
-      description: "Use `variant=\"destructive\"` for actions that delete and `disabled` for ones that aren't available right now.",
+      title: { en: "Disabled and Destructive", zh: "禁用与危险操作" },
     },
     {
       id: "inset",
-      title: "Inset",
-      description: "Set `inset` on `MenuItem` and `MenuLabel` when only some items have an icon or indicator, so the text lines up.",
+      title: { en: "Inset", zh: "内嵌" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

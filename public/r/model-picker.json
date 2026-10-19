@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "model-picker",
   "title": "Model Picker",
-  "description": "Lets users choose an agent's model, effort or mode.",
+  "description": "Chooses an agent model.",
   "dependencies": [
     "@base-ui/react"
   ],

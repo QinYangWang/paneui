@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "App frame with a collapsible sidebar and an inset content panel.", "zh": "组织应用导航与主内容。"},
   usage: {
     imports: `import { AppShell, AppShellInsetHeader, AppShellMain, AppShellSidebar, AppShellSwitcher } from "@/components/ui/app-shell"
 import { SidebarContent, SidebarFooter, SidebarHeader, SidebarItem, SidebarMenu } from "@/components/ui/animated-sidebar"`,
@@ -41,33 +42,27 @@ import { SidebarContent, SidebarFooter, SidebarHeader, SidebarItem, SidebarMenu 
   examples: [
     {
       id: "header-first",
-      title: "Header First",
-      description: "Add `AppShellHeader` when brand, search and actions should span the window.",
+      title: { en: "Header First", zh: "通栏标题栏" },
     },
     {
       id: "sidebar",
-      title: "Sidebar",
-      description: "Use `layout=\"sidebar\"` for dense tools where a panel edge would waste space.",
+      title: { en: "Sidebar", zh: "侧栏" },
     },
     {
       id: "floating",
-      title: "Floating",
-      description: "Use `layout=\"floating\"` when the navigation should read as its own surface.",
+      title: { en: "Floating", zh: "浮动" },
     },
     {
       id: "top-nav",
-      title: "Top Nav",
-      description: "Leave out `AppShellSidebar` when a few sections fit in the header.",
+      title: { en: "Top Nav", zh: "顶部导航" },
     },
     {
       id: "icon-rail",
-      title: "Icon Rail",
-      description: "Use `defaultOpen={false}` when the content needs the width from the start.",
+      title: { en: "Icon Rail", zh: "图标栏" },
     },
     {
       id: "header-actions",
-      title: "Header Actions",
-      description: "Use `open` and `onOpenChange` when other controls fold the rail.",
+      title: { en: "Header Actions", zh: "标题栏操作" },
     },
   ],
   notes: [

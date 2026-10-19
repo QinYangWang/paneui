@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Enters a one-time code, one character per slot.", "zh": "逐位输入一次性验证码。"},
   "baseUi": {
     "name": "OTP Field",
     "href": "https://base-ui.com/react/components/otp-field"
@@ -13,8 +14,8 @@ export default {
   "examples": [
     {
       "id": "four-digits",
-      "title": "Four Digits",
-      "description": "Use `mask` for a PIN that shouldn't show on screen."
+      "title": {"en":"Four Digits","zh":"四位数字"},
+      "description": {"en":"Use for a PIN that should stay hidden.","zh":"适用于不应显示在屏幕上的 PIN 码。"}
     }
   ],
   "notes": [

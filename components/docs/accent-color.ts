@@ -191,7 +191,7 @@ const declarations = (v: AccentVars, indent = "") => ACCENT_VARS.map((k) => `${i
 /** The overrides a user pastes after the theme variables: exactly what this page applies. */
 export function themeCss(theme: AccentTheme, label: string): string {
   return [
-    `/* taimatsu/ui accent: ${label} */`,
+    `/* paneui accent: ${label} */`,
     "/* Paste after the theme variables in globals.css. */",
     ":root {",
     ...declarations(theme.light, "  "),

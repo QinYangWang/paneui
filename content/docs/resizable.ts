@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Split panes the user can resize or collapse.", "zh": "调整或收起分栏。"},
   usage: {
     imports: `import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"`,
     code: `<ResizablePanelGroup direction="horizontal" autoSaveId="workspace">
@@ -14,8 +15,8 @@ export default {
 ├── ResizableHandle
 └── ResizablePanel`,
   examples: [
-    { id: "collapsible", title: "Collapsible", description: "Use for sidebars that can be dragged shut or toggled from a button." },
-    { id: "with-handle", title: "With Handle", description: "Use where the divider is easy to miss." },
+    { id: "collapsible", title: { en: "Collapsible", zh: "可收起" }, description: { en: "Use for sidebars that can be dragged shut or toggled from a button.", zh: "适用于可拖动收起或用按钮切换的侧栏。" } },
+    { id: "with-handle", title: { en: "With Handle", zh: "带拖动柄" }, description: { en: "Use where the divider is easy to miss.", zh: "适用于分隔线不易察觉的场景。" } },
   ],
   notes: [
     { title: "Sizes", body: "Sizes are percentages of the group, or pixel strings like `\"240px\"` for `defaultSize`, `minSize`, `maxSize` and `collapsedSize` (converted with the group's current size). Panels without `defaultSize` share what is left." },

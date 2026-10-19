@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Brings content into view as it scrolls onscreen.", "zh": "在内容进入视野时显示。"},
   usage: {
     imports: `import { ScrollReveal } from "@/components/ui/scroll-reveal"`,
     code: `<ScrollReveal>
@@ -10,13 +11,12 @@ export default {
   examples: [
     {
       id: "directions",
-      title: "Directions",
-      description: "Use `once={false}` when content should replay each time it comes back into view.",
+      title: { en: "Directions", zh: "方向" },
     },
     {
       id: "stagger",
-      title: "Stagger",
-      description: "Use for lists and grids so items arrive one after another.",
+      title: { en: "Stagger", zh: "交错" },
+      description: { en: "Use for lists and grids so items arrive one after another.", zh: "适用于需要依次显示的列表或网格。" },
     },
   ],
   notes: [

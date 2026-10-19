@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Browses, filters and acts on a set of rows.", "zh": "浏览、筛选并处理数据行。"},
   usage: {
     imports: `import { DataTable, DataTableRowActions, type DataTableColumn } from "@/components/ui/data-table"`,
     code: `<DataTable
@@ -14,7 +15,7 @@ export default {
   onRowClick={({ row }) => open(row)}
 />`,
   },
-  examples: [{ id: "empty", title: "Empty State", description: "Pass `emptyState` when the table can start with no rows; a search or filter that matches nothing shows its own state." }],
+  examples: [{ id: "empty", title: { en: "Empty State", zh: "空白状态" },  }],
   notes: [
     { title: "What it adds to Table", body: "It builds on [Table](/docs/table). Columns are Table columns plus `label` and `hideable`, and `toolbar` adds your own controls." },
     { title: "Data flow", body: "Everything runs on the client: filter → search → sort → page. Selection survives paging. For server-side data, page and filter on the server and render Table directly." },

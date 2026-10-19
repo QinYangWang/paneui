@@ -1,5 +1,7 @@
 "use client"
 
+import { T, useT } from "@/lib/site-locale"
+
 import * as React from "react"
 
 import { CheckIcon, CopyIcon, DownloadIcon, FileIcon } from "@/components/icons"
@@ -16,6 +18,7 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
  * `html` is the same text highlighted at build time.
  */
 export function AgentSkill({ name, skill, html }: { name: string; skill: string; html: string }) {
+  const t = useT()
   const skillUrl = `${BASE_PATH}/skills/${name}/SKILL.md`
   const install = `npx skills add QinYangWang/ui --skill ${name}`
   const [copied, setCopied] = React.useState(false)
@@ -50,11 +53,11 @@ export function AgentSkill({ name, skill, html }: { name: string; skill: string;
             <ActionSwapBlurIcon value={copied ? "copied" : "copy"}>
               {copied ? <CheckIcon data-icon="inline-start" className="text-success" /> : <CopyIcon data-icon="inline-start" />}
             </ActionSwapBlurIcon>
-            {copied ? "Copied" : "Copy"}
+            {t(copied ? { en: "Copied", zh: "已复制" } : { en: "Copy", zh: "复制" })}
           </Button>
           <Button variant="ghost" size="sm" nativeButton={false} render={<a href={skillUrl} download="SKILL.md" />}>
             <DownloadIcon data-icon="inline-start" />
-            Download
+            <T en="Download" zh="下载" />
           </Button>
         </div>
         <CollapsiblePanel>

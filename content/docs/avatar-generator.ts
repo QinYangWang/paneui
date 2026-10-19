@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Creates and edits avatars.", "zh": "生成或编辑用户头像。"},
   usage: {
     imports: `import { GeneratedAvatar } from "@/components/ui/generated-avatar"
 import { AvatarGenerator } from "@/components/ui/avatar-generator"`,
@@ -13,26 +14,20 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
   examples: [
     {
       id: "by-seed",
-      title: "From a Seed",
-      description: "Use a stable seed, like a user id, so a person gets the same avatar everywhere.",
+      title: { en: "From a Seed", zh: "按种子生成" },
+      description: { en: "Use a stable seed, like a user id, so a person gets the same avatar everywhere.", zh: "使用固定种子，让同一用户始终获得同一头像。" },
     },
     {
       id: "gender",
-      title: "Male and Female",
-      description:
-        "Use `gender` when the avatar should match the person's stated gender.",
+      title: { en: "Male and Female", zh: "男性与女性" },
     },
     {
       id: "options",
-      title: "Options",
-      description:
-        "Use `selections` to pin parts the seed shouldn't choose, and `\"none\"` to turn off glasses, beard or gesture.",
+      title: { en: "Options", zh: "选项" },
     },
     {
       id: "generator",
-      title: "Generator",
-      description:
-        "Use `AvatarGenerator` when people design their own avatar, storing the state from `onValueChange`.",
+      title: { en: "Generator", zh: "生成器" },
     },
   ],
   notes: [

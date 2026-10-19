@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "edited-files-card",
   "title": "Edited Files Card",
-  "description": "Summarises the files an agent changed, with undo and review.",
+  "description": "Reviews and undoes an agent’s file changes.",
   "dependencies": [
     "motion"
   ],

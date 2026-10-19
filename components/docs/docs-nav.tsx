@@ -1,5 +1,8 @@
 "use client"
 
+import { useT, type Localized } from "@/lib/site-locale"
+import { siteCopy } from "@/lib/site-copy"
+
 import * as React from "react"
 import Link from "next/link"
 
@@ -17,7 +20,7 @@ import {
 import { COMPONENTS_HREF, COMPONENTS_TITLE, GUIDE_PAGES } from "./docs-pages"
 import { isNew, WHATS_NEW } from "./whats-new"
 
-export type NavGroup = { category: string; items: { name: string; title: string; description: string }[] }
+export type NavGroup = { category: string; items: { name: string; title: string; description: Localized }[] }
 
 /** Strip basePath-independent trailing slash so "/docs/button/" and "/docs/button" match. */
 export function normalizePath(pathname: string | null) {
@@ -71,6 +74,8 @@ export function DocsNav({
   searchShortcut: string
   className?: string
 }) {
+  const t = useT()
+  const label = (text: string) => t(siteCopy(text))
   const [collapsed, toggle] = useCollapsed()
   const sectionProps = (id: string, forceOpen = false) => ({
     open: forceOpen || !collapsed.has(id),
@@ -85,31 +90,31 @@ export function DocsNav({
   const newBadge = (name: string) =>
     isNew(name) ? (
       <Badge variant="success" size="sm">
-        New
+        {label("New")}
       </Badge>
     ) : undefined
   const link = (href: string, title: string, badge?: React.ReactNode) => (
     <SidebarNavLink key={href} active={pathname === href} badge={badge} render={<Link href={href} />}>
-      {title}
+      {label(title)}
     </SidebarNavLink>
   )
 
   return (
     <SidebarNav className={className}>
-      <SidebarNavSearch shortcut={searchShortcut} onClick={onSearch} aria-label="Search docs" />
-      <SidebarNavContent aria-label="Docs">
-        <SidebarNavSection label="Docs" {...sectionProps("docs")}>
+      <SidebarNavSearch shortcut={searchShortcut} onClick={onSearch} aria-label={label("Search docs")}>{label("Search docs…")}</SidebarNavSearch>
+      <SidebarNavContent aria-label={label("Docs")}>
+        <SidebarNavSection label={label("Docs")} {...sectionProps("docs")}>
           <SidebarNavList>{GUIDE_PAGES.map((p) => link(p.href, p.title))}</SidebarNavList>
         </SidebarNavSection>
 
-        <SidebarNavSection label="Components" count={componentCount} {...sectionProps("components")}>
+        <SidebarNavSection label={label("Components")} count={componentCount} {...sectionProps("components")}>
           <SidebarNavList>{link(COMPONENTS_HREF, COMPONENTS_TITLE)}</SidebarNavList>
           {components.map((g) => (
             // A group holding the current page always shows it.
             <SidebarNavSection
               key={g.category}
               level="group"
-              label={g.category}
+              label={label(g.category)}
               count={g.items.length}
               {...sectionProps(`group:${g.category}`, g.items.some((i) => pathname === `/docs/${i.name}`))}
             >
@@ -119,7 +124,7 @@ export function DocsNav({
         </SidebarNavSection>
 
         {templates.length > 0 && (
-          <SidebarNavSection label="Templates" count={templates.length} {...sectionProps("templates")}>
+          <SidebarNavSection label={label("Templates")} count={templates.length} {...sectionProps("templates")}>
             <SidebarNavList>{templates.map((i) => link(`/docs/${i.name}`, i.title, newBadge(i.name)))}</SidebarNavList>
           </SidebarNavSection>
         )}
@@ -129,11 +134,11 @@ export function DocsNav({
         <SidebarNavList>
           <SidebarNavLink
             render={<Link href={WHATS_NEW.href} />}
-            badge={<span className="text-ui-xs text-muted-foreground tabular-nums">{WHATS_NEW.items.length} new</span>}
+            badge={<span className="text-ui-xs text-muted-foreground tabular-nums">{WHATS_NEW.items.length} {label("New")}</span>}
           >
             <span className="flex items-center gap-2 font-medium text-foreground">
               <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-success" />
-              What&apos;s new
+              {label("What's new")}
             </span>
           </SidebarNavLink>
         </SidebarNavList>

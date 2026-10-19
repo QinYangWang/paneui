@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Chooses an agent model.", "zh": "选择助手使用的模型。"},
   usage: {
     imports: `import { EffortPicker, ModelPicker, ModePicker } from "@/components/ui/model-picker"`,
     code: `<ModePicker modes={modes} value={mode} onValueChange={setMode} />
@@ -8,8 +9,8 @@ export default {
 <EffortPicker value={effort} onValueChange={setEffort} />`,
   },
   examples: [
-    { id: "searchable", title: "Searchable", description: "Use when the list runs past a screen, such as a model router's catalogue." },
-    { id: "composer-picker", title: "Composer Picker", description: "Use `ComposerPicker` directly for an option list the presets don't cover." },
+    { id: "searchable", title: { en: "Searchable", zh: "可搜索" }, description: { en: "Use when the list runs past a screen, such as a model router's catalogue.", zh: "适用于选项超过一屏的模型目录。" } },
+    { id: "composer-picker", title: { en: "Composer Picker", zh: "输入栏选择器" },  },
   ],
   notes: [
     { title: "ACP", body: "Feed `ModePicker` from an agent's `SessionModeState`, `ModelPicker` from a config option with `category: \"model\"` (grouped options map to `provider`), and `EffortPicker` from `category: \"thought_level\"`." },

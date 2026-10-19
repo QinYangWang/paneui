@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "message-scroller",
   "title": "Message Scroller",
-  "description": "Keeps a chat pinned to new messages until the reader scrolls up.",
+  "description": "Follows new messages until the reader scrolls up.",
   "dependencies": [
     "motion"
   ],

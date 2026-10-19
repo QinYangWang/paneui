@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Lists entries in time order along a line.", "zh": "按时间顺序展示记录。"},
   usage: {
     imports: `import { Timeline, TimelineDescription, TimelineItem, TimelineTitle } from "@/components/ui/timeline"`,
     code: `<Timeline>
@@ -14,7 +15,7 @@ export default {
 └── TimelineItem
     ├── TimelineTitle
     └── TimelineDescription`,
-  examples: [{ id: "cards", title: "Cards", description: "Use cards when each entry carries more than two lines." }],
+  examples: [{ id: "cards", title: { en: "Cards", zh: "卡片" }, description: { en: "Use cards when each entry carries more than two lines.", zh: "适用于每条记录内容较长的时间线。" } }],
   notes: [
     { title: "Time column", body: "The column is 3.5rem wide; set `--timeline-time` on the `Timeline` for longer labels. Leave `time` out on every item to drop the column." },
     { title: "Hairline", body: "The line starts at the first dot and ends at the last, so a single entry shows a dot alone." },

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Compact section navigation that previews each destination.", "zh": "在导航中预览目标内容。"},
   usage: {
     imports: `import { PreviewRail } from "@/components/ui/preview-rail"`,
     code: `<PreviewRail
@@ -14,18 +15,17 @@ export default {
   examples: [
     {
       id: "horizontal",
-      title: "Horizontal",
-      description: "Use along the top or bottom of a page, with `side=\"start\"` to open the card above.",
+      title: { en: "Horizontal", zh: "横向" },
     },
     {
       id: "render-preview",
-      title: "Icons and Custom Preview",
-      description: "Use when the preview needs icons or your own contents.",
+      title: { en: "Icons and Custom Preview", zh: "图标与自定义预览" },
+      description: { en: "Use when the preview needs icons or your own contents.", zh: "适用于需要自定义预览内容的导航。" },
     },
     {
       id: "side-start",
-      title: "Compact, Preview on Start",
-      description: "Use when the rail sits on the right edge and space is tight.",
+      title: { en: "Compact, Preview on Start", zh: "紧凑，起始侧预览" },
+      description: { en: "Use when the rail sits on the right edge and space is tight.", zh: "适用于靠近右侧边缘的紧凑导航。" },
     },
   ],
   notes: [

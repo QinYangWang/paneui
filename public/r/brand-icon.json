@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "brand-icon",
   "title": "Brand Icon",
-  "description": "Shows a third-party logo at the icon set's sizes.",
+  "description": "Shows brand logos.",
   "dependencies": [
     "simple-icons"
   ],

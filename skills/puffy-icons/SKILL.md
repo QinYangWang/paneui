@@ -1,11 +1,11 @@
 ---
 name: puffy-icons
-description: Draws new icons for the taimatsu/ui icon set (single colour) in whichever style is installed, rounded (the default, 24x24 outline glyphs with 1.75px round strokes), puffy (18x18 soft, inflated filled glyphs) or outline (18x18, 1.6px round strokes), and adds them to an installed components/icons.tsx. Use when a component needs an icon the set doesn't have, when changing an existing glyph, or when choosing which icons to use together in a nav, toolbar or card header.
+description: Draw and update icons for paneui.
 ---
 
 # Puffy icons
 
-The taimatsu/ui icon set (`@taimatsu/icons`, installed as `components/icons.tsx`) is a single file of
+The paneui icon set (`@paneui/icons`, installed as `components/icons.tsx`) is a single file of
 React components: soft, slightly inflated glyphs in one colour. This skill lets you draw new icons
 that sit in the same family, add them to that file, and use them the way the library does.
 

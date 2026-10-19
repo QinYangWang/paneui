@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows brief notifications that dismiss themselves.", "zh": "显示短暂通知。"},
   baseUi: {
     name: "Toast",
     href: "https://base-ui.com/react/components/toast",
@@ -17,28 +18,24 @@ toast.add({ title: "Saved", description: "Your changes are live.", type: "succes
   examples: [
     {
       id: "types",
-      title: "Types",
-      description: "Use `type` to match the outcome, or leave it out for a plain notice.",
+      title: { en: "Types", zh: "类型" },
     },
     {
       id: "with-action",
-      title: "With Action",
-      description: "Use for Undo, closing the toast in the action's `onClick`.",
+      title: { en: "With Action", zh: "带操作" },
     },
     {
       id: "promise",
-      title: "Promise",
-      description: "Use for saves and uploads that take a moment; the toast follows the promise to success or error.",
+      title: { en: "Promise", zh: "异步操作" },
+      description: { en: "Use for saves and uploads that take a moment; the toast follows the promise to success or error.", zh: "适用于保存或上传等异步操作。" },
     },
     {
       id: "persistent",
-      title: "Persistent",
-      description: "Use `timeout: 0` for messages the user must act on, and `priority: \"high\"` when they are urgent.",
+      title: { en: "Persistent", zh: "持续显示" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, put a \`ToastProvider\` inside \`DirectionProvider\`; its toasts stack at the bottom left.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

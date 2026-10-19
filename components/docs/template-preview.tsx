@@ -1,5 +1,7 @@
 "use client"
 
+import { T } from "@/lib/site-locale"
+
 import * as React from "react"
 
 import { ExternalLinkIcon } from "@/components/icons"
@@ -60,7 +62,7 @@ export function TemplatePreview({ name, path = `/templates/${name}/`, height = 4
       </div>
       <div className="flex justify-end">
         <Button variant="secondary" size="sm" nativeButton={false} render={<a href={src} target="_blank" rel="noreferrer" />}>
-          Open full page
+          <T en="Open full page" zh="打开完整页面" />
           <ExternalLinkIcon className="rtl:-scale-x-100" data-icon="inline-end" />
         </Button>
       </div>

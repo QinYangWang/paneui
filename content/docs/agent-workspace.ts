@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Chat with coding agents and review their work.", "zh": "与编码助手对话并查看工作进度。"},
   usage: {
     imports: `// One command, into a new app:
 // pnpm dlx shadcn@latest init -d -n my-agent https://qinyangwang.github.io/ui/r/agent-workspace.json

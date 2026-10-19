@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Labels an item with a short status or category.", "zh": "标记状态或分类。"},
   usage: {
     imports: `import { Badge } from "@/components/ui/badge"`,
     code: `<Badge variant="success">Paid</Badge>`,
@@ -8,23 +9,20 @@ export default {
   examples: [
     {
       id: "sizes",
-      title: "Sizes",
-      description: "Use `sm` in tables and dense rows.",
+      title: { en: "Sizes", zh: "尺寸" },
     },
     {
       id: "with-icon",
-      title: "With Icon",
-      description: "Put an icon first when the badge marks a status or category.",
+      title: { en: "With Icon", zh: "带图标" },
+      description: { en: "Put an icon first when the badge marks a status or category.", zh: "适用于需要快速识别状态或分类的标记。" },
     },
     {
       id: "with-avatar",
-      title: "With Avatar",
-      description: "Use `BadgeAvatar` when the badge names a person or vendor.",
+      title: { en: "With Avatar", zh: "带头像" },
     },
     {
       id: "as-link",
-      title: "As Link",
-      description: "Use `render={<a />}` when the badge leads to a filtered view or detail page.",
+      title: { en: "As Link", zh: "用作链接" },
     },
   ],
   api: [

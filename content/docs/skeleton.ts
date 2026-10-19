@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Placeholder shape while content loads.", "zh": "在加载时预留内容位置。"},
   "usage": {
     "imports": "import { Skeleton } from \"@/components/ui/skeleton\"",
     "code": "<Skeleton className=\"h-4 w-32\" />"
@@ -8,7 +9,7 @@ export default {
   "examples": [
     {
       "id": "card",
-      "title": "Card"
+      "title": {"en":"Card","zh":"卡片"}
     }
   ],
   "notes": [

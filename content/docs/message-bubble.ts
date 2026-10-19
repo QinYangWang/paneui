@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Holds one chat message in a speech bubble.", "zh": "显示一条聊天消息。"},
   usage: {
     imports: `import { MessageBubble, MessageBubbleGroup } from "@/components/ui/message-bubble"`,
     code: `<MessageBubbleGroup align="end">
@@ -13,33 +14,27 @@ export default {
   examples: [
     {
       id: "tones",
-      title: "Tones",
-      description: "Match `tone` to who is speaking and why, such as `primary` for the sender and `destructive` for errors.",
+      title: { en: "Tones", zh: "色调" },
     },
     {
       id: "sizes",
-      title: "Sizes",
-      description: "Use `size=\"sm\"` for chips like status lines and quick replies.",
+      title: { en: "Sizes", zh: "尺寸" },
     },
     {
       id: "align-and-tail",
-      title: "Alignment and Tail",
-      description: "Set `align=\"end\"` for the user's own bubbles, and `tail={false}` when the bubble shouldn't point at its sender.",
+      title: { en: "Alignment and Tail", zh: "对齐与尾角" },
     },
     {
       id: "grouped",
-      title: "Grouped",
-      description: "Wrap consecutive bubbles from one sender in `MessageBubbleGroup` so they share `align` and join corners.",
+      title: { en: "Grouped", zh: "分组" },
     },
     {
       id: "interactive",
-      title: "Interactive",
-      description: "Pass `render={<button />}` when the whole bubble is pressable, e.g. quick-reply suggestions.",
+      title: { en: "Interactive", zh: "可交互" },
     },
     {
       id: "collapsible",
-      title: "Collapsible",
-      description: "Wrap long content in `MessageBubbleCollapsible` so it stays clipped until the reader expands it.",
+      title: { en: "Collapsible", zh: "可收起" },
     },
   ],
   notes: [

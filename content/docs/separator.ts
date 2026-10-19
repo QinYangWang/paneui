@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Divides groups of content with a hairline.", "zh": "分隔相关内容组。"},
   "baseUi": {
     "name": "Separator",
     "href": "https://base-ui.com/react/components/separator"
@@ -12,7 +13,7 @@ export default {
   "examples": [
     {
       "id": "list",
-      "title": "List"
+      "title": {"en":"List","zh":"列表"}
     }
   ],
   "api": [

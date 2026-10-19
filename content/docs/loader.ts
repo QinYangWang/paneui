@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows that something is loading.", "zh": "提示内容正在加载。"},
   usage: {
     imports: `import { Loader } from "@/components/ui/loader"`,
     code: `<Loader variant="dots" />`,
@@ -8,19 +9,17 @@ export default {
   examples: [
     {
       id: "speed",
-      title: "Speed",
+      title: { en: "Speed", zh: "速度" },
     },
     {
       id: "colors",
-      title: "Colors",
-      description: "Put a token `text-*` colour on `Loader` when it shouldn't inherit its parent's `currentColor`.",
+      title: { en: "Colors", zh: "颜色" },
     },
     {
       id: "in-context",
-      title: "In Context",
-      description: "Use `size=\"sm\"` inside buttons and status rows, and give each one a specific `label`.",
+      title: { en: "In Context", zh: "实际场景" },
     },
-    { id: "sizes", title: "Sizes", description: "Use `xs` inside `xs` and `sm` buttons." },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" },  },
   ],
   notes: [
     {

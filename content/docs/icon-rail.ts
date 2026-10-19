@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Narrow bar of icon buttons for switching between app sections.", "zh": "通过图标切换应用分区。"},
   usage: {
     imports: `import { IconRail, IconRailItem, IconRailSpacer } from "@/components/ui/icon-rail"`,
     code: `<IconRail aria-label="App">
@@ -17,8 +18,8 @@ export default {
 ├── IconRailSpacer
 └── IconRailAvatar`,
   examples: [
-    { id: "badges", title: "Badges", description: "Use a count `badge` for unread items and `true` for an attention dot; counts cap at 99+." },
-    { id: "horizontal", title: "Horizontal", description: "Use `orientation=\"horizontal\"` along the bottom of a mobile drawer; the row scrolls sideways when it runs out of room." },
+    { id: "badges", title: { en: "Badges", zh: "标记" },  },
+    { id: "horizontal", title: { en: "Horizontal", zh: "横向" },  },
   ],
   notes: [
     { title: "Icons", body: "Use solid icons at 18px, as the icon usage rules ask. Each item's tooltip shows its `label` and shortcut, so make the label clear." },

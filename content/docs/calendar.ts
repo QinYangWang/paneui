@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Month grid for picking a date or a range.", "zh": "在月历中选择日期。"},
   "usage": {
     "imports": "import { Calendar } from \"@/components/ui/calendar\"",
     "code": "const [date, setDate] = React.useState<Date | null>(new Date())\n\n<Calendar value={date} onValueChange={setDate} />"
@@ -8,17 +9,16 @@ export default {
   "examples": [
     {
       "id": "range",
-      "title": "Range"
+      "title": {"en":"Range","zh":"范围"}
     },
     {
       "id": "disabled-days",
-      "title": "Disabled Days",
-      "description": "Use `min`, `max` and `disabled` when only some days can be booked."
+      "title": {"en":"Disabled Days","zh":"不可选日期"},
+      "description": {"en":"Use when only some days can be booked.","zh":"适用于只有部分日期可预约的场景。"}
     },
     {
       "id": "rtl",
-      "title": "RTL",
-      "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and pass a matching `locale`."
+      "title": {"en":"RTL","zh":"从右到左"},
     }
   ],
   "notes": [

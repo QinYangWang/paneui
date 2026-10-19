@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Adjusts a number up or down in fixed steps.", "zh": "按固定步长调整数值。"},
   baseUi: {
     name: "Number Field",
     href: "https://base-ui.com/react/components/number-field",
@@ -10,28 +11,24 @@ export default {
     code: `<Stepper aria-label="Guests" defaultValue={2} min={1} max={8} />`,
   },
   examples: [
-    { id: "sizes", title: "Sizes", description: "Use `sm` in toolbars and dense rows." },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" },  },
     {
       id: "with-unit",
-      title: "With Unit",
-      description: "Use `unit` when the number needs a word after it, e.g. \"nights\".",
+      title: { en: "With Unit", zh: "带单位" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when other UI reads the value; it is `null` while the field is empty.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "decimals",
-      title: "Decimals",
-      description: "Use for prices and measurements, pairing a fractional `step` with `format` to fix the digits.",
+      title: { en: "Decimals", zh: "小数" },
     },
     {
       id: "localized",
-      title: "Localized",
-      description: "Use when your UI is translated, passing the button labels along with `locale`.",
+      title: { en: "Localized", zh: "本地化" },
     },
-    { id: "disabled", title: "Disabled" },
+    { id: "disabled", title: { en: "Disabled", zh: "禁用" } },
   ],
   notes: [
     {

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Stops iOS from zooming into small text fields on focus.", "zh": "防止聚焦小字号输入框时自动放大。"},
   usage: {
     imports: `import { IosZoomLock } from "@/components/ui/ios-zoom-lock"`,
     code: `// app/layout.tsx
@@ -12,8 +13,7 @@ export default {
   examples: [
     {
       id: "scoped",
-      title: "Scoped",
-      description: "Use the hook with `enabled` when only one screen, such as a reply sheet, needs it.",
+      title: { en: "Scoped", zh: "局部生效" },
     },
   ],
   notes: [

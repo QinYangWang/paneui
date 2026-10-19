@@ -1,5 +1,8 @@
 "use client"
 
+import { useT } from "@/lib/site-locale"
+import { siteCopy } from "@/lib/site-copy"
+
 import * as React from "react"
 import { siClaude } from "simple-icons"
 
@@ -21,6 +24,8 @@ const absolute = (p: string) => new URL(`${BASE_PATH}${p}`, window.location.orig
  * written at build time, so the copy, the raw view and the chat links all read the same file.
  */
 export function PageActions({ markdownPath, pagePath, title }: { markdownPath: string; pagePath: string; title: string }) {
+  const t = useT()
+  const label = (text: string) => t(siteCopy(text))
   const toast = useToast()
   const [copied, setCopied] = React.useState(false)
   const cache = React.useRef<Promise<string> | null>(null)
@@ -51,23 +56,23 @@ export function PageActions({ markdownPath, pagePath, title }: { markdownPath: s
         await navigator.clipboard.writeText(await markdown())
       }
       flash()
-      toast.add({ title: "Copied as Markdown", type: "success" })
+      toast.add({ title: label("Copied as Markdown"), type: "success" })
     } catch {
-      toast.add({ title: "Couldn't copy this page", description: "Open it as Markdown instead.", type: "error" })
+      toast.add({ title: label("Couldn't copy this page"), description: label("Open it as Markdown instead."), type: "error" })
     }
   }
 
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(absolute(pagePath))
-      toast.add({ title: "Link copied", type: "success" })
+      toast.add({ title: label("Link copied"), type: "success" })
     } catch {
-      toast.add({ title: "Couldn't copy the link", type: "error" })
+      toast.add({ title: label("Couldn't copy the link"), type: "error" })
     }
   }
 
   const openChat = (base: string) => {
-    const prompt = `Read ${absolute(markdownPath)} so I can ask questions about ${title} in taimatsu/ui.`
+    const prompt = `Read ${absolute(markdownPath)} so I can ask questions about ${title} in paneui.`
     window.open(`${base}${encodeURIComponent(prompt)}`, "_blank", "noopener,noreferrer")
   }
 
@@ -77,22 +82,22 @@ export function PageActions({ markdownPath, pagePath, title }: { markdownPath: s
         <ActionSwapBlurIcon value={copied ? "copied" : "copy"} className="size-3.5">
           {copied ? <CheckIcon data-icon="inline-start" /> : <CopyIcon data-icon="inline-start" />}
         </ActionSwapBlurIcon>
-        Copy page
+        {label("Copy page")}
       </Button>
       <ButtonGroupSeparator />
       <Menu>
-        <MenuTrigger render={<Button variant="secondary" size="icon-sm" aria-label="More page actions" />}>
+        <MenuTrigger render={<Button variant="secondary" size="icon-sm" aria-label={label("More page actions")} />}>
           <ChevronDownIcon />
         </MenuTrigger>
         <MenuContent align="end" className="min-w-52">
           <MenuGroup>
             <MenuItem onClick={copyMarkdown}>
               <CopyIcon />
-              Copy as Markdown
+              {label("Copy as Markdown")}
             </MenuItem>
             <MenuItem onClick={() => window.open(absolute(markdownPath), "_blank", "noopener,noreferrer")}>
               <FileIcon />
-              View as Markdown
+              {label("View as Markdown")}
             </MenuItem>
           </MenuGroup>
           <MenuSeparator />
@@ -100,19 +105,19 @@ export function PageActions({ markdownPath, pagePath, title }: { markdownPath: s
             <MenuItem onClick={() => openChat("https://chatgpt.com/?hints=search&q=")}>
               {/* The brand icon package leaves this mark out, so it gets a neutral chat glyph. */}
               <ChatIcon />
-              Open in ChatGPT
+              {label("Open in ChatGPT")}
               <ExternalLinkIcon className="ms-auto rtl:-scale-x-100" />
             </MenuItem>
             <MenuItem onClick={() => openChat("https://claude.ai/new?q=")}>
               <BrandIcon icon={siClaude} />
-              Open in Claude
+              {label("Open in Claude")}
               <ExternalLinkIcon className="ms-auto rtl:-scale-x-100" />
             </MenuItem>
           </MenuGroup>
           <MenuSeparator />
           <MenuItem onClick={copyLink}>
             <LinkIcon />
-            Copy page link
+            {label("Copy page link")}
           </MenuItem>
         </MenuContent>
       </Menu>

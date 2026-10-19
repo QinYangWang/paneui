@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Eases scrolling for a page or a scroll container.", "zh": "让页面或容器平滑滚动。"},
   usage: {
     imports: `import { SmoothScroll } from "@/components/ui/smooth-scroll"`,
     code: `<SmoothScroll className="h-80">
@@ -10,18 +11,16 @@ export default {
   examples: [
     {
       id: "horizontal",
-      title: "Horizontal",
-      description: "Use for galleries and timelines that scroll sideways.",
+      title: { en: "Horizontal", zh: "横向" },
+      description: { en: "Use for galleries and timelines that scroll sideways.", zh: "适用于横向画廊或时间线。" },
     },
     {
       id: "easing",
-      title: "Lerp vs Duration",
-      description: "Use a fixed `duration` when every scroll should take the same time, or a lower `lerp` for a heavier feel.",
+      title: { en: "Lerp vs Duration", zh: "插值与时长" },
     },
     {
       id: "scroll-to-section",
-      title: "Scroll to Section",
-      description: "Use for in-page navigation, with a negative `offset` to clear a sticky header.",
+      title: { en: "Scroll to Section", zh: "滚动到分节" },
     },
   ],
   notes: [

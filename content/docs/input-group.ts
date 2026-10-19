@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Groups related controls inside an input.", "zh": "在输入框内组合相关控件。"},
   "usage": {
     "imports": "import {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupButton,\n  InputGroupInput,\n  InputGroupText,\n} from \"@/components/ui/input-group\"",
     "code": "<InputGroup>\n  <InputGroupAddon>\n    <SearchIcon />\n  </InputGroupAddon>\n  <InputGroupInput placeholder=\"Search\" />\n  <InputGroupAddon align=\"inline-end\">\n    <InputGroupButton>Go</InputGroupButton>\n  </InputGroupAddon>\n</InputGroup>"
@@ -9,17 +10,16 @@ export default {
   "examples": [
     {
       "id": "textarea",
-      "title": "Textarea",
-      "description": "Use `block-end` addons for a composer toolbar under the text."
+      "title": {"en":"Textarea","zh":"多行输入"},
+      "description": {"en":"Use for prompts that need room for longer text.","zh":"适用于需要输入较长提示的场景。"}
     },
     {
       "id": "sizes",
-      "title": "Sizes"
+      "title": {"en":"Sizes","zh":"尺寸"}
     },
     {
       "id": "rtl",
-      "title": "RTL",
-      "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root."
+      "title": {"en":"RTL","zh":"从右到左"},
     }
   ],
   "notes": [

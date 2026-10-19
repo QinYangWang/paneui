@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Follows your reading position in the page outline.", "zh": "跟随阅读位置显示页面目录。"},
   usage: {
     imports: `import { Outline, OutlinePopover, type OutlineItem } from "@/components/ui/outline"`,
     code: `const items: OutlineItem[] = [
@@ -18,9 +19,9 @@ export default {
 OutlinePopover       nav: a button with the current section, the same list in a popover
 useActiveHeading     the id of the section being read`,
   examples: [
-    { id: "popover", title: "Popover", description: "Use below the breakpoint where the rail no longer fits, or on full-width pages." },
-    { id: "router-links", title: "Router Links", description: "Use `renderLink` when the links must go through your router or scroll a panel instead of the window." },
-    { id: "rtl", title: "RTL", description: "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root." },
+    { id: "popover", title: { en: "Popover", zh: "浮层" }, description: { en: "Use below the breakpoint where the rail no longer fits, or on full-width pages.", zh: "适用于放不下侧栏目录的窄屏或全宽页面。" } },
+    { id: "router-links", title: { en: "Router Links", zh: "路由链接" },  },
+    { id: "rtl", title: { en: "RTL", zh: "从右到左" },  },
   ],
   notes: [
     {

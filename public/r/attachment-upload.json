@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "attachment-upload",
   "title": "Attachment Upload",
-  "description": "Attaches files, images and links to a message or form.",
+  "description": "Adds attachments to a message or form.",
   "dependencies": [
     "@base-ui/react",
     "motion"

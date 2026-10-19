@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "agent-progress",
   "title": "Agent Progress",
-  "description": "Shows that an agent is working, with a running timer.",
+  "description": "Shows how long an agent has been working.",
   "dependencies": [
     "motion"
   ],

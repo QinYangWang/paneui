@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "og-image",
   "title": "OG Image",
-  "description": "A share image for pages, rendered to PNG with ImageResponse.",
+  "description": "Creates page share images.",
   "dependencies": [],
   "registryDependencies": [],
   "files": [

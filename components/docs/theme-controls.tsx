@@ -1,5 +1,8 @@
 "use client"
 
+import { useT } from "@/lib/site-locale"
+import { siteCopy } from "@/lib/site-copy"
+
 import * as React from "react"
 
 import { ChevronDownIcon, MonitorIcon, MoonIcon, SunIcon } from "@/components/icons"
@@ -52,24 +55,26 @@ const isChoice = (v: unknown, hasCustom: boolean): v is AccentChoice =>
  * pre-paint script and syncs other tabs and the Colors page.
  */
 export function AccentControl() {
+  const t = useT()
+  const label = (text: string) => t(siteCopy(text))
   const { accent, custom } = useAccentState()
-  const label = accent === "custom" ? "Custom" : PRESET_LABELS[accent]
+  const accentLabel = label(accent === "custom" ? "Custom" : PRESET_LABELS[accent])
 
   return (
     <Menu>
       <Tooltip>
         <TooltipTrigger
           render={
-            <MenuTrigger render={<Button variant="ghost" size="icon-sm" aria-label={`Accent colour: ${label}`} />} />
+            <MenuTrigger render={<Button variant="ghost" size="icon-sm" aria-label={`${label("Accent")}: ${accentLabel}`} />} />
           }
         >
           <span aria-hidden className="size-3.5 rounded-full bg-primary shadow-chip" />
         </TooltipTrigger>
-        <TooltipContent side="bottom">Accent: {label}</TooltipContent>
+        <TooltipContent side="bottom">{label("Accent")}: {label(accent === "custom" ? "Custom" : PRESET_LABELS[accent])}</TooltipContent>
       </Tooltip>
       <MenuContent align="end" className="min-w-40">
         <MenuGroup>
-          <MenuLabel>Accent</MenuLabel>
+          <MenuLabel>{label("Accent")}</MenuLabel>
           <MenuRadioGroup value={accent} onValueChange={(v) => isChoice(v, !!custom) && setAccent(v)}>
             {accentOptions.map(({ accent: a, label: l, swatch }) => (
               <MenuRadioItem key={a} value={a} closeOnClick>
@@ -78,8 +83,8 @@ export function AccentControl() {
                   className="size-3.5 shrink-0 rounded-full bg-(--swatch) shadow-chip"
                   style={{ "--swatch": swatch } as React.CSSProperties}
                 />
-                {l}
-                {a === DEFAULT_ACCENT ? <span className="ms-auto text-ui-xs text-muted-foreground">Default</span> : null}
+                {label(l)}
+                {a === DEFAULT_ACCENT ? <span className="ms-auto text-ui-xs text-muted-foreground">{label("Default")}</span> : null}
               </MenuRadioItem>
             ))}
             {custom ? (
@@ -89,7 +94,7 @@ export function AccentControl() {
                   className="size-3.5 shrink-0 rounded-full bg-(--swatch) shadow-chip"
                   style={{ "--swatch": custom.light.primary } as React.CSSProperties}
                 />
-                Custom
+                {label("Custom")}
               </MenuRadioItem>
             ) : null}
           </MenuRadioGroup>
@@ -111,6 +116,8 @@ const options: { mode: Mode; label: string; icon: typeof SunIcon }[] = [
  * with the pre-paint script in <head>.
  */
 export function ThemeControls({ className }: { className?: string }) {
+  const t = useT()
+  const label = (text: string) => t(siteCopy(text))
   const [mode, setMode] = React.useState<Mode | null>(null)
   const triggerRef = React.useRef<HTMLButtonElement>(null)
   // Set while a "System" choice is animating; the toggle hook writes light/dark, we restore "system" after.
@@ -187,7 +194,7 @@ export function ThemeControls({ className }: { className?: string }) {
               <MenuTrigger
                 ref={triggerRef}
                 // eslint-disable-next-line shadcn/no-restyle -- compact 28px-wide trigger beside the GitHub icon (existing header design)
-                render={<Button variant="ghost" size="icon-sm" aria-label="Theme options" className="w-7 text-muted-foreground" />}
+                render={<Button variant="ghost" size="icon-sm" aria-label={label("Theme")} className="w-7 text-muted-foreground" />}
               />
             }
           >
@@ -195,17 +202,17 @@ export function ThemeControls({ className }: { className?: string }) {
           </TooltipTrigger>
           <TooltipContent side="bottom">
             <ActiveIcon size={13} />
-            Theme: {options.find((o) => o.mode === mode)?.label ?? "System"}
+            {label("Theme")}: {label(options.find((o) => o.mode === mode)?.label ?? "System")}
           </TooltipContent>
         </Tooltip>
         <MenuContent align="end" className="min-w-40">
           <MenuGroup>
-            <MenuLabel>Theme</MenuLabel>
+            <MenuLabel>{label("Theme")}</MenuLabel>
             <MenuRadioGroup value={mode ?? "system"} onValueChange={(v) => isMode(v) && choose(v)}>
-              {options.map(({ mode: m, label, icon: Icon }) => (
+              {options.map(({ mode: m, label: optionLabel, icon: Icon }) => (
                 <MenuRadioItem key={m} value={m} closeOnClick>
                   <Icon />
-                  {label}
+                  {label(optionLabel)}
                 </MenuRadioItem>
               ))}
             </MenuRadioGroup>

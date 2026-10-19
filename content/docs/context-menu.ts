@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Opens actions for an item on right-click or long-press.", "zh": "通过右键或长按打开操作菜单。"},
   baseUi: {
     name: "Context Menu",
     href: "https://base-ui.com/react/components/context-menu",
@@ -32,23 +33,21 @@ export default {
   examples: [
     {
       id: "basic",
-      title: "Basic",
-      description: "Use `variant=\"destructive\"` for the item that deletes or removes.",
+      title: { en: "Basic", zh: "基础" },
     },
     {
       id: "checkboxes",
-      title: "Checkboxes",
-      description: "Use checkbox items for toggles; the menu stays open so several can change.",
+      title: { en: "Checkboxes", zh: "复选项" },
+      description: { en: "Use checkbox items for toggles; the menu stays open so several can change.", zh: "适用于一次调整多个开关的场景。" },
     },
     {
       id: "radio-group",
-      title: "Radio Group",
-      description: "Use a radio group when the reader picks one option, like a sort order.",
+      title: { en: "Radio Group", zh: "单选组" },
+      description: { en: "Use a radio group when the reader picks one option, like a sort order.", zh: "适用于排序方式等互斥选项。" },
     },
     {
       id: "inset",
-      title: "Inset",
-      description: "Use `inset` on plain items and labels that sit beside checkbox or radio items.",
+      title: { en: "Inset", zh: "内嵌" },
     },
   ],
   notes: [

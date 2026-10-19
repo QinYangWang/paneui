@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Toggles a single option on or off.", "zh": "开启或关闭单个选项。"},
   baseUi: {
     name: "Checkbox",
     href: "https://base-ui.com/react/components/checkbox",
@@ -16,23 +17,21 @@ import { Label } from "@/components/ui/label"`,
   examples: [
     {
       id: "with-description",
-      title: "With Description",
-      description: "Align the box to the first line with `items-start` on the `Label` when helper text wraps.",
+      title: { en: "With Description", zh: "带说明" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `checked` and `onCheckedChange` when other UI depends on the value.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "disabled",
-      title: "Disabled",
+      title: { en: "Disabled", zh: "禁用" },
     },
     {
       id: "task-list",
-      title: "Task List",
+      title: { en: "Task List", zh: "任务列表" },
     },
-    { id: "sizes", title: "Sizes", description: "Use `lg` in touch-first forms and `sm` in dense tables." },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" },  },
   ],
   notes: [
     {

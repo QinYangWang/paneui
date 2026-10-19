@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows how much drops off at each step of a process.", "zh": "展示流程各阶段的流失。"},
   usage: {
     imports: `import { FunnelChart } from "@/components/ui/funnel-chart"`,
     code: `<FunnelChart
@@ -16,18 +17,15 @@ export default {
   examples: [
     {
       id: "single-color",
-      title: "Single Color",
-      description: "Pass `color` when the funnel should use one hue instead of the palette.",
+      title: { en: "Single Color", zh: "单色" },
     },
     {
       id: "horizontal",
-      title: "Horizontal",
-      description: "Use `direction=\"horizontal\"` in wide, short spaces; `size` then sets the plot height.",
+      title: { en: "Horizontal", zh: "横向" },
     },
     {
       id: "descriptions",
-      title: "Descriptions",
-      description: "Add a stage `description` when the tooltip needs context, and `minRatio` when tiny stages must stay visible.",
+      title: { en: "Descriptions", zh: "说明" },
     },
   ],
   notes: [

@@ -32,7 +32,8 @@ const cell = (s = "") => String(s).replace(/\|/g, "\\|").replace(/\n+/g, " ")
 /** A value as inline code; one that already holds code spans ("true for `icon*` sizes") keeps them as written. */
 const codeCell = (s = "") => (String(s).includes("`") ? cell(s) : `\`${cell(s)}\``)
 /** Inline docs text keeps its `code` and [links](…); site-relative links become absolute. */
-const inline = (s = "") => s.replace(/\]\((\/[^)]*)\)/g, (_, href) => `](${base}${href})`)
+const english = (text) => typeof text === "string" ? text : text.en
+const inline = (s = "") => english(s).replace(/\]\((\/[^)]*)\)/g, (_, href) => `](${base}${href})`)
 
 // ---------- components and templates ----------
 
@@ -64,7 +65,7 @@ for (const item of visible) {
   if (doc?.examples?.length) {
     md.push("## Examples", "")
     for (const ex of doc.examples) {
-      md.push(`### ${ex.title}`, "")
+      md.push(`### ${english(ex.title)}`, "")
       if (ex.description) md.push(inline(ex.description), "")
       const file = `registry/base-nova/examples/${name}/${ex.id}.tsx`
       if (exists(file)) md.push(fence(read(file), "tsx"), "")

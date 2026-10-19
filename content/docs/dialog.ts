@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Asks for a decision or input in a modal window.", "zh": "请求用户决定或输入。"},
   baseUi: {
     name: "Dialog",
     href: "https://base-ui.com/react/components/dialog",
@@ -41,27 +42,23 @@ export default {
   examples: [
     {
       id: "destructive",
-      title: "Destructive",
-      description: "Use to confirm a delete, naming the thing in the title and confirming with a `destructive` Button.",
+      title: { en: "Destructive", zh: "危险操作" },
     },
     {
       id: "with-form",
-      title: "With Form",
-      description: "Control `open` and `onOpenChange` when a form submit should close the dialog.",
+      title: { en: "With Form", zh: "带表单" },
     },
     {
       id: "no-close-button",
-      title: "No Close Button",
-      description: "Set `showClose={false}` on `DialogContent` when the footer action is the only way out.",
+      title: { en: "No Close Button", zh: "无关闭按钮" },
     },
     {
       id: "long-content",
-      title: "Long Content",
+      title: { en: "Long Content", zh: "长内容" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Previews a linked item while it is hovered.", "zh": "悬停时预览链接内容。"},
   "baseUi": {
     "name": "Preview Card",
     "href": "https://base-ui.com/react/components/preview-card"
@@ -13,7 +14,7 @@ export default {
   "examples": [
     {
       "id": "sides",
-      "title": "Sides"
+      "title": {"en":"Sides","zh":"方向"}
     }
   ],
   "notes": [

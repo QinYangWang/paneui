@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows how far the reader has scrolled.", "zh": "显示阅读进度。"},
   usage: {
     imports: `import { ScrollProgress } from "@/components/ui/scroll-progress"`,
     code: `<ScrollProgress />`,
@@ -8,18 +9,18 @@ export default {
   examples: [
     {
       id: "bottom-bar",
-      title: "Bottom Bar",
-      description: "Use inside a scroll container, pinned to its bottom edge.",
+      title: { en: "Bottom Bar", zh: "底部进度条" },
+      description: { en: "Use inside a scroll container, pinned to its bottom edge.", zh: "适用于容器内部的底部进度条。" },
     },
     {
       id: "ring-sizes",
-      title: "Ring Sizes",
-      description: "Use the ring where an edge bar has no room, such as a floating button.",
+      title: { en: "Ring Sizes", zh: "环形尺寸" },
+      description: { en: "Use the ring where an edge bar has no room, such as a floating button.", zh: "适用于无法放置边缘进度条的场景。" },
     },
     {
       id: "custom-progress",
-      title: "Custom Progress",
-      description: "Use to show progress that isn't scroll, like an upload.",
+      title: { en: "Custom Progress", zh: "自定义进度" },
+      description: { en: "Use to show progress that isn't scroll, like an upload.", zh: "也可用于上传等任务进度。" },
     },
   ],
   notes: [

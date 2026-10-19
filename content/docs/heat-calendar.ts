@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows daily activity on a calendar.", "zh": "在日历中展示每日活动量。"},
   usage: {
     imports: `import { HeatCalendar } from "@/components/ui/heat-calendar"`,
     code: `<HeatCalendar
@@ -21,23 +22,20 @@ export default {
   examples: [
     {
       id: "monday-start",
-      title: "Monday Start",
-      description: "Set `weekStartsOn={1}` where weeks start on Monday.",
+      title: { en: "Monday Start", zh: "周一开始" },
     },
     {
       id: "full-year",
-      title: "Full Year",
-      description: "Use 53 `weeks` for a full year, with `maxCount` so one busy day doesn't wash out the rest.",
+      title: { en: "Full Year", zh: "全年" },
     },
     {
       id: "custom-composition",
-      title: "Custom Composition",
-      description: "Arrange the parts yourself when you need another layout or your own tooltip body.",
+      title: { en: "Custom Composition", zh: "自定义组合" },
+      description: { en: "Arrange the parts yourself when you need another layout or your own tooltip body.", zh: "适用于需要自定义布局或提示内容的场景。" },
     },
     {
       id: "default-selection",
-      title: "Default Selection",
-      description: "Pass `defaultSelection` to open with a range already totalled, such as the current week.",
+      title: { en: "Default Selection", zh: "默认选择" },
     },
   ],
   notes: [

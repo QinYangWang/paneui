@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Plots how values change over time.", "zh": "展示数值随时间的变化。"},
   usage: {
     imports: `import { TrendChart } from "@/components/ui/trend-chart"`,
     code: `<TrendChart
@@ -10,7 +11,7 @@ export default {
   stacked
 />`,
   },
-  examples: [{ id: "single-series", title: "Single Series", description: "Use `color` to pin a lone series to a colour that carries meaning, e.g. `var(--chart-3)`." }],
+  examples: [{ id: "single-series", title: { en: "Single Series", zh: "单系列" },  }],
   notes: [
     { title: "Which chart", body: "TrendChart plots absolute values over time. For shares of a whole over time use [Composition Chart](/docs/composition-chart); for parts of one total, [Donut Chart](/docs/donut-chart)." },
     { title: "Interaction", body: "Hovering (or tapping) shows a crosshair and a tooltip with every series and the stack total. Legend items toggle series. A hidden data table mirrors the values for screen readers." },

@@ -1,5 +1,8 @@
 import "server-only"
 
+import type { Localized } from "./site-locale"
+import { DOC_SUMMARIES } from "./doc-summaries"
+
 import { execFileSync } from "node:child_process"
 import fs from "node:fs"
 import path from "node:path"
@@ -12,9 +15,9 @@ export type Category = (typeof ORDER)[number]
 export type DocItem = {
   name: string
   title: string
-  description: string
+  description: Localized
   /** One-line description for cards, nav and page ledes; falls back to description. */
-  summary: string
+  summary: Localized
   category: Category
   type: string
   dependencies: string[]
@@ -29,8 +32,7 @@ export const ORDER = ["Foundations", "Forms", "Overlays", "Display", "Navigation
  * Short display copy for items whose registry description is a full spec
  * (the registry text stays complete for `shadcn view`; the docs show this).
  */
-const SUMMARIES: Record<string, string> = {
-}
+const SUMMARIES = DOC_SUMMARIES
 
 function categoryOf(type: string, meta?: { category?: string }): Category {
   if (meta?.category && (ORDER as readonly string[]).includes(meta.category)) return meta.category as Category

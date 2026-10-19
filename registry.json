@@ -1,13 +1,13 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "taimatsu",
+  "name": "paneui",
   "homepage": "https://qinyangwang.github.io/ui",
   "items": [
     {
       "name": "theme",
       "type": "registry:theme",
       "title": "Theme",
-      "description": "Design tokens, type scale and utilities every component in the library reads.",
+      "description": "Shared design tokens for every component.",
       "cssVars": {
         "theme": {
           "color-primary-hover": "var(--primary-hover)",
@@ -540,8 +540,8 @@
         "version": "2.3"
       },
       "registryDependencies": [
-        "@taimatsu/utils",
-        "@qinyang/utils"
+        "@paneui/utils",
+        "@paneui/utils"
       ]
     },
     {
@@ -568,7 +568,7 @@
       "name": "control-size",
       "type": "registry:lib",
       "title": "Control size",
-      "description": "Shares one size between a field and the controls inside it.",
+      "description": "Keeps field controls the same size.",
       "dependencies": [],
       "files": [
         {
@@ -603,7 +603,7 @@
       "title": "Theme: Neutral accent",
       "description": "Accent preset that makes the primary colour black or white.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -638,7 +638,7 @@
       "title": "Theme: Blue accent",
       "description": "Accent preset that sets the primary colour to blue, the default.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -699,7 +699,7 @@
       "title": "Theme: Green accent",
       "description": "Accent preset that sets the primary colour to green.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -760,7 +760,7 @@
       "title": "Theme: Orange accent",
       "description": "Accent preset that sets the primary colour to orange.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -821,7 +821,7 @@
       "title": "Theme: Rose accent",
       "description": "Accent preset that sets the primary colour to rose.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -882,7 +882,7 @@
       "title": "Theme: Violet accent",
       "description": "Accent preset that sets the primary colour to violet.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -943,7 +943,7 @@
       "title": "Theme: Square radius",
       "description": "Radius preset with square corners everywhere.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -961,7 +961,7 @@
       "title": "Theme: Small radius",
       "description": "Radius preset with tighter corners everywhere.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -979,7 +979,7 @@
       "title": "Theme: Default radius",
       "description": "Radius preset that restores the default corner rounding.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -997,7 +997,7 @@
       "title": "Theme: Large radius",
       "description": "Radius preset with rounder corners everywhere.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -1015,7 +1015,7 @@
       "title": "Theme: Extra large radius",
       "description": "Radius preset with the roundest corners everywhere.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "cssVars": {
         "light": {
@@ -1031,7 +1031,7 @@
       "name": "fonts",
       "type": "registry:file",
       "title": "Fonts",
-      "description": "Self-hosted UI, code and reading fonts the theme's font stacks name.",
+      "description": "Fonts for interfaces, code and reading.",
       "dependencies": [
         "@fontsource-variable/inter",
         "@fontsource-variable/noto-sans-sc",
@@ -1040,7 +1040,7 @@
         "@fontsource-variable/noto-serif-sc"
       ],
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -1404,7 +1404,7 @@
       "title": "Theme Accents",
       "description": "Switches the accent colour at runtime with one attribute.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -1423,7 +1423,7 @@
       "title": "Theme Radii",
       "description": "Switches corner rounding at runtime with one attribute.",
       "registryDependencies": [
-        "@qinyang/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -1457,7 +1457,7 @@
       "name": "icons-puffy",
       "type": "registry:component",
       "title": "Icons (puffy)",
-      "description": "The icon set redrawn as soft filled shapes, under the same names.",
+      "description": "Filled icons for interfaces.",
       "files": [
         {
           "path": "registry/base-nova/icons/puffy/icons.tsx",
@@ -1474,7 +1474,7 @@
       "name": "icons-outline",
       "type": "registry:component",
       "title": "Icons (outline)",
-      "description": "The icon set as thin outlines on the compact grid, same names.",
+      "description": "Outline icons for interfaces.",
       "files": [
         {
           "path": "registry/base-nova/icons/outline/icons.tsx",
@@ -1497,7 +1497,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -1513,12 +1513,12 @@
       "name": "brand-icon",
       "type": "registry:ui",
       "title": "Brand Icon",
-      "description": "Shows a third-party logo at the icon set's sizes.",
+      "description": "Shows brand logos.",
       "dependencies": [
         "simple-icons"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -1538,19 +1538,19 @@
       "name": "outline",
       "type": "registry:ui",
       "title": "Outline",
-      "description": "Links to the page's headings and follows the section being read.",
+      "description": "Follows your reading position in the page outline.",
       "dependencies": [
         "@base-ui/react",
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/overflow-hint",
-        "@taimatsu/popover",
-        "@taimatsu/scroll-area",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/overflow-hint",
+        "@paneui/popover",
+        "@paneui/scroll-area",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -1569,8 +1569,8 @@
       "description": "Generated cover images for posts and cards, drawn in theme colours.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -1586,7 +1586,7 @@
       "name": "og-image",
       "type": "registry:ui",
       "title": "OG Image",
-      "description": "A share image for pages, rendered to PNG with ImageResponse.",
+      "description": "Creates page share images.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -1603,10 +1603,10 @@
       "name": "og-image-route",
       "type": "registry:block",
       "title": "OG Image Route",
-      "description": "Site share image files for the app folder.",
+      "description": "Adds a site share image route.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/og-image"
+        "@paneui/og-image"
       ],
       "files": [
         {
@@ -1629,10 +1629,10 @@
       "name": "og-image-post-route",
       "type": "registry:block",
       "title": "OG Image Post Route",
-      "description": "Per-post share image with seeded cover art.",
+      "description": "Creates a share image for each post.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/og-image"
+        "@paneui/og-image"
       ],
       "files": [
         {
@@ -1655,10 +1655,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/kbd",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/kbd",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -1677,7 +1677,7 @@
       "description": "A plain table for reference content like props and tokens.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -1693,63 +1693,63 @@
       "name": "saas",
       "type": "registry:block",
       "title": "SaaS",
-      "description": "Starter app with marketing pages, sign-in flows and a dashboard.",
+      "description": "Pages for a product website and dashboard.",
       "dependencies": [
         "motion",
         "simple-icons"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/otp-input",
-        "@taimatsu/signup-form",
-        "@taimatsu/avatar",
-        "@taimatsu/button",
-        "@taimatsu/button-stateful",
-        "@taimatsu/checkbox",
-        "@taimatsu/field",
-        "@taimatsu/icon-chip",
-        "@taimatsu/input",
-        "@taimatsu/password-input",
-        "@taimatsu/stat-card",
-        "@taimatsu/theme-toggle",
-        "@taimatsu/drawer",
-        "@taimatsu/badge",
-        "@taimatsu/accordion",
-        "@taimatsu/card",
-        "@taimatsu/marquee",
-        "@taimatsu/number-ticker",
-        "@taimatsu/segmented-control",
-        "@taimatsu/shader-background",
-        "@taimatsu/text-reveal",
-        "@taimatsu/trend-chart",
-        "@taimatsu/accent-picker",
-        "@taimatsu/toast",
-        "@taimatsu/tooltip",
-        "@taimatsu/page-header",
-        "@taimatsu/settings-section",
-        "@taimatsu/data-table",
-        "@taimatsu/dialog",
-        "@taimatsu/menu",
-        "@taimatsu/radio",
-        "@taimatsu/select",
-        "@taimatsu/switch",
-        "@taimatsu/table",
-        "@taimatsu/textarea",
-        "@taimatsu/usage-meter",
-        "@taimatsu/bar-list",
-        "@taimatsu/date-range-picker",
-        "@taimatsu/donut-chart",
-        "@taimatsu/empty-state",
-        "@taimatsu/command-palette",
-        "@taimatsu/animated-sidebar",
-        "@taimatsu/breadcrumb",
-        "@taimatsu/user-menu",
-        "@taimatsu/alert",
-        "@taimatsu/app-shell",
-        "@taimatsu/brand-icon",
-        "@taimatsu/input-group",
-        "@taimatsu/kbd"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/otp-input",
+        "@paneui/signup-form",
+        "@paneui/avatar",
+        "@paneui/button",
+        "@paneui/button-stateful",
+        "@paneui/checkbox",
+        "@paneui/field",
+        "@paneui/icon-chip",
+        "@paneui/input",
+        "@paneui/password-input",
+        "@paneui/stat-card",
+        "@paneui/theme-toggle",
+        "@paneui/drawer",
+        "@paneui/badge",
+        "@paneui/accordion",
+        "@paneui/card",
+        "@paneui/marquee",
+        "@paneui/number-ticker",
+        "@paneui/segmented-control",
+        "@paneui/shader-background",
+        "@paneui/text-reveal",
+        "@paneui/trend-chart",
+        "@paneui/accent-picker",
+        "@paneui/toast",
+        "@paneui/tooltip",
+        "@paneui/page-header",
+        "@paneui/settings-section",
+        "@paneui/data-table",
+        "@paneui/dialog",
+        "@paneui/menu",
+        "@paneui/radio",
+        "@paneui/select",
+        "@paneui/switch",
+        "@paneui/table",
+        "@paneui/textarea",
+        "@paneui/usage-meter",
+        "@paneui/bar-list",
+        "@paneui/date-range-picker",
+        "@paneui/donut-chart",
+        "@paneui/empty-state",
+        "@paneui/command-palette",
+        "@paneui/animated-sidebar",
+        "@paneui/breadcrumb",
+        "@paneui/user-menu",
+        "@paneui/alert",
+        "@paneui/app-shell",
+        "@paneui/brand-icon",
+        "@paneui/input-group",
+        "@paneui/kbd"
       ],
       "files": [
         {
@@ -1951,38 +1951,38 @@
       "name": "vscode",
       "type": "registry:block",
       "title": "Code Editor",
-      "description": "Edit a project in the browser with a shell on its files.",
+      "description": "Edit projects and run commands in the browser.",
       "dependencies": [
         "@monaco-editor/react",
         "motion",
         "simple-icons"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/command-palette",
-        "@taimatsu/bottom-sheet",
-        "@taimatsu/breadcrumb",
-        "@taimatsu/button",
-        "@taimatsu/context-menu",
-        "@taimatsu/dialog",
-        "@taimatsu/drawer",
-        "@taimatsu/file-tree",
-        "@taimatsu/icon-rail",
-        "@taimatsu/input",
-        "@taimatsu/loader",
-        "@taimatsu/menu",
-        "@taimatsu/resizable",
-        "@taimatsu/scroll-area",
-        "@taimatsu/switch",
-        "@taimatsu/tab-strip",
-        "@taimatsu/terminal",
-        "@taimatsu/textarea",
-        "@taimatsu/theme-toggle",
-        "@taimatsu/tooltip",
-        "@taimatsu/badge",
-        "@taimatsu/brand-icon",
-        "@taimatsu/action-swap-blur"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/command-palette",
+        "@paneui/bottom-sheet",
+        "@paneui/breadcrumb",
+        "@paneui/button",
+        "@paneui/context-menu",
+        "@paneui/dialog",
+        "@paneui/drawer",
+        "@paneui/file-tree",
+        "@paneui/icon-rail",
+        "@paneui/input",
+        "@paneui/loader",
+        "@paneui/menu",
+        "@paneui/resizable",
+        "@paneui/scroll-area",
+        "@paneui/switch",
+        "@paneui/tab-strip",
+        "@paneui/terminal",
+        "@paneui/textarea",
+        "@paneui/theme-toggle",
+        "@paneui/tooltip",
+        "@paneui/badge",
+        "@paneui/brand-icon",
+        "@paneui/action-swap-blur"
       ],
       "files": [
         {
@@ -2079,7 +2079,7 @@
       "name": "agent-workspace",
       "type": "registry:block",
       "title": "Agent Workspace",
-      "description": "A full app for chatting with and supervising coding agents.",
+      "description": "Chat with coding agents and review their work.",
       "dependencies": [
         "@agentclientprotocol/sdk",
         "ws",
@@ -2087,47 +2087,47 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/typeset",
-        "@taimatsu/icons",
-        "@taimatsu/agent-composer",
-        "@taimatsu/agent-code-block",
-        "@taimatsu/badge",
-        "@taimatsu/button",
-        "@taimatsu/command-palette",
-        "@taimatsu/dialog",
-        "@taimatsu/edited-files-card",
-        "@taimatsu/file-diff",
-        "@taimatsu/file-tree",
-        "@taimatsu/icon-rail",
-        "@taimatsu/input",
-        "@taimatsu/label",
-        "@taimatsu/loader",
-        "@taimatsu/menu",
-        "@taimatsu/message",
-        "@taimatsu/message-scroller",
-        "@taimatsu/model-picker",
-        "@taimatsu/resizable",
-        "@taimatsu/select",
-        "@taimatsu/streaming-response",
-        "@taimatsu/tab-strip",
-        "@taimatsu/terminal-view",
-        "@taimatsu/textarea",
-        "@taimatsu/theme-toggle",
-        "@taimatsu/thread-list-item",
-        "@taimatsu/todo-list",
-        "@taimatsu/tool-approval",
-        "@taimatsu/tooltip",
-        "@taimatsu/work-summary",
-        "@taimatsu/alert",
-        "@taimatsu/bottom-sheet",
-        "@taimatsu/brand-icon",
-        "@taimatsu/card",
-        "@taimatsu/drawer",
-        "@taimatsu/scroll-area",
-        "@taimatsu/settings-section",
-        "@taimatsu/code-block",
-        "@taimatsu/action-swap-blur"
+        "@paneui/theme",
+        "@paneui/typeset",
+        "@paneui/icons",
+        "@paneui/agent-composer",
+        "@paneui/agent-code-block",
+        "@paneui/badge",
+        "@paneui/button",
+        "@paneui/command-palette",
+        "@paneui/dialog",
+        "@paneui/edited-files-card",
+        "@paneui/file-diff",
+        "@paneui/file-tree",
+        "@paneui/icon-rail",
+        "@paneui/input",
+        "@paneui/label",
+        "@paneui/loader",
+        "@paneui/menu",
+        "@paneui/message",
+        "@paneui/message-scroller",
+        "@paneui/model-picker",
+        "@paneui/resizable",
+        "@paneui/select",
+        "@paneui/streaming-response",
+        "@paneui/tab-strip",
+        "@paneui/terminal-view",
+        "@paneui/textarea",
+        "@paneui/theme-toggle",
+        "@paneui/thread-list-item",
+        "@paneui/todo-list",
+        "@paneui/tool-approval",
+        "@paneui/tooltip",
+        "@paneui/work-summary",
+        "@paneui/alert",
+        "@paneui/bottom-sheet",
+        "@paneui/brand-icon",
+        "@paneui/card",
+        "@paneui/drawer",
+        "@paneui/scroll-area",
+        "@paneui/settings-section",
+        "@paneui/code-block",
+        "@paneui/action-swap-blur"
       ],
       "files": [
         {
@@ -2224,27 +2224,27 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/typeset",
-        "@taimatsu/alert",
-        "@taimatsu/badge",
-        "@taimatsu/breadcrumb",
-        "@taimatsu/button",
-        "@taimatsu/card",
-        "@taimatsu/code-block",
-        "@taimatsu/command-palette",
-        "@taimatsu/drawer",
-        "@taimatsu/icon-chip",
-        "@taimatsu/icons",
-        "@taimatsu/kbd",
-        "@taimatsu/navigation-menu",
-        "@taimatsu/outline",
-        "@taimatsu/page-header",
-        "@taimatsu/popover",
-        "@taimatsu/separator",
-        "@taimatsu/sidebar-nav",
-        "@taimatsu/theme-toggle",
-        "@taimatsu/brand-icon"
+        "@paneui/theme",
+        "@paneui/typeset",
+        "@paneui/alert",
+        "@paneui/badge",
+        "@paneui/breadcrumb",
+        "@paneui/button",
+        "@paneui/card",
+        "@paneui/code-block",
+        "@paneui/command-palette",
+        "@paneui/drawer",
+        "@paneui/icon-chip",
+        "@paneui/icons",
+        "@paneui/kbd",
+        "@paneui/navigation-menu",
+        "@paneui/outline",
+        "@paneui/page-header",
+        "@paneui/popover",
+        "@paneui/separator",
+        "@paneui/sidebar-nav",
+        "@paneui/theme-toggle",
+        "@paneui/brand-icon"
       ],
       "files": [
         {
@@ -2307,19 +2307,19 @@
         "simple-icons"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/typeset",
-        "@taimatsu/badge",
-        "@taimatsu/button",
-        "@taimatsu/icons",
-        "@taimatsu/input",
-        "@taimatsu/scroll-progress",
-        "@taimatsu/theme-toggle",
-        "@taimatsu/toast",
-        "@taimatsu/brand-icon",
-        "@taimatsu/code-block",
-        "@taimatsu/outline",
-        "@taimatsu/cover-art"
+        "@paneui/theme",
+        "@paneui/typeset",
+        "@paneui/badge",
+        "@paneui/button",
+        "@paneui/icons",
+        "@paneui/input",
+        "@paneui/scroll-progress",
+        "@paneui/theme-toggle",
+        "@paneui/toast",
+        "@paneui/brand-icon",
+        "@paneui/code-block",
+        "@paneui/outline",
+        "@paneui/cover-art"
       ],
       "files": [
         {
@@ -2387,7 +2387,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2409,7 +2409,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2427,7 +2427,7 @@
       "title": "Card",
       "description": "Groups related content and actions on one surface.",
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2453,8 +2453,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -2470,10 +2470,10 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "Takes multi-line text input that grows with its content.",
+      "description": "A text field that grows with your writing.",
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -2494,7 +2494,7 @@
       "title": "iOS Zoom Lock",
       "description": "Stops iOS from zooming into small text fields on focus.",
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2531,8 +2531,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -2555,8 +2555,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -2578,9 +2578,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -2601,8 +2601,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -2623,9 +2623,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -2646,9 +2646,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/menu"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/menu"
       ],
       "files": [
         {
@@ -2670,9 +2670,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -2688,13 +2688,13 @@
       "name": "bottom-sheet",
       "type": "registry:ui",
       "title": "Bottom Sheet",
-      "description": "A panel that slides up from the bottom and snaps to heights.",
+      "description": "Opens a panel from the bottom of the page.",
       "dependencies": [
         "@base-ui/react",
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2710,16 +2710,16 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "Shows an inline message that can animate in and be dismissed.",
+      "description": "Shows a message that needs attention.",
       "dependencies": [
         "motion",
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/icon-chip",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/icon-chip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -2740,8 +2740,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -2757,13 +2757,13 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Stacks sections that expand one at a time or several together.",
+      "description": "Opens sections of content on demand.",
       "dependencies": [
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -2785,10 +2785,10 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/menu",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/menu",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -2804,12 +2804,12 @@
       "name": "text-reveal",
       "type": "registry:ui",
       "title": "Text Reveal",
-      "description": "Reveals a headline word by word on load or scroll.",
+      "description": "Reveals a headline in sequence.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2825,10 +2825,10 @@
       "name": "text-shimmer",
       "type": "registry:ui",
       "title": "Text Shimmer",
-      "description": "Marks text as in progress with a moving highlight.",
+      "description": "Highlights text while work is in progress.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2849,7 +2849,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2870,7 +2870,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2891,7 +2891,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2910,7 +2910,7 @@
       "description": "Scrolls content past in an endless loop.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -2932,10 +2932,10 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/control-size",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/control-size",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -2954,8 +2954,8 @@
       "description": "Shows that something is loading.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -2977,11 +2977,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/combobox",
-        "@taimatsu/control-size",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/combobox",
+        "@paneui/control-size",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -2997,15 +2997,15 @@
       "name": "button-stateful",
       "type": "registry:ui",
       "title": "Button Stateful",
-      "description": "A button that shows loading, success and error after a press.",
+      "description": "Shows an action’s progress and result.",
       "dependencies": [
         "@base-ui/react",
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button"
       ],
       "files": [
         {
@@ -3026,7 +3026,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3048,7 +3048,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3069,7 +3069,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3085,14 +3085,14 @@
       "name": "action-swap-blur",
       "type": "registry:ui",
       "title": "Action Swap Blur",
-      "description": "A button that blurs its label and icon into the next state.",
+      "description": "Blurs between button states.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/button",
-        "@taimatsu/text-cascade"
+        "@paneui/theme",
+        "@paneui/button",
+        "@paneui/text-cascade"
       ],
       "files": [
         {
@@ -3108,13 +3108,13 @@
       "name": "action-swap-roll",
       "type": "registry:ui",
       "title": "Action Swap Roll",
-      "description": "A button that rolls its label and icon into the next state.",
+      "description": "Rolls between button states.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/action-swap-blur"
+        "@paneui/theme",
+        "@paneui/action-swap-blur"
       ],
       "files": [
         {
@@ -3130,12 +3130,12 @@
       "name": "digit-swap",
       "type": "registry:ui",
       "title": "Digit Swap",
-      "description": "Animates a changing number by rolling only the characters that change.",
+      "description": "Rolls only the digits that change.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3156,8 +3156,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -3178,8 +3178,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -3201,9 +3201,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3225,7 +3225,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3246,7 +3246,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3262,12 +3262,12 @@
       "name": "wheel-picker",
       "type": "registry:ui",
       "title": "Wheel Picker",
-      "description": "Picks a value by scrolling a wheel, as for times and dates.",
+      "description": "Picks values with a scrolling wheel.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3288,7 +3288,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3310,10 +3310,10 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/popover",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/popover",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3334,8 +3334,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -3356,7 +3356,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3378,10 +3378,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/loader",
-        "@taimatsu/scroll-area"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/loader",
+        "@paneui/scroll-area"
       ],
       "files": [
         {
@@ -3404,8 +3404,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/scroll-area"
+        "@paneui/theme",
+        "@paneui/scroll-area"
       ],
       "files": [
         {
@@ -3426,7 +3426,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3448,8 +3448,8 @@
         "lenis"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/smooth-scroll"
+        "@paneui/theme",
+        "@paneui/smooth-scroll"
       ],
       "files": [
         {
@@ -3472,9 +3472,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/button",
-        "@taimatsu/smooth-scroll"
+        "@paneui/theme",
+        "@paneui/button",
+        "@paneui/smooth-scroll"
       ],
       "files": [
         {
@@ -3496,8 +3496,8 @@
         "lenis"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/smooth-scroll"
+        "@paneui/theme",
+        "@paneui/smooth-scroll"
       ],
       "files": [
         {
@@ -3519,7 +3519,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3540,7 +3540,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -3562,9 +3562,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/tooltip"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/tooltip"
       ],
       "files": [
         {
@@ -3585,8 +3585,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -3607,8 +3607,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icon-chip"
+        "@paneui/theme",
+        "@paneui/icon-chip"
       ],
       "files": [
         {
@@ -3631,11 +3631,11 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/checkbox",
-        "@taimatsu/loader",
-        "@taimatsu/scroll-area"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/checkbox",
+        "@paneui/loader",
+        "@paneui/scroll-area"
       ],
       "files": [
         {
@@ -3658,10 +3658,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/table",
-        "@taimatsu/menu"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/table",
+        "@paneui/menu"
       ],
       "files": [
         {
@@ -3684,10 +3684,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/table",
-        "@taimatsu/button"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/table",
+        "@paneui/button"
       ],
       "files": [
         {
@@ -3709,8 +3709,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -3732,11 +3732,11 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/button",
-        "@taimatsu/tooltip",
-        "@taimatsu/message-bubble",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/button",
+        "@paneui/tooltip",
+        "@paneui/message-bubble",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3752,14 +3752,14 @@
       "name": "message-scroller",
       "type": "registry:ui",
       "title": "Message Scroller",
-      "description": "Keeps a chat pinned to new messages until the reader scrolls up.",
+      "description": "Follows new messages until the reader scrolls up.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3781,12 +3781,12 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/scroll-area",
-        "@taimatsu/tabs",
-        "@taimatsu/file-tree",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/scroll-area",
+        "@paneui/tabs",
+        "@paneui/file-tree",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3809,10 +3809,10 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/scroll-area",
-        "@taimatsu/code-block"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/scroll-area",
+        "@paneui/code-block"
       ],
       "files": [
         {
@@ -3835,11 +3835,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/agent-code-block",
-        "@taimatsu/collapsible",
-        "@taimatsu/loader"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/agent-code-block",
+        "@paneui/collapsible",
+        "@paneui/loader"
       ],
       "files": [
         {
@@ -3862,11 +3862,11 @@
         "shiki"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/action-swap-roll",
-        "@taimatsu/icon-chip",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/action-swap-roll",
+        "@paneui/icon-chip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3888,9 +3888,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3906,18 +3906,18 @@
       "name": "streaming-response",
       "type": "registry:ui",
       "title": "Streaming Response",
-      "description": "Shows an assistant reply as it streams, then offers copy and feedback.",
+      "description": "Shows a reply as it arrives.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/typeset",
-        "@taimatsu/icons",
-        "@taimatsu/citations",
-        "@taimatsu/tool-result",
-        "@taimatsu/locale-provider",
-        "@taimatsu/checkbox"
+        "@paneui/theme",
+        "@paneui/typeset",
+        "@paneui/icons",
+        "@paneui/citations",
+        "@paneui/tool-result",
+        "@paneui/locale-provider",
+        "@paneui/checkbox"
       ],
       "files": [
         {
@@ -3933,14 +3933,14 @@
       "name": "image-generation",
       "type": "registry:ui",
       "title": "Image Generation",
-      "description": "Shows a generated image from queued to finished, with its actions.",
+      "description": "Shows image generation progress and results.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/tool-result"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/tool-result"
       ],
       "files": [
         {
@@ -3962,12 +3962,12 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/tool-result",
-        "@taimatsu/icon-chip",
-        "@taimatsu/action-swap-roll"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/tool-result",
+        "@paneui/icon-chip",
+        "@paneui/action-swap-roll"
       ],
       "files": [
         {
@@ -3983,17 +3983,17 @@
       "name": "agent-activity",
       "type": "registry:ui",
       "title": "Agent Activity",
-      "description": "Shows what an agent did during a run as one activity stream.",
+      "description": "Summarises an agent’s work.",
       "dependencies": [
         "@base-ui/react",
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/text-shimmer",
-        "@taimatsu/citations",
-        "@taimatsu/tool-result"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/text-shimmer",
+        "@paneui/citations",
+        "@paneui/tool-result"
       ],
       "files": [
         {
@@ -4014,10 +4014,10 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/text-shimmer",
-        "@taimatsu/text-cascade",
-        "@taimatsu/text-scramble"
+        "@paneui/theme",
+        "@paneui/text-shimmer",
+        "@paneui/text-cascade",
+        "@paneui/text-scramble"
       ],
       "files": [
         {
@@ -4033,13 +4033,13 @@
       "name": "agent-progress",
       "type": "registry:ui",
       "title": "Agent Progress",
-      "description": "Shows that an agent is working, with a running timer.",
+      "description": "Shows how long an agent has been working.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4061,10 +4061,10 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/digit-swap",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/digit-swap",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4086,9 +4086,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/tooltip"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/tooltip"
       ],
       "files": [
         {
@@ -4109,8 +4109,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/chart-utils"
+        "@paneui/theme",
+        "@paneui/chart-utils"
       ],
       "files": [
         {
@@ -4131,8 +4131,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/chart-utils"
+        "@paneui/theme",
+        "@paneui/chart-utils"
       ],
       "files": [
         {
@@ -4153,8 +4153,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/chart-utils"
+        "@paneui/theme",
+        "@paneui/chart-utils"
       ],
       "files": [
         {
@@ -4175,8 +4175,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/chart-utils"
+        "@paneui/theme",
+        "@paneui/chart-utils"
       ],
       "files": [
         {
@@ -4197,8 +4197,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/chart-utils"
+        "@paneui/theme",
+        "@paneui/chart-utils"
       ],
       "files": [
         {
@@ -4219,8 +4219,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/chart-utils"
+        "@paneui/theme",
+        "@paneui/chart-utils"
       ],
       "files": [
         {
@@ -4236,13 +4236,13 @@
       "name": "heat-calendar",
       "type": "registry:ui",
       "title": "Heat Calendar",
-      "description": "Shows daily activity over weeks or months as a calendar heat map.",
+      "description": "Shows daily activity on a calendar.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/chart-utils"
+        "@paneui/theme",
+        "@paneui/chart-utils"
       ],
       "files": [
         {
@@ -4263,9 +4263,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4283,9 +4283,9 @@
       "title": "Recommendation Card",
       "description": "Shows an agent's suggestion for the user to accept or swap.",
       "registryDependencies": [
-        "@taimatsu/card",
-        "@taimatsu/badge",
-        "@taimatsu/button"
+        "@paneui/card",
+        "@paneui/badge",
+        "@paneui/button"
       ],
       "files": [
         {
@@ -4307,8 +4307,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -4330,7 +4330,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -4351,9 +4351,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4374,8 +4374,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4396,9 +4396,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/kbd"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/kbd"
       ],
       "files": [
         {
@@ -4420,9 +4420,9 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -4443,9 +4443,9 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4461,13 +4461,13 @@
       "name": "prompt-bar",
       "type": "registry:block",
       "title": "Prompt Bar",
-      "description": "Input where the user writes and sends a prompt to an agent.",
+      "description": "Writes and sends prompts to an agent.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/button",
-        "@taimatsu/icons"
+        "@paneui/button",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4488,7 +4488,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -4509,11 +4509,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/card",
-        "@taimatsu/badge",
-        "@taimatsu/button",
-        "@taimatsu/icons",
-        "@taimatsu/icon-chip"
+        "@paneui/card",
+        "@paneui/badge",
+        "@paneui/button",
+        "@paneui/icons",
+        "@paneui/icon-chip"
       ],
       "files": [
         {
@@ -4534,8 +4534,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4557,7 +4557,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -4579,9 +4579,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4603,16 +4603,16 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/chat",
-        "@taimatsu/prompt-bar",
-        "@taimatsu/ai-sidebar",
-        "@taimatsu/todo-list",
-        "@taimatsu/reasoning-text",
-        "@taimatsu/agent-progress",
-        "@taimatsu/icon-chip"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/chat",
+        "@paneui/prompt-bar",
+        "@paneui/ai-sidebar",
+        "@paneui/todo-list",
+        "@paneui/reasoning-text",
+        "@paneui/agent-progress",
+        "@paneui/icon-chip"
       ],
       "files": [
         {
@@ -4628,14 +4628,14 @@
       "name": "notification-stack",
       "type": "registry:block",
       "title": "Notification Stack",
-      "description": "Collapses many notifications into one stack that opens on demand.",
+      "description": "Groups notifications for review.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/icon-chip"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/icon-chip"
       ],
       "files": [
         {
@@ -4657,9 +4657,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button-stateful"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button-stateful"
       ],
       "files": [
         {
@@ -4681,7 +4681,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -4697,14 +4697,14 @@
       "name": "overflow-actions",
       "type": "registry:block",
       "title": "Overflow Actions",
-      "description": "Keeps primary actions visible and tucks extra ones behind a toggle.",
+      "description": "Keeps secondary actions in a menu.",
       "dependencies": [
         "@base-ui/react",
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4725,8 +4725,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4747,8 +4747,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4764,13 +4764,13 @@
       "name": "morphing-tabs",
       "type": "registry:block",
       "title": "Morphing Tabs",
-      "description": "Tabs the user can reorder, with content attached to the active tab.",
+      "description": "Reorders tabs and switches their content.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4791,8 +4791,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4814,9 +4814,9 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/icon-chip"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/icon-chip"
       ],
       "files": [
         {
@@ -4837,8 +4837,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4854,14 +4854,14 @@
       "name": "attachment-upload",
       "type": "registry:block",
       "title": "Attachment Upload",
-      "description": "Attaches files, images and links to a message or form.",
+      "description": "Adds attachments to a message or form.",
       "dependencies": [
         "@base-ui/react",
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4882,8 +4882,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -4905,12 +4905,12 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/switch",
-        "@taimatsu/select",
-        "@taimatsu/menu"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/switch",
+        "@paneui/select",
+        "@paneui/menu"
       ],
       "files": [
         {
@@ -4932,12 +4932,12 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/input",
-        "@taimatsu/checkbox",
-        "@taimatsu/button",
-        "@taimatsu/button-stateful"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/input",
+        "@paneui/checkbox",
+        "@paneui/button",
+        "@paneui/button-stateful"
       ],
       "files": [
         {
@@ -4953,13 +4953,13 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Shows a person's photo or initials, alone or in a group.",
+      "description": "Shows a photo or initials.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -4975,20 +4975,20 @@
       "name": "avatar-generator",
       "type": "registry:ui",
       "title": "Avatar Generator",
-      "description": "Draws a consistent illustrated avatar from a seed, with an editor.",
+      "description": "Creates and edits avatars.",
       "dependencies": [
         "@base-ui/react",
         "@dicebear/core@^9.4.3",
         "@dicebear/notionists@^9.4.3"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/avatar",
-        "@taimatsu/button",
-        "@taimatsu/input",
-        "@taimatsu/select",
-        "@taimatsu/tabs",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/avatar",
+        "@paneui/button",
+        "@paneui/input",
+        "@paneui/select",
+        "@paneui/tabs",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -5013,7 +5013,7 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5034,8 +5034,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/chart-utils"
+        "@paneui/theme",
+        "@paneui/chart-utils"
       ],
       "files": [
         {
@@ -5051,12 +5051,12 @@
       "name": "bar-list",
       "type": "registry:ui",
       "title": "Bar List",
-      "description": "Ranks items by one measure with a bar behind each label.",
+      "description": "Ranks items by a single measure.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5075,10 +5075,10 @@
       "description": "Card for a key metric and how it changed.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/badge",
-        "@taimatsu/sparkline"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/badge",
+        "@paneui/sparkline"
       ],
       "files": [
         {
@@ -5094,12 +5094,12 @@
       "name": "empty-state",
       "type": "registry:ui",
       "title": "Empty State",
-      "description": "Tells users a list or page is empty and what to do.",
+      "description": "Explains an empty view and what to do next.",
       "dependencies": [
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5118,7 +5118,7 @@
       "description": "Title, context and actions at the top of an app page.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5139,7 +5139,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5160,8 +5160,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -5179,7 +5179,7 @@
       "title": "Timeline",
       "description": "Lists entries in time order along a line.",
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5195,14 +5195,14 @@
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
-      "description": "Ties a label, control, hint and error into one form field.",
+      "description": "Connects form labels, controls and feedback.",
       "dependencies": [
         "@base-ui/react",
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -5223,11 +5223,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/input",
-        "@taimatsu/control-size",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/input",
+        "@paneui/control-size",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5250,7 +5250,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5266,13 +5266,13 @@
       "name": "accent-picker",
       "type": "registry:ui",
       "title": "Accent Picker",
-      "description": "Lets people choose the theme's accent colour, remembered across visits.",
+      "description": "Chooses and remembers an accent colour.",
       "dependencies": [
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -5291,11 +5291,11 @@
       "description": "Moves through pages of results in a list or table.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/select",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/select",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5314,9 +5314,9 @@
       "description": "Switches between workspaces or teams from the sidebar header.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/menu"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/menu"
       ],
       "files": [
         {
@@ -5335,10 +5335,10 @@
       "description": "Opens account actions for the signed-in user.",
       "dependencies": [],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/avatar",
-        "@taimatsu/menu"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/avatar",
+        "@paneui/menu"
       ],
       "files": [
         {
@@ -5359,14 +5359,14 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/empty-state",
-        "@taimatsu/input",
-        "@taimatsu/menu",
-        "@taimatsu/pagination",
-        "@taimatsu/table"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/empty-state",
+        "@paneui/input",
+        "@paneui/menu",
+        "@paneui/pagination",
+        "@paneui/table"
       ],
       "files": [
         {
@@ -5388,7 +5388,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5410,7 +5410,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5431,7 +5431,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5452,7 +5452,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5468,7 +5468,7 @@
       "name": "notion-editor",
       "type": "registry:block",
       "title": "Block Editor",
-      "description": "Block editor for writing documents that save as MDX.",
+      "description": "Writes and saves documents.",
       "dependencies": [
         "@tiptap/core",
         "@tiptap/pm",
@@ -5497,16 +5497,16 @@
         "@types/mdast"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/input",
-        "@taimatsu/menu",
-        "@taimatsu/popover",
-        "@taimatsu/tooltip",
-        "@taimatsu/toolbar",
-        "@taimatsu/menu-list",
-        "@taimatsu/swatch-picker"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/input",
+        "@paneui/menu",
+        "@paneui/popover",
+        "@paneui/tooltip",
+        "@paneui/toolbar",
+        "@paneui/menu-list",
+        "@paneui/swatch-picker"
       ],
       "files": [
         {
@@ -5563,7 +5563,7 @@
       "name": "email-editor",
       "type": "registry:block",
       "title": "Email Editor",
-      "description": "Edits email templates and exports them as email-safe HTML.",
+      "description": "Edits and exports email templates.",
       "dependencies": [
         "@tiptap/core",
         "@tiptap/pm",
@@ -5581,18 +5581,18 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/notion-editor",
-        "@taimatsu/button",
-        "@taimatsu/input",
-        "@taimatsu/menu",
-        "@taimatsu/select",
-        "@taimatsu/switch",
-        "@taimatsu/segmented-control",
-        "@taimatsu/swatch-picker",
-        "@taimatsu/toggle-group",
-        "@taimatsu/toolbar"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/notion-editor",
+        "@paneui/button",
+        "@paneui/input",
+        "@paneui/menu",
+        "@paneui/select",
+        "@paneui/switch",
+        "@paneui/segmented-control",
+        "@paneui/swatch-picker",
+        "@paneui/toggle-group",
+        "@paneui/toolbar"
       ],
       "files": [
         {
@@ -5626,7 +5626,7 @@
       "title": "Resizable",
       "description": "Split panes the user can resize or collapse.",
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5647,7 +5647,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5669,12 +5669,12 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/animated-sidebar",
-        "@taimatsu/drawer",
-        "@taimatsu/menu",
-        "@taimatsu/separator"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/animated-sidebar",
+        "@paneui/drawer",
+        "@paneui/menu",
+        "@paneui/separator"
       ],
       "files": [
         {
@@ -5690,15 +5690,15 @@
       "name": "tab-strip",
       "type": "registry:ui",
       "title": "Tab Strip",
-      "description": "Switches between open documents or panels, with closing and reordering.",
+      "description": "Switches, closes and reorders document tabs.",
       "dependencies": [
         "motion",
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/overflow-hint"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/overflow-hint"
       ],
       "files": [
         {
@@ -5716,9 +5716,9 @@
       "title": "Icon Rail",
       "description": "Narrow bar of icon buttons for switching between app sections.",
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/tooltip",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/tooltip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5739,8 +5739,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5758,7 +5758,7 @@
       "title": "Locale Provider",
       "description": "Sets the language of every built-in label.",
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5782,7 +5782,7 @@
         "ws"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5810,7 +5810,7 @@
       "title": "Terminal View",
       "description": "Shows command output and takes commands in a terminal panel.",
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -5828,10 +5828,10 @@
       "title": "Thread List Item",
       "description": "Lists agent or chat threads in a sidebar.",
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/loader",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/loader",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5852,11 +5852,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/loader",
-        "@taimatsu/text-shimmer",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/loader",
+        "@paneui/text-shimmer",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5872,15 +5872,15 @@
       "name": "edited-files-card",
       "type": "registry:ui",
       "title": "Edited Files Card",
-      "description": "Summarises the files an agent changed, with undo and review.",
+      "description": "Reviews and undoes an agent’s file changes.",
       "dependencies": [
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/file-diff"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/file-diff"
       ],
       "files": [
         {
@@ -5896,14 +5896,14 @@
       "name": "model-picker",
       "type": "registry:ui",
       "title": "Model Picker",
-      "description": "Lets users choose an agent's model, effort or mode.",
+      "description": "Chooses an agent model.",
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/menu",
-        "@taimatsu/locale-provider",
-        "@taimatsu/combobox"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/menu",
+        "@paneui/locale-provider",
+        "@paneui/combobox"
       ],
       "files": [
         {
@@ -5927,11 +5927,11 @@
         "motion"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/tooltip",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/tooltip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5952,8 +5952,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/button"
+        "@paneui/theme",
+        "@paneui/button"
       ],
       "files": [
         {
@@ -5974,8 +5974,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -5993,9 +5993,9 @@
       "title": "Calendar",
       "description": "Month grid for picking a date or a range.",
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -6016,13 +6016,13 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/control-size",
-        "@taimatsu/calendar",
-        "@taimatsu/popover",
-        "@taimatsu/select",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/control-size",
+        "@paneui/calendar",
+        "@paneui/popover",
+        "@paneui/select",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -6044,7 +6044,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -6062,7 +6062,7 @@
       "title": "Skeleton",
       "description": "Placeholder shape while content loads.",
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -6083,7 +6083,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -6104,7 +6104,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -6126,9 +6126,9 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -6144,14 +6144,14 @@
       "name": "input-group",
       "type": "registry:ui",
       "title": "Input Group",
-      "description": "Input with icons, text or buttons inside the field.",
+      "description": "Groups related controls inside an input.",
       "dependencies": [
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/control-size",
-        "@taimatsu/button"
+        "@paneui/theme",
+        "@paneui/control-size",
+        "@paneui/button"
       ],
       "files": [
         {
@@ -6172,7 +6172,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -6193,9 +6193,9 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/control-size"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -6216,8 +6216,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/menu"
+        "@paneui/theme",
+        "@paneui/menu"
       ],
       "files": [
         {
@@ -6238,8 +6238,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons"
+        "@paneui/theme",
+        "@paneui/icons"
       ],
       "files": [
         {
@@ -6257,10 +6257,10 @@
       "title": "Carousel",
       "description": "Scrolls through slides one at a time.",
       "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/button",
-        "@taimatsu/locale-provider"
+        "@paneui/theme",
+        "@paneui/icons",
+        "@paneui/button",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -6281,7 +6281,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@taimatsu/theme"
+        "@paneui/theme"
       ],
       "files": [
         {
@@ -6293,5 +6293,6 @@
         "category": "Overlays"
       }
     }
-  ]
+  ],
+  "description": "React components you own and edit."
 }

@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Button or chip that expands on click to reveal a label.", "zh": "点击展开控件的标签。"},
   baseUi: { name: "Button", href: "https://base-ui.com/react/components/button" },
   usage: {
     imports: `import { ExpandableButton, ExpandableChip } from "@/components/ui/expandable-control"`,
@@ -9,18 +10,15 @@ export default {
   examples: [
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Control `expanded` with `onExpandedChange` when only one button in a toolbar should be open at a time.",
+      title: { en: "Controlled", zh: "受控" },
     },
     {
       id: "chip-actions",
-      title: "Chip Actions",
-      description: "Set `collapseOnAction={false}` when the revealed action may run more than once in a row.",
+      title: { en: "Chip Actions", zh: "标签操作" },
     },
     {
       id: "prevent-toggle",
-      title: "Prevent Toggle",
-      description: "Call `event.preventDefault()` in `onClick` when a click should act without toggling the button.",
+      title: { en: "Prevent Toggle", zh: "禁止切换" },
     },
   ],
   notes: [

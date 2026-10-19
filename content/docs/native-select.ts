@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "The browser's own select, styled as a field.", "zh": "使用浏览器原生选择控件。"},
   "usage": {
     "imports": "import { NativeSelect, NativeSelectOption } from \"@/components/ui/native-select\"",
     "code": "<NativeSelect defaultValue=\"name\">\n  <NativeSelectOption value=\"name\">Name</NativeSelectOption>\n  <NativeSelectOption value=\"date\">Date</NativeSelectOption>\n</NativeSelect>"
@@ -8,7 +9,7 @@ export default {
   "examples": [
     {
       "id": "sizes",
-      "title": "Sizes"
+      "title": {"en":"Sizes","zh":"尺寸"}
     }
   ],
   "notes": [

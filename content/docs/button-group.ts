@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Joins related buttons into one control.", "zh": "组合相关按钮。"},
   "usage": {
     "imports": "import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from \"@/components/ui/button-group\"",
     "code": "<ButtonGroup aria-label=\"Alignment\">\n  <Button variant=\"outline\">Left</Button>\n  <Button variant=\"outline\">Center</Button>\n  <Button variant=\"outline\">Right</Button>\n</ButtonGroup>"
@@ -8,12 +9,11 @@ export default {
   "examples": [
     {
       "id": "vertical",
-      "title": "Vertical"
+      "title": {"en":"Vertical","zh":"纵向"}
     },
     {
       "id": "nested",
-      "title": "Nested",
-      "description": "Nest groups to space clusters apart in one toolbar."
+      "title": {"en":"Nested","zh":"嵌套"},
     }
   ],
   "notes": [

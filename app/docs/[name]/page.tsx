@@ -1,3 +1,6 @@
+import { english } from "@/lib/site-copy"
+import { LocalizedText } from "@/components/docs/localized"
+
 import * as React from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -35,7 +38,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ name: string }> }) {
   const item = getItem((await params).name)
-  return item ? { title: item.title, description: item.summary } : {}
+  return item ? { title: item.title, description: english(item.summary) } : {}
 }
 
 /** The preview route of a template example: `/templates/docs/` for the classic layout, `/templates/docs/flux/` for the others. */
@@ -221,7 +224,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         eyebrow={item.category}
         eyebrowHref={`/#${categorySlug(item.category)}`}
         title={item.title}
-        lede={item.summary}
+        lede={doc?.summary ?? item.summary}
       >
         {doc?.baseUi && (
           <div className="flex flex-wrap gap-1.5">
@@ -233,7 +236,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         {isTemplate && (
           <div className="flex flex-wrap gap-2 pt-1">
             <Button nativeButton={false} render={<Link href={`/templates/${item.name}/`} />}>
-              Open template
+              <LocalizedText text="Open template" />
               <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
             </Button>
           </div>
@@ -264,7 +267,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         <Tabs defaultValue="command">
           <TabsList>
             <TabsTab value="command">Command</TabsTab>
-            <TabsTab value="manual">Manual</TabsTab>
+            <TabsTab value="manual"><LocalizedText text="Manual" /></TabsTab>
           </TabsList>
           <TabsPanel value="command" className="pt-2">
             <InstallCommand args={`add @${REGISTRY_NAME}/${name}`} />
@@ -322,7 +325,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
           {doc.examples.map((ex) => (
             <div key={ex.id} className="flex flex-col gap-3">
               <DocHeading as="h3" id={`example-${ex.id}`}>
-                {ex.title}
+                <LocalizedText text={ex.title} />
               </DocHeading>
               {ex.description && (
                 <div className="typeset typeset-docs text-muted-foreground">

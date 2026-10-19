@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Picks one option from a list.", "zh": "从列表中选择一项。"},
   baseUi: {
     name: "Select",
     href: "https://base-ui.com/react/components/select",
@@ -29,33 +30,29 @@ export default {
   examples: [
     {
       id: "placeholder",
-      title: "Placeholder",
-      description: "Use when the field starts empty, with an item whose `value` is `null` as the prompt.",
+      title: { en: "Placeholder", zh: "占位内容" },
     },
     {
       id: "sizes",
-      title: "Sizes",
-      description: "Set `size` on `Select` to size the trigger and its rows together.",
+      title: { en: "Sizes", zh: "尺寸" },
     },
     {
       id: "with-icons",
-      title: "With Icons",
-      description: "Use when icons help tell the options apart.",
+      title: { en: "With Icons", zh: "带图标" },
+      description: { en: "Use when icons help tell the options apart.", zh: "适用于需要用图标区分选项的场景。" },
     },
     {
       id: "disabled",
-      title: "Disabled",
-      description: "Use `disabled` on `SelectItem` to block one option, or on `Select` to block the whole control.",
+      title: { en: "Disabled", zh: "禁用" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use when other UI reacts to the choice.",
+      title: { en: "Controlled", zh: "受控" },
+      description: { en: "Use when other UI reacts to the choice.", zh: "适用于选择值与其他界面联动的场景。" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

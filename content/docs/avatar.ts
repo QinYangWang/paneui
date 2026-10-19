@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows a photo or initials.", "zh": "显示用户照片或姓名缩写。"},
   baseUi: { name: "Avatar", href: "https://base-ui.com/react/components/avatar" },
   usage: {
     imports: `import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"`,
@@ -18,29 +19,23 @@ export default {
   examples: [
     {
       id: "basic",
-      title: "Basic",
+      title: { en: "Basic", zh: "基础" },
     },
     {
       id: "sizes",
-      title: "Sizes and Shapes",
-      description:
-        "Use `sm` in dense lists, and `shape=\"rounded\"` for teams and apps rather than people.",
+      title: { en: "Sizes and Shapes", zh: "尺寸与形状" },
     },
     {
       id: "fallback",
-      title: "Fallback",
-      description:
-        "Use `delay` so fast-loading photos don't flash the fallback, or a [generated avatar](/docs/avatar-generator) when there is no photo.",
+      title: { en: "Fallback", zh: "备用内容" },
     },
     {
       id: "status",
-      title: "Status",
-      description: "Use `AvatarStatus` for presence, with a `label` when the state matters to screen readers.",
+      title: { en: "Status", zh: "状态" },
     },
     {
       id: "group",
-      title: "Group",
-      description: "Use `AvatarGroup` for the people on a shared item, ending with `AvatarGroupCount` for the overflow.",
+      title: { en: "Group", zh: "分组" },
     },
   ],
   notes: [

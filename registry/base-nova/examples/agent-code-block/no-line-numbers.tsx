@@ -1,6 +1,6 @@
 import { AgentCodeBlock } from "@/registry/base-nova/ui/agent-code-block"
 
-const CODE = `pnpm dlx shadcn@latest add @taimatsu/agent-code-block
+const CODE = `pnpm dlx shadcn@latest add @paneui/agent-code-block
 pnpm dev`
 
 export default function AgentCodeBlockNoLineNumbers() {

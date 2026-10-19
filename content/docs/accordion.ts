@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Opens sections of content on demand.", "zh": "按需展开内容分节。"},
   baseUi: {
     name: "Accordion",
     href: "https://base-ui.com/react/components/accordion",
@@ -21,47 +22,43 @@ export default {
   examples: [
     {
       id: "basic",
-      title: "Basic",
-      description: "Use for FAQs and settings where one open answer at a time is enough.",
+      title: { en: "Basic", zh: "基础" },
+      description: { en: "Use for FAQs and settings where one open answer at a time is enough.", zh: "适用于每次只需查看一条答案的常见问题或设置。" },
     },
     {
       id: "multiple",
-      title: "Multiple",
-      description: "Use `multiple` when readers compare several answers side by side.",
+      title: { en: "Multiple", zh: "多项展开" },
     },
     {
       id: "disabled",
-      title: "Disabled",
+      title: { en: "Disabled", zh: "禁用" },
     },
     {
       id: "with-icons",
-      title: "With icons",
-      description: "Use icons when readers scan the list by topic.",
+      title: { en: "With icons", zh: "带图标" },
+      description: { en: "Use icons when readers scan the list by topic.", zh: "适用于按主题快速查找条目的列表。" },
     },
     {
       id: "ghost",
-      title: "Borderless",
-      description:
-        "Use the borderless variant inside cards or panels that already have a frame.",
+      title: { en: "Borderless", zh: "无边框" },
+      description: { en: "Use the borderless variant inside cards or panels that already have a frame.", zh: "适用于已有外框的卡片或面板。" },
     },
     {
       id: "ghost-multiple",
-      title: "Borderless, multiple",
+      title: { en: "Borderless, multiple", zh: "无边框，多项展开" },
     },
     {
       id: "ghost-disabled",
-      title: "Borderless, disabled",
+      title: { en: "Borderless, disabled", zh: "无边框，禁用" },
     },
     {
       id: "ghost-with-icons",
-      title: "Borderless, with icons",
-      description:
-        "Use one icon family (solid) per list so the bare glyphs line up.",
+      title: { en: "Borderless, with icons", zh: "无边框，带图标" },
+      description: { en: "Use one icon family (solid) per list so the bare glyphs line up.", zh: "同一列表使用同一图标风格。" },
     },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

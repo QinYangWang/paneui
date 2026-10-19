@@ -14,6 +14,7 @@ const size = {
 }
 
 export default {
+  summary: {"en": "Turns formatting or view options on and off.", "zh": "切换格式或视图选项。"},
   baseUi: { name: "Toggle Group", href: "https://base-ui.com/react/components/toggle-group" },
   usage: {
     imports: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"`,
@@ -27,13 +28,12 @@ export default {
 
 Toggle`,
   examples: [
-    { id: "outline", title: "Outline", description: "Use `outline` with text items in settings panels." },
-    { id: "single-toggle", title: "Single Toggle", description: "Use `Toggle` alone for a single on/off option, driven by `pressed` and `onPressedChange`." },
-    { id: "sizes", title: "Sizes" },
+    { id: "outline", title: { en: "Outline", zh: "边框" },  },
+    { id: "single-toggle", title: { en: "Single Toggle", zh: "单个切换" },  },
+    { id: "sizes", title: { en: "Sizes", zh: "尺寸" } },
     {
       id: "rtl",
-      title: "RTL",
-      description: `For right-to-left languages, wrap the tree in \`DirectionProvider\` and set \`dir="rtl"\` on its root.`,
+      title: { en: "RTL", zh: "从右到左" },
     },
   ],
   notes: [

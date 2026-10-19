@@ -1,3 +1,5 @@
+import type { Localized } from "./site-locale"
+
 /**
  * Hand-written documentation for one registry item, shown on /docs/<name>.
  * Lives in content/docs/<name>.ts; examples live in registry/base-nova/examples/<name>/<id>.tsx.
@@ -28,11 +30,13 @@ export type PartDoc = {
 export type ExampleDoc = {
   /** File name without extension in registry/base-nova/examples/<name>/. */
   id: string
-  title: string
-  description?: string
+  title: Localized
+  description?: Localized
 }
 
 export type ComponentDoc = {
+  description?: Localized
+  summary?: Localized
   /** Headless primitive this wraps, linked at the top and in API Reference. */
   baseUi?: { name: string; href: string }
   usage: { imports: string; code: string }

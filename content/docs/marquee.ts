@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Scrolls content past in an endless loop.", "zh": "循环滚动内容。"},
   usage: {
     imports: `import { Marquee } from "@/components/ui/marquee"`,
     code: `<Marquee>
@@ -11,18 +12,15 @@ export default {
   examples: [
     {
       id: "vertical",
-      title: "Vertical",
-      description: "Use `direction=\"up\"` or `\"down\"` for a column, and give the parent a fixed height.",
+      title: { en: "Vertical", zh: "纵向" },
     },
     {
       id: "no-fade",
-      title: "Without Fade",
-      description: "Turn off `fade` and `pauseOnHover` for decorative strips with nothing to read or click.",
+      title: { en: "Without Fade", zh: "无淡入淡出" },
     },
     {
       id: "repeat",
-      title: "Repeat",
-      description: "Raise `repeat` when the items are narrower than the container so the track never shows a gap.",
+      title: { en: "Repeat", zh: "重复" },
     },
   ],
   notes: [

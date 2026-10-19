@@ -15,13 +15,13 @@ the type scale, densities and shell layout still apply.
 - Sidebar icon buttons: muted-foreground/60, hover foreground/82, rounded-sm, p-0.5. Icon chips: 1px sidebar-border ring + 0 1px 2px black/5%.
 - Density: buttons h-8 (sm:h-8 default, sm h-7, xs h-6 at desktop widths), text-ui-sm in small controls.
 
-## Applied to taimatsu/ui (2026-10-14)
+## Applied to paneui (2026-10-14)
 Replaced the flat style outright (no switch). Kept: neutral black/white primary + accent presets
 (their rings are now opaque and used at `/50`), coloured chart-1..5, status colours
 (destructive/success/warning keep the earlier hues), existing shadow token names.
 - Tokens: `app/globals.css` (system font, text-ui scale, radius multipliers, alpha fills,
   `shell`/`shell-border`, `rounded-shell`, `shell-inset` utility); `lib/utils.ts` teaches
-  tailwind-merge the text-ui sizes (`@taimatsu/utils`, dependency of `@taimatsu/theme`).
+  tailwind-merge the text-ui sizes (`@paneui/utils`, dependency of `@paneui/theme`).
 - `secondary/muted/accent` became translucent, so every opaque use of `bg-secondary` in the
   library (raised controls, triggers, morph shells, toasts, cards) moved to `bg-card`.
 - Removed press scale from standard controls; kept it on motion showcases.

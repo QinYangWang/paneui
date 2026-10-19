@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Scroll container with thin scrollbars that stay inside its frame.", "zh": "为容器提供滚动区域。"},
   baseUi: {
     name: "Scroll Area",
     href: "https://base-ui.com/react/components/scroll-area",
@@ -16,8 +17,8 @@ export default {
 ├── ScrollBar (vertical)
 └── ScrollBar (horizontal)`,
   examples: [
-    { id: "both", title: "Both Axes", description: "Use for grids and schedules wider and taller than their frame." },
-    { id: "sticky-header", title: "Sticky Header", description: "Use `scrollbarMargin` so the track starts below a pinned header." },
+    { id: "both", title: { en: "Both Axes", zh: "双轴" }, description: { en: "Use for grids and schedules wider and taller than their frame.", zh: "适用于超出容器宽高的网格或日程表。" } },
+    { id: "sticky-header", title: { en: "Sticky Header", zh: "固定表头" },  },
   ],
   notes: [
     {

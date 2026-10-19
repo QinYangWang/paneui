@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Highlights text while work is in progress.", "zh": "通过文字高亮提示正在处理。"},
   usage: {
     imports: `import { TextShimmer } from "@/components/ui/text-shimmer"`,
     code: `<TextShimmer>Checking flight prices…</TextShimmer>`,
@@ -8,24 +9,19 @@ export default {
   examples: [
     {
       id: "elements",
-      title: "Elements",
-      description: "Use `as` when the shimmer is a heading or paragraph rather than inline text.",
+      title: { en: "Elements", zh: "元素" },
     },
     {
       id: "speed",
-      title: "Speed",
-      description: "Use a longer `duration` for long waits.",
+      title: { en: "Speed", zh: "速度" },
     },
     {
       id: "spread",
-      title: "Spread",
-      description: "Use a wider `spread` on large headings.",
+      title: { en: "Spread", zh: "展开范围" },
     },
     {
       id: "colors",
-      title: "Colors",
-      description:
-        "Use on coloured surfaces, setting `--shimmer-base` and `--shimmer-highlight` through `style`.",
+      title: { en: "Colors", zh: "颜色" },
     },
   ],
   notes: [

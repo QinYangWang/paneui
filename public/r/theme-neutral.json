@@ -4,7 +4,7 @@
   "title": "Theme: Neutral accent",
   "description": "Accent preset that makes the primary colour black or white.",
   "registryDependencies": [
-    "@qinyang/theme"
+    "@paneui/theme"
   ],
   "cssVars": {
     "light": {

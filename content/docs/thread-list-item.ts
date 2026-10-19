@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Lists agent or chat threads in a sidebar.", "zh": "在侧栏中显示对话。"},
   usage: {
     imports: `import { ThreadList, ThreadListGroup, ThreadListItem } from "@/components/ui/thread-list-item"`,
     code: `<ThreadList>
@@ -20,9 +21,9 @@ export default {
 └── ThreadListGroup
     └── ThreadListItem`,
   examples: [
-    { id: "pr-states", title: "Pull Request States", description: "Use in coding-agent sidebars where threads map to pull requests." },
-    { id: "actions", title: "Description and Actions", description: "Use for chat lists with a subtitle, a time and a row menu." },
-    { id: "minimal", title: "Minimal", description: "Use for plain chat lists; without `repo`, `pr` or `branch` the row is one line." },
+    { id: "pr-states", title: { en: "Pull Request States", zh: "合并请求状态" }, description: { en: "Use in coding-agent sidebars where threads map to pull requests.", zh: "适用于关联代码合并请求的对话列表。" } },
+    { id: "actions", title: { en: "Description and Actions", zh: "说明与操作" }, description: { en: "Use for chat lists with a subtitle, a time and a row menu.", zh: "适用于需要副标题和操作菜单的对话列表。" } },
+    { id: "minimal", title: { en: "Minimal", zh: "简洁" },  },
   ],
   notes: [
     { title: "Truncation", body: "Title, repo and branch truncate independently; the branch gives way first so the PR number stays readable in a narrow sidebar." },

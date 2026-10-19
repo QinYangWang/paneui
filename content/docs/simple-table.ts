@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "A plain table for reference content like props and tokens.", "zh": "展示属性和主题变量等参考内容。"},
   usage: {
     imports: `import {
   SimpleTable,
@@ -33,10 +34,10 @@ export default {
     └── SimpleTableRow
         └── SimpleTableCell   variant`,
   examples: [
-    { id: "numbers", title: "Numbers", description: "Use the `numeric` cell for sizes and counts that should line up." },
-    { id: "comparison", title: "Comparisons", description: "Short values across many columns fit a reading column without scrolling." },
-    { id: "markdown", title: "Markdown Tables", description: "Map the table elements in your MDX components so GFM tables render as SimpleTable." },
-    { id: "rtl", title: "RTL", description: "For right-to-left pages, set `dir=\"rtl\"` on a parent; headers align to the start edge." },
+    { id: "numbers", title: { en: "Numbers", zh: "数值" },  },
+    { id: "comparison", title: { en: "Comparisons", zh: "比较" }, description: { en: "Short values across many columns fit a reading column without scrolling.", zh: "适用于列数较多、单元格内容较短的参考表。" } },
+    { id: "markdown", title: { en: "Markdown Tables", zh: "Markdown 表格" }, description: { en: "Map the table elements in your MDX components so GFM tables render as SimpleTable.", zh: "适用于 MDX 中的 Markdown 表格。" } },
+    { id: "rtl", title: { en: "RTL", zh: "从右到左" },  },
   ],
   notes: [
     {

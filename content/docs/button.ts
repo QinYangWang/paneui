@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Triggers an action or submits a form.", "zh": "触发操作或提交表单。"},
   baseUi: {
     name: "Button",
     href: "https://base-ui.com/react/components/button",
@@ -12,31 +13,24 @@ export default {
   examples: [
     {
       id: "variants",
-      title: "Variants",
-      description:
-        "Use `default` for the one primary action, `secondary` for everything else, and `ghost` inside toolbars and rows.",
+      title: { en: "Variants", zh: "样式" },
     },
     {
       id: "sizes",
-      title: "Sizes",
-      description: "Use `sm` in toolbars and dense rows.",
+      title: { en: "Sizes", zh: "尺寸" },
     },
     {
       id: "with-icon",
-      title: "With icon",
-      description:
-        'Mark the icon with `data-icon="inline-start"` or `data-icon="inline-end"` so the padding on that side tightens.',
+      title: { en: "With icon", zh: "带图标" },
     },
     {
       id: "icon",
-      title: "Icon",
-      description: "Use icon-only buttons in toolbars, and always give them an `aria-label`.",
+      title: { en: "Icon", zh: "图标" },
     },
-    { id: "disabled", title: "Disabled" },
+    { id: "disabled", title: { en: "Disabled", zh: "禁用" } },
     {
       id: "as-link",
-      title: "As link",
-      description: "Use `render` when the action navigates, with `nativeButton={false}` when it isn't a `<button>`.",
+      title: { en: "As link", zh: "用作链接" },
     },
   ],
   api: [

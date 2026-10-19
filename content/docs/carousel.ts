@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Scrolls through slides one at a time.", "zh": "逐张浏览内容。"},
   "usage": {
     "imports": "import {\n  Carousel,\n  CarouselContent,\n  CarouselDots,\n  CarouselItem,\n  CarouselNext,\n  CarouselPrevious,\n} from \"@/components/ui/carousel\"",
     "code": "<Carousel aria-label=\"Photos\">\n  <CarouselContent>\n    <CarouselItem>…</CarouselItem>\n    <CarouselItem>…</CarouselItem>\n  </CarouselContent>\n  <CarouselPrevious />\n  <CarouselNext />\n</Carousel>"
@@ -9,13 +10,11 @@ export default {
   "examples": [
     {
       "id": "several-per-view",
-      "title": "Several per View",
-      "description": "Give items `basis-1/3` (or any basis) to show several at once."
+      "title": {"en":"Several per View","zh":"同屏多项"},
     },
     {
       "id": "rtl",
-      "title": "RTL",
-      "description": "For right-to-left languages, wrap the tree in `DirectionProvider` and set `dir=\"rtl\"` on its root."
+      "title": {"en":"RTL","zh":"从右到左"},
     }
   ],
   "notes": [

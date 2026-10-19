@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Number whose digits roll to each new value.", "zh": "滚动显示数值变化。"},
   usage: {
     imports: `import { NumberTicker } from "@/components/ui/number-ticker"`,
     code: `<NumberTicker value={1284.5} locale="en-US" format={{ style: "currency", currency: "USD" }} />`,
@@ -8,18 +9,17 @@ export default {
   examples: [
     {
       id: "formats",
-      title: "Formats",
-      description: "Use for currency, percentages or compact counts.",
+      title: { en: "Formats", zh: "格式" },
+      description: { en: "Use for currency, percentages or compact counts.", zh: "适用于金额、百分比或缩写计数。" },
     },
     {
       id: "stagger",
-      title: "Stagger and Transition",
-      description: "Use when the default roll feels too fast or too even.",
+      title: { en: "Stagger and Transition", zh: "交错与过渡" },
+      description: { en: "Use when the default roll feels too fast or too even.", zh: "适用于默认滚动节奏不合适的场景。" },
     },
     {
       id: "live",
-      title: "Live Counter",
-      description: "Use `startOnView={false}` for numbers that update on their own.",
+      title: { en: "Live Counter", zh: "实时计数" },
     },
   ],
   notes: [

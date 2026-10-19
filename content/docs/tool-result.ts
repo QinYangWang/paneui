@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows what an agent tool call ran and what it returned.", "zh": "展示工具调用与返回结果。"},
   baseUi: {
     name: "Collapsible",
     href: "https://base-ui.com/react/components/collapsible",
@@ -17,33 +18,27 @@ export default {
   examples: [
     {
       id: "statuses",
-      title: "Statuses",
-      description: "Use `status` to mirror the tool call as it runs and finishes.",
+      title: { en: "Statuses", zh: "状态" },
     },
     {
       id: "error-retry",
-      title: "Error with Retry",
-      description: "Use `onRetry` when a failed call can be run again; failed runs stay open.",
+      title: { en: "Error with Retry", zh: "错误与重试" },
     },
     {
       id: "requests",
-      title: "Requests",
-      description: "Use for HTTP calls, pairing `kind=\"request\"` with `ToolResultRequest`.",
+      title: { en: "Requests", zh: "请求" },
     },
     {
       id: "custom-icon",
-      title: "Custom Icon",
-      description: "Use `icon` for tools that have their own glyph.",
+      title: { en: "Custom Icon", zh: "自定义图标" },
     },
     {
       id: "output-languages",
-      title: "Output Languages",
-      description: "Use `language` to match the tool's output format.",
+      title: { en: "Output Languages", zh: "输出语言" },
     },
     {
       id: "controlled",
-      title: "Controlled",
-      description: "Use `open` and `onOpenChange` when you own the disclosure, or `collapseOnComplete={false}` to keep a finished run open.",
+      title: { en: "Controlled", zh: "受控" },
     },
   ],
   notes: [

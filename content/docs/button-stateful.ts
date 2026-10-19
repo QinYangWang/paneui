@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Shows an action’s progress and result.", "zh": "显示操作的进度与结果。"},
   usage: {
     imports: `import { StatefulButton } from "@/components/ui/button-stateful"`,
     code: `<StatefulButton state={state} onClick={save} successText="Saved">
@@ -10,21 +11,20 @@ export default {
   examples: [
     {
       id: "states",
-      title: "States",
-      description: "Use for async actions like saving, where the reader needs to see the result.",
+      title: { en: "States", zh: "状态" },
+      description: { en: "Use for async actions like saving, where the reader needs to see the result.", zh: "适用于保存等需要反馈结果的异步操作。" },
     },
     {
       id: "variants",
-      title: "Variants",
+      title: { en: "Variants", zh: "样式" },
     },
     {
       id: "no-tint",
-      title: "Without Tint",
-      description: "Use `tint={false}` when coloured feedback would clash with the surrounding UI.",
+      title: { en: "Without Tint", zh: "无色调反馈" },
     },
     {
       id: "sizes",
-      title: "Sizes",
+      title: { en: "Sizes", zh: "尺寸" },
     },
   ],
   notes: [

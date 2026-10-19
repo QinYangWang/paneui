@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "vscode",
   "title": "Code Editor",
-  "description": "Edit a project in the browser with a shell on its files.",
+  "description": "Edit projects and run commands in the browser.",
   "dependencies": [
     "@monaco-editor/react",
     "motion",

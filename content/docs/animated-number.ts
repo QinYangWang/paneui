@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Counts up to a number when it scrolls into view.", "zh": "在进入视野时开始计数。"},
   usage: {
     imports: `import { AnimatedNumber } from "@/components/ui/animated-number"`,
     code: `<AnimatedNumber value={1842} locale="en-US" />`,
@@ -8,18 +9,15 @@ export default {
   examples: [
     {
       id: "live",
-      title: "Live Updates",
-      description: "Use `startOnView={false}` when the number is already on screen and updates live.",
+      title: { en: "Live Updates", zh: "实时更新" },
     },
     {
       id: "from",
-      title: "Start Value",
-      description: "Use `from` to count down, or to start from a previous total.",
+      title: { en: "Start Value", zh: "起始值" },
     },
     {
       id: "spring",
-      title: "Spring",
-      description: "Tune `stiffness`, `damping` and `mass` to match the pace of nearby motion.",
+      title: { en: "Spring", zh: "弹簧动画" },
     },
   ],
   notes: [

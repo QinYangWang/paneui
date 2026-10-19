@@ -1,6 +1,7 @@
 import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
+  summary: {"en": "Explains an empty view and what to do next.", "zh": "说明空白状态及下一步操作。"},
   usage: {
     imports: `import {
   EmptyState,
@@ -21,7 +22,7 @@ export default {
 ├── EmptyStateTitle
 ├── EmptyStateDescription
 └── EmptyStateActions`,
-  examples: [{ id: "variants", title: "Variants", description: "Use `default` inside a card or table, `outline` as a drop zone, and `muted` to set the area apart from the page." }],
+  examples: [{ id: "variants", title: { en: "Variants", zh: "样式" },  }],
   notes: [
     { title: "Writing", body: "Say what is missing, then what to do about it, then offer the action. For a filtered list, say no results matched and offer to clear the filters, as DataTable does." },
   ],
