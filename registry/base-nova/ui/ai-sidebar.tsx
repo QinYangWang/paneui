@@ -515,7 +515,7 @@ function AISidebar({
       animate={{ width: open ? width : "3.5rem" }}
       transition={reduce ? { duration: 0 } : WIDTH_SPRING}
       className={cn(
-        "relative flex h-full shrink-0 flex-col overflow-hidden bg-card/60 text-ui",
+        "relative flex h-full shrink-0 flex-col overflow-hidden border-e border-border/60 bg-card/60 text-ui",
         className
       )}
       onFocusCapture={(e) => {

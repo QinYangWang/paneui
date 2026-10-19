@@ -112,13 +112,14 @@ export function ProjectFolder({
           {/*
            * Back panel with tab. The tab owns the top-left corner, so the panel's own corner is square
            * there (a rounded one left a notch below the tab). Both tab corners are no taller than its
-           * 14px rise (14px left, 10px right), so each curve ends above the panel's top edge instead of
-           * stepping into it, and a concave 8px fillet joins the tab's right edge to the panel top.
+           * 14px rise, so each curve ends above the panel's top edge instead of
+           * stepping into it. The right corner (--tab-r) ends --tab-f (= 14px − --tab-r) above the panel, exactly where a
+           * concave fillet of that radius starts, so the edge is one S-curve.
            * No hairline ring: the tab could not carry it, so the outline broke where they meet.
            */}
-          <span aria-hidden className="absolute inset-x-0 top-3.5 bottom-0 rounded-3xl rounded-tl-none bg-(--folder-back)">
-            <span className="absolute -top-3.5 left-0 h-7 w-24 rounded-tl-xl rounded-tr-lg bg-(--folder-back)" />
-            <span className="absolute -top-2 left-24 size-2 bg-[radial-gradient(circle_at_100%_0,transparent_0.5rem,var(--folder-back)_calc(0.5rem+0.5px))]" />
+          <span aria-hidden className="absolute inset-x-0 top-3.5 bottom-0 rounded-3xl rounded-tl-none bg-(--folder-back) [--tab-r:min(calc(var(--radius)*1.25),0.75rem)] [--tab-f:calc(0.875rem-var(--tab-r))]">
+            <span className="absolute -top-3.5 left-0 h-7 w-24 rounded-tl-xl rounded-tr-(--tab-r) bg-(--folder-back)" />
+            <span className="absolute -top-(--tab-f) left-24 size-(--tab-f) bg-[radial-gradient(circle_at_100%_0,transparent_var(--tab-f),var(--folder-back)_calc(var(--tab-f)+0.5px))]" />
           </span>
 
           {/* Sheets */}
