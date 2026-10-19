@@ -109,7 +109,7 @@ function MorphSelectContent({
         <SelectPrimitive.Popup
           data-slot="morph-select-content"
           className={cn(
-            "group/morph flex h-(--morph-h) w-(--anchor-width) flex-col overflow-clip frame-xl frame-inset-1.5 rounded-xl bg-popover text-popover-foreground shadow-surface outline-none data-[side=top]:justify-end",
+            "group/morph flex h-(--morph-h) w-(--anchor-width) flex-col overflow-clip frame-xl frame-inset-1.5 rounded-xl bg-popover text-popover-foreground shadow-[var(--shadow-default),var(--shadow-xl)] outline-none data-[side=top]:justify-end",
             "transition-[height,margin,background-color,box-shadow] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]",
             // closed geometry: trigger-sized box; the margin keeps the positioner at full size
             "data-starting-style:h-(--anchor-height) data-starting-style:bg-card data-starting-style:shadow-raised",

@@ -1,0 +1,11 @@
+/*
+ * Site-only guard (not shipped in the theme item): drop Tailwind's default palette and shadow
+ * scale so only our tokens compile. `bg-zinc-100` or `shadow-2xl` in a component produces no CSS,
+ * which shows up at once in the preview. Black and white stay for scrims and text on solid fills.
+ */
+@theme {
+  --color-*: initial;
+  --color-black: #000;
+  --color-white: #fff;
+  --shadow-*: initial;
+}
