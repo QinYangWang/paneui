@@ -105,6 +105,8 @@ function MorphingTabs({
 
   const tabRefs = React.useRef(new Map<string, HTMLButtonElement | null>())
   const railRef = React.useRef<HTMLDivElement>(null)
+  /** Drag bounds: the panel minus its corner radius, the tab's 8px feet and 6px of straight edge, so a dragged tab never leaves the outline. */
+  const boundsRef = React.useRef<HTMLSpanElement>(null)
 
   /**
    * Scroll the rail (only the rail, never the page) so a tab and its concave feet are fully visible.
@@ -198,7 +200,8 @@ function MorphingTabs({
 
   return (
     <LayoutGroup id={uid}>
-      <div data-slot="morphing-tabs" className={cn("flex w-full flex-col", className)}>
+      <div data-slot="morphing-tabs" className={cn("relative flex w-full flex-col", className)}>
+        <span ref={boundsRef} aria-hidden className="pointer-events-none absolute inset-x-[calc(var(--radius-xl)+0.875rem)] top-0 h-9" />
         <Reorder.Group
           ref={railRef}
           as="div"
@@ -222,7 +225,10 @@ function MorphingTabs({
                 value={id}
                 role="presentation"
                 drag={reorderable && !item.disabled ? "x" : false}
-                dragElastic={0.12}
+                dragConstraints={boundsRef}
+                dragElastic={0}
+                dragMomentum={false}
+                style={{ originY: 1 }}
                 whileDrag={reduceMotion ? undefined : { scale: 1.03 }}
                 onDragStart={() => {
                   // A drag starts with a focus on the tab; let the user steer instead of auto-scrolling.
@@ -235,6 +241,8 @@ function MorphingTabs({
                   requestAnimationFrame(() => {
                     dragging.current = false
                   })
+                  // Once the tab settles, scroll the rail so a tab dropped at an end keeps its feet in view.
+                  window.setTimeout(() => reveal(id), 350)
                   if (!sameOrder(orderAtDragStart.current, orderRef.current)) onOrderChange?.(orderRef.current)
                 }}
                 transition={reduceMotion ? { duration: 0 } : SURFACE}
