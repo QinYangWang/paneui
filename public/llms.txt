@@ -42,9 +42,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Date Picker](https://qinyangwang.github.io/ui/docs/date-picker.md): Field that opens a calendar to pick one date. JSON: https://qinyangwang.github.io/ui/r/date-picker.json
 - [Date Range Picker](https://qinyangwang.github.io/ui/docs/date-range-picker.md): Picks a start and end date from a calendar. JSON: https://qinyangwang.github.io/ui/r/date-range-picker.json
 - [Expandable Control](https://qinyangwang.github.io/ui/docs/expandable-control.md): Button or chip that expands on click to reveal a label. JSON: https://qinyangwang.github.io/ui/r/expandable-control.json
-- [Expanding Arrow Button](https://qinyangwang.github.io/ui/docs/expanding-arrow-button.md): Call-to-action button with an arrow sweep on hover. JSON: https://qinyangwang.github.io/ui/r/expanding-arrow-button.json
 - [Field](https://qinyangwang.github.io/ui/docs/field.md): Ties a label, control, hint and error into one form field. JSON: https://qinyangwang.github.io/ui/r/field.json
-- [Hold Action Button](https://qinyangwang.github.io/ui/docs/hold-action-button.md): Confirms a risky action by making the user press and hold. JSON: https://qinyangwang.github.io/ui/r/hold-action-button.json
 - [Input](https://qinyangwang.github.io/ui/docs/input.md): Single-line text field. JSON: https://qinyangwang.github.io/ui/r/input.json
 - [Input Group](https://qinyangwang.github.io/ui/docs/input-group.md): Input with icons, text or buttons inside the field. JSON: https://qinyangwang.github.io/ui/r/input-group.json
 - [Input OTP](https://qinyangwang.github.io/ui/docs/input-otp.md): Enters a one-time code, one character per slot. JSON: https://qinyangwang.github.io/ui/r/input-otp.json
@@ -58,7 +56,6 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Segmented Control](https://qinyangwang.github.io/ui/docs/segmented-control.md): Switches a setting between a few options. JSON: https://qinyangwang.github.io/ui/r/segmented-control.json
 - [Select](https://qinyangwang.github.io/ui/docs/select.md): Picks one option from a list. JSON: https://qinyangwang.github.io/ui/r/select.json
 - [Select Morph](https://qinyangwang.github.io/ui/docs/select-morph.md): Select whose trigger unfolds into its option list. JSON: https://qinyangwang.github.io/ui/r/select-morph.json
-- [Slide Action Button](https://qinyangwang.github.io/ui/docs/slide-action-button.md): Confirms an action when the user slides it to the end. JSON: https://qinyangwang.github.io/ui/r/slide-action-button.json
 - [Slider](https://qinyangwang.github.io/ui/docs/slider.md): Picks a value or range by dragging. JSON: https://qinyangwang.github.io/ui/r/slider.json
 - [Stepper](https://qinyangwang.github.io/ui/docs/stepper.md): Adjusts a number up or down in fixed steps. JSON: https://qinyangwang.github.io/ui/r/stepper.json
 - [Swatch Picker](https://qinyangwang.github.io/ui/docs/swatch-picker.md): Picks one colour from a fixed palette. JSON: https://qinyangwang.github.io/ui/r/swatch-picker.json
