@@ -5,9 +5,9 @@ command line. It runs the shadcn CLI to write files and install dependencies, so
 same as `shadcn add`, and it remembers what you installed so one command can update all of it.
 
 ```bash
-npx qinyang@latest init            # register @qinyang in components.json, install the theme
-npx qinyang@latest add button card # add items
-npx qinyang@latest update          # reinstall the theme and every installed item
+npx @qinyang/ui@latest init            # register @qinyang in components.json, install the theme
+npx @qinyang/ui@latest add button card # add items
+npx @qinyang/ui@latest update          # reinstall the theme and every installed item
 ```
 
 Requires Node.js 18.17 or later and a project the shadcn CLI supports (React, Tailwind CSS 4).

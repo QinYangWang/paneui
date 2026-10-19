@@ -39,10 +39,10 @@ If you scaffold the app yourself with `create-next-app` and pnpm 10+, approve it
 `packages/cli` publishes `qinyang`, which runs the shadcn CLI and remembers what you installed:
 
 ```bash
-npx qinyang@latest init           # register @qinyang in components.json, install the theme
-npx qinyang@latest add button     # or: npx shadcn@latest add @qinyang/button
-npx qinyang@latest search chart
-npx qinyang@latest update         # reinstall the theme and every installed item (--dry-run first)
+npx @qinyang/ui@latest init           # register @qinyang in components.json, install the theme
+npx @qinyang/ui@latest add button     # or: npx shadcn@latest add @qinyang/button
+npx @qinyang/ui@latest search chart
+npx @qinyang/ui@latest update         # reinstall the theme and every installed item (--dry-run first)
 ```
 
 See [packages/cli/README.md](packages/cli/README.md).

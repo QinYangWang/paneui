@@ -19,7 +19,7 @@ aliases and the Pages workflow all assume it); publishable packages live in `pac
   `registry/base-nova/`, built to `public/r/`). `pnpm install` at the root installs the site and `packages/*`.
 - `packages/cli/` — the `qinyang` CLI (npm name and bin in its `package.json`; the docs read the name from there).
   `pnpm cli:build`, `pnpm cli:test` (node:test against a mock registry). Released by pushing a `cli-v<version>` tag
-  (`.github/workflows/release-cli.yml`, needs the `NPM_TOKEN` secret). Excluded from the root `tsc`; it has its own tsconfig.
+  (`.github/workflows/release-cli.yml`, npm trusted publishing, package `@qinyang/ui`). Excluded from the root `tsc`; it has its own tsconfig.
 - `apps/desktop/` — the Electron shell. **Not** a workspace member: its own `pnpm-workspace.yaml` and lockfile, so root
   installs and CI never fetch Electron or build node-pty. Install it with `pnpm install` inside `apps/desktop/`.
 - `skills/` — our skills (design, copy density, puffy icons). `.agents/skills/` holds the vendored third-party skills

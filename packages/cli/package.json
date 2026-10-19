@@ -1,8 +1,15 @@
 {
-  "name": "qinyang",
+  "name": "@qinyang/ui",
   "version": "0.1.0",
   "description": "Add, search and update qinyang/ui registry components and themes. Works alongside the shadcn CLI.",
-  "keywords": ["shadcn", "registry", "cli", "components", "react", "tailwindcss"],
+  "keywords": [
+    "shadcn",
+    "registry",
+    "cli",
+    "components",
+    "react",
+    "tailwindcss"
+  ],
   "license": "MIT",
   "author": "Wang Qinyang",
   "homepage": "https://qinyangwang.github.io/ui/docs/cli",
