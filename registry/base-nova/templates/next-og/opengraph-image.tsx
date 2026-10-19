@@ -49,6 +49,6 @@ export default async function Image() {
       url={SITE.url}
       fontFamily={fonts ? "Inter" : undefined}
     />,
-    { ...size, fonts }
+    { ...size, ...(fonts && { fonts }) }
   )
 }
