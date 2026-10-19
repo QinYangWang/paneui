@@ -27,6 +27,10 @@ export default async function Image() {
       body: "`npx shadcn@latest add @qinyang/og-image-route` writes `app/opengraph-image.tsx` and `app/twitter-image.tsx`; edit the `SITE` object at the top. Next.js links the image from every page under that folder and renders it at build time. `@qinyang/og-image-post-route` writes `app/blog/[slug]/opengraph-image.tsx`, which reads `params` and draws `OgCoverArt` from the slug behind the title. For several images in one route, export `generateImageMetadata` and read `id` in the image function.",
     },
     {
+      title: "Static export",
+      body: "With `output: \"export\"`, `opengraph-image` is written without an extension, and some static hosts then serve it as a download, which share previews ignore. Render the image from a route handler at `app/og.png/route.tsx` instead (a `GET` that returns the `ImageResponse`, with `dynamic = \"force-static\"`), and list `/og.png` in `metadata.openGraph.images`; metadata URLs don't get `basePath`, so prefix it yourself.",
+    },
+    {
       title: "Rendering",
       body: "The renderer behind `ImageResponse` lays out flexbox and absolute positioning only, with inline styles: no grid, classes, hooks, context or browser APIs. Every text box has a fixed size, and fades end on the same colour at alpha 0, since `transparent` blends through black there. Set `metadataBase` in the root layout so the image URL is absolute.",
     },

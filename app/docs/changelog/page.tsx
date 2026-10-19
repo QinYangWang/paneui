@@ -22,7 +22,8 @@ const ENTRIES: Entry[] = [
       <>
         <Code>@qinyang/og-image-route</Code> adds <Code>app/opengraph-image.tsx</Code> and <Code>app/twitter-image.tsx</Code>;{" "}
         <Code>@qinyang/og-image-post-route</Code> adds a per-post image under <Code>app/blog/[slug]</Code>. The docs site
-        uses the same route for its own share image.
+        draws its own share image the same way and writes it to <Code>/og.png</Code>, so static hosts serve it as an
+        image; the OG Image notes show how.
       </>,
       <>
         New: <Code>OgCoverArt</Code>, the <TextLink href="/docs/cover-art">Cover Art</TextLink> compositions drawn for share
@@ -45,7 +46,7 @@ const ENTRIES: Entry[] = [
       </>,
       <>
         The sidebar&apos;s edge line no longer runs past the inset panel&apos;s rounded corners, and the floating rail&apos;s
-        icons sit on the trigger&apos;s column again (they were 3px off).
+        icons sit on the trigger&apos;s column again (they were 3px off). The panel header&apos;s divider is centred.
       </>,
       <>
         Outline buttons, cards, select and combobox triggers, fields, tab lists and dividers share one edge colour,{" "}
@@ -53,7 +54,7 @@ const ENTRIES: Entry[] = [
       </>,
       <>
         <TextLink href="/docs/edited-files-card">Edited Files Card</TextLink>: Undo, Review and the toggle follow the
-        card&apos;s corner.
+        card&apos;s corner, and so does a closed last file row.
       </>,
     ],
   },

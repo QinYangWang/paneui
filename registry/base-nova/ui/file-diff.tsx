@@ -469,6 +469,7 @@ function FileDiff<A = undefined>({
         {copyable && <CodeCopyButton value={newText} label={labels.copyNewFile} />}
         {variant === "row" && (
           <CollapsiblePrimitive.Trigger
+            data-slot="file-diff-toggle"
             aria-label={open ? labels.hideChanges : labels.showChanges}
             className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
           >

@@ -2,10 +2,9 @@ import { ImageResponse } from "next/og"
 
 import { OgImage, ogImageContentType, ogImageSize } from "@/registry/base-nova/ui/og-image"
 
-// The docs site's own share image, built from the og-image route template.
-export const alt = "qinyang/ui: desktop-density React components"
-export const size = ogImageSize
-export const contentType = ogImageContentType
+// The docs site's own share image, built from the og-image route template. A route handler
+// rather than an opengraph-image file, so the static export writes /og.png: static hosts pick
+// the content type from the extension, and a file with none is served as a download.
 export const dynamic = "force-static"
 
 const TITLE = "Desktop-density React components"
@@ -18,7 +17,7 @@ async function loadFont(weight: number, text: string) {
   return (await fetch(src)).arrayBuffer()
 }
 
-export default async function Image() {
+export async function GET() {
   const text = `qinyang/ui qinyangwang.github.io/ui ${TITLE} ${DESCRIPTION}·…`
   const fonts = await Promise.all([
     loadFont(400, text).then((data) => ({ name: "Inter", data, weight: 400 as const, style: "normal" as const })),
@@ -26,6 +25,6 @@ export default async function Image() {
   ]).catch(() => undefined)
   return new ImageResponse(
     <OgImage title={TITLE} description={DESCRIPTION} siteName="qinyang/ui" url="qinyangwang.github.io/ui" fontFamily={fonts ? "Inter" : undefined} />,
-    { ...size, fonts }
+    { ...ogImageSize, fonts, headers: { "content-type": ogImageContentType } }
   )
 }

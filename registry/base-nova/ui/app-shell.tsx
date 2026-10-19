@@ -349,6 +349,8 @@ function AppShellMain({ className, children, ...props }: React.ComponentProps<"m
         panel && "mt-(--app-shell-gap) me-0.75 mb-0.75 inset-ring-[0.5px] inset-ring-shell-border max-lg:ms-0.75",
         layout === "floating" && "lg:ms-0.75",
         variant === "window" && "overflow-y-auto overscroll-contain",
+        // a sidebar-first panel's own header redraws the rounded top, so the cap steps aside
+        "[&:has(>[data-slot=app-shell-inset-header])>[data-slot=app-shell-cap]]:hidden",
         panel && (variant === "page" ? "rounded-shell" : "rounded-inner"),
         className
       )}
@@ -378,29 +380,57 @@ type AppShellInsetHeaderProps = React.ComponentProps<"header"> & {
 
 /**
  * The panel's own header for a sidebar-first shell: the trigger, a short divider, then your
- * breadcrumb or title. Sticks to the top of the panel in `page` shells.
+ * breadcrumb or title. Sticks to the top of the panel and redraws the panel's rounded top and
+ * hairline over the content scrolling under it.
  */
 function AppShellInsetHeader({ trigger = true, className, children, ...props }: AppShellInsetHeaderProps) {
   const { variant, layout } = useAppShellContext()
+  const panel = layout !== "sidebar"
+  const row = (
+    <div className={cn("flex h-12 min-w-0 items-center gap-2 px-3", className)}>
+      {trigger && (
+        <>
+          <AppShellTrigger />
+          {/* the separator's own vertical rule is self-stretch; these override it by the same variant */}
+          <Separator orientation="vertical" className="me-1 data-[orientation=vertical]:h-4 data-[orientation=vertical]:self-center" />
+        </>
+      )}
+      {children}
+    </div>
+  )
   return (
     <header
       data-slot="app-shell-inset-header"
       className={cn(
-        "flex h-12 min-w-0 shrink-0 items-center gap-2 rounded-t-[inherit] bg-background px-3",
-        layout === "sidebar" && "border-b border-border",
-        // eslint-disable-next-line shadcn/no-arbitrary-values -- the panel's top edge, as the cap reads it
-        variant === "page" ? "sticky top-[calc(var(--app-shell-top)+var(--app-shell-gap))] z-20" : "sticky top-0 z-20",
-        className
+        "z-30 shrink-0",
+        // eslint-disable-next-line shadcn/no-arbitrary-values -- the panel's top edge: below the header row, or below the band's gap
+        variant === "page" ? "sticky top-[calc(var(--app-shell-top)+var(--app-shell-gap))]" : "sticky top-0",
+        // page shells: the band colour fills the square corners around the rounded face
+        variant === "page" && panel && "bg-shell",
+        !panel && "border-b border-border bg-background"
       )}
       {...props}
     >
-      {trigger && (
+      {panel ? (
         <>
-          <AppShellTrigger />
-          <Separator orientation="vertical" className="me-1 h-4" />
+          {/* the band's gap above the panel, so scrolled content never shows through it */}
+          {variant === "page" && <div aria-hidden className="absolute inset-x-0 bottom-full h-(--app-shell-gap) bg-shell" />}
+          {/* The face is taller than its clip, so its hairline draws the top and sides but no bottom edge. */}
+          <div className="h-12 overflow-hidden">
+            <div
+              className={cn(
+                // eslint-disable-next-line shadcn/no-arbitrary-values -- the same 0.5px hairline as the panel
+                "h-16 bg-background inset-ring-[0.5px] inset-ring-shell-border",
+                variant === "page" ? "rounded-t-shell" : "rounded-t-inner"
+              )}
+            >
+              {row}
+            </div>
+          </div>
         </>
+      ) : (
+        row
       )}
-      {children}
     </header>
   )
 }

@@ -1,6 +1,6 @@
 /**
  * Natural preview heights (px) of gallery demos at the xl two-column layout,
- * measured with Playwright at 1280px, last on 2026-10-18 (anything not listed is the 256px
+ * measured with Playwright at 1280px, last on 2026-10-19 (anything not listed is the 256px
  * minimum). The lazy gallery reserves this space before a demo first mounts,
  * so cards scrolled into view for the first time don't shift the page.
  * Re-measure after a demo's size changes noticeably; a stale value only costs
@@ -86,7 +86,7 @@ export const galleryHeights: Record<string, number> = {
   "timeline": 276,
   "outline": 582,
   "sidebar-nav": 448,
-  "app-shell": 480,
+  "app-shell": 544,
   "tab-bar": 448,
   "simple-table": 279,
   "data-table": 460,

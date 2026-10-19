@@ -157,22 +157,21 @@ function Sparkline({
         )}
         {/* Draw-in: a clip that sweeps left to right. Animating the stroke's length instead breaks
             the line into dashes, because the stroke doesn't scale with the stretched box. */}
-        {play && (
-          <clipPath id={`spark-clip-${id}`}>
-            <motion.rect
-              x={-PAD}
-              y={-PAD}
-              width={W + PAD * 2}
-              height={H + PAD * 2}
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              style={{ transformOrigin: "0 0", transformBox: "view-box" }}
-              transition={{ duration: 0.8, ease: EASE }}
-            />
-          </clipPath>
-        )}
+        {/* Always rendered, so server and client markup match whatever the motion setting. */}
+        <clipPath id={`spark-clip-${id}`}>
+          <motion.rect
+            x={-PAD}
+            y={-PAD}
+            width={W + PAD * 2}
+            height={H + PAD * 2}
+            initial={play ? { scaleX: 0 } : false}
+            animate={{ scaleX: 1 }}
+            style={{ transformOrigin: "0 0", transformBox: "view-box" }}
+            transition={play ? { duration: 0.8, ease: EASE } : { duration: 0 }}
+          />
+        </clipPath>
       </defs>
-      <g clipPath={play ? `url(#spark-clip-${id})` : undefined}>
+      <g clipPath={`url(#spark-clip-${id})`}>
         {variant === "area" &&
           runs
             .filter((r) => r.length > 1)

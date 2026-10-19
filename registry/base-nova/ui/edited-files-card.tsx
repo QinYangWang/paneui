@@ -150,7 +150,19 @@ function EditedFilesCard({
           >
             <ul data-slot="edited-files-list" className="flex flex-col border-t border-border">
               {files.map((file) => (
-                <li key={file.path} className="border-b border-border last:border-b-0">
+                <li
+                  key={file.path}
+                  className={cn(
+                    "border-b border-border last:border-b-0",
+                    // A closed last row sits in the card's bottom corners: its name button (4px in) and
+                    // chevron (6px in) follow the corner. The card's inner radius is 16 − 8, so add back
+                    // the difference.
+                    // eslint-disable-next-line shadcn/no-arbitrary-values -- concentric with the card's corner at a 4px inset
+                    "last:[&_[data-slot=file-diff-trigger]:not([data-panel-open])]:rounded-es-[calc(var(--frame-inner-1)+4px)]",
+                    // eslint-disable-next-line shadcn/no-arbitrary-values -- concentric with the card's corner at a 6px inset
+                    "last:[&_[data-slot=file-diff-toggle]:not([data-panel-open])]:rounded-ee-[calc(var(--frame-inner-1)+2px)]"
+                  )}
+                >
                   <FileDiff
                     variant="row"
                     filename={file.path}

@@ -96,8 +96,9 @@ function groupOptions(options: PickerOption[]) {
 }
 
 const triggerClass =
-  // Shrinks (label truncates) instead of pushing the composer toolbar wider.
-  "min-w-0 shrink px-2 font-normal text-muted-foreground hover:text-foreground data-[tone=destructive]:text-destructive data-[tone=warning]:text-warning"
+  // Shrinks (label truncates) instead of pushing the composer toolbar wider; the chevron side
+  // keeps the 2px optical trim under the tighter padding.
+  "min-w-0 shrink px-2 has-data-[icon=inline-end]:pe-1.5 font-normal text-muted-foreground hover:text-foreground data-[tone=destructive]:text-destructive data-[tone=warning]:text-warning"
 
 /** Trigger props and content shared by the menu and the searchable list. */
 function usePickerTrigger({ options, value, label, icon, placeholder, compact = false, className }: ComposerPickerProps) {
