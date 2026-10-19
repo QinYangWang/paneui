@@ -11,6 +11,8 @@ import "./fonts.css"
 import "./globals.css"
 
 export const metadata: Metadata = {
+  // share image URLs are absolute; the base path is added to them by the framework
+  metadataBase: new URL(new URL(process.env.SITE_URL ?? "https://qinyangwang.github.io/ui").origin),
   title: { default: "qinyang/ui", template: "%s · qinyang/ui" },
   description: "Quiet, precise React components, distributed as a shadcn registry.",
 }

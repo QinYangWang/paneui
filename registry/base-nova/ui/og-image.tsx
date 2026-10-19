@@ -1,22 +1,30 @@
 import type * as React from "react"
 
 /*
- * A 1200×630 share card for a page, drawn for build-time JSX-to-SVG renderers: inline styles,
- * flexbox only, fixed sizes on every text box, sRGB hex colours, no hooks, context, classes or
- * browser APIs. It renders in the DOM too (the docs preview), but the PNG is the target.
+ * Share images for pages, drawn for the JSX-to-PNG renderer behind `ImageResponse` (next/og):
+ * inline styles, flexbox only, fixed sizes on every text box, sRGB hex colours, no hooks, context,
+ * classes or browser APIs. They render in the DOM too (the docs previews), but the PNG is the target.
  *
- *   const svg = await renderToSvg(<OgImage title={page.title} siteName="Notes" accent="green" />, {
- *     width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT, fonts,
- *   })
+ *   // app/opengraph-image.tsx
+ *   import { ImageResponse } from "next/og"
+ *   import { OgImage, ogImageSize } from "@/components/ui/og-image"
  *
- * Colours come from OG_IMAGE_TOKENS, generated from the theme per accent and mode, so the card
+ *   export const alt = "Acme"
+ *   export const size = ogImageSize
+ *   export const contentType = "image/png"
+ *
+ *   export default async function Image() {
+ *     return new ImageResponse(<OgImage title="Acme" siteName="acme.dev" />, { ...size, fonts })
+ *   }
+ *
+ * Colours come from OG_IMAGE_TOKENS, generated from the theme per accent and mode, so the image
  * matches the site without reading its CSS.
  */
 
 type OgImageAccent = "blue" | "neutral" | "green" | "orange" | "rose" | "violet"
 type OgImageMode = "light" | "dark"
 
-/** The theme roles the card draws with, as opaque sRGB hex. */
+/** The theme roles the images draw with, as opaque sRGB hex. */
 type OgImageColors = {
   background: string
   card: string
@@ -37,7 +45,7 @@ const OG_IMAGE_TOKENS = {
       card: "#ffffff",
       foreground: "#202020",
       mutedForeground: "#646464",
-      border: "#f0f0f0",
+      border: "#e8e8e8",
       primary: "#0090ff",
       primaryForeground: "#ffffff",
       primarySubtle: "#e6f4fe",
@@ -48,7 +56,7 @@ const OG_IMAGE_TOKENS = {
       card: "#111111",
       foreground: "#eeeeee",
       mutedForeground: "#b2b2b2",
-      border: "#1c1c1c",
+      border: "#252525",
       primary: "#0090ff",
       primaryForeground: "#ffffff",
       primarySubtle: "#092443",
@@ -61,7 +69,7 @@ const OG_IMAGE_TOKENS = {
       card: "#ffffff",
       foreground: "#202020",
       mutedForeground: "#646464",
-      border: "#f0f0f0",
+      border: "#e8e8e8",
       primary: "#0d0d0d",
       primaryForeground: "#ffffff",
       primarySubtle: "#f0f0f0",
@@ -72,7 +80,7 @@ const OG_IMAGE_TOKENS = {
       card: "#111111",
       foreground: "#eeeeee",
       mutedForeground: "#b2b2b2",
-      border: "#1c1c1c",
+      border: "#252525",
       primary: "#f3f3f3",
       primaryForeground: "#000000",
       primarySubtle: "#1c1c1c",
@@ -85,7 +93,7 @@ const OG_IMAGE_TOKENS = {
       card: "#ffffff",
       foreground: "#202020",
       mutedForeground: "#646464",
-      border: "#f0f0f0",
+      border: "#e8e8e8",
       primary: "#30a46c",
       primaryForeground: "#ffffff",
       primarySubtle: "#e6f6eb",
@@ -96,7 +104,7 @@ const OG_IMAGE_TOKENS = {
       card: "#111111",
       foreground: "#eeeeee",
       mutedForeground: "#b2b2b2",
-      border: "#1c1c1c",
+      border: "#252525",
       primary: "#30a46c",
       primaryForeground: "#ffffff",
       primarySubtle: "#0e281c",
@@ -109,7 +117,7 @@ const OG_IMAGE_TOKENS = {
       card: "#ffffff",
       foreground: "#202020",
       mutedForeground: "#646464",
-      border: "#f0f0f0",
+      border: "#e8e8e8",
       primary: "#f76b15",
       primaryForeground: "#ffffff",
       primarySubtle: "#ffefd6",
@@ -120,7 +128,7 @@ const OG_IMAGE_TOKENS = {
       card: "#111111",
       foreground: "#eeeeee",
       mutedForeground: "#b2b2b2",
-      border: "#1c1c1c",
+      border: "#252525",
       primary: "#f76b15",
       primaryForeground: "#ffffff",
       primarySubtle: "#2e1909",
@@ -133,7 +141,7 @@ const OG_IMAGE_TOKENS = {
       card: "#ffffff",
       foreground: "#202020",
       mutedForeground: "#646464",
-      border: "#f0f0f0",
+      border: "#e8e8e8",
       primary: "#e93d82",
       primaryForeground: "#ffffff",
       primarySubtle: "#ffe9f0",
@@ -144,7 +152,7 @@ const OG_IMAGE_TOKENS = {
       card: "#111111",
       foreground: "#eeeeee",
       mutedForeground: "#b2b2b2",
-      border: "#1c1c1c",
+      border: "#252525",
       primary: "#e93d82",
       primaryForeground: "#ffffff",
       primarySubtle: "#331020",
@@ -157,7 +165,7 @@ const OG_IMAGE_TOKENS = {
       card: "#ffffff",
       foreground: "#202020",
       mutedForeground: "#646464",
-      border: "#f0f0f0",
+      border: "#e8e8e8",
       primary: "#6e56cf",
       primaryForeground: "#ffffff",
       primarySubtle: "#f4f0fe",
@@ -168,7 +176,7 @@ const OG_IMAGE_TOKENS = {
       card: "#111111",
       foreground: "#eeeeee",
       mutedForeground: "#b2b2b2",
-      border: "#1c1c1c",
+      border: "#252525",
       primary: "#6e56cf",
       primaryForeground: "#ffffff",
       primarySubtle: "#241b3f",
@@ -180,11 +188,27 @@ const OG_IMAGE_TOKENS = {
 
 const OG_IMAGE_WIDTH = 1200
 const OG_IMAGE_HEIGHT = 630
+/** The `size` export of an `opengraph-image` or `twitter-image` route. */
+const ogImageSize = { width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT }
+/** The `contentType` export of the route. */
+const ogImageContentType = "image/png"
 
-/** The card's colours for an accent and mode, with any overrides on top. */
+/** The colours for an accent and mode, with any overrides on top. */
 function ogImageColors(accent: OgImageAccent = "blue", mode: OgImageMode = "light", overrides?: Partial<OgImageColors>): OgImageColors {
   const base = (OG_IMAGE_TOKENS[accent] ?? OG_IMAGE_TOKENS.blue)[mode === "dark" ? "dark" : "light"]
   return overrides ? { ...base, ...overrides } : base
+}
+
+/** `color` at `alpha` over `base`, as opaque hex: the renderer's gradients and fills stay sRGB. */
+function mixHex(color: string, base: string, alpha: number) {
+  const rgb = (h: string) => {
+    const x = h.replace("#", "")
+    const full = x.length === 3 ? [...x].map((c) => c + c).join("") : x.slice(0, 6)
+    return [0, 2, 4].map((i) => parseInt(full.slice(i, i + 2), 16))
+  }
+  const a = rgb(color)
+  const b = rgb(base)
+  return `#${a.map((v, i) => Math.round(v * alpha + b[i] * (1 - alpha)).toString(16).padStart(2, "0")).join("")}`
 }
 
 const WIDE = /[\u1100-\u115f\u2e80-\ua4cf\uac00-\ud7a3\uf900-\ufaff\ufe30-\ufe4f\uff00-\uff60\uffe0-\uffe6]/u
@@ -193,9 +217,9 @@ const WIDE = /[\u1100-\u115f\u2e80-\ua4cf\uac00-\ud7a3\uf900-\ufaff\ufe30-\ufe4f
 function ogImageTitleSize(title: string): number {
   let width = 0
   for (const ch of title) width += WIDE.test(ch) ? 2 : 1
-  if (width <= 28) return 76
-  if (width <= 48) return 64
-  if (width <= 80) return 54
+  if (width <= 24) return 80
+  if (width <= 44) return 68
+  if (width <= 72) return 56
   return 46
 }
 
@@ -204,6 +228,8 @@ type OgImageProps = {
   description?: string
   /** Shown at the top, beside `logo`. */
   siteName: string
+  /** Shown at the top right, e.g. the page's host and path. */
+  url?: string
   author?: string
   /** Round image beside the author. A URL or data URI (PNG, JPEG or SVG). */
   avatar?: string
@@ -211,10 +237,12 @@ type OgImageProps = {
   logo?: string
   /** Shown as given, after the author. Format it in the page's language. */
   date?: string
-  /** The first three are shown, each with a leading `#`. */
+  /** The first three are shown. */
   tags?: string[]
   accent?: OgImageAccent
   mode?: OgImageMode
+  /** `grid` (default) or `dots` behind the text, fading out from the top corner; `none` for a flat background. */
+  pattern?: "grid" | "dots" | "none"
   /** Overrides for single roles, on top of the accent and mode. */
   colors?: Partial<OgImageColors>
   /** Family name the fonts were registered under. Without it the renderer's first font is used. */
@@ -224,16 +252,33 @@ type OgImageProps = {
 }
 
 const PAD_X = 80
-const PAD_Y = 64
+const PAD_Y = 72
 const INNER = OG_IMAGE_WIDTH - PAD_X * 2
-const HEADER = 56
-const FOOTER = 88
-const GAP = 24
+const HEADER = 52
+const FOOTER = 52
+const CELL = 56
+
+/**
+ * The pattern layers: a line grid or a dot field. Fades end on the same colour at alpha 0, never
+ * `transparent`, which the renderer blends through black.
+ */
+function backdrop(c: OgImageColors, pattern: OgImageProps["pattern"]) {
+  const line = mixHex(c.foreground, c.background, 0.07)
+  const layers: string[] = []
+  if (pattern === "grid") {
+    layers.push(`linear-gradient(to right, ${line} 1px, ${line}00 1px)`, `linear-gradient(to bottom, ${line} 1px, ${line}00 1px)`)
+  } else if (pattern === "dots") {
+    const dot = mixHex(c.foreground, c.background, 0.16)
+    layers.push(`radial-gradient(circle, ${dot} 1.5px, ${dot}00 1.5px)`)
+  }
+  return layers
+}
 
 function OgImage({
   title,
   description,
   siteName,
+  url,
   author,
   avatar,
   logo,
@@ -241,22 +286,25 @@ function OgImage({
   tags = [],
   accent = "blue",
   mode = "light",
+  pattern = "grid",
   colors,
   fontFamily,
   style,
 }: OgImageProps) {
   const c = ogImageColors(accent, mode, colors)
   const size = ogImageTitleSize(title)
-  const titleLines = 3
+  const titleLines = size >= 68 ? 2 : 3
+  const descLines = 2
   const shownTags = tags.filter(Boolean).slice(0, 3)
   const meta = [author, date].filter(Boolean).join(" · ")
   const footer = Boolean(meta || avatar || shownTags.length)
   // Text boxes don't shrink inside flex columns, so the body gets the height that is left.
-  const body = OG_IMAGE_HEIGHT - PAD_Y * 2 - HEADER - (footer ? FOOTER : 0)
-  const descLines = size >= 64 ? 2 : 1
+  const body = OG_IMAGE_HEIGHT - PAD_Y * 2 - HEADER - (footer ? FOOTER + 24 : 0)
   // room below the last line for descenders (CJK fonts draw about 1.36em tall)
   const titleSlack = Math.ceil(size * 0.15)
   const descSlack = Math.ceil(30 * 0.15)
+  const layers = backdrop(c, pattern)
+  const glow = mixHex(c.primary, c.background, mode === "dark" ? 0.22 : 0.14)
 
   return (
     <div
@@ -276,44 +324,69 @@ function OgImage({
         ...style,
       }}
     >
-      {/* accent edge */}
-      <div style={{ position: "absolute", left: 0, top: 0, width: 12, height: OG_IMAGE_HEIGHT, display: "flex", backgroundColor: c.primary }} />
+      {layers.length > 0 && (
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: OG_IMAGE_WIDTH,
+            height: OG_IMAGE_HEIGHT,
+            display: "flex",
+            backgroundImage: layers.join(", "),
+            backgroundSize: `${CELL}px ${CELL}px`,
+            backgroundPosition: `${PAD_X - CELL}px ${PAD_Y - CELL}px`,
+          }}
+        />
+      )}
+      {/* accent glow in the top corner, and a fade that keeps the pattern off the text */}
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: OG_IMAGE_WIDTH,
+          height: OG_IMAGE_HEIGHT,
+          display: "flex",
+          backgroundImage: `radial-gradient(circle at 100% 0%, ${glow} 0%, ${glow}00 55%), radial-gradient(ellipse at 20% 100%, ${c.background} 25%, ${c.background}00 75%)`,
+        }}
+      />
 
-      <div style={{ display: "flex", alignItems: "center", gap: 20, height: HEADER, width: INNER }}>
-        {logo && (
-          <img src={logo} width={48} height={48} alt="" style={{ width: 48, height: 48, borderRadius: 12, objectFit: "cover" }} />
-        )}
-        <div style={{ display: "flex", fontSize: 30, fontWeight: 700, lineHeight: 1.2, color: c.mutedForeground, maxWidth: INNER - (logo ? 68 : 0) }}>
-          {siteName}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, height: HEADER, width: INNER, position: "relative" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          {logo && <img src={logo} width={52} height={52} alt="" style={{ width: 52, height: 52, borderRadius: 12, objectFit: "cover" }} />}
+          <div style={{ display: "flex", fontSize: 30, fontWeight: 700, lineHeight: 1.2, letterSpacing: -0.5, color: c.foreground }}>{siteName}</div>
         </div>
+        {url && <div style={{ display: "flex", fontSize: 26, lineHeight: 1.2, color: c.mutedForeground }}>{url}</div>}
       </div>
 
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          gap: GAP,
+          justifyContent: "flex-end",
+          gap: 20,
           width: INNER,
           height: body,
           overflow: "hidden",
+          position: "relative",
         }}
       >
         <div
           style={{
             display: "block",
-            width: INNER,
-            // The glyphs reach past a 1.25 line box, so the box gets room below the last line
+            width: INNER - 80,
+            // The glyphs reach past the line box, so the box gets room below the last line
             // for descenders and a matching negative margin keeps the layout unchanged.
             boxSizing: "border-box",
-            maxHeight: Math.ceil(size * 1.25 * titleLines) + titleSlack,
+            maxHeight: Math.ceil(size * 1.15 * titleLines) + titleSlack,
             paddingBottom: titleSlack,
             marginBottom: -titleSlack,
             overflow: "hidden",
             fontSize: size,
             fontWeight: 700,
-            lineHeight: 1.25,
-            letterSpacing: size >= 54 ? -1 : -0.5,
+            lineHeight: 1.15,
+            letterSpacing: size >= 56 ? -2 : -1,
             lineClamp: titleLines,
           }}
         >
@@ -323,14 +396,14 @@ function OgImage({
           <div
             style={{
               display: "block",
-              width: INNER,
+              width: INNER - 160,
               boxSizing: "border-box",
-              maxHeight: Math.ceil(30 * 1.45 * descLines) + descSlack,
+              maxHeight: Math.ceil(30 * 1.4 * descLines) + descSlack,
               paddingBottom: descSlack,
               marginBottom: -descSlack,
               overflow: "hidden",
               fontSize: 30,
-              lineHeight: 1.45,
+              lineHeight: 1.4,
               color: c.mutedForeground,
               lineClamp: descLines,
             }}
@@ -341,27 +414,13 @@ function OgImage({
       </div>
 
       {footer && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: GAP,
-            width: INNER,
-            height: FOOTER,
-            boxSizing: "border-box",
-            paddingBottom: 4,
-            borderTop: `2px solid ${c.border}`,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 16, height: 48 }}>
-            {avatar && (
-                  <img src={avatar} width={44} height={44} alt="" style={{ width: 44, height: 44, borderRadius: 22, objectFit: "cover" }} />
-            )}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, width: INNER, height: FOOTER, marginTop: 24, position: "relative" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            {avatar && <img src={avatar} width={44} height={44} alt="" style={{ width: 44, height: 44, borderRadius: 22, objectFit: "cover" }} />}
             {meta && <div style={{ display: "flex", fontSize: 26, lineHeight: 1.2, color: c.mutedForeground }}>{meta}</div>}
           </div>
           {shownTags.length > 0 && (
-            <div style={{ display: "flex", alignItems: "center", gap: 12, height: 48 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               {shownTags.map((tag) => (
                 <div
                   key={tag}
@@ -369,15 +428,16 @@ function OgImage({
                     display: "flex",
                     alignItems: "center",
                     height: 44,
-                    padding: "0 20px",
+                    padding: "0 18px",
                     borderRadius: 22,
-                    fontSize: 24,
+                    border: `1.5px solid ${c.primaryBorder}`,
+                    fontSize: 22,
                     lineHeight: 1,
                     color: c.primary,
                     backgroundColor: c.primarySubtle,
                   }}
                 >
-                  {`#${tag}`}
+                  {tag}
                 </div>
               ))}
             </div>
@@ -388,5 +448,236 @@ function OgImage({
   )
 }
 
-export { OgImage, OG_IMAGE_HEIGHT, OG_IMAGE_TOKENS, OG_IMAGE_WIDTH, ogImageColors, ogImageTitleSize }
-export type { OgImageAccent, OgImageColors, OgImageMode, OgImageProps }
+/* ───────────────────────── Cover art ───────────────────────── */
+
+type OgCoverArtVariant = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
+type OgCoverArtMirror = "none" | "x" | "y" | "xy"
+
+/* The same seed hash as the in-page CoverArt, so a post gets the same composition in both. */
+function hashSeed(seed: string) {
+  let h = 0x811c9dc5
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i)
+    h = Math.imul(h, 0x01000193)
+  }
+  return h >>> 0
+}
+function mix(h: number) {
+  h ^= h >>> 16
+  h = Math.imul(h, 0x85ebca6b)
+  h ^= h >>> 13
+  h = Math.imul(h, 0xc2b2ae35)
+  h ^= h >>> 16
+  return h >>> 0
+}
+const MIRRORS: readonly OgCoverArtMirror[] = ["none", "x", "y", "xy"]
+
+type OgCoverArtProps = {
+  /** Picks the composition, mirror, tones and pattern, as on the in-page cover art. */
+  seed?: string
+  /** Which composition to draw (`0` to `7`). Wins over `seed`. */
+  variant?: OgCoverArtVariant
+  mirror?: OgCoverArtMirror
+  /** Shifts the tones along the accent ladder. */
+  ramp?: 0 | 1 | 2
+  accent?: OgImageAccent
+  mode?: OgImageMode
+  colors?: Partial<OgImageColors>
+  /** Defaults to 1200 × 630. */
+  width?: number
+  height?: number
+  fontFamily?: string
+  style?: React.CSSProperties
+}
+
+/**
+ * Cover art for share images and feeds, drawn with the same rules as OgImage: the eight
+ * compositions of the in-page cover art in inline styles and opaque colours.
+ */
+function OgCoverArt({
+  seed,
+  variant,
+  mirror,
+  ramp,
+  accent = "blue",
+  mode = "light",
+  colors,
+  width = OG_IMAGE_WIDTH,
+  height = OG_IMAGE_HEIGHT,
+  fontFamily,
+  style,
+}: OgCoverArtProps) {
+  const c = ogImageColors(accent, mode, colors)
+  const h = seed !== undefined ? mix(hashSeed(seed)) : 0
+  const v = variant ?? (seed !== undefined ? ((h % 8) as OgCoverArtVariant) : 0)
+  const m = mirror ?? (seed !== undefined ? MIRRORS[(h >>> 3) & 3] : "none")
+  const r = ramp ?? (seed !== undefined ? (((h >>> 5) % 3) as 0 | 1 | 2) : 0)
+  const pattern = seed !== undefined ? mix(h ^ 0x9e3779b9) & 0xffff : 0x5a3c
+  const bit = (i: number) => (pattern >>> i) & 1
+  // Tone ladder, strongest first, flattened over the background.
+  const ladder = [c.primary, mixHex(c.primary, c.background, 0.7), mixHex(c.primary, c.background, 0.45), mixHex(c.primary, c.background, 0.25), mixHex(c.primary, c.background, 0.12), c.card]
+  const tone = (i: number) => ladder[(i + r * 2) % ladder.length]
+  const u = Math.min(width, height) / 100
+  const edge = mixHex(c.foreground, c.background, 0.09)
+  const raised = { border: `${Math.max(1, u * 0.2)}px solid ${edge}` }
+  // the renderer rejects `transform: undefined`, so the flip is spread in only when there is one
+  const flipTo = v === 3 ? undefined : { none: undefined, x: "scaleX(-1)", y: "scaleY(-1)", xy: "rotate(180deg)" }[m]
+  const flip = flipTo ? { transform: flipTo } : {}
+  const angle = { none: "135deg", x: "225deg", y: "45deg", xy: "315deg" }[m]
+  const glow = mixHex(c.primary, c.background, mode === "dark" ? 0.25 : 0.18)
+  const muted = mixHex(c.foreground, c.background, 0.04)
+  const stops = [
+    `linear-gradient(${angle}, ${glow}, ${muted} 50%, ${c.background})`,
+    `linear-gradient(${angle}, ${c.background}, ${muted} 50%, ${glow})`,
+    `linear-gradient(${angle}, ${mixHex(c.primary, c.background, 0.1)}, ${c.background} 50%, ${mixHex(c.primary, c.background, 0.22)})`,
+  ][r]
+  const fill = { position: "absolute" as const, left: 0, top: 0, width, height, display: "flex" }
+
+  let art: React.ReactNode = null
+  if (v === 0) {
+    const outer = height * 0.6
+    art = (
+      <div style={{ ...fill, alignItems: "center", justifyContent: "center", ...flip }}>
+        <div style={{ display: "flex", width: outer, height: outer, padding: u * 4, borderRadius: u * 8, backgroundColor: c.card, ...raised }}>
+          <div style={{ display: "flex", flex: 1, padding: u * 1.5, borderRadius: u * 4, backgroundColor: c.primarySubtle }}>
+            <div style={{ display: "flex", flex: 1, borderRadius: u * 2.5, backgroundColor: r === 0 ? c.primary : tone(0) }} />
+          </div>
+        </div>
+      </div>
+    )
+  } else if (v === 1) {
+    const widths = [0.92, 0.75, 0.58, 0.42]
+    art = (
+      <div style={{ ...fill, flexDirection: "column", justifyContent: "center", gap: u * 4, padding: `0 ${width * 0.1}px`, ...flip }}>
+        {widths.map((w, i) => (
+          <div key={i} style={{ display: "flex", width: (width * 0.8) * w, height: u * 8, borderRadius: u * 4, backgroundColor: r === 0 ? [c.primary, mixHex(c.primary, c.background, 0.6), mixHex(c.primary, c.background, 0.35), c.card][i] : tone(i), ...raised }} />
+        ))}
+      </div>
+    )
+  } else if (v === 2) {
+    const heights = [0.2, 0.4, 0.6, 0.8, 0.92, 0.75]
+    const fills = r === 0 ? [0.1, 0.25, 0.45, 0.7, 1].map((a) => mixHex(c.primary, c.background, a)) : [tone(4), tone(3), tone(2), tone(1), tone(0)]
+    art = (
+      <div style={{ ...fill, alignItems: "flex-end", gap: u * 3, padding: u * 10, ...flip }}>
+        {heights.map((hh, i) => (
+          <div key={i} style={{ display: "flex", flex: 1, height: (height - u * 20) * hh, borderRadius: u * 3, backgroundColor: i === 5 ? mixHex(c.foreground, c.background, 0.8) : fills[i], ...raised }} />
+        ))}
+      </div>
+    )
+  } else if (v === 3) {
+    const digits = seed !== undefined ? [0, 1, 2, 3].map((i) => String(((pattern >>> (i * 4)) & 15) % 10)) : ["1", "0", "4", "8"]
+    art = (
+      <div style={{ ...fill, alignItems: "center", justifyContent: "center", gap: u * 3 }}>
+        {digits.map((d, i) => (
+          <div
+            key={i}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: u * 22,
+              height: u * 30,
+              borderRadius: u * 5,
+              fontSize: u * 18,
+              fontWeight: 700,
+              fontFamily,
+              color: r === 2 ? c.foreground : c.primary,
+              backgroundColor: r === 1 && i === (m === "x" || m === "xy" ? 0 : 3) ? c.primarySubtle : c.card,
+              ...raised,
+            }}
+          >
+            {d}
+          </div>
+        ))}
+      </div>
+    )
+  } else if (v === 4) {
+    art = (
+      <div style={{ ...fill, ...flip }}>
+        {[1, 0.75, 0.5, 0.25].map((s, i) => {
+          const d = width * s
+          return <div key={i} style={{ position: "absolute", left: -d / 3, top: height - (d * 2) / 3, width: d, height: d, borderRadius: d / 2, display: "flex", backgroundColor: tone(3 - i), ...raised }} />
+        })}
+      </div>
+    )
+  } else if (v === 5) {
+    const gap = u * 2
+    const pad = u * 8
+    const cw = (width - pad * 2 - gap * 5) / 6
+    const ch = (height - pad * 2 - gap * 2) / 3
+    art = (
+      <div style={{ ...fill, flexWrap: "wrap", gap, padding: pad, ...flip }}>
+        {Array.from({ length: 18 }, (_, i) => (
+          <div key={i} style={{ display: "flex", width: cw, height: ch, borderRadius: u * 3, backgroundColor: bit(i % 16) ? tone(i % 3) : i % 2 ? c.card : tone(4), ...raised }} />
+        ))}
+      </div>
+    )
+  } else if (v === 6) {
+    const card = (l: number, t: number, rr: number, b: number, bg: string) => ({
+      position: "absolute" as const,
+      left: width * l,
+      top: height * t,
+      width: width * (1 - l - rr),
+      height: height * (1 - t - b),
+      borderRadius: u * 5,
+      display: "flex",
+      backgroundColor: bg,
+      ...raised,
+    })
+    art = (
+      <div style={{ ...fill, ...flip }}>
+        <div style={card(1 / 3, 1 / 3, 1 / 12, 1 / 3, tone(2))} />
+        <div style={card(1 / 5, 1 / 4, 1 / 6, 1 / 4, tone(1))} />
+        <div style={{ ...card(1 / 8, 1 / 6, 1 / 4, 1 / 6, c.card), flexDirection: "column", justifyContent: "flex-end", gap: u * 2.5, padding: u * 6 }}>
+          <div style={{ display: "flex", width: "60%", height: u * 3.5, borderRadius: u * 2, backgroundColor: tone(0) }} />
+          <div style={{ display: "flex", width: "80%", height: u * 2.5, borderRadius: u * 2, backgroundColor: mixHex(c.foreground, c.card, 0.12) }} />
+          <div style={{ display: "flex", width: "40%", height: u * 2.5, borderRadius: u * 2, backgroundColor: mixHex(c.foreground, c.card, 0.12) }} />
+        </div>
+      </div>
+    )
+  } else {
+    const cols = 12
+    const rows = 6
+    const pad = u * 6
+    const cw = (width - pad * 2) / cols
+    const ch = (height - pad * 2) / rows
+    const dot = u * 3.5
+    art = (
+      <div style={{ ...fill, flexWrap: "wrap", padding: pad, ...flip }}>
+        {Array.from({ length: cols * rows }, (_, i) => {
+          const x = i % cols
+          const y = Math.floor(i / cols)
+          const step = Math.min(4, Math.floor((x + y + bit(i % 16)) / 4))
+          return (
+            <div key={i} style={{ display: "flex", width: cw, height: ch, alignItems: "center", justifyContent: "center" }}>
+              <div style={{ display: "flex", width: dot, height: dot, borderRadius: dot / 2, backgroundColor: ladder[(step + r * 2) % 5] }} />
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  return (
+    <div
+      data-slot="og-cover-art"
+      data-variant={v}
+      style={{ width, height, display: "flex", position: "relative", overflow: "hidden", backgroundColor: c.background, backgroundImage: stops, fontFamily, ...style }}
+    >
+      {art}
+    </div>
+  )
+}
+
+export {
+  OgImage,
+  OgCoverArt,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_TOKENS,
+  OG_IMAGE_WIDTH,
+  ogImageColors,
+  ogImageContentType,
+  ogImageSize,
+  ogImageTitleSize,
+}
+export type { OgCoverArtMirror, OgCoverArtProps, OgCoverArtVariant, OgImageAccent, OgImageColors, OgImageMode, OgImageProps }

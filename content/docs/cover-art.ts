@@ -21,6 +21,10 @@ export default {
       body: "Every colour is a theme token, so the art follows the accent and dark mode. Clip it with a wrapper (`overflow-hidden rounded-xl`) to round its corners.",
     },
     {
+      title: "Share images",
+      body: "This art is CSS for the page. For an `opengraph-image` route use `OgCoverArt` from [OG Image](/docs/og-image): the same compositions in inline styles, and the same seed picks the same art.",
+    },
+    {
       title: "Seeds",
       body: "A seed sets the composition, the mirror, the tone offset and a pattern for the tile, dot and digit compositions, so slugs next to each other in a list look different. `variant` on its own draws the composition with no mirror and the first tones; `0` to `3` look as they did before `4` to `7` were added. Digits never mirror; a seed changes the numbers instead.",
     },
