@@ -5,7 +5,7 @@
   "description": "Shared design tokens for every component.",
   "registryDependencies": [
     "https://qinyangwang.github.io/ui/r/utils.json",
-    "@paneui/utils"
+    "https://qinyangwang.github.io/ui/r/utils.json"
   ],
   "cssVars": {
     "theme": {

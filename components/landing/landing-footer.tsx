@@ -1,7 +1,7 @@
 "use client"
 
-import { TaimatsuLogoIcon } from "@/components/icons"
-import { TextLink } from "@/components/docs/guide-page"
+import { PaneuiLogoIcon } from "@/components/icons"
+import { TextLink } from "@/components/docs/text-link"
 import { setSiteLocale, SITE_LOCALES, T, useSiteLocale } from "@/lib/site-locale"
 import { cn } from "@/lib/utils"
 
@@ -36,7 +36,7 @@ export function LandingFooter() {
     <footer className="flex flex-col gap-4 border-t border-border pt-6">
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
         <span className="flex items-center gap-2 font-semibold">
-          <TaimatsuLogoIcon size={18} className="text-foreground" />
+          <PaneuiLogoIcon size={18} className="text-foreground" />
           paneui
         </span>
         <span className="text-ui-sm text-muted-foreground">MIT License</span>

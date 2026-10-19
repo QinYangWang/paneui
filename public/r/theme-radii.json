@@ -4,7 +4,7 @@
   "title": "Theme Radii",
   "description": "Switches corner rounding at runtime with one attribute.",
   "registryDependencies": [
-    "@paneui/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "files": [
     {

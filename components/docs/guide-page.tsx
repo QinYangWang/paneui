@@ -1,7 +1,6 @@
 import type { Localized } from "@/lib/site-locale"
 
 import type * as React from "react"
-import Link from "next/link"
 
 import { getPrevNext, lastUpdated } from "@/lib/docs"
 
@@ -10,6 +9,9 @@ import { codeContent, INLINE_CODE_CLS } from "./doc-inline"
 import { DocFooter, DocHeader, DocLayout } from "./doc-layout"
 import type { TocEntry } from "./doc-toc"
 import { GUIDE_PAGES } from "./docs-pages"
+import { TextLink } from "./text-link"
+
+export { TextLink }
 
 /** Section heading with a copy-link anchor, matching the component pages. */
 export function GuideH2({ id, children }: { id: string; children: React.ReactNode }) {
@@ -29,19 +31,6 @@ export function Code({ children }: { children: React.ReactNode }) {
   return <code className={`${INLINE_CODE_CLS} text-xs`}>{codeContent(children)}</code>
 }
 
-/** Underlined text link for reading copy (internal hrefs use next/link). */
-export function TextLink({ href, children }: { href: string; children: React.ReactNode }) {
-  const cls = "font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
-  return href.startsWith("/") || href.startsWith("#") ? (
-    <Link href={href} className={cls}>
-      {children}
-    </Link>
-  ) : (
-    <a href={href} className={cls} target="_blank" rel="noreferrer">
-      {children}
-    </a>
-  )
-}
 
 /** The files a guide page is made from, for its "Last updated" date. */
 function guideSources(href: string) {

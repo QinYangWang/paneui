@@ -6293,5 +6293,6 @@
         "category": "Overlays"
       }
     }
-  ]
+  ],
+  "description": "React components you own and edit."
 }

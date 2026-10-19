@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-import { ArrowRightIcon, TaimatsuLogoIcon } from "@/components/icons"
+import { ArrowRightIcon, PaneuiLogoIcon } from "@/components/icons"
 import { CLI_NAME, CommandPill } from "@/components/docs/install-command"
 import { T } from "@/lib/site-locale"
 import { Button } from "@/registry/base-nova/ui/button"
@@ -11,7 +11,7 @@ export function Hero() {
   return (
     <section className="flex flex-col items-center gap-5 pt-4 text-center sm:pt-8">
       <div className="flex items-center gap-2.5">
-        <TaimatsuLogoIcon size={30} className="text-foreground" />
+        <PaneuiLogoIcon size={30} className="text-foreground" />
         <span className="text-2xl font-semibold tracking-tight">paneui</span>
       </div>
       <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">

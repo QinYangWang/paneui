@@ -1,4 +1,4 @@
-# paneui
+# paneui/ui
 
 > React components you own and edit.
 

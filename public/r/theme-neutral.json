@@ -4,7 +4,7 @@
   "title": "Theme: Neutral accent",
   "description": "Accent preset that makes the primary colour black or white.",
   "registryDependencies": [
-    "@paneui/theme"
+    "https://qinyangwang.github.io/ui/r/theme.json"
   ],
   "cssVars": {
     "light": {
