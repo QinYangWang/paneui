@@ -111,8 +111,7 @@ const on = (id) => !only || only.has(id)
 const config = readJson(path.join(cwd, "qinyang-design.config.json")) ?? {}
 const PRESS_SCALE_OK = new Set([
   // Components whose motion is the point; everything else answers a press with a fill.
-  "expanding-arrow-button", "expandable-control", "card-folder", "message-bubble",
-  "hold-action-button", "slide-action-button",
+  "expandable-control", "card-folder", "message-bubble",
   ...(config.pressScale ?? []),
 ])
 const IGNORE_DIRS = new Set(["node_modules", ".next", "out", "dist", "build", "public", ".git", ".agents", ".claude", ".turbo", "coverage"])

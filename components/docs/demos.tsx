@@ -55,9 +55,6 @@ import MultiSelectDemo from "@/registry/base-nova/examples/multi-select-demo"
 import LoaderDemo from "@/registry/base-nova/examples/loader-demo"
 import ButtonStatefulDemo from "@/registry/base-nova/examples/button-stateful-demo"
 import MagneticDemo from "@/registry/base-nova/examples/magnetic-demo"
-import HoldActionButtonDemo from "@/registry/base-nova/examples/hold-action-button-demo"
-import SlideActionButtonDemo from "@/registry/base-nova/examples/slide-action-button-demo"
-import ExpandingArrowButtonDemo from "@/registry/base-nova/examples/expanding-arrow-button-demo"
 import ExpandableControlDemo from "@/registry/base-nova/examples/expandable-control-demo"
 import TextCascadeDemo from "@/registry/base-nova/examples/text-cascade-demo"
 import ActionSwapBlurDemo from "@/registry/base-nova/examples/action-swap-blur-demo"
@@ -279,9 +276,6 @@ export const demos: Record<string, React.ComponentType> = {
   "loader": LoaderDemo,
   "button-stateful": ButtonStatefulDemo,
   "magnetic": MagneticDemo,
-  "hold-action-button": HoldActionButtonDemo,
-  "slide-action-button": SlideActionButtonDemo,
-  "expanding-arrow-button": ExpandingArrowButtonDemo,
   "expandable-control": ExpandableControlDemo,
   "text-cascade": TextCascadeDemo,
   "action-swap-blur": ActionSwapBlurDemo,

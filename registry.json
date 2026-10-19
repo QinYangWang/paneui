@@ -1540,7 +1540,8 @@
       "title": "Outline",
       "description": "Links to the page's headings and follows the section being read.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "motion"
       ],
       "registryDependencies": [
         "@taimatsu/theme",
@@ -3035,71 +3036,6 @@
       ],
       "meta": {
         "category": "Motion"
-      }
-    },
-    {
-      "name": "hold-action-button",
-      "type": "registry:ui",
-      "title": "Hold Action Button",
-      "description": "Confirms a risky action by making the user press and hold.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@taimatsu/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/hold-action-button.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
-      "name": "slide-action-button",
-      "type": "registry:ui",
-      "title": "Slide Action Button",
-      "description": "Confirms an action when the user slides it to the end.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@taimatsu/theme",
-        "@taimatsu/icons",
-        "@taimatsu/text-shimmer"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/slide-action-button.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
-      }
-    },
-    {
-      "name": "expanding-arrow-button",
-      "type": "registry:ui",
-      "title": "Expanding Arrow Button",
-      "description": "Call-to-action button with an arrow sweep on hover.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [
-        "@taimatsu/theme"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/ui/expanding-arrow-button.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Forms"
       }
     },
     {

@@ -54,13 +54,11 @@ import d_edited_files_card from "./edited-files-card"
 import d_email_editor from "./email-editor"
 import d_empty_state from "./empty-state"
 import d_expandable_control from "./expandable-control"
-import d_expanding_arrow_button from "./expanding-arrow-button"
 import d_field from "./field"
 import d_file_diff from "./file-diff"
 import d_file_tree from "./file-tree"
 import d_funnel_chart from "./funnel-chart"
 import d_heat_calendar from "./heat-calendar"
-import d_hold_action_button from "./hold-action-button"
 import d_hover_card from "./hover-card"
 import d_icon_chip from "./icon-chip"
 import d_icon_rail from "./icon-rail"
@@ -117,7 +115,6 @@ import d_shared_layout_bg from "./shared-layout-bg"
 import d_sidebar_nav from "./sidebar-nav"
 import d_simple_table from "./simple-table"
 import d_skeleton from "./skeleton"
-import d_slide_action_button from "./slide-action-button"
 import d_slider from "./slider"
 import d_smooth_scroll from "./smooth-scroll"
 import d_sortable_stack from "./sortable-stack"
@@ -216,13 +213,11 @@ export const docsContent: Record<string, ComponentDoc> = {
   "email-editor": d_email_editor,
   "empty-state": d_empty_state,
   "expandable-control": d_expandable_control,
-  "expanding-arrow-button": d_expanding_arrow_button,
   "field": d_field,
   "file-diff": d_file_diff,
   "file-tree": d_file_tree,
   "funnel-chart": d_funnel_chart,
   "heat-calendar": d_heat_calendar,
-  "hold-action-button": d_hold_action_button,
   "hover-card": d_hover_card,
   "icon-chip": d_icon_chip,
   "icon-rail": d_icon_rail,
@@ -279,7 +274,6 @@ export const docsContent: Record<string, ComponentDoc> = {
   "sidebar-nav": d_sidebar_nav,
   "simple-table": d_simple_table,
   "skeleton": d_skeleton,
-  "slide-action-button": d_slide_action_button,
   "slider": d_slider,
   "smooth-scroll": d_smooth_scroll,
   "sortable-stack": d_sortable_stack,

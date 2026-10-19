@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react"
 
 import { ArrowUpIcon, ChevronDownIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
@@ -188,6 +189,16 @@ function OutlineList({
   renderLink?: OutlineRenderLink
 }) {
   const [track, setTrack] = React.useState<Track | null>(null)
+  const reduce = useReducedMotion()
+  // The indicator's edges follow springs instead of a CSS transition: a transition restarts on
+  // every section change, so a steady scroll kept interrupting it and squeezed the block to nothing.
+  const spring = { stiffness: 380, damping: 38, mass: 0.6 }
+  const top = useSpring(0, spring)
+  const bottom = useSpring(0, spring)
+  const height = useMotionValue(0)
+  const bottomInset = useTransform(() => Math.max(0, height.get() - bottom.get()))
+  const clipPath = useMotionTemplate`inset(${top}px -2px ${bottomInset}px -2px)`
+  const placed = React.useRef(false)
 
   React.useLayoutEffect(() => {
     const list = listRef.current
@@ -199,25 +210,34 @@ function OutlineList({
     return () => ro.disconnect()
   }, [active, items, listRef])
 
+  React.useLayoutEffect(() => {
+    if (!track) return
+    height.set(track.height)
+    if (!track.active) return
+    if (!placed.current || reduce) {
+      top.jump(track.active.top)
+      bottom.jump(track.active.bottom)
+      placed.current = true
+    } else {
+      top.set(track.active.top)
+      bottom.set(track.active.bottom)
+    }
+  }, [track, reduce, top, bottom, height])
+
   return (
     <ul ref={listRef} data-slot="outline-list" className="relative flex flex-col py-0.5">
       {track && (
         <li aria-hidden className="pointer-events-none absolute start-0 top-0 rtl:-scale-x-100">
           <svg width={track.width} height={track.height} viewBox={`0 0 ${track.width} ${track.height}`} fill="none" className="overflow-visible">
             <path d={track.d} className="stroke-border" strokeWidth={1} strokeLinejoin="round" />
-            <path
+            <motion.path
               d={track.d}
               data-slot="outline-indicator"
-              className="stroke-foreground transition-[clip-path,opacity] duration-300 ease-out motion-reduce:transition-none"
+              className="stroke-foreground transition-opacity duration-200 motion-reduce:transition-none"
               strokeWidth={2}
               strokeLinecap="round"
               strokeLinejoin="round"
-              style={{
-                clipPath: track.active
-                  ? `inset(${track.active.top}px -2px ${Math.max(0, track.height - track.active.bottom)}px -2px)`
-                  : `inset(0 -2px ${track.height}px -2px)`,
-                opacity: track.active ? 1 : 0,
-              }}
+              style={{ clipPath, opacity: track.active ? 1 : 0 }}
             />
           </svg>
         </li>

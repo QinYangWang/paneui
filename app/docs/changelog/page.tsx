@@ -113,10 +113,6 @@ const ENTRIES: Entry[] = [
         scrolls to it.
       </>,
       <>
-        <TextLink href="/docs/expanding-arrow-button">Expanding Arrow Button</TextLink> plays its sweep on a tap, since
-        touch screens have no hover.
-      </>,
-      <>
         The shadow swatches on <TextLink href="/docs/theme">Theme</TextLink> and the accent role strip on{" "}
         <TextLink href="/docs/colors">Customize</TextLink> keep every label whole and centred on a phone.
       </>,
