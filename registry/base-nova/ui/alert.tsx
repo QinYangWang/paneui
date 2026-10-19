@@ -10,17 +10,19 @@ import { IconChip } from "@/registry/base-nova/ui/icon-chip"
 import { useLocale } from "@/registry/base-nova/ui/locale-provider"
 
 // The surface is an opaque card; the tone is a wash painted underneath the content
-// (a ::before layer) so it never changes the text contrast tokens.
+// (a ::before layer) so it never changes the text contrast tokens. A 1px ring in the
+// tone's border token paints over the neutral hairline inside shadow-raised, so the
+// frame carries the variant colour instead of a grey edge.
 const alertVariants = cva(
-  "relative isolate flex w-full items-start overflow-hidden bg-card text-card-foreground shadow-raised before:pointer-events-none before:absolute before:inset-0 before:-z-10",
+  "relative isolate flex w-full items-start overflow-hidden bg-card text-card-foreground shadow-raised ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10",
   {
     variants: {
       variant: {
-        default: "before:bg-transparent",
-        info: "before:bg-primary-subtle",
-        success: "before:bg-success-subtle",
-        warning: "before:bg-warning-subtle",
-        destructive: "before:bg-destructive-subtle",
+        default: "ring-foreground/15 before:bg-transparent",
+        info: "ring-primary-border before:bg-primary-subtle",
+        success: "ring-success-border before:bg-success-subtle",
+        warning: "ring-warning-border before:bg-warning-subtle",
+        destructive: "ring-destructive-border before:bg-destructive-subtle",
       },
       size: {
         sm: "gap-2.5 rounded-xl p-2.5 text-ui",

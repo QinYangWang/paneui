@@ -12,14 +12,14 @@ import { cn } from "@/lib/utils"
 // Trigger heights match Button (xs 24, sm 28, default 32, lg 36). Rows follow a size set
 // on <Select> or a sized Field; a size on the trigger alone keeps full-size rows.
 const selectTriggerVariants = cva(
-  "inline-flex w-full min-w-36 cursor-pointer items-center gap-2 bg-card shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-popup-open:shadow-raised-hover [&_svg]:shrink-0",
+  "inline-flex w-full min-w-36 cursor-pointer items-center gap-2 bg-card shadow-raised transition-[box-shadow,background-color] duration-150 ease-out outline-none select-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-popup-open:shadow-raised-hover [body:has([data-slot=select-content][data-side=none])_&]:data-popup-open:shadow-none [&_svg]:shrink-0",
   {
     variants: {
       size: {
-        xs: "h-6 gap-1.5 rounded-sm pe-1.5 ps-2 text-ui-xs [&_svg]:size-3",
-        sm: "h-7 rounded-lg pe-2 ps-2.5 text-ui-sm [&_svg]:size-3.5",
-        default: "h-8 rounded-lg pe-2 ps-2.5 text-ui [&_svg]:size-3.5",
-        lg: "h-9 rounded-lg pe-2.5 ps-3 text-ui-lg [&_svg]:size-4",
+        xs: "[--select-value-inset:--spacing(2)] h-6 gap-1.5 rounded-sm pe-1.5 ps-2 text-ui-xs [&_svg]:size-3",
+        sm: "[--select-value-inset:--spacing(2.5)] h-7 rounded-lg pe-2 ps-2.5 text-ui-sm [&_svg]:size-3.5",
+        default: "[--select-value-inset:--spacing(2.5)] h-8 rounded-lg pe-2 ps-2.5 text-ui [&_svg]:size-3.5",
+        lg: "[--select-value-inset:--spacing(3)] h-9 rounded-lg pe-2.5 ps-3 text-ui-lg [&_svg]:size-4",
       },
     },
     defaultVariants: { size: "default" },
@@ -54,11 +54,12 @@ function Select<Value, Multiple extends boolean | undefined = false>({ size, ...
 
 const SelectGroup = SelectPrimitive.Group
 
+// Include the trigger inset in the measured value box so item alignment preserves both popup edges.
 function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
   return (
     <SelectPrimitive.Value
       data-slot="select-value"
-      className={cn("flex-1 truncate text-start data-placeholder:text-muted-foreground", className)}
+      className={cn("-ms-(--select-value-inset) flex-1 truncate ps-(--select-value-inset) text-start data-placeholder:text-muted-foreground", className)}
       {...props}
     />
   )
@@ -110,7 +111,7 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           className={cn(
-            "relative max-h-(--available-height) min-w-(--anchor-width) origin-(--transform-origin) overflow-hidden rounded-2xl bg-popover text-popover-foreground shadow-surface transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-98 data-ending-style:opacity-0 data-[side=none]:data-ending-style:scale-100 data-starting-style:scale-98 data-starting-style:opacity-0 data-[side=none]:data-starting-style:scale-100",
+            "relative max-h-(--available-height) w-(--anchor-width) min-w-(--anchor-width) origin-(--transform-origin) overflow-hidden rounded-2xl bg-popover text-popover-foreground shadow-[var(--shadow-default),var(--shadow-lg)] transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-98 data-ending-style:opacity-0 data-[side=none]:data-ending-style:scale-100 data-starting-style:scale-98 data-starting-style:opacity-0 data-[side=none]:data-starting-style:scale-100",
             className
           )}
           {...props}
@@ -137,7 +138,11 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
       className={cn(selectItemVariants({ size }), className)}
       {...props}
     >
-      <SelectPrimitive.ItemText className="flex flex-1 items-center gap-2 truncate">{children}</SelectPrimitive.ItemText>
+      {/* Align the measured box with the popup edge while keeping the text inset. */}
+      <SelectPrimitive.ItemText className={cn(
+        "flex flex-1 items-center gap-2 truncate",
+        size === "xs" ? "-ms-2.5 ps-2.5" : size === "lg" ? "-ms-3.5 ps-3.5" : "-ms-3 ps-3"
+      )}>{children}</SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator className={cn("absolute flex text-foreground", size === "xs" ? "end-1.5" : size === "lg" ? "end-2.5" : "end-2")}>
         <CheckIcon />
       </SelectPrimitive.ItemIndicator>

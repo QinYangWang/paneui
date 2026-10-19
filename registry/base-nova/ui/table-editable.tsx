@@ -265,7 +265,7 @@ function EditableTable({
         minWidth: c.minWidth,
         grow: c.grow,
         align: c.align ?? (c.type === "number" ? "right" : "left"),
-        className: "px-0",
+        className: "frame-lg frame-inset-1 px-0",
         headerClassName: "has-[[data-insert-col]:hover]:shadow-[inset_-2px_0_0_var(--primary)] rtl:has-[[data-insert-col]:hover]:shadow-[inset_2px_0_0_var(--primary)]",
       })),
     [columns]
@@ -304,7 +304,7 @@ function EditableTable({
             }
           }}
           className={cn(
-            "absolute inset-1 min-w-0 rounded-lg bg-background px-2 text-ui text-foreground shadow-well ring-2 ring-primary/45 outline-none",
+            "absolute inset-1 min-w-0 rounded-inner bg-background px-2 text-ui text-foreground shadow-well ring-2 ring-primary/45 outline-none",
             alignRight && "text-end tabular-nums"
           )}
         />
@@ -344,7 +344,7 @@ function EditableTable({
           }
         }}
         className={cn(
-          "absolute inset-0 flex min-w-0 cursor-cell items-center rounded-lg px-3 outline-none",
+          "absolute inset-1 flex min-w-0 cursor-cell items-center rounded-inner px-2 outline-none",
           "focus-visible:shadow-[inset_0_0_0_2px_var(--primary)] focus:bg-primary/6",
           alignRight ? "justify-end" : "justify-start"
         )}

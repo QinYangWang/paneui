@@ -16,7 +16,7 @@ function Tabs({ className, ...props }: TabsPrimitive.Root.Props) {
 // `underline`: tabs on a hairline with a sliding 2px bar; tabs take the full height.
 // A tab whose only child is an icon is square (give it an `aria-label`).
 const tabsListVariants = cva(
-  "relative z-0 inline-flex w-fit items-center data-[orientation=vertical]:h-fit data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch",
+  "relative z-0 inline-flex w-fit shrink-0 items-center data-[orientation=vertical]:h-fit data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch",
   {
     variants: {
       variant: {
@@ -35,7 +35,7 @@ const tabsListVariants = cva(
 )
 
 const tabsTabVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center data-[orientation=vertical]:justify-start gap-1.5 font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 has-[>svg:only-child]:aspect-square has-[>svg:only-child]:px-0 [&_svg]:size-3.5 [&_svg]:shrink-0",
+  "inline-flex shrink-0 cursor-pointer items-center justify-center data-[orientation=vertical]:justify-start gap-1.5 font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 data-icon-only:aspect-square data-icon-only:px-0 [&_svg]:size-3.5 [&_svg]:shrink-0",
   {
     variants: {
       variant: { default: "", underline: "rounded-md" },
@@ -104,15 +104,28 @@ function TabsList({ className, children, size = "default", variant = "default", 
   )
 }
 
-function TabsTab({ className, ...props }: TabsPrimitive.Tab.Props) {
+// CSS can't see text nodes (`>svg:only-child` also matched icon + label tabs and stripped their
+// padding), so icon-only is decided from the children.
+function isIconOnly(children: React.ReactNode) {
+  const nodes = React.Children.toArray(children)
+  return nodes.length === 1 && React.isValidElement(nodes[0])
+    && (nodes[0].type === "svg" || typeof nodes[0].type === "function" || typeof nodes[0].type === "object")
+    && !(nodes[0].props as { children?: unknown }).children
+}
+
+function TabsTab({ className, children, ...props }: TabsPrimitive.Tab.Props) {
   const { size, variant } = React.useContext(TabsListContext)
+  const iconOnly = typeof children !== "function" && isIconOnly(children as React.ReactNode)
   return (
     <TabsPrimitive.Tab
       data-slot="tabs-tab"
       data-size={size}
+      data-icon-only={iconOnly ? "" : undefined}
       className={cn(tabsTabVariants({ size, variant }), className)}
       {...props}
-    />
+    >
+      {children}
+    </TabsPrimitive.Tab>
   )
 }
 

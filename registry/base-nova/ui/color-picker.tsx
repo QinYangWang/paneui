@@ -177,7 +177,7 @@ function ColorPicker({
 
 /* ─────────────────────────── trigger + content ─────────────────────────── */
 
-/** Raised chip showing the colour and its hex. The popup grows out of this chip. */
+/** Raised chip showing the colour and its hex. The popup grows from a chip-shaped seed just below it. */
 function ColorPickerTrigger({
   className,
   children,
@@ -208,18 +208,20 @@ function ColorPickerTrigger({
 }
 
 /**
- * Popup panel. It opens on top of the trigger and expands out of the chip's
- * rounded-lg shape (clip-path morph), then shrinks back into it on close.
+ * Popup panel. It opens below the trigger, start-aligned so its left edge lines
+ * up with the trigger's, and grows from a chip-shaped seed the trigger's size
+ * (clip-path morph), then shrinks back into it on close.
  */
 function ColorPickerContent({
   className,
   style,
   align = "start",
+  sideOffset = 8,
   collisionPadding = 8,
   triggerRadius = "var(--radius-lg)",
   ...props
 }: PopoverPrimitive.Popup.Props &
-  Pick<PopoverPrimitive.Positioner.Props, "align" | "collisionPadding"> & {
+  Pick<PopoverPrimitive.Positioner.Props, "align" | "sideOffset" | "collisionPadding"> & {
     /** Corner radius of the trigger shape the panel starts from (CSS length). Defaults to `var(--radius-lg)`, the radius of `ColorPickerTrigger`. */
     triggerRadius?: string
   }) {
@@ -231,7 +233,7 @@ function ColorPickerContent({
         className="z-50 outline-none"
         side="bottom"
         align={align}
-        sideOffset={({ anchor }) => -anchor.height}
+        sideOffset={sideOffset}
         collisionPadding={collisionPadding}
       >
         <PopoverPrimitive.Popup

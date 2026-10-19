@@ -36,6 +36,7 @@ type WorkspaceSwitcherProps = Omit<React.ComponentProps<"button">, "value" | "on
   createLabel?: string
   /** Show only the mark (icon-rail sidebars). */
   collapsed?: boolean
+  /** Popup alignment to the trigger. Defaults to "center". */
   align?: "start" | "center" | "end"
 }
 
@@ -61,7 +62,7 @@ function WorkspaceSwitcher({
   onCreate,
   createLabel = "Create workspace",
   collapsed = false,
-  align = "start",
+  align = "center",
   className,
   ...props
 }: WorkspaceSwitcherProps) {

@@ -67,7 +67,7 @@ function DatePicker({
         <span className={cn("flex-1 truncate text-start tabular-nums", !text && "text-muted-foreground")}>{text || placeholder}</span>
         <ChevronsUpDownIcon className="text-muted-foreground" />
       </PopoverPrimitive.Trigger>
-      <PopoverContent data-slot="date-picker-content" align="start" className="w-auto p-1">
+      <PopoverContent data-slot="date-picker-content" align="center" className="w-auto p-1">
         <Calendar
           mode="single"
           value={date}
