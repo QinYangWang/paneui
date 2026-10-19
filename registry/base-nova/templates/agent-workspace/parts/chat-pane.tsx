@@ -10,7 +10,7 @@ import { EffortPicker, ModelPicker, ModePicker } from "@/registry/base-nova/ui/m
 import { TodoList } from "@/registry/base-nova/ui/todo-list"
 
 import { configByCategory, flatOptions, type AcpClient, type ClientState, type SessionState, type TimelineItem } from "../acp/client"
-import { ProviderIcon } from "./provider-icon"
+import { modelProvider, ProviderIcon } from "./provider-icon"
 import type { ThreadSummary } from "./threads-sidebar"
 import { Timeline } from "./turn-timeline"
 
@@ -159,9 +159,8 @@ export function ChatPane({
                     models={flatOptions(model.options).map((o) => ({
                       id: o.value,
                       name: o.name,
-                      description: o.description ?? undefined,
                       provider: o.group,
-                      icon: <ProviderIcon provider={o.group?.toLowerCase()} />,
+                      icon: <ProviderIcon provider={o.group?.toLowerCase() ?? modelProvider(o.value)} />,
                     }))}
                     align="end"
                   />
@@ -169,7 +168,10 @@ export function ChatPane({
                   <ModelPicker
                     value={session.models.currentModelId}
                     onValueChange={(v) => void client.setModel(session.id, v)}
-                    models={session.models.availableModels.map((m) => ({ id: m.modelId, name: m.name, description: m.description ?? undefined }))}
+                    models={session.models.availableModels.map((m) => {
+                      const provider = modelProvider(m.modelId) ?? modelProvider(m.name)
+                      return { id: m.modelId, name: m.name, icon: provider ? <ProviderIcon provider={provider} /> : undefined }
+                    })}
                     align="end"
                   />
                 ) : null}
@@ -177,7 +179,7 @@ export function ChatPane({
                   <EffortPicker
                     value={effort.currentValue}
                     onValueChange={(v) => void client.setConfigOption(session.id, effort.id, v)}
-                    levels={flatOptions(effort.options).map((o) => ({ value: o.value, label: o.name, description: o.description ?? undefined }))}
+                    levels={flatOptions(effort.options).map((o) => ({ value: o.value, label: o.name }))}
                     align="end"
                   />
                 )}

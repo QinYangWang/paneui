@@ -42,6 +42,6 @@
 ## Not in the library
 
 Removed on purpose and not to be added back: novelty buttons (magnetic, metallic), decorative range
-sliders, 3D carousels and tilt cards, glitch or spotlight 404 pages, prediction-market and trading
+sliders, 3D carousels and tilt cards, glitch, spotlight or terminal 404 pages, prediction-market and trading
 widgets, the dock, returns calendar, bracket and wheel visualisations, voice orb, thinking shimmer and
 the other effect-only pieces. Prefer a plain component plus a token over a showcase effect.

@@ -2,7 +2,11 @@
 
 import * as React from "react"
 
-import { ApertureIcon, AsteriskIcon, PlusIcon } from "@/components/icons"
+import { siClaude } from "simple-icons"
+
+import { PlusIcon } from "@/components/icons"
+import { markOpenai } from "@/lib/brand-marks"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { Button } from "@/registry/base-nova/ui/button"
 import { TabStrip, TabStripItem } from "@/registry/base-nova/ui/tab-strip"
 
@@ -45,7 +49,7 @@ export default function TabStripDemo() {
         }
       >
         {tabs.map((t) => (
-          <TabStripItem key={t.id} value={t.id} icon={t.provider === "codex" ? <ApertureIcon /> : <AsteriskIcon />} className="w-40">
+          <TabStripItem key={t.id} value={t.id} icon={<BrandIcon icon={t.provider === "codex" ? markOpenai : siClaude} />} className="w-40">
             {t.title}
           </TabStripItem>
         ))}

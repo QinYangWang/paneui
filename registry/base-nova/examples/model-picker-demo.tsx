@@ -1,14 +1,18 @@
 "use client"
 
 import * as React from "react"
+import { siClaude, siGooglegemini } from "simple-icons"
 
-import { ApertureIcon, AsteriskIcon, ShieldIcon } from "@/components/icons"
+import { ShieldIcon } from "@/components/icons"
+import { markOpenai } from "@/lib/brand-marks"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { EffortPicker, ModelPicker, ModePicker } from "@/registry/base-nova/ui/model-picker"
 
 const MODELS = [
-  { id: "gpt-6.1-sol", name: "GPT-6.1 Sol", description: "Most capable for long tasks", provider: "Codex", icon: <ApertureIcon /> },
-  { id: "gpt-6.1-mini", name: "GPT-6.1 Mini", description: "Quick edits", provider: "Codex", icon: <ApertureIcon /> },
-  { id: "sonnet-5.5", name: "Sonnet 5.5", description: "Balanced speed and depth", provider: "Claude", icon: <AsteriskIcon /> },
+  { id: "gpt-6.1-sol", name: "GPT-6.1 Sol", provider: "OpenAI", icon: <BrandIcon icon={markOpenai} color="brand" /> },
+  { id: "gpt-6.1-mini", name: "GPT-6.1 Mini", provider: "OpenAI", icon: <BrandIcon icon={markOpenai} color="brand" /> },
+  { id: "sonnet-5.5", name: "Sonnet 5.5", provider: "Anthropic", icon: <BrandIcon icon={siClaude} color="brand" /> },
+  { id: "gemini-4-pro", name: "Gemini 4 Pro", provider: "Google", icon: <BrandIcon icon={siGooglegemini} color="brand" /> },
 ]
 
 const MODES = [

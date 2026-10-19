@@ -25,7 +25,7 @@ const LAYERS: { variable: string; value: string; utility: React.ReactNode; usedB
     ),
     usedBy: "Filled buttons, switches, checks, selection",
   },
-  { variable: "--border", value: "#0000000f", utility: <Code>border-border</Code>, usedBy: "Every divider" },
+  { variable: "--border", value: "#00000017", utility: <Code>border-border</Code>, usedBy: "Every divider and edge" },
   { variable: "--radius", value: "0.5rem", utility: <Code>rounded-sm … rounded-3xl</Code>, usedBy: "All corners" },
   { variable: "--shadow-default", value: "hairline + 1px drop", utility: <Code>shadow-raised</Code>, usedBy: "Resting cards and controls" },
   { variable: "--text-ui", value: "0.8125rem", utility: <Code>text-ui</Code>, usedBy: "Buttons, inputs, menus, nav" },

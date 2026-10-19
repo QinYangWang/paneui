@@ -7,9 +7,11 @@ export default {
   },
   examples: [
     { id: "variants", title: "Variants", description: "Use `bar` for discrete counts and `area` or `line` for continuous trends." },
+    { id: "gaps", title: "Gaps", description: "Use `gap=\"break\"` when a missing reading should read as an outage." },
   ],
   notes: [
     { title: "Colour and size", body: "The chart draws in `currentColor`, so tint it with a text token (`text-success`, `text-chart-1`). It stretches to its box, so size it with `h-*` and `w-*` (default 36px tall, full width)." },
+    { title: "Missing data", body: "`null`, `undefined` and `NaN` are gaps. `bridge` joins the known points either side with a faint dashed line (bars get a faint stub), `break` leaves the space empty and `zero` plots 0. A series with no points, or one point, draws a flat dashed baseline, plus a dot for the point." },
     { title: "Accessibility", body: "With `label` it is an `img` with that name; without one it is decorative (`aria-hidden`). Put the number it summarises in text next to it." },
   ],
   api: [
@@ -17,7 +19,8 @@ export default {
       name: "Sparkline",
       extends: "svg",
       props: [
-        { name: "values", type: "readonly number[]", required: true, description: "The series, oldest first." },
+        { name: "values", type: "readonly (number | null | undefined)[]", required: true, description: "The series, oldest first. `null`, `undefined` and `NaN` are missing points." },
+        { name: "gap", type: `"bridge" | "break" | "zero"`, default: `"bridge"`, description: "How missing points draw." },
         { name: "variant", type: `"area" | "line" | "bar"`, default: `"area"`, description: "Shape." },
         { name: "label", type: "string", description: "Accessible summary. Omit to make the chart decorative." },
         { name: "animate", type: "boolean", default: "true", description: "Draw in on mount (always off under reduced motion)." },

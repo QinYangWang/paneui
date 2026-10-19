@@ -2,31 +2,48 @@ import type { ComponentDoc } from "@/lib/doc-types"
 
 export default {
   usage: {
-    imports: `import { AppShell, AppShellHeader, AppShellMain, AppShellSidebar } from "@/components/ui/app-shell"
-import { SidebarContent, SidebarItem, SidebarMenu } from "@/components/ui/animated-sidebar"`,
+    imports: `import { AppShell, AppShellInsetHeader, AppShellMain, AppShellSidebar, AppShellSwitcher } from "@/components/ui/app-shell"
+import { SidebarContent, SidebarFooter, SidebarHeader, SidebarItem, SidebarMenu } from "@/components/ui/animated-sidebar"`,
     code: `<AppShell>
-  <AppShellHeader>
-    <span className="text-ui font-semibold">Acme</span>
-  </AppShellHeader>
   <AppShellSidebar>
+    <SidebarHeader>
+      <AppShellSwitcher name="Acme" description="Business" avatar={<Avatar shape="rounded">…</Avatar>}>
+        <MenuItem>New team</MenuItem>
+      </AppShellSwitcher>
+    </SidebarHeader>
     <SidebarContent>
       <SidebarMenu>
         <SidebarItem icon={<HomeIcon />} label="Home" isActive />
       </SidebarMenu>
     </SidebarContent>
+    <SidebarFooter>
+      <UserMenu name="Dana Chen" email="dana@acme.dev">…</UserMenu>
+    </SidebarFooter>
   </AppShellSidebar>
   <AppShellMain>
-    <div className="p-8">…</div>
+    <AppShellInsetHeader>
+      <Breadcrumb>…</Breadcrumb>
+    </AppShellInsetHeader>
+    <div className="p-4">…</div>
   </AppShellMain>
 </AppShell>`,
   },
   composition: `AppShell
-├── AppShellHeader
+├── AppShellHeader (optional, header-first)
 │   └── AppShellTrigger
 ├── AppShellSidebar
-│   └── SidebarContent, SidebarFooter, …
-└── AppShellMain`,
+│   ├── SidebarHeader → AppShellSwitcher
+│   ├── SidebarContent
+│   └── SidebarFooter → UserMenu
+└── AppShellMain
+    └── AppShellInsetHeader
+        └── AppShellTrigger, Separator, your breadcrumb`,
   examples: [
+    {
+      id: "header-first",
+      title: "Header First",
+      description: "Add `AppShellHeader` when brand, search and actions should span the window.",
+    },
     {
       id: "sidebar",
       title: "Sidebar",
@@ -55,8 +72,12 @@ import { SidebarContent, SidebarItem, SidebarMenu } from "@/components/ui/animat
   ],
   notes: [
     {
+      title: "Sidebar first or header first",
+      body: "Without a direct `AppShellHeader` child the sidebar runs the full height and the panel sits 3px below the top, with `AppShellInsetHeader` as its first row. With one, the header spans the top and the sidebar and panel start below it. The choice is made in CSS from the children, so it renders right on the server.",
+    },
+    {
       title: "Alignment",
-      body: "The header's leading column is exactly `--sidebar-width-icon` wide, so the trigger sits on the rail's icon column whether the sidebar is expanded or folded. Header content starts on the sidebar's label column (`--app-shell-label-inset`), so a title or logo lines up with the nav labels. Change the rail width on `AppShell` with `style={{ \"--sidebar-width-icon\": \"4rem\" }}` and both follow.",
+      body: "The header's leading column is exactly `--sidebar-width-icon` wide, so the trigger sits on the rail's icon column whether the sidebar is expanded or folded. Header content starts on the sidebar's label column (`--app-shell-label-inset`), so a title or logo lines up with the nav labels. Change the rail width on `AppShell` with `style={{ \"--sidebar-width-icon\": \"4rem\" }}` and both follow. The floating rail grows by its 3px gutter and the trigger moves with it, so the icons stay on the trigger's column. `AppShellSwitcher` puts a 32px avatar on the same column.",
     },
     {
       title: "Page and window",
@@ -124,6 +145,27 @@ import { SidebarContent, SidebarItem, SidebarMenu } from "@/components/ui/animat
       description: "The inset content panel. Bring your own padding.",
       extends: "main",
       props: [],
+    },
+    {
+      name: "AppShellInsetHeader",
+      description: "The panel's first row in a sidebar-first shell. Sticks to the panel's top.",
+      extends: "header",
+      props: [
+        { name: "trigger", type: "boolean", default: "true", description: "Lead with `AppShellTrigger` and a vertical divider." },
+      ],
+    },
+    {
+      name: "AppShellSwitcher",
+      description: "The team or workspace at the top of the sidebar, opening a menu of the others.",
+      extends: "button",
+      props: [
+        { name: "name", type: "ReactNode", required: true, description: "The current team." },
+        { name: "description", type: "ReactNode", description: "Second line, such as the plan." },
+        { name: "avatar", type: "ReactNode", required: true, description: "A 32px `Avatar shape=\"rounded\"`; it stays visible in the icon rail." },
+        { name: "side", type: `"top" | "bottom" | "left" | "right"`, default: `"bottom"`, description: "Menu side." },
+        { name: "align", type: `"start" | "center" | "end"`, default: `"start"`, description: "Menu alignment." },
+        { name: "children", type: "ReactNode", description: "Menu contents." },
+      ],
     },
     {
       name: "useAppShell",

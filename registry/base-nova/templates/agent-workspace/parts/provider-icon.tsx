@@ -1,20 +1,30 @@
 import { siClaude, siGooglegemini } from "simple-icons"
 
-import { ApertureIcon, BotIcon } from "@/components/icons"
+import { BotIcon } from "@/components/icons"
+import { markOpenai } from "@/lib/brand-marks"
 import { cn } from "@/lib/utils"
-import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
+import { BrandIcon, type BrandIconData } from "@/registry/base-nova/ui/brand-icon"
 
 import type { AgentProvider } from "./agents"
 
-/**
- * Mark for an agent provider: the vendor's logo where the brand icon package has one, a
- * neutral glyph from the icon set where it does not (some vendors do not distribute their
- * mark in icon packs) and for custom agents.
- */
+const MARKS: Partial<Record<AgentProvider, BrandIconData>> = {
+  codex: markOpenai,
+  claude: siClaude,
+  gemini: siGooglegemini,
+}
+
+/** Mark for an agent provider: the vendor's logo, or a neutral glyph for custom agents. */
 export function ProviderIcon({ provider, className }: { provider: string | undefined; className?: string }) {
-  const p = (provider ?? "custom") as AgentProvider
-  if (p === "claude") return <BrandIcon icon={siClaude} color="brand" className={className} />
-  if (p === "gemini") return <BrandIcon icon={siGooglegemini} color="brand" className={className} />
-  const Icon = p === "codex" ? ApertureIcon : BotIcon
-  return <Icon className={cn(p === "codex" ? "text-foreground" : "text-muted-foreground", className)} />
+  const mark = MARKS[(provider ?? "custom") as AgentProvider]
+  if (mark) return <BrandIcon icon={mark} color="brand" className={className} />
+  return <BotIcon className={cn("text-muted-foreground", className)} />
+}
+
+/** Guesses the vendor from a model id or name when the agent sends no group. */
+export function modelProvider(model: string): AgentProvider | undefined {
+  const m = model.toLowerCase()
+  if (/^(gpt|o\d|codex)/.test(m)) return "codex"
+  if (/(claude|sonnet|opus|haiku)/.test(m)) return "claude"
+  if (m.includes("gemini")) return "gemini"
+  return undefined
 }

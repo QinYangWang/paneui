@@ -29,3 +29,4 @@ Second pass: dialog sticky close button, onFill moved to chart-utils, animated-s
 
 ## Removed 2026-10-14 (user approved): button-magnetic arc-picker range-slider-wave range-slider-fluid range-slider-bubble range-slider-ruler color-selector tilt-card animated-badge bounce-sidebar action-swap-cascade chromatic-text-reveal cylinder-carousel parallax center-morph-modal morphing-lightbox voice-orb thinking-shimmer liquidity-heatmap order-book bump-chart price-target-fan volume-profile not-found-glitch not-found-magnetic not-found-spotlight not-found-stacked knockout-bracket knockout-wheel prediction-market prediction-market-card wallet-card swap bloom-menu dynamic-island morphing-search-chips infinite-masonry
 - returns-calendar (removed 2026-10-14, user: unused; don't re-add)
+- not-found-terminal / "404 Terminal" (removed 2026-10-19 by the user; never re-add; the SaaS 404 uses EmptyState)

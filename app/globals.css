@@ -191,11 +191,11 @@
   --warning-foreground: #fefcfb;
   --warning-subtle: #ff9c0029;
   --warning-border: #ff81007d;
-  /* Borders: default a3 (every divider), subtle a2, strong a6 (field outlines = input). */
-  --border: #0000000f;
+  /* Borders: one edge role, a4, for dividers, field and outline-button rings and the raised ring; subtle a2, strong a6 (hover, emphasis). input = border. */
+  --border: #00000017;
   --border-subtle: #00000006;
   --border-strong: #00000026;
-  --input: #00000026;
+  --input: #00000017;
   /* Charts: chart-1…8 = blue, orange, violet, green, pink, amber, cyan, gray, step 9 (light orange 10, amber 11 for 3:1 on white). Never follow the accent. */
   --chart-1: #0090ff;
   --chart-2: #ef5f00;
@@ -214,13 +214,13 @@
   --shell-border: oklch(0% 0 0 / 10%);
 
   /* Shadow scale: border ring, default (resting), lg (menus, popovers), xl (dialogs). */
-  --shadow-border: 0 0 0 1px #00000012;
-  --shadow-default: 0 0 0 0.5px #0000 inset, 0 0 0 0.5px #0000000f, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d;
+  --shadow-border: 0 0 0 1px #00000017;
+  --shadow-default: 0 0 0 0.5px #0000 inset, 0 0 0 1px #00000017, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d;
   --shadow-lg: 0 0 0 0.5px #0000000f, 0 2px 3px -2px #0000000f, 0 3px 12px -4px #0000001a, 0 4px 16px -8px #0000000d;
   --shadow-xl: 0 0 0 0.5px #0000 inset, 0 0 0 0.5px #0000000f, 0 8px 40px 0 #0000000d, 0 12px 32px -16px #00000026;
   /* Named elevation (components use these), restated in .dark so they resolve per mode. */
   --skeuo-raised: var(--shadow-default);
-  --skeuo-raised-hover: 0 0 0 0.5px #0000 inset, 0 0 0 0.5px #00000026, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d;
+  --skeuo-raised-hover: 0 0 0 0.5px #0000 inset, 0 0 0 1px #00000026, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d;
   --skeuo-pressed: var(--shadow-border);
   --skeuo-primary: 0 1px 2px #0000000d;
   --skeuo-well: inset 0 0 0 1px var(--input);
@@ -275,11 +275,11 @@
   --warning-foreground: #fff;
   --warning-subtle: #fb6a0025;
   --warning-border: #fd75045c;
-  /* Borders: default a3 (every divider), subtle a2, strong a6 (field outlines = input). */
-  --border: #ffffff12;
+  /* Borders: one edge role, a4, for dividers, field and outline-button rings and the raised ring; subtle a2, strong a6 (hover, emphasis). input = border. */
+  --border: #ffffff1b;
   --border-subtle: #ffffff09;
   --border-strong: #ffffff2c;
-  --input: #ffffff2c;
+  --input: #ffffff1b;
   /* Charts: chart-1…8 = blue, orange, violet, green, pink, amber, cyan, gray, step 9 (light orange 10, amber 11 for 3:1 on white). Never follow the accent. */
   --chart-1: #0090ff;
   --chart-2: #f76b15;
@@ -298,13 +298,13 @@
   --shell-border: oklch(100% 0 0 / 9%);
 
   /* Shadow scale: border ring, default (resting), lg (menus, popovers), xl (dialogs). */
-  --shadow-border: 0 0 0 1px #ffffff12;
-  --shadow-default: 0 0 0 0.5px #ffffff12 inset, 0 0 0 0.5px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000;
+  --shadow-border: 0 0 0 1px #ffffff1b;
+  --shadow-default: 0 0 0 1px #ffffff1b inset, 0 0 0 1px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000;
   --shadow-lg: 0 0 0 1px #ffffff2c, 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080;
   --shadow-xl: 0 0 0 0.5px #ffffff12 inset, 0 0 0 0.5px #0000, 0 8px 40px 0 #0000000d, 0 12px 32px -16px #00000026;
   /* Named elevation (components use these), restated in .dark so they resolve per mode. */
   --skeuo-raised: var(--shadow-default);
-  --skeuo-raised-hover: 0 0 0 0.5px #ffffff2c inset, 0 0 0 0.5px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000;
+  --skeuo-raised-hover: 0 0 0 1px #ffffff2c inset, 0 0 0 1px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000;
   --skeuo-pressed: var(--shadow-border);
   --skeuo-primary: 0 0 0 0 transparent;
   --skeuo-well: inset 0 0 0 1px var(--input);

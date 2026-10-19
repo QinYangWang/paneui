@@ -100,7 +100,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Empty State](https://qinyangwang.github.io/ui/docs/empty-state.md): Tells users a list or page is empty and what to do. JSON: https://qinyangwang.github.io/ui/r/empty-state.json
 - [Kbd](https://qinyangwang.github.io/ui/docs/kbd.md): Shows a keyboard key or shortcut. JSON: https://qinyangwang.github.io/ui/r/kbd.json
 - [Loader](https://qinyangwang.github.io/ui/docs/loader.md): Shows that something is loading. JSON: https://qinyangwang.github.io/ui/r/loader.json
-- [OG Image](https://qinyangwang.github.io/ui/docs/og-image.md): A share card for pages, rendered to PNG at build time. JSON: https://qinyangwang.github.io/ui/r/og-image.json
+- [OG Image](https://qinyangwang.github.io/ui/docs/og-image.md): A share image for pages, rendered to PNG with ImageResponse. JSON: https://qinyangwang.github.io/ui/r/og-image.json
 - [Page Header](https://qinyangwang.github.io/ui/docs/page-header.md): Title, context and actions at the top of an app page. JSON: https://qinyangwang.github.io/ui/r/page-header.json
 - [Progress](https://qinyangwang.github.io/ui/docs/progress.md): Shows how far a task has come. JSON: https://qinyangwang.github.io/ui/r/progress.json
 - [Resizable](https://qinyangwang.github.io/ui/docs/resizable.md): Split panes the user can resize or collapse. JSON: https://qinyangwang.github.io/ui/r/resizable.json
@@ -116,7 +116,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 ## Navigation
 
 - [Animated Sidebar](https://qinyangwang.github.io/ui/docs/animated-sidebar.md): App navigation sidebar that folds into an icon rail. JSON: https://qinyangwang.github.io/ui/r/animated-sidebar.json
-- [App Shell](https://qinyangwang.github.io/ui/docs/app-shell.md): App frame with a header, rail sidebar and inset content panel. JSON: https://qinyangwang.github.io/ui/r/app-shell.json
+- [App Shell](https://qinyangwang.github.io/ui/docs/app-shell.md): App frame with a collapsible sidebar and an inset content panel. JSON: https://qinyangwang.github.io/ui/r/app-shell.json
 - [Breadcrumb](https://qinyangwang.github.io/ui/docs/breadcrumb.md): Shows where the current page sits in the site hierarchy. JSON: https://qinyangwang.github.io/ui/r/breadcrumb.json
 - [File Tree](https://qinyangwang.github.io/ui/docs/file-tree.md): Browses files and folders in a keyboard-navigable tree. JSON: https://qinyangwang.github.io/ui/r/file-tree.json
 - [Icon Rail](https://qinyangwang.github.io/ui/docs/icon-rail.md): Narrow bar of icon buttons for switching between app sections. JSON: https://qinyangwang.github.io/ui/r/icon-rail.json
@@ -222,7 +222,6 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [File Upload](https://qinyangwang.github.io/ui/docs/file-upload.md): Upload queue for dropping files and tracking each one. JSON: https://qinyangwang.github.io/ui/r/file-upload.json
 - [Morphing Search](https://qinyangwang.github.io/ui/docs/morphing-search.md): Search field that opens into a list of results. JSON: https://qinyangwang.github.io/ui/r/morphing-search.json
 - [Morphing Tabs](https://qinyangwang.github.io/ui/docs/morphing-tabs.md): Tabs the user can reorder, with content attached to the active tab. JSON: https://qinyangwang.github.io/ui/r/morphing-tabs.json
-- [404 Terminal](https://qinyangwang.github.io/ui/docs/not-found-terminal.md): 404 page styled as a terminal session. JSON: https://qinyangwang.github.io/ui/r/not-found-terminal.json
 - [Notification Stack](https://qinyangwang.github.io/ui/docs/notification-stack.md): Collapses many notifications into one stack that opens on demand. JSON: https://qinyangwang.github.io/ui/r/notification-stack.json
 - [Block Editor](https://qinyangwang.github.io/ui/docs/notion-editor.md): Block editor for writing documents that save as MDX. JSON: https://qinyangwang.github.io/ui/r/notion-editor.json
 - [OTP Input](https://qinyangwang.github.io/ui/docs/otp-input.md): Enters a one-time sign-in or verification code. JSON: https://qinyangwang.github.io/ui/r/otp-input.json

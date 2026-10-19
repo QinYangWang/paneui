@@ -52,7 +52,6 @@ export const galleryHeights: Record<string, number> = {
   "message-bubble": 505,
   "message-scroller": 428,
   "morphing-search": 448,
-  "not-found-terminal": 484,
   "notification-stack": 384,
   "preview-rail": 262,
   "project-folder": 344,

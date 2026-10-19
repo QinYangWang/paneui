@@ -2,7 +2,10 @@
 
 import * as React from "react"
 
-import { ApertureIcon, AsteriskIcon } from "@/components/icons"
+import { siClaude } from "simple-icons"
+
+import { markOpenai } from "@/lib/brand-marks"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { ThreadList, ThreadListGroup, ThreadListItem } from "@/registry/base-nova/ui/thread-list-item"
 
 export default function ThreadListItemDemo() {
@@ -11,12 +14,12 @@ export default function ThreadListItemDemo() {
     <div className="w-72 frame-3xl frame-p-2 bg-shell">
       <ThreadList>
         <ThreadListGroup label="Recent">
-          <ThreadListItem title="Fix broken chat dragging behavior" icon={<ApertureIcon />} repo="workspace" pr={{ number: 1526, status: "open" }} branch="feat/fix-chat-dragging" active={active === "1"} onClick={() => setActive("1")} />
-          <ThreadListItem title="Redesign split chats with close button" icon={<ApertureIcon />} repo="workspace" pr={{ number: 1525, status: "draft" }} branch="feat/simplify-split-chats" running active={active === "2"} onClick={() => setActive("2")} />
+          <ThreadListItem title="Fix broken chat dragging behavior" icon={<BrandIcon icon={markOpenai} />} repo="workspace" pr={{ number: 1526, status: "open" }} branch="feat/fix-chat-dragging" active={active === "1"} onClick={() => setActive("1")} />
+          <ThreadListItem title="Redesign split chats with close button" icon={<BrandIcon icon={markOpenai} />} repo="workspace" pr={{ number: 1525, status: "draft" }} branch="feat/simplify-split-chats" running active={active === "2"} onClick={() => setActive("2")} />
         </ThreadListGroup>
         <ThreadListGroup label="Yesterday">
-          <ThreadListItem title="Configurable expiry with 24h option" icon={<ApertureIcon />} repo="workspace" pr={{ number: 1507, status: "merged" }} branch="main" active={active === "3"} onClick={() => setActive("3")} />
-          <ThreadListItem title="Check if screenshot behavior is normal" icon={<AsteriskIcon />} repo="workspace" branch="main" unread active={active === "4"} onClick={() => setActive("4")} />
+          <ThreadListItem title="Configurable expiry with 24h option" icon={<BrandIcon icon={markOpenai} />} repo="workspace" pr={{ number: 1507, status: "merged" }} branch="main" active={active === "3"} onClick={() => setActive("3")} />
+          <ThreadListItem title="Check if screenshot behavior is normal" icon={<BrandIcon icon={siClaude} />} repo="workspace" branch="main" unread active={active === "4"} onClick={() => setActive("4")} />
         </ThreadListGroup>
       </ThreadList>
     </div>

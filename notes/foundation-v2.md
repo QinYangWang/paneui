@@ -29,9 +29,9 @@ control densities and shell layout from `notes/native-style.md` are unchanged. L
 | `fg-disabled` | `#00000044` | `#ffffff55` | gray a8 |
 | `secondary`, `muted` | `#0000000f` | `#ffffff12` | gray a3 (component default) |
 | `accent` | `#00000017` | `#ffffff1b` | gray a4 (component hover) |
-| `border` | `#0000000f` | `#ffffff12` | gray a3 |
+| `border`, `input` | `#00000017` | `#ffffff1b` | gray a4: one edge role (round 35, was a3 / input a6) |
 | `border-subtle` | `#00000006` | `#ffffff09` | gray a2 |
-| `border-strong`, `input` | `#00000026` | `#ffffff2c` | gray a6 |
+| `border-strong` | `#00000026` | `#ffffff2c` | gray a6 |
 | `primary` / `-hover` / `-active` | `#0090ff` / `#0588f0` / `#0d74ce` | `#0090ff` / `#3b9eff` / `#70b8ff` | blue 9 / 10 / 11 |
 | `primary-foreground` | `#fff` | `#fff` | on solid |
 | `primary-subtle` / `-subtle-hover` | `#008ff519` / `#009eff2a` | `#0077ff3a` / `#0075ff57` | blue a3 / a4 |
@@ -79,7 +79,7 @@ arrow button) became `rounded-3xl` / `frame-3xl`.
 | Level | Tailwind | Light | Dark |
 | --- | --- | --- | --- |
 | `--shadow-border` | `shadow-xs` | 1px ring black 7% | 1px ring white 7% |
-| `--shadow-default` | `shadow-sm` | 0.5px ring 6% + two tiny drops | 0.5px inset white 7% |
+| `--shadow-default` | `shadow-sm` | 1px ring `border` (a4) + two tiny drops | 1px inset ring `border` (a4) |
 | `--shadow-lg` | `shadow-md`, `shadow-lg` | 0.5px ring (color-mix toward gray 3) + three soft drops | 1px ring (mix toward gray 6) + three deep drops |
 | `--shadow-xl` | `shadow-xl` | 0.5px ring 6% + 40px / 32px drops | inset hairline + the same drops |
 

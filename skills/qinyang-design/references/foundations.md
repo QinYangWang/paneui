@@ -22,7 +22,7 @@ any surface.
 | `fg-tertiary` / `fg-disabled` | gray a9 / a8 | same steps | meta, disabled text |
 | `secondary`, `muted` | gray a3 | gray a3 | **translucent** default and hover fills |
 | `accent` | gray a4 | gray a4 | **translucent** stronger hover / selected fill |
-| `border` / `border-subtle` / `border-strong`, `input` | gray a3 / a2 / a6 | same steps | hairlines, field edges |
+| `border` = `input` / `border-subtle` / `border-strong` | gray a4 / a2 / a6 | same steps | one edge role: dividers, field and outline-button rings, the raised ring; strong for hover and emphasis |
 | `destructive` / `success` / `warning` | tomato 9 / green 9 / orange 9 | same | status solids; each has `-hover` (10), `-foreground`, `-subtle` (a3), `-border` (a6) |
 | `code` | gray 2 | gray 2 | code block background |
 | `chart-1` … `chart-8` | see `charts.md` | | data series |

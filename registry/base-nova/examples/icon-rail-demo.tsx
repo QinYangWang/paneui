@@ -2,7 +2,11 @@
 
 import * as React from "react"
 
-import { ApertureIcon, AsteriskIcon, FolderIcon, GitBranchIcon, HistoryIcon, HomeIcon, InboxIcon, SettingsIcon } from "@/components/icons"
+import { siClaude } from "simple-icons"
+
+import { FolderIcon, GitBranchIcon, HistoryIcon, HomeIcon, InboxIcon, SettingsIcon } from "@/components/icons"
+import { markOpenai } from "@/lib/brand-marks"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { IconRail, IconRailAvatar, IconRailGroup, IconRailItem, IconRailSpacer } from "@/registry/base-nova/ui/icon-rail"
 import { TooltipProvider } from "@/registry/base-nova/ui/tooltip"
 
@@ -28,10 +32,10 @@ export default function IconRailDemo() {
           <IconRailSpacer />
           <IconRailGroup>
             <IconRailAvatar label="Codex" hint="connected" status="online">
-              <ApertureIcon />
+              <BrandIcon icon={markOpenai} />
             </IconRailAvatar>
             <IconRailAvatar label="Claude Code" hint="not connected">
-              <AsteriskIcon />
+              <BrandIcon icon={siClaude} />
             </IconRailAvatar>
             <IconRailItem label="Settings" icon={<SettingsIcon />} shortcut="⌘," />
           </IconRailGroup>

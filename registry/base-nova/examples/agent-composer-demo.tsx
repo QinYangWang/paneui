@@ -2,8 +2,12 @@
 
 import * as React from "react"
 
+import { siClaude } from "simple-icons"
+
 import { GitPullRequestIcon } from "@/components/icons"
+import { markOpenai } from "@/lib/brand-marks"
 import { AgentComposer, AgentComposerBanner } from "@/registry/base-nova/blocks/agent-composer/agent-composer"
+import { BrandIcon } from "@/registry/base-nova/ui/brand-icon"
 import { EffortPicker, ModelPicker, ModePicker } from "@/registry/base-nova/ui/model-picker"
 
 export default function AgentComposerDemo() {
@@ -50,7 +54,10 @@ export default function AgentComposerDemo() {
         }
         toolbarEnd={
           <>
-            <ModelPicker value={model} onValueChange={setModel} align="end" models={[{ id: "sol", name: "GPT-6.1 Sol" }, { id: "sonnet", name: "Sonnet 5.5" }]} />
+            <ModelPicker value={model} onValueChange={setModel} align="end" models={[
+                { id: "sol", name: "GPT-6.1 Sol", icon: <BrandIcon icon={markOpenai} color="brand" /> },
+                { id: "sonnet", name: "Sonnet 5.5", icon: <BrandIcon icon={siClaude} color="brand" /> },
+              ]} />
             <EffortPicker value={effort} onValueChange={setEffort} align="end" />
           </>
         }

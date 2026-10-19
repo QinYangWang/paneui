@@ -69,12 +69,17 @@ type ComposerPickerProps = {
    * `ModePicker` and `EffortPicker` default to `true`, `ModelPicker` and `ComposerPicker` to `false`.
    */
   compact?: boolean
+  /**
+   * Show each option's `description` under its name. `ComposerPicker` and `ModePicker` default to `true`;
+   * `ModelPicker` and `EffortPicker` default to `false`, so model and effort rows are the name alone.
+   */
+  showDescriptions?: boolean
 }
 
 /**
  * Small ghost trigger + menu used in agent composers: shows the selected
- * option's icon and label, opens a list with descriptions and a check on the
- * current choice. `ModelPicker`, `EffortPicker` and `ModePicker` are presets.
+ * option's icon and label, opens a list (with descriptions when `showDescriptions`) and a check
+ * on the current choice. `ModelPicker`, `EffortPicker` and `ModePicker` are presets.
  */
 function ComposerPicker(props: ComposerPickerProps) {
   if (props.searchable) return <ComposerPickerSearch {...props} />
@@ -121,21 +126,22 @@ function usePickerTrigger({ options, value, label, icon, placeholder, compact = 
   return { selected, button, content }
 }
 
-function OptionBody({ option }: { option: PickerOption }) {
+function OptionBody({ option, showDescription }: { option: PickerOption; showDescription: boolean }) {
   return (
     <>
       {option.icon && <span className="flex h-4.5 shrink-0 items-center">{option.icon}</span>}
       <span className="flex min-w-0 flex-1 flex-col">
         <span className="truncate">{option.label}</span>
-        {option.description && <span className="text-ui-xs text-pretty text-muted-foreground">{option.description}</span>}
+        {showDescription && option.description && <span className="text-ui-xs text-pretty text-muted-foreground">{option.description}</span>}
       </span>
     </>
   )
 }
 
+// Two-line rows (with descriptions) align to the top line; single-line rows keep the menu's row height.
 
 function ComposerPickerMenu(props: ComposerPickerProps) {
-  const { options, value, onValueChange, heading, side = "top", align = "start", disabled, footer } = props
+  const { options, value, onValueChange, heading, side = "top", align = "start", disabled, footer, showDescriptions = true } = props
   const { button, content } = usePickerTrigger(props)
   const groups = React.useMemo(() => groupOptions(options), [options])
 
@@ -158,9 +164,9 @@ function ComposerPickerMenu(props: ComposerPickerProps) {
                   data-value={o.value}
                   disabled={o.disabled}
                   onClick={() => onValueChange?.(o.value)}
-                  className={cn("items-start py-1", o.tone === "warning" && "[&_svg]:text-warning", o.tone === "destructive" && "[&_svg]:text-destructive")}
+                  className={cn(showDescriptions && o.description && "items-start py-1", o.tone === "warning" && "[&_svg]:text-warning", o.tone === "destructive" && "[&_svg]:text-destructive")}
                 >
-                  <OptionBody option={o} />
+                  <OptionBody option={o} showDescription={showDescriptions} />
                   <span className="flex h-4.5 w-4 shrink-0 items-center justify-center">
                     {o.value === value && <CheckIcon className="!text-foreground" />}
                   </span>
@@ -189,7 +195,7 @@ function matches(o: PickerOption, words: string[]) {
 
 /** The searchable list: a field at the top keeps focus, arrows move the highlight, Enter picks. */
 function ComposerPickerSearch(props: ComposerPickerProps) {
-  const { options, value, onValueChange, heading, side = "top", align = "start", disabled, footer, searchPlaceholder, emptyLabel, maxPerGroup } = props
+  const { options, value, onValueChange, heading, side = "top", align = "start", disabled, footer, searchPlaceholder, emptyLabel, maxPerGroup, showDescriptions = true } = props
   const { labels } = useLocale()
   const { selected, button, content } = usePickerTrigger(props)
   const [query, setQuery] = React.useState("")
@@ -247,8 +253,8 @@ function ComposerPickerSearch(props: ComposerPickerProps) {
                 {group.value && <ComboboxLabel>{group.value}</ComboboxLabel>}
                 <ComboboxPrimitive.Collection>
                   {(o: PickerOption) => (
-                    <ComboboxItem key={o.value} value={o} data-value={o.value} disabled={o.disabled} className={cn("items-start py-1", o.tone === "warning" && "[&_svg]:text-warning", o.tone === "destructive" && "[&_svg]:text-destructive")}>
-                      <OptionBody option={o} />
+                    <ComboboxItem key={o.value} value={o} data-value={o.value} disabled={o.disabled} className={cn(showDescriptions && o.description && "items-start py-1", o.tone === "warning" && "[&_svg]:text-warning", o.tone === "destructive" && "[&_svg]:text-destructive")}>
+                      <OptionBody option={o} showDescription={showDescriptions} />
                     </ComboboxItem>
                   )}
                 </ComboboxPrimitive.Collection>
@@ -275,7 +281,15 @@ function ComposerPickerSearch(props: ComposerPickerProps) {
   )
 }
 
-type ModelOption = { id: string; name: string; description?: string; provider?: string; icon?: React.ReactNode; disabled?: boolean }
+type ModelOption = {
+  id: string
+  name: string
+  /** Kept for callers that pass one; shown only with `showDescriptions`. */
+  description?: string
+  provider?: string
+  icon?: React.ReactNode
+  disabled?: boolean
+}
 
 type ModelPickerProps = Omit<ComposerPickerProps, "options" | "label"> & {
   models: ModelOption[]
@@ -283,7 +297,7 @@ type ModelPickerProps = Omit<ComposerPickerProps, "options" | "label"> & {
 }
 
 /** Model menu, grouped by `provider` when given. */
-function ModelPicker({ models, label, heading, ...props }: ModelPickerProps) {
+function ModelPicker({ models, label, heading, showDescriptions = false, ...props }: ModelPickerProps) {
   const { labels } = useLocale()
   const options = models.map<PickerOption>((m) => ({
     value: m.id,
@@ -293,7 +307,7 @@ function ModelPicker({ models, label, heading, ...props }: ModelPickerProps) {
     icon: m.icon,
     disabled: m.disabled,
   }))
-  return <ComposerPicker options={options} label={label ?? labels.model} heading={heading} {...props} />
+  return <ComposerPicker options={options} label={label ?? labels.model} heading={heading} showDescriptions={showDescriptions} {...props} />
 }
 
 type EffortLevel = { value: string; label: string; description?: string }
@@ -305,7 +319,7 @@ type EffortPickerProps = Omit<ComposerPickerProps, "options" | "label"> & {
 }
 
 /** Reasoning effort (thought level), with a bolt glyph. */
-function EffortPicker({ levels, label, icon, heading, compact = true, ...props }: EffortPickerProps) {
+function EffortPicker({ levels, label, icon, heading, compact = true, showDescriptions = false, ...props }: EffortPickerProps) {
   const { labels } = useLocale()
   const defaults: EffortLevel[] = [
     { value: "low", label: labels.effortLow, description: labels.effortLowDescription },
@@ -315,6 +329,7 @@ function EffortPicker({ levels, label, icon, heading, compact = true, ...props }
   return (
     <ComposerPicker
       compact={compact}
+      showDescriptions={showDescriptions}
       options={(levels ?? defaults).map((l) => ({ ...l }))}
       label={label ?? labels.reasoningEffort}
       heading={heading ?? labels.reasoningEffort}

@@ -124,7 +124,6 @@ import AttachmentUploadDemo from "@/registry/base-nova/examples/attachment-uploa
 import FileUploadDemo from "@/registry/base-nova/examples/file-upload-demo"
 import AvailabilitySchedulerDemo from "@/registry/base-nova/examples/availability-scheduler-demo"
 import SignupFormDemo from "@/registry/base-nova/examples/signup-form-demo"
-import NotFoundTerminalDemo from "@/registry/base-nova/examples/not-found-terminal-demo"
 import AvatarDemo from "@/registry/base-nova/examples/avatar-demo"
 import AvatarGeneratorDemo from "@/registry/base-nova/examples/avatar-generator-demo"
 
@@ -350,7 +349,6 @@ export const demos: Record<string, React.ComponentType> = {
   "file-upload": FileUploadDemo,
   "availability-scheduler": AvailabilitySchedulerDemo,
   "signup-form": SignupFormDemo,
-  "not-found-terminal": NotFoundTerminalDemo,
   avatar: AvatarDemo,
   "avatar-generator": AvatarGeneratorDemo,
   "toggle-group": ToggleGroupDemo,

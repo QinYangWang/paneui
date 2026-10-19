@@ -118,7 +118,7 @@ const CSS_EXAMPLE = `:root {
   --primary-hover: #0588f0;       /* blue 10 */
   --primary-subtle: #008ff519;    /* blue a3 */
   --ring: #0084e6a1;              /* blue a8 */
-  --border: #0000000f;            /* gray a3 */
+  --border: #00000017;            /* gray a4 */
   --shadow-lg: 0 0 0 0.5px #0000000f, 0 2px 3px -2px #0000000f, …;
   /* … */
 }
@@ -129,7 +129,7 @@ const CSS_EXAMPLE = `:root {
   --popover: oklch(25.2% 0 0);
   --foreground: #ffffffed;        /* gray a12 */
   --primary-hover: #3b9eff;       /* blue 10 */
-  --border: #ffffff12;            /* gray a3 */
+  --border: #ffffff1b;            /* gray a4 */
   /* … */
 }
 

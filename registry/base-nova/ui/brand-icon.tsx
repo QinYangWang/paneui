@@ -21,6 +21,8 @@ type BrandIconData = {
   path: string
   /** Brand colour, six hex digits without `#`. */
   hex?: string
+  /** Fill rule of the path; marks drawn with cut-outs need `evenodd`. */
+  fillRule?: "nonzero" | "evenodd"
 }
 
 type BrandIconProps = Omit<React.ComponentProps<"svg">, "children" | "color"> & {
@@ -80,7 +82,7 @@ function BrandIcon({ icon, size = 18, color = "current", title, inset = true, cl
       aria-labelledby={props["aria-labelledby"] ?? (title ? id : undefined)}
     >
       {title && <title id={id}>{title}</title>}
-      <path d={icon.path} />
+      <path d={icon.path} fillRule={icon.fillRule} clipRule={icon.fillRule} />
     </svg>
   )
 }

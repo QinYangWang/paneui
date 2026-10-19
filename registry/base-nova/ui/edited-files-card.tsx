@@ -97,10 +97,11 @@ function EditedFilesCard({
     <div
       data-slot="edited-files-card"
       data-open={open || undefined}
-      className={cn("@container/edited-files frame-xl frame-inset-2 overflow-hidden bg-card text-ui shadow-raised", className)}
+      className={cn("@container/edited-files frame-3xl frame-inset-2 overflow-hidden bg-card text-ui shadow-raised", className)}
       {...props}
     >
-      <div className="flex items-center gap-2 py-2 ps-3 pe-2">
+      {/* 44px row: the 28px buttons sit 8px in from the top and end edges, so `rounded-inner` follows the card's corner. */}
+      <div className="flex h-11 items-center gap-2 ps-3 pe-2">
         {/* The summary column clips rather than running under the buttons when the card is narrow. */}
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <span className="truncate font-medium">

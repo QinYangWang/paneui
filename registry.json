@@ -139,10 +139,10 @@
           "warning-foreground": "#fefcfb",
           "warning-subtle": "#ff9c0029",
           "warning-border": "#ff81007d",
-          "border": "#0000000f",
+          "border": "#00000017",
           "border-subtle": "#00000006",
           "border-strong": "#00000026",
-          "input": "#00000026",
+          "input": "#00000017",
           "chart-1": "#0090ff",
           "chart-2": "#ef5f00",
           "chart-3": "#6e56cf",
@@ -156,12 +156,12 @@
           "scrollbar-hover": "#0004",
           "shell": "oklch(97.3% 0 0)",
           "shell-border": "oklch(0% 0 0 / 10%)",
-          "shadow-border": "0 0 0 1px #00000012",
-          "shadow-default": "0 0 0 0.5px #0000 inset, 0 0 0 0.5px #0000000f, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d",
+          "shadow-border": "0 0 0 1px #00000017",
+          "shadow-default": "0 0 0 0.5px #0000 inset, 0 0 0 1px #00000017, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d",
           "shadow-lg": "0 0 0 0.5px #0000000f, 0 2px 3px -2px #0000000f, 0 3px 12px -4px #0000001a, 0 4px 16px -8px #0000000d",
           "shadow-xl": "0 0 0 0.5px #0000 inset, 0 0 0 0.5px #0000000f, 0 8px 40px 0 #0000000d, 0 12px 32px -16px #00000026",
           "skeuo-raised": "var(--shadow-default)",
-          "skeuo-raised-hover": "0 0 0 0.5px #0000 inset, 0 0 0 0.5px #00000026, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d",
+          "skeuo-raised-hover": "0 0 0 0.5px #0000 inset, 0 0 0 1px #00000026, 0 1px 1px -1px #0000001a, 0 1px 2px 0 #0000000d",
           "skeuo-pressed": "var(--shadow-border)",
           "skeuo-primary": "0 1px 2px #0000000d",
           "skeuo-well": "inset 0 0 0 1px var(--input)",
@@ -210,10 +210,10 @@
           "warning-foreground": "#fff",
           "warning-subtle": "#fb6a0025",
           "warning-border": "#fd75045c",
-          "border": "#ffffff12",
+          "border": "#ffffff1b",
           "border-subtle": "#ffffff09",
           "border-strong": "#ffffff2c",
-          "input": "#ffffff2c",
+          "input": "#ffffff1b",
           "chart-1": "#0090ff",
           "chart-2": "#f76b15",
           "chart-3": "#6e56cf",
@@ -227,12 +227,12 @@
           "scrollbar-hover": "#fff5",
           "shell": "#000",
           "shell-border": "oklch(100% 0 0 / 9%)",
-          "shadow-border": "0 0 0 1px #ffffff12",
-          "shadow-default": "0 0 0 0.5px #ffffff12 inset, 0 0 0 0.5px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000",
+          "shadow-border": "0 0 0 1px #ffffff1b",
+          "shadow-default": "0 0 0 1px #ffffff1b inset, 0 0 0 1px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000",
           "shadow-lg": "0 0 0 1px #ffffff2c, 0 2px 3px -2px #00000026, 0 3px 8px -2px #0006, 0 4px 12px -4px #00000080",
           "shadow-xl": "0 0 0 0.5px #ffffff12 inset, 0 0 0 0.5px #0000, 0 8px 40px 0 #0000000d, 0 12px 32px -16px #00000026",
           "skeuo-raised": "var(--shadow-default)",
-          "skeuo-raised-hover": "0 0 0 0.5px #ffffff2c inset, 0 0 0 0.5px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000",
+          "skeuo-raised-hover": "0 0 0 1px #ffffff2c inset, 0 0 0 1px #0000, 0 1px 1px -1px #0000, 0 1px 2px 0 #0000",
           "skeuo-pressed": "var(--shadow-border)",
           "skeuo-primary": "0 0 0 0 transparent",
           "skeuo-well": "inset 0 0 0 1px var(--input)",
@@ -1523,6 +1523,10 @@
         {
           "path": "registry/base-nova/ui/brand-icon.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "lib/brand-marks.ts",
+          "type": "registry:lib"
         }
       ],
       "meta": {
@@ -1580,17 +1584,64 @@
       "name": "og-image",
       "type": "registry:ui",
       "title": "OG Image",
-      "description": "A share card for pages, rendered to PNG at build time.",
+      "description": "A share image for pages, rendered to PNG with ImageResponse.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
         {
           "path": "registry/base-nova/ui/og-image.tsx",
-          "type": "registry:component"
+          "type": "registry:ui"
         }
       ],
       "meta": {
         "category": "Display"
+      }
+    },
+    {
+      "name": "og-image-route",
+      "type": "registry:block",
+      "title": "OG Image Route",
+      "description": "Site share image files for the app folder.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/og-image"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/templates/next-og/opengraph-image.tsx",
+          "type": "registry:file",
+          "target": "app/opengraph-image.tsx"
+        },
+        {
+          "path": "registry/base-nova/templates/next-og/twitter-image.tsx",
+          "type": "registry:file",
+          "target": "app/twitter-image.tsx"
+        }
+      ],
+      "meta": {
+        "category": "Display",
+        "hidden": true
+      }
+    },
+    {
+      "name": "og-image-post-route",
+      "type": "registry:block",
+      "title": "OG Image Post Route",
+      "description": "Per-post share image with seeded cover art.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@qinyang/og-image"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/templates/next-og/opengraph-image-post.tsx",
+          "type": "registry:file",
+          "target": "app/blog/[slug]/opengraph-image.tsx"
+        }
+      ],
+      "meta": {
+        "category": "Display",
+        "hidden": true
       }
     },
     {
@@ -1670,7 +1721,6 @@
         "@qinyang/shader-background",
         "@qinyang/text-reveal",
         "@qinyang/trend-chart",
-        "@qinyang/not-found-terminal",
         "@qinyang/accent-picker",
         "@qinyang/toast",
         "@qinyang/tooltip",
@@ -4963,28 +5013,6 @@
       }
     },
     {
-      "name": "not-found-terminal",
-      "type": "registry:block",
-      "title": "404 Terminal",
-      "description": "404 page styled as a terminal session.",
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "@qinyang/theme",
-        "@qinyang/button"
-      ],
-      "files": [
-        {
-          "path": "registry/base-nova/blocks/not-found-terminal/not-found-terminal.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "meta": {
-        "category": "Blocks"
-      }
-    },
-    {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
@@ -5698,7 +5726,7 @@
       "name": "app-shell",
       "type": "registry:ui",
       "title": "App Shell",
-      "description": "App frame with a header, rail sidebar and inset content panel.",
+      "description": "App frame with a collapsible sidebar and an inset content panel.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -5707,7 +5735,9 @@
         "@qinyang/theme",
         "@qinyang/icons",
         "@qinyang/animated-sidebar",
-        "@qinyang/drawer"
+        "@qinyang/drawer",
+        "@qinyang/menu",
+        "@qinyang/separator"
       ],
       "files": [
         {

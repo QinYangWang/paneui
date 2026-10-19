@@ -56,8 +56,10 @@ direction take `rtl:-scale-x-100` (`polish.md` › Icons).
 Other products' logos (sign-in providers, integrations, agents, languages) use
 `<BrandIcon icon={siGithub} />` from `@qinyang/brand-icon`, with one named import per logo (never
 `import *` or a lookup by slug). `color="brand"` where the logo is the content (a list of apps), the
-default `current` in toolbars and nav. Brands the package leaves out get a neutral icon from the set,
-never a redrawn mark.
+default `current` in toolbars and nav. AI vendors the package leaves out (OpenAI, xAI) come from
+`@/lib/brand-marks` (`markOpenai`, `markXai`), the vendor's published mark in the same shape; any other
+missing brand gets a neutral icon from the set, never a redrawn mark. Models in a picker show their
+vendor's mark.
 
 ## Not icons
 

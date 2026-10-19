@@ -8,6 +8,76 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-19-share-images",
+    date: "October 19, 2026",
+    title: "Share images for Next.js routes",
+    tag: "Components",
+    changes: [
+      <>
+        <TextLink href="/docs/og-image">OG Image</TextLink> renders straight from an <Code>opengraph-image.tsx</Code>{" "}
+        route with <Code>ImageResponse</Code>. It exports <Code>ogImageSize</Code> and <Code>ogImageContentType</Code> for
+        the route&apos;s <Code>size</Code> and <Code>contentType</Code>, and has a new look: title at the bottom, an optional
+        URL, a faint grid or dot backdrop and an accent glow.
+      </>,
+      <>
+        <Code>@qinyang/og-image-route</Code> adds <Code>app/opengraph-image.tsx</Code> and <Code>app/twitter-image.tsx</Code>;{" "}
+        <Code>@qinyang/og-image-post-route</Code> adds a per-post image under <Code>app/blog/[slug]</Code>. The docs site
+        uses the same route for its own share image.
+      </>,
+      <>
+        New: <Code>OgCoverArt</Code>, the <TextLink href="/docs/cover-art">Cover Art</TextLink> compositions drawn for share
+        images. A slug picks the same art in both. The file now installs as a ui component, at{" "}
+        <Code>components/ui/og-image.tsx</Code>.
+      </>,
+    ],
+  },
+  {
+    id: "2026-10-19-sidebar-first-app-shell",
+    date: "October 19, 2026",
+    title: "Sidebar-first App Shell, one border colour",
+    tag: "Components",
+    changes: [
+      <>
+        <TextLink href="/docs/app-shell">App Shell</TextLink> leads with a full-height sidebar: a team switcher
+        (<Code>AppShellSwitcher</Code>) on top, folding groups, projects and the user menu at the foot, and the panel&apos;s own
+        header (<Code>AppShellInsetHeader</Code>) with the trigger, a divider and a breadcrumb. Add{" "}
+        <Code>AppShellHeader</Code> for the header-first layout, now its own example.
+      </>,
+      <>
+        The sidebar&apos;s edge line no longer runs past the inset panel&apos;s rounded corners, and the floating rail&apos;s
+        icons sit on the trigger&apos;s column again (they were 3px off).
+      </>,
+      <>
+        Outline buttons, cards, select and combobox triggers, fields, tab lists and dividers share one edge colour,{" "}
+        <Code>--border</Code> (gray a4) at 1px, in light and dark. <Code>--input</Code> now equals it.
+      </>,
+      <>
+        <TextLink href="/docs/edited-files-card">Edited Files Card</TextLink>: Undo, Review and the toggle follow the
+        card&apos;s corner.
+      </>,
+    ],
+  },
+  {
+    id: "2026-10-19-pickers-and-sparklines",
+    date: "October 19, 2026",
+    title: "Vendor logos in the model picker, sparkline gaps",
+    tag: "Components",
+    changes: [
+      <>
+        <TextLink href="/docs/model-picker">Model Picker</TextLink>: model and effort rows show the name only. A{" "}
+        <Code>description</Code> still type-checks and shows with <Code>showDescriptions</Code>. The examples and the
+        agent templates show each model&apos;s vendor logo; OpenAI and xAI marks ship in <Code>lib/brand-marks.ts</Code>{" "}
+        with <TextLink href="/docs/brand-icon">Brand Icon</TextLink>.
+      </>,
+      <>
+        <TextLink href="/docs/sparkline">Sparkline</TextLink> takes missing points (<Code>null</Code>). <Code>gap</Code>{" "}
+        bridges them with a faint dashed line (default), breaks the line or plots zero. An empty or one-point series
+        draws a flat dashed baseline. The line no longer breaks into dashes when the chart is stretched.
+      </>,
+      <>Removed: 404 Terminal. The SaaS template&apos;s 404 page uses Empty State.</>,
+    ],
+  },
+  {
     id: "2026-10-18-ios-zoom-lock",
     date: "October 18, 2026",
     title: "iOS Zoom Lock",
