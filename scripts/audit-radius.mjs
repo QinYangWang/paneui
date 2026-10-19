@@ -14,9 +14,9 @@
  * show on hover/selection), the rest as "visible".
  *
  * Usage
- *   pnpm audit:radius                      # light theme, docs index pages + /
+ *   pnpm audit:radius                      # light theme, docs index pages + the components gallery
  *   pnpm audit:radius -- --dark            # dark theme
- *   pnpm audit:radius -- --pages menu,card # only these docs pages ("/" for the home page)
+ *   pnpm audit:radius -- --pages menu,card # only these docs pages ("components" for the gallery)
  *   pnpm audit:radius -- --all             # every page under out/docs (blocks too)
  *   pnpm audit:radius -- --no-actions      # skip the hover/click steps from the config
  *   pnpm audit:radius -- --url <u1,u2>     # audit arbitrary pages (e.g. a local demo harness)
@@ -73,8 +73,8 @@ function docNames() {
 let pages
 if (opt("--url")) pages = opt("--url").split(",").map((s) => s.trim()).filter(Boolean)
 else if (opt("--pages")) pages = opt("--pages").split(",").map((s) => s.trim()).filter(Boolean)
-else if (flag("--all")) pages = ["/", ...fs.readdirSync(path.join(ROOT, "out/docs")).filter((d) => !d.includes("."))]
-else pages = ["/", ...docNames()]
+else if (flag("--all")) pages = ["components", ...fs.readdirSync(path.join(ROOT, "out/docs")).filter((d) => !d.includes("."))]
+else pages = ["components", ...docNames()]
 const urlFor = (p) => (/^(https?|file):/.test(p) ? p : p === "/" ? `${BASE}/` : `${BASE}/docs/${p}/`)
 
 // ── in-page measurement ─────────────────────────────────────────────────────

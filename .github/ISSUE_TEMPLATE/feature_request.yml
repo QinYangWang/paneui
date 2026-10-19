@@ -1,0 +1,25 @@
+name: Feature request
+description: A new component, block, template or capability.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+      description: The situation or UI you cannot build well today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What do you propose?
+      description: The API or behaviour you have in mind. Sketches help.
+    validations:
+      required: true
+  - type: input
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: What you tried or considered instead.
+    validations:
+      required: false

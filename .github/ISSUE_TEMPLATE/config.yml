@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://qinyangwang.github.io/ui/docs
+    about: Installation, theming, CLI and design rules.
+  - name: Components overview
+    url: https://qinyangwang.github.io/ui/docs/components
+    about: Live previews of every component, block and template.
