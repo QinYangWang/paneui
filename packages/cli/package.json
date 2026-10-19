@@ -21,7 +21,7 @@
   "bugs": "https://github.com/QinYangWang/ui/issues",
   "type": "module",
   "bin": {
-    "taimatsu": "./dist/index.js"
+    "taimatsu": "dist/index.js"
   },
   "files": [
     "dist",
