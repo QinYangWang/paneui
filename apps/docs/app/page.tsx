@@ -1,30 +1,12 @@
 import type { Metadata } from "next"
 
-import { Hero } from "@/components/landing/hero"
-import { InstallSteps } from "@/components/landing/install-steps"
-import { LandingFooter } from "@/components/landing/landing-footer"
-import { Principles } from "@/components/landing/principles"
-import { Showcase } from "@/components/landing/showcase"
-import { getItems } from "@/lib/docs"
+import { LandingPage } from "@/components/landing/landing-page"
 
 export const metadata: Metadata = {
-  title: { absolute: "paneui" },
-  description: "React components that feel at home on the desktop.",
+  title: { absolute: "paneui — Small panes. Big ideas." },
+  description: "React components for interfaces people work in. Own the source, shape every detail.",
 }
 
-/** Registry demos shown in the showcase panes, in display order. */
-const SHOWCASE = ["button", "tabs", "avatar", "switch", "task-row", "command-palette"]
-
-export default function LandingPage() {
-  const items = getItems()
-  const panes = SHOWCASE.map((name) => ({ name, title: items.find((i) => i.name === name)?.title ?? name }))
-  return (
-    <div className="flex flex-col gap-10">
-      <Hero />
-      <Showcase panes={panes} />
-      <Principles />
-      <InstallSteps />
-      <LandingFooter />
-    </div>
-  )
+export default function Home() {
+  return <LandingPage />
 }

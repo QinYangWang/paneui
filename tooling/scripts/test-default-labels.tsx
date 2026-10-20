@@ -9,6 +9,7 @@ import { LocaleProvider, localeLabels } from "@paneui/ui/components/locale-provi
 import { Outline } from "@paneui/ui/components/outline"
 import { Pagination } from "@paneui/ui/components/pagination"
 import { ThemeToggle } from "@paneui/ui/components/theme-toggle"
+import { Tabs, TabsList, TabsTab } from "@paneui/ui/components/tabs"
 
 let failed = 0
 const check = (name: string, ok: boolean, html?: string) => {
@@ -41,6 +42,17 @@ for (const locale of ["en", "zh-CN"] as const) {
     const html = renderToString(<LocaleProvider locale={locale}>{c.node}</LocaleProvider>)
     check(`${locale} ${c.slot}: aria-label="Custom" wins`, has(html, c.slot, "Custom"), html)
   }
+}
+
+// A text-producing component has no children, but is not an icon-only tab.
+function TranslatedLabel() { return <>Overview</> }
+for (const [name, node, iconOnly] of [
+  ["translated text keeps padding", <TabsTab key="translated" value="one"><TranslatedLabel /></TabsTab>, false],
+  ["named icon uses square target", <TabsTab key="icon" value="one" aria-label="Overview"><svg /></TabsTab>, true],
+  ["plain text keeps padding", <TabsTab key="text" value="one">Overview</TabsTab>, false],
+] as const) {
+  const html = renderToString(<Tabs defaultValue="one"><TabsList>{node}</TabsList></Tabs>)
+  check(`tabs: ${name}`, html.includes('data-icon-only=""') === iconOnly, html)
 }
 
 if (failed) {
