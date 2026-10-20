@@ -1,15 +1,25 @@
 ---
 name: paneui-design
-description: Design rules and checks for paneui interfaces.
+description: Build and review paneui Web and Native interfaces using shared design values and platform-specific interaction rules.
 ---
 
 # paneui design
 
-paneui is a desktop-density component library: a 13px type scale, translucent fills on opaque
-surfaces, alpha hairlines, four elevation levels, corners that derive from one `--radius` and stop at
-16px, one accent swapped through eight role tokens. These rules keep every screen and every coding
-agent on that one style. Each rule is a short instruction, the reason, and what to write; the
-references hold the exact values.
+paneui shares semantic colours, spacing, radius, typography hierarchy and wording across renderers.
+Web uses desktop density and browser primitives. Native uses touch dimensions and native views. The numbered rules describe the shared intent with Web examples. Use the platform
+references to translate that intent before editing a different renderer.
+
+## Choose the platform
+
+| Work | Read | Apply |
+| --- | --- | --- |
+| Shared design values or state | `references/platforms.md` | Semantic roles, package boundaries and platform-independent logic |
+| Web components, docs or desktop renderer | `references/web.md`, then the relevant topic reference | CSS tokens, DOM semantics, keyboard and pointer behaviour |
+| Native components or showcase | `references/native.md`, then `references/platforms.md` | Native style tokens, touch, safe areas, font scaling and native accessibility |
+
+Keep one source of design values. Component implementations, navigation and platform APIs can
+vary. A showcase rendered in a browser remains a browser check; validate device behaviour on the
+target platforms. The Web density and CSS recipes below do not override Native guidance.
 
 ## Install
 
@@ -25,6 +35,7 @@ item). See `references/registry.md`.
 ```bash
 node .agents/skills/paneui-design/scripts/check.mjs            # wherever the skill was installed
 node .agents/skills/paneui-design/scripts/check.mjs app src    # only these paths
+node .agents/skills/paneui-design/scripts/check.mjs --self-test
 ```
 
 Static checks for most of the rules below (tokens, radius, type, motion, icons, hit areas, copy,
@@ -34,7 +45,17 @@ on errors (`--strict`: warnings too), `--json` for tools, `--list` for the rule 
 `paneui-design.config.json` (allow-list a file with a reason, add names that must not appear in copy);
 silence one line with a comment `design-check-ignore <rule> -- <reason>` above it.
 
-Some rules need the rendered page: open the screen in a browser (menus open, a row hovered) and paste
+The checker detects Native source from its imports or configured `platforms.native` globs.
+Configure `platforms.shared` globs for shared core modules. Native checks report literal style
+colours, fixed touch targets below 44px, disabled font scaling, missing primitive roles or names,
+and literal radii above the cap. Shared-boundary checks reject platform dependencies in core.
+These AST checks need the TypeScript parser. A passing result does not prove that indirect styles,
+prop spreads, contrast, actual target bounds or device accessibility are correct.
+
+Web rendering checks use the browser probes below. Native rendering checks follow the device
+checklist in `references/native.md`; DOM probes do not inspect a native view tree.
+
+Some Web rules need the rendered page: open the screen in a browser (menus open, a row hovered) and paste
 `scripts/radius-probe.js` into the console for corners more than 2px off concentric, and
 `scripts/polish-probe.js` for small or overlapping hit areas, button padding, image outlines, heading
 wrap, live numbers, smoothing and compositing hints. Run the check before you commit and fix what it
@@ -141,6 +162,9 @@ Buttons and inputs `h-8` (sm `h-7`, xs `h-6`, lg `h-9`), menu rows 26px, sidebar
 at the control size on phones too; where iOS focus zoom gets in the way, mount the opt-in `IosZoomLock` once
 (recommended) or give that field `max-md:text-base`; never turn zoom off for the whole page (check:
 `viewport-zoom`).
+
+Native components use the same semantic colours and type hierarchy with touch dimensions from
+`references/native.md`. Web control heights above apply to the Web implementation.
 
 ### 14. Space related things closer
 
@@ -376,4 +400,7 @@ itself is left to right (code gutters) or a stored setting is physical (an email
 | `references/charts.md` | Chart palette, order, swatches, labels |
 | `references/motion-a11y.md` | Springs, durations, press, reduced motion, focus, dark mode |
 | `references/polish.md` | Hit areas, optical alignment, image outlines, icon swaps, exits, compositing, reviewing a screen, where this skill differs from common polish advice |
+| `references/platforms.md` | Shared values, dependency boundaries and cross-platform contracts |
+| `references/web.md` | Web rule scope, browser interaction and validation |
+| `references/native.md` | Native tokens, touch, accessibility, motion and device validation |
 | `references/registry.md` | Installing, upgrading, adding items, the checks |

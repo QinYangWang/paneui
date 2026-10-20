@@ -1,0 +1,30 @@
+"use client"
+
+import { DirectionProvider } from "@base-ui/react/direction-provider"
+import { Button } from "@paneui/ui/components/button"
+import { ToastProvider, useToast } from "@paneui/ui/components/toast"
+
+function Trigger() {
+  const toast = useToast()
+  return (
+    <Button
+      variant="secondary"
+      onClick={() => toast.add({ title: "تم تقديم الطلب", description: "تصل ٢٠٠ قطعة يوم الخميس.", type: "success" })}
+    >
+      إظهار إشعار
+    </Button>
+  )
+}
+
+export default function ToastRtl() {
+  return (
+    <DirectionProvider direction="rtl">
+      {/* A provider inside the direction provider puts its toasts at the bottom left. */}
+      <ToastProvider>
+        <div dir="rtl">
+          <Trigger />
+        </div>
+      </ToastProvider>
+    </DirectionProvider>
+  )
+}

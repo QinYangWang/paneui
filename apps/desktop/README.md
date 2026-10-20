@@ -1,7 +1,7 @@
 # Desktop code editor
 
 The `vscode` template in a native window. It imports the template from this repo's source, so changes to
-`registry/base-nova/templates/vscode` show up here.
+`apps/docs/registry/templates/vscode` show up here.
 
 - **Folders on disk.** File › Open Folder loads a folder. Saves and explorer changes write to it, and changes made
   elsewhere show up. `node_modules`, `.git` and build folders are skipped, as are binary files and files over 1 MB.

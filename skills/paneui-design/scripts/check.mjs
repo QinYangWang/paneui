@@ -4,7 +4,7 @@
  *
  *   node <skill>/scripts/check.mjs [paths…] [--strict] [--quiet] [--json] [--rules a,b] [--list]
  *
- *   paths      files or folders (default: app, src, components, registry, lib, content, skills
+ *   paths      files or folders (default: app, src, apps, packages, components, registry, lib, content, skills
  *              and registry.json, whichever exist)
  *   --strict   exit 1 on warnings too (default: errors only)
  *   --quiet    print errors only
@@ -29,6 +29,7 @@
  *   }
  * One line: put `design-check-ignore <rule> -- <reason>` in a comment on the line above.
  */
+import { checkNativeSource } from "./native-checks.mjs"
 import { createHash } from "node:crypto"
 import { spawnSync } from "node:child_process"
 import fs from "node:fs"
@@ -49,6 +50,12 @@ const inputs = argv.filter((a) => !a.startsWith("--") && !optValues.has(a))
 /* ────────────────────────────── rules ────────────────────────────── */
 
 const RULES = {
+  "native-colors": ["error", "Native style colours come from semantic tokens."],
+  "native-touch-target": ["error", "Native controls have a 44px minimum effective target."],
+  "native-font-scaling": ["error", "Native text respects system font scaling."],
+  "native-accessibility": ["error", "Native primitives expose roles and accessible names."],
+  "native-radius": ["error", "Native radius stays within the shared cap."],
+  "platform-boundary": ["error", "Shared source has no platform dependencies; Native has no Web dependencies."],
   "no-palette-colors": ["error", "Colours come from theme tokens, never the Tailwind palette."],
   "no-hex-colors": ["error", "No hex or rgb literals in classes or component CSS; add a token."],
   "on-solid-text": ["error", "Text on a solid uses its *-foreground token, never text-white."],
@@ -115,7 +122,7 @@ const PRESS_SCALE_OK = new Set([
   "expandable-control", "card-folder", "message-bubble",
   ...(config.pressScale ?? []),
 ])
-const IGNORE_DIRS = new Set(["node_modules", ".next", "out", "dist", "build", "public", ".git", ".agents", ".claude", ".turbo", "coverage"])
+const IGNORE_DIRS = new Set(["node_modules", ".next", "out", "dist", "build", "public", ".git", ".agents", ".claude", ".turbo", "coverage", ".expo"])
 const ignoreGlobs = (config.ignore ?? []).map(globToRegExp)
 const allow = (config.allow ?? []).map((a) => ({ ...a, re: a.file ? globToRegExp(a.file) : null }))
 
@@ -173,7 +180,7 @@ const fileLines = new Map()
 
 /* ────────────────────────────── files ────────────────────────────── */
 
-const DEFAULT_ROOTS = ["app", "src", "components", "registry", "lib", "content", "skills", "registry.json"]
+const DEFAULT_ROOTS = ["app", "src", "apps", "packages", "components", "registry", "lib", "content", "skills", "registry.json"]
 const roots = (inputs.length ? inputs : DEFAULT_ROOTS).map((p) => path.resolve(cwd, p)).filter((p) => fs.existsSync(p))
 const EXTS = /\.(tsx|ts|jsx|js|mjs|cjs|css|md|mdx)$/
 const files = []
@@ -398,6 +405,10 @@ function boxOf(classes) {
 function checkSourceTs(file, text) {
   const kind = /\.tsx$/.test(file) ? ts.ScriptKind.TSX : /\.jsx$/.test(file) ? ts.ScriptKind.JSX : /\.ts$/.test(file) ? ts.ScriptKind.TS : ts.ScriptKind.JS
   const sf = ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true, kind)
+  const relative = relPath(file)
+  const matches = (patterns) => (patterns ?? []).some((pattern) => globToRegExp(pattern).test(relative))
+  const native = matches(config.platforms?.native) || /\.native\.[jt]sx?$/.test(file) || sf.statements.some((node) => ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier) && /^(react-native|@paneui\/ui-native)(?:\/|$)/.test(node.moduleSpecifier.text))
+  checkNativeSource(ts, sf, { native, shared: matches(config.platforms?.shared), report })
   const lineOf = (pos) => sf.getLineAndCharacterOfPosition(pos).line + 1
 
   // Comments, from the scanner so strings and regexes never read as comments.
@@ -830,7 +841,7 @@ function checkUpgrade() {
 const SELF = path.resolve(fileURLToPath(import.meta.url))
 
 // Rules that read JSX structure, so they only run with the TypeScript parser.
-const JSX_RULES = new Set(["concentric-radius", "menu-label-group", "tabular-nums", "text-wrap", "media-outline", "hit-area", "presence-initial", "exit-subtle", "icon-swap", "icon-stroke", "icon-weight", "nav-active-icon", "icon-size", "icon-color", "icon-rtl", "optical-icon-padding", "icon-button-label"])
+const JSX_RULES = new Set(["native-colors", "native-touch-target", "native-font-scaling", "native-accessibility", "native-radius", "platform-boundary", "concentric-radius", "menu-label-group", "tabular-nums", "text-wrap", "media-outline", "hit-area", "presence-initial", "exit-subtle", "icon-swap", "icon-stroke", "icon-weight", "nav-active-icon", "icon-size", "icon-color", "icon-rtl", "optical-icon-padding", "icon-button-label"])
 
 // --self-test: every examples/<rule>/bad.tsx must trip <rule>; every good.tsx must be clean.
 if (flag("--self-test")) {
@@ -838,6 +849,8 @@ if (flag("--self-test")) {
   PRESS_SCALE_OK.add("good").add("bad")
   config.rtl = true
   themeSmooths = false
+  config.platforms ??= {}
+  config.platforms.shared = [...(config.platforms.shared ?? []), relPath(path.join(dir, "platform-boundary", "*.tsx"))]
   let failed = 0, cases = 0
   for (const rule of fs.readdirSync(dir).sort()) {
     if (!RULES[rule]) {

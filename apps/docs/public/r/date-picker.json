@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker",
+  "title": "Date Picker",
+  "description": "Field that opens a calendar to pick one date.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/icons.json",
+    "https://paneui.dev/r/control-size.json",
+    "https://paneui.dev/r/calendar.json",
+    "https://paneui.dev/r/popover.json",
+    "https://paneui.dev/r/select.json",
+    "https://paneui.dev/r/locale-provider.json"
+  ],
+  "files": [
+    {
+      "path": "registry/web/ui/date-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\"\nimport { Popover as PopoverPrimitive } from \"@base-ui/react/popover\"\n\nimport { CalendarIcon, ChevronsUpDownIcon } from \"@/components/icons\"\nimport { useControlSize, type ControlSize } from \"@/lib/control-size\"\nimport { cn } from \"@/lib/utils\"\nimport { Calendar, type CalendarProps } from \"@/registry/web/ui/calendar\"\nimport { PopoverContent } from \"@/registry/web/ui/popover\"\nimport { selectTriggerVariants } from \"@/registry/web/ui/select\"\nimport { useLocale } from \"@/registry/web/ui/locale-provider\"\n\ntype DatePickerProps = Omit<Extract<CalendarProps, { mode?: \"single\" }>, \"mode\" | \"className\"> & {\n  className?: string\n  placeholder?: string\n  /** How the chosen date reads on the trigger. */\n  formatOptions?: Intl.DateTimeFormatOptions\n  size?: ControlSize\n  /** Keep the popup open after a date is picked. */\n  keepOpen?: boolean\n  \"aria-label\"?: string\n}\n\nconst subscribeNothing = () => () => {}\n/** The given locale, or en-US until hydration, so the server and the first client render print the same text. */\nfunction useStableLocale(locale?: string) {\n  const hydrated = React.useSyncExternalStore(subscribeNothing, () => true, () => false)\n  return locale ?? (hydrated ? undefined : \"en-US\")\n}\n/** ICU versions differ on thin / narrow no-break spaces around range dashes; print plain spaces. */\nconst plainSpaces = (s: string) => s.replace(/[\\u2009\\u202f]/g, \" \")\n\n/** A field that opens a calendar for one date. */\nfunction DatePicker({\n  value,\n  defaultValue,\n  onValueChange,\n  placeholder: placeholderProp,\n  formatOptions = { dateStyle: \"medium\" },\n  size,\n  keepOpen = false,\n  locale: localeProp,\n  className,\n  \"aria-label\": ariaLabel,\n  ...calendarProps\n}: DatePickerProps) {\n  const { labels } = useLocale()\n  const placeholder = placeholderProp ?? labels.pickDate\n  const resolved = useControlSize(size)\n  const locale = useStableLocale(localeProp)\n  const [open, setOpen] = React.useState(false)\n  const [inner, setInner] = React.useState<Date | null>(defaultValue ?? null)\n  const date = value !== undefined ? value : inner\n  const text = date ? plainSpaces(new Intl.DateTimeFormat(locale, formatOptions).format(date)) : \"\"\n\n  return (\n    <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>\n      <PopoverPrimitive.Trigger\n        data-slot=\"date-picker-trigger\"\n        data-size={resolved}\n        data-placeholder={!text || undefined}\n        aria-label={ariaLabel}\n        className={cn(selectTriggerVariants({ size: resolved }), \"min-w-44\", className)}\n      >\n        <CalendarIcon className=\"text-muted-foreground\" />\n        <span className={cn(\"flex-1 truncate text-start tabular-nums\", !text && \"text-muted-foreground\")}>{text || placeholder}</span>\n        <ChevronsUpDownIcon className=\"text-muted-foreground\" />\n      </PopoverPrimitive.Trigger>\n      <PopoverContent data-slot=\"date-picker-content\" align=\"center\" className=\"w-auto p-1\">\n        <Calendar\n          mode=\"single\"\n          value={date}\n          locale={localeProp}\n          onValueChange={(d) => {\n            if (value === undefined) setInner(d)\n            onValueChange?.(d)\n            if (d && !keepOpen) setOpen(false)\n          }}\n          {...calendarProps}\n        />\n      </PopoverContent>\n    </PopoverPrimitive.Root>\n  )\n}\n\nexport { DatePicker }\nexport type { DatePickerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Forms"
+  },
+  "type": "registry:ui"
+}

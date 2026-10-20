@@ -1,0 +1,5 @@
+@import "@paneui/tokens/styles/globals.css";
+
+@source "../../../packages/ui/src";
+@source "../registry";
+@source "../components";

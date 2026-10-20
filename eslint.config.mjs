@@ -27,20 +27,20 @@ const compat = new FlatCompat({
 // ───────────────────────────────────────────────────────────────────────────
 
 const LIBRARY_FILES = [
-  "registry/base-nova/ui/**/*.{ts,tsx}",
-  "registry/base-nova/blocks/**/*.{ts,tsx}",
-  "components/icons.tsx",
-  "registry/base-nova/icons/**/*.tsx",
+  "packages/ui/src/components/**/*.{ts,tsx}",
+  "packages/ui/src/blocks/**/*.{ts,tsx}",
+  "packages/ui/src/icons/index.tsx",
+  "packages/ui/src/icons/**/*.tsx",
 ];
 
 const CONSUMER_FILES = [
-  "registry/base-nova/examples/**/*.{ts,tsx}",
-  "registry/base-nova/templates/**/*.{ts,tsx}",
-  "app/**/*.{ts,tsx}",
-  "components/docs/**/*.{ts,tsx}",
+  "apps/docs/registry/examples/**/*.{ts,tsx}",
+  "apps/docs/registry/templates/**/*.{ts,tsx}",
+  "apps/docs/app/**/*.{ts,tsx}",
+  "apps/docs/components/docs/**/*.{ts,tsx}",
 ];
 
-const THEME = "app/globals.css";
+const THEME = "packages/tokens/styles/globals.css";
 const TOKENS =
   "background, foreground, card, popover, primary, secondary, muted, muted-foreground, accent, destructive, success, warning, border, input, ring";
 
@@ -146,9 +146,10 @@ const designSystemRules = [
   {
     files: ["**/*.{ts,tsx}"],
     settings: {
+      next: { rootDir: fileURLToPath(new URL("./apps/docs/", import.meta.url)) },
       shadcn: {
-        ui: ["@/registry/base-nova/ui", "@/registry/base-nova/blocks"],
-        componentImports: ["^@/components/icons$"],
+        ui: ["@paneui/ui/components", "@paneui/ui/blocks"],
+        componentImports: ["^@paneui/ui/icons$"],
         note: "See AGENTS.md for paneui design rules.",
       },
     },
@@ -346,13 +347,15 @@ const eslintConfig = [
   {
     // `next lint` ignored these implicitly; `eslint .` needs them spelled out.
     ignores: [
-      ".next/**",
-      "out/**",
-      "public/**",
-      "node_modules/**",
-      "next-env.d.ts",
+      "**/.next/**",
+      "**/out/**",
+      "**/public/**",
+      "**/node_modules/**",
+      "**/next-env.d.ts",
       // The desktop example: its own install and toolchain.
-      "apps/",
+      "apps/desktop/**",
+      "apps/native/dist/**",
+      "apps/native/.expo/**",
       // Build output of the workspace packages.
       "packages/*/dist/**",
       // Vendored agent skills (installed via skills-lock.json), not our code.
@@ -367,17 +370,23 @@ const eslintConfig = [
   {
     // @shadcn/lint: register the plugin. eslint-config-next already sets up
     // the TypeScript/JSX parser for these files, so no parser override here.
-    files: ["**/*.{js,jsx,ts,tsx}"],
+    files: ["**/*.{js,jsx,ts,tsx,mjs,cjs}"],
+    settings: { next: { rootDir: fileURLToPath(new URL("./apps/docs/", import.meta.url)) } },
     plugins: { shadcn: shadcnPlugin, paneui: paneuiPlugin },
   },
   ...designSystemRules,
+  {
+    files: ["apps/native/**/*.{ts,tsx}", "packages/ui-native/**/*.{ts,tsx}"],
+    // Native browser links load a separate application, outside the docs router.
+    rules: { "@next/next/no-html-link-for-pages": "off" },
+  },
   {
     files: [...LIBRARY_FILES, ...CONSUMER_FILES],
     rules: { "paneui/concentric-radius": "warn" },
   },
   {
     // The share card is rendered to SVG at build time, never served as a page image.
-    files: ["registry/base-nova/ui/og-image.tsx"],
+    files: ["packages/ui/src/components/og-image.tsx"],
     rules: { "@next/next/no-img-element": "off" },
   },
 ];

@@ -1,4 +1,4 @@
-import type { TerminalTransport } from "@/registry/base-nova/ui/terminal"
+import type { TerminalTransport } from "@paneui/ui/components/terminal"
 
 import type { DesktopBridge } from "../shared/bridge"
 

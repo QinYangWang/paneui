@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "action-swap-roll",
+  "title": "Action Swap Roll",
+  "description": "Rolls between button states.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/action-swap-blur.json"
+  ],
+  "files": [
+    {
+      "path": "registry/web/ui/action-swap-roll.tsx",
+      "content": "import {\n  ActionSwapButton,\n  ActionSwapIcon,\n  ActionSwapText,\n  type ActionSwapButtonProps,\n  type ActionSwapIconProps,\n  type ActionSwapItem,\n  type ActionSwapTextProps,\n} from \"@/registry/web/ui/action-swap-blur\"\n\n/* Roll preset: the next label and icon roll up from below through a soft blur while the old ones lift out. */\n\ntype ActionSwapRollButtonProps = Omit<ActionSwapButtonProps, \"animation\">\ntype ActionSwapRollTextProps = Omit<ActionSwapTextProps, \"animation\">\ntype ActionSwapRollIconProps = Omit<ActionSwapIconProps, \"animation\">\n\nfunction ActionSwapRollButton(props: ActionSwapRollButtonProps) {\n  return <ActionSwapButton {...props} animation=\"roll\" />\n}\n\nfunction ActionSwapRollText(props: ActionSwapRollTextProps) {\n  return <ActionSwapText {...props} animation=\"roll\" />\n}\n\nfunction ActionSwapRollIcon(props: ActionSwapRollIconProps) {\n  return <ActionSwapIcon {...props} animation=\"roll\" />\n}\n\nexport {\n  ActionSwapRollButton,\n  ActionSwapRollText,\n  ActionSwapRollIcon,\n  type ActionSwapItem,\n  type ActionSwapRollButtonProps,\n  type ActionSwapRollTextProps,\n  type ActionSwapRollIconProps,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Text"
+  },
+  "type": "registry:ui"
+}

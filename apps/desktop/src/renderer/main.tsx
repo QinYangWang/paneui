@@ -4,7 +4,7 @@ import "./app.css"
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 
-import { VsCodeApp } from "@/registry/base-nova/templates/vscode/vscode"
+import { VsCodeApp } from "@/registry/templates/vscode/vscode"
 
 import { createDesktopHost } from "./host"
 import { followSystemTheme } from "./theme"

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "base-nova",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "../tokens/styles/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@paneui/ui",
+    "ui": "@paneui/ui/components",
+    "utils": "@paneui/ui/lib/utils",
+    "lib": "@paneui/ui/lib"
+  },
+  "iconLibrary": "lucide"
+}

@@ -14,8 +14,9 @@ node_modules/
 /coverage
 
 # next.js
-/.next/
+**/.next/
 /out/
+**/.wrangler/
 
 # production
 /build
@@ -40,8 +41,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# static export (root and apps/desktop)
+# static export and application build output
 out/
+apps/native/dist/
+.expo/
 
 # workspace package builds
 packages/*/dist/

@@ -1,0 +1,314 @@
+"use client"
+
+import * as React from "react"
+import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
+import { mergeProps } from "@base-ui/react/merge-props"
+import { useRender } from "@base-ui/react/use-render"
+
+import { ChevronRightIcon, SearchIcon } from "@paneui/ui/icons"
+import { cn } from "@paneui/ui/lib/utils"
+import { Kbd } from "@paneui/ui/components/kbd"
+import { useLocale } from "@paneui/ui/components/locale-provider"
+
+/*
+ * Compact text navigation for docs and settings sidebars: a search field, collapsible sections
+ * and groups, and rows that all start on one left edge. The current row is a fill plus a 2px bar
+ * in the gutter.
+ *
+ * Icons: when a list (or a section's rows) holds a row or group label with an `icon`, the rows
+ * and labels beside it that have none move in by the icon's width, so every text starts on one
+ * edge. That happens on its own; set `--sidebar-nav-inset` on a wrapper to force or cancel it.
+ *
+ *   <SidebarNav>
+ *     <SidebarNavSearch shortcut="⌘K" onClick={openSearch} />
+ *     <SidebarNavContent aria-label="Docs">
+ *       <SidebarNavSection label="Guides" count={3}>
+ *         <SidebarNavList>
+ *           <SidebarNavLink href="/docs" active>Introduction</SidebarNavLink>
+ *         </SidebarNavList>
+ *         <SidebarNavSection level="group" label="Forms" href="/docs/forms">…</SidebarNavSection>
+ *       </SidebarNavSection>
+ *     </SidebarNavContent>
+ *     <SidebarNavFooter>…</SidebarNavFooter>
+ *   </SidebarNav>
+ */
+
+/*
+ * The icon-aligned inset. A container whose direct rows or group labels carry an icon sets
+ * `--sidebar-nav-inset` to the icon slot plus its gap (16px + 8px); rows and labels without an
+ * icon add it to their start padding. Nested groups inherit it, so their rows line up too.
+ */
+const iconInsetScope =
+  "[&:has(>[data-slot=sidebar-nav-list]>[data-slot=sidebar-nav-item]>*>[data-slot=sidebar-nav-link-icon])]:[--sidebar-nav-inset:1.5rem] [&:has(>[data-slot=sidebar-nav-section]>[data-slot=sidebar-nav-section-label]_[data-slot=sidebar-nav-section-icon])]:[--sidebar-nav-inset:1.5rem]"
+const insetStart = "ps-[calc(0.5rem+var(--sidebar-nav-inset,0px))] pe-2"
+
+function SidebarNav({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="sidebar-nav" className={cn("flex min-h-0 flex-1 flex-col", className)} {...props} />
+}
+
+/** A field-shaped button that opens your search (a command palette). Its text defaults to the locale's "Search". */
+function SidebarNavSearch({
+  shortcut,
+  children,
+  className,
+  ...props
+}: React.ComponentProps<"button"> & { shortcut?: React.ReactNode }) {
+  const { labels } = useLocale()
+  return (
+    <div data-slot="sidebar-nav-search" className="shrink-0 px-3 pt-3 pb-2">
+      <button
+        type="button"
+        // the key cap sits 8px into the field: concentric with it at large radii
+        className={cn(
+          "flex h-8 w-full cursor-pointer items-center gap-2 frame-lg frame-inset-2 bg-background px-2.5 text-ui text-muted-foreground shadow-well outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 dark:bg-input/32 [&>[data-slot=kbd]]:rounded-inner-or-2xs",
+          className
+        )}
+        {...props}
+      >
+        <SearchIcon className="size-3.5 shrink-0" />
+        <span className="flex-1 text-start">{children ?? labels.searchPlaceholder}</span>
+        {shortcut && <Kbd size="sm">{shortcut}</Kbd>}
+      </button>
+    </div>
+  )
+}
+
+/**
+ * The scrolling list of sections. On mount it scrolls the current row (`aria-current="page"`)
+ * into view when it would start below the fold.
+ */
+function SidebarNavContent({ className, children, ...props }: React.ComponentProps<"nav">) {
+  const ref = React.useRef<HTMLElement>(null)
+  React.useEffect(() => {
+    const box = ref.current
+    const el = box?.querySelector<HTMLElement>('[aria-current="page"]')
+    if (!box || !el) return
+    const top = el.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop
+    if (top > box.clientHeight - 80) box.scrollTop = Math.max(0, top - box.clientHeight / 2 + el.offsetHeight / 2)
+  }, [])
+  return (
+    <nav
+      ref={ref}
+      data-slot="sidebar-nav-content"
+      className={cn("scrollbar-hover min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 pb-4", className)}
+      {...props}
+    >
+      <div className={cn("flex flex-col gap-4", iconInsetScope)}>{children}</div>
+    </nav>
+  )
+}
+
+type SidebarNavSectionProps = Omit<CollapsiblePrimitive.Root.Props, "children"> & {
+  label: React.ReactNode
+  /** Muted count after the label. */
+  count?: number
+  /** `section`: a top-level heading; `group`: a smaller muted heading inside a section. */
+  level?: "section" | "group"
+  /** A section with no toggle (always open). */
+  collapsible?: boolean
+  /** Makes the label a link to the section's own page; the chevron still folds it. */
+  href?: string
+  /** Renders the label link with your router's link, such as `<Link href="…" />`. Implies a link label. */
+  labelRender?: useRender.ComponentProps<"a">["render"]
+  /** The label's page is current: the label row gets the active fill and `aria-current="page"`. */
+  active?: boolean
+  /** Leading 16px icon, muted until the label is hovered or current (same slot as `SidebarNavLink`). */
+  icon?: React.ReactNode
+  /** Name of the fold toggle on a link label. Defaults to the locale's "Toggle {label}" ("Toggle section" for a non-text label). */
+  toggleLabel?: string
+  children?: React.ReactNode
+}
+
+/** A labelled, collapsible block of rows. Open by default; control it with `open` / `onOpenChange` to persist it. */
+function SidebarNavSection({
+  label,
+  count,
+  level = "section",
+  collapsible = true,
+  defaultOpen = true,
+  href,
+  labelRender,
+  active = false,
+  icon,
+  toggleLabel,
+  className,
+  children,
+  ...props
+}: SidebarNavSectionProps) {
+  const { labels } = useLocale()
+  const isLink = href !== undefined || labelRender !== undefined
+  const labelClass =
+    level === "section" ? "h-7 text-ui font-semibold text-foreground icon-bold" : "h-6.5 text-ui-sm font-medium text-muted-foreground hover:text-foreground"
+  const pad = icon ? "gap-2 px-2" : cn("gap-1.5", insetStart)
+  const iconEl = (hover: string) =>
+    icon && (
+      <span
+        aria-hidden
+        data-slot="sidebar-nav-section-icon"
+        className={cn(
+          "flex size-4 shrink-0 items-center justify-center text-muted-foreground transition-colors duration-150 [&>svg]:size-4",
+          hover
+        )}
+      >
+        {icon}
+      </span>
+    )
+  const countEl = count !== undefined && <span className="text-ui-xs font-normal text-muted-foreground/80 tabular-nums">{count}</span>
+  const chevron = (
+    <ChevronRightIcon
+      aria-hidden
+      className={cn(
+        "shrink-0 text-muted-foreground transition-transform duration-200 group-data-panel-open/trigger:rotate-90 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-data-panel-open/trigger:-rotate-90",
+        level === "section" ? "size-3.5" : "size-3"
+      )}
+    />
+  )
+  const labelLink = useRender({
+    defaultTagName: "a",
+    render: labelRender,
+    props: {
+      href,
+      "aria-current": active ? "page" : undefined,
+      "data-slot": "sidebar-nav-section-link",
+      className: cn(
+        "group/nav relative flex min-w-0 flex-1 items-center rounded-md outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
+        "aria-[current=page]:bg-secondary aria-[current=page]:text-foreground",
+        pad,
+        labelClass
+      ),
+      children: (
+        <>
+          <span
+            aria-hidden
+            className="absolute inset-y-1.5 -start-2 w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
+          />
+          {iconEl("group-hover/nav:text-foreground group-aria-[current=page]/nav:text-foreground")}
+          <span className="truncate">{label}</span>
+          {countEl}
+        </>
+      ),
+    },
+  })
+  let heading: React.ReactNode
+  if (isLink) {
+    heading = (
+      <div data-slot="sidebar-nav-section-label" className="flex items-center gap-px">
+        {labelLink}
+        {collapsible && (
+          <CollapsiblePrimitive.Trigger
+            aria-label={toggleLabel ?? (typeof label === "string" ? labels.toggleNamed(label) : labels.toggleSection)}
+            className={cn(
+              "group/trigger grid w-6 shrink-0 cursor-pointer place-items-center rounded-md outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
+              level === "section" ? "h-7" : "h-6.5"
+            )}
+          >
+            {chevron}
+          </CollapsiblePrimitive.Trigger>
+        )}
+      </div>
+    )
+  } else if (collapsible) {
+    heading = (
+      <CollapsiblePrimitive.Trigger
+        className={cn(
+          "group/trigger flex w-full cursor-pointer items-center rounded-md text-start outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
+          pad,
+          labelClass
+        )}
+      >
+        {iconEl("group-hover/trigger:text-foreground")}
+        <span className="truncate">{label}</span>
+        {countEl}
+        <span className="ms-auto flex">{chevron}</span>
+      </CollapsiblePrimitive.Trigger>
+    )
+  } else {
+    heading = (
+      <div className={cn("flex items-center", pad, labelClass)}>
+        {iconEl("")}
+        <span className="truncate">{label}</span>
+        {countEl}
+      </div>
+    )
+  }
+  return (
+    <CollapsiblePrimitive.Root
+      data-slot="sidebar-nav-section"
+      data-level={level}
+      data-active={active ? "" : undefined}
+      defaultOpen={collapsible ? defaultOpen : true}
+      className={cn("flex flex-col gap-px", level === "group" && "mt-2", className)}
+      {...props}
+    >
+      {heading}
+      <CollapsiblePrimitive.Panel className={cn("flex flex-col gap-px", iconInsetScope)}>{children}</CollapsiblePrimitive.Panel>
+    </CollapsiblePrimitive.Root>
+  )
+}
+
+/**
+ * Rows of a section or group; no indent, so every label and row shares one left edge. When one
+ * row has an icon, the rows without one start at its text (see `--sidebar-nav-inset`).
+ */
+function SidebarNavList({ className, ...props }: React.ComponentProps<"ul">) {
+  return <ul data-slot="sidebar-nav-list" className={cn("flex flex-col gap-px", iconInsetScope, className)} {...props} />
+}
+
+type SidebarNavLinkProps = useRender.ComponentProps<"a"> & {
+  /** The current page: a fill, a bar in the gutter and `aria-current="page"`. */
+  active?: boolean
+  /** Trailing content, such as a "New" badge. */
+  badge?: React.ReactNode
+  /** Leading 16px icon, muted until the row is current. */
+  icon?: React.ReactNode
+}
+
+/** One row in a list item. Pass `render={<Link href="…" />}` for a router link. */
+function SidebarNavLink({ active = false, badge, icon, className, children, render, ...props }: SidebarNavLinkProps) {
+  const link = useRender({
+    defaultTagName: "a",
+    render,
+    props: mergeProps<"a">(
+      {
+        "aria-current": active ? "page" : undefined,
+        className: cn(
+          "group/nav relative flex h-7 min-w-0 items-center gap-2 rounded-md text-ui text-muted-foreground outline-none transition-colors duration-150",
+          icon ? "px-2" : insetStart,
+          "hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+          "aria-[current=page]:bg-secondary aria-[current=page]:font-medium aria-[current=page]:text-foreground",
+          className
+        ),
+        children: (
+          <>
+            <span
+              aria-hidden
+              className="absolute inset-y-1.5 -start-2 w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
+            />
+            {icon && (
+              <span
+                aria-hidden
+                data-slot="sidebar-nav-link-icon"
+                className="flex size-4 shrink-0 items-center justify-center text-muted-foreground transition-colors duration-150 group-hover/nav:text-foreground group-aria-[current=page]/nav:text-foreground [&>svg]:size-4"
+              >
+                {icon}
+              </span>
+            )}
+            <span className="min-w-0 flex-1 truncate">{children}</span>
+            {badge}
+          </>
+        ),
+      },
+      props
+    ),
+    state: { slot: "sidebar-nav-link", active },
+  })
+  return <li data-slot="sidebar-nav-item">{link}</li>
+}
+
+/** Pinned under the list: a changelog link, a version switcher. */
+function SidebarNavFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="sidebar-nav-footer" className={cn("shrink-0 border-t border-border p-2", className)} {...props} />
+}
+
+export { SidebarNav, SidebarNavSearch, SidebarNavContent, SidebarNavSection, SidebarNavList, SidebarNavLink, SidebarNavFooter }
+export type { SidebarNavSectionProps, SidebarNavLinkProps }

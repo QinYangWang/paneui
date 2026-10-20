@@ -1,4 +1,4 @@
-import type { VsCodeHost } from "@/registry/base-nova/templates/vscode/parts/host"
+import type { VsCodeHost } from "@/registry/templates/vscode/parts/host"
 
 import type { DesktopBridge } from "../shared/bridge"
 import { createIpcTransport } from "./ipc-transport"

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
@@ -11,8 +15,25 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "types": ["node", "vite/client"],
-    "paths": { "@/*": ["../../*"] }
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "paths": {
+      "@/*": [
+        "../docs/*"
+      ],
+      "@paneui/ui/*": [
+        "../../packages/ui/src/*"
+      ],
+      "@paneui/core/*": [
+        "../../packages/core/src/*"
+      ]
+    }
   },
-  "include": ["electron.vite.config.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "electron.vite.config.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }
