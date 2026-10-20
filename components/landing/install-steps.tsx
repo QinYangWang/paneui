@@ -1,6 +1,6 @@
 "use client"
 
-import { CLI_NAME, CommandPill } from "@/components/docs/install-command"
+import { CLI_PACKAGE, CommandPill } from "@/components/docs/install-command"
 import { T, useT, type Localized } from "@/lib/site-locale"
 import { Card } from "@/registry/base-nova/ui/card"
 
@@ -43,7 +43,7 @@ export function InstallSteps() {
                   <h3 className="font-semibold">{t(step.title)}</h3>
                   <p className="text-pretty text-sm text-muted-foreground">{t(step.body)}</p>
                 </div>
-                <CommandPill command={`npx ${CLI_NAME} ${step.args}`} className="mt-auto h-9" />
+                <CommandPill command={`npx ${CLI_PACKAGE} ${step.args}`} className="mt-auto h-9" />
               </div>
             </Card>
           </Reveal>

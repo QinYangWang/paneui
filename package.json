@@ -19,8 +19,8 @@
     "design:check": "node skills/qinyang-design/scripts/check.mjs",
     "test:cover-art": "node scripts/test-cover-art-seeds.mjs",
     "test:labels": "node scripts/run-tsx.mjs scripts/test-default-labels.tsx",
-    "cli:build": "pnpm --filter paneui build",
-    "cli:test": "pnpm --filter paneui test"
+    "cli:build": "pnpm --filter @oukinyou/paneui build",
+    "cli:test": "pnpm --filter @oukinyou/paneui test"
   },
   "dependencies": {
     "@agentclientprotocol/sdk": "^1.8.0",

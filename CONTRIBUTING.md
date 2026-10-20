@@ -99,6 +99,6 @@ git push origin cli-vX.Y.Z
 ```
 
 `.github/workflows/release-cli.yml` verifies the tag against the package
-version, runs the CLI tests and publishes `@paneui` to npm with trusted
+version, runs the CLI tests and publishes `@oukinyou/paneui` to npm with trusted
 publishing (OIDC, no token). The site deploys from the default branch through
 the Pages workflow; there is no separate site release.

@@ -3,7 +3,7 @@
 import Link from "next/link"
 
 import { ArrowRightIcon, PaneuiLogoIcon } from "@/components/icons"
-import { CLI_NAME, CommandPill } from "@/components/docs/install-command"
+import { CLI_PACKAGE, CommandPill } from "@/components/docs/install-command"
 import { T } from "@/lib/site-locale"
 import { Button } from "@/registry/base-nova/ui/button"
 
@@ -29,8 +29,8 @@ export function Hero() {
           <T en="Components" zh="组件一览" />
         </Button>
       </div>
-      {/* CLI_NAME reads the npm name from packages/cli, so the pill tracks the rename to `paneui`. */}
-      <CommandPill command={`npx ${CLI_NAME} init`} className="mt-1 w-full max-w-60" />
+      {/* CLI_NAME reads the npm name from packages/cli, so the pill tracks the package name. */}
+      <CommandPill command={`npx ${CLI_PACKAGE} init`} className="mt-1 w-full max-w-60" />
     </section>
   )
 }

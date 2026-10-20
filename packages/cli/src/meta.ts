@@ -8,9 +8,13 @@ import { readFileSync } from "node:fs"
 const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")) as {
   name: string
   version: string
+  bin: Record<string, string>
 }
 
-export const CLI_NAME = pkg.name
+/** The command users type (the `bin` key). */
+export const CLI_NAME = Object.keys(pkg.bin)[0] ?? pkg.name
+/** The npm package, for `npx <package>`. */
+export const PACKAGE_NAME = pkg.name
 export const CLI_VERSION = pkg.version
 
 /** Registry namespace, as used in `@paneui/<item>` addresses and components.json `registries`. */

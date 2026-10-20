@@ -20,7 +20,9 @@ const MANAGERS = {
 type Manager = keyof typeof MANAGERS
 
 /** The library's own CLI (packages/cli); its npm name is the one field to change when it is renamed. */
-export const CLI_NAME = cliPackage.name
+/** The npm package (for npx) and the command it installs. */
+export const CLI_PACKAGE = cliPackage.name
+export const CLI_NAME = Object.keys(cliPackage.bin ?? {})[0] ?? cliPackage.name
 const RUNNERS = {
   pnpm: "pnpm dlx",
   npm: "npx",
@@ -118,7 +120,7 @@ export function CommandPill({ command, className }: { command: string; className
  */
 export function InstallCommand({ args, cli = "shadcn", className }: { args: string; cli?: "shadcn" | "paneui"; className?: string }) {
   const pm = usePackageManager()
-  const runner = (m: Manager) => (cli === "shadcn" ? MANAGERS[m] : `${RUNNERS[m]} ${CLI_NAME}@latest`)
+  const runner = (m: Manager) => (cli === "shadcn" ? MANAGERS[m] : `${RUNNERS[m]} ${CLI_PACKAGE}@latest`)
   return (
     <Tabs value={pm} onValueChange={(v) => isManager(v) && setManager(v)} className={cn("gap-2.5", className)}>
       <TabsList className="p-0.5">
