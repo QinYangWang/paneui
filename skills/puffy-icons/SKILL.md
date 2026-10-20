@@ -12,11 +12,11 @@ that sit in the same family, add them to that file, and use them the way the lib
 Install the set first if the project doesn't have it:
 
 ```bash
-npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons.json
+npx shadcn@latest add https://paneui.dev/r/icons.json
 ```
 
 
-Which icons to use where (families, sizes, chips, brand marks) is part of the `qinyang-design` skill
+Which icons to use where (families, sizes, chips, brand marks) is part of the `paneui-design` skill
 (`references/icons.md`); this skill is for drawing them.
 
 ## The primitives
@@ -65,9 +65,9 @@ thickens every line at once. A glyph that needs a different line width spreads `
 The set ships in three styles with identical export names, all installed as `components/icons.tsx`:
 
 ```bash
-npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons.json --overwrite          # rounded (default)
-npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-puffy.json --overwrite    # puffy
-npx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-outline.json --overwrite  # outline
+npx shadcn@latest add https://paneui.dev/r/icons.json --overwrite          # rounded (default)
+npx shadcn@latest add https://paneui.dev/r/icons-puffy.json --overwrite    # puffy
+npx shadcn@latest add https://paneui.dev/r/icons-outline.json --overwrite  # outline
 ```
 
 Check the top of the file before drawing:
@@ -233,7 +233,7 @@ export const CheckIcon = (p: IconProps) => (
   frame.
 - **Inline** (buttons, badges, meta rows): no size of its own; the button or text sets it.
 - **Title, header, card, alert icons** sit in an `IconChip` (`npx shadcn@latest add
-  https://qinyangwang.github.io/ui/r/icon-chip.json`): sizes `sm` 24, `default` 32, `lg` 40, `xl` 48;
+  https://paneui.dev/r/icon-chip.json`): sizes `sm` 24, `default` 32, `lg` 40, `xl` 48;
   tones `neutral`, `primary`, `success`, `warning`, `destructive`, `solid`. One size per list.
 - On an icon, `className` sets size, layout, a token text colour, opacity and motion only.
 - Import every icon from `@/components/icons`. Don't mix in another icon library or ad-hoc SVG next
@@ -263,7 +263,7 @@ export const CheckIcon = (p: IconProps) => (
    ```
 
    If you only downloaded `SKILL.md`, save the script next to it as `scripts/preview.tsx` from
-   https://qinyangwang.github.io/ui/skills/puffy-icons/scripts/preview.tsx.
+   https://paneui.dev/skills/puffy-icons/scripts/preview.tsx.
 
    Run it from the project root (it needs the project's `react` and `react-dom`). PNG output needs
    `@resvg/resvg-js` (`npm i -D @resvg/resvg-js`); without it the sheet is written as SVG. Any other

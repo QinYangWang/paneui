@@ -5,7 +5,7 @@
  * Same 18x18 grid, names and props as the puffy set: filled shapes are drawn as
  * 1.6px round outlines, open glyphs keep their 1.6px stroke, tiny dots stay solid.
  * Install it over the puffy set with
- *   pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-outline.json --overwrite
+ *   pnpm dlx shadcn@latest add https://paneui.dev/r/icons-outline.json --overwrite
  * and switch back with the same command and icons.json.
  */
 import type { CSSProperties, SVGProps } from "react";

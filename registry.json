@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "paneui",
-  "homepage": "https://qinyangwang.github.io/ui",
+  "homepage": "https://paneui.dev",
   "items": [
     {
       "name": "theme",
@@ -1063,7 +1063,7 @@
         {
           "path": "registry/base-nova/scripts/upgrade-check.mjs",
           "type": "registry:file",
-          "target": "~/scripts/qinyang-upgrade-check.mjs"
+          "target": "~/scripts/paneui-upgrade-check.mjs"
         }
       ],
       "meta": {
@@ -1078,319 +1078,319 @@
       "description": "Design rules and checks for coding agents.",
       "files": [
         {
-          "path": "skills/qinyang-design/SKILL.md",
+          "path": "skills/paneui-design/SKILL.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/SKILL.md"
+          "target": "~/.agents/skills/paneui-design/SKILL.md"
         },
         {
-          "path": "skills/qinyang-design/references/charts.md",
+          "path": "skills/paneui-design/references/charts.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/charts.md"
+          "target": "~/.agents/skills/paneui-design/references/charts.md"
         },
         {
-          "path": "skills/qinyang-design/references/components.md",
+          "path": "skills/paneui-design/references/components.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/components.md"
+          "target": "~/.agents/skills/paneui-design/references/components.md"
         },
         {
-          "path": "skills/qinyang-design/references/copy.md",
+          "path": "skills/paneui-design/references/copy.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/copy.md"
+          "target": "~/.agents/skills/paneui-design/references/copy.md"
         },
         {
-          "path": "skills/qinyang-design/references/foundations.md",
+          "path": "skills/paneui-design/references/foundations.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/foundations.md"
+          "target": "~/.agents/skills/paneui-design/references/foundations.md"
         },
         {
-          "path": "skills/qinyang-design/references/icons.md",
+          "path": "skills/paneui-design/references/icons.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/icons.md"
+          "target": "~/.agents/skills/paneui-design/references/icons.md"
         },
         {
-          "path": "skills/qinyang-design/references/layout.md",
+          "path": "skills/paneui-design/references/layout.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/layout.md"
+          "target": "~/.agents/skills/paneui-design/references/layout.md"
         },
         {
-          "path": "skills/qinyang-design/references/motion-a11y.md",
+          "path": "skills/paneui-design/references/motion-a11y.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/motion-a11y.md"
+          "target": "~/.agents/skills/paneui-design/references/motion-a11y.md"
         },
         {
-          "path": "skills/qinyang-design/references/polish.md",
+          "path": "skills/paneui-design/references/polish.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/polish.md"
+          "target": "~/.agents/skills/paneui-design/references/polish.md"
         },
         {
-          "path": "skills/qinyang-design/references/registry.md",
+          "path": "skills/paneui-design/references/registry.md",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/references/registry.md"
+          "target": "~/.agents/skills/paneui-design/references/registry.md"
         },
         {
-          "path": "skills/qinyang-design/scripts/check.mjs",
+          "path": "skills/paneui-design/scripts/check.mjs",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/scripts/check.mjs"
+          "target": "~/.agents/skills/paneui-design/scripts/check.mjs"
         },
         {
-          "path": "skills/qinyang-design/scripts/polish-probe.js",
+          "path": "skills/paneui-design/scripts/polish-probe.js",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/scripts/polish-probe.js"
+          "target": "~/.agents/skills/paneui-design/scripts/polish-probe.js"
         },
         {
-          "path": "skills/qinyang-design/scripts/radius-probe.js",
+          "path": "skills/paneui-design/scripts/radius-probe.js",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/scripts/radius-probe.js"
+          "target": "~/.agents/skills/paneui-design/scripts/radius-probe.js"
         },
         {
-          "path": "skills/qinyang-design/examples/border-and-shadow/bad.tsx",
+          "path": "skills/paneui-design/examples/border-and-shadow/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/border-and-shadow/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/border-and-shadow/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/border-and-shadow/good.tsx",
+          "path": "skills/paneui-design/examples/border-and-shadow/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/border-and-shadow/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/border-and-shadow/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/exit-subtle/bad.tsx",
+          "path": "skills/paneui-design/examples/exit-subtle/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/exit-subtle/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/exit-subtle/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/exit-subtle/good.tsx",
+          "path": "skills/paneui-design/examples/exit-subtle/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/exit-subtle/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/exit-subtle/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/font-smoothing/bad.tsx",
+          "path": "skills/paneui-design/examples/font-smoothing/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/font-smoothing/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/font-smoothing/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/font-smoothing/good.tsx",
+          "path": "skills/paneui-design/examples/font-smoothing/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/font-smoothing/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/font-smoothing/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/hit-area/bad.tsx",
+          "path": "skills/paneui-design/examples/hit-area/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/hit-area/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/hit-area/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/hit-area/good.tsx",
+          "path": "skills/paneui-design/examples/hit-area/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/hit-area/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/hit-area/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-button-label/bad.tsx",
+          "path": "skills/paneui-design/examples/icon-button-label/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-button-label/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-button-label/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-button-label/good.tsx",
+          "path": "skills/paneui-design/examples/icon-button-label/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-button-label/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-button-label/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-color/bad.tsx",
+          "path": "skills/paneui-design/examples/icon-color/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-color/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-color/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-color/good.tsx",
+          "path": "skills/paneui-design/examples/icon-color/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-color/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-color/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-rtl/bad.tsx",
+          "path": "skills/paneui-design/examples/icon-rtl/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-rtl/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-rtl/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-rtl/good.tsx",
+          "path": "skills/paneui-design/examples/icon-rtl/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-rtl/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-rtl/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-size/bad.tsx",
+          "path": "skills/paneui-design/examples/icon-size/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-size/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-size/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-size/good.tsx",
+          "path": "skills/paneui-design/examples/icon-size/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-size/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-size/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-stroke/bad.tsx",
+          "path": "skills/paneui-design/examples/icon-stroke/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-stroke/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-stroke/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-stroke/good.tsx",
+          "path": "skills/paneui-design/examples/icon-stroke/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-stroke/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-stroke/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-weight/bad.tsx",
+          "path": "skills/paneui-design/examples/icon-weight/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-weight/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-weight/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-weight/good.tsx",
+          "path": "skills/paneui-design/examples/icon-weight/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-weight/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-weight/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/nav-active-icon/bad.tsx",
+          "path": "skills/paneui-design/examples/nav-active-icon/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/nav-active-icon/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/nav-active-icon/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/nav-active-icon/good.tsx",
+          "path": "skills/paneui-design/examples/nav-active-icon/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/nav-active-icon/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/nav-active-icon/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/text-align-logical/bad.tsx",
+          "path": "skills/paneui-design/examples/text-align-logical/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/text-align-logical/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/text-align-logical/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/text-align-logical/good.tsx",
+          "path": "skills/paneui-design/examples/text-align-logical/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/text-align-logical/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/text-align-logical/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-swap/bad.tsx",
+          "path": "skills/paneui-design/examples/icon-swap/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-swap/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-swap/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/icon-swap/good.tsx",
+          "path": "skills/paneui-design/examples/icon-swap/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/icon-swap/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/icon-swap/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/keyframes-on-state/bad.tsx",
+          "path": "skills/paneui-design/examples/keyframes-on-state/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/keyframes-on-state/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/keyframes-on-state/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/keyframes-on-state/good.tsx",
+          "path": "skills/paneui-design/examples/keyframes-on-state/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/keyframes-on-state/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/keyframes-on-state/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/media-outline/bad.tsx",
+          "path": "skills/paneui-design/examples/media-outline/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/media-outline/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/media-outline/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/media-outline/good.tsx",
+          "path": "skills/paneui-design/examples/media-outline/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/media-outline/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/media-outline/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/motion-restraint/bad.tsx",
+          "path": "skills/paneui-design/examples/motion-restraint/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/motion-restraint/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/motion-restraint/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/motion-restraint/good.tsx",
+          "path": "skills/paneui-design/examples/motion-restraint/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/motion-restraint/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/motion-restraint/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/optical-icon-padding/bad.tsx",
+          "path": "skills/paneui-design/examples/optical-icon-padding/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/optical-icon-padding/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/optical-icon-padding/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/optical-icon-padding/good.tsx",
+          "path": "skills/paneui-design/examples/optical-icon-padding/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/optical-icon-padding/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/optical-icon-padding/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/presence-initial/bad.tsx",
+          "path": "skills/paneui-design/examples/presence-initial/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/presence-initial/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/presence-initial/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/presence-initial/good.tsx",
+          "path": "skills/paneui-design/examples/presence-initial/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/presence-initial/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/presence-initial/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/press-scale-floor/bad.tsx",
+          "path": "skills/paneui-design/examples/press-scale-floor/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/press-scale-floor/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/press-scale-floor/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/press-scale-floor/good.tsx",
+          "path": "skills/paneui-design/examples/press-scale-floor/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/press-scale-floor/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/press-scale-floor/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/spring-bounce/bad.tsx",
+          "path": "skills/paneui-design/examples/spring-bounce/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/spring-bounce/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/spring-bounce/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/spring-bounce/good.tsx",
+          "path": "skills/paneui-design/examples/spring-bounce/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/spring-bounce/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/spring-bounce/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/spring-damping/bad.tsx",
+          "path": "skills/paneui-design/examples/spring-damping/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/spring-damping/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/spring-damping/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/spring-damping/good.tsx",
+          "path": "skills/paneui-design/examples/spring-damping/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/spring-damping/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/spring-damping/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/tabular-nums/bad.tsx",
+          "path": "skills/paneui-design/examples/tabular-nums/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/tabular-nums/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/tabular-nums/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/tabular-nums/good.tsx",
+          "path": "skills/paneui-design/examples/tabular-nums/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/tabular-nums/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/tabular-nums/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/text-wrap/bad.tsx",
+          "path": "skills/paneui-design/examples/text-wrap/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/text-wrap/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/text-wrap/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/text-wrap/good.tsx",
+          "path": "skills/paneui-design/examples/text-wrap/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/text-wrap/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/text-wrap/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/will-change/bad.tsx",
+          "path": "skills/paneui-design/examples/will-change/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/will-change/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/will-change/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/will-change/good.tsx",
+          "path": "skills/paneui-design/examples/will-change/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/will-change/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/will-change/good.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/viewport-zoom/bad.tsx",
+          "path": "skills/paneui-design/examples/viewport-zoom/bad.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/viewport-zoom/bad.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/viewport-zoom/bad.tsx"
         },
         {
-          "path": "skills/qinyang-design/examples/viewport-zoom/good.tsx",
+          "path": "skills/paneui-design/examples/viewport-zoom/good.tsx",
           "type": "registry:file",
-          "target": "~/.agents/skills/qinyang-design/examples/viewport-zoom/good.tsx"
+          "target": "~/.agents/skills/paneui-design/examples/viewport-zoom/good.tsx"
         }
       ],
       "meta": {

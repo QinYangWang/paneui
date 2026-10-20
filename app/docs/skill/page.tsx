@@ -16,9 +16,9 @@ export const metadata = { title: "Design skill" }
 
 type Rule = { n: number; title: string; why: string; id: string }
 
-/** Rules straight from skills/qinyang-design/SKILL.md: "### N. Title" and the sentence under it. */
+/** Rules straight from skills/paneui-design/SKILL.md: "### N. Title" and the sentence under it. */
 function readSkill() {
-  const skill = fs.readFileSync(path.join(process.cwd(), "skills/qinyang-design/SKILL.md"), "utf8")
+  const skill = fs.readFileSync(path.join(process.cwd(), "skills/paneui-design/SKILL.md"), "utf8")
   const body = skill.slice(skill.indexOf("\n## Rules"), skill.indexOf("\n## References"))
   const rules: Rule[] = []
   for (const block of body.split(/\n### /).slice(1)) {
@@ -61,7 +61,7 @@ function LiveExample({ tone, children }: { tone: keyof typeof LABEL; children: R
 
 /** The good/bad pair the skill ships in examples/<dir>/. */
 function fileExample(dir: string) {
-  const read = (kind: string) => fs.readFileSync(path.join(process.cwd(), "skills/qinyang-design/examples", dir, `${kind}.tsx`), "utf8").trim()
+  const read = (kind: string) => fs.readFileSync(path.join(process.cwd(), "skills/paneui-design/examples", dir, `${kind}.tsx`), "utf8").trim()
   return { kind: "code" as const, lang: "tsx", good: read("good"), bad: read("bad") }
 }
 
@@ -83,9 +83,9 @@ function RuleExamples({ id }: { id: string }) {
   )
 }
 
-const CHECK = `node .agents/skills/qinyang-design/scripts/check.mjs
-node .agents/skills/qinyang-design/scripts/check.mjs app components --strict
-node .agents/skills/qinyang-design/scripts/check.mjs --list`
+const CHECK = `node .agents/skills/paneui-design/scripts/check.mjs
+node .agents/skills/paneui-design/scripts/check.mjs app components --strict
+node .agents/skills/paneui-design/scripts/check.mjs --list`
 
 export default async function SkillPage() {
   const { skill, rules } = readSkill()
@@ -99,7 +99,7 @@ export default async function SkillPage() {
     <GuidePage href="/docs/skill" toc={toc}>
       <section className="flex flex-col gap-4">
         <GuideH2 id="installation">Installation</GuideH2>
-        <AgentSkill name="qinyang-design" skill={skill} html={await highlight(skill, "markdown")} />
+        <AgentSkill name="paneui-design" skill={skill} html={await highlight(skill, "markdown")} />
         <p className="text-muted-foreground">Or through the shadcn CLI, into <Code>.agents/skills</Code>:</p>
         <InstallCommand args={`add @${REGISTRY_NAME}/design-skill`} />
       </section>
@@ -108,7 +108,7 @@ export default async function SkillPage() {
         <GuideH2 id="check">Check</GuideH2>
         <p className="text-muted-foreground">
           Run it before you commit. It exits with an error when a rule breaks; allow-list a deliberate exception in{" "}
-          <Code>qinyang-design.config.json</Code> with its reason.
+          <Code>paneui-design.config.json</Code> with its reason.
         </p>
         <DocsCode code={CHECK} language="bash" />
         <p className="text-muted-foreground">

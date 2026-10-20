@@ -346,7 +346,7 @@ export class AcpClient {
       const res = await this.request<acp.InitializeResponse>("initialize", {
         protocolVersion: PROTOCOL_VERSION,
         clientCapabilities: options.clientCapabilities ?? { fs: { readTextFile: true, writeTextFile: true }, terminal: true },
-        clientInfo: options.clientInfo ?? { name: "qinyang-agent-workspace", title: "Agent Workspace", version: "1.0.0" },
+        clientInfo: options.clientInfo ?? { name: "paneui-agent-workspace", title: "Agent Workspace", version: "1.0.0" },
       } satisfies acp.InitializeRequest)
       this.set((s) => ({
         ...s,

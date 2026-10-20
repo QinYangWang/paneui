@@ -4,9 +4,9 @@ export default {
   summary: {"en": "Documentation site layout with search, navigation and a page outline.", "zh": "为文档站点提供导航和搜索。"},
   usage: {
     imports: `// One command, into a new app:
-// pnpm dlx shadcn@latest init -d -n my-docs https://qinyangwang.github.io/ui/r/docs.json
+// pnpm dlx shadcn@latest init -d -n my-docs https://paneui.dev/r/docs.json
 // or into an existing one (adds app/docs/page.tsx):
-// pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/docs.json
+// pnpm dlx shadcn@latest add https://paneui.dev/r/docs.json
 import { DocsTemplate } from "@/components/docs-template/docs"`,
     code: `// app/docs/page.tsx (installed for you)
 export default function DocsPage() {

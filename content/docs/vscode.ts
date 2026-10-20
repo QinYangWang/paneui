@@ -4,9 +4,9 @@ export default {
   summary: {"en": "Edit projects and run commands in the browser.", "zh": "在浏览器中编辑项目并运行命令。"},
   usage: {
     imports: `// One command, into a new app:
-// pnpm dlx shadcn@latest init -d -n my-editor https://qinyangwang.github.io/ui/r/vscode.json
+// pnpm dlx shadcn@latest init -d -n my-editor https://paneui.dev/r/vscode.json
 // or into an existing one (replaces app/page.tsx):
-// pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/vscode.json
+// pnpm dlx shadcn@latest add https://paneui.dev/r/vscode.json
 import { VsCodeApp } from "@/components/vscode/vscode"`,
     code: `// app/page.tsx (installed for you: the editor is the home page)
 export default function CodeEditorPage() {

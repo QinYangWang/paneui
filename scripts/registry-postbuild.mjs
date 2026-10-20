@@ -12,7 +12,7 @@
  * SITE_URL defaults to registry.json's homepage; CI sets it to the Pages URL. For a
  * local CLI test, point it at a local static server: SITE_URL=http://127.0.0.1:8761.
  *
- * 2. Strip `eslint-disable` comments for this repo's own lint rules (`shadcn/*`, `qinyang/*`)
+ * 2. Strip `eslint-disable` comments for this repo's own lint rules (`shadcn/*`, `paneui/*`)
  * from shipped file contents: those plugins do not exist in the user's app, and Next 15's
  * build-time lint fails on "Definition for rule … was not found".
  *
@@ -24,14 +24,15 @@
  */
 import fs from "node:fs"
 import path from "node:path"
+import { fileURLToPath } from "node:url"
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const registry = JSON.parse(fs.readFileSync(path.join(root, "registry.json"), "utf8"))
 const ns = `@${registry.name}/`
 const base = (process.env.SITE_URL || registry.homepage).replace(/\/$/, "")
 const dir = path.join(root, "public/r")
 
-const OWN_RULE_COMMENT = /^[ \t]*(?:\/\/|\{?\/\*) eslint-disable(?:-next-line|-line)? (?:shadcn|qinyang)\/[^\n]*\n/gm
+const OWN_RULE_COMMENT = /^[ \t]*(?:\/\/|\{?\/\*) eslint-disable(?:-next-line|-line)? (?:shadcn|paneui)\/[^\n]*\n/gm
 const stripOwnRules = (content) => content.replace(OWN_RULE_COMMENT, "")
 const USE_CLIENT = /^(["'])use client\1;?[ \t]*\n/
 const stableDirective = (content) => content.replace(USE_CLIENT, '"use client";\n')

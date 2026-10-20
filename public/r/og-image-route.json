@@ -5,7 +5,7 @@
   "description": "Adds a site share image route.",
   "dependencies": [],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/og-image.json"
+    "https://paneui.dev/r/og-image.json"
   ],
   "files": [
     {

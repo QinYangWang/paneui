@@ -4,8 +4,9 @@
 //    Examples render client-only (ssr: false): many use today's date, locale or window size.
 import fs from "node:fs"
 import path from "node:path"
+import { fileURLToPath } from "node:url"
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const ident = (s) => "d_" + s.replace(/[^a-zA-Z0-9]/g, "_")
 
 const contentDir = path.join(root, "content/docs")

@@ -8,19 +8,19 @@
     "simple-icons"
   ],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json",
-    "https://qinyangwang.github.io/ui/r/typeset.json",
-    "https://qinyangwang.github.io/ui/r/badge.json",
-    "https://qinyangwang.github.io/ui/r/button.json",
-    "https://qinyangwang.github.io/ui/r/icons.json",
-    "https://qinyangwang.github.io/ui/r/input.json",
-    "https://qinyangwang.github.io/ui/r/scroll-progress.json",
-    "https://qinyangwang.github.io/ui/r/theme-toggle.json",
-    "https://qinyangwang.github.io/ui/r/toast.json",
-    "https://qinyangwang.github.io/ui/r/brand-icon.json",
-    "https://qinyangwang.github.io/ui/r/code-block.json",
-    "https://qinyangwang.github.io/ui/r/outline.json",
-    "https://qinyangwang.github.io/ui/r/cover-art.json"
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/typeset.json",
+    "https://paneui.dev/r/badge.json",
+    "https://paneui.dev/r/button.json",
+    "https://paneui.dev/r/icons.json",
+    "https://paneui.dev/r/input.json",
+    "https://paneui.dev/r/scroll-progress.json",
+    "https://paneui.dev/r/theme-toggle.json",
+    "https://paneui.dev/r/toast.json",
+    "https://paneui.dev/r/brand-icon.json",
+    "https://paneui.dev/r/code-block.json",
+    "https://paneui.dev/r/outline.json",
+    "https://paneui.dev/r/cover-art.json"
   ],
   "files": [
     {

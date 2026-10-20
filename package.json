@@ -1,5 +1,5 @@
 {
-  "name": "registry",
+  "name": "paneui",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
@@ -16,11 +16,11 @@
     "docs:md:audit": "node scripts/audit-docs-md.mjs",
     "templates:code": "node scripts/gen-template-code.mjs",
     "audit:radius": "node scripts/audit-radius.mjs",
-    "design:check": "node skills/qinyang-design/scripts/check.mjs",
+    "design:check": "node skills/paneui-design/scripts/check.mjs",
     "test:cover-art": "node scripts/test-cover-art-seeds.mjs",
     "test:labels": "node scripts/run-tsx.mjs scripts/test-default-labels.tsx",
-    "cli:build": "pnpm --filter @oukinyou/paneui build",
-    "cli:test": "pnpm --filter @oukinyou/paneui test"
+    "cli:build": "pnpm --filter paneui build",
+    "cli:test": "pnpm --filter paneui test"
   },
   "dependencies": {
     "@agentclientprotocol/sdk": "^1.8.0",
@@ -95,12 +95,6 @@
     "mdast-util-mdx": "^3.0.0",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.9.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.1.2",
-      "@types/react-dom": "19.1.2"
-    }
   },
   "packageManager": "pnpm@12.9.1"
 }

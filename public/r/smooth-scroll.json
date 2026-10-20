@@ -9,8 +9,8 @@
     "@base-ui/react"
   ],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json",
-    "https://qinyangwang.github.io/ui/r/scroll-area.json"
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/scroll-area.json"
   ],
   "files": [
     {

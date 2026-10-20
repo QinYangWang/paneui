@@ -181,10 +181,13 @@ export async function main(argv = process.argv.slice(2)) {
 }
 
 main().catch((err: unknown) => {
+  // exitCode, not exit(): an immediate exit can outrun the stderr pipe on Windows
+  // (libuv assertion) and skip the pending write.
   if (err instanceof CliError) {
     log.error(err.message)
-    process.exit(err.exitCode)
+    process.exitCode = err.exitCode
+  } else {
+    log.error((err as Error)?.stack ?? String(err))
+    process.exitCode = 1
   }
-  log.error((err as Error)?.stack ?? String(err))
-  process.exit(1)
 })

@@ -8,12 +8,12 @@
     "motion"
   ],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json",
-    "https://qinyangwang.github.io/ui/r/icons.json",
-    "https://qinyangwang.github.io/ui/r/button.json",
-    "https://qinyangwang.github.io/ui/r/tool-result.json",
-    "https://qinyangwang.github.io/ui/r/icon-chip.json",
-    "https://qinyangwang.github.io/ui/r/action-swap-roll.json"
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/icons.json",
+    "https://paneui.dev/r/button.json",
+    "https://paneui.dev/r/tool-result.json",
+    "https://paneui.dev/r/icon-chip.json",
+    "https://paneui.dev/r/action-swap-roll.json"
   ],
   "files": [
     {

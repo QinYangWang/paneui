@@ -262,7 +262,7 @@ const designSystemRules = [
 
 
 // ───────────────────────────────────────────────────────────────────────────
-// qinyang/concentric-radius
+// paneui/concentric-radius
 //
 // Static half of the nested-radius rule (the runtime half is `pnpm audit:radius`).
 // For a JSX element whose className literally sets a radius token and a padding
@@ -271,7 +271,7 @@ const designSystemRules = [
 // Only unprefixed literal classes are read (cn("…") / template strings included,
 // conditional branches too); anything computed is left to the runtime audit.
 // ───────────────────────────────────────────────────────────────────────────
-// Default-theme px (--radius 0.5rem); keep in step with skills/qinyang-design/scripts/check.mjs.
+// Default-theme px (--radius 0.5rem); keep in step with skills/paneui-design/scripts/check.mjs.
 const RADIUS_PX = { none: 0, xs: 2, "2xs": 2, sm: 4, md: 6, lg: 8, xl: 10, "2xl": 12, "3xl": 16, "4xl": 16, "5xl": 16, shell: 12 };
 const SPACING_PX = (n) => (/^\d+(\.\d+)?$/.test(n) ? parseFloat(n) * 4 : null);
 
@@ -340,7 +340,7 @@ const concentricRadius = {
   },
 };
 
-const qinyangPlugin = { rules: { "concentric-radius": concentricRadius } };
+const paneuiPlugin = { rules: { "concentric-radius": concentricRadius } };
 
 const eslintConfig = [
   {
@@ -368,12 +368,12 @@ const eslintConfig = [
     // @shadcn/lint: register the plugin. eslint-config-next already sets up
     // the TypeScript/JSX parser for these files, so no parser override here.
     files: ["**/*.{js,jsx,ts,tsx}"],
-    plugins: { shadcn: shadcnPlugin, qinyang: qinyangPlugin },
+    plugins: { shadcn: shadcnPlugin, paneui: paneuiPlugin },
   },
   ...designSystemRules,
   {
     files: [...LIBRARY_FILES, ...CONSUMER_FILES],
-    rules: { "qinyang/concentric-radius": "warn" },
+    rules: { "paneui/concentric-radius": "warn" },
   },
   {
     // The share card is rendered to SVG at build time, never served as a page image.

@@ -4,7 +4,7 @@
   "title": "iOS Zoom Lock",
   "description": "Stops iOS from zooming into small text fields on focus.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "files": [
     {

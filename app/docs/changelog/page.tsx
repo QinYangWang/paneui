@@ -466,7 +466,7 @@ const ENTRIES: Entry[] = [
     changes: [
       <>
         The <TextLink href="/docs/skill">design skill</TextLink> collects the library&apos;s rules in one place, each with
-        a recommended and an avoid example. Install it with <Code>npx skills add QinYangWang/ui --skill qinyang-design</Code>{" "}
+        a recommended and an avoid example. Install it with <Code>npx skills add QinYangWang/ui --skill paneui-design</Code>{" "}
         or as the <Code>design-skill</Code> registry item.
       </>,
       <>

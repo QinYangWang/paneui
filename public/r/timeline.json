@@ -4,7 +4,7 @@
   "title": "Timeline",
   "description": "Lists entries in time order along a line.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "files": [
     {

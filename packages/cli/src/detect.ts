@@ -111,7 +111,7 @@ export async function itemChange(project: Project, item: RegistryItem, ignoreVar
   const files: FileChange[] = []
   for (const f of item.files ?? []) {
     const local = project.findInstalled(f)
-    const rel = path.relative(project.cwd, local ?? project.installPaths(f)[0])
+    const rel = path.relative(project.cwd, local ?? project.installPaths(f)[0]).replaceAll("\\", "/")
     if (!local) {
       files.push({ path: rel, status: "new", added: f.content ? normalize(f.content).length : 0, removed: 0 })
       continue

@@ -31,7 +31,7 @@ import { Switch } from "@/registry/base-nova/ui/switch"
 
 /*
  * Recommended / Avoid pairs for /docs/skill, keyed by the rule title's slug in
- * skills/qinyang-design/SKILL.md. "Avoid" previews break the rules on purpose, with
+ * skills/paneui-design/SKILL.md. "Avoid" previews break the rules on purpose, with
  * inline styles where a class would be the very thing the rule bans; the design
  * check allow-lists this file.
  */
@@ -544,7 +544,7 @@ components/vscode/parts/docs.ts       # same name as @paneui/docs`,
     lang: "bash",
     good: `npx shadcn@latest add @paneui/theme --overwrite
 npx shadcn@latest add @paneui/upgrade-check
-node scripts/qinyang-upgrade-check.mjs --fix`,
+node scripts/paneui-upgrade-check.mjs --fix`,
     bad: `npx shadcn@latest add @paneui/theme --overwrite
 # removed tokens stay in globals.css`,
   },
@@ -637,7 +637,7 @@ function Lede({ title, text }: { title: string; text: string }) {
 /** Slug of a rule title, the key into SKILL_EXAMPLES. */
 /**
  * Rules whose Recommended / Avoid pair is the one the skill ships in
- * skills/qinyang-design/examples/<dir>/{good,bad}.tsx (shown as code; the design check's
+ * skills/paneui-design/examples/<dir>/{good,bad}.tsx (shown as code; the design check's
  * --self-test keeps them honest).
  */
 export const SKILL_EXAMPLE_FILES: Record<string, string> = {

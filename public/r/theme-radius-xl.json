@@ -4,7 +4,7 @@
   "title": "Theme: Extra large radius",
   "description": "Radius preset with the roundest corners everywhere.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "cssVars": {
     "light": {

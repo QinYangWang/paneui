@@ -38,7 +38,7 @@ A child is never rounder than its container.
 
 ## Tools
 
-- `pnpm lint` → `qinyang/concentric-radius` (warn, `eslint.config.mjs`): a JSX element with a literal
+- `pnpm lint` → `paneui/concentric-radius` (warn, `eslint.config.mjs`): a JSX element with a literal
   radius token and `p-*`/`frame-p-*`, whose direct JSX child sets a literal radius token ≠ outer − padding (±2px).
   Static, so it only sees nesting written in one file. Currently 0 warnings repo-wide.
 - `pnpm audit:radius` (`scripts/audit-radius.mjs`, config `scripts/audit-radius.config.mjs`): loads `/` and

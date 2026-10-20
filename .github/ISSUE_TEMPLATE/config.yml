@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://qinyangwang.github.io/ui/docs
+    url: https://paneui.dev/docs
     about: Installation, theming, CLI and design rules.
   - name: Components overview
-    url: https://qinyangwang.github.io/ui/docs/components
+    url: https://paneui.dev/docs/components
     about: Live previews of every component, block and template.

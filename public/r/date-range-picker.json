@@ -8,10 +8,10 @@
     "motion"
   ],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json",
-    "https://qinyangwang.github.io/ui/r/icons.json",
-    "https://qinyangwang.github.io/ui/r/popover.json",
-    "https://qinyangwang.github.io/ui/r/locale-provider.json"
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/icons.json",
+    "https://paneui.dev/r/popover.json",
+    "https://paneui.dev/r/locale-provider.json"
   ],
   "files": [
     {

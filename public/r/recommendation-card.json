@@ -4,9 +4,9 @@
   "title": "Recommendation Card",
   "description": "Shows an agent's suggestion for the user to accept or swap.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/card.json",
-    "https://qinyangwang.github.io/ui/r/badge.json",
-    "https://qinyangwang.github.io/ui/r/button.json"
+    "https://paneui.dev/r/card.json",
+    "https://paneui.dev/r/badge.json",
+    "https://paneui.dev/r/button.json"
   ],
   "files": [
     {

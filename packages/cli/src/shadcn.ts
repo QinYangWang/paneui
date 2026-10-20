@@ -3,10 +3,10 @@ import { spawn } from "node:child_process"
 import { SHADCN_ENV } from "./meta.js"
 import { CliError, c } from "./ui.js"
 
-/** How to launch the shadcn CLI: $PANEUI_SHADCN (split on spaces) or `npx --yes shadcn@latest`. */
+/** How to launch the shadcn CLI: $PANEUI_SHADCN (split on spaces; quote paths that contain spaces) or `npx --yes shadcn@latest`. */
 export function shadcnCommand(): string[] {
   const env = process.env[SHADCN_ENV]?.trim()
-  if (env) return env.split(/\s+/)
+  if (env) return [...env.matchAll(/"([^"]*)"|'([^']*)'|(\S+)/g)].map((m) => m[1] ?? m[2] ?? m[3])
   return [process.platform === "win32" ? "npx.cmd" : "npx", "--yes", "shadcn@latest"]
 }
 
@@ -22,7 +22,8 @@ export function runShadcn(args: string[], opts: { cwd: string; quiet?: boolean }
     const child = spawn(cmd, [...pre, ...args], {
       cwd: opts.cwd,
       stdio: "inherit",
-      shell: process.platform === "win32",
+      // Shell is for shim scripts (npx.cmd); a direct .exe spawn survives paths with spaces.
+      shell: process.platform === "win32" && !/\.exe$/i.test(cmd),
       env: process.env,
     })
     child.on("error", (err) => reject(new CliError(`Could not start the shadcn CLI (${cmd}): ${err.message}`)))

@@ -2,15 +2,15 @@
 
 React components you own and edit.
 
-[Docs and previews](https://qinyangwang.github.io/ui)
+[Docs and previews](https://paneui.dev)
 
 ## Install
 
 Start in a React project with Tailwind CSS 4:
 
 ```bash
-npx @oukinyou/paneui@latest init
-npx @oukinyou/paneui@latest add button card
+npx paneui@latest init
+npx paneui@latest add button card
 ```
 
 The CLI writes source files into your project and records installs in `paneui.json`.
@@ -18,7 +18,7 @@ The CLI writes source files into your project and records installs in `paneui.js
 You can also register the namespace in `components.json`:
 
 ```json
-{ "registries": { "@paneui": "https://qinyangwang.github.io/ui/r/{name}.json" } }
+{ "registries": { "@paneui": "https://paneui.dev/r/{name}.json" } }
 ```
 
 ```bash
@@ -32,10 +32,10 @@ See the [CLI guide](packages/cli/README.md) for updates and theme options.
 Start an app from a template:
 
 ```bash
-pnpm dlx shadcn@latest init -d -n my-app https://qinyangwang.github.io/ui/r/saas.json
+pnpm dlx shadcn@latest init -d -n my-app https://paneui.dev/r/saas.json
 ```
 
-[Browse templates](https://qinyangwang.github.io/ui/#templates).
+[Browse templates](https://paneui.dev/#templates).
 
 ## Development
 

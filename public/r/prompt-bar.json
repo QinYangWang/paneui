@@ -7,8 +7,8 @@
     "motion"
   ],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/button.json",
-    "https://qinyangwang.github.io/ui/r/icons.json"
+    "https://paneui.dev/r/button.json",
+    "https://paneui.dev/r/icons.json"
   ],
   "files": [
     {

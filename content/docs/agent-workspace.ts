@@ -4,9 +4,9 @@ export default {
   summary: {"en": "Chat with coding agents and review their work.", "zh": "与编码助手对话并查看工作进度。"},
   usage: {
     imports: `// One command, into a new app:
-// pnpm dlx shadcn@latest init -d -n my-agent https://qinyangwang.github.io/ui/r/agent-workspace.json
+// pnpm dlx shadcn@latest init -d -n my-agent https://paneui.dev/r/agent-workspace.json
 // or into an existing one (replaces app/page.tsx):
-// pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/agent-workspace.json
+// pnpm dlx shadcn@latest add https://paneui.dev/r/agent-workspace.json
 import { AgentWorkspace } from "@/components/agent-workspace/agent-workspace"`,
     code: `// app/page.tsx (installed for you: the workspace is the home page)
 export default function AgentPage() {

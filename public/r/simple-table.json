@@ -5,7 +5,7 @@
   "description": "A plain table for reference content like props and tokens.",
   "dependencies": [],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "files": [
     {

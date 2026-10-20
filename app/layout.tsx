@@ -17,7 +17,7 @@ const OG_IMAGE = { ...ogImageSize, type: "image/png", alt: "paneui — React com
 
 export const metadata: Metadata = {
   // share image URLs are absolute
-  metadataBase: new URL(new URL(process.env.SITE_URL ?? "https://qinyangwang.github.io/ui").origin),
+  metadataBase: new URL(new URL(process.env.SITE_URL ?? "https://paneui.dev").origin),
   title: { default: "paneui", template: "%s · paneui" },
   description: "React components you own and edit.",
   // Metadata image URLs don't get the base path, so it is added here.

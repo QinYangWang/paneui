@@ -1,5 +1,5 @@
 ---
-name: qinyang-design
+name: paneui-design
 description: Design rules and checks for paneui interfaces.
 ---
 
@@ -14,7 +14,7 @@ references hold the exact values.
 ## Install
 
 ```bash
-npx skills add QinYangWang/ui --skill qinyang-design
+npx skills add QinYangWang/ui --skill paneui-design
 ```
 
 The library itself installs with the shadcn CLI (`npx shadcn@latest add @paneui/theme`, then any
@@ -23,15 +23,15 @@ item). See `references/registry.md`.
 ## Check
 
 ```bash
-node .agents/skills/qinyang-design/scripts/check.mjs            # wherever the skill was installed
-node .agents/skills/qinyang-design/scripts/check.mjs app src    # only these paths
+node .agents/skills/paneui-design/scripts/check.mjs            # wherever the skill was installed
+node .agents/skills/paneui-design/scripts/check.mjs app src    # only these paths
 ```
 
 Static checks for most of the rules below (tokens, radius, type, motion, icons, hit areas, copy,
 registry names, stale theme; `--list` names each one). No dependencies; with TypeScript in the project it reads JSX exactly (the native
 TypeScript 7 compiler has no parser API, so there it falls back to line checks). Exit code 1
 on errors (`--strict`: warnings too), `--json` for tools, `--list` for the rule ids. Configure it in
-`qinyang-design.config.json` (allow-list a file with a reason, add names that must not appear in copy);
+`paneui-design.config.json` (allow-list a file with a reason, add names that must not appear in copy);
 silence one line with a comment `design-check-ignore <rule> -- <reason>` above it.
 
 Some rules need the rendered page: open the screen in a browser (menus open, a row hovered) and paste
@@ -273,7 +273,7 @@ Name parts for their job: `parts/author-avatar.tsx`, `parts/buffers.ts`.
 
 The CLI adds and updates theme variables but never deletes one, so removed tokens linger.
 
-`npx shadcn@latest add @paneui/upgrade-check`, then `node scripts/qinyang-upgrade-check.mjs` (`--fix`
+`npx shadcn@latest add @paneui/upgrade-check`, then `node scripts/paneui-upgrade-check.mjs` (`--fix`
 cleans the stylesheet). The design check runs it for you when it is installed.
 
 ### 33. Give every target 24px to land on

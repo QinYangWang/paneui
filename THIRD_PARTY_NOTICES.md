@@ -248,7 +248,7 @@ in their place and do not redraw those marks.
 
 ## make-interfaces-feel-better (interface-polish guidance for the design skill, since 2026-10-17)
 
-Parts of `skills/qinyang-design` (rules 33–40, `references/polish.md`, the polish checks in
+Parts of `skills/paneui-design` (rules 33–40, `references/polish.md`, the polish checks in
 `scripts/check.mjs`, `scripts/polish-probe.js` and `examples/`) restate interface-polish guidance from
 the agent skill at https://github.com/jakubkrehel/make-interfaces-feel-better (commit 35545ea): icon-swap
 values, image outlines, optical button padding, hit-area extension, exit and motion restraint, compositing

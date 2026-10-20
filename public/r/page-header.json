@@ -5,7 +5,7 @@
   "description": "Title, context and actions at the top of an app page.",
   "dependencies": [],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "files": [
     {

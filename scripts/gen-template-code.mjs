@@ -9,9 +9,10 @@
  */
 import fs from "node:fs"
 import path from "node:path"
+import { fileURLToPath } from "node:url"
 import { codeToHtml } from "shiki"
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const THEMES = { light: "github-light-default", dark: "github-dark-default" }
 
 const POLICY = `# tessel.toml: committed at the repo root

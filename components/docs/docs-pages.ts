@@ -36,7 +36,7 @@ export const GUIDE_PAGES = [
     href: "/docs/cli",
     title: "CLI & registry",
     description: { en: "Find, inspect and install components from the command line.", zh: "在命令行查找、查看和安装组件。" },
-    keywords: ["shadcn", "cli", "qinyang", "add", "view", "search", "update", "registry", "json"],
+    keywords: ["shadcn", "cli", "paneui", "add", "view", "search", "update", "registry", "json"],
   },
   {
     href: "/docs/skill",

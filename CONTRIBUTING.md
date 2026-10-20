@@ -2,8 +2,8 @@
 
 Thanks for helping out. This file covers setup, where things live, and what to
 run before opening a PR. The design rules live in
-[AGENTS.md](AGENTS.md) and the `qinyang-design` skill
-(`skills/qinyang-design/SKILL.md`) — read them before any UI work.
+[AGENTS.md](AGENTS.md) and the `paneui-design` skill
+(`skills/paneui-design/SKILL.md`) — read them before any UI work.
 
 ## Setup
 
@@ -27,7 +27,7 @@ workspace with its own lockfile — install it inside `apps/desktop/` if you nee
 | `content/docs/<name>.ts` | Docs page content (usage, composition, examples, API) |
 | `app/`, `components/docs/`, `components/landing/` | The docs site and landing page |
 | `packages/cli/` | The `paneui` CLI |
-| `skills/qinyang-design/` | The design rules and the design check |
+| `skills/paneui-design/` | The design rules and the design check |
 | `scripts/` | Generation and audit scripts (`gen-docs.mjs`, `gen-docs-md.mjs`, `audit-radius.mjs`, …) |
 
 ## Adding a component
@@ -49,7 +49,7 @@ Never edit `registry/base-nova/icons/outline/icons.tsx` by hand; change
 
 ## Design rules
 
-Follow `skills/qinyang-design/SKILL.md` (colour tokens, concentric radius,
+Follow `skills/paneui-design/SKILL.md` (colour tokens, concentric radius,
 `text-ui-*` sizes, motion, copy density). Running checks catches most of it:
 
 ```bash
@@ -57,7 +57,7 @@ pnpm design:check
 ```
 
 If a rule is wrong for a legitimate case, allow-list it in
-`qinyang-design.config.json` with a reason instead of working around it.
+`paneui-design.config.json` with a reason instead of working around it.
 
 ## Checks before a PR
 
@@ -99,6 +99,6 @@ git push origin cli-vX.Y.Z
 ```
 
 `.github/workflows/release-cli.yml` verifies the tag against the package
-version, runs the CLI tests and publishes `@oukinyou/paneui` to npm with trusted
+version, runs the CLI tests and publishes `paneui` to npm with trusted
 publishing (OIDC, no token). The site deploys from the default branch through
 the Pages workflow; there is no separate site release.

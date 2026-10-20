@@ -68,7 +68,7 @@ export async function info(name: string, opts: CommonOptions & { json?: boolean 
   if (item.files?.length) {
     log.info(c.dim("Files"))
     for (const f of item.files) {
-      const dest = project.installPaths(f)[0].slice(project.cwd.length + 1)
+      const dest = project.installPaths(f)[0].slice(project.cwd.length + 1).replaceAll("\\", "/")
       log.info(`  ${dest}${f.content ? c.dim(`  ${f.content.split("\n").length} lines`) : ""}`)
     }
   }

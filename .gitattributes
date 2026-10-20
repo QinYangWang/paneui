@@ -1,0 +1,3 @@
+# LF everywhere: the registry build embeds file contents verbatim, so CRLF
+# checkouts (core.autocrlf=true on Windows) would leak \r\n into public/r/*.json.
+* text=auto eol=lf

@@ -1,12 +1,12 @@
 # paneui
 
-Find, install and update [paneui](https://qinyangwang.github.io/ui) components.
+Find, install and update [paneui](https://paneui.dev) components.
 Installed source files are yours to edit.
 
 ```bash
-npx @oukinyou/paneui@latest init            # register @paneui in components.json, install the theme
-npx @oukinyou/paneui@latest add button card # add items
-npx @oukinyou/paneui@latest update          # reinstall the theme and every installed item
+npx paneui@latest init            # register @paneui in components.json, install the theme
+npx paneui@latest add button card # add items
+npx paneui@latest update          # reinstall the theme and every installed item
 ```
 
 Requires Node.js 18.17 or later and a project the shadcn CLI supports (React, Tailwind CSS 4).
@@ -53,7 +53,7 @@ pass `--templates`, because reinstalling one replaces its routes.
 `init` adds this to `components.json`, so `npx shadcn@latest add @paneui/<name>` works too:
 
 ```json
-{ "registries": { "@paneui": "https://qinyangwang.github.io/ui/r/{name}.json" } }
+{ "registries": { "@paneui": "https://paneui.dev/r/{name}.json" } }
 ```
 
 Items added with the shadcn CLI are not in `paneui.json`, but `update` still finds them.
@@ -62,15 +62,15 @@ Items added with the shadcn CLI are not in `paneui.json`, but `update` still fin
 
 | Setting | Default |
 | --- | --- |
-| Registry: `--registry`, then `$PANEUI_REGISTRY`, then `registries["@paneui"]` in components.json | `https://qinyangwang.github.io/ui/r` |
+| Registry: `--registry`, then `$PANEUI_REGISTRY`, then `registries["@paneui"]` in components.json | `https://paneui.dev/r` |
 | shadcn command: `$PANEUI_SHADCN` | `npx --yes shadcn@latest` |
 | Colours: `NO_COLOR`, `FORCE_COLOR` | on in a terminal |
 
 ## Development
 
 ```bash
-pnpm --filter @oukinyou/paneui build
-pnpm --filter @oukinyou/paneui test   # builds, then runs node:test against a mock registry
+pnpm --filter paneui build
+pnpm --filter paneui test   # builds, then runs node:test against a mock registry
 node packages/cli/dist/index.js search chart
 ```
 

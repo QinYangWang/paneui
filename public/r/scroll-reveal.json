@@ -8,8 +8,8 @@
     "lenis"
   ],
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json",
-    "https://qinyangwang.github.io/ui/r/smooth-scroll.json"
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/smooth-scroll.json"
   ],
   "files": [
     {

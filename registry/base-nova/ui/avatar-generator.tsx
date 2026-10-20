@@ -81,7 +81,7 @@ type AvatarGeneratorProps = Omit<React.ComponentProps<"div">, "onChange"> & {
 
 function AvatarGenerator({
   className,
-  defaultSeed = "qinyang",
+  defaultSeed = "paneui",
   defaultGender = "any",
   onValueChange,
   ...props

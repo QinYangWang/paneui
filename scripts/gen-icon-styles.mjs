@@ -20,15 +20,17 @@
  */
 import fs from "node:fs"
 import path from "node:path"
+import { fileURLToPath } from "node:url"
 
 import { outlineOverrides } from "./icon-outline-overrides.mjs"
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const srcPath = path.join(root, "registry/base-nova/icons/puffy/icons.tsx")
 const outPath = path.join(root, "registry/base-nova/icons/outline/icons.tsx")
 const check = process.argv.includes("--check")
 
-const src = fs.readFileSync(srcPath, "utf8")
+// Normalize CRLF: the regexes below anchor on \n, and Windows checks the worktree out as CRLF.
+const src = fs.readFileSync(srcPath, "utf8").replace(/\r\n/g, "\n")
 
 const PUFF = /^\/\/ Trace every filled shape with this\..*\nconst puff = \{[^\n]*\} as const;\n/m
 if (!PUFF.test(src)) throw new Error("gen-icon-styles: could not find the `puff` definition in the puffy icons file")
@@ -55,7 +57,7 @@ const header = `/*
  * Same 18x18 grid, names and props as the puffy set: filled shapes are drawn as
  * 1.6px round outlines, open glyphs keep their 1.6px stroke, tiny dots stay solid.
  * Install it over the puffy set with
- *   pnpm dlx shadcn@latest add https://qinyangwang.github.io/ui/r/icons-outline.json --overwrite
+ *   pnpm dlx shadcn@latest add https://paneui.dev/r/icons-outline.json --overwrite
  * and switch back with the same command and icons.json.
  */
 `

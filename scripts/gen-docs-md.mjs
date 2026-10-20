@@ -10,8 +10,9 @@
  */
 import fs from "node:fs"
 import path from "node:path"
+import { fileURLToPath } from "node:url"
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const outDir = path.join(root, process.argv[2] ?? "out")
 const registry = JSON.parse(fs.readFileSync(path.join(root, "registry.json"), "utf8"))
 const base = (process.env.SITE_URL || registry.homepage).replace(/\/$/, "")
@@ -356,7 +357,7 @@ for (const g of GUIDES) {
   if (g.href === "/docs/skill") {
     // The page renders the skill's rules with live examples; the skill file itself is the readable form.
     const h1 = textOf(find(article, (n) => n.tag === "h1") ?? { children: [] }).trim()
-    const skill = read("skills/qinyang-design/SKILL.md").replace(/^---[\s\S]*?---\n+/, "")
+    const skill = read("skills/paneui-design/SKILL.md").replace(/^---[\s\S]*?---\n+/, "")
     md = [`# ${h1}`, "", `Page: ${base}${g.href}/`, "", fence(`npx shadcn@latest add @${ns}/design-skill`, "bash"), "", skill.replace(/^# .*\n+/, "")].join("\n")
   } else {
     const fixed = blocks(article)

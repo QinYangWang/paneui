@@ -4,7 +4,7 @@
   "title": "Terminal View",
   "description": "Shows command output and takes commands in a terminal panel.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "files": [
     {

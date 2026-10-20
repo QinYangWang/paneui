@@ -3,8 +3,8 @@
  * Finds what an earlier install of the paneui theme and components left behind after the
  * theme moved on, and says how to fix each finding.
  *
- *   node scripts/qinyang-upgrade-check.mjs          report only (exit code 1 when something needs fixing)
- *   node scripts/qinyang-upgrade-check.mjs --fix    also clean the stylesheet (stale tokens, broken and duplicate rules),
+ *   node scripts/paneui-upgrade-check.mjs          report only (exit code 1 when something needs fixing)
+ *   node scripts/paneui-upgrade-check.mjs --fix    also clean the stylesheet (stale tokens, broken and duplicate rules),
  *                                                   then scan again and report only what is left (exit code 1 if errors remain)
  *
  * The CLI merges the theme into your stylesheet: it adds and updates variables but never

@@ -1,5 +1,5 @@
 {
-  "$comment": "Design check settings for this repo (skills/qinyang-design/scripts/check.mjs). nameHashes: words that must not appear in prose, stored hashed so this file doesn't name them; add one with --hash \"word\".",
+  "$comment": "Design check settings for this repo (skills/paneui-design/scripts/check.mjs). nameHashes: words that must not appear in prose, stored hashed so this file doesn't name them; add one with --hash \"word\".",
   "ignore": [
     "registry/base-nova/icons/outline/**",
     "scripts/fixtures/**",

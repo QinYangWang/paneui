@@ -1,5 +1,5 @@
 {
-  "name": "@oukinyou/paneui",
+  "name": "paneui",
   "version": "0.1.0",
   "description": "Find, install and update paneui components.",
   "keywords": [
@@ -12,7 +12,7 @@
   ],
   "license": "MIT",
   "author": "Wang Qinyang",
-  "homepage": "https://qinyangwang.github.io/ui/docs/cli",
+  "homepage": "https://paneui.dev/docs/cli",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/QinYangWang/ui.git",

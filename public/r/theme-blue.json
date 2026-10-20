@@ -4,7 +4,7 @@
   "title": "Theme: Blue accent",
   "description": "Accent preset that sets the primary colour to blue, the default.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "cssVars": {
     "light": {

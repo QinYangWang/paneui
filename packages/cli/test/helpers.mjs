@@ -63,7 +63,7 @@ export const CONTENT = { button, card }
 
 /** Serves the mock registry at http://127.0.0.1:<port>/r. */
 export async function startRegistry() {
-  const index = { name: "qinyang", homepage: "http://localhost", items: ITEMS.map(({ files, ...rest }) => ({ ...rest, files: files?.map((f) => ({ path: f.path, type: f.type, target: f.target })) })) }
+  const index = { name: "paneui", homepage: "http://localhost", items: ITEMS.map(({ files, ...rest }) => ({ ...rest, files: files?.map((f) => ({ path: f.path, type: f.type, target: f.target })) })) }
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, "http://x")
     const m = url.pathname.match(/^\/r\/([^/]+)\.json$/)
@@ -112,7 +112,7 @@ export function run(args, { cwd, env = {} } = {}) {
       [BIN, ...args],
       {
         cwd,
-        env: { ...process.env, NO_COLOR: "1", PANEUI_REGISTRY: "", PANEUI_SHADCN: `${process.execPath} ${FAKE_SHADCN}`, FAKE_SHADCN_CALLS: callsFile, ...env },
+        env: { ...process.env, NO_COLOR: "1", PANEUI_REGISTRY: "", PANEUI_SHADCN: `"${process.execPath}" ${FAKE_SHADCN}`, FAKE_SHADCN_CALLS: callsFile, ...env },
       },
       (err, stdout, stderr) => {
         let calls = []

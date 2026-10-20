@@ -127,7 +127,7 @@ Express every fix in the project's own system: Tailwind classes and theme tokens
   `-scale-x-100 rtl:scale-x-100`. A chevron that rotates 90° when open takes `rtl:-rotate-90` on the open
   state, and a hover nudge takes `rtl:group-hover:-translate-x-0.5`. A control that moves left to right in
   every direction (a slide-to-confirm thumb) keeps its arrow. Check: `icon-rtl`, on when
-  `qinyang-design.config.json` sets `"rtl": true`. Text alignment is logical too: `text-start` /
+  `paneui-design.config.json` sets `"rtl": true`. Text alignment is logical too: `text-start` /
   `text-end`, never `text-left` / `text-right` unless the content is itself left to right (code
   gutters). Check: `text-align-logical`.
 - Icon-only controls have an `aria-label`; icons beside a label are hidden from assistive tech. Check:

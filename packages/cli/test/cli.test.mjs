@@ -60,7 +60,7 @@ describe("units", () => {
     delete process.env.PANEUI_REGISTRY
     assert.equal(resolveRegistry({ componentsJson: cj }).base, "https://cj.dev/r")
     assert.equal(resolveRegistry({ lockRegistry: "https://lock.dev/r" }).from, "lockfile")
-    assert.equal(resolveRegistry({}).base, "https://qinyangwang.github.io/ui/r")
+    assert.equal(resolveRegistry({}).base, "https://paneui.dev/r")
     if (prev !== undefined) process.env.PANEUI_REGISTRY = prev
   })
 

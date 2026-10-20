@@ -4,7 +4,7 @@
   "title": "Skeleton",
   "description": "Placeholder shape while content loads.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "files": [
     {

@@ -322,7 +322,7 @@ export default function CliPage() {
           </li>
         </ol>
         <InstallCommand args={`add ${ns}/upgrade-check`} />
-        <DocsCode code={"node scripts/qinyang-upgrade-check.mjs\nnode scripts/qinyang-upgrade-check.mjs --fix"} language="bash" lineNumbers={false} />
+        <DocsCode code={"node scripts/paneui-upgrade-check.mjs\nnode scripts/paneui-upgrade-check.mjs --fix"} language="bash" lineNumbers={false} />
         <ol start={4} className="flex list-decimal flex-col gap-2 ps-5 text-muted-foreground marker:text-fg-tertiary">
           <li>
             Re-add the components you use with <Code>--overwrite</Code>, a few at a time, and re-apply local edits from the

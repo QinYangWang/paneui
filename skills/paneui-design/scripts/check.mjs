@@ -17,7 +17,7 @@
  * comments, text); without it, or with a native compiler build that has no parser API
  * (TypeScript 7), the class checks fall back to quoted strings.
  *
- * Config (optional) in qinyang-design.config.json at the project root:
+ * Config (optional) in paneui-design.config.json at the project root:
  *   {
  *     "theme": "app/globals.css",
  *     "ignore": ["**\/generated\/**"],
@@ -33,6 +33,7 @@ import { createHash } from "node:crypto"
 import { spawnSync } from "node:child_process"
 import fs from "node:fs"
 import { createRequire } from "node:module"
+import { fileURLToPath } from "node:url"
 import path from "node:path"
 
 const cwd = process.cwd()
@@ -108,7 +109,7 @@ const on = (id) => !only || only.has(id)
 
 /* ────────────────────────────── config ────────────────────────────── */
 
-const config = readJson(path.join(cwd, "qinyang-design.config.json")) ?? {}
+const config = readJson(path.join(cwd, "paneui-design.config.json")) ?? {}
 const PRESS_SCALE_OK = new Set([
   // Components whose motion is the point; everything else answers a press with a fill.
   "expandable-control", "card-folder", "message-bubble",
@@ -149,12 +150,15 @@ function globToRegExp(glob) {
   return new RegExp(`(^|/)${re}$`)
 }
 
+// Globs in the config use forward slashes; path.relative returns backslashes on Windows.
+const relPath = (p) => path.relative(cwd, p).replace(/\\/g, "/")
+
 /* ────────────────────────────── findings ────────────────────────────── */
 
 const findings = []
 function report(rule, file, line, message) {
   if (!on(rule)) return
-  const rel = path.relative(cwd, file) || file
+  const rel = relPath(file) || file
   if (allow.some((a) => (a.rule === rule || a.rule === "*") && (!a.re || a.re.test(rel)) && (!a.match || message.includes(a.match)))) return
   const lines = fileLines.get(file)
   const above = lines?.[line - 2] ?? ""
@@ -180,7 +184,7 @@ function walk(p) {
     for (const f of fs.readdirSync(p)) walk(path.join(p, f))
     return
   }
-  const rel = path.relative(cwd, p)
+  const rel = relPath(p)
   if (ignoreGlobs.some((g) => g.test(rel))) return
   if (/\.generated\.|\.d\.ts$|\.min\./.test(p)) return
   if (p.endsWith("registry.json") || EXTS.test(p)) files.push(p)
@@ -804,7 +808,7 @@ function themeFile() {
 
 function checkUpgrade() {
   if (!on("upgrade")) return
-  const script = ["scripts/qinyang-upgrade-check.mjs", "registry/base-nova/scripts/upgrade-check.mjs"].map((p) => path.join(cwd, p)).find((p) => fs.existsSync(p))
+  const script = ["scripts/paneui-upgrade-check.mjs", "registry/base-nova/scripts/upgrade-check.mjs"].map((p) => path.join(cwd, p)).find((p) => fs.existsSync(p))
   if (script) {
     const r = spawnSync(process.execPath, [script], { cwd, encoding: "utf8" })
     const out = `${r.stdout ?? ""}${r.stderr ?? ""}`.trim()
@@ -823,7 +827,7 @@ function checkUpgrade() {
 
 /* ────────────────────────────── run ────────────────────────────── */
 
-const SELF = path.resolve(new URL(import.meta.url).pathname)
+const SELF = path.resolve(fileURLToPath(import.meta.url))
 
 // Rules that read JSX structure, so they only run with the TypeScript parser.
 const JSX_RULES = new Set(["concentric-radius", "menu-label-group", "tabular-nums", "text-wrap", "media-outline", "hit-area", "presence-initial", "exit-subtle", "icon-swap", "icon-stroke", "icon-weight", "nav-active-icon", "icon-size", "icon-color", "icon-rtl", "optical-icon-padding", "icon-button-label"])
@@ -871,7 +875,7 @@ for (const file of files) {
   if (path.resolve(file) === SELF) continue
   // Installed copies of this skill are reference text, not project code.
   if (path.resolve(file).startsWith(SKILL_DIR) && !/\.md$/.test(file)) continue
-  if (/[\\/]skills[\\/]qinyang-design[\\/]/.test(file) && !path.resolve(file).startsWith(SKILL_DIR)) continue
+  if (/[\\/]skills[\\/]paneui-design[\\/]/.test(file) && !path.resolve(file).startsWith(SKILL_DIR)) continue
   const text = fs.readFileSync(file, "utf8")
   if (/^\s*(\/\/|\/\*|#)\s*GENERATED\b/.test(text.slice(0, 200))) continue
   fileLines.set(file, text.split("\n"))

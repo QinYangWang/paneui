@@ -4,7 +4,7 @@
   "title": "Resizable",
   "description": "Split panes the user can resize or collapse.",
   "registryDependencies": [
-    "https://qinyangwang.github.io/ui/r/theme.json"
+    "https://paneui.dev/r/theme.json"
   ],
   "files": [
     {

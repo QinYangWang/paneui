@@ -16,8 +16,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      BASE_PATH: /ui
-      SITE_URL: https://qinyangwang.github.io/ui
+      SITE_URL: https://paneui.dev
       NEXT_TELEMETRY_DISABLED: 1
     steps:
       - uses: actions/checkout@v4
@@ -41,4 +40,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
+          cname: paneui.dev
           force_orphan: true

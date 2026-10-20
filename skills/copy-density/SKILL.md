@@ -7,7 +7,7 @@ description: Keep paneui interface copy short and useful.
 
 The preview explains the component. Text only covers what the preview can't show.
 
-These rules are also part of the `qinyang-design` skill (rules 27–30, `references/copy.md`), which covers
+These rules are also part of the `paneui-design` skill (rules 27–30, `references/copy.md`), which covers
 the rest of the design system and ships a check for them (`scripts/check.mjs`).
 
 ## Rules

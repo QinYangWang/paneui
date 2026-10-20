@@ -20,7 +20,7 @@ export const CLI_VERSION = pkg.version
 /** Registry namespace, as used in `@paneui/<item>` addresses and components.json `registries`. */
 export const NAMESPACE = "@paneui"
 /** Default registry base: items live at `${base}/<name>.json`, the index at `${base}/registry.json`. */
-export const DEFAULT_REGISTRY = "https://qinyangwang.github.io/ui/r"
+export const DEFAULT_REGISTRY = "https://paneui.dev/r"
 /** Environment variable that overrides the registry base. */
 export const REGISTRY_ENV = "PANEUI_REGISTRY"
 /** Environment variable that overrides how the shadcn CLI is launched (e.g. "node ./shadcn/dist/index.js"). */

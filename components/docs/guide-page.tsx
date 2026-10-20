@@ -35,7 +35,7 @@ export function Code({ children }: { children: React.ReactNode }) {
 /** The files a guide page is made from, for its "Last updated" date. */
 function guideSources(href: string) {
   const page = href === "/docs" ? "app/docs/page.tsx" : `app${href}/page.tsx`
-  if (href === "/docs/skill") return [page, "skills/qinyang-design", "components/docs/skill-examples.tsx"]
+  if (href === "/docs/skill") return [page, "skills/paneui-design", "components/docs/skill-examples.tsx"]
   return [page]
 }
 

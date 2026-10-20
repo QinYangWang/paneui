@@ -98,7 +98,7 @@ AvatarGenerator        editor: seed, gender, part pickers, download, copy`,
       description: "The editor UI.",
       extends: "div",
       props: [
-        { name: "defaultSeed", type: "string", default: `"qinyang"`, description: "Initial seed." },
+        { name: "defaultSeed", type: "string", default: `"paneui"`, description: "Initial seed." },
         { name: "defaultGender", type: `"male" | "female" | "any"`, default: `"any"`, description: "Initial gender." },
         { name: "onValueChange", type: "(state: { seed, gender, selections, accessories }) => void", description: "Called on every change; store it to redraw the same avatar with `GeneratedAvatar`." },
       ],

@@ -5,7 +5,7 @@
 Add the namespace to `components.json`, then install the theme and any item:
 
 ```json
-{ "registries": { "@paneui": "https://qinyangwang.github.io/ui/r/{name}.json" } }
+{ "registries": { "@paneui": "https://paneui.dev/r/{name}.json" } }
 ```
 
 ```bash
@@ -21,13 +21,13 @@ overwrite `components/icons.tsx`, answer no to keep your icon style.
 ## This skill
 
 ```bash
-npx skills add QinYangWang/ui --skill qinyang-design   # agent skill (rules, references, checks)
+npx skills add QinYangWang/ui --skill paneui-design   # agent skill (rules, references, checks)
 npx shadcn@latest add @paneui/design-skill            # same files through the shadcn CLI
 ```
 
-The registry copy lands in `.agents/skills/qinyang-design/` at the project root, also in projects with `src/`.
+The registry copy lands in `.agents/skills/paneui-design/` at the project root, also in projects with `src/`.
 Run the check from the project root:
-`node .agents/skills/qinyang-design/scripts/check.mjs`.
+`node .agents/skills/paneui-design/scripts/check.mjs`.
 
 ## Upgrading
 
@@ -37,8 +37,8 @@ After a theme update:
 ```bash
 npx shadcn@latest add @paneui/theme --overwrite
 npx shadcn@latest add @paneui/upgrade-check
-node scripts/qinyang-upgrade-check.mjs          # report; exit 1 when something needs fixing
-node scripts/qinyang-upgrade-check.mjs --fix    # cleans the stylesheet, then reports only what is left
+node scripts/paneui-upgrade-check.mjs          # report; exit 1 when something needs fixing
+node scripts/paneui-upgrade-check.mjs --fix    # cleans the stylesheet, then reports only what is left
 ```
 
 It finds the removed accent ramp, broken wide-gamut overrides, `@property` rules left by theme 2.2 and earlier
@@ -66,10 +66,10 @@ runs it when it is installed.
 | `scripts/radius-probe.js` | Nested radii as rendered, including open menus and hovered rows | paste in the console on the page |
 | `scripts/polish-probe.js` | Hit areas and overlaps, button padding, image outlines, heading wrap, live numbers, smoothing, compositing hints | paste in the console on the page |
 | `check.mjs --self-test` | The `examples/<rule>/` pairs still trip (bad) and pass (good) their rule | `node <skill>/scripts/check.mjs --self-test` |
-| Upgrade check | Stale theme leftovers | `node scripts/qinyang-upgrade-check.mjs` |
+| Upgrade check | Stale theme leftovers | `node scripts/paneui-upgrade-check.mjs` |
 | Linter (`@shadcn/lint` + the concentric rule) | Restyles, raw colours, arbitrary values | `eslint .` |
 
-Allow-list an intentional finding in `qinyang-design.config.json` with a reason:
+Allow-list an intentional finding in `paneui-design.config.json` with a reason:
 
 ```json
 { "allow": [{ "rule": "type-scale", "file": "components/card-art.tsx", "reason": "card artwork" }] }
