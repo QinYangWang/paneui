@@ -17,7 +17,12 @@ export default defineConfig({
   renderer: {
     plugins: [react(), tailwindcss()],
     resolve: {
-      alias: { "@": repo },
+      alias: [
+        { find: /^@paneui\/ui\/icons$/, replacement: resolve(repo, "packages/ui/src/icons/index.tsx") },
+        { find: "@paneui/ui", replacement: resolve(repo, "packages/ui/src") },
+        { find: "@paneui/core", replacement: resolve(repo, "packages/core/src") },
+        { find: "@", replacement: resolve(repo, "apps/docs") },
+      ],
       // One copy of React for the app and the template (both resolve to the repo's).
       dedupe: ["react", "react-dom"],
     },

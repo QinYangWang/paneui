@@ -20,31 +20,31 @@ workspace with its own lockfile — install it inside `apps/desktop/` if you nee
 
 | Path | What |
 | --- | --- |
-| `registry/base-nova/ui/` | Components (`registry:ui`) |
-| `registry/base-nova/blocks/<name>/` | Composed blocks (`registry:block`) |
-| `components/icons.tsx` | Hand-drawn icon set; the outline set is generated from it |
-| `registry/base-nova/examples/` | One demo per item, written as a consumer |
-| `content/docs/<name>.ts` | Docs page content (usage, composition, examples, API) |
-| `app/`, `components/docs/`, `components/landing/` | The docs site and landing page |
+| `packages/ui/src/components/` | Components (`registry:ui`) |
+| `packages/ui/src/blocks/<name>/` | Composed blocks (`registry:block`) |
+| `packages/ui/src/icons/index.tsx` | Hand-drawn icon set; the outline set is generated from it |
+| `apps/docs/registry/examples/` | One demo per item, written as a consumer |
+| `apps/docs/content/docs/<name>.ts` | Docs page content (usage, composition, examples, API) |
+| `apps/docs/app/`, `apps/docs/components/docs/`, `apps/docs/components/landing/` | The docs site and landing page |
 | `packages/cli/` | The `paneui` CLI |
 | `skills/paneui-design/` | The design rules and the design check |
-| `scripts/` | Generation and audit scripts (`gen-docs.mjs`, `gen-docs-md.mjs`, `audit-radius.mjs`, …) |
+| `tooling/scripts/` | Generation and audit scripts (`gen-docs.mjs`, `gen-docs-md.mjs`, `audit-radius.mjs`, …) |
 
 ## Adding a component
 
-1. Create `registry/base-nova/ui/<name>.tsx` (or `blocks/<name>/…`) with named
+1. Create `packages/ui/src/components/<name>.tsx` (or `blocks/<name>/…`) with named
    part exports, `data-slot` on each part and `cva` variants.
-2. Add a demo at `registry/base-nova/examples/<name>-demo.tsx`. It must pass
+2. Add a demo at `apps/docs/registry/examples/<name>-demo.tsx`. It must pass
    consumer lint: theme tokens only, no restyling.
-3. Register the item in `registry.json` (type, title, one-sentence description
+3. Register the item in `packages/registry/registry.json` (type, title, one-sentence description
    of 12 words or fewer, dependencies, files, `meta.category`).
-4. Add docs content at `content/docs/<name>.ts` and per-example files under
-   `registry/base-nova/examples/<name>/`.
-5. Add the demo to `components/docs/demos.tsx`, run `node scripts/gen-docs.mjs`
+4. Add docs content at `apps/docs/content/docs/<name>.ts` and per-example files under
+   `apps/docs/registry/examples/<name>/`.
+5. Add the demo to `apps/docs/components/docs/demos.tsx`, run `node tooling/scripts/gen-docs.mjs`
    and commit the generated files.
 
-Never edit `registry/base-nova/icons/outline/icons.tsx` by hand; change
-`components/icons.tsx` or `scripts/icon-outline-overrides.mjs` and run
+Never edit `packages/ui/src/icons/outline/icons.tsx` by hand; change
+`packages/ui/src/icons/index.tsx` or `tooling/scripts/icon-outline-overrides.mjs` and run
 `pnpm icons:gen`.
 
 ## Design rules
@@ -100,5 +100,6 @@ git push origin cli-vX.Y.Z
 
 `.github/workflows/release-cli.yml` verifies the tag against the package
 version, runs the CLI tests and publishes `paneui` to npm with trusted
-publishing (OIDC, no token). The site deploys from the default branch through
-the Pages workflow; there is no separate site release.
+publishing (OIDC, no token). Cloudflare Pages builds and deploys the site from
+`main` through its Git integration; there is no separate site release.
+See [Deployment](README.md#deployment) for setup.

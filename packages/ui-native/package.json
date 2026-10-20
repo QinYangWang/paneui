@@ -1,0 +1,26 @@
+{
+  "name": "@paneui/ui-native",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme": "./src/theme.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@paneui/tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=19.1.0 <20",
+    "react-native": ">=0.83.0 <1"
+  },
+  "devDependencies": {
+    "react": "19.3.0",
+    "react-native": "0.88.0",
+    "@types/react": "~19.3.0",
+    "typescript": "^5.9.2"
+  }
+}

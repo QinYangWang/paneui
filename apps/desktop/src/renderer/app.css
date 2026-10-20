@@ -1,9 +1,9 @@
-@import "../../../../app/globals.css";
+@import "../../../../packages/tokens/styles/globals.css";
 
 /* The template and the components it uses live in the repo, outside this app. */
-@source "../../../../registry/base-nova";
-@source "../../../../components";
-@source "../../../../lib";
+@source "../../../../packages/ui/src";
+@source "../../../../apps/docs/registry";
+@source "../../../../apps/docs/components";
 
 html,
 body,

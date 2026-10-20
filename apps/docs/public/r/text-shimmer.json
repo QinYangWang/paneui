@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-shimmer",
+  "title": "Text Shimmer",
+  "description": "Highlights text while work is in progress.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://paneui.dev/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/web/ui/text-shimmer.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype TextShimmerTag = \"span\" | \"p\" | \"div\" | \"h1\" | \"h2\" | \"h3\" | \"h4\"\n\ntype TextShimmerProps = React.HTMLAttributes<HTMLElement> & {\n  as?: TextShimmerTag\n  /** Seconds for one sweep. */\n  duration?: number\n  /** Width of the bright band; 14 spans about half the text. */\n  spread?: number\n}\n\n// Shipped with the component (React hoists and dedupes it by href) so an\n// installed copy brings its own keyframes and reduced-motion rule.\nconst SHIMMER_CSS =\n  \"@keyframes qy-text-shimmer{from{background-position:100% 0}to{background-position:0% 0}}\" +\n  \"@media (prefers-reduced-motion: reduce){[data-slot=text-shimmer]{animation:none!important;background-position:50% 0!important}}\"\n\n/**\n * The gradient is sized from the band so the band starts fully left of the\n * text and ends fully right of it: the loop resets while nothing bright is on\n * screen. Positions are in % of the gradient, which is `size` × the text width.\n */\nfunction bandGeometry(spread: number) {\n  const half = Math.max(0.04, spread / 60) // half-width as a fraction of the text width\n  const size = 2 + 2 * half + 0.1\n  const edge = (half / size) * 100\n  const core = edge * 0.35\n  return { size: size * 100, edge, core }\n}\n\nfunction TextShimmer({\n  as = \"span\",\n  duration = 2.2,\n  spread = 14,\n  className,\n  style,\n  ...props\n}: TextShimmerProps) {\n  const Comp = as as React.ElementType\n  const { size, edge, core } = bandGeometry(spread)\n  const at = (offset: number) => `${(50 + offset).toFixed(2)}%`\n  return (\n    <>\n      <style href=\"qy-text-shimmer\" precedence=\"default\">\n        {SHIMMER_CSS}\n      </style>\n      <Comp\n        data-slot=\"text-shimmer\"\n        className={cn(\n          \"inline-block bg-clip-text bg-no-repeat text-transparent [-webkit-background-clip:text]\",\n          \"[--shimmer-base:color-mix(in_oklch,var(--muted-foreground)_78%,transparent)] [--shimmer-highlight:var(--foreground)]\",\n          className\n        )}\n        style={\n          {\n            backgroundImage: `linear-gradient(100deg, var(--shimmer-base) ${at(-edge)}, var(--shimmer-highlight) ${at(-core)}, var(--shimmer-highlight) ${at(core)}, var(--shimmer-base) ${at(edge)})`,\n            backgroundSize: `${size.toFixed(1)}% 100%`,\n            animationName: \"qy-text-shimmer\",\n            animationDuration: `${duration}s`,\n            animationTimingFunction: \"cubic-bezier(0.4,0.1,0.6,0.9)\",\n            animationIterationCount: \"infinite\",\n            ...style,\n          } as React.CSSProperties\n        }\n        {...props}\n      />\n    </>\n  )\n}\n\nexport { TextShimmer, type TextShimmerProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Text"
+  },
+  "type": "registry:ui"
+}

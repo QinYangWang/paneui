@@ -14,7 +14,7 @@ const button = `"use client"
 import * as React from "react"
 import { cva } from "class-variance-authority"
 
-import { cn } from "@/registry/base-nova/lib/utils"
+import { cn } from "@/registry/web/lib/utils"
 
 const buttonVariants = cva("inline-flex items-center", {
   variants: { variant: { default: "bg-primary text-primary-foreground", ghost: "hover:bg-muted" } },
@@ -28,7 +28,7 @@ export { Button, buttonVariants }
 `
 
 const card = `import * as React from "react"
-import { cn } from "@/registry/base-nova/lib/utils"
+import { cn } from "@/registry/web/lib/utils"
 
 function Card({ className, ...props }) {
   return <div data-slot="card" className={cn("rounded-xl bg-card", className)} {...props} />
@@ -52,11 +52,11 @@ export const ITEMS = [
   { name: "theme-radius-default", type: "registry:theme", title: "Radius default", description: "Default radius.", cssVars: { light: { radius: "0.5rem" } }, meta: { category: "Foundations", hidden: true } },
   { name: "theme-radius-lg", type: "registry:theme", title: "Radius lg", description: "Large radius.", cssVars: { light: { radius: "0.625rem" } }, meta: { category: "Foundations", hidden: true } },
   { name: "icons", type: "registry:component", title: "Icons", description: "Icon set.", files: [{ path: "components/icons.tsx", type: "registry:component", target: "components/icons.tsx", content: "export const A = 1\nexport const B = 2\n// rounded\n" }], meta: { category: "Foundations" } },
-  { name: "icons-outline", type: "registry:component", title: "Icons outline", description: "Outline icon set.", files: [{ path: "registry/base-nova/icons/outline/icons.tsx", type: "registry:component", target: "components/icons.tsx", content: "export const A = 1\nexport const B = 2\n// outline\n// thin strokes\n" }], meta: { category: "Foundations", hidden: true } },
-  { name: "button", type: "registry:ui", title: "Button", description: "Triggers an action or submits a form.", dependencies: ["class-variance-authority"], registryDependencies: ["@paneui/theme"], files: [{ path: "registry/base-nova/ui/button.tsx", type: "registry:ui", content: button }], meta: { category: "Forms" } },
-  { name: "card", type: "registry:ui", title: "Card", description: "Groups related content on a surface.", registryDependencies: ["@paneui/theme"], files: [{ path: "registry/base-nova/ui/card.tsx", type: "registry:ui", content: card }], meta: { category: "Display" } },
-  { name: "donut-chart", type: "registry:ui", title: "Donut Chart", description: "Shows how parts make up a whole as a ring.", files: [{ path: "registry/base-nova/ui/donut-chart.tsx", type: "registry:ui", content: "export function DonutChart() { return null }\n" }], meta: { category: "Charts" } },
-  { name: "blog", type: "registry:block", title: "Blog", description: "A blog template.", files: [{ path: "registry/base-nova/templates/blog/app/blog/page.tsx", type: "registry:page", target: "app/blog/page.tsx", content: "export default function Page() {\n  return <main>Blog</main>\n}\n" }], meta: { category: "Templates" } },
+  { name: "icons-outline", type: "registry:component", title: "Icons outline", description: "Outline icon set.", files: [{ path: "registry/web/icons/outline/icons.tsx", type: "registry:component", target: "components/icons.tsx", content: "export const A = 1\nexport const B = 2\n// outline\n// thin strokes\n" }], meta: { category: "Foundations", hidden: true } },
+  { name: "button", type: "registry:ui", title: "Button", description: "Triggers an action or submits a form.", dependencies: ["class-variance-authority"], registryDependencies: ["@paneui/theme"], files: [{ path: "registry/web/ui/button.tsx", type: "registry:ui", content: button }], meta: { category: "Forms" } },
+  { name: "card", type: "registry:ui", title: "Card", description: "Groups related content on a surface.", registryDependencies: ["@paneui/theme"], files: [{ path: "registry/web/ui/card.tsx", type: "registry:ui", content: card }], meta: { category: "Display" } },
+  { name: "donut-chart", type: "registry:ui", title: "Donut Chart", description: "Shows how parts make up a whole as a ring.", files: [{ path: "registry/web/ui/donut-chart.tsx", type: "registry:ui", content: "export function DonutChart() { return null }\n" }], meta: { category: "Charts" } },
+  { name: "blog", type: "registry:block", title: "Blog", description: "A blog template.", files: [{ path: "registry/web/templates/blog/app/blog/page.tsx", type: "registry:page", target: "app/blog/page.tsx", content: "export default function Page() {\n  return <main>Blog</main>\n}\n" }], meta: { category: "Templates" } },
 ]
 
 export const CONTENT = { button, card }

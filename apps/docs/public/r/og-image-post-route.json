@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "og-image-post-route",
+  "title": "OG Image Post Route",
+  "description": "Creates a share image for each post.",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://paneui.dev/r/og-image.json"
+  ],
+  "files": [
+    {
+      "path": "registry/web/templates/next-og/opengraph-image-post.tsx",
+      "content": "import { ImageResponse } from \"next/og\"\n\nimport { OgCoverArt, OgImage, ogImageContentType, ogImageSize } from \"@/registry/web/ui/og-image\"\n\n/*\n * One share image per post: app/blog/[slug]/opengraph-image.tsx. Swap `getPost` for your content\n * source. With `generateStaticParams` on the page, every image is rendered at build time.\n */\n\ntype Post = { title: string; description: string; author: string; date: string; tags: string[] }\n\nasync function getPost(slug: string): Promise<Post> {\n  return { title: slug.replace(/-/g, \" \"), description: \"\", author: \"Acme\", date: \"\", tags: [] }\n}\n\nexport const alt = \"Blog post\"\nexport const size = ogImageSize\nexport const contentType = ogImageContentType\n\nexport default async function Image({ params }: { params: Promise<{ slug: string }> }) {\n  const { slug } = await params\n  const post = await getPost(slug)\n  return new ImageResponse(\n    <div style={{ display: \"flex\", position: \"relative\", width: size.width, height: size.height }}>\n      <OgCoverArt seed={slug} style={{ position: \"absolute\", left: 0, top: 0 }} />\n      <OgImage\n        title={post.title}\n        description={post.description || undefined}\n        siteName=\"Acme Blog\"\n        author={post.author}\n        date={post.date || undefined}\n        tags={post.tags}\n        pattern=\"none\"\n        // a scrim over the art so the text stays readable\n        style={{ position: \"absolute\", left: 0, top: 0, backgroundColor: \"#ffffffd9\" }}\n      />\n    </div>,\n    size\n  )\n}\n",
+      "type": "registry:file",
+      "target": "app/blog/[slug]/opengraph-image.tsx"
+    }
+  ],
+  "meta": {
+    "category": "Display",
+    "hidden": true
+  },
+  "type": "registry:block"
+}

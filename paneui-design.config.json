@@ -1,8 +1,8 @@
 {
   "$comment": "Design check settings for this repo (skills/paneui-design/scripts/check.mjs). nameHashes: words that must not appear in prose, stored hashed so this file doesn't name them; add one with --hash \"word\".",
   "ignore": [
-    "registry/base-nova/icons/outline/**",
-    "scripts/fixtures/**",
+    "packages/ui/src/icons/outline/**",
+    "tooling/scripts/fixtures/**",
     "**/parts/code.ts"
   ],
   "rtl": true,
@@ -48,53 +48,63 @@
   "allow": [
     {
       "rule": "no-palette-colors",
-      "file": "registry/base-nova/ui/file-tree.tsx",
+      "file": "packages/ui/src/components/file-tree.tsx",
       "reason": "file-type icon colours are a fixed code-editor convention, tuned per mode"
     },
     {
       "rule": "radius-cap",
-      "file": "app/docs/theming/page.tsx",
+      "file": "apps/docs/app/docs/theming/page.tsx",
       "reason": "the radius table documents the 4xl/5xl aliases"
     },
     {
       "rule": "type-scale",
-      "file": "registry/base-nova/blocks/card-folder/card-folder.tsx",
+      "file": "packages/ui/src/blocks/card-folder/card-folder.tsx",
       "reason": "payment card artwork, sized to the card"
     },
     {
       "rule": "tracking",
-      "file": "registry/base-nova/blocks/card-folder/card-folder.tsx",
+      "file": "packages/ui/src/blocks/card-folder/card-folder.tsx",
       "reason": "payment card artwork"
     },
     {
       "rule": "type-scale",
-      "file": "registry/base-nova/blocks/file-upload/file-upload.tsx",
+      "file": "packages/ui/src/blocks/file-upload/file-upload.tsx",
       "reason": "file extension tag drawn on the file glyph"
     },
     {
       "rule": "tracking",
-      "file": "registry/base-nova/blocks/file-upload/file-upload.tsx",
+      "file": "packages/ui/src/blocks/file-upload/file-upload.tsx",
       "reason": "file extension tag drawn on the file glyph"
     },
     {
       "rule": "tracking",
-      "file": "registry/base-nova/examples/text-scramble-demo.tsx",
+      "file": "apps/docs/registry/examples/text-scramble-demo.tsx",
       "reason": "mono scramble effect"
     },
     {
       "rule": "*",
-      "file": "components/docs/skill-examples.tsx",
+      "file": "apps/docs/components/docs/skill-examples.tsx",
       "reason": "the Avoid previews on /docs/skill break the rules on purpose"
     },
     {
       "rule": "media-outline",
-      "file": "registry/base-nova/ui/og-image.tsx",
+      "file": "packages/ui/src/components/og-image.tsx",
       "reason": "rendered to a PNG by the share-card renderer, which has no outline support; the card draws its own edges"
     },
     {
       "rule": "icon-color",
-      "file": "registry/base-nova/examples/image-generation-demo.tsx",
+      "file": "apps/docs/registry/examples/image-generation-demo.tsx",
       "reason": "placeholder illustration standing in for a generated image, not an icon"
     }
-  ]
+  ],
+  "theme": "packages/tokens/styles/globals.css",
+  "platforms": {
+    "native": [
+      "packages/ui-native/src/**",
+      "apps/native/**"
+    ],
+    "shared": [
+      "packages/core/src/**"
+    ]
+  }
 }

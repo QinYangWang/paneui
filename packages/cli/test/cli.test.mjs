@@ -75,7 +75,7 @@ describe("units", () => {
   })
 
   test("normalize ignores import paths, directives and semicolons", () => {
-    const shipped = `"use client";\nimport { cn } from "@/registry/base-nova/lib/utils";\nexport const a = 1;\n`
+    const shipped = `"use client";\nimport { cn } from "@/registry/web/lib/utils";\nexport const a = 1;\n`
     const installed = `import { cn } from "@/lib/utils"\n\nexport const a = 1\n`
     assert.deepEqual(normalize(shipped), normalize(installed))
     const d = lineDiff(installed, shipped + "export const b = 2\n")
@@ -84,8 +84,8 @@ describe("units", () => {
   })
 
   test("nested install paths follow shadcn", () => {
-    assert.equal(nestedPath("registry/base-nova/ui/button.tsx", "/p/components/ui"), "button.tsx")
-    assert.equal(nestedPath("registry/base-nova/blocks/card-x/card-x.tsx", "/p/components"), "card-x.tsx")
+    assert.equal(nestedPath("registry/web/ui/button.tsx", "/p/components/ui"), "button.tsx")
+    assert.equal(nestedPath("registry/web/blocks/card-x/card-x.tsx", "/p/components"), "card-x.tsx")
   })
 
   test("parseJsonc handles comments and trailing commas", () => {
@@ -193,8 +193,8 @@ describe("commands", () => {
     const cwd = project({
       files: {
         // Installed copy: imports rewritten by shadcn, plus one local edit.
-        "components/ui/button.tsx": CONTENT.button.replace("@/registry/base-nova/lib/utils", "@/lib/utils").replace("hover:bg-muted", "hover:bg-accent"),
-        "components/ui/card.tsx": CONTENT.card.replace("@/registry/base-nova/lib/utils", "@/lib/utils"),
+        "components/ui/button.tsx": CONTENT.button.replace("@/registry/web/lib/utils", "@/lib/utils").replace("hover:bg-muted", "hover:bg-accent"),
+        "components/ui/card.tsx": CONTENT.card.replace("@/registry/web/lib/utils", "@/lib/utils"),
         // Same name, someone else's file: must not be picked up.
         "components/ui/donut-chart.tsx": "import { Pie } from 'charts'\nexport const DonutChart = () => <Pie />\n// local\n",
         "app/blog/page.tsx": "export default function Page() {\n  return <main>Blog</main>\n}\n",

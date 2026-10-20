@@ -1,27 +1,28 @@
 {
+  "extends": "./apps/docs/tsconfig.json",
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./apps/docs/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "skills", "out", "apps", "packages"]
+  "include": [
+    "apps/docs/**/*.ts",
+    "apps/docs/**/*.tsx",
+    "apps/docs/.next/types/**/*.ts",
+    "packages/ui/src/**/*.ts",
+    "packages/ui/src/**/*.tsx",
+    "packages/core/src/**/*.ts",
+    "packages/tokens/src/**/*.ts",
+    "tooling/scripts/**/*.tsx",
+    "tooling/scripts/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "apps/docs/node_modules",
+    "apps/docs/.next/cache",
+    "apps/docs/out",
+    "tooling/scripts/fixtures"
+  ]
 }

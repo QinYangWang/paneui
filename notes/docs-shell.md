@@ -9,10 +9,10 @@ the docs site no longer uses them.
 - **Tabs** (Docs, Components, Templates) mirror the sidebar's three sections. Active tab = foreground
   text plus a 2px bottom indicator, the same treatment as the sidebar's left indicator line.
 - **Right side**: search field with the shortcut (icon-only under `sm`), GitHub, theme and accent controls.
-- **Sidebar** (`components/docs/docs-nav.tsx`): search field at the top (opens the palette),
+- **Sidebar** (`apps/docs/components/docs/docs-nav.tsx`): search field at the top (opens the palette),
   collapsible sections with counts, category groups inside Components, `h-7` text-only rows
   (`text-ui`, no per-item icons), "New" badges and a sticky "What's new" footer from
-  `components/docs/whats-new.ts`. Collapsed state persists in `localStorage["docs-nav-collapsed"]`.
+  `apps/docs/components/docs/whats-new.ts`. Collapsed state persists in `localStorage["docs-nav-collapsed"]`.
   Below `lg` it opens in the left drawer.
   - **One left edge (round 15)**: no indent and no guide line. Section labels, group labels and rows
     all put their text on the same line (`px-2` inside the nav's `px-3`). Hierarchy comes from type
@@ -25,14 +25,14 @@ the docs site no longer uses them.
   reduced motion). Titles are single-line and truncate with an `OverflowHint` (opens to the left). Depth-2 entries
   are `ps-6 text-ui-sm`. The current section is the last heading above 112px, or the last entry at the page end.
   Back to top sits under the list, outside the scroll area, and fades in after 320px of page scroll.
-- **Docs page chrome (round 23)**, in `components/docs/doc-layout.tsx` (`DocLayout`, `DocHeader`, `DocFooter`), shared by
+- **Docs page chrome (round 23)**, in `apps/docs/components/docs/doc-layout.tsx` (`DocLayout`, `DocHeader`, `DocFooter`), shared by
   the component pages (`app/docs/[name]`) and the guide pages (`GuidePage`):
   - **Eyebrow, not breadcrumb**: the section name (component category, "Templates" or "Getting started") sits above the
     title as a muted `text-ui` link to that section. The breadcrumb repeated the sidebar and the header tab, so it went.
   - **Page actions** (`page-actions.tsx`): a `ButtonGroup` of "Copy page" plus a `Menu` (Copy as Markdown, View as
     Markdown, Open in ChatGPT, Open in Claude, Copy page link), top-right of the title row; it wraps under the title on
     phones. All actions read the static `/docs/<slug>.md` (`/docs/index.md` for the introduction) written after
-    `next build` by `scripts/gen-docs-md.mjs` (`pnpm docs:md`, part of `pnpm build` and the Pages workflow): component
+    `next build` by `tooling/scripts/gen-docs-md.mjs` (`pnpm docs:md`, part of `pnpm build` and the Cloudflare Pages build): component
     and template pages from registry.json, `content/docs/<name>.ts` and the example files (install commands, usage,
     composition, examples' code, notes, API tables); guide pages from their built HTML (elements with `data-md-skip`
     are left out), the design skill page from `SKILL.md`. `public/llms.txt` links to the `.md` files. The ChatGPT mark is

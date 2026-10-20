@@ -1,4 +1,4 @@
-import type { HostChange, HostCommand, HostFolder } from "@/registry/base-nova/templates/vscode/parts/host"
+import type { HostChange, HostCommand, HostFolder } from "@/registry/templates/vscode/parts/host"
 
 export type { HostChange, HostCommand, HostFolder }
 
