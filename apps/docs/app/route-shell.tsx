@@ -8,14 +8,15 @@ import { SiteShell } from "@/components/docs/site-shell"
 import { ThemeSync } from "@/components/docs/theme-sync"
 
 /**
- * Docs pages get the docs chrome (header, sidebar, ⌘K). Full-page templates
+ * The homepage is a standalone marketing page. Docs pages get the docs chrome
+ * (header, sidebar, ⌘K). Full-page templates
  * under /templates/* and the /preview frame render bare, full-bleed, but keep the root providers and
  * follow theme/accent changes made in the docs (they are also embedded as
  * iframe previews there).
  */
 export function RouteShell({ groups, children }: { groups: NavGroup[]; children: React.ReactNode }) {
   const pathname = usePathname() ?? "/"
-  if (pathname === "/templates" || pathname.startsWith("/templates/") || pathname === "/preview" || pathname.startsWith("/preview/")) return (
+  if (pathname === "/" || pathname === "/templates" || pathname.startsWith("/templates/") || pathname === "/preview" || pathname.startsWith("/preview/")) return (
       <>
         <ThemeSync />
         {children}

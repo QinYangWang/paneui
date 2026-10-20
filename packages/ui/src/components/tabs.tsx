@@ -105,7 +105,8 @@ function TabsList({ className, children, size = "default", variant = "default", 
 }
 
 // CSS can't see text nodes (`>svg:only-child` also matched icon + label tabs and stripped their
-// padding), so icon-only is decided from the children.
+// padding), so icon-only requires an accessible label and a single glyph child.
+// An arbitrary component without children can also render text (for example a localized label).
 function isIconOnly(children: React.ReactNode) {
   const nodes = React.Children.toArray(children)
   return nodes.length === 1 && React.isValidElement(nodes[0])
@@ -115,7 +116,7 @@ function isIconOnly(children: React.ReactNode) {
 
 function TabsTab({ className, children, ...props }: TabsPrimitive.Tab.Props) {
   const { size, variant } = React.useContext(TabsListContext)
-  const iconOnly = typeof children !== "function" && isIconOnly(children as React.ReactNode)
+  const iconOnly = !!(props["aria-label"] || props["aria-labelledby"]) && typeof children !== "function" && isIconOnly(children as React.ReactNode)
   return (
     <TabsPrimitive.Tab
       data-slot="tabs-tab"
