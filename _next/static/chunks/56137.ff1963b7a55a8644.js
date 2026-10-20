@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[56137],{56137:(e,r,i)=>{i.r(r),i.d(r,{default:()=>c});var s=i(56230),n=i(18319);function c(){return(0,s.jsx)(n.KS,{children:(0,s.jsx)(n.SK,{children:["Overview","Customers","Pricing","Blog"].map((e,r)=>(0,s.jsx)(n.JD,{children:(0,s.jsx)(n.Ws,{variant:"trigger",href:"#",active:0===r,children:e})},e))})})}}}]);

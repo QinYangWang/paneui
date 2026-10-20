@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[91264],{91264:(e,a,u)=>{u.r(a),u.d(a,{default:()=>t});var l=u(56230),s=u(18174);function t(){return(0,l.jsx)(s.C,{"aria-label":"Seats",defaultValue:4,disabled:!0})}}}]);

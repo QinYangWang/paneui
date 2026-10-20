@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[63566],{63566:(e,c,n)=>{n.r(c),n.d(c,{default:()=>a});var u=n(56230),t=n(54568);function a(){return(0,u.jsx)(t.mW,{language:"python",code:"def nights_between(check_in, check_out):\n    return (check_out - check_in).days\n",className:"w-full max-w-xl"})}}}]);

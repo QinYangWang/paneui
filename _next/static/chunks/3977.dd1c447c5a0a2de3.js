@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[3977],{3977:(e,t,a)=>{a.r(t),a.d(t,{default:()=>u});var s=a(56230),n=a(80549),l=a(15233);let r=e=>0===e.getDay()||6===e.getDay();function u(){return(0,s.jsx)(l.Zp,{className:"w-fit p-3",children:(0,s.jsx)(n.V,{min:new Date,disabled:r,weekStartsOn:1})})}}}]);

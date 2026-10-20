@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[28252],{28252:(e,s,a)=>{a.r(s),a.d(s,{default:()=>c});var l=a(56230),u=a(85878);function c(){return(0,l.jsx)("div",{className:"w-full max-w-xl",children:(0,l.jsx)(u._y,{placeholder:"Message the agent"})})}}}]);

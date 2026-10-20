@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[79936],{57555:(e,s,t)=>{t.r(s),t.d(s,{default:()=>u});var a=t(56230),r=t(33630);function u(){return(0,a.jsx)("div",{className:"flex items-center gap-6 text-muted-foreground",children:["xs","sm","md","lg"].map(e=>(0,a.jsx)(r.a,{size:e},e))})}}}]);

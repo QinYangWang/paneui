@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[65404],{65404:(a,e,l)=>{l.r(e),l.d(e,{default:()=>t});var s=l(56230),u=l(56830);function t(){return(0,s.jsx)("div",{className:"w-full max-w-sm",children:(0,s.jsx)(u.Y,{label:"Bitrate",defaultValue:70,disabled:!0,formatValue:a=>"".concat(4*a," kbps")})})}}}]);

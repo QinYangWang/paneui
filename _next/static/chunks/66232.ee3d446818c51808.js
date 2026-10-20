@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[66232],{66232:(e,s,a)=>{a.r(s),a.d(s,{default:()=>i});var l=a(56230),t=a(1990);function i(){return(0,l.jsxs)("div",{className:"flex flex-col items-start gap-3",children:[(0,l.jsx)(t.F,{label:"Reading",meta:"12 files"}),(0,l.jsx)(t.F,{label:"Writing",initialElapsed:14,meta:"1.8k tokens"})]})}}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[79640],{79640:(t,s,a)=>{a.r(s),a.d(s,{default:()=>o});var e=a(56230),n=a(93330),r=a(72442);function o(){return(0,e.jsxs)(r.x,{to:0,variant:"ghost",size:"sm",children:[(0,e.jsx)(n.ArrowUpIcon,{"data-icon":"inline-start"}),"Back to top of page"]})}}}]);

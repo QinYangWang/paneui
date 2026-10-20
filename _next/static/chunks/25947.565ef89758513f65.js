@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[25947],{25947:(e,u,a)=>{a.r(u),a.d(u,{default:()=>t});var n=a(56230),s=a(25372);function t(){return(0,n.jsx)(s.B,{defaultSeed:"paneui"})}}}]);

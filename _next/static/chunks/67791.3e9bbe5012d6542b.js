@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[67791],{67791:(e,s,a)=>{a.r(s),a.d(s,{default:()=>u});var n=a(56230),t=a(54568);function u(){return(0,n.jsx)(t.mW,{filename:"vitest output",code:"✓ 128 tests passed\n✓ Coverage 91.4%\nDone in 6.2s",copyable:!1,showLineNumbers:!1,className:"w-full max-w-xl"})}}}]);

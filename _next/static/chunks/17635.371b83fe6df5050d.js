@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[17635],{17635:(e,t,a)=>{a.r(t),a.d(t,{default:()=>u});var l=a(56230),s=a(79175);let n=(0,s.U)(90,{seed:33,start:54.1,volatility:.009});function u(){return(0,l.jsx)(s.M,{candles:n,label:"Ninety one-minute candles",volumeRatio:.35,height:320,className:"max-w-2xl"})}}}]);

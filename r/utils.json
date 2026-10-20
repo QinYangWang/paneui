@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "utils",
+  "title": "cn helper",
+  "description": "Class-merging helper that understands the theme's font sizes.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "lib/utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { extendTailwindMerge } from \"tailwind-merge\"\n\n// The theme adds a native 13px type scale (text-ui-2xs … text-ui-lg). Teach tailwind-merge\n// that these are font sizes, so `cn(\"text-ui\", \"text-muted-foreground\")` keeps both.\nconst twMerge = extendTailwindMerge({\n  extend: {\n    classGroups: {\n      \"font-size\": [{ text: [\"ui\", \"ui-lg\", \"ui-sm\", \"ui-xs\", \"ui-2xs\"] }],\n      // Concentric radius utilities (frame-* on the container, rounded-inner on children).\n      rounded: [{ rounded: [\"inner\"] }],\n      \"rounded-t\": [{ \"rounded-t\": [\"inner\"] }],\n      \"rounded-b\": [{ \"rounded-b\": [\"inner\"] }],\n      \"rounded-s\": [{ \"rounded-s\": [\"inner\"] }],\n      \"rounded-e\": [{ \"rounded-e\": [\"inner\"] }],\n    },\n  },\n})\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "meta": {
+    "category": "Foundations",
+    "hidden": true
+  },
+  "type": "registry:lib"
+}

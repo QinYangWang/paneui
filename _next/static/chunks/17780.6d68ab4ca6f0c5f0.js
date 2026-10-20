@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[17780],{17780:(e,r,c)=>{c.r(r),c.d(r,{default:()=>a});var s=c(56230),n=c(99921),t=c(2119);function a(){return(0,s.jsx)(n.YO,{labels:{workedFor:e=>"Took ".concat(e)},children:(0,s.jsx)(t.UV,{duration:12,children:(0,s.jsx)(t.ir,{kind:"search",title:"Searched the docs"})})})}}}]);

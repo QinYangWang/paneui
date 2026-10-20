@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[80497],{80497:(e,a,n)=>{n.r(a),n.d(a,{default:()=>u});var l=n(56230),s=n(54568);function u(){return(0,l.jsx)(s.mW,{filename:"Terminal",language:"bash",code:"pnpm dlx shadcn@latest add @paneui/agent-code-block\npnpm dev",showLineNumbers:!1,className:"w-full max-w-xl"})}}}]);

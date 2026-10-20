@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[50659],{50659:(e,u,s)=>{s.r(u),s.d(u,{default:()=>l});var t=s(56230),a=s(47969);function l(){return(0,t.jsx)(a.DocsTemplate,{layout:"flux"})}}}]);

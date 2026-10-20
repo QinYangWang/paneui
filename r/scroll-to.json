@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-to",
+  "title": "Scroll To",
+  "description": "Button that scrolls to a section or position.",
+  "dependencies": [
+    "@base-ui/react",
+    "lenis",
+    "motion"
+  ],
+  "registryDependencies": [
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/button.json",
+    "https://paneui.dev/r/smooth-scroll.json"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/scroll-to.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\"\nimport type { VariantProps } from \"class-variance-authority\"\n\nimport { Button, buttonVariants } from \"@/registry/base-nova/ui/button\"\nimport { type ScrollTarget, useSmoothScroll } from \"@/registry/base-nova/ui/smooth-scroll\"\n\ntype ScrollToProps = Omit<React.ComponentProps<typeof Button>, \"onClick\"> &\n  VariantProps<typeof buttonVariants> & {\n    /** Where to go: a px offset, a CSS selector or an element. */\n    to: ScrollTarget\n    /** Extra px from the target, e.g. -64 to clear a sticky header. */\n    offset?: number\n    /** Ease duration in seconds (eased path only). */\n    duration?: number\n    /** Move keyboard focus to the target after scrolling (selector / element targets). */\n    focusTarget?: boolean\n    onClick?: React.MouseEventHandler<HTMLButtonElement>\n  }\n\n/**\n * Button that eases to a target through the nearest SmoothScroll, or native\n * smooth scrolling when there is none. Jumps instantly under reduced motion.\n */\nfunction ScrollTo({ to, offset, duration, focusTarget = false, onClick, ...props }: ScrollToProps) {\n  const { scrollTo, container } = useSmoothScroll()\n\n  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {\n    onClick?.(event)\n    if (event.defaultPrevented) return\n    scrollTo(to, { offset, duration })\n    if (!focusTarget || typeof to === \"number\") return\n    const root: ParentNode = container?.current ?? document\n    const el = typeof to === \"string\" ? root.querySelector<HTMLElement>(to) : to\n    if (!el) return\n    if (!el.hasAttribute(\"tabindex\")) el.setAttribute(\"tabindex\", \"-1\")\n    el.focus({ preventScroll: true })\n  }\n\n  return <Button data-slot=\"scroll-to\" variant=\"secondary\" onClick={handleClick} {...props} />\n}\n\nexport { ScrollTo, type ScrollToProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Motion"
+  },
+  "type": "registry:ui"
+}

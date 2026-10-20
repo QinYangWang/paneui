@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[77263],{77263:(a,e,l)=>{l.r(e),l.d(e,{default:()=>c});var s=l(56230),u=l(39248),r=l(57777);function c(){return(0,s.jsx)(u.EG,{variables:r.lF,className:"h-140 w-full max-w-3xl"})}}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[43905],{43905:(e,t,u)=>{u.r(t),u.d(t,{default:()=>n});var s=u(56230),a=u(47969);function n(){return(0,s.jsx)(a.DocsTemplate,{layout:"notebook"})}}}]);

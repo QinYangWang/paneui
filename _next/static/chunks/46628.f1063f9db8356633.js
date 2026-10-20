@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[46628],{46628:(e,a,s)=>{s.r(a),s.d(a,{default:()=>n});var r=s(56230),c=s(48867),u=s(81947);function n(){return(0,r.jsxs)(c.J,{className:"gap-3",children:[(0,r.jsx)(u.Switch,{readOnly:!0,defaultChecked:!0}),"Backups are on for every workspace"]})}}}]);

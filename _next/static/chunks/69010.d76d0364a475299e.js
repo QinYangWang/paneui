@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[69010],{69010:(e,l,a)=>{a.r(l),a.d(l,{default:()=>i});var u=a(56230),s=a(39248),f=a(57777);function i(){return(0,u.jsx)(s.EG,{defaultValue:f.pg,variables:f.lF,previewValues:f.$I,defaultView:"preview",defaultDevice:"mobile",className:"h-180 w-full max-w-3xl"})}}}]);

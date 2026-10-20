@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fdocs\u002F[name]","\u002Ftemplates\u002Fdocs\u002F[layout]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "control-size",
+  "title": "Control size",
+  "description": "Keeps field controls the same size.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "lib/control-size.ts",
+      "content": "\"use client\";\n\nimport * as React from \"react\"\n\n/**\n * Shared height scale for form controls, the same steps as Button:\n * `xs` 24px, `sm` 28px, `default` 32px, `lg` 36px. A `Field` (or a compound root such as\n * `Select`) publishes its size here and the controls inside read it, so one prop sizes a\n * whole row. A control's own `size` prop always wins.\n */\ntype ControlSize = \"xs\" | \"sm\" | \"default\" | \"lg\"\n\nconst ControlSizeContext = React.createContext<ControlSize | undefined>(undefined)\n\n/** The size from the nearest provider, or `fallback`. Pass a control's own prop first. */\nfunction useControlSize<S extends string = ControlSize>(own?: S | null, fallback: S = \"default\" as S): S {\n  const inherited = React.useContext(ControlSizeContext)\n  return (own ?? (inherited as S | undefined) ?? fallback) as S\n}\n\nexport { ControlSizeContext, useControlSize }\nexport type { ControlSize }\n",
+      "type": "registry:lib"
+    }
+  ],
+  "meta": {
+    "category": "Foundations",
+    "hidden": true
+  },
+  "type": "registry:lib"
+}

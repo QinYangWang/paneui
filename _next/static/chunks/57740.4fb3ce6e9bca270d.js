@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[57740],{57740:(e,s,t)=>{t.r(s),t.d(s,{default:()=>u});var r=t(56230),a=t(68715);function u(){return(0,r.jsx)(a.k,{ellipsis:!1,interval:1600,shimmerDuration:1.2,phrases:["Step 1 of 3: fetch issues","Step 2 of 3: group by label","Step 3 of 3: draft the changelog"]})}}}]);

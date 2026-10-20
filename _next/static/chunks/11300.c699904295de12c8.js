@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[11300],{11300:(e,s,c)=>{c.r(s),c.d(s,{default:()=>i});var n=c(56230),r=c(45776);function i(){return(0,n.jsxs)("div",{className:"flex items-center gap-3",children:[(0,n.jsx)(r.ue,{size:"sm",children:"esc"}),(0,n.jsx)(r.ue,{children:"⌘K"}),(0,n.jsx)(r.ue,{size:"lg",children:"Enter"})]})}}}]);

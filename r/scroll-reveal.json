@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-reveal",
+  "title": "Scroll Reveal",
+  "description": "Brings content into view as it scrolls onscreen.",
+  "dependencies": [
+    "motion",
+    "lenis"
+  ],
+  "registryDependencies": [
+    "https://paneui.dev/r/theme.json",
+    "https://paneui.dev/r/smooth-scroll.json"
+  ],
+  "files": [
+    {
+      "path": "registry/base-nova/ui/scroll-reveal.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\"\nimport { motion, useInView, useReducedMotion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { useSmoothScrollContainer } from \"@/registry/base-nova/ui/smooth-scroll\"\n\ntype ScrollRevealProps = Omit<\n  React.ComponentProps<typeof motion.div>,\n  \"ref\" | \"initial\" | \"animate\" | \"transition\" | \"children\"\n> & {\n  children?: React.ReactNode\n  /** Direction the content slides in from. */\n  from?: \"bottom\" | \"top\" | \"left\" | \"right\"\n  /** Slide distance in px. */\n  distance?: number\n  /** Starting blur in px. */\n  blur?: number\n  /** Delay in seconds, handy for staggering siblings. */\n  delay?: number\n  /** Reveal once (default) or every time it re-enters view. */\n  once?: boolean\n  /** How much of the element must be visible: \"some\", \"all\" or 0–1. */\n  amount?: \"some\" | \"all\" | number\n  /** Scroll root. Defaults to the nearest contained SmoothScroll, then the viewport. */\n  root?: React.RefObject<Element | null>\n}\n\nfunction ScrollReveal({\n  from = \"bottom\",\n  distance = 24,\n  blur = 8,\n  delay = 0,\n  once = true,\n  amount = 0.3,\n  root,\n  className,\n  children,\n  ...props\n}: ScrollRevealProps) {\n  const reduce = useReducedMotion() ?? false\n  const contextContainer = useSmoothScrollContainer()\n  const ref = React.useRef<HTMLDivElement>(null)\n  const inView = useInView(ref, { root: root ?? contextContainer ?? undefined, once, amount })\n\n  const axis = from === \"left\" || from === \"right\" ? \"x\" : \"y\"\n  const sign = from === \"bottom\" || from === \"right\" ? 1 : -1\n  const hidden = reduce\n    ? { opacity: 0 }\n    : { opacity: 0, [axis]: distance * sign, filter: `blur(${blur}px)` }\n  const shown = reduce ? { opacity: 1 } : { opacity: 1, x: 0, y: 0, filter: \"blur(0px)\" }\n\n  return (\n    <motion.div\n      ref={ref}\n      data-slot=\"scroll-reveal\"\n      data-revealed={inView ? \"\" : undefined}\n      initial={hidden}\n      animate={inView ? shown : hidden}\n      transition={\n        reduce\n          ? { duration: 0.2, delay }\n          : {\n              default: { type: \"spring\", stiffness: 220, damping: 26, mass: 0.8, delay },\n              opacity: { duration: 0.45, ease: [0.22, 1, 0.36, 1], delay },\n              filter: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay },\n            }\n      }\n      className={cn(className)}\n      {...props}\n    >\n      {children}\n    </motion.div>\n  )\n}\n\nexport { ScrollReveal, type ScrollRevealProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Motion"
+  },
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "title": "Label",
+  "description": "Names a form control.",
+  "files": [
+    {
+      "path": "registry/base-nova/ui/label.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Label({ className, ...props }: React.ComponentProps<\"label\">) {\n  return (\n    <label\n      data-slot=\"label\"\n      className={cn(\n        \"flex items-center gap-2 text-ui leading-none font-medium select-none\",\n        // Inside a group marked data-disabled=\"true\" (e.g. a disabled field row).\n        \"group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50\",\n        // Label after its control: native inputs use :disabled, primitive controls\n        // (Checkbox, Switch, Radio render a span) set data-disabled.\n        \"peer-disabled:cursor-not-allowed peer-disabled:opacity-50 peer-data-disabled:cursor-not-allowed peer-data-disabled:opacity-50\",\n        // Label wrapping its control: mute the text only, the control dims itself.\n        \"has-disabled:cursor-not-allowed has-disabled:text-muted-foreground has-data-disabled:cursor-not-allowed has-data-disabled:text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Label }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Forms"
+  },
+  "type": "registry:ui"
+}

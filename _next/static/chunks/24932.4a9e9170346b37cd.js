@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[24932],{24932:(e,t,a)=>{a.r(t),a.d(t,{default:()=>u});var l=a(56230),s=a(79175);let n=(0,s.U)(36,{seed:21,start:1.0842,volatility:.0012});function u(){return(0,l.jsx)(s.M,{candles:n,label:"EUR/USD one-minute candles",formatPrice:e=>e.toFixed(4),showVolume:!1,height:260,className:"max-w-2xl"})}}}]);

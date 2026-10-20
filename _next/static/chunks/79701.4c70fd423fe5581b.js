@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[79701],{79701:(e,a,s)=>{s.r(a),s.d(a,{default:()=>u});var t=s(56230),l=s(48198),n=s(4343);function u(){let[e,a]=l.useState(4);return(0,t.jsx)("div",{className:"flex flex-col items-center gap-3",children:["sm","default","lg"].map(s=>(0,t.jsx)(n.dK,{size:s,page:e,pageCount:12,onPageChange:a},s))})}}}]);
