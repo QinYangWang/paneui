@@ -20,7 +20,7 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 export function AgentSkill({ name, skill, html }: { name: string; skill: string; html: string }) {
   const t = useT()
   const skillUrl = `${BASE_PATH}/skills/${name}/SKILL.md`
-  const install = `npx skills add QinYangWang/ui --skill ${name}`
+  const install = `npx skills add QinYangWang/paneui --skill ${name}`
   const [copied, setCopied] = React.useState(false)
   React.useEffect(() => {
     if (!copied) return

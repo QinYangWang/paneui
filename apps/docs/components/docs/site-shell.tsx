@@ -24,7 +24,7 @@ import { LanguageToggle } from "./language-toggle"
 import { ThemeControls } from "./theme-controls"
 import { ThemeSync } from "./theme-sync"
 
-const GITHUB_URL = "https://github.com/QinYangWang/ui"
+const GITHUB_URL = "https://github.com/QinYangWang/paneui"
 
 const isTemplate = (pathname: string, groups: NavGroup[]) =>
   groups.some((g) => g.category === "Templates" && g.items.some((i) => pathname === `/docs/${i.name}`))

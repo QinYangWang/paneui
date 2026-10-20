@@ -15,10 +15,10 @@
   "homepage": "https://paneui.dev/docs/cli",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QinYangWang/ui.git",
+    "url": "git+https://github.com/QinYangWang/paneui.git",
     "directory": "packages/cli"
   },
-  "bugs": "https://github.com/QinYangWang/ui/issues",
+  "bugs": "https://github.com/QinYangWang/paneui/issues",
   "type": "module",
   "bin": {
     "paneui": "dist/index.js"

@@ -6,13 +6,19 @@ import { Button, Card, CardContent, CardHeader, Input, Text, ThemeProvider, useT
 import { spacing, type ColorScheme } from "@paneui/tokens"
 
 import { WebDocsLink } from "./web-docs-link"
+import { formSections } from "./sections/forms"
+import { displaySections } from "./sections/display"
 
-const components = ["Button", "Card", "Input", "Text"] as const
-type Component = (typeof components)[number]
+const sections: Record<string, () => React.ReactElement> = { ...formSections, ...displaySections }
+
+const components = ["Button", "Card", "Input", "Text", ...Object.keys(formSections), ...Object.keys(displaySections)]
+type Component = string
 
 function Examples({ component }: { component: Component }) {
   const [presses, setPresses] = React.useState(0)
   const [email, setEmail] = React.useState("")
+  const Section = sections[component]
+  if (Section) return <CardContent><Section /></CardContent>
   if (component === "Button") return (
     <CardContent>
       <View style={styles.wrap}>
