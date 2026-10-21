@@ -5,6 +5,7 @@ import { radius, spacing, typography } from "@paneui/tokens"
 import { useTheme } from "./theme"
 
 export type DialogProps = {
+  closeLabel?: string
   open?: boolean
   defaultOpen?: boolean
   onOpenChange?: (open: boolean) => void
@@ -13,7 +14,7 @@ export type DialogProps = {
   children?: React.ReactNode
 }
 
-export function Dialog({ open, defaultOpen = false, onOpenChange, title, description, children }: DialogProps) {
+export function Dialog({ closeLabel = "Close dialog", open, defaultOpen = false, onOpenChange, title, description, children }: DialogProps) {
   const { colors, scheme } = useTheme()
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen)
   const isOpen = open ?? uncontrolledOpen
@@ -26,7 +27,7 @@ export function Dialog({ open, defaultOpen = false, onOpenChange, title, descrip
   return (
     <Modal visible={isOpen} transparent animationType="fade" statusBarTranslucent onRequestClose={() => setOpen(false)}>
       <View style={{ flex: 1, justifyContent: "center", padding: spacing.xl }}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Close dialog" onPress={() => setOpen(false)} style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: scrim, opacity: scrimOpacity }} />
+        <Pressable accessibilityRole="button" accessibilityLabel={closeLabel} onPress={() => setOpen(false)} style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: scrim, opacity: scrimOpacity }} />
         <View
           accessibilityViewIsModal
           accessibilityRole="alert"

@@ -1,16 +1,20 @@
-
+import { View } from "react-native";
+import { spacing } from "@paneui/tokens";
 import { SegmentedControl } from "@paneui/ui-native";
-
-export default function SegmentedExample() {
+import { useExampleText } from "../../language";
+export default function Example() {
+  const t = useExampleText();
   return (
-    <SegmentedControl
-      label="View"
-      defaultValue="week"
-      options={[
-        { value: "day", label: "Day" },
-        { value: "week", label: "Week" },
-        { value: "month", label: "Month" },
-      ]}
-    />
+    <View style={{ gap: spacing.md }}>
+      <SegmentedControl
+        label={t("Workspace", "工作区")}
+        options={[
+          { value: "personal", label: t("Personal", "个人") },
+          { value: "team", label: t("Team", "团队") },
+          { value: "archive", label: t("Archive", "归档"), disabled: true },
+        ]}
+        defaultValue="personal"
+      />
+    </View>
   );
 }

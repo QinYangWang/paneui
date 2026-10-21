@@ -1,17 +1,12 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { spacing } from "@paneui/tokens";
 import { Spinner } from "@paneui/ui-native";
-
-export default function SpinnerExample() {
+import { useExampleText } from "../../language";
+export default function Example() {
+  const t = useExampleText();
   return (
-    <View style={[styles.row, { alignItems: "center" }]}>
-      <Spinner />
-      <Spinner size="large" />
-      <Spinner tone="mutedForeground" />
+    <View style={{ gap: spacing.md }}>
+      <Spinner accessibilityLabel={t("Loading projects", "正在加载项目")} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: { flexDirection: "row", flexWrap: "wrap", gap: spacing.md },
-});

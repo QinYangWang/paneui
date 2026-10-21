@@ -1,11 +1,20 @@
+import { View } from "react-native";
+import { spacing } from "@paneui/tokens";
 import { RadioGroup, RadioGroupItem } from "@paneui/ui-native";
-
-export default function RadioExample() {
+import { useExampleText } from "../../language";
+export default function Example() {
+  const t = useExampleText();
   return (
-    <RadioGroup label="Delivery" defaultValue="email">
-      <RadioGroupItem value="email" label="Email" />
-      <RadioGroupItem value="inbox" label="Inbox" />
-      <RadioGroupItem value="sms" label="Text message" disabled />
-    </RadioGroup>
+    <View style={{ gap: spacing.md }}>
+      <RadioGroup label={t("Delivery", "通知方式")} defaultValue="email">
+        <RadioGroupItem value="email" label={t("Email", "邮件")} />
+        <RadioGroupItem value="inbox" label={t("Inbox", "收件箱")} />
+        <RadioGroupItem
+          value="sms"
+          label={t("Text message", "短信")}
+          disabled
+        />
+      </RadioGroup>
+    </View>
   );
 }

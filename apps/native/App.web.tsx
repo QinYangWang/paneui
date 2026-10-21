@@ -6,6 +6,9 @@ import { categories, components } from "./docs/registry";
 import { guides } from "./docs/guides";
 import { sources } from "./docs/sources.generated";
 import "./docs/shell.css";
+import { ExampleLanguage } from "./docs/language";
+import { api } from "./docs/api.generated";
+import { reference } from "./docs/reference";
 
 type Language = "en" | "zh";
 type Mode = ColorScheme | "system";
@@ -194,6 +197,8 @@ function Docs({
             title: example.title[index],
           })),
           { id: "usage", title: t("Usage", "使用") },
+          { id: "api", title: "API" },
+          { id: "accessibility", title: t("Accessibility", "无障碍") },
         ]
       : []);
   React.useEffect(() => {
@@ -283,242 +288,322 @@ function Docs({
     ),
   } as React.CSSProperties;
   return (
-    <div className="native-docs" style={vars}>
-      <a className="skip-link" href="#main">
-        {t("Skip to content", "跳至内容")}
-      </a>
-      <header className="site-header">
-        <div className="header-brand">
-          <button
-            ref={menuButton}
-            className="menu-button"
-            aria-label={t("Open navigation", "打开导航")}
-            aria-expanded={menu}
-            onClick={() => setMenu(true)}
-          >
-            ☰
-          </button>
-          <a
-            href={href("introduction")}
-            onClick={(e) => navigate(e, "introduction")}
-            className="wordmark"
-          >
-            <Logo />
-            <span>paneui</span>
-          </a>
-        </div>
-        <nav className="header-tabs" aria-label={t("Site", "站点")}>
-          <a href="/docs/">{t("Docs", "文档")}</a>
-          <a href="/docs/components/">{t("Components", "组件")}</a>
-          <a
-            href={href("introduction")}
-            aria-current="page"
-            onClick={(e) => navigate(e, "introduction")}
-          >
-            Native
-          </a>
-        </nav>
-        <div className="header-actions">
-          <button
-            aria-label={t("Switch to Chinese", "切换到英文")}
-            onClick={() => setLanguage(zh ? "en" : "zh")}
-          >
-            {zh ? "EN" : "中文"}
-          </button>
-          <label className="theme-label">
-            <span className="sr-only">{t("Theme", "主题")}</span>
-            <select
-              aria-label={t("Theme", "主题")}
-              value={mode}
-              onChange={(e) => setMode(e.target.value as Mode)}
+    <ExampleLanguage.Provider value={language}>
+      <div className="native-docs" style={vars}>
+        <a className="skip-link" href="#main">
+          {t("Skip to content", "跳至内容")}
+        </a>
+        <header className="site-header">
+          <div className="header-brand">
+            <button
+              ref={menuButton}
+              className="menu-button"
+              aria-label={t("Open navigation", "打开导航")}
+              aria-expanded={menu}
+              onClick={() => setMenu(true)}
             >
-              <option value="system">{t("System", "系统")}</option>
-              <option value="light">{t("Light", "浅色")}</option>
-              <option value="dark">{t("Dark", "深色")}</option>
-            </select>
-          </label>
-          <a
-            className="repo-link"
-            href="https://github.com/QinYangWang/paneui"
-            aria-label="GitHub"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill={colors.foreground}
-              aria-hidden="true"
+              ☰
+            </button>
+            <a
+              href={href("introduction")}
+              onClick={(e) => navigate(e, "introduction")}
+              className="wordmark"
             >
-              <path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.55v-2.14c-3.21.7-3.89-1.36-3.89-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.3-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.96 10.96 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 12 .7Z" />
-            </svg>
-          </a>
+              <Logo />
+              <span>paneui</span>
+            </a>
+          </div>
+          <nav className="header-tabs" aria-label={t("Site", "站点")}>
+            <a href="/docs/">{t("Docs", "文档")}</a>
+            <a href="/docs/components/">{t("Components", "组件")}</a>
+            <a
+              href={href("introduction")}
+              aria-current="page"
+              onClick={(e) => navigate(e, "introduction")}
+            >
+              Native
+            </a>
+          </nav>
+          <div className="header-actions">
+            <button
+              aria-label={t("Switch to Chinese", "切换到英文")}
+              onClick={() => setLanguage(zh ? "en" : "zh")}
+            >
+              {zh ? "EN" : "中文"}
+            </button>
+            <label className="theme-label">
+              <span className="sr-only">{t("Theme", "主题")}</span>
+              <select
+                aria-label={t("Theme", "主题")}
+                value={mode}
+                onChange={(e) => setMode(e.target.value as Mode)}
+              >
+                <option value="system">{t("System", "系统")}</option>
+                <option value="light">{t("Light", "浅色")}</option>
+                <option value="dark">{t("Dark", "深色")}</option>
+              </select>
+            </label>
+            <a
+              className="repo-link"
+              href="https://github.com/QinYangWang/paneui"
+              aria-label={t("Source repository", "源码仓库")}
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill={colors.foreground}
+                aria-hidden="true"
+              >
+                <path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.55v-2.14c-3.21.7-3.89-1.36-3.89-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.3-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.96 10.96 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 12 .7Z" />
+              </svg>
+            </a>
+          </div>
+        </header>
+        <div className="docs-layout">
+          <aside className="sidebar">
+            {navigation}
+            <a className="back-web" href="/docs/">
+              {t("Web docs ↗", "网页文档 ↗")}
+            </a>
+          </aside>
+          <main id="main" tabIndex={-1} key={route}>
+            <div className="page-heading">
+              <p className="eyebrow">
+                {item
+                  ? categories[item.category][index]
+                  : overview
+                    ? "Native"
+                    : t("Getting started", "开始使用")}
+              </p>
+              <h1>{title}</h1>
+              <p className="lede">
+                {item?.lede[index] ??
+                  guide?.lede[index] ??
+                  (overview
+                    ? t(
+                        "Choose a component to try it.",
+                        "选择一个组件，试试它的用法。",
+                      )
+                    : t(
+                        "Choose a page from the navigation.",
+                        "请从导航中选择页面。",
+                      ))}
+              </p>
+            </div>
+            {guide?.sections.map((section) => (
+              <section key={section.id}>
+                <h2 id={section.id}>
+                  <a href={`#${section.id}`}>
+                    {section.title[index]}
+                    <span aria-hidden="true"> #</span>
+                  </a>
+                </h2>
+                <p>{section.body[index]}</p>
+                {section.code && (
+                  <pre>
+                    <code>{section.code}</code>
+                  </pre>
+                )}
+              </section>
+            ))}
+            {item && (
+              <>
+                {item.examples.map((example) => (
+                  <section key={example.id}>
+                    <h2 id={example.id}>
+                      <a href={`#${example.id}`}>
+                        {example.title[index]}
+                        <span aria-hidden="true"> #</span>
+                      </a>
+                    </h2>
+                    <Preview
+                      slug={`${item.slug}/${example.id}`}
+                      Example={example.Example}
+                      zh={zh}
+                    />
+                  </section>
+                ))}
+                <section>
+                  <h2 id="usage">
+                    <a href="#usage">
+                      {t("Usage", "使用")}
+                      <span aria-hidden="true"> #</span>
+                    </a>
+                  </h2>
+                  <pre>
+                    <code>{reference[item.slug].usage[index]}</code>
+                  </pre>
+                  <p>
+                    {t(
+                      "Wrap your app in ThemeProvider to follow the theme.",
+                      "用 ThemeProvider 包裹应用以跟随主题。",
+                    )}{" "}
+                    {link("installation", t("Installation guide", "安装指南"))}
+                  </p>
+                </section>
+                <section>
+                  <h2 id="api">
+                    <a href="#api">
+                      API<span aria-hidden="true"> #</span>
+                    </a>
+                  </h2>
+                  <p>
+                    {t(
+                      "Required props are marked with *; — means no explicit default. Inherited props are accepted by each part.",
+                      "必填属性标有 *；— 表示未指定默认值。各部分也接受继承的属性。",
+                    )}
+                  </p>
+                  {api[item.slug as keyof typeof api]
+                    ?.filter((group) => group.name !== "FieldState")
+                    .map((group) => (
+                      <div key={group.name}>
+                        <h3>{group.name}</h3>
+                        {group.extends && (
+                          <p>
+                            <code>{group.extends}</code>
+                          </p>
+                        )}
+                        {group.props.length > 0 && (
+                          <div
+                            className="api-scroll"
+                            tabIndex={0}
+                            role="region"
+                            aria-label={`${group.name} API`}
+                          >
+                            <table>
+                              <thead>
+                                <tr>
+                                  {[
+                                    t("Prop", "属性"),
+                                    t("Type", "类型"),
+                                    t("Default", "默认值"),
+                                    t("Description", "说明"),
+                                  ].map((label) => (
+                                    <th key={label} scope="col">
+                                      {label}
+                                    </th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {group.props.map((prop) => (
+                                  <tr key={prop.name}>
+                                    <th scope="row">
+                                      <code>
+                                        {prop.name}
+                                        {prop.required ? " *" : ""}
+                                      </code>
+                                    </th>
+                                    <td>
+                                      <code>{prop.type}</code>
+                                    </td>
+                                    <td>
+                                      <code>{prop.default}</code>
+                                    </td>
+                                    <td>{prop.description[index]}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                </section>
+                <section>
+                  <h2 id="accessibility">
+                    <a href="#accessibility">
+                      {t("Accessibility", "无障碍")}
+                      <span aria-hidden="true"> #</span>
+                    </a>
+                  </h2>
+                  <p>{reference[item.slug].accessibility[index]}</p>
+                </section>
+              </>
+            )}
+            {overview && (
+              <div className="component-grid">
+                {components.map((entry) => (
+                  <article className="component-card" key={entry.slug}>
+                    <h2>{link(entry.slug, entry.name)}</h2>
+                    <div className="card-preview">
+                      <GalleryPreview Example={entry.examples[0].Example} />
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+            {!item &&
+              !guide &&
+              !overview &&
+              link("introduction", t("Go to introduction", "前往简介"))}
+            {position >= 0 && (
+              <footer className="page-footer">
+                {[sequence[position - 1], sequence[position + 1]].map(
+                  (entry, i) =>
+                    entry ? (
+                      <a
+                        key={entry.slug}
+                        href={href(entry.slug)}
+                        onClick={(event) => navigate(event, entry.slug)}
+                      >
+                        <span>
+                          {i === 0
+                            ? t("Previous", "上一页")
+                            : t("Next", "下一页")}
+                        </span>
+                        <strong>
+                          {i === 0 ? "← " : ""}
+                          {entry.name}
+                          {i === 1 ? " →" : ""}
+                        </strong>
+                      </a>
+                    ) : (
+                      <div key={i} />
+                    ),
+                )}
+              </footer>
+            )}
+          </main>
+          <aside className="toc" hidden={headings.length === 0}>
+            <p>{t("On this page", "本页内容")}</p>
+            {headings.map((heading) => (
+              <a href={`#${heading.id}`} key={heading.id}>
+                {heading.title}
+              </a>
+            ))}
+          </aside>
         </div>
-      </header>
-      <div className="docs-layout">
-        <aside className="sidebar">
+        <dialog
+          ref={dialog}
+          className="navigation-drawer"
+          aria-label={t("Navigation", "导航")}
+          onCancel={() => setMenu(false)}
+          onClose={() => {
+            setMenu(false);
+            menuButton.current?.focus();
+          }}
+          onClick={(event) => {
+            if (event.target === dialog.current) setMenu(false);
+          }}
+        >
+          <div className="drawer-heading">
+            <span>{t("Navigation", "导航")}</span>
+            <button
+              onClick={() => setMenu(false)}
+              aria-label={t("Close navigation", "关闭导航")}
+            >
+              ×
+            </button>
+          </div>
           {navigation}
           <a className="back-web" href="/docs/">
             {t("Web docs ↗", "网页文档 ↗")}
           </a>
-        </aside>
-        <main id="main" tabIndex={-1} key={route}>
-          <div className="page-heading">
-            <p className="eyebrow">
-              {item
-                ? categories[item.category][index]
-                : overview
-                  ? "Native"
-                  : t("Getting started", "开始使用")}
-            </p>
-            <h1>{title}</h1>
-            <p className="lede">
-              {item?.lede[index] ??
-                guide?.lede[index] ??
-                (overview
-                  ? t(
-                      "Choose a component to try it.",
-                      "选择一个组件，试试它的用法。",
-                    )
-                  : t(
-                      "Choose a page from the navigation.",
-                      "请从导航中选择页面。",
-                    ))}
-            </p>
-          </div>
-          {guide?.sections.map((section) => (
-            <section key={section.id}>
-              <h2 id={section.id}>
-                <a href={`#${section.id}`}>
-                  {section.title[index]}
-                  <span aria-hidden="true"> #</span>
-                </a>
-              </h2>
-              <p>{section.body[index]}</p>
-              {section.code && (
-                <pre>
-                  <code>{section.code}</code>
-                </pre>
-              )}
-            </section>
-          ))}
-          {item && (
-            <>
-              {item.examples.map((example) => (
-                <section key={example.id}>
-                  <h2 id={example.id}>
-                    <a href={`#${example.id}`}>
-                      {example.title[index]}
-                      <span aria-hidden="true"> #</span>
-                    </a>
-                  </h2>
-                  <Preview
-                    slug={`${item.slug}/${example.id}`}
-                    Example={example.Example}
-                    zh={zh}
-                  />
-                </section>
-              ))}
-              <section>
-                <h2 id="usage">
-                  <a href="#usage">
-                    {t("Usage", "使用")}
-                    <span aria-hidden="true"> #</span>
-                  </a>
-                </h2>
-                <pre>
-                  <code>{`import { ${item.name} } from "@paneui/ui-native"`}</code>
-                </pre>
-                <p>
-                  {t(
-                    "Wrap your app in ThemeProvider to follow the theme.",
-                    "用 ThemeProvider 包裹应用以跟随主题。",
-                  )}{" "}
-                  {link("installation", t("Installation guide", "安装指南"))}
-                </p>
-              </section>
-            </>
-          )}
-          {overview && (
-            <div className="component-grid">
-              {components.map((entry) => (
-                <article className="component-card" key={entry.slug}>
-                  <h2>{link(entry.slug, entry.name)}</h2>
-                  <div className="card-preview">
-                    <GalleryPreview Example={entry.examples[0].Example} />
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-          {!item &&
-            !guide &&
-            !overview &&
-            link("introduction", t("Go to introduction", "前往简介"))}
-          {position >= 0 && (
-            <footer className="page-footer">
-              {[sequence[position - 1], sequence[position + 1]].map(
-                (entry, i) =>
-                  entry ? (
-                    <a
-                      key={entry.slug}
-                      href={href(entry.slug)}
-                      onClick={(event) => navigate(event, entry.slug)}
-                    >
-                      <span>
-                        {i === 0
-                          ? t("Previous", "上一页")
-                          : t("Next", "下一页")}
-                      </span>
-                      <strong>
-                        {i === 0 ? "← " : ""}
-                        {entry.name}
-                        {i === 1 ? " →" : ""}
-                      </strong>
-                    </a>
-                  ) : (
-                    <div key={i} />
-                  ),
-              )}
-            </footer>
-          )}
-        </main>
-        <aside className="toc" hidden={headings.length === 0}>
-          <p>{t("On this page", "本页内容")}</p>
-          {headings.map((heading) => (
-            <a href={`#${heading.id}`} key={heading.id}>
-              {heading.title}
-            </a>
-          ))}
-        </aside>
+        </dialog>
       </div>
-      <dialog
-        ref={dialog}
-        className="navigation-drawer"
-        aria-label={t("Navigation", "导航")}
-        onCancel={() => setMenu(false)}
-        onClose={() => {
-          setMenu(false);
-          menuButton.current?.focus();
-        }}
-        onClick={(event) => {
-          if (event.target === dialog.current) setMenu(false);
-        }}
-      >
-        <div className="drawer-heading">
-          <span>{t("Navigation", "导航")}</span>
-          <button
-            onClick={() => setMenu(false)}
-            aria-label={t("Close navigation", "关闭导航")}
-          >
-            ×
-          </button>
-        </div>
-        {navigation}
-        <a className="back-web" href="/docs/">
-          {t("Web docs ↗", "网页文档 ↗")}
-        </a>
-      </dialog>
-    </div>
+    </ExampleLanguage.Provider>
   );
 }
 export default function App() {

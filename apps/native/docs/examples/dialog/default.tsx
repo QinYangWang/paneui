@@ -1,39 +1,42 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { spacing } from "@paneui/tokens";
-import { Button, Dialog, ListItem, Text } from "@paneui/ui-native";
-
-export default function DialogExample() {
+import { Dialog, Button, Text } from "@paneui/ui-native";
+import { useExampleText } from "../../language";
+export default function Example() {
+  const t = useExampleText();
+  const [count, setCount] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   return (
-    <View style={styles.column}>
-      <ListItem
-        title="Delete project"
-        description="Asks before something irreversible."
-        onPress={() => setOpen(true)}
-        trailing={
-          <Text variant="supporting" tone="muted">
-            Dialog
-          </Text>
-        }
-      />
+    <View style={{ gap: spacing.md }}>
+      <Button onPress={() => setOpen(true)}>
+        {t("Open details", "打开详情")}
+      </Button>
       <Dialog
+        closeLabel={t("Close", "关闭")}
         open={open}
         onOpenChange={setOpen}
-        title="Delete this project?"
-        description="This removes the project and its files for everyone."
+        title={t("Default", "默认")}
       >
-        <Button variant="destructive" onPress={() => setOpen(false)}>
-          Delete
+        <Text>
+          {t("Review your changes before continuing.", "继续前请检查更改。")}
+        </Text>
+        <Button variant="secondary" onPress={() => setOpen(false)}>
+          {t("Cancel", "取消")}
         </Button>
-        <Button variant="ghost" onPress={() => setOpen(false)}>
-          Cancel
+        <Button
+          variant="primary"
+          onPress={() => {
+            setOpen(false);
+            setCount(count + 1);
+          }}
+        >
+          {t("Confirm", "确认")}
         </Button>
       </Dialog>
+      <Text accessibilityLiveRegion="polite">
+        {count ? t("Changes applied", "更改已应用") : ""}
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  column: { gap: spacing.lg },
-});

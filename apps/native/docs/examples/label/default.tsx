@@ -1,12 +1,12 @@
 import { View } from "react-native";
 import { spacing } from "@paneui/tokens";
 import { Label } from "@paneui/ui-native";
-
-export default function LabelExample() {
+import { useExampleText } from "../../language";
+export default function Example() {
+  const t = useExampleText();
   return (
-    <View style={{ gap: spacing.sm }}>
-      <Label required>Project name</Label>
-      <Label disabled>Workspace</Label>
+    <View style={{ gap: spacing.md }}>
+      <Label>{t("Contact details", "联系方式")}</Label>
     </View>
   );
 }

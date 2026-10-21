@@ -1,13 +1,12 @@
 import { View } from "react-native";
 import { spacing } from "@paneui/tokens";
 import { Checkbox } from "@paneui/ui-native";
-
-export default function CheckboxExample() {
+import { useExampleText } from "../../language";
+export default function Example() {
+  const t = useExampleText();
   return (
-    <View style={{ gap: spacing.sm }}>
-      <Checkbox label="Save a copy" />
-      <Checkbox label="All folders" defaultValue="indeterminate" />
-      <Checkbox label="Archived" disabled />
+    <View style={{ gap: spacing.md }}>
+      <Checkbox label={t("Notifications", "通知")} />
     </View>
   );
 }

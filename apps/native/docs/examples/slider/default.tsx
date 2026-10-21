@@ -1,9 +1,12 @@
-import { Field, Slider } from "@paneui/ui-native";
-
-export default function SliderExample() {
+import { View } from "react-native";
+import { spacing } from "@paneui/tokens";
+import { Slider } from "@paneui/ui-native";
+import { useExampleText } from "../../language";
+export default function Example() {
+  const t = useExampleText();
   return (
-    <Field label="Volume">
-      <Slider defaultValue={40} step={5} />
-    </Field>
+    <View style={{ gap: spacing.md }}>
+      <Slider label={t("Volume", "音量")} defaultValue={40} />
+    </View>
   );
 }

@@ -1,41 +1,22 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { spacing } from "@paneui/tokens";
-import { ListItem, ToastProvider, useToast } from "@paneui/ui-native";
-
-function ToastTriggers() {
-  const { show } = useToast();
-  return (
-    <View style={styles.column}>
-      <ListItem
-        title="Save draft"
-        onPress={() => show({ title: "Draft saved" })}
-      />
-      <ListItem
-        title="Send invite"
-        onPress={() =>
-          show({
-            title: "Invite sent",
-            description: "Maya can now join the workspace.",
-            variant: "success",
-          })
-        }
-      />
-      <ListItem
-        title="Remove file"
-        onPress={() => show({ title: "File removed", variant: "destructive" })}
-      />
-    </View>
-  );
-}
-
-export default function ToastExample() {
+import { ToastProvider, useToast, Button } from "@paneui/ui-native";
+import { useExampleText } from "../../language";
+export default function Example() {
   return (
     <ToastProvider>
-      <ToastTriggers />
+      <Actions />
     </ToastProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  column: { gap: spacing.lg },
-});
+function Actions() {
+  const t = useExampleText();
+  const { show } = useToast();
+  return (
+    <View style={{ gap: spacing.md }}>
+      <Button onPress={() => show({ title: t("Draft saved", "草稿已保存") })}>
+        {t("Save draft", "保存草稿")}
+      </Button>
+    </View>
+  );
+}

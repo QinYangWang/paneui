@@ -5,6 +5,7 @@ import { nativeControl, radius, spacing } from "@paneui/tokens"
 import { useTheme } from "./theme"
 
 export type SheetProps = {
+  closeLabel?: string
   open?: boolean
   defaultOpen?: boolean
   onOpenChange?: (open: boolean) => void
@@ -28,7 +29,7 @@ function useReducedMotion() {
   return reduced
 }
 
-export function Sheet({ open, defaultOpen = false, onOpenChange, bottomInset = spacing.xl, children }: SheetProps) {
+export function Sheet({ closeLabel = "Close sheet", open, defaultOpen = false, onOpenChange, bottomInset = spacing.xl, children }: SheetProps) {
   const { colors, scheme } = useTheme()
   const reduced = useReducedMotion()
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen)
@@ -76,7 +77,7 @@ export function Sheet({ open, defaultOpen = false, onOpenChange, bottomInset = s
   return (
     <Modal visible={isOpen} transparent animationType="fade" statusBarTranslucent onRequestClose={() => setOpen(false)}>
       <View style={{ flex: 1, justifyContent: "flex-end" }}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Close sheet" onPress={() => setOpen(false)} style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: scrim, opacity: scrimOpacity }} />
+        <Pressable accessibilityRole="button" accessibilityLabel={closeLabel} onPress={() => setOpen(false)} style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: scrim, opacity: scrimOpacity }} />
         <Animated.View
           style={{
             transform: [{ translateY }],

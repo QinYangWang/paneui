@@ -1,9 +1,14 @@
-import { Field, Textarea } from "@paneui/ui-native";
-
-export default function TextareaExample() {
+import { View } from "react-native";
+import { spacing } from "@paneui/tokens";
+import { Textarea, Field } from "@paneui/ui-native";
+import { useExampleText } from "../../language";
+export default function Example() {
+  const t = useExampleText();
   return (
-    <Field label="Notes" description="Add a note for your team.">
-      <Textarea placeholder="Write a note" maxLength={240} showCounter />
-    </Field>
+    <View style={{ gap: spacing.md }}>
+      <Field label={t("Notes", "备注")}>
+        <Textarea placeholder={t("Write a note", "写下备注")} />
+      </Field>
+    </View>
   );
 }

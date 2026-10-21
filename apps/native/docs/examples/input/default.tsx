@@ -1,23 +1,15 @@
-import * as React from "react";
-
-import { CardContent, Input } from "@paneui/ui-native";
-
+import { View } from "react-native";
+import { spacing } from "@paneui/tokens";
+import { Input } from "@paneui/ui-native";
+import { useExampleText } from "../../language";
 export default function Example() {
-  const [email, setEmail] = React.useState("");
+  const t = useExampleText();
   return (
-    <CardContent>
+    <View style={{ gap: spacing.md }}>
       <Input
-        label="Email"
-        placeholder="you@example.com"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoComplete="email"
-        description="Use the address you check most often."
+        label={t("Name", "姓名")}
+        placeholder={t("Your name", "你的姓名")}
       />
-      <Input label="Project name" value="" error="Enter a project name." />
-      <Input label="Workspace" value="Personal" editable={false} />
-    </CardContent>
+    </View>
   );
 }

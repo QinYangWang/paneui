@@ -1,21 +1,19 @@
-import * as React from "react";
-
-import { Button, Card, CardContent, CardHeader, Text } from "@paneui/ui-native";
-
+import { View } from "react-native";
+import { spacing } from "@paneui/tokens";
+import { Card, CardHeader, CardContent, Text } from "@paneui/ui-native";
+import { useExampleText } from "../../language";
 export default function Example() {
-  const [presses, setPresses] = React.useState(0);
+  const t = useExampleText();
   return (
-    <Card>
-      <CardHeader>
-        <Text variant="title">Weekend plans</Text>
-        <Text tone="muted">Make room for something new.</Text>
-      </CardHeader>
-      <CardContent>
-        <Text>Keep your notes and ideas together.</Text>
-        <Button onPress={() => setPresses((value) => value + 1)}>
-          {presses ? "Plan saved" : "Save plan"}
-        </Button>
-      </CardContent>
-    </Card>
+    <View style={{ gap: spacing.md }}>
+      <Card>
+        <CardHeader>
+          <Text variant="title">{t("Project notes", "项目备注")}</Text>
+        </CardHeader>
+        <CardContent>
+          <Text>{t("Plan the next steps.", "规划后续步骤。")}</Text>
+        </CardContent>
+      </Card>
+    </View>
   );
 }
