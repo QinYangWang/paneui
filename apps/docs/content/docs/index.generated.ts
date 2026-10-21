@@ -139,6 +139,7 @@ import d_text_scramble from "./text-scramble"
 import d_text_shimmer from "./text-shimmer"
 import d_textarea from "./textarea"
 import d_theme_accents from "./theme-accents"
+import d_theme_paper from "./theme-paper"
 import d_theme_toggle from "./theme-toggle"
 import d_thread_list_item from "./thread-list-item"
 import d_timeline from "./timeline"
@@ -298,6 +299,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "text-shimmer": d_text_shimmer,
   "textarea": d_textarea,
   "theme-accents": d_theme_accents,
+  "theme-paper": d_theme_paper,
   "theme-toggle": d_theme_toggle,
   "thread-list-item": d_thread_list_item,
   "timeline": d_timeline,

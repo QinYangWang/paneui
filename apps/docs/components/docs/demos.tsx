@@ -29,6 +29,7 @@ import TerminalDemo from "@/registry/examples/terminal-demo"
 import ScrollAreaDemo from "@/registry/examples/scroll-area-demo"
 import TypesetDemo from "@/registry/examples/typeset-demo"
 import ThemeAccentsDemo from "@/registry/examples/theme-accents-demo"
+import ThemePaperDemo from "@/registry/examples/theme-paper-demo"
 import CodeBlockDemo from "@/registry/examples/code-block-demo"
 import CheckboxDemo from "@/registry/examples/checkbox-demo"
 import RadioDemo from "@/registry/examples/radio-demo"
@@ -226,6 +227,7 @@ export const demos: Record<string, React.ComponentType> = {
   theme: ThemeDemo,
   typeset: TypesetDemo,
   "theme-accents": ThemeAccentsDemo,
+  "theme-paper": ThemePaperDemo,
   "scroll-area": ScrollAreaDemo,
   "app-shell": AppShellDemo,
   "overflow-hint": OverflowHintDemo,

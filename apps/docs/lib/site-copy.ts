@@ -96,6 +96,7 @@ export const SITE_COPY: Record<string, string> = {
   "Nothing to preview.": "暂无预览。", Copied: "已复制", "Copy link to section": "复制章节链接",
   Manual: "手动安装", "Open template": "打开模板", "Icon styles": "图标风格", "Make your own icons": "绘制图标", "All icons": "全部图标",
   Light: "浅色", Dark: "深色", System: "跟随系统", Theme: "主题", Accent: "主题色", Custom: "自定义", Default: "默认",
+  Style: "风格", Paper: "纸张", Styles: "界面风格",
   Neutral: "中性", Blue: "蓝色", Green: "绿色", Orange: "橙色", Rose: "玫瑰色", Violet: "紫色",
 }
 

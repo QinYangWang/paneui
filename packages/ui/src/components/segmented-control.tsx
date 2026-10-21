@@ -26,10 +26,10 @@ import { cn } from "@paneui/ui/lib/utils"
 const segmentedControlVariants = cva("relative inline-flex w-fit items-center gap-0.5 bg-muted frame-p-0.5 shadow-well", {
   variants: {
     size: {
-      xs: "frame-sm",
-      sm: "frame-lg",
-      default: "frame-lg",
-      lg: "frame-lg",
+      xs: "frame-control-sm",
+      sm: "frame-control",
+      default: "frame-control",
+      lg: "frame-control",
     },
   },
   defaultVariants: { size: "default" },

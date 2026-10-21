@@ -44,7 +44,7 @@ function ButtonGroupText({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="button-group-text"
       className={cn(
-        "flex items-center gap-1.5 rounded-lg bg-secondary px-2.5 text-ui font-medium text-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+        "flex items-center gap-1.5 rounded-control bg-secondary px-2.5 text-ui font-medium text-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}

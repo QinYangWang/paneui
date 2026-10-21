@@ -27,6 +27,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Locale Provider](https://paneui.dev/docs/locale-provider.md): Sets the language of every built-in label. JSON: https://paneui.dev/r/locale-provider.json
 - [Theme](https://paneui.dev/docs/theme.md): Shared design tokens for every component. JSON: https://paneui.dev/r/theme.json
 - [Theme Accents](https://paneui.dev/docs/theme-accents.md): Switches the accent colour at runtime with one attribute. JSON: https://paneui.dev/r/theme-accents.json
+- [Theme Paper](https://paneui.dev/docs/theme-paper.md): Opt-in style with warm paper, serif titles and pill controls. JSON: https://paneui.dev/r/theme-paper.json
 - [Typeset](https://paneui.dev/docs/typeset.md): Styles long-form text in docs, articles and chat messages. JSON: https://paneui.dev/r/typeset.json
 
 ## Forms

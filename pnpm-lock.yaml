@@ -503,6 +503,9 @@ importers:
       '@fontsource-variable/noto-serif-sc':
         specifier: ^5.3.1
         version: 5.3.1
+      '@fontsource-variable/source-serif-4':
+        specifier: ^5.3.1
+        version: 5.3.1
       tailwindcss:
         specifier: ^4.1.11
         version: 4.3.3

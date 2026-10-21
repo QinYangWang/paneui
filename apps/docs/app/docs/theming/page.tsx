@@ -4,6 +4,7 @@ import { InstallCommand } from "@/components/docs/install-command"
 import { ThemingSystem } from "@/components/docs/theming-system"
 import { REGISTRY_NAME } from "@/lib/docs"
 import { DocsCode } from "@/components/docs/docs-code"
+import { Inline } from "@/components/docs/doc-inline"
 import { Badge } from "@paneui/ui/components/badge"
 import {
   SimpleTable,
@@ -177,6 +178,7 @@ export default function Theming() {
     { id: "colors", title: "Colors" },
     { id: "dark-mode", title: "Dark mode" },
     { id: "accent-presets", title: "Accent presets" },
+    { id: "styles", title: "Styles" },
     { id: "typography", title: "Typography" },
     { id: "fonts", title: "Fonts" },
     { id: "radius", title: "Radius" },
@@ -269,6 +271,19 @@ export default function Theming() {
           roles and copy them.
         </p>
         <DocsCode code={ACCENT_RUNTIME} filename="globals.css" language="css" />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <GuideH2 id="styles">Styles</GuideH2>
+        <p className="text-muted-foreground">
+          <Inline
+            text={{
+              en: "Paper is an opt-in style with warm surfaces, serif titles, pill controls and softer shadows, in light and dark. Install it, import `theme-paper.css` after the theme and set `data-style=\"paper\"` on `<html>`; try it on [Customize](/docs/colors#style).",
+              zh: "Paper 是可选的界面风格：暖色纸面、衬线标题、胶囊形控件和更柔和的阴影，支持浅色与深色。安装后在主题之后导入 `theme-paper.css`，并在 `<html>` 上设置 `data-style=\"paper\"`；可在[自定义](/docs/colors#style)页试用。",
+            }}
+          />
+        </p>
+        <InstallCommand args={`add @${REGISTRY_NAME}/theme-paper`} />
       </section>
 
       <section className="flex flex-col gap-4">

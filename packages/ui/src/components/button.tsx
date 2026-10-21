@@ -8,8 +8,9 @@ import { cn } from "@paneui/ui/lib/utils"
 // An icon marked data-icon="inline-start" / "inline-end" takes 2px off that side's padding, so the
 // label and glyph look centred (the glyph's side bearing already adds space).
 // A key cap inside a button sits about 6px from its corner, so it follows the button's radius.
+// Corners read --radius-control (rounded-lg by default), so a style can make every button a pill.
 const buttonVariants = cva(
-  "group/button relative inline-flex shrink-0 cursor-pointer items-center justify-center rounded-lg text-ui font-medium whitespace-nowrap transition-[box-shadow,background-color,color,opacity] duration-150 ease-out outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-64 aria-invalid:ring-2 aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='opacity-'])]:opacity-80 [&_[data-slot=kbd]]:rounded-[max(calc(var(--radius-lg)-var(--spacing)*1.5),min(var(--radius-2xs),var(--radius-sm)))]",
+  "group/button relative inline-flex shrink-0 cursor-pointer items-center justify-center rounded-control text-ui font-medium whitespace-nowrap transition-[box-shadow,background-color,color,opacity] duration-150 ease-out outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-64 aria-invalid:ring-2 aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='opacity-'])]:opacity-80 [&_[data-slot=kbd]]:rounded-[max(calc(var(--radius-control)-var(--spacing)*1.5),min(var(--radius-2xs),var(--radius-sm)))]",
   {
     variants: {
       variant: {
@@ -24,11 +25,11 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-8 gap-1.5 px-3 has-data-[icon=inline-end]:pe-2.5 has-data-[icon=inline-start]:ps-2.5",
-        xs: "h-6 gap-1 rounded-sm px-2 text-ui-xs has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        xs: "h-6 gap-1 rounded-control-sm px-2 text-ui-xs has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         sm: "h-7 gap-1.5 px-2.5 has-data-[icon=inline-end]:pe-2 has-data-[icon=inline-start]:ps-2 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 gap-2 px-3.5 text-ui-lg has-data-[icon=inline-end]:pe-3 has-data-[icon=inline-start]:ps-3",
         icon: "size-8",
-        "icon-xs": "size-6 rounded-sm [&_svg:not([class*='size-'])]:size-3.5",
+        "icon-xs": "size-6 rounded-control-sm [&_svg:not([class*='size-'])]:size-3.5",
         "icon-sm": "size-7",
         "icon-lg": "size-9",
       },

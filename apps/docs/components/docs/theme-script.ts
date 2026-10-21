@@ -25,6 +25,16 @@ export const CUSTOM_RADIUS_KEY = "radius-custom"
 /** Same-tab broadcast when the radius changes. */
 export const RADIUS_CHANGE_EVENT = "qy-radius-change"
 
+/** localStorage key for the style ("default" | "paper"). Applied as `data-style` on <html>; the default style has no attribute. */
+export const STYLE_KEY = "style"
+
+/** Same-tab broadcast when the style changes. */
+export const STYLE_CHANGE_EVENT = "qy-style-change"
+
+/** Styles: "default" is the theme as installed; the rest have a `html[data-style]` block (packages/tokens/styles/theme-paper.css). */
+export const STYLES = ["default", "paper"] as const
+export type StylePreset = (typeof STYLES)[number]
+
 /** Radius presets, each a `html[data-radius]` block in packages/tokens/styles/globals.css; "default" is the :root value. */
 export const RADII = ["none", "sm", "default", "lg", "xl"] as const
 export type RadiusPreset = (typeof RADII)[number]
@@ -37,5 +47,5 @@ const DEFAULT = "blue"
 
 export type Accent = (typeof ACCENTS)[number]
 
-/** Runs before paint (inlined in <head>) so the page never flashes the wrong theme or accent. */
-export const themeScript = `(function(){try{var m=localStorage.getItem("${THEME_KEY}")||"system";var d=m==="dark"||(m==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);var e=document.documentElement;e.classList.toggle("dark",d);e.style.colorScheme=d?"dark":"light";var a=localStorage.getItem("${ACCENT_KEY}");if(a&&a!=="${DEFAULT}"&&${JSON.stringify(ACCENTS)}.indexOf(a)>-1)e.setAttribute("data-accent",a);else if(a==="custom"){var c=JSON.parse(localStorage.getItem("${CUSTOM_ACCENT_KEY}")||"null"),v=function(o){var r="";for(var k in o)if(/^(primary|ring)[a-z-]*$/.test(k)&&typeof o[k]==="string"&&!/[;{}<]/.test(o[k]))r+="--"+k+":"+o[k]+";";return r};if(c&&c.v===2&&c.light&&c.dark){var s=document.createElement("style");s.id="${CUSTOM_ACCENT_STYLE_ID}";s.textContent='html[data-accent="custom"]{'+v(c.light)+'}html[data-accent="custom"].dark{'+v(c.dark)+"}";document.head.appendChild(s);e.setAttribute("data-accent","custom")}}var q=localStorage.getItem("${RADIUS_KEY}");if(q&&q!=="default"&&${JSON.stringify(RADII)}.indexOf(q)>-1)e.setAttribute("data-radius",q);else if(q==="custom"){var n=parseFloat(localStorage.getItem("${CUSTOM_RADIUS_KEY}")||"");if(n>=0&&n<=2){e.setAttribute("data-radius","custom");e.style.setProperty("--radius",Math.min(n,1)+"rem")}}}catch(_){}})()`
+/** Runs before paint (inlined in <head>) so the page never flashes the wrong theme, accent, radius or style. */
+export const themeScript = `(function(){try{var m=localStorage.getItem("${THEME_KEY}")||"system";var d=m==="dark"||(m==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);var e=document.documentElement;e.classList.toggle("dark",d);e.style.colorScheme=d?"dark":"light";var a=localStorage.getItem("${ACCENT_KEY}");if(a&&a!=="${DEFAULT}"&&${JSON.stringify(ACCENTS)}.indexOf(a)>-1)e.setAttribute("data-accent",a);else if(a==="custom"){var c=JSON.parse(localStorage.getItem("${CUSTOM_ACCENT_KEY}")||"null"),v=function(o){var r="";for(var k in o)if(/^(primary|ring)[a-z-]*$/.test(k)&&typeof o[k]==="string"&&!/[;{}<]/.test(o[k]))r+="--"+k+":"+o[k]+";";return r};if(c&&c.v===2&&c.light&&c.dark){var s=document.createElement("style");s.id="${CUSTOM_ACCENT_STYLE_ID}";s.textContent='html[data-accent="custom"]{'+v(c.light)+'}html[data-accent="custom"].dark{'+v(c.dark)+"}";document.head.appendChild(s);e.setAttribute("data-accent","custom")}}var q=localStorage.getItem("${RADIUS_KEY}");if(q&&q!=="default"&&${JSON.stringify(RADII)}.indexOf(q)>-1)e.setAttribute("data-radius",q);else if(q==="custom"){var n=parseFloat(localStorage.getItem("${CUSTOM_RADIUS_KEY}")||"");if(n>=0&&n<=2){e.setAttribute("data-radius","custom");e.style.setProperty("--radius",Math.min(n,1)+"rem")}}var y=localStorage.getItem("${STYLE_KEY}");if(y&&y!=="default"&&${JSON.stringify(STYLES)}.indexOf(y)>-1)e.setAttribute("data-style",y)}catch(_){}})()`

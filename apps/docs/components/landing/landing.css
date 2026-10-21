@@ -2,7 +2,6 @@
  * Homepage only: the display serif, the paper and pastel scenery, and the grain laid over it.
  * Everything else on the page comes from the theme tokens.
  */
-@import "@fontsource-variable/source-serif-4/opsz.css";
 
 .lp {
   --lp-display: "Source Serif 4 Variable", "Noto Serif SC Variable", "Noto Serif SC", ui-serif, Georgia, "Songti SC", serif;

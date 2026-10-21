@@ -74,7 +74,7 @@ function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn("text-lg leading-tight font-semibold icon-bold", className)}
+      className={cn("font-heading text-lg leading-tight font-semibold icon-bold", className)}
       {...props}
     />
   )

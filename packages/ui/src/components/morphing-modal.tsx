@@ -259,7 +259,7 @@ function MorphingModalTitle({ className, ...props }: DialogPrimitive.Title.Props
   return (
     <DialogPrimitive.Title
       data-slot="morphing-modal-title"
-      className={cn("text-lg leading-8 font-semibold icon-bold", className)}
+      className={cn("font-heading text-lg leading-8 font-semibold icon-bold", className)}
       {...props}
     />
   )

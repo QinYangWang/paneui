@@ -80,6 +80,11 @@ utility (0.5px hairline, `rounded-shell`, 3px gap).
 Presets: none 0, sm 0.375rem, default 0.5rem, lg 0.625rem, xl 0.875rem; a custom value goes up to 1rem.
 `html[data-radius="…"]` or an inline `--radius` on `<html>` switches them.
 
+Buttons, toggles, tab lists and segmented wells read `rounded-control` (`rounded-control-sm` at xs, and
+`frame-control` / `frame-control-sm` on wells). It equals `rounded-lg` / `rounded-sm` unless a style sets
+`--control-radius`; Paper sets it past the cap, so controls become pills and their children stay
+concentric through `rounded-inner`. New controls use these tokens, never a literal radius.
+
 ### Concentric nesting
 
 Declare the container with `frame-*` and the child follows it:
@@ -111,6 +116,10 @@ is never rounder than its container. Two levels are supported; a third computes 
 Inter Variable (`ss03`) → Noto Sans SC → system for UI; JetBrains Mono → system mono for code, keys and
 terminals; Newsreader → Noto Serif SC only in the reading preset. Letter spacing normal. Self-hosted
 through the `fonts` item; the theme falls back to system fonts without it.
+
+Titles (card, dialog, sheet, empty state, page header, settings section) also take `font-heading`. It
+is the UI face by default; the Paper style points it at Source Serif 4 → Noto Serif SC. Body text never
+uses it.
 
 | Size | px | Use |
 | --- | --- | --- |

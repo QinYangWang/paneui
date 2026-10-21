@@ -78,6 +78,10 @@ export const DOC_SUMMARIES: Record<string, Localized> = {
     "en": "Switches the accent colour at runtime with one attribute.",
     "zh": "在运行时切换主题色。"
   },
+  "theme-paper": {
+    "en": "Opt-in style with warm paper, serif titles and pill controls.",
+    "zh": "可选的纸张风格：暖色纸面、衬线标题与胶囊控件。"
+  },
   "theme-radii": {
     "en": "Switches corner rounding at runtime with one attribute.",
     "zh": "在运行时切换圆角。"

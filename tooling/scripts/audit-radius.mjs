@@ -16,6 +16,7 @@
  * Usage
  *   pnpm audit:radius                      # light theme, docs index pages + the components gallery
  *   pnpm audit:radius -- --dark            # dark theme
+ *   pnpm audit:radius -- --style paper     # under a style (data-style on <html>)
  *   pnpm audit:radius -- --pages menu,card # only these docs pages ("components" for the gallery)
  *   pnpm audit:radius -- --all             # every page under out/docs (blocks too)
  *   pnpm audit:radius -- --no-actions      # skip the hover/click steps from the config
@@ -59,6 +60,8 @@ const BASE = (process.env.BASE_URL || opt("--base", "http://localhost:3123")).re
 const THEME = flag("--dark") ? "dark" : "light"
 // --radius <none|sm|lg|xl|custom:REM>: audit under a radius preset or a custom value (stored the way the Customize page stores it)
 const RADIUS = opt("--radius", "")
+// --style <paper>: audit under a style, stored the way the docs style switch stores it
+const STYLE = opt("--style", "")
 const OUT = path.resolve(ROOT, opt("--out", "node_modules/.cache/radius-audit"))
 const CONCURRENCY = Number(opt("--concurrency", "3"))
 const TOL = Number(opt("--tolerance", "2"))
@@ -279,15 +282,16 @@ const context = await browser.newContext({
   colorScheme: THEME,
   reducedMotion: "reduce",
 })
-await context.addInitScript(([theme, radius]) => {
+await context.addInitScript(([theme, radius, style]) => {
   try {
     localStorage.setItem("theme", theme)
+    if (style) localStorage.setItem("style", style)
     if (radius && radius.startsWith("custom:")) {
       localStorage.setItem("radius", "custom")
       localStorage.setItem("radius-custom", radius.slice(7))
     } else if (radius) localStorage.setItem("radius", radius)
   } catch {}
-}, [THEME, RADIUS])
+}, [THEME, RADIUS, STYLE])
 
 const allow = config.allow ?? []
 const isAllowed = (page, f) =>
@@ -414,11 +418,12 @@ report.total = total
 report.allowed = allowed
 
 fs.mkdirSync(OUT, { recursive: true })
-const jsonPath = path.join(OUT, `report-${THEME}.json`)
+const SUFFIX = `${THEME}${STYLE ? `-${STYLE}` : ""}`
+const jsonPath = path.join(OUT, `report-${SUFFIX}.json`)
 fs.writeFileSync(jsonPath, JSON.stringify(report, null, 2))
 
 const md = []
-md.push(`# Radius audit (${THEME})`, "", `${report.generated} · ${BASE} · tolerance ${TOL}px · inset < ${MAX_INSET}px`, "")
+md.push(`# Radius audit (${SUFFIX})`, "", `${report.generated} · ${BASE} · tolerance ${TOL}px · inset < ${MAX_INSET}px`, "")
 const musts = report.pages.reduce((n, p) => n + p.findings.filter((f) => f.level === "must").length, 0)
 md.push(
   `**${total} findings** (${musts} must, ${total - musts} should; ${allowed} allow-listed).`,
@@ -454,7 +459,7 @@ for (const p of report.pages) {
     md.push("")
   }
 }
-const mdPath = path.join(OUT, `report-${THEME}.md`)
+const mdPath = path.join(OUT, `report-${SUFFIX}.md`)
 fs.writeFileSync(mdPath, md.join("\n"))
 console.log(`radius audit: ${total} findings (${musts} must) (${allowed} allowed) across ${report.pages.length} pages`)
 console.log(`  ${path.relative(ROOT, mdPath)}\n  ${path.relative(ROOT, jsonPath)}`)

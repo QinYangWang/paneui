@@ -27,8 +27,8 @@ const tabsListVariants = cva(
       size: { xs: "", sm: "", default: "", lg: "" },
     },
     compoundVariants: [
-      { variant: "default", size: "xs", className: "frame-sm" },
-      { variant: "default", size: ["sm", "default", "lg"], className: "frame-lg" },
+      { variant: "default", size: "xs", className: "frame-control-sm" },
+      { variant: "default", size: ["sm", "default", "lg"], className: "frame-control" },
     ],
     defaultVariants: { variant: "default", size: "default" },
   }

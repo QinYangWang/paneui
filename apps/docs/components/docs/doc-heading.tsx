@@ -9,8 +9,8 @@ import { CheckIcon, LinkIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
 
 const sizes = {
-  h2: "text-xl font-semibold tracking-tight",
-  h3: "text-lg font-semibold",
+  h2: "font-heading text-xl font-semibold tracking-tight",
+  h3: "font-heading text-lg font-semibold",
 } as const
 
 /**

@@ -11,7 +11,7 @@ import { cn } from "@paneui/ui/lib/utils"
 // density (lg h-9, h-8 default, sm h-7, xs h-6). For a one-of-many value with a raised thumb on a
 // well, use SegmentedControl instead.
 const toggleVariants = cva(
-  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg text-ui font-medium whitespace-nowrap text-muted-foreground transition-[background-color,color,box-shadow] duration-150 ease-out outline-none select-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-pressed:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-control text-ui font-medium whitespace-nowrap text-muted-foreground transition-[background-color,color,box-shadow] duration-150 ease-out outline-none select-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-64 data-pressed:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -22,7 +22,7 @@ const toggleVariants = cva(
       size: {
         default: "h-8 min-w-8 px-2.5",
         sm: "h-7 min-w-7 px-2 [&_svg:not([class*='size-'])]:size-3.5",
-        xs: "h-6 min-w-6 rounded-sm px-1.5 text-ui-xs [&_svg:not([class*='size-'])]:size-3.5",
+        xs: "h-6 min-w-6 rounded-control-sm px-1.5 text-ui-xs [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 min-w-9 px-3 text-ui-lg",
       },
     },
