@@ -1,75 +1,46 @@
 "use client"
 
-import Link from "next/link"
+import { LocaleProvider } from "@paneui/ui/components/locale-provider"
+import { useSiteLocale, useT } from "@/lib/site-locale"
 
-import { ArrowRightIcon, GithubIcon, PaneuiLogoIcon } from "@paneui/ui/icons"
-import { Button } from "@paneui/ui/components/button"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/tooltip"
-import { LanguageToggle } from "@/components/docs/language-toggle"
-import { ThemeControls } from "@/components/docs/theme-controls"
-import { T, useT } from "@/lib/site-locale"
-
-import { Gallery } from "./gallery"
+import { GetStarted, Install, Quote } from "./closing"
+import { Features } from "./features"
 import { Hero } from "./hero"
-import { Install } from "./install"
-import { GITHUB_URL, LandingFooter } from "./landing-footer"
-import { Platforms } from "./platforms"
-import { Tune } from "./tune"
+import { Kinds } from "./kinds"
+import { LandingFooter, LandingHeader } from "./landing-chrome"
 
-function Header() {
+import "./landing.css"
+
+/**
+ * The homepage: a light, paper-toned page with a sky hero and pastel cards, each holding live
+ * library components. It follows the site theme; dark mode swaps the scenery for night tones.
+ */
+export function LandingPage({ count, codeHtml }: { count: number; codeHtml: string }) {
+  const locale = useSiteLocale()
   const t = useT()
   return (
-    <header>
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:px-8">
-        <Link href="/" aria-label={t({ en: "paneui home", zh: "paneui 首页" })} className="flex items-center gap-2 rounded-sm text-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
-          <PaneuiLogoIcon size={22} />
-          paneui
-        </Link>
-        <nav aria-label={t({ en: "Main", zh: "主导航" })} className="flex items-center gap-1">
-          <Button variant="ghost" nativeButton={false} render={<Link href="/docs/components" />} className="hidden md:inline-flex">
-            <T en="Components" zh="组件" />
-          </Button>
-          <Button variant="ghost" nativeButton={false} render={<a href="/native/" />} className="hidden md:inline-flex">
-            Native
-          </Button>
-          <Tooltip>
-            <TooltipTrigger
-              render={<Button variant="ghost" size="icon-sm" nativeButton={false} render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />} aria-label={t({ en: "GitHub repository", zh: "GitHub 仓库" })} />}
-            >
-              <GithubIcon />
-            </TooltipTrigger>
-            <TooltipContent side="bottom">GitHub</TooltipContent>
-          </Tooltip>
-          <ThemeControls className="hidden sm:flex" />
-          <LanguageToggle />
-          <Button variant="secondary" nativeButton={false} render={<Link href="/docs" />} className="ms-1 hidden sm:inline-flex">
-            <T en="Docs" zh="文档" />
-            <ArrowRightIcon data-icon="inline-end" className="rtl:-scale-x-100" />
-          </Button>
-        </nav>
+    <LocaleProvider locale={locale}>
+      <div className="lp min-h-screen overflow-x-clip text-foreground">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-card focus:p-3 focus-visible:ring-2 focus-visible:ring-ring/50"
+        >
+          {t({ en: "Skip to content", zh: "跳转到内容" })}
+        </a>
+        <LandingHeader />
+        <main id="main" className="flex flex-col gap-24 pb-24 sm:gap-32 sm:pb-32">
+          <Hero />
+          <Kinds count={count} />
+          <Quote>{t({ en: "“Every part of these windows is a live component. Press anything.”", zh: "「这些窗口里的每一块都是真实组件，随便点。」" })}</Quote>
+          <div className="flex flex-col gap-6 sm:gap-10">
+            <Features codeHtml={codeHtml} />
+          </div>
+          <Quote align="end">{t({ en: "“Made for apps people keep open all day.”", zh: "「为整天开着的应用而做。」" })}</Quote>
+          <Install />
+          <GetStarted />
+        </main>
+        <LandingFooter />
       </div>
-    </header>
-  )
-}
-
-export function LandingPage({ count }: { count: number }) {
-  return (
-    <div className="min-h-screen overflow-x-clip bg-background text-foreground">
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-card focus:p-3 focus-visible:ring-2 focus-visible:ring-ring/50"
-      >
-        <T en="Skip to content" zh="跳转到内容" />
-      </a>
-      <Header />
-      <main id="main" className="flex flex-col gap-28 pb-28 sm:gap-40 sm:pb-40">
-        <Hero />
-        <Tune />
-        <Platforms />
-        <Gallery count={count} />
-        <Install />
-      </main>
-      <LandingFooter />
-    </div>
+    </LocaleProvider>
   )
 }
