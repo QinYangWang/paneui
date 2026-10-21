@@ -8,7 +8,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build:web": "expo export --platform web",
+    "build:web": "node ../../tooling/scripts/native-example-sources.mjs && expo export --platform web && node ../../tooling/scripts/native-export-docs.mjs",
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {
