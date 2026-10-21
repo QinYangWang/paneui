@@ -69,7 +69,7 @@ export type TabsListProps = ViewProps & {
 }
 
 export function TabsList({ children, style, ...props }: TabsListProps) {
-  const { colors } = useTheme()
+  const { colors, scheme } = useTheme()
   const { value, measurements } = useTabsContext()
   const reduced = useReducedMotion()
   const translateX = React.useRef(new Animated.Value(0)).current
@@ -101,7 +101,7 @@ export function TabsList({ children, style, ...props }: TabsListProps) {
           width,
           borderRadius: radius.md,
           backgroundColor: colors.card,
-          shadowColor: colors.foreground,
+          shadowColor: scheme === "dark" ? colors.background : colors.foreground,
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.12,
           shadowRadius: spacing.sm,

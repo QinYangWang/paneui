@@ -4,9 +4,11 @@ import { ToastProvider, useToast, Button } from "@paneui/ui-native";
 import { useExampleText } from "../../language";
 export default function Example() {
   return (
-    <ToastProvider>
-      <Actions />
-    </ToastProvider>
+    <View style={{ minHeight: spacing["3xl"] * 4 }}>
+      <ToastProvider>
+        <Actions />
+      </ToastProvider>
+    </View>
   );
 }
 function Actions() {

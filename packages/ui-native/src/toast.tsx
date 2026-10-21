@@ -45,7 +45,7 @@ function useReducedMotion() {
 }
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
-  const { colors } = useTheme()
+  const { colors, scheme } = useTheme()
   const reduced = useReducedMotion()
   const [toast, setToast] = React.useState<ToastItem | null>(null)
   const opacity = React.useRef(new Animated.Value(0)).current
@@ -109,7 +109,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               borderRadius: radius.lg,
               paddingHorizontal: spacing.lg,
               paddingVertical: spacing.md,
-              shadowColor: colors.foreground,
+              shadowColor: scheme === "dark" ? colors.background : colors.foreground,
               shadowOffset: { width: 0, height: spacing.sm },
               shadowOpacity: 0.15,
               shadowRadius: spacing.lg,

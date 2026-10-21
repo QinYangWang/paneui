@@ -42,14 +42,17 @@ async function main() {
     for (const route of routes) {
       const response = await page.goto(root + route + "/");
       if (response.status() !== 200) throw Error(`route ${route}`);
-      await page.locator("h1").waitFor();
-      if ((await page.locator("h1").textContent()) === "Page not found")
+      await page.locator(".page-heading h1").waitFor();
+      if (
+        (await page.locator(".page-heading h1").textContent()) ===
+        "Page not found"
+      )
         throw Error(`missing ${route}`);
       const code = page.getByRole("tab", { name: "Code", exact: true });
       if (await code.count()) {
-        await code.click();
+        await code.first().click();
         if (
-          !(await page.getByRole("tabpanel").textContent()).includes(
+          !(await page.getByRole("tabpanel").first().textContent()).includes(
             "export default function",
           )
         )
@@ -90,41 +93,56 @@ async function main() {
     if (before === after) throw Error("switch");
     await page.goto(root + "checkbox/");
     const check = page.getByRole("checkbox", {
-      name: "Save a copy",
+      name: "Notifications",
       exact: true,
     });
     await check.click();
     await check.getByText("✓", { exact: true }).waitFor();
     await page.goto(root + "radio-group/");
-    await page.getByRole("radio", { name: "Inbox", exact: true }).click();
+    await page
+      .getByRole("radio", { name: "Inbox", exact: true })
+      .first()
+      .first()
+      .click();
     if (
       (await page
         .getByRole("radio", { name: "Inbox", exact: true })
+        .first()
         .locator("div")
         .count()) < 3
     )
       throw Error("radio");
     await page.goto(root + "tabs/");
-    await page.getByRole("tab", { name: "Tasks", exact: true }).click();
-    await page.getByText("Three tasks are due this week.").waitFor();
+    await page.getByRole("tab", { name: "Files", exact: true }).first().click();
+    await page.getByText("Shared files", { exact: true }).first().waitFor();
     await page.goto(root + "input/");
     await page.getByLabel("Email", { exact: true }).fill("hello@example.com");
     await page.goto(root + "dialog/");
-    await page.getByRole("button", { name: /Delete project/ }).click();
-    await page.getByText("Delete this project?", { exact: true }).waitFor();
+    await page
+      .getByRole("button", { name: "Open details", exact: true })
+      .click();
+    await page.getByText("Default", { exact: true }).last().waitFor();
     await page.getByRole("button", { name: "Cancel", exact: true }).click();
     await page.goto(root + "sheet/");
-    await page.getByRole("button", { name: /Share file/ }).click();
-    await page.getByRole("button", { name: "Copy link", exact: true }).click();
+    await page
+      .getByRole("button", { name: "Open details", exact: true })
+      .click();
+    await page.getByRole("button", { name: "Confirm", exact: true }).click();
     await page.goto(root + "toast/");
     await page.getByRole("button", { name: "Save draft", exact: true }).click();
-    await page.getByText("Draft saved", { exact: true }).waitFor();
+    const notification = page.getByText("Draft saved", { exact: true });
+    await notification.waitFor();
+    const notificationBox = await notification.boundingBox();
+    const previewBox = await page.locator(".example-frame").first().boundingBox();
+    if (!notificationBox || !previewBox || notificationBox.y < previewBox.y || notificationBox.y + notificationBox.height > previewBox.y + previewBox.height)
+      throw Error("Toast must stay inside its example preview");
     await page.goto(root + "select/");
     await page
       .getByRole("combobox", { name: "Workspace", exact: true })
+      .first()
       .click();
     await page.getByRole("radio", { name: "Team", exact: true }).click();
-    await page.getByText("Team", { exact: true }).waitFor();
+    await page.getByText("Team", { exact: true }).first().waitFor();
     await page.goto(root + "theming/");
     const badLinks = await page
       .locator("a[href]")
@@ -159,11 +177,15 @@ async function main() {
       .click();
     await page.keyboard.press("Escape");
     if (await page.locator("dialog").isVisible()) throw Error("escape");
-    await page.getByRole("tab", { name: "Preview", exact: true }).focus();
+    await page
+      .getByRole("tab", { name: "Preview", exact: true })
+      .first()
+      .focus();
     await page.keyboard.press("ArrowRight");
     if (
       (await page
         .getByRole("tab", { name: "Code", exact: true })
+        .first()
         .getAttribute("aria-selected")) !== "true"
     )
       throw Error("keyboard tab");
