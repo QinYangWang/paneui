@@ -2,10 +2,13 @@
 
 import * as React from "react"
 import { motion, useInView, useScroll, useTransform } from "motion/react"
+import Link from "next/link"
 
 import { CalendarDaysIcon, ChartIcon, InboxIcon, TerminalSquareIcon } from "@paneui/ui/icons"
 import { AgentProgress } from "@paneui/ui/components/agent-progress"
 import { Badge } from "@paneui/ui/components/badge"
+import { Button } from "@paneui/ui/components/button"
+import { WindowFrame, WindowFrameActions, WindowFrameBar, WindowFrameBody, WindowFrameTitle } from "@paneui/ui/components/window-frame"
 import {
   SidebarNav,
   SidebarNavContent,
@@ -16,7 +19,7 @@ import {
 } from "@paneui/ui/components/sidebar-nav"
 import { useT, type Localized } from "@/lib/site-locale"
 
-import { asset, PillLink } from "./parts"
+import { asset } from "./parts"
 import { Checklist, Composer, Deploy, Latency, Messages, Requests, Rollout } from "./pieces"
 import { EASE, useStill } from "./reveal"
 
@@ -67,22 +70,19 @@ function HeroApp() {
   const still = useStill()
   const ref = React.useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { amount: 0.2 })
+  // The hero's glass is a touch denser than the default so the window holds up over the sky.
   return (
-    <div ref={ref} className="frame-3xl frame-p-1.5 rounded-3xl bg-shell/85 shadow-xl backdrop-blur-xl">
-      <div className="relative flex h-9 items-center gap-3 px-3">
-        <span aria-hidden className="flex gap-1.5">
-          <span className="size-2.5 rounded-full bg-foreground/15" />
-          <span className="size-2.5 rounded-full bg-foreground/15" />
-          <span className="size-2.5 rounded-full bg-foreground/15" />
-        </span>
-        <span className="absolute start-1/2 hidden -translate-x-1/2 rounded-md bg-foreground/5 px-3 py-0.5 text-ui-sm text-muted-foreground sm:block rtl:translate-x-1/2">
+    <WindowFrame ref={ref} variant="glass" className="bg-shell/85">
+      <WindowFrameBar>
+        <WindowFrameTitle align="center" className="hidden sm:block">
           {t({ en: "Release review", zh: "发布评审" })}
-        </span>
-        <span className="ms-auto">
+        </WindowFrameTitle>
+        {/* A block box, not the default flex row: the status sits on the text baseline as it always has. */}
+        <WindowFrameActions className="block">
           <AgentProgress label={t({ en: "Working", zh: "处理中" })} running={inView && !still} />
-        </span>
-      </div>
-      <div className="frame-inner flex h-160 overflow-hidden bg-background">
+        </WindowFrameActions>
+      </WindowFrameBar>
+      <WindowFrameBody className="flex h-160">
         <aside className="hidden w-56 shrink-0 border-e border-border bg-shell/50 md:flex md:flex-col">
           <Sidebar />
         </aside>
@@ -103,8 +103,8 @@ function HeroApp() {
           <Latency />
           <Rollout />
         </aside>
-      </div>
-    </div>
+      </WindowFrameBody>
+    </WindowFrame>
   )
 }
 
@@ -147,10 +147,12 @@ export function Hero() {
             {t({ en: "The source lands in your app, ready to edit.", zh: "源码直接放进你的项目，随时修改。" })}
           </motion.p>
           <motion.div className="mt-8 flex flex-wrap items-center justify-center gap-3" {...rise(0.25, still)}>
-            <PillLink href="/docs" tone="solid">
+            <Button variant="inverse" shape="pill" size="xl" nativeButton={false} render={<Link href="/docs" />}>
               {t({ en: "Get started", zh: "开始使用" })}
-            </PillLink>
-            <PillLink href="/docs/components">{t({ en: "Browse components", zh: "浏览组件" })}</PillLink>
+            </Button>
+            <Button variant="glass" shape="pill" size="xl" nativeButton={false} render={<Link href="/docs/components" />}>
+              {t({ en: "Browse components", zh: "浏览组件" })}
+            </Button>
           </motion.div>
         </div>
 

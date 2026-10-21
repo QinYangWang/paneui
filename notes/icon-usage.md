@@ -54,8 +54,12 @@ checkbox / otp-input / animated-badge (these share CheckIcon's path and round
 caps; checkbox/otp use a 2px stroke because they sit on a filled box).
 
 ## Brand
-- `PaneuiLogoIcon`: soft rounded square with a "q" knocked out. Docs header,
-  mobile drawer title, favicon (`app/icon.svg`, same path, light/dark aware).
+- `PaneuiLogoIcon`: four filled panes turning around a square void (pinwheel). Three panes are
+  `currentColor`; the top-right pane fills `var(--primary, currentColor)`, so accent presets and the
+  Paper style recolour it. `PaneuiLogoMonoIcon` is the one-colour version (solid chips, print).
+  Used in the docs header, mobile drawer, landing header, quotes and footer. Static copies use the
+  default primary `#0090ff`: favicon `app/icon.svg` (ink switches with prefers-color-scheme),
+  `public/logo.svg`, and `public/og.png` (rendered from `/workspace/work/og/og.html`).
 - `GithubIcon`: simplified puffy octocat silhouette, used for the repo link.
 
 ## Outline variant

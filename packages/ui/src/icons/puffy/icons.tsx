@@ -63,6 +63,9 @@ const line = { fill: "none", stroke: "currentColor", strokeLinecap: "round", str
 // Trace every filled shape with this. It puffs the shape out a little and rounds all of its corners.
 const puff = { stroke: "currentColor", strokeWidth: 1.5, strokeLinejoin: "round" } as const;
 
+// The top-right pane of the mark takes the theme's primary colour; outside a theme, the text colour.
+const accent = { fill: "var(--primary, currentColor)" } as const;
+
 /* ───────────────────────── Basic glyphs (line) ───────────────────────── */
 
 export const CheckIcon = (p: IconProps) => (
@@ -1085,11 +1088,23 @@ export const ClipboardListIcon = (p: IconProps) => (
 
 /* ───────────────────────── Brand marks (puff) ───────────────────────── */
 
-/** The paneui mark: a window with four panes. */
+/** The paneui mark: four panes turning around a square. The top-right pane is the accent. */
 export const PaneuiLogoIcon = (p: IconProps) => (
   <Icon {...p}>
-    <rect {...line} x="2" y="2" width="14" height="14" rx="4" />
-    <path {...line} d="M2 9h14M9 2v14" />
+    <rect x="1" y="1" width="9.4" height="5.4" rx="1" fill="currentColor" />
+    <rect x="11.6" y="1" width="5.4" height="9.4" rx="1" fill="currentColor" style={accent} />
+    <rect x="7.6" y="11.6" width="9.4" height="5.4" rx="1" fill="currentColor" />
+    <rect x="1" y="7.6" width="5.4" height="9.4" rx="1" fill="currentColor" />
+  </Icon>
+);
+
+/** The paneui mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
+export const PaneuiLogoMonoIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect x="1" y="1" width="9.4" height="5.4" rx="1" fill="currentColor" />
+    <rect x="11.6" y="1" width="5.4" height="9.4" rx="1" fill="currentColor" />
+    <rect x="7.6" y="11.6" width="9.4" height="5.4" rx="1" fill="currentColor" />
+    <rect x="1" y="7.6" width="5.4" height="9.4" rx="1" fill="currentColor" />
   </Icon>
 );
 

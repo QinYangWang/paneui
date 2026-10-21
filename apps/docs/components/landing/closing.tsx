@@ -1,13 +1,15 @@
 "use client"
 
-import { CheckIcon, CopyIcon, PaneuiLogoIcon } from "@paneui/ui/icons"
+import Link from "next/link"
+
+import { PaneuiLogoIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
-import { ActionSwapBlurIcon } from "@paneui/ui/components/action-swap-blur"
-import { useCopy } from "@paneui/ui/components/code-block"
+import { Button, ButtonArrow } from "@paneui/ui/components/button"
+import { CommandCopy } from "@paneui/ui/components/command-copy"
 import { CLI_PACKAGE } from "@/components/docs/install-command"
 import { useT } from "@/lib/site-locale"
 
-import { asset, Eyebrow, PillLink } from "./parts"
+import { asset, Eyebrow } from "./parts"
 import { Reveal } from "./reveal"
 
 /** A quiet line between the big cards, signed with the mark. */
@@ -32,7 +34,6 @@ const COMMAND = `npx ${CLI_PACKAGE}@latest init`
 
 export function Install() {
   const t = useT()
-  const { copied, copy } = useCopy()
   return (
     <section aria-labelledby="install-title" className="relative isolate mx-auto flex w-full max-w-6xl flex-col items-center px-4 text-center sm:px-8">
       {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
@@ -50,24 +51,12 @@ export function Install() {
         </p>
       </Reveal>
       <Reveal delay={0.1} className="mt-10 w-full max-w-xl">
-        <div className="flex h-14 w-full items-center gap-3 rounded-full bg-card/80 ps-4 pe-2 sm:ps-6 shadow-xl backdrop-blur-xl">
-          <code className="min-w-0 flex-1 overflow-x-auto text-start font-mono text-ui-sm whitespace-nowrap sm:text-ui-lg scrollbar-none">
-            <span aria-hidden className="text-muted-foreground select-none">$ </span>
-            {COMMAND}
-          </code>
-          <button
-            type="button"
-            onClick={() => copy(COMMAND)}
-            aria-label={copied ? t({ en: "Copied", zh: "已复制" }) : t({ en: "Copy command", zh: "复制命令" })}
-            className="flex size-10 shrink-0 items-center justify-center rounded-full bg-foreground text-background outline-none transition-colors duration-150 hover:bg-foreground/85 focus-visible:ring-2 focus-visible:ring-ring/50"
-          >
-            <ActionSwapBlurIcon value={copied ? "copied" : "copy"}>{copied ? <CheckIcon size={16} /> : <CopyIcon size={16} />}</ActionSwapBlurIcon>
-          </button>
-        </div>
+        <CommandCopy command={COMMAND} variant="floating" size="lg" />
         <div className="mt-5">
-          <PillLink href="/docs/installation" size="sm" arrow>
+          <Button variant="glass" shape="pill" size="lg" nativeButton={false} render={<Link href="/docs/installation" />}>
             {t({ en: "Installation guide", zh: "安装指南" })}
-          </PillLink>
+            <ButtonArrow />
+          </Button>
         </div>
       </Reveal>
     </section>
@@ -90,10 +79,12 @@ export function GetStarted() {
           <p className="lp-display text-balance text-xl text-foreground/70 sm:text-2xl">{t({ en: "Free and open source, under MIT.", zh: "免费开源，MIT 许可。" })}</p>
         </div>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row lg:flex-col xl:flex-row">
-          <PillLink href="/docs/components">{t({ en: "Browse components", zh: "浏览组件" })}</PillLink>
-          <PillLink href="/docs" tone="solid">
+          <Button variant="glass" shape="pill" size="xl" nativeButton={false} render={<Link href="/docs/components" />}>
+            {t({ en: "Browse components", zh: "浏览组件" })}
+          </Button>
+          <Button variant="inverse" shape="pill" size="xl" nativeButton={false} render={<Link href="/docs" />}>
             {t({ en: "Read the docs", zh: "阅读文档" })}
-          </PillLink>
+          </Button>
         </div>
       </div>
     </Reveal>

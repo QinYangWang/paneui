@@ -31,6 +31,8 @@ import TypesetDemo from "@/registry/examples/typeset-demo"
 import ThemeAccentsDemo from "@/registry/examples/theme-accents-demo"
 import ThemePaperDemo from "@/registry/examples/theme-paper-demo"
 import CodeBlockDemo from "@/registry/examples/code-block-demo"
+import CommandCopyDemo from "@/registry/examples/command-copy-demo"
+import WindowFrameDemo from "@/registry/examples/window-frame-demo"
 import CheckboxDemo from "@/registry/examples/checkbox-demo"
 import RadioDemo from "@/registry/examples/radio-demo"
 import StepperDemo from "@/registry/examples/stepper-demo"
@@ -230,6 +232,7 @@ export const demos: Record<string, React.ComponentType> = {
   "theme-paper": ThemePaperDemo,
   "scroll-area": ScrollAreaDemo,
   "app-shell": AppShellDemo,
+  "window-frame": WindowFrameDemo,
   "overflow-hint": OverflowHintDemo,
   icons: IconsDemo,
   "icon-chip": IconChipDemo,
@@ -310,6 +313,7 @@ export const demos: Record<string, React.ComponentType> = {
   "message-scroller": MessageScrollerDemo,
   "agent-code-block": AgentCodeBlockDemo,
   "code-block": CodeBlockDemo,
+  "command-copy": CommandCopyDemo,
   "file-diff": FileDiffDemo,
   "tool-result": ToolResultDemo,
   "citations": CitationsDemo,

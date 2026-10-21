@@ -11,7 +11,6 @@ import { ThemeControls } from "@/components/docs/theme-controls"
 import { THEME_KEY } from "@/components/docs/theme-script"
 import { useT, type Localized } from "@/lib/site-locale"
 
-import { PillLink } from "./parts"
 
 export const GITHUB_URL = "https://github.com/QinYangWang/paneui"
 
@@ -66,9 +65,9 @@ export function LandingHeader() {
           <span className="lg:hidden">
             <ThemeToggle variant="ghost" storageKey={THEME_KEY} />
           </span>
-          <PillLink href="/docs" tone="solid" size="sm" className="ms-1.5 hidden sm:inline-flex">
+          <Button variant="inverse" shape="pill" size="lg" nativeButton={false} render={<Link href="/docs" />} className="ms-1.5 hidden sm:inline-flex">
             {t({ en: "Get started", zh: "开始使用" })}
-          </PillLink>
+          </Button>
         </div>
       </div>
     </header>

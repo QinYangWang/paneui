@@ -2495,7 +2495,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "https://paneui.dev/r/theme.json"
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/icons.json"
       ],
       "files": [
         {
@@ -3899,6 +3900,32 @@
       "files": [
         {
           "path": "registry/web/ui/code-block.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Text"
+      }
+    },
+    {
+      "name": "command-copy",
+      "type": "registry:ui",
+      "title": "Command Copy",
+      "description": "Shows a shell command with a button that copies it.",
+      "dependencies": [
+        "class-variance-authority",
+        "motion"
+      ],
+      "registryDependencies": [
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/button.json",
+        "https://paneui.dev/r/action-swap-blur.json",
+        "https://paneui.dev/r/locale-provider.json"
+      ],
+      "files": [
+        {
+          "path": "registry/web/ui/command-copy.tsx",
           "type": "registry:ui"
         }
       ],
@@ -5792,6 +5819,27 @@
       ],
       "meta": {
         "category": "Navigation"
+      }
+    },
+    {
+      "name": "window-frame",
+      "type": "registry:ui",
+      "title": "Window Frame",
+      "description": "Frames a piece of UI as a desktop app window.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://paneui.dev/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "registry/web/ui/window-frame.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Display"
       }
     },
     {

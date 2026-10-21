@@ -4,6 +4,7 @@
 import * as React from "react"
 import { renderToString } from "react-dom/server"
 
+import { CommandCopy } from "@paneui/ui/components/command-copy"
 import { Loader } from "@paneui/ui/components/loader"
 import { LocaleProvider, localeLabels } from "@paneui/ui/components/locale-provider"
 import { Outline } from "@paneui/ui/components/outline"
@@ -28,6 +29,7 @@ const cases = (label: string | undefined) => [
   { slot: "theme-toggle", key: "toggleTheme", node: <ThemeToggle aria-label={label} /> },
   { slot: "pagination", key: "pagination", node: <Pagination page={1} pageCount={3} onPageChange={noop} aria-label={label} /> },
   { slot: "loader", key: "loading", node: <Loader aria-label={label} /> },
+  { slot: "command-copy-button", key: "copyCommand", node: <CommandCopy command="npx paneui init" label={label} /> },
   { slot: "outline", key: "onThisPage", node: <Outline items={[{ id: "a", title: "A", depth: 2 }]} aria-label={label} /> },
 ] as const
 

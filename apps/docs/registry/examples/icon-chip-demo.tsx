@@ -1,4 +1,4 @@
-import { BellIcon, BotIcon, PaneuiLogoIcon, ShieldIcon, SparklesIcon, TerminalSquareIcon, ThumbsUpIcon } from "@paneui/ui/icons"
+import { BellIcon, BotIcon, PaneuiLogoMonoIcon, ShieldIcon, SparklesIcon, TerminalSquareIcon, ThumbsUpIcon } from "@paneui/ui/icons"
 import { IconChip } from "@paneui/ui/components/icon-chip"
 
 const rows = [
@@ -16,7 +16,7 @@ export default function IconChipDemo() {
         <IconChip size="sm"><BellIcon /></IconChip>
         <IconChip><BotIcon /></IconChip>
         <IconChip size="lg"><ShieldIcon /></IconChip>
-        <IconChip size="lg" tone="solid"><PaneuiLogoIcon /></IconChip>
+        <IconChip size="lg" tone="solid"><PaneuiLogoMonoIcon /></IconChip>
       </div>
       <ul className="flex flex-col gap-1 frame-3xl frame-p-2 bg-card shadow-surface">
         {rows.map(({ icon: Icon, title, body, tone }) => (

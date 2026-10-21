@@ -984,11 +984,27 @@ export const ClipboardListIcon = (p: IconProps) => (
   </Icon>
 );
 
+// The top-right pane of the mark takes the theme's primary colour, so accent presets and styles
+// recolour it; outside a theme it falls back to the text colour.
+const accent = { fill: "var(--primary, currentColor)" } as const;
+
+/** The paneui mark: four panes turning around a square. The top-right pane is the accent. */
 export const PaneuiLogoIcon = (p: IconProps) => (
-  // Four panes in a rounded window frame.
   <Icon {...p}>
-    <rect {...line} x="2" y="2" width="20" height="20" rx="6" />
-    <path {...line} d="M2 12h20M12 2v20" />
+    <rect x="2" y="2" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
+    <rect x="15.25" y="2" width="6.75" height="11.75" rx="1.25" fill="currentColor" style={accent} />
+    <rect x="10.25" y="15.25" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
+    <rect x="2" y="10.25" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
+  </Icon>
+);
+
+/** The paneui mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
+export const PaneuiLogoMonoIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <rect x="2" y="2" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
+    <rect x="15.25" y="2" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
+    <rect x="10.25" y="15.25" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
+    <rect x="2" y="10.25" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
   </Icon>
 );
 

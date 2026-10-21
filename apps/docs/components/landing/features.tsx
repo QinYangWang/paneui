@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react"
+import Link from "next/link"
 
 import * as Rounded from "@paneui/ui/icons"
 import {
@@ -21,7 +22,7 @@ import * as Puffy from "@paneui/ui/icons/puffy/icons"
 import { cn } from "@paneui/ui/lib/utils"
 import { AvatarStatus } from "@paneui/ui/components/avatar"
 import { Badge } from "@paneui/ui/components/badge"
-import { Button } from "@paneui/ui/components/button"
+import { Button, ButtonArrow } from "@paneui/ui/components/button"
 import { CodeBlock } from "@paneui/ui/components/code-block"
 import { FileTree, FileTreeFile, FileTreeFolder } from "@paneui/ui/components/file-tree"
 import { GeneratedAvatar } from "@paneui/ui/components/generated-avatar"
@@ -31,6 +32,7 @@ import { Progress, ProgressLabel, ProgressValue } from "@paneui/ui/components/pr
 import { SegmentedControl, SegmentedControlItem } from "@paneui/ui/components/segmented-control"
 import { SwatchPicker } from "@paneui/ui/components/swatch-picker"
 import { Switch } from "@paneui/ui/components/switch"
+import { WindowFrame, WindowFrameBar, WindowFrameBody, WindowFrameTitle } from "@paneui/ui/components/window-frame"
 import { PRESET_LABELS, PRESET_THEMES, type PresetAccent } from "@/components/docs/accent-color"
 import { setAccent, useAccentState } from "@/components/docs/accent-store"
 import { radiusValue, setRadius, useRadiusState, type RadiusChoice } from "@/components/docs/radius-store"
@@ -38,7 +40,7 @@ import { RADII } from "@/components/docs/theme-script"
 import { siteCopy } from "@/lib/site-copy"
 import { useT, type Localized } from "@/lib/site-locale"
 
-import { Eyebrow, MiniWindow, PillLink } from "./parts"
+import { Eyebrow } from "./parts"
 import { Phone, Usage } from "./pieces"
 import { Reveal, useStill } from "./reveal"
 
@@ -117,9 +119,14 @@ function PlatformsVisual() {
   const t = useT()
   return (
     <div className="relative pb-44 sm:pb-16">
-      <MiniWindow title="app.example.com" className="w-full sm:w-10/12">
-        <Usage />
-      </MiniWindow>
+      <WindowFrame variant="glass" size="sm" className="w-full sm:w-10/12">
+        <WindowFrameBar>
+          <WindowFrameTitle>app.example.com</WindowFrameTitle>
+        </WindowFrameBar>
+        <WindowFrameBody>
+          <Usage />
+        </WindowFrameBody>
+      </WindowFrame>
       <Phone className="absolute end-0 -bottom-2 w-56 origin-bottom-right scale-75 sm:-bottom-8 sm:w-60 sm:scale-90 lg:scale-100" />
       <span className="sr-only">{t({ en: "A desktop window and a phone", zh: "桌面窗口和手机" })}</span>
     </div>
@@ -339,9 +346,11 @@ export function Features({ codeHtml }: { codeHtml: string }) {
           zh: "Web 与 Native 组件读取同一套设计变量，各自保留平台本身的手感。",
         })}
         link={
-          <PillLink href="/native/" external arrow>
+          // The showcase is a separate app on the same host, so a plain link leaves the router.
+          <Button variant="glass" shape="pill" size="xl" nativeButton={false} render={<a href="/native/" />}>
             {t({ en: "Open the Native showcase", zh: "打开 Native 展示" })}
-          </PillLink>
+            <ButtonArrow />
+          </Button>
         }
         points={[
           { icon: <MonitorIcon />, label: t({ en: "Desktop density", zh: "桌面密度" }) },
@@ -364,9 +373,10 @@ export function Features({ codeHtml }: { codeHtml: string }) {
         })}
         extra={<ThemeControls />}
         link={
-          <PillLink href="/docs/theming" arrow>
+          <Button variant="glass" shape="pill" size="xl" nativeButton={false} render={<Link href="/docs/theming" />}>
             {t({ en: "Theming guide", zh: "主题指南" })}
-          </PillLink>
+            <ButtonArrow />
+          </Button>
         }
         visual={<Specimen />}
       />
@@ -382,9 +392,10 @@ export function Features({ codeHtml }: { codeHtml: string }) {
         })}
         extra={<IconStylePicker value={iconStyle} onChange={setIconStyle} />}
         link={
-          <PillLink href="/docs/icons" arrow>
+          <Button variant="glass" shape="pill" size="xl" nativeButton={false} render={<Link href="/docs/icons" />}>
             {t({ en: "Browse icons", zh: "浏览图标" })}
-          </PillLink>
+            <ButtonArrow />
+          </Button>
         }
         visual={<IconsVisual style={iconStyle} />}
       />
@@ -400,9 +411,10 @@ export function Features({ codeHtml }: { codeHtml: string }) {
           zh: "CLI 把每个组件复制进你的项目，没有藏在包里的代码。",
         })}
         link={
-          <PillLink href="/docs/cli" arrow>
+          <Button variant="glass" shape="pill" size="xl" nativeButton={false} render={<Link href="/docs/cli" />}>
             {t({ en: "CLI reference", zh: "CLI 文档" })}
-          </PillLink>
+            <ButtonArrow />
+          </Button>
         }
         points={[
           { icon: <CodeIcon />, label: t({ en: "Plain TSX", zh: "普通 TSX" }) },

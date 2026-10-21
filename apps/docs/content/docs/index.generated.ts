@@ -39,6 +39,7 @@ import d_collapsible from "./collapsible"
 import d_color_picker from "./color-picker"
 import d_combobox from "./combobox"
 import d_command from "./command"
+import d_command_copy from "./command-copy"
 import d_composition_chart from "./composition-chart"
 import d_context_menu from "./context-menu"
 import d_cover_art from "./cover-art"
@@ -157,6 +158,7 @@ import d_usage_meter from "./usage-meter"
 import d_user_menu from "./user-menu"
 import d_vscode from "./vscode"
 import d_wheel_picker from "./wheel-picker"
+import d_window_frame from "./window-frame"
 import d_work_summary from "./work-summary"
 import d_workspace_switcher from "./workspace-switcher"
 
@@ -199,6 +201,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "color-picker": d_color_picker,
   "combobox": d_combobox,
   "command": d_command,
+  "command-copy": d_command_copy,
   "composition-chart": d_composition_chart,
   "context-menu": d_context_menu,
   "cover-art": d_cover_art,
@@ -317,6 +320,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "user-menu": d_user_menu,
   "vscode": d_vscode,
   "wheel-picker": d_wheel_picker,
+  "window-frame": d_window_frame,
   "work-summary": d_work_summary,
   "workspace-switcher": d_workspace_switcher,
 }

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "window-frame",
+  "title": "Window Frame",
+  "description": "Frames a piece of UI as a desktop app window.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://paneui.dev/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/web/ui/window-frame.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\n/*\n * Desktop window chrome for showing a piece of UI as an app: a title bar with the three window\n * dots, then an inset body that follows the frame's corner (frame + frame-inner). `glass` lets a\n * picture behind it through; `solid` sits on plain pages.\n */\nconst windowFrameVariants = cva(\"frame-3xl frame-p-1.5 flex flex-col rounded-3xl shadow-xl\", {\n  variants: {\n    variant: {\n      solid: \"bg-shell\",\n      glass: \"bg-shell/80 backdrop-blur-xl\",\n    },\n  },\n  defaultVariants: { variant: \"solid\" },\n})\n\ntype WindowFrameSize = \"sm\" | \"default\"\nconst WindowFrameContext = React.createContext<WindowFrameSize>(\"default\")\n\nfunction WindowFrame({\n  className,\n  variant = \"solid\",\n  size = \"default\",\n  ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof windowFrameVariants> & { size?: WindowFrameSize }) {\n  return (\n    <WindowFrameContext.Provider value={size}>\n      <div\n        data-slot=\"window-frame\"\n        data-variant={variant}\n        data-size={size}\n        className={cn(windowFrameVariants({ variant }), className)}\n        {...props}\n      />\n    </WindowFrameContext.Provider>\n  )\n}\n\n/** The title bar. Starts with the window dots unless `controls={false}`. */\nfunction WindowFrameBar({\n  className,\n  controls = true,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> & { controls?: boolean }) {\n  const size = React.useContext(WindowFrameContext)\n  return (\n    <div\n      data-slot=\"window-frame-bar\"\n      className={cn(\"relative flex shrink-0 items-center gap-3\", size === \"sm\" ? \"h-8 px-2.5\" : \"h-9 px-3\", className)}\n      {...props}\n    >\n      {controls ? <WindowFrameControls /> : null}\n      {children}\n    </div>\n  )\n}\n\n/** The three window dots. Decoration only, so hidden from assistive tech. */\nfunction WindowFrameControls({ className, ...props }: React.ComponentProps<\"span\">) {\n  return (\n    <span data-slot=\"window-frame-controls\" aria-hidden className={cn(\"flex gap-1.5\", className)} {...props}>\n      <span className=\"size-2.5 rounded-full bg-foreground/15\" />\n      <span className=\"size-2.5 rounded-full bg-foreground/15\" />\n      <span className=\"size-2.5 rounded-full bg-foreground/15\" />\n    </span>\n  )\n}\n\n/** The window title: beside the dots by default, or centred on the bar as a chip. */\nfunction WindowFrameTitle({\n  className,\n  align = \"start\",\n  ...props\n}: React.ComponentProps<\"span\"> & { align?: \"start\" | \"center\" }) {\n  return (\n    <span\n      data-slot=\"window-frame-title\"\n      data-align={align}\n      className={cn(\n        align === \"center\"\n          ? \"absolute start-1/2 max-w-1/2 -translate-x-1/2 truncate rounded-md bg-foreground/5 px-3 py-0.5 text-ui-sm text-muted-foreground rtl:translate-x-1/2\"\n          : \"min-w-0 truncate text-ui font-medium text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n/** Controls at the end of the bar. */\nfunction WindowFrameActions({ className, ...props }: React.ComponentProps<\"span\">) {\n  return <span data-slot=\"window-frame-actions\" className={cn(\"ms-auto flex items-center\", className)} {...props} />\n}\n\n/** The window's content, inset from the frame with a matching corner. */\nfunction WindowFrameBody({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"window-frame-body\"\n      className={cn(\"frame-inner min-h-0 grow overflow-hidden bg-background\", className)}\n      {...props}\n    />\n  )\n}\n\nexport {\n  WindowFrame,\n  WindowFrameBar,\n  WindowFrameControls,\n  WindowFrameTitle,\n  WindowFrameActions,\n  WindowFrameBody,\n  windowFrameVariants,\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "meta": {
+    "category": "Display"
+  },
+  "type": "registry:ui"
+}

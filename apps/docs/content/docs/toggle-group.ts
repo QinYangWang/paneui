@@ -2,9 +2,9 @@ import type { ComponentDoc } from "@/lib/doc-types"
 
 const variant = {
   name: "variant",
-  type: `"default" | "outline"`,
+  type: `"default" | "outline" | "tile"`,
   default: `"default"`,
-  description: "`default` fills only the pressed item; `outline` frames every item, for settings panels.",
+  description: "`default` fills only the pressed item; `outline` frames every item, for settings panels; `tile` stacks a large glyph in `ToggleGroupItemIcon` over its label and raises the pressed one.",
 }
 const size = {
   name: "size",
@@ -25,12 +25,14 @@ export default {
   },
   composition: `ToggleGroup
 └── ToggleGroupItem
+    └── ToggleGroupItemIcon (tile)
 
 Toggle`,
   examples: [
     { id: "outline", title: { en: "Outline", zh: "边框" },  },
     { id: "single-toggle", title: { en: "Single Toggle", zh: "单个切换" },  },
     { id: "sizes", title: { en: "Sizes", zh: "尺寸" } },
+    { id: "tile", title: { en: "Tile", zh: "图块" }, description: { en: "Use tiles to pick what a large preview below shows.", zh: "用于切换下方大预览的内容。" } },
     {
       id: "rtl",
       title: { en: "RTL", zh: "从右到左" },
@@ -43,6 +45,7 @@ Toggle`,
   api: [
     { name: "ToggleGroup", extends: "ToggleGroup", extendsHref: "https://base-ui.com/react/components/toggle-group#api-reference", props: [variant, size], dataAttributes: [{ name: "data-variant", description: "The group variant." }, { name: "data-size", description: "The group size." }] },
     { name: "ToggleGroupItem", description: "Takes `variant` / `size` from the group unless set.", extends: "Toggle", extendsHref: "https://base-ui.com/react/components/toggle#api-reference", props: [{ name: "value", type: "string", description: "The item's value in the group.", required: true }], dataAttributes: [{ name: "data-pressed", description: "Present when pressed." }, { name: "data-variant", description: "The resolved variant." }, { name: "data-size", description: "The resolved size." }] },
+    { name: "ToggleGroupItemIcon", description: "The 48px square that holds a `tile` item's glyph (24px). Raised on a card fill while the item is pressed; hidden from assistive tech, so the item's text names it.", extends: "span", props: [] },
     { name: "Toggle", extends: "Toggle", extendsHref: "https://base-ui.com/react/components/toggle#api-reference", props: [variant, size] },
   ],
 } satisfies ComponentDoc

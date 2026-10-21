@@ -46,6 +46,7 @@ type LocaleLabels = {
   copy: string
   copied: string
   copyCode: string
+  copyCommand: string
   /* Chat */
   messageFrom: (from: string) => string
   typing: string
@@ -267,6 +268,7 @@ const en: LocaleLabels = {
   copy: "Copy",
   copied: "Copied",
   copyCode: "Copy code",
+  copyCommand: "Copy command",
   messageFrom: (from) => `${from} message`,
   typing: "Typing",
   jumpToLatest: "Jump to latest",
@@ -473,6 +475,7 @@ const zhCN: LocaleLabels = {
   copy: "复制",
   copied: "已复制",
   copyCode: "复制代码",
+  copyCommand: "复制命令",
   messageFrom: (from) => `${from} 的消息`,
   typing: "正在输入",
   jumpToLatest: "跳到最新",

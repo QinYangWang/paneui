@@ -32,6 +32,16 @@ export default {
       id: "as-link",
       title: { en: "As link", zh: "用作链接" },
     },
+    {
+      id: "pill",
+      title: { en: "Pill", zh: "胶囊" },
+      description: { en: "Use pills for calls to action on landing pages and pictures.", zh: "用于落地页和图片上的行动按钮。" },
+    },
+    {
+      id: "arrow",
+      title: { en: "With arrow", zh: "带箭头" },
+      description: { en: "Use when the button takes the reader somewhere else.", zh: "用于跳转到其他页面的按钮。" },
+    },
   ],
   api: [
     {
@@ -41,15 +51,21 @@ export default {
       props: [
         {
           name: "variant",
-          type: `"default" | "secondary" | "outline" | "ghost" | "destructive" | "link"`,
+          type: `"default" | "secondary" | "outline" | "ghost" | "destructive" | "link" | "inverse" | "glass"`,
           default: `"default"`,
-          description: "Visual style.",
+          description: "Visual style. `inverse` is a foreground-coloured fill; `glass` is a translucent card that lets a picture behind it through.",
         },
         {
           name: "size",
-          type: `"default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"`,
+          type: `"default" | "xs" | "sm" | "lg" | "xl" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"`,
           default: `"default"`,
-          description: "Height and padding. `xs` is 24px, `sm` 28px, `default` 32px and `lg` 36px, all with a 10px radius except `xs` at 6px. `icon*` sizes are square.",
+          description: "Height and padding. `xs` is 24px, `sm` 28px, `default` 32px, `lg` 36px and `xl` 44px (hero calls to action). Corners follow `--radius-control`, half of it at `xs`. `icon*` sizes are square.",
+        },
+        {
+          name: "shape",
+          type: `"default" | "pill"`,
+          default: `"default"`,
+          description: "`pill` rounds the ends fully. A `lg` pill keeps a 13px label and 16px padding; an `xl` pill widens to 24px padding from the `sm` breakpoint.",
         },
         {
           name: "render",
@@ -71,11 +87,20 @@ export default {
       ],
     },
     {
+      name: "ButtonArrow",
+      description: "Trailing arrow for a link button. It moves 2px toward the destination on hover (not under reduced motion) and mirrors in right-to-left layouts.",
+      props: [
+        { name: "external", type: "boolean", default: "false", description: "Shows the leave-the-site glyph instead, which stays still." },
+        { name: "className", type: "string", description: "Merged last." },
+      ],
+    },
+    {
       name: "buttonVariants",
       description: "The `cva` function behind `Button`, for styling other elements like a button.",
       props: [
         { name: "variant", type: "same as Button", description: "" },
         { name: "size", type: "same as Button", description: "" },
+        { name: "shape", type: "same as Button", description: "" },
         { name: "className", type: "string", description: "Merged last." },
       ],
     },

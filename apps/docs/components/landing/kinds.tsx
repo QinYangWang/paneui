@@ -4,7 +4,6 @@ import * as React from "react"
 import { AnimatePresence, motion } from "motion/react"
 
 import { CalendarDaysIcon, ChatIcon, FileIcon, InboxIcon, PanelRightIcon, SettingsIcon, SmartphoneIcon, TableIcon, TypeIcon, UserIcon } from "@paneui/ui/icons"
-import { cn } from "@paneui/ui/lib/utils"
 import { Button } from "@paneui/ui/components/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@paneui/ui/components/card"
 import { Checkbox } from "@paneui/ui/components/checkbox"
@@ -14,6 +13,7 @@ import { Input } from "@paneui/ui/components/input"
 import { Label } from "@paneui/ui/components/label"
 import { Radio, RadioGroup } from "@paneui/ui/components/radio"
 import { Switch } from "@paneui/ui/components/switch"
+import { ToggleGroup, ToggleGroupItem, ToggleGroupItemIcon } from "@paneui/ui/components/toggle-group"
 import { TrendChart } from "@paneui/ui/components/trend-chart"
 import { useT, type Localized } from "@/lib/site-locale"
 
@@ -221,33 +221,20 @@ export function Kinds({ count }: { count: number }) {
       </Reveal>
 
       <Reveal delay={0.1} className="mt-12 w-full sm:mt-16">
-        <div role="group" aria-label={t({ en: "Kind of UI", zh: "界面类型" })} className="mx-auto flex max-w-2xl items-start justify-between gap-1 sm:justify-center sm:gap-6">
-          {KINDS.map((k) => {
-            const on = k.id === kind
-            return (
-              <button
-                key={k.id}
-                type="button"
-                aria-pressed={on}
-                onClick={() => setKind(k.id)}
-                className={cn(
-                  "group/kind flex w-16 flex-col items-center gap-2.5 rounded-xl py-2 outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-ring/50 sm:w-24",
-                  on ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                <span
-                  className={cn(
-                    "flex size-12 items-center justify-center rounded-2xl transition-[background-color,box-shadow] duration-200 [&_svg]:size-6",
-                    on ? "bg-card shadow-raised" : "group-hover/kind:bg-foreground/5"
-                  )}
-                >
-                  {k.icon}
-                </span>
-                <span className="text-ui-sm font-medium sm:text-ui">{t(k.label)}</span>
-              </button>
-            )
-          })}
-        </div>
+        <ToggleGroup
+          variant="tile"
+          value={[kind]}
+          onValueChange={(next) => next[0] && setKind(next[0])}
+          aria-label={t({ en: "Kind of UI", zh: "界面类型" })}
+          className="mx-auto flex w-full max-w-2xl items-start justify-between gap-1 sm:justify-center sm:gap-6"
+        >
+          {KINDS.map((k) => (
+            <ToggleGroupItem key={k.id} value={k.id} className="w-16 sm:w-24">
+              <ToggleGroupItemIcon>{k.icon}</ToggleGroupItemIcon>
+              {t(k.label)}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
       </Reveal>
 
       <Reveal delay={0.15} className="mt-8 w-full">
