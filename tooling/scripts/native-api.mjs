@@ -3,6 +3,27 @@ import { readFile, writeFile, readdir } from "node:fs/promises";
 const root = new URL("../../packages/ui-native/src/", import.meta.url);
 const result = {};
 const descriptions = {
+  people: ["People shown in reading order.", "按阅读顺序显示的成员。"],
+  overflowLabel: [
+    "Localized name for the hidden count.",
+    "隐藏人数的本地化说明。",
+  ],
+  clearLabel: ["Localized clear action label.", "清除操作的本地化标签。"],
+  decrementLabel: [
+    "Accessible name for decreasing the quantity.",
+    "减少数量的无障碍名称。",
+  ],
+  incrementLabel: [
+    "Accessible name for increasing the quantity.",
+    "增加数量的无障碍名称。",
+  ],
+  count: ["Number of pages in the sequence.", "序列中的页面总数。"],
+  pageLabel: [
+    "Names a one-based page and total.",
+    "为从一开始的页码和总数命名。",
+  ],
+  ref: ["Ref to the input instance.", "输入框实例的引用。"],
+  onChangeText: ["Called when the query changes.", "查询文字更改时调用。"],
   children: ["Content to render.", "要显示的内容。"],
   label: ["Accessible control name.", "控件的无障碍名称。"],
   title: ["Visible title.", "显示的标题。"],
@@ -64,7 +85,7 @@ for (const file of await readdir(root)) {
       defaults[node.name.text] = Object.fromEntries(
         node.parameters[0].name.elements
           .filter((x) => x.initializer)
-          .map((x) => [x.name.getText(source), x.initializer.getText(source)]),
+          .map((x) => [x.name.getText(), x.initializer.getText()]),
       );
     }
   function optionDefaults(node) {
@@ -72,10 +93,10 @@ for (const file of await readdir(root)) {
       ts.isBinaryExpression(node) &&
       node.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken &&
       ts.isPropertyAccessExpression(node.left) &&
-      node.left.expression.getText(source) === "options"
+      node.left.expression.getText() === "options"
     ) {
       defaults.ToastOptions ??= {};
-      defaults.ToastOptions[node.left.name.text] = node.right.getText(source);
+      defaults.ToastOptions[node.left.name.text] = node.right.getText();
     }
     ts.forEachChild(node, optionDefaults);
   }
@@ -86,27 +107,59 @@ for (const file of await readdir(root)) {
       .filter(ts.isTypeAliasDeclaration)
       .map((node) => [node.name.text, node.type]),
   );
+  // Include added props inherited from another local component.
+  for (const node of source.statements) {
+    if (
+      !ts.isImportDeclaration(node) ||
+      !ts.isStringLiteral(node.moduleSpecifier)
+    )
+      continue;
+    const specifier = node.moduleSpecifier.text;
+    const bindings = node.importClause?.namedBindings;
+    if (
+      !specifier.startsWith("./") ||
+      !bindings ||
+      !ts.isNamedImports(bindings)
+    )
+      continue;
+    const names = bindings.elements.filter((item) =>
+      /Props$/.test(item.name.text),
+    );
+    if (!names.length) continue;
+    const imported = ts.createSourceFile(
+      `${specifier}.tsx`,
+      await readFile(new URL(`${specifier}.tsx`, root), "utf8"),
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TSX,
+    );
+    for (const item of names) {
+      const declaration = imported.statements.find(
+        (candidate) =>
+          ts.isTypeAliasDeclaration(candidate) &&
+          candidate.name.text === (item.propertyName?.text ?? item.name.text),
+      );
+      if (declaration) aliases.set(item.name.text, declaration.type);
+    }
+  }
   function members(type) {
     if (ts.isTypeLiteralNode(type))
       return type.members.filter(ts.isPropertySignature);
     if (ts.isIntersectionTypeNode(type)) return type.types.flatMap(members);
+    if (ts.isTypeReferenceNode(type) && aliases.has(type.typeName.getText()))
+      return members(aliases.get(type.typeName.getText()));
     if (
       ts.isTypeReferenceNode(type) &&
-      aliases.has(type.typeName.getText(source))
-    )
-      return members(aliases.get(type.typeName.getText(source)));
-    if (
-      ts.isTypeReferenceNode(type) &&
-      type.typeName.getText(source) === "Omit" &&
+      type.typeName.getText() === "Omit" &&
       type.typeArguments?.length === 2
     ) {
       const excluded =
         type.typeArguments[1]
-          .getText(source)
+          .getText()
           .match(/"([^"]+)"/g)
           ?.map((x) => x.slice(1, -1)) ?? [];
       return members(type.typeArguments[0]).filter(
-        (p) => !excluded.includes(p.name.getText(source)),
+        (p) => !excluded.includes(p.name.getText()),
       );
     }
     return [];
@@ -114,32 +167,54 @@ for (const file of await readdir(root)) {
   for (const node of source.statements)
     if (
       ts.isTypeAliasDeclaration(node) &&
-      /Props$|^ToastOptions$|^FieldState$|^SelectOption$|^SegmentedControlOption$/.test(
+      /Props$|^ToastOptions$|^FieldState$|^SelectOption$|^SegmentedControlOption$|^ToggleGroupOption$/.test(
         node.name.text,
       )
     ) {
       const name = node.name.text.replace(/Props$/, "");
       const props = members(node.type).map((p) => ({
-        name: p.name.getText(source),
-        type: p.type?.getText(source) ?? "unknown",
+        name: p.name.getText(),
+        type: p.type?.getText() ?? "unknown",
         required: !p.questionToken,
-        default: defaults[name]?.[p.name.getText(source)] ?? "—",
+        default: defaults[name]?.[p.name.getText()] ?? "—",
         description:
-          p.name.getText(source) === "value" &&
-          ["RadioGroupItem", "SelectOption", "SegmentedControlOption"].includes(
-            name,
-          )
+          p.name.getText() === "value" &&
+          [
+            "RadioGroupItem",
+            "SelectOption",
+            "SegmentedControlOption",
+            "ToggleGroupOption",
+          ].includes(name)
             ? ["Option identifier.", "选项标识。"]
-            : p.name.getText(source) === "value" &&
+            : p.name.getText() === "value" &&
                 ["TabsTrigger", "TabsContent"].includes(name)
               ? ["Matching panel identifier.", "匹配的面板标识。"]
-              : p.name.getText(source) === "value" && name === "Progress"
+              : p.name.getText() === "value" && name === "Progress"
                 ? ["Completed fraction from 0 to 1.", "0 至 1 的完成比例。"]
-                : (descriptions[p.name.getText(source)] ?? [
+                : (descriptions[p.name.getText()] ?? [
                     "Value for this part.",
                     "此部分的值。",
                   ]),
       }));
+      for (const row of props) {
+        if (row.type === "keyof typeof nativeControl") {
+          row.type = '"xs" | "sm" | "default" | "lg"';
+          row.description = [
+            "Minimum height is 44pt for xs and sm, 48pt for default, and 52pt for lg.",
+            "最小高度为 xs 和 sm 的 44pt、default 的 48pt、lg 的 52pt。",
+          ];
+        }
+        if (name === "AvatarGroup" && row.name === "max")
+          row.description = [
+            "Maximum visible people, clamped to at least one.",
+            "最多显示的成员人数，至少为一。",
+          ];
+        if (name === "PaginationDots" && row.name === "value")
+          row.description = [
+            "Current zero-based page index.",
+            "当前页索引，从零开始。",
+          ];
+      }
       const forwarded = {
         disabled: "boolean",
         editable: "boolean",
@@ -165,7 +240,7 @@ for (const file of await readdir(root)) {
         extends: ts.isIntersectionTypeNode(node.type)
           ? node.type.types
               .filter((x) => !ts.isTypeLiteralNode(x))
-              .map((x) => x.getText(source))
+              .map((x) => x.getText())
               .join(" & ")
           : "",
         props,
@@ -180,12 +255,12 @@ for (const file of await readdir(root)) {
       node.parameters[0]?.type
     ) {
       const type = node.parameters[0].type;
-      if (type.getText(source) === "ViewProps" || ts.isTypeLiteralNode(type))
+      if (type.getText() === "ViewProps" || ts.isTypeLiteralNode(type))
         groups.push({
           name: node.name.text,
           extends: ts.isTypeLiteralNode(type) ? "" : "ViewProps",
           props:
-            type.getText(source) === "ViewProps"
+            type.getText() === "ViewProps"
               ? [
                   {
                     name: "children",
@@ -216,12 +291,11 @@ for (const file of await readdir(root)) {
                   },
                 ]
               : members(type).map((p) => ({
-                  name: p.name.getText(source),
-                  type: p.type.getText(source),
+                  name: p.name.getText(),
+                  type: p.type.getText(),
                   required: !p.questionToken,
-                  default:
-                    defaults[node.name.text]?.[p.name.getText(source)] ?? "—",
-                  description: descriptions[p.name.getText(source)] ?? [
+                  default: defaults[node.name.text]?.[p.name.getText()] ?? "—",
+                  description: descriptions[p.name.getText()] ?? [
                     "Content to render.",
                     "要显示的内容。",
                   ],

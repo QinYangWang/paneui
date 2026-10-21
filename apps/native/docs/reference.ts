@@ -2,6 +2,86 @@ export const reference: Record<
   string,
   { usage: readonly [string, string]; accessibility: readonly [string, string] }
 > = {
+  accordion: {
+    usage: [
+      'import { Accordion, Text } from "@paneui/ui-native";\n\n<Accordion title="Delivery"><Text>Arrives in three days.</Text></Accordion>',
+      'import { Accordion, Text } from "@paneui/ui-native";\n\n<Accordion title="配送"><Text>三天内送达。</Text></Accordion>',
+    ],
+    accessibility: [
+      "Exposes expanded and disabled button states. Tab focuses the heading; Enter or Space toggles it on web. Closed content is unmounted, so keep persistent form state outside. No reveal motion is used.",
+      "提供按钮展开和禁用状态。网页端用 Tab 聚焦标题，Enter 或空格切换。收起后卸载内容，需保留的表单状态应放在外部。不使用展开动画。",
+    ],
+  },
+  "toggle-group": {
+    usage: [
+      'import { ToggleGroup } from "@paneui/ui-native";\n\n<ToggleGroup label="Days" options={[{value: "mon", label: "Monday"}, {value: "fri", label: "Friday"}]} />',
+      'import { ToggleGroup } from "@paneui/ui-native";\n\n<ToggleGroup label="日期" options={[{value: "mon", label: "周一"}, {value: "fri", label: "周五"}]} />',
+    ],
+    accessibility: [
+      "Each option exposes a named button with selected and disabled state. Tab visits enabled choices and Enter or Space toggles on web. Multiple choices may be selected, including none. Sizes keep targets at least 44pt.",
+      "每个选项提供具名按钮及选中、禁用状态。网页端 Tab 访问可用选项，Enter 或空格切换。可多选，也可全部取消。所有尺寸触控区域至少为 44pt。",
+    ],
+  },
+  "avatar-group": {
+    usage: [
+      'import { AvatarGroup } from "@paneui/ui-native";\n\n<AvatarGroup people={[{name: "Maya Chen"}, {name: "Alex Lin"}]} overflowLabel={count => `${count} more people`} />',
+      'import { AvatarGroup } from "@paneui/ui-native";\n\n<AvatarGroup people={[{name: "陈晓"}, {name: "林安"}]} overflowLabel={count => `另外 ${count} 人`} />',
+    ],
+    accessibility: [
+      "Avatars announce each person’s name. Supply a localized overflowLabel for hidden people. The group wraps rather than overlaps and contains no actions. max is clamped to at least one.",
+      "头像播报各成员姓名。请提供本地化 overflowLabel 说明隐藏人数。分组换行而不重叠，不包含操作。max 至少为一。",
+    ],
+  },
+  "empty-state": {
+    usage: [
+      'import { EmptyState } from "@paneui/ui-native";\n\n<EmptyState title="No files yet" description="Add your first file to begin." />',
+      'import { EmptyState } from "@paneui/ui-native";\n\n<EmptyState title="暂无文件" description="添加第一个文件以开始。" />',
+    ],
+    accessibility: [
+      "The title exposes a heading. Child actions remain separately focusable. Describe a next step in the message or provide an action. The component does not announce content changes automatically.",
+      "标题提供标题语义，子操作保留独立焦点。请在说明中提供下一步，或添加操作。组件不会自动播报内容变化。",
+    ],
+  },
+  stat: {
+    usage: [
+      'import { Stat } from "@paneui/ui-native";\n\n<Stat label="Completed" value="128" />',
+      'import { Stat } from "@paneui/ui-native";\n\n<Stat label="已完成" value="128" />',
+    ],
+    accessibility: [
+      "Label, value and description remain readable text. Format values for the current locale before passing them. Include units in the value or label. Use a surrounding live region when updates need announcements.",
+      "标签、数值和说明保持可读文字。传入前请按当前语言格式化数值。在数值或标签中说明单位。需要播报更新时，请在外部添加实时区域。",
+    ],
+  },
+  "search-field": {
+    usage: [
+      'import { SearchField } from "@paneui/ui-native";\n\n<SearchField label="Search files" clearLabel="Clear search" />',
+      'import { SearchField } from "@paneui/ui-native";\n\n<SearchField label="搜索文件" clearLabel="清除搜索" />',
+    ],
+    accessibility: [
+      "The visible label names the search field. A localized clear button appears when text is present. Clearing sends an empty string to onChangeText and returns focus to the field. Filtering and submit handling belong to the caller; disabled editing also disables clearing.",
+      "可见标签为搜索框命名。有文字时显示本地化清除按钮。清除时 onChangeText 接收空字符串，焦点返回输入框。筛选和提交由调用方处理；禁止编辑时也禁止清除。",
+    ],
+  },
+  stepper: {
+    usage: [
+      'import { Stepper } from "@paneui/ui-native";\n\n<Stepper label="Quantity" decrementLabel="Decrease quantity" incrementLabel="Increase quantity" />',
+      'import { Stepper } from "@paneui/ui-native";\n\n<Stepper label="数量" decrementLabel="减少数量" incrementLabel="增加数量" />',
+    ],
+    accessibility: [
+      "Provide localized names for both buttons. Bounds disable the corresponding action; the value uses a polite live region. Values are clamped and fractional steps are supported. Bounds must be finite and ordered; step must be positive. All sizes keep at least 44pt targets.",
+      "请为两个按钮提供本地化名称。到达边界时禁用对应操作，数值通过礼貌实时区域播报。数值限制在范围内并支持小数步长。边界须为有限且有序的数值，步长须为正数。所有尺寸触控区域至少为 44pt。",
+    ],
+  },
+  "pagination-dots": {
+    usage: [
+      'import * as React from "react";\nimport { PaginationDots } from "@paneui/ui-native";\n\nfunction Pages() {\n  const [page, setPage] = React.useState(0);\n  return <PaginationDots count={4} value={page} onValueChange={setPage} pageLabel={(page, total) => `Page ${page} of ${total}`} />;\n}',
+      'import * as React from "react";\nimport { PaginationDots } from "@paneui/ui-native";\n\nfunction Pages() {\n  const [page, setPage] = React.useState(0);\n  return <PaginationDots count={4} value={page} onValueChange={setPage} pageLabel={(page, total) => `第 ${page} 页，共 ${total} 页`} />;\n}',
+    ],
+    accessibility: [
+      "Values are zero-based; pageLabel receives a one-based page and the total. Each dot exposes selected and disabled button states with a target of at least 44pt. Tab then Enter or Space selects on web. Keep sequences short; content navigation belongs to the caller.",
+      "value 从零开始，pageLabel 接收从一开始的页码和总数。每个圆点提供选中、禁用按钮状态，触控区域至少为 44pt。网页端用 Tab 后按 Enter 或空格选择。请用于短序列，内容切换由调用方处理。",
+    ],
+  },
   "theme-provider": {
     usage: [
       'import { ThemeProvider, Button } from "@paneui/ui-native";\n\n<ThemeProvider><Button>Continue</Button></ThemeProvider>',

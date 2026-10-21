@@ -37,3 +37,7 @@ For the full component-page browser check, run
 `node tooling/scripts/native-component-pages-smoke.mjs` against the static export.
 `NATIVE_DOCS_URL` selects the deployment path. Set `SCREENSHOT_DIR` to capture key
 pages at both viewport widths, themes and languages and check overflow on all pages.
+
+Run `node tooling/scripts/native-gaps-smoke.mjs` for the added component interactions,
+minimum touch targets and RTL layout. Set `SCREENSHOT_DIR` to save all eight pages
+at both viewport widths, in each language and theme.

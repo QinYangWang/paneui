@@ -17,7 +17,7 @@ Use platform-supported elevation recipes rather than copying CSS shadow strings.
 ## Density and text
 
 Native controls have a 44px minimum touch target, with 48px as the default. Use 52px for
-a large control. A smaller visible glyph can sit inside that target. Hit slop is an
+a large control. The xs and sm sizes both keep the 44px minimum. A smaller visible glyph can sit inside that target. Hit slop is an
 explicit exception: verify the effective bounds and ensure adjacent targets do not overlap.
 Use 16px field and label text, 14px supporting text and 12px captions. Headings use the
 shared Native type scale. Medium controls, semibold titles, normal body text.

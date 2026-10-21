@@ -25,6 +25,7 @@ export function Button({ children, variant = "primary", size = "default", disabl
       style={(state) => [
         {
           minHeight: nativeControl[size],
+          minWidth: nativeControl[size],
           paddingHorizontal: spacing.lg,
           paddingVertical: spacing.sm,
           borderRadius: radius.lg,

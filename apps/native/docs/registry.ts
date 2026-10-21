@@ -1,3 +1,27 @@
+import AccordionDefaultExample from "./examples/accordion/default";
+import AccordionStatesExample from "./examples/accordion/states";
+import AccordionCompositionExample from "./examples/accordion/composition";
+import ToggleGroupDefaultExample from "./examples/toggle-group/default";
+import ToggleGroupStatesExample from "./examples/toggle-group/states";
+import ToggleGroupCompositionExample from "./examples/toggle-group/composition";
+import AvatarGroupDefaultExample from "./examples/avatar-group/default";
+import AvatarGroupStatesExample from "./examples/avatar-group/states";
+import AvatarGroupCompositionExample from "./examples/avatar-group/composition";
+import EmptyStateDefaultExample from "./examples/empty-state/default";
+import EmptyStateStatesExample from "./examples/empty-state/states";
+import EmptyStateCompositionExample from "./examples/empty-state/composition";
+import StatDefaultExample from "./examples/stat/default";
+import StatStatesExample from "./examples/stat/states";
+import StatCompositionExample from "./examples/stat/composition";
+import SearchFieldDefaultExample from "./examples/search-field/default";
+import SearchFieldStatesExample from "./examples/search-field/states";
+import SearchFieldCompositionExample from "./examples/search-field/composition";
+import StepperDefaultExample from "./examples/stepper/default";
+import StepperStatesExample from "./examples/stepper/states";
+import StepperCompositionExample from "./examples/stepper/composition";
+import PaginationDotsDefaultExample from "./examples/pagination-dots/default";
+import PaginationDotsStatesExample from "./examples/pagination-dots/states";
+import PaginationDotsCompositionExample from "./examples/pagination-dots/composition";
 import ThemeDefaultExample from "./examples/theme-provider/default";
 import ThemeStatesExample from "./examples/theme-provider/states";
 import ThemeCompositionExample from "./examples/theme-provider/composition";
@@ -100,6 +124,190 @@ export type NativeComponentDoc = {
 };
 
 const componentDocs = [
+  {
+    name: "Accordion",
+    slug: "accordion",
+    category: "Display",
+    lede: ["Reveals content beneath a heading.", "展开标题下的内容。"],
+    examples: [
+      {
+        id: "default",
+        title: ["Default", "默认"],
+        Example: AccordionDefaultExample,
+      },
+      {
+        id: "states",
+        title: ["States", "状态"],
+        Example: AccordionStatesExample,
+      },
+      {
+        id: "composition",
+        title: ["Composition", "组合"],
+        Example: AccordionCompositionExample,
+      },
+    ],
+  },
+  {
+    name: "ToggleGroup",
+    slug: "toggle-group",
+    category: "Forms",
+    lede: ["Selects several choices from a group.", "从分组中选择多个选项。"],
+    examples: [
+      {
+        id: "default",
+        title: ["Default", "默认"],
+        Example: ToggleGroupDefaultExample,
+      },
+      {
+        id: "states",
+        title: ["States", "状态"],
+        Example: ToggleGroupStatesExample,
+      },
+      {
+        id: "composition",
+        title: ["Composition", "组合"],
+        Example: ToggleGroupCompositionExample,
+      },
+    ],
+  },
+  {
+    name: "AvatarGroup",
+    slug: "avatar-group",
+    category: "Display",
+    lede: ["Shows the people in a shared space.", "显示共享空间中的成员。"],
+    examples: [
+      {
+        id: "default",
+        title: ["Default", "默认"],
+        Example: AvatarGroupDefaultExample,
+      },
+      {
+        id: "states",
+        title: ["States", "状态"],
+        Example: AvatarGroupStatesExample,
+      },
+      {
+        id: "composition",
+        title: ["Composition", "组合"],
+        Example: AvatarGroupCompositionExample,
+      },
+    ],
+  },
+  {
+    name: "EmptyState",
+    slug: "empty-state",
+    category: "Display",
+    lede: [
+      "Helps people act when content is missing.",
+      "在内容为空时引导操作。",
+    ],
+    examples: [
+      {
+        id: "default",
+        title: ["Default", "默认"],
+        Example: EmptyStateDefaultExample,
+      },
+      {
+        id: "states",
+        title: ["States", "状态"],
+        Example: EmptyStateStatesExample,
+      },
+      {
+        id: "composition",
+        title: ["Composition", "组合"],
+        Example: EmptyStateCompositionExample,
+      },
+    ],
+  },
+  {
+    name: "Stat",
+    slug: "stat",
+    category: "Display",
+    lede: ["Shows a measurement with its context.", "显示数值及其含义。"],
+    examples: [
+      {
+        id: "default",
+        title: ["Default", "默认"],
+        Example: StatDefaultExample,
+      },
+      { id: "states", title: ["States", "状态"], Example: StatStatesExample },
+      {
+        id: "composition",
+        title: ["Composition", "组合"],
+        Example: StatCompositionExample,
+      },
+    ],
+  },
+  {
+    name: "SearchField",
+    slug: "search-field",
+    category: "Forms",
+    lede: ["Finds content with a text query.", "通过文字查找内容。"],
+    examples: [
+      {
+        id: "default",
+        title: ["Default", "默认"],
+        Example: SearchFieldDefaultExample,
+      },
+      {
+        id: "states",
+        title: ["States", "状态"],
+        Example: SearchFieldStatesExample,
+      },
+      {
+        id: "composition",
+        title: ["Composition", "组合"],
+        Example: SearchFieldCompositionExample,
+      },
+    ],
+  },
+  {
+    name: "Stepper",
+    slug: "stepper",
+    category: "Forms",
+    lede: ["Adjusts a quantity within a range.", "在范围内调整数量。"],
+    examples: [
+      {
+        id: "default",
+        title: ["Default", "默认"],
+        Example: StepperDefaultExample,
+      },
+      {
+        id: "states",
+        title: ["States", "状态"],
+        Example: StepperStatesExample,
+      },
+      {
+        id: "composition",
+        title: ["Composition", "组合"],
+        Example: StepperCompositionExample,
+      },
+    ],
+  },
+  {
+    name: "PaginationDots",
+    slug: "pagination-dots",
+    category: "Navigation",
+    lede: ["Chooses a page in a short sequence.", "选择短序列中的页面。"],
+    examples: [
+      {
+        id: "default",
+        title: ["Default", "默认"],
+        Example: PaginationDotsDefaultExample,
+      },
+      {
+        id: "states",
+        title: ["States", "状态"],
+        Example: PaginationDotsStatesExample,
+      },
+      {
+        id: "composition",
+        title: ["Composition", "组合"],
+        Example: PaginationDotsCompositionExample,
+      },
+    ],
+  },
+
   {
     name: "ThemeProvider",
     slug: "theme-provider",
