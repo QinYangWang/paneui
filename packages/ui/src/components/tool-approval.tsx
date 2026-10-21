@@ -253,7 +253,7 @@ function ToolApproval({
       data-decision={decision ?? "pending"}
       data-status={pending ? undefined : (status ?? undefined)}
       className={cn(
-        "@container/tool-approval frame-3xl frame-inset-2 w-full overflow-hidden text-ui text-foreground ring-1 ring-border ring-inset",
+        "@container/tool-approval frame-3xl frame-inset-2 w-full overflow-hidden bg-card text-ui text-foreground ring-1 ring-border ring-inset",
         className
       )}
       {...props}
