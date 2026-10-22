@@ -129,6 +129,7 @@ export function TabsTrigger({ value, children, disabled = false, style, onPress,
     <Pressable
       {...props}
       accessibilityRole="tab"
+      aria-selected={selected}
       accessibilityState={{ ...accessibilityState, selected, disabled }}
       disabled={disabled}
       onPress={(event) => {

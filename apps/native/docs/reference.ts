@@ -198,8 +198,8 @@ export const reference: Record<
       'import { Slider } from "@paneui/ui-native";\n\n<Slider label="音量" defaultValue={40} step={5} />',
     ],
     accessibility: [
-      "Exposes an adjustable role with minimum, maximum and current value. Device accessibility actions increment or decrement by step. Pointer dragging works on web; keyboard arrow adjustment is not implemented.",
-      "提供可调整角色以及最小、最大和当前值。设备无障碍操作可按 step 增减。网页端支持指针拖动；尚未实现键盘方向键调整。",
+      "Exposes an adjustable role with minimum, maximum and current value. Device accessibility actions increment or decrement by step. On web, arrow keys adjust the value; Home and End jump to the bounds.",
+      "提供可调整角色以及最小、最大和当前值。设备无障碍操作可按 step 增减。网页端支持指针拖动和方向键调整，Home 和 End 跳到边界。",
     ],
   },
   alert: {

@@ -43,6 +43,9 @@ export function Progress({ value = 0, tone = "primary", label = "Progress", styl
       {...props}
       accessibilityRole="progressbar"
       accessibilityLabel={label}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(clamped * 100)}
       accessibilityValue={{ min: 0, max: 100, now: Math.round(clamped * 100) }}
       style={[{ height: spacing.sm, borderRadius: radius.sm, backgroundColor: colors.muted, overflow: "hidden" }, style]}
     >
