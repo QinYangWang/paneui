@@ -1,5 +1,5 @@
 /*
- * paneui icon set. Rounded outline icons on a 24x24 grid (the default style).
+ * PaneUI icon set. Rounded outline icons on a 24x24 grid (the default style).
  *
  * Drawing rules: artwork spans about 2-22 (a full circle is r=10); every shape
  * uses `line` (stroke 1.75, round caps and joins, no fill); `dot` only for small
@@ -988,7 +988,7 @@ export const ClipboardListIcon = (p: IconProps) => (
 // recolour it; outside a theme it falls back to the text colour.
 const accent = { fill: "var(--primary, currentColor)" } as const;
 
-/** The paneui mark: four panes turning around a square. The top-right pane is the accent. */
+/** The PaneUI mark: four panes turning around a square. The top-right pane is the accent. */
 export const PaneuiLogoIcon = (p: IconProps) => (
   <Icon {...p}>
     <rect x="2" y="2" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
@@ -998,7 +998,7 @@ export const PaneuiLogoIcon = (p: IconProps) => (
   </Icon>
 );
 
-/** The paneui mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
+/** The PaneUI mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
 export const PaneuiLogoMonoIcon = (p: IconProps) => (
   <Icon {...p}>
     <rect x="2" y="2" width="11.75" height="6.75" rx="1.25" fill="currentColor" />

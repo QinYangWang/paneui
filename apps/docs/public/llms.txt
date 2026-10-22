@@ -1,4 +1,4 @@
-# paneui/ui
+# PaneUI
 
 > React components you own and edit.
 
@@ -17,7 +17,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Customize](https://paneui.dev/docs/colors.md): Choose an accent and corner radius.
 - [CLI & registry](https://paneui.dev/docs/cli.md): Find, inspect and install components from the command line.
 - [Design skill](https://paneui.dev/docs/skill.md): Design rules and checks for consistent interfaces.
-- [Changelog](https://paneui.dev/docs/changelog.md): Updates to paneui.
+- [Changelog](https://paneui.dev/docs/changelog.md): Updates to PaneUI.
 
 ## Foundations
 
@@ -94,7 +94,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Card](https://paneui.dev/docs/card.md): Groups related content and actions on one surface. JSON: https://paneui.dev/r/card.json
 - [Carousel](https://paneui.dev/docs/carousel.md): Scrolls through slides one at a time. JSON: https://paneui.dev/r/carousel.json
 - [Collapsible](https://paneui.dev/docs/collapsible.md): Shows and hides a section of content. JSON: https://paneui.dev/r/collapsible.json
-- [Cover Art](https://paneui.dev/docs/cover-art.md): Generated cover images for posts and cards, drawn in theme colours. JSON: https://paneui.dev/r/cover-art.json
+- [Cover Art](https://paneui.dev/docs/cover-art.md): Cover images for posts and cards. JSON: https://paneui.dev/r/cover-art.json
 - [Empty State](https://paneui.dev/docs/empty-state.md): Explains an empty view and what to do next. JSON: https://paneui.dev/r/empty-state.json
 - [Kbd](https://paneui.dev/docs/kbd.md): Shows a keyboard key or shortcut. JSON: https://paneui.dev/r/kbd.json
 - [Loader](https://paneui.dev/docs/loader.md): Shows that something is loading. JSON: https://paneui.dev/r/loader.json

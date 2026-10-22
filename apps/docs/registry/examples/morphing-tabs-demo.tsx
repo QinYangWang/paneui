@@ -12,7 +12,7 @@ const initial: MorphingTabsItem[] = [
     icon: <FileIcon />,
     content: (
       <div className="space-y-2 text-sm">
-        <p className="font-medium">paneui</p>
+        <p className="font-medium">PaneUI</p>
         <p className="text-muted-foreground">Soft, slightly skeuomorphic components with headless primitives and spring motion.</p>
       </div>
     ),

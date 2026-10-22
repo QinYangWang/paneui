@@ -11,7 +11,7 @@ export default function MenuInset() {
           <MenuLabel inset>Switch workspace</MenuLabel>
           <MenuItem>
             <CheckIcon />
-            paneui
+            PaneUI
           </MenuItem>
           <MenuItem inset>Novon</MenuItem>
           <MenuItem inset>Personal</MenuItem>

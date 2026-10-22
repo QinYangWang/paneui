@@ -210,7 +210,7 @@ export default function CliPage() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="the-registry">The registry</GuideH2>
         <p className="text-muted-foreground">
-          paneui is published as one static JSON file per item at <Code>{SITE_URL}/r/&lt;name&gt;.json</Code>. Register
+          PaneUI is published as one static JSON file per item at <Code>{SITE_URL}/r/&lt;name&gt;.json</Code>. Register
           the namespace so every command below accepts short names like <Code>{ns}/button</Code>.
         </p>
         <DocsCode code={config} filename="components.json" language="json" />

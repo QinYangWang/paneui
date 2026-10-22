@@ -1674,7 +1674,7 @@
       "name": "cover-art",
       "type": "registry:ui",
       "title": "Cover Art",
-      "description": "Generated cover images for posts and cards, drawn in theme colours.",
+      "description": "Cover images for posts and cards.",
       "dependencies": [],
       "registryDependencies": [
         "@paneui/theme",

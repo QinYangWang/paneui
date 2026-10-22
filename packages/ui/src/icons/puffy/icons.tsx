@@ -1,5 +1,5 @@
 /*
- * paneui icon set. Puffy, single-colour icons on an 18x18 grid.
+ * PaneUI icon set. Puffy, single-colour icons on an 18x18 grid.
  *
  * Drawing rules: ~2.5px padding; filled shapes use `puff` (stroke 1.5, round
  * join, fill currentColor), open glyphs use `line` (stroke 1.6, round caps and
@@ -1088,7 +1088,7 @@ export const ClipboardListIcon = (p: IconProps) => (
 
 /* ───────────────────────── Brand marks (puff) ───────────────────────── */
 
-/** The paneui mark: four panes turning around a square. The top-right pane is the accent. */
+/** The PaneUI mark: four panes turning around a square. The top-right pane is the accent. */
 export const PaneuiLogoIcon = (p: IconProps) => (
   <Icon {...p}>
     <rect x="1" y="1" width="9.4" height="5.4" rx="1" fill="currentColor" />
@@ -1098,7 +1098,7 @@ export const PaneuiLogoIcon = (p: IconProps) => (
   </Icon>
 );
 
-/** The paneui mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
+/** The PaneUI mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
 export const PaneuiLogoMonoIcon = (p: IconProps) => (
   <Icon {...p}>
     <rect x="1" y="1" width="9.4" height="5.4" rx="1" fill="currentColor" />

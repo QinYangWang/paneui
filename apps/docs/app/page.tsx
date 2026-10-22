@@ -5,7 +5,7 @@ import { LandingPage } from "@/components/landing/landing-page"
 import { getItems } from "@/lib/docs"
 
 export const metadata: Metadata = {
-  title: { absolute: "paneui — React components for Web and Native" },
+  title: { absolute: "PaneUI — React components for Web and Native" },
   description: "React components for Web and Native. The source lands in your app.",
 }
 

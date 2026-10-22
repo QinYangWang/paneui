@@ -13,12 +13,12 @@ import { RouteShell } from "./route-shell"
 import "./fonts.css"
 import "./globals.css"
 
-const OG_IMAGE = { ...ogImageSize, type: "image/png", alt: "paneui — React components" }
+const OG_IMAGE = { ...ogImageSize, type: "image/png", alt: "PaneUI — React components" }
 
 export const metadata: Metadata = {
   // share image URLs are absolute
   metadataBase: new URL(new URL(process.env.SITE_URL ?? "https://paneui.dev").origin),
-  title: { default: "paneui", template: "%s · paneui" },
+  title: { default: "PaneUI", template: "%s · PaneUI" },
   description: "React components you own and edit.",
   // Metadata image URLs don't get the base path, so it is added here.
   openGraph: { images: [{ url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/og.png`, ...OG_IMAGE }] },

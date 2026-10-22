@@ -1,4 +1,4 @@
-# Contributing to paneui
+# Contributing to PaneUI
 
 Thanks for helping out. This file covers setup, where things live, and what to
 run before opening a PR. The design rules live in

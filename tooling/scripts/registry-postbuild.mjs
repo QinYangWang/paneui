@@ -76,7 +76,7 @@ console.log(`registry-postbuild: ${changed} items rewritten (dependencies → ${
   }
   const cats = [...byCat.keys()].sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99))
   const lines = [
-    `# ${registry.name}/ui`,
+    "# PaneUI",
     "",
     `> ${registry.description ?? "A shadcn registry of desktop-density components, agent interfaces and page templates."}`,
     "",

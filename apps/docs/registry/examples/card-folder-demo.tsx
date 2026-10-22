@@ -11,7 +11,7 @@ export default function CardFolderDemo() {
       <CardFolder
         title="Studio expenses"
         brand="Mercury"
-        holder="paneui LLC"
+        holder="PaneUI LLC"
         cardNumber="5412 7534 9821 4821"
         expiry="08/29"
         cvv="317"

@@ -177,6 +177,7 @@ export const examples: Record<string, React.ComponentType> = {
   "context-menu/radio-group": dynamic(() => import("@/registry/examples/context-menu/radio-group"), { ssr: false }),
   "cover-art/rtl": dynamic(() => import("@/registry/examples/cover-art/rtl"), { ssr: false }),
   "cover-art/seed": dynamic(() => import("@/registry/examples/cover-art/seed"), { ssr: false }),
+  "cover-art/sky": dynamic(() => import("@/registry/examples/cover-art/sky"), { ssr: false }),
   "cover-art/tones": dynamic(() => import("@/registry/examples/cover-art/tones"), { ssr: false }),
   "data-table/empty": dynamic(() => import("@/registry/examples/data-table/empty"), { ssr: false }),
   "date-picker/sizes": dynamic(() => import("@/registry/examples/date-picker/sizes"), { ssr: false }),

@@ -7,6 +7,7 @@
  * a small one-time shift.
  */
 export const galleryHeights: Record<string, number> = {
+  "cover-art": 402,
   "command": 333,
   "calendar": 348,
   "carousel": 284,

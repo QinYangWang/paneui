@@ -74,7 +74,7 @@ function Showcase() {
       <KeyboardAvoidingView style={styles.fill} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.page}>
           <View style={styles.header}>
-            <Text variant="heading" accessibilityRole="header">paneui Native</Text>
+            <Text variant="heading" accessibilityRole="header">PaneUI Native</Text>
             <Text tone="muted">Components for your next app.</Text>
             <WebDocsLink />
           </View>

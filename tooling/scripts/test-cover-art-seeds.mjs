@@ -9,15 +9,20 @@ const { outputText } = ts.transpileModule(readFileSync(file, "utf8"), {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX },
 })
 const mod = { exports: {} }
-const stubs = { "@paneui/ui/lib/utils": { cn: (...a) => a.filter(Boolean).join(" ") }, "react/jsx-runtime": { jsx: () => null, jsxs: () => null, Fragment: null } }
+const stubs = { "@paneui/ui/lib/utils": { cn: (...a) => a.filter(Boolean).join(" ") }, "react": { useId: () => "cover-label" }, "react/jsx-runtime": { jsx: (type, props) => ({ type, props }), jsxs: (type, props) => ({ type, props }), Fragment: "fragment" } }
 new Function("module", "exports", "require", outputText)(mod, mod.exports, (id) => stubs[id] ?? {})
-const { coverArtStyle, coverArtVariant } = mod.exports
+const { CoverArt, coverArtStyle, coverArtVariant } = mod.exports
 
 let failed = 0
 const check = (name, ok, detail = "") => {
   console.log(`${ok ? "ok  " : "FAIL"} ${name}${detail ? `  ${detail}` : ""}`)
   if (!ok) failed++
 }
+check("no variant or seed draws sky", CoverArt({}).props["data-variant"] === "sky")
+check("explicit sky wins over seed", CoverArt({ variant: "sky", seed: "post" }).props["data-variant"] === "sky")
+check("explicit zero wins over seed", CoverArt({ variant: 0, seed: "post" }).props["data-variant"] === 0)
+check("empty seed still selects geometric art", typeof CoverArt({ seed: "" }).props["data-variant"] === "number")
+check("seed mapping stays compatible", JSON.stringify(coverArtStyle("plain-text")) === JSON.stringify({ variant: 1, mirror: "none", ramp: 0, pattern: 50827 }))
 const key = (s) => `${s.variant}/${s.mirror}/${s.ramp}`
 
 // The slugs that used to collide on one composition.

@@ -18,7 +18,7 @@ const seed = [
   { id: "1", from: "Mei Lin", initials: "ML", hue: 250, subject: "Pricing page copy, final pass", time: "09:41" },
   { id: "2", from: "Stripe", initials: "S", hue: 280, subject: "Your payout of $1,240 is on its way", time: "08:15" },
   { id: "3", from: "Kenji Sato", initials: "KS", hue: 160, subject: "Dinner Friday? Found a place in Shibuya", time: "Mon" },
-  { id: "4", from: "GitHub", initials: "GH", hue: 20, subject: "[paneui] PR #212 approved", time: "Sun" },
+  { id: "4", from: "GitHub", initials: "GH", hue: 20, subject: "[PaneUI] PR #212 approved", time: "Sun" },
 ]
 
 export default function SwipeableListDemo() {

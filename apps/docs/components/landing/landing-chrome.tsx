@@ -25,11 +25,11 @@ export function LandingHeader() {
       <div className="pointer-events-auto mx-auto flex h-14 max-w-5xl items-center justify-between gap-2 rounded-full bg-card/70 ps-5 pe-2 shadow-surface backdrop-blur-xl">
         <Link
           href="/"
-          aria-label={t({ en: "paneui home", zh: "paneui 首页" })}
+          aria-label={t({ en: "PaneUI home", zh: "PaneUI 首页" })}
           className="flex items-center gap-2 rounded-sm text-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           <PaneuiLogoIcon size={22} />
-          paneui
+          PaneUI
         </Link>
         <nav aria-label={t({ en: "Main", zh: "主导航" })} className="hidden items-center gap-1 md:flex">
           <Link href="/docs" className={navLink}>
@@ -89,7 +89,7 @@ export function LandingFooter() {
     <footer className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 pt-10 pb-12 sm:flex-row sm:items-center sm:justify-between sm:px-8">
       <span className="flex items-center gap-2 font-semibold">
         <PaneuiLogoIcon size={18} />
-        paneui
+        PaneUI
         <span className="ms-2 text-ui font-normal text-muted-foreground">{t({ en: "MIT License", zh: "MIT 许可" })}</span>
       </span>
       <nav aria-label={t({ en: "Footer", zh: "页脚" })}>

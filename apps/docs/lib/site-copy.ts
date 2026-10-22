@@ -73,7 +73,7 @@ export const SITE_COPY: Record<string, string> = {
   "Component pages, templates and lint rules": "组件文档、模板与检查规则",
   "The library grows: motion, agents, charts and blocks": "动效、助手、图表与组合组件",
   "First release": "首次发布",
-  "The paneui CLI": "paneui 命令行工具", "Install by URL": "通过链接安装",
+  "The PaneUI CLI": "PaneUI 命令行工具", "Install by URL": "通过链接安装",
   Copy: "复制", "Copy command": "复制命令", Download: "下载",
   "Getting started": "开始使用", Docs: "文档", Components: "组件", Templates: "模板",
   Foundations: "基础", Forms: "表单", Overlays: "浮层", Display: "展示",

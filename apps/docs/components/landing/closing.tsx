@@ -21,7 +21,7 @@ export function Quote({ children, align = "start" }: { children: React.ReactNode
           <span className="flex size-10 items-center justify-center rounded-full bg-card shadow-raised">
             <PaneuiLogoIcon size={20} />
           </span>
-          paneui
+          PaneUI
         </figcaption>
         <span aria-hidden className="hidden h-px w-16 shrink-0 bg-border sm:block" />
         <blockquote className="lp-display text-balance max-w-2xl text-2xl text-foreground/85 sm:text-3xl">{children}</blockquote>
