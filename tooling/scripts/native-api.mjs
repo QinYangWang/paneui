@@ -60,6 +60,8 @@ const descriptions = {
   duration: ["Time before dismissal in milliseconds.", "自动关闭前的毫秒数。"],
   closeLabel: ["Accessible dismissal label.", "关闭操作的无障碍名称。"],
   doneLabel: ["Visible dismissal text.", "关闭操作的可见文字。"],
+  style: ["Visual style; defaults to the original appearance.", "视觉样式，默认保留原有外观。"],
+  headingFont: ["Registered heading font family.", "已注册的标题字体名称。"],
   mode: [
     "Theme override; otherwise follows the system.",
     "指定主题，默认跟随系统。",
@@ -197,6 +199,7 @@ for (const file of await readdir(root)) {
                   ]),
       }));
       for (const row of props) {
+        if (row.type === "ThemeStyle") row.type = '"default" | "paper"';
         if (row.type === "keyof typeof nativeControl") {
           row.type = '"xs" | "sm" | "default" | "lg"';
           row.description = [

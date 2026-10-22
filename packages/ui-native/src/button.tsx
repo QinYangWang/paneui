@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Pressable, Text, type PressableProps } from "react-native"
-import { nativeControl, radius, spacing, typography } from "@paneui/tokens"
+import { nativeControl, spacing, typography } from "@paneui/tokens"
 
 import { useTheme } from "./theme"
 
@@ -11,7 +11,7 @@ export type ButtonProps = Omit<PressableProps, "children"> & {
 }
 
 export function Button({ children, variant = "primary", size = "default", disabled = false, style, onFocus, onBlur, accessibilityState, ...props }: ButtonProps) {
-  const { colors } = useTheme()
+  const { colors, controlRadius } = useTheme()
   const [focused, setFocused] = React.useState(false)
   const foreground = variant === "primary" ? colors.primaryForeground : variant === "destructive" ? colors.destructiveForeground : colors.foreground
   return (
@@ -28,7 +28,7 @@ export function Button({ children, variant = "primary", size = "default", disabl
           minWidth: nativeControl[size],
           paddingHorizontal: spacing.lg,
           paddingVertical: spacing.sm,
-          borderRadius: radius.lg,
+          borderRadius: controlRadius,
           borderWidth: 2,
           borderColor: focused ? colors.ring : "transparent",
           alignItems: "center",

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { AccessibilityInfo, Animated, Text, View } from "react-native"
-import { radius, spacing, typography } from "@paneui/tokens"
+import { spacing, typography } from "@paneui/tokens"
 
 import { useTheme } from "./theme"
 
@@ -45,7 +45,7 @@ function useReducedMotion() {
 }
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
-  const { colors, scheme } = useTheme()
+  const { headingFont, shadows, colors, scheme, radius } = useTheme()
   const reduced = useReducedMotion()
   const [toast, setToast] = React.useState<ToastItem | null>(null)
   const opacity = React.useRef(new Animated.Value(0)).current
@@ -114,11 +114,12 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               shadowOpacity: 0.15,
               shadowRadius: spacing.lg,
               elevation: spacing.xs,
+              ...shadows.surface,
             }}
           >
             {tone ? <View style={{ width: spacing.sm, height: spacing.sm, borderRadius: spacing.sm / 2, backgroundColor: tone }} /> : null}
             <View style={{ gap: spacing.xs }}>
-              <Text style={[typography.body, { color: colors.foreground, fontWeight: "600" }]}>{toast.title}</Text>
+              <Text style={[typography.body, { color: colors.foreground, fontFamily: headingFont, fontWeight: "600" }]}>{toast.title}</Text>
               {toast.description ? <Text style={[typography.supporting, { color: colors.mutedForeground }]}>{toast.description}</Text> : null}
             </View>
           </Animated.View>

@@ -75,19 +75,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Fonts (Inter, Noto Sans SC, JetBrains Mono, Newsreader, Noto Serif SC)
+## Fonts (Inter, Noto Sans SC, JetBrains Mono, Newsreader, Noto Serif SC, Source Serif 4)
 
 The theme's font stacks name these typefaces. The docs site and the `fonts` registry item
 install them from npm as the Fontsource packages (`@fontsource-variable/inter`,
 `@fontsource-variable/noto-sans-sc`, `@fontsource-variable/jetbrains-mono`,
-`@fontsource-variable/newsreader`, `@fontsource-variable/noto-serif-sc`); the font files are not
-vendored or modified. All five are licensed under the SIL Open Font License, Version 1.1
+`@fontsource-variable/newsreader`, `@fontsource-variable/noto-serif-sc`,
+`@fontsource-variable/source-serif-4`); the font files are not
+vendored or modified. These fonts are licensed under the SIL Open Font License, Version 1.1
 (https://openfontlicense.org); each package ships the full licence text in its `LICENSE` file.
 
 - Inter: Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
 - Noto Sans SC and Noto Serif SC: Copyright Google Inc. (https://github.com/notofonts/noto-cjk)
 - JetBrains Mono: Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
 - Newsreader: Copyright 2020 The Newsreader Project Authors (https://github.com/productiontype/Newsreader)
+
+- Source Serif 4: the installed package ships its SIL Open Font License in `LICENSE`.
 
 ## @pierre/diffs (runtime dependency of `file-diff`)
 
@@ -311,3 +314,11 @@ SOFTWARE.
 **Trademarks.** OpenAI and xAI and their logos are trademarks of their owners. The MIT licence covers
 the drawings as published in the package, not the marks: it grants no trademark rights and implies no
 endorsement or affiliation. Follow each owner's brand guidelines when you use a logo.
+
+## Traditional Chinese colour anchors
+
+Paper uses seven named colour values from the GUSCSS / Traditional-Chinese-Colors
+dataset by imoyao (https://github.com/imoyao/GUSCSS and
+https://github.com/imoyao/Traditional-Chinese-Colors). Only colour names, pinyin
+and hexadecimal values are retained in `tooling/fixtures/paper-anchors.json`;
+no descriptions, artwork or implementation code are copied.

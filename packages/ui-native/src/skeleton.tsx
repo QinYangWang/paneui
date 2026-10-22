@@ -1,6 +1,6 @@
 import * as React from "react"
 import { AccessibilityInfo, Animated, type DimensionValue, type ViewProps } from "react-native"
-import { radius, spacing } from "@paneui/tokens"
+import { spacing } from "@paneui/tokens"
 
 import { useTheme } from "./theme"
 
@@ -27,7 +27,7 @@ function useReducedMotion() {
 }
 
 export function Skeleton({ width = "100%", height = spacing["2xl"], circle = false, style, ...props }: SkeletonProps) {
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   const reduced = useReducedMotion()
   const opacity = React.useRef(new Animated.Value(1)).current
   React.useEffect(() => {

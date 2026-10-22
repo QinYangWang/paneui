@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Modal, Pressable, Text, View } from "react-native"
-import { radius, spacing, typography } from "@paneui/tokens"
+import { spacing, typography } from "@paneui/tokens"
 
 import { useTheme } from "./theme"
 
@@ -15,7 +15,7 @@ export type DialogProps = {
 }
 
 export function Dialog({ closeLabel = "Close dialog", open, defaultOpen = false, onOpenChange, title, description, children }: DialogProps) {
-  const { colors, scheme } = useTheme()
+  const { headingFont, shadows, colors, scheme, radius } = useTheme()
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen)
   const isOpen = open ?? uncontrolledOpen
   const setOpen = (next: boolean) => {
@@ -47,9 +47,10 @@ export function Dialog({ closeLabel = "Close dialog", open, defaultOpen = false,
             shadowOpacity: 0.15,
             shadowRadius: spacing.lg,
             elevation: spacing.xs,
+            ...shadows.overlay,
           }}
         >
-          <Text style={[typography.body, { color: colors.foreground, fontWeight: "600" }]}>{title}</Text>
+          <Text style={[typography.body, { color: colors.foreground, fontFamily: headingFont, fontWeight: "600" }]}>{title}</Text>
           {description ? <Text style={[typography.supporting, { color: colors.mutedForeground }]}>{description}</Text> : null}
           {children ? <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "flex-end", gap: spacing.sm }}>{children}</View> : null}
         </View>

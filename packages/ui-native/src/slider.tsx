@@ -1,12 +1,12 @@
 import * as React from "react"
 import { I18nManager, View, type ViewProps } from "react-native"
-import { nativeControl, radius, spacing } from "@paneui/tokens"
+import { nativeControl, spacing } from "@paneui/tokens"
 import { useTheme } from "./theme"
 import { useField, useFormValue } from "./field"
 
 export type SliderProps = ViewProps & { value?: number; defaultValue?: number; onValueChange?: (value: number) => void; min?: number; max?: number; step?: number; disabled?: boolean; label?: string }
 export function Slider({ value, defaultValue, onValueChange, min = 0, max = 100, step = 1, disabled, label, style, onLayout, onFocus, onBlur, onAccessibilityAction, accessibilityState, ...props }: SliderProps) {
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   const field = useField()
   const [current, change] = useFormValue(value, defaultValue ?? min, onValueChange)
   const [width, setWidth] = React.useState(0)

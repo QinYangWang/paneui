@@ -1530,7 +1530,7 @@
       "name": "theme-paper",
       "type": "registry:file",
       "title": "Theme Paper",
-      "description": "Opt-in style with warm paper, serif titles and pill controls.",
+      "description": "Gives pages a paper surface and serif titles.",
       "registryDependencies": [
         "@paneui/theme"
       ],

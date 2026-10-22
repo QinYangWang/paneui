@@ -1,12 +1,12 @@
 import * as React from "react"
 import { Pressable, Text, View, type PressableProps } from "react-native"
-import { nativeControl, radius, spacing, typography } from "@paneui/tokens"
+import { nativeControl, spacing, typography } from "@paneui/tokens"
 import { useTheme } from "./theme"
 import { useField, useFormValue } from "./field"
 
 export type CheckboxProps = Omit<PressableProps, "children" | "defaultValue"> & { label?: string; value?: boolean | "indeterminate"; defaultValue?: boolean | "indeterminate"; onValueChange?: (value: boolean | "indeterminate") => void }
 export function Checkbox({ label, value, defaultValue = false, onValueChange, disabled, style, onFocus, onBlur, onPress, accessibilityState, accessibilityLabel, ...props }: CheckboxProps) {
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   const field = useField()
   const inactive = disabled ?? field?.disabled ?? false
   const [current, change] = useFormValue(value, defaultValue, onValueChange)

@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, type ViewProps } from "react-native";
 import { spacing } from "@paneui/tokens";
 import { Pressable } from "react-native";
-import { nativeControl, radius } from "@paneui/tokens";
+import { nativeControl } from "@paneui/tokens";
 import { useTheme } from "./theme";
 export type PaginationDotsProps = ViewProps & {
   count: number;
@@ -22,7 +22,7 @@ export function PaginationDots({
   style,
   ...props
 }: PaginationDotsProps) {
-  const { colors } = useTheme();
+  const { colors, radius } = useTheme();
   const [focused, setFocused] = React.useState<number | null>(null);
   const total = Number.isFinite(count) ? Math.max(0, Math.floor(count)) : 0;
   return (

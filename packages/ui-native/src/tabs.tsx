@@ -1,6 +1,6 @@
 import * as React from "react"
 import { AccessibilityInfo, Animated, Pressable, Text, View, type PressableProps, type ViewProps } from "react-native"
-import { nativeControl, radius, spacing, typography } from "@paneui/tokens"
+import { nativeControl, spacing, typography } from "@paneui/tokens"
 
 import { useTheme } from "./theme"
 
@@ -69,7 +69,7 @@ export type TabsListProps = ViewProps & {
 }
 
 export function TabsList({ children, style, ...props }: TabsListProps) {
-  const { colors, scheme } = useTheme()
+  const { colors, scheme, shadows, radius, controlRadius, style: themeStyle } = useTheme()
   const { value, measurements } = useTabsContext()
   const reduced = useReducedMotion()
   const translateX = React.useRef(new Animated.Value(0)).current
@@ -90,7 +90,7 @@ export function TabsList({ children, style, ...props }: TabsListProps) {
     }
   }, [measurements, value, reduced, translateX, width])
   return (
-    <View {...props} accessibilityRole="tablist" style={[{ flexDirection: "row", backgroundColor: colors.muted, borderRadius: radius.lg, padding: spacing.xs }, style]}>
+    <View {...props} accessibilityRole="tablist" style={[{ flexDirection: "row", backgroundColor: colors.muted, borderRadius: controlRadius, padding: spacing.xs }, style]}>
       <Animated.View
         pointerEvents="none"
         style={{
@@ -99,13 +99,14 @@ export function TabsList({ children, style, ...props }: TabsListProps) {
           bottom: spacing.xs,
           left: 0,
           width,
-          borderRadius: radius.md,
+          borderRadius: themeStyle === "paper" ? controlRadius - spacing.xs : radius.md,
           backgroundColor: colors.card,
           shadowColor: scheme === "dark" ? colors.background : colors.foreground,
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.12,
           shadowRadius: spacing.sm,
           elevation: 2,
+          ...shadows.raised,
           transform: [{ translateX }],
         }}
       />
@@ -120,7 +121,7 @@ export type TabsTriggerProps = Omit<PressableProps, "children"> & {
 }
 
 export function TabsTrigger({ value, children, disabled = false, style, onPress, onFocus, onBlur, onLayout, accessibilityState, ...props }: TabsTriggerProps) {
-  const { colors } = useTheme()
+  const { colors, radius, controlRadius, style: themeStyle } = useTheme()
   const { value: active, setValue, register } = useTabsContext()
   const [focused, setFocused] = React.useState(false)
   const selected = active === value
@@ -152,7 +153,7 @@ export function TabsTrigger({ value, children, disabled = false, style, onPress,
           minHeight: nativeControl.sm,
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: radius.md,
+          borderRadius: themeStyle === "paper" ? controlRadius - spacing.xs : radius.md,
           borderWidth: 2,
           borderColor: focused ? colors.ring : "transparent",
           opacity: disabled ? 0.64 : 1,

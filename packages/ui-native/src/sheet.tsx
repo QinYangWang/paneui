@@ -1,6 +1,6 @@
 import * as React from "react"
 import { AccessibilityInfo, Animated, Modal, PanResponder, Pressable, View } from "react-native"
-import { nativeControl, radius, spacing } from "@paneui/tokens"
+import { nativeControl, spacing } from "@paneui/tokens"
 
 import { useTheme } from "./theme"
 
@@ -30,7 +30,7 @@ function useReducedMotion() {
 }
 
 export function Sheet({ closeLabel = "Close sheet", open, defaultOpen = false, onOpenChange, bottomInset = spacing.xl, children }: SheetProps) {
-  const { colors, scheme } = useTheme()
+  const { shadows, colors, scheme, radius } = useTheme()
   const reduced = useReducedMotion()
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen)
   const isOpen = open ?? uncontrolledOpen
@@ -81,7 +81,7 @@ export function Sheet({ closeLabel = "Close sheet", open, defaultOpen = false, o
         <Animated.View
           style={{
             transform: [{ translateY }],
-            backgroundColor: colors.card,
+            ...shadows.raised, backgroundColor: colors.card,
             borderTopLeftRadius: radius["3xl"],
             borderTopRightRadius: radius["3xl"],
             paddingTop: spacing.sm,

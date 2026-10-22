@@ -285,6 +285,8 @@ const context = await browser.newContext({
 await context.addInitScript(([theme, radius, style]) => {
   try {
     localStorage.setItem("theme", theme)
+    localStorage.setItem("native-docs-theme", theme)
+    localStorage.setItem("native-docs-style", style || "default")
     if (style) localStorage.setItem("style", style)
     if (radius && radius.startsWith("custom:")) {
       localStorage.setItem("radius", "custom")

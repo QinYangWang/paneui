@@ -1,4 +1,5 @@
 export { ThemeProvider, useTheme } from "./theme"
+export type { ThemeProviderProps } from "./theme"
 export { Button } from "./button"
 export type { ButtonProps } from "./button"
 export { Card, CardHeader, CardContent } from "./card"

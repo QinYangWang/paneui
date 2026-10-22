@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Pressable, Text, View, type PressableProps, type ViewProps } from "react-native"
-import { nativeControl, radius, spacing, typography } from "@paneui/tokens"
+import { nativeControl, spacing, typography } from "@paneui/tokens"
 import { useTheme } from "./theme"
 import { useField, useFormValue } from "./field"
 
@@ -14,7 +14,7 @@ export function RadioGroup({ value, defaultValue = "", onValueChange, disabled, 
 export type RadioGroupItemProps = Omit<PressableProps, "children"> & { value: string; label: string }
 export function RadioGroupItem({ value, label, disabled, style, onFocus, onBlur, onPress, accessibilityState, ...props }: RadioGroupItemProps) {
   const group = React.useContext(RadioContext)
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   const [focused, setFocused] = React.useState(false)
   if (!group) throw new Error("RadioGroupItem requires RadioGroup")
   const inactive = disabled || group.disabled

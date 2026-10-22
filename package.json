@@ -25,7 +25,7 @@
     "cli:test": "pnpm --filter paneui test",
     "typecheck": "pnpm -r --if-present typecheck",
     "registry:test": "pnpm --filter @paneui/registry test",
-    "tokens:gen": "node tooling/scripts/gen-native-tokens.mjs",
+    "tokens:gen": "python3 tooling/scripts/gen-paper.py && node tooling/scripts/gen-native-tokens.mjs",
     "native": "pnpm --filter @paneui/native-showcase start",
     "native:web": "pnpm --filter @paneui/native-showcase web",
     "native:smoke": "node tooling/scripts/native-docs-smoke.mjs",

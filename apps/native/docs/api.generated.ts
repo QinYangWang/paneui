@@ -2044,6 +2044,26 @@ export const api = {
           ]
         },
         {
+          "name": "style",
+          "type": "\"default\" | \"paper\"",
+          "required": false,
+          "default": "\"default\"",
+          "description": [
+            "Visual style; defaults to the original appearance.",
+            "视觉样式，默认保留原有外观。"
+          ]
+        },
+        {
+          "name": "headingFont",
+          "type": "string",
+          "required": false,
+          "default": "—",
+          "description": [
+            "Registered heading font family.",
+            "已注册的标题字体名称。"
+          ]
+        },
+        {
           "name": "children",
           "type": "React.ReactNode",
           "required": true,

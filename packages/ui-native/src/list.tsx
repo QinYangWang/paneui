@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Pressable, Text, View, type PressableProps, type ViewProps } from "react-native"
-import { nativeControl, radius, spacing, typography } from "@paneui/tokens"
+import { nativeControl, spacing, typography } from "@paneui/tokens"
 
 import { useTheme } from "./theme"
 
@@ -11,7 +11,7 @@ export type ListProps = ViewProps & {
 }
 
 export function List({ children, style, ...props }: ListProps) {
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   return (
     <View {...props} style={[{ backgroundColor: colors.card, borderRadius: radius.xl, borderWidth: 1, borderColor: colors.border, overflow: "hidden" }, style]}>
       <ListGroupContext.Provider value={true}>
@@ -32,7 +32,7 @@ export type ListItemProps = Omit<PressableProps, "children"> & {
 }
 
 export function ListItem({ title, description, leading, trailing, showSeparator = false, onPress, disabled = false, style, onFocus, onBlur, accessibilityState, ...props }: ListItemProps) {
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   const grouped = React.useContext(ListGroupContext)
   const [focused, setFocused] = React.useState(false)
   const row = (pressed: boolean) => (

@@ -1,5 +1,5 @@
 import { Text, View, type ViewProps } from "react-native"
-import { radius, spacing, typography } from "@paneui/tokens"
+import { spacing, typography } from "@paneui/tokens"
 
 import { useTheme } from "./theme"
 
@@ -9,7 +9,7 @@ export type BadgeProps = ViewProps & {
 }
 
 export function Badge({ children, variant = "default", style, ...props }: BadgeProps) {
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   const backgroundColor = variant === "primary" ? colors.primary : variant === "destructive" ? colors.destructive : variant === "outline" ? "transparent" : colors.muted
   const color = variant === "primary" ? colors.primaryForeground : variant === "destructive" ? colors.destructiveForeground : variant === "success" ? colors.success : variant === "warning" ? colors.warning : colors.foreground
   return (
