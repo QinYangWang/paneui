@@ -1,12 +1,13 @@
 /**
  * Natural preview heights (px) of gallery demos at the xl two-column layout,
- * measured with Playwright at 1280px, last on 2026-10-19 (anything not listed is the 256px
+ * measured with Playwright at 1280px, last on 2026-10-22 (anything not listed is the 256px
  * minimum). The lazy gallery reserves this space before a demo first mounts,
  * so cards scrolled into view for the first time don't shift the page.
  * Re-measure after a demo's size changes noticeably; a stale value only costs
  * a small one-time shift.
  */
 export const galleryHeights: Record<string, number> = {
+  "cover-art": 402,
   "command": 333,
   "calendar": 348,
   "carousel": 284,
@@ -40,7 +41,7 @@ export const galleryHeights: Record<string, number> = {
   "composition-chart": 466,
   "expandable-tabs": 352,
   "feedback-widget": 448,
-  "file-diff": 486,
+  "file-diff": 487,
   "file-tree": 390,
   "file-upload": 500,
   "funnel-chart": 392,
@@ -75,12 +76,12 @@ export const galleryHeights: Record<string, number> = {
   "vscode": 544,
   "tool-result": 393,
   "treemap": 506,
-  "typeset": 280,
+  "typeset": 305,
   "brand-icon": 884,
   "locale-provider": 282,
   "og-image": 266,
   "scroll-area": 352,
-  "empty-state": 310,
+  "empty-state": 292,
   "usage-meter": 272,
   "settings-section": 288,
   "timeline": 276,
@@ -93,4 +94,5 @@ export const galleryHeights: Record<string, number> = {
   "streaming-response": 385,
   "trend-chart": 388,
   "bar-list": 262,
+  "window-frame": 272,
 }

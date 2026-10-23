@@ -1,6 +1,6 @@
 ---
 name: copy-density
-description: Keep paneui interface copy short and useful.
+description: Keep PaneUI interface copy short and useful.
 ---
 
 # Copy density

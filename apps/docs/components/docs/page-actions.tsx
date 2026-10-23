@@ -72,7 +72,7 @@ export function PageActions({ markdownPath, pagePath, title }: { markdownPath: s
   }
 
   const openChat = (base: string) => {
-    const prompt = `Read ${absolute(markdownPath)} so I can ask questions about ${title} in paneui.`
+    const prompt = `Read ${absolute(markdownPath)} so I can ask questions about ${title} in PaneUI.`
     window.open(`${base}${encodeURIComponent(prompt)}`, "_blank", "noopener,noreferrer")
   }
 

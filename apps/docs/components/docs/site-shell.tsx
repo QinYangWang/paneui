@@ -55,7 +55,7 @@ function Brand() {
       className="-ms-1 flex h-8 items-center gap-2 rounded-lg ps-1 pe-2 text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
     >
       <PaneuiLogoIcon size={20} className="text-foreground" />
-      paneui
+      PaneUI
     </Link>
   )
 }
@@ -209,7 +209,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
             <div className="flex h-14 shrink-0 items-center px-4">
               <DrawerTitle className="flex items-center gap-2 text-ui-lg font-semibold">
                 <PaneuiLogoIcon size={20} />
-                paneui
+                PaneUI
               </DrawerTitle>
             </div>
             <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />

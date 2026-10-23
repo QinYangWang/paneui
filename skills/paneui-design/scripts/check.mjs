@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Static design checks for projects built on paneui.
+ * Static design checks for projects built on PaneUI.
  *
  *   node <skill>/scripts/check.mjs [paths…] [--strict] [--quiet] [--json] [--rules a,b] [--list]
  *
@@ -829,7 +829,7 @@ function checkUpgrade() {
   const css = themeFile()
   if (!css) return
   const text = fs.readFileSync(css, "utf8")
-  if (!/--radius:/.test(text)) return // not a paneui theme
+  if (!/--radius:/.test(text)) return // not a PaneUI theme
   if (/--(?:color-)?accent-(?:50|[1-9]00|950):/.test(text)) report("upgrade", css, 1, "The removed accent ramp (--accent-50…950) is still in the stylesheet; install the upgrade-check item and run it with --fix.")
   if (!/--radius-max:/.test(text)) report("upgrade", css, 1, "No --radius-max: the theme predates the 16px cap; reinstall the theme.")
   const r = text.match(/--radius:\s*([\d.]+)rem/)

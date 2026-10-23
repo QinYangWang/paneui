@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Finds what an earlier install of the paneui theme and components left behind after the
+ * Finds what an earlier install of the PaneUI theme and components left behind after the
  * theme moved on, and says how to fix each finding.
  *
  *   node scripts/paneui-upgrade-check.mjs          report only (exit code 1 when something needs fixing)

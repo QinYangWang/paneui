@@ -1,0 +1,20 @@
+<html><head><style>
+@font-face{font-family:Inter;src:local("Inter")}
+body{margin:0;width:1200px;height:630px;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#171717;position:relative;overflow:hidden;
+background:radial-gradient(ellipse 700px 500px at 1180px 320px,#dbeafe 0%,rgba(219,234,254,.4) 45%,rgba(255,255,255,0) 75%),#fff}
+.grid{position:absolute;inset:0;background-image:linear-gradient(#f2f2f2 1px,transparent 1px),linear-gradient(90deg,#f2f2f2 1px,transparent 1px);background-size:56px 56px;background-position:-1px 16px;opacity:.7}
+.top{position:absolute;top:84px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:14px;font-weight:700;font-size:28px}
+.url{font-size:26px;color:#666}
+h1{position:absolute;left:80px;top:340px;margin:0;font-size:66px;line-height:1.12;font-weight:700;letter-spacing:-1.5px;width:900px}
+p{position:absolute;left:80px;top:518px;margin:0;font-size:29px;color:#666}
+.sky{overflow:hidden;position:absolute;inset:24px;border-radius:32px;background: linear-gradient(165deg,oklch(84% .065 238),oklch(94.5% .025 230));box-shadow:inset 0 0 0 1px #00000008}
+.sky::before,.sky::after{content:"";position:absolute;background:url('../../apps/docs/public/landing/cloud.webp') center/contain no-repeat;width:480px;height:360px;opacity:.7}.sky::before{left:-110px;bottom:-80px}.sky::after{right:-80px;top:-90px;transform:scaleX(-1)}
+body{background:#faf9f7}
+h1{top:310px;width:880px;font-family:Georgia,serif;font-size:76px;font-weight:400;letter-spacing:-2px}
+p{top:510px;color:#344655;font-size:27px}
+.brand{font-size:32px}.url{color:#344655}
+@media(prefers-color-scheme:dark){.sky::before,.sky::after{display:none}body{background:#17181d;color:#f6f7fb}.sky{background:linear-gradient(165deg,oklch(27% .06 268),oklch(21% .035 262))}.url,p{color:#becbdf}.brand svg g{fill:#f6f7fb}}
+</style></head><body><div class="sky"></div>
+<div class="top"><div class="brand"><svg width="34" height="34" viewBox="0 0 24 24"><g fill="#171717"><rect x="2" y="2" width="11.75" height="6.75" rx="1.25"/><rect x="15.25" y="2" width="6.75" height="11.75" rx="1.25" fill="#0090ff"/><rect x="10.25" y="15.25" width="11.75" height="6.75" rx="1.25"/><rect x="2" y="10.25" width="6.75" height="11.75" rx="1.25"/></g></svg>PaneUI</div><div class="url">paneui.dev</div></div>
+<h1>Interfaces, one pane at a time.</h1><p>React components that feel at home on the desktop.</p></body></html>

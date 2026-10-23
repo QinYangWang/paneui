@@ -54,7 +54,7 @@ function Showcase() {
         >
           <View style={styles.header}>
             <Text variant="heading" accessibilityRole="header">
-              paneui Native
+              PaneUI Native
             </Text>
             <Text tone="muted">Components for your next app.</Text>
             <WebDocsLink />

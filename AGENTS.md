@@ -1,4 +1,4 @@
-# paneui — agent guide
+# PaneUI — agent guide
 
 A shadcn registry (`@paneui/*`, style `base-nova`, headless primitives from `@base-ui/react`,
 Tailwind v4, motion/react) plus its Next.js docs site. These rules keep every coding agent on one

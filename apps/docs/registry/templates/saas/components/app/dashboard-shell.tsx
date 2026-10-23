@@ -14,6 +14,7 @@ import {
   LogOutIcon,
   MoonIcon,
   PaletteIcon,
+  PaneuiLogoIcon,
   PlusIcon,
   SearchIcon,
   SettingsIcon,
@@ -38,7 +39,6 @@ import {
   BreadcrumbSeparator,
 } from "@paneui/ui/components/breadcrumb"
 import { Button } from "@paneui/ui/components/button"
-import { IconChip } from "@paneui/ui/components/icon-chip"
 import { Kbd } from "@paneui/ui/components/kbd"
 import { Menu, MenuContent, MenuGroup, MenuItem, MenuLabel, MenuSeparator, MenuTrigger } from "@paneui/ui/components/menu"
 import { ThemeToggle, useThemeToggle } from "@paneui/ui/components/theme-toggle"
@@ -49,7 +49,7 @@ import { UserMenu } from "@paneui/ui/components/user-menu"
 import { REQUIRE_AUTH, signOut, useSession } from "../../lib/auth"
 import { workspaces } from "../../lib/data"
 import { AppLink, routes, useHref, useRoute } from "../../lib/routes"
-import { BrandMark, initials, SaasProviders } from "../providers"
+import { BrandMark, SaasProviders } from "../providers"
 
 /* ───────────────────────── Navigation model ───────────────────────── */
 
@@ -153,9 +153,7 @@ function WorkspaceMenu() {
   return (
     <Menu>
       <MenuTrigger render={<Button variant="ghost" size="sm" className="-ms-2.5 min-w-0" />}>
-        <IconChip tone="solid" size="sm" data-icon="inline-start">
-          <span className="text-ui-2xs font-semibold">{initials(current.name)}</span>
-        </IconChip>
+        <PaneuiLogoIcon data-icon="inline-start" />
         <span className="truncate font-semibold">{current.name}</span>
         <ChevronsUpDownIcon data-icon="inline-end" className="text-muted-foreground" />
       </MenuTrigger>

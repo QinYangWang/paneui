@@ -1,11 +1,11 @@
 ---
 name: puffy-icons
-description: Draw and update icons for paneui.
+description: Draw and update icons for PaneUI.
 ---
 
 # Puffy icons
 
-The paneui icon set (`@paneui/icons`, installed as `components/icons.tsx`) is a single file of
+The PaneUI icon set (`@paneui/icons`, installed as `components/icons.tsx`) is a single file of
 React components: soft, slightly inflated glyphs in one colour. This skill lets you draw new icons
 that sit in the same family, add them to that file, and use them the way the library does.
 

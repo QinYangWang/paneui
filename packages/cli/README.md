@@ -1,6 +1,6 @@
-# paneui
+# PaneUI
 
-Find, install and update [paneui](https://paneui.dev) components.
+Find, install and update [PaneUI](https://paneui.dev) components.
 Installed source files are yours to edit.
 
 ```bash

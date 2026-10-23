@@ -1,11 +1,11 @@
 ---
 name: paneui-design
-description: Build and review paneui Web and Native interfaces using shared design values and platform-specific interaction rules.
+description: Build and review PaneUI Web and Native interfaces using shared design values and platform-specific interaction rules.
 ---
 
-# paneui design
+# PaneUI design
 
-paneui shares semantic colours, spacing, radius, typography hierarchy and wording across renderers.
+PaneUI shares semantic colours, spacing, radius, typography hierarchy and wording across renderers.
 Web uses desktop density and browser primitives. Native uses touch dimensions and native views. The numbered rules describe the shared intent with Web examples. Use the platform
 references to translate that intent before editing a different renderer.
 

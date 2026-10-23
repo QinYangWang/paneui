@@ -47,7 +47,7 @@ export const GUIDE_PAGES = [
   {
     href: "/docs/changelog",
     title: "Changelog",
-    description: { en: "Updates to paneui.", zh: "查看 paneui 的更新。" },
+    description: { en: "Updates to PaneUI.", zh: "查看 PaneUI 的更新。" },
     keywords: ["releases", "updates", "history", "news"],
   },
 ] as const satisfies readonly GuidePage[]

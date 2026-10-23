@@ -11,7 +11,7 @@ const compat = new FlatCompat({
 });
 
 // ───────────────────────────────────────────────────────────────────────────
-// paneui design-system rules
+// PaneUI design-system rules
 //
 // One consistent style across every coding agent working in this repo.
 // Rule reference: https://github.com/shadcn-ui/lint/blob/main/docs/rules.md
@@ -150,7 +150,7 @@ const designSystemRules = [
       shadcn: {
         ui: ["@paneui/ui/components", "@paneui/ui/blocks"],
         componentImports: ["^@paneui/ui/icons$"],
-        note: "See AGENTS.md for paneui design rules.",
+        note: "See AGENTS.md for PaneUI design rules.",
       },
     },
   },

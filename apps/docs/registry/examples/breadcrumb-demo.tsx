@@ -28,7 +28,7 @@ export default function BreadcrumbDemo() {
             <BreadcrumbEllipsis
               items={[
                 { label: "Projects", href: "#", icon: <FolderIcon /> },
-                { label: "paneui", href: "#", icon: <FolderIcon /> },
+                { label: "PaneUI", href: "#", icon: <FolderIcon /> },
               ]}
             />
           </BreadcrumbItem>

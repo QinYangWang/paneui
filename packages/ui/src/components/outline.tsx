@@ -6,7 +6,6 @@ import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring,
 import { ArrowUpIcon, ChevronDownIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
 import { Button } from "@paneui/ui/components/button"
-import { OverflowHint, OverflowHintContent, OverflowHintTrigger } from "@paneui/ui/components/overflow-hint"
 import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Popover, PopoverContent, PopoverTrigger } from "@paneui/ui/components/popover"
 import { ScrollArea } from "@paneui/ui/components/scroll-area"
@@ -165,26 +164,16 @@ function buildTrack(list: HTMLElement, activeId: string | undefined): Track | nu
   return { d, height: list.scrollHeight, width: TRACK_X[3] + 2, active }
 }
 
-/** The text a title shows, for the hint and the popover button. */
-function plainTitle(title: React.ReactNode): string {
-  if (typeof title === "string" || typeof title === "number") return String(title)
-  if (Array.isArray(title)) return title.map(plainTitle).join("")
-  if (React.isValidElement<{ children?: React.ReactNode }>(title)) return plainTitle(title.props.children)
-  return ""
-}
-
 function OutlineList({
   items,
   active,
   onSelect,
-  hintSide,
   listRef,
   renderLink,
 }: {
   items: readonly OutlineItem[]
   active: string | undefined
   onSelect: (id: string) => void
-  hintSide: "left" | "right" | "bottom"
   listRef: React.RefObject<HTMLUListElement | null>
   renderLink?: OutlineRenderLink
 }) {
@@ -253,14 +242,7 @@ function OutlineList({
             "block rounded-sm py-1 ps-3.5 text-muted-foreground transition-colors duration-150 outline-none hover:text-foreground focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset aria-[current=location]:text-foreground",
             item.depth === 3 && "ps-6.5 text-ui-sm"
           ),
-          children: (
-            <OverflowHint>
-              <OverflowHintTrigger>{item.title}</OverflowHintTrigger>
-              <OverflowHintContent side={hintSide} sideOffset={16}>
-                {plainTitle(item.title) || item.title}
-              </OverflowHintContent>
-            </OverflowHint>
-          ),
+          children: <span className="block break-words">{item.title}</span>,
         }
         return <li key={item.id}>{renderLink ? renderLink(props, item) : <a {...props} />}</li>
       })}
@@ -331,8 +313,7 @@ type OutlineProps = Omit<React.ComponentProps<"nav">, "title" | "children"> & {
 
 /**
  * Sticky-rail outline. It never grows past `maxHeight`: the list scrolls in its own thin area with
- * fades at the cut edges and keeps the current entry in view. Long titles stay on one line and show
- * in full on hover.
+ * fades at the cut edges and keeps the current entry in view. Long titles wrap so every heading remains readable.
  */
 function Outline({
   items,
@@ -364,7 +345,7 @@ function Outline({
     >
       {title !== null && <p className="shrink-0 font-medium text-foreground">{title}</p>}
       <ScrollArea fade viewportRef={viewportRef} className="-ms-1 flex min-h-0 flex-1 flex-col" viewportClassName="min-h-0 flex-1 ps-1 pe-3">
-        <OutlineList items={items} active={active} onSelect={setActive} hintSide="left" listRef={listRef} renderLink={renderLink} />
+        <OutlineList items={items} active={active} onSelect={setActive} listRef={listRef} renderLink={renderLink} />
       </ScrollArea>
       {backToTop && (
         // the divider belongs to the link: both fade in together, and the row keeps its space
@@ -440,7 +421,6 @@ function OutlinePopover({
             <OutlineList
               items={items}
               active={active}
-              hintSide="bottom"
               listRef={listRef}
               renderLink={renderLink}
               onSelect={(id) => {
