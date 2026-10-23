@@ -1,14 +1,14 @@
 import * as React from "react"
-import { TextInput, View, type TextInputProps } from "react-native"
-import { nativeControl, radius, spacing, typography } from "@paneui/tokens"
+import { TextInput, View, type TextInputInstance, type TextInputProps } from "react-native"
+import { nativeControl, spacing, typography } from "@paneui/tokens"
 
 import { Text } from "./text"
 import { useTheme } from "./theme"
 
-export type InputProps = TextInputProps & { label: string; description?: string; error?: string }
+export type InputProps = TextInputProps & { ref?: React.Ref<TextInputInstance>; label: string; description?: string; error?: string }
 
 export function Input({ label, description, error, style, accessibilityLabel, accessibilityHint, editable = true, onFocus, onBlur, ...props }: InputProps) {
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   const [focused, setFocused] = React.useState(false)
   return (
     <View style={{ gap: spacing.sm }}>

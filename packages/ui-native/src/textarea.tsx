@@ -1,13 +1,13 @@
 import * as React from "react"
 import { Platform, TextInput, View, type TextInputProps } from "react-native"
-import { nativeControl, radius, spacing, typography } from "@paneui/tokens"
+import { nativeControl, spacing, typography } from "@paneui/tokens"
 import { useTheme } from "./theme"
 import { useField, useFormValue } from "./field"
 import { Text } from "./text"
 
 export type TextareaProps = TextInputProps & { label?: string; onValueChange?: (value: string) => void; autoGrow?: boolean; showCounter?: boolean }
 export function Textarea({ label, value, defaultValue = "", onValueChange, onChangeText, autoGrow = true, showCounter = false, maxLength, editable, style, onFocus, onBlur, onContentSizeChange, accessibilityState, ...props }: TextareaProps) {
-  const { colors } = useTheme()
+  const { colors, radius } = useTheme()
   const field = useField()
   const [current, change] = useFormValue(value, defaultValue, onValueChange)
   const [height, setHeight] = React.useState<number>(nativeControl.default * 2)

@@ -14,10 +14,17 @@ Use the shared spacing and radius scales. Radius stays at or below 16px; round a
 and circular controls use the circle treatment supplied by their component.
 Use platform-supported elevation recipes rather than copying CSS shadow strings.
 
+ThemeProvider accepts `style="paper"` as an opt-in. Read `radius`, `controlRadius`,
+`headingFont` and `shadows` from `useTheme` for style-aware surfaces. Paper values are
+generated from the shared stylesheet. Controls use the capped control radius; inner
+segments subtract the well padding. Titles use the heading face, while body text stays
+on the UI face. Devices fall back to a system serif; pass a registered `headingFont`
+after loading a bundled font. The default style retains the existing values.
+
 ## Density and text
 
 Native controls have a 44px minimum touch target, with 48px as the default. Use 52px for
-a large control. A smaller visible glyph can sit inside that target. Hit slop is an
+a large control. The xs and sm sizes both keep the 44px minimum. A smaller visible glyph can sit inside that target. Hit slop is an
 explicit exception: verify the effective bounds and ensure adjacent targets do not overlap.
 Use 16px field and label text, 14px supporting text and 12px captions. Headings use the
 shared Native type scale. Medium controls, semibold titles, normal body text.

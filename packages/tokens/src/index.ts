@@ -10,4 +10,6 @@ export const typography = {
   title: { fontSize: 24, lineHeight: 32 },
   heading: { fontSize: 32, lineHeight: 40 },
 } as const
-export const nativeControl = { sm: 44, default: 48, lg: 52 } as const
+export const nativeControl = { xs: 44, sm: 44, default: 48, lg: 52 } as const
+export { paper } from "./paper.generated"
+export type ThemeStyle = "default" | "paper"

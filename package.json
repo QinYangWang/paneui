@@ -25,9 +25,10 @@
     "cli:test": "pnpm --filter paneui test",
     "typecheck": "pnpm -r --if-present typecheck",
     "registry:test": "pnpm --filter @paneui/registry test",
-    "tokens:gen": "node tooling/scripts/gen-native-tokens.mjs",
+    "tokens:gen": "python3 tooling/scripts/gen-paper.py && node tooling/scripts/gen-native-tokens.mjs",
     "native": "pnpm --filter @paneui/native-showcase start",
     "native:web": "pnpm --filter @paneui/native-showcase web",
+    "native:smoke": "node tooling/scripts/native-docs-smoke.mjs",
     "native:build": "pnpm tokens:gen && pnpm --filter @paneui/native-showcase build:web",
     "test:pages": "node --test tooling/scripts/pages-output.test.mjs",
     "design:test": "node skills/paneui-design/scripts/check.mjs --self-test && node --test skills/paneui-design/scripts/native-checks.test.mjs"

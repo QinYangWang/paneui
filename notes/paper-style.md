@@ -8,7 +8,7 @@ resolves to the old value.
 
 - `packages/tokens/styles/theme-paper.css`: all Paper values, light and `.dark`, plus Paper versions of
   every accent preset (`html[data-style="paper"][data-accent="…"]`). Written by
-  `/workspace/work/r43/gen-paper.py`; edit the values there and re-run, or edit the CSS by hand.
+  `tooling/scripts/gen-paper.py`; edit the generator and run `pnpm tokens:gen`.
   Imported by `globals.css` after `theme-accents.css`; shipped as the `theme-paper` registry item.
 - New theme tokens (in `@theme inline` and the `theme` item, version 2.4):
   - `--font-heading` = `var(--heading-font, <sans stack>)`, feature settings `var(--heading-font-features, "ss03")`.
@@ -18,7 +18,7 @@ resolves to the old value.
   SegmentedControl wells (`frame-control*`). Titles with `font-heading`: Card, Dialog, AlertDialog,
   Drawer, BottomSheet, MorphingModal, EmptyState, PageHeader, SettingsSection; docs `DocHeading` and the
   components index headings. `cn()` knows `rounded-control*` so a `rounded-full` override still wins.
-- Paper also raises `--radius` to 0.75rem when no radius preset is set, swaps greys to warm alpha inks,
+- Paper also raises `--radius` to 0.75rem when no radius preset is set, swaps greys to near-neutral alpha inks,
   softens the four shadow levels and the state colours, and uses dusty accent solids (pastel solids with
   ink text in dark).
 - Docs: `localStorage["style"]`, applied by the pre-paint script; `style-store.ts`; ThemeSync and
@@ -27,7 +27,30 @@ resolves to the old value.
 
 ## Open
 
-- Native (`packages/ui-native`) has no Paper: its ThemeProvider only carries two colour sets and radii
-  are static constants, so a Paper palette alone would not match.
+- Native now accepts `style="paper"` on ThemeProvider. `pnpm tokens:gen` derives its palette,
+  radii, heading stack and shadow layers from the shared Paper stylesheet. Native shadows
+  use the broadest drop layer and retain each surface hairline. The browser docs persist
+  the style in `native-docs-style`; devices use a system serif or a registered `headingFont`.
 - The Customize accent strip and its copied CSS show default-style accent values; Paper's own accent
   values live in theme-paper.css.
+
+## Paper palette
+
+The pale surface anchor is lifted to 99% lightness with chroma 0.002. Cards use
+99.8% lightness with chroma 0.001. Ink uses chroma 0.004, including dark surfaces.
+Accent hues come from the anchors below; light solids use 54% lightness and
+white text. Dark solids use 80% lightness with ink text.
+
+| Colour | Pinyin | Anchor | Token |
+| --- | --- | --- | --- |
+| 霜色 | shuāng sè | #E9F1F6 | background, card |
+| 玄青 | xuán qīng | #3D3B4F | foreground, neutral |
+| 靛青 | diàn qīng | #177CB0 | primary, blue |
+| 松花绿 | sōng huā lǜ | #057748 | green, success |
+| 琥珀 | hǔ pò | #CA6924 | orange, warning |
+| 胭脂 | yān zhī | #9D2933 | rose, destructive |
+| 黛紫 | dài zǐ | #574266 | violet |
+
+`tooling/fixtures/paper-anchors.json` records the selected anchors. The generator
+derives their hue and chroma, then normalizes lightness for readable controls.
+Run `node tooling/scripts/paper-contrast.mjs` to check every solid state.

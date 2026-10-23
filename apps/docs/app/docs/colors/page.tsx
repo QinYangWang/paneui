@@ -39,7 +39,7 @@ export default function Colors() {
       <section className="flex flex-col gap-4">
         <GuideH2 id="style">Style</GuideH2>
         <p className="text-muted-foreground">
-          Paper brings warm surfaces, serif titles and pill controls. The accent and radius below still apply on top.
+          Paper brings pale surfaces, serif titles and pill controls. The accent and radius below still apply on top.
         </p>
         <ThemingStyle />
       </section>
