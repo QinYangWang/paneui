@@ -225,7 +225,7 @@ function Docs({
   React.useEffect(() => {
     document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
     document.documentElement.style.colorScheme = scheme;
-    document.title = `${title} · paneui Native`;
+    document.title = `${title} · PaneUI Native`;
     document.body.style.backgroundColor = colors.background;
   }, [language, scheme, title, colors.background]);
   React.useEffect(() => {

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "paneui Native",
+    "name": "PaneUI Native",
     "slug": "paneui-native",
     "version": "0.1.0",
     "orientation": "default",
@@ -11,7 +11,7 @@
     "web": {
       "bundler": "metro",
       "output": "single",
-      "name": "paneui Native"
+      "name": "PaneUI Native"
     }
   }
 }
