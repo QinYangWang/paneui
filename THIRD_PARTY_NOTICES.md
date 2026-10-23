@@ -311,3 +311,13 @@ SOFTWARE.
 **Trademarks.** OpenAI and xAI and their logos are trademarks of their owners. The MIT licence covers
 the drawings as published in the package, not the marks: it grants no trademark rights and implies no
 endorsement or affiliation. Follow each owner's brand guidelines when you use a logo.
+
+## Syntax highlighting
+
+The default syntax highlighter uses `@pierre/highlights` 0.2.0 by Pierre, licensed
+under Apache-2.0. Source and documentation: https://diffs.com/docs#highlights.
+The package includes its licence and notices. No bundled theme artwork or palettes
+are used; syntax scopes map to this project's theme tokens.
+
+Shiki remains a fallback for unsupported languages, under the MIT licence:
+https://github.com/shikijs/shiki/blob/main/LICENSE.

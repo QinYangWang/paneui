@@ -196,7 +196,9 @@
     "./icons/outline/icons": "./src/icons/outline/icons.tsx",
     "./icons/puffy/icons": "./src/icons/puffy/icons.tsx",
     "./lib/brand-marks": "./src/lib/brand-marks.ts",
-    "./lib/utils": "./src/lib/utils.ts"
+    "./lib/utils": "./src/lib/utils.ts",
+    "./lib/highlight": "./src/lib/highlight.ts",
+    "./lib/use-code-tokens": "./src/lib/use-code-tokens.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p ."
@@ -243,7 +245,8 @@
     "@react-email/render": "^2.1.0",
     "@tiptap/extension-text-align": "^3.32.0",
     "ws": "^8.22.0",
-    "@paneui/core": "workspace:*"
+    "@paneui/core": "workspace:*",
+    "@pierre/highlights": "0.2.0"
   },
   "peerDependencies": {
     "react": "^19.1.0",

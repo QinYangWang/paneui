@@ -3894,7 +3894,8 @@
         "https://paneui.dev/r/scroll-area.json",
         "https://paneui.dev/r/tabs.json",
         "https://paneui.dev/r/file-tree.json",
-        "https://paneui.dev/r/locale-provider.json"
+        "https://paneui.dev/r/locale-provider.json",
+        "https://paneui.dev/r/highlight.json"
       ],
       "files": [
         {
@@ -3938,7 +3939,6 @@
       "title": "Agent Code Block",
       "description": "Displays code from an agent, including code still streaming in.",
       "dependencies": [
-        "shiki",
         "motion",
         "@base-ui/react"
       ],
@@ -3946,7 +3946,8 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/scroll-area.json",
-        "https://paneui.dev/r/code-block.json"
+        "https://paneui.dev/r/code-block.json",
+        "https://paneui.dev/r/highlight.json"
       ],
       "files": [
         {
@@ -3992,15 +3993,15 @@
       "description": "Shows what an agent tool call ran and what it returned.",
       "dependencies": [
         "@base-ui/react",
-        "motion",
-        "shiki"
+        "motion"
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/action-swap-roll.json",
         "https://paneui.dev/r/icon-chip.json",
-        "https://paneui.dev/r/locale-provider.json"
+        "https://paneui.dev/r/locale-provider.json",
+        "https://paneui.dev/r/highlight.json"
       ],
       "files": [
         {
@@ -6446,6 +6447,30 @@
       ],
       "meta": {
         "category": "Overlays"
+      }
+    },
+    {
+      "name": "highlight",
+      "type": "registry:lib",
+      "title": "Code highlighting",
+      "description": "Highlights static and streaming code with theme colours.",
+      "dependencies": [
+        "@pierre/highlights@0.2.0",
+        "shiki@^3.23.0"
+      ],
+      "files": [
+        {
+          "path": "lib/highlight.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/use-code-tokens.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
       }
     }
   ],

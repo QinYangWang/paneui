@@ -3105,7 +3105,7 @@
       "name": "button-stateful",
       "type": "registry:ui",
       "title": "Button Stateful",
-      "description": "Shows an action’s progress and result.",
+      "description": "Shows an action\u2019s progress and result.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3894,7 +3894,8 @@
         "@paneui/scroll-area",
         "@paneui/tabs",
         "@paneui/file-tree",
-        "@paneui/locale-provider"
+        "@paneui/locale-provider",
+        "@paneui/highlight"
       ],
       "files": [
         {
@@ -3938,7 +3939,6 @@
       "title": "Agent Code Block",
       "description": "Displays code from an agent, including code still streaming in.",
       "dependencies": [
-        "shiki",
         "motion",
         "@base-ui/react"
       ],
@@ -3946,7 +3946,8 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/scroll-area",
-        "@paneui/code-block"
+        "@paneui/code-block",
+        "@paneui/highlight"
       ],
       "files": [
         {
@@ -3992,15 +3993,15 @@
       "description": "Shows what an agent tool call ran and what it returned.",
       "dependencies": [
         "@base-ui/react",
-        "motion",
-        "shiki"
+        "motion"
       ],
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/action-swap-roll",
         "@paneui/icon-chip",
-        "@paneui/locale-provider"
+        "@paneui/locale-provider",
+        "@paneui/highlight"
       ],
       "files": [
         {
@@ -4117,7 +4118,7 @@
       "name": "agent-activity",
       "type": "registry:ui",
       "title": "Agent Activity",
-      "description": "Summarises an agent’s work.",
+      "description": "Summarises an agent\u2019s work.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -6027,7 +6028,7 @@
       "name": "edited-files-card",
       "type": "registry:ui",
       "title": "Edited Files Card",
-      "description": "Reviews and undoes an agent’s file changes.",
+      "description": "Reviews and undoes an agent\u2019s file changes.",
       "dependencies": [
         "motion"
       ],
@@ -6446,6 +6447,30 @@
       ],
       "meta": {
         "category": "Overlays"
+      }
+    },
+    {
+      "name": "highlight",
+      "type": "registry:lib",
+      "title": "Code highlighting",
+      "description": "Highlights static and streaming code with theme colours.",
+      "dependencies": [
+        "@pierre/highlights@0.2.0",
+        "shiki@^3.23.0"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/lib/highlight.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "packages/ui/src/lib/use-code-tokens.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "meta": {
+        "category": "Foundations",
+        "hidden": true
       }
     }
   ],

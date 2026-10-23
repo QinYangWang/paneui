@@ -1,6 +1,6 @@
 import "server-only"
 
-import { bundledLanguages, bundledLanguagesAlias, codeToHtml } from "shiki"
+import { highlight as highlightCode } from "@paneui/ui/lib/highlight"
 
 import { CodeBlock, type CodeBlockProps } from "@paneui/ui/components/code-block"
 
@@ -10,7 +10,6 @@ import { CodeBlock, type CodeBlockProps } from "@paneui/ui/components/code-block
  * panels) uses LiveCodeBlock instead.
  */
 
-const THEMES = { light: "github-light-default", dark: "github-dark-default" } as const
 const EXT: Record<string, string> = { mjs: "javascript", cjs: "javascript", md: "markdown", sh: "bash", yml: "yaml" }
 const cache = new Map<string, Promise<string>>()
 
@@ -19,16 +18,16 @@ export function languageOf(filename?: string, fallback = "text") {
   const ext = filename?.split(".").pop()?.toLowerCase()
   if (!ext || ext === filename) return fallback
   const lang = EXT[ext] ?? ext
-  return lang in bundledLanguages || lang in bundledLanguagesAlias ? lang : fallback
+  return lang
 }
 
 /** Dual-theme markup for <CodeBlock html>, cached per code and language. */
 export function highlight(code: string, language = "text") {
-  const lang = language in bundledLanguages || language in bundledLanguagesAlias ? language : "text"
+  const lang = language
   const key = `${lang}\u0000${code}`
   let html = cache.get(key)
   if (!html) {
-    html = codeToHtml(code.replace(/\n$/, ""), { lang, themes: THEMES, defaultColor: false })
+    html = highlightCode(code.replace(/\n$/, ""), lang)
     cache.set(key, html)
   }
   return html

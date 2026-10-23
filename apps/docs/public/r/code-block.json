@@ -13,7 +13,8 @@
     "https://paneui.dev/r/scroll-area.json",
     "https://paneui.dev/r/tabs.json",
     "https://paneui.dev/r/file-tree.json",
-    "https://paneui.dev/r/locale-provider.json"
+    "https://paneui.dev/r/locale-provider.json",
+    "https://paneui.dev/r/highlight.json"
   ],
   "files": [
     {

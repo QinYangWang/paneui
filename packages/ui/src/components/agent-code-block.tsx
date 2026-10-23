@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import { useReducedMotion } from "motion/react"
-import type { Highlighter } from "shiki"
+import type { CodeToken, CodeTokenLines } from "@paneui/ui/lib/highlight"
+import { useCodeTokens } from "@paneui/ui/lib/use-code-tokens"
 
 import { cn } from "@paneui/ui/lib/utils"
 import { CodeCopyButton, useCopy } from "@paneui/ui/components/code-block"
@@ -11,46 +12,6 @@ import { ScrollArea } from "@paneui/ui/components/scroll-area"
 /* -------------------------------------------------------------------------- */
 /*  Highlighting (shared with file-diff)                                       */
 /* -------------------------------------------------------------------------- */
-
-const LIGHT_THEME = "github-light-default"
-const DARK_THEME = "github-dark-default"
-
-type CodeToken = { content: string; light?: string; dark?: string }
-type CodeTokenLines = CodeToken[][]
-
-let highlighterPromise: Promise<Highlighter> | null = null
-const loadedLangs = new Map<string, Promise<string>>()
-const tokenCache = new Map<string, CodeTokenLines>()
-
-/** Lazily create one syntax highlighter (JS regex engine, no wasm) for the page. */
-function getHighlighter() {
-  if (!highlighterPromise) {
-    highlighterPromise = Promise.all([import("shiki"), import("shiki/engine/javascript")]).then(
-      ([shiki, engine]) =>
-        shiki.createHighlighter({
-          themes: [LIGHT_THEME, DARK_THEME],
-          langs: [],
-          engine: engine.createJavaScriptRegexEngine({ forgiving: true }),
-        })
-    )
-  }
-  return highlighterPromise
-}
-
-/** Load a grammar on demand; unknown languages resolve to plain text. */
-function ensureLanguage(hl: Highlighter, lang: string) {
-  let pending = loadedLangs.get(lang)
-  if (!pending) {
-    pending = import("shiki").then(async ({ bundledLanguages, bundledLanguagesAlias }) => {
-      const known = lang in bundledLanguages || lang in bundledLanguagesAlias
-      if (!known) return "text"
-      await hl.loadLanguage(lang as Parameters<Highlighter["loadLanguage"]>[0])
-      return lang
-    })
-    loadedLangs.set(lang, pending)
-  }
-  return pending
-}
 
 const EXTENSION_LANGS: Record<string, string> = {
   ts: "typescript", tsx: "tsx", js: "javascript", jsx: "jsx", mjs: "javascript", cjs: "javascript",
@@ -64,52 +25,6 @@ const EXTENSION_LANGS: Record<string, string> = {
 function languageFromFilename(filename?: string, fallback = "text") {
   const ext = filename?.split(".").pop()?.toLowerCase()
   return (ext && EXTENSION_LANGS[ext]) || fallback
-}
-
-/**
- * Tokenize `code` with light and dark colours. Returns `null` until the
- * first pass resolves. While code streams in, the previous result is kept so
- * already-coloured lines never flash back to plain text.
- */
-function useCodeTokens(code: string, language: string): CodeTokenLines | null {
-  const key = `${language}\u0000${code}`
-  const [result, setResult] = React.useState<{ key: string; lines: CodeTokenLines } | null>(() => {
-    const cached = tokenCache.get(key)
-    return cached ? { key, lines: cached } : null
-  })
-
-  React.useEffect(() => {
-    const cached = tokenCache.get(key)
-    if (cached) {
-      setResult({ key, lines: cached })
-      return
-    }
-    let cancelled = false
-    getHighlighter()
-      .then(async (hl) => {
-        const lang = await ensureLanguage(hl, language)
-        if (cancelled) return
-        const lines = hl
-          .codeToTokensWithThemes(code, {
-            lang: lang as Parameters<Highlighter["codeToTokensWithThemes"]>[1]["lang"],
-            themes: { light: LIGHT_THEME, dark: DARK_THEME },
-          })
-          .map((line) =>
-            line.map((t) => ({ content: t.content, light: t.variants.light?.color, dark: t.variants.dark?.color }))
-          )
-        if (tokenCache.size > 200) tokenCache.clear()
-        tokenCache.set(key, lines)
-        setResult({ key, lines })
-      })
-      .catch(() => {
-        /* keep plain text */
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [code, key, language])
-
-  return result?.lines ?? null
 }
 
 /**
@@ -194,7 +109,7 @@ function AgentCodeBlock({
   ...props
 }: AgentCodeBlockProps) {
   const lang = language ?? languageFromFilename(typeof filename === "string" ? filename : undefined)
-  const tokens = useCodeTokens(code, lang)
+  const tokens = useCodeTokens(code, lang, streaming)
   const reduce = useReducedMotion() ?? false
   const viewportRef = React.useRef<HTMLDivElement>(null)
   const pinned = React.useRef(true)

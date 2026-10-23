@@ -16,7 +16,7 @@
     "docs:gen": "node tooling/scripts/gen-docs.mjs",
     "docs:md": "node --experimental-strip-types --no-warnings tooling/scripts/gen-docs-md.mjs",
     "docs:md:audit": "node tooling/scripts/audit-docs-md.mjs",
-    "templates:code": "node tooling/scripts/gen-template-code.mjs",
+    "templates:code": "node --experimental-strip-types tooling/scripts/gen-template-code.mjs",
     "audit:radius": "node tooling/scripts/audit-radius.mjs",
     "design:check": "node skills/paneui-design/scripts/check.mjs apps/docs packages/ui/src packages/core/src packages/tokens/src packages/ui-native/src apps/native skills packages/registry/registry.json",
     "test:cover-art": "node tooling/scripts/test-cover-art-seeds.mjs",
@@ -30,7 +30,8 @@
     "native:web": "pnpm --filter @paneui/native-showcase web",
     "native:build": "pnpm tokens:gen && pnpm --filter @paneui/native-showcase build:web",
     "test:pages": "node --test tooling/scripts/pages-output.test.mjs",
-    "design:test": "node skills/paneui-design/scripts/check.mjs --self-test && node --test skills/paneui-design/scripts/native-checks.test.mjs"
+    "design:test": "node skills/paneui-design/scripts/check.mjs --self-test && node --test skills/paneui-design/scripts/native-checks.test.mjs",
+    "test:highlight": "node --experimental-strip-types --test tooling/scripts/highlight.test.mjs"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.4",
@@ -55,7 +56,6 @@
     "react-dom": "19.1.0",
     "@tiptap/core": "^3.32.0",
     "@tiptap/pm": "^3.32.0",
-    "shadcn": "^4.21.4",
-    "shiki": "^3.23.0"
+    "shadcn": "^4.21.4"
   }
 }
