@@ -96,7 +96,7 @@ function AccordionTrigger({
           <span
             data-slot="accordion-icon"
             aria-hidden
-            className="flex size-7 shrink-0 items-center justify-center rounded-inner-or-lg bg-card text-muted-foreground shadow-raised transition-colors duration-200 group-data-panel-open/accordion-trigger:text-primary [&_svg]:size-4"
+            className="flex size-7 shrink-0 items-center justify-center rounded-inner bg-card text-muted-foreground shadow-raised transition-colors duration-200 group-data-panel-open/accordion-trigger:text-primary [&_svg]:size-4"
           >
             {icon}
           </span>

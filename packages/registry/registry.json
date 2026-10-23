@@ -1655,7 +1655,6 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/button",
-        "@paneui/overflow-hint",
         "@paneui/popover",
         "@paneui/scroll-area",
         "@paneui/locale-provider"

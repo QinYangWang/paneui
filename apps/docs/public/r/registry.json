@@ -1655,7 +1655,6 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/button.json",
-        "https://paneui.dev/r/overflow-hint.json",
         "https://paneui.dev/r/popover.json",
         "https://paneui.dev/r/scroll-area.json",
         "https://paneui.dev/r/locale-provider.json"

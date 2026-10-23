@@ -216,8 +216,8 @@ export const demoUser = {
 }
 
 export const workspaces = [
-  { id: "northwind", name: "Northwind", plan: "Team · 24 seats" },
-  { id: "northwind-labs", name: "Northwind Labs", plan: "Solo" },
+  { id: "paneui", name: "PaneUI", plan: "Team · 24 seats" },
+  { id: "paneui-labs", name: "PaneUI Labs", plan: "Solo" },
   { id: "acme", name: "Acme Robotics", plan: "Enterprise" },
 ]
 
