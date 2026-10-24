@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { isNodeSelection, type Editor } from "@tiptap/core"
 import { useEditorState } from "@tiptap/react"
 import { BubbleMenu } from "@tiptap/react/menus"
@@ -19,9 +20,9 @@ import {
 } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
 import {
-  blockTypes as defaultBlockTypes,
-  highlightColors as defaultHighlightColors,
-  textColors as defaultTextColors,
+  getBlockTypes,
+  getHighlightColors,
+  getTextColors,
   type BlockType,
 } from "@paneui/ui/blocks/notion-editor/block-types"
 import { Button } from "@paneui/ui/components/button"
@@ -76,14 +77,19 @@ type BubbleProps = {
 /** Floating format bar over a text selection: turn into, marks, link, colour. */
 export function EditorBubbleMenu({
   editor,
-  blockTypes = defaultBlockTypes,
+  blockTypes,
   colors = true,
-  textColors = defaultTextColors,
-  highlightColors = defaultHighlightColors,
+  textColors,
+  highlightColors,
   children,
   shouldShow = shouldShowTextBubble,
   className,
 }: BubbleProps) {
+  const l10n = useLocale().labels
+  if (highlightColors === undefined) highlightColors = getHighlightColors(l10n)
+  if (textColors === undefined) textColors = getTextColors(l10n)
+  if (blockTypes === undefined) blockTypes = getBlockTypes(l10n)
+
   const state = useEditorState({
     editor,
     selector: ({ editor: e }) => ({
@@ -125,22 +131,22 @@ export function EditorBubbleMenu({
       options={{ placement: "top", offset: 8, flip: true, shift: { padding: 8 } }}
       className="z-40"
     >
-      <Toolbar variant="floating" aria-label="Format" className={cn("motion-safe:animate-in motion-safe:fade-in-0", className)}>
+      <Toolbar variant="floating" aria-label={l10n.format} className={cn("motion-safe:animate-in motion-safe:fade-in-0", className)}>
         {blockTypes && (
           <>
             <Menu>
               <MenuTrigger
                 render={
-                  <ToolbarButton aria-label="Turn into" size="label" className="text-foreground">
+                  <ToolbarButton aria-label={l10n.turnInto} size="label" className="text-foreground">
                     {BlockIcon && <BlockIcon className="size-3.5" />}
-                    <span className="max-w-24 truncate">{state.block?.label ?? "Text"}</span>
+                    <span className="max-w-24 truncate">{state.block?.label ?? l10n.text}</span>
                     <ChevronDownIcon className="size-3 opacity-60" />
                   </ToolbarButton>
                 }
               />
               <MenuContent className="w-48" sideOffset={8}>
                 <MenuGroup>
-                  <MenuLabel>Turn into</MenuLabel>
+                  <MenuLabel>{l10n.turnInto}</MenuLabel>
                   {blockTypes.map((b) => (
                     <MenuItem key={b.id} onClick={() => b.apply(editor)}>
                       <b.icon />
@@ -154,28 +160,28 @@ export function EditorBubbleMenu({
             <ToolbarSeparator />
           </>
         )}
-        <Tip label="Bold" kbd={`${mod}B`}>
-          <ToolbarToggle aria-label="Bold" pressed={state.bold} onPressedChange={toggle(() => editor.chain().focus().toggleBold().run())}>
+        <Tip label={l10n.bold} kbd={`${mod}B`}>
+          <ToolbarToggle aria-label={l10n.bold} pressed={state.bold} onPressedChange={toggle(() => editor.chain().focus().toggleBold().run())}>
             <BoldIcon />
           </ToolbarToggle>
         </Tip>
-        <Tip label="Italic" kbd={`${mod}I`}>
-          <ToolbarToggle aria-label="Italic" pressed={state.italic} onPressedChange={toggle(() => editor.chain().focus().toggleItalic().run())}>
+        <Tip label={l10n.italic} kbd={`${mod}I`}>
+          <ToolbarToggle aria-label={l10n.italic} pressed={state.italic} onPressedChange={toggle(() => editor.chain().focus().toggleItalic().run())}>
             <ItalicIcon />
           </ToolbarToggle>
         </Tip>
-        <Tip label="Underline" kbd={`${mod}U`}>
-          <ToolbarToggle aria-label="Underline" pressed={state.underline} onPressedChange={toggle(() => editor.chain().focus().toggleUnderline().run())}>
+        <Tip label={l10n.underline} kbd={`${mod}U`}>
+          <ToolbarToggle aria-label={l10n.underline} pressed={state.underline} onPressedChange={toggle(() => editor.chain().focus().toggleUnderline().run())}>
             <UnderlineIcon />
           </ToolbarToggle>
         </Tip>
-        <Tip label="Strikethrough" kbd={`${mod}⇧S`}>
-          <ToolbarToggle aria-label="Strikethrough" pressed={state.strike} onPressedChange={toggle(() => editor.chain().focus().toggleStrike().run())}>
+        <Tip label={l10n.strikethrough} kbd={`${mod}⇧S`}>
+          <ToolbarToggle aria-label={l10n.strikethrough} pressed={state.strike} onPressedChange={toggle(() => editor.chain().focus().toggleStrike().run())}>
             <StrikethroughIcon />
           </ToolbarToggle>
         </Tip>
-        <Tip label="Inline code" kbd={`${mod}E`}>
-          <ToolbarToggle aria-label="Inline code" pressed={state.code} onPressedChange={toggle(() => editor.chain().focus().toggleCode().run())}>
+        <Tip label={l10n.inlineCode} kbd={`${mod}E`}>
+          <ToolbarToggle aria-label={l10n.inlineCode} pressed={state.code} onPressedChange={toggle(() => editor.chain().focus().toggleCode().run())}>
             <CodeIcon />
           </ToolbarToggle>
         </Tip>
@@ -183,7 +189,7 @@ export function EditorBubbleMenu({
         <Popover open={linkOpen} onOpenChange={setLinkOpen}>
           <PopoverTrigger
             render={
-              <ToolbarButton aria-label="Link" data-pressed={state.link ? "" : undefined}>
+              <ToolbarButton aria-label={l10n.link} data-pressed={state.link ? "" : undefined}>
                 <LinkIcon />
               </ToolbarButton>
             }
@@ -212,7 +218,7 @@ export function EditorBubbleMenu({
           <Popover>
             <PopoverTrigger
               render={
-                <ToolbarButton aria-label="Colour" className="gap-0.5 px-1">
+                <ToolbarButton aria-label={l10n.colour} className="gap-0.5 px-1">
                   <BaselineIcon style={state.color !== "default" ? { color: state.color } : undefined} />
                   <ChevronDownIcon className="size-3 opacity-60" />
                 </ToolbarButton>
@@ -220,7 +226,7 @@ export function EditorBubbleMenu({
             />
             <PopoverContent side="bottom" sideOffset={10} className="w-fit gap-3 p-3">
               <SwatchPicker
-                label="Text colour"
+                label={l10n.textColour}
                 variant="letter"
                 swatches={textColors}
                 value={state.color}
@@ -230,7 +236,7 @@ export function EditorBubbleMenu({
                 }}
               />
               <SwatchPicker
-                label="Background"
+                label={l10n.background}
                 swatches={highlightColors}
                 value={state.highlight}
                 onValueChange={(value) => {
@@ -248,6 +254,8 @@ export function EditorBubbleMenu({
 }
 
 function LinkForm({ href, onApply, onRemove }: { href: string; onApply: (href: string) => void; onRemove?: () => void }) {
+  const l10n = useLocale().labels
+
   const [value, setValue] = React.useState(href)
   return (
     <form
@@ -258,12 +266,12 @@ function LinkForm({ href, onApply, onRemove }: { href: string; onApply: (href: s
         onApply(v && !/^[a-z][a-z0-9+.-]*:|^\/|^#|^mailto:/i.test(v) ? `https://${v}` : v)
       }}
     >
-      <Input autoFocus value={value} onChange={(e) => setValue(e.target.value)} placeholder="Paste or type a link" aria-label="Link URL" className="h-7" />
-      <Button type="submit" size="icon-sm" variant="ghost" aria-label="Apply link">
+      <Input autoFocus value={value} onChange={(e) => setValue(e.target.value)} placeholder={l10n.pasteOrTypeALink} aria-label={l10n.linkURL} className="h-7" />
+      <Button type="submit" size="icon-sm" variant="ghost" aria-label={l10n.applyLink}>
         <CheckIcon />
       </Button>
       {onRemove && (
-        <Button type="button" size="icon-sm" variant="ghost" aria-label="Remove link" onClick={onRemove}>
+        <Button type="button" size="icon-sm" variant="ghost" aria-label={l10n.removeLink} onClick={onRemove}>
           <TrashIcon />
         </Button>
       )}

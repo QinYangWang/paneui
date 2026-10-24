@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -119,8 +120,8 @@ function MessageBubbleGroup({
 function MessageBubbleCollapsible({
   collapsedHeight = 120,
   defaultExpanded = false,
-  moreLabel = "Show more",
-  lessLabel = "Show less",
+  moreLabel,
+  lessLabel,
   className,
   children,
   ...props
@@ -130,6 +131,10 @@ function MessageBubbleCollapsible({
   moreLabel?: string
   lessLabel?: string
 }) {
+  const l10n = useLocale().labels
+  if (moreLabel === undefined) moreLabel = l10n.showMore
+  if (lessLabel === undefined) lessLabel = l10n.showLess
+
   const innerRef = React.useRef<HTMLDivElement>(null)
   const [expanded, setExpanded] = React.useState(defaultExpanded)
   const [full, setFull] = React.useState<number | null>(null)

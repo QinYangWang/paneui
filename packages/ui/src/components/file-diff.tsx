@@ -11,7 +11,7 @@ import { cn } from "@paneui/ui/lib/utils"
 import { CodeCopyButton } from "@paneui/ui/components/agent-code-block"
 import { CollapsiblePanel } from "@paneui/ui/components/collapsible"
 import { Loader } from "@paneui/ui/components/loader"
-import { useLocale } from "@paneui/ui/components/locale-provider"
+import { useLocale, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 
 /* -------------------------------------------------------------------------- */
 /*  Rows (our own unified-diff model, kept for streaming and the API)          */
@@ -168,6 +168,21 @@ const STREAMING_CSS = /* css */ `
 }
 [data-content] > [data-line]:last-child { animation: file-diff-row-in 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
 `
+
+/** Translate renderer-owned controls after each render without replacing their handlers. */
+function localizeDiffControls(host: HTMLElement, labels: LocaleLabels) {
+  const root = host.shadowRoot ?? host
+  root.querySelectorAll<HTMLElement>("[data-unmodified-lines]").forEach((node) => {
+    const match = /^(\d+) unmodified lines?$/.exec(node.textContent ?? "")
+    if (match) node.dataset.localeLineCount = match[1]
+    if (node.dataset.localeLineCount !== undefined) node.textContent = labels.unmodifiedLines(Number(node.dataset.localeLineCount))
+  })
+  root.querySelectorAll<HTMLElement>("[data-expand-button]").forEach((node) => {
+    const label = node.hasAttribute("data-expand-up") ? labels.expandLinesUp : node.hasAttribute("data-expand-down") ? labels.expandLinesDown : labels.expandAll
+    node.setAttribute("aria-label", label)
+    if (node.hasAttribute("data-expand-all-button")) node.textContent = labels.expandAll
+  })
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Header pieces                                                             */
@@ -406,11 +421,18 @@ function FileDiff<A = undefined>({
       hunkSeparators: twoFile ? "line-info-basic" : "metadata",
       unsafeCSS: streaming && !reduce ? UNSAFE_CSS + STREAMING_CSS : UNSAFE_CSS,
       ...optionsProp,
+      onPostRender: (node, instance, phase) => {
+        localizeDiffControls(node, labels)
+        optionsProp?.onPostRender?.(node, instance, phase)
+      },
     }),
-    [dark, diffStyle, indicators, inlineChanges, showLineNumbers, wrap, twoFile, streaming, reduce, optionsProp]
+    [dark, diffStyle, indicators, inlineChanges, showLineNumbers, wrap, twoFile, streaming, reduce, optionsProp, labels]
   )
 
   const viewportRef = React.useRef<HTMLDivElement>(null)
+  React.useEffect(() => {
+    viewportRef.current?.querySelectorAll<HTMLElement>("diffs-container").forEach((node) => localizeDiffControls(node, labels))
+  }, [labels])
   const pinned = React.useRef(true)
   const rowCount = rows?.length ?? 0
   React.useLayoutEffect(() => {

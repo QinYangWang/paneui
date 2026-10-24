@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 
 import { ChevronsUpDownIcon, MenuIcon, SidebarIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
@@ -49,7 +50,6 @@ import { Separator } from "@paneui/ui/components/separator"
 
 /** The band between the panels and the window edge (`*-0.75`). */
 const GUTTER = "0.1875rem"
-
 
 const MOBILE_QUERY = "(width < 64rem)"
 
@@ -215,8 +215,10 @@ function AppShellHeader({ leading = <AppShellTrigger />, className, children, ..
 
 /** Toggles the rail on desktop and opens the drawer below lg. */
 function AppShellTrigger({ className, onClick, ...props }: React.ComponentProps<"button">) {
+  const l10n = useLocale().labels
+
   const { open, toggle, isMobile, mobileOpen, setMobileOpen } = useAppShell()
-  const label = isMobile ? "Open navigation" : open ? "Collapse sidebar" : "Expand sidebar"
+  const label = isMobile ? l10n.openNavigation : open ? l10n.collapseSidebar : l10n.expandSidebar
   return (
     <button
       type="button"
@@ -254,9 +256,12 @@ function AppShellSidebar({
   className,
   panelClassName,
   children,
-  "aria-label": ariaLabel = "Sidebar",
+  "aria-label": ariaLabel,
   ...props
 }: AppShellSidebarProps) {
+  const l10n = useLocale().labels
+  if (ariaLabel === undefined) ariaLabel = l10n.sidebar
+
   const { variant, layout, isMobile, mobileOpen, setMobileOpen } = useAppShellContext()
   return (
     <>
@@ -312,7 +317,7 @@ function AppShellSidebar({
               {/* Same height as the close button's band; an 18px mark leading the title centres on the icon column. */}
               {/* eslint-disable-next-line shadcn/no-arbitrary-values -- half the rail minus half the 18px mark */}
               <div className="flex h-16 shrink-0 items-center ps-[calc(var(--sidebar-width-icon)/2_-_0.5625rem)] pe-14">
-                <DrawerTitle className="flex min-w-0 items-center gap-2 text-ui-lg font-semibold icon-bold">{mobileTitle ?? "Navigation"}</DrawerTitle>
+                <DrawerTitle className="flex min-w-0 items-center gap-2 text-ui-lg font-semibold icon-bold">{mobileTitle ?? l10n.navigation}</DrawerTitle>
               </div>
               <Sidebar
                 variant="sidebar"

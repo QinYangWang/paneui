@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "motion/react"
 
 import { ArrowUpRightIcon, BellIcon, ChevronDownIcon, XIcon } from "@paneui/ui/icons"
@@ -104,10 +105,15 @@ export function NotificationStack({
   maxVisible = 4,
   onDismiss,
   onViewAll,
-  label = "Notifications",
-  emptyLabel = "You're all caught up",
+  label,
+  emptyLabel,
   className,
 }: NotificationStackProps) {
+  const l10n = useLocale().labels
+
+  if (label === undefined) label = l10n.notifications
+  if (emptyLabel === undefined) emptyLabel = l10n.youreAllCaughtUp
+
   const reduce = useReducedMotion()
   const listId = React.useId()
   const [internal, setInternal] = React.useState(defaultExpanded)
@@ -206,7 +212,7 @@ export function NotificationStack({
               transition={{ duration: 0.18 }}
               className="inline-flex h-7 items-center gap-1 rounded-md px-2.5 text-ui-sm font-medium text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
             >
-              View all
+              {l10n.viewAll}
               <ArrowUpRightIcon className="rtl:-scale-x-100" size={13} />
             </motion.button>
           )}
@@ -274,7 +280,7 @@ export function NotificationStack({
                     {onDismiss && expanded && (
                       <button
                         type="button"
-                        aria-label="Dismiss notification"
+                        aria-label={l10n.dismissNotification}
                         onClick={() => onDismiss(item.id)}
                         className="-mt-0.5 -mr-1 inline-flex size-6 shrink-0 items-center justify-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                       >

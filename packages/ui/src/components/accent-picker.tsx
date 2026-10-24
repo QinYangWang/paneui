@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import { Radio as RadioPrimitive } from "@base-ui/react/radio"
 import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group"
 
@@ -24,14 +25,18 @@ import { cn } from "@paneui/ui/lib/utils"
 const ACCENTS = ["blue", "neutral", "green", "orange", "rose", "violet"] as const
 type Accent = (typeof ACCENTS)[number]
 
-const ACCENT_LABELS: Record<Accent, string> = {
-  blue: "Blue",
-  neutral: "Neutral",
-  green: "Green",
-  orange: "Orange",
-  rose: "Rose",
-  violet: "Violet",
+function getAccentLabels(l10n: LocaleLabels = localeLabels.en): Record<Accent, string> {
+  return ({
+  blue: l10n.blue,
+  neutral: l10n.neutral,
+  green: l10n.green,
+  orange: l10n.orange,
+  rose: l10n.rose,
+  violet: l10n.violet,
+})
 }
+
+const ACCENT_LABELS = getAccentLabels()
 
 /** Each preset's light-mode primary (neutral follows the foreground). */
 const SWATCH: Record<Accent, string> = {
@@ -134,6 +139,9 @@ type AccentPickerProps = Omit<RadioGroupPrimitive.Props<string>, "value" | "defa
 }
 
 function AccentPicker({ accents = ACCENTS, showLabels = false, className, ...props }: AccentPickerProps) {
+  const l10n = useLocale().labels
+  const ACCENT_LABELS = getAccentLabels(l10n)
+
   const [accent, setAccent] = useAccent()
   return (
     <RadioGroupPrimitive
@@ -142,7 +150,7 @@ function AccentPicker({ accents = ACCENTS, showLabels = false, className, ...pro
       onValueChange={(v) => isAccent(v) && setAccent(v)}
       className={cn("flex flex-wrap items-start gap-3", className)}
       {...props}
-      aria-label={props["aria-label"] ?? "Accent colour"}
+      aria-label={props["aria-label"] ?? l10n.accentColour}
     >
       {accents.map((a) => (
         <label key={a} className="flex cursor-pointer flex-col items-center gap-1.5 text-ui-sm text-muted-foreground has-data-checked:text-foreground">

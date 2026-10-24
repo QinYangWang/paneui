@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 
 import { CheckIcon, ChevronsUpDownIcon, PlusIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
@@ -60,12 +61,15 @@ function WorkspaceSwitcher({
   value,
   onValueChange,
   onCreate,
-  createLabel = "Create workspace",
+  createLabel,
   collapsed = false,
   align = "center",
   className,
   ...props
 }: WorkspaceSwitcherProps) {
+  const l10n = useLocale().labels
+  if (createLabel === undefined) createLabel = l10n.createWorkspace
+
   const current = workspaces.find((w) => w.id === value) ?? workspaces[0]
   if (!current) return null
   return (
@@ -78,7 +82,7 @@ function WorkspaceSwitcher({
           className
         )}
         {...props}
-        aria-label={props["aria-label"] ?? `Workspace: ${current.name}. Switch workspace`}
+        aria-label={props["aria-label"] ?? l10n.workspaceSwitch(current.name)}
       >
         {/* 8px into the row: concentric with it where that leaves a usable radius */}
         <WorkspaceMark workspace={current} className="rounded-inner-or-md" />
@@ -95,7 +99,7 @@ function WorkspaceSwitcher({
       </MenuTrigger>
       <MenuContent align={align} className="w-60">
         <MenuGroup>
-          <MenuLabel>Workspaces</MenuLabel>
+          <MenuLabel>{l10n.workspaces}</MenuLabel>
           {workspaces.map((w, i) => (
             <MenuItem key={w.id} onClick={() => onValueChange(w.id)} className="min-h-8">
               <WorkspaceMark workspace={w} className="size-5 rounded-sm" />

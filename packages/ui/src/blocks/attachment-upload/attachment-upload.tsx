@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react"
 
@@ -186,6 +187,8 @@ function Thumb({ item, layout }: { item: AttachmentItem; layout: boolean }) {
 }
 
 function StatusMark({ status }: { status: AttachmentStatus }) {
+  const l10n = useLocale().labels
+
   const reduce = useReducedMotion()
   return (
     <AnimatePresence mode="popLayout" initial={false}>
@@ -197,7 +200,7 @@ function StatusMark({ status }: { status: AttachmentStatus }) {
           exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
           className="inline-flex size-4 items-center justify-center rounded-full bg-success/14 text-success"
-          aria-label="Uploaded"
+          aria-label={l10n.uploaded}
         >
           <CheckIcon size={10} />
         </motion.span>
@@ -210,7 +213,7 @@ function StatusMark({ status }: { status: AttachmentStatus }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
           className="inline-flex text-destructive"
-          aria-label="Failed"
+          aria-label={l10n.toolFailed}
         >
           <AlertCircleIcon size={14} />
         </motion.span>
@@ -236,6 +239,8 @@ function AttachmentRow({
   previewing: boolean
   disabled?: boolean
 }) {
+  const l10n = useLocale().labels
+
   const reduce = useReducedMotion()
   const status = item.status ?? (item.kind === "link" ? "success" : "queued")
   const progress = status === "success" ? 100 : Math.min(100, Math.max(0, item.progress ?? 0))
@@ -245,9 +250,9 @@ function AttachmentRow({
       : status === "uploading"
         ? `${Math.round(progress)}% of ${formatBytes(item.size)}`
         : status === "queued"
-          ? `Waiting · ${formatBytes(item.size)}`
+          ? l10n.waitingSize(formatBytes(item.size))
           : status === "error"
-            ? (item.error ?? "Upload failed")
+            ? (item.error ?? l10n.uploadFailed)
             : formatBytes(item.size)
 
   return (
@@ -272,7 +277,7 @@ function AttachmentRow({
         <button
           type="button"
           onClick={() => onPreview(item)}
-          aria-label={`Preview ${item.name}`}
+          aria-label={l10n.previewNamed(item.name)}
           className="relative size-11 shrink-0 cursor-zoom-in rounded-inner outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {!previewing && <Thumb item={item} layout={!reduce} />}
@@ -314,7 +319,7 @@ function AttachmentRow({
         {item.kind === "file" && (status === "uploading" || status === "queued") && (
           <div
             role="progressbar"
-            aria-label={`Uploading ${item.name}`}
+            aria-label={l10n.uploadingNamed(item.name)}
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(progress)}
@@ -337,7 +342,7 @@ function AttachmentRow({
             className={iconButton}
             onClick={() => onRetry(item)}
             disabled={disabled}
-            aria-label={`Retry ${item.name}`}
+            aria-label={l10n.retryNamed(item.name)}
           >
             <RefreshIcon size={15} />
           </button>
@@ -347,7 +352,7 @@ function AttachmentRow({
           className={cn(iconButton, "sm:opacity-0 sm:group-hover/row:opacity-100 sm:focus-visible:opacity-100", status === "error" && "sm:opacity-100")}
           onClick={() => onRemove(item)}
           disabled={disabled}
-          aria-label={`Remove ${item.name}`}
+          aria-label={l10n.removeNamed(item.name)}
         >
           <XIcon size={15} />
         </button>
@@ -370,11 +375,16 @@ export function AttachmentUpload({
   maxFiles,
   maxFileSize,
   disabled = false,
-  title = "Drag files here",
-  description = "Images, documents and archives",
-  label = "Attachments",
+  title,
+  description,
+  label,
   className,
 }: AttachmentUploadProps) {
+  const l10n = useLocale().labels
+  if (title === undefined) title = l10n.dragFilesHere
+  if (description === undefined) description = l10n.imagesDocumentsAndArchives
+  if (label === undefined) label = l10n.attachments
+
   const reduce = useReducedMotion()
   const [items, setItems] = useItemList(value, defaultValue, onValueChange)
   const [dragging, setDragging] = React.useState(false)
@@ -413,7 +423,7 @@ export function AttachmentUpload({
         })
         .catch((err: unknown) => {
           if (controller.signal.aborted) return
-          const message = err instanceof Error ? err.message : "Upload failed"
+          const message = err instanceof Error ? err.message : l10n.uploadFailed
           patch(item.id, { status: "error", error: message })
           setAnnouncement(`${item.name} failed`)
         })
@@ -449,7 +459,7 @@ export function AttachmentUpload({
       const tooLarge = files.filter((f) => f.size > maxFileSize)
       if (tooLarge.length) {
         onFilesRejected?.(tooLarge, "too-large")
-        setAnnouncement(`${tooLarge.length} file${tooLarge.length === 1 ? " is" : "s are"} over ${formatBytes(maxFileSize)}`)
+        setAnnouncement(l10n.filesTooLarge(tooLarge.length, formatBytes(maxFileSize)))
       }
       files = files.filter((f) => f.size <= maxFileSize)
     }
@@ -510,7 +520,7 @@ export function AttachmentUpload({
             )}
           </div>
           <span className="text-ui-sm text-muted-foreground tabular-nums" aria-hidden>
-            {uploading > 0 ? `Uploading ${uploading}…` : items.length > 0 ? "All synced" : ""}
+            {uploading > 0 ? l10n.uploadingCount(uploading) : items.length > 0 ? l10n.allSynced : ""}
           </span>
         </div>
 
@@ -565,7 +575,7 @@ export function AttachmentUpload({
             <UploadIcon size={compact ? 16 : 22} />
           </motion.span>
           <motion.div layout={!reduce ? "position" : false} className="flex min-w-0 flex-1 flex-col">
-            <span className="text-ui font-medium">{dragging ? "Release to attach" : full ? "Attachment limit reached" : title}</span>
+            <span className="text-ui font-medium">{dragging ? l10n.releaseToAttach : full ? l10n.attachmentLimitReached : title}</span>
             {!compact && (
               <span className="text-ui-sm text-muted-foreground">
                 {description}
@@ -601,7 +611,7 @@ export function AttachmentUpload({
             )}
           >
             <PlusIcon size={14} />
-            {compact ? "Add" : "Choose files"}
+            {compact ? l10n.add : l10n.chooseFiles}
           </motion.button>
         </motion.div>
 
@@ -652,7 +662,7 @@ export function AttachmentUpload({
                     <DialogPrimitive.Title className="truncate text-ui font-medium">{preview.name}</DialogPrimitive.Title>
                     <span className="tabular-nums shrink-0 text-ui-sm text-muted-foreground">{formatBytes(preview.size)}</span>
                   </div>
-                  <DialogPrimitive.Close aria-label="Close preview" className={iconButton}>
+                  <DialogPrimitive.Close aria-label={l10n.closePreview} className={iconButton}>
                     <XIcon size={15} />
                   </DialogPrimitive.Close>
                 </motion.div>

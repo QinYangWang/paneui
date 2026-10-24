@@ -262,7 +262,7 @@ function DonutChart({
 
       {showLegend && (
         <ul
-          aria-label={`${label} legend`}
+          aria-label={labels.legendFor(label)}
           className="flex w-full flex-col gap-1 rounded-3xl bg-background dark:bg-input/32 p-1.5 shadow-well"
         >
           {placed.map((s) => {

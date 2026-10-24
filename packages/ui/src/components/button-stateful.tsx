@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "motion/react"
 
 import { CheckIcon, LoaderIcon, XIcon } from "@paneui/ui/icons"
@@ -44,9 +45,9 @@ function useNaturalWidth<T extends HTMLElement>() {
 function StatefulButton({
   state = "idle",
   children,
-  loadingText = "Working",
-  successText = "Done",
-  errorText = "Try again",
+  loadingText,
+  successText,
+  errorText,
   icon,
   tint = true,
   variant = "default",
@@ -54,6 +55,11 @@ function StatefulButton({
   className,
   ...props
 }: StatefulButtonProps) {
+  const l10n = useLocale().labels
+  if (loadingText === undefined) loadingText = l10n.working
+  if (successText === undefined) successText = l10n.toolDone
+  if (errorText === undefined) errorText = l10n.tryAgain
+
   const reduce = useReducedMotion()
   const [innerRef, width] = useNaturalWidth<HTMLSpanElement>()
   const busy = state === "loading"

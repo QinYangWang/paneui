@@ -268,6 +268,7 @@ export const examples: Record<string, React.ComponentType> = {
   "loader/in-context": dynamic(() => import("@/registry/examples/loader/in-context"), { ssr: false }),
   "loader/sizes": dynamic(() => import("@/registry/examples/loader/sizes"), { ssr: false }),
   "loader/speed": dynamic(() => import("@/registry/examples/loader/speed"), { ssr: false }),
+  "locale-provider/chinese": dynamic(() => import("@/registry/examples/locale-provider/chinese"), { ssr: false }),
   "locale-provider/overrides": dynamic(() => import("@/registry/examples/locale-provider/overrides"), { ssr: false }),
   "magnetic/range": dynamic(() => import("@/registry/examples/magnetic/range"), { ssr: false }),
   "magnetic/spring": dynamic(() => import("@/registry/examples/magnetic/spring"), { ssr: false }),

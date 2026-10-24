@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "motion/react"
 
 import { CopyIcon, PlusIcon, XIcon } from "@paneui/ui/icons"
@@ -102,6 +103,7 @@ function AvailabilityScheduler({
   className,
   ...props
 }: AvailabilitySchedulerProps) {
+  const l10n = useLocale().labels
   const [inner, setInner] = React.useState<WeekAvailability>(() => defaultValue ?? emptyWeek())
   const value = valueProp ?? inner
   const valueRef = React.useRef(value)
@@ -125,7 +127,9 @@ function AvailabilityScheduler({
     return out
   }, [step, hour12])
 
-  const days = weekStartsOn === "sun" ? [DAYS[6], ...DAYS.slice(0, 6)] : DAYS
+  const weekdayLabels = l10n.weekdayLabels
+  const localizedDays = DAYS.map((day, i) => ({ ...day, label: weekdayLabels[i][0], short: weekdayLabels[i][1] }))
+  const days = weekStartsOn === "sun" ? [localizedDays[6], ...localizedDays.slice(0, 6)] : localizedDays
 
   const copyTo = (from: DayKey, targets: DayKey[]) => {
     const current = valueRef.current
@@ -190,6 +194,8 @@ function DayRow({
   onCopy: (targets: DayKey[]) => void
   days: typeof DAYS
 }) {
+  const l10n = useLocale().labels
+
   const reduce = useReducedMotion()
   const labelId = React.useId()
   const bad = overlapping(data.ranges)
@@ -254,7 +260,7 @@ function DayRow({
               ranges: checked && d.ranges.length === 0 ? [{ id: newId(), start: "09:00", end: "17:00" }] : d.ranges,
             }))
           }
-          aria-label={`${day.label} available`}
+          aria-label={l10n.dayAvailable(day.label)}
         />
         <span id={labelId} className={cn("truncate transition-colors duration-200", !data.enabled && "text-muted-foreground")}>
           {day.label}
@@ -272,7 +278,7 @@ function DayRow({
               transition={ROW}
               className="hidden h-9 items-center text-ui text-muted-foreground @lg:flex"
             >
-              Unavailable
+              {l10n.unavailable}
             </motion.p>
           ) : (
             <motion.ul
@@ -290,7 +296,7 @@ function DayRow({
                       {/* Below 16rem the two times stack instead of squeezing. */}
                       <div className="flex min-w-0 items-center gap-2 @max-3xs:flex-1 @max-3xs:flex-col @max-3xs:items-stretch @max-3xs:gap-1">
                       <TimeSelect
-                        label={`${day.label} range ${i + 1} start`}
+                        label={l10n.dayRangeStart(day.label, i + 1)}
                         value={r.start}
                         options={options}
                         keys={startOptions}
@@ -301,7 +307,7 @@ function DayRow({
                         –
                       </span>
                       <TimeSelect
-                        label={`${day.label} range ${i + 1} end`}
+                        label={l10n.dayRangeEnd(day.label, i + 1)}
                         value={r.end}
                         options={options}
                         keys={endOptions}
@@ -312,7 +318,7 @@ function DayRow({
                       <Button
                         variant="ghost"
                         size="icon-sm"
-                        aria-label={`Remove ${formatTime(r.start, true)} to ${formatTime(r.end, true)} on ${day.label}`}
+                        aria-label={l10n.removeDayRange(formatTime(r.start, true), formatTime(r.end, true), day.label)}
                         onClick={() =>
                           onChange((d) => {
                             const ranges = d.ranges.filter((x) => x.id !== r.id)
@@ -338,7 +344,7 @@ function DayRow({
                     role="alert"
                     className="overflow-hidden text-ui-sm text-destructive"
                   >
-                    <span className="block pt-0.5">These hours overlap.</span>
+                    <span className="block pt-0.5">{l10n.theseHoursOverlap}</span>
                   </motion.li>
                 )}
               </AnimatePresence>
@@ -358,7 +364,7 @@ function DayRow({
             aria-hidden
             className="col-start-2 row-start-1 flex h-9 items-center text-ui text-muted-foreground @lg:hidden"
           >
-            Unavailable
+            {l10n.unavailable}
           </motion.p>
         ) : (
           <motion.div
@@ -372,7 +378,7 @@ function DayRow({
             <Button
               variant="ghost"
               size="icon-sm"
-              aria-label={`Add a range on ${day.label}`}
+              aria-label={l10n.addDayRange(day.label)}
               disabled={!canAdd}
               onClick={addRange}
               className="text-muted-foreground hover:text-foreground"
@@ -436,6 +442,8 @@ function CopyMenu({
   days: typeof DAYS
   onCopy: (targets: DayKey[]) => void
 }) {
+  const l10n = useLocale().labels
+
   const [picked, setPicked] = React.useState<DayKey[]>([])
   const others = days.filter((d) => d.key !== day.key)
   return (
@@ -445,7 +453,7 @@ function CopyMenu({
           <Button
             variant="ghost"
             size="icon-sm"
-            aria-label={`Copy ${day.label} hours`}
+            aria-label={l10n.copyDayHours(day.label)}
             className="text-muted-foreground hover:text-foreground"
           />
         }
@@ -453,11 +461,11 @@ function CopyMenu({
         <CopyIcon />
       </MenuTrigger>
       <MenuContent align="end" className="min-w-52">
-        <MenuItem onClick={() => onCopy(days.map((d) => d.key))}>Copy to all days</MenuItem>
-        <MenuItem onClick={() => onCopy(WEEKDAYS)}>Copy to weekdays</MenuItem>
+        <MenuItem onClick={() => onCopy(days.map((d) => d.key))}>{l10n.copyToAllDays}</MenuItem>
+        <MenuItem onClick={() => onCopy(WEEKDAYS)}>{l10n.copyToWeekdays}</MenuItem>
         <MenuSeparator />
         <MenuGroup>
-          <MenuLabel>Copy {day.short} to…</MenuLabel>
+          <MenuLabel>{l10n.copyDayTo(day.short)}</MenuLabel>
           {others.map((d) => (
             <MenuCheckboxItem
               key={d.key}
@@ -477,7 +485,7 @@ function CopyMenu({
           onClick={() => onCopy(picked)}
           className="justify-center font-medium text-primary"
         >
-          Apply{picked.length ? ` to ${picked.length} day${picked.length > 1 ? "s" : ""}` : ""}
+          {l10n.apply}{picked.length ? ` to ${picked.length} day${picked.length > 1 ? "s" : ""}` : ""}
         </MenuItem>
       </MenuContent>
     </Menu>

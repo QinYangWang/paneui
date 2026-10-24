@@ -12,7 +12,8 @@
     "https://paneui.dev/r/theme.json",
     "https://paneui.dev/r/icons.json",
     "https://paneui.dev/r/table.json",
-    "https://paneui.dev/r/menu.json"
+    "https://paneui.dev/r/menu.json",
+    "https://paneui.dev/r/locale-provider.json"
   ],
   "files": [
     {

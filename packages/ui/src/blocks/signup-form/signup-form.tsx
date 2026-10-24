@@ -1,5 +1,7 @@
 "use client"
 
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
+
 import * as React from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
@@ -36,14 +38,14 @@ type SignupFormProps = Omit<React.ComponentProps<"form">, "onSubmit" | "children
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
-function validate(v: SignupValues, min: number): SignupErrors {
+function validate(v: SignupValues, min: number, l10n: LocaleLabels): SignupErrors {
   const e: SignupErrors = {}
-  if (!v.name.trim()) e.name = "Tell us what to call you."
-  if (!v.email.trim()) e.email = "Enter your email address."
-  else if (!EMAIL.test(v.email.trim())) e.email = "That doesn't look like an email address."
-  if (!v.password) e.password = "Choose a password."
-  else if (v.password.length < min) e.password = `Use at least ${min} characters.`
-  if (!v.terms) e.terms = "Please accept the terms to continue."
+  if (!v.name.trim()) e.name = l10n.tellUsWhatToCallYou
+  if (!v.email.trim()) e.email = l10n.enterYourEmailAddress
+  else if (!EMAIL.test(v.email.trim())) e.email = l10n.thatDoesntLookLikeAnEmailAddress
+  if (!v.password) e.password = l10n.chooseAPassword
+  else if (v.password.length < min) e.password = l10n.minimumCharacters(min)
+  if (!v.terms) e.terms = l10n.pleaseAcceptTheTermsToContinue
   return e
 }
 
@@ -55,13 +57,16 @@ function strength(pw: string, min: number) {
   const score = len + (variety >= 3 ? 1 : 0)
   return Math.max(1, Math.min(4, pw.length < min ? 1 : score))
 }
-const STRENGTH = [
+function getStrengthLabels(l10n: LocaleLabels = localeLabels.en) {
+  return ([
   { label: "", tone: "" },
-  { label: "Weak", tone: "bg-destructive" },
-  { label: "Fair", tone: "bg-warning" },
-  { label: "Good", tone: "bg-primary" },
-  { label: "Strong", tone: "bg-success" },
-]
+  { label: l10n.weak, tone: "bg-destructive" },
+  { label: l10n.fair, tone: "bg-warning" },
+  { label: l10n.good, tone: "bg-primary" },
+  { label: l10n.strong, tone: "bg-success" },
+])
+}
+
 
 /**
  * Composed sign-up form. A field is only flagged once it has been left (or on
@@ -72,16 +77,25 @@ const STRENGTH = [
 function SignupForm({
   onSubmit,
   minPasswordLength = 8,
-  title = "Create your account",
-  description = "Start free. No card required.",
-  submitLabel = "Create account",
-  successLabel = "Account created",
-  termsLabel = "I agree to the Terms and Privacy Policy",
+  title,
+  description,
+  submitLabel,
+  successLabel,
+  termsLabel,
   footer,
   variant = "card",
   className,
   ...props
 }: SignupFormProps) {
+  const l10n = useLocale().labels
+  const STRENGTH = getStrengthLabels(l10n)
+
+  if (title === undefined) title = l10n.createYourAccount
+  if (description === undefined) description = l10n.startFreeNoCardRequired
+  if (submitLabel === undefined) submitLabel = l10n.createAccount
+  if (successLabel === undefined) successLabel = l10n.accountCreated
+  if (termsLabel === undefined) termsLabel = l10n.iAgreeToTheTermsAndPrivacyPolicy
+
   const reduce = useReducedMotion()
   const uid = React.useId()
   const [values, setValues] = React.useState<SignupValues>({ name: "", email: "", password: "", terms: false })
@@ -98,7 +112,7 @@ function SignupForm({
     terms: React.useRef<HTMLElement>(null),
   }
 
-  const clientErrors = validate(values, minPasswordLength)
+  const clientErrors = validate(values, minPasswordLength, l10n)
   const errorFor = (f: SignupField) => serverErrors[f] ?? (flagged[f] ? clientErrors[f] : undefined)
   const score = strength(values.password, minPasswordLength)
   const done = state === "success"
@@ -106,13 +120,13 @@ function SignupForm({
   const set = <K extends SignupField>(field: K, v: SignupValues[K]) => {
     const next = { ...values, [field]: v }
     setValues(next)
-    if (flagged[field] && !validate(next, minPasswordLength)[field]) setFlagged((f) => ({ ...f, [field]: false }))
+    if (flagged[field] && !validate(next, minPasswordLength, l10n)[field]) setFlagged((f) => ({ ...f, [field]: false }))
     if (serverErrors[field]) setServerErrors((e) => ({ ...e, [field]: undefined }))
     if (state === "error") setState("idle")
     setFormError(null)
   }
   const leave = (field: SignupField, current: SignupValues = values) => {
-    const invalid = !!validate(current, minPasswordLength)[field]
+    const invalid = !!validate(current, minPasswordLength, l10n)[field]
     // Leaving an empty, never-typed field does not nag; only a real attempt does.
     if (invalid && (current[field] !== "" || flagged[field])) setFlagged((f) => ({ ...f, [field]: true }))
   }
@@ -140,7 +154,7 @@ function SignupForm({
       setState("success")
     } catch (err) {
       setState("error")
-      setFormError(err instanceof Error && err.message ? err.message : "Something went wrong. Please try again.")
+      setFormError(err instanceof Error && err.message ? err.message : l10n.somethingWentWrongPleaseTryAgain)
     }
   }
 
@@ -180,15 +194,15 @@ function SignupForm({
       )}
 
       <div className="flex flex-col gap-4">
-        <FieldShell id={`${uid}-name`} label="Name" error={errorFor("name")}>
+        <FieldShell id={`${uid}-name`} label={l10n.name} error={errorFor("name")}>
           <Input {...field("name")} autoComplete="name" placeholder="Ada Lovelace" />
         </FieldShell>
 
-        <FieldShell id={`${uid}-email`} label="Email" error={errorFor("email")}>
+        <FieldShell id={`${uid}-email`} label={l10n.email} error={errorFor("email")}>
           <Input {...field("email")} type="email" inputMode="email" autoComplete="email" placeholder="ada@example.com" />
         </FieldShell>
 
-        <FieldShell id={`${uid}-password`} label="Password" error={errorFor("password")}>
+        <FieldShell id={`${uid}-password`} label={l10n.password} error={errorFor("password")}>
           <div className="relative">
             <Input
               {...field("password")}
@@ -199,7 +213,7 @@ function SignupForm({
             <button
               type="button"
               onClick={() => setReveal((r) => !r)}
-              aria-label={reveal ? "Hide password" : "Show password"}
+              aria-label={reveal ? l10n.hidePassword : l10n.showPassword}
               aria-pressed={reveal}
               disabled={done}
               className="absolute top-1/2 right-1.5 flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-4"

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 
 import { CheckCircleIcon, RefreshIcon } from "@paneui/ui/icons"
 import { Button } from "@paneui/ui/components/button"
@@ -113,6 +114,8 @@ interface AsyncTableProps<T> extends Omit<TableProps<T>, "data" | "loading" | "o
  * reorder all still work over whatever has loaded.
  */
 function AsyncTable<T>({ loadPage, resetKey, endMessage, onStatusChange, ref, ...tableProps }: AsyncTableProps<T>) {
+  const l10n = useLocale().labels
+
   const { rows, status, loadMore, retry, reload } = useAsyncPages(loadPage, resetKey)
   const tableRef = React.useRef<TableHandle | null>(null)
   React.useImperativeHandle(ref, () => ({
@@ -139,10 +142,10 @@ function AsyncTable<T>({ loadPage, resetKey, endMessage, onStatusChange, ref, ..
   else if (status === "error") {
     footer = (
       <div role="alert" className="flex h-full items-center justify-center gap-3 text-ui text-muted-foreground">
-        Couldn&apos;t load more rows.
+        {l10n.couldNotLoadMoreRows}
         <Button size="xs" variant="secondary" onClick={rows.length ? retry : reload}>
           <RefreshIcon data-icon="inline-start" />
-          Retry
+          {l10n.retry}
         </Button>
       </div>
     )
@@ -155,7 +158,7 @@ function AsyncTable<T>({ loadPage, resetKey, endMessage, onStatusChange, ref, ..
       ) : (
         <div className="flex h-full items-center justify-center gap-1.5 text-ui-sm text-muted-foreground">
           <CheckCircleIcon className="size-3.5 text-success" />
-          All {rows.length.toLocaleString("en-US")} rows loaded
+          {l10n.allRowsLoaded(rows.length.toLocaleString("en-US"))}
         </div>
       )
   }
@@ -171,10 +174,10 @@ function AsyncTable<T>({ loadPage, resetKey, endMessage, onStatusChange, ref, ..
       emptyState={
         status === "error" ? (
           <div role="alert" className="flex flex-col items-center gap-3">
-            Couldn&apos;t load this table.
+            {l10n.couldNotLoadThisTable}
             <Button size="sm" variant="secondary" onClick={reload}>
               <RefreshIcon data-icon="inline-start" />
-              Try again
+              {l10n.tryAgain}
             </Button>
           </div>
         ) : (

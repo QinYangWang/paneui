@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Extension, type AnyExtension, type Editor, type JSONContent } from "@tiptap/core"
 import { EditorContent, useEditor, useEditorState } from "@tiptap/react"
 
@@ -11,7 +12,7 @@ import { EditorBubbleMenu } from "@paneui/ui/blocks/notion-editor/bubble-menu"
 import { notionExtensions, type ImageUploader } from "@paneui/ui/blocks/notion-editor/extensions"
 import { fromMDX, toMDX } from "@paneui/ui/blocks/notion-editor/mdx"
 import { CalloutWithView, MdxBlockWithView } from "@paneui/ui/blocks/notion-editor/node-views"
-import { defaultSlashItems, pickFile, SlashCommand, type SlashItem } from "@paneui/ui/blocks/notion-editor/slash-command"
+import { getDefaultSlashItems, pickFile, SlashCommand, type SlashItem } from "@paneui/ui/blocks/notion-editor/slash-command"
 import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from "@paneui/ui/components/toolbar"
 import { Tooltip, TooltipContent, TooltipKbd, TooltipTrigger } from "@paneui/ui/components/tooltip"
 
@@ -126,12 +127,18 @@ export function useNotionEditor({
   readOnly = false,
   placeholder,
   placeholders,
-  slashItems = defaultSlashItems,
+  slashItems,
   uploadImage,
   extensions = [],
   autofocus = false,
-  "aria-label": ariaLabel = "Document",
+  "aria-label": ariaLabel,
 }: UseNotionEditorOptions = {}) {
+  const l10n = useLocale().labels
+  const localeRef = React.useRef(l10n)
+  localeRef.current = l10n
+  const slashRef = React.useRef(slashItems)
+  slashRef.current = slashItems
+  if (ariaLabel === undefined) ariaLabel = l10n.document
   const last = React.useRef<string | undefined>(undefined)
   const callbacks = React.useRef({ onChange, onUpdate })
   callbacks.current = { onChange, onUpdate }
@@ -142,10 +149,10 @@ export function useNotionEditor({
     autofocus,
     content: toJSON(value ?? defaultValue) ?? "",
     extensions: [
-      ...notionExtensions({ placeholder, placeholders, uploadImage }).map((ext) =>
+      ...notionExtensions({ placeholder, placeholders, uploadImage, labels: () => localeRef.current }).map((ext) =>
         ext.name === "callout" ? CalloutWithView : ext.name === "mdxBlock" ? MdxBlockWithView : ext
       ),
-      SlashCommand.configure({ items: slashItems }),
+      SlashCommand.configure({ items: () => slashRef.current ?? getDefaultSlashItems(localeRef.current), labels: () => localeRef.current }),
       NotionShortcuts,
       ...extensions,
     ],
@@ -229,6 +236,8 @@ type ToolbarProps = {
 
 /** Undo / redo, a word count, and MDX import / export. */
 export function NotionEditorToolbar({ editor, fileName = "document.mdx", children, className }: ToolbarProps) {
+  const l10n = useLocale().labels
+
   const state = useEditorState({
     editor,
     selector: ({ editor: e }) =>
@@ -245,31 +254,31 @@ export function NotionEditorToolbar({ editor, fileName = "document.mdx", childre
   const mod = isMac ? "⌘" : "Ctrl+"
   return (
     <Toolbar
-      aria-label="Document"
+      aria-label={l10n.document}
       className={cn("h-11 shrink-0 border-b border-border px-2", className)}
       data-slot="notion-editor-toolbar"
     >
       <ToolbarGroup>
-        <TipButton label="Undo" kbd={`${mod}Z`} disabled={!state?.canUndo} onClick={() => editor?.chain().focus().undo().run()}>
+        <TipButton label={l10n.undo} kbd={`${mod}Z`} disabled={!state?.canUndo} onClick={() => editor?.chain().focus().undo().run()}>
           <UndoIcon className="rtl:-scale-x-100" />
         </TipButton>
-        <TipButton label="Redo" kbd={`${mod}⇧Z`} disabled={!state?.canRedo} onClick={() => editor?.chain().focus().redo().run()}>
+        <TipButton label={l10n.redo} kbd={`${mod}⇧Z`} disabled={!state?.canRedo} onClick={() => editor?.chain().focus().redo().run()}>
           <UndoIcon className="-scale-x-100 rtl:scale-x-100" />
         </TipButton>
       </ToolbarGroup>
       {children}
       <span className="ml-auto px-2 text-ui-xs text-muted-foreground tabular-nums">
-        {state?.words ?? 0} {state?.words === 1 ? "word" : "words"}
+        {l10n.wordCount(state?.words ?? 0)}
       </span>
       <ToolbarSeparator />
       <ToolbarGroup>
         <ToolbarButton disabled={!editor || !state?.editable} onClick={() => editor && void importMDXFile(editor)} size="label">
           <UploadIcon />
-          Import
+          {l10n.import}
         </ToolbarButton>
         <ToolbarButton disabled={!editor} onClick={() => editor && exportMDXFile(editor, fileName)} size="label">
           <DownloadIcon />
-          Export MDX
+          {l10n.exportMDX}
         </ToolbarButton>
       </ToolbarGroup>
     </Toolbar>

@@ -286,7 +286,7 @@ function Treemap({
             viewBox={`0 0 ${width} ${height}`}
             className="block overflow-visible"
             role="group"
-            aria-label={`${label}: ${tiles.length} items`}
+            aria-label={labels.chartItems(label, tiles.length)}
           >
             <defs>
               {tiles.map((t) => (
@@ -311,7 +311,7 @@ function Treemap({
                   data-index={i}
                   tabIndex={0}
                   role="img"
-                  aria-label={`${t.group ? `${t.group.label} / ` : ""}${t.label}: ${formatValue(t.value)}, ${formatPercent(t.share)} of total`}
+                  aria-label={`${t.group ? `${t.group.label} / ` : ""}${t.label}: ${formatValue(t.value)}, ${labels.percentOf(formatPercent(t.share), labels.total)}`}
                   className="cursor-default outline-none [&:focus-visible>rect:last-of-type]:stroke-ring"
                   onPointerMove={(e) => {
                     const box = ref.current?.getBoundingClientRect()
@@ -401,7 +401,7 @@ function Treemap({
       </div>
 
       {showLegend && (
-        <ChartLegend aria-label={`${label} legend`}>
+        <ChartLegend aria-label={labels.legendFor(label)}>
           {data.map((node, i) => {
             const v = nodeValue(node)
             return (

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@paneui/ui/lib/utils"
@@ -83,13 +84,16 @@ function PreviewRail({
   showActive = true,
   itemSize = 22,
   tickLength = 40,
-  label = "Sections",
+  label,
   className,
   railClassName,
   previewClassName,
   children,
   ...props
 }: PreviewRailProps) {
+  const l10n = useLocale().labels
+  if (label === undefined) label = l10n.sections
+
   const reduce = useReducedMotion() ?? false
   const uid = React.useId()
   const rootRef = React.useRef<HTMLDivElement>(null)

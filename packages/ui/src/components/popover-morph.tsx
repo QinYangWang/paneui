@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { useDirection } from "@base-ui/react/direction-provider"
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 
@@ -147,6 +148,8 @@ function MorphPopoverClose(props: PopoverPrimitive.Close.Props) {
 
 /** Round × button pinned to the panel's top-right corner. */
 function MorphPopoverCloseButton({ className, ...props }: PopoverPrimitive.Close.Props) {
+  const l10n = useLocale().labels
+
   return (
     <PopoverPrimitive.Close
       data-slot="morph-popover-close-button"
@@ -155,7 +158,7 @@ function MorphPopoverCloseButton({ className, ...props }: PopoverPrimitive.Close
         className
       )}
       {...props}
-      aria-label={props["aria-label"] ?? "Close"}
+      aria-label={props["aria-label"] ?? l10n.priceClose}
     >
       <XIcon size={14} />
     </PopoverPrimitive.Close>

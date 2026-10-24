@@ -261,6 +261,7 @@ function HeatCalendar({
 /* -------------------------------------------------------------------------- */
 
 function HeatCalendarGrid({ className, children }: { className?: string; children?: React.ReactNode }) {
+  const { labels } = useLocale()
   const {
     days,
     byDate,
@@ -392,7 +393,7 @@ function HeatCalendarGrid({ className, children }: { className?: string; childre
 
           <div
             role="grid"
-            aria-label={`${label}. Arrow keys move between days; Enter starts and ends a range; Shift+arrows extend it.`}
+            aria-label={labels.calendarRangeHint(label)}
             aria-multiselectable
             className="grid touch-pan-x select-none"
             style={{ gridTemplateColumns: `repeat(${weeks}, ${cellSize}px)`, gap }}

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { useReducedMotion } from "motion/react"
 import type { CodeToken, CodeTokenLines } from "@paneui/ui/lib/highlight"
 import { useCodeTokens } from "@paneui/ui/lib/use-code-tokens"
@@ -108,6 +109,8 @@ function AgentCodeBlock({
   className,
   ...props
 }: AgentCodeBlockProps) {
+  const l10n = useLocale().labels
+
   const lang = language ?? languageFromFilename(typeof filename === "string" ? filename : undefined)
   const tokens = useCodeTokens(code, lang, streaming)
   const reduce = useReducedMotion() ?? false
@@ -151,7 +154,7 @@ function AgentCodeBlock({
           {streaming && (
             <span className="inline-flex items-center gap-1.5 text-ui-xs font-medium text-muted-foreground">
               <span className="size-1.5 animate-pulse rounded-full bg-primary" />
-              Writing
+              {l10n.writing}
             </span>
           )}
           {lang !== "text" && (

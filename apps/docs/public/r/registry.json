@@ -2802,7 +2802,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "https://paneui.dev/r/theme.json"
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3113,7 +3114,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/button.json"
+        "https://paneui.dev/r/button.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3287,7 +3289,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3396,7 +3399,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "https://paneui.dev/r/theme.json"
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3443,7 +3447,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3489,7 +3494,8 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/loader.json",
-        "https://paneui.dev/r/scroll-area.json"
+        "https://paneui.dev/r/scroll-area.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3557,7 +3563,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/smooth-scroll.json"
+        "https://paneui.dev/r/smooth-scroll.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3672,7 +3679,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/tooltip.json"
+        "https://paneui.dev/r/tooltip.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3694,7 +3702,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3716,7 +3725,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icon-chip.json"
+        "https://paneui.dev/r/icon-chip.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3743,7 +3753,8 @@
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/checkbox.json",
         "https://paneui.dev/r/loader.json",
-        "https://paneui.dev/r/scroll-area.json"
+        "https://paneui.dev/r/scroll-area.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3769,7 +3780,8 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/table.json",
-        "https://paneui.dev/r/menu.json"
+        "https://paneui.dev/r/menu.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3795,7 +3807,8 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/table.json",
-        "https://paneui.dev/r/button.json"
+        "https://paneui.dev/r/button.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3818,7 +3831,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3947,7 +3961,8 @@
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/scroll-area.json",
         "https://paneui.dev/r/code-block.json",
-        "https://paneui.dev/r/highlight.json"
+        "https://paneui.dev/r/highlight.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -3974,7 +3989,8 @@
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/agent-code-block.json",
         "https://paneui.dev/r/collapsible.json",
-        "https://paneui.dev/r/loader.json"
+        "https://paneui.dev/r/loader.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4075,7 +4091,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/tool-result.json"
+        "https://paneui.dev/r/tool-result.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4102,7 +4119,8 @@
         "https://paneui.dev/r/button.json",
         "https://paneui.dev/r/tool-result.json",
         "https://paneui.dev/r/icon-chip.json",
-        "https://paneui.dev/r/action-swap-roll.json"
+        "https://paneui.dev/r/action-swap-roll.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4128,7 +4146,8 @@
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/text-shimmer.json",
         "https://paneui.dev/r/citations.json",
-        "https://paneui.dev/r/tool-result.json"
+        "https://paneui.dev/r/tool-result.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4152,7 +4171,8 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/text-shimmer.json",
         "https://paneui.dev/r/text-cascade.json",
-        "https://paneui.dev/r/text-scramble.json"
+        "https://paneui.dev/r/text-scramble.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4223,7 +4243,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/tooltip.json"
+        "https://paneui.dev/r/tooltip.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4245,7 +4266,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/chart-utils.json"
+        "https://paneui.dev/r/chart-utils.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4267,7 +4289,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/chart-utils.json"
+        "https://paneui.dev/r/chart-utils.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4289,7 +4312,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/chart-utils.json"
+        "https://paneui.dev/r/chart-utils.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4311,7 +4335,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/chart-utils.json"
+        "https://paneui.dev/r/chart-utils.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4333,7 +4358,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/chart-utils.json"
+        "https://paneui.dev/r/chart-utils.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4355,7 +4381,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/chart-utils.json"
+        "https://paneui.dev/r/chart-utils.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4377,7 +4404,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/chart-utils.json"
+        "https://paneui.dev/r/chart-utils.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4420,7 +4448,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/card.json",
         "https://paneui.dev/r/badge.json",
-        "https://paneui.dev/r/button.json"
+        "https://paneui.dev/r/button.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4602,7 +4631,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/button.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4623,7 +4653,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "https://paneui.dev/r/theme.json"
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4648,7 +4679,8 @@
         "https://paneui.dev/r/badge.json",
         "https://paneui.dev/r/button.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/icon-chip.json"
+        "https://paneui.dev/r/icon-chip.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4670,7 +4702,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4692,7 +4725,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "https://paneui.dev/r/theme.json"
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4747,7 +4781,8 @@
         "https://paneui.dev/r/todo-list.json",
         "https://paneui.dev/r/reasoning-text.json",
         "https://paneui.dev/r/agent-progress.json",
-        "https://paneui.dev/r/icon-chip.json"
+        "https://paneui.dev/r/icon-chip.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4770,7 +4805,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/icon-chip.json"
+        "https://paneui.dev/r/icon-chip.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4794,7 +4830,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/button-stateful.json"
+        "https://paneui.dev/r/button-stateful.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4816,7 +4853,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "https://paneui.dev/r/theme.json"
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4839,7 +4877,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4861,7 +4900,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4883,7 +4923,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4905,7 +4946,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4927,7 +4969,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4951,7 +4994,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/icon-chip.json"
+        "https://paneui.dev/r/icon-chip.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4973,7 +5017,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -4996,7 +5041,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5018,7 +5064,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5045,7 +5092,8 @@
         "https://paneui.dev/r/button.json",
         "https://paneui.dev/r/switch.json",
         "https://paneui.dev/r/select.json",
-        "https://paneui.dev/r/menu.json"
+        "https://paneui.dev/r/menu.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5072,7 +5120,8 @@
         "https://paneui.dev/r/input.json",
         "https://paneui.dev/r/checkbox.json",
         "https://paneui.dev/r/button.json",
-        "https://paneui.dev/r/button-stateful.json"
+        "https://paneui.dev/r/button-stateful.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5123,7 +5172,8 @@
         "https://paneui.dev/r/input.json",
         "https://paneui.dev/r/select.json",
         "https://paneui.dev/r/tabs.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5170,7 +5220,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/chart-utils.json"
+        "https://paneui.dev/r/chart-utils.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5213,7 +5264,8 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/badge.json",
-        "https://paneui.dev/r/sparkline.json"
+        "https://paneui.dev/r/sparkline.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5407,7 +5459,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5451,7 +5504,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/menu.json"
+        "https://paneui.dev/r/menu.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5473,7 +5527,8 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/avatar.json",
-        "https://paneui.dev/r/menu.json"
+        "https://paneui.dev/r/menu.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5501,7 +5556,8 @@
         "https://paneui.dev/r/input.json",
         "https://paneui.dev/r/menu.json",
         "https://paneui.dev/r/pagination.json",
-        "https://paneui.dev/r/table.json"
+        "https://paneui.dev/r/table.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5641,7 +5697,8 @@
         "https://paneui.dev/r/tooltip.json",
         "https://paneui.dev/r/toolbar.json",
         "https://paneui.dev/r/menu-list.json",
-        "https://paneui.dev/r/swatch-picker.json"
+        "https://paneui.dev/r/swatch-picker.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5727,7 +5784,8 @@
         "https://paneui.dev/r/segmented-control.json",
         "https://paneui.dev/r/swatch-picker.json",
         "https://paneui.dev/r/toggle-group.json",
-        "https://paneui.dev/r/toolbar.json"
+        "https://paneui.dev/r/toolbar.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5809,7 +5867,8 @@
         "https://paneui.dev/r/animated-sidebar.json",
         "https://paneui.dev/r/drawer.json",
         "https://paneui.dev/r/menu.json",
-        "https://paneui.dev/r/separator.json"
+        "https://paneui.dev/r/separator.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5854,7 +5913,8 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/overflow-hint.json"
+        "https://paneui.dev/r/overflow-hint.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -5966,7 +6026,8 @@
       "title": "Terminal View",
       "description": "Shows command output and takes commands in a terminal panel.",
       "registryDependencies": [
-        "https://paneui.dev/r/theme.json"
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -6036,7 +6097,8 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/button.json",
-        "https://paneui.dev/r/file-diff.json"
+        "https://paneui.dev/r/file-diff.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {
@@ -6131,7 +6193,8 @@
       ],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/icons.json"
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
         {

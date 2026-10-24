@@ -1,5 +1,7 @@
 "use client"
 
+import { localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
+
 import * as React from "react"
 import { Extension, type Editor, type Range } from "@tiptap/core"
 import { PluginKey } from "@tiptap/pm/state"
@@ -61,21 +63,22 @@ export async function insertImageFromFile(editor: Editor) {
 const icon = (I: React.ComponentType<{ className?: string }>) => <I className="size-4 text-muted-foreground" />
 
 /** The block menu of the block editor. Pass your own list (or extend this one) via `slashItems`. */
-export const defaultSlashItems: SlashItem[] = [
+export function getDefaultSlashItems(l10n: LocaleLabels = localeLabels.en): SlashItem[] {
+  return ([
   {
     id: "text",
-    title: "Text",
-    description: "Plain paragraph",
-    group: "Basic blocks",
+    title: l10n.text,
+    description: l10n.plainParagraph,
+    group: l10n.basicBlocks,
     icon: icon(TypeIcon),
     keywords: ["paragraph", "p"],
     command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setParagraph().run(),
   },
   {
     id: "heading-1",
-    title: "Heading 1",
-    description: "Big section heading",
-    group: "Basic blocks",
+    title: l10n.heading1,
+    description: l10n.bigSectionHeading,
+    group: l10n.basicBlocks,
     icon: icon(Heading1Icon),
     hint: "#",
     keywords: ["h1", "title"],
@@ -83,9 +86,9 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "heading-2",
-    title: "Heading 2",
-    description: "Medium section heading",
-    group: "Basic blocks",
+    title: l10n.heading2,
+    description: l10n.mediumSectionHeading,
+    group: l10n.basicBlocks,
     icon: icon(Heading2Icon),
     hint: "##",
     keywords: ["h2", "subtitle"],
@@ -93,9 +96,9 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "heading-3",
-    title: "Heading 3",
-    description: "Small section heading",
-    group: "Basic blocks",
+    title: l10n.heading3,
+    description: l10n.smallSectionHeading,
+    group: l10n.basicBlocks,
     icon: icon(Heading3Icon),
     hint: "###",
     keywords: ["h3"],
@@ -103,9 +106,9 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "bullet-list",
-    title: "Bulleted list",
-    description: "A simple bulleted list",
-    group: "Basic blocks",
+    title: l10n.bulletedList,
+    description: l10n.simpleBulletedList,
+    group: l10n.basicBlocks,
     icon: icon(ListIcon),
     hint: "-",
     keywords: ["ul", "unordered"],
@@ -113,9 +116,9 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "numbered-list",
-    title: "Numbered list",
-    description: "A list with numbering",
-    group: "Basic blocks",
+    title: l10n.numberedList,
+    description: l10n.simpleNumberedList,
+    group: l10n.basicBlocks,
     icon: icon(ListOrderedIcon),
     hint: "1.",
     keywords: ["ol", "ordered"],
@@ -123,9 +126,9 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "todo-list",
-    title: "To-do list",
-    description: "Track tasks with checkboxes",
-    group: "Basic blocks",
+    title: l10n.todoList,
+    description: l10n.trackTasksWithCheckboxes,
+    group: l10n.basicBlocks,
     icon: icon(ListTodoIcon),
     hint: "[]",
     keywords: ["task", "checkbox", "check"],
@@ -133,18 +136,18 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "toggle",
-    title: "Toggle",
-    description: "Collapsible section",
-    group: "Basic blocks",
+    title: l10n.toggle,
+    description: l10n.collapsibleSection,
+    group: l10n.basicBlocks,
     icon: icon(ListCollapseIcon),
     keywords: ["details", "collapse", "accordion"],
     command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setDetails().run(),
   },
   {
     id: "quote",
-    title: "Quote",
-    description: "Capture a quote",
-    group: "Basic blocks",
+    title: l10n.quote,
+    description: l10n.captureAQuote,
+    group: l10n.basicBlocks,
     icon: icon(QuoteIcon),
     hint: ">",
     keywords: ["blockquote", "citation"],
@@ -152,18 +155,18 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "callout",
-    title: "Callout",
-    description: "Make a note stand out",
-    group: "Basic blocks",
+    title: l10n.callout,
+    description: l10n.makeANoteStandOut,
+    group: l10n.basicBlocks,
     icon: icon(CalloutIcon),
     keywords: ["note", "info", "warning", "admonition"],
     command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setCallout({ type: "info", icon: "💡" }).run(),
   },
   {
     id: "divider",
-    title: "Divider",
-    description: "Separate sections",
-    group: "Basic blocks",
+    title: l10n.divider,
+    description: l10n.separateSections,
+    group: l10n.basicBlocks,
     icon: icon(MinusIcon),
     hint: "---",
     keywords: ["hr", "rule", "separator", "line"],
@@ -171,9 +174,9 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "code",
-    title: "Code block",
-    description: "Code with syntax highlighting",
-    group: "Media",
+    title: l10n.codeBlock,
+    description: l10n.codeWithSyntaxHighlighting,
+    group: l10n.media,
     icon: icon(SquareCodeIcon),
     hint: "```",
     keywords: ["snippet", "pre"],
@@ -181,9 +184,9 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "image",
-    title: "Image",
-    description: "Upload or paste an image",
-    group: "Media",
+    title: l10n.image,
+    description: l10n.uploadOrPasteAnImage,
+    group: l10n.media,
     icon: icon(ImageIcon),
     keywords: ["picture", "photo", "media"],
     command: ({ editor, range }) => {
@@ -193,18 +196,22 @@ export const defaultSlashItems: SlashItem[] = [
   },
   {
     id: "table",
-    title: "Table",
-    description: "A simple 3 × 3 table",
-    group: "Media",
+    title: l10n.table,
+    description: l10n.simpleTable,
+    group: l10n.media,
     icon: icon(TableIcon),
     keywords: ["grid", "rows", "columns"],
     command: ({ editor, range }) =>
       editor.chain().focus().deleteRange(range).insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run(),
   },
-]
+])
+}
+
+export const defaultSlashItems = getDefaultSlashItems()
 
 export type SlashCommandOptions = {
-  items: SlashItem[]
+  items: SlashItem[] | (() => SlashItem[])
+  labels: () => LocaleLabels
   /** Trigger character. Default "/". */
   char: string
 }
@@ -215,7 +222,7 @@ export const slashCommandKey = new PluginKey("slashCommand")
 export const SlashCommand = Extension.create<SlashCommandOptions>({
   name: "slashCommand",
   addOptions() {
-    return { items: defaultSlashItems, char: "/" }
+    return { items: defaultSlashItems, char: "/", labels: () => localeLabels.en }
   },
   addProseMirrorPlugins() {
     return [
@@ -230,9 +237,9 @@ export const SlashCommand = Extension.create<SlashCommandOptions>({
           const $from = state.doc.resolve(range.from)
           return !$from.parent.type.spec.code
         },
-        items: ({ query }) => filterSuggestionItems(this.options.items, query),
+        items: ({ query }) => filterSuggestionItems(typeof this.options.items === "function" ? this.options.items() : this.options.items, query),
         command: ({ editor, range, props }) => props.command({ editor, range }),
-        render: suggestionRenderer<SlashItem>({ emptyLabel: "No matching blocks" }),
+        render: suggestionRenderer<SlashItem>({ emptyLabel: () => this.options.labels().noMatchingBlocks }),
       }),
     ]
   },

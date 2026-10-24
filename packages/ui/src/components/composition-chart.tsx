@@ -174,7 +174,7 @@ function CompositionChart({
         ref={ref}
         tabIndex={0}
         role="img"
-        aria-label={`${label}. Use left and right arrow keys to inspect periods.`}
+        aria-label={labels.statusHistoryHint(label)}
         onKeyDown={onKeyDown}
         onBlur={() => setHoverIndex(null)}
         onPointerLeave={() => setHoverIndex(null)}
@@ -381,7 +381,7 @@ function CompositionChart({
       </div>
 
       {showLegend && (
-        <ChartLegend aria-label={`${label} series`}>
+        <ChartLegend aria-label={labels.chartSeries(label)}>
           {colored.map((s) => {
             const off = hidden.includes(s.id)
             return (

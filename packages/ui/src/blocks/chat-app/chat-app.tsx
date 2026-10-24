@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { BotIcon, PlusIcon, SparklesIcon } from "@paneui/ui/icons"
@@ -89,8 +90,10 @@ const FALLBACK_SCRIPT: AgentScript = {
     "Here's what I found: the short version is that it's doable this week. I've laid out the steps above and kept the details tight, so you can skim the plan and tell me which part to start on.",
 }
 
-function defaultRespond(prompt: string): AgentScript {
-  return SAMPLE_SCRIPTS.find((s) => s.match.test(prompt))?.script ?? FALLBACK_SCRIPT
+function defaultRespond(prompt: string, labels: LocaleLabels = localeLabels.en): AgentScript {
+  const index = SAMPLE_SCRIPTS.findIndex((s) => s.match.test(prompt))
+  const kind = index === 0 ? "travel" : index === 1 ? "code" : "general"
+  return { ...(SAMPLE_SCRIPTS[index]?.script ?? FALLBACK_SCRIPT), thinking: labels.chatThinking(kind), verb: labels.chatVerb(kind) }
 }
 
 /* ──────────────────────────── Sample sidebar ──────────────────────────── */
@@ -153,6 +156,8 @@ const sleep = (ms: number, signal: AbortSignal) =>
 /* ─────────────────────────────── Turns ─────────────────────────────── */
 
 function AssistantTurn({ turn }: { turn: Extract<Turn, { role: "assistant" }> }) {
+  const l10n = useLocale().labels
+
   const reduce = useReducedMotion()
   const live = turn.phase === "thinking" || turn.phase === "working" || turn.phase === "streaming"
 
@@ -176,7 +181,7 @@ function AssistantTurn({ turn }: { turn: Extract<Turn, { role: "assistant" }> })
           ) : live ? (
             <motion.span key="work" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <AgentProgress
-                label={turn.phase === "streaming" ? "Writing" : turn.verb}
+                label={turn.phase === "streaming" ? l10n.writing : turn.verb}
                 initialElapsed={(performance.now() - turn.startedAt) / 1000}
               />
             </motion.span>
@@ -187,14 +192,13 @@ function AssistantTurn({ turn }: { turn: Extract<Turn, { role: "assistant" }> })
               animate={{ opacity: 1 }}
               className="text-ui-sm text-muted-foreground tabular-nums"
             >
-              {turn.phase === "stopped" ? "Stopped after " : "Worked for "}
-              {formatElapsed(turn.elapsed ?? 0)}
+              {turn.phase === "stopped" ? l10n.stoppedAfter(formatElapsed(turn.elapsed ?? 0)) : l10n.workedFor(formatElapsed(turn.elapsed ?? 0))}
             </motion.span>
           )}
         </AnimatePresence>
       </div>
 
-      {turn.plan.length > 0 && <TodoList items={turn.plan} title="Plan" collapseOnComplete className="w-[min(26rem,100%)]" />}
+      {turn.plan.length > 0 && <TodoList items={turn.plan} title={l10n.plan} collapseOnComplete className="w-[min(26rem,100%)]" />}
 
       {turn.text && (
         <ChatBubble from="assistant">
@@ -212,14 +216,16 @@ function AssistantTurn({ turn }: { turn: Extract<Turn, { role: "assistant" }> })
 }
 
 function EmptyState({ onPick }: { onPick: (s: string) => void }) {
+  const l10n = useLocale().labels
+
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
       <IconChip size="xl" className="text-primary">
         <BotIcon />
       </IconChip>
       <div className="flex flex-col gap-1">
-        <p className="text-lg font-semibold">What should we work on?</p>
-        <p className="text-ui text-muted-foreground">Ask anything, or start from one of these.</p>
+        <p className="text-lg font-semibold">{l10n.whatShouldWeWorkOn}</p>
+        <p className="text-ui text-muted-foreground">{l10n.askAnythingOrStartFromOneOfThese}</p>
       </div>
       <div className="flex flex-wrap justify-center gap-2">
         {SUGGESTIONS.map((s) => (
@@ -257,16 +263,18 @@ type ChatAppProps = {
 function ChatApp({
   items = SAMPLE_ITEMS,
   bookmarks = SAMPLE_BOOKMARKS,
-  respond = defaultRespond,
+  respond,
   autoPlayPrompt,
   collapseSidebarBelow = 640,
   searchHotkey = "k",
   className,
 }: ChatAppProps) {
+  const l10n = useLocale().labels
+
   const [turns, setTurns] = React.useState<Turn[]>([])
   const [busy, setBusy] = React.useState(false)
   const [activeId, setActiveId] = React.useState<string | null>(null)
-  const [chatTitle, setChatTitle] = React.useState("New chat")
+  const [chatTitle, setChatTitle] = React.useState<string | null>(null)
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
   const abortRef = React.useRef<AbortController | null>(null)
   const rootRef = React.useRef<HTMLDivElement>(null)
@@ -285,12 +293,12 @@ function ChatApp({
       const controller = new AbortController()
       abortRef.current = controller
       const { signal } = controller
-      const script = respond(prompt)
+      const script = respond ? respond(prompt) : defaultRespond(prompt, l10n)
       const aId = nextId("a")
       const startedAt = performance.now()
       stickRef.current = true
       setBusy(true)
-      setChatTitle((t) => (t === "New chat" ? prompt.slice(0, 48) : t))
+      setChatTitle((t) => (t ?? prompt.slice(0, 48)))
       setTurns((prev) => [
         ...prev,
         { id: nextId("u"), role: "user", text: prompt },
@@ -298,8 +306,8 @@ function ChatApp({
           id: aId,
           role: "assistant",
           phase: "thinking",
-          thinking: script.thinking ?? ["Thinking"],
-          verb: script.verb ?? "Working",
+          thinking: script.thinking ?? [l10n.thinking],
+          verb: script.verb ?? l10n.working,
           plan: [],
           text: "",
           startedAt,
@@ -342,7 +350,7 @@ function ChatApp({
           ...t,
           phase: "stopped",
           elapsed: elapsed(),
-          plan: t.plan.map((p) => (p.status === "in-progress" ? { ...p, status: "failed", meta: "Stopped" } : p)),
+          plan: t.plan.map((p) => (p.status === "in-progress" ? { ...p, status: "failed", meta: l10n.stopped } : p)),
         }))
       } finally {
         if (abortRef.current === controller) {
@@ -351,7 +359,7 @@ function ChatApp({
         }
       }
     },
-    [patchAssistant, respond]
+    [patchAssistant, respond, l10n]
   )
 
   const stop = () => abortRef.current?.abort()
@@ -396,7 +404,7 @@ function ChatApp({
   const newChat = () => {
     abortRef.current?.abort()
     setTurns([])
-    setChatTitle("New chat")
+    setChatTitle(null)
     setActiveId(null)
   }
 
@@ -417,26 +425,26 @@ function ChatApp({
         defaultExpandedIds={["p-travel"]}
         open={sidebarOpen}
         onOpenChange={setSidebarOpen}
-        title="Agent"
+        title={l10n.agent}
         searchHotkey={searchHotkey}
         renamable
         actions={(open) =>
           open ? (
             <Button variant="secondary" size="sm" className="w-full justify-start" onClick={newChat}>
               <PlusIcon data-icon="inline-start" />
-              New chat
+              {l10n.newChat}
             </Button>
           ) : (
-            <Button variant="secondary" size="icon-sm" aria-label="New chat" onClick={newChat}>
+            <Button variant="secondary" size="icon-sm" aria-label={l10n.newChat} onClick={newChat}>
               <PlusIcon />
             </Button>
           )
         }
       />
 
-      <section aria-label="Conversation" className="flex min-w-0 flex-1 flex-col">
+      <section aria-label={l10n.conversation} className="flex min-w-0 flex-1 flex-col">
         <header className="flex h-12 shrink-0 items-center gap-3 border-b border-border/60 px-4">
-          <h2 className="min-w-0 flex-1 truncate text-ui font-semibold">{chatTitle}</h2>
+          <h2 className="min-w-0 flex-1 truncate text-ui font-semibold">{chatTitle ?? l10n.newChat}</h2>
           <AnimatePresence initial={false}>
             {busy && (
               <motion.span
@@ -445,7 +453,7 @@ function ChatApp({
                 exit={{ opacity: 0, scale: 0.9 }}
                 className="rounded-full bg-primary/10 px-2.5 py-0.5 text-ui-sm font-medium text-primary"
               >
-                Running
+                {l10n.toolRunning}
               </motion.span>
             )}
           </AnimatePresence>
@@ -479,7 +487,7 @@ function ChatApp({
         <div className="shrink-0 px-4 pb-4">
           <PromptBar
             className="mx-auto max-w-2xl"
-            placeholder="Message the agent…"
+            placeholder={l10n.messageTheAgent}
             busy={busy}
             onSubmit={(v) => void send(v)}
             onStop={stop}

@@ -565,7 +565,7 @@ function DateRangePickerGrid({
 /** "Mar 3 – 9, 2026 · 6 nights", or a prompt for the next click. */
 function DateRangePickerSummary({
   className,
-  unit = ["night", "nights"],
+  unit,
   formatOptions,
   ...props
 }: Omit<React.ComponentProps<"p">, "children"> & {
@@ -573,13 +573,15 @@ function DateRangePickerSummary({
   unit?: [string, string] | null
   formatOptions?: Intl.DateTimeFormatOptions
 }) {
+  const l10n = useLocale().labels
+
   const { range, locale } = useDateRangePicker()
-  let text = "Select a start date"
-  if (range.from && !range.to) text = "Select an end date"
+  let text = l10n.selectAStartDate
+  if (range.from && !range.to) text = l10n.selectAnEndDate
   if (range.from && range.to) {
     const n = daysBetween(range.from, range.to)
     text = formatRange(range, locale, formatOptions ?? { month: "short", day: "numeric" })
-    if (unit) text += ` · ${n} ${n === 1 ? unit[0] : unit[1]}`
+    if (unit !== null) text += ` · ${unit ? `${n} ${n === 1 ? unit[0] : unit[1]}` : l10n.nights(n)}`
   }
   return (
     <p

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
@@ -79,39 +80,37 @@ function groupItems(items: AgentActivityItem[], working: boolean): ActivityGroup
   return groups
 }
 
-const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`
-
-function groupLabel(group: ActivityGroup): string {
+function groupLabel(group: ActivityGroup, l10n: LocaleLabels): string {
   const n = group.items.length
   if (group.type === "reasoning") {
-    if (group.active) return "Thinking…"
+    if (group.active) return l10n.labelThinking
     const secs = group.items.reduce((sum, it) => sum + ((it as AgentActivityReasoning).duration ?? 0), 0)
-    return secs ? `Thought for ${formatDuration(secs)}` : "Reasoned"
+    return secs ? l10n.thoughtFor(formatDuration(secs)) : l10n.reasoned
   }
   if (group.type === "search") {
-    if (group.active) return "Searching the web…"
+    if (group.active) return l10n.searchingTheWeb
     const sources = group.items.reduce((sum, it) => sum + ((it as AgentActivitySearch).results?.length ?? 0), 0)
-    return `Searched ${plural(n, "query", "queries")}${sources ? ` · ${plural(sources, "source")}` : ""}`
+    return l10n.searchedQueries(n, sources)
   }
   if (group.type === "tool") {
     if (group.active) {
       const live = [...group.items].reverse().find((it) => it.status === "active") ?? group.items[n - 1]
-      return `${actionVerb((live as AgentActivityTool).action, true)}…`
+      return `${actionVerb((live as AgentActivityTool).action, true, l10n)}…`
     }
-    return `Used ${plural(n, "tool")}`
+    return l10n.usedTools(n)
   }
-  return group.active ? "Working through steps…" : `Completed ${plural(n, "step")}`
+  return group.active ? l10n.workingThroughSteps : l10n.completedSteps(n)
 }
 
-function actionVerb(action: string, live = false) {
+function actionVerb(action: string, live: boolean, l10n: LocaleLabels) {
   const map: Record<string, [string, string]> = {
-    read: ["Read", "Reading"],
-    edit: ["Edited", "Editing"],
-    write: ["Wrote", "Writing"],
-    run: ["Ran", "Running"],
+    read: [l10n.read, l10n.reading],
+    edit: [l10n.edited, l10n.editing],
+    write: [l10n.wrote, l10n.writing],
+    run: [l10n.ran, l10n.toolRunning],
   }
   const verbs = map[action]
-  return verbs ? verbs[live ? 1 : 0] : live ? `Calling ${action}` : action
+  return verbs ? verbs[live ? 1 : 0] : live ? l10n.callingTool(action) : action
 }
 
 const TYPE_ICON: Record<AgentActivityType, React.ComponentType<{ className?: string }>> = {
@@ -140,6 +139,8 @@ function RowStatus({ status }: { status?: AgentActivityItemStatus }) {
 }
 
 function ActivityRow({ item }: { item: AgentActivityItem }) {
+  const l10n = useLocale().labels
+
   const reduce = useReducedMotion()
   if (item.type === "reasoning") {
     return <p className="text-ui leading-relaxed text-muted-foreground">{item.text}</p>
@@ -176,7 +177,7 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
                     className="inline-flex h-6 max-w-48 items-center gap-1.5 rounded-full bg-muted pr-2 pl-0.5 text-ui-xs text-muted-foreground shadow-chip outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
                     <CitationFavicon source={r} className="size-5 rounded-full shadow-none" />
-                    <span className="truncate">{r.domain ?? (typeof r.title === "string" ? r.title : "Source")}</span>
+                    <span className="truncate">{r.domain ?? (typeof r.title === "string" ? r.title : l10n.source)}</span>
                   </a>
                 </motion.li>
               ))}
@@ -192,7 +193,7 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
       <div className="flex flex-col gap-0.5">
         <div className="flex min-w-0 items-center gap-1.5 text-ui">
           <Icon className="size-3.5 shrink-0 text-muted-foreground" />
-          <span className="shrink-0 text-muted-foreground">{actionVerb(item.action, item.status === "active")}</span>
+          <span className="shrink-0 text-muted-foreground">{actionVerb(item.action, item.status === "active", l10n)}</span>
           <span className="min-w-0 truncate font-mono text-ui-sm text-foreground/85">{item.target}</span>
           {item.additions || item.deletions ? (
             <span className="shrink-0 font-mono text-ui-xs tabular-nums">
@@ -272,8 +273,9 @@ function ActivityGroupView({
   onOpenChange: (open: boolean) => void
   last: boolean
 }) {
+  const l10n = useLocale().labels
   const Icon = TYPE_ICON[group.type]
-  const label = groupLabel(group)
+  const label = groupLabel(group, l10n)
   return (
     <CollapsiblePrimitive.Root open={open} onOpenChange={onOpenChange} className="relative flex flex-col" render={<li />}>
       {/* timeline rail */}
@@ -338,16 +340,9 @@ type AgentActivityProps = Omit<React.ComponentProps<"div">, "children"> & {
   summary?: React.ReactNode
 }
 
-function summarize(items: AgentActivityItem[]) {
+function summarize(items: AgentActivityItem[], l10n: LocaleLabels) {
   const count = (t: AgentActivityType) => items.filter((i) => i.type === t).length
-  const parts: string[] = []
-  const searches = count("search")
-  const tools = count("tool")
-  const steps = count("step")
-  if (searches) parts.push(plural(searches, "search", "searches"))
-  if (tools) parts.push(plural(tools, "tool call"))
-  if (steps) parts.push(plural(steps, "step"))
-  return parts.join(", ")
+  return l10n.activitySummary(count("search"), count("tool"), count("step"))
 }
 
 /**
@@ -369,6 +364,8 @@ function AgentActivity({
   className,
   ...props
 }: AgentActivityProps) {
+  const l10n = useLocale().labels
+
   const working = status === "working"
   const elapsed = useElapsed(working)
   const seconds = duration ?? elapsed
@@ -384,8 +381,8 @@ function AgentActivity({
   }, [status, collapseOnComplete, setOpen])
 
   const liveGroup = [...groups].reverse().find((g) => g.active)
-  const headerLabel = activeLabel ?? (liveGroup ? groupLabel(liveGroup) : "Working…")
-  const detail = summarize(items)
+  const headerLabel = activeLabel ?? (liveGroup ? groupLabel(liveGroup, l10n) : l10n.labelWorking)
+  const detail = summarize(items, l10n)
   const expanded = working || isOpen
 
   return (
@@ -411,7 +408,7 @@ function AgentActivity({
             <span className="truncate font-medium text-foreground/85">
               {summary ?? (
                 <>
-                  Worked for <span className="tabular-nums">{formatDuration(seconds)}</span>
+                  <span className="tabular-nums">{l10n.workedFor(formatDuration(seconds))}</span>
                 </>
               )}
             </span>
@@ -429,7 +426,7 @@ function AgentActivity({
           header's own -ml-1.5) and pad it back, so the group triggers' hover
           fill, focus rings and live halos have room inside the clip. */}
       <CollapsiblePrimitive.Panel className={cn(PANEL, "-ml-1.5 pl-1.5")}>
-        <ol aria-label="Agent activity" className="flex flex-col pt-1.5 pl-0.5">
+        <ol aria-label={l10n.agentActivity} className="flex flex-col pt-1.5 pl-0.5">
           {groups.map((group, i) => (
             <ActivityGroupView
               key={group.id}

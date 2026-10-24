@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import {
@@ -59,12 +60,15 @@ export interface FileUploadProps {
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-const statusLabel: Record<FileUploadStatus, string> = {
-  queued: "Queued",
-  uploading: "Uploading",
-  success: "Uploaded",
-  error: "Failed",
+function getStatusLabel(l10n: LocaleLabels = localeLabels.en): Record<FileUploadStatus, string> {
+  return ({
+  queued: l10n.queued,
+  uploading: l10n.uploading,
+  success: l10n.uploaded,
+  error: l10n.toolFailed,
+})
 }
+
 
 export function formatBytes(bytes: number) {
   if (!Number.isFinite(bytes) || bytes <= 0) return "0 B"
@@ -124,13 +128,15 @@ function extension(name: string) {
 }
 
 function UploadProgress({ status, progress }: { status: FileUploadStatus; progress: number }) {
+  const l10n = useLocale().labels
+
   return (
     <div
       role="progressbar"
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(progress)}
-      aria-label="Upload progress"
+      aria-label={l10n.uploadProgress}
       className="relative h-1.5 w-full overflow-hidden rounded-full bg-muted shadow-well"
     >
       <motion.div
@@ -150,6 +156,9 @@ function UploadProgress({ status, progress }: { status: FileUploadStatus; progre
 }
 
 function StatusBadge({ status }: { status: FileUploadStatus }) {
+  const l10n = useLocale().labels
+  const statusLabel = getStatusLabel(l10n)
+
   return (
     <span className="relative inline-flex h-5 items-center">
       <AnimatePresence mode="popLayout" initial={false}>
@@ -187,6 +196,8 @@ function FileUploadRow({
   onRetry: (item: FileUploadItem) => void
   disabled?: boolean
 }) {
+  const l10n = useLocale().labels
+
   const reduce = useReducedMotion()
   const status = item.status ?? "queued"
   const progress = status === "success" ? 100 : Math.min(100, Math.max(0, item.progress ?? 0))
@@ -224,7 +235,7 @@ function FileUploadRow({
         </div>
         {status === "error" ? (
           <span className="tabular-nums truncate text-ui-sm text-destructive/90">
-            {item.error ?? "Upload failed"} · {formatBytes(item.size)}
+            {item.error ?? l10n.uploadFailed} · {formatBytes(item.size)}
           </span>
         ) : (
           <div className="flex items-center gap-2.5">
@@ -244,7 +255,7 @@ function FileUploadRow({
             type="button"
             onClick={() => onRetry(item)}
             disabled={disabled}
-            aria-label={`Retry ${item.name}`}
+            aria-label={l10n.retryNamed(item.name)}
             className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
           >
             <RefreshIcon size={15} />
@@ -254,7 +265,7 @@ function FileUploadRow({
           type="button"
           onClick={() => onRemove(item)}
           disabled={disabled}
-          aria-label={status === "uploading" ? `Cancel ${item.name}` : `Remove ${item.name}`}
+          aria-label={status === "uploading" ? l10n.cancelNamed(item.name) : l10n.removeNamed(item.name)}
           className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
         >
           <XIcon size={15} />
@@ -277,11 +288,15 @@ export function FileUpload({
   maxFiles,
   maxFileSize,
   disabled = false,
-  title = "Drop files to upload",
+  title,
   description = "or browse from your computer",
-  browseLabel = "Browse files",
+  browseLabel,
   className,
 }: FileUploadProps) {
+  const l10n = useLocale().labels
+  if (title === undefined) title = l10n.dropFilesToUpload
+  if (browseLabel === undefined) browseLabel = l10n.browseFiles
+
   const reduce = useReducedMotion()
   const inputRef = React.useRef<HTMLInputElement>(null)
   const inputId = React.useId()
@@ -320,7 +335,7 @@ export function FileUpload({
         })
         .catch((err: unknown) => {
           if (controller.signal.aborted) return
-          const message = err instanceof Error ? err.message : typeof err === "string" ? err : "Upload failed"
+          const message = err instanceof Error ? err.message : typeof err === "string" ? err : l10n.uploadFailed
           patch(item.id, { status: "error", error: message })
           setAnnouncement(`${item.name} failed: ${message}`)
         })
@@ -356,19 +371,19 @@ export function FileUpload({
     if (!multiple) files = files.slice(0, 1)
     if (maxFiles !== undefined) files = files.slice(0, Math.max(0, maxFiles - items.length))
     if (files.length === 0) {
-      setAnnouncement(`You can add up to ${maxFiles} files`)
+      setAnnouncement(l10n.fileLimit(maxFiles ?? 0))
       return
     }
     const created = files.map((file) => {
       const item = createFileUploadItem(file)
       if (maxFileSize !== undefined && file.size > maxFileSize) {
-        return { ...item, status: "error" as const, error: `Larger than ${formatBytes(maxFileSize)}` }
+        return { ...item, status: "error" as const, error: l10n.largerThan(formatBytes(maxFileSize)) }
       }
       return item
     })
     setItems((all) => (multiple ? [...all, ...created] : created))
     onFilesAdded?.(created, files)
-    setAnnouncement(`${created.length} file${created.length === 1 ? "" : "s"} added`)
+    setAnnouncement(l10n.filesAdded(created.length))
   }
 
   const handleRemove = (item: FileUploadItem) => {
@@ -436,7 +451,7 @@ export function FileUpload({
           <UploadIcon size={20} />
         </motion.span>
         <div className="flex flex-col gap-0.5">
-          <span className="text-ui font-medium">{dragging ? "Release to add" : full ? "Upload limit reached" : title}</span>
+          <span className="text-ui font-medium">{dragging ? l10n.releaseToAdd : full ? l10n.uploadLimitReached : title}</span>
           <span className="text-ui-sm text-muted-foreground">
             {description}
             {maxFileSize !== undefined && ` · up to ${formatBytes(maxFileSize)}`}
@@ -477,7 +492,7 @@ export function FileUpload({
         </div>
       )}
 
-      <ul data-slot="file-upload-queue" aria-label="Upload queue" className="flex flex-col gap-2">
+      <ul data-slot="file-upload-queue" aria-label={l10n.uploadQueue} className="flex flex-col gap-2">
         <AnimatePresence initial={false} mode="popLayout">
           {items.map((item) => (
             <FileUploadRow key={item.id} item={item} onRemove={handleRemove} onRetry={handleRetry} disabled={disabled} />

@@ -2802,7 +2802,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@paneui/theme"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3105,7 +3106,7 @@
       "name": "button-stateful",
       "type": "registry:ui",
       "title": "Button Stateful",
-      "description": "Shows an action\u2019s progress and result.",
+      "description": "Shows an action’s progress and result.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -3113,7 +3114,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/button"
+        "@paneui/button",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3287,7 +3289,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3396,7 +3399,8 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "@paneui/theme"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3443,7 +3447,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3489,7 +3494,8 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/loader",
-        "@paneui/scroll-area"
+        "@paneui/scroll-area",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3557,7 +3563,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/smooth-scroll"
+        "@paneui/smooth-scroll",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3672,7 +3679,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/tooltip"
+        "@paneui/tooltip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3694,7 +3702,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3716,7 +3725,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icon-chip"
+        "@paneui/icon-chip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3743,7 +3753,8 @@
         "@paneui/icons",
         "@paneui/checkbox",
         "@paneui/loader",
-        "@paneui/scroll-area"
+        "@paneui/scroll-area",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3769,7 +3780,8 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/table",
-        "@paneui/menu"
+        "@paneui/menu",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3795,7 +3807,8 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/table",
-        "@paneui/button"
+        "@paneui/button",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3818,7 +3831,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3947,7 +3961,8 @@
         "@paneui/icons",
         "@paneui/scroll-area",
         "@paneui/code-block",
-        "@paneui/highlight"
+        "@paneui/highlight",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -3974,7 +3989,8 @@
         "@paneui/icons",
         "@paneui/agent-code-block",
         "@paneui/collapsible",
-        "@paneui/loader"
+        "@paneui/loader",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4075,7 +4091,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/tool-result"
+        "@paneui/tool-result",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4102,7 +4119,8 @@
         "@paneui/button",
         "@paneui/tool-result",
         "@paneui/icon-chip",
-        "@paneui/action-swap-roll"
+        "@paneui/action-swap-roll",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4118,7 +4136,7 @@
       "name": "agent-activity",
       "type": "registry:ui",
       "title": "Agent Activity",
-      "description": "Summarises an agent\u2019s work.",
+      "description": "Summarises an agent’s work.",
       "dependencies": [
         "@base-ui/react",
         "motion"
@@ -4128,7 +4146,8 @@
         "@paneui/icons",
         "@paneui/text-shimmer",
         "@paneui/citations",
-        "@paneui/tool-result"
+        "@paneui/tool-result",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4152,7 +4171,8 @@
         "@paneui/theme",
         "@paneui/text-shimmer",
         "@paneui/text-cascade",
-        "@paneui/text-scramble"
+        "@paneui/text-scramble",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4223,7 +4243,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/tooltip"
+        "@paneui/tooltip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4245,7 +4266,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/chart-utils"
+        "@paneui/chart-utils",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4267,7 +4289,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/chart-utils"
+        "@paneui/chart-utils",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4289,7 +4312,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/chart-utils"
+        "@paneui/chart-utils",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4311,7 +4335,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/chart-utils"
+        "@paneui/chart-utils",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4333,7 +4358,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/chart-utils"
+        "@paneui/chart-utils",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4355,7 +4381,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/chart-utils"
+        "@paneui/chart-utils",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4377,7 +4404,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/chart-utils"
+        "@paneui/chart-utils",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4420,7 +4448,8 @@
       "registryDependencies": [
         "@paneui/card",
         "@paneui/badge",
-        "@paneui/button"
+        "@paneui/button",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4602,7 +4631,8 @@
       ],
       "registryDependencies": [
         "@paneui/button",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4623,7 +4653,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@paneui/theme"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4648,7 +4679,8 @@
         "@paneui/badge",
         "@paneui/button",
         "@paneui/icons",
-        "@paneui/icon-chip"
+        "@paneui/icon-chip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4670,7 +4702,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4692,7 +4725,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@paneui/theme"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4747,7 +4781,8 @@
         "@paneui/todo-list",
         "@paneui/reasoning-text",
         "@paneui/agent-progress",
-        "@paneui/icon-chip"
+        "@paneui/icon-chip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4770,7 +4805,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/icon-chip"
+        "@paneui/icon-chip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4794,7 +4830,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/button-stateful"
+        "@paneui/button-stateful",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4816,7 +4853,8 @@
         "motion"
       ],
       "registryDependencies": [
-        "@paneui/theme"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4839,7 +4877,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4861,7 +4900,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4883,7 +4923,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4905,7 +4946,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4927,7 +4969,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4951,7 +4994,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/icon-chip"
+        "@paneui/icon-chip",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4973,7 +5017,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -4996,7 +5041,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5018,7 +5064,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5045,7 +5092,8 @@
         "@paneui/button",
         "@paneui/switch",
         "@paneui/select",
-        "@paneui/menu"
+        "@paneui/menu",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5072,7 +5120,8 @@
         "@paneui/input",
         "@paneui/checkbox",
         "@paneui/button",
-        "@paneui/button-stateful"
+        "@paneui/button-stateful",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5123,7 +5172,8 @@
         "@paneui/input",
         "@paneui/select",
         "@paneui/tabs",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5170,7 +5220,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/chart-utils"
+        "@paneui/chart-utils",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5213,7 +5264,8 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/badge",
-        "@paneui/sparkline"
+        "@paneui/sparkline",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5407,7 +5459,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5451,7 +5504,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/menu"
+        "@paneui/menu",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5473,7 +5527,8 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/avatar",
-        "@paneui/menu"
+        "@paneui/menu",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5501,7 +5556,8 @@
         "@paneui/input",
         "@paneui/menu",
         "@paneui/pagination",
-        "@paneui/table"
+        "@paneui/table",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5641,7 +5697,8 @@
         "@paneui/tooltip",
         "@paneui/toolbar",
         "@paneui/menu-list",
-        "@paneui/swatch-picker"
+        "@paneui/swatch-picker",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5727,7 +5784,8 @@
         "@paneui/segmented-control",
         "@paneui/swatch-picker",
         "@paneui/toggle-group",
-        "@paneui/toolbar"
+        "@paneui/toolbar",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5809,7 +5867,8 @@
         "@paneui/animated-sidebar",
         "@paneui/drawer",
         "@paneui/menu",
-        "@paneui/separator"
+        "@paneui/separator",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5854,7 +5913,8 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/overflow-hint"
+        "@paneui/overflow-hint",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -5966,7 +6026,8 @@
       "title": "Terminal View",
       "description": "Shows command output and takes commands in a terminal panel.",
       "registryDependencies": [
-        "@paneui/theme"
+        "@paneui/theme",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -6028,7 +6089,7 @@
       "name": "edited-files-card",
       "type": "registry:ui",
       "title": "Edited Files Card",
-      "description": "Reviews and undoes an agent\u2019s file changes.",
+      "description": "Reviews and undoes an agent’s file changes.",
       "dependencies": [
         "motion"
       ],
@@ -6036,7 +6097,8 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/button",
-        "@paneui/file-diff"
+        "@paneui/file-diff",
+        "@paneui/locale-provider"
       ],
       "files": [
         {
@@ -6131,7 +6193,8 @@
       ],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/icons"
+        "@paneui/icons",
+        "@paneui/locale-provider"
       ],
       "files": [
         {

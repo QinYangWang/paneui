@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { useVirtualizer } from "@tanstack/react-virtual"
 import { useReducedMotion } from "motion/react"
 
@@ -283,10 +284,13 @@ function TableSkeletonRow({
 }
 
 /** Default band shown under the rows while the next page loads. */
-function TableLoadingFooter({ label = "Loading more…" }: { label?: React.ReactNode }) {
+function TableLoadingFooter({ label }: { label?: React.ReactNode }) {
+  const l10n = useLocale().labels
+  if (label === undefined) label = l10n.loadingMore
+
   return (
     <div role="status" className="flex h-full items-center justify-center gap-2.5 text-ui text-muted-foreground">
-      <Loader size="sm" label="Loading more rows" />
+      <Loader size="sm" label={l10n.loadingMoreRows} />
       {label}
     </div>
   )
@@ -333,7 +337,7 @@ function Table<T>({
   onEndReached,
   endReachedThreshold = 8,
   footer,
-  emptyState = "No rows",
+  emptyState,
   renderCell,
   renderHeader,
   headerAccessory,
@@ -344,6 +348,10 @@ function Table<T>({
   className,
   ref,
 }: TableProps<T>) {
+  const l10n = useLocale().labels
+
+  if (emptyState === undefined) emptyState = l10n.noRows
+
   const reduce = useReducedMotion()
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const bodyRef = React.useRef<HTMLDivElement>(null)
@@ -724,7 +732,7 @@ function Table<T>({
                   checked={allSelected}
                   indeterminate={someSelected && !allSelected}
                   onCheckedChange={toggleAll}
-                  aria-label={allSelected ? "Deselect all rows" : "Select all rows"}
+                  aria-label={allSelected ? l10n.deselectAllRows : l10n.selectAllRows}
                   disabled={rows.length === 0}
                 />
               </div>
@@ -756,7 +764,7 @@ function Table<T>({
                     <button
                       type="button"
                       {...ctx.labelProps}
-                      aria-description={reorderable ? "Alt plus arrow keys moves the column" : undefined}
+                      aria-description={reorderable ? l10n.altPlusArrowKeysMovesTheColumn : undefined}
                       className={cn(headerLabelClass, alignClass(column.align), ctx.sort && "text-foreground", !column.sortable && "cursor-default")}
                     >
                       <span className="truncate">{column.header}</span>
@@ -772,7 +780,7 @@ function Table<T>({
                     <div
                       role="separator"
                       aria-orientation="vertical"
-                      aria-label={`Resize ${typeof column.header === "string" ? column.header : column.key} column`}
+                      aria-label={l10n.resizeColumn(typeof column.header === "string" ? column.header : column.key)}
                       aria-valuenow={Math.round(width)}
                       aria-valuemin={minFor(column)}
                       tabIndex={0}
@@ -831,7 +839,7 @@ function Table<T>({
           {showSkeleton ? (
             <div role="row" aria-busy className="absolute inset-x-0 top-0">
               <span className="sr-only" role="status">
-                Loading rows
+                {l10n.loadingRows}
               </span>
               {Array.from({ length: skeletonCount }, (_, i) => (
                 <TableSkeletonRow
@@ -898,7 +906,7 @@ function Table<T>({
                           const event = details.event as Partial<MouseEvent> | undefined
                           toggleRow(item.index, checked, !!event?.shiftKey)
                         }}
-                        aria-label={`Select row ${item.index + 1}`}
+                        aria-label={l10n.selectRow(item.index + 1)}
                       />
                     </div>
                   ) : null}

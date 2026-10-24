@@ -20,6 +20,7 @@
     "audit:radius": "node tooling/scripts/audit-radius.mjs",
     "design:check": "node skills/paneui-design/scripts/check.mjs apps/docs packages/ui/src packages/core/src packages/tokens/src packages/ui-native/src apps/native skills packages/registry/registry.json",
     "test:cover-art": "node tooling/scripts/test-cover-art-seeds.mjs",
+    "test:locales": "node tooling/scripts/run-tsx.mjs tooling/scripts/test-locales.tsx",
     "test:labels": "node tooling/scripts/run-tsx.mjs tooling/scripts/test-default-labels.tsx",
     "cli:build": "pnpm --filter paneui build",
     "cli:test": "pnpm --filter paneui test",

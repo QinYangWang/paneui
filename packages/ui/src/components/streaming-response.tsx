@@ -280,6 +280,8 @@ function StreamingResponse({
   contentClassName,
   ...props
 }: StreamingResponseProps) {
+  const l10n = useLocale().labels
+
   const { labels } = useLocale()
   const errorMessage = errorMessageProp ?? labels.responseInterrupted
   const reduce = useReducedMotion()
@@ -338,7 +340,7 @@ function StreamingResponse({
                   className="inline-flex h-7 cursor-pointer items-center gap-1 rounded-full px-2.5 text-ui-sm font-medium outline-none hover:bg-destructive/12 focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <RefreshIcon className="size-3.5" />
-                  Retry
+                  {l10n.retry}
                 </button>
               ) : null}
             </motion.div>

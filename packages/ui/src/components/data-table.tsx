@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { FilterIcon, MoreHorizontalIcon, SearchIcon, SlidersIcon, XIcon } from "@paneui/ui/icons"
@@ -106,7 +107,7 @@ function DataTable<T>({
   getRowId,
   "aria-label": ariaLabel,
   searchText,
-  searchPlaceholder = "Search…",
+  searchPlaceholder,
   filters = [],
   defaultSort = null,
   defaultHiddenColumns = [],
@@ -118,12 +119,16 @@ function DataTable<T>({
   bulkActions,
   toolbar,
   emptyState,
-  noun = "rows",
+  noun,
   rowHeight = 48,
   onRowClick,
   rowClassName,
   className,
 }: DataTableProps<T>) {
+  const l10n = useLocale().labels
+  if (searchPlaceholder === undefined) searchPlaceholder = l10n.search
+
+  if (noun === undefined) noun = l10n.rows
   const reduce = useReducedMotion()
   const [query, setQuery] = React.useState("")
   const [active, setActive] = React.useState<Record<string, string[]>>({})
@@ -235,7 +240,7 @@ function DataTable<T>({
   const empty = isEmpty
     ? (emptyState ?? (
         <EmptyState size="sm">
-          <EmptyStateTitle>No {noun} yet</EmptyStateTitle>
+          <EmptyStateTitle>{l10n.noItemsYet(noun)}</EmptyStateTitle>
         </EmptyState>
       ))
     : (
@@ -243,11 +248,11 @@ function DataTable<T>({
           <EmptyStateIcon>
             <SearchIcon />
           </EmptyStateIcon>
-          <EmptyStateTitle>No matching {noun}</EmptyStateTitle>
-          <EmptyStateDescription>Try a different search or remove a filter.</EmptyStateDescription>
+          <EmptyStateTitle>{l10n.noMatchingItems(noun)}</EmptyStateTitle>
+          <EmptyStateDescription>{l10n.tryADifferentSearchOrRemoveAFilter}</EmptyStateDescription>
           <EmptyStateActions>
             <Button variant="secondary" size="sm" onClick={resetFilters}>
-              Clear filters
+              {l10n.clearFilters}
             </Button>
           </EmptyStateActions>
         </EmptyState>
@@ -301,7 +306,7 @@ function DataTable<T>({
             ))}
             {filtering && (
               <Button variant="ghost" size="sm" onClick={resetFilters}>
-                Reset
+                {l10n.reset}
                 <XIcon data-icon="inline-end" />
               </Button>
             )}
@@ -313,11 +318,11 @@ function DataTable<T>({
             <Menu>
               <MenuTrigger render={<Button variant="outline" size="sm" />}>
                 <SlidersIcon data-icon="inline-start" />
-                View
+                {l10n.view}
               </MenuTrigger>
               <MenuContent align="end" className="w-48">
                 <MenuGroup>
-                  <MenuLabel>Columns</MenuLabel>
+                  <MenuLabel>{l10n.columns}</MenuLabel>
                   {hideableColumns.map((c) => (
                     <MenuCheckboxItem
                       key={c.key}
@@ -349,9 +354,9 @@ function DataTable<T>({
             className="overflow-hidden"
           >
             <div className="flex min-h-10 flex-wrap items-center gap-2 rounded-xl bg-primary/8 px-3 py-1.5 text-ui">
-              <span className="font-medium tabular-nums">{selected.length} selected</span>
+              <span className="font-medium tabular-nums">{l10n.selectedCount(selected.length)}</span>
               <Button variant="ghost" size="xs" onClick={() => setSelected([])}>
-                Clear
+                {l10n.clear}
               </Button>
               <div className="ml-auto flex flex-wrap items-center gap-2">{bulkActions?.(selectedRows, () => setSelected([]))}</div>
             </div>
@@ -443,12 +448,14 @@ function FacetOptions<T>({ filter, data, value, onValueChange }: FacetProps<T>) 
 
 /** Multi-select filter button with counts per option. */
 function DataTableFacet<T>(props: FacetProps<T>) {
+  const l10n = useLocale().labels
+
   const { filter, value, onValueChange } = props
   return (
     <Menu>
       <MenuTrigger
         render={<Button variant="outline" size="sm" />}
-        aria-label={value.length ? `${filter.label}: ${value.length} selected` : `Filter by ${filter.label}`}
+        aria-label={value.length ? l10n.filterSelection(filter.label, value.length) : l10n.filterBy(filter.label)}
       >
         <FilterIcon data-icon="inline-start" />
         {filter.label}
@@ -459,7 +466,7 @@ function DataTableFacet<T>(props: FacetProps<T>) {
         {value.length > 0 && (
           <>
             <MenuSeparator />
-            <MenuItem onClick={() => onValueChange([])}>Clear filter</MenuItem>
+            <MenuItem onClick={() => onValueChange([])}>{l10n.clearFilter}</MenuItem>
           </>
         )}
       </MenuContent>
@@ -479,11 +486,13 @@ function DataTableFilterMenu<T>({
   count: number
   onClear: () => void
 }) {
+  const l10n = useLocale().labels
+
   return (
     <Menu>
-      <MenuTrigger render={<Button variant="outline" size="sm" />} aria-label={count ? `Filters: ${count} selected` : "Filters"}>
+      <MenuTrigger render={<Button variant="outline" size="sm" />} aria-label={count ? l10n.filterSelection(l10n.filters, count) : l10n.filters}>
         <FilterIcon data-icon="inline-start" />
-        Filter
+        {l10n.filter}
         {count > 0 && <FacetCount>{count}</FacetCount>}
       </MenuTrigger>
       <MenuContent className="max-h-(--available-height) w-56">
@@ -496,7 +505,7 @@ function DataTableFilterMenu<T>({
         {count > 0 && (
           <>
             <MenuSeparator />
-            <MenuItem onClick={onClear}>Clear filters</MenuItem>
+            <MenuItem onClick={onClear}>{l10n.clearFilters}</MenuItem>
           </>
         )}
       </MenuContent>
@@ -505,7 +514,10 @@ function DataTableFilterMenu<T>({
 }
 
 /** "⋯" menu for a row's actions. Put `MenuItem`s inside; clicks don't reach `onRowClick`. */
-function DataTableRowActions({ label = "Row actions", children }: { label?: string; children: React.ReactNode }) {
+function DataTableRowActions({ label, children }: { label?: string; children: React.ReactNode }) {
+  const l10n = useLocale().labels
+  if (label === undefined) label = l10n.rowActions
+
   return (
     // only stops the row's click handler; the button inside is the control
     <div className="flex justify-end" onClick={(e) => e.stopPropagation()}>

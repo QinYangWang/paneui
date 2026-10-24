@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Extension, mergeAttributes, Node, type Editor } from "@tiptap/core"
 import { Mention } from "@tiptap/extension-mention"
 import { NodeViewContent, NodeViewWrapper, ReactNodeViewRenderer, type ReactNodeViewProps } from "@tiptap/react"
@@ -10,6 +11,8 @@ import { cn } from "@paneui/ui/lib/utils"
 import {
   filterSuggestionItems,
   suggestionRenderer,
+  SuggestionMenu,
+  type SuggestionMenuProps,
   type SuggestionMenuItem,
 } from "@paneui/ui/blocks/notion-editor/suggestion-menu"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@paneui/ui/components/select"
@@ -79,6 +82,8 @@ function attrsSpec<T extends Record<string, unknown>>(defaults: T) {
 /* ───────────────────────── button ───────────────────────── */
 
 function ButtonView({ node, selected }: ReactNodeViewProps) {
+  const l10n = useLocale().labels
+
   const { text, variant, align, color, radius } = node.attrs as {
     text: string
     variant: ButtonVariant
@@ -106,7 +111,7 @@ function ButtonView({ node, selected }: ReactNodeViewProps) {
               : { color }
         }
       >
-        {text || "Button"}
+        {text || l10n.button}
       </span>
     </NodeViewWrapper>
   )
@@ -143,6 +148,8 @@ export const EmailButton = Node.create({
 /* ───────────────────────── image + logo ───────────────────────── */
 
 function ImageView({ node, selected }: ReactNodeViewProps) {
+  const l10n = useLocale().labels
+
   const { src, alt, width, align } = node.attrs as { src: string; alt: string; width: number; align: Align }
   return (
     <NodeViewWrapper data-type="email-image" className={cn("my-3 flex", alignClass[align])}>
@@ -164,7 +171,7 @@ function ImageView({ node, selected }: ReactNodeViewProps) {
           )}
         >
           <ImageIcon className="size-5" />
-          Select to add an image URL
+          {l10n.selectToAddAnImageURL}
         </div>
       )}
     </NodeViewWrapper>
@@ -200,6 +207,8 @@ export const EmailImage = Node.create({
 })
 
 function LogoView({ node, selected }: ReactNodeViewProps) {
+  const l10n = useLocale().labels
+
   const { src, size, align } = node.attrs as { src: string; size: number; align: Align }
   return (
     <NodeViewWrapper data-type="email-logo" className={cn("my-2 flex", alignClass[align])}>
@@ -208,7 +217,7 @@ function LogoView({ node, selected }: ReactNodeViewProps) {
         <img
           data-drag-handle
           src={src}
-          alt="Logo"
+          alt={l10n.logo}
           style={{ height: size }}
           className={cn("block w-auto rounded-md media-outline", selected && "ring-2 ring-ring/50")}
         />
@@ -382,13 +391,14 @@ function VariableSelect({
   lists?: boolean
   label: string
 }) {
+  const l10n = useLocale().labels
   const vars = variablesOf(editor).filter((v) => (lists ? v.list : !v.list))
   const items = vars.map((v) => ({ value: v.name, label: v.label ?? v.name }))
   if (value && !items.some((i) => i.value === value)) items.unshift({ value, label: value })
   return (
     <Select items={items} value={value} onValueChange={(v) => onChange(String(v ?? ""))} disabled={!editor.isEditable}>
       <SelectTrigger size="sm" aria-label={label} className="h-6 w-auto min-w-28 font-mono text-ui-xs">
-        <SelectValue placeholder="variable" />
+        <SelectValue placeholder={l10n.variablePlaceholder} />
       </SelectTrigger>
       <SelectContent>
         {items.map((i) => (
@@ -408,11 +418,13 @@ const sectionTone: Record<SectionBackground, string> = {
 }
 
 function SectionView({ node, updateAttributes, editor }: ReactNodeViewProps) {
+  const l10n = useLocale().labels
+
   const { background, align } = node.attrs as { background: SectionBackground; align: Align }
   return (
     <NodeViewWrapper data-type="email-section" className={cn("group/section frame-xl frame-p-1 my-3", sectionTone[background])}>
       <ContainerHeader className="opacity-0 transition-opacity duration-150 group-focus-within/section:opacity-100 group-hover/section:opacity-100">
-        <span className="font-medium">Section</span>
+        <span className="font-medium">{l10n.section}</span>
         {editor.isEditable && (
           <span className="ml-auto flex gap-0.5">
             {(["none", "muted", "brand"] as SectionBackground[]).map((b) => (
@@ -423,7 +435,7 @@ function SectionView({ node, updateAttributes, editor }: ReactNodeViewProps) {
                 onClick={() => updateAttributes({ background: b })}
                 className="h-5 cursor-pointer rounded-md px-1.5 capitalize outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 aria-pressed:bg-foreground/8 aria-pressed:text-foreground"
               >
-                {b === "none" ? "Plain" : b}
+                {b === "none" ? l10n.plain : b === "muted" ? l10n.sectionMuted : l10n.sectionBrand}
               </button>
             ))}
           </span>
@@ -471,21 +483,23 @@ export const EmailSection = Node.create({
 })
 
 function LogicView({ node, updateAttributes, editor }: ReactNodeViewProps) {
+  const l10n = useLocale().labels
+
   const repeat = node.type.name === "repeat"
   const key = repeat ? "each" : "when"
   const value = (node.attrs[key] as string) ?? ""
   return (
     <NodeViewWrapper
       data-type={repeat ? "email-repeat" : "email-show-if"}
-      title={repeat ? "Renders its blocks once per item of the list" : "Renders its blocks only when the variable is set and not empty"}
+      title={repeat ? l10n.rendersItsBlocksOncePerItemOfTheList : l10n.rendersItsBlocksOnlyWhenTheVariableIsSetAndNotEmpty}
       className="frame-xl frame-p-1 my-3 border border-dashed border-primary/40 frame-border"
     >
       <ContainerHeader>
         {repeat ? <RefreshIcon className="text-primary" /> : <GitBranchIcon className="text-primary" />}
-        <span className="font-medium text-foreground">{repeat ? "Repeat for each" : "Show if"}</span>
+        <span className="font-medium text-foreground">{repeat ? l10n.repeatForEach : l10n.showIf}</span>
         <VariableSelect
           editor={editor}
-          label={repeat ? "List variable" : "Condition variable"}
+          label={repeat ? l10n.listVariable : l10n.conditionVariable}
           lists={repeat}
           value={value}
           onChange={(v) => updateAttributes({ [key]: v })}
@@ -648,6 +662,11 @@ export const Variable = Mention.extend({
         ])
         .run()
     },
-    render: suggestionRenderer<VariableItem>({ emptyLabel: "No variables", className: "w-64" }) as never,
+    render: suggestionRenderer<VariableItem>({ Component: VariableSuggestionMenu, className: "w-64" }) as never,
   },
 })
+
+function VariableSuggestionMenu(props: SuggestionMenuProps<VariableItem> & { ref?: React.Ref<import("@paneui/ui/components/menu-list").MenuListHandle> }) {
+  const { labels } = useLocale()
+  return <SuggestionMenu {...props} emptyLabel={labels.noVariables} />
+}

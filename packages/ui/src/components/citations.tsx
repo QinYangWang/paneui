@@ -241,6 +241,8 @@ function Citation({
   onClick,
   ...props
 }: CitationProps) {
+  const l10n = useLocale().labels
+
   const group = React.useContext(CitationGroupContext)
   // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
   const dir = useDirection() === "rtl" ? "rtl" : undefined
@@ -273,7 +275,7 @@ function Citation({
           className
         )}
         {...props}
-        aria-label={props["aria-label"] ?? `Source ${index ?? ""}: ${typeof source.title === "string" ? source.title : (domain ?? "")}`.trim()}
+        aria-label={props["aria-label"] ?? l10n.sourceLabel(index, typeof source.title === "string" ? source.title : (domain ?? ""))}
       >
         {index ?? "•"}
       </PreviewCardPrimitive.Trigger>
@@ -290,7 +292,7 @@ function Citation({
           >
             <div className="flex items-center gap-2 text-ui-sm text-muted-foreground">
               <CitationFavicon source={source} favicon={favicon} />
-              <span className="min-w-0 flex-1 truncate">{domain ?? "Source"}</span>
+              <span className="min-w-0 flex-1 truncate">{domain ?? l10n.source}</span>
               {index != null ? <span className="font-mono tabular-nums">[{index}]</span> : null}
             </div>
             <div className="leading-snug font-semibold">{source.title}</div>
@@ -307,7 +309,7 @@ function Citation({
                     rel="noreferrer noopener"
                     className="inline-flex shrink-0 items-center gap-0.5 rounded-full px-1.5 py-0.5 font-medium text-primary outline-none hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
-                    Open
+                    {l10n.priceOpen}
                     <ArrowUpRightIcon className="size-3 rtl:-scale-x-100" />
                   </a>
                 ) : null}

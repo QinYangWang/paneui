@@ -1,3 +1,6 @@
+"use client"
+
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import * as React from "react"
 
 import { ChevronsUpDownIcon } from "@paneui/ui/icons"
@@ -54,6 +57,7 @@ function UserMenu({
   className,
   ...props
 }: UserMenuProps) {
+  const l10n = useLocale().labels
   const compact = collapsed || variant === "compact"
   return (
     <Menu>
@@ -65,7 +69,7 @@ function UserMenu({
           className
         )}
         {...props}
-        aria-label={props["aria-label"] ?? `Account menu for ${name}`}
+        aria-label={props["aria-label"] ?? l10n.accountMenu(name)}
       >
         <Avatar size={variant === "compact" ? "sm" : "md"} className={variant === "row" ? "size-7" : undefined}>
           {image && <AvatarImage src={image} alt="" />}

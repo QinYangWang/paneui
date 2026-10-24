@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 
 import { CheckIcon, CopyIcon, DownloadIcon, RefreshIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
@@ -37,21 +38,27 @@ type AvatarGeneratorState = {
   accessories: boolean
 }
 
-const GENDERS: { value: AvatarGender; label: string }[] = [
-  { value: "any", label: "Any" },
-  { value: "female", label: "Female" },
-  { value: "male", label: "Male" },
-]
-const PICKERS: { slot: AvatarSlot; label: string }[] = [
-  { slot: "hair", label: "Hair" },
-  { slot: "eyes", label: "Eyes" },
-  { slot: "brows", label: "Brows" },
-  { slot: "lips", label: "Mouth" },
-  { slot: "glasses", label: "Glasses" },
-  { slot: "beard", label: "Beard" },
-  { slot: "body", label: "Top" },
-  { slot: "gesture", label: "Gesture" },
-]
+function getGenders(l10n: LocaleLabels = localeLabels.en): { value: AvatarGender; label: string }[] {
+  return ([
+  { value: "any", label: l10n.any },
+  { value: "female", label: l10n.female },
+  { value: "male", label: l10n.male },
+])
+}
+
+function getPickers(l10n: LocaleLabels = localeLabels.en): { slot: AvatarSlot; label: string }[] {
+  return ([
+  { slot: "hair", label: l10n.hair },
+  { slot: "eyes", label: l10n.eyes },
+  { slot: "brows", label: l10n.brows },
+  { slot: "lips", label: l10n.mouth },
+  { slot: "glasses", label: l10n.glasses },
+  { slot: "beard", label: l10n.beard },
+  { slot: "body", label: l10n.top },
+  { slot: "gesture", label: l10n.gesture },
+])
+}
+
 const FROM_SEED = "__seed"
 const NO_ITEM = "none"
 const VARIATIONS = 6
@@ -86,6 +93,10 @@ function AvatarGenerator({
   onValueChange,
   ...props
 }: AvatarGeneratorProps) {
+  const l10n = useLocale().labels
+  const GENDERS = getGenders(l10n)
+  const PICKERS = getPickers(l10n)
+
   const [state, setState] = React.useState<AvatarGeneratorState>({
     seed: defaultSeed,
     gender: defaultGender,
@@ -104,7 +115,7 @@ function AvatarGenerator({
     // Keep overrides that the new gender still offers; drop the rest back to the seed.
     const selections: AvatarSelections = {}
     for (const [slot, name] of Object.entries(state.selections) as [AvatarSlot, string][]) {
-      if (getAvatarParts(slot, gender).some((part) => part.name === name)) selections[slot] = name
+      if (getAvatarParts(slot, gender, l10n).some((part) => part.name === name)) selections[slot] = name
     }
     update({ gender, selections })
   }
@@ -168,13 +179,13 @@ function AvatarGenerator({
             <GeneratedAvatar
               {...avatarOptions}
               size={152}
-              title={`Avatar for ${state.seed || "empty seed"}`}
+              title={l10n.avatarFor(state.seed)}
             />
           </div>
           <div
             className="flex items-center justify-center gap-2 @xl/avatar-generator:justify-between @xl/avatar-generator:gap-0"
             role="group"
-            aria-label="Variations"
+            aria-label={l10n.variations}
           >
             {Array.from({ length: VARIATIONS }, (_, i) => {
               const seed = `${state.seed}-${i + 1}`
@@ -182,7 +193,7 @@ function AvatarGenerator({
                 <button
                   key={seed}
                   type="button"
-                  aria-label={`Use seed ${seed}`}
+                  aria-label={l10n.useSeed(seed)}
                   onClick={() => update({ seed, selections: {} })}
                   className="cursor-pointer rounded-full outline-none transition-opacity duration-150 hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
@@ -201,7 +212,7 @@ function AvatarGenerator({
         <div className="@container/avatar-generator-controls flex min-w-0 flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label htmlFor={seedId} className="text-ui font-medium">
-              Seed
+              {l10n.seed}
             </label>
             <div className="flex gap-2">
               <Input
@@ -209,26 +220,26 @@ function AvatarGenerator({
                 value={state.seed}
                 spellCheck={false}
                 autoComplete="off"
-                placeholder="User id, email or name"
+                placeholder={l10n.userIdEmailOrName}
                 onChange={(event) => update({ seed: event.target.value })}
               />
               <Button
                 variant="outline"
                 onClick={() => update({ seed: randomSeed(), selections: {} })}
-                aria-label="Shuffle seed"
+                aria-label={l10n.shuffleSeed}
               >
                 <RefreshIcon data-icon="inline-start" />
-                Shuffle
+                {l10n.shuffle}
               </Button>
             </div>
             <p className="text-ui-sm text-pretty text-muted-foreground">
-              The same seed always draws the same avatar.
+              {l10n.theSameSeedAlwaysDrawsTheSameAvatar}
             </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
             <span id={`${seedId}-gender`} className="text-ui font-medium">
-              Gender
+              {l10n.gender}
             </span>
             <Tabs value={state.gender} onValueChange={(value) => setGender(value as AvatarGender)}>
               <TabsList aria-labelledby={`${seedId}-gender`} className="w-full">
@@ -243,17 +254,17 @@ function AvatarGenerator({
 
           <div className="grid gap-x-2 gap-y-2 @2xs/avatar-generator-controls:grid-cols-2 @2xs/avatar-generator-controls:gap-y-3">
             {PICKERS.map(({ slot, label }) => {
-              const parts = getAvatarParts(slot, state.gender)
+              const parts = getAvatarParts(slot, state.gender, l10n)
               const items = (() => {
                 if (slot === "glasses")
                   return [
-                    { value: NO_ITEM, label: "None" },
-                    { value: FROM_SEED, label: "Random" },
+                    { value: NO_ITEM, label: l10n.none },
+                    { value: FROM_SEED, label: l10n.random },
                     ...parts.filter((part) => part.name !== NO_ITEM).map((part) => ({ value: part.name, label: part.label })),
                   ]
                 const seedPart = parts.find((part) => part.name === resolved[slot])
                 return [
-                  { value: FROM_SEED, label: `Seed · ${seedPart?.label ?? "None"}` },
+                  { value: FROM_SEED, label: l10n.seedPart(seedPart?.label ?? l10n.none) },
                   ...parts.map((part) => ({ value: part.name, label: part.label })),
                 ]
               })()
@@ -284,14 +295,14 @@ function AvatarGenerator({
           <div className="mt-auto flex flex-wrap justify-end gap-2 pt-1">
             <Button variant="outline" onClick={download} className="grow @sm/avatar-generator-controls:grow-0">
               <DownloadIcon data-icon="inline-start" />
-              Download SVG
+              {l10n.downloadSVG}
             </Button>
             <Button onClick={copy} aria-live="polite" className="grow @sm/avatar-generator-controls:grow-0">
               <span className="relative inline-grid shrink-0 place-items-center *:col-start-1 *:row-start-1 *:transition-[opacity,scale,filter] *:duration-300 *:ease-[cubic-bezier(0.22,1,0.36,1)]">
                 <CheckIcon className={!copied ? "opacity-0 motion-safe:scale-25 motion-safe:blur-xs" : undefined} />
                 <CopyIcon className={copied ? "opacity-0 motion-safe:scale-25 motion-safe:blur-xs" : undefined} />
               </span>
-              {copied ? "Copied" : "Copy code"}
+              {copied ? l10n.copied : l10n.copyCode}
             </Button>
           </div>
         </div>

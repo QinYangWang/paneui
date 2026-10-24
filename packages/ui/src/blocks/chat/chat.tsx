@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { motion } from "motion/react"
 
 import { cn } from "@paneui/ui/lib/utils"
@@ -44,10 +45,12 @@ function ChatBubble({
 
 /** Three bouncing dots inside an assistant bubble. */
 function ChatTyping({ className }: { className?: string }) {
+  const l10n = useLocale().labels
+
   return (
     <div
       data-slot="chat-typing"
-      aria-label="Typing"
+      aria-label={l10n.typing}
       className={cn("flex h-10 w-16 items-center justify-center gap-1 self-start rounded-3xl rounded-bl-md bg-card shadow-raised", className)}
     >
       {[0, 1, 2].map((i) => (
