@@ -1759,7 +1759,8 @@
       "title": "Sidebar Nav",
       "description": "Compact text navigation for docs and settings sidebars.",
       "dependencies": [
-        "@base-ui/react"
+        "@base-ui/react",
+        "class-variance-authority"
       ],
       "registryDependencies": [
         "@paneui/theme",
@@ -5437,7 +5438,8 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "@paneui/theme"
+        "@paneui/theme",
+        "@paneui/control-size"
       ],
       "files": [
         {
@@ -6534,6 +6536,31 @@
       "meta": {
         "category": "Foundations",
         "hidden": true
+      }
+    },
+    {
+      "name": "search-button",
+      "type": "registry:ui",
+      "title": "Search Button",
+      "description": "Opens search from a responsive toolbar button.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@paneui/theme",
+        "@paneui/utils",
+        "@paneui/icons",
+        "@paneui/kbd",
+        "@paneui/locale-provider"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/search-button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "meta": {
+        "category": "Navigation"
       }
     }
   ],

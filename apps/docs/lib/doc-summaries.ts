@@ -610,6 +610,7 @@ export const DOC_SUMMARIES: Record<string, Localized> = {
     "en": "Creates and edits avatars.",
     "zh": "生成或编辑用户头像。"
   },
+  "search-button": { en: "Opens search from a responsive toolbar button.", zh: "通过自适应工具栏按钮打开搜索。" },
   "sparkline": {
     "en": "Small inline chart that shows a trend.",
     "zh": "在行内显示趋势。"

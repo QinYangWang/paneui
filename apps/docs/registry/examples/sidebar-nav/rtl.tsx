@@ -8,7 +8,7 @@ export default function SidebarNavRtl() {
   return (
     <DirectionProvider direction="rtl">
       <div dir="rtl" className="flex h-80 w-64 flex-col overflow-hidden rounded-xl bg-background shadow-raised">
-        <SidebarNav>
+        <SidebarNav variant="fill">
           <SidebarNavSearch shortcut="⌘K">بحث</SidebarNavSearch>
           <SidebarNavContent aria-label="التوثيق">
             <SidebarNavSection label="البداية">

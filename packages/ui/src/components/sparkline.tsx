@@ -33,6 +33,8 @@ type SparklineProps = Omit<React.ComponentProps<"svg">, "values" | "children"> &
   label?: string
   /** Draw the chart in on mount. Default true (always off under reduced motion). */
   animate?: boolean
+  /** Mark the first minimum and maximum in a line or area series. */
+  extrema?: boolean
 }
 
 const W = 120
@@ -62,6 +64,7 @@ function Sparkline({
   gap = "bridge",
   label,
   animate = true,
+  extrema = false,
   className,
   ...props
 }: SparklineProps) {
@@ -184,6 +187,9 @@ function Sparkline({
         {runs.map((r, i) => (
           // A lone point between gaps is a zero-length path: its round cap draws a dot.
           <path key={`l${i}`} d={r.length > 1 ? path(r) : path([r[0], r[0]])} {...stroke} strokeWidth={r.length > 1 ? 1.5 : 2.5} />
+        ))}
+        {extrema && [...new Set([min, max])].map((v) => (
+          <path key={v} data-slot="sparkline-extremum" d={path([[x(list.indexOf(v)), y(v)], [x(list.indexOf(v)), y(v)]])} {...stroke} strokeWidth={5} />
         ))}
       </g>
     </svg>

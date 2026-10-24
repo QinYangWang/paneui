@@ -154,6 +154,7 @@
     "./components/slider": "./src/components/slider.tsx",
     "./components/smooth-scroll": "./src/components/smooth-scroll.tsx",
     "./components/sortable-stack": "./src/components/sortable-stack.tsx",
+    "./components/search-button": "./src/components/search-button.tsx",
     "./components/sparkline": "./src/components/sparkline.tsx",
     "./components/stat-card": "./src/components/stat-card.tsx",
     "./components/status-bar": "./src/components/status-bar.tsx",

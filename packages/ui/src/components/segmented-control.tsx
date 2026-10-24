@@ -6,6 +6,8 @@ import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group"
 import { cva, type VariantProps } from "class-variance-authority"
 import { LayoutGroup, motion, useReducedMotion } from "motion/react"
 
+import { useControlSize } from "@paneui/core/control-size"
+
 import { cn } from "@paneui/ui/lib/utils"
 
 /*
@@ -36,11 +38,11 @@ const segmentedControlVariants = cva("relative inline-flex w-fit items-center ga
 })
 
 const segmentedControlItemVariants = cva(
-  "relative inline-flex cursor-pointer items-center select-none justify-center gap-1.5 font-medium whitespace-nowrap text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-checked:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 [&_svg]:size-3.5 [&_svg]:shrink-0",
+  "relative inline-flex cursor-pointer items-center select-none justify-center gap-1.5 font-medium whitespace-nowrap text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground active:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-checked:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 [&_svg]:size-3.5 [&_svg]:shrink-0",
   {
     variants: {
       size: {
-        xs: "h-5 rounded-inner px-2 text-ui-xs [&_svg]:size-3",
+        xs: "after:absolute after:inset-x-0 after:-inset-y-0.5 h-5 rounded-inner px-2 text-ui-xs [&_svg]:size-3",
         sm: "h-6 rounded-inner px-2.5 text-ui-sm",
         default: "h-7 rounded-inner px-3 text-ui",
         lg: "h-8 rounded-inner px-3.5 text-ui-lg [&_svg]:size-4",
@@ -60,7 +62,8 @@ type SegmentedControlProps = Omit<RadioGroupPrimitive.Props<string>, "onValueCha
   size?: SegmentedControlSize
 }
 
-function SegmentedControl({ className, size = "default", value, defaultValue, onValueChange, ...props }: SegmentedControlProps) {
+function SegmentedControl({ className, size: sizeProp, value, defaultValue, onValueChange, ...props }: SegmentedControlProps) {
+  const size = useControlSize(sizeProp)
   const id = React.useId()
   const reduce = useReducedMotion() ?? false
   const [inner, setInner] = React.useState<unknown>(defaultValue)
@@ -100,8 +103,10 @@ function SegmentedControlItem({ className, children, value, ...props }: RadioPri
       {selected && (
         <motion.span
           aria-hidden
-          layoutId={`${ctx?.id}-thumb`}
-          transition={ctx?.reduce ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 40, mass: 0.6 }}
+          layoutId={ctx?.reduce ? undefined : `${ctx?.id}-thumb`}
+          initial={ctx?.reduce ? { opacity: 0 } : false}
+          animate={{ opacity: 1 }}
+          transition={ctx?.reduce ? { duration: 0.15 } : { type: "spring", stiffness: 500, damping: 40, mass: 0.6 }}
           className="absolute inset-0 rounded-inner bg-card shadow-raised"
         />
       )}

@@ -106,6 +106,7 @@ import d_scroll_area from "./scroll-area"
 import d_scroll_progress from "./scroll-progress"
 import d_scroll_reveal from "./scroll-reveal"
 import d_scroll_to from "./scroll-to"
+import d_search_button from "./search-button"
 import d_segmented_control from "./segmented-control"
 import d_select from "./select"
 import d_select_morph from "./select-morph"
@@ -268,6 +269,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "scroll-progress": d_scroll_progress,
   "scroll-reveal": d_scroll_reveal,
   "scroll-to": d_scroll_to,
+  "search-button": d_search_button,
   "segmented-control": d_segmented_control,
   "select": d_select,
   "select-morph": d_select_morph,
