@@ -85,14 +85,14 @@ function ApiPart({ part }: { part: PartDoc }) {
         <Card data-md-skip render={<dl />} className="gap-0 py-0 sm:hidden">
           {part.props.map((p) => (
             <div key={p.name} className="flex min-w-0 flex-col gap-1 border-b border-border px-4 py-3 text-sm last:border-b-0">
-              <dt className="flex min-w-0 items-baseline justify-between gap-3 font-mono text-xs">
+              <dt className="flex min-w-0 flex-wrap items-baseline justify-between gap-x-3 gap-y-1 font-mono text-xs">
                 <span className="min-w-0 break-all text-foreground">
                   {p.name}
                   {p.required && <span className="text-destructive">*</span>}
                 </span>
-                {p.default && <span className="shrink-0 text-muted-foreground">= {p.default}</span>}
+                {p.default && <span className="min-w-0 break-all text-muted-foreground">= {p.default}</span>}
               </dt>
-              <dd className="font-mono text-xs break-words text-primary">{p.type}</dd>
+              <dd className="font-mono text-xs break-words text-foreground">{p.type}</dd>
               {p.description && (
                 <dd className="text-pretty text-muted-foreground">
                   <Inline text={p.description} />

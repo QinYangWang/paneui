@@ -98,7 +98,7 @@ const cellVariants = {
   /** Secondary names: defaults, token names beside a class. */
   "code-muted": "font-mono text-xs whitespace-nowrap text-muted-foreground",
   /** Types and values that can be long. */
-  type: "max-w-64 font-mono text-xs break-words text-primary",
+  type: "max-w-64 font-mono text-xs break-words text-foreground",
   /** Values that line up: sizes, counts. */
   numeric: cn("whitespace-nowrap text-muted-foreground tabular-nums", inlineCode),
 } as const

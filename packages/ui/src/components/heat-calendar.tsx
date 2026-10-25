@@ -241,7 +241,7 @@ function HeatCalendar({
 
   return (
     <HeatCalendarContext.Provider value={value}>
-      <div data-slot="heat-calendar" className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
+      <div data-slot="heat-calendar" className={cn("grid w-full min-w-0 grid-cols-1 gap-3", className)} {...props}>
         {children ?? (
           <>
             <HeatCalendarGrid />
@@ -359,7 +359,7 @@ function HeatCalendarGrid({ className, children }: { className?: string; childre
     <div
       ref={outer}
       data-slot="heat-calendar-grid"
-      className={cn("relative", className)}
+      className={cn("relative min-w-0", className)}
       onPointerLeave={() => setHot(null)}
     >
       <div

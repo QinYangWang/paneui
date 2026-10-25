@@ -263,7 +263,7 @@ function DonutChart({
       {showLegend && (
         <ul
           aria-label={labels.legendFor(label)}
-          className="flex w-full flex-col gap-1 rounded-3xl bg-background dark:bg-input/32 p-1.5 shadow-well"
+          className="flex w-full flex-col gap-1 frame-3xl frame-p-1.5 bg-background shadow-well dark:bg-input/32"
         >
           {placed.map((s) => {
             const isActive = s.id === activeId
@@ -277,7 +277,7 @@ function DonutChart({
                   onFocus={() => setActiveId(s.id)}
                   onBlur={() => setActiveId(null)}
                   className={cn(
-                    "relative flex w-full items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-start text-ui outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+                    "relative flex w-full items-center gap-2.5 rounded-inner px-2.5 py-1.5 text-start text-ui outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                     active && !isActive && "opacity-55",
                     "transition-opacity duration-200"
                   )}
@@ -286,7 +286,7 @@ function DonutChart({
                     <motion.span
                       layoutId={`${baseId}-legend-hl`}
                       transition={transition}
-                      className="absolute inset-0 -z-0 rounded-xl bg-card shadow-raised"
+                      className="absolute inset-0 -z-0 rounded-inner bg-card shadow-raised"
                     />
                   )}
                   <ChartSwatch color={s.color} className="relative" />

@@ -81,7 +81,7 @@ export function RecommendationCard({
           )}
         </CardDescription>
       </CardContent>
-      <CardFooter className="justify-between pt-2">
+      <CardFooter className="flex-wrap justify-between gap-3 pt-2">
         <ConfidenceMeter value={confidence} />
         <div className="flex items-center gap-2">
           <Button variant="secondary" onClick={onAlternatives}>

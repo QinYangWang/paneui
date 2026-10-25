@@ -37,7 +37,7 @@ export default function AnimatedSidebarDemo() {
   const title = active.startsWith("project:") ? active.slice(8) : titles[active]
 
   return (
-    <SidebarProvider className="h-104 w-full max-w-2xl gap-3">
+    <SidebarProvider className="w-full max-w-2xl flex-col gap-3 sm:h-104 sm:flex-row">
       <Sidebar>
         <SidebarHeader>
           <div className="flex h-9 items-center gap-2.5 px-2">
@@ -89,7 +89,7 @@ export default function AnimatedSidebarDemo() {
         <div className="flex items-center gap-2">
           <SidebarTrigger />
           <span className="text-sm font-medium">{title}</span>
-          <span className="ml-auto text-xs text-muted-foreground">⌘/Ctrl+B to toggle</span>
+          <span className="ml-auto hidden text-xs text-muted-foreground sm:inline">⌘/Ctrl+B to toggle</span>
           <BellIcon className="size-4 text-muted-foreground" />
         </div>
         <div className="grid flex-1 grid-cols-2 gap-3">

@@ -162,9 +162,9 @@ function StatusBar({
         <div className="flex items-center gap-2 text-ui">
           {latest && (
             <span className="relative flex size-2.5">
-              {!reduce && latest.status.weight === 1 && (
+              {latest.status.weight === 1 && (
                 <span
-                  className="absolute inset-0 animate-ping rounded-full opacity-50"
+                  className="absolute inset-0 animate-ping rounded-full opacity-50 motion-reduce:hidden motion-reduce:animate-none"
                   style={{ background: latest.status.color }}
                 />
               )}

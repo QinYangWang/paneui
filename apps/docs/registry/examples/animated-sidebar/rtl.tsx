@@ -26,7 +26,7 @@ export default function AnimatedSidebarRtl() {
     <DirectionProvider direction="rtl">
       <div dir="rtl" className="w-full max-w-2xl">
         {/* `side="left"` is the start side, so in right-to-left the sidebar sits on the right. */}
-        <SidebarProvider shortcut={null} className="h-96 w-full gap-3">
+        <SidebarProvider shortcut={null} className="w-full flex-col gap-3 sm:h-96 sm:flex-row">
           <Sidebar>
             <SidebarContent>
               <SidebarGroup>

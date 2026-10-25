@@ -202,7 +202,7 @@ export function ThemingAccent() {
             </div>
             <div className="flex flex-col gap-4">
               <Slider defaultValue={62} aria-label="Volume" />
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <div className="flex h-8 flex-1 items-center rounded-lg bg-card px-3 text-ui text-muted-foreground shadow-well ring-2 ring-ring/50">
                   Focus ring
                 </div>

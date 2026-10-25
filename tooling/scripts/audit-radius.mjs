@@ -22,6 +22,7 @@
  *   pnpm audit:radius -- --no-actions      # skip the hover/click steps from the config
  *   pnpm audit:radius -- --url <u1,u2>     # audit arbitrary pages (e.g. a local demo harness)
  *   pnpm audit:radius -- --out <dir>       # default node_modules/.cache/radius-audit
+ *   pnpm audit:radius -- --resume          # resume this output directory against the same export
  *   BASE_URL=http://localhost:3123          # the served static export (out/)
  *
  * Interactions (hover a row, open a menu) are listed in scripts/audit-radius.config.mjs.
@@ -76,7 +77,7 @@ function docNames() {
 let pages
 if (opt("--url")) pages = opt("--url").split(",").map((s) => s.trim()).filter(Boolean)
 else if (opt("--pages")) pages = opt("--pages").split(",").map((s) => s.trim()).filter(Boolean)
-else if (flag("--all")) pages = ["components", ...fs.readdirSync(path.join(ROOT, "apps/docs/out/docs")).filter((d) => !d.includes("."))]
+else if (flag("--all")) pages = [...new Set(["components", ...fs.readdirSync(path.join(ROOT, "apps/docs/out/docs")).filter((d) => !d.includes("."))])]
 else pages = ["components", ...docNames()]
 const urlFor = (p) => (/^(https?|file):/.test(p) ? p : p === "/" ? `${BASE}/` : `${BASE}/docs/${p}/`)
 
@@ -313,8 +314,7 @@ async function settle(page) {
   await page.waitForTimeout(600)
 }
 
-async function auditPage(name) {
-  const page = await context.newPage()
+async function auditPage(name, page) {
   const findings = []
   try {
     const res = await page.goto(urlFor(name), { waitUntil: "domcontentloaded", timeout: 45000 })
@@ -362,19 +362,29 @@ async function auditPage(name) {
     return { name, findings }
   } catch (e) {
     return { name, error: String(e.message).split("\n")[0], findings }
-  } finally {
-    await page.close()
   }
 }
 
-const results = []
-const queue = [...pages]
+fs.mkdirSync(OUT, { recursive: true })
+const checkpointPath = path.join(OUT, "progress.json")
+const runKey = JSON.stringify({ base: BASE, theme: THEME, radius: RADIUS, style: STYLE, tolerance: TOL, maxInset: MAX_INSET, actions: !flag("--no-actions"), pages, exportTime: fs.statSync(path.join(ROOT, "apps/docs/out")).mtimeMs })
+const checkpoint = flag("--resume") && fs.existsSync(checkpointPath) ? JSON.parse(fs.readFileSync(checkpointPath, "utf8")) : null
+const results = checkpoint?.key === runKey ? checkpoint.results.filter((r) => !r.error && !r.findings.some((f) => f.phase === "action-error")) : []
+const completed = new Set(results.map((r) => r.name))
+const queue = pages.filter((name) => !completed.has(name))
 async function worker() {
+  const page = await context.newPage()
+  try {
   while (queue.length) {
     const name = queue.shift()
-    const r = await auditPage(name)
+    const r = await auditPage(name, page)
     results.push(r)
+    fs.writeFileSync(`${checkpointPath}.tmp`, JSON.stringify({ key: runKey, results }))
+    fs.renameSync(`${checkpointPath}.tmp`, checkpointPath)
     process.stderr.write(`${r.error ? "!" : "."} ${name} ${r.findings.length}${r.error ? " " + r.error : ""}\n`)
+  }
+  } finally {
+    await page.close()
   }
 }
 await Promise.all(Array.from({ length: Math.max(1, CONCURRENCY) }, worker))
@@ -388,7 +398,7 @@ const seen = new Set()
 const shell = (slot) => (slot === "gallery-preview" || slot === "tabs-panel" ? "" : slot)
 const sig = (f) => [shell(f.slot), f.classes, shell(f.ancestorSlot), f.ancestorClasses, f.corners.map((c) => c.corner + c.r + ">" + c.expected).join()].join("|")
 const docSigs = new Set(results.filter((r) => r.name !== "/").flatMap((r) => r.findings.filter((f) => f.corners).map(sig)))
-const report = { base: BASE, theme: THEME, tolerance: TOL, maxInset: MAX_INSET, generated: new Date().toISOString(), pages: [] }
+const report = { base: BASE, theme: THEME, style: STYLE || "default", radius: RADIUS || "default", tolerance: TOL, maxInset: MAX_INSET, generated: new Date().toISOString(), pages: [] }
 let total = 0, allowed = 0
 for (const name of pages) {
   const r = results.find((x) => x.name === name)
@@ -418,7 +428,7 @@ report.total = total
 report.allowed = allowed
 
 fs.mkdirSync(OUT, { recursive: true })
-const SUFFIX = `${THEME}${STYLE ? `-${STYLE}` : ""}`
+const SUFFIX = `${THEME}${STYLE ? `-${STYLE}` : ""}${RADIUS ? `-${RADIUS.replace(":", "-")}` : ""}`
 const jsonPath = path.join(OUT, `report-${SUFFIX}.json`)
 fs.writeFileSync(jsonPath, JSON.stringify(report, null, 2))
 

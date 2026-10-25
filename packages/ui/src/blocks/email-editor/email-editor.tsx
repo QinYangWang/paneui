@@ -634,7 +634,7 @@ export function EmailEditor({
       data-slot="email-editor"
       className={cn("flex min-h-0 flex-col overflow-hidden rounded-xl bg-card text-card-foreground shadow-raised", className)}
     >
-      <div className="flex h-12 shrink-0 items-center gap-2 border-b border-border px-3">
+      <div className="flex min-h-12 shrink-0 flex-wrap items-center gap-2 border-b border-border px-3 py-2">
         <SegmentedControl size="sm" value={view} onValueChange={(v) => setView(v as "edit" | "preview")} aria-label={l10n.mode}>
           <SegmentedControlItem value="edit">
             <EditIcon />

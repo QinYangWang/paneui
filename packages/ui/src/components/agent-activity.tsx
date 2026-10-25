@@ -250,14 +250,13 @@ const PANEL =
  */
 function PulseRing() {
   const reduce = useReducedMotion()
-  if (reduce) return null
   return (
     <motion.span
       aria-hidden
-      className="pointer-events-none absolute inset-0 rounded-full bg-primary/20"
+      className="pointer-events-none absolute inset-0 rounded-full bg-primary/20 motion-reduce:hidden"
       initial={{ scale: 1, opacity: 0.9 }}
-      animate={{ scale: 1.5, opacity: 0 }}
-      transition={{ duration: 1.2, ease: "easeOut", repeat: Infinity }}
+      animate={{ scale: reduce ? 1 : 1.5, opacity: 0 }}
+      transition={{ duration: reduce ? 0 : 1.2, ease: "easeOut", repeat: reduce ? 0 : Infinity }}
     />
   )
 }

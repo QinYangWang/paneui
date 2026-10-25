@@ -255,7 +255,7 @@ export function NotionEditorToolbar({ editor, fileName = "document.mdx", childre
   return (
     <Toolbar
       aria-label={l10n.document}
-      className={cn("h-11 shrink-0 border-b border-border px-2", className)}
+      className={cn("min-h-11 shrink-0 flex-wrap gap-y-1 border-b border-border px-2 py-2", className)}
       data-slot="notion-editor-toolbar"
     >
       <ToolbarGroup>
