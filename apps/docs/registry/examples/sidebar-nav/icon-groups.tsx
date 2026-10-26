@@ -18,7 +18,7 @@ export default function SidebarNavIconGroups() {
     </SidebarNavLink>
   )
   return (
-    <div className="flex h-72 w-60 flex-col overflow-hidden rounded-xl bg-background shadow-raised">
+    <div className="flex h-80 w-60 flex-col overflow-hidden rounded-xl bg-background shadow-raised">
       <SidebarNav>
         <SidebarNavContent aria-label="Reference" className="pt-3">
           <SidebarNavSection label="Reference">
@@ -36,7 +36,10 @@ export default function SidebarNavIconGroups() {
               </SidebarNavList>
             </SidebarNavSection>
             <SidebarNavSection level="group" label="Guides" labelRender={<a href="#guides" onClick={go("#guides")} />} active={current === "#guides"}>
-              <SidebarNavList>{link("#guides-deploy", "Deploy")}</SidebarNavList>
+              <SidebarNavList>
+                {link("#guides-deploy", "Deploy")}
+                {link("#guides-domains", "Domains")}
+              </SidebarNavList>
             </SidebarNavSection>
             <SidebarNavList>{link("#output", "Output", <FileIcon />)}</SidebarNavList>
           </SidebarNavSection>

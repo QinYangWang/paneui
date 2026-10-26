@@ -54,6 +54,7 @@ export default {
       extends: "Slider.Root",
       extendsHref: "https://base-ui.com/react/components/slider#root",
       props: [
+        { name: "variant", type: `"default" | "contained"`, default: `"default"`, description: "`contained` makes the track as tall as the thumb, which rides inside it; suits stepped choices." },
         { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Thumb 16 / 20 / 24px on a 6 / 8 / 10px track. Inside a sized `Field` it takes the field's size (`xs` maps to `sm`)." },
         {
           name: "ticks",
@@ -93,6 +94,7 @@ export default {
       ],
       dataAttributes: [
         { name: "data-size", description: "On the root, the resolved size." },
+        { name: "data-variant", description: "On the root, `default` or `contained`." },
         { name: "data-dragging", description: "On the thumb while it is dragged (scaled up)." },
         { name: "data-active", description: "On a tick (`data-slot=\"slider-tick\"`) inside the selected range." },
         { name: "data-disabled", description: "Present when disabled." },

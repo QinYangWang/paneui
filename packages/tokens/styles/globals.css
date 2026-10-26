@@ -762,7 +762,7 @@ html[data-accent="violet"].dark {
  * ───────────── Concentric radii: frame-* + rounded-inner ─────────────
  *
  * A rounded element inside a rounded, padded container must use the container's radius minus
- * the inset (inner = outer − padding − border), or the corners visibly drift apart.
+ * the inset, or the corners visibly drift apart: outer radius = inner radius + padding (+ border).
  * Instead of computing that by hand in every component:
  *
  *   <div class="frame-2xl frame-p-1">         radius 2xl (12px), padding 4px
@@ -775,7 +775,7 @@ html[data-accent="violet"].dark {
  *   frame-inset-{n|[len]}       only the inset (when the gap comes from px/py, a gap, or a
  *                               wrapper): the frame's own padding is left alone.
  *   frame-border                add the frame's 1px border to the inset.
- *   rounded-inner               a child: border-radius = frame radius − inset (min 2px, never above the frame).
+ *   rounded-inner               a child: border-radius = frame radius − inset (outer = inner + padding; 0 when the inset reaches the radius).
  *   rounded-{t,b,s,e}-inner     the same for one side (first/last rows, segmented ends).
  *   frame-inner                 a child that is itself a padded frame (second level): gets
  *                               rounded-inner and publishes its own inner radius, so its
@@ -797,7 +797,7 @@ html[data-accent="violet"].dark {
 @utility frame-* {
   --frame-r: --value(--radius-*, [length]);
   border-radius: --value(--radius-*, [length]);
-  --frame-inner-1: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), min(2px, var(--frame-r)));
+  --frame-inner-1: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 0px);
   /* A fresh frame starts a new chain, even inside a frame-inner. */
   --frame-inner-2: initial;
 }
@@ -856,7 +856,7 @@ html[data-accent="violet"].dark {
 @utility frame-inner {
   --frame-r: var(--frame-inner-1, var(--radius-lg));
   border-radius: var(--frame-inner-1, var(--radius-lg));
-  --frame-inner-2: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), min(2px, var(--frame-r)));
+  --frame-inner-2: max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 0px);
 }
 
 /* Dual-theme syntax highlighting (defaultColor: false). */

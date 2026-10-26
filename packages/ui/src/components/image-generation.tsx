@@ -221,22 +221,6 @@ function ImageGeneration({
             </motion.span>
           </AnimatePresence>
         </div>
-
-        {/* Progress hairline */}
-        <div
-          aria-hidden
-          className={cn(
-            "absolute inset-x-3 bottom-2.5 h-1 overflow-hidden rounded-full bg-foreground/10 transition-opacity duration-500",
-            !working && "opacity-0"
-          )}
-        >
-          <motion.div
-            className="h-full origin-left rounded-full bg-primary"
-            initial={false}
-            animate={{ scaleX: progress }}
-            transition={{ duration: reduce ? 0 : 0.5, ease: AGENT_EASE }}
-          />
-        </div>
       </div>
 
       {prompt || meta || complete ? (

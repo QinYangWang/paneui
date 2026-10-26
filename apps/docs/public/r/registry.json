@@ -495,7 +495,7 @@
         "@utility frame-*": {
           "--frame-r": "--value(--radius-*, [length])",
           "border-radius": "--value(--radius-*, [length])",
-          "--frame-inner-1": "max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), min(2px, var(--frame-r)))",
+          "--frame-inner-1": "max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 0px)",
           "--frame-inner-2": "initial"
         },
         "@utility frame-p-*": {
@@ -536,7 +536,7 @@
         "@utility frame-inner": {
           "--frame-r": "var(--frame-inner-1, var(--radius-lg))",
           "border-radius": "var(--frame-inner-1, var(--radius-lg))",
-          "--frame-inner-2": "max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), min(2px, var(--frame-r)))"
+          "--frame-inner-2": "max(calc(var(--frame-r) - var(--frame-p) - var(--frame-b)), 0px)"
         }
       },
       "meta": {

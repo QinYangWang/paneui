@@ -16,6 +16,14 @@ const sliderSizes: Record<SliderSize, { control: [string, string]; track: [strin
   lg: { control: ["h-6 w-full", "h-full w-6 flex-col justify-center"], track: ["h-2.5 w-full", "h-full w-2.5"], thumb: "size-6", inset: "0.75rem" },
 }
 
+// `contained`: the track is as tall as the thumb plus a 2px rim, the thumb rides inside it and
+// the fill runs to the thumb's far edge.
+const containedSizes: Record<SliderSize, { control: [string, string]; track: [string, string]; thumb: string; inset: string }> = {
+  sm: { control: ["h-6 w-full", "h-full w-6 flex-col justify-center"], track: ["h-6 w-full", "h-full w-6"], thumb: "size-5", inset: "0.625rem" },
+  default: { control: ["h-7 w-full", "h-full w-7 flex-col justify-center"], track: ["h-7 w-full", "h-full w-7"], thumb: "size-6", inset: "0.75rem" },
+  lg: { control: ["h-9 w-full", "h-full w-9 flex-col justify-center"], track: ["h-9 w-full", "h-full w-9"], thumb: "size-8", inset: "1rem" },
+}
+
 type SliderProps<Value extends number | readonly number[] = number | readonly number[]> =
   SliderPrimitive.Root.Props<Value> & {
     /** Dots along the track: `true` = one per step, a number = that many evenly spaced. */
@@ -26,6 +34,8 @@ type SliderProps<Value extends number | readonly number[] = number | readonly nu
     getThumbLabel?: (index: number) => string
     /** Thumb and track size. An `xs` inherited from a Field maps to `sm`. */
     size?: SliderSize
+    /** `default`: a thin track under a raised thumb. `contained`: a thick track with the thumb inside it, for stepped choices. */
+    variant?: "default" | "contained"
   }
 
 /**
@@ -46,11 +56,13 @@ function Slider<Value extends number | readonly number[]>({
   orientation = "horizontal",
   thumbAlignment = "edge",
   size: sizeProp,
+  variant = "default",
   ...props
 }: SliderProps<Value>) {
   const inherited = useControlSize<ControlSize>(sizeProp)
   const size: SliderSize = inherited === "xs" ? "sm" : inherited
-  const dims = sliderSizes[size]
+  const contained = variant === "contained"
+  const dims = (contained ? containedSizes : sliderSizes)[size]
   const initial = (value ?? defaultValue ?? min) as number | readonly number[]
   const [values, setValues] = React.useState<readonly number[]>(toArray(initial))
 
@@ -78,6 +90,7 @@ function Slider<Value extends number | readonly number[]>({
     <SliderPrimitive.Root
       data-slot="slider"
       data-size={size}
+      data-variant={variant}
       value={value}
       defaultValue={defaultValue}
       min={min}
@@ -105,12 +118,27 @@ function Slider<Value extends number | readonly number[]>({
       >
         <SliderPrimitive.Track
           data-slot="slider-track"
-          className={cn("relative rounded-full bg-muted shadow-well", vertical ? dims.track[1] : dims.track[0])}
+          className={cn(
+            "relative rounded-full bg-muted shadow-well",
+            // the rim: positions below are inside it, so the thumb and fill sit 2px in
+            contained && "border-2 border-transparent",
+            vertical ? dims.track[1] : dims.track[0]
+          )}
         >
-          <SliderPrimitive.Indicator
-            data-slot="slider-indicator"
-            className="rounded-full bg-primary"
-          />
+          {contained ? (
+            <span
+              aria-hidden
+              data-slot="slider-indicator"
+              style={
+                vertical
+                  ? { bottom: `calc((100% - 2 * ${thumbInset}) * ${(low - min) / span})`, height: `calc(2 * ${thumbInset} + (100% - 2 * ${thumbInset}) * ${(high - low) / span})` }
+                  : { insetInlineStart: `calc((100% - 2 * ${thumbInset}) * ${(low - min) / span})`, width: `calc(2 * ${thumbInset} + (100% - 2 * ${thumbInset}) * ${(high - low) / span})` }
+              }
+              className={cn("pointer-events-none absolute rounded-full bg-primary", vertical ? "inset-x-0" : "inset-y-0")}
+            />
+          ) : (
+            <SliderPrimitive.Indicator data-slot="slider-indicator" className="rounded-full bg-primary" />
+          )}
           {tickValues.map((tick) => {
             const pct = ((tick - min) / span) * 100
             const active = tick >= low - 1e-9 && tick <= high + 1e-9
@@ -122,7 +150,8 @@ function Slider<Value extends number | readonly number[]>({
                 data-active={active || undefined}
                 style={{ [vertical ? "bottom" : "insetInlineStart"]: `calc(${thumbInset} + (100% - 2 * ${thumbInset}) * ${pct / 100})` }}
                 className={cn(
-                  "pointer-events-none absolute size-1 rounded-full bg-foreground/20 transition-colors duration-150 data-active:bg-primary-foreground/70",
+                  "pointer-events-none absolute rounded-full transition-colors duration-150",
+                  contained ? "size-1.5 bg-foreground/25 data-active:bg-primary-foreground/45" : "size-1 bg-foreground/20 data-active:bg-primary-foreground/70",
                   vertical ? "left-1/2 -translate-x-1/2 translate-y-1/2" : "top-1/2 -translate-x-1/2 -translate-y-1/2 rtl:translate-x-1/2"
                 )}
               />
@@ -137,7 +166,8 @@ function Slider<Value extends number | readonly number[]>({
               className={cn(
                 "group/thumb block rounded-full bg-card shadow-raised outline-none",
                 dims.thumb,
-                "transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 data-dragging:scale-115 has-focus-visible:ring-2 has-focus-visible:ring-ring/50 motion-reduce:transition-none"
+                "transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] has-focus-visible:ring-2 has-focus-visible:ring-ring/50 motion-reduce:transition-none",
+                contained ? "data-dragging:scale-95" : "hover:scale-110 data-dragging:scale-115"
               )}
             >
               {showValue ? (

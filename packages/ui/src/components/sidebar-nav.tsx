@@ -12,9 +12,12 @@ import { Kbd } from "@paneui/ui/components/kbd"
 import { useLocale } from "@paneui/ui/components/locale-provider"
 
 /*
- * Compact text navigation for docs and settings sidebars: a search field, collapsible sections
- * and groups, and rows that all start on one left edge. The current row is a fill plus a 2px bar
- * in the gutter.
+ * Compact text navigation for docs and settings sidebars: a search field, collapsible sections,
+ * folder-like groups and page rows. The current row is a fill plus a 2px bar in the gutter.
+ *
+ * Groups (`level="group"`) read as folders: a leading chevron, foreground label, and their rows
+ * indented behind a guide line that runs down from the chevron, so it is clear which pages belong
+ * to which group. Pages read as files: muted rows with no chevron.
  *
  * Icons: when a list (or a section's rows) holds a row or group label with an `icon`, the rows
  * and labels beside it that have none move in by the icon's width, so every text starts on one
@@ -143,9 +146,10 @@ function SidebarNavSection({
 }: SidebarNavSectionProps) {
   const { labels } = useLocale()
   const isLink = href !== undefined || labelRender !== undefined
-  const labelClass =
-    level === "section" ? "h-7 text-ui font-semibold text-foreground icon-bold" : "h-6.5 text-ui-sm font-medium text-muted-foreground hover:text-foreground"
-  const pad = icon ? "gap-2 px-2" : cn("gap-1.5", insetStart)
+  const isGroup = level === "group"
+  const labelClass = isGroup ? "h-7 text-ui font-medium text-foreground" : "h-7 text-ui font-semibold text-foreground icon-bold"
+  // a group starts with its chevron slot (16px), so the label sits where an icon row's text does
+  const pad = isGroup ? "gap-1.5 ps-2 pe-2" : icon ? "gap-2 px-2" : cn("gap-1.5", insetStart)
   const iconEl = (hover: string) =>
     icon && (
       <span
@@ -164,10 +168,16 @@ function SidebarNavSection({
     <ChevronRightIcon
       aria-hidden
       className={cn(
-        "shrink-0 text-muted-foreground transition-transform duration-200 group-data-panel-open/trigger:rotate-90 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-data-panel-open/trigger:-rotate-90",
-        level === "section" ? "size-3.5" : "size-3"
+        "shrink-0 text-muted-foreground transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/trigger:rotate-90 motion-reduce:transition-none rtl:-scale-x-100 rtl:group-data-panel-open/trigger:-rotate-90",
+        "size-3.5"
       )}
     />
+  )
+  /** The group's leading 16px slot: the chevron (or nothing for a group that cannot fold). */
+  const chevronSlot = (inner: React.ReactNode) => (
+    <span aria-hidden data-slot="sidebar-nav-section-chevron" className="flex size-4 shrink-0 items-center justify-center">
+      {inner}
+    </span>
   )
   const labelLink = useRender({
     defaultTagName: "a",
@@ -177,17 +187,20 @@ function SidebarNavSection({
       "aria-current": active ? "page" : undefined,
       "data-slot": "sidebar-nav-section-link",
       className: cn(
-        "group/nav relative flex min-w-0 flex-1 items-center rounded-md outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
+        "group/nav relative flex min-w-0 flex-1 items-center rounded-md outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset",
         "aria-[current=page]:bg-secondary aria-[current=page]:text-foreground",
         pad,
+        // the fold toggle sits over the chevron slot at the start
+        isGroup && collapsible && "ps-[calc(0.5rem+1rem+0.375rem)]",
         labelClass
       ),
       children: (
         <>
           <span
             aria-hidden
-            className="absolute inset-y-1.5 -start-2 w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
+            className="absolute inset-y-1.5 start-[var(--sidebar-nav-bar,-0.5rem)] w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
           />
+          {isGroup && !collapsible && chevronSlot(null)}
           {iconEl("group-hover/nav:text-foreground group-aria-[current=page]/nav:text-foreground")}
           <span className="truncate">{label}</span>
           {countEl}
@@ -196,17 +209,29 @@ function SidebarNavSection({
     },
   })
   let heading: React.ReactNode
-  if (isLink) {
+  const toggleName = toggleLabel ?? (typeof label === "string" ? labels.toggleNamed(label) : labels.toggleSection)
+  if (isLink && isGroup) {
+    heading = (
+      <div data-slot="sidebar-nav-section-label" className="relative flex items-center">
+        {labelLink}
+        {collapsible && (
+          <CollapsiblePrimitive.Trigger
+            aria-label={toggleName}
+            className="group/trigger absolute start-1 top-0 z-10 grid h-7 w-6 cursor-pointer place-items-center rounded-md outline-none transition-colors duration-150 hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
+          >
+            {chevron}
+          </CollapsiblePrimitive.Trigger>
+        )}
+      </div>
+    )
+  } else if (isLink) {
     heading = (
       <div data-slot="sidebar-nav-section-label" className="flex items-center gap-px">
         {labelLink}
         {collapsible && (
           <CollapsiblePrimitive.Trigger
-            aria-label={toggleLabel ?? (typeof label === "string" ? labels.toggleNamed(label) : labels.toggleSection)}
-            className={cn(
-              "group/trigger grid w-6 shrink-0 cursor-pointer place-items-center rounded-md outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
-              level === "section" ? "h-7" : "h-6.5"
-            )}
+            aria-label={toggleName}
+            className="group/trigger grid h-7 w-6 shrink-0 cursor-pointer place-items-center rounded-md outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
           >
             {chevron}
           </CollapsiblePrimitive.Trigger>
@@ -217,20 +242,22 @@ function SidebarNavSection({
     heading = (
       <CollapsiblePrimitive.Trigger
         className={cn(
-          "group/trigger flex w-full cursor-pointer items-center rounded-md text-start outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
+          "group/trigger flex w-full cursor-pointer items-center rounded-md text-start outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset",
           pad,
           labelClass
         )}
       >
+        {isGroup && chevronSlot(chevron)}
         {iconEl("group-hover/trigger:text-foreground")}
         <span className="truncate">{label}</span>
         {countEl}
-        <span className="ms-auto flex">{chevron}</span>
+        {!isGroup && <span className="ms-auto flex">{chevron}</span>}
       </CollapsiblePrimitive.Trigger>
     )
   } else {
     heading = (
       <div className={cn("flex items-center", pad, labelClass)}>
+        {isGroup && chevronSlot(null)}
         {iconEl("")}
         <span className="truncate">{label}</span>
         {countEl}
@@ -243,11 +270,30 @@ function SidebarNavSection({
       data-level={level}
       data-active={active ? "" : undefined}
       defaultOpen={collapsible ? defaultOpen : true}
-      className={cn("flex flex-col gap-px", level === "group" && "mt-2", className)}
+      className={cn("flex flex-col gap-px", className)}
       {...props}
     >
       {heading}
-      <CollapsiblePrimitive.Panel className={cn("flex flex-col gap-px", iconInsetScope)}>{children}</CollapsiblePrimitive.Panel>
+      <CollapsiblePrimitive.Panel
+        data-slot="sidebar-nav-section-panel"
+        className={cn(
+          // height folds; the panel reaches into the gutter so the current-row bar is not clipped
+          "h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none",
+          isGroup
+            ? cn(
+                "relative ms-4 ps-1.5 [--sidebar-nav-bar:-0.375rem]",
+                // rows start where the group's own label text does (after its icon, when it has one)
+                icon ? "[--sidebar-nav-inset:1.375rem]" : "[--sidebar-nav-inset:0px]"
+              )
+            : "-ms-2 ps-2"
+        )}
+      >
+        {isGroup && (
+          // the guide: runs down from the chevron's centre beside the group's own rows
+          <span aria-hidden data-slot="sidebar-nav-guide" className="pointer-events-none absolute inset-y-0.5 start-0 w-px bg-border" />
+        )}
+        <div className={cn("flex flex-col gap-px", iconInsetScope)}>{children}</div>
+      </CollapsiblePrimitive.Panel>
     </CollapsiblePrimitive.Root>
   )
 }
@@ -280,7 +326,7 @@ function SidebarNavLink({ active = false, badge, icon, className, children, rend
         className: cn(
           "group/nav relative flex h-7 min-w-0 items-center gap-2 rounded-md text-ui text-muted-foreground outline-none transition-colors duration-150",
           icon ? "px-2" : insetStart,
-          "hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+          "hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset",
           "aria-[current=page]:bg-secondary aria-[current=page]:font-medium aria-[current=page]:text-foreground",
           className
         ),
@@ -288,7 +334,7 @@ function SidebarNavLink({ active = false, badge, icon, className, children, rend
           <>
             <span
               aria-hidden
-              className="absolute inset-y-1.5 -start-2 w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
+              className="absolute inset-y-1.5 start-[var(--sidebar-nav-bar,-0.5rem)] w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
             />
             {icon && (
               <span

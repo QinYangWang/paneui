@@ -11,10 +11,15 @@ import { Card, CardHeader, CardPanel, CardTitle } from "@paneui/ui/components/ca
 
 const wide = new Set(["file-diff", "heat-calendar", "saas", "vscode", "agent-workspace", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
+/** Documented and installable, but not shown as gallery cards. */
+const notInGallery = new Set(["theme-paper"])
+
 export const metadata: Metadata = { title: "Components" }
 
 export default function ComponentsPage() {
   const groups = getGroups()
+    .map((g) => ({ ...g, items: g.items.filter((i) => !notInGallery.has(i.name)) }))
+    .filter((g) => g.items.length > 0)
   const total = getItems().length
   return (
     <div className="flex flex-col gap-14">

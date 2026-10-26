@@ -11,7 +11,7 @@ export default function SliderDemo() {
       </div>
       <div className="flex flex-col gap-3">
         <span className="text-sm font-medium">Reasoning effort</span>
-        <Slider defaultValue={2} min={0} max={4} step={1} ticks aria-label="Reasoning effort" />
+        <Slider variant="contained" defaultValue={1} min={0} max={4} step={1} ticks aria-label="Reasoning effort" />
       </div>
       <div className="flex flex-col gap-3">
         <span className="text-sm font-medium">Price range</span>
