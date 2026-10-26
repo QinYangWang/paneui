@@ -5,23 +5,20 @@ import * as React from "react"
 import { ShaderBackground, type ShaderVariant } from "@paneui/ui/components/shader-background"
 import { cn } from "@paneui/ui/lib/utils"
 
-import { asset } from "./parts"
-
 /**
- * What the homepage's sky panels (hero and the kinds stage) draw behind their content. `sky` is
- * the painted scenery; `image` takes any URL (with an optional dark-mode one); `shader` runs the
- * shader background with fixed colours or a random palette (repeatable with `seed`).
+ * What the homepage's feature panels (hero and the kinds stage) draw behind their content. `image`
+ * takes any URL (with an optional dark-mode one); `shader` runs the shader background with fixed
+ * colours or a random palette (repeatable with `seed`).
  */
 export type LandingBackdrop =
-  | { kind: "sky" }
   | { kind: "image"; src: string; srcDark?: string }
   | { kind: "shader"; shader?: ShaderVariant; palette?: string[] | "random"; seed?: string }
 
-/** Change this one value to restyle every sky panel on the homepage. */
-export const LANDING_BACKDROP: LandingBackdrop = { kind: "sky" }
+/** Change this one value to restyle both backdrop panels on the homepage. */
+export const LANDING_BACKDROP: LandingBackdrop = { kind: "shader", palette: "random" }
 
 /** The scenery layer: fills its positioned parent, sits behind the content. */
-export function LandingBackdropLayer({ backdrop = LANDING_BACKDROP, scenery, className }: { backdrop?: LandingBackdrop; scenery?: boolean; className?: string }) {
+export function LandingBackdropLayer({ backdrop = LANDING_BACKDROP, className }: { backdrop?: LandingBackdrop; className?: string }) {
   if (backdrop.kind === "image") {
     return (
       <div aria-hidden className={cn("absolute inset-0", className)}>
@@ -34,27 +31,16 @@ export function LandingBackdropLayer({ backdrop = LANDING_BACKDROP, scenery, cla
       </div>
     )
   }
-  if (backdrop.kind === "shader") {
-    return (
+  return (
+    <div aria-hidden className={cn("absolute inset-0", className)}>
       <ShaderBackground
-        aria-hidden
         variant={backdrop.shader ?? "mesh-gradient"}
         colors={backdrop.palette ?? "random"}
         seed={backdrop.seed}
-        className={cn("absolute inset-0 bg-transparent", className)}
+        className="absolute inset-0 bg-transparent"
       />
-    )
-  }
-  if (!scenery) return null
-  return (
-    <div aria-hidden className={cn("absolute inset-0", className)}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- static export; the scenery is decorative */}
-      <img src={asset("hero-sky-light.webp")} alt="" className="absolute inset-0 size-full scale-110 object-cover object-bottom dark:hidden" />
-      {/* eslint-disable-next-line @next/next/no-img-element -- static export; the scenery is decorative */}
-      <img src={asset("hero-sky-dark.webp")} alt="" className="absolute inset-0 hidden size-full scale-110 object-cover object-bottom dark:block" />
+      {/* Random palettes run light; dim them at night so the text keeps its contrast. */}
+      <div className="absolute inset-0 hidden bg-background/65 dark:block" />
     </div>
   )
 }
-
-/** Clouds and the sky gradient belong to the painted sky only. */
-export const isSky = (backdrop: LandingBackdrop = LANDING_BACKDROP) => backdrop.kind === "sky"

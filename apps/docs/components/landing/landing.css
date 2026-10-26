@@ -90,14 +90,3 @@
 .lp-mint { --lp-c1: var(--lp-mint-1); --lp-c2: var(--lp-mint-2); }
 .lp-peach { --lp-c1: var(--lp-peach-1); --lp-c2: var(--lp-peach-2); }
 
-/* Clouds drift a little; nothing moves when the reader asks for less motion. */
-@keyframes lp-drift {
-  from { transform: translate3d(-1.5%, 0, 0); }
-  to { transform: translate3d(1.5%, 0, 0); }
-}
-.lp-drift {
-  animation: lp-drift 18s ease-in-out infinite alternate;
-}
-@media (prefers-reduced-motion: reduce) {
-  .lp-drift { animation: none; }
-}

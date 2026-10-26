@@ -278,8 +278,8 @@ export default function Theming() {
         <p className="text-muted-foreground">
           <Inline
             text={{
-              en: "Paper is an opt-in style with pale surfaces and serif titles. Install it, import `theme-paper.css` after the theme and set `data-style=\"paper\"` on `<html>`; try it on [Customize](/docs/colors#style).",
-              zh: "Paper 是采用浅色纸面与衬线标题的可选样式。安装后在主题之后导入 `theme-paper.css`，并在 `<html>` 上设置 `data-style=\"paper\"`；可在[自定义](/docs/colors#style)页试用。",
+              en: "Paper is the style of this site: pale surfaces, serif titles and pill controls. Install it, import `theme-paper.css` after the theme and set `data-style=\"paper\"` on `<html>`.",
+              zh: "Paper 是本站使用的样式：浅色纸面、衬线标题与胶囊形控件。安装后在主题之后导入 `theme-paper.css`，并在 `<html>` 上设置 `data-style=\"paper\"`。",
             }}
           />
         </p>

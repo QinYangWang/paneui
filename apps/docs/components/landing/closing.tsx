@@ -9,7 +9,7 @@ import { CommandCopy } from "@paneui/ui/components/command-copy"
 import { CLI_PACKAGE } from "@/components/docs/install-command"
 import { useT } from "@/lib/site-locale"
 
-import { asset, Eyebrow } from "./parts"
+import { Eyebrow } from "./parts"
 import { Reveal } from "./reveal"
 
 /** A quiet line between the big cards, signed with the mark. */
@@ -36,10 +36,6 @@ export function Install() {
   const t = useT()
   return (
     <section aria-labelledby="install-title" className="relative isolate mx-auto flex w-full max-w-6xl flex-col items-center px-4 text-center sm:px-8">
-      {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
-      <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift pointer-events-none absolute -start-24 -top-20 -z-10 w-80 opacity-70 sm:w-md dark:hidden" />
-      {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
-      <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift pointer-events-none absolute -end-28 top-48 -z-10 hidden w-96 -scale-x-100 opacity-60 [animation-delay:-7s] sm:block dark:hidden" />
       <Reveal className="flex flex-col items-center gap-5">
         <Eyebrow>{t({ en: "Install", zh: "安装" })}</Eyebrow>
         <h2 id="install-title" className="lp-display text-balance text-4xl sm:text-6xl">

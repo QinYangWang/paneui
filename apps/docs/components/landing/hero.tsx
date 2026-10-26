@@ -19,8 +19,7 @@ import {
 } from "@paneui/ui/components/sidebar-nav"
 import { useT, type Localized } from "@/lib/site-locale"
 
-import { isSky, LandingBackdropLayer } from "./backdrop"
-import { asset } from "./parts"
+import { LandingBackdropLayer } from "./backdrop"
 import { Checklist, Composer, Deploy, Latency, Messages, Requests, Rollout } from "./pieces"
 import { EASE, useStill } from "./reveal"
 
@@ -122,21 +121,14 @@ export function Hero() {
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const skyY = useTransform(p, [0, 1], [0, 140])
   const appY = useTransform(p, [0, 1], [0, -70])
-  const cloudX2 = useTransform(p, [0, 1], [0, 50])
 
   return (
     <section ref={ref} aria-labelledby="hero-title" className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="lp-grain lp-sky relative overflow-hidden rounded-3xl">
-        {/* Scenery: a sky over paper hills (night version for dark mode), an image, or a shader. */}
+        {/* Backdrop: a shader or an image, set in backdrop.tsx. */}
         <motion.div aria-hidden className="absolute inset-0 -z-10" style={still ? undefined : { y: skyY }}>
-          <LandingBackdropLayer scenery className="scale-110" />
+          <LandingBackdropLayer className="scale-110" />
         </motion.div>
-        {isSky() && (
-          <motion.div aria-hidden className="pointer-events-none absolute -end-20 top-10 hidden w-80 sm:block lg:w-md" style={still ? undefined : { x: cloudX2 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
-            <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift w-full -scale-x-100 opacity-80 [animation-delay:-9s] dark:opacity-10" />
-          </motion.div>
-        )}
 
         <div className="relative flex flex-col items-center px-5 pt-32 text-center sm:pt-40 lg:pt-44">
           <motion.h1 id="hero-title" className="lp-display text-balance max-w-4xl text-4xl sm:text-6xl lg:text-7xl" {...rise(0.05, still)}>

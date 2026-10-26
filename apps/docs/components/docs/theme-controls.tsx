@@ -8,14 +8,13 @@ import * as React from "react"
 import { ChevronDownIcon, MonitorIcon, MoonIcon, SunIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
 import { Button } from "@paneui/ui/components/button"
-import { Menu, MenuContent, MenuGroup, MenuLabel, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from "@paneui/ui/components/menu"
+import { Menu, MenuContent, MenuGroup, MenuLabel, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@paneui/ui/components/menu"
 import { THEME_CHANGE_EVENT, ThemeToggle, useThemeToggle, type ThemeChangeDetail } from "@paneui/ui/components/theme-toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/tooltip"
 
 import { DEFAULT_ACCENT, PRESET_LABELS, PRESET_THEMES, type PresetAccent } from "./accent-color"
 import { setAccent, useAccentState, type AccentChoice } from "./accent-store"
-import { setStyle, STYLE_LABELS, useStyle } from "./style-store"
-import { STYLES, THEME_KEY, type StylePreset } from "./theme-script"
+import { THEME_KEY } from "./theme-script"
 
 type Mode = "light" | "dark" | "system"
 const isMode = (v: unknown): v is Mode => v === "light" || v === "dark" || v === "system"
@@ -50,18 +49,15 @@ const accentOptions: { accent: PresetAccent; label: string; swatch: string }[] =
 const isChoice = (v: unknown, hasCustom: boolean): v is AccentChoice =>
   (v === "custom" && hasCustom) || accentOptions.some((o) => o.accent === v)
 
-const isStyle = (v: unknown): v is StylePreset => (STYLES as readonly unknown[]).includes(v)
-
 /**
- * Accent and style picker: swaps `data-accent` on <html> (presets live in packages/tokens/styles/globals.css; a custom colour
+ * Accent picker: swaps `data-accent` on <html> (presets live in packages/tokens/styles/globals.css; a custom colour
  * picked on the Colors page rides in its own <style>), persists localStorage["accent"] for the
- * pre-paint script and syncs other tabs and the Colors page. The style group swaps `data-style` the same way.
+ * pre-paint script and syncs other tabs and the Colors page.
  */
 export function AccentControl() {
   const t = useT()
   const label = (text: string) => t(siteCopy(text))
   const { accent, custom } = useAccentState()
-  const style = useStyle()
   const accentLabel = label(accent === "custom" ? "Custom" : PRESET_LABELS[accent])
 
   return (
@@ -101,17 +97,6 @@ export function AccentControl() {
                 {label("Custom")}
               </MenuRadioItem>
             ) : null}
-          </MenuRadioGroup>
-        </MenuGroup>
-        <MenuSeparator />
-        <MenuGroup>
-          <MenuLabel>{label("Style")}</MenuLabel>
-          <MenuRadioGroup value={style} onValueChange={(v) => isStyle(v) && setStyle(v)}>
-            {STYLES.map((s) => (
-              <MenuRadioItem key={s} value={s} closeOnClick>
-                {label(STYLE_LABELS[s])}
-              </MenuRadioItem>
-            ))}
           </MenuRadioGroup>
         </MenuGroup>
       </MenuContent>

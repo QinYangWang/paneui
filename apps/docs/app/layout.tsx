@@ -31,7 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     items: g.items.map(({ name, title, summary }) => ({ name, title, description: summary })),
   }))
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-style="paper" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: siteLocaleScript }} />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

@@ -4,8 +4,8 @@ import * as React from "react"
 
 import { STYLE_CHANGE_EVENT, STYLE_KEY, STYLES, type StylePreset } from "./theme-script"
 
-export const DEFAULT_STYLE: StylePreset = "default"
-export const STYLE_LABELS: Record<StylePreset, string> = { default: "Default", paper: "Paper" }
+export const DEFAULT_STYLE: StylePreset = "paper"
+export const STYLE_LABELS: Record<StylePreset, string> = { paper: "Paper" }
 
 const isStyle = (v: unknown): v is StylePreset => typeof v === "string" && (STYLES as readonly string[]).includes(v)
 
@@ -19,16 +19,15 @@ export function readStyle(): StylePreset {
   }
 }
 
-/** Apply a style to a document's <html>: `data-style`, none for the default. Colours swap at once, without transitions. */
+/** Apply a style to a document's <html> as `data-style`. Paper is the only style, so anything else falls back to it. Colours swap at once, without transitions. */
 export function applyStyle(root: HTMLElement, style: string | null) {
-  const next = style && style !== DEFAULT_STYLE ? style : null
+  const next: string = isStyle(style) ? style : DEFAULT_STYLE
   if (root.getAttribute("data-style") === next) return
   const doc = root.ownerDocument
   const mute = doc.createElement("style")
   mute.textContent = "*,*::before,*::after{transition:none!important}"
   doc.head.appendChild(mute)
-  if (next) root.setAttribute("data-style", next)
-  else root.removeAttribute("data-style")
+  root.setAttribute("data-style", next)
   const win = doc.defaultView
   if (!win) return mute.remove()
   void win.getComputedStyle(root).opacity

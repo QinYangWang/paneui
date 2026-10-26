@@ -15,7 +15,7 @@ import { useT, type Localized } from "@/lib/site-locale"
 export const GITHUB_URL = "https://github.com/QinYangWang/paneui"
 
 const navLink =
-  "rounded-full px-3 py-1.5 text-ui-lg text-foreground/80 outline-none transition-colors duration-150 hover:bg-foreground/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+  "lp-display rounded-full px-3 py-1.5 text-lg text-foreground outline-none transition-colors duration-150 hover:bg-foreground/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
 
 /** A floating glass bar, the same on every scroll position. */
 export function LandingHeader() {

@@ -499,7 +499,6 @@ export const examples: Record<string, React.ComponentType> = {
   "textarea/with-button": dynamic(() => import("@/registry/examples/textarea/with-button"), { ssr: false }),
   "textarea/with-counter": dynamic(() => import("@/registry/examples/textarea/with-counter"), { ssr: false }),
   "theme-accents/switch": dynamic(() => import("@/registry/examples/theme-accents/switch"), { ssr: false }),
-  "theme-paper/section": dynamic(() => import("@/registry/examples/theme-paper/section"), { ssr: false }),
   "theme-toggle/sizes": dynamic(() => import("@/registry/examples/theme-toggle/sizes"), { ssr: false }),
   "theme-toggle/slow-reveal": dynamic(() => import("@/registry/examples/theme-toggle/slow-reveal"), { ssr: false }),
   "theme-toggle/tri-state": dynamic(() => import("@/registry/examples/theme-toggle/tri-state"), { ssr: false }),

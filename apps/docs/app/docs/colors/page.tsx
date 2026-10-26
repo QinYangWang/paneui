@@ -5,7 +5,6 @@ import { ACCENT_VARS, DEFAULT_ACCENT, PRESET_THEMES } from "@/components/docs/ac
 import { Code, GuideH2, GuidePage } from "@/components/docs/guide-page"
 import { ThemingAccent } from "@/components/docs/theming-accent"
 import { ThemingRadius } from "@/components/docs/theming-radius"
-import { ThemingStyle } from "@/components/docs/theming-style"
 import { ThemingTokenTable } from "@/components/docs/theming-token-table"
 import { parseThemeTokens, TOKEN_ROLES } from "@/components/docs/theming-tokens"
 
@@ -25,7 +24,6 @@ function readTheme() {
 export default function Colors() {
   const theme = readTheme()
   const toc = [
-    { id: "style", title: "Style" },
     { id: "accent", title: "One accent" },
     { id: "radius", title: "Radius" },
     ...TOKEN_ROLES.map((r) => ({ id: r.id, title: r.title })),
@@ -34,16 +32,8 @@ export default function Colors() {
     <GuidePage
       href="/docs/colors"
       toc={toc}
-      lede={{ en: "Choose a style, an accent and a corner radius.", zh: "选择风格、主题色与圆角。" }}
+      lede={{ en: "Choose an accent and a corner radius.", zh: "选择主题色与圆角。" }}
     >
-      <section className="flex flex-col gap-4">
-        <GuideH2 id="style">Style</GuideH2>
-        <p className="text-muted-foreground">
-          Paper brings pale surfaces, serif titles and pill controls. The accent and radius below still apply on top.
-        </p>
-        <ThemingStyle />
-      </section>
-
       <section className="flex flex-col gap-4">
         <GuideH2 id="accent">One accent, every control</GuideH2>
         <p className="text-muted-foreground">
