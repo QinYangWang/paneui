@@ -5,6 +5,7 @@ import { ArrowRightIcon } from "@paneui/ui/icons"
 import { categorySlug } from "@/components/docs/category-icons"
 import { LazyDemo } from "@/components/docs/lazy-demo"
 import { getGroups, getItems } from "@/lib/docs"
+import { T } from "@/lib/site-locale"
 import { Badge } from "@paneui/ui/components/badge"
 import { Button } from "@paneui/ui/components/button"
 import { Card, CardHeader, CardPanel, CardTitle } from "@paneui/ui/components/card"
@@ -13,6 +14,21 @@ const wide = new Set(["file-diff", "heat-calendar", "saas", "vscode", "agent-wor
 
 /** Documented and installable, but not shown as gallery cards. */
 const notInGallery = new Set(["theme-paper"])
+
+const CATEGORY_ZH: Record<string, string> = {
+  Foundations: "基础",
+  Forms: "表单",
+  Overlays: "浮层",
+  Display: "展示",
+  Navigation: "导航",
+  Text: "文本",
+  Motion: "动效",
+  Data: "数据",
+  Agents: "助手",
+  Charts: "图表",
+  Blocks: "组合组件",
+  Templates: "模板",
+}
 
 export const metadata: Metadata = { title: "Components" }
 
@@ -24,18 +40,23 @@ export default function ComponentsPage() {
   return (
     <div className="flex flex-col gap-14">
       <section className="flex flex-col items-start gap-3">
-        <h1 className="font-heading text-balance text-3xl font-semibold tracking-tight">Components</h1>
+        <h1 className="font-heading text-balance text-3xl font-semibold tracking-tight">
+          <T en="Components" zh="组件" />
+        </h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
           {/* design-check-ignore tabular-nums -- the item count is fixed at build time and sits in a sentence */}
-          {total} components, blocks and templates for Tailwind 4.
+          <T
+            en={<>{total} components, blocks and templates for Tailwind 4.</>}
+            zh={<>{total} 个组件、组合组件和模板，适用于 Tailwind 4。</>}
+          />
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
           <Button nativeButton={false} render={<Link href="/docs/installation" />}>
-            Installation
+            <T en="Installation" zh="安装" />
             <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
           </Button>
           <Button variant="secondary" nativeButton={false} render={<Link href="/docs" />}>
-            Introduction
+            <T en="Introduction" zh="介绍" />
           </Button>
         </div>
       </section>
@@ -43,7 +64,7 @@ export default function ComponentsPage() {
         return (
           <section key={g.category} id={categorySlug(g.category)} className="flex scroll-mt-20 flex-col gap-5">
             <h2 className="font-heading text-balance flex items-center gap-2.5 text-lg font-semibold">
-              {g.category}
+              <T en={g.category} zh={CATEGORY_ZH[g.category] ?? g.category} />
               <Badge size="sm">{g.items.length}</Badge>
             </h2>
             <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">

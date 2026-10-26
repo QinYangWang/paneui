@@ -23,26 +23,26 @@ export default {
     { id: "no-controls", title: { en: "Without controls", zh: "无窗口按钮" } },
   ],
   notes: [
-    { title: "Corners", body: "The body is inset 6px and its corner is the frame's minus that inset, so the two stay concentric at every radius preset and in the Paper style." },
-    { title: "Decoration only", body: "The window dots are hidden from assistive tech and do nothing. Put real controls in `WindowFrameActions`." },
+    { title: "Corners", body: { en: "The body is inset 6px and its corner is the frame's minus that inset, so the two stay concentric at every radius preset and in the Paper style.", zh: "主体内缩 6px，其圆角为外框圆角减去该内缩值，因此两者在每个圆角预设下以及 Paper 样式中都保持同心。" } },
+    { title: "Decoration only", body: { en: "The window dots are hidden from assistive tech and do nothing. Put real controls in `WindowFrameActions`.", zh: "窗口圆点对辅助技术隐藏且不执行任何操作。请将真实控件放在 `WindowFrameActions` 中。" } },
   ],
   api: [
     {
       name: "WindowFrame",
       extends: "div",
       props: [
-        { name: "variant", type: `"solid" | "glass"`, default: `"solid"`, description: "`glass` is a translucent, blurred shell for use over pictures." },
-        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: "Title bar height: 32px or 36px." },
+        { name: "variant", type: `"solid" | "glass"`, default: `"solid"`, description: { en: "`glass` is a translucent, blurred shell for use over pictures.", zh: "`glass` 是一种半透明、模糊的外壳，用于图片上方。" } },
+        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: { en: "Title bar height: 32px or 36px.", zh: "标题栏高度：32px 或 36px。" } },
       ],
       dataAttributes: [
-        { name: "data-variant", description: "The variant." },
-        { name: "data-size", description: "The size." },
+        { name: "data-variant", description: { en: "The variant.", zh: "变体。" } },
+        { name: "data-size", description: { en: "The size.", zh: "尺寸。" } },
       ],
     },
-    { name: "WindowFrameBar", extends: "div", props: [{ name: "controls", type: "boolean", default: "true", description: "Starts the bar with the three window dots." }] },
-    { name: "WindowFrameTitle", extends: "span", props: [{ name: "align", type: `"start" | "center"`, default: `"start"`, description: "`center` puts the title on a chip in the middle of the bar." }] },
-    { name: "WindowFrameActions", description: "Pushed to the end of the bar.", extends: "span", props: [] },
-    { name: "WindowFrameControls", description: "The three dots, for a custom bar.", extends: "span", props: [] },
-    { name: "WindowFrameBody", description: "The content area. Give it a height or let its content size it.", extends: "div", props: [] },
+    { name: "WindowFrameBar", extends: "div", props: [{ name: "controls", type: "boolean", default: "true", description: { en: "Starts the bar with the three window dots.", zh: "以三个窗口圆点开始标题栏。" } }] },
+    { name: "WindowFrameTitle", extends: "span", props: [{ name: "align", type: `"start" | "center"`, default: `"start"`, description: { en: "`center` puts the title on a chip in the middle of the bar.", zh: "`center` 将标题放在栏中间的芯片上。" } }] },
+    { name: "WindowFrameActions", description: { en: "Pushed to the end of the bar.", zh: "推到栏的末尾。" }, extends: "span", props: [] },
+    { name: "WindowFrameControls", description: { en: "The three dots, for a custom bar.", zh: "三个圆点，用于自定义栏。" }, extends: "span", props: [] },
+    { name: "WindowFrameBody", description: { en: "The content area. Give it a height or let its content size it.", zh: "内容区域。给它一个高度，或让其内容决定其尺寸。" }, extends: "div", props: [] },
   ],
 } satisfies ComponentDoc

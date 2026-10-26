@@ -21,7 +21,7 @@ export default {
   "notes": [
     {
       "title": "Accessibility",
-      "body": "Label the first slot with the field label and give the rest `aria-label`s such as \"Character 2 of 6\". Pasting fills every slot; `autoComplete` is `one-time-code` so phones offer the code from a message."
+      "body": { en: "Label the first slot with the field label and give the rest `aria-label`s such as \"Character 2 of 6\". Pasting fills every slot; `autoComplete` is `one-time-code` so phones offer the code from a message.", zh: "用字段标签标记第一个槽位，并给其余槽位添加 `aria-label`，例如 \"Character 2 of 6\"。粘贴会填充每个槽位；`autoComplete` 为 `one-time-code`，因此手机会从短信中提供验证码。" }
     }
   ],
   "api": [
@@ -33,19 +33,19 @@ export default {
         {
           "name": "length",
           "type": "number",
-          "description": "Number of slots.",
+          "description": { en: "Number of slots.", zh: "槽位数量。" },
           "required": true
         },
         {
           "name": "size",
           "type": "\"xs\" | \"sm\" | \"default\" | \"lg\"",
-          "description": "Slot size (24 / 28 / 32 / 36px). Inside a sized `Field` it follows the field.",
+          "description": { en: "Slot size (24 / 28 / 32 / 36px). Inside a sized `Field` it follows the field.", zh: "槽位大小（24 / 28 / 32 / 36px）。在有大小的 `Field` 内时跟随字段。" },
           "default": "\"default\""
         },
         {
           "name": "onValueComplete",
           "type": "(value: string) => void",
-          "description": "Called when every slot is filled."
+          "description": { en: "Called when every slot is filled.", zh: "每个槽位都填满时调用。" }
         }
       ]
     },
@@ -57,7 +57,7 @@ export default {
       "dataAttributes": [
         {
           "name": "data-filled",
-          "description": "Present when the slot holds a character."
+          "description": { en: "Present when the slot holds a character.", zh: "槽位包含字符时存在。" }
         }
       ]
     },

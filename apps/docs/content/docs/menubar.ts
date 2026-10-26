@@ -20,7 +20,7 @@ export default {
   "notes": [
     {
       "title": "Keyboard",
-      "body": "←/→ move between menus; once one is open, hovering or arrowing to another trigger switches menus. Items inside behave as in `Menu`."
+      "body": { en: "←/→ move between menus; once one is open, hovering or arrowing to another trigger switches menus. Items inside behave as in `Menu`.", zh: "←/→ 在菜单间移动；菜单打开后，悬停或用方向键移到其他触发器会切换菜单。其中的项行为与 `Menu` 中相同。" }
     }
   ],
   "api": [
@@ -32,7 +32,7 @@ export default {
     },
     {
       "name": "MenubarMenu",
-      "description": "Re-export of the menu root.",
+      "description": { en: "Re-export of the menu root.", zh: "菜单根的再导出。" },
       "extends": "Menu.Root",
       "extendsHref": "https://base-ui.com/react/components/menu#root",
       "props": []
@@ -45,20 +45,20 @@ export default {
       "dataAttributes": [
         {
           "name": "data-popup-open",
-          "description": "Present while its menu is open."
+          "description": { en: "Present while its menu is open.", zh: "在其菜单打开期间存在。" }
         }
       ]
     },
     {
       "name": "MenubarContent",
-      "description": "`MenuContent`, aligned to the trigger's start.",
+      "description": { en: "`MenuContent`, aligned to the trigger's start.", zh: "与触发器 start 对齐的 `MenuContent`。" },
       "extends": "MenuContent",
       "extendsHref": "/docs/menu#api-reference",
       "props": []
     },
     {
       "name": "MenubarItem, MenubarCheckboxItem, MenubarRadioItem…",
-      "description": "The `Menu` parts under menubar names.",
+      "description": { en: "The `Menu` parts under menubar names.", zh: "menubar 命名下的 `Menu` 各部分。" },
       "extends": "Menu parts",
       "extendsHref": "/docs/menu#api-reference",
       "props": []

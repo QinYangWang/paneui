@@ -29,47 +29,47 @@ export default {
   notes: [
     {
       title: "Accessibility",
-      body: "The scrambling characters are `aria-hidden`; screen readers read the final `value` from a visually hidden copy. The final value also sizes the box, so the width never jumps.",
+      body: { en: "The scrambling characters are `aria-hidden`; screen readers read the final `value` from a visually hidden copy. The final value also sizes the box, so the width never jumps.", zh: "乱序字符为 `aria-hidden`；屏幕阅读器从视觉隐藏的副本中读取最终 `value`。最终值也决定框的大小，因此宽度不会跳动。" },
     },
     {
       title: "Motion",
-      body: "With reduced motion the new value appears immediately and nothing scrambles. Related: [Text Shimmer](/docs/text-shimmer), [Text Cascade](/docs/text-cascade), [Text Reveal](/docs/text-reveal).",
+      body: { en: "With reduced motion the new value appears immediately and nothing scrambles. Related: [Text Shimmer](/docs/text-shimmer), [Text Cascade](/docs/text-cascade), [Text Reveal](/docs/text-reveal).", zh: "在减少动态效果下，新值立即出现，不会乱序。相关：[Text Shimmer](/docs/text-shimmer)、[Text Cascade](/docs/text-cascade)、[Text Reveal](/docs/text-reveal)。" },
     },
   ],
   api: [
     {
       name: "TextScramble",
-      description: "Scrambles from the previous `value` to the new one, resolving left to right.",
+      description: { en: "Scrambles from the previous `value` to the new one, resolving left to right.", zh: "从旧 `value` 乱序过渡到新值，从左到右解析。" },
       extends: "span",
       props: [
         {
           name: "value",
           type: "string",
           required: true,
-          description: "The text to show. Changing it scrambles from the old value to the new one.",
+          description: { en: "The text to show. Changing it scrambles from the old value to the new one.", zh: "要显示的文本。更改它会从旧值乱序过渡到新值。" },
         },
         {
           name: "duration",
           type: "number",
           default: "length × 34, clamped 360–900",
-          description: "Total animation time in ms.",
+          description: { en: "Total animation time in ms.", zh: "总动画时间，单位 ms。" },
         },
         {
           name: "glyphs",
           type: "string",
           default: `"ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&*+=?/"`,
-          description: "Characters sampled while a position is unresolved. An empty string disables scrambling.",
+          description: { en: "Characters sampled while a position is unresolved. An empty string disables scrambling.", zh: "位置未解析时采样的字符。空字符串禁用乱序。" },
         },
         {
           name: "scrambleOnMount",
           type: "boolean",
           default: "false",
-          description: "Also scramble in on first render.",
+          description: { en: "Also scramble in on first render.", zh: "首次渲染时也乱序进入。" },
         },
-        { name: "onComplete", type: "() => void", description: "Called once the new value has fully resolved." },
+        { name: "onComplete", type: "() => void", description: { en: "Called once the new value has fully resolved.", zh: "新值完全解析后调用。" } },
       ],
       dataAttributes: [
-        { name: "data-slot", description: `"text-scramble" on the root, "text-scramble-display" on the animated layer.` },
+        { name: "data-slot", description: { en: "\"text-scramble\" on the root, \"text-scramble-display\" on the animated layer.", zh: "根元素上为 \"text-scramble\"，动画层上为 \"text-scramble-display\"。" } },
       ],
     },
   ],

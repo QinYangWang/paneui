@@ -1,5 +1,6 @@
 import { english } from "@/lib/site-copy"
 import { LocalizedText } from "@/components/docs/localized"
+import { T } from "@/lib/site-locale"
 
 import * as React from "react"
 import Link from "next/link"
@@ -62,7 +63,7 @@ function ApiPart({ part }: { part: PartDoc }) {
           {part.description && <Inline text={part.description} />}
           {part.extends && (
             <>
-              {part.description ? " " : ""}Also accepts every prop of{" "}
+              {part.description ? " " : ""}<T en="Also accepts every prop of " zh="同时接受 " />
               {part.extendsHref ? (
                 <a
                   href={part.extendsHref}
@@ -75,7 +76,7 @@ function ApiPart({ part }: { part: PartDoc }) {
                   {part.extends}
                 </code>
               )}
-              .
+              <T en="." zh=" 的全部属性。" />
             </>
           )}
         </p>
@@ -106,10 +107,10 @@ function ApiPart({ part }: { part: PartDoc }) {
         <SimpleTable containerClassName="max-sm:hidden" className="min-w-xl">
           <SimpleTableHeader>
             <SimpleTableRow>
-              <SimpleTableHead>Prop</SimpleTableHead>
-              <SimpleTableHead>Type</SimpleTableHead>
-              <SimpleTableHead>Default</SimpleTableHead>
-              <SimpleTableHead>Description</SimpleTableHead>
+              <SimpleTableHead><T en="Prop" zh="属性" /></SimpleTableHead>
+              <SimpleTableHead><T en="Type" zh="类型" /></SimpleTableHead>
+              <SimpleTableHead><T en="Default" zh="默认值" /></SimpleTableHead>
+              <SimpleTableHead><T en="Description" zh="描述" /></SimpleTableHead>
             </SimpleTableRow>
           </SimpleTableHeader>
           <SimpleTableBody>
@@ -147,8 +148,8 @@ function ApiPart({ part }: { part: PartDoc }) {
         <SimpleTable containerClassName="max-sm:hidden">
           <SimpleTableHeader>
             <SimpleTableRow>
-              <SimpleTableHead>Data attribute</SimpleTableHead>
-              <SimpleTableHead>Description</SimpleTableHead>
+              <SimpleTableHead><T en="Data attribute" zh="数据属性" /></SimpleTableHead>
+              <SimpleTableHead><T en="Description" zh="描述" /></SimpleTableHead>
             </SimpleTableRow>
           </SimpleTableHeader>
           <SimpleTableBody>
@@ -229,7 +230,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         {doc?.baseUi && (
           <div className="flex flex-wrap gap-1.5">
             <Badge variant="outline" size="sm" render={<a href={doc.baseUi.href} />}>
-              {doc.baseUi.name} primitive
+              <T en={`${doc.baseUi.name} primitive`} zh={`${doc.baseUi.name} 原语`} />
             </Badge>
           </div>
         )}
@@ -266,7 +267,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         <H2 id="installation">Installation</H2>
         <Tabs defaultValue="command">
           <TabsList>
-            <TabsTab value="command">Command</TabsTab>
+            <TabsTab value="command"><T en="Command" zh="命令" /></TabsTab>
             <TabsTab value="manual"><LocalizedText text="Manual" /></TabsTab>
           </TabsList>
           <TabsPanel value="command" className="pt-2">
@@ -275,31 +276,31 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
           <TabsPanel value="manual" className="flex flex-col gap-5 pt-2">
             {item.dependencies.length > 0 && (
               <div className="flex flex-col gap-2.5">
-                <p className="font-medium">Install the dependencies:</p>
+                <p className="font-medium"><T en="Install the dependencies:" zh="安装依赖：" /></p>
                 <PackageInstall packages={item.dependencies} />
               </div>
             )}
             {item.registryDependencies.length > 0 && (
               <p className="text-muted-foreground">
-                Add the registry items it builds on first:{" "}
+                <T en="Add the registry items it builds on first: " zh="先添加它所依赖的组件库条目：" />
                 {item.registryDependencies.map((d, i) => (
                   <React.Fragment key={d}>
-                    {i > 0 && ", "}
+                    {i > 0 && <T en=", " zh="、" />}
                     <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">
                       {d}
                     </code>
                   </React.Fragment>
                 ))}
-                .
+                <T en="." zh="。" />
               </p>
             )}
             <div className="flex flex-col gap-2.5">
-              <p className="font-medium">Copy the source into your project:</p>
+              <p className="font-medium"><T en="Copy the source into your project:" zh="将源码复制到你的项目：" /></p>
               {item.files.map((f) => (
                 <DocsCode key={f} code={readSource(f)} filename={f} maxHeight={420} />
               ))}
             </div>
-            <p className="text-muted-foreground">Update the import paths to match your project setup.</p>
+            <p className="text-muted-foreground"><T en="Update the import paths to match your project setup." zh="按项目配置调整导入路径。" /></p>
           </TabsPanel>
         </Tabs>
       </section>
@@ -359,22 +360,51 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         <section className="flex flex-col gap-3">
           <H2 id="icon-styles">Icon styles</H2>
           <p className="text-pretty text-muted-foreground">
-            The default set is rounded: outline glyphs on a 24×24 grid with 1.75px round strokes and soft corners. The
-            same names and props also ship in two other styles: puffy (filled shapes on an 18×18 grid) and outline (the
-            puffy shapes as 1.6px outlines). Every style installs to 
-            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>,
-            so one command switches every component in your project. Preview them with the toggle under All icons.
+            <T
+              en={
+                <>
+                  The default set is rounded: outline glyphs on a 24×24 grid with 1.75px round strokes and soft
+                  corners. The same names and props also ship in two other styles: puffy (filled shapes on an 18×18
+                  grid) and outline (the puffy shapes as 1.6px outlines). Every style installs to{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>,
+                  so one command switches every component in your project. Preview them with the toggle under All
+                  icons.
+                </>
+              }
+              zh={
+                <>
+                  默认图标集是圆角风格：在 24×24 网格上绘制轮廓，1.75px 圆头描边，转角柔和。相同的名称和属性也提供两种其他风格：puffy（在 18×18 网格上的填充图形）和 outline（把 puffy 图形处理为 1.6px 描边）。每种风格都安装到{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>，
+                  因此一条命令即可切换项目中所有组件。可在“全部图标”下方的切换器中预览它们。
+                </>
+              }
+            />
           </p>
           <InstallCommand args={`add ${SITE_URL}/r/icons-puffy.json --overwrite`} />
           <InstallCommand args={`add ${SITE_URL}/r/icons-outline.json --overwrite`} />
-          <p className="text-pretty text-muted-foreground">Back to rounded:</p>
+          <p className="text-pretty text-muted-foreground"><T en="Back to rounded:" zh="返回圆角风格：" /></p>
           <InstallCommand args={`add ${SITE_URL}/r/icons.json --overwrite`} />
           <p className="text-pretty text-muted-foreground">
-            Components list the icon set as a dependency, so adding one later asks whether to overwrite 
-            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>.
-            Answer no (the default) to keep your style. If you add components with 
-            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">--overwrite</code>, the
-            rounded set comes back: run your style&apos;s command again afterwards.
+            <T
+              en={
+                <>
+                  Components list the icon set as a dependency, so adding one later asks whether to overwrite{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>.
+                  Answer no (the default) to keep your style. If you add components with{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">--overwrite</code>, the
+                  rounded set comes back: run your style&apos;s command again afterwards.
+                </>
+              }
+              zh={
+                <>
+                  组件会把图标集列为依赖，因此之后再添加组件时会询问是否覆盖{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>。
+                  选择否（默认值）即可保留你的风格。如果使用{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">--overwrite</code>{" "}
+                  添加组件，圆角图标集会被恢复：之后请再次运行你所选风格的命令。
+                </>
+              }
+            />
           </p>
         </section>
       )}
@@ -383,12 +413,29 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
         <section className="flex flex-col gap-3">
           <H2 id="make-your-own-icons">Make your own icons</H2>
           <p className="text-pretty text-muted-foreground">
-            Need a glyph the set doesn&apos;t have? Install the <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puffy-icons</code>{" "}
-            agent skill and ask your coding agent for it. The skill carries the drawing rules for every style (grids,
-            primitives, corner radii), reference icons, a preview script to check the result at small sizes, and how to
-            add it to your{" "}
-            <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>.
-            Works with any coding agent that reads Agent Skills.
+            <T
+              en={
+                <>
+                  Need a glyph the set doesn&apos;t have? Install the{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puffy-icons</code>{" "}
+                  agent skill and ask your coding agent for it. The skill carries the drawing rules for every style
+                  (grids, primitives, corner radii), reference icons, a preview script to check the result at small
+                  sizes, and how to add it to your{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>.
+                  Works with any coding agent that reads Agent Skills.
+                </>
+              }
+              zh={
+                <>
+                  需要图标集中没有的字形？安装{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puffy-icons</code>{" "}
+                  智能体技能，然后向你的编程智能体索取。该技能包含适用于所有风格的绘制规则
+                  （网格、基础图形、圆角半径）、参考图标、用于检查小尺寸效果的预览脚本，以及如何把它加入{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>。
+                  适用于任何能读取 Agent Skills 的编程智能体。
+                </>
+              }
+            />
           </p>
           <AgentSkill name="puffy-icons" skill={iconSkill} html={await highlight(iconSkill, "markdown")} />
         </section>
@@ -397,7 +444,7 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
       {name === "icons" && (
         <section className="flex flex-col gap-3">
           <H2 id="all-icons">All icons</H2>
-          <p className="text-muted-foreground">Click an icon to copy its JSX.</p>
+          <p className="text-muted-foreground"><T en="Click an icon to copy its JSX." zh="点击图标复制其 JSX。" /></p>
           <IconGrid />
         </section>
       )}
@@ -408,14 +455,17 @@ export default async function DocPage({ params }: { params: Promise<{ name: stri
             <H2 id="api-reference">API Reference</H2>
             {doc.baseUi && (
               <p className="text-muted-foreground">
-                Built on{" "}
+                <T en="Built on " zh="基于 " />
                 <a
                   href={`${doc.baseUi.href}#api-reference`}
                   className="font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
                 >
-                  the {doc.baseUi.name} primitive
+                  <T en={`the ${doc.baseUi.name} primitive`} zh={`${doc.baseUi.name} 原语`} />
                 </a>
-                . Only the props this library adds or changes are listed; everything else passes through.
+                <T
+                  en=". Only the props this library adds or changes are listed; everything else passes through."
+                  zh="。这里只列出本库新增或改动的属性，其余属性原样透传。"
+                />
               </p>
             )}
           </div>

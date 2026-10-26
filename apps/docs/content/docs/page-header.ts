@@ -33,7 +33,7 @@ export default {
       title: { en: "Reading Page", zh: "阅读页面" },
     },
   ],
-  notes: [{ title: "Layout", body: "Actions wrap under the title on narrow screens. The title is the page's `h1`." }],
+  notes: [{ title: "Layout", body: { en: "Actions wrap under the title on narrow screens. The title is the page's `h1`.", zh: "在窄屏幕上，操作按钮换行到标题下方。标题是页面的 `h1`。" } }],
   api: [
     {
       name: "PageHeader",
@@ -43,11 +43,11 @@ export default {
           name: "size",
           type: `"default" | "lg"`,
           default: `"default"`,
-          description: "`lg` sets a `text-3xl` title and `text-lg` lede, aligns actions with the title, and gives a direct eyebrow or description its own row.",
+          description: { en: "`lg` sets a `text-3xl` title and `text-lg` lede, aligns actions with the title, and gives a direct eyebrow or description its own row.", zh: "`lg` 设置 `text-3xl` 标题和 `text-lg` 导语，将操作按钮与标题对齐，并为直接眉题或描述提供自己的行。" },
         },
       ],
     },
-    { name: "PageHeaderTitle", extends: "h1", description: "`text-2xl` semibold, balanced wrapping.", props: [] },
-    { name: "PageHeaderEyebrow", extends: "div", description: "Small line above the title, such as a breadcrumb or status.", props: [] },
+    { name: "PageHeaderTitle", extends: "h1", description: { en: "`text-2xl` semibold, balanced wrapping.", zh: "`text-2xl` 半粗体，平衡换行。" }, props: [] },
+    { name: "PageHeaderEyebrow", extends: "div", description: { en: "Small line above the title, such as a breadcrumb or status.", zh: "标题上方的小行，例如面包屑或状态。" }, props: [] },
   ],
 } satisfies ComponentDoc

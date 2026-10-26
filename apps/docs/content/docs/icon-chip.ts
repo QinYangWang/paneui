@@ -25,37 +25,37 @@ export default {
   notes: [
     {
       title: "Accessibility",
-      body: "The chip is always `aria-hidden`, so it is decoration only. Put the meaning in the text next to it.",
+      body: { en: "The chip is always `aria-hidden`, so it is decoration only. Put the meaning in the text next to it.", zh: "该 chip 始终为 `aria-hidden`，因此只是装饰。把含义放在它旁边的文本中。" },
     },
   ],
   api: [
     {
       name: "IconChip",
-      description: "A small rounded frame that holds one icon.",
+      description: { en: "A small rounded frame that holds one icon.", zh: "一个包含单个图标的小圆角框。" },
       extends: "span",
       props: [
         {
           name: "tone",
           type: `"neutral" | "primary" | "success" | "warning" | "destructive" | "solid"`,
           default: `"neutral"`,
-          description: "Surface and icon color.",
+          description: { en: "Surface and icon color.", zh: "表面和图标颜色。" },
         },
         {
           name: "size",
           type: `"sm" | "default" | "lg" | "xl"`,
           default: `"default"`,
-          description: "Chip size (24 / 32 / 40 / 48px); the icon scales with it.",
+          description: { en: "Chip size (24 / 32 / 40 / 48px); the icon scales with it.", zh: "chip 尺寸（24 / 32 / 40 / 48px）；图标随之缩放。" },
         },
         {
           name: "render",
           type: "ReactElement | (props, state) => ReactElement",
-          description: "Replace the rendered `<span>` with another element.",
+          description: { en: "Replace the rendered `<span>` with another element.", zh: "用另一个元素替换渲染的 `<span>`。" },
         },
       ],
     },
     {
       name: "iconChipVariants",
-      description: "The `cva` function behind `IconChip`, for styling other elements like a chip.",
+      description: { en: "The `cva` function behind `IconChip`, for styling other elements like a chip.", zh: "`IconChip` 背后的 `cva` 函数，用于给其他元素应用 chip 样式。" },
       props: [
         { name: "tone", type: "same as IconChip", description: "" },
         { name: "size", type: "same as IconChip", description: "" },

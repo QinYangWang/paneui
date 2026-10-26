@@ -15,25 +15,25 @@ export default {
   "notes": [
     {
       "title": "When to use",
-      "body": "Prefer it to `Select` on touch devices, in long forms and wherever the platform picker helps. Use `Select` when options need icons or custom rows."
+      "body": { en: "Prefer it to `Select` on touch devices, in long forms and wherever the platform picker helps. Use `Select` when options need icons or custom rows.", zh: "在触摸设备、长表单以及平台选择器更有帮助的场景中，优先使用它而非 `Select`。需要图标或自定义行时使用 `Select`。" }
     }
   ],
   "api": [
     {
       "name": "NativeSelect",
-      "description": "`className` goes on the wrapper, so width utilities apply to the field.",
+      "description": { en: "`className` goes on the wrapper, so width utilities apply to the field.", zh: "`className` 作用于外层容器，因此宽度工具类会应用到字段上。" },
       "extends": "select",
       "props": [
         {
           "name": "size",
           "type": "\"xs\" | \"sm\" | \"default\" | \"lg\"",
-          "description": "Height (24 / 28 / 32 / 36px). Follows a sized `Field`.",
+          "description": { en: "Height (24 / 28 / 32 / 36px). Follows a sized `Field`.", zh: "高度（24 / 28 / 32 / 36px）。跟随设置了尺寸的 `Field`。" },
           "default": "\"default\""
         },
         {
           "name": "htmlSize",
           "type": "number",
-          "description": "The native `size` attribute."
+          "description": { en: "The native `size` attribute.", zh: "原生 `size` 属性。" }
         }
       ]
     },

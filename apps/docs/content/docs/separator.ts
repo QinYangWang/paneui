@@ -25,7 +25,7 @@ export default {
         {
           "name": "orientation",
           "type": "\"horizontal\" | \"vertical\"",
-          "description": "A vertical one stretches to its row's height.",
+          "description": { en: "A vertical one stretches to its row's height.", zh: "垂直的会拉伸到其行的高度。" },
           "default": "\"horizontal\""
         }
       ]

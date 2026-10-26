@@ -17,15 +17,15 @@ export default {
   notes: [
     {
       title: "Presets",
-      body: "`blue` (the default, also what no attribute gives), `neutral`, `green`, `orange`, `rose` and `violet`. Each sets the eight accent roles (`--primary` with its `-hover`, `-active`, `-foreground`, `-subtle`, `-subtle-hover` and `-border` variants, plus `--ring`), in light and under `.dark`. The values are the same as the single `theme-<name>` items, which bake one accent into the theme instead.",
+      body: { en: "`blue` (the default, also what no attribute gives), `neutral`, `green`, `orange`, `rose` and `violet`. Each sets the eight accent roles (`--primary` with its `-hover`, `-active`, `-foreground`, `-subtle`, `-subtle-hover` and `-border` variants, plus `--ring`), in light and under `.dark`. The values are the same as the single `theme-<name>` items, which bake one accent into the theme instead.", zh: "`blue`（默认，也是无属性时的值）、`neutral`、`green`、`orange`、`rose` 和 `violet`。每个在亮色和 `.dark` 下设置八个主题色角色（`--primary` 及其 `-hover`、`-active`、`-foreground`、`-subtle`、`-subtle-hover` 和 `-border` 变体，加上 `--ring`）。值与单个 `theme-<name>` 项相同，后者将一个主题色烘焙到主题中。" },
     },
     {
       title: "Switching",
-      body: "Set or remove the attribute with `document.documentElement.dataset.accent = \"rose\"`. To keep a pick across visits, store it and set the attribute in a pre-paint script, as the theme toggle does for `.dark`. For a ready-made control, see [Accent Picker](/docs/accent-picker).",
+      body: { en: "Set or remove the attribute with `document.documentElement.dataset.accent = \"rose\"`. To keep a pick across visits, store it and set the attribute in a pre-paint script, as the theme toggle does for `.dark`. For a ready-made control, see [Accent Picker](/docs/accent-picker).", zh: "使用 `document.documentElement.dataset.accent = \"rose\"` 设置或移除该属性。要在多次访问间保留选择，请存储它并在预绘制脚本中设置属性，就像主题切换对 `.dark` 所做的那样。如需现成控件，请参阅 [Accent Picker](/docs/accent-picker)。" },
     },
     {
       title: "Radius presets",
-      body: "`theme-radii` is the same idea for corners: `@import \"./theme-radii.css\"` and set `data-radius=\"none\" | \"sm\" | \"lg\" | \"xl\"` on `<html>` (no attribute or `default` is the theme radius). Install it from `/r/theme-radii.json`.",
+      body: { en: "`theme-radii` is the same idea for corners: `@import \"./theme-radii.css\"` and set `data-radius=\"none\" | \"sm\" | \"lg\" | \"xl\"` on `<html>` (no attribute or `default` is the theme radius). Install it from `/r/theme-radii.json`.", zh: "`theme-radii` 对圆角是同样的思路：`@import \"./theme-radii.css\"` 并在 `<html>` 上设置 `data-radius=\"none\" | \"sm\" | \"lg\" | \"xl\"`（无属性或 `default` 是主题圆角）。从 `/r/theme-radii.json` 安装它。" },
     },
   ],
   api: [],

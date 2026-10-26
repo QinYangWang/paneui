@@ -41,45 +41,45 @@ toast.add({ title: "Saved", description: "Your changes are live.", type: "succes
   notes: [
     {
       title: "Motion",
-      body: "Hovering or focusing the stack expands it, and swiping right or down dismisses a toast.",
+      body: { en: "Hovering or focusing the stack expands it, and swiping right or down dismisses a toast.", zh: "悬停或聚焦堆叠会将其展开，向右或向下滑动可关闭提示。" },
     },
     {
       title: "Accessibility",
-      body: "Toasts are announced in a live region. Timers pause while the stack is hovered or focused, and `F6` moves focus into the viewport.",
+      body: { en: "Toasts are announced in a live region. Timers pause while the stack is hovered or focused, and `F6` moves focus into the viewport.", zh: "提示会在一个实时区域中播报。悬停或聚焦堆叠时计时器暂停，按 `F6` 可将焦点移入视口。" },
     },
   ],
   api: [
     {
       name: "ToastProvider",
-      description: "Wrap your app once. Renders the viewport (fixed bottom-right) and the stacked toasts.",
+      description: { en: "Wrap your app once. Renders the viewport (fixed bottom-right) and the stacked toasts.", zh: "在应用中包裹一次。渲染视口（固定在右下角）和堆叠的提示。" },
       extends: "Toast.Provider",
       extendsHref: "https://base-ui.com/react/components/toast#provider",
       props: [
-        { name: "limit", type: "number", default: "3", description: "Toasts shown at once; older ones are hidden." },
-        { name: "timeout", type: "number", default: "5000", description: "Default auto-dismiss in ms. `0` never dismisses." },
+        { name: "limit", type: "number", default: "3", description: { en: "Toasts shown at once; older ones are hidden.", zh: "同时显示的提示数量；更早的提示会被隐藏。" } },
+        { name: "timeout", type: "number", default: "5000", description: { en: "Default auto-dismiss in ms. `0` never dismisses.", zh: "默认自动关闭时间，单位为 ms。`0` 表示永不关闭。" } },
       ],
     },
     {
       name: "useToast",
-      description: "Alias of the toast primitive's `useToastManager`. Returns `{ toasts, add, update, close, promise }`; `add` returns the toast id and `close()` with no id clears every toast.",
+      description: { en: "Alias of the toast primitive's `useToastManager`. Returns `{ toasts, add, update, close, promise }`; `add` returns the toast id and `close()` with no id clears every toast.", zh: "toast 原语的 `useToastManager` 的别名。返回 `{ toasts, add, update, close, promise }`；`add` 返回 toast id，不带 id 调用 `close()` 会清除所有提示。" },
       extends: "Toast.useToastManager",
       extendsHref: "https://base-ui.com/react/components/toast#usetoastmanager",
       props: [
-        { name: "title", type: "ReactNode", description: "First line, medium weight." },
-        { name: "description", type: "ReactNode", description: "Muted second line." },
+        { name: "title", type: "ReactNode", description: { en: "First line, medium weight.", zh: "第一行，中等字重。" } },
+        { name: "description", type: "ReactNode", description: { en: "Muted second line.", zh: "弱化的第二行。" } },
         {
           name: "type",
           type: `"success" | "error" | "warning" | "info" | "loading" | string`,
-          description: "Known types get an icon; `loading` spins.",
+          description: { en: "Known types get an icon; `loading` spins.", zh: "已知类型会显示图标；`loading` 会旋转。" },
         },
-        { name: "timeout", type: "number", description: "Override the provider timeout for this toast; `0` keeps it until dismissed." },
-        { name: "priority", type: `"low" | "high"`, default: `"low"`, description: "How urgently screen readers announce it." },
+        { name: "timeout", type: "number", description: { en: "Override the provider timeout for this toast; `0` keeps it until dismissed.", zh: "覆盖此提示的 provider 超时；`0` 表示保留到被关闭。" } },
+        { name: "priority", type: `"low" | "high"`, default: `"low"`, description: { en: "How urgently screen readers announce it.", zh: "屏幕阅读器播报的紧急程度。" } },
         {
           name: "actionProps",
           type: "ComponentProps<\"button\">",
-          description: "Renders an action button; pass `children` and `onClick`.",
+          description: { en: "Renders an action button; pass `children` and `onClick`.", zh: "渲染一个操作按钮；传入 `children` 和 `onClick`。" },
         },
-        { name: "onClose", type: "() => void", description: "Called when the toast starts closing." },
+        { name: "onClose", type: "() => void", description: { en: "Called when the toast starts closing.", zh: "提示开始关闭时调用。" } },
       ],
     },
   ],

@@ -16,15 +16,15 @@ export default {
   notes: [
     {
       title: "Shader",
-      body: "Without `image` the cover renders [Shader Background](/docs/shader-background), which pauses offscreen and under reduced motion. A `seed` picks a random palette from a stable hash, so the same slug gets the same colours on every visit and in `OgCoverArt`. `palette=\"random\"` without a seed picks new colours after mount; with neither, the shader uses the theme colours.",
+      body: { en: "Without `image` the cover renders [Shader Background](/docs/shader-background), which pauses offscreen and under reduced motion. A `seed` picks a random palette from a stable hash, so the same slug gets the same colours on every visit and in `OgCoverArt`. `palette=\"random\"` without a seed picks new colours after mount; with neither, the shader uses the theme colours.", zh: "没有 `image` 时，封面渲染 [Shader Background](/docs/shader-background)，在屏幕外和减少动态效果下暂停。`seed` 从稳定哈希中选取随机调色板，因此相同 slug 每次访问和 `OgCoverArt` 中得到相同颜色。`palette=\"random\"` 没有 seed 时在挂载后选取新颜色；两者都没有时，着色器使用主题色。" },
     },
     {
       title: "Accessibility",
-      body: "The art is `role=\"img\"`, named by the locale’s `coverArt` label (“Abstract cover illustration” in English) through a hidden element. Pass `aria-label` with the post title, or `aria-hidden` when a caption next to it already names the post.",
+      body: { en: "The art is `role=\"img\"`, named by the locale’s `coverArt` label (“Abstract cover illustration” in English) through a hidden element. Pass `aria-label` with the post title, or `aria-hidden` when a caption next to it already names the post.", zh: "图像为 `role=\"img\"`，通过隐藏元素由区域设置的 `coverArt` 标签命名（英文为“Abstract cover illustration”）。传入 `aria-label` 和帖子标题，或当旁边的说明文字已命名帖子时传入 `aria-hidden`。" },
     },
     {
       title: "Share images",
-      body: "This art is WebGL for the page. For an `opengraph-image` route use `OgCoverArt` from [OG Image](/docs/og-image): the same `image`, `palette` and `seed`, with the shader drawn as a still frame of the same colours. Clip the cover with a wrapper (`overflow-hidden rounded-xl`) to round its corners.",
+      body: { en: "This art is WebGL for the page. For an `opengraph-image` route use `OgCoverArt` from [OG Image](/docs/og-image): the same `image`, `palette` and `seed`, with the shader drawn as a still frame of the same colours. Clip the cover with a wrapper (`overflow-hidden rounded-xl`) to round its corners.", zh: "此图是页面的 WebGL。对于 `opengraph-image` 路由，使用 [OG Image](/docs/og-image) 中的 `OgCoverArt`：相同的 `image`、`palette` 和 `seed`，着色器绘制为相同颜色的静态帧。用包装器（`overflow-hidden rounded-xl`）裁剪封面以圆角。" },
     },
   ],
   api: [
@@ -32,12 +32,12 @@ export default {
       name: "CoverArt",
       extends: "div",
       props: [
-        { name: "image", type: "string", description: "Image URL drawn edge to edge. Wins over the shader." },
-        { name: "palette", type: 'string[] | "random"', description: "Shader colours, or a random set. Defaults to random with `seed`, else the theme." },
-        { name: "shader", type: "ShaderVariant", default: '"mesh-gradient"', description: "Which shader to draw." },
-        { name: "seed", type: "string", description: "Keeps the random palette stable, from a hash of the string." },
+        { name: "image", type: "string", description: { en: "Image URL drawn edge to edge. Wins over the shader.", zh: "边到边绘制的图像 URL。优先于着色器。" } },
+        { name: "palette", type: 'string[] | "random"', description: { en: "Shader colours, or a random set. Defaults to random with `seed`, else the theme.", zh: "着色器颜色，或随机一组。默认使用 `seed` 随机，否则使用主题。" } },
+        { name: "shader", type: "ShaderVariant", default: '"mesh-gradient"', description: { en: "Which shader to draw.", zh: "绘制哪个着色器。" } },
+        { name: "seed", type: "string", description: { en: "Keeps the random palette stable, from a hash of the string.", zh: "从字符串哈希保持随机调色板稳定。" } },
       ],
-      dataAttributes: [{ name: "data-variant", description: "`image` or `shader`." }],
+      dataAttributes: [{ name: "data-variant", description: { en: "`image` or `shader`.", zh: "`image` 或 `shader`。" } }],
     },
   ],
 } satisfies ComponentDoc

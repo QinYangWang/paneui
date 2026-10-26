@@ -24,7 +24,7 @@ export default {
   "notes": [
     {
       "title": "Motion",
-      "body": "The fill eases to each new value over 300ms. With `value={null}` the bar is indeterminate: it slides across the track, and pulses in place under reduced motion."
+      "body": { en: "The fill eases to each new value over 300ms. With `value={null}` the bar is indeterminate: it slides across the track, and pulses in place under reduced motion.", zh: "填充在 300ms 内缓动到每个新值。使用 `value={null}` 时，进度条为不确定状态：它在轨道上滑动，并在减少动态效果下原地脉冲。" }
     }
   ],
   "api": [
@@ -36,25 +36,25 @@ export default {
         {
           "name": "value",
           "type": "number | null",
-          "description": "Current value; `null` is indeterminate.",
+          "description": { en: "Current value; `null` is indeterminate.", zh: "当前值；`null` 表示不确定。" },
           "required": true
         },
         {
           "name": "size",
           "type": "\"sm\" | \"default\" | \"lg\"",
-          "description": "Track height (4 / 6 / 8px).",
+          "description": { en: "Track height (4 / 6 / 8px).", zh: "轨道高度（4 / 6 / 8px）。" },
           "default": "\"default\""
         },
         {
           "name": "tone",
           "type": "\"default\" | \"success\" | \"warning\" | \"destructive\"",
-          "description": "Fill colour.",
+          "description": { en: "Fill colour.", zh: "填充颜色。" },
           "default": "\"default\""
         },
         {
           "name": "children",
           "type": "ReactNode",
-          "description": "Label and value row above the track."
+          "description": { en: "Label and value row above the track.", zh: "轨道上方的标签和值行。" }
         }
       ]
     },
@@ -66,7 +66,7 @@ export default {
     },
     {
       "name": "ProgressValue",
-      "description": "Formatted percentage by default.",
+      "description": { en: "Formatted percentage by default.", zh: "默认格式化为百分比。" },
       "extends": "Progress.Value",
       "extendsHref": "https://base-ui.com/react/components/progress#value",
       "props": []

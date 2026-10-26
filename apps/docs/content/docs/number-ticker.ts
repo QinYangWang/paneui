@@ -25,53 +25,53 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "Only digits roll; separators and symbols stay still. With reduced motion digits jump straight to their value. The formatted number is read from a visually hidden copy for screen readers.",
+      body: { en: "Only digits roll; separators and symbols stay still. With reduced motion digits jump straight to their value. The formatted number is read from a visually hidden copy for screen readers.", zh: "只有数字滚动；分隔符和符号保持不动。在减少动态效果下，数字直接跳到其值。格式化后的数字从视觉隐藏的副本中读取，供屏幕阅读器使用。" },
     },
     {
       title: "Related",
-      body: "[Animated Number](/docs/animated-number) counts smoothly instead of rolling digits; [Digit Swap](/docs/digit-swap).",
+      body: { en: "[Animated Number](/docs/animated-number) counts smoothly instead of rolling digits; [Digit Swap](/docs/digit-swap).", zh: "[Animated Number](/docs/animated-number) 平滑计数而不是滚动数字；[Digit Swap](/docs/digit-swap)。" },
     },
   ],
   api: [
     {
       name: "NumberTicker",
-      description: "A number whose digits roll like an odometer when `value` changes.",
+      description: { en: "A number whose digits roll like an odometer when `value` changes.", zh: "一个数字，当 `value` 变化时其数字像里程表一样滚动。" },
       extends: "span",
       props: [
-        { name: "value", type: "number", required: true, description: "The number to show." },
+        { name: "value", type: "number", required: true, description: { en: "The number to show.", zh: "要显示的数字。" } },
         {
           name: "locale",
           type: "string",
           default: "runtime locale",
-          description: "Locale for `Intl.NumberFormat`.",
+          description: { en: "Locale for `Intl.NumberFormat`.", zh: "`Intl.NumberFormat` 的区域设置。" },
         },
         {
           name: "format",
           type: "Intl.NumberFormatOptions",
-          description: "Currency, percent, compact, fraction digits and so on.",
+          description: { en: "Currency, percent, compact, fraction digits and so on.", zh: "货币、百分比、紧凑格式、小数位数等。" },
         },
         {
           name: "startOnView",
           type: "boolean",
           default: "true",
-          description: "Hold every digit at 0 until half the number scrolls into view, then roll.",
+          description: { en: "Hold every digit at 0 until half the number scrolls into view, then roll.", zh: "每个数字保持在 0，直到数字的一半滚入视野，然后滚动。" },
         },
         {
           name: "stagger",
           type: "number",
           default: "0.045",
-          description: "Seconds between neighbouring digits, rippling from the right.",
+          description: { en: "Seconds between neighbouring digits, rippling from the right.", zh: "相邻数字之间的秒数，从右侧开始涟漪。" },
         },
         {
           name: "transition",
           type: "Transition",
           default: `{ type: "spring", stiffness: 380, damping: 30, mass: 0.7 }`,
-          description: "motion transition merged over the default spring.",
+          description: { en: "motion transition merged over the default spring.", zh: "合并到默认弹簧上的 motion transition。" },
         },
-        { name: "digitClassName", type: "string", description: "Classes for each rolling digit column." },
+        { name: "digitClassName", type: "string", description: { en: "Classes for each rolling digit column.", zh: "每个滚动数字列的类名。" } },
       ],
       dataAttributes: [
-        { name: "data-slot", description: `"number-ticker" on the root, "number-ticker-digit" on each digit column.` },
+        { name: "data-slot", description: { en: "\"number-ticker\" on the root, \"number-ticker-digit\" on each digit column.", zh: "根上为 \"number-ticker\"，每个数字列上为 \"number-ticker-digit\"。" } },
       ],
     },
   ],

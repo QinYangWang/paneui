@@ -52,15 +52,15 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "The popup slides 4px toward its side and leaves faster than it arrives. With reduced motion it only fades.",
+      body: { en: "The popup slides 4px toward its side and leaves faster than it arrives. With reduced motion it only fades.", zh: "弹出层向其所在侧滑动 4px，离开比进入更快。启用减少动态效果时仅淡出。" },
     },
     {
       title: "Keyboard",
-      body: "Enter or Space on the trigger opens it and moves focus inside; Esc closes it and returns focus.",
+      body: { en: "Enter or Space on the trigger opens it and moves focus inside; Esc closes it and returns focus.", zh: "在触发器上按 Enter 或 Space 打开并将焦点移入；按 Esc 关闭并返回焦点。" },
     },
     {
       title: "Related",
-      body: "[Popover Morph](/docs/popover-morph) grows the popover out of its trigger.",
+      body: { en: "[Popover Morph](/docs/popover-morph) grows the popover out of its trigger.", zh: "[Popover Morph](/docs/popover-morph) 让弹出层从触发器中展开。" },
     },
   ],
   api: [
@@ -78,7 +78,7 @@ export default {
     },
     {
       name: "PopoverContent",
-      description: "The 288px-wide popup, already wrapped in a portal and positioner.",
+      description: { en: "The 288px-wide popup, already wrapped in a portal and positioner.", zh: "宽 288px 的弹出层，已包装在 portal 和 positioner 中。" },
       extends: "Popover.Popup",
       extendsHref: "https://base-ui.com/react/components/popover#popup",
       props: [
@@ -86,31 +86,31 @@ export default {
           name: "side",
           type: `"top" | "right" | "bottom" | "left" | "inline-start" | "inline-end"`,
           default: `"bottom"`,
-          description: "Edge of the trigger it opens on.",
+          description: { en: "Edge of the trigger it opens on.", zh: "它从触发器哪一侧打开。" },
         },
-        { name: "sideOffset", type: "number", default: "8", description: "Gap to the trigger in px." },
+        { name: "sideOffset", type: "number", default: "8", description: { en: "Gap to the trigger in px.", zh: "与触发器的间隙，单位为 px。" } },
         {
           name: "align",
           type: `"start" | "center" | "end"`,
           default: `"center"`,
-          description: "Alignment against the trigger.",
+          description: { en: "Alignment against the trigger.", zh: "相对触发器的对齐方式。" },
         },
-        { name: "alignOffset", type: "number", default: "0", description: "Shift along the alignment axis in px." },
+        { name: "alignOffset", type: "number", default: "0", description: { en: "Shift along the alignment axis in px.", zh: "沿对齐轴偏移（px）。" } },
         {
           name: "collisionPadding",
           type: "number | Rect",
           default: "8",
-          description: "Space kept from the viewport edges.",
+          description: { en: "Space kept from the viewport edges.", zh: "与视口边缘保留的间距。" },
         },
       ],
       dataAttributes: [
-        { name: "data-side", description: "The side it actually opened on." },
-        { name: "data-starting-style / data-ending-style", description: "Set during the enter and exit transitions." },
+        { name: "data-side", description: { en: "The side it actually opened on.", zh: "实际打开的那一侧。" } },
+        { name: "data-starting-style / data-ending-style", description: { en: "Set during the enter and exit transitions.", zh: "在进入和退出过渡期间设置。" } },
       ],
     },
     {
       name: "PopoverHeader",
-      description: "Stacks title and description with a 4px gap.",
+      description: { en: "Stacks title and description with a 4px gap.", zh: "堆叠标题和描述，间距 4px。" },
       extends: "div",
       props: [],
     },
@@ -128,20 +128,20 @@ export default {
     },
     {
       name: "PopoverFooter",
-      description: "Right-aligned row for actions.",
+      description: { en: "Right-aligned row for actions.", zh: "右对齐的操作行。" },
       extends: "div",
       props: [],
     },
     {
       name: "PopoverClose",
-      description: "Unstyled close part. Pass `render={<Button />}` to make any button close the popover.",
+      description: { en: "Unstyled close part. Pass `render={<Button />}` to make any button close the popover.", zh: "无样式的关闭部分。传入 `render={<Button />}` 让任意按钮关闭弹出层。" },
       extends: "Popover.Close",
       extendsHref: "https://base-ui.com/react/components/popover#close",
       props: [],
     },
     {
       name: "PopoverCloseButton",
-      description: "Round × button pinned to the top-right corner, labelled \"Close\".",
+      description: { en: "Round × button pinned to the top-right corner, labelled \"Close\".", zh: "固定在右上角的圆形 × 按钮，标签为 “Close”。" },
       extends: "Popover.Close",
       extendsHref: "https://base-ui.com/react/components/popover#close",
       props: [],

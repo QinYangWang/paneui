@@ -19,7 +19,7 @@ export default {
   "notes": [
     {
       "title": "Tooltips",
-      "body": "`TooltipKbd` is a small `Kbd` on the tooltip's own fill, so shortcuts read the same in tooltips, menus and buttons."
+      "body": { en: "`TooltipKbd` is a small `Kbd` on the tooltip's own fill, so shortcuts read the same in tooltips, menus and buttons.", zh: "`TooltipKbd` 是提示自身填充上的小号 `Kbd`，因此快捷键在提示、菜单和按钮中读起来一致。" }
     }
   ],
   "api": [
@@ -30,14 +30,14 @@ export default {
         {
           "name": "size",
           "type": "\"sm\" | \"default\" | \"lg\"",
-          "description": "Key height (16 / 20 / 24px).",
+          "description": { en: "Key height (16 / 20 / 24px).", zh: "按键高度（16 / 20 / 24px）。" },
           "default": "\"default\""
         }
       ]
     },
     {
       "name": "KbdGroup",
-      "description": "Keys pressed together or in sequence.",
+      "description": { en: "Keys pressed together or in sequence.", zh: "一起或按顺序按下的键。" },
       "extends": "kbd",
       "props": []
     }

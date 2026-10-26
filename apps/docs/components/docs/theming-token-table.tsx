@@ -6,6 +6,8 @@ import { cn } from "@paneui/ui/lib/utils"
 import { Badge } from "@paneui/ui/components/badge"
 import { Card } from "@paneui/ui/components/card"
 
+import { T } from "@/lib/site-locale"
+
 import { ACCENT_VARS, PRESET_THEMES, type AccentVar } from "./accent-color"
 import { useAccentState } from "./accent-store"
 import { modeValue, type ParsedTheme, type TokenKind, type TokenRole } from "./theming-tokens"
@@ -80,14 +82,16 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
               <code className="font-mono text-xs text-foreground">--{t.name}</code>
               {t.note === "accent" ? (
                 <Badge variant="primary" size="sm">
-                  accent
+                  <T en="accent" zh="主题色" />
                 </Badge>
               ) : null}
               <code className="basis-full font-mono text-ui-xs break-all text-muted-foreground">{t.cls}</code>
             </span>
             {(["light", "dark"] as const).map((mode) => (
               <span key={mode} className="flex min-w-0 items-center gap-2.5">
-                <span className="w-8 shrink-0 text-ui-xs text-muted-foreground capitalize">{mode}</span>
+                <span className="w-8 shrink-0 text-ui-xs text-muted-foreground capitalize">
+                  <T en={mode} zh={mode === "light" ? "浅色" : "深色"} />
+                </span>
                 <ValueCell kind={t.kind} value={valueFor(t.name, mode)} bg={valueFor(t.on ?? "background", mode)} wrap />
               </span>
             ))}
@@ -97,9 +101,15 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
     <SimpleTable containerClassName="max-sm:hidden" className="min-w-xl table-fixed">
         <SimpleTableHeader>
           <SimpleTableRow>
-            <SimpleTableHead className="w-2/5">Token / class</SimpleTableHead>
-            <SimpleTableHead>Light</SimpleTableHead>
-            <SimpleTableHead>Dark</SimpleTableHead>
+            <SimpleTableHead className="w-2/5">
+              <T en="Token / class" zh="变量 / 类名" />
+            </SimpleTableHead>
+            <SimpleTableHead>
+              <T en="Light" zh="浅色" />
+            </SimpleTableHead>
+            <SimpleTableHead>
+              <T en="Dark" zh="深色" />
+            </SimpleTableHead>
           </SimpleTableRow>
         </SimpleTableHeader>
         <SimpleTableBody>
@@ -111,7 +121,7 @@ export function ThemingTokenTable({ role, theme }: { role: TokenRole; theme: Par
                     <code className="font-mono text-xs text-foreground">--{t.name}</code>
                     {t.note === "accent" ? (
                       <Badge variant="primary" size="sm">
-                        accent
+                        <T en="accent" zh="主题色" />
                       </Badge>
                     ) : null}
                   </span>

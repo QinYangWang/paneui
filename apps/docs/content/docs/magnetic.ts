@@ -25,36 +25,36 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "Only fine pointers (mouse, pen) on hover-capable devices get the effect, and it is off entirely under `prefers-reduced-motion: reduce`. The wrapper never moves, only its inner span, so layout is unaffected.",
+      body: { en: "Only fine pointers (mouse, pen) on hover-capable devices get the effect, and it is off entirely under `prefers-reduced-motion: reduce`. The wrapper never moves, only its inner span, so layout is unaffected.", zh: "仅在支持悬停的设备上，只有精细指针（鼠标、笔）获得效果，并且在 `prefers-reduced-motion: reduce` 下完全关闭。包裹器从不移动，只有其内部 span 移动，因此布局不受影响。" },
     },
     {
       title: "Related",
-      body: "Wrap a [Button](/docs/button), or any other element, to make it lean toward the cursor.",
+      body: { en: "Wrap a [Button](/docs/button), or any other element, to make it lean toward the cursor.", zh: "包裹一个 [Button](/docs/button) 或任何其他元素，使其向光标倾斜。" },
     },
   ],
   api: [
     {
       name: "Magnetic",
-      description: "Wraps any element so it leans toward a nearby cursor, then springs home.",
+      description: { en: "Wraps any element so it leans toward a nearby cursor, then springs home.", zh: "包裹任何元素，使其向附近的光标倾斜，然后弹回原位。" },
       extends: "span",
       props: [
-        { name: "children", type: "ReactNode", required: true, description: "Content that moves." },
+        { name: "children", type: "ReactNode", required: true, description: { en: "Content that moves.", zh: "移动的内容。" } },
         {
           name: "strength",
           type: "number",
           default: "0.3",
-          description: "Fraction of the cursor's offset from centre the content follows.",
+          description: { en: "Fraction of the cursor's offset from centre the content follows.", zh: "内容跟随光标偏离中心的比例。" },
         },
-        { name: "range", type: "number", default: "24", description: "Extra pull zone around the element, in px." },
-        { name: "disabled", type: "boolean", default: "false", description: "Turn the effect off." },
+        { name: "range", type: "number", default: "24", description: { en: "Extra pull zone around the element, in px.", zh: "元素周围的额外拉拽区域，以 px 为单位。" } },
+        { name: "disabled", type: "boolean", default: "false", description: { en: "Turn the effect off.", zh: "关闭效果。" } },
         {
           name: "spring",
           type: "{ stiffness?: number; damping?: number; mass?: number }",
           default: "{ stiffness: 220, damping: 16, mass: 0.35 }",
-          description: "Spring for the follow and the snap back, merged over the default.",
+          description: { en: "Spring for the follow and the snap back, merged over the default.", zh: "用于跟随和弹回的弹簧，合并到默认值之上。" },
         },
       ],
-      dataAttributes: [{ name: "data-slot", description: `"magnetic"` }],
+      dataAttributes: [{ name: "data-slot", description: { en: "\"magnetic\"", zh: "\"magnetic\"" } }],
     },
   ],
 } satisfies ComponentDoc

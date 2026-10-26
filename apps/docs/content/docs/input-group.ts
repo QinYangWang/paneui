@@ -25,7 +25,7 @@ export default {
   "notes": [
     {
       "title": "Behaviour",
-      "body": "The group draws the well and the focus ring; the input inside is bare. Clicking an addon (not its buttons) focuses the input. Buttons inside are concentric with the well at every size."
+      "body": { en: "The group draws the well and the focus ring; the input inside is bare. Clicking an addon (not its buttons) focuses the input. Buttons inside are concentric with the well at every size.", zh: "组负责绘制井和焦点环；内部的输入框是裸露的。点击附加项（不是其按钮）会聚焦输入框。内部的按钮在每个尺寸下都与井同心。" }
     }
   ],
   "api": [
@@ -36,7 +36,7 @@ export default {
         {
           "name": "size",
           "type": "\"xs\" | \"sm\" | \"default\" | \"lg\"",
-          "description": "Height (24 / 28 / 32 / 36px); also sizes buttons inside. Follows a sized `Field`.",
+          "description": { en: "Height (24 / 28 / 32 / 36px); also sizes buttons inside. Follows a sized `Field`.", zh: "高度（24 / 28 / 32 / 36px）；也决定内部按钮的尺寸。跟随有大小的 `Field`。" },
           "default": "\"default\""
         }
       ]
@@ -48,7 +48,7 @@ export default {
         {
           "name": "align",
           "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
-          "description": "Where the addon sits. Block addons make the group a column.",
+          "description": { en: "Where the addon sits. Block addons make the group a column.", zh: "附加项的位置。块级附加项使组变为列。" },
           "default": "\"inline-start\""
         }
       ]
@@ -67,7 +67,7 @@ export default {
         {
           "name": "size",
           "type": "Button size",
-          "description": "Use `icon-xs` for an icon-only button.",
+          "description": { en: "Use `icon-xs` for an icon-only button.", zh: "仅图标按钮使用 `icon-xs`。" },
           "default": "\"xs\""
         }
       ]
@@ -79,7 +79,7 @@ export default {
     },
     {
       "name": "InputGroupTextarea",
-      "description": "Grows with its content.",
+      "description": { en: "Grows with its content.", zh: "随其内容增长。" },
       "extends": "textarea",
       "props": []
     },

@@ -34,11 +34,11 @@ export default function DocsPage() {
   notes: [
     {
       title: "Layouts",
-      body: "Each layout composes the same parts and only moves the navigation and the outline. Edit `parts/site.ts` for your sections and pages, or add a layout in `parts/layouts.tsx` from the same parts.",
+      body: { en: "Each layout composes the same parts and only moves the navigation and the outline. Edit `parts/site.ts` for your sections and pages, or add a layout in `parts/layouts.tsx` from the same parts.", zh: "每个布局组合相同的部件，只移动导航和大纲。在 `parts/site.ts` 中编辑你的区块和页面，或用相同的部件在 `parts/layouts.tsx` 中添加布局。" },
     },
     {
       title: "Responsive",
-      body: "Below `lg` the sidebar moves into a drawer behind the menu button, and below `xl` the outline becomes the On this page button. Flux keeps its bar at every width; Notebook's tabs scroll sideways on phones.",
+      body: { en: "Below `lg` the sidebar moves into a drawer behind the menu button, and below `xl` the outline becomes the On this page button. Flux keeps its bar at every width; Notebook's tabs scroll sideways on phones.", zh: "低于 `lg` 时侧边栏移入菜单按钮后的抽屉，低于 `xl` 时大纲变为 On this page 按钮。Flux 在任何宽度都保留其栏；Notebook 的标签在手机上横向滚动。" },
     },
   ],
   api: [
@@ -49,7 +49,7 @@ export default function DocsPage() {
           name: "layout",
           type: `"classic" | "notebook" | "flux" | "spacious" | "home"`,
           default: `"classic"`,
-          description: "Where the navigation and the outline go.",
+          description: { en: "Where the navigation and the outline go.", zh: "导航和大纲的位置。" },
         },
       ],
     },

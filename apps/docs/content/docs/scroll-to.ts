@@ -23,30 +23,30 @@ export default {
   notes: [
     {
       title: "Accessibility",
-      body: "Set `focusTarget` to move keyboard focus to a selector or element target after scrolling (it adds `tabindex=\"-1\"` if needed). Under reduced motion the scroll jumps instead of easing.",
+      body: { en: "Set `focusTarget` to move keyboard focus to a selector or element target after scrolling (it adds `tabindex=\"-1\"` if needed). Under reduced motion the scroll jumps instead of easing.", zh: "设置 `focusTarget` 可在滚动后将键盘焦点移动到选择器或元素目标（如有需要会添加 `tabindex=\"-1\"`）。在减少动态效果下，滚动会直接跳转而不是缓动。" },
     },
     {
       title: "Related",
-      body: "Scrolls through [Smooth Scroll](/docs/smooth-scroll). See also [Scroll Progress](/docs/scroll-progress), [Scroll Reveal](/docs/scroll-reveal).",
+      body: { en: "Scrolls through [Smooth Scroll](/docs/smooth-scroll). See also [Scroll Progress](/docs/scroll-progress), [Scroll Reveal](/docs/scroll-reveal).", zh: "通过 [Smooth Scroll](/docs/smooth-scroll) 滚动。另见 [Scroll Progress](/docs/scroll-progress)、[Scroll Reveal](/docs/scroll-reveal)。" },
     },
   ],
   api: [
     {
       name: "ScrollTo",
-      description: "Button that eases to a target through the nearest `SmoothScroll`, or the window.",
+      description: { en: "Button that eases to a target through the nearest `SmoothScroll`, or the window.", zh: "按钮，通过最近的 `SmoothScroll` 或 window 缓动到目标。" },
       extends: "Button",
       extendsHref: "/docs/button",
       props: [
-        { name: "to", type: "number | string | HTMLElement", required: true, description: "A px offset, a CSS selector or an element." },
-        { name: "offset", type: "number", description: "Extra px from the target, e.g. `-64` to clear a sticky header." },
-        { name: "duration", type: "number", description: "Ease duration in seconds, only inside a `SmoothScroll` that is easing." },
-        { name: "focusTarget", type: "boolean", default: "false", description: "Move keyboard focus to a selector or element target after scrolling." },
+        { name: "to", type: "number | string | HTMLElement", required: true, description: { en: "A px offset, a CSS selector or an element.", zh: "以 px 为单位的偏移量、CSS 选择器或元素。" } },
+        { name: "offset", type: "number", description: { en: "Extra px from the target, e.g. `-64` to clear a sticky header.", zh: "距目标的额外 px，例如 `-64` 用于避开吸顶头部。" } },
+        { name: "duration", type: "number", description: { en: "Ease duration in seconds, only inside a `SmoothScroll` that is easing.", zh: "缓动时长（秒），仅在正在缓动的 `SmoothScroll` 内有效。" } },
+        { name: "focusTarget", type: "boolean", default: "false", description: { en: "Move keyboard focus to a selector or element target after scrolling.", zh: "滚动后将键盘焦点移动到选择器或元素目标。" } },
         {
           name: "onClick",
           type: "MouseEventHandler<HTMLButtonElement>",
-          description: "Runs before scrolling; call `event.preventDefault()` to cancel the scroll.",
+          description: { en: "Runs before scrolling; call `event.preventDefault()` to cancel the scroll.", zh: "在滚动前运行；调用 `event.preventDefault()` 可取消滚动。" },
         },
-        { name: "variant", type: "Button variant", default: `"secondary"`, description: "Visual style." },
+        { name: "variant", type: "Button variant", default: `"secondary"`, description: { en: "Visual style.", zh: "视觉样式。" } },
       ],
     },
   ],

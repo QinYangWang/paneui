@@ -21,23 +21,23 @@ export default {
   notes: [
     {
       title: "Presets",
-      body: "Use `typeset-docs` for notes and guides (14px), `typeset-reading` for articles (16px, set in the serif face) and `typeset-chat` for messages and streamed answers (14px, tighter flow). Each preset sets `--typeset-size`, `--typeset-leading` and `--typeset-flow` (reading also sets `--typeset-font-body`), so a one-off works too: `className=\"typeset [--typeset-flow:1.5em]\"`.",
+      body: { en: "Use `typeset-docs` for notes and guides (14px), `typeset-reading` for articles (16px, set in the serif face) and `typeset-chat` for messages and streamed answers (14px, tighter flow). Each preset sets `--typeset-size`, `--typeset-leading` and `--typeset-flow` (reading also sets `--typeset-font-body`), so a one-off works too: `className=\"typeset [--typeset-flow:1.5em]\"`.", zh: "注释和指南使用 `typeset-docs`（14px），文章使用 `typeset-reading`（16px，衬线字体），消息和流式回答使用 `typeset-chat`（14px，更紧凑的流）。每个预设设置 `--typeset-size`、`--typeset-leading` 和 `--typeset-flow`（reading 还设置 `--typeset-font-body`），因此一次性的也可用：`className=\"typeset [--typeset-flow:1.5em]\"`。" },
     },
     {
       title: "Components inside prose",
-      body: "Every library component carries `data-slot` and is skipped automatically. Wrap anything else in `not-typeset`. Utilities on an element override the typeset styles without `!important`.",
+      body: { en: "Every library component carries `data-slot` and is skipped automatically. Wrap anything else in `not-typeset`. Utilities on an element override the typeset styles without `!important`.", zh: "每个库组件都带有 `data-slot`，会被自动跳过。将其他内容包裹在 `not-typeset` 中。元素上的工具类无需 `!important` 即可覆盖 typeset 样式。" },
     },
     {
       title: "Prose inside components",
-      body: "A component slot with `.typeset` or `data-typeset` styles its own content as prose again, inheriting the surrounding preset; components inside it stay skipped. `TabsPanel`, `AccordionPanel`, `CollapsiblePanel` and `CardContent` take a `typeset` prop that sets the attribute (and lets the accordion content keep the prose size and colour). `data-typeset=\"docs\"`, `\"reading\"` or `\"chat\"` picks a preset where there is no container. Re-enabling works three levels deep.",
+      body: { en: "A component slot with `.typeset` or `data-typeset` styles its own content as prose again, inheriting the surrounding preset; components inside it stay skipped. `TabsPanel`, `AccordionPanel`, `CollapsiblePanel` and `CardContent` take a `typeset` prop that sets the attribute (and lets the accordion content keep the prose size and colour). `data-typeset=\"docs\"`, `\"reading\"` or `\"chat\"` picks a preset where there is no container. Re-enabling works three levels deep.", zh: "带有 `.typeset` 或 `data-typeset` 的组件插槽会再次将其内容作为散文排版，并继承周围的预设；其中的组件仍被跳过。`TabsPanel`、`AccordionPanel`、`CollapsiblePanel` 和 `CardContent` 接受一个 `typeset` prop，用于设置该属性（并让手风琴内容保持散文的字号和颜色）。`data-typeset=\"docs\"`、`\"reading\"` 或 `\"chat\"` 在没有容器时选择预设。重新启用最多可深入三层。" },
     },
     {
       title: "Streaming",
-      body: "Spacing only flows downward (`margin-block-start`), so a new block never restyles the ones above it.",
+      body: { en: "Spacing only flows downward (`margin-block-start`), so a new block never restyles the ones above it.", zh: "间距只向下流动（`margin-block-start`），因此新块不会重新设置上方块的样式。" },
     },
     {
       title: "Width",
-      body: "Typeset sets no max width; add `max-w-reading` (68ch) on the container.",
+      body: { en: "Typeset sets no max width; add `max-w-reading` (68ch) on the container.", zh: "Typeset 不设置最大宽度；在容器上添加 `max-w-reading`（68ch）。" },
     },
   ],
 } satisfies ComponentDoc

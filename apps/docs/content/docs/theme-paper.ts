@@ -11,11 +11,11 @@ export default {
   notes: [
     {
       title: "What changes",
-      body: "Surfaces, greys and text turn warm, titles read `--font-heading` (a text serif), controls read `--radius-control` (pills), the base radius rises to `0.75rem` and shadows soften. Accent presets, radius presets and dark mode keep working on top.",
+      body: { en: "Surfaces, greys and text turn warm, titles read `--font-heading` (a text serif), controls read `--radius-control` (pills), the base radius rises to `0.75rem` and shadows soften. Accent presets, radius presets and dark mode keep working on top.", zh: "表面、灰色和文本变为暖色，标题使用 `--font-heading`（一种文本衬线字体），控件使用 `--radius-control`（药丸形），基础圆角升至 `0.75rem`，阴影变柔和。主题色预设、圆角预设和深色模式仍可在其上工作。" },
     },
     {
       title: "Fonts",
-      body: "The title serif ships with the `fonts` item. Without it, titles fall back to the system serif.",
+      body: { en: "The title serif ships with the `fonts` item. Without it, titles fall back to the system serif.", zh: "标题衬线字体随 `fonts` 项提供。没有它，标题回退到系统衬线字体。" },
     },
   ],
   api: [],

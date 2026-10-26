@@ -60,9 +60,12 @@ export function useT() {
   return React.useCallback((text: Localized) => pick(text, locale), [locale])
 }
 
-/** Client text node for server components: `<T en="Install" zh="安装" />`. */
-export function T({ en, zh }: { en: string; zh: string }) {
-  return useT()({ en, zh })
+/**
+ * Client text node for server components: `<T en="Install" zh="安装" />`. Rich text works too:
+ * `<T en={<>Run <Code>init</Code> first.</>} zh={<>先运行 <Code>init</Code>。</>} />`.
+ */
+export function T({ en, zh }: { en: React.ReactNode; zh: React.ReactNode }) {
+  return useSiteLocale() === "zh" ? zh : en
 }
 
 /** Inline script for <head>: sets <html lang> before paint from the stored choice. */

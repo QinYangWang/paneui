@@ -24,17 +24,17 @@ export default {
 └── EmptyStateActions`,
   examples: [{ id: "variants", title: { en: "Variants", zh: "样式" },  }],
   notes: [
-    { title: "Writing", body: "Say what is missing, then what to do about it, then offer the action. For a filtered list, say no results matched and offer to clear the filters, as DataTable does." },
+    { title: "Writing", body: { en: "Say what is missing, then what to do about it, then offer the action. For a filtered list, say no results matched and offer to clear the filters, as DataTable does.", zh: "先说明缺少什么，再说明如何处理，最后提供操作。对于筛选后的列表，说明没有匹配结果并提供清除筛选的操作，如 DataTable 所做的那样。" } },
   ],
   api: [
     {
       name: "EmptyState",
       extends: "div",
       props: [
-        { name: "variant", type: `"default" | "outline" | "muted"`, default: `"default"`, description: "Surface." },
-        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: "Vertical padding." },
+        { name: "variant", type: `"default" | "outline" | "muted"`, default: `"default"`, description: { en: "Surface.", zh: "表面。" } },
+        { name: "size", type: `"sm" | "default" | "lg"`, default: `"default"`, description: { en: "Vertical padding.", zh: "垂直内边距。" } },
       ],
     },
-    { name: "EmptyStateIcon", extends: "div", description: "40px raised chip with a 20px muted glyph.", props: [] },
+    { name: "EmptyStateIcon", extends: "div", description: { en: "40px raised chip with a 20px muted glyph.", zh: "40px 高的凸起 chip，带 20px 的柔和字形。" }, props: [] },
   ],
 } satisfies ComponentDoc

@@ -19,7 +19,7 @@ export default {
   "notes": [
     {
       "title": "Accessibility",
-      "body": "The group has `role=\"group\"`; give it an `aria-label`. For a set where one option is chosen, use `ToggleGroup` instead."
+      "body": { en: "The group has `role=\"group\"`; give it an `aria-label`. For a set where one option is chosen, use `ToggleGroup` instead.", zh: "该组具有 `role=\"group\"`；请为其提供 `aria-label`。对于需要选择一个选项的集合，请改用 `ToggleGroup`。" }
     }
   ],
   "api": [
@@ -30,14 +30,14 @@ export default {
         {
           "name": "orientation",
           "type": "\"horizontal\" | \"vertical\"",
-          "description": "Direction of the joined buttons.",
+          "description": { en: "Direction of the joined buttons.", zh: "拼接按钮的方向。" },
           "default": "\"horizontal\""
         }
       ]
     },
     {
       "name": "ButtonGroupSeparator",
-      "description": "A hairline between filled buttons.",
+      "description": { en: "A hairline between filled buttons.", zh: "填充按钮之间的细线。" },
       "extends": "div",
       "props": [
         {
@@ -50,7 +50,7 @@ export default {
     },
     {
       "name": "ButtonGroupText",
-      "description": "A label on the group's fill.",
+      "description": { en: "A label on the group's fill.", zh: "组填充上的标签。" },
       "extends": "div",
       "props": []
     }

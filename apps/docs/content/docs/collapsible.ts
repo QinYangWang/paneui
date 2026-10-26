@@ -37,20 +37,20 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "The panel height eases open while the content fades in, slides down 4px and un-blurs; the chevron turns 180°. With reduced motion the panel opens instantly.",
+      body: { en: "The panel height eases open while the content fades in, slides down 4px and un-blurs; the chevron turns 180°. With reduced motion the panel opens instantly.", zh: "面板高度缓动展开，同时内容淡入、下滑 4px 并取消模糊；箭头旋转 180°。在减少动态效果下面板立即打开。" },
     },
   ],
   api: [
     {
       name: "Collapsible",
-      description: "Unstyled vertical stack; bring your own surface.",
+      description: { en: "Unstyled vertical stack; bring your own surface.", zh: "无样式的垂直堆叠；自带表面样式。" },
       extends: "Collapsible.Root",
       extendsHref: "https://base-ui.com/react/components/collapsible#root",
       props: [],
     },
     {
       name: "CollapsibleTrigger",
-      description: "A 36px row that tints while open.",
+      description: { en: "A 36px row that tints while open.", zh: "36px 高的行，打开时着色。" },
       extends: "Collapsible.Trigger",
       extendsHref: "https://base-ui.com/react/components/collapsible#trigger",
       props: [
@@ -58,21 +58,21 @@ export default {
           name: "chevron",
           type: "boolean",
           default: "true",
-          description: "Show the trailing chevron that rotates when open.",
+          description: { en: "Show the trailing chevron that rotates when open.", zh: "显示尾部的箭头，打开时旋转。" },
         },
       ],
-      dataAttributes: [{ name: "data-panel-open", description: "Present while the panel is open." }],
+      dataAttributes: [{ name: "data-panel-open", description: { en: "Present while the panel is open.", zh: "面板打开时存在。" } }],
     },
     {
       name: "CollapsiblePanel",
-      description: "Animates its height; the children sit in an inner wrapper that fades and slides.",
+      description: { en: "Animates its height; the children sit in an inner wrapper that fades and slides.", zh: "为其高度做动画；子元素位于内部包装器中，会淡入并滑动。" },
       extends: "Collapsible.Panel",
       extendsHref: "https://base-ui.com/react/components/collapsible#panel",
       props: [
-        { name: "typeset", type: 'boolean | "docs" | "reading" | "chat"', default: "false", description: "Turn prose styles back on for the panel content inside a `typeset` container, or name a preset when it stands alone." },
+        { name: "typeset", type: 'boolean | "docs" | "reading" | "chat"', default: "false", description: { en: "Turn prose styles back on for the panel content inside a `typeset` container, or name a preset when it stands alone.", zh: "在 `typeset` 容器内为面板内容重新启用 prose 样式，或单独使用时指定预设名称。" } },
       ],
       dataAttributes: [
-        { name: "data-starting-style / data-ending-style", description: "Set during the open and close transitions." },
+        { name: "data-starting-style / data-ending-style", description: { en: "Set during the open and close transitions.", zh: "在打开和关闭过渡期间设置。" } },
       ],
     },
   ],

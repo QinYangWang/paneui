@@ -17,11 +17,11 @@ export default {
   "notes": [
     {
       "title": "Keyboard",
-      "body": "↑/↓ (or Ctrl+N / Ctrl+P) move the highlight, Enter runs it, typing filters. Groups with no matches hide, and separators hide while searching."
+      "body": { en: "↑/↓ (or Ctrl+N / Ctrl+P) move the highlight, Enter runs it, typing filters. Groups with no matches hide, and separators hide while searching.", zh: "↑/↓（或 Ctrl+N / Ctrl+P）移动高亮，Enter 执行，输入过滤。无匹配的组隐藏，搜索时隐藏分隔符。" }
     },
     {
       "title": "Filtering",
-      "body": "Items rank by prefix, then substring, then letters in order, across `value` and `keywords`. Pass `filter` to change the ranking, or `shouldFilter={false}` when you filter the items yourself."
+      "body": { en: "Items rank by prefix, then substring, then letters in order, across `value` and `keywords`. Pass `filter` to change the ranking, or `shouldFilter={false}` when you filter the items yourself.", zh: "项按前缀、子串、字母顺序排名，跨 `value` 和 `keywords`。传入 `filter` 更改排名，或自行过滤项时传入 `shouldFilter={false}`。" }
     }
   ],
   "api": [
@@ -32,49 +32,49 @@ export default {
         {
           "name": "search",
           "type": "string",
-          "description": "Controlled search text."
+          "description": { en: "Controlled search text.", zh: "受控搜索文本。" }
         },
         {
           "name": "onSearchChange",
           "type": "(search: string) => void",
-          "description": "Called as the input changes."
+          "description": { en: "Called as the input changes.", zh: "输入变化时调用。" }
         },
         {
           "name": "filter",
           "type": "(value, search, keywords?) => number",
-          "description": "Ranking; 0 hides the item.",
+          "description": { en: "Ranking; 0 hides the item.", zh: "排名；0 隐藏该项。" },
           "default": "prefix / substring / in-order letters"
         },
         {
           "name": "shouldFilter",
           "type": "boolean",
-          "description": "Set false for server-filtered items.",
+          "description": { en: "Set false for server-filtered items.", zh: "服务器过滤项时设为 false。" },
           "default": "true"
         },
         {
           "name": "loop",
           "type": "boolean",
-          "description": "Wrap at the ends with the arrow keys.",
+          "description": { en: "Wrap at the ends with the arrow keys.", zh: "使用方向键在两端循环。" },
           "default": "false"
         }
       ]
     },
     {
       "name": "CommandDialog",
-      "description": "The Command in a centred dialog; the input takes focus on open.",
+      "description": { en: "The Command in a centred dialog; the input takes focus on open.", zh: "居中对话框中的 Command；打开时输入框获得焦点。" },
       "extends": "Dialog.Root",
       "extendsHref": "https://base-ui.com/react/components/dialog#root",
       "props": [
         {
           "name": "title",
           "type": "string",
-          "description": "Screen-reader title.",
+          "description": { en: "Screen-reader title.", zh: "屏幕阅读器标题。" },
           "default": "\"Command palette\""
         },
         {
           "name": "commandProps",
           "type": "CommandProps",
-          "description": "Props for the inner Command."
+          "description": { en: "Props for the inner Command.", zh: "内部 Command 的 props。" }
         }
       ]
     },
@@ -85,30 +85,30 @@ export default {
         {
           "name": "value",
           "type": "string",
-          "description": "Identity and search text.",
+          "description": { en: "Identity and search text.", zh: "标识和搜索文本。" },
           "default": "the text content"
         },
         {
           "name": "keywords",
           "type": "string[]",
-          "description": "Extra words that match."
+          "description": { en: "Extra words that match.", zh: "额外匹配的词语。" }
         },
         {
           "name": "onSelect",
           "type": "(value: string) => void",
-          "description": "Runs on click or Enter."
+          "description": { en: "Runs on click or Enter.", zh: "点击或按 Enter 时运行。" }
         },
         {
           "name": "disabled",
           "type": "boolean",
-          "description": "Skip in navigation and dim.",
+          "description": { en: "Skip in navigation and dim.", zh: "在导航中跳过并变暗。" },
           "default": "false"
         }
       ],
       "dataAttributes": [
         {
           "name": "data-selected",
-          "description": "Present on the highlighted item."
+          "description": { en: "Present on the highlighted item.", zh: "在高亮项上存在。" }
         }
       ]
     },
@@ -119,13 +119,13 @@ export default {
     },
     {
       "name": "CommandList",
-      "description": "Scrolls at 20rem.",
+      "description": { en: "Scrolls at 20rem.", zh: "在 20rem 处滚动。" },
       "extends": "div",
       "props": []
     },
     {
       "name": "CommandEmpty",
-      "description": "Rendered only when nothing matches.",
+      "description": { en: "Rendered only when nothing matches.", zh: "仅在无匹配时渲染。" },
       "extends": "div",
       "props": []
     },
@@ -136,7 +136,7 @@ export default {
         {
           "name": "heading",
           "type": "ReactNode",
-          "description": "Label above the items."
+          "description": { en: "Label above the items.", zh: "项上方的标签。" }
         }
       ]
     },

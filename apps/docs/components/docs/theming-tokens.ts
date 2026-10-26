@@ -5,12 +5,14 @@
  * reads the file and passes the parsed values down.
  */
 
+import type { Localized } from "@/lib/site-locale"
+
 /** How a token is previewed: a fill on the mode's page, text on it, or a hairline. */
 export type TokenKind = "surface" | "fill" | "text" | "line"
 
 /** `on`: preview text tokens on this token's fill instead of the page (primary-foreground on primary). */
 export type TokenRow = { name: string; cls: string; kind: TokenKind; note?: string; on?: string }
-export type TokenRole = { id: string; title: string; description: string; tokens: TokenRow[] }
+export type TokenRole = { id: string; title: Localized; description: Localized; tokens: TokenRow[] }
 
 const stateTokens = (n: string): TokenRow[] => [
   { name: n, cls: `bg-${n}`, kind: "fill" },
@@ -23,8 +25,11 @@ const stateTokens = (n: string): TokenRow[] => [
 export const TOKEN_ROLES: TokenRole[] = [
   {
     id: "background",
-    title: "Background",
-    description: "Use these for anything that must be opaque, and sunken for wells inside a surface.",
+    title: { en: "Background", zh: "背景" },
+    description: {
+      en: "Use these for anything that must be opaque, and sunken for wells inside a surface.",
+      zh: "需要不透明的地方用这些变量，表面内部的凹槽用 sunken。",
+    },
     tokens: [
       { name: "background", cls: "bg-background", kind: "surface" },
       { name: "card", cls: "bg-card", kind: "surface" },
@@ -37,9 +42,11 @@ export const TOKEN_ROLES: TokenRole[] = [
   },
   {
     id: "fill",
-    title: "Fill",
-    description:
-      "Use primary for the main action and secondary, muted or accent for hover, selected and track states. The last three are translucent, so never use them as surfaces.",
+    title: { en: "Fill", zh: "填充" },
+    description: {
+      en: "Use primary for the main action and secondary, muted or accent for hover, selected and track states. The last three are translucent, so never use them as surfaces.",
+      zh: "主要操作用 primary，悬停、选中和轨道状态用 secondary、muted 或 accent。后三者是半透明的，不要把它们用作表面。",
+    },
     tokens: [
       { name: "primary", cls: "bg-primary", kind: "fill", note: "accent" },
       { name: "secondary", cls: "bg-secondary", kind: "fill" },
@@ -49,8 +56,11 @@ export const TOKEN_ROLES: TokenRole[] = [
   },
   {
     id: "accent-roles",
-    title: "Accent roles",
-    description: "Use hover and active for pressed solids, and subtle for selected rows and tinted chips.",
+    title: { en: "Accent roles", zh: "主题色角色" },
+    description: {
+      en: "Use hover and active for pressed solids, and subtle for selected rows and tinted chips.",
+      zh: "按下的实色用 hover 和 active，选中的行和带底色的标签用 subtle。",
+    },
     tokens: [
       { name: "primary-hover", cls: "bg-primary-hover", kind: "fill", note: "accent" },
       { name: "primary-active", cls: "bg-primary-active", kind: "fill", note: "accent" },
@@ -61,9 +71,11 @@ export const TOKEN_ROLES: TokenRole[] = [
   },
   {
     id: "text",
-    title: "Text",
-    description:
-      "Use foreground for primary text, muted-foreground for captions and nav icons, and fg-tertiary only for placeholders and hints.",
+    title: { en: "Text", zh: "文字" },
+    description: {
+      en: "Use foreground for primary text, muted-foreground for captions and nav icons, and fg-tertiary only for placeholders and hints.",
+      zh: "主要文字用 foreground，说明文字和导航图标用 muted-foreground，fg-tertiary 只用于占位符和提示。",
+    },
     tokens: [
       { name: "foreground", cls: "text-foreground", kind: "text" },
       { name: "muted-foreground", cls: "text-muted-foreground", kind: "text" },
@@ -79,8 +91,11 @@ export const TOKEN_ROLES: TokenRole[] = [
   },
   {
     id: "border",
-    title: "Border",
-    description: "Use border for dividers, border-strong or input for field outlines, and ring at /50 for focus.",
+    title: { en: "Border", zh: "边框" },
+    description: {
+      en: "Use border for dividers, border-strong or input for field outlines, and ring at /50 for focus.",
+      zh: "分隔线用 border，输入框轮廓用 border-strong 或 input，聚焦环用 /50 的 ring。",
+    },
     tokens: [
       { name: "border", cls: "border-border", kind: "line" },
       { name: "border-subtle", cls: "border-border-subtle", kind: "line" },
@@ -94,15 +109,20 @@ export const TOKEN_ROLES: TokenRole[] = [
   },
   {
     id: "state",
-    title: "State",
-    description: "These keep their meaning under every accent. Use subtle for alert and badge washes, and the solid for icons and text.",
+    title: { en: "State", zh: "状态" },
+    description: {
+      en: "These keep their meaning under every accent. Use subtle for alert and badge washes, and the solid for icons and text.",
+      zh: "这些颜色在任何主题色下都保持含义。提示和徽标的浅底色用 subtle，图标和文字用实色。",
+    },
     tokens: [...stateTokens("destructive"), ...stateTokens("success"), ...stateTokens("warning")],
   },
   {
     id: "chart",
-    title: "Chart",
-    description:
-      "Charts never read primary, so data keeps its colours under every accent. Use them as classes, or as var(--chart-n) in SVG.",
+    title: { en: "Chart", zh: "图表" },
+    description: {
+      en: "Charts never read primary, so data keeps its colours under every accent. Use them as classes, or as var(--chart-n) in SVG.",
+      zh: "图表从不读取 primary，因此数据在任何主题色下都保持自身颜色。可以把它们用作类名，或在 SVG 中使用 var(--chart-n)。",
+    },
     tokens: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({ name: `chart-${n}`, cls: `bg-chart-${n}`, kind: "fill" as const })),
   },
 ]

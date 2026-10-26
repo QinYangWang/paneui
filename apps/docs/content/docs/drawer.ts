@@ -52,17 +52,17 @@ export default {
   notes: [
     {
       title: "Motion",
-      body: "The panel exits on a stiffer spring than it enters. With reduced motion the panel and backdrop only fade.",
+      body: { en: "The panel exits on a stiffer spring than it enters. With reduced motion the panel and backdrop only fade.", zh: "面板退出的弹簧比进入时更硬。在减少动态效果下，面板和背景只淡入淡出。" },
     },
     {
       title: "Keyboard",
-      body: "Focus moves into the drawer and is trapped there; Esc or a backdrop press closes it.",
+      body: { en: "Focus moves into the drawer and is trapped there; Esc or a backdrop press closes it.", zh: "焦点移入抽屉并被困在其中；按 Esc 或点击背景可关闭。" },
     },
   ],
   api: [
     {
       name: "Drawer",
-      description: "Root. Holds the open state and the side.",
+      description: { en: "Root. Holds the open state and the side.", zh: "根组件。持有打开状态和侧边。" },
       extends: "Dialog.Root",
       extendsHref: "https://base-ui.com/react/components/dialog#root",
       props: [
@@ -70,14 +70,14 @@ export default {
           name: "side",
           type: `"left" | "right"`,
           default: `"right"`,
-          description: "Edge the panel slides in from.",
+          description: { en: "Edge the panel slides in from.", zh: "面板滑入的边缘。" },
         },
-        { name: "open", type: "boolean", description: "Controlled open state." },
-        { name: "defaultOpen", type: "boolean", default: "false", description: "Open on first render." },
+        { name: "open", type: "boolean", description: { en: "Controlled open state.", zh: "受控的打开状态。" } },
+        { name: "defaultOpen", type: "boolean", default: "false", description: { en: "Open on first render.", zh: "首次渲染时打开。" } },
         {
           name: "onOpenChange",
           type: "(open: boolean, details) => void",
-          description: "Called when the drawer opens or closes.",
+          description: { en: "Called when the drawer opens or closes.", zh: "抽屉打开或关闭时调用。" },
         },
       ],
     },
@@ -89,7 +89,7 @@ export default {
     },
     {
       name: "DrawerContent",
-      description: "The floating panel (up to 384px wide, 8px from the edges) with its backdrop and portal.",
+      description: { en: "The floating panel (up to 384px wide, 8px from the edges) with its backdrop and portal.", zh: "浮动面板（最宽 384px，距边缘 8px），含背景和传送门。" },
       extends: "Dialog.Popup",
       extendsHref: "https://base-ui.com/react/components/dialog#popup",
       props: [
@@ -97,26 +97,26 @@ export default {
           name: "showClose",
           type: "boolean",
           default: "true",
-          description: "Show the round × button in the top-right corner.",
+          description: { en: "Show the round × button in the top-right corner.", zh: "在右上角显示圆形 × 按钮。" },
         },
       ],
-      dataAttributes: [{ name: "data-side", description: "`left` or `right`." }],
+      dataAttributes: [{ name: "data-side", description: { en: "`left` or `right`.", zh: "`left` 或 `right`。" } }],
     },
     {
       name: "DrawerHeader",
-      description: "Padded top area; leaves room on the right for the close button.",
+      description: { en: "Padded top area; leaves room on the right for the close button.", zh: "带内边距的顶部区域；右侧留出关闭按钮的空间。" },
       extends: "div",
       props: [],
     },
     {
       name: "DrawerBody",
-      description: "The scrolling area (`overscroll-contain`).",
+      description: { en: "The scrolling area (`overscroll-contain`).", zh: "滚动区域（`overscroll-contain`）。" },
       extends: "div",
       props: [],
     },
     {
       name: "DrawerFooter",
-      description: "Action row pinned to the bottom of the panel.",
+      description: { en: "Action row pinned to the bottom of the panel.", zh: "固定在面板底部的操作行。" },
       extends: "div",
       props: [],
     },
