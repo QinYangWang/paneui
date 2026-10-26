@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { useDirection } from "@base-ui/react/direction-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import {
@@ -250,6 +251,8 @@ function SheetSurface({
 
 /** Grip at the top of the sheet: drag to resize/dismiss, or press to cycle snap points. */
 function BottomSheetHandle({ className, ...props }: React.ComponentProps<"button">) {
+  const l10n = useLocale().labels
+
   const { snapPoints, snap, setSnap, dragControls } = useSheet()
   const multiple = snapPoints.length > 1
   return (
@@ -263,7 +266,7 @@ function BottomSheetHandle({ className, ...props }: React.ComponentProps<"button
         className
       )}
       {...props}
-      aria-label={props["aria-label"] ?? (multiple ? (snap === snapPoints.length - 1 ? "Collapse sheet" : "Expand sheet") : "Drag to close")}
+      aria-label={props["aria-label"] ?? (multiple ? (snap === snapPoints.length - 1 ? l10n.collapseSheet : l10n.expandSheet) : l10n.dragToClose)}
     >
       <span className="h-1.5 w-10 rounded-full bg-muted shadow-well transition-[width,background-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/handle:w-12 group-focus-visible/handle:bg-primary/60 group-active/handle:w-14" />
     </button>

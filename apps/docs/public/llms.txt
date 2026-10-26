@@ -124,6 +124,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Outline](https://paneui.dev/docs/outline.md): Follows your reading position in the page outline. JSON: https://paneui.dev/r/outline.json
 - [Pagination](https://paneui.dev/docs/pagination.md): Moves through pages of results in a list or table. JSON: https://paneui.dev/r/pagination.json
 - [Preview Rail](https://paneui.dev/docs/preview-rail.md): Compact section navigation that previews each destination. JSON: https://paneui.dev/r/preview-rail.json
+- [Search Button](https://paneui.dev/docs/search-button.md): Opens search from a responsive toolbar button. JSON: https://paneui.dev/r/search-button.json
 - [Shared Layout Background](https://paneui.dev/docs/shared-layout-bg.md): Hover highlight that follows the pointer across a group. JSON: https://paneui.dev/r/shared-layout-bg.json
 - [Sidebar Nav](https://paneui.dev/docs/sidebar-nav.md): Compact text navigation for docs and settings sidebars. JSON: https://paneui.dev/r/sidebar-nav.json
 - [Tab Bar](https://paneui.dev/docs/tab-bar.md): Bottom navigation for phones, with a label under each icon. JSON: https://paneui.dev/r/tab-bar.json

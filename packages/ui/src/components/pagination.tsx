@@ -67,7 +67,7 @@ function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = fal
   const current = Math.min(Math.max(1, page), count)
   const go = (p: number) => onPageChange(Math.min(Math.max(1, p), count))
   return (
-    <nav data-slot="pagination" data-size={size} className={cn("flex items-center gap-1", className)} {...props} aria-label={props["aria-label"] ?? labels.pagination}>
+    <nav data-slot="pagination" data-size={size} className={cn("flex min-w-0 max-w-full items-center gap-1", className)} {...props} aria-label={props["aria-label"] ?? labels.pagination}>
       <Button variant="ghost" size={dims.button} aria-label={labels.previousPage} disabled={current <= 1} onClick={() => go(current - 1)}>
         <ChevronLeftIcon className="rtl:rotate-180" />
       </Button>
@@ -76,7 +76,7 @@ function Pagination({ page, pageCount, onPageChange, siblings = 1, compact = fal
           {labels.pageOf(current, count)}
         </span>
       ) : (
-        <ul className="flex items-center gap-0.5">
+        <ul className="flex min-w-0 flex-wrap items-center justify-center gap-0.5">
           {getPageRange(current, count, siblings).map((p, i) =>
             p === "ellipsis" ? (
               <li key={`e${i}`} aria-hidden className={cn("grid place-items-center text-muted-foreground [&_svg]:size-3.5", dims.gap)}>

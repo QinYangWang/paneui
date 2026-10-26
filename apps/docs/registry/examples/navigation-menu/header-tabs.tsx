@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@paneui/ui/components/navigation-menu"
+import { ScrollArea } from "@paneui/ui/components/scroll-area"
 
 const sections = ["Docs", "Components", "Templates", "Changelog"]
 
@@ -10,7 +11,8 @@ export default function NavigationMenuHeaderTabs() {
   const [current, setCurrent] = React.useState("Docs")
   return (
     <div className="flex h-12 w-full max-w-xl items-stretch border-b border-border px-2">
-      <NavigationMenu aria-label="Sections" className="h-full">
+      <ScrollArea orientation="horizontal" className="w-full" viewportProps={{ "aria-label": "Sections" }}>
+      <NavigationMenu aria-label="Sections" className="h-12">
         <NavigationMenuList className="h-full items-stretch gap-1">
           {sections.map((s) => (
             <NavigationMenuItem key={s}>
@@ -30,6 +32,7 @@ export default function NavigationMenuHeaderTabs() {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
+      </ScrollArea>
     </div>
   )
 }

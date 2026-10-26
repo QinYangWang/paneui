@@ -1,5 +1,7 @@
 "use client"
 
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
+
 import * as React from "react"
 import { AnimatePresence, motion } from "motion/react"
 
@@ -8,12 +10,15 @@ import { cn } from "@paneui/ui/lib/utils"
 
 export type TaskStatus = "queued" | "running" | "done" | "failed"
 
-const statusText: Record<TaskStatus, string> = {
-  queued: "Queued",
-  running: "Running",
-  done: "Done",
-  failed: "Failed",
+function getStatusText(l10n: LocaleLabels = localeLabels.en): Record<TaskStatus, string> {
+  return ({
+  queued: l10n.queued,
+  running: l10n.toolRunning,
+  done: l10n.toolDone,
+  failed: l10n.toolFailed,
+})
 }
+
 
 function StatusMark({ status }: { status: TaskStatus }) {
   return (
@@ -55,6 +60,9 @@ export function TaskRow({
   onClick?: () => void
   className?: string
 }) {
+  const l10n = useLocale().labels
+  const statusText = getStatusText(l10n)
+
   return (
     <button
       type="button"

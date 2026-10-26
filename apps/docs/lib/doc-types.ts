@@ -10,21 +10,21 @@ export type PropDoc = {
   /** TypeScript type as the user writes it, e.g. `"default" | "sm"` or `(value: string) => void`. */
   type: string
   default?: string
-  description: string
+  description: Localized
   required?: boolean
 }
 
 export type PartDoc = {
   /** Exported component or hook name, e.g. `AccordionTrigger`. */
   name: string
-  description?: string
+  description?: Localized
   /** What the rest of its props come from, e.g. `Accordion.Trigger` or `button`. */
   extends?: string
   /** Docs link for `extends`. */
   extendsHref?: string
   props: PropDoc[]
   /** data-* attributes useful for styling, e.g. `data-open`. */
-  dataAttributes?: { name: string; description: string }[]
+  dataAttributes?: { name: string; description: Localized }[]
 }
 
 export type ExampleDoc = {
@@ -45,5 +45,5 @@ export type ComponentDoc = {
   examples: ExampleDoc[]
   api: PartDoc[]
   /** Extra short paragraphs (accessibility, motion, tips) shown before API Reference. */
-  notes?: { title: string; body: string }[]
+  notes?: { title: string; body: Localized }[]
 }

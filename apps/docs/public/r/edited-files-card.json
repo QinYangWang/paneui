@@ -10,7 +10,8 @@
     "https://paneui.dev/r/theme.json",
     "https://paneui.dev/r/icons.json",
     "https://paneui.dev/r/button.json",
-    "https://paneui.dev/r/file-diff.json"
+    "https://paneui.dev/r/file-diff.json",
+    "https://paneui.dev/r/locale-provider.json"
   ],
   "files": [
     {

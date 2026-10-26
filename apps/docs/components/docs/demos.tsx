@@ -128,6 +128,7 @@ import AvatarDemo from "@/registry/examples/avatar-demo"
 import AvatarGeneratorDemo from "@/registry/examples/avatar-generator-demo"
 
 import { TemplatePreview } from "./template-preview"
+import SearchButtonDemo from "@/registry/examples/search-button-demo"
 import SparklineDemo from "@/registry/examples/sparkline-demo"
 import TrendChartDemo from "@/registry/examples/trend-chart-demo"
 import BarListDemo from "@/registry/examples/bar-list-demo"
@@ -193,6 +194,7 @@ const BlogPreview = () => <TemplatePreview name="blog" />
 
 export const demos: Record<string, React.ComponentType> = {
   "sparkline": SparklineDemo,
+  "search-button": SearchButtonDemo,
   "trend-chart": TrendChartDemo,
   "bar-list": BarListDemo,
   "stat-card": StatCardDemo,

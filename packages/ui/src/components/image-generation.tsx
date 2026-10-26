@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { AlertCircleIcon, CheckIcon, ClockIcon, DownloadIcon, RefreshIcon, SparklesIcon } from "@paneui/ui/icons"
@@ -17,13 +18,16 @@ const DEFAULT_PROGRESS: Record<ImageGenerationStatus, number> = {
   error: 0,
 }
 
-const STATUS_TEXT: Record<ImageGenerationStatus, string> = {
-  queued: "Queued",
-  generating: "Generating",
-  refining: "Refining details",
-  complete: "Ready",
-  error: "Generation failed",
+function getStatusText(l10n: LocaleLabels = localeLabels.en): Record<ImageGenerationStatus, string> {
+  return ({
+  queued: l10n.queued,
+  generating: l10n.generating,
+  refining: l10n.refiningDetails,
+  complete: l10n.ready,
+  error: l10n.generationFailed,
+})
 }
+
 
 // Fine film grain from an SVG turbulence filter; tiled and jittered while working.
 const NOISE =
@@ -73,13 +77,19 @@ function ImageGeneration({
   aspectRatio = "1 / 1",
   onRetry,
   onDownload,
-  errorText = "Couldn’t finish this image.",
-  retryLabel = "Try again",
+  errorText,
+  retryLabel,
   alt,
   className,
   mediaClassName,
   ...props
 }: ImageGenerationProps) {
+  const l10n = useLocale().labels
+  const STATUS_TEXT = getStatusText(l10n)
+
+  if (errorText === undefined) errorText = l10n.couldntFinishThisImage
+  if (retryLabel === undefined) retryLabel = l10n.tryAgain
+
   const reduce = useReducedMotion()
   const progress = Math.min(1, Math.max(0, progressProp ?? DEFAULT_PROGRESS[status]))
   const working = status === "queued" || status === "generating" || status === "refining"
@@ -105,7 +115,7 @@ function ImageGeneration({
         className="relative isolate w-full overflow-hidden rounded-2xl bg-muted shadow-well"
         style={{ aspectRatio }}
         role="img"
-        aria-label={complete ? (alt ?? prompt ?? "Generated image") : `${STATUS_TEXT[status]}${working ? `, ${pct}%` : ""}`}
+        aria-label={complete ? (alt ?? prompt ?? l10n.generatedImage) : `${STATUS_TEXT[status]}${working ? `, ${pct}%` : ""}`}
       >
         {/* Media refines in place */}
         <motion.div
@@ -204,7 +214,7 @@ function ImageGeneration({
               ) : (
                 <SparklesIcon className="text-primary" />
               )}
-              {status === "queued" && queuePosition ? `Queued · #${queuePosition}` : STATUS_TEXT[status]}
+              {status === "queued" && queuePosition ? l10n.queuedPosition(queuePosition) : STATUS_TEXT[status]}
               {status === "generating" || status === "refining" ? (
                 <span className="font-mono text-muted-foreground tabular-nums">{pct}%</span>
               ) : null}
@@ -243,14 +253,14 @@ function ImageGeneration({
             aria-hidden={!complete}
             inert={!complete}
           >
-            {prompt ? <AgentCopyButton value={prompt} label="Copy prompt" /> : null}
+            {prompt ? <AgentCopyButton value={prompt} label={l10n.copyPrompt} /> : null}
             {onRetry ? (
-              <AgentIconButton label="Generate again" onClick={onRetry}>
+              <AgentIconButton label={l10n.generateAgain} onClick={onRetry}>
                 <RefreshIcon />
               </AgentIconButton>
             ) : null}
             {onDownload ? (
-              <AgentIconButton label="Download" onClick={onDownload}>
+              <AgentIconButton label={l10n.download} onClick={onDownload}>
                 <DownloadIcon />
               </AgentIconButton>
             ) : null}

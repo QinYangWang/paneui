@@ -180,7 +180,7 @@ function CandlestickChart({
         ref={ref}
         tabIndex={0}
         role="img"
-        aria-label={`${label}. Use left and right arrow keys to inspect candles.`}
+        aria-label={labels.candleHistoryHint(label)}
         onKeyDown={onKeyDown}
         onPointerMove={updateFromPointer}
         onPointerDown={updateFromPointer}

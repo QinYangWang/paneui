@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "motion/react"
 
 import { cn } from "@paneui/ui/lib/utils"
@@ -64,8 +65,11 @@ function ExpandableTabs({
   className,
   panelClassName,
   barClassName,
-  "aria-label": ariaLabel = "Sections",
+  "aria-label": ariaLabel,
 }: ExpandableTabsProps) {
+  const l10n = useLocale().labels
+  if (ariaLabel === undefined) ariaLabel = l10n.sections
+
   const reduceMotion = useReducedMotion()
   const uid = React.useId()
   const [uncontrolled, setUncontrolled] = React.useState<string | null>(defaultValue)

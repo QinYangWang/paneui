@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { ReactRenderer } from "@tiptap/react"
 import type { SuggestionKeyDownProps, SuggestionOptions, SuggestionProps } from "@tiptap/suggestion"
 
@@ -44,9 +45,12 @@ function SuggestionMenu<I extends SuggestionMenuItem>({
   ref,
   items,
   command,
-  emptyLabel = "No results",
+  emptyLabel,
   className,
 }: SuggestionMenuProps<I> & { ref?: React.Ref<MenuListHandle> }) {
+  const l10n = useLocale().labels
+  if (emptyLabel === undefined) emptyLabel = l10n.noResults
+
   const groups = React.useMemo(() => {
     const map = new Map<string, I[]>()
     for (const item of items) {
@@ -57,7 +61,7 @@ function SuggestionMenu<I extends SuggestionMenuItem>({
   }, [items])
 
   return (
-    <MenuList ref={ref} aria-label="Suggestions" className={cn("w-72", className)}>
+    <MenuList ref={ref} aria-label={l10n.suggestions} className={cn("w-72", className)}>
       {items.length === 0 && <MenuListEmpty>{emptyLabel}</MenuListEmpty>}
       {groups.map(([group, groupItems]) => (
         <MenuListGroup key={group || "_"}>
@@ -84,7 +88,7 @@ function SuggestionMenu<I extends SuggestionMenuItem>({
  * with the plugin's items and forwards keys to its MenuList handle.
  */
 export function suggestionRenderer<I extends SuggestionMenuItem>(
-  options: { emptyLabel?: string; className?: string; Component?: typeof SuggestionMenu } = {}
+  options: { emptyLabel?: string | (() => string); className?: string; Component?: React.ComponentType<SuggestionMenuProps<I> & { ref?: React.Ref<MenuListHandle> }> } = {}
 ): NonNullable<SuggestionOptions<I, I>["render"]> {
   const Component = options.Component ?? SuggestionMenu
   return () => {
@@ -95,7 +99,7 @@ export function suggestionRenderer<I extends SuggestionMenuItem>(
       items: p.items,
       query: p.query,
       command: (item: I) => p.command(item),
-      emptyLabel: options.emptyLabel,
+      emptyLabel: typeof options.emptyLabel === "function" ? options.emptyLabel() : options.emptyLabel,
       className: options.className,
     })
 

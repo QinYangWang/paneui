@@ -249,6 +249,7 @@ function CarouselNext({ className, variant = "secondary", size = "icon-sm", ...p
  * one's 24px target (the ::after) meets its neighbour's without overlapping.
  */
 function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
+  const { labels } = useLocale()
   const { count, index, scrollTo } = useCarousel()
   return (
     <div data-slot="carousel-dots" className={cn("flex items-center justify-center gap-4.5", className)} {...props}>
@@ -256,7 +257,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
         <button
           key={i}
           type="button"
-          aria-label={`Go to slide ${i + 1}`}
+          aria-label={labels.goToSlide(i + 1)}
           aria-current={i === index ? "true" : undefined}
           onClick={() => scrollTo(i)}
           className="relative size-1.5 cursor-pointer rounded-full after:absolute after:-inset-[9px] bg-foreground/16 transition-[background-color,width] duration-200 outline-none hover:bg-foreground/32 focus-visible:ring-2 focus-visible:ring-ring/50 aria-current:w-4 aria-current:bg-foreground/72 motion-reduce:transition-none"

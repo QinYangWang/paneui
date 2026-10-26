@@ -3,8 +3,7 @@
 import * as React from "react"
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
 import { motion, useReducedMotion } from "motion/react"
-import { createHighlighterCore, type HighlighterCore, type LanguageInput } from "shiki/core"
-import { createJavaScriptRegexEngine } from "shiki/engine/javascript"
+import { useCodeTokens } from "@paneui/ui/lib/use-code-tokens"
 
 import {
   CheckCircleIcon,
@@ -33,94 +32,17 @@ const AGENT_EASE = [0.22, 1, 0.36, 1] as const
 
 type CodeLanguage = "bash" | "json" | "diff" | "tsx" | "typescript" | "yaml" | "python" | "text"
 
-const LIGHT_THEME = "github-light-default"
-const DARK_THEME = "github-dark-default"
-
-// Only these grammars and the two themes reach the bundle, each as its own chunk loaded on first use.
-const LANG_LOADERS: Record<Exclude<CodeLanguage, "text">, () => LanguageInput> = {
-  bash: () => import("shiki/langs/bash.mjs"),
-  json: () => import("shiki/langs/json.mjs"),
-  diff: () => import("shiki/langs/diff.mjs"),
-  tsx: () => import("shiki/langs/tsx.mjs"),
-  typescript: () => import("shiki/langs/typescript.mjs"),
-  yaml: () => import("shiki/langs/yaml.mjs"),
-  python: () => import("shiki/langs/python.mjs"),
-}
-
-type CodeToken = { content: string; light?: string; dark?: string }
-
-let highlighterPromise: Promise<HighlighterCore> | null = null
-const langPromises = new Map<string, Promise<void>>()
-const tokenCache = new Map<string, CodeToken[][]>()
-
-/** The shared highlighter, with `language` loaded. */
-async function getHighlighter(language: Exclude<CodeLanguage, "text">) {
-  highlighterPromise ??= createHighlighterCore({
-    themes: [import("shiki/themes/github-light-default.mjs"), import("shiki/themes/github-dark-default.mjs")],
-    langs: [],
-    engine: createJavaScriptRegexEngine(),
-  })
-  const highlighter = await highlighterPromise
-  if (!langPromises.has(language)) langPromises.set(language, highlighter.loadLanguage(LANG_LOADERS[language]()))
-  await langPromises.get(language)
-  return highlighter
-}
-
-/**
- * Highlighter tokens for `code`, loaded lazily on the client. While a new chunk is
- * being highlighted the previous lines keep their colours, so streamed output
- * never flashes back to plain text.
- */
-function useCodeTokens(code: string, language: CodeLanguage) {
-  const key = `${language}\u0000${code}`
-  const [state, setState] = React.useState<{ key: string; lines: CodeToken[][] } | null>(() => {
-    const cached = tokenCache.get(key)
-    return cached ? { key, lines: cached } : null
-  })
-
-  React.useEffect(() => {
-    if (language === "text") return
-    const cached = tokenCache.get(key)
-    if (cached) {
-      setState({ key, lines: cached })
-      return
-    }
-    let cancelled = false
-    getHighlighter(language)
-      .then((highlighter) => {
-        if (cancelled) return
-        const lines = highlighter
-          .codeToTokensWithThemes(code, { lang: language, themes: { light: LIGHT_THEME, dark: DARK_THEME } })
-          .map((line) =>
-            line.map((token) => ({
-              content: token.content,
-              light: token.variants.light?.color,
-              dark: token.variants.dark?.color,
-            }))
-          )
-        if (tokenCache.size > 200) tokenCache.clear()
-        tokenCache.set(key, lines)
-        setState({ key, lines })
-      })
-      .catch(() => {})
-    return () => {
-      cancelled = true
-    }
-  }, [code, key, language])
-
-  return language === "text" ? null : (state?.lines ?? null)
-}
-
 type CodeHighlightProps = Omit<React.ComponentProps<"pre">, "children"> & {
   code: string
   language?: CodeLanguage
   /** Wrap long lines instead of scrolling horizontally. */
   wrap?: boolean
+  streaming?: boolean
 }
 
 /** Lightweight dual-theme (light/dark) syntax highlight for agent output. */
-function CodeHighlight({ code, language = "bash", wrap = false, className, ...props }: CodeHighlightProps) {
-  const tokens = useCodeTokens(code, language)
+function CodeHighlight({ code, language = "bash", wrap = false, streaming = false, className, ...props }: CodeHighlightProps) {
+  const tokens = useCodeTokens(code, language, streaming)
   const lines = code.split("\n")
 
   return (

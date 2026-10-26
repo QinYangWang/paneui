@@ -1,0 +1,58 @@
+{
+  "apps/docs/registry/examples/code-block-demo.tsx": {
+    "html": {
+      "code": "export function greet(name: string) {\n  const time = new Date().getHours()\n  const part = time < 12 ? \"morning\" : \"evening\"\n  return `Good ${part}, ${name}.`\n}",
+      "lang": "ts",
+      "highlight": [
+        3
+      ]
+    }
+  },
+  "apps/docs/registry/examples/code-block/code-group.tsx": {
+    "page": {
+      "code": "import { Button } from \"@/components/ui/button\"\n\nexport default function Page() {\n  return <Button>Deploy</Button>\n}",
+      "lang": "tsx",
+      "highlight": []
+    },
+    "layout": {
+      "code": "import \"./globals.css\"\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang=\"en\">\n      <body>{children}</body>\n    </html>\n  )\n}",
+      "lang": "tsx",
+      "highlight": [
+        5
+      ]
+    },
+    "css": {
+      "code": "@import \"tailwindcss\";\n@import \"./typeset.css\";\n\n:root {\n  --radius: 0.625rem;\n}",
+      "lang": "css",
+      "highlight": []
+    }
+  },
+  "apps/docs/registry/examples/code-block/highlighted-lines.tsx": {
+    "html": {
+      "code": "import \"./globals.css\"\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang=\"en\">\n      <body>{children}</body>\n    </html>\n  )\n}",
+      "lang": "tsx",
+      "highlight": [
+        5
+      ]
+    }
+  },
+  "apps/docs/registry/examples/code-block/remember-tab.tsx": {
+    "ts": {
+      "code": "import { Button } from \"@/components/ui/button\"\n\nexport default function Page() {\n  return <Button>Deploy</Button>\n}",
+      "lang": "tsx",
+      "highlight": []
+    },
+    "css": {
+      "code": "@import \"tailwindcss\";\n@import \"./typeset.css\";\n\n:root {\n  --radius: 0.625rem;\n}",
+      "lang": "css",
+      "highlight": []
+    }
+  },
+  "apps/docs/registry/examples/code-block/without-title.tsx": {
+    "html": {
+      "code": "mkdir docs && cd docs\nnpx shadcn@latest init",
+      "lang": "bash",
+      "highlight": []
+    }
+  }
+}

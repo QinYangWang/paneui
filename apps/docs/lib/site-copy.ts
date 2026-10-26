@@ -7,6 +7,12 @@ export function english(text: Localized): string {
 
 /** Shared labels for docs navigation and headings. */
 export const SITE_COPY: Record<string, string> = {
+  "Tabs or segmented control?": "标签页还是分段控件？",
+  "Colour and size": "颜色与尺寸",
+  "Missing data": "缺失数据",
+  "Icon alignment": "图标对齐",
+  "Search Button": "搜索按钮",
+  Keyboard: "键盘操作", Accessibility: "无障碍", "When to use": "适用场景",
   "Requirements": "环境要求",
   "Add the registry": "添加组件库",
   "Install the theme": "安装主题",

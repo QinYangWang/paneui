@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Reorder, useReducedMotion } from "motion/react"
 
 import { XIcon } from "@paneui/ui/icons"
@@ -202,6 +203,8 @@ type TabStripItemProps = Omit<React.ComponentProps<"div">, "onDrag" | "onDragSta
 }
 
 function TabStripItem({ value, icon, closable, indicator, disabled, hint, className, children, ...props }: TabStripItemProps) {
+  const l10n = useLocale().labels
+
   const ctx = useTabStrip()
   const reduce = useReducedMotion()
   const selected = ctx.value === value
@@ -233,13 +236,13 @@ function TabStripItem({ value, icon, closable, indicator, disabled, hint, classN
             {children}
           </OverflowHintText>
         )}
-        {indicator && <span aria-label="Has changes" className="size-1.5 shrink-0 rounded-full bg-primary" />}
+        {indicator && <span aria-label={l10n.hasChanges} className="size-1.5 shrink-0 rounded-full bg-primary" />}
       </span>
       {canClose && (
         <button
           type="button"
           tabIndex={-1}
-          aria-label="Close tab"
+          aria-label={l10n.closeTab}
           onPointerDown={(e) => e.stopPropagation()}
           onClick={(e) => {
             e.stopPropagation()

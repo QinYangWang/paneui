@@ -195,7 +195,7 @@ function ResponseMarkdown({
           const lang = (CODE_LANGS.has(block.lang) ? block.lang : "text") as CodeLanguage
           return (
             <div key={k} className="not-typeset mt-(--typeset-flow) overflow-hidden rounded-xl bg-code p-3 shadow-well first:mt-0">
-              <CodeHighlight code={block.code} language={lang} />
+              <CodeHighlight code={block.code} language={lang} streaming={caret && last} />
               {last && tail}
             </div>
           )
@@ -280,6 +280,8 @@ function StreamingResponse({
   contentClassName,
   ...props
 }: StreamingResponseProps) {
+  const l10n = useLocale().labels
+
   const { labels } = useLocale()
   const errorMessage = errorMessageProp ?? labels.responseInterrupted
   const reduce = useReducedMotion()
@@ -338,7 +340,7 @@ function StreamingResponse({
                   className="inline-flex h-7 cursor-pointer items-center gap-1 rounded-full px-2.5 text-ui-sm font-medium outline-none hover:bg-destructive/12 focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <RefreshIcon className="size-3.5" />
-                  Retry
+                  {l10n.retry}
                 </button>
               ) : null}
             </motion.div>

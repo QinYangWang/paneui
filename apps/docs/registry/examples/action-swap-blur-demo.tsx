@@ -8,8 +8,8 @@ const INSTALL = "pnpm dlx shadcn@latest add @paneui/action-swap-blur"
 export default function ActionSwapBlurDemo() {
   const copy = (text: string) => navigator.clipboard?.writeText(text).catch(() => {})
   return (
-    <div className="flex flex-col items-start gap-4">
-      <div className="flex items-center gap-2 rounded-2xl bg-muted py-1.5 pr-1.5 pl-4 font-mono text-xs text-muted-foreground shadow-well">
+    <div className="flex min-w-0 max-w-full flex-col items-start gap-4">
+      <div className="flex max-w-full items-center gap-2 rounded-2xl bg-muted py-1.5 pr-1.5 pl-4 font-mono text-xs text-muted-foreground shadow-well">
         <span className="truncate">{INSTALL}</span>
         <ActionSwapBlurButton
           variant="secondary"

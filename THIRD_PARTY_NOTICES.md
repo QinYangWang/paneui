@@ -322,3 +322,13 @@ dataset by imoyao (https://github.com/imoyao/GUSCSS and
 https://github.com/imoyao/Traditional-Chinese-Colors). Only colour names, pinyin
 and hexadecimal values are retained in `tooling/fixtures/paper-anchors.json`;
 no descriptions, artwork or implementation code are copied.
+
+## Syntax highlighting
+
+The default syntax highlighter uses `@pierre/highlights` 0.2.0 by Pierre, licensed
+under Apache-2.0. Source and documentation: https://diffs.com/docs#highlights.
+The package includes its licence and notices. No bundled theme artwork or palettes
+are used; syntax scopes map to this project's theme tokens.
+
+Shiki remains a fallback for unsupported languages, under the MIT licence:
+https://github.com/shikijs/shiki/blob/main/LICENSE.

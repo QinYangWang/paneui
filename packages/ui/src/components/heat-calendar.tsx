@@ -241,7 +241,7 @@ function HeatCalendar({
 
   return (
     <HeatCalendarContext.Provider value={value}>
-      <div data-slot="heat-calendar" className={cn("grid w-full min-w-0 gap-3", className)} {...props}>
+      <div data-slot="heat-calendar" className={cn("grid w-full min-w-0 grid-cols-1 gap-3", className)} {...props}>
         {children ?? (
           <>
             <HeatCalendarGrid />
@@ -261,6 +261,7 @@ function HeatCalendar({
 /* -------------------------------------------------------------------------- */
 
 function HeatCalendarGrid({ className, children }: { className?: string; children?: React.ReactNode }) {
+  const { labels } = useLocale()
   const {
     days,
     byDate,
@@ -358,7 +359,7 @@ function HeatCalendarGrid({ className, children }: { className?: string; childre
     <div
       ref={outer}
       data-slot="heat-calendar-grid"
-      className={cn("relative", className)}
+      className={cn("relative min-w-0", className)}
       onPointerLeave={() => setHot(null)}
     >
       <div
@@ -392,7 +393,7 @@ function HeatCalendarGrid({ className, children }: { className?: string; childre
 
           <div
             role="grid"
-            aria-label={`${label}. Arrow keys move between days; Enter starts and ends a range; Shift+arrows extend it.`}
+            aria-label={labels.calendarRangeHint(label)}
             aria-multiselectable
             className="grid touch-pan-x select-none"
             style={{ gridTemplateColumns: `repeat(${weeks}, ${cellSize}px)`, gap }}

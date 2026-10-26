@@ -1,5 +1,7 @@
 "use client"
 
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
+
 import * as React from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
@@ -53,7 +55,10 @@ function AsciiSpinner({ kind = "braille", interval = 80, className, ...props }: 
   )
 }
 
-const DEFAULT_PHRASES = ["Thinking", "Reading the context", "Weighing the options", "Drafting a reply"]
+function getDefaultPhrases(l10n: LocaleLabels = localeLabels.en) {
+  return ([l10n.thinking, l10n.readingTheContext, l10n.weighingTheOptions, l10n.draftingAReply])
+}
+
 
 type ReasoningTextMode = "swap" | "cascade" | "scramble"
 
@@ -87,7 +92,7 @@ const SWAP_TRANSITION = { type: "spring", stiffness: 460, damping: 34, mass: 0.6
  * trades places by swap (blur roll), cascade (letter roll) or scramble.
  */
 function ReasoningText({
-  phrases = DEFAULT_PHRASES,
+  phrases,
   mode = "swap",
   interval = 2400,
   index,
@@ -98,6 +103,9 @@ function ReasoningText({
   className,
   ...props
 }: ReasoningTextProps) {
+  const l10n = useLocale().labels
+  if (phrases === undefined) phrases = getDefaultPhrases(l10n)
+
   const reduce = useReducedMotion()
   const [internal, setInternal] = React.useState(0)
   const controlled = index !== undefined

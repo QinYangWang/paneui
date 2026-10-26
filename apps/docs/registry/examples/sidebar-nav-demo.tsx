@@ -13,7 +13,7 @@ import {
 
 export default function SidebarNavDemo() {
   return (
-    <div className="flex h-96 w-64 flex-col overflow-hidden rounded-xl bg-background shadow-raised">
+    <div className="flex w-64 flex-col overflow-hidden frame-xl frame-inset-2 bg-background shadow-raised [&_[data-slot=sidebar-nav-footer]_[data-slot=sidebar-nav-link]]:rounded-inner">
       <SidebarNav>
         <SidebarNavSearch shortcut="⌘K" />
         <SidebarNavContent aria-label="Docs">

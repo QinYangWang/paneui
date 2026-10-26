@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import {
   animate,
   AnimatePresence,
@@ -90,6 +91,8 @@ type RowProps = {
 }
 
 function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, renderItem }: RowProps) {
+  const l10n = useLocale().labels
+
   const reduceMotion = useReducedMotion()
   const rowRef = React.useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
@@ -226,7 +229,7 @@ function SwipeRow({ item, openSide, onOpen, onCommit, actionWidth, fullSwipe, re
   }
 
   const hasActions = leftWidth > 0 || rightWidth > 0
-  const hint = [rightWidth ? "Left arrow for actions" : "", leftWidth ? "Right arrow for more actions" : ""]
+  const hint = [rightWidth ? l10n.leftArrowForActions : "", leftWidth ? l10n.rightArrowForMoreActions : ""]
     .filter(Boolean)
     .join(", ")
 

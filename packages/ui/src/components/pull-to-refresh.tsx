@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react"
 
 import { RefreshIcon } from "@paneui/ui/icons"
@@ -54,13 +55,18 @@ function PullToRefresh({
   threshold = 64,
   maxPull = 120,
   holdDistance = 56,
-  pullingLabel = "Pull to refresh",
-  releaseLabel = "Release to refresh",
-  refreshingLabel = "Refreshing…",
+  pullingLabel,
+  releaseLabel,
+  refreshingLabel,
   onStatusChange,
   contentClassName,
   ...props
 }: PullToRefreshProps) {
+  const l10n = useLocale().labels
+  if (pullingLabel === undefined) pullingLabel = l10n.pullToRefresh
+  if (releaseLabel === undefined) releaseLabel = l10n.releaseToRefresh
+  if (refreshingLabel === undefined) refreshingLabel = l10n.refreshing
+
   const reduce = useReducedMotion() ?? false
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const y = useMotionValue(0)
@@ -236,7 +242,7 @@ function PullToRefresh({
             )}
           >
             {busy ? (
-              <Loader variant="ring" size="sm" label="Refreshing" />
+              <Loader variant="ring" size="sm" label={l10n.labelRefreshing} />
             ) : (
               <>
                 <svg viewBox="0 0 36 36" className="absolute inset-0 size-full -rotate-90">

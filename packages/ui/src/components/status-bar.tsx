@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@paneui/ui/lib/utils"
@@ -31,17 +32,21 @@ type StatusBarDatum = {
   description?: string
 }
 
-const STATUS_BAR_STATUSES = {
-  operational: { label: "Operational", color: "var(--success)", weight: 1 },
-  degraded: { label: "Degraded", color: "var(--warning)", weight: 0.5 },
-  outage: { label: "Outage", color: "var(--destructive)", weight: 0 },
-  maintenance: { label: "Maintenance", color: "var(--primary)", weight: null },
+function getStatusBarStatuses(l10n: LocaleLabels = localeLabels.en) {
+  return ({
+  operational: { label: l10n.operational, color: "var(--success)", weight: 1 },
+  degraded: { label: l10n.degraded, color: "var(--warning)", weight: 0.5 },
+  outage: { label: l10n.outage, color: "var(--destructive)", weight: 0 },
+  maintenance: { label: l10n.maintenance, color: "var(--primary)", weight: null },
   nodata: {
-    label: "No data",
+    label: l10n.noData,
     color: "color-mix(in oklch, var(--muted-foreground) 30%, transparent)",
     weight: null,
   },
-} satisfies Record<string, StatusBarStatus>
+} satisfies Record<string, StatusBarStatus>)
+}
+
+const STATUS_BAR_STATUSES = getStatusBarStatuses()
 
 type StatusBarProps = Omit<React.ComponentProps<"section">, "children" | "title"> & {
   data: readonly StatusBarDatum[]
@@ -64,21 +69,27 @@ type StatusBarProps = Omit<React.ComponentProps<"section">, "children" | "title"
 
 function StatusBar({
   data,
-  statuses = STATUS_BAR_STATUSES,
-  label = "Status history",
+  statuses,
+  label,
   title,
   height = 36,
   gap = 3,
   showHeader = true,
   showLegend = true,
   startLabel,
-  endLabel = "Today",
+  endLabel,
   activeId: activeIdProp,
   defaultActiveId,
   onActiveChange,
   className,
   ...props
 }: StatusBarProps) {
+  const l10n = useLocale().labels
+  if (statuses === undefined) statuses = getStatusBarStatuses(l10n)
+
+  if (label === undefined) label = l10n.statusHistory
+  if (endLabel === undefined) endLabel = l10n.today
+
   const [ref, size] = useChartSize<HTMLDivElement>()
   const [activeId, setActiveId] = useActiveId(activeIdProp, defaultActiveId, onActiveChange)
   const reduce = useReducedMotion()
@@ -88,7 +99,7 @@ function StatusBar({
   // trailed behind the pointer instead of tracking it.
   const [entered, setEntered] = React.useState(false)
 
-  const fallback: StatusBarStatus = { label: "Unknown", color: "var(--muted-foreground)", weight: null }
+  const fallback: StatusBarStatus = { label: l10n.unknown, color: "var(--muted-foreground)", weight: null }
   const rows = data.map((datum) => ({ datum, status: statuses[datum.status] ?? fallback }))
 
   const counted = rows.filter((r) => r.status.weight != null)
@@ -151,9 +162,9 @@ function StatusBar({
         <div className="flex items-center gap-2 text-ui">
           {latest && (
             <span className="relative flex size-2.5">
-              {!reduce && latest.status.weight === 1 && (
+              {latest.status.weight === 1 && (
                 <span
-                  className="absolute inset-0 animate-ping rounded-full opacity-50"
+                  className="absolute inset-0 animate-ping rounded-full opacity-50 motion-reduce:hidden motion-reduce:animate-none"
                   style={{ background: latest.status.color }}
                 />
               )}
@@ -164,7 +175,7 @@ function StatusBar({
           {latest && <span className="text-muted-foreground">{latest.status.label}</span>}
           {uptime !== null && (
             <span className="ml-auto text-ui-sm font-medium text-muted-foreground tabular-nums">
-              <span className="text-foreground">{(uptime * 100).toFixed(2)}%</span> uptime
+              <span className="text-foreground">{(uptime * 100).toFixed(2)}%</span> {l10n.uptime}
             </span>
           )}
         </div>
@@ -174,7 +185,7 @@ function StatusBar({
         ref={ref}
         tabIndex={0}
         role="img"
-        aria-label={`${label}. Use left and right arrow keys to inspect periods.`}
+        aria-label={l10n.statusHistoryHint(label)}
         onKeyDown={onKeyDown}
         onBlur={() => setActiveId(null)}
         onPointerLeave={() => setActiveId(null)}
@@ -243,14 +254,14 @@ function StatusBar({
 
       {(startLabel || endLabel) && (
         <div className="flex items-center gap-3 text-ui-xs text-muted-foreground">
-          <span>{startLabel ?? `${n} periods ago`}</span>
+          <span>{startLabel ?? l10n.periodsAgo(n)}</span>
           <span className="h-px flex-1 bg-border" />
           <span>{endLabel}</span>
         </div>
       )}
 
       {showLegend && (
-        <ul aria-label={`${label} legend`} className="flex flex-wrap gap-x-3 gap-y-1 text-ui-sm text-muted-foreground">
+        <ul aria-label={l10n.legendFor(label)} className="flex flex-wrap gap-x-3 gap-y-1 text-ui-sm text-muted-foreground">
           {Object.entries(statuses)
             .filter(([key]) => counts.has(key))
             .map(([key, s]) => (
@@ -264,8 +275,8 @@ function StatusBar({
       )}
 
       <ChartDataTable
-        caption={`${label} data`}
-        columns={["Period", "Status", "Details"]}
+        caption={l10n.chartData(label)}
+        columns={[l10n.period, l10n.status, l10n.details]}
         rows={rows.map(({ datum, status }) => [datum.label, status.label, datum.description ?? ""])}
       />
     </section>

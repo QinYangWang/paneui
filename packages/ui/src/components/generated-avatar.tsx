@@ -1,3 +1,4 @@
+import { localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import * as React from "react"
 import { createAvatar } from "@dicebear/core"
 import * as avatarStyle from "@dicebear/notionists"
@@ -74,35 +75,8 @@ const MALE_HAIR = new Set(
     variantName
   )
 )
-const HAIR_LABELS: Record<string, string> = {
-  hat: "Cap",
-  variant14: "Paper hat",
-  variant61: "Head wrap",
-  variant62: "Headscarf",
-  variant63: "Headscarf (long)",
-}
 // Gestures whose hands stay inside the cropped frame.
 const GESTURES = ["waveLongArms", "waveLongArm", "wavePointLongArms", "waveOkLongArms", "pointLongArm", "okLongArm", "handPhone"]
-const GESTURE_LABELS: Record<string, string> = {
-  waveLongArms: "Wave, both hands",
-  waveLongArm: "Wave",
-  wavePointLongArms: "Wave and point",
-  waveOkLongArms: "Wave and OK",
-  pointLongArm: "Point",
-  okLongArm: "OK",
-  handPhone: "Phone",
-}
-const SLOT_LABELS: Record<AvatarSlot, string> = {
-  hair: "Hair",
-  eyes: "Eyes",
-  brows: "Brows",
-  lips: "Mouth",
-  nose: "Nose",
-  glasses: "Glasses",
-  beard: "Beard",
-  body: "Top",
-  gesture: "Gesture",
-}
 /** Slots that can be empty; `"none"` in `selections` turns them off. */
 const OPTIONAL_SLOTS: AvatarSlot[] = ["glasses", "beard", "gesture"]
 
@@ -129,8 +103,36 @@ function hairGender(name: string): "male" | "female" | undefined {
   return FEMALE_HAIR.has(name) ? "female" : MALE_HAIR.has(name) ? "male" : undefined
 }
 
-function partLabel(slot: AvatarSlot, name: string) {
-  if (name === NONE) return "None"
+function partLabel(slot: AvatarSlot, name: string, l10n: LocaleLabels) {
+const HAIR_LABELS: Record<string, string> = {
+  hat: l10n.cap,
+  variant14: l10n.paperHat,
+  variant61: l10n.headWrap,
+  variant62: l10n.headscarf,
+  variant63: l10n.headscarfLong,
+}
+const GESTURE_LABELS: Record<string, string> = {
+  waveLongArms: l10n.waveBothHands,
+  waveLongArm: l10n.wave,
+  wavePointLongArms: l10n.waveAndPoint,
+  waveOkLongArms: l10n.waveAndOK,
+  pointLongArm: l10n.point,
+  okLongArm: "OK",
+  handPhone: l10n.phone,
+}
+const SLOT_LABELS: Record<AvatarSlot, string> = {
+  hair: l10n.hair,
+  eyes: l10n.eyes,
+  brows: l10n.brows,
+  lips: l10n.mouth,
+  nose: l10n.nose,
+  glasses: l10n.glasses,
+  beard: l10n.beard,
+  body: l10n.top,
+  gesture: l10n.gesture,
+}
+
+  if (name === NONE) return l10n.none
   if (slot === "hair" && HAIR_LABELS[name]) return HAIR_LABELS[name]
   if (slot === "gesture") return GESTURE_LABELS[name] ?? name
   return `${SLOT_LABELS[slot]} ${variantNumber(name)}`
@@ -140,17 +142,17 @@ function partLabel(slot: AvatarSlot, name: string) {
  * The parts a slot offers for a gender, for building your own pickers. Only hair differs by gender
  * (and `beard` is empty for `female`). Optional slots (glasses, beard, gesture) start with `none`.
  */
-function getAvatarParts(slot: AvatarSlot, gender: AvatarGender = "any"): AvatarPart[] {
-  if (slot === "beard" && gender === "female") return [{ name: NONE, label: "None" }]
+function getAvatarParts(slot: AvatarSlot, gender: AvatarGender = "any", l10n: LocaleLabels = localeLabels.en): AvatarPart[] {
+  if (slot === "beard" && gender === "female") return [{ name: NONE, label: l10n.none }]
   const names = slotVariants(slot).filter((name) => {
     return slot !== "hair" || gender === "any" || hairGender(name) === gender
   })
   const parts: AvatarPart[] = names.map((name) => ({
     name,
-    label: partLabel(slot, name),
+    label: partLabel(slot, name, l10n),
     ...(slot === "hair" && hairGender(name) ? { gender: hairGender(name) } : {}),
   }))
-  return OPTIONAL_SLOTS.includes(slot) ? [{ name: NONE, label: "None" }, ...parts] : parts
+  return OPTIONAL_SLOTS.includes(slot) ? [{ name: NONE, label: l10n.none }, ...parts] : parts
 }
 
 /** Renderer options for our options. Seeded slots keep the style's own list order, so `any` draws what the style draws. */
@@ -164,7 +166,7 @@ function toRendererOptions({ seed, gender = "any", accessories = false, selectio
     beardProbability: gender === "female" ? 0 : gender === "male" ? 25 : 10,
   }
   if (gender !== "any") options.hair = variants("hair").filter((name) => hairGender(name) === gender)
-  for (const slot of Object.keys(SLOT_LABELS) as AvatarSlot[]) {
+  for (const slot of ["hair", "eyes", "brows", "lips", "nose", "glasses", "beard", "body", "gesture"] as AvatarSlot[]) {
     const picked = selections[slot]
     if (!picked) continue
     const optional = OPTIONAL_SLOTS.includes(slot)
@@ -191,7 +193,7 @@ function render(options: GeneratedAvatarOptions) {
     extra = avatar.toJson().extra as Record<string, unknown>
   }
   const selections = {} as Record<AvatarSlot, string>
-  for (const slot of Object.keys(SLOT_LABELS) as AvatarSlot[]) {
+  for (const slot of ["hair", "eyes", "brows", "lips", "nose", "glasses", "beard", "body", "gesture"] as AvatarSlot[]) {
     selections[slot] = typeof extra[slot] === "string" ? (extra[slot] as string) : NONE
   }
   return { svg: avatar.toString(), selections }

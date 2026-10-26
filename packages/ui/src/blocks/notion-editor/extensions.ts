@@ -1,3 +1,4 @@
+import { localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import { Extension, mergeAttributes, Node, type AnyExtension } from "@tiptap/core"
 import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight"
 import { Details, DetailsContent, DetailsSummary } from "@tiptap/extension-details"
@@ -201,6 +202,7 @@ export const ImageUpload = Extension.create<{ upload: ImageUploader }>({
 })
 
 export type NotionExtensionOptions = {
+  labels?: () => LocaleLabels
   placeholder?: string
   /** Placeholder per block type (falls back to `placeholder`). */
   placeholders?: Partial<Record<string, string>>
@@ -209,11 +211,11 @@ export type NotionExtensionOptions = {
 
 /** Every schema extension of the block editor (no node views, no menus). */
 export function notionExtensions({
-  placeholder = "Write, or press '/' for commands…",
+  placeholder,
+  labels = () => localeLabels.en,
   placeholders = {},
   uploadImage,
 }: NotionExtensionOptions = {}): AnyExtension[] {
-  const headingPlaceholder: Record<number, string> = { 1: "Heading 1", 2: "Heading 2", 3: "Heading 3" }
   return [
     StarterKit.configure({
       codeBlock: false,
@@ -232,9 +234,11 @@ export function notionExtensions({
       includeChildren: true,
       showOnlyCurrent: true,
       placeholder: ({ node }) => {
-        if (node.type.name === "heading") return placeholders.heading ?? headingPlaceholder[node.attrs.level as number] ?? "Heading"
-        if (node.type.name === "detailsSummary") return placeholders.detailsSummary ?? "Toggle"
-        return placeholders[node.type.name] ?? placeholder
+        const l10n = labels()
+        const headingPlaceholder: Record<number, string> = { 1: l10n.heading1, 2: l10n.heading2, 3: l10n.heading3 }
+        if (node.type.name === "heading") return placeholders.heading ?? headingPlaceholder[node.attrs.level as number] ?? l10n.heading
+        if (node.type.name === "detailsSummary") return placeholders.detailsSummary ?? l10n.toggle
+        return placeholders[node.type.name] ?? placeholder ?? l10n.editorPlaceholder
       },
     }),
     TaskList,
@@ -254,7 +258,7 @@ export function notionExtensions({
       renderToggleButton: ({ element, isOpen }) => {
         // ChevronRightIcon's path; the content class rotates it when open
         if (!element.firstChild) element.innerHTML = CHEVRON
-        element.setAttribute("aria-label", isOpen ? "Collapse" : "Expand")
+        element.setAttribute("aria-label", isOpen ? labels().collapse : labels().expand)
         element.setAttribute("aria-expanded", String(isOpen))
       },
     }),

@@ -309,11 +309,12 @@ function CodeGroup({
   className,
   ...props
 }: CodeGroupProps) {
+  const { labels } = useLocale()
   const blocks = React.Children.toArray(children).filter(React.isValidElement) as CodeBlockElement[]
   const tabs = blocks.map((block, i) => {
     const { title, language } = block.props
     const value = typeof title === "string" ? title : language ?? `Code ${i + 1}`
-    return { block, value, label: title ?? language ?? `Code ${i + 1}` }
+    return { block, value, label: title ?? language ?? labels.codeTab(i + 1) }
   })
   const values = tabs.map((t) => t.value)
   const valuesKey = values.join("\u0000")

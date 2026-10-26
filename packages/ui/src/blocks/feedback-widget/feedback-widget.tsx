@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import { Radio } from "@base-ui/react/radio"
 import { RadioGroup } from "@base-ui/react/radio-group"
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "motion/react"
@@ -29,12 +30,15 @@ export type FeedbackWidgetProps = {
 
 type Status = "closed" | "open" | "sending" | "sent" | "error"
 
-const moods: { value: FeedbackMood; emoji: string; label: string }[] = [
-  { value: "bad", emoji: "😣", label: "Bad" },
-  { value: "meh", emoji: "😕", label: "Meh" },
-  { value: "good", emoji: "🙂", label: "Good" },
-  { value: "love", emoji: "😍", label: "Love it" },
-]
+function getMoods(l10n: LocaleLabels = localeLabels.en): { value: FeedbackMood; emoji: string; label: string }[] {
+  return ([
+  { value: "bad", emoji: "😣", label: l10n.bad },
+  { value: "meh", emoji: "😕", label: l10n.meh },
+  { value: "good", emoji: "🙂", label: l10n.good },
+  { value: "love", emoji: "😍", label: l10n.loveIt },
+])
+}
+
 
 // Overshoots a little on the way open, settles calmly on the way back.
 const OPEN: Transition = { type: "spring", stiffness: 340, damping: 26, mass: 0.8 }
@@ -70,13 +74,23 @@ export function FeedbackWidget({
   onSubmit,
   position = "bottom-right",
   strategy = "absolute",
-  label = "Feedback",
-  title = "Help us improve",
-  placeholder = "Share an idea or report a bug…",
-  successTitle = "Thanks for the feedback!",
-  successDescription = "We read every message.",
+  label,
+  title,
+  placeholder,
+  successTitle,
+  successDescription,
   className,
 }: FeedbackWidgetProps) {
+  const l10n = useLocale().labels
+
+  const moods = getMoods(l10n)
+
+  if (label === undefined) label = l10n.feedback
+  if (title === undefined) title = l10n.helpUsImprove
+  if (placeholder === undefined) placeholder = l10n.shareAnIdeaOrReportABug
+  if (successTitle === undefined) successTitle = l10n.thanksForTheFeedback
+  if (successDescription === undefined) successDescription = l10n.weReadEveryMessage
+
   const reduce = useReducedMotion()
   const titleId = React.useId()
   const rootRef = React.useRef<HTMLDivElement>(null)
@@ -204,7 +218,7 @@ export function FeedbackWidget({
                     </span>
                     <button
                       type="button"
-                      aria-label="Close feedback"
+                      aria-label={l10n.closeFeedback}
                       disabled={busy}
                       onClick={() => close()}
                       className="-mr-1.5 inline-flex size-7 items-center justify-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:opacity-40"
@@ -214,7 +228,7 @@ export function FeedbackWidget({
                   </div>
                   <textarea
                     ref={textareaRef}
-                    aria-label="Your feedback"
+                    aria-label={l10n.yourFeedback}
                     value={message}
                     disabled={busy}
                     placeholder={placeholder}
@@ -233,7 +247,7 @@ export function FeedbackWidget({
                   />
                   <div className="flex items-center justify-between gap-3">
                     <RadioGroup
-                      aria-label="How do you feel?"
+                      aria-label={l10n.howDoYouFeel}
                       value={mood}
                       onValueChange={(value) => setMood(value as FeedbackMood)}
                       disabled={busy}
@@ -259,7 +273,7 @@ export function FeedbackWidget({
                       errorText="Retry"
                       disabled={!message.trim()}
                     >
-                      Send
+                      {l10n.send}
                     </StatefulButton>
                   </div>
                   <AnimatePresence initial={false}>
@@ -271,7 +285,7 @@ export function FeedbackWidget({
                         exit={{ opacity: 0, height: 0 }}
                         className="-mt-1 overflow-hidden text-ui-sm text-destructive"
                       >
-                        Couldn&apos;t send that. Check your connection and retry.
+                        {l10n.feedbackSendFailed}
                       </motion.p>
                     )}
                   </AnimatePresence>

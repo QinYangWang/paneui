@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { OTPField as OTPFieldPrimitive } from "@base-ui/react/otp-field"
 import { AnimatePresence, LayoutGroup, animate, motion, useReducedMotion } from "motion/react"
 
@@ -45,6 +46,8 @@ function OTPInput({
   "aria-label": ariaLabel,
   ...props
 }: OTPInputProps) {
+  const l10n = useLocale().labels
+
   const id = React.useId()
   const reduce = useReducedMotion()
   const rowRef = React.useRef<HTMLDivElement>(null)
@@ -78,7 +81,7 @@ function OTPInput({
           defaultValue={defaultValue}
           mask={mask}
           disabled={disabled}
-          aria-label={label ? undefined : (ariaLabel ?? "One-time code")}
+          aria-label={label ? undefined : (ariaLabel ?? l10n.onetimeCode)}
           aria-invalid={status === "error" || undefined}
           onValueChange={(next, details) => {
             setCurrent(next)

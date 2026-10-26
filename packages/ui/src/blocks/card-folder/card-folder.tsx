@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import { CopyIcon, EyeIcon, EyeOffIcon, MoreHorizontalIcon } from "@paneui/ui/icons"
@@ -87,7 +88,7 @@ function DefaultArt() {
 export function CardFolder({
   title,
   holder,
-  brand = "Debit",
+  brand,
   cardNumber,
   expiry,
   cvv,
@@ -99,12 +100,16 @@ export function CardFolder({
   defaultDetailsVisible = false,
   onDetailsVisibleChange,
   onAction,
-  actionLabel = "More options",
+  actionLabel,
   onCopy,
   disabled = false,
   className,
   cardClassName,
 }: CardFolderProps) {
+  const l10n = useLocale().labels
+  if (brand === undefined) brand = l10n.debit
+  if (actionLabel === undefined) actionLabel = l10n.moreOptions
+
   const reduce = useReducedMotion()
   const [open, setOpen] = useControllable(openProp, defaultOpen, onOpenChange)
   const [details, setDetails] = useControllable(detailsProp, defaultDetailsVisible, onDetailsVisibleChange)
@@ -129,7 +134,7 @@ export function CardFolder({
               className={iconButton}
               disabled={disabled}
               onClick={() => onCopy(parts.join(""))}
-              aria-label="Copy card number"
+              aria-label={l10n.copyCardNumber}
             >
               <CopyIcon size={15} />
             </button>
@@ -139,7 +144,7 @@ export function CardFolder({
             className={iconButton}
             disabled={disabled}
             aria-pressed={details}
-            aria-label={details ? "Hide card details" : "Show card details"}
+            aria-label={details ? l10n.hideCardDetails : l10n.showCardDetails}
             onClick={() => setDetails(!details)}
           >
             {details ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
@@ -156,7 +161,7 @@ export function CardFolder({
         type="button"
         disabled={disabled}
         aria-expanded={open}
-        aria-label={open ? `Tuck ${title} into its pocket` : `Pull ${title} out of its pocket`}
+        aria-label={open ? l10n.tuckCard(title) : l10n.pullCard(title)}
         onClick={() => setOpen(!open)}
         className="group/pocket relative h-60 w-full cursor-pointer rounded-[min(calc(var(--radius)*2.8),var(--radius-max))] outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-60"
       >
@@ -201,7 +206,7 @@ export function CardFolder({
                 <span className="truncate opacity-85">{holder}</span>
                 <span className="flex gap-3 font-mono tabular-nums">
                   <span className="flex flex-col">
-                    <span className="text-[0.55rem] opacity-60">Exp</span>
+                    <span className="text-[0.55rem] opacity-60">{l10n.exp}</span>
                     {expiry}
                   </span>
                   <span className="flex flex-col">
@@ -232,7 +237,7 @@ export function CardFolder({
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.18 }}
               >
-                {open ? "Tap to tuck away" : "Tap to pull out"}
+                {open ? l10n.tapToTuckAway : l10n.tapToPullOut}
               </motion.span>
             </AnimatePresence>
           </span>

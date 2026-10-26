@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { useDirection } from "@base-ui/react/direction-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
@@ -303,7 +304,10 @@ type CommandDialogProps = DialogPrimitive.Root.Props & {
 }
 
 /** The same Command in a centred dialog, for a ⌘K palette. Opening it focuses the input. */
-function CommandDialog({ title = "Command palette", className, children, commandProps, ...props }: CommandDialogProps) {
+function CommandDialog({ title, className, children, commandProps, ...props }: CommandDialogProps) {
+  const l10n = useLocale().labels
+  if (title === undefined) title = l10n.commandPalette
+
   // Portaled popups leave the DOM subtree that sets `dir`; carry the provider direction over.
   const dir = useDirection() === "rtl" ? "rtl" : undefined
   return (

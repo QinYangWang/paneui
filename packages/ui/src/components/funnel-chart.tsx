@@ -227,7 +227,7 @@ function FunnelChart({
                     data-index={i}
                     tabIndex={0}
                     role="img"
-                    aria-label={`${s.label}: ${fmtUnit(s.value)}, ${formatPercent(s.ofFirst)} of ${placed[0].label}`}
+                    aria-label={`${s.label}: ${fmtUnit(s.value)}, ${labels.percentOf(formatPercent(s.ofFirst), placed[0].label)}`}
                     initial={false}
                     animate={{ d, opacity: dim ? 0.4 : 1 }}
                     transition={transition}

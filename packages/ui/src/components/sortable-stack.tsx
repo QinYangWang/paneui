@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Reorder, useDragControls, useReducedMotion, type DragControls } from "motion/react"
 
 import { GripVerticalIcon, UndoIcon } from "@paneui/ui/icons"
@@ -64,12 +65,15 @@ function SortableStack<T extends { id: string }>({
   onItemsChange,
   getItemLabel,
   children,
-  label = "Sortable list",
+  label,
   disabled = false,
   showUndo = true,
   footer,
   className,
 }: SortableStackProps<T>) {
+  const l10n = useLocale().labels
+  if (label === undefined) label = l10n.sortableList
+
   const [internal, setInternal] = React.useState(defaultItems)
   const items = itemsProp ?? internal
   const live = React.useRef(items)
@@ -104,7 +108,7 @@ function SortableStack<T extends { id: string }>({
   const announce = (id: string) => {
     const idx = live.current.findIndex((i) => i.id === id)
     const item = live.current[idx]
-    if (item) setAnnouncement(`${getItemLabel(item)}, position ${idx + 1} of ${live.current.length}.`)
+    if (item) setAnnouncement(l10n.itemPosition(getItemLabel(item), idx + 1, live.current.length))
   }
   const move = (id: string, by: Move) => {
     const cur = live.current
@@ -131,7 +135,7 @@ function SortableStack<T extends { id: string }>({
     pendingFocus.current = previous.find((id, i) => id !== ids[i]) ?? null
     reorder(previous)
     setPrevious(null)
-    setAnnouncement("Previous order restored.")
+    setAnnouncement(l10n.previousOrderRestored)
   }
 
   const labels = new Map(items.map((i) => [i.id, getItemLabel(i)]))
@@ -161,8 +165,7 @@ function SortableStack<T extends { id: string }>({
     <StackContext.Provider value={ctx}>
       <div ref={root} data-slot="sortable-stack" className={cn("flex w-full flex-col gap-2", className)}>
         <p id={instructionsId} className="sr-only">
-          Drag a handle to reorder. With a handle focused, press Up or Down to move the row, Home or End to move it to
-          the top or bottom.
+          {l10n.sortableInstructions}
         </p>
         <Reorder.Group
           axis="y"
@@ -236,6 +239,7 @@ function SortableStackItem({
 
 /** Grip button that starts the drag and owns keyboard reordering. */
 function SortableStackHandle({ className, onPointerDown, onKeyDown, children, ...props }: React.ComponentProps<"button">) {
+  const l10n = useLocale().labels
   const item = React.useContext(ItemContext)
   const { ids, labelOf, move, disabled, instructionsId } = useStack("SortableStackHandle")
   if (!item) throw new Error("SortableStackHandle must be used inside <SortableStackItem>.")
@@ -269,7 +273,7 @@ function SortableStackHandle({ className, onPointerDown, onKeyDown, children, ..
         className
       )}
       {...props}
-      aria-label={props["aria-label"] ?? `Reorder ${labelOf(item.id)}, position ${index + 1} of ${ids.length}`}
+      aria-label={props["aria-label"] ?? l10n.reorderItem(labelOf(item.id), index + 1, ids.length)}
     >
       {children ?? <GripVerticalIcon size={16} />}
     </button>
@@ -282,6 +286,8 @@ function SortableStackContent({ className, ...props }: React.ComponentProps<"div
 
 /** Restores the order from before the last move. Hidden until there is something to undo. */
 function SortableStackUndo({ className, children, onClick, ...props }: React.ComponentProps<"button">) {
+  const l10n = useLocale().labels
+
   const { canUndo, undo, disabled } = useStack("SortableStackUndo")
   return (
     <button
@@ -305,7 +311,7 @@ function SortableStackUndo({ className, children, onClick, ...props }: React.Com
       {children ?? (
         <>
           <UndoIcon className="rtl:-scale-x-100" size={14} />
-          Undo
+          {l10n.undo}
         </>
       )}
     </button>

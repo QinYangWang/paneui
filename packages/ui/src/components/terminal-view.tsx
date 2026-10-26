@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 
 import { cn } from "@paneui/ui/lib/utils"
 
@@ -245,6 +246,8 @@ type TerminalInputProps = Omit<React.ComponentProps<"input">, "onSubmit" | "pref
 
 /** Command line with a prompt glyph and ↑ / ↓ history of what was submitted. */
 function TerminalInput({ prompt = "❯", onSubmit, className, onKeyDown, ...props }: TerminalInputProps) {
+  const l10n = useLocale().labels
+
   const [value, setValue] = React.useState("")
   const history = React.useRef<string[]>([])
   const cursor = React.useRef(-1)
@@ -278,7 +281,7 @@ function TerminalInput({ prompt = "❯", onSubmit, className, onKeyDown, ...prop
         }}
         className="min-w-0 flex-1 bg-transparent caret-foreground outline-none placeholder:text-muted-foreground"
         {...props}
-        aria-label={props["aria-label"] ?? "Terminal command"}
+        aria-label={props["aria-label"] ?? l10n.terminalCommand}
       />
     </label>
   )

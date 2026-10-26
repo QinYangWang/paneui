@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion, type Transition } from "motion/react"
 
 import { SearchIcon, XIcon } from "@paneui/ui/icons"
@@ -87,11 +88,11 @@ const isMac = () => typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(n
  */
 function MorphingSearch({
   items,
-  placeholder = "Search…",
+  placeholder,
   iconOnly = false,
   shortcut,
   align = "start",
-  emptyMessage = "No matches.",
+  emptyMessage,
   limit = 8,
   open: openProp,
   defaultOpen = false,
@@ -102,6 +103,10 @@ function MorphingSearch({
   className,
   surfaceClassName,
 }: MorphingSearchProps) {
+  const l10n = useLocale().labels
+  if (placeholder === undefined) placeholder = l10n.search
+  if (emptyMessage === undefined) emptyMessage = l10n.noMatches
+
   const reduceMotion = useReducedMotion()
   const uid = React.useId()
   const rootRef = React.useRef<HTMLDivElement>(null)
@@ -146,7 +151,7 @@ function MorphingSearch({
     const top = scored.slice(0, limit).map((r) => r.item)
     const map = new Map<string, MorphingSearchItem[]>()
     for (const item of top) {
-      const key = item.group ?? "Results"
+      const key = item.group ?? l10n.labelResults
       map.set(key, [...(map.get(key) ?? []), item])
     }
     const groups = [...map.entries()].map(([label, items]) => ({ label, items }))
@@ -307,7 +312,7 @@ function MorphingSearch({
                 />
                 <button
                   type="button"
-                  aria-label={query ? "Clear search" : "Close search"}
+                  aria-label={query ? l10n.clearSearch : l10n.closeSearch}
                   onClick={() => (query ? (setQuery(""), inputRef.current?.focus()) : close())}
                   className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
@@ -325,7 +330,7 @@ function MorphingSearch({
                   ref={listRef}
                   id={listboxId}
                   role="listbox"
-                  aria-label="Results"
+                  aria-label={l10n.labelResults}
                   className="max-h-80 overflow-y-auto overscroll-contain p-1.5"
                 >
                   {groups.length === 0 ? (
@@ -390,10 +395,10 @@ function MorphingSearch({
                     <kbd className="font-sans">↵</kbd> open
                   </span>
                   <span>
-                    <kbd className="font-sans">esc</kbd> close
+                    <kbd className="font-sans">esc</kbd> {l10n.close.toLowerCase()}
                   </span>
                   <span className="ml-auto tabular-nums" aria-live="polite">
-                    {flat.length} {flat.length === 1 ? "result" : "results"}
+                    {flat.length} {flat.length === 1 ? "result" : l10n.results}
                   </span>
                 </div>
               </motion.div>

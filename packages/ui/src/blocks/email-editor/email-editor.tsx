@@ -1,5 +1,7 @@
 "use client"
 
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
+
 import * as React from "react"
 import { isNodeSelection, type AnyExtension, type Editor, type JSONContent } from "@tiptap/core"
 import { Color, TextStyle } from "@tiptap/extension-text-style"
@@ -68,7 +70,7 @@ import {
   type EmailTheme,
 } from "@paneui/ui/blocks/email-editor/render"
 import { EditorBlockHandle } from "@paneui/ui/blocks/notion-editor/block-handle"
-import { blockTypes, type BlockType } from "@paneui/ui/blocks/notion-editor/block-types"
+import { getBlockTypes, type BlockType } from "@paneui/ui/blocks/notion-editor/block-types"
 import { EditorBubbleMenu } from "@paneui/ui/blocks/notion-editor/bubble-menu"
 import { fileToDataUrl, ImageUpload, type ImageUploader } from "@paneui/ui/blocks/notion-editor/extensions"
 import { editorContentClass, NotionShortcuts } from "@paneui/ui/blocks/notion-editor/notion-editor"
@@ -86,62 +88,75 @@ import { ToolbarSeparator, ToolbarToggle } from "@paneui/ui/components/toolbar"
 
 const icon = (I: React.ComponentType<{ className?: string }>) => <I className="size-4 text-muted-foreground" />
 
-export const emailSlashItems: SlashItem[] = [
-  { id: "text", title: "Text", description: "Plain paragraph", group: "Text", icon: icon(TypeIcon), keywords: ["paragraph"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setParagraph().run() },
-  { id: "heading-1", title: "Heading 1", description: "Email title", group: "Text", icon: icon(Heading1Icon), hint: "#", keywords: ["h1"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHeading({ level: 1 }).run() },
-  { id: "heading-2", title: "Heading 2", description: "Section heading", group: "Text", icon: icon(Heading2Icon), hint: "##", keywords: ["h2"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHeading({ level: 2 }).run() },
-  { id: "heading-3", title: "Heading 3", description: "Small heading", group: "Text", icon: icon(Heading3Icon), hint: "###", keywords: ["h3"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHeading({ level: 3 }).run() },
-  { id: "bullet-list", title: "Bulleted list", group: "Text", icon: icon(ListIcon), hint: "-", keywords: ["ul"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).toggleBulletList().run() },
-  { id: "numbered-list", title: "Numbered list", group: "Text", icon: icon(ListOrderedIcon), hint: "1.", keywords: ["ol"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).toggleOrderedList().run() },
-  { id: "quote", title: "Quote", group: "Text", icon: icon(QuoteIcon), hint: ">", keywords: ["blockquote"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).toggleBlockquote().run() },
-  { id: "variable", title: "Variable", description: "Insert {{first_name}} and friends", group: "Text", icon: icon(BracesIcon), hint: "{{", keywords: ["merge", "tag", "personalize"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertContent("{{").run() },
-  { id: "button", title: "Button", description: "Call to action link", group: "Blocks", icon: icon(RectangleHorizontalIcon), keywords: ["cta", "link"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertEmailButton().run() },
-  { id: "image", title: "Image", description: "Picture from a URL or upload", group: "Blocks", icon: icon(ImageIcon), keywords: ["picture", "photo"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertEmailImage().run() },
-  { id: "logo", title: "Logo", description: "Brand mark", group: "Blocks", icon: icon(CircleDotIcon), keywords: ["brand"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertEmailLogo().run() },
-  { id: "spacer", title: "Spacer", description: "Vertical space", group: "Blocks", icon: icon(MoveVerticalIcon), keywords: ["gap", "space"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertSpacer(32).run() },
-  { id: "divider", title: "Divider", description: "Horizontal line", group: "Blocks", icon: icon(MinusIcon), hint: "---", keywords: ["hr", "line"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHorizontalRule().run() },
-  { id: "footer", title: "Footer", description: "Small print, address, unsubscribe", group: "Blocks", icon: icon(PanelBottomIcon), keywords: ["unsubscribe", "address"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertFooter().run() },
-  { id: "columns-2", title: "2 columns", description: "Side by side content", group: "Layout", icon: icon(Columns2Icon), keywords: ["grid", "columns"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertColumns(2).run() },
-  { id: "columns-3", title: "3 columns", description: "Three across", group: "Layout", icon: icon(Columns2Icon), keywords: ["grid", "columns"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertColumns(3).run() },
-  { id: "section", title: "Section", description: "Tinted box around blocks", group: "Layout", icon: icon(Rows2Icon), keywords: ["container", "box", "card"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertSection().run() },
-  { id: "show-if", title: "Show if", description: "Only when a variable is set", group: "Logic", icon: icon(GitBranchIcon), keywords: ["condition", "if"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertShowIf().run() },
-  { id: "repeat", title: "Repeat", description: "Once per item of a list", group: "Logic", icon: icon(RefreshIcon), keywords: ["loop", "each", "for"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertRepeat().run() },
-]
+export function getEmailSlashItems(l10n: LocaleLabels = localeLabels.en): SlashItem[] {
+  return ([
+  { id: "text", title: l10n.text, description: l10n.plainParagraph, group: l10n.text, icon: icon(TypeIcon), keywords: ["paragraph"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setParagraph().run() },
+  { id: "heading-1", title: l10n.heading1, description: l10n.emailTitle, group: l10n.text, icon: icon(Heading1Icon), hint: "#", keywords: ["h1"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHeading({ level: 1 }).run() },
+  { id: "heading-2", title: l10n.heading2, description: l10n.sectionHeading, group: l10n.text, icon: icon(Heading2Icon), hint: "##", keywords: ["h2"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHeading({ level: 2 }).run() },
+  { id: "heading-3", title: l10n.heading3, description: l10n.smallHeading, group: l10n.text, icon: icon(Heading3Icon), hint: "###", keywords: ["h3"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHeading({ level: 3 }).run() },
+  { id: "bullet-list", title: l10n.bulletedList, group: l10n.text, icon: icon(ListIcon), hint: "-", keywords: ["ul"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).toggleBulletList().run() },
+  { id: "numbered-list", title: l10n.numberedList, group: l10n.text, icon: icon(ListOrderedIcon), hint: "1.", keywords: ["ol"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).toggleOrderedList().run() },
+  { id: "quote", title: l10n.quote, group: l10n.text, icon: icon(QuoteIcon), hint: ">", keywords: ["blockquote"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).toggleBlockquote().run() },
+  { id: "variable", title: l10n.variable, description: l10n.insertFirstnameAndFriends, group: l10n.text, icon: icon(BracesIcon), hint: "{{", keywords: ["merge", "tag", "personalize"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertContent("{{").run() },
+  { id: "button", title: l10n.button, description: l10n.callToActionLink, group: l10n.blocks, icon: icon(RectangleHorizontalIcon), keywords: ["cta", "link"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertEmailButton().run() },
+  { id: "image", title: l10n.image, description: l10n.pictureFromAURLOrUpload, group: l10n.blocks, icon: icon(ImageIcon), keywords: ["picture", "photo"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertEmailImage().run() },
+  { id: "logo", title: l10n.logo, description: l10n.brandMark, group: l10n.blocks, icon: icon(CircleDotIcon), keywords: ["brand"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertEmailLogo().run() },
+  { id: "spacer", title: l10n.spacer, description: l10n.verticalSpace, group: l10n.blocks, icon: icon(MoveVerticalIcon), keywords: ["gap", "space"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertSpacer(32).run() },
+  { id: "divider", title: l10n.divider, description: l10n.horizontalLine, group: l10n.blocks, icon: icon(MinusIcon), hint: "---", keywords: ["hr", "line"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).setHorizontalRule().run() },
+  { id: "footer", title: l10n.footer, description: l10n.smallPrintAddressUnsubscribe, group: l10n.blocks, icon: icon(PanelBottomIcon), keywords: ["unsubscribe", "address"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertFooter().run() },
+  { id: "columns-2", title: l10n.twoColumns, description: l10n.sideBySideContent, group: l10n.layout, icon: icon(Columns2Icon), keywords: ["grid", "columns"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertColumns(2).run() },
+  { id: "columns-3", title: l10n.threeColumns, description: l10n.threeAcross, group: l10n.layout, icon: icon(Columns2Icon), keywords: ["grid", "columns"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertColumns(3).run() },
+  { id: "section", title: l10n.section, description: l10n.tintedBoxAroundBlocks, group: l10n.layout, icon: icon(Rows2Icon), keywords: ["container", "box", "card"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertSection().run() },
+  { id: "show-if", title: l10n.showIf, description: l10n.onlyWhenAVariableIsSet, group: l10n.logic, icon: icon(GitBranchIcon), keywords: ["condition", "if"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertShowIf().run() },
+  { id: "repeat", title: l10n.repeat, description: l10n.oncePerItemOfAList, group: l10n.logic, icon: icon(RefreshIcon), keywords: ["loop", "each", "for"], command: ({ editor, range }) => editor.chain().focus().deleteRange(range).insertRepeat().run() },
+])
+}
 
-const emailBlockTypes: BlockType[] = blockTypes.filter((b) => ["text", "heading-1", "heading-2", "heading-3", "bullet-list", "numbered-list", "quote"].includes(b.id))
+export const emailSlashItems = getEmailSlashItems()
+
+const getEmailBlockTypes = (l10n: LocaleLabels): BlockType[] => getBlockTypes(l10n).filter((b) => ["text", "heading-1", "heading-2", "heading-3", "bullet-list", "numbered-list", "quote"].includes(b.id))
 
 /** Email-safe palettes (hex, since the exported HTML has no theme). */
-export const emailTextColors: Swatch[] = [
-  { value: "default", label: "Default" },
-  { value: "#737373", label: "Gray", color: "#737373" },
-  { value: "#dc2626", label: "Red", color: "#dc2626" },
-  { value: "#d97706", label: "Amber", color: "#d97706" },
-  { value: "#16a34a", label: "Green", color: "#16a34a" },
-  { value: "#0d9488", label: "Teal", color: "#0d9488" },
-  { value: "#2563eb", label: "Blue", color: "#2563eb" },
-  { value: "#7c3aed", label: "Violet", color: "#7c3aed" },
-  { value: "#db2777", label: "Pink", color: "#db2777" },
-]
+export function getEmailTextColors(l10n: LocaleLabels = localeLabels.en): Swatch[] {
+  return ([
+  { value: "default", label: l10n.default },
+  { value: "#737373", label: l10n.gray, color: "#737373" },
+  { value: "#dc2626", label: l10n.red, color: "#dc2626" },
+  { value: "#d97706", label: l10n.amber, color: "#d97706" },
+  { value: "#16a34a", label: l10n.green, color: "#16a34a" },
+  { value: "#0d9488", label: l10n.teal, color: "#0d9488" },
+  { value: "#2563eb", label: l10n.blue, color: "#2563eb" },
+  { value: "#7c3aed", label: l10n.violet, color: "#7c3aed" },
+  { value: "#db2777", label: l10n.pink, color: "#db2777" },
+])
+}
 
-export const emailHighlightColors: Swatch[] = [
-  { value: "default", label: "None" },
-  { value: "#f5f5f5", label: "Gray", color: "#f5f5f5" },
-  { value: "#fee2e2", label: "Red", color: "#fee2e2" },
-  { value: "#fef3c7", label: "Amber", color: "#fef3c7" },
-  { value: "#dcfce7", label: "Green", color: "#dcfce7" },
-  { value: "#ccfbf1", label: "Teal", color: "#ccfbf1" },
-  { value: "#dbeafe", label: "Blue", color: "#dbeafe" },
-  { value: "#ede9fe", label: "Violet", color: "#ede9fe" },
-  { value: "#fce7f3", label: "Pink", color: "#fce7f3" },
-]
+export const emailTextColors = getEmailTextColors()
 
-const brandSwatches: Swatch[] = emailTextColors.slice(1).map((s) => ({ ...s, value: s.color! }))
+export function getEmailHighlightColors(l10n: LocaleLabels = localeLabels.en): Swatch[] {
+  return ([
+  { value: "default", label: l10n.none },
+  { value: "#f5f5f5", label: l10n.gray, color: "#f5f5f5" },
+  { value: "#fee2e2", label: l10n.red, color: "#fee2e2" },
+  { value: "#fef3c7", label: l10n.amber, color: "#fef3c7" },
+  { value: "#dcfce7", label: l10n.green, color: "#dcfce7" },
+  { value: "#ccfbf1", label: l10n.teal, color: "#ccfbf1" },
+  { value: "#dbeafe", label: l10n.blue, color: "#dbeafe" },
+  { value: "#ede9fe", label: l10n.violet, color: "#ede9fe" },
+  { value: "#fce7f3", label: l10n.pink, color: "#fce7f3" },
+])
+}
+
+export const emailHighlightColors = getEmailHighlightColors()
+
+const getBrandSwatches = (l10n: LocaleLabels): Swatch[] => getEmailTextColors(l10n).slice(1).map((s) => ({ ...s, value: s.color! }))
 
 /* ───────────────────────── extensions ───────────────────────── */
 
 export type EmailExtensionOptions = {
+  labels?: () => LocaleLabels
   variables?: EmailVariable[]
-  slashItems?: SlashItem[]
+  slashItems?: SlashItem[] | (() => SlashItem[])
   uploadImage?: ImageUploader
   placeholder?: string
 }
@@ -149,9 +164,10 @@ export type EmailExtensionOptions = {
 /** Every extension of the email editor (schema, node views, menus). */
 export function emailExtensions({
   variables = [],
-  slashItems = emailSlashItems,
+  slashItems,
+  labels = () => localeLabels.en,
   uploadImage,
-  placeholder = "Write, press '/' for blocks or '{{' for variables…",
+  placeholder,
 }: EmailExtensionOptions = {}): AnyExtension[] {
   return [
     StarterKit.configure({
@@ -168,7 +184,7 @@ export function emailExtensions({
       includeChildren: true,
       showOnlyCurrent: true,
       placeholder: ({ node }) =>
-        node.type.name === "heading" ? `Heading ${node.attrs.level}` : node.type.name === "footer" ? "Footer text, address, unsubscribe link" : placeholder,
+        node.type.name === "heading" ? labels().headingLevel(node.attrs.level) : node.type.name === "footer" ? labels().footerPlaceholder : placeholder ?? labels().emailPlaceholder,
     }),
     EmailButton,
     EmailImage,
@@ -183,7 +199,7 @@ export function emailExtensions({
     Variable,
     EmailVariables.configure({ variables }),
     ImageUpload.configure(uploadImage ? { upload: uploadImage } : {}),
-    SlashCommand.configure({ items: slashItems }),
+    SlashCommand.configure({ items: slashItems ?? (() => getEmailSlashItems(labels())), labels }),
     NotionShortcuts,
   ]
 }
@@ -214,15 +230,17 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 }
 
 function AlignToggle({ value, onChange }: { value: Align; onChange: (v: Align) => void }) {
+  const l10n = useLocale().labels
+
   return (
-    <ToggleGroup size="sm" variant="outline" value={[value]} onValueChange={(v) => v[0] && onChange(v[0] as Align)} aria-label="Alignment">
-      <ToggleGroupItem value="left" aria-label="Align left">
+    <ToggleGroup size="sm" variant="outline" value={[value]} onValueChange={(v) => v[0] && onChange(v[0] as Align)} aria-label={l10n.alignment}>
+      <ToggleGroupItem value="left" aria-label={l10n.alignLeft}>
         <AlignLeftIcon />
       </ToggleGroupItem>
-      <ToggleGroupItem value="center" aria-label="Align centre">
+      <ToggleGroupItem value="center" aria-label={l10n.alignCentre}>
         <AlignCenterIcon />
       </ToggleGroupItem>
-      <ToggleGroupItem value="right" aria-label="Align right">
+      <ToggleGroupItem value="right" aria-label={l10n.alignRight}>
         <AlignRightIcon />
       </ToggleGroupItem>
     </ToggleGroup>
@@ -282,6 +300,8 @@ function CommitInput({ value, onCommit, ...props }: Omit<React.ComponentProps<ty
 }
 
 function NodeSettingsMenu({ editor }: { editor: Editor }) {
+  const l10n = useLocale().labels
+
   const sel = useEditorState({
     editor,
     selector: ({ editor: e }) => {
@@ -333,71 +353,71 @@ function NodeSettingsMenu({ editor }: { editor: Editor }) {
         >
           <div className="flex items-center justify-between">
             <span className="text-ui font-semibold">
-              {{ emailButton: "Button", emailImage: "Image", emailLogo: "Logo", spacer: "Spacer" }[sel.type]}
+              {{ emailButton: l10n.button, emailImage: l10n.image, emailLogo: l10n.logo, spacer: l10n.spacer }[sel.type]}
             </span>
-            <Button size="icon-xs" variant="ghost" aria-label="Delete block" onClick={remove}>
+            <Button size="icon-xs" variant="ghost" aria-label={l10n.deleteBlock} onClick={remove}>
               <TrashIcon />
             </Button>
           </div>
           {sel.type === "emailButton" && (
             <>
-              <Field label="Label">
-                <CommitInput aria-label="Button label" value={String(a.text ?? "")} onCommit={(text) => set({ text })} />
+              <Field label={l10n.label}>
+                <CommitInput aria-label={l10n.buttonLabel} value={String(a.text ?? "")} onCommit={(text) => set({ text })} />
               </Field>
-              <Field label="Link">
-                <CommitInput aria-label="Button link" value={String(a.href ?? "")} placeholder="https:// or {{variable}}" onCommit={(href) => set({ href })} />
+              <Field label={l10n.link}>
+                <CommitInput aria-label={l10n.buttonLink} value={String(a.href ?? "")} placeholder={l10n.urlOrVariable} onCommit={(href) => set({ href })} />
               </Field>
-              <Field label="Style">
+              <Field label={l10n.style}>
                 <Choice<ButtonVariant>
-                  label="Button style"
+                  label={l10n.buttonStyle}
                   value={a.variant as ButtonVariant}
                   onChange={(variant) => set({ variant })}
                   options={[
-                    { value: "filled", label: "Filled" },
-                    { value: "outline", label: "Outline" },
-                    { value: "link", label: "Link" },
+                    { value: "filled", label: l10n.filled },
+                    { value: "outline", label: l10n.outline },
+                    { value: "link", label: l10n.link },
                   ]}
                 />
               </Field>
-              <Field label="Corners">
+              <Field label={l10n.corners}>
                 <Choice<ButtonRadius>
-                  label="Corners"
+                  label={l10n.corners}
                   value={a.radius as ButtonRadius}
                   onChange={(radius) => set({ radius })}
                   options={[
-                    { value: "square", label: "Square" },
-                    { value: "rounded", label: "Round" },
-                    { value: "pill", label: "Pill" },
+                    { value: "square", label: l10n.square },
+                    { value: "rounded", label: l10n.round },
+                    { value: "pill", label: l10n.pill },
                   ]}
                 />
               </Field>
-              <Field label="Align">
+              <Field label={l10n.align}>
                 <AlignToggle value={a.align as Align} onChange={(align) => set({ align })} />
               </Field>
-              <Field label="Colour">
-                <SwatchPicker swatches={brandSwatches} value={String(a.color)} onValueChange={(color) => set({ color })} aria-label="Button colour" />
+              <Field label={l10n.colour}>
+                <SwatchPicker swatches={getBrandSwatches(l10n)} value={String(a.color)} onValueChange={(color) => set({ color })} aria-label={l10n.buttonColour} />
               </Field>
             </>
           )}
           {(sel.type === "emailImage" || sel.type === "emailLogo") && (
             <>
-              <Field label="Image">
-                <CommitInput aria-label="Image URL" value={String(a.src ?? "").startsWith("data:") ? "" : String(a.src ?? "")} placeholder={String(a.src ?? "").startsWith("data:") ? "Uploaded image" : "https://"} onCommit={(src) => set({ src })} />
-                <Button size="icon-sm" variant="ghost" aria-label="Upload image" onClick={() => void upload("src")}>
+              <Field label={l10n.image}>
+                <CommitInput aria-label={l10n.imageURL} value={String(a.src ?? "").startsWith("data:") ? "" : String(a.src ?? "")} placeholder={String(a.src ?? "").startsWith("data:") ? l10n.uploadedImage : "https://"} onCommit={(src) => set({ src })} />
+                <Button size="icon-sm" variant="ghost" aria-label={l10n.uploadImage} onClick={() => void upload("src")}>
                   <UploadIcon />
                 </Button>
               </Field>
               {sel.type === "emailImage" ? (
                 <>
-                  <Field label="Alt text">
-                    <CommitInput aria-label="Alt text" value={String(a.alt ?? "")} placeholder="Describe the image" onCommit={(alt) => set({ alt })} />
+                  <Field label={l10n.altText}>
+                    <CommitInput aria-label={l10n.altText} value={String(a.alt ?? "")} placeholder={l10n.describeTheImage} onCommit={(alt) => set({ alt })} />
                   </Field>
-                  <Field label="Link">
-                    <CommitInput aria-label="Image link" value={String(a.href ?? "")} placeholder="Optional" onCommit={(href) => set({ href })} />
+                  <Field label={l10n.link}>
+                    <CommitInput aria-label={l10n.imageLink} value={String(a.href ?? "")} placeholder={l10n.optional} onCommit={(href) => set({ href })} />
                   </Field>
-                  <Field label="Width">
+                  <Field label={l10n.width}>
                     <Choice<number>
-                      label="Width"
+                      label={l10n.width}
                       value={Number(a.width)}
                       onChange={(width) => set({ width })}
                       options={[25, 50, 75, 100].map((w) => ({ value: w, label: `${w}%` }))}
@@ -405,9 +425,9 @@ function NodeSettingsMenu({ editor }: { editor: Editor }) {
                   </Field>
                 </>
               ) : (
-                <Field label="Size">
+                <Field label={l10n.size}>
                   <Choice<number>
-                    label="Logo size"
+                    label={l10n.logoSize}
                     value={Number(a.size)}
                     onChange={(size) => set({ size })}
                     options={[
@@ -418,15 +438,15 @@ function NodeSettingsMenu({ editor }: { editor: Editor }) {
                   />
                 </Field>
               )}
-              <Field label="Align">
+              <Field label={l10n.align}>
                 <AlignToggle value={a.align as Align} onChange={(align) => set({ align })} />
               </Field>
             </>
           )}
           {sel.type === "spacer" && (
-            <Field label="Height">
+            <Field label={l10n.height}>
               <Choice<number>
-                label="Spacer height"
+                label={l10n.spacerHeight}
                 value={Number(a.height)}
                 onChange={(height) => set({ height })}
                 options={[8, 16, 32, 64].map((h) => ({ value: h, label: `${h}` }))}
@@ -440,15 +460,17 @@ function NodeSettingsMenu({ editor }: { editor: Editor }) {
 }
 
 function AlignmentToggles({ editor }: { editor: Editor }) {
+  const l10n = useLocale().labels
+
   const align = useEditorState({
     editor,
     selector: ({ editor: e }) =>
       (["center", "right"] as const).find((v) => e.isActive({ textAlign: v })) ?? "left",
   })
   const items: { value: Align; label: string; Icon: React.ComponentType }[] = [
-    { value: "left", label: "Align left", Icon: AlignLeftIcon },
-    { value: "center", label: "Align centre", Icon: AlignCenterIcon },
-    { value: "right", label: "Align right", Icon: AlignRightIcon },
+    { value: "left", label: l10n.alignLeft, Icon: AlignLeftIcon },
+    { value: "center", label: l10n.alignCentre, Icon: AlignCenterIcon },
+    { value: "right", label: l10n.alignRight, Icon: AlignRightIcon },
   ]
   return (
     <>
@@ -513,6 +535,15 @@ export function EmailEditor({
   onReady,
   className,
 }: EmailEditorProps) {
+  const l10n = useLocale().labels
+
+  const emailTextColors = getEmailTextColors(l10n)
+  const emailHighlightColors = getEmailHighlightColors(l10n)
+
+  const localeRef = React.useRef(l10n)
+  localeRef.current = l10n
+  const slashRef = React.useRef(slashItems)
+  slashRef.current = slashItems
   const initial = value ?? defaultValue ?? emptyEmail
   const [subject, setSubject] = React.useState(initial.subject)
   const [preheader, setPreheader] = React.useState(initial.preheader)
@@ -531,8 +562,8 @@ export function EmailEditor({
     immediatelyRender: false,
     editable: !readOnly,
     content: initial.content,
-    extensions: emailExtensions({ variables, slashItems, uploadImage }),
-    editorProps: { attributes: { "aria-label": "Email body", role: "textbox", "aria-multiline": "true" } },
+    extensions: emailExtensions({ variables, slashItems: () => slashRef.current ?? getEmailSlashItems(localeRef.current), uploadImage, labels: () => localeRef.current }),
+    editorProps: { attributes: { "aria-label": l10n.emailBody, role: "textbox", "aria-multiline": "true" } },
     onUpdate: ({ editor: e }) => {
       const content = e.getJSON()
       lastJSON.current = JSON.stringify(content)
@@ -603,47 +634,47 @@ export function EmailEditor({
       data-slot="email-editor"
       className={cn("flex min-h-0 flex-col overflow-hidden rounded-xl bg-card text-card-foreground shadow-raised", className)}
     >
-      <div className="flex h-12 shrink-0 items-center gap-2 border-b border-border px-3">
-        <SegmentedControl size="sm" value={view} onValueChange={(v) => setView(v as "edit" | "preview")} aria-label="Mode">
+      <div className="flex min-h-12 shrink-0 flex-wrap items-center gap-2 border-b border-border px-3 py-2">
+        <SegmentedControl size="sm" value={view} onValueChange={(v) => setView(v as "edit" | "preview")} aria-label={l10n.mode}>
           <SegmentedControlItem value="edit">
             <EditIcon />
-            Edit
+            {l10n.edit}
           </SegmentedControlItem>
           <SegmentedControlItem value="preview">
             <EyeIcon />
-            Preview
+            {l10n.preview}
           </SegmentedControlItem>
         </SegmentedControl>
         {view === "preview" && previewValues && (
           <label className="ml-1 flex items-center gap-2 text-ui-sm text-muted-foreground">
-            <Switch checked={useSample} onCheckedChange={setUseSample} aria-label="Fill variables with sample data" />
-            Sample data
+            <Switch checked={useSample} onCheckedChange={setUseSample} aria-label={l10n.fillVariablesWithSampleData} />
+            {l10n.sampleData}
           </label>
         )}
         <div className="ml-auto flex items-center gap-2">
-          <SegmentedControl size="sm" value={device} onValueChange={(v) => setDevice(v as "desktop" | "mobile")} aria-label="Device">
-            <SegmentedControlItem value="desktop" aria-label="Desktop">
+          <SegmentedControl size="sm" value={device} onValueChange={(v) => setDevice(v as "desktop" | "mobile")} aria-label={l10n.device}>
+            <SegmentedControlItem value="desktop" aria-label={l10n.desktop}>
               <MonitorIcon />
             </SegmentedControlItem>
-            <SegmentedControlItem value="mobile" aria-label="Mobile">
+            <SegmentedControlItem value="mobile" aria-label={l10n.mobile}>
               <SmartphoneIcon />
             </SegmentedControlItem>
           </SegmentedControl>
           <Menu>
             <MenuTrigger render={<Button size="sm" variant="secondary" />}>
               <DownloadIcon data-icon="inline-start" />
-              Export
+              {l10n.export}
             </MenuTrigger>
             <MenuContent align="end" className="w-48">
               <MenuGroup>
                 <MenuLabel>HTML</MenuLabel>
                 <MenuItem onClick={() => void copyHtml()} closeOnClick={false}>
                   <CopyIcon />
-                  {copied ? "Copied" : "Copy HTML"}
+                  {copied ? l10n.copied : l10n.copyHTML}
                 </MenuItem>
                 <MenuItem onClick={() => void exportHtml().then((h) => download(h, `${fileName}.html`, "text/html"))}>
                   <DownloadIcon />
-                  Download .html
+                  {l10n.downloadHtml}
                 </MenuItem>
               </MenuGroup>
               <MenuSeparator />
@@ -651,11 +682,11 @@ export function EmailEditor({
                 <MenuLabel>JSON</MenuLabel>
                 <MenuItem onClick={() => download(JSON.stringify(current(), null, 2), `${fileName}.json`, "application/json")}>
                   <DownloadIcon />
-                  Export JSON
+                  {l10n.exportJSON}
                 </MenuItem>
                 <MenuItem onClick={() => void importJson()} disabled={readOnly}>
                   <UploadIcon />
-                  Import JSON
+                  {l10n.importJSON}
                 </MenuItem>
               </MenuGroup>
             </MenuContent>
@@ -665,22 +696,22 @@ export function EmailEditor({
 
       <div className="flex shrink-0 flex-col border-b border-border">
         <label className="flex h-10 items-center gap-3 border-b border-border px-4">
-          <span className="w-18 shrink-0 text-ui text-muted-foreground">Subject</span>
+          <span className="w-18 shrink-0 text-ui text-muted-foreground">{l10n.subject}</span>
           <input
             value={subject}
             readOnly={readOnly}
             onChange={(e) => updateField({ subject: e.target.value })}
-            placeholder="What is this email about?"
+            placeholder={l10n.whatIsThisEmailAbout}
             className="h-full min-w-0 flex-1 bg-transparent text-ui font-medium outline-none placeholder:text-muted-foreground/72"
           />
         </label>
         <label className="flex h-10 items-center gap-3 px-4">
-          <span className="w-18 shrink-0 text-ui text-muted-foreground">Preheader</span>
+          <span className="w-18 shrink-0 text-ui text-muted-foreground">{l10n.preheader}</span>
           <input
             value={preheader}
             readOnly={readOnly}
             onChange={(e) => updateField({ preheader: e.target.value })}
-            placeholder="Preview text shown after the subject in the inbox"
+            placeholder={l10n.previewTextShownAfterTheSubjectInTheInbox}
             className="h-full min-w-0 flex-1 bg-transparent text-ui outline-none placeholder:text-muted-foreground/72"
           />
         </label>
@@ -694,7 +725,7 @@ export function EmailEditor({
           >
             <div className="relative py-8 pr-8 pl-14">
               <EditorContent editor={editor} className={cn(emailContentClass, "min-h-60")} />
-              {editor && !readOnly && <EditorBlockHandle editor={editor} blockTypes={emailBlockTypes} />}
+              {editor && !readOnly && <EditorBlockHandle editor={editor} blockTypes={getEmailBlockTypes(l10n)} />}
             </div>
           </div>
         </div>
@@ -709,7 +740,7 @@ export function EmailEditor({
               style={device === "mobile" ? { width: 375 + 16 } : undefined}
             >
               <iframe
-                title="Email preview"
+                title={l10n.emailPreview}
                 srcDoc={html}
                 sandbox=""
                 className={cn("block h-160 w-full", device === "mobile" && "rounded-inner")}
@@ -723,7 +754,7 @@ export function EmailEditor({
         <>
           <EditorBubbleMenu
             editor={editor}
-            blockTypes={emailBlockTypes}
+            blockTypes={getEmailBlockTypes(l10n)}
             textColors={emailTextColors}
             highlightColors={emailHighlightColors}
           >

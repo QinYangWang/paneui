@@ -11,7 +11,7 @@ export default function PaginationDemo() {
   return (
     <div className="flex w-full max-w-2xl flex-wrap items-center justify-between gap-4">
       <PaginationSummary page={page} pageSize={size} total={total} noun="customers" />
-      <div className="flex items-center gap-4">
+      <div className="flex min-w-0 flex-wrap items-center gap-4">
         <PaginationPageSize
           value={size}
           onValueChange={(s) => {

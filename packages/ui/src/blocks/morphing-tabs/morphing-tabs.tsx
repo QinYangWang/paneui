@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, LayoutGroup, motion, Reorder, useReducedMotion, type Transition } from "motion/react"
 
 import { XIcon } from "@paneui/ui/icons"
@@ -70,10 +71,14 @@ function MorphingTabs({
   onOrderChange,
   onClose,
   reorderable = true,
-  "aria-label": ariaLabel = "Tabs",
+  "aria-label": ariaLabel,
   className,
   contentClassName,
 }: MorphingTabsProps) {
+  const l10n = useLocale().labels
+
+  if (ariaLabel === undefined) ariaLabel = l10n.tabs
+
   const reduceMotion = useReducedMotion()
   const uid = React.useId()
   const ids = items.map((item) => item.id)
@@ -313,7 +318,7 @@ function MorphingTabs({
                     <button
                       type="button"
                       tabIndex={-1}
-                      aria-label={`Close ${item.label}`}
+                      aria-label={l10n.closeNamed(item.label)}
                       onPointerDownCapture={(event) => event.stopPropagation()}
                       onClick={() => close(id)}
                       className={cn(
@@ -370,7 +375,7 @@ function MorphingTabs({
                   exit={{ opacity: 0 }}
                   className="p-5 text-ui text-muted-foreground"
                 >
-                  No tab selected.
+                  {l10n.noTabSelected}
                 </motion.p>
               )}
             </AnimatePresence>

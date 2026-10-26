@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { NodeViewContent, NodeViewWrapper, ReactNodeViewRenderer, type ReactNodeViewProps } from "@tiptap/react"
 
 import { CodeIcon } from "@paneui/ui/icons"
@@ -22,6 +23,8 @@ const emojiFont = "font-[Apple_Color_Emoji,Segoe_UI_Emoji,Noto_Color_Emoji,sans-
 const calloutIcons: Record<CalloutType, string> = { info: "💡", note: "📝", success: "✅", warning: "⚠️", danger: "🚨" }
 
 function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
+  const l10n = useLocale().labels
+
   const type = (node.attrs.type as CalloutType) in calloutTone ? (node.attrs.type as CalloutType) : "info"
   const icon = (node.attrs.icon as string | null) ?? calloutIcons[type]
   return (
@@ -35,7 +38,7 @@ function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
         <MenuTrigger
           disabled={!editor.isEditable}
           contentEditable={false}
-          aria-label="Callout style"
+          aria-label={l10n.calloutStyle}
           className={cn(
             "mt-px inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-inner-or-md text-base leading-none outline-none select-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-default disabled:hover:bg-transparent",
             emojiFont
@@ -45,7 +48,7 @@ function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
         </MenuTrigger>
         <MenuContent className="w-40">
           <MenuGroup>
-            <MenuLabel>Callout</MenuLabel>
+            <MenuLabel>{l10n.callout}</MenuLabel>
             <MenuRadioGroup
               value={type}
               onValueChange={(value) => updateAttributes({ type: value, icon: calloutIcons[value as CalloutType] })}
@@ -55,7 +58,7 @@ function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
                   <span aria-hidden className={emojiFont}>
                     {calloutIcons[t]}
                   </span>
-                  <span className="capitalize">{t}</span>
+                  <span className="capitalize">{{ info: l10n.calloutInfo, note: l10n.calloutNote, success: l10n.calloutSuccess, warning: l10n.calloutWarning, danger: l10n.calloutDanger }[t]}</span>
                 </MenuRadioItem>
               ))}
             </MenuRadioGroup>
@@ -68,6 +71,8 @@ function CalloutView({ node, updateAttributes, editor }: ReactNodeViewProps) {
 }
 
 function MdxBlockView({ node, updateAttributes, editor, selected }: ReactNodeViewProps) {
+  const l10n = useLocale().labels
+
   const source = node.attrs.source as string
   const [draft, setDraft] = React.useState(source)
   React.useEffect(() => setDraft(source), [source])
@@ -83,11 +88,11 @@ function MdxBlockView({ node, updateAttributes, editor, selected }: ReactNodeVie
       <div contentEditable={false} className="flex h-7 items-center gap-1.5 border-b border-border px-2.5 text-ui-xs text-muted-foreground select-none">
         <CodeIcon className="size-3.5" />
         <span className="font-medium">MDX</span>
-        <span className="text-muted-foreground/72">kept as written</span>
+        <span className="text-muted-foreground/72">{l10n.keptAsWritten}</span>
       </div>
       <textarea
         contentEditable={false}
-        aria-label="Raw MDX"
+        aria-label={l10n.rawMDX}
         readOnly={!editor.isEditable}
         value={draft}
         rows={rows}

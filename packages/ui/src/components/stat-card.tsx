@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 
 import { ArrowDownIcon, ArrowUpIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
@@ -76,6 +77,8 @@ type StatCardDeltaProps = Omit<React.ComponentProps<typeof Badge>, "children" | 
 }
 
 function StatCardDelta({ value, unit = "%", invert = false, precision = 1, className, ...props }: StatCardDeltaProps) {
+  const l10n = useLocale().labels
+
   const { setTone } = React.useContext(StatCardContext)
   const tone: Tone = value === 0 ? "neutral" : value > 0 !== invert ? "positive" : "negative"
   React.useLayoutEffect(() => setTone(tone), [tone, setTone])
@@ -88,7 +91,7 @@ function StatCardDelta({ value, unit = "%", invert = false, precision = 1, class
       variant={variant}
       className={cn("tabular-nums", className)}
       {...props}
-      aria-label={props["aria-label"] ?? `${value >= 0 ? "Up" : "Down"} ${Math.abs(value).toFixed(precision)}${unit}`}
+      aria-label={props["aria-label"] ?? `${value >= 0 ? l10n.up : l10n.down} ${Math.abs(value).toFixed(precision)}${unit}`}
     >
       {value !== 0 && <Arrow />}
       {Math.abs(value).toFixed(precision)}

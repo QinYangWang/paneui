@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Toolbar } from "@base-ui/react/toolbar"
 import { LayoutGroup, motion, useReducedMotion, type Transition } from "motion/react"
 
@@ -70,9 +71,12 @@ export function ExpandableActionBar({
   expandOnHover = true,
   expandOnFocus = true,
   collapseDelay = 120,
-  "aria-label": ariaLabel = "Actions",
+  "aria-label": ariaLabel,
   className,
 }: ExpandableActionBarProps) {
+  const l10n = useLocale().labels
+  if (ariaLabel === undefined) ariaLabel = l10n.actions
+
   const reduce = useReducedMotion()
   const groupId = React.useId()
   const rootRef = React.useRef<HTMLDivElement>(null)

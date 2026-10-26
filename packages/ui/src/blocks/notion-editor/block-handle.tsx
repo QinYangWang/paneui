@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 import type { Editor } from "@tiptap/core"
 import type { Node as PMNode } from "@tiptap/pm/model"
 import { NodeSelection, Plugin, PluginKey, Selection, TextSelection } from "@tiptap/pm/state"
@@ -8,7 +9,7 @@ import { Decoration, DecorationSet } from "@tiptap/pm/view"
 
 import { ArrowDownIcon, ArrowUpIcon, CopyIcon, GripVerticalIcon, PlusIcon, TrashIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
-import { blockTypes as defaultBlockTypes, type BlockType } from "@paneui/ui/blocks/notion-editor/block-types"
+import { getBlockTypes, type BlockType } from "@paneui/ui/blocks/notion-editor/block-types"
 import {
   Menu,
   MenuContent,
@@ -164,7 +165,11 @@ type BlockHandleProps = {
  * caret. Render it inside the same `relative` container as `EditorContent`.
  * Content needs ~3.5rem of left padding.
  */
-export function EditorBlockHandle({ editor, blockTypes = defaultBlockTypes, className }: BlockHandleProps) {
+export function EditorBlockHandle({ editor, blockTypes, className }: BlockHandleProps) {
+  const l10n = useLocale().labels
+
+  if (blockTypes === undefined) blockTypes = getBlockTypes(l10n)
+
   const ref = React.useRef<HTMLDivElement>(null)
   const [hovered, setHovered] = React.useState<Hovered | null>(null)
   const [menuOpen, setMenuOpen] = React.useState(false)
@@ -444,7 +449,7 @@ export function EditorBlockHandle({ editor, blockTypes = defaultBlockTypes, clas
             render={
               <button
                 type="button"
-                aria-label="Insert block below"
+                aria-label={l10n.insertBlockBelow}
                 onClick={insertBelow}
                 className="inline-flex size-6 cursor-pointer items-center justify-center rounded-md text-muted-foreground/72 transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
@@ -452,7 +457,7 @@ export function EditorBlockHandle({ editor, blockTypes = defaultBlockTypes, clas
               </button>
             }
           />
-          <TooltipContent side="bottom">Click to add below</TooltipContent>
+          <TooltipContent side="bottom">{l10n.clickToAddBelow}</TooltipContent>
         </Tooltip>
         <Menu
           open={menuOpen}
@@ -467,7 +472,7 @@ export function EditorBlockHandle({ editor, blockTypes = defaultBlockTypes, clas
             render={
               <button
                 type="button"
-                aria-label="Drag to move, click for block actions"
+                aria-label={l10n.dragToMoveClickForBlockActions}
                 // Menus open on press, which would fight the drag: open on click instead.
                 onMouseDown={(e: React.MouseEvent & { preventBaseUIHandler?: () => void }) => e.preventBaseUIHandler?.()}
                 onPointerDown={(e: React.PointerEvent<HTMLButtonElement> & { preventBaseUIHandler?: () => void }) => {
@@ -497,10 +502,10 @@ export function EditorBlockHandle({ editor, blockTypes = defaultBlockTypes, clas
           />
           <MenuContent side="left" align="start" sideOffset={4} className="w-56">
             <MenuGroup>
-              <MenuLabel>{node ? labelOf(node) : "Block"}</MenuLabel>
+              <MenuLabel>{node ? labelOf(node, l10n) : l10n.block}</MenuLabel>
               {blockTypes && node?.isTextblock !== false && node?.type.name !== "codeBlock" && (
                 <MenuSub>
-                  <MenuSubTrigger>Turn into</MenuSubTrigger>
+                  <MenuSubTrigger>{l10n.turnInto}</MenuSubTrigger>
                   <MenuSubContent className="w-44">
                     {blockTypes.map((b) => (
                       <MenuItem key={b.id} onClick={() => turnInto(b)}>
@@ -513,17 +518,17 @@ export function EditorBlockHandle({ editor, blockTypes = defaultBlockTypes, clas
               )}
               <MenuItem disabled={targets.up == null} onClick={() => move("up")}>
                 <ArrowUpIcon />
-                Move up
+                {l10n.moveUp}
                 <MenuShortcut className="pointer-coarse:hidden">{mod}↑</MenuShortcut>
               </MenuItem>
               <MenuItem disabled={targets.down == null} onClick={() => move("down")}>
                 <ArrowDownIcon />
-                Move down
+                {l10n.moveDown}
                 <MenuShortcut className="pointer-coarse:hidden">{mod}↓</MenuShortcut>
               </MenuItem>
               <MenuItem onClick={duplicate}>
                 <CopyIcon />
-                Duplicate
+                {l10n.duplicate}
               </MenuItem>
             </MenuGroup>
             <MenuSeparator />
@@ -547,20 +552,20 @@ export function EditorBlockHandle({ editor, blockTypes = defaultBlockTypes, clas
   )
 }
 
-function labelOf(node: PMNode) {
+function labelOf(node: PMNode, l10n: LocaleLabels) {
   const names: Record<string, string> = {
-    paragraph: "Text",
-    heading: `Heading ${node.attrs.level}`,
-    bulletList: "Bulleted list",
-    orderedList: "Numbered list",
-    taskList: "To-do list",
-    blockquote: "Quote",
-    codeBlock: "Code block",
-    horizontalRule: "Divider",
-    image: "Image",
-    table: "Table",
-    details: "Toggle",
-    callout: "Callout",
+    paragraph: l10n.text,
+    heading: l10n.headingLevel(node.attrs.level),
+    bulletList: l10n.bulletedList,
+    orderedList: l10n.numberedList,
+    taskList: l10n.todoList,
+    blockquote: l10n.quote,
+    codeBlock: l10n.codeBlock,
+    horizontalRule: l10n.divider,
+    image: l10n.image,
+    table: l10n.table,
+    details: l10n.toggle,
+    callout: l10n.callout,
     mdxBlock: "MDX",
   }
   return names[node.type.name] ?? node.type.name.replace(/^\w/, (c) => c.toUpperCase())

@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
+import { cva, type VariantProps } from "class-variance-authority"
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 
@@ -42,8 +43,13 @@ const iconInsetScope =
   "[&:has(>[data-slot=sidebar-nav-list]>[data-slot=sidebar-nav-item]>*>[data-slot=sidebar-nav-link-icon])]:[--sidebar-nav-inset:1.5rem] [&:has(>[data-slot=sidebar-nav-section]>[data-slot=sidebar-nav-section-label]_[data-slot=sidebar-nav-section-icon])]:[--sidebar-nav-inset:1.5rem]"
 const insetStart = "ps-[calc(0.5rem+var(--sidebar-nav-inset,0px))] pe-2"
 
-function SidebarNav({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="sidebar-nav" className={cn("flex min-h-0 flex-1 flex-col", className)} {...props} />
+const sidebarNavVariants = cva("flex min-h-0 flex-1 flex-col", {
+  variants: { variant: { default: "", fill: "bg-shell" } },
+  defaultVariants: { variant: "default" },
+})
+
+function SidebarNav({ className, variant, ...props }: React.ComponentProps<"div"> & VariantProps<typeof sidebarNavVariants>) {
+  return <div data-slot="sidebar-nav" data-variant={variant ?? "default"} className={cn(sidebarNavVariants({ variant }), className)} {...props} />
 }
 
 /** A field-shaped button that opens your search (a command palette). Its text defaults to the locale's "Search". */

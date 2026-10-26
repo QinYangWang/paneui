@@ -24,7 +24,7 @@ export default function AnimatedSidebarControlled() {
   const [active, setActive] = React.useState("Contracts")
 
   return (
-    <SidebarProvider open={open} onOpenChange={setOpen} shortcut={null} className="h-80 w-full max-w-xl gap-3">
+    <SidebarProvider open={open} onOpenChange={setOpen} shortcut={null} className="w-full max-w-xl flex-col gap-3 sm:h-80 sm:flex-row">
       <Sidebar>
         <SidebarContent>
           <SidebarGroup>

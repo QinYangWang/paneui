@@ -41,7 +41,7 @@ export default {
   notes: [
     {
       title: "Input",
-      body: "The block never highlights in the browser. Give it markup highlighted at build time, as an `html` string or as children. Dual-theme output that puts `--shiki-light` and `--shiki-dark` on the `<pre>` and its spans follows the `.dark` class; output with inline light colours plus `--shiki-dark` works too. Only pass trusted build output to `html`.",
+      body: "The block never highlights in the browser. Give it markup highlighted at build time, as an `html` string or as children. Use `highlight(code, language)` from the installed `lib/highlight` module. Its colours follow the current theme and style. Existing dual-theme markup remains supported. Only pass trusted build output to `html`.",
     },
     {
       title: "Lines",

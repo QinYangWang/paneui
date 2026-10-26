@@ -1,10 +1,12 @@
 import { SharedLayoutBg, SharedLayoutBgItem } from "@paneui/ui/components/shared-layout-bg"
+import { ScrollArea } from "@paneui/ui/components/scroll-area"
 
 const tabs = ["Overview", "Deployments", "Analytics", "Logs", "Settings"]
 
 export default function SharedLayoutBgHorizontal() {
   return (
-    <nav aria-label="Project">
+    <ScrollArea orientation="horizontal" className="max-w-full" viewportProps={{ "aria-label": "Project" }}>
+    <nav aria-label="Project" className="w-max">
       <SharedLayoutBg orientation="horizontal" className="gap-1">
         {tabs.map((tab) => (
           <SharedLayoutBgItem
@@ -17,5 +19,6 @@ export default function SharedLayoutBgHorizontal() {
         ))}
       </SharedLayoutBg>
     </nav>
+    </ScrollArea>
   )
 }

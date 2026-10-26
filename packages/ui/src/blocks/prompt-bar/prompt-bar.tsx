@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion } from "motion/react"
 
 import { ArrowUpIcon, AttachIcon, MicIcon, StopIcon } from "@paneui/ui/icons"
@@ -8,7 +9,7 @@ import { cn } from "@paneui/ui/lib/utils"
 import { Button } from "@paneui/ui/components/button"
 
 export function PromptBar({
-  placeholder = "Ask anything…",
+  placeholder,
   busy = false,
   onSubmit,
   onStop,
@@ -20,6 +21,9 @@ export function PromptBar({
   onStop?: () => void
   className?: string
 }) {
+  const l10n = useLocale().labels
+  if (placeholder === undefined) placeholder = l10n.askAnything
+
   const [value, setValue] = React.useState("")
   const canSend = value.trim().length > 0
 
@@ -57,23 +61,23 @@ export function PromptBar({
       />
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
-          <Button type="button" variant="ghost" size="icon-sm" aria-label="Attach">
+          <Button type="button" variant="ghost" size="icon-sm" aria-label={l10n.attach}>
             <AttachIcon />
           </Button>
-          <Button type="button" variant="ghost" size="icon-sm" aria-label="Voice">
+          <Button type="button" variant="ghost" size="icon-sm" aria-label={l10n.voice}>
             <MicIcon />
           </Button>
         </div>
         <AnimatePresence mode="popLayout" initial={false}>
           {busy ? (
             <motion.span key="stop" initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.6, opacity: 0 }}>
-              <Button type="button" variant="secondary" size="icon-sm" aria-label="Stop" onClick={onStop}>
+              <Button type="button" variant="secondary" size="icon-sm" aria-label={l10n.stop} onClick={onStop}>
                 <StopIcon size={14} />
               </Button>
             </motion.span>
           ) : (
             <motion.span key="send" initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.6, opacity: 0 }}>
-              <Button type="submit" size="icon-sm" aria-label="Send" disabled={!canSend}>
+              <Button type="submit" size="icon-sm" aria-label={l10n.send} disabled={!canSend}>
                 <ArrowUpIcon />
               </Button>
             </motion.span>

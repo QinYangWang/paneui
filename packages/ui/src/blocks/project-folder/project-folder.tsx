@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { LayoutGroup, motion, useReducedMotion } from "motion/react"
 
@@ -84,6 +85,8 @@ export function ProjectFolder({
   disabled = false,
   className,
 }: ProjectFolderProps) {
+  const l10n = useLocale().labels
+
   const reduce = useReducedMotion()
   const uid = React.useId()
   const [open, setOpen] = useControllable(openProp, defaultOpen, onOpenChange)
@@ -209,7 +212,7 @@ export function ProjectFolder({
                   </div>
                 </motion.div>
                 <DialogPrimitive.Close
-                  aria-label="Close folder"
+                  aria-label={l10n.closeFolder}
                   className="absolute top-4 right-4 inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <XIcon size={16} />

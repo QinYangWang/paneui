@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { Toolbar } from "@base-ui/react/toolbar"
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "motion/react"
 
@@ -57,11 +58,16 @@ export function OverflowActions({
   onAction,
   collapseOnAction = false,
   size = "md",
-  openLabel = "More actions",
-  closeLabel = "Fewer actions",
-  "aria-label": ariaLabel = "Actions",
+  openLabel,
+  closeLabel,
+  "aria-label": ariaLabel,
   className,
 }: OverflowActionsProps) {
+  const l10n = useLocale().labels
+  if (openLabel === undefined) openLabel = l10n.moreActions
+  if (closeLabel === undefined) closeLabel = l10n.fewerActions
+  if (ariaLabel === undefined) ariaLabel = l10n.actions
+
   const reduce = useReducedMotion()
   const groupId = React.useId()
   const toggleRef = React.useRef<HTMLButtonElement>(null)
@@ -131,7 +137,7 @@ export function OverflowActions({
             key="overflow"
             id={groupId}
             role="group"
-            aria-label="Extra actions"
+            aria-label={l10n.extraActions}
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "auto", opacity: 1 }}
             exit={{ width: 0, opacity: 0, transition: reduce ? { duration: 0 } : { ...SHELL, stiffness: 320, damping: 32 } }}

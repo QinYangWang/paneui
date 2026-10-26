@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { motion, useReducedMotion, type Variants } from "motion/react"
@@ -199,9 +200,12 @@ function Sidebar({
   className,
   panelClassName,
   children,
-  "aria-label": ariaLabel = "Sidebar",
+  "aria-label": ariaLabel,
   ...props
 }: SidebarProps) {
+  const l10n = useLocale().labels
+  if (ariaLabel === undefined) ariaLabel = l10n.sidebar
+
   const { open, reduce } = useSidebar()
   const collapsed = collapsible === "icon" && !open
   return (
@@ -597,6 +601,8 @@ function SidebarSubItem({ isActive = false, href, disabled, icon, render, classN
 /* ───────────────────────── Chrome ───────────────────────── */
 
 function SidebarTrigger({ className, onClick, children, ...props }: React.ComponentProps<"button">) {
+  const l10n = useLocale().labels
+
   const { open, toggle } = useSidebar()
   return (
     <button
@@ -613,7 +619,7 @@ function SidebarTrigger({ className, onClick, children, ...props }: React.Compon
         className
       )}
       {...props}
-      aria-label={props["aria-label"] ?? (open ? "Collapse sidebar" : "Expand sidebar")}
+      aria-label={props["aria-label"] ?? (open ? l10n.collapseSidebar : l10n.expandSidebar)}
     >
       {children ?? <SidebarIcon />}
     </button>

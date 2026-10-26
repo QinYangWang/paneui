@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
 import {
@@ -198,10 +199,13 @@ function FileTree({
   onExpandedChange,
   onOpenFile,
   indent = 12,
-  label = "Files",
+  label,
   className,
   ...props
 }: FileTreeProps) {
+  const l10n = useLocale().labels
+  if (label === undefined) label = l10n.files
+
   const reduce = useReducedMotion() ?? false
   // Guides grow in only for rows that appear after mount (a folder opening); rows that are
   // there from the start draw their guides immediately, so a guide never stays at scale 0.

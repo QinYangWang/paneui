@@ -7,7 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { ChevronDownIcon, ListIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
 import { DigitSwap } from "@paneui/ui/components/digit-swap"
-import { useLocale } from "@paneui/ui/components/locale-provider"
+import { useLocale, localeLabels, type LocaleLabels } from "@paneui/ui/components/locale-provider"
 
 type TodoStatus = "pending" | "in-progress" | "done" | "failed"
 
@@ -21,12 +21,15 @@ type TodoItem = {
   detail?: React.ReactNode
 }
 
-const STATUS_LABEL: Record<TodoStatus, string> = {
-  pending: "Pending",
-  "in-progress": "In progress",
-  done: "Done",
-  failed: "Failed",
+function getStatusLabels(l10n: LocaleLabels = localeLabels.en): Record<TodoStatus, string> {
+  return ({
+  pending: l10n.pending,
+  "in-progress": l10n.inProgress,
+  done: l10n.toolDone,
+  failed: l10n.toolFailed,
+})
 }
+
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const
 const SPRING = { type: "spring", stiffness: 460, damping: 32, mass: 0.6 } as const
@@ -130,6 +133,9 @@ function TodoList({
   className,
   ...props
 }: TodoListProps) {
+  const l10n = useLocale().labels
+  const STATUS_LABEL = getStatusLabels(l10n)
+
   const { labels } = useLocale()
   const title = titleProp ?? labels.plan
   const reduce = useReducedMotion()
@@ -218,11 +224,11 @@ function TodoList({
         </span>
         {failed > 0 && (
           <span className="rounded-full bg-destructive/12 px-1.5 py-0.5 text-ui-xs font-medium text-destructive tabular-nums">
-            {failed} failed
+            {labels.failedTasks(failed)}
           </span>
         )}
         <span className="sr-only">
-          {done} of {total} done
+          {labels.completedTasks(done, total)}
         </span>
         <span
           aria-hidden

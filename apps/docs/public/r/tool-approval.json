@@ -13,7 +13,8 @@
     "https://paneui.dev/r/button.json",
     "https://paneui.dev/r/tool-result.json",
     "https://paneui.dev/r/icon-chip.json",
-    "https://paneui.dev/r/action-swap-roll.json"
+    "https://paneui.dev/r/action-swap-roll.json",
+    "https://paneui.dev/r/locale-provider.json"
   ],
   "files": [
     {

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion } from "motion/react"
 
 import { CheckIcon, ShieldIcon, XIcon } from "@paneui/ui/icons"
@@ -29,6 +30,8 @@ export function ApprovalCard({
   onDecline?: () => void
   className?: string
 }) {
+  const l10n = useLocale().labels
+
   const [status, setStatus] = React.useState<Status>("pending")
 
   return (
@@ -38,7 +41,7 @@ export function ApprovalCard({
           <IconChip size="sm" tone="primary">
             <ShieldIcon />
           </IconChip>
-          Needs your approval
+          {l10n.needsYourApproval}
         </div>
         <CardTitle className="text-lg">{title}</CardTitle>
       </CardHeader>
@@ -69,7 +72,7 @@ export function ApprovalCard({
                   onDecline?.()
                 }}
               >
-                Decline
+                {l10n.decline}
               </Button>
               <Button
                 className="flex-1"
@@ -78,7 +81,7 @@ export function ApprovalCard({
                   onApprove?.()
                 }}
               >
-                Approve
+                {l10n.approve}
               </Button>
             </motion.div>
           ) : (
@@ -91,10 +94,10 @@ export function ApprovalCard({
             >
               <Badge variant={status === "approved" ? "success" : "destructive"}>
                 {status === "approved" ? <CheckIcon /> : <XIcon />}
-                {status === "approved" ? "Approved" : "Declined"}
+                {status === "approved" ? l10n.approved : l10n.declined}
               </Badge>
               <Button variant="ghost" size="sm" onClick={() => setStatus("pending")}>
-                Undo
+                {l10n.undo}
               </Button>
             </motion.div>
           )}
