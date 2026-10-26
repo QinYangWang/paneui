@@ -11,9 +11,15 @@ export default {
     { id: "sky", title: { en: "Sky", zh: "天空" }, description: { en: "Omit variant and seed for sky; seeds keep the original eight compositions.", zh: "不传 variant 和 seed 时使用天空；种子仍从原有八种构图中选择。" } },
     { id: "seed", title: { en: "From a Seed", zh: "按种子生成" },  },
     { id: "tones", title: { en: "Mirror and Tones", zh: "镜像与色调" },  },
+    { id: "image", title: { en: "Image", zh: "图片" }, description: { en: "Use when the post already has its own artwork.", zh: "文章已有配图时使用。" } },
+    { id: "shader", title: { en: "Shader", zh: "Shader" }, description: { en: "Use for a moving cover; a seed keeps each post's colours.", zh: "需要动态封面时使用；种子让每篇文章保持自己的配色。" } },
     { id: "rtl", title: { en: "RTL", zh: "从右到左" },  },
   ],
   notes: [
+    {
+      title: "Shader",
+      body: "The shader variant renders [Shader Background](/docs/shader-background) and pauses offscreen and under reduced motion. `palette=\"random\"` with a `seed` gives the same colours on every visit and in `OgCoverArt`; without a seed it picks new colours after mount.",
+    },
     {
       title: "Accessibility",
       body: "The art is `role=\"img\"`, named by the locale’s `coverArt` label (“Abstract cover illustration” in English) through a hidden element, so it works without client code. Pass `aria-label` with the post title, or `aria-hidden` when a caption next to it already names the post.",
@@ -24,7 +30,7 @@ export default {
     },
     {
       title: "Share images",
-      body: "This art is CSS for the page. For an `opengraph-image` route use `OgCoverArt` from [OG Image](/docs/og-image): the eight geometric compositions in inline styles, with matching seeds. Sky is only available in `CoverArt`.",
+      body: "This art is CSS for the page. For an `opengraph-image` route use `OgCoverArt` from [OG Image](/docs/og-image): the eight geometric compositions in inline styles, with matching seeds. `image` and `palette` work there too; the shader becomes a still frame of the same colours. Sky is only available in `CoverArt`.",
     },
     {
       title: "Seeds",
@@ -36,13 +42,16 @@ export default {
       name: "CoverArt",
       extends: "div",
       props: [
-        { name: "variant", type: '"sky" | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7', description: "Which composition to draw. Wins over `seed`; without either it is `sky`." },
+        { name: "variant", type: '"sky" | "shader" | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7', description: "Which composition to draw. Wins over `seed`; without either it is `sky`." },
+        { name: "image", type: "string", description: "Image URL drawn edge to edge. Wins over `variant`." },
+        { name: "palette", type: 'string[] | "random"', description: "Shader colours, or a random set picked by `seed`. Implies `variant=\"shader\"`." },
+        { name: "shader", type: "ShaderVariant", default: '"mesh-gradient"', description: "Which shader the `shader` variant draws." },
         { name: "seed", type: "string", description: "Picks composition, mirror, tones and pattern from a stable hash of the string." },
         { name: "mirror", type: `"none" | "x" | "y" | "xy"`, description: "Flips the composition. Defaults to the seed's, or `\"none\"`." },
         { name: "ramp", type: "0 | 1 | 2", description: "Shifts geometric tones along the accent ladder; ignored by sky. Defaults to the seed's, or `0`." },
       ],
       dataAttributes: [
-        { name: "data-variant", description: "The composition drawn, `sky` or `0` to `7`." },
+        { name: "data-variant", description: "The composition drawn: `sky`, `image`, `shader` or `0` to `7`." },
         { name: "data-mirror", description: "The mirror applied." },
         { name: "data-ramp", description: "The tone offset applied." },
       ],

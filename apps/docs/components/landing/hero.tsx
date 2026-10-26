@@ -19,6 +19,7 @@ import {
 } from "@paneui/ui/components/sidebar-nav"
 import { useT, type Localized } from "@/lib/site-locale"
 
+import { isSky, LandingBackdropLayer } from "./backdrop"
 import { asset } from "./parts"
 import { Checklist, Composer, Deploy, Latency, Messages, Requests, Rollout } from "./pieces"
 import { EASE, useStill } from "./reveal"
@@ -126,17 +127,16 @@ export function Hero() {
   return (
     <section ref={ref} aria-labelledby="hero-title" className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div className="lp-grain lp-sky relative overflow-hidden rounded-3xl">
-        {/* Scenery: a sky over paper hills, with a night version for dark mode. */}
+        {/* Scenery: a sky over paper hills (night version for dark mode), an image, or a shader. */}
         <motion.div aria-hidden className="absolute inset-0 -z-10" style={still ? undefined : { y: skyY }}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- static export; the scenery is decorative */}
-          <img aria-hidden src={asset("hero-sky-light.webp")} alt="" className="absolute inset-0 size-full scale-110 object-cover object-bottom dark:hidden" />
-          {/* eslint-disable-next-line @next/next/no-img-element -- static export; the scenery is decorative */}
-          <img aria-hidden src={asset("hero-sky-dark.webp")} alt="" className="absolute inset-0 hidden size-full scale-110 object-cover object-bottom dark:block" />
+          <LandingBackdropLayer scenery className="scale-110" />
         </motion.div>
-        <motion.div aria-hidden className="pointer-events-none absolute -end-20 top-10 hidden w-80 sm:block lg:w-md" style={still ? undefined : { x: cloudX2 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
-          <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift w-full -scale-x-100 opacity-80 [animation-delay:-9s] dark:opacity-10" />
-        </motion.div>
+        {isSky() && (
+          <motion.div aria-hidden className="pointer-events-none absolute -end-20 top-10 hidden w-80 sm:block lg:w-md" style={still ? undefined : { x: cloudX2 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
+            <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift w-full -scale-x-100 opacity-80 [animation-delay:-9s] dark:opacity-10" />
+          </motion.div>
+        )}
 
         <div className="relative flex flex-col items-center px-5 pt-32 text-center sm:pt-40 lg:pt-44">
           <motion.h1 id="hero-title" className="lp-display text-balance max-w-4xl text-4xl sm:text-6xl lg:text-7xl" {...rise(0.05, still)}>

@@ -15,6 +15,11 @@ export default {
       description: { en: "Use to match a brand palette instead of the theme.", zh: "适用于需要使用品牌色板的场景。" },
     },
     {
+      id: "random-colors",
+      title: { en: "Random Colors", zh: "随机颜色" },
+      description: { en: "Use for one-off covers and headers that don't need a brand palette.", zh: "适用于不需要品牌色的封面和页头。" },
+    },
+    {
       id: "paused",
       title: { en: "Speed and Paused", zh: "速度与暂停" },
     },
@@ -44,9 +49,10 @@ export default {
         },
         {
           name: "colors",
-          type: "string[]",
-          description: "Any CSS colours, including `var(--token)` and `color-mix(...)`, re-read when the theme changes. Defaults to tints of `--primary` and `--background`; `waves` uses only the first colour.",
+          type: 'string[] | "random"',
+          description: "Any CSS colours, including `var(--token)` and `color-mix(...)`, re-read when the theme changes. `\"random\"` picks a matching set. Defaults to tints of `--primary` and `--background`; `waves` uses only the first colour.",
         },
+        { name: "seed", type: "string", description: "Makes `colors=\"random\"` repeatable; without it the palette changes on every mount." },
         { name: "colorBack", type: "string", default: `"var(--background)"`, description: "Base colour behind the pattern (grain, waves, dot orbit)." },
         { name: "speed", type: "number", default: "0.6", description: "Animation speed. `0` freezes the current frame." },
         { name: "paused", type: "boolean", default: "false", description: "Freeze the animation." },

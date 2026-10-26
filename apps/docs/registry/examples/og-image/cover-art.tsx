@@ -14,6 +14,15 @@ export default function OgImageCoverArt() {
           </svg>
         </div>
       ))}
+      {SLUGS.slice(0, 2).map((slug) => (
+        <div key={`shader-${slug}`} className="overflow-hidden rounded-xl shadow-raised">
+          <svg viewBox={`0 0 ${OG_IMAGE_WIDTH} ${OG_IMAGE_HEIGHT}`} role="img" aria-label={`Shader cover for ${slug}`} className="block h-auto w-full">
+            <foreignObject width={OG_IMAGE_WIDTH} height={OG_IMAGE_HEIGHT}>
+              <OgCoverArt seed={slug} palette="random" />
+            </foreignObject>
+          </svg>
+        </div>
+      ))}
     </div>
   )
 }

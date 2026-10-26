@@ -1677,7 +1677,8 @@
       "dependencies": [],
       "registryDependencies": [
         "@paneui/theme",
-        "@paneui/locale-provider"
+        "@paneui/locale-provider",
+        "@paneui/shader-background"
       ],
       "files": [
         {

@@ -211,6 +211,73 @@ function mixHex(color: string, base: string, alpha: number) {
   return `#${a.map((v, i) => Math.round(v * alpha + b[i] * (1 - alpha)).toString(16).padStart(2, "0")).join("")}`
 }
 
+/* Seed hash shared with CoverArt and ShaderBackground, so a seed gives the same art and colours everywhere. */
+function hashSeed(seed: string) {
+  let h = 0x811c9dc5
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i)
+    h = Math.imul(h, 0x01000193)
+  }
+  return h >>> 0
+}
+function mix(h: number) {
+  h ^= h >>> 16
+  h = Math.imul(h, 0x85ebca6b)
+  h ^= h >>> 13
+  h = Math.imul(h, 0xc2b2ae35)
+  h ^= h >>> 16
+  return h >>> 0
+}
+function hslHex(h: number, s: number, l: number) {
+  const a = (s / 100) * Math.min(l / 100, 1 - l / 100)
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12
+    const v = l / 100 - a * Math.max(-1, Math.min(k - 3, 9 - k, 1))
+    return Math.round(v * 255).toString(16).padStart(2, "0")
+  }
+  return `#${f(0)}${f(8)}${f(4)}`
+}
+const SCHEMES = [
+  [0, 30, 60, 200],
+  [0, 150, 180, 330],
+  [0, 40, 180, 220],
+] as const
+const LIGHTS = [58, 72, 86, 66]
+
+/** The seeded palette ShaderBackground uses for `colors="random"`, as hex. */
+function ogPalette(seed: string, count = 4): string[] {
+  const h = mix(hashSeed(seed))
+  const hue = h % 360
+  const scheme = SCHEMES[(h >>> 9) % SCHEMES.length]
+  const sat = 68 + ((h >>> 12) % 20)
+  return Array.from({ length: count }, (_, i) => hslHex((hue + scheme[i % scheme.length] + Math.floor(i / scheme.length) * 15) % 360, Math.max(40, sat - i * 6), LIGHTS[i % LIGHTS.length]))
+}
+
+/**
+ * A still frame of the mesh-gradient shader: soft colour fields over the first colour. The PNG
+ * renderer has no WebGL, so blobs are radial gradients placed by the seed.
+ */
+function meshLayers(colors: string[], seed: string) {
+  const h = mix(hashSeed(seed))
+  return colors
+    .slice(1)
+    .map((color, i) => {
+      const r = mix(h ^ Math.imul(i + 1, 0x9e3779b9))
+      const x = r % 101
+      const y = (r >>> 8) % 101
+      const size = 55 + ((r >>> 16) % 30)
+      return `radial-gradient(circle at ${x}% ${y}%, ${color} 0%, ${color}00 ${size}%)`
+    })
+    .reverse()
+}
+
+/** Resolves a `palette` prop to hex colours: given, seeded random, or the accent ramp. */
+function resolvePalette(palette: string[] | "random" | undefined, seed: string, c: OgImageColors) {
+  if (Array.isArray(palette) && palette.length > 0) return palette
+  if (palette === "random") return ogPalette(seed)
+  return [c.background, c.primary, mixHex(c.primary, c.background, 0.45), mixHex(c.primary, c.background, 0.2)]
+}
+
 const WIDE = /[\u1100-\u115f\u2e80-\ua4cf\uac00-\ud7a3\uf900-\ufaff\ufe30-\ufe4f\uff00-\uff60\uffe0-\uffe6]/u
 
 /** Title size in px: shorter titles get bigger type. CJK and full-width characters count double. */
@@ -241,8 +308,14 @@ type OgImageProps = {
   tags?: string[]
   accent?: OgImageAccent
   mode?: OgImageMode
-  /** `grid` (default) or `dots` behind the text, fading out from the top corner; `none` for a flat background. */
-  pattern?: "grid" | "dots" | "none"
+  /** `grid` (default) or `dots` behind the text, fading out from the top corner; `shader` for soft colour fields; `none` for a flat background. */
+  pattern?: "grid" | "dots" | "shader" | "none"
+  /** Colours for `pattern="shader"` as hex, or `"random"`. Defaults to the accent. */
+  palette?: string[] | "random"
+  /** Picks the random palette and the shader's layout. Defaults to `title`. */
+  seed?: string
+  /** A background image URL or data URI (PNG or JPEG), drawn under a wash that keeps the text readable. */
+  image?: string
   /** Overrides for single roles, on top of the accent and mode. */
   colors?: Partial<OgImageColors>
   /** Family name the fonts were registered under. Without it the renderer's first font is used. */
@@ -287,6 +360,9 @@ function OgImage({
   accent = "blue",
   mode = "light",
   pattern = "grid",
+  palette,
+  seed,
+  image,
   colors,
   fontFamily,
   style,
@@ -303,8 +379,10 @@ function OgImage({
   // room below the last line for descenders (CJK fonts draw about 1.36em tall)
   const titleSlack = Math.ceil(size * 0.15)
   const descSlack = Math.ceil(30 * 0.15)
-  const layers = backdrop(c, pattern)
+  const layers = image || pattern === "shader" ? [] : backdrop(c, pattern)
   const glow = mixHex(c.primary, c.background, mode === "dark" ? 0.22 : 0.14)
+  const fields = !image && pattern === "shader" ? resolvePalette(palette, seed ?? title, c) : null
+  const full = { position: "absolute" as const, left: 0, top: 0, width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT, display: "flex" }
 
   return (
     <div
@@ -324,6 +402,17 @@ function OgImage({
         ...style,
       }}
     >
+      {image && <img src={image} width={OG_IMAGE_WIDTH} height={OG_IMAGE_HEIGHT} alt="" style={{ ...full, objectFit: "cover" }} />}
+      {fields && <div style={{ ...full, backgroundColor: fields[0], backgroundImage: meshLayers(fields, seed ?? title).join(", ") }} />}
+      {(image || fields) && (
+        // a wash from the text side, so titles stay readable over any picture or palette
+        <div
+          style={{
+            ...full,
+            backgroundImage: `linear-gradient(to top right, ${c.background}f2 0%, ${c.background}cc 45%, ${c.background}40 100%)`,
+          }}
+        />
+      )}
       {layers.length > 0 && (
         <div
           style={{
@@ -340,7 +429,7 @@ function OgImage({
         />
       )}
       {/* accent glow in the top corner, and a fade that keeps the pattern off the text */}
-      <div
+      {!image && !fields && <div
         style={{
           position: "absolute",
           left: 0,
@@ -350,7 +439,7 @@ function OgImage({
           display: "flex",
           backgroundImage: `radial-gradient(circle at 100% 0%, ${glow} 0%, ${glow}00 55%), radial-gradient(ellipse at 20% 100%, ${c.background} 25%, ${c.background}00 75%)`,
         }}
-      />
+      />}
 
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, height: HEADER, width: INNER, position: "relative" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
@@ -453,30 +542,17 @@ function OgImage({
 type OgCoverArtVariant = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 type OgCoverArtMirror = "none" | "x" | "y" | "xy"
 
-/* The same seed hash as the in-page CoverArt, so a post gets the same composition in both. */
-function hashSeed(seed: string) {
-  let h = 0x811c9dc5
-  for (let i = 0; i < seed.length; i++) {
-    h ^= seed.charCodeAt(i)
-    h = Math.imul(h, 0x01000193)
-  }
-  return h >>> 0
-}
-function mix(h: number) {
-  h ^= h >>> 16
-  h = Math.imul(h, 0x85ebca6b)
-  h ^= h >>> 13
-  h = Math.imul(h, 0xc2b2ae35)
-  h ^= h >>> 16
-  return h >>> 0
-}
 const MIRRORS: readonly OgCoverArtMirror[] = ["none", "x", "y", "xy"]
 
 type OgCoverArtProps = {
   /** Picks the composition, mirror, tones and pattern, as on the in-page cover art. */
   seed?: string
-  /** Which composition to draw (`0` to `7`). Wins over `seed`. */
-  variant?: OgCoverArtVariant
+  /** Which composition to draw (`0` to `7`, or `"shader"`). Wins over `seed`. */
+  variant?: OgCoverArtVariant | "shader"
+  /** An image URL or data URI drawn edge to edge instead of a composition. Wins over `variant`. */
+  image?: string
+  /** Colours for `variant="shader"` as hex, or `"random"` (from `seed`). Setting it implies the shader. */
+  palette?: string[] | "random"
   mirror?: OgCoverArtMirror
   /** Shifts the tones along the accent ladder. */
   ramp?: 0 | 1 | 2
@@ -497,6 +573,8 @@ type OgCoverArtProps = {
 function OgCoverArt({
   seed,
   variant,
+  image,
+  palette,
   mirror,
   ramp,
   accent = "blue",
@@ -509,7 +587,7 @@ function OgCoverArt({
 }: OgCoverArtProps) {
   const c = ogImageColors(accent, mode, colors)
   const h = seed !== undefined ? mix(hashSeed(seed)) : 0
-  const v = variant ?? (seed !== undefined ? ((h % 8) as OgCoverArtVariant) : 0)
+  const v = image !== undefined ? "image" : (variant ?? (palette !== undefined ? "shader" : seed !== undefined ? ((h % 8) as OgCoverArtVariant) : 0))
   const m = mirror ?? (seed !== undefined ? MIRRORS[(h >>> 3) & 3] : "none")
   const r = ramp ?? (seed !== undefined ? (((h >>> 5) % 3) as 0 | 1 | 2) : 0)
   const pattern = seed !== undefined ? mix(h ^ 0x9e3779b9) & 0xffff : 0x5a3c
@@ -521,7 +599,7 @@ function OgCoverArt({
   const edge = mixHex(c.foreground, c.background, 0.09)
   const raised = { border: `${Math.max(1, u * 0.2)}px solid ${edge}` }
   // the renderer rejects `transform: undefined`, so the flip is spread in only when there is one
-  const flipTo = v === 3 ? undefined : { none: undefined, x: "scaleX(-1)", y: "scaleY(-1)", xy: "rotate(180deg)" }[m]
+  const flipTo = v === 3 || v === "image" ? undefined : { none: undefined, x: "scaleX(-1)", y: "scaleY(-1)", xy: "rotate(180deg)" }[m]
   const flip = flipTo ? { transform: flipTo } : {}
   const angle = { none: "135deg", x: "225deg", y: "45deg", xy: "315deg" }[m]
   const glow = mixHex(c.primary, c.background, mode === "dark" ? 0.25 : 0.18)
@@ -534,7 +612,12 @@ function OgCoverArt({
   const fill = { position: "absolute" as const, left: 0, top: 0, width, height, display: "flex" }
 
   let art: React.ReactNode = null
-  if (v === 0) {
+  if (v === "image") {
+    art = <img src={image} width={width} height={height} alt="" style={{ ...fill, objectFit: "cover", ...flip }} />
+  } else if (v === "shader") {
+    const fields = resolvePalette(palette ?? (seed !== undefined ? "random" : undefined), seed ?? "", c)
+    art = <div style={{ ...fill, backgroundColor: fields[0], backgroundImage: meshLayers(fields, seed ?? "").join(", "), ...flip }} />
+  } else if (v === 0) {
     const outer = height * 0.6
     art = (
       <div style={{ ...fill, alignItems: "center", justifyContent: "center", ...flip }}>
@@ -679,5 +762,6 @@ export {
   ogImageContentType,
   ogImageSize,
   ogImageTitleSize,
+  ogPalette,
 }
 export type { OgCoverArtMirror, OgCoverArtProps, OgCoverArtVariant, OgImageAccent, OgImageColors, OgImageMode, OgImageProps }

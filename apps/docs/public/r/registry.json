@@ -1677,7 +1677,8 @@
       "dependencies": [],
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/locale-provider.json"
+        "https://paneui.dev/r/locale-provider.json",
+        "https://paneui.dev/r/shader-background.json"
       ],
       "files": [
         {

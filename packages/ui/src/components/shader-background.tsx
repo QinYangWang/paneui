@@ -29,13 +29,68 @@ const defaults: Record<ShaderVariant, { colors: string[]; colorBack: string }> =
   "dot-orbit": { colors: ["var(--primary)", tint(35), tint(65)], colorBack: "var(--background)" },
 }
 
+/* ── Seeded palettes ── the same function lives in og-image, so a seed gives the same colours in a PNG. */
+function hashSeed(seed: string) {
+  let h = 0x811c9dc5
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i)
+    h = Math.imul(h, 0x01000193)
+  }
+  return h >>> 0
+}
+function mix(h: number) {
+  h ^= h >>> 16
+  h = Math.imul(h, 0x85ebca6b)
+  h ^= h >>> 13
+  h = Math.imul(h, 0xc2b2ae35)
+  h ^= h >>> 16
+  return h >>> 0
+}
+function hslHex(h: number, s: number, l: number) {
+  const a = (s / 100) * Math.min(l / 100, 1 - l / 100)
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12
+    const v = l / 100 - a * Math.max(-1, Math.min(k - 3, 9 - k, 1))
+    return Math.round(v * 255).toString(16).padStart(2, "0")
+  }
+  return `#${f(0)}${f(8)}${f(4)}`
+}
+const SCHEMES = [
+  [0, 30, 60, 200],
+  [0, 150, 180, 330],
+  [0, 40, 180, 220],
+] as const
+const LIGHTS = [58, 72, 86, 66]
+
+/** A harmonious palette of `count` hex colours for a seed; the same seed always gives the same colours. */
+function shaderPalette(seed: string, count = 4): string[] {
+  const h = mix(hashSeed(seed))
+  const hue = h % 360
+  const scheme = SCHEMES[(h >>> 9) % SCHEMES.length]
+  const sat = 68 + ((h >>> 12) % 20)
+  return Array.from({ length: count }, (_, i) => hslHex((hue + scheme[i % scheme.length] + Math.floor(i / scheme.length) * 15) % 360, Math.max(40, sat - i * 6), LIGHTS[i % LIGHTS.length]))
+}
+
+/** Seed when given; otherwise a fresh palette after mount, so server and client markup match. */
+function usePalette(colors: string[] | "random" | undefined, seed: string | undefined) {
+  const [fresh, setFresh] = React.useState<string[] | null>(null)
+  const random = colors === "random" && seed === undefined
+  React.useEffect(() => {
+    if (random) setFresh(shaderPalette(Math.random().toString(36)))
+  }, [random])
+  if (colors !== "random") return colors
+  return seed !== undefined ? shaderPalette(seed) : (fresh ?? undefined)
+}
+
 type CommonProps = Omit<React.ComponentProps<"div">, "color"> & {
   /**
    * Palette. Any CSS colour works, including tokens like `var(--primary)` and
    * `color-mix(...)`; they are re-read when the theme changes. `waves` uses the
-   * first colour as its line colour.
+   * first colour as its line colour. `"random"` picks a matching set, from `seed` when given.
    */
-  colors?: string[]
+  colors?: string[] | "random"
+  /** Makes `colors="random"` repeatable: the same seed always gives the same palette. */
+  seed?: string
   /** Base colour behind the pattern (grain, waves, dot orbit). */
   colorBack?: string
   /** Animation speed. 0 freezes the current frame. */
@@ -114,6 +169,7 @@ function useOnScreen(ref: React.RefObject<HTMLElement | null>) {
 function ShaderBackground({
   variant = "mesh-gradient",
   colors,
+  seed,
   colorBack,
   speed = 0.6,
   paused = false,
@@ -126,12 +182,14 @@ function ShaderBackground({
   const ref = React.useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion() ?? false
   const onScreen = useOnScreen(ref)
-  const palette = colors ?? defaults[variant].colors
+  const picked = usePalette(colors, seed)
+  const pending = colors === "random" && !picked
+  const palette = picked ?? defaults[variant].colors
   const resolved = useResolvedColors(ref, [colorBack ?? defaults[variant].colorBack, ...palette])
   const liveSpeed = paused || reduce || !onScreen ? 0 : speed
 
   let shader: React.ReactNode = null
-  if (resolved) {
+  if (resolved && !pending) {
     const [back, ...list] = resolved
     const layer = cn("absolute inset-0 size-full", shaderClassName)
     switch (variant) {
@@ -231,4 +289,4 @@ function ShaderBackground({
   )
 }
 
-export { ShaderBackground, type ShaderBackgroundProps, type ShaderVariant }
+export { ShaderBackground, shaderPalette, type ShaderBackgroundProps, type ShaderVariant }

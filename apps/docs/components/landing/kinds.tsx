@@ -17,6 +17,7 @@ import { ToggleGroup, ToggleGroupItem, ToggleGroupItemIcon } from "@paneui/ui/co
 import { TrendChart } from "@paneui/ui/components/trend-chart"
 import { useT, type Localized } from "@/lib/site-locale"
 
+import { isSky, LandingBackdropLayer } from "./backdrop"
 import { asset, Eyebrow } from "./parts"
 import { Checklist, Composer, Deploy, Messages, Phone, Requests } from "./pieces"
 import { EASE, Reveal, useStill } from "./reveal"
@@ -239,10 +240,15 @@ export function Kinds({ count }: { count: number }) {
 
       <Reveal delay={0.15} className="mt-8 w-full">
         <div className="lp-grain lp-sky relative flex min-h-144 items-center justify-center overflow-hidden rounded-3xl px-4 py-10 sm:min-h-120 sm:px-10 sm:py-14">
-          {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
-          <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift pointer-events-none absolute -start-24 -bottom-16 -z-10 w-96 opacity-80 dark:hidden" />
-          {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
-          <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift pointer-events-none absolute -end-20 -top-12 -z-10 hidden w-80 -scale-x-100 opacity-70 [animation-delay:-6s] sm:block dark:hidden" />
+          <LandingBackdropLayer className="-z-10" />
+          {isSky() && (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
+              <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift pointer-events-none absolute -start-24 -bottom-16 -z-10 w-96 opacity-80 dark:hidden" />
+              {/* eslint-disable-next-line @next/next/no-img-element -- decorative */}
+              <img aria-hidden src={asset("cloud.webp")} alt="" className="lp-drift pointer-events-none absolute -end-20 -top-12 -z-10 hidden w-80 -scale-x-100 opacity-70 [animation-delay:-6s] sm:block dark:hidden" />
+            </>
+          )}
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={kind}
