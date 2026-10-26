@@ -221,7 +221,7 @@ function ExplorerDock({ client, state, selected, onSelect }: { client: AcpClient
           </div>
           <ScrollArea className="min-h-0 flex-1" viewportClassName="px-2 pb-2">
             {tree.length ? (
-              <FileTree items={tree} value={selected} onValueChange={(v, n) => n.type === "file" && onSelect(v)} expanded={open} onExpandedChange={setOpen} label="Workspace files" />
+              <FileTree variant="ghost" items={tree} value={selected} onValueChange={(v, n) => n.type === "file" && onSelect(v)} expanded={open} onExpandedChange={setOpen} label="Workspace files" />
             ) : (
               <p className="px-2 py-6 text-center text-ui text-muted-foreground">No files yet.</p>
             )}

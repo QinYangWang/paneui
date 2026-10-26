@@ -310,7 +310,7 @@ function CodeVisual({ html }: { html: string }) {
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-7">
       <div className="frame-2xl frame-p-2 hidden rounded-2xl bg-card/70 shadow-raised backdrop-blur-xl sm:col-span-2 sm:block">
-        <FileTree label={t({ en: "Project files", zh: "项目文件" })} value={file} onValueChange={setFile} defaultExpanded={["app", "components", "components/ui"]}>
+        <FileTree variant="ghost" label={t({ en: "Project files", zh: "项目文件" })} value={file} onValueChange={setFile} defaultExpanded={["app", "components", "components/ui"]}>
           <FileTreeFolder name="app">
             <FileTreeFile name="layout.tsx" />
             <FileTreeFile name="page.tsx" />

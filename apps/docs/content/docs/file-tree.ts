@@ -67,6 +67,7 @@ export default {
         { name: "onExpandedChange", type: "(expanded: string[]) => void", description: "Called when folders open or close." },
         { name: "onOpenFile", type: "(node: FileTreeNode) => void", description: "Called when a file (not a folder) is activated with Enter or a click." },
         { name: "indent", type: "number", default: "12", description: "Indent per level, px." },
+        { name: "variant", type: '"default" | "ghost"', default: '"default"', description: "Card surface, or none inside a sidebar." },
         { name: "label", type: "string", default: `"Files"`, description: "Accessible name of the tree." },
       ],
       dataAttributes: [

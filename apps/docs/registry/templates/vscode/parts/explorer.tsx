@@ -281,6 +281,7 @@ export function Explorer({
         >
           <ScrollArea className="min-h-0 flex-1" viewportClassName="px-2 pb-3">
             <FileTree
+              variant="ghost"
               items={items}
               value={selected}
               onValueChange={(v) => onSelect(v)}

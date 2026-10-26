@@ -9,7 +9,7 @@ export default function FileTreeOpenFile() {
   const [opened, setOpened] = React.useState<string | null>(null)
   return (
     <div className="flex w-72 flex-col gap-2">
-      <div className="frame-xl frame-p-2 bg-card shadow-surface">
+      <div>
         <FileTree label="Site" defaultExpanded={["public", "pages"]} onOpenFile={(node) => setOpened(node.name)}>
           <FileTreeFolder value="pages" name="pages">
             <FileTreeFile value="index.html" name="index.html" />

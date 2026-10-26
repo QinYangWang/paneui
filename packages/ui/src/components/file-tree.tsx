@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { cva } from "class-variance-authority"
 import { useLocale } from "@paneui/ui/components/locale-provider"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 
@@ -171,6 +172,20 @@ const EASE = [0.22, 1, 0.36, 1] as const
 /** Left padding of a depth-0 row, px. */
 const PAD = 4
 
+/**
+ * `default` sits on its own card surface like Command or Card; `ghost` drops the surface for
+ * trees that live inside a sidebar or panel that already has one.
+ */
+const fileTreeVariants = cva("flex min-w-0 flex-col text-ui", {
+  variants: {
+    variant: {
+      default: "frame-xl frame-p-2 bg-card shadow-raised",
+      ghost: "",
+    },
+  },
+  defaultVariants: { variant: "default" },
+})
+
 type FileTreeProps = Omit<React.ComponentProps<"div">, "children" | "defaultValue" | "onChange"> & {
   children?: React.ReactNode
   /** Data alternative to declarative children. */
@@ -185,6 +200,8 @@ type FileTreeProps = Omit<React.ComponentProps<"div">, "children" | "defaultValu
   onOpenFile?: (node: FileTreeNode) => void
   /** Indent per level, px. */
   indent?: number
+  /** Surface: `default` card, `ghost` transparent. */
+  variant?: "default" | "ghost"
   label?: string
 }
 
@@ -200,6 +217,7 @@ function FileTree({
   onOpenFile,
   indent = 12,
   label,
+  variant = "default",
   className,
   ...props
 }: FileTreeProps) {
@@ -320,7 +338,8 @@ function FileTree({
     <div
       role="tree"
       data-slot="file-tree"
-      className={cn("flex min-w-0 flex-col text-ui", className)}
+      data-variant={variant}
+      className={cn(fileTreeVariants({ variant }), className)}
       {...props}
       aria-label={props["aria-label"] ?? label}
     >
@@ -431,5 +450,5 @@ function FileTree({
   )
 }
 
-export { FileTree, FileTreeFolder, FileTreeFile, getFileKind }
+export { FileTree, FileTreeFolder, FileTreeFile, getFileKind, fileTreeVariants }
 export type { FileTreeProps, FileTreeNode, FileTreeItem, FileTreeFolderProps, FileTreeFileProps, FileKind }

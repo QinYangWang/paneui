@@ -24,7 +24,7 @@ const items: FileTreeNode[] = [
 
 export default function FileTreeItems() {
   return (
-    <div className="w-80 frame-xl frame-p-2 bg-card shadow-surface">
+    <div className="w-80">
       <FileTree label="Documents" items={items} defaultExpanded={["2026", "2026/taxes"]} defaultValue="2026/taxes/w2.pdf" />
     </div>
   )

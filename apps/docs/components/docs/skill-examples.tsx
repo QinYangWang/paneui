@@ -333,7 +333,7 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
   "chevrons-for-folders-file-icons-for-files": {
     kind: "live",
     good: (
-      <div className="w-56 bg-card shadow-raised frame-xl frame-p-2">
+      <div className="w-56">
         {/* Data instead of FileTreeFolder/FileTreeFile parts: this module renders on the server. */}
         <FileTree
           label="Project files"

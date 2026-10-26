@@ -3699,6 +3699,7 @@
       "title": "File Tree",
       "description": "Browses files and folders in a keyboard-navigable tree.",
       "dependencies": [
+        "class-variance-authority",
         "motion"
       ],
       "registryDependencies": [
