@@ -12,7 +12,6 @@ export type Post = {
   date: string
   readingTime: number
   tags: string[]
-  cover: 0 | 1 | 2 | 3
 }
 
 export const posts: Post[] = [
@@ -23,7 +22,6 @@ export const posts: Post[] = [
     date: "Oct 9, 2026",
     readingTime: 7,
     tags: ["Design", "CSS"],
-    cover: 0,
   },
   {
     slug: "motion-budgets",
@@ -32,7 +30,6 @@ export const posts: Post[] = [
     date: "Sep 22, 2026",
     readingTime: 9,
     tags: ["Motion", "Design"],
-    cover: 1,
   },
   {
     slug: "oklch-in-practice",
@@ -41,7 +38,6 @@ export const posts: Post[] = [
     date: "Aug 30, 2026",
     readingTime: 11,
     tags: ["Color", "CSS"],
-    cover: 2,
   },
   {
     slug: "tabular-numbers",
@@ -50,7 +46,6 @@ export const posts: Post[] = [
     date: "Aug 4, 2026",
     readingTime: 4,
     tags: ["Typography"],
-    cover: 3,
   },
   {
     slug: "agent-interfaces",
@@ -59,6 +54,5 @@ export const posts: Post[] = [
     date: "Jul 12, 2026",
     readingTime: 13,
     tags: ["AI", "Design"],
-    cover: 1,
   },
 ]

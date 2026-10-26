@@ -8,6 +8,25 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-26-cover-backgrounds",
+    date: "October 26, 2026",
+    title: "Covers and share images: image or shader",
+    tag: "Breaking",
+    changes: [
+      <>
+        <TextLink href="/docs/cover-art">Cover Art</TextLink> draws an <Code>image</Code> or a shader in a custom or seeded
+        random <Code>palette</Code>. The sky, the eight compositions and <Code>variant</Code>, <Code>mirror</Code>,{" "}
+        <Code>ramp</Code>, <Code>coverArtStyle</Code> and <Code>coverArtVariant</Code> are removed; pass{" "}
+        <Code>seed</Code> for a stable cover per post.
+      </>,
+      <>
+        <TextLink href="/docs/og-image">OG Image</TextLink> drops <Code>pattern</Code>: the backdrop is a shader frame in the
+        accent or a <Code>palette</Code>, or an <Code>image</Code>. <Code>OgCoverArt</Code> takes the same{" "}
+        <Code>image</Code>, <Code>palette</Code> and <Code>seed</Code>.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-19-share-images",
     date: "October 19, 2026",
     title: "Share images for Next.js routes",

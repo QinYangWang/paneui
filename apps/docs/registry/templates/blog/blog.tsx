@@ -50,7 +50,7 @@ export function BlogHome({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
               href={hrefs.post}
               className="group grid grid-cols-1 overflow-hidden rounded-2xl bg-card shadow-raised transition-shadow duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 md:grid-cols-2"
             >
-              <CoverArt variant={featured.cover} className="aspect-video md:aspect-auto md:min-h-72" />
+              <CoverArt seed={featured.slug} className="aspect-video md:aspect-auto md:min-h-72" />
               <div className="flex flex-col justify-between gap-6 p-6 sm:p-8">
                 <div className="flex flex-col gap-3">
                   <PostMeta date={featured.date} minutes={featured.readingTime} />

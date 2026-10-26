@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og"
 
-import { OgCoverArt, OgImage, ogImageContentType, ogImageSize } from "@paneui/ui/components/og-image"
+import { OgImage, ogImageContentType, ogImageSize } from "@paneui/ui/components/og-image"
 
 /*
  * One share image per post: app/blog/[slug]/opengraph-image.tsx. Swap `getPost` for your content
@@ -21,20 +21,17 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const { slug } = await params
   const post = await getPost(slug)
   return new ImageResponse(
-    <div style={{ display: "flex", position: "relative", width: size.width, height: size.height }}>
-      <OgCoverArt seed={slug} style={{ position: "absolute", left: 0, top: 0 }} />
-      <OgImage
-        title={post.title}
-        description={post.description || undefined}
-        siteName="Acme Blog"
-        author={post.author}
-        date={post.date || undefined}
-        tags={post.tags}
-        pattern="none"
-        // a scrim over the art so the text stays readable
-        style={{ position: "absolute", left: 0, top: 0, backgroundColor: "#ffffffd9" }}
-      />
-    </div>,
+    // the slug picks the palette, matching <CoverArt seed={slug} /> on the page
+    <OgImage
+      title={post.title}
+      description={post.description || undefined}
+      siteName="Acme Blog"
+      author={post.author}
+      date={post.date || undefined}
+      tags={post.tags}
+      palette="random"
+      seed={slug}
+    />,
     size
   )
 }

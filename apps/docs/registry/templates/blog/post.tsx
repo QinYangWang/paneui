@@ -58,7 +58,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
           </Stagger>
 
           <div className="overflow-hidden rounded-2xl outline -outline-offset-1 outline-(--image-outline)">
-            <CoverArt variant={post.cover} className="aspect-video w-full sm:aspect-21/9" />
+            <CoverArt seed={post.slug} className="aspect-video w-full sm:aspect-21/9" />
           </div>
 
           <div className="flex justify-between gap-12">
@@ -143,7 +143,7 @@ export function BlogPost({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                   href={hrefs.post}
                   className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-raised transition-shadow duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
-                  <CoverArt variant={p.cover} className="aspect-video" />
+                  <CoverArt seed={p.slug} className="aspect-video" />
                   <div className="flex flex-col gap-2 p-5">
                     <PostMeta date={p.date} minutes={p.readingTime} />
                     <h3 className="leading-snug font-medium text-balance">{p.title}</h3>

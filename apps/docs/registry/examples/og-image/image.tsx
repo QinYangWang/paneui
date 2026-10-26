@@ -17,8 +17,8 @@ export default function OgImageBackground() {
     <div className="grid w-full max-w-3xl gap-4 sm:grid-cols-2">
       <Preview title="Summer reading" siteName="Field Notes" date="Jul 4, 2026" image="https://paneui.dev/covers/sky.jpg" />
       <Preview title="Night shift" siteName="Field Notes" mode="dark" image="https://paneui.dev/covers/night.jpg" />
-      <Preview title="Designing for desktop density" siteName="Field Notes" pattern="shader" palette="random" />
-      <Preview title="One accent, eight roles" siteName="Field Notes" pattern="shader" palette={["#ffffff", "#ff8a3d", "#ffd36e", "#8fd3ff"]} />
+      <Preview title="Designing for desktop density" siteName="Field Notes" palette="random" />
+      <Preview title="One accent, eight roles" siteName="Field Notes" palette={["#ffffff", "#ff8a3d", "#ffd36e", "#8fd3ff"]} />
     </div>
   )
 }

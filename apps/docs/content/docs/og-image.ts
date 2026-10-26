@@ -19,14 +19,14 @@ export default async function Image() {
   },
   examples: [
     { id: "modes", title: { en: "Accents and Modes", zh: "主题色与模式" },  },
-    { id: "image", title: { en: "Background", zh: "背景" }, description: { en: "Use a photo or a shader palette when the grid feels too plain.", zh: "觉得网格太素时，用图片或 shader 配色作背景。" } },
+    { id: "image", title: { en: "Background", zh: "背景" }, description: { en: "Use a photo or your own palette behind the title.", zh: "标题背后放图片或自定义配色时使用。" } },
     { id: "cover-art", title: { en: "Cover Art", zh: "封面" },  },
     { id: "cjk", title: { en: "CJK Titles", zh: "中日韩文标题" } },
   ],
   notes: [
     {
       title: "Route files",
-      body: "`npx shadcn@latest add @paneui/og-image-route` writes `app/opengraph-image.tsx` and `app/twitter-image.tsx`; edit the `SITE` object at the top. Next.js links the image from every page under that folder and renders it at build time. `@paneui/og-image-post-route` writes `app/blog/[slug]/opengraph-image.tsx`, which reads `params` and draws `OgCoverArt` from the slug behind the title. For several images in one route, export `generateImageMetadata` and read `id` in the image function.",
+      body: "`npx shadcn@latest add @paneui/og-image-route` writes `app/opengraph-image.tsx` and `app/twitter-image.tsx`; edit the `SITE` object at the top. Next.js links the image from every page under that folder and renders it at build time. `@paneui/og-image-post-route` writes `app/blog/[slug]/opengraph-image.tsx`, which reads `params` and colours the backdrop from the slug, matching `CoverArt` on the page. For several images in one route, export `generateImageMetadata` and read `id` in the image function.",
     },
     {
       title: "Static export",
@@ -72,10 +72,9 @@ export default async function Image() {
         { name: "tags", type: "string[]", description: "The first three are shown." },
         { name: "accent", type: `"blue" | "neutral" | "green" | "orange" | "rose" | "violet"`, default: `"blue"`, description: "The theme accent preset." },
         { name: "mode", type: `"light" | "dark"`, default: `"light"`, description: "The theme mode." },
-        { name: "pattern", type: `"grid" | "dots" | "shader" | "none"`, default: `"grid"`, description: "Backdrop behind the text, fading from the top corner." },
-        { name: "palette", type: `string[] | "random"`, description: "Hex colours for `pattern=\"shader\"`, or a random set. Defaults to the accent." },
+        { name: "palette", type: `string[] | "random"`, description: "Hex colours for the shader backdrop, or a random set. Defaults to the accent." },
         { name: "seed", type: "string", description: "Picks the random palette and layout. Defaults to `title`." },
-        { name: "image", type: "string", description: "Background image URL or data URI (PNG or JPEG), under a wash that keeps text readable." },
+        { name: "image", type: "string", description: "Background image URL or data URI (PNG or JPEG) instead of the shader, under a wash that keeps text readable." },
         { name: "colors", type: "Partial<OgImageColors>", description: "Overrides for single roles, on top of the accent and mode." },
         { name: "fontFamily", type: "string", description: "The family name the fonts were registered under." },
         { name: "style", type: "React.CSSProperties", description: "Merged onto the root, for a background image or a renderer quirk." },
@@ -84,14 +83,11 @@ export default async function Image() {
     },
     {
       name: "OgCoverArt",
-      description: "The eight cover-art compositions, drawn for the same renderer. The same `seed` picks the same art as the in-page cover art.",
+      description: "Cover art for the same renderer: an image, or a still frame of the shader. The same `seed` gives the same colours as the in-page cover art.",
       props: [
-        { name: "seed", type: "string", description: "Picks composition, mirror, tones and pattern." },
-        { name: "variant", type: `0 – 7 | "shader"`, description: "The composition. Wins over `seed`." },
-        { name: "image", type: "string", description: "Image URL or data URI drawn edge to edge. Wins over `variant`." },
-        { name: "palette", type: `string[] | "random"`, description: "Hex colours for the shader, or a random set from `seed`. Implies `variant=\"shader\"`." },
-        { name: "mirror", type: `"none" | "x" | "y" | "xy"`, description: "Flips the composition." },
-        { name: "ramp", type: "0 | 1 | 2", description: "Shifts the tones along the accent ladder." },
+        { name: "seed", type: "string", description: "Keeps the random palette and layout stable." },
+        { name: "image", type: "string", description: "Image URL or data URI drawn edge to edge. Wins over the shader." },
+        { name: "palette", type: `string[] | "random"`, description: "Hex colours, or a random set. Defaults to random with `seed`, else the accent." },
         { name: "accent", type: "OgImageAccent", default: `"blue"`, description: "The theme accent preset." },
         { name: "mode", type: `"light" | "dark"`, default: `"light"`, description: "The theme mode." },
         { name: "width", type: "number", default: "1200", description: "Width in px." },

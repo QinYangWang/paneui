@@ -211,7 +211,7 @@ function mixHex(color: string, base: string, alpha: number) {
   return `#${a.map((v, i) => Math.round(v * alpha + b[i] * (1 - alpha)).toString(16).padStart(2, "0")).join("")}`
 }
 
-/* Seed hash shared with CoverArt and ShaderBackground, so a seed gives the same art and colours everywhere. */
+/* Seed hash shared with ShaderBackground, so a seed gives the same colours everywhere. */
 function hashSeed(seed: string) {
   let h = 0x811c9dc5
   for (let i = 0; i < seed.length; i++) {
@@ -308,13 +308,11 @@ type OgImageProps = {
   tags?: string[]
   accent?: OgImageAccent
   mode?: OgImageMode
-  /** `grid` (default) or `dots` behind the text, fading out from the top corner; `shader` for soft colour fields; `none` for a flat background. */
-  pattern?: "grid" | "dots" | "shader" | "none"
-  /** Colours for `pattern="shader"` as hex, or `"random"`. Defaults to the accent. */
+  /** Shader colours as hex, or `"random"`. Defaults to the accent. */
   palette?: string[] | "random"
   /** Picks the random palette and the shader's layout. Defaults to `title`. */
   seed?: string
-  /** A background image URL or data URI (PNG or JPEG), drawn under a wash that keeps the text readable. */
+  /** A background image URL or data URI (PNG or JPEG) instead of the shader, under a wash that keeps the text readable. */
   image?: string
   /** Overrides for single roles, on top of the accent and mode. */
   colors?: Partial<OgImageColors>
@@ -329,24 +327,6 @@ const PAD_Y = 72
 const INNER = OG_IMAGE_WIDTH - PAD_X * 2
 const HEADER = 52
 const FOOTER = 52
-const CELL = 56
-
-/**
- * The pattern layers: a line grid or a dot field. Fades end on the same colour at alpha 0, never
- * `transparent`, which the renderer blends through black.
- */
-function backdrop(c: OgImageColors, pattern: OgImageProps["pattern"]) {
-  const line = mixHex(c.foreground, c.background, 0.07)
-  const layers: string[] = []
-  if (pattern === "grid") {
-    layers.push(`linear-gradient(to right, ${line} 1px, ${line}00 1px)`, `linear-gradient(to bottom, ${line} 1px, ${line}00 1px)`)
-  } else if (pattern === "dots") {
-    const dot = mixHex(c.foreground, c.background, 0.16)
-    layers.push(`radial-gradient(circle, ${dot} 1.5px, ${dot}00 1.5px)`)
-  }
-  return layers
-}
-
 function OgImage({
   title,
   description,
@@ -359,7 +339,6 @@ function OgImage({
   tags = [],
   accent = "blue",
   mode = "light",
-  pattern = "grid",
   palette,
   seed,
   image,
@@ -379,9 +358,7 @@ function OgImage({
   // room below the last line for descenders (CJK fonts draw about 1.36em tall)
   const titleSlack = Math.ceil(size * 0.15)
   const descSlack = Math.ceil(30 * 0.15)
-  const layers = image || pattern === "shader" ? [] : backdrop(c, pattern)
-  const glow = mixHex(c.primary, c.background, mode === "dark" ? 0.22 : 0.14)
-  const fields = !image && pattern === "shader" ? resolvePalette(palette, seed ?? title, c) : null
+  const fields = image ? null : resolvePalette(palette, seed ?? title, c)
   const full = { position: "absolute" as const, left: 0, top: 0, width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT, display: "flex" }
 
   return (
@@ -404,42 +381,13 @@ function OgImage({
     >
       {image && <img src={image} width={OG_IMAGE_WIDTH} height={OG_IMAGE_HEIGHT} alt="" style={{ ...full, objectFit: "cover" }} />}
       {fields && <div style={{ ...full, backgroundColor: fields[0], backgroundImage: meshLayers(fields, seed ?? title).join(", ") }} />}
-      {(image || fields) && (
-        // a wash from the text side, so titles stay readable over any picture or palette
-        <div
-          style={{
-            ...full,
-            backgroundImage: `linear-gradient(to top right, ${c.background}f2 0%, ${c.background}cc 45%, ${c.background}40 100%)`,
-          }}
-        />
-      )}
-      {layers.length > 0 && (
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: OG_IMAGE_WIDTH,
-            height: OG_IMAGE_HEIGHT,
-            display: "flex",
-            backgroundImage: layers.join(", "),
-            backgroundSize: `${CELL}px ${CELL}px`,
-            backgroundPosition: `${PAD_X - CELL}px ${PAD_Y - CELL}px`,
-          }}
-        />
-      )}
-      {/* accent glow in the top corner, and a fade that keeps the pattern off the text */}
-      {!image && !fields && <div
+      {/* a wash from the text side, so titles stay readable over any picture or palette */}
+      <div
         style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          width: OG_IMAGE_WIDTH,
-          height: OG_IMAGE_HEIGHT,
-          display: "flex",
-          backgroundImage: `radial-gradient(circle at 100% 0%, ${glow} 0%, ${glow}00 55%), radial-gradient(ellipse at 20% 100%, ${c.background} 25%, ${c.background}00 75%)`,
+          ...full,
+          backgroundImage: `linear-gradient(to top right, ${c.background}f2 0%, ${c.background}cc 45%, ${c.background}40 100%)`,
         }}
-      />}
+      />
 
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, height: HEADER, width: INNER, position: "relative" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
@@ -539,215 +487,38 @@ function OgImage({
 
 /* ───────────────────────── Cover art ───────────────────────── */
 
-type OgCoverArtVariant = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
-type OgCoverArtMirror = "none" | "x" | "y" | "xy"
-
-const MIRRORS: readonly OgCoverArtMirror[] = ["none", "x", "y", "xy"]
-
 type OgCoverArtProps = {
-  /** Picks the composition, mirror, tones and pattern, as on the in-page cover art. */
+  /** Keeps a random palette and the shader's layout stable, as on the in-page cover art. */
   seed?: string
-  /** Which composition to draw (`0` to `7`, or `"shader"`). Wins over `seed`. */
-  variant?: OgCoverArtVariant | "shader"
-  /** An image URL or data URI drawn edge to edge instead of a composition. Wins over `variant`. */
+  /** An image URL or data URI drawn edge to edge. Wins over the shader. */
   image?: string
-  /** Colours for `variant="shader"` as hex, or `"random"` (from `seed`). Setting it implies the shader. */
+  /** Shader colours as hex, or `"random"`. Defaults to random when `seed` is set, else the accent. */
   palette?: string[] | "random"
-  mirror?: OgCoverArtMirror
-  /** Shifts the tones along the accent ladder. */
-  ramp?: 0 | 1 | 2
   accent?: OgImageAccent
   mode?: OgImageMode
   colors?: Partial<OgImageColors>
   /** Defaults to 1200 × 630. */
   width?: number
   height?: number
-  fontFamily?: string
   style?: React.CSSProperties
 }
 
 /**
- * Cover art for share images and feeds, drawn with the same rules as OgImage: the eight
- * compositions of the in-page cover art in inline styles and opaque colours.
+ * Cover art for share images and feeds, drawn with the same rules as OgImage: an image, or a
+ * still frame of the in-page shader in the same colours.
  */
-function OgCoverArt({
-  seed,
-  variant,
-  image,
-  palette,
-  mirror,
-  ramp,
-  accent = "blue",
-  mode = "light",
-  colors,
-  width = OG_IMAGE_WIDTH,
-  height = OG_IMAGE_HEIGHT,
-  fontFamily,
-  style,
-}: OgCoverArtProps) {
+function OgCoverArt({ seed, image, palette, accent = "blue", mode = "light", colors, width = OG_IMAGE_WIDTH, height = OG_IMAGE_HEIGHT, style }: OgCoverArtProps) {
   const c = ogImageColors(accent, mode, colors)
-  const h = seed !== undefined ? mix(hashSeed(seed)) : 0
-  const v = image !== undefined ? "image" : (variant ?? (palette !== undefined ? "shader" : seed !== undefined ? ((h % 8) as OgCoverArtVariant) : 0))
-  const m = mirror ?? (seed !== undefined ? MIRRORS[(h >>> 3) & 3] : "none")
-  const r = ramp ?? (seed !== undefined ? (((h >>> 5) % 3) as 0 | 1 | 2) : 0)
-  const pattern = seed !== undefined ? mix(h ^ 0x9e3779b9) & 0xffff : 0x5a3c
-  const bit = (i: number) => (pattern >>> i) & 1
-  // Tone ladder, strongest first, flattened over the background.
-  const ladder = [c.primary, mixHex(c.primary, c.background, 0.7), mixHex(c.primary, c.background, 0.45), mixHex(c.primary, c.background, 0.25), mixHex(c.primary, c.background, 0.12), c.card]
-  const tone = (i: number) => ladder[(i + r * 2) % ladder.length]
-  const u = Math.min(width, height) / 100
-  const edge = mixHex(c.foreground, c.background, 0.09)
-  const raised = { border: `${Math.max(1, u * 0.2)}px solid ${edge}` }
-  // the renderer rejects `transform: undefined`, so the flip is spread in only when there is one
-  const flipTo = v === 3 || v === "image" ? undefined : { none: undefined, x: "scaleX(-1)", y: "scaleY(-1)", xy: "rotate(180deg)" }[m]
-  const flip = flipTo ? { transform: flipTo } : {}
-  const angle = { none: "135deg", x: "225deg", y: "45deg", xy: "315deg" }[m]
-  const glow = mixHex(c.primary, c.background, mode === "dark" ? 0.25 : 0.18)
-  const muted = mixHex(c.foreground, c.background, 0.04)
-  const stops = [
-    `linear-gradient(${angle}, ${glow}, ${muted} 50%, ${c.background})`,
-    `linear-gradient(${angle}, ${c.background}, ${muted} 50%, ${glow})`,
-    `linear-gradient(${angle}, ${mixHex(c.primary, c.background, 0.1)}, ${c.background} 50%, ${mixHex(c.primary, c.background, 0.22)})`,
-  ][r]
+  const v = image !== undefined ? "image" : "shader"
   const fill = { position: "absolute" as const, left: 0, top: 0, width, height, display: "flex" }
-
-  let art: React.ReactNode = null
-  if (v === "image") {
-    art = <img src={image} width={width} height={height} alt="" style={{ ...fill, objectFit: "cover", ...flip }} />
-  } else if (v === "shader") {
-    const fields = resolvePalette(palette ?? (seed !== undefined ? "random" : undefined), seed ?? "", c)
-    art = <div style={{ ...fill, backgroundColor: fields[0], backgroundImage: meshLayers(fields, seed ?? "").join(", "), ...flip }} />
-  } else if (v === 0) {
-    const outer = height * 0.6
-    art = (
-      <div style={{ ...fill, alignItems: "center", justifyContent: "center", ...flip }}>
-        <div style={{ display: "flex", width: outer, height: outer, padding: u * 4, borderRadius: u * 8, backgroundColor: c.card, ...raised }}>
-          <div style={{ display: "flex", flex: 1, padding: u * 1.5, borderRadius: u * 4, backgroundColor: c.primarySubtle }}>
-            <div style={{ display: "flex", flex: 1, borderRadius: u * 2.5, backgroundColor: r === 0 ? c.primary : tone(0) }} />
-          </div>
-        </div>
-      </div>
-    )
-  } else if (v === 1) {
-    const widths = [0.92, 0.75, 0.58, 0.42]
-    art = (
-      <div style={{ ...fill, flexDirection: "column", justifyContent: "center", gap: u * 4, padding: `0 ${width * 0.1}px`, ...flip }}>
-        {widths.map((w, i) => (
-          <div key={i} style={{ display: "flex", width: (width * 0.8) * w, height: u * 8, borderRadius: u * 4, backgroundColor: r === 0 ? [c.primary, mixHex(c.primary, c.background, 0.6), mixHex(c.primary, c.background, 0.35), c.card][i] : tone(i), ...raised }} />
-        ))}
-      </div>
-    )
-  } else if (v === 2) {
-    const heights = [0.2, 0.4, 0.6, 0.8, 0.92, 0.75]
-    const fills = r === 0 ? [0.1, 0.25, 0.45, 0.7, 1].map((a) => mixHex(c.primary, c.background, a)) : [tone(4), tone(3), tone(2), tone(1), tone(0)]
-    art = (
-      <div style={{ ...fill, alignItems: "flex-end", gap: u * 3, padding: u * 10, ...flip }}>
-        {heights.map((hh, i) => (
-          <div key={i} style={{ display: "flex", flex: 1, height: (height - u * 20) * hh, borderRadius: u * 3, backgroundColor: i === 5 ? mixHex(c.foreground, c.background, 0.8) : fills[i], ...raised }} />
-        ))}
-      </div>
-    )
-  } else if (v === 3) {
-    const digits = seed !== undefined ? [0, 1, 2, 3].map((i) => String(((pattern >>> (i * 4)) & 15) % 10)) : ["1", "0", "4", "8"]
-    art = (
-      <div style={{ ...fill, alignItems: "center", justifyContent: "center", gap: u * 3 }}>
-        {digits.map((d, i) => (
-          <div
-            key={i}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: u * 22,
-              height: u * 30,
-              borderRadius: u * 5,
-              fontSize: u * 18,
-              fontWeight: 700,
-              fontFamily,
-              color: r === 2 ? c.foreground : c.primary,
-              backgroundColor: r === 1 && i === (m === "x" || m === "xy" ? 0 : 3) ? c.primarySubtle : c.card,
-              ...raised,
-            }}
-          >
-            {d}
-          </div>
-        ))}
-      </div>
-    )
-  } else if (v === 4) {
-    art = (
-      <div style={{ ...fill, ...flip }}>
-        {[1, 0.75, 0.5, 0.25].map((s, i) => {
-          const d = width * s
-          return <div key={i} style={{ position: "absolute", left: -d / 3, top: height - (d * 2) / 3, width: d, height: d, borderRadius: d / 2, display: "flex", backgroundColor: tone(3 - i), ...raised }} />
-        })}
-      </div>
-    )
-  } else if (v === 5) {
-    const gap = u * 2
-    const pad = u * 8
-    const cw = (width - pad * 2 - gap * 5) / 6
-    const ch = (height - pad * 2 - gap * 2) / 3
-    art = (
-      <div style={{ ...fill, flexWrap: "wrap", gap, padding: pad, ...flip }}>
-        {Array.from({ length: 18 }, (_, i) => (
-          <div key={i} style={{ display: "flex", width: cw, height: ch, borderRadius: u * 3, backgroundColor: bit(i % 16) ? tone(i % 3) : i % 2 ? c.card : tone(4), ...raised }} />
-        ))}
-      </div>
-    )
-  } else if (v === 6) {
-    const card = (l: number, t: number, rr: number, b: number, bg: string) => ({
-      position: "absolute" as const,
-      left: width * l,
-      top: height * t,
-      width: width * (1 - l - rr),
-      height: height * (1 - t - b),
-      borderRadius: u * 5,
-      display: "flex",
-      backgroundColor: bg,
-      ...raised,
-    })
-    art = (
-      <div style={{ ...fill, ...flip }}>
-        <div style={card(1 / 3, 1 / 3, 1 / 12, 1 / 3, tone(2))} />
-        <div style={card(1 / 5, 1 / 4, 1 / 6, 1 / 4, tone(1))} />
-        <div style={{ ...card(1 / 8, 1 / 6, 1 / 4, 1 / 6, c.card), flexDirection: "column", justifyContent: "flex-end", gap: u * 2.5, padding: u * 6 }}>
-          <div style={{ display: "flex", width: "60%", height: u * 3.5, borderRadius: u * 2, backgroundColor: tone(0) }} />
-          <div style={{ display: "flex", width: "80%", height: u * 2.5, borderRadius: u * 2, backgroundColor: mixHex(c.foreground, c.card, 0.12) }} />
-          <div style={{ display: "flex", width: "40%", height: u * 2.5, borderRadius: u * 2, backgroundColor: mixHex(c.foreground, c.card, 0.12) }} />
-        </div>
-      </div>
-    )
-  } else {
-    const cols = 12
-    const rows = 6
-    const pad = u * 6
-    const cw = (width - pad * 2) / cols
-    const ch = (height - pad * 2) / rows
-    const dot = u * 3.5
-    art = (
-      <div style={{ ...fill, flexWrap: "wrap", padding: pad, ...flip }}>
-        {Array.from({ length: cols * rows }, (_, i) => {
-          const x = i % cols
-          const y = Math.floor(i / cols)
-          const step = Math.min(4, Math.floor((x + y + bit(i % 16)) / 4))
-          return (
-            <div key={i} style={{ display: "flex", width: cw, height: ch, alignItems: "center", justifyContent: "center" }}>
-              <div style={{ display: "flex", width: dot, height: dot, borderRadius: dot / 2, backgroundColor: ladder[(step + r * 2) % 5] }} />
-            </div>
-          )
-        })}
-      </div>
-    )
-  }
-
+  const fields = v === "shader" ? resolvePalette(palette ?? (seed !== undefined ? "random" : undefined), seed ?? "", c) : null
   return (
-    <div
-      data-slot="og-cover-art"
-      data-variant={v}
-      style={{ width, height, display: "flex", position: "relative", overflow: "hidden", backgroundColor: c.background, backgroundImage: stops, fontFamily, ...style }}
-    >
-      {art}
+    <div data-slot="og-cover-art" data-variant={v} style={{ width, height, display: "flex", position: "relative", overflow: "hidden", backgroundColor: c.background, ...style }}>
+      {image !== undefined ? (
+        <img src={image} width={width} height={height} alt="" style={{ ...fill, objectFit: "cover" }} />
+      ) : (
+        fields && <div style={{ ...fill, backgroundColor: fields[0], backgroundImage: meshLayers(fields, seed ?? "").join(", ") }} />
+      )}
     </div>
   )
 }
@@ -764,4 +535,4 @@ export {
   ogImageTitleSize,
   ogPalette,
 }
-export type { OgCoverArtMirror, OgCoverArtProps, OgCoverArtVariant, OgImageAccent, OgImageColors, OgImageMode, OgImageProps }
+export type { OgCoverArtProps, OgImageAccent, OgImageColors, OgImageMode, OgImageProps }
