@@ -326,6 +326,7 @@ export const examples: Record<string, React.ComponentType> = {
   "outline/popover": dynamic(() => import("@/registry/examples/outline/popover"), { ssr: false }),
   "outline/router-links": dynamic(() => import("@/registry/examples/outline/router-links"), { ssr: false }),
   "outline/rtl": dynamic(() => import("@/registry/examples/outline/rtl"), { ssr: false }),
+  "outline/variants": dynamic(() => import("@/registry/examples/outline/variants"), { ssr: false }),
   "overflow-hint/lines": dynamic(() => import("@/registry/examples/overflow-hint/lines"), { ssr: false }),
   "overflow-hint/parts": dynamic(() => import("@/registry/examples/overflow-hint/parts"), { ssr: false }),
   "page-header/basic": dynamic(() => import("@/registry/examples/page-header/basic"), { ssr: false }),
