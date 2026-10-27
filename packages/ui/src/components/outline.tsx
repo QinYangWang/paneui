@@ -47,8 +47,8 @@ function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE, trac
   // The last heading still on screen: the `range` variant lights everything the page is showing.
   const [lastVisible, setLastVisible] = React.useState<string | undefined>(ids[0])
   const lastVisibleRef = React.useRef(lastVisible)
-  // How far the reading line has travelled through the headings, as a fraction of an index
-  // (2.4 = 40% from the third heading to the fourth). Only the `progress` variant uses it.
+  // How far down the page the reader is, as a fraction of the whole scroll range (0 at the top,
+  // 1 at the bottom). Only the `progress` variant uses it.
   const [position, setPosition] = React.useState(0)
   const positionRef = React.useRef(position)
   // A clicked entry holds while its jump or smooth scroll runs, so the track doesn't march
@@ -114,18 +114,9 @@ function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE, trac
         setLastVisible(lastId)
       }
       if (trackPosition) {
-        // The last heading's own height closes the range, so a fully read page fills the track.
-        const ends = tops.map((t, i) => (i + 1 < tops.length ? tops[i + 1] : t + els[i].offsetHeight))
-        let at2 = 0
-        for (let i = 0; i < tops.length; i++) {
-          if (at >= ends[i]) {
-            at2 = i + 1
-            continue
-          }
-          at2 = at <= tops[i] ? i : i + (ends[i] > tops[i] ? (at - tops[i]) / (ends[i] - tops[i]) : 0)
-          break
-        }
-        const rounded = Math.round(at2 * 100) / 100
+        // The page's own scroll range, so a long section moves the track further than a short one.
+        const fraction = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0
+        const rounded = Math.round(fraction * 1000) / 1000
         if (rounded !== positionRef.current) {
           positionRef.current = rounded
           setPosition(rounded)
@@ -221,12 +212,11 @@ function buildTrack(
   })
   const base = { d, height: list.scrollHeight, width: TRACK_X[3] + 2 }
   if (mode === "progress") {
-    // A travelling edge runs from the first entry to the list's end, one entry per step; the part
-    // above it is read, the part below it still to come.
+    // The reader's place in the page's scroll range, drawn straight down the track: a long section
+    // moves it further than a short one. The part above the edge is read, the part below still to come.
     const from = firstTop ?? 0
     const span = lastBottom - from
-    const scale = Math.max(1, links.length)
-    const at = from + span * Math.max(0, Math.min(1, position / scale))
+    const at = from + span * Math.max(0, Math.min(1, position))
     return { ...base, active: at > from ? { top: from, bottom: at } : undefined }
   }
   // `section` lights the current entry; `range` closes on the last entry the page is showing.

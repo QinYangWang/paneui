@@ -19,7 +19,7 @@ export default {
 OutlinePopover       nav: a button with the current section, the same list in a popover
 useActiveHeading     the id of the section being read`,
   examples: [
-    { id: "variants", title: { en: "Variants", zh: "变体" }, description: { en: "`section` marks one entry, `range` the entries on screen, `progress` how far the page is read.", zh: "`section` 标记一条，`range` 标记屏幕上的条目，`progress` 标记已读进度。" } },
+    { id: "variants", title: { en: "Variants", zh: "变体" }, description: { en: "`section` marks one entry, `range` the entries on screen, `progress` the share of the page read.", zh: "`section` 标记一条，`range` 标记屏幕上的条目，`progress` 标记已读的页面比例。" } },
     { id: "popover", title: { en: "Popover", zh: "浮层" }, description: { en: "Use below the breakpoint where the rail no longer fits, or on full-width pages.", zh: "适用于放不下侧栏目录的窄屏或全宽页面。" } },
     { id: "router-links", title: { en: "Router Links", zh: "路由链接" },  },
     { id: "rtl", title: { en: "RTL", zh: "从右到左" },  },
@@ -35,7 +35,7 @@ useActiveHeading     the id of the section being read`,
     },
     {
       title: "Track",
-      body: { en: "The track lights one entry by default. `variant=\"range\"` lights everything from the current entry down to the last one still on screen, so the lit stretch matches what the page is showing. `variant=\"progress\"` lights a single travelling edge from the top of the list to the bottom, one entry per step.", zh: "轨道默认点亮一个条目。`variant=\"range\"` 从当前条目一直点亮到屏幕上仍可见的最后一条，因此亮起范围与页面显示的内容一致。`variant=\"progress\"` 从列表顶端到底端点亮一条移动的边线，每条一步。" },
+      body: { en: "The track lights one entry by default. `variant=\"range\"` lights everything from the current entry down to the last one still on screen, so the lit stretch matches what the page is showing. `variant=\"progress\"` lights a single travelling edge that follows `scrollY / (scrollHeight - clientHeight)`, so a long section moves it further than a short one.", zh: "轨道默认点亮一个条目。`variant=\"range\"` 从当前条目一直点亮到屏幕上仍可见的最后一条，因此亮起范围与页面显示的内容一致。`variant=\"progress\"` 点亮一条移动的边线，按 `scrollY / (scrollHeight - clientHeight)` 推进，因此长的部分推进得多、短的部分推进得少。" },
     },
     {
       title: "Motion",
@@ -52,7 +52,7 @@ useActiveHeading     the id of the section being read`,
         { name: "activeLine", type: "number", default: "112", description: { en: "Px from the top of the viewport a heading must pass to become current.", zh: "标题必须超过距视口顶部的 px 才能成为当前。" } },
         { name: "backToTop", type: "boolean", default: "true", description: { en: "Shows the locale's `backToTop` link under the list after 320px of scrolling. The row and its divider fade in together; before that the row keeps its space but shows nothing.", zh: "在滚动 320px 后，在列表下方显示区域设置的 `backToTop` 链接。行及其分隔线一起淡入；在此之前，行保留其空间但不显示任何内容。" } },
         { name: "maxHeight", type: "string", default: `"calc(100svh - 6.5rem)"`, description: { en: "Cap for the outline; the list scrolls inside it.", zh: "大纲的上限；列表在其中滚动。" } },
-        { name: "variant", type: `"section" | "range" | "progress"`, default: `"section"`, description: { en: "What the track lights. `section` marks the entry being read, `range` every entry the page is showing, `progress` how far the page is read.", zh: "轨道点亮什么。`section` 标记正在读的条目，`range` 标记页面正在显示的所有条目，`progress` 标记已读进度。" } },
+        { name: "variant", type: `"section" | "range" | "progress"`, default: `"section"`, description: { en: "What the track lights. `section` marks the entry being read, `range` every entry the page is showing, `progress` the share of the page read.", zh: "轨道点亮什么。`section` 标记正在读的条目，`range` 标记页面正在显示的所有条目，`progress` 标记已读的页面比例。" } },
         { name: "renderLink", type: "(props, item) => React.ReactElement", description: { en: "Swap each `<a>` for your own element; spread `props` onto it.", zh: "将每个 `<a>` 替换为你自己的元素；将 `props` 展开到它上面。" } },
       ],
     },
