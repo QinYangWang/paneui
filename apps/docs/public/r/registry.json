@@ -3964,6 +3964,7 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/button.json",
+        "https://paneui.dev/r/tabs.json",
         "https://paneui.dev/r/action-swap-blur.json",
         "https://paneui.dev/r/locale-provider.json"
       ],

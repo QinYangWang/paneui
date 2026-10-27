@@ -165,6 +165,7 @@ export const examples: Record<string, React.ComponentType> = {
   "combobox/rtl": dynamic(() => import("@/registry/examples/combobox/rtl"), { ssr: false }),
   "combobox/sizes": dynamic(() => import("@/registry/examples/combobox/sizes"), { ssr: false }),
   "command-copy/floating": dynamic(() => import("@/registry/examples/command-copy/floating"), { ssr: false }),
+  "command-copy/group": dynamic(() => import("@/registry/examples/command-copy/group"), { ssr: false }),
   "command-copy/no-prompt": dynamic(() => import("@/registry/examples/command-copy/no-prompt"), { ssr: false }),
   "command-copy/sizes": dynamic(() => import("@/registry/examples/command-copy/sizes"), { ssr: false }),
   "command/dialog": dynamic(() => import("@/registry/examples/command/dialog"), { ssr: false }),
