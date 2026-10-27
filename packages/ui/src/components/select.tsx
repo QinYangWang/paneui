@@ -27,7 +27,7 @@ const selectTriggerVariants = cva(
 )
 
 const selectItemVariants = cva(
-  "relative flex cursor-default items-center gap-2 rounded-lg py-px outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:shrink-0",
+  "relative flex cursor-default items-center gap-2 rounded-lg py-px outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:shrink-0",
   {
     variants: {
       size: {
@@ -119,7 +119,7 @@ function SelectContent({
           <SelectPrimitive.ScrollUpArrow className="top-0 z-10 flex h-6 w-full cursor-default items-center justify-center rounded-t-xl bg-popover text-muted-foreground">
             <ChevronUpIcon size={14} />
           </SelectPrimitive.ScrollUpArrow>
-          <SelectPrimitive.List className="max-h-(--available-height) scroll-py-6 overflow-y-auto overscroll-contain p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{children}</SelectPrimitive.List>
+          <SelectPrimitive.List className="scroll-fade-y max-h-(--available-height) scroll-py-6 overflow-y-auto overscroll-contain p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">{children}</SelectPrimitive.List>
           <SelectPrimitive.ScrollDownArrow className="bottom-0 z-10 flex h-6 w-full cursor-default items-center justify-center rounded-b-xl bg-popover text-muted-foreground">
             <ChevronDownIcon size={14} />
           </SelectPrimitive.ScrollDownArrow>

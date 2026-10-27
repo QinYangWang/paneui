@@ -198,7 +198,7 @@ function CommandList({ className, ...props }: React.ComponentProps<"div">) {
       id={listId}
       role="listbox"
       data-slot="command-list"
-      className={cn("frame-inner frame-p-1 max-h-80 scroll-py-1 overflow-y-auto overscroll-contain", className)}
+      className={cn("frame-inner frame-p-1 scroll-fade-y max-h-80 scroll-py-1 overflow-y-auto overscroll-contain", className)}
       {...props}
     />
   )

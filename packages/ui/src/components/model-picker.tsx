@@ -267,7 +267,7 @@ function ComposerPickerSearch(props: ComposerPickerProps) {
                     // Keep focus in the search field.
                     onPointerDown={(e) => e.preventDefault()}
                     onClick={() => setExpanded((prev) => new Set(prev).add(group.value))}
-                    className="flex min-h-6.5 w-full cursor-pointer items-center rounded-lg px-2 text-ui text-muted-foreground outline-none transition-colors duration-150 hover:bg-secondary hover:text-foreground"
+                    className="flex min-h-6.5 w-full cursor-pointer items-center rounded-lg px-2 text-ui text-muted-foreground outline-none hover:bg-secondary hover:text-foreground"
                   >
                     {labels.showAll(group.items.length + (hidden.get(group.value) ?? 0))}
                   </button>

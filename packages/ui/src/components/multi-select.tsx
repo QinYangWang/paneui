@@ -162,7 +162,7 @@ function MultiSelectTrigger({
                     <ComboboxPrimitive.ChipRemove
                       aria-label={labels.remove}
                       className={cn(
-                        "flex shrink-0 cursor-pointer items-center justify-center rounded-inner text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                        "flex shrink-0 cursor-pointer items-center justify-center rounded-inner text-muted-foreground hover:bg-muted hover:text-foreground",
                         c.remove
                       )}
                     >
@@ -183,7 +183,7 @@ function MultiSelectTrigger({
       <ComboboxPrimitive.Trigger
         aria-label={labels.showOptions}
         className={cn(
-          "absolute flex cursor-pointer items-center justify-center text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+          "absolute flex cursor-pointer items-center justify-center text-muted-foreground outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
           c.trigger
         )}
       >
@@ -236,7 +236,7 @@ function MultiSelectItem({ className, children, ...props }: ComboboxPrimitive.It
       data-slot="multi-select-item"
       data-size={size}
       className={cn(
-        "group/item relative flex cursor-default items-center gap-2.5 rounded-inner px-2.5 outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent",
+        "group/item relative flex cursor-default items-center gap-2.5 rounded-inner px-2.5 outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent",
         sizeClass[size].item,
         className
       )}

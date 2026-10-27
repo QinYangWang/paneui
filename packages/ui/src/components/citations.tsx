@@ -362,7 +362,7 @@ function CitationList({
                 id={safeId(prefix, source.id)}
                 data-highlighted={active || undefined}
                 {...(source.url ? { href: source.url, target: "_blank", rel: "noreferrer noopener" } : {})}
-                className="group/citation-row flex scroll-m-4 items-center gap-2.5 rounded-xl px-2 py-1.5 transition-[background-color,box-shadow] duration-300 outline-none hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring/50 data-highlighted:bg-primary/10 data-highlighted:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary)_30%,transparent)]"
+                className="group/citation-row flex scroll-m-4 items-center gap-2.5 rounded-xl px-2 py-1.5 outline-none hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring/50 data-highlighted:bg-primary/10 data-highlighted:shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary)_30%,transparent)]"
               >
                 <span className="w-4 shrink-0 text-end font-mono text-ui-xs text-muted-foreground tabular-nums">{i + 1}</span>
                 <CitationFavicon source={source} favicon={favicon} />

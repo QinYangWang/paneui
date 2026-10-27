@@ -619,7 +619,7 @@ function DateRangePickerClear({ className, children: childrenProp, onClick, ...p
         if (!e.defaultPrevented) clear()
       }}
       className={cn(
-        "inline-flex h-8 cursor-pointer items-center rounded-lg px-3 text-ui-sm font-medium text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40",
+        "inline-flex h-8 cursor-pointer items-center rounded-lg px-3 text-ui-sm font-medium text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40",
         className
       )}
       {...props}

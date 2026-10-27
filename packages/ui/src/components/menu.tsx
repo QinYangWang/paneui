@@ -34,7 +34,7 @@ const popupClass =
   "min-w-44 origin-(--transform-origin) overflow-y-auto overscroll-contain rounded-2xl bg-popover p-1 text-popover-foreground shadow-surface outline-none transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0"
 
 const itemClass =
-  "relative flex min-h-6.5 cursor-default items-center gap-2 rounded-lg px-2 py-px text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground data-highlighted:[&_svg]:text-foreground"
+  "relative flex min-h-6.5 cursor-default items-center gap-2 rounded-lg px-2 py-px text-ui outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground data-highlighted:[&_svg]:text-foreground"
 
 function MenuContent({
   className,

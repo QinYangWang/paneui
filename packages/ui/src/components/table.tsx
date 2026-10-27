@@ -880,7 +880,7 @@ function Table<T>({
                   data-selected={isSelected || undefined}
                   onClick={onRowClick ? (e) => onRowClick(rowCtx, e) : undefined}
                   className={cn(
-                    "group/row absolute inset-x-0 top-0 border-b border-border/60 transition-colors duration-150 hover:z-10 hover:bg-muted/45 focus-within:z-10",
+                    "group/row absolute inset-x-0 top-0 border-b border-border/60 hover:z-10 hover:bg-muted/45 focus-within:z-10",
                     "data-selected:bg-primary/8 data-selected:hover:bg-primary/12",
                     animate && "transition-[transform,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
                     onRowClick && "cursor-pointer",

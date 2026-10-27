@@ -268,7 +268,7 @@ function SortableStackHandle({ className, onPointerDown, onKeyDown, children, ..
         move(item.id, m)
       }}
       className={cn(
-        "inline-flex h-8 w-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-lg text-muted-foreground transition-[background-color,color] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-40",
+        "inline-flex h-8 w-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-40",
         item.dragging && "cursor-grabbing bg-muted text-foreground",
         className
       )}

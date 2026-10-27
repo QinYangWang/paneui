@@ -215,7 +215,7 @@ function MenuListItem({ className, value, onSelect, disabled, onClick, onMouseMo
         if (!disabled && !e.defaultPrevented) onSelect?.()
       }}
       className={cn(
-        "relative flex min-h-6.5 cursor-default items-center gap-2 rounded-inner px-2 py-px text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground data-highlighted:[&_svg]:text-foreground",
+        "relative flex min-h-6.5 cursor-default items-center gap-2 rounded-inner px-2 py-px text-ui outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground data-highlighted:[&_svg]:text-foreground",
         className
       )}
       {...props}

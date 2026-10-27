@@ -154,7 +154,7 @@ function MorphSelectItem({ className, children, ...props }: SelectPrimitive.Item
     <SelectPrimitive.Item
       data-slot="morph-select-item"
       className={cn(
-        "relative flex h-8.5 cursor-default items-center gap-2 rounded-inner pr-8 pl-2.5 text-ui outline-none select-none transition-colors duration-150 data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent [&_svg]:size-4 [&_svg]:shrink-0",
+        "relative flex h-8.5 cursor-default items-center gap-2 rounded-inner pr-8 pl-2.5 text-ui outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-accent [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

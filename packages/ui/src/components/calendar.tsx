@@ -95,7 +95,7 @@ function useControllable<T>(value: T | undefined, defaultValue: T, onChange?: (v
 }
 
 const navButton =
-  "inline-flex size-7 cursor-pointer items-center justify-center rounded-lg text-muted-foreground transition-colors duration-150 outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40 [&_svg]:size-4"
+  "inline-flex size-7 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40 [&_svg]:size-4"
 
 function Calendar(props: CalendarProps) {
   const { labels } = useLocale()

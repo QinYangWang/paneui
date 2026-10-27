@@ -529,7 +529,7 @@ function EditableTable({
           <button
             type="button"
             onClick={() => insertRow(rows.length)}
-            className="flex h-full w-full cursor-pointer items-center gap-2 px-3 text-ui text-muted-foreground outline-none transition-colors duration-150 hover:bg-muted/45 hover:text-foreground focus-visible:bg-muted/45 focus-visible:text-foreground"
+            className="flex h-full w-full cursor-pointer items-center gap-2 px-3 text-ui text-muted-foreground outline-none hover:bg-muted/45 hover:text-foreground focus-visible:bg-muted/45 focus-visible:text-foreground"
           >
             <PlusIcon className="size-4" />
             {labels.newRow}

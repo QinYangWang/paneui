@@ -623,7 +623,9 @@ html[data-accent="violet"].dark {
   * {
     @apply border-border outline-ring/50;
   }
+  /* Paint the document canvas too, so overscroll and rubber-banding never show white behind a dark page. */
   html {
+    background-color: var(--background);
     color-scheme: light;
     scrollbar-gutter: stable;
   }
@@ -726,6 +728,30 @@ html[data-accent="violet"].dark {
 
 @utility window-no-drag {
   -webkit-app-region: no-drag;
+}
+
+/*
+ * Fade the edge of a plain overflow list only on the side that has more to scroll (a scroll-driven
+ * animation flips each edge on once the list leaves it). Browsers without scroll timelines show hard edges.
+ * ScrollArea has its own `fade` prop.
+ */
+@utility scroll-fade-y {
+  @supports (animation-timeline: scroll()) {
+    mask-image: linear-gradient(to bottom, transparent, #000 var(--scroll-fade-top, 0px), #000 calc(100% - var(--scroll-fade-bottom, 0px)), transparent);
+    animation: scroll-fade-top linear both, scroll-fade-bottom linear both;
+    animation-timeline: scroll(self), scroll(self);
+    animation-range: 0 2px, calc(100% - 2px) 100%;
+  }
+}
+
+@keyframes scroll-fade-top {
+  from { --scroll-fade-top: 0px; }
+  to { --scroll-fade-top: 24px; }
+}
+
+@keyframes scroll-fade-bottom {
+  from { --scroll-fade-bottom: 24px; }
+  to { --scroll-fade-bottom: 0px; }
 }
 
 /*

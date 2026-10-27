@@ -14,6 +14,12 @@
   property.
 - Hover, open and toggle states are transitions, which retarget mid-way; keyframes only for loops and
   one-time sequences. Hover answers within 150ms.
+- **Rows highlight instantly.** List and nav rows a pointer sweeps across (menu, select, combobox and
+  command items, sidebar and nav links, table rows, rail and toolbar icons) change their hover/highlight
+  background with no transition. Animate only what happens rarely; a shortcut-driven panel toggle is not rare.
+- Plain overflow lists (sidebar content, command, select and combobox lists) carry `scroll-fade-y`, which
+  fades only the edge that has more to scroll; `ScrollArea` uses its `fade` prop. Never a static fade on both ends.
+- The root `html` paints `--background` so overscroll never shows a white canvas behind a dark page.
 - Staggered entrances 100ms apart (opacity + 4px blur + 12px rise, 300ms ease-out), only for infrequent
   moments; exits shorter (150ms) with a short fixed offset, never a deep scale-down.
   `initial={false}` on `AnimatePresence` state swaps. Popups enter from `scale-98` plus opacity.

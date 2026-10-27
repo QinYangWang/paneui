@@ -60,7 +60,7 @@ const comboboxTriggerVariants = cva(
 )
 
 const comboboxItemVariants = cva(
-  "relative flex cursor-default items-center gap-2 rounded-lg py-px outline-none select-none transition-[background-color,box-shadow] duration-150 data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:shrink-0",
+  "relative flex cursor-default items-center gap-2 rounded-lg py-px outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-64 data-highlighted:bg-secondary [&_svg]:shrink-0",
   {
     variants: {
       size: {
@@ -141,7 +141,7 @@ function ComboboxInput({
           data-slot="combobox-trigger"
           aria-label={labels.showOptions}
           className={cn(
-            "flex shrink-0 cursor-pointer items-center justify-center text-muted-foreground transition-colors outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+            "flex shrink-0 cursor-pointer items-center justify-center text-muted-foreground outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
             buttonBox
           )}
         >
@@ -235,7 +235,7 @@ function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
     <ComboboxPrimitive.List
       data-slot="combobox-list"
       className={cn(
-        "min-h-0 flex-1 scroll-py-1 overflow-y-auto overscroll-contain p-1 [scrollbar-width:none] data-empty:p-0 [&::-webkit-scrollbar]:hidden",
+        "scroll-fade-y min-h-0 flex-1 scroll-py-1 overflow-y-auto overscroll-contain p-1 [scrollbar-width:none] data-empty:p-0 [&::-webkit-scrollbar]:hidden",
         className
       )}
       {...props}
