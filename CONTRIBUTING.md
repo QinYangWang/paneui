@@ -59,6 +59,19 @@ pnpm design:check
 If a rule is wrong for a legitimate case, allow-list it in
 `paneui-design.config.json` with a reason instead of working around it.
 
+## Branches
+
+- `main` is the released line. Never commit or push to it directly; it only takes merges from `dev` (or a `hotfix/*` branch) through a pull request.
+- `dev` is the integration branch. Start every change from it and merge back through a pull request.
+- Name work branches by type: `feat/<topic>`, `fix/<topic>`, `docs/<topic>`, `chore/<topic>`, `hotfix/<topic>` (a hotfix branches from `main` and merges into both `main` and `dev`).
+- Delete a branch once it is merged. Keep `main`, `dev` and the deploy branch `gh-pages`.
+
+```bash
+git switch dev && git pull
+git switch -c feat/my-change
+# commit, then open a PR into dev
+```
+
 ## Checks before a PR
 
 ```bash
