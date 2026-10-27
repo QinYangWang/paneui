@@ -41,9 +41,16 @@ const HYSTERESIS = 8
 /** Quiet time after a click before scrolling picks the section again. */
 const SETTLE_MS = 150
 
-function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE) {
+function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE, trackPosition = false) {
   const [active, setActiveState] = React.useState<string | undefined>(ids[0])
   const activeRef = React.useRef(active)
+  // The last heading still on screen: the `range` variant lights everything the page is showing.
+  const [lastVisible, setLastVisible] = React.useState<string | undefined>(ids[0])
+  const lastVisibleRef = React.useRef(lastVisible)
+  // How far the reading line has travelled through the headings, as a fraction of an index
+  // (2.4 = 40% from the third heading to the fourth). Only the `progress` variant uses it.
+  const [position, setPosition] = React.useState(0)
+  const positionRef = React.useRef(position)
   // A clicked entry holds while its jump or smooth scroll runs, so the track doesn't march
   // through every section in between (or land on a neighbour the page can't scroll past).
   const locked = React.useRef(false)
@@ -99,6 +106,31 @@ function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE) {
         activeRef.current = id
         setActiveState(id)
       }
+      let shown = next
+      for (let i = 0; i < tops.length; i++) if (tops[i] < view) shown = i
+      const lastId = els[Math.max(shown, next)].id
+      if (lastId !== lastVisibleRef.current) {
+        lastVisibleRef.current = lastId
+        setLastVisible(lastId)
+      }
+      if (trackPosition) {
+        // The last heading's own height closes the range, so a fully read page fills the track.
+        const ends = tops.map((t, i) => (i + 1 < tops.length ? tops[i + 1] : t + els[i].offsetHeight))
+        let at2 = 0
+        for (let i = 0; i < tops.length; i++) {
+          if (at >= ends[i]) {
+            at2 = i + 1
+            continue
+          }
+          at2 = at <= tops[i] ? i : i + (ends[i] > tops[i] ? (at - tops[i]) / (ends[i] - tops[i]) : 0)
+          break
+        }
+        const rounded = Math.round(at2 * 100) / 100
+        if (rounded !== positionRef.current) {
+          positionRef.current = rounded
+          setPosition(rounded)
+        }
+      }
     }
     onSettled.current = () => {
       const top = activeRef.current ? document.getElementById(activeRef.current)?.getBoundingClientRect().top : undefined
@@ -116,9 +148,9 @@ function useActiveHeadingState(ids: readonly string[], line = DEFAULT_LINE) {
       window.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onScroll)
     }
-  }, [key, line, unlockSoon])
+  }, [key, line, unlockSoon, trackPosition])
   React.useEffect(() => () => clearTimeout(settle.current), [])
-  return [active, select] as const
+  return [active, select, lastVisible, position] as const
 }
 
 /**
@@ -141,15 +173,36 @@ function useScrolledPast(threshold: number) {
   return scrolled
 }
 
-type Track = { d: string; height: number; width: number; active?: { top: number; bottom: number } }
+type OutlineVariant = "section" | "range" | "progress"
+
+/** What the track shows: the current entry, the whole stretch on screen, or how far the page is read. */
+type TrackMode = OutlineVariant
+
+type Track = {
+  d: string
+  height: number
+  width: number
+  /** The part of the track the variant lights. */
+  active?: { top: number; bottom: number }
+}
 
 /** One path down the list's start edge, built from the links' offsets; a depth change is a short diagonal. */
-function buildTrack(list: HTMLElement, activeId: string | undefined): Track | null {
+function buildTrack(
+  list: HTMLElement,
+  mode: TrackMode,
+  activeId: string | undefined,
+  lastVisibleId: string | undefined,
+  position: number
+): Track | null {
   const links = [...list.querySelectorAll<HTMLElement>("[data-outline-id]")]
   if (links.length === 0) return null
   let d = ""
   let prevX: number | undefined
-  let active: Track["active"]
+  let current: { top: number; bottom: number } | undefined
+  let last: { top: number; bottom: number } | undefined
+  // The first entry's top and the last one's bottom: the range a progress position travels over.
+  let firstTop: number | undefined
+  let lastBottom = 0
   links.forEach((link, i) => {
     const x = TRACK_X[link.dataset.depth === "3" ? 3 : 2]
     const top = link.offsetTop
@@ -159,20 +212,48 @@ function buildTrack(list: HTMLElement, activeId: string | undefined): Track | nu
     else if (stepped) d += `L${x} ${top + STEP}`
     d += `L${x} ${bottom}`
     prevX = x
-    if (link.dataset.outlineId === activeId) active = { top: stepped ? top + STEP : top, bottom }
+    const linkTop = stepped ? top + STEP : top
+    if (firstTop === undefined) firstTop = linkTop
+    lastBottom = bottom
+    const range = { top: linkTop, bottom }
+    if (link.dataset.outlineId === activeId) current = range
+    if (link.dataset.outlineId === lastVisibleId) last = range
   })
-  return { d, height: list.scrollHeight, width: TRACK_X[3] + 2, active }
+  const base = { d, height: list.scrollHeight, width: TRACK_X[3] + 2 }
+  if (mode === "progress") {
+    // A travelling edge runs from the first entry to the list's end, one entry per step; the part
+    // above it is read, the part below it still to come.
+    const from = firstTop ?? 0
+    const span = lastBottom - from
+    const scale = Math.max(1, links.length)
+    const at = from + span * Math.max(0, Math.min(1, position / scale))
+    return { ...base, active: at > from ? { top: from, bottom: at } : undefined }
+  }
+  // `section` lights the current entry; `range` closes on the last entry the page is showing.
+  const start = current ?? last
+  const active =
+    start &&
+    (mode === "range"
+      ? { top: start.top, bottom: Math.max(start.top, last ? last.bottom : start.bottom) }
+      : { top: start.top, bottom: start.bottom })
+  return { ...base, active }
 }
 
 function OutlineList({
   items,
+  mode,
   active,
+  lastVisible,
+  position,
   onSelect,
   listRef,
   renderLink,
 }: {
   items: readonly OutlineItem[]
+  mode: TrackMode
   active: string | undefined
+  lastVisible: string | undefined
+  position: number
   onSelect: (id: string) => void
   listRef: React.RefObject<HTMLUListElement | null>
   renderLink?: OutlineRenderLink
@@ -181,7 +262,8 @@ function OutlineList({
   const reduce = useReducedMotion()
   // The indicator's edges follow springs instead of a CSS transition: a transition restarts on
   // every section change, so a steady scroll kept interrupting it and squeezed the block to nothing.
-  const spring = { stiffness: 380, damping: 38, mass: 0.6 }
+  // `progress` chases the scroll position, so it needs a softer spring than the steps do.
+  const spring = mode === "progress" ? { stiffness: 160, damping: 30, mass: 0.5 } : { stiffness: 380, damping: 38, mass: 0.6 }
   const top = useSpring(0, spring)
   const bottom = useSpring(0, spring)
   const height = useMotionValue(0)
@@ -192,12 +274,12 @@ function OutlineList({
   React.useLayoutEffect(() => {
     const list = listRef.current
     if (!list) return
-    const place = () => setTrack(buildTrack(list, active))
+    const place = () => setTrack(buildTrack(list, mode, active, lastVisible, position))
     place()
     const ro = new ResizeObserver(place)
     ro.observe(list)
     return () => ro.disconnect()
-  }, [active, items, listRef])
+  }, [mode, active, lastVisible, position, items, listRef])
 
   React.useLayoutEffect(() => {
     if (!track) return
@@ -308,6 +390,11 @@ type OutlineProps = Omit<React.ComponentProps<"nav">, "title" | "children"> & {
   backToTop?: boolean
   /** Cap for the whole outline; the list scrolls inside it. Defaults to the viewport minus a sticky offset. */
   maxHeight?: string
+  /**
+   * What the track lights. `section` marks the entry being read, `range` the entries on screen,
+   * `progress` how far the page is read.
+   */
+  variant?: OutlineVariant
   renderLink?: OutlineRenderLink
 }
 
@@ -321,6 +408,7 @@ function Outline({
   activeLine = DEFAULT_LINE,
   backToTop = true,
   maxHeight = "calc(100svh - 6.5rem)",
+  variant = "section",
   renderLink,
   className,
   style,
@@ -329,7 +417,7 @@ function Outline({
   const { labels } = useLocale()
   const title = titleProp === undefined ? labels.onThisPage : titleProp
   const ids = React.useMemo(() => items.map((i) => i.id), [items])
-  const [active, setActive] = useActiveHeadingState(ids, activeLine)
+  const [active, setActive, lastVisible, position] = useActiveHeadingState(ids, activeLine, variant === "progress")
   const viewportRef = React.useRef<HTMLDivElement>(null)
   const listRef = React.useRef<HTMLUListElement>(null)
   const scrolled = useScrolledPast(320)
@@ -338,6 +426,7 @@ function Outline({
   return (
     <nav
       data-slot="outline"
+      data-variant={variant}
       style={{ maxHeight, ...style }}
       className={cn("flex min-h-0 flex-col gap-3 text-ui", className)}
       {...props}
@@ -345,7 +434,16 @@ function Outline({
     >
       {title !== null && <p className="shrink-0 font-medium text-foreground">{title}</p>}
       <ScrollArea fade viewportRef={viewportRef} className="-ms-1 flex min-h-0 flex-1 flex-col" viewportClassName="min-h-0 flex-1 ps-1 pe-3">
-        <OutlineList items={items} active={active} onSelect={setActive} listRef={listRef} renderLink={renderLink} />
+        <OutlineList
+          items={items}
+          mode={variant}
+          active={active}
+          lastVisible={lastVisible}
+          position={position}
+          onSelect={setActive}
+          listRef={listRef}
+          renderLink={renderLink}
+        />
       </ScrollArea>
       {backToTop && (
         // the divider belongs to the link: both fade in together, and the row keeps its space
@@ -376,6 +474,7 @@ function OutlinePopover({
   title: titleProp,
   activeLine = DEFAULT_LINE,
   backToTop = true,
+  variant = "section",
   renderLink,
   className,
   ...props
@@ -383,7 +482,7 @@ function OutlinePopover({
   const { labels } = useLocale()
   const title = titleProp === undefined ? labels.onThisPage : titleProp
   const ids = React.useMemo(() => items.map((i) => i.id), [items])
-  const [active, setActive] = useActiveHeadingState(ids, activeLine)
+  const [active, setActive, lastVisible, position] = useActiveHeadingState(ids, activeLine, variant === "progress")
   const [open, setOpen] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
   const viewportRef = React.useRef<HTMLDivElement>(null)
@@ -420,7 +519,10 @@ function OutlinePopover({
           >
             <OutlineList
               items={items}
+              mode={variant}
               active={active}
+              lastVisible={lastVisible}
+              position={position}
               listRef={listRef}
               renderLink={renderLink}
               onSelect={(id) => {
@@ -447,4 +549,4 @@ function OutlinePopover({
 }
 
 export { Outline, OutlinePopover, useActiveHeading }
-export type { OutlineItem, OutlineProps, OutlinePopoverProps, OutlineRenderLink, OutlineLinkProps }
+export type { OutlineItem, OutlineProps, OutlinePopoverProps, OutlineRenderLink, OutlineLinkProps, OutlineVariant }
