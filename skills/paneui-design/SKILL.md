@@ -24,7 +24,7 @@ target platforms. The Web density and CSS recipes below do not override Native g
 ## Install
 
 ```bash
-npx skills add QinYangWang/paneui --skill paneui-design
+npx skills add taimatsuorg/paneui --skill paneui-design
 ```
 
 The library itself installs with the shadcn CLI (`npx shadcn@latest add @paneui/theme`, then any

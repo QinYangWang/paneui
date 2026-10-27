@@ -9,8 +9,8 @@ React components you own and edit.
 Start in a React project with Tailwind CSS 4:
 
 ```bash
-npx paneui@latest init
-npx paneui@latest add button card
+npx @taimatsu/paneui@latest init
+npx @taimatsu/paneui@latest add button card
 ```
 
 The CLI writes source files into your project and records installs in `paneui.json`.

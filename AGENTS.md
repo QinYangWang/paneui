@@ -32,7 +32,7 @@ A pnpm workspace. Applications live in `apps/`; shared source and distribution p
 - `tooling/` — repository generators, checks, fixtures and shared TypeScript configuration.
 - `packages/cli/` — the `paneui` CLI (npm name and bin in its `package.json`; the docs read the name from there).
   `pnpm cli:build`, `pnpm cli:test` (node:test against a mock registry). Released by pushing a `cli-v<version>` tag
-  (`.github/workflows/release-cli.yml`, npm trusted publishing, package `paneui`). Excluded from the root `tsc`; it has its own tsconfig.
+  (`.github/workflows/release-cli.yml`, npm trusted publishing, package `@taimatsu/paneui`). Excluded from the root `tsc`; it has its own tsconfig.
 - `apps/desktop/` — the Electron shell. **Not** a workspace member: its own `pnpm-workspace.yaml` and lockfile, so root
   installs and CI never fetch Electron or build node-pty. Install it with `pnpm install` inside `apps/desktop/`.
 - `skills/` — our skills (design, copy density, puffy icons). `.agents/skills/` holds the vendored third-party skills

@@ -4,7 +4,7 @@ export default {
   summary: { en: "Shows a shell command with a button that copies it.", zh: "展示一条命令，并可一键复制。" },
   usage: {
     imports: `import { CommandCopy } from "@/components/ui/command-copy"`,
-    code: `<CommandCopy command="npx paneui@latest init" />`,
+    code: `<CommandCopy command="npx @taimatsu/paneui@latest init" />`,
   },
   examples: [
     { id: "sizes", title: { en: "Sizes", zh: "尺寸" }, description: { en: "Use `lg` for the one install line on a landing page.", zh: "落地页上的安装命令用 `lg`。" } },

@@ -359,7 +359,7 @@ function Docs({
             </label>
             <a
               className="repo-link"
-              href="https://github.com/QinYangWang/paneui"
+              href="https://github.com/taimatsuorg/paneui"
               aria-label={t("Source repository", "源码仓库")}
             >
               <svg

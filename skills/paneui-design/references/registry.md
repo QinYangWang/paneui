@@ -21,7 +21,7 @@ overwrite `components/icons.tsx`, answer no to keep your icon style.
 ## This skill
 
 ```bash
-npx skills add QinYangWang/paneui --skill paneui-design   # agent skill (rules, references, checks)
+npx skills add taimatsuorg/paneui --skill paneui-design   # agent skill (rules, references, checks)
 npx shadcn@latest add @paneui/design-skill            # same files through the shadcn CLI
 ```
 

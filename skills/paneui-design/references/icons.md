@@ -2,7 +2,7 @@
 
 All glyphs come from the house set (`@paneui/icons`, installed as `components/icons.tsx`), never another
 icon package or an ad-hoc SVG. Drawing new glyphs is the `puffy-icons` skill
-(`npx skills add QinYangWang/paneui --skill puffy-icons`); it covers the grids, primitives and preview script
+(`npx skills add taimatsuorg/paneui --skill puffy-icons`); it covers the grids, primitives and preview script
 for every style.
 
 ## Styles

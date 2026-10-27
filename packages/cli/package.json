@@ -1,5 +1,5 @@
 {
-  "name": "paneui",
+  "name": "@taimatsu/paneui",
   "version": "0.1.0",
   "description": "Find, install and update paneui components.",
   "keywords": [
@@ -15,10 +15,10 @@
   "homepage": "https://paneui.dev/docs/cli",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QinYangWang/paneui.git",
+    "url": "git+https://github.com/taimatsuorg/paneui.git",
     "directory": "packages/cli"
   },
-  "bugs": "https://github.com/QinYangWang/paneui/issues",
+  "bugs": "https://github.com/taimatsuorg/paneui/issues",
   "type": "module",
   "bin": {
     "paneui": "dist/index.js"

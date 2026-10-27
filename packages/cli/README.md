@@ -4,9 +4,9 @@ Find, install and update [PaneUI](https://paneui.dev) components.
 Installed source files are yours to edit.
 
 ```bash
-npx paneui@latest init            # register @paneui in components.json, install the theme
-npx paneui@latest add button card # add items
-npx paneui@latest update          # reinstall the theme and every installed item
+npx @taimatsu/paneui@latest init            # register @paneui in components.json, install the theme
+npx @taimatsu/paneui@latest add button card # add items
+npx @taimatsu/paneui@latest update          # reinstall the theme and every installed item
 ```
 
 Requires Node.js 18.17 or later and a project the shadcn CLI supports (React, Tailwind CSS 4).
@@ -69,8 +69,8 @@ Items added with the shadcn CLI are not in `paneui.json`, but `update` still fin
 ## Development
 
 ```bash
-pnpm --filter paneui build
-pnpm --filter paneui test   # builds, then runs node:test against a mock registry
+pnpm --filter @taimatsu/paneui build
+pnpm --filter @taimatsu/paneui test   # builds, then runs node:test against a mock registry
 node packages/cli/dist/index.js search chart
 ```
 

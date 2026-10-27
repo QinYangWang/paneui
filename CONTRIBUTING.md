@@ -99,7 +99,7 @@ git push origin cli-vX.Y.Z
 ```
 
 `.github/workflows/release-cli.yml` verifies the tag against the package
-version, runs the CLI tests and publishes `paneui` to npm with trusted
+version, runs the CLI tests and publishes `@taimatsu/paneui` to npm with trusted
 publishing (OIDC, no token). Cloudflare Pages builds and deploys the site from
 `main` through its Git integration; there is no separate site release.
 See [Deployment](README.md#deployment) for setup.

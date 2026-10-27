@@ -1,10 +1,10 @@
 name: Release CLI to npm
 
-# Publishes packages/cli (paneui) when a tag like `cli-v0.1.0` is pushed. The tag must match
+# Publishes packages/cli (@taimatsu/paneui) when a tag like `cli-v0.1.0` is pushed. The tag must match
 # the version in packages/cli/package.json.
 #
-# Uses npm trusted publishing (OIDC): no token. On npmjs.com › paneui › Settings › Trusted
-# publishing, add GitHub Actions with user QinYangWang, repository ui, workflow release-cli.yml.
+# Uses npm trusted publishing (OIDC): no token. On npmjs.com › @taimatsu/paneui › Settings › Trusted
+# publishing, add GitHub Actions with organization taimatsuorg, repository paneui, workflow release-cli.yml.
 # Needs npm >= 11.5.1 and Node >= 22.14; provenance is generated automatically (public repo).
 
 on:
@@ -26,7 +26,7 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
       - run: npm install -g npm@latest
-      - run: pnpm install --frozen-lockfile --filter paneui...
+      - run: pnpm install --frozen-lockfile --filter @taimatsu/paneui...
       - name: Check the tag matches the package version
         run: |
           version=$(node -p "require('./packages/cli/package.json').version")

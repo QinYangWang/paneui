@@ -12,7 +12,7 @@ import { THEME_KEY } from "@/components/docs/theme-script"
 import { useT, type Localized } from "@/lib/site-locale"
 
 
-export const GITHUB_URL = "https://github.com/QinYangWang/paneui"
+export const GITHUB_URL = "https://github.com/taimatsuorg/paneui"
 
 const navLink =
   "lp-display rounded-full px-3 py-1.5 text-lg text-foreground outline-none transition-colors duration-150 hover:bg-foreground/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"

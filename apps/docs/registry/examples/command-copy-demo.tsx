@@ -4,7 +4,7 @@ export default function CommandCopyDemo() {
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
       <CommandCopy command="npx shadcn@latest add @paneui/button" />
-      <CommandCopy command="npx paneui@latest init" variant="floating" size="lg" />
+      <CommandCopy command="npx @taimatsu/paneui@latest init" variant="floating" size="lg" />
     </div>
   )
 }
