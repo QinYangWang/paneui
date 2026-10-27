@@ -3964,6 +3964,7 @@
         "@paneui/theme",
         "@paneui/icons",
         "@paneui/button",
+        "@paneui/tabs",
         "@paneui/action-swap-blur",
         "@paneui/locale-provider"
       ],

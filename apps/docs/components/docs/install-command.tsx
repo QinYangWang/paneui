@@ -8,7 +8,7 @@ import * as React from "react"
 import { CheckIcon, CopyIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
 import { ActionSwapBlurButton, type ActionSwapItem } from "@paneui/ui/components/action-swap-blur"
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@paneui/ui/components/tabs"
+import { CommandGroup } from "@paneui/ui/components/command-copy"
 import cliPackage from "@paneui/cli-metadata/package.json"
 
 const MANAGERS = {
@@ -121,23 +121,13 @@ export function CommandPill({ command, className }: { command: string; className
 export function InstallCommand({ args, cli = "shadcn", className }: { args: string; cli?: "shadcn" | "paneui"; className?: string }) {
   const pm = usePackageManager()
   const runner = (m: Manager) => (cli === "shadcn" ? MANAGERS[m] : `${RUNNERS[m]} ${CLI_PACKAGE}@latest`)
-  return (
-    <Tabs value={pm} onValueChange={(v) => isManager(v) && setManager(v)} className={cn("gap-2.5", className)}>
-      <TabsList className="p-0.5">
-        {(Object.keys(MANAGERS) as Manager[]).map((m) => (
-          // eslint-disable-next-line shadcn/no-restyle -- compact mono package-manager tabs; Tabs has no size prop yet
-          <TabsTab key={m} value={m} className="h-6 px-3 font-mono text-xs">
-            {m}
-          </TabsTab>
-        ))}
-      </TabsList>
-      {(Object.keys(MANAGERS) as Manager[]).map((m) => (
-        <TabsPanel key={m} value={m}>
-          <CommandPill command={`${runner(m)} ${args}`} />
-        </TabsPanel>
-      ))}
-    </Tabs>
+  const items = React.useMemo(
+    () => (Object.keys(MANAGERS) as Manager[]).map((m) => ({ value: m, command: `${runner(m)} ${args}` })),
+    // runner closes over args and cli only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [args, cli]
   )
+  return <CommandGroup items={items} value={pm} onValueChange={(v) => isManager(v) && setManager(v)} storageKey={PM_KEY} className={className} />
 }
 
 const ADD = {
@@ -150,21 +140,10 @@ const ADD = {
 /** `pnpm add <packages>` with the same remembered package-manager tabs. */
 export function PackageInstall({ packages, className }: { packages: string[]; className?: string }) {
   const pm = usePackageManager()
-  return (
-    <Tabs value={pm} onValueChange={(v) => isManager(v) && setManager(v)} className={cn("gap-2.5", className)}>
-      <TabsList className="p-0.5">
-        {(Object.keys(ADD) as Manager[]).map((m) => (
-          // eslint-disable-next-line shadcn/no-restyle -- compact mono package-manager tabs; Tabs has no size prop yet
-          <TabsTab key={m} value={m} className="h-6 px-3 font-mono text-xs">
-            {m}
-          </TabsTab>
-        ))}
-      </TabsList>
-      {(Object.keys(ADD) as Manager[]).map((m) => (
-        <TabsPanel key={m} value={m}>
-          <CommandPill command={`${ADD[m]} ${packages.join(" ")}`} />
-        </TabsPanel>
-      ))}
-    </Tabs>
+  const key = packages.join("\u0000")
+  const items = React.useMemo(
+    () => (Object.keys(ADD) as Manager[]).map((m) => ({ value: m, command: `${ADD[m]} ${key.split("\u0000").join(" ")}` })),
+    [key]
   )
+  return <CommandGroup items={items} value={pm} onValueChange={(v) => isManager(v) && setManager(v)} storageKey={PM_KEY} className={className} />
 }
