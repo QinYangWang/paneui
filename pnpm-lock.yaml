@@ -260,7 +260,7 @@ importers:
         specifier: ^4.7.0
         version: 4.7.0(monaco-editor@0.57.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@paneui/cli-metadata':
-        specifier: workspace:@oukinyou/paneui@*
+        specifier: workspace:paneui@*
         version: link:../../packages/cli
       '@paneui/core':
         specifier: workspace:*

@@ -4,9 +4,9 @@ Find, install and update [PaneUI](https://paneui.dev) components.
 Installed source files are yours to edit.
 
 ```bash
-npx @oukinyou/paneui@latest init            # register @paneui in components.json, install the theme
-npx @oukinyou/paneui@latest add button card # add items
-npx @oukinyou/paneui@latest update          # reinstall the theme and every installed item
+npx paneui@latest init            # register @paneui in components.json, install the theme
+npx paneui@latest add button card # add items
+npx paneui@latest update          # reinstall the theme and every installed item
 ```
 
 Requires Node.js 18.17 or later and a project the shadcn CLI supports (React, Tailwind CSS 4).
