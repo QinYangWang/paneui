@@ -17,8 +17,7 @@ import {
   SmartphoneIcon,
   TerminalIcon,
 } from "@paneui/ui/icons"
-import * as Outline from "@paneui/ui/icons/outline/icons"
-import * as Puffy from "@paneui/ui/icons/puffy/icons"
+import * as Emoji from "@paneui/ui/icons/emoji/icons"
 import { cn } from "@paneui/ui/lib/utils"
 import { AvatarStatus } from "@paneui/ui/components/avatar"
 import { Badge } from "@paneui/ui/components/badge"
@@ -252,12 +251,11 @@ const ICON_NAMES = [
   "LockIcon",
   "SendIcon",
 ] as const
-const SETS = { rounded: Rounded, puffy: Puffy, outline: Outline } as unknown as Record<"rounded" | "puffy" | "outline", Record<string, IconFn>>
+const SETS = { rounded: Rounded, emoji: Emoji } as unknown as Record<"rounded" | "emoji", Record<string, IconFn>>
 type IconStyle = keyof typeof SETS
 const STYLE_LABEL: Record<IconStyle, Localized> = {
   rounded: { en: "Rounded", zh: "圆润" },
-  puffy: { en: "Puffy", zh: "饱满" },
-  outline: { en: "Outline", zh: "线框" },
+  emoji: { en: "Emoji", zh: "拟物" },
 }
 
 function IconStylePicker({ value, onChange }: { value: IconStyle; onChange: (v: IconStyle) => void }) {
@@ -387,8 +385,8 @@ export function Features({ codeHtml }: { codeHtml: string }) {
         eyebrow={t({ en: "Icons", zh: "图标" })}
         title={[t({ en: "Icons drawn", zh: "图标与组件" }), t({ en: "on the same grid.", zh: "画在同一网格上。" })]}
         body={t({
-          en: "Three styles share every name. Swap the import and the whole app follows.",
-          zh: "三种风格共用同一套名称，换一个导入，整个应用随之切换。",
+          en: "Two styles share every name. Swap the file and the whole app follows.",
+          zh: "两种风格共用同一套名称，换一个文件，整个应用随之切换。",
         })}
         extra={<IconStylePicker value={iconStyle} onChange={setIconStyle} />}
         link={

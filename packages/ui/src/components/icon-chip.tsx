@@ -6,7 +6,7 @@ import { cn } from "@paneui/ui/lib/utils"
 
 /*
  * The house frame for an icon that labels a title, header or card: a small
- * raised squircle that holds one puffy icon. Every title-level icon in the
+ * raised squircle that holds one house icon. Every title-level icon in the
  * library sits in one of these so headers read as one family; nav, menu and
  * inline icons stay bare (16px, muted, active = foreground).
  *

@@ -43,9 +43,8 @@ workspace with its own lockfile — install it inside `apps/desktop/` if you nee
 5. Add the demo to `apps/docs/components/docs/demos.tsx`, run `node tooling/scripts/gen-docs.mjs`
    and commit the generated files.
 
-Never edit `packages/ui/src/icons/outline/icons.tsx` by hand; change
-`packages/ui/src/icons/index.tsx` or `tooling/scripts/icon-outline-overrides.mjs` and run
-`pnpm icons:gen`.
+Icons come in two hand-drawn styles with the same exports: `packages/ui/src/icons/index.tsx`
+(rounded) and `packages/ui/src/icons/emoji/icons.tsx` (emoji). Add a new icon to both.
 
 ## Design rules
 

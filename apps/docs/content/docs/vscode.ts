@@ -17,7 +17,7 @@ export default function CodeEditorPage() {
 // http://localhost:3000/?pty=ws://127.0.0.1:3457/?token=…`,
   },
   composition: `VsCodeApp
-├── IconRail                    Explorer · Search · Source control · Extensions
+├── SidebarRail                 Explorer · Search · Source control · Extensions
 ├── ResizablePanelGroup
 │   ├── sidebar                 Explorer (FileTree + ContextMenu) · SearchView · ScmView · ExtensionsView
 │   └── shell-inset panel

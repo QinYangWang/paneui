@@ -27,7 +27,7 @@ import { Button } from "@paneui/ui/components/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@paneui/ui/components/dialog"
 import { Drawer, DrawerContent, DrawerTitle } from "@paneui/ui/components/drawer"
 import { getFileKind } from "@paneui/ui/components/file-tree"
-import { IconRail, IconRailGroup, IconRailItem, IconRailSpacer } from "@paneui/ui/components/icon-rail"
+import { SidebarRail, SidebarRailGroup, SidebarRailItem, SidebarRailSpacer } from "@paneui/ui/components/animated-sidebar"
 import { Menu, MenuContent, MenuItem, MenuSeparator, MenuShortcut, MenuTrigger } from "@paneui/ui/components/menu"
 import {
   ResizableHandle,
@@ -468,10 +468,10 @@ function Shell({ ws, docs, host }: { ws: Workspace; docs: Docs; host?: VsCodeHos
   )
 
   const rail = (orientation: "vertical" | "horizontal") => (
-    <IconRail aria-label="Views" orientation={orientation}>
-      <IconRailGroup>
+    <SidebarRail aria-label="Views" orientation={orientation}>
+      <SidebarRailGroup>
         {VIEWS.map((v) => (
-          <IconRailItem
+          <SidebarRailItem
             key={v.id}
             label={v.label}
             shortcut={v.shortcut}
@@ -481,11 +481,11 @@ function Shell({ ws, docs, host }: { ws: Workspace; docs: Docs; host?: VsCodeHos
             onClick={() => (mobile ? setView(v.id) : toggleView(v.id))}
           />
         ))}
-      </IconRailGroup>
-      <IconRailSpacer />
-      <IconRailGroup>
-        {!mobile && <IconRailItem label="Toggle panel" shortcut="⌃`" icon={<TerminalSquareIcon />} active={panelOpen} onClick={togglePanel} />}
-        <IconRailItem
+      </SidebarRailGroup>
+      <SidebarRailSpacer />
+      <SidebarRailGroup>
+        {!mobile && <SidebarRailItem label="Toggle panel" shortcut="⌃`" icon={<TerminalSquareIcon />} active={panelOpen} onClick={togglePanel} />}
+        <SidebarRailItem
           label="Show all commands"
           shortcut="⇧⌘P"
           icon={<SettingsIcon />}
@@ -494,8 +494,8 @@ function Shell({ ws, docs, host }: { ws: Workspace; docs: Docs; host?: VsCodeHos
             setPalette("commands")
           }}
         />
-      </IconRailGroup>
-    </IconRail>
+      </SidebarRailGroup>
+    </SidebarRail>
   )
 
   const editorTabs = (

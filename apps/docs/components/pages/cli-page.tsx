@@ -551,20 +551,19 @@ export default function CliPage({ site, data }: { site: SiteProps; data: CliData
         <GuideH2 id="icon-style">Switch the icon style</GuideH2>
         <p className="text-muted-foreground">
           <T
-            en="The icon set comes in three styles with the same exports, and all of them install to the same file. Replace it to switch the icons in every component."
-            zh="图标集有三种风格，导出相同，且都安装到同一个文件。替换它即可切换所有组件中的图标。"
+            en="The icon set comes in two styles with the same exports, and both install to the same file. Replace it to switch the icons in every component."
+            zh="图标集有两种风格，导出相同，且都安装到同一个文件。替换它即可切换所有组件中的图标。"
           />
         </p>
-        <InstallCommand args={`add ${templateUrl("icons-puffy")} --overwrite`} />
-        <InstallCommand args={`add ${templateUrl("icons-outline")} --overwrite`} />
+        <InstallCommand args={`add ${templateUrl("icons-emoji")} --overwrite`} />
         <p className="text-muted-foreground">
           <T en="To go back to the default rounded set, run this." zh="要回到默认的圆角图标集，请运行这条命令。" />
         </p>
         <InstallCommand args={`add ${templateUrl("icons")} --overwrite`} />
         <p className="text-muted-foreground">
           <T
-            en={<>When you later add an item that uses icons, the CLI asks before overwriting <Code>packages/ui/src/icons/index.tsx</Code>. Answer no to keep your style. A non-interactive run stops at that question. If you add with <Code>--overwrite</Code>, the rounded set comes back, so run your style&apos;s command again. Compare the styles on{" "}<TextLink href="/docs/icons#icon-styles">Icons</TextLink>.</>}
-            zh={<>之后添加使用图标的条目时，CLI 会在覆盖 <Code>packages/ui/src/icons/index.tsx</Code> 前询问。回答否以保留你的风格。非交互运行会停在这个问题。如果使用 <Code>--overwrite</Code> 添加，圆角图标集会回来，因此请再次运行你的风格对应命令。在<TextLink href="/docs/icons#icon-styles">图标</TextLink>页面比较各风格。</>}
+            en={<>When you later add an item that uses icons, the CLI asks before overwriting <Code>components/icons.tsx</Code>. Answer no to keep your style. A non-interactive run stops at that question. If you add with <Code>--overwrite</Code>, the rounded set comes back, so run your style&apos;s command again. Compare the styles on{" "}<TextLink href="/docs/icons#icon-styles">Icons</TextLink>.</>}
+            zh={<>之后添加使用图标的条目时，CLI 会在覆盖 <Code>components/icons.tsx</Code> 前询问。回答否以保留你的风格。非交互运行会停在这个问题。如果使用 <Code>--overwrite</Code> 添加，圆角图标集会回来，因此请再次运行你的风格对应命令。在<TextLink href="/docs/icons#icon-styles">图标</TextLink>页面比较各风格。</>}
           />
         </p>
       </section>

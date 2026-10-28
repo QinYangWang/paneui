@@ -29,7 +29,7 @@ export default {
 </SidebarProvider>`,
   },
   composition: `SidebarProvider
-├── Sidebar
+├── Sidebar  (rail → SidebarRail, for three columns)
 │   ├── SidebarHeader
 │   │   └── SidebarHideCollapsed
 │   ├── SidebarContent
@@ -45,7 +45,15 @@ export default {
   examples: [
     {
       id: "collapsed",
-      title: { en: "Icon Rail", zh: "图标栏" },
+      title: { en: "Collapsed", zh: "收起" },
+    },
+    {
+      id: "three-column",
+      title: { en: "Three Columns", zh: "三栏" },
+    },
+    {
+      id: "rail-horizontal",
+      title: { en: "Horizontal Rail", zh: "横向图标栏" },
     },
     {
       id: "flush-right",
@@ -97,12 +105,14 @@ export default {
         { name: "variant", type: `"floating" | "sidebar"`, default: `"floating"`, description: { en: "`floating` is a raised rounded card; `sidebar` sits flush with a hairline edge.", zh: "`floating` 是凸起的圆角卡片；`sidebar` 贴合边缘，带一条细线。" } },
         { name: "collapsible", type: `"icon" | "none"`, default: `"icon"`, description: { en: "`icon` folds into an icon rail; `none` never collapses.", zh: "`icon` 折叠为图标栏；`none` 从不折叠。" } },
         { name: "panelClassName", type: "string", description: { en: "Class for the inner panel surface.", zh: "内部面板表面的类名。" } },
+        { name: "rail", type: "ReactNode", description: { en: "A `SidebarRail` shown beside the sidebar's content: rail, second level, then main. Collapsing hides the second level and keeps the rail.", zh: "放在侧栏内容旁的 `SidebarRail`：图标栏、二级栏、主区三栏。收起时只隐藏二级栏，图标栏保留。" } },
         { name: "aria-label", type: "string", default: `"Sidebar"`, description: { en: "Accessible name of the aside.", zh: "aside 的无障碍名称。" } },
       ],
       dataAttributes: [
         { name: "data-state", description: { en: "`expanded` or `collapsed`.", zh: "`expanded` 或 `collapsed`。" } },
         { name: "data-variant", description: { en: "`floating` or `sidebar`.", zh: "`floating` 或 `sidebar`。" } },
         { name: "data-side", description: { en: "`left` or `right`.", zh: "`left` 或 `right`。" } },
+        { name: "data-rail", description: { en: "Present in the three-column layout.", zh: "三栏布局时存在。" } },
       ],
     },
     { name: "SidebarHeader", extends: "div", props: [] },
@@ -172,5 +182,41 @@ export default {
         { name: "pillId", type: "string", description: { en: "Shared layout id of the active pill.", zh: "激活胶囊的共享布局 id。" } },
       ],
     },
+
+    {
+      name: "SidebarRail",
+      extends: "nav",
+      props: [
+        { name: "orientation", type: `"vertical" | "horizontal"`, default: `"vertical"`, description: { en: "A 48px column, or a 48px row (groups, separators and the spacer follow).", zh: "48px 的列，或 48px 的行（分组、分隔符和占位元素随之）。" } },
+        { name: "tooltipSide", type: `"right" | "left" | "top" | "bottom"`, default: `"right" / "top"`, description: { en: "Side tooltips open on. Defaults to `right` for a vertical rail and `top` for a horizontal one; use `left` for a rail on the right edge.", zh: "侧边提示打开的方向。垂直默认为 `right`，水平默认为 `top`；位于右边缘的侧边栏使用 `left`。" } },
+      ],
+      dataAttributes: [{ name: "data-orientation", description: { en: "`vertical` or `horizontal`.", zh: "`vertical` 或 `horizontal`。" } }],
+    },
+    {
+      name: "SidebarRailItem",
+      extends: "button",
+      props: [
+        { name: "label", type: "string", required: true, description: { en: "Accessible name and tooltip text.", zh: "无障碍名称和提示文本。" } },
+        { name: "icon", type: "ReactNode", required: true, description: { en: "The glyph.", zh: "图标。" } },
+        { name: "shortcut", type: "string", description: { en: "Shown as a key chip in the tooltip.", zh: "在提示中显示为按键 chip。" } },
+        { name: "active", type: "boolean", default: "false", description: { en: "Selected state; sets `aria-current=\"page\"`.", zh: "选中状态；设置 `aria-current=\"page\"`。" } },
+        { name: "badge", type: "number | boolean", description: { en: "Count or dot.", zh: "计数或圆点。" } },
+        { name: "render", type: "ReactElement", description: { en: "Render as another element, e.g. a `Link`.", zh: "渲染为另一个元素，例如 `Link`。" } },
+      ],
+      dataAttributes: [{ name: "data-active", description: { en: "Present when active.", zh: "激活时存在。" } }],
+    },
+    {
+      name: "SidebarRailAvatar",
+      description: { en: "Round button for accounts or agent providers at the bottom of the rail.", zh: "侧边栏底部用于账号或代理提供商的圆形按钮。" },
+      extends: "button",
+      props: [
+        { name: "label", type: "string", required: true, description: { en: "Accessible name and tooltip.", zh: "可访问名称和提示。" } },
+        { name: "status", type: `"online" | "busy" | "error" | "offline"`, default: `"offline"`, description: { en: "Ring colour. `online` is success, `busy` warning, `error` destructive and `offline` has none.", zh: "圆环颜色。`online` 为成功，`busy` 为警告，`error` 为破坏性，`offline` 无颜色。" } },
+        { name: "hint", type: "string", description: { en: "Extra tooltip text, e.g. the connection state.", zh: "额外的提示文本，例如连接状态。" } },
+      ],
+    },
+    { name: "SidebarRailGroup", extends: "div", props: [] },
+    { name: "SidebarRailSeparator", extends: "div", props: [] },
+    { name: "SidebarRailSpacer", description: { en: "Pushes what follows to the bottom.", zh: "将其后的内容推到底部。" }, extends: "div", props: [] },
   ],
 } satisfies ComponentDoc
