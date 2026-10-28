@@ -1501,14 +1501,14 @@ export const ClipboardListIcon = (p: IconProps) => (
 /** The PaneUI mark: an app window whose sidebar and top-right pane read as a P. */
 export const PaneuiLogoIcon = (p: IconProps) => (
   <Icon {...p} tones={["graphite", "silver"]}>
-    {(c) => <path fillRule="evenodd" d="M8 2H16A6 6 0 0 1 22 8V16A6 6 0 0 1 16 22H8A6 6 0 0 1 2 16V8A6 6 0 0 1 8 2Z M7.25 5H7.25A2.25 2.25 0 0 1 9.5 7.25V16.75A2.25 2.25 0 0 1 7.25 19H7.25A2.25 2.25 0 0 1 5 16.75V7.25A2.25 2.25 0 0 1 7.25 5Z M14.5 5H16A3 3 0 0 1 19 8V8A3 3 0 0 1 16 11H14.5A3 3 0 0 1 11.5 8V8A3 3 0 0 1 14.5 5Z" fill={c.f("graphite")} stroke={c.s("silver")} strokeWidth="0.6" />}
+    {(c) => <path fillRule="evenodd" d="M8 2H16A6 6 0 0 1 22 8V16A6 6 0 0 1 16 22H8A6 6 0 0 1 2 16V8A6 6 0 0 1 8 2Z M7.25 4.75H7.25A2.5 2.5 0 0 1 9.75 7.25V16.75A2.5 2.5 0 0 1 7.25 19.25H7.25A2.5 2.5 0 0 1 4.75 16.75V7.25A2.5 2.5 0 0 1 7.25 4.75Z M15 4.75H16A3.25 3.25 0 0 1 19.25 8V11A3.25 3.25 0 0 1 16 14.25H15A3.25 3.25 0 0 1 11.75 11V8A3.25 3.25 0 0 1 15 4.75Z" fill={c.f("graphite")} stroke={c.s("silver")} strokeWidth="0.6" />}
   </Icon>
 );
 
 /** The PaneUI mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
 export const PaneuiLogoMonoIcon = (p: IconProps) => (
   <Glyph {...p}>
-    <path fillRule="evenodd" d="M8 2H16A6 6 0 0 1 22 8V16A6 6 0 0 1 16 22H8A6 6 0 0 1 2 16V8A6 6 0 0 1 8 2Z M7.25 5H7.25A2.25 2.25 0 0 1 9.5 7.25V16.75A2.25 2.25 0 0 1 7.25 19H7.25A2.25 2.25 0 0 1 5 16.75V7.25A2.25 2.25 0 0 1 7.25 5Z M14.5 5H16A3 3 0 0 1 19 8V8A3 3 0 0 1 16 11H14.5A3 3 0 0 1 11.5 8V8A3 3 0 0 1 14.5 5Z" fill="currentColor" />
+    <path fillRule="evenodd" d="M8 2H16A6 6 0 0 1 22 8V16A6 6 0 0 1 16 22H8A6 6 0 0 1 2 16V8A6 6 0 0 1 8 2Z M7.25 4.75H7.25A2.5 2.5 0 0 1 9.75 7.25V16.75A2.5 2.5 0 0 1 7.25 19.25H7.25A2.5 2.5 0 0 1 4.75 16.75V7.25A2.5 2.5 0 0 1 7.25 4.75Z M15 4.75H16A3.25 3.25 0 0 1 19.25 8V11A3.25 3.25 0 0 1 16 14.25H15A3.25 3.25 0 0 1 11.75 11V8A3.25 3.25 0 0 1 15 4.75Z" fill="currentColor" />
   </Glyph>
 );
 
