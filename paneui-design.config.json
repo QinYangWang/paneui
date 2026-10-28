@@ -57,11 +57,6 @@
       "reason": "the radius table documents the 4xl/5xl aliases"
     },
     {
-      "rule": "radius-cap",
-      "file": "apps/docs/app/docs/theming/page.tsx",
-      "reason": "the radius table documents the 4xl/5xl aliases (Next route until app/ is deleted)"
-    },
-    {
       "rule": "type-scale",
       "file": "packages/ui/src/blocks/card-folder/card-folder.tsx",
       "reason": "payment card artwork, sized to the card"

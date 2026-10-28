@@ -36,7 +36,7 @@ for (const family of ["inter", "noto-sans-sc", "jetbrains-mono", "source-serif-4
 }
 await writeFile(new URL("fonts.css", root), fontCss);
 
-await copyFile(new URL("../../apps/docs/app/icon.svg", import.meta.url), new URL("icon.svg", root));
+await copyFile(new URL("../../apps/docs/public/icon.svg", import.meta.url), new URL("icon.svg", root));
 
 const html = (await readFile(new URL("index.html", root), "utf8")).replace(
   "</head>",

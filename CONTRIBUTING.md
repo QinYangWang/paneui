@@ -25,7 +25,7 @@ workspace with its own lockfile — install it inside `apps/desktop/` if you nee
 | `packages/ui/src/icons/index.tsx` | Hand-drawn icon set; the outline set is generated from it |
 | `apps/docs/registry/examples/` | One demo per item, written as a consumer |
 | `apps/docs/content/docs/<name>.ts` | Docs page content (usage, composition, examples, API) |
-| `apps/docs/app/`, `apps/docs/components/docs/`, `apps/docs/components/landing/` | The docs site and landing page |
+| `apps/docs/src/pages/`, `apps/docs/components/pages/`, `apps/docs/components/docs/`, `apps/docs/components/landing/` | The docs site and landing page |
 | `packages/cli/` | The `paneui` CLI |
 | `skills/paneui-design/` | The design rules and the design check |
 | `tooling/scripts/` | Generation and audit scripts (`gen-docs.mjs`, `gen-docs-md.mjs`, `audit-radius.mjs`, …) |
