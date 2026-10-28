@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <style>.ink{fill:#171717}@media (prefers-color-scheme:dark){.ink{fill:#ededed}}</style>
-  <rect class="ink" x="2" y="2" width="11.75" height="6.75" rx="1.25"/>
-  <rect x="15.25" y="2" width="6.75" height="11.75" rx="1.25" fill="#0090ff"/>
-  <rect class="ink" x="10.25" y="15.25" width="11.75" height="6.75" rx="1.25"/>
-  <rect class="ink" x="2" y="10.25" width="6.75" height="11.75" rx="1.25"/>
-</svg>
