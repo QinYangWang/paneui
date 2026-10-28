@@ -9,12 +9,8 @@ import {
   BellIcon,
   CodeIcon,
   GitBranchIcon,
-  MonitorIcon,
-  MoonIcon,
-  PaletteIcon,
   RefreshIcon,
   SearchIcon,
-  SmartphoneIcon,
   TerminalIcon,
 } from "@paneui/ui/icons"
 import * as Emoji from "@paneui/ui/icons/emoji/icons"
@@ -31,7 +27,6 @@ import { Progress, ProgressLabel, ProgressValue } from "@paneui/ui/components/pr
 import { SegmentedControl, SegmentedControlItem } from "@paneui/ui/components/segmented-control"
 import { SwatchPicker } from "@paneui/ui/components/swatch-picker"
 import { Switch } from "@paneui/ui/components/switch"
-import { WindowFrame, WindowFrameBar, WindowFrameBody, WindowFrameTitle } from "@paneui/ui/components/window-frame"
 import { PRESET_LABELS, PRESET_THEMES, type PresetAccent } from "@/components/docs/accent-color"
 import { setAccent, useAccentState } from "@/components/docs/accent-store"
 import { radiusValue, setRadius, useRadiusState, type RadiusChoice } from "@/components/docs/radius-store"
@@ -40,7 +35,6 @@ import { siteCopy } from "@/lib/site-copy"
 import { useT, type Localized } from "@/lib/site-locale"
 
 import { Eyebrow } from "./parts"
-import { Phone, Usage } from "./pieces"
 import { Reveal, useStill } from "./reveal"
 
 type Tone = "lilac" | "butter" | "mint" | "peach"
@@ -109,26 +103,6 @@ function FeatureCard({
         </motion.div>
       </div>
     </Reveal>
-  )
-}
-
-/* ───────────── Web + Native ───────────── */
-
-function PlatformsVisual() {
-  const t = useT()
-  return (
-    <div className="relative pb-44 sm:pb-16">
-      <WindowFrame variant="glass" size="sm" className="w-full sm:w-10/12">
-        <WindowFrameBar>
-          <WindowFrameTitle>app.example.com</WindowFrameTitle>
-        </WindowFrameBar>
-        <WindowFrameBody>
-          <Usage />
-        </WindowFrameBody>
-      </WindowFrame>
-      <Phone className="absolute end-0 -bottom-2 w-56 origin-bottom-right scale-75 sm:-bottom-8 sm:w-60 sm:scale-90 lg:scale-100" />
-      <span className="sr-only">{t({ en: "A desktop window and a phone", zh: "桌面窗口和手机" })}</span>
-    </div>
   )
 }
 
@@ -307,7 +281,7 @@ function CodeVisual({ html }: { html: string }) {
   const [file, setFile] = React.useState<string | null>("components/ui/button.tsx")
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-7">
-      <div className="frame-2xl frame-p-2 hidden rounded-2xl bg-card/70 shadow-raised backdrop-blur-xl sm:col-span-2 sm:block">
+      <div className="frame-xl frame-p-2 hidden bg-code shadow-xl sm:col-span-2 sm:block">
         <FileTree variant="ghost" label={t({ en: "Project files", zh: "项目文件" })} value={file} onValueChange={setFile} defaultExpanded={["app", "components", "components/ui"]}>
           <FileTreeFolder name="app">
             <FileTreeFile name="layout.tsx" />
@@ -334,31 +308,6 @@ export function Features({ codeHtml }: { codeHtml: string }) {
   const [iconStyle, setIconStyle] = React.useState<IconStyle>("rounded")
   return (
     <>
-      <FeatureCard
-        id="feature-platforms"
-        tone="lilac"
-        eyebrow="Web + React Native"
-        title={[t({ en: "One design,", zh: "一套设计，" }), t({ en: "two platforms.", zh: "两个平台。" })]}
-        body={t({
-          en: "Web and Native components read the same tokens. Each keeps the feel of its own platform.",
-          zh: "Web 与 Native 组件读取同一套设计变量，各自保留平台本身的手感。",
-        })}
-        link={
-          // The showcase is a separate app on the same host, so a plain link leaves the router.
-          <Button variant="glass" shape="pill" size="xl" nativeButton={false} render={<a href="/native/" />}>
-            {t({ en: "Open the Native showcase", zh: "打开 Native 展示" })}
-            <ButtonArrow />
-          </Button>
-        }
-        points={[
-          { icon: <MonitorIcon />, label: t({ en: "Desktop density", zh: "桌面密度" }) },
-          { icon: <SmartphoneIcon />, label: t({ en: "Touch sizes", zh: "触控尺寸" }) },
-          { icon: <PaletteIcon />, label: t({ en: "Shared tokens", zh: "共享变量" }) },
-          { icon: <MoonIcon />, label: t({ en: "Dark mode", zh: "深色模式" }) },
-        ]}
-        visual={<PlatformsVisual />}
-      />
-
       <FeatureCard
         id="feature-theming"
         tone="butter"

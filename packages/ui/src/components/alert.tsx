@@ -6,27 +6,26 @@ import { AnimatePresence, motion, useReducedMotion, type HTMLMotionProps } from 
 
 import { AlertCircleIcon, CheckCircleIcon, InfoIcon, WarningIcon, XIcon } from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
-import { IconChip } from "@paneui/ui/components/icon-chip"
 import { useLocale } from "@paneui/ui/components/locale-provider"
 
-// The surface is an opaque card; the tone is a wash painted underneath the content
-// (a ::before layer) so it never changes the text contrast tokens. A 1px ring in the
-// tone's border token paints over the neutral hairline inside shadow-raised, so the
-// frame carries the variant colour instead of a grey edge.
+// A quiet bordered card: the tone lives on the icon (and on the text for destructive), never on a
+// filled wash, so a page with several alerts stays calm. Title and description share one column
+// beside a 16px icon; actions and the close button sit at the end of the first line.
 const alertVariants = cva(
-  "relative isolate flex w-full items-start overflow-hidden bg-card text-card-foreground shadow-raised ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10",
+  "relative flex w-full items-start border bg-card text-card-foreground [&>[data-slot=alert-icon]]:mt-0.5",
   {
     variants: {
       variant: {
-        default: "ring-foreground/15 before:bg-transparent",
-        info: "ring-primary-border before:bg-primary-subtle",
-        success: "ring-success-border before:bg-success-subtle",
-        warning: "ring-warning-border before:bg-warning-subtle",
-        destructive: "ring-destructive-border before:bg-destructive-subtle",
+        default: "border-border [&>[data-slot=alert-icon]]:text-foreground",
+        info: "border-border [&>[data-slot=alert-icon]]:text-primary",
+        success: "border-border [&>[data-slot=alert-icon]]:text-success",
+        warning: "border-border [&>[data-slot=alert-icon]]:text-warning",
+        destructive:
+          "border-border text-destructive [&>[data-slot=alert-icon]]:text-destructive [&_[data-slot=alert-description]]:text-destructive/80",
       },
       size: {
-        sm: "gap-2.5 rounded-xl p-2.5 text-ui",
-        default: "gap-3 rounded-2xl p-3.5 text-ui",
+        sm: "gap-2.5 rounded-lg px-3 py-2.5 text-ui",
+        default: "gap-3 rounded-xl px-4 py-3 text-ui",
       },
     },
     defaultVariants: { variant: "default", size: "default" },
@@ -52,14 +51,6 @@ function useAlert() {
   return ctx
 }
 
-const chipTone = {
-  default: "neutral",
-  info: "primary",
-  success: "success",
-  warning: "warning",
-  destructive: "destructive",
-} as const satisfies Record<AlertVariant, string>
-
 const defaultIcon: Record<AlertVariant, React.ComponentType<{ className?: string }>> = {
   default: InfoIcon,
   info: InfoIcon,
@@ -75,7 +66,7 @@ type AlertProps = Omit<
   "initial" | "animate" | "exit" | "transition" | "role" | "children"
 > & {
   variant?: AlertVariant
-  /** `sm` tightens the padding and uses the small icon chip, for alerts inside cards and forms. */
+  /** `sm` tightens the padding, for alerts inside cards and forms. */
   size?: AlertSize
   /** Controlled visibility. Hiding animates the alert out (height collapses, surface fades). */
   open?: boolean
@@ -89,7 +80,7 @@ type AlertProps = Omit<
 }
 
 /**
- * Inline message surface. Compose with AlertIcon, AlertTitle, AlertDescription,
+ * Inline callout. Compose with AlertIcon, AlertContent (AlertTitle + AlertDescription),
  * AlertAction and AlertClose. Appears and dismisses with a soft height + scale animation.
  */
 function Alert({
@@ -165,24 +156,23 @@ function Alert({
   )
 }
 
-/** Icon chip. Renders the variant's default icon unless children are given. */
+/** The variant's icon, tinted by the variant, unless children are given. */
 function AlertIcon({ className, children, ...props }: React.ComponentProps<"span">) {
-  const { variant, size } = useAlert()
+  const { variant } = useAlert()
   const Icon = defaultIcon[variant]
   return (
-    <IconChip data-slot="alert-icon" tone={chipTone[variant]} size={size === "sm" ? "sm" : "default"} className={className} {...props}>
+    <span data-slot="alert-icon" aria-hidden className={cn("flex size-4 shrink-0 items-center justify-center [&_svg]:size-4", className)} {...props}>
       {children ?? <Icon />}
-    </IconChip>
+    </span>
   )
 }
 
 /** Wraps title + description so they stack beside the icon. */
 function AlertContent({ className, ...props }: React.ComponentProps<"div">) {
-  const { size } = useAlert()
   return (
     <div
       data-slot="alert-content"
-      className={cn("flex min-w-0 flex-1 flex-col gap-0.5", size === "sm" ? "pt-0.5" : "pt-1", className)}
+      className={cn("flex min-w-0 flex-1 flex-col gap-0.5", className)}
       {...props}
     />
   )
@@ -205,7 +195,7 @@ function AlertDescription({ className, ...props }: React.ComponentProps<"div">) 
 /** Right-aligned slot for buttons (e.g. "Undo", "Review"). */
 function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div data-slot="alert-action" className={cn("ml-auto flex shrink-0 items-center gap-1.5 self-center", className)} {...props} />
+    <div data-slot="alert-action" className={cn("-my-0.5 ml-auto flex shrink-0 items-center gap-1.5 self-start", className)} {...props} />
   )
 }
 
@@ -222,7 +212,7 @@ function AlertClose({ className, onClick, children, ...props }: React.ComponentP
         if (!e.defaultPrevented) dismiss()
       }}
       className={cn(
-        size === "sm" ? "-mr-0.5 size-6" : "-mt-0.5 -mr-1 size-7",
+        size === "sm" ? "-my-0.5 -mr-1 size-6" : "-my-1 -mr-1.5 size-7",
         "flex shrink-0 cursor-pointer items-center justify-center self-start rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-3.5",
         className
       )}

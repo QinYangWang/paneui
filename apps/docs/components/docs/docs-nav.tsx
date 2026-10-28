@@ -103,18 +103,15 @@ export function DocsNav({
     <SidebarNav className={className}>
       <SidebarNavSearch shortcut={searchShortcut} onClick={onSearch} aria-label={label("Search docs")}>{label("Search docs…")}</SidebarNavSearch>
       <SidebarNavContent aria-label={label("Docs")}>
-        <SidebarNavSection label={label("Platforms")} {...sectionProps("platforms")}>
-          <SidebarNavList>
-            {link(COMPONENTS_HREF, "Web")}
-            <SidebarNavLink render={<a href="/native/" />}>Native</SidebarNavLink>
-          </SidebarNavList>
-        </SidebarNavSection>
         <SidebarNavSection label={label("Docs")} {...sectionProps("docs")}>
-          <SidebarNavList>{GUIDE_PAGES.map((p) => link(p.href, p.title))}</SidebarNavList>
+          <SidebarNavList>
+            {link(GUIDE_PAGES[0].href, GUIDE_PAGES[0].title)}
+            {link(COMPONENTS_HREF, COMPONENTS_TITLE)}
+            {GUIDE_PAGES.slice(1).map((p) => link(p.href, p.title))}
+          </SidebarNavList>
         </SidebarNavSection>
 
         <SidebarNavSection label={label("Components")} count={componentCount} {...sectionProps("components")}>
-          <SidebarNavList>{link(COMPONENTS_HREF, COMPONENTS_TITLE)}</SidebarNavList>
           {components.map((g) => (
             // A group holding the current page always shows it.
             <SidebarNavSection

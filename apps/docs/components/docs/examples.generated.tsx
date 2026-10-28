@@ -275,6 +275,7 @@ export const examples: Record<string, React.ComponentType> = {
   "magnetic/spring": dynamic(() => import("@/registry/examples/magnetic/spring"), { ssr: false }),
   "magnetic/strength": dynamic(() => import("@/registry/examples/magnetic/strength"), { ssr: false }),
   "marquee/no-fade": dynamic(() => import("@/registry/examples/marquee/no-fade"), { ssr: false }),
+  "marquee/posts": dynamic(() => import("@/registry/examples/marquee/posts"), { ssr: false }),
   "marquee/repeat": dynamic(() => import("@/registry/examples/marquee/repeat"), { ssr: false }),
   "marquee/vertical": dynamic(() => import("@/registry/examples/marquee/vertical"), { ssr: false }),
   "menu-list/plain": dynamic(() => import("@/registry/examples/menu-list/plain"), { ssr: false }),

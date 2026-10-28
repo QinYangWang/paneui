@@ -27,8 +27,9 @@ import { cn } from "@paneui/ui/lib/utils"
  * full-width rows, arrow-key navigation), 12px indent per level and one 16px leading slot per
  * row. A folder's slot holds its chevron, a file's slot holds its file-type
  * icon, so at the same level chevrons and file icons share one column. A thin
- * indent guide runs under each open folder's chevron. Rows spring in and out as folders open and the selection
- * is one fill that glides between rows.
+ * indent guide runs under each open folder's chevron. Rows fade in and slide 4px as a folder opens
+ * (160ms ease-out), closing rows leave the flow at once, and the selection is one fill that
+ * follows the pointer.
  */
 
 type FileTreeNode = {
@@ -125,7 +126,8 @@ function siblingsOf(nodes: FileTreeNode[], value: string): FileTreeNode[] | null
   return null
 }
 
-const SPRING = { type: "spring", stiffness: 420, damping: 34, mass: 0.6 } as const
+/** Selection pill: stiff and critically damped so it lands with the pointer, no float. */
+const SPRING = { type: "spring", stiffness: 900, damping: 60, mass: 0.5 } as const
 type FileKind = { icon: React.ReactNode; className: string }
 
 const KINDS: Record<string, FileKind> = {
@@ -167,8 +169,9 @@ function getFileKind(name: string): FileKind {
   return KINDS[EXT[ext] ?? "file"]
 }
 
-const POP = { type: "spring", stiffness: 520, damping: 26, mass: 0.5 } as const
 const EASE = [0.22, 1, 0.36, 1] as const
+/** Rows, chevrons and guides: one short ease-out tween, so open and close track the click. */
+const FAST = { type: "tween", duration: 0.16, ease: EASE } as const
 /** Left padding of a depth-0 row, px. */
 const PAD = 4
 
@@ -176,7 +179,7 @@ const PAD = 4
  * `default` sits on its own card surface like Command or Card; `ghost` drops the surface for
  * trees that live inside a sidebar or panel that already has one.
  */
-const fileTreeVariants = cva("flex min-w-0 flex-col text-ui", {
+const fileTreeVariants = cva("relative flex min-w-0 flex-col text-ui", {
   variants: {
     variant: {
       default: "frame-xl frame-p-2 bg-card shadow-raised",
@@ -343,7 +346,8 @@ function FileTree({
       {...props}
       aria-label={props["aria-label"] ?? label}
     >
-      <AnimatePresence initial={false}>
+      {/* popLayout: closing rows leave the flow at once, so the rows below move on the same frame. */}
+      <AnimatePresence initial={false} mode="popLayout">
         {rows.map((row) => {
           const { node } = row
           const isFolder = node.type === "folder"
@@ -357,10 +361,10 @@ function FileTree({
                 else refs.current.delete(node.value)
               }}
               layout={reduce ? false : "position"}
-              initial={reduce ? { opacity: 0 } : { opacity: 0, y: -6, filter: "blur(2px)" }}
-              animate={{ opacity: node.disabled ? 0.45 : 1, y: 0, filter: "blur(0px)" }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -4, filter: "blur(2px)", transition: { duration: 0.12, ease: EASE } }}
-              transition={reduce ? { duration: 0.12 } : { ...SPRING, opacity: { duration: 0.2, ease: EASE, delay: Math.min(row.pos * 0.02, 0.12) } }}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: -4 }}
+              animate={{ opacity: node.disabled ? 0.45 : 1, y: 0 }}
+              exit={{ opacity: 0, transition: { duration: 0.08, ease: EASE } }}
+              transition={reduce ? { duration: 0.1 } : FAST}
               role="treeitem"
               aria-level={row.depth + 1}
               aria-posinset={row.pos}
@@ -380,9 +384,9 @@ function FileTree({
               }}
               style={{ paddingLeft: PAD + row.depth * indent }}
               className={cn(
-                "group/file-tree-item relative flex h-[22px] shrink-0 cursor-pointer items-center gap-1.5 rounded-inner-or-sm pr-2 text-muted-foreground outline-none select-none",
+                "group/file-tree-item relative flex h-5.5 shrink-0 cursor-pointer items-center gap-1.5 rounded-inner-or-sm pr-2 text-muted-foreground outline-none select-none",
                 "focus-visible:ring-inset",
-                "transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+                "hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
                 isSelected && "font-medium text-foreground",
                 node.disabled && "cursor-not-allowed hover:text-muted-foreground",
                 node.className
@@ -397,7 +401,7 @@ function FileTree({
                 />
               )}
               {!isSelected && (
-                <span aria-hidden className="absolute inset-0 rounded-inner-or-sm transition-colors group-hover/file-tree-item:bg-muted/60" />
+                <span aria-hidden className="absolute inset-0 rounded-inner-or-sm group-hover/file-tree-item:bg-muted/60" />
               )}
 
               {/* indent guides, one per ancestor level, under that ancestor's chevron */}
@@ -407,7 +411,7 @@ function FileTree({
                   aria-hidden
                   initial={reduce || !mounted ? false : { scaleY: 0 }}
                   animate={{ scaleY: 1 }}
-                  transition={{ duration: reduce ? 0 : 0.28, ease: EASE }}
+                  transition={reduce ? { duration: 0 } : FAST}
                   style={{ left: PAD + d * indent + 7 }}
                   className="absolute inset-y-0 z-10 w-px origin-top bg-foreground/15"
                 />
@@ -420,7 +424,7 @@ function FileTree({
                   data-slot="file-tree-chevron"
                   initial={false}
                   animate={{ rotate: isOpen ? 90 : 0 }}
-                  transition={reduce ? { duration: 0 } : POP}
+                  transition={reduce ? { duration: 0 } : FAST}
                   className={cn(
                     "relative z-10 grid size-4 shrink-0 place-items-center text-muted-foreground transition-colors rtl:-scale-x-100 [&_svg]:size-3",
                     isOpen && "text-foreground"

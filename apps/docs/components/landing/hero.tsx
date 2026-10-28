@@ -132,8 +132,8 @@ export function Hero() {
 
         <div className="relative flex flex-col items-center px-5 pt-32 text-center sm:pt-40 lg:pt-44">
           <motion.h1 id="hero-title" className="lp-display text-balance max-w-4xl text-4xl sm:text-6xl lg:text-7xl" {...rise(0.05, still)}>
-            <span className="block">{t({ en: "React components", zh: "为 Web 与 Native" })}</span>
-            <span className="block">{t({ en: "for Web and Native", zh: "而做的 React 组件" })}</span>
+            <span className="block">{t({ en: "React components", zh: "为应用界面" })}</span>
+            <span className="block">{t({ en: "for app interfaces", zh: "而做的 React 组件" })}</span>
           </motion.h1>
           <motion.p className="mt-5 max-w-md text-pretty text-base text-foreground/70 sm:mt-6 sm:text-lg" {...rise(0.15, still)}>
             {t({ en: "The source lands in your app, ready to edit.", zh: "源码直接放进你的项目，随时修改。" })}
