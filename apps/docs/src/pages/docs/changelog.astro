@@ -1,0 +1,14 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import ChangelogPage, { type ChangelogData } from "@/components/pages/changelog-page"
+import { docNav, siteNavGroups } from "@/lib/build"
+
+const data: ChangelogData = {
+  nav: docNav("/docs/changelog", ["components/pages/changelog-page.tsx", "components/docs/whats-new.ts"]),
+}
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Changelog">
+  <ChangelogPage client:load site={site} data={data} />
+</Base>

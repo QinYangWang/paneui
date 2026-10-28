@@ -82,7 +82,8 @@ function PageCard({ page, dir }: { page: DocsPageRef; dir: "prev" | "next" }) {
 }
 
 /** Previous and next page in sidebar order, then when the page's sources last changed. */
-export function DocFooter({ prev, next, updated }: { prev?: DocsPageRef; next?: DocsPageRef; updated?: Date }) {
+/** `updated` is an ISO date string (props cross the island boundary as JSON). */
+export function DocFooter({ prev, next, updated }: { prev?: DocsPageRef; next?: DocsPageRef; updated?: string }) {
   return (
     <footer data-md-skip className="flex flex-col gap-4">
       <Separator className="mb-2" />
@@ -92,7 +93,7 @@ export function DocFooter({ prev, next, updated }: { prev?: DocsPageRef; next?: 
       </nav>
       {updated && (
         <p className="text-ui-sm text-muted-foreground">
-          <LocalizedText text="Last updated" /> <LocalizedDate iso={updated.toISOString()} />
+          <LocalizedText text="Last updated" /> <LocalizedDate iso={updated} />
         </p>
       )}
     </footer>

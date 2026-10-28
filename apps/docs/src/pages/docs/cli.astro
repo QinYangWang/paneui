@@ -1,0 +1,35 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import CliPage, { type CliData } from "@/components/pages/cli-page"
+import { docNav, highlight, siteNavGroups } from "@/lib/build"
+import { REGISTRY_NAME, REGISTRY_URL } from "@/lib/site-constants"
+
+const ns = `@${REGISTRY_NAME}`
+const config = JSON.stringify({ registries: { [ns]: REGISTRY_URL } }, null, 2)
+const itemUrl = REGISTRY_URL.replace("{name}", "button")
+const itemJson = `{
+  "name": "button",
+  "type": "registry:ui",
+  "title": "Button",
+  "description": "Triggers an action or submits a form.",
+  "dependencies": ["@base-ui/react", "class-variance-authority"],
+  "registryDependencies": ["${ns}/theme"],
+  "files": [{ "path": "packages/ui/src/components/button.tsx", "type": "registry:ui", "content": "…" }]
+}`
+const upgradeCheck = "node scripts/paneui-upgrade-check.mjs\nnode scripts/paneui-upgrade-check.mjs --fix"
+
+const data: CliData = {
+  nav: docNav("/docs/cli", ["components/pages/cli-page.tsx"]),
+  code: {
+    config: await highlight(config, "json"),
+    item: await highlight(itemJson, "json"),
+    upgradeCheck: await highlight(upgradeCheck, "bash"),
+  },
+  itemFilename: itemUrl.replace(/^https?:\/\//, ""),
+}
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="CLI & registry">
+  <CliPage client:load site={site} data={data} />
+</Base>

@@ -53,8 +53,13 @@
     },
     {
       "rule": "radius-cap",
-      "file": "apps/docs/app/docs/theming/page.tsx",
+      "file": "apps/docs/components/pages/theming-page.tsx",
       "reason": "the radius table documents the 4xl/5xl aliases"
+    },
+    {
+      "rule": "radius-cap",
+      "file": "apps/docs/app/docs/theming/page.tsx",
+      "reason": "the radius table documents the 4xl/5xl aliases (Next route until app/ is deleted)"
     },
     {
       "rule": "type-scale",
@@ -85,6 +90,11 @@
       "rule": "*",
       "file": "apps/docs/components/docs/skill-examples.tsx",
       "reason": "the Avoid previews on /docs/skill break the rules on purpose"
+    },
+    {
+      "rule": "*",
+      "file": "apps/docs/components/docs/skill-example-code.ts",
+      "reason": "the Avoid code samples on /docs/skill break the rules on purpose"
     },
     {
       "rule": "media-outline",

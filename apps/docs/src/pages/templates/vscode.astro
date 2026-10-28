@@ -1,0 +1,11 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import CodeEditorTemplateRoute from "@/components/pages/templates/code-editor-route"
+import { siteNavGroups } from "@/lib/build"
+
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Code Editor template">
+  <CodeEditorTemplateRoute client:load site={site} />
+</Base>

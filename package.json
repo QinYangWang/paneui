@@ -8,7 +8,7 @@
     "dev": "pnpm --filter @paneui/docs dev",
     "build": "pnpm --filter @paneui/docs build",
     "build:cloudflare": "pnpm registry:build && pnpm build && pnpm docs:md:audit && node tooling/scripts/build-pages.mjs",
-    "start": "pnpm --filter @paneui/docs exec next start",
+    "start": "pnpm --filter @paneui/docs preview",
     "lint": "eslint .",
     "registry:build": "pnpm tokens:gen && node tooling/scripts/gen-icon-styles.mjs && node tooling/scripts/gen-og-tokens.mjs && shadcn build packages/registry/registry.json --output apps/docs/public/r && node tooling/scripts/registry-postbuild.mjs",
     "icons:gen": "node tooling/scripts/gen-icon-styles.mjs",

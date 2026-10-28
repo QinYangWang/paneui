@@ -1,0 +1,63 @@
+---
+import fs from "node:fs"
+
+import Base from "@/src/layouts/Base.astro"
+import SkillPage, { type SkillData, type SkillRule } from "@/components/pages/skill-page"
+import { docNav, highlight, siteNavGroups } from "@/lib/build"
+import { repoPath } from "@/lib/repo-path"
+import { ruleSlug, SKILL_CODE, SKILL_EXAMPLE_FILES } from "@/components/docs/skill-example-code"
+
+const CHECK = `node .agents/skills/paneui-design/scripts/check.mjs
+node .agents/skills/paneui-design/scripts/check.mjs app components --strict
+node .agents/skills/paneui-design/scripts/check.mjs --list`
+
+/**
+ * Rules straight from skills/paneui-design/SKILL.md: "### N. Title" and the sentence under it.
+ * Every rule needs an example, either as short code (SKILL_CODE) or as the good/bad pair the skill
+ * ships in examples/<dir>/ (SKILL_EXAMPLE_FILES); a gap is reported in the build log.
+ */
+const skill = fs.readFileSync(repoPath("skills/paneui-design/SKILL.md"), "utf8")
+const body = skill.slice(skill.indexOf("\n## Rules"), skill.indexOf("\n## References"))
+const rules: SkillRule[] = []
+for (const block of body.split(/\n### /).slice(1)) {
+  const [head, ...rest] = block.split("\n")
+  const m = head.match(/^(\d+)\.\s+(.+)$/)
+  if (!m) continue
+  const why = rest.join("\n").trim().split(/\n\s*\n/)[0].replace(/\s+/g, " ")
+  rules.push({ n: Number(m[1]), title: m[2], why, id: ruleSlug(m[2]) })
+}
+const missing = rules.filter((r) => !SKILL_CODE[r.id] && !SKILL_EXAMPLE_FILES[r.id]).map((r) => r.id)
+if (missing.length) console.warn(`[docs/skill] rules without an example in skill-example-code.ts: ${missing.join(", ")}`)
+
+/** Rules shown as code: the inline snippets, then the good/bad pair each example directory ships. */
+const code: SkillData["code"] = {}
+for (const [id, example] of Object.entries(SKILL_CODE)) {
+  code[id] = {
+    lang: example.lang,
+    good: await highlight(example.good, example.lang),
+    bad: await highlight(example.bad, example.lang),
+  }
+}
+for (const [id, dir] of Object.entries(SKILL_EXAMPLE_FILES)) {
+  const read = (kind: string) => fs.readFileSync(repoPath("skills/paneui-design/examples", dir, `${kind}.tsx`), "utf8").trim()
+  code[id] = {
+    lang: "tsx",
+    good: await highlight(read("good"), "tsx"),
+    bad: await highlight(read("bad"), "tsx"),
+  }
+}
+
+const data: SkillData = {
+  nav: docNav("/docs/skill", ["components/pages/skill-page.tsx", "components/docs/skill-example-code.ts", "skills/paneui-design", "components/docs/skill-examples.tsx"]),
+  skill,
+  skillHtml: await highlight(skill, "markdown"),
+  rules,
+  code,
+  checkHtml: await highlight(CHECK, "bash"),
+}
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Design skill">
+  <SkillPage client:load site={site} data={data} />
+</Base>

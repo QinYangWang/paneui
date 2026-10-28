@@ -1,0 +1,12 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import BlogTemplateRoute, { type BlogTemplateData } from "@/components/pages/templates/blog-route"
+import { siteNavGroups } from "@/lib/build"
+
+const data: BlogTemplateData = { page: "home" }
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Blog template">
+  <BlogTemplateRoute client:load site={site} data={data} />
+</Base>
