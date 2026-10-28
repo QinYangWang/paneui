@@ -101,9 +101,9 @@ function FilesCard() {
       <CardHeader>
         <CardTitle>{t({ en: "Files", zh: "文件" })}</CardTitle>
       </CardHeader>
-      <CardContent>
+      {/* Rows run edge to edge, like an editor's explorer. */}
+      <CardContent className="px-0">
         <FileTree
-          variant="ghost"
           label={t({ en: "Project files", zh: "项目文件" })}
           value={value}
           onValueChange={setValue}

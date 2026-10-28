@@ -200,8 +200,8 @@ export function CodeVisual({ html }: { html: string }) {
   const [file, setFile] = React.useState<string | null>("components/ui/button.tsx")
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-7">
-      <div className="frame-xl frame-p-2 hidden bg-code shadow-xl sm:col-span-2 sm:block">
-        <FileTree variant="ghost" label={t({ en: "Project files", zh: "项目文件" })} value={file} onValueChange={setFile} defaultExpanded={["app", "components", "components/ui"]}>
+      <div className="hidden overflow-hidden rounded-xl bg-code py-2 shadow-xl sm:col-span-2 sm:block">
+        <FileTree label={t({ en: "Project files", zh: "项目文件" })} value={file} onValueChange={setFile} defaultExpanded={["app", "components", "components/ui"]}>
           <FileTreeFolder name="app">
             <FileTreeFile name="layout.tsx" />
             <FileTreeFile name="page.tsx" />

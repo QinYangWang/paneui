@@ -48,8 +48,8 @@ export default {
       body: { en: "A file gets its icon and tint from its extension, and an unknown extension gets a plain file. `getFileKind(name)` returns the same icon and tint for use elsewhere.", zh: "文件根据扩展名获得图标和色调，未知扩展名使用普通文件图标。`getFileKind(name)` 返回相同的图标和色调，可在其他地方使用。" },
     },
     {
-      title: "Motion",
-      body: { en: "Under reduced motion, rows only fade in and the selection fill jumps instead of gliding.", zh: "在减少动态效果下，行只会淡入，选中填充会直接跳变而不是滑动。" },
+      title: "Surface",
+      body: { en: "The tree takes the background it sits on and nothing animates, like an editor's explorer. Use `variant=\"card\"` to give it a raised card.", zh: "树沿用所在容器的背景，不做动画，和编辑器的资源管理器一样。需要独立卡片时用 `variant=\"card\"`。" },
     },
   ],
   api: [
@@ -66,8 +66,8 @@ export default {
         { name: "defaultExpanded", type: "string[]", default: "[]", description: { en: "Folders open on first render.", zh: "首次渲染时展开的文件夹。" } },
         { name: "onExpandedChange", type: "(expanded: string[]) => void", description: { en: "Called when folders open or close.", zh: "文件夹展开或折叠时调用。" } },
         { name: "onOpenFile", type: "(node: FileTreeNode) => void", description: { en: "Called when a file (not a folder) is activated with Enter or a click.", zh: "文件（非文件夹）通过 Enter 或点击激活时调用。" } },
-        { name: "indent", type: "number", default: "12", description: { en: "Indent per level, px.", zh: "每级缩进，单位 px。" } },
-        { name: "variant", type: '"default" | "ghost"', default: '"default"', description: { en: "Card surface, or none inside a sidebar.", zh: "卡片表面，或在侧边栏内为 none。" } },
+        { name: "indent", type: "number", default: "8", description: { en: "Indent per level, px.", zh: "每级缩进，单位 px。" } },
+        { name: "variant", type: '"default" | "ghost" | "card"', default: '"default"', description: { en: "Parent's background, or a raised card.", zh: "沿用父级背景，或独立卡片。" } },
         { name: "label", type: "string", default: `"Files"`, description: { en: "Accessible name of the tree.", zh: "树的无障碍名称。" } },
       ],
       dataAttributes: [
