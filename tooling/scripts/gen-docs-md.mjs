@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Writes a Markdown twin of every docs page into the static export (run after `next build`):
+ * Writes a Markdown twin of every docs page into the static export (run after `astro build`):
  *   out/docs/<name>.md   component and template pages, from registry.json, apps/docs/content/docs/<name>.ts and the example files
  *   out/docs/index.md, out/docs/<guide>.md   Getting started pages, from their built HTML (the design skill page from SKILL.md)
  * The page actions menu copies, opens and shares these files; public/llms.txt links to them.
@@ -22,7 +22,7 @@ const read = (f) => publishSource(fs.readFileSync(path.join(root, f), "utf8").tr
 const exists = (f) => fs.existsSync(path.join(root, f))
 
 if (!fs.existsSync(path.join(outDir, "docs"))) {
-  console.error(`gen-docs-md: ${path.relative(root, outDir)}/docs not found; run next build first`)
+  console.error(`gen-docs-md: ${path.relative(root, outDir)}/docs not found; run astro build first`)
   process.exit(1)
 }
 
