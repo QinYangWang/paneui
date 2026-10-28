@@ -152,7 +152,8 @@ function readStored(key: string, values: readonly string[]) {
 }
 
 /**
- * Tabs and command in one frame: the tab row is the bar's top line and the command sits under it,
+ * Tabs and command in one frame: the tab row is the bar's top line and the command sits under it.
+ * Tabs use the ghost variant (soft fill, no underline) and sit 6px in, concentric with the frame,
  * so the two read as one control instead of a separate segmented track above a separate pill.
  */
 function CommandGroup({
@@ -212,12 +213,12 @@ function CommandGroup({
   return (
     <div
       data-slot="command-group"
-      className={cn("overflow-hidden rounded-xl bg-card text-ui text-card-foreground shadow-raised", className)}
+      className={cn("frame-xl frame-inset-1.5 overflow-hidden bg-card text-ui text-card-foreground shadow-raised", className)}
       {...props}
     >
       <Tabs value={active.value} onValueChange={(v) => select(String(v))} className="gap-0">
-        <div data-slot="command-group-header" className="flex h-10 items-center gap-2 border-b border-border ps-2 pe-1.5">
-          <TabsList variant="underline" size="sm" className="min-w-0 items-center overflow-x-auto shadow-none scrollbar-none">
+        <div data-slot="command-group-header" className="flex h-10 items-center gap-2 border-b border-border/60 px-1.5">
+          <TabsList variant="ghost" size="sm" className="min-w-0 overflow-x-auto scrollbar-none">
             {items.map((item) => (
               <TabsTab key={item.value} value={item.value} className="font-mono font-normal">
                 {item.label ?? item.value}

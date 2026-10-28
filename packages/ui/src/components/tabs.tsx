@@ -14,6 +14,8 @@ function Tabs({ className, ...props }: TabsPrimitive.Root.Props) {
 // (xs 24, sm 28, default 32, lg 36) with tabs 4px shorter inside the p-0.5 well; the well is a
 // frame, so tabs and the indicator stay concentric with it at every radius.
 // `underline`: tabs on a hairline with a sliding 2px bar; tabs take the full height.
+// `ghost`: no well and no line; the active tab gets a soft fill. For tab rows inside another
+// frame (a card header), where the parent supplies the edge.
 // A tab whose only child is an icon is square (give it an `aria-label`).
 const tabsListVariants = cva(
   "relative z-0 inline-flex w-fit shrink-0 items-center data-[orientation=vertical]:h-fit data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch",
@@ -23,6 +25,7 @@ const tabsListVariants = cva(
         default: "gap-0.5 bg-muted frame-p-0.5 shadow-well",
         underline:
           "gap-1 shadow-[inset_0_-1px_0_var(--border)] data-[orientation=vertical]:gap-0.5 data-[orientation=vertical]:shadow-[inset_1px_0_0_var(--border)]",
+        ghost: "gap-0.5",
       },
       size: { xs: "", sm: "", default: "", lg: "" },
     },
@@ -38,7 +41,7 @@ const tabsTabVariants = cva(
   "inline-flex shrink-0 cursor-pointer items-center justify-center data-[orientation=vertical]:justify-start gap-1.5 font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 data-icon-only:aspect-square data-icon-only:px-0 [&_svg]:size-3.5 [&_svg]:shrink-0",
   {
     variants: {
-      variant: { default: "", underline: "rounded-md" },
+      variant: { default: "", underline: "rounded-md", ghost: "rounded-inner" },
       size: {
         xs: "px-2 text-ui-xs [&_svg]:size-3",
         sm: "px-2.5 text-ui-sm",
@@ -55,6 +58,10 @@ const tabsTabVariants = cva(
       { variant: "underline", size: "sm", className: "h-7 px-2" },
       { variant: "underline", size: "default", className: "h-8 px-2.5" },
       { variant: "underline", size: "lg", className: "h-9 px-3" },
+      { variant: "ghost", size: "xs", className: "h-6 px-2" },
+      { variant: "ghost", size: "sm", className: "h-7 px-2.5" },
+      { variant: "ghost", size: "default", className: "h-8 px-3" },
+      { variant: "ghost", size: "lg", className: "h-9 px-3.5" },
     ],
     defaultVariants: { variant: "default", size: "default" },
   }
@@ -67,6 +74,7 @@ type TabsVariant = NonNullable<TabsListVariantProps["variant"]>
 const TabsListContext = React.createContext<{ size: TabsSize; variant: TabsVariant }>({ size: "default", variant: "default" })
 
 const indicatorClass: Record<TabsVariant, string> = {
+  ghost: "h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) translate-y-(--active-tab-top) bg-secondary",
   default:
     "h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) translate-y-(--active-tab-top) bg-card shadow-raised",
   underline:
@@ -95,7 +103,7 @@ function TabsList({ className, children, size = "default", variant = "default", 
           data-slot="tabs-indicator"
           className={cn(
             "absolute top-0 left-0 -z-10 transition-[translate,width,height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-            v === "default" && "rounded-inner",
+            v !== "underline" && "rounded-inner",
             indicatorClass[v]
           )}
         />

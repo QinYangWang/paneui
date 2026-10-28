@@ -470,6 +470,7 @@ export const examples: Record<string, React.ComponentType> = {
   "tabs/controlled": dynamic(() => import("@/registry/examples/tabs/controlled"), { ssr: false }),
   "tabs/disabled": dynamic(() => import("@/registry/examples/tabs/disabled"), { ssr: false }),
   "tabs/full-width": dynamic(() => import("@/registry/examples/tabs/full-width"), { ssr: false }),
+  "tabs/ghost": dynamic(() => import("@/registry/examples/tabs/ghost"), { ssr: false }),
   "tabs/icon-only": dynamic(() => import("@/registry/examples/tabs/icon-only"), { ssr: false }),
   "tabs/rtl": dynamic(() => import("@/registry/examples/tabs/rtl"), { ssr: false }),
   "tabs/sizes": dynamic(() => import("@/registry/examples/tabs/sizes"), { ssr: false }),
