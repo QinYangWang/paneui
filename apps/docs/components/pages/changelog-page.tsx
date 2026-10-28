@@ -12,6 +12,23 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-28-emoji-icons-sidebar-rail",
+    date: "October 28, 2026",
+    title: "Emoji icons and a three-column sidebar",
+    tag: "Breaking",
+    changes: [
+      <>
+        <TextLink href="/docs/icons">Icons</TextLink> come in two styles: rounded and the new emoji style (
+        <Code>icons-emoji</Code>), full-colour objects with the same names. The puffy and outline styles are removed.
+      </>,
+      <>
+        Icon Rail moves into <TextLink href="/docs/animated-sidebar">Animated Sidebar</TextLink> as{" "}
+        <Code>SidebarRail</Code>. Pass it to <Code>Sidebar rail</Code> (or <Code>AppShellSidebar rail</Code>) for rail,
+        second level and main; collapsing keeps the rail.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-26-cover-backgrounds",
     date: "October 26, 2026",
     title: "Covers and share images: image or shader",

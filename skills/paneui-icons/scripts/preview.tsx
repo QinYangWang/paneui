@@ -1,9 +1,9 @@
-// Puffy icon preview sheet: renders every *Icon export of your icons file at
+// Icon preview sheet: renders every *Icon export of your icons file at
 // 48px, 18px and 14px, so you can check a new glyph next to its neighbours.
 //
 // Bundle it with your project's icons file aliased to "icons", then run it:
 //
-//   npx esbuild path/to/puffy-icons/scripts/preview.tsx --bundle --platform=node \
+//   npx esbuild path/to/paneui-icons/scripts/preview.tsx --bundle --platform=node \
 //     --jsx=automatic --alias:icons=./components/icons.tsx \
 //     --external:@resvg/resvg-js --outfile=.icon-preview.cjs
 //   node .icon-preview.cjs icon-preview.png heart,bell,yourNew [--light]

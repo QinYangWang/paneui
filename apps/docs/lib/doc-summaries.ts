@@ -89,15 +89,13 @@ export const DOC_SUMMARIES: Record<string, Localized> = {
   "icons": {
     "en": "Rounded outline icon set used across the library.",
     "zh": "为界面提供统一的圆角图标。"
+  },  "icons-emoji": {
+    "en": "Full-colour glossy icons with the same names.",
+    "zh": "同名的彩色拟物图标。"
   },
-  "icons-puffy": {
-    "en": "Filled icons for interfaces.",
-    "zh": "提供填充风格的图标。"
-  },
-  "icons-outline": {
-    "en": "Outline icons for interfaces.",
-    "zh": "提供细描边风格的图标。"
-  },
+
+
+
   "icon-chip": {
     "en": "Frames an icon so card and section headers match.",
     "zh": "为标题图标提供统一的底框。"
@@ -719,10 +717,7 @@ export const DOC_SUMMARIES: Record<string, Localized> = {
     "en": "Switches, closes and reorders document tabs.",
     "zh": "切换、关闭或重排文档标签。"
   },
-  "icon-rail": {
-    "en": "Narrow bar of icon buttons for switching between app sections.",
-    "zh": "通过图标切换应用分区。"
-  },
+
   "tab-bar": {
     "en": "Bottom navigation for phones, with a label under each icon.",
     "zh": "为手机提供底部导航。"

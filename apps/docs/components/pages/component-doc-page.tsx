@@ -68,7 +68,7 @@ export type ComponentDocData = {
   deps: { label: string; href?: string }[]
   /** Site origin as the build sees it (SITE_URL), for the icon-style install commands. */
   siteUrl: string
-  /** The `puffy-icons` skill text and its highlighted Markdown (icons page only). */
+  /** The `paneui-icons` skill text and its highlighted Markdown (icons page only). */
   iconSkill?: { text: string; html: string }
 }
 
@@ -381,24 +381,23 @@ export default function ComponentDocPage({ site, data }: { site: SiteProps; data
               en={
                 <>
                   The default set is rounded: outline glyphs on a 24×24 grid with 1.75px round strokes and soft
-                  corners. The same names and props also ship in two other styles: puffy (filled shapes on an 18×18
-                  grid) and outline (the puffy shapes as 1.6px outlines). Every style installs to{" "}
-                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>,
+                  corners. The same names and props also ship in an emoji style: full-colour glossy objects, with
+                  arrows and text tools kept as heavier glyphs in the text colour. Both styles install to{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>,
                   so one command switches every component in your project. Preview them with the toggle under All
                   icons.
                 </>
               }
               zh={
                 <>
-                  默认图标集是圆角风格：在 24×24 网格上绘制轮廓，1.75px 圆头描边，转角柔和。相同的名称和属性也提供两种其他风格：puffy（在 18×18 网格上的填充图形）和 outline（把 puffy 图形处理为 1.6px 描边）。每种风格都安装到{" "}
-                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>，
+                  默认图标集是圆角风格：在 24×24 网格上绘制轮廓，1.75px 圆头描边，转角柔和。相同的名称和属性也提供 emoji 拟物风格：彩色光泽的小物件，箭头和文字工具保留为跟随文字颜色的加粗字形。两种风格都安装到{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>，
                   因此一条命令即可切换项目中所有组件。可在“全部图标”下方的切换器中预览它们。
                 </>
               }
             />
           </p>
-          <InstallCommand args={`add ${data.siteUrl}/r/icons-puffy.json --overwrite`} />
-          <InstallCommand args={`add ${data.siteUrl}/r/icons-outline.json --overwrite`} />
+          <InstallCommand args={`add ${data.siteUrl}/r/icons-emoji.json --overwrite`} />
           <p className="text-pretty text-muted-foreground"><T en="Back to rounded:" zh="返回圆角风格：" /></p>
           <InstallCommand args={`add ${data.siteUrl}/r/icons.json --overwrite`} />
           <p className="text-pretty text-muted-foreground">
@@ -406,7 +405,7 @@ export default function ComponentDocPage({ site, data }: { site: SiteProps; data
               en={
                 <>
                   Components list the icon set as a dependency, so adding one later asks whether to overwrite{" "}
-                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>.
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>.
                   Answer no (the default) to keep your style. If you add components with{" "}
                   <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">--overwrite</code>, the
                   rounded set comes back: run your style&apos;s command again afterwards.
@@ -415,7 +414,7 @@ export default function ComponentDocPage({ site, data }: { site: SiteProps; data
               zh={
                 <>
                   组件会把图标集列为依赖，因此之后再添加组件时会询问是否覆盖{" "}
-                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>。
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>。
                   选择否（默认值）即可保留你的风格。如果使用{" "}
                   <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">--overwrite</code>{" "}
                   添加组件，圆角图标集会被恢复：之后请再次运行你所选风格的命令。
@@ -434,27 +433,27 @@ export default function ComponentDocPage({ site, data }: { site: SiteProps; data
               en={
                 <>
                   Need a glyph the set doesn&apos;t have? Install the{" "}
-                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puffy-icons</code>{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">paneui-icons</code>{" "}
                   agent skill and ask your coding agent for it. The skill carries the drawing rules for every style
                   (grids, primitives, corner radii), reference icons, a preview script to check the result at small
                   sizes, and how to add it to your{" "}
-                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>.
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>.
                   Works with any coding agent that reads Agent Skills.
                 </>
               }
               zh={
                 <>
                   需要图标集中没有的字形？安装{" "}
-                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">puffy-icons</code>{" "}
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">paneui-icons</code>{" "}
                   智能体技能，然后向你的编程智能体索取。该技能包含适用于所有风格的绘制规则
                   （网格、基础图形、圆角半径）、参考图标、用于检查小尺寸效果的预览脚本，以及如何把它加入{" "}
-                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">packages/ui/src/icons/index.tsx</code>。
+                  <code className="rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">components/icons.tsx</code>。
                   适用于任何能读取 Agent Skills 的编程智能体。
                 </>
               }
             />
           </p>
-          <AgentSkill name="puffy-icons" skill={data.iconSkill?.text ?? ""} html={data.iconSkill?.html ?? ""} />
+          <AgentSkill name="paneui-icons" skill={data.iconSkill?.text ?? ""} html={data.iconSkill?.html ?? ""} />
         </section>
       )}
 

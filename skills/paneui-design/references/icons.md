@@ -1,32 +1,26 @@
 # Icons and brand marks
 
 All glyphs come from the house set (`@paneui/icons`, installed as `components/icons.tsx`), never another
-icon package or an ad-hoc SVG. Drawing new glyphs is the `puffy-icons` skill
-(`npx skills add taimatsuorg/paneui --skill puffy-icons`); it covers the grids, primitives and preview script
+icon package or an ad-hoc SVG. Drawing new glyphs is the `paneui-icons` skill
+(`npx skills add taimatsuorg/paneui --skill paneui-icons`); it covers the grids, primitives and preview script
 for every style.
 
 ## Styles
 
-One file, three styles with the same exports: rounded (default, 24×24, 1.75px strokes), puffy (18×18 soft
-filled shapes) and outline (the puffy shapes as 1.6px outlines). Switch a project with
-`npx shadcn@latest add <site>/r/icons-puffy.json --overwrite` (or `icons-outline.json`, `icons.json`).
-Check a new icon in every style at 14px.
+One file, two styles with the same exports: rounded (default, 24×24, 1.75px strokes) and emoji (full-colour
+glossy objects; arrows, chevrons and text tools stay heavier glyphs in the text colour). Switch a project with
+`npx shadcn@latest add <site>/r/icons-emoji.json --overwrite` (or `icons.json` to go back).
+Check a new icon in both styles at 14px.
 
 ## Families
 
-- **Solid**: filled silhouettes with knockouts (`HomeIcon`, `BotIcon`, `SettingsIcon`, `InboxIcon`,
-  `CalendarDaysIcon`, `ServerIcon`, `TerminalSquareIcon` in the puffy style).
-- **Line / ring**: open glyphs and outlined objects (chevrons, arrows, check, x, search, `MailIcon`,
-  `CalendarIcon`, `InfoIcon`, `ClockIcon`).
-- A set shown side by side (nav list, rail, dock, tab bar, palette group, a feed of cards) uses one family.
-  Navigation uses the nav glyphs: `InboxIcon` not `MailIcon`, `CalendarDaysIcon` not `CalendarIcon`,
-  `TerminalSquareIcon` not `TerminalIcon`. In the rounded and outline styles they are outline like the
-  controls; the puffy style draws them solid.
+- Navigation uses the nav glyphs: `InboxIcon` not `MailIcon`, `CalendarDaysIcon` not `CalendarIcon`,
+  `TerminalSquareIcon` not `TerminalIcon`.
 - **Filled pairs**: `HomeFilledIcon`, `InboxFilledIcon`, `ChatFilledIcon`, `CalendarDaysFilledIcon`,
   `BellFilledIcon`, `UserFilledIcon`, `SettingsFilledIcon`, `FolderFilledIcon`, for the active item of a
   nav without a row fill (`TabBarItem activeIcon`). A row fill already marks the active item in sidebars
-  and rails, so they keep the outline glyph. Add a pair in all three styles when a new glyph goes in a tab
-  bar (the outline style generates it from the puffy drawing).
+  and rails, so they keep the outline glyph. Add a pair when a new glyph goes in a tab bar (in the emoji
+  style it is an alias of the plain drawing).
 
 ## Stroke tiers
 

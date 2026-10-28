@@ -18,7 +18,7 @@ export default function AgentPage() {
 // and paste the printed address + token into Settings → Agents.`,
   },
   composition: `AgentWorkspace
-├── IconRail                      app rail, provider avatars, settings
+├── SidebarRail                   app rail, provider avatars, settings
 ├── ResizablePanelGroup
 │   ├── ThreadsSidebar            ThreadList / ThreadListItem
 │   └── shell-inset panel

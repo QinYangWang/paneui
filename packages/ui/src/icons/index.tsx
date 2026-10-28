@@ -8,8 +8,7 @@
  * path/circle/rect/ellipse only, no transforms, masks, clips or <g> styling;
  * every detail must survive at 16px.
  *
- * Other styles with the same exports: packages/ui/src/icons/puffy (filled,
- * 18x18) and packages/ui/src/icons/outline (generated from puffy).
+ * The other style with the same exports: packages/ui/src/icons/emoji (full-colour objects).
  *
  * Usage system (full version in notes/icon-usage.md):
  * - Nav / sidebar / palette icons: 16px, muted; active = foreground; bare.

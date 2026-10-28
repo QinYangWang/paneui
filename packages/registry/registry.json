@@ -1589,30 +1589,13 @@
       }
     },
     {
-      "name": "icons-puffy",
+      "name": "icons-emoji",
       "type": "registry:component",
-      "title": "Icons (puffy)",
-      "description": "Filled icons for interfaces.",
+      "title": "Icons (emoji)",
+      "description": "Full-colour glossy icons with the same names.",
       "files": [
         {
-          "path": "packages/ui/src/icons/puffy/icons.tsx",
-          "type": "registry:component",
-          "target": "components/icons.tsx"
-        }
-      ],
-      "meta": {
-        "category": "Foundations",
-        "hidden": true
-      }
-    },
-    {
-      "name": "icons-outline",
-      "type": "registry:component",
-      "title": "Icons (outline)",
-      "description": "Outline icons for interfaces.",
-      "files": [
-        {
-          "path": "packages/ui/src/icons/outline/icons.tsx",
+          "path": "packages/ui/src/icons/emoji/icons.tsx",
           "type": "registry:component",
           "target": "components/icons.tsx"
         }
@@ -2104,7 +2087,6 @@
         "@paneui/dialog",
         "@paneui/drawer",
         "@paneui/file-tree",
-        "@paneui/icon-rail",
         "@paneui/input",
         "@paneui/loader",
         "@paneui/menu",
@@ -2118,7 +2100,8 @@
         "@paneui/tooltip",
         "@paneui/badge",
         "@paneui/brand-icon",
-        "@paneui/action-swap-blur"
+        "@paneui/action-swap-blur",
+        "@paneui/animated-sidebar"
       ],
       "files": [
         {
@@ -2235,7 +2218,6 @@
         "@paneui/edited-files-card",
         "@paneui/file-diff",
         "@paneui/file-tree",
-        "@paneui/icon-rail",
         "@paneui/input",
         "@paneui/label",
         "@paneui/loader",
@@ -2263,7 +2245,8 @@
         "@paneui/scroll-area",
         "@paneui/settings-section",
         "@paneui/code-block",
-        "@paneui/action-swap-blur"
+        "@paneui/action-swap-blur",
+        "@paneui/animated-sidebar"
       ],
       "files": [
         {
@@ -5951,26 +5934,6 @@
       "files": [
         {
           "path": "packages/ui/src/components/tab-strip.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Navigation"
-      }
-    },
-    {
-      "name": "icon-rail",
-      "type": "registry:ui",
-      "title": "Icon Rail",
-      "description": "Narrow bar of icon buttons for switching between app sections.",
-      "registryDependencies": [
-        "@paneui/theme",
-        "@paneui/tooltip",
-        "@paneui/locale-provider"
-      ],
-      "files": [
-        {
-          "path": "packages/ui/src/components/icon-rail.tsx",
           "type": "registry:ui"
         }
       ],

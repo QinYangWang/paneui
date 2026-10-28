@@ -29,7 +29,7 @@ import { Button } from "@paneui/ui/components/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@paneui/ui/components/dialog"
 import { Drawer, DrawerContent, DrawerTitle } from "@paneui/ui/components/drawer"
 import { FileDiff } from "@paneui/ui/components/file-diff"
-import { IconRail, IconRailAvatar, IconRailGroup, IconRailItem, IconRailSpacer } from "@paneui/ui/components/icon-rail"
+import { SidebarRail, SidebarRailAvatar, SidebarRailGroup, SidebarRailItem, SidebarRailSpacer } from "@paneui/ui/components/animated-sidebar"
 import {
   ResizableHandle,
   ResizablePanel,
@@ -372,12 +372,12 @@ export function AgentWorkspace() {
       fn()
     }
     return (
-      <IconRail aria-label="App" orientation={orientation}>
-        <IconRailGroup>
-          <IconRailItem label="Home" icon={<HomeIcon />} onClick={then(() => left && show(left))} />
-          <IconRailItem label="Inbox" icon={<InboxIcon />} />
-          <IconRailItem label="Tasks" icon={<ClipboardListIcon />} />
-          <IconRailItem
+      <SidebarRail aria-label="App" orientation={orientation}>
+        <SidebarRailGroup>
+          <SidebarRailItem label="Home" icon={<HomeIcon />} onClick={then(() => left && show(left))} />
+          <SidebarRailItem label="Inbox" icon={<InboxIcon />} />
+          <SidebarRailItem label="Tasks" icon={<ClipboardListIcon />} />
+          <SidebarRailItem
             label="Branches"
             icon={<GitBranchIcon />}
             onClick={then(() => {
@@ -385,15 +385,15 @@ export function AgentWorkspace() {
               if (horizontal) setDockSheetOpen(true)
             })}
           />
-          <IconRailItem label="History" shortcut="⌘K" icon={<HistoryIcon />} onClick={then(() => setPaletteOpen(true))} />
-          <IconRailItem label="Agents" icon={<GridIcon />} onClick={then(() => setSettingsOpen(true))} />
-          {!horizontal && <IconRailItem label="Threads" shortcut="⌘B" icon={<FolderIcon />} active={sidebarOpen} onClick={toggleSidebar} />}
-        </IconRailGroup>
-        <IconRailSpacer />
-        <IconRailGroup>
+          <SidebarRailItem label="History" shortcut="⌘K" icon={<HistoryIcon />} onClick={then(() => setPaletteOpen(true))} />
+          <SidebarRailItem label="Agents" icon={<GridIcon />} onClick={then(() => setSettingsOpen(true))} />
+          {!horizontal && <SidebarRailItem label="Threads" shortcut="⌘B" icon={<FolderIcon />} active={sidebarOpen} onClick={toggleSidebar} />}
+        </SidebarRailGroup>
+        <SidebarRailSpacer />
+        <SidebarRailGroup>
           {/* The phone row has room for the connected agent only; the rest are in the threads header menu. */}
           {(horizontal ? agents.filter((a) => a.id === agentId) : agents.slice(0, 3)).map((a) => (
-            <IconRailAvatar
+            <SidebarRailAvatar
               key={a.id}
               label={a.name}
               hint={a.id === agentId ? state.connection : "not connected"}
@@ -401,12 +401,12 @@ export function AgentWorkspace() {
               onClick={then(() => (a.builtin ? void connect(a, bridge) : setSettingsOpen(true)))}
             >
               <ProviderIcon provider={a.provider} />
-            </IconRailAvatar>
+            </SidebarRailAvatar>
           ))}
-          <IconRailItem label="Command palette" shortcut="⌘K" icon={<HelpCircleIcon />} onClick={then(() => setPaletteOpen(true))} />
-          <IconRailItem label="Settings" shortcut="⌘," icon={<SettingsIcon />} onClick={then(() => setSettingsOpen(true))} />
-        </IconRailGroup>
-      </IconRail>
+          <SidebarRailItem label="Command palette" shortcut="⌘K" icon={<HelpCircleIcon />} onClick={then(() => setPaletteOpen(true))} />
+          <SidebarRailItem label="Settings" shortcut="⌘," icon={<SettingsIcon />} onClick={then(() => setSettingsOpen(true))} />
+        </SidebarRailGroup>
+      </SidebarRail>
     )
   }
 

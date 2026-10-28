@@ -16,7 +16,7 @@ export default {
   notes: [
     { title: "Phones", body: { en: "The bar adds the bottom safe-area inset as padding, so it can sit flush with the screen edge; add `viewport-fit=cover` to the viewport meta tag for the inset to apply. Labels show under each icon, so there are no tooltips.", zh: "该栏会把底部安全区域内边距作为 padding，因此可以紧贴屏幕边缘；需在 viewport meta 标签中添加 `viewport-fit=cover` 才能使内边距生效。标签显示在每个图标下方，因此没有提示。" } },
     { title: "Active glyph", body: { en: "The bar has no row fill, so the active item swaps to the filled glyph as well as the foreground colour. Every nav icon has a `<Name>FilledIcon` pair.", zh: "该栏没有行填充，所以激活项同时切换为填充字形和前景色。每个导航图标都有对应的 `<Name>FilledIcon`。" } },
-    { title: "Wider screens", body: { en: "Swap to `IconRail` from `md` up, where a column of icons with tooltips fits better.", zh: "`md` 及以上改用 `IconRail`，那里一列带提示的图标更合适。" } },
+    { title: "Wider screens", body: { en: "Swap to `SidebarRail` from `md` up, where a column of icons with tooltips fits better.", zh: "`md` 及以上改用 `SidebarRail`，那里一列带提示的图标更合适。" } },
     { title: "Accessibility", body: { en: "The active item gets `aria-current=\"page\"`. The keyboard focus ring draws around the icon pill, so it never clashes with rounded screen corners. Give the `TabBar` an `aria-label` when the page has more than one navigation region.", zh: "激活项获得 `aria-current=\"page\"`。键盘焦点环绘制在图标胶囊周围，因此不会与圆角屏幕边缘冲突。页面有多个导航区域时，请给 `TabBar` 一个 `aria-label`。" } },
   ],
   api: [
