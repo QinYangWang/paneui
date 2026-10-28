@@ -26,7 +26,7 @@ import { cn } from "@paneui/ui/lib/utils"
  * <FileTreeFile> are declarative: <FileTree> reads them into one flattened, keyboard-navigable
  * collection (WAI-ARIA tree pattern, roving tabindex, typeahead). Density and geometry: 22px
  * full-width rows (under the 24px target floor on purpose: editor density, arrow-key navigation),
- * 8px indent per level and one 16px leading slot per row. A folder's slot holds its chevron, a
+ * 10px indent per level and one 16px leading slot per row. A folder's slot holds its chevron, a
  * file's slot holds its file-type icon, so at the same level chevrons and file icons share one
  * column. Indent guides show while the pointer is over the tree. Nothing animates: rows appear
  * and the chevron turns on the click, the way an editor's explorer does.
@@ -222,7 +222,7 @@ function FileTree({
   defaultExpanded = [],
   onExpandedChange,
   onOpenFile,
-  indent = 8,
+  indent = 10,
   label,
   variant = "default",
   className,
