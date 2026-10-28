@@ -66,7 +66,7 @@ export default {
         { name: "defaultExpanded", type: "string[]", default: "[]", description: { en: "Folders open on first render.", zh: "首次渲染时展开的文件夹。" } },
         { name: "onExpandedChange", type: "(expanded: string[]) => void", description: { en: "Called when folders open or close.", zh: "文件夹展开或折叠时调用。" } },
         { name: "onOpenFile", type: "(node: FileTreeNode) => void", description: { en: "Called when a file (not a folder) is activated with Enter or a click.", zh: "文件（非文件夹）通过 Enter 或点击激活时调用。" } },
-        { name: "indent", type: "number", default: "8", description: { en: "Indent per level, px.", zh: "每级缩进，单位 px。" } },
+        { name: "indent", type: "number", default: "10", description: { en: "Indent per level, px.", zh: "每级缩进，单位 px。" } },
         { name: "variant", type: '"default" | "ghost" | "card"', default: '"default"', description: { en: "Parent's background, or a raised card.", zh: "沿用父级背景，或独立卡片。" } },
         { name: "label", type: "string", default: `"Files"`, description: { en: "Accessible name of the tree.", zh: "树的无障碍名称。" } },
       ],
