@@ -6,7 +6,7 @@ import ComponentDocPage, {
   type DocFileData,
 } from "@/components/pages/component-doc-page"
 import { docNav, highlight, languageOf, siteNavGroups } from "@/lib/build"
-import { docSources, demoFile, getItem, getItems, readSource, REGISTRY_NAME, SITE_URL } from "@/lib/docs"
+import { docSources, demoFile, getItem, getItems, readSource, SITE_URL } from "@/lib/docs"
 import { docsContent } from "@/content/docs/index.generated"
 import type { ComponentDoc } from "@/lib/doc-types"
 import { english } from "@/lib/site-copy"
@@ -43,15 +43,6 @@ const examples: DocExampleData[] = await Promise.all(
 
 const iconSkillSource = name === "icons" ? read("skills/paneui-icons/SKILL.md") : undefined
 
-const prefix = `@${REGISTRY_NAME}/`
-const deps = [
-  ...item.registryDependencies.map((d) => {
-    const local = d.startsWith(prefix) ? getItem(d.slice(prefix.length)) : undefined
-    return { label: d, href: local ? `/docs/${local.name}` : undefined }
-  }),
-  ...item.dependencies.map((d) => ({ label: d, href: undefined })),
-]
-
 const data: ComponentDocData = {
   item: {
     name: item.name,
@@ -72,7 +63,6 @@ const data: ComponentDocData = {
   },
   examples,
   demo: { html: await highlight(usageSource, demoLanguage), filename: `${name}-demo.tsx`, language: demoLanguage },
-  deps,
   siteUrl: SITE_URL,
   iconSkill: iconSkillSource
     ? { text: iconSkillSource, html: await highlight(iconSkillSource, "markdown") }

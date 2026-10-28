@@ -2,59 +2,177 @@
 
 import * as React from "react"
 
-import { CalendarDaysIcon, FileIcon, InboxIcon, SettingsIcon, UserIcon } from "@paneui/ui/icons"
-import { Alert, AlertAction, AlertContent, AlertDescription, AlertIcon, AlertTitle } from "@paneui/ui/components/alert"
-import { Button } from "@paneui/ui/components/button"
-import { Calendar } from "@paneui/ui/components/calendar"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@paneui/ui/components/card"
+import { siClaude, siGooglegemini } from "simple-icons"
+
+import { CalendarDaysIcon, FileIcon, InboxIcon, SettingsIcon, TerminalSquareIcon, UserIcon } from "@paneui/ui/icons"
+import { markOpenai } from "@paneui/ui/lib/brand-marks"
+import { AgentProgress } from "@paneui/ui/components/agent-progress"
+import { BarList } from "@paneui/ui/components/bar-list"
+import { BrandIcon } from "@paneui/ui/components/brand-icon"
+import { Card, CardContent, CardHeader, CardTitle } from "@paneui/ui/components/card"
 import { Checkbox } from "@paneui/ui/components/checkbox"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@paneui/ui/components/command"
-import { Field, FieldGroup, FieldLabel } from "@paneui/ui/components/field"
-import { Input } from "@paneui/ui/components/input"
+import { FileTree, FileTreeFile, FileTreeFolder } from "@paneui/ui/components/file-tree"
 import { Label } from "@paneui/ui/components/label"
-import { Progress, ProgressLabel, ProgressValue } from "@paneui/ui/components/progress"
-import { Radio, RadioGroup } from "@paneui/ui/components/radio"
+import { EffortPicker, ModelPicker } from "@paneui/ui/components/model-picker"
 import { Switch } from "@paneui/ui/components/switch"
+import { Timeline, TimelineItem, TimelineTitle } from "@paneui/ui/components/timeline"
+import { ToolApproval, type ToolApprovalDecision, type ToolApprovalStatus } from "@paneui/ui/components/tool-approval"
 import { TrendChart } from "@paneui/ui/components/trend-chart"
 import { useT, type Localized } from "@/lib/site-locale"
 
 import { AccentControls } from "./features"
-import { Checklist, Composer, Deploy, Messages, Requests, Usage } from "./pieces"
+import { Checklist, Composer, Messages, Usage } from "./pieces"
 import { useStill } from "./reveal"
 
-function ProjectCard() {
+const MODELS = [
+  { id: "sol", name: "GPT-6.1 Sol", provider: "OpenAI", icon: <BrandIcon icon={markOpenai} color="brand" /> },
+  { id: "sonnet", name: "Sonnet 5.5", provider: "Anthropic", icon: <BrandIcon icon={siClaude} color="brand" /> },
+  { id: "gemini", name: "Gemini 4 Pro", provider: "Google", icon: <BrandIcon icon={siGooglegemini} color="brand" /> },
+]
+
+function AgentCard() {
   const t = useT()
+  const [model, setModel] = React.useState("sonnet")
+  const [effort, setEffort] = React.useState("high")
   return (
-    <Card>
+    <Card size="sm">
       <CardHeader>
-        <CardTitle>{t({ en: "New project", zh: "新建项目" })}</CardTitle>
-        <CardDescription>{t({ en: "You can change these later.", zh: "之后还可以修改。" })}</CardDescription>
+        <CardTitle>{t({ en: "Agent", zh: "智能体" })}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-3">
+        <div className="flex items-center gap-1">
+          <ModelPicker models={MODELS} value={model} onValueChange={setModel} side="bottom" />
+          <EffortPicker value={effort} onValueChange={setEffort} side="bottom" />
+        </div>
+        <AgentProgress label={t({ en: "Refactoring", zh: "正在重构" })} meta="2.4k tokens" />
+        <AgentProgress label={t({ en: "Researching", zh: "正在调研" })} initialElapsed={83} />
+      </CardContent>
+    </Card>
+  )
+}
+
+/** Approving starts the call; it finishes a moment later. */
+function useRun(decision: ToolApprovalDecision | null) {
+  const [status, setStatus] = React.useState<ToolApprovalStatus | undefined>()
+  React.useEffect(() => {
+    if (decision !== "once" && decision !== "always") return
+    const start = window.setTimeout(() => setStatus("running"), 500)
+    const end = window.setTimeout(() => setStatus("done"), 1900)
+    return () => {
+      window.clearTimeout(start)
+      window.clearTimeout(end)
+      setStatus(undefined)
+    }
+  }, [decision])
+  return status
+}
+
+function ApprovalCard() {
+  const t = useT()
+  const [decision, setDecision] = React.useState<ToolApprovalDecision | null>(null)
+  const status = useRun(decision)
+  return (
+    <ToolApproval
+      tool="shell.exec"
+      icon={<TerminalSquareIcon />}
+      risk="low"
+      title={
+        <>
+          {t({ en: "Run", zh: "运行" })} <code>pnpm test</code>?
+        </>
+      }
+      resultTitle={<code>pnpm test</code>}
+      description={t({ en: "The command runs in this project.", zh: "命令在当前项目中运行。" })}
+      decision={decision}
+      onDecisionChange={setDecision}
+      status={status}
+    />
+  )
+}
+
+const Dot = ({ className }: { className: string }) => <span className={`block size-1.5 rounded-full ${className}`} />
+
+function FilesCard() {
+  const t = useT()
+  const [value, setValue] = React.useState<string | null>("components/ui/button.tsx")
+  return (
+    <Card size="sm">
+      <CardHeader>
+        <CardTitle>{t({ en: "Files", zh: "文件" })}</CardTitle>
       </CardHeader>
       <CardContent>
-        <FieldGroup>
-          <Field>
-            <FieldLabel>{t({ en: "Name", zh: "名称" })}</FieldLabel>
-            <Input defaultValue={t({ en: "Northwind", zh: "北风" })} />
-          </Field>
-          <Field>
-            <FieldLabel>{t({ en: "Visibility", zh: "可见范围" })}</FieldLabel>
-            <RadioGroup defaultValue="team" aria-label={t({ en: "Visibility", zh: "可见范围" })}>
-              <Label className="gap-2.5">
-                <Radio value="team" />
-                {t({ en: "Team", zh: "团队" })}
-              </Label>
-              <Label className="gap-2.5">
-                <Radio value="private" />
-                {t({ en: "Only me", zh: "仅自己" })}
-              </Label>
-            </RadioGroup>
-          </Field>
-        </FieldGroup>
+        <FileTree
+          variant="ghost"
+          label={t({ en: "Project files", zh: "项目文件" })}
+          value={value}
+          onValueChange={setValue}
+          defaultExpanded={["app", "components", "components/ui"]}
+        >
+          <FileTreeFolder name="app">
+            <FileTreeFile name="layout.tsx" />
+            <FileTreeFile name="page.tsx" meta={<Dot className="bg-warning" />} />
+          </FileTreeFolder>
+          <FileTreeFolder name="components">
+            <FileTreeFolder name="ui">
+              <FileTreeFile name="button.tsx" />
+              <FileTreeFile name="tabs.tsx" meta={<Dot className="bg-success" />} />
+            </FileTreeFolder>
+          </FileTreeFolder>
+          <FileTreeFile name="package.json" />
+        </FileTree>
       </CardContent>
-      <CardFooter className="justify-end gap-2">
-        <Button variant="ghost">{t({ en: "Cancel", zh: "取消" })}</Button>
-        <Button>{t({ en: "Create", zh: "创建" })}</Button>
-      </CardFooter>
+    </Card>
+  )
+}
+
+const TASKS: { time: string; title: Localized; tone?: "primary" }[] = [
+  { time: "08:00", title: { en: "Morning brief", zh: "晨间简报" } },
+  { time: "12:30", title: { en: "Inbox digest", zh: "收件箱摘要" }, tone: "primary" },
+  { time: "18:00", title: { en: "Price check", zh: "价格检查" } },
+]
+
+function ScheduleCard() {
+  const t = useT()
+  return (
+    <Card size="sm">
+      <CardHeader>
+        <CardTitle>{t({ en: "Today", zh: "今天" })}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Timeline>
+          {TASKS.map((task) => (
+            <TimelineItem key={task.time} time={task.time} tone={task.tone}>
+              <TimelineTitle>{t(task.title)}</TimelineTitle>
+            </TimelineItem>
+          ))}
+        </Timeline>
+      </CardContent>
+    </Card>
+  )
+}
+
+const PAGES = [
+  { name: "/pricing", value: 18420 },
+  { name: "/", value: 15210 },
+  { name: "/docs", value: 9840 },
+  { name: "/changelog", value: 6120 },
+]
+
+function TrafficCard() {
+  const t = useT()
+  return (
+    <Card size="sm">
+      <CardHeader>
+        <CardTitle>{t({ en: "Top pages", zh: "热门页面" })}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <BarList
+          items={PAGES}
+          labels={[t({ en: "Page", zh: "页面" }), t({ en: "Visitors", zh: "访客" })]}
+          formatValue={(v) => v.toLocaleString("en-US")}
+        />
+      </CardContent>
     </Card>
   )
 }
@@ -121,54 +239,6 @@ function UsersCard() {
   )
 }
 
-function StorageCard() {
-  const t = useT()
-  return (
-    <Card size="sm">
-      <CardHeader>
-        <CardTitle>{t({ en: "Storage", zh: "存储" })}</CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        <Progress value={72}>
-          <ProgressLabel>{t({ en: "Upload", zh: "上传" })}</ProgressLabel>
-          <ProgressValue />
-        </Progress>
-        <Progress value={18}>
-          <ProgressLabel>{t({ en: "Backups", zh: "备份" })}</ProgressLabel>
-          <ProgressValue />
-        </Progress>
-      </CardContent>
-    </Card>
-  )
-}
-
-function UpdateAlert() {
-  const t = useT()
-  return (
-    <Alert variant="info">
-      <AlertIcon />
-      <AlertContent>
-        <AlertTitle>{t({ en: "Update available", zh: "有可用更新" })}</AlertTitle>
-        <AlertDescription>{t({ en: "A newer version is ready.", zh: "新版本已就绪。" })}</AlertDescription>
-      </AlertContent>
-      <AlertAction>
-        <Button size="xs">{t({ en: "Update", zh: "更新" })}</Button>
-      </AlertAction>
-    </Alert>
-  )
-}
-
-function CalendarCard() {
-  const [date, setDate] = React.useState<Date | null>(null)
-  // The date is set after mount so the static HTML and the first client render match.
-  React.useEffect(() => setDate(new Date()), [])
-  return (
-    <Card className="items-center p-3">
-      <Calendar value={date} onValueChange={setDate} />
-    </Card>
-  )
-}
-
 function CommandCard() {
   const t = useT()
   return (
@@ -227,10 +297,10 @@ export function Wall() {
   const t = useT()
   const still = useStill()
   const columns: React.ReactNode[][] = [
-    [<ProjectCard key="project" />, <UpdateAlert key="alert" />, <Requests key="requests" />],
-    [<UsersCard key="users" />, <NotifyCard key="notify" />, <StorageCard key="storage" />],
-    [<CommandCard key="command" />, <Deploy key="deploy" />, <Checklist key="checklist" live={!still} />],
-    [<CalendarCard key="calendar" />, <ChatCard key="chat" />, <Usage key="usage" />],
+    [<AgentCard key="agent" />, <FilesCard key="files" />, <NotifyCard key="notify" />],
+    [<ApprovalCard key="approval" />, <TrafficCard key="traffic" />, <div key="usage" className="overflow-hidden rounded-xl bg-card shadow-raised"><Usage /></div>],
+    [<CommandCard key="command" />, <ScheduleCard key="schedule" />],
+    [<ChatCard key="chat" />, <UsersCard key="users" />, <Checklist key="checklist" live={!still} />],
   ]
   return (
     <section aria-labelledby="wall-title" className="flex flex-col items-center gap-8 px-4 sm:px-6">

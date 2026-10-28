@@ -256,7 +256,13 @@ function CodeBlock({
   return (
     <div
       data-slot="code-block"
-      className={cn("group/code relative overflow-hidden rounded-xl bg-code text-ui text-foreground shadow-raised", className)}
+      className={cn(
+        "group/code relative overflow-hidden rounded-xl bg-code text-ui text-foreground shadow-raised",
+        // Touch screens always show the floating copy button, so the code scrolls in the space
+        // left of it instead of sliding underneath.
+        !header && copyButton && "pointer-coarse:[&>[data-slot=scroll-area]]:me-11",
+        className
+      )}
       {...props}
     >
       {header && (
