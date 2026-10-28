@@ -52,7 +52,7 @@ export const guideIcons: Record<string, IconComponent> = {
   "/docs": HomeIcon,
   "/docs/installation": TerminalSquareIcon,
   "/docs/theming": SettingsIcon,
-  "/docs/colors": PaletteIcon,
+  "/themes": PaletteIcon,
   "/docs/cli": FolderIcon,
   "/docs/changelog": BookmarkIcon,
 }

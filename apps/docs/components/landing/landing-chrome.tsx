@@ -37,6 +37,12 @@ export function LandingHeader() {
           <Link href="/docs" className={navLink}>
             {t({ en: "Docs", zh: "文档" })}
           </Link>
+          <Link href="/docs/templates" className={navLink}>
+            {t({ en: "Templates", zh: "模板" })}
+          </Link>
+          <Link href="/themes" className={navLink}>
+            {t({ en: "Customize", zh: "自定义" })}
+          </Link>
         </nav>
         <div className="ms-auto flex items-center gap-1">
           <Tooltip>
@@ -69,6 +75,8 @@ export function LandingHeader() {
 const LINKS: { label: Localized; href: string; external?: boolean }[] = [
   { label: { en: "Docs", zh: "文档" }, href: "/docs" },
   { label: { en: "Components", zh: "组件" }, href: "/docs/components" },
+  { label: { en: "Templates", zh: "模板" }, href: "/docs/templates" },
+  { label: { en: "Customize", zh: "自定义" }, href: "/themes" },
   { label: "GitHub", href: GITHUB_URL, external: true },
 ]
 

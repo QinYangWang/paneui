@@ -27,12 +27,6 @@ export const GUIDE_PAGES = [
     keywords: ["theme", "tokens", "dark mode", "accent", "colors", "css variables", "radius", "shadow", "typography"],
   },
   {
-    href: "/docs/colors",
-    title: "Customize",
-    description: { en: "Choose an accent and corner radius.", zh: "选择主题色与圆角。" },
-    keywords: ["customize", "radius", "corners", "rounded", "color", "colour", "tokens", "palette", "accent", "primary", "custom accent", "oklch", "dark mode", "css variables"],
-  },
-  {
     href: "/docs/cli",
     title: "CLI & registry",
     description: { en: "Find, inspect and install components from the command line.", zh: "在命令行查找、查看和安装组件。" },
@@ -55,4 +49,6 @@ export const GUIDE_PAGES = [
 /** The components overview (all live previews, by category). */
 export const COMPONENTS_HREF = "/docs/components"
 export const COMPONENTS_TITLE = "Components"
+/** The theme builder: a page of its own, linked from the header. */
+export const THEMES_HREF = "/themes"
 export const TEMPLATES_HREF = "/docs/templates"
