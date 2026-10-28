@@ -17,7 +17,6 @@ import { InstallCommand, PackageInstall } from "@/components/docs/install-comman
 import { PreviewTabs } from "@/components/docs/preview-tabs"
 import { StaticCode } from "@/components/site/static-code"
 import { SiteRoot, type SiteProps } from "@/components/site/site-root"
-import { Badge } from "@paneui/ui/components/badge"
 import { Button } from "@paneui/ui/components/button"
 import { Card } from "@paneui/ui/components/card"
 import {
@@ -64,8 +63,6 @@ export type ComponentDocData = {
   examples: DocExampleData[]
   /** The demo shown in the page's first preview tab. */
   demo: { html: string; filename: string; language: string }
-  /** Registry dependencies resolved to docs pages where the item exists locally. */
-  deps: { label: string; href?: string }[]
   /** Site origin as the build sees it (SITE_URL), for the icon-style install commands. */
   siteUrl: string
   /** The `paneui-icons` skill text and its highlighted Markdown (icons page only). */
@@ -244,34 +241,12 @@ export default function ComponentDocPage({ site, data }: { site: SiteProps; data
         title={item.title}
         lede={doc?.summary ?? item.summary}
       >
-        {doc?.baseUi && (
-          <div className="flex flex-wrap gap-1.5">
-            <Badge variant="outline" size="sm" render={<a href={doc.baseUi.href} />}>
-              <T en={`${doc.baseUi.name} primitive`} zh={`${doc.baseUi.name} 原语`} />
-            </Badge>
-          </div>
-        )}
         {isTemplate && (
           <div className="flex flex-wrap gap-2 pt-1">
             <Button nativeButton={false} render={<Link href={`/templates/${item.name}/`} />}>
               <LocalizedText text="Open template" />
               <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
             </Button>
-          </div>
-        )}
-        {data.deps.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-1">
-            {data.deps.map((d) =>
-              d.href ? (
-                <Badge key={d.label} variant="chip" size="sm" render={<Link href={d.href} />}>
-                  {d.label}
-                </Badge>
-              ) : (
-                <Badge key={d.label} variant="outline" size="sm">
-                  {d.label}
-                </Badge>
-              ),
-            )}
           </div>
         )}
       </DocHeader>

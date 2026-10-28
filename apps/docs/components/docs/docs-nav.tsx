@@ -16,7 +16,7 @@ import {
   SidebarNavSection,
 } from "@paneui/ui/components/sidebar-nav"
 
-import { COMPONENTS_HREF, COMPONENTS_TITLE, GUIDE_PAGES } from "./docs-pages"
+import { COMPONENTS_HREF, COMPONENTS_TITLE, GUIDE_PAGES, TEMPLATES_HREF } from "./docs-pages"
 import { isNew } from "./whats-new"
 
 export type NavGroup = { category: string; items: { name: string; title: string; description: Localized }[] }
@@ -32,7 +32,7 @@ export type DocsSection = "docs" | "components" | "templates"
 /** The header section a path belongs to. */
 export function sectionOf(pathname: string, groups: NavGroup[]): DocsSection {
   if (GUIDE_PAGES.some((g) => g.href === pathname)) return "docs"
-  if (groups.some((g) => g.category === "Templates" && g.items.some((i) => pathname === `/docs/${i.name}`))) return "templates"
+  if (pathname === TEMPLATES_HREF || groups.some((g) => g.category === "Templates" && g.items.some((i) => pathname === `/docs/${i.name}`))) return "templates"
   return "components"
 }
 
@@ -103,9 +103,12 @@ export function DocsNav({
         )}
 
         {section === "templates" && (
+          <>
+          <SidebarNavList>{link(TEMPLATES_HREF, "All templates")}</SidebarNavList>
           <SidebarNavSection level="label" label={label("Templates")}>
             <SidebarNavList>{templates.map((i) => link(`/docs/${i.name}`, i.title, newBadge(i.name)))}</SidebarNavList>
           </SidebarNavSection>
+          </>
         )}
       </SidebarNavContent>
     </SidebarNav>

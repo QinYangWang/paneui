@@ -40,9 +40,9 @@ export type ComponentsGalleryData = {
 }
 
 export default function ComponentsGalleryPage({ site, data }: { site: SiteProps; data: ComponentsGalleryData }) {
-  const { total } = data
   // Templates have their own section in the header and sidebar.
   const groups = data.groups.filter((g) => g.category !== "Templates")
+  const total = data.total - (data.groups.find((g) => g.category === "Templates")?.items.length ?? 0)
   return (
     <SiteRoot {...site}>
     <div className="flex flex-col gap-12">
@@ -51,7 +51,7 @@ export default function ComponentsGalleryPage({ site, data }: { site: SiteProps;
         eyebrow="Docs"
         eyebrowHref="/docs"
         title="Components"
-        lede={{ en: `${total} components, blocks and templates, grouped by what they do.`, zh: `${total} 个组件、组合组件和模板，按用途分组。` }}
+        lede={{ en: `${total} components and blocks, grouped by what they do.`, zh: `${total} 个组件和组合组件，按用途分组。` }}
       />
       {groups.map((g, gi) => {
         return (

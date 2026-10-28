@@ -107,8 +107,9 @@ export function DocLayout({ toc, wide, children }: { toc?: TocEntry[]; wide?: bo
     <div className="mx-auto flex max-w-6xl gap-12">
       <article className={cn("mx-auto flex min-w-0 flex-1 flex-col gap-10", wide ? "max-w-6xl" : "max-w-3xl")}>
         {hasToc && (
-          // Sticky under the header; on wide pages the button keeps a reading width.
-          <div data-md-skip className={cn("sticky top-12 z-30 -my-4 bg-background py-2", !wide && "xl:hidden")}>
+          // Sticky under the header. The band bleeds into the page gutters (px-5/8/10 in site-shell) so
+          // nothing scrolls past at its sides; on wide pages the button keeps a reading width.
+          <div data-md-skip className={cn("sticky top-12 z-30 -mx-5 -my-4 bg-background px-5 py-2 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10", !wide && "xl:hidden")}>
             <OutlinePopover items={toOutline(toc)} className={cn(wide && "max-w-sm")} />
           </div>
         )}

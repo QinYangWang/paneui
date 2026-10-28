@@ -14,13 +14,12 @@ import { Button } from "@paneui/ui/components/button"
 import { Drawer, DrawerContent, DrawerTitle } from "@paneui/ui/components/drawer"
 import { Kbd } from "@paneui/ui/components/kbd"
 import { ThemeSwitch } from "@paneui/ui/components/theme-toggle"
-import { cn } from "@paneui/ui/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/tooltip"
 
 
 import { categoryIcons, ComponentsIcon, guideIcons } from "./category-icons"
 import { DocsNav, normalizePath, sectionOf, type DocsSection, type NavGroup } from "./docs-nav"
-import { COMPONENTS_HREF, GUIDE_PAGES } from "./docs-pages"
+import { COMPONENTS_HREF, TEMPLATES_HREF, GUIDE_PAGES } from "./docs-pages"
 import { LanguageToggle } from "./language-toggle"
 import { THEME_KEY } from "./theme-script"
 import { ThemeSync } from "./theme-sync"
@@ -102,11 +101,10 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
 
   const shortcut = mac ? "⌘K" : "Ctrl K"
   const section = sectionOf(pathname, groups)
-  const firstTemplate = groups.find((g) => g.category === "Templates")?.items[0]
   const headerLinks: { id: DocsSection; label: string; href: string }[] = [
     { id: "docs", label: "Docs", href: "/docs" },
     { id: "components", label: "Components", href: COMPONENTS_HREF },
-    ...(firstTemplate ? [{ id: "templates" as const, label: "Templates", href: `/docs/${firstTemplate.name}` }] : []),
+    { id: "templates", label: "Templates", href: TEMPLATES_HREF },
   ]
   const openSearch = React.useCallback(() => {
     setDrawerOpen(false)
