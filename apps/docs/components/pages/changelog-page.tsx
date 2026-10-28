@@ -154,7 +154,7 @@ const ENTRIES: Entry[] = [
       </>,
       <>
         The shadow swatches on <TextLink href="/docs/theme">Theme</TextLink> and the accent role strip on{" "}
-        <TextLink href="/docs/colors">Customize</TextLink> keep every label whole and centred on a phone.
+        <TextLink href="/themes">Customize</TextLink> keep every label whole and centred on a phone.
       </>,
     ],
   },
@@ -532,7 +532,7 @@ const ENTRIES: Entry[] = [
     changes: [
       <>
         Theme 2.2: no radius token goes past 16px, and the custom radius on{" "}
-        <TextLink href="/docs/colors#radius">Customize</TextLink> goes up to 1rem. Above that, controls turned into pills
+        <TextLink href="/themes">Customize</TextLink> goes up to 1rem. Above that, controls turned into pills
         and nested parts drifted off their containers. <Code>rounded-4xl</Code> and <Code>rounded-5xl</Code> stay as names
         at the cap.
       </>,
@@ -625,7 +625,7 @@ const ENTRIES: Entry[] = [
       </>,
       <>
         The accent is eight role variables instead of a ramp. Presets and custom colours on{" "}
-        <TextLink href="/docs/colors">Customize</TextLink> swap all eight; a custom colour saved before today resets to blue.
+        <TextLink href="/themes">Customize</TextLink> swap all eight; a custom colour saved before today resets to blue.
       </>,
       <>
         <Code>--radius</Code> is now 0.5rem, so controls are 8px, cards 10px and dialogs 16px. New{" "}
@@ -673,7 +673,7 @@ const ENTRIES: Entry[] = [
     changes: [
       <>
         Every radius follows <Code>--radius</Code>. Pick a preset or a custom value on{" "}
-        <TextLink href="/docs/colors">Customize</TextLink>, copy the CSS, or install a <Code>theme-radius-*</Code> item.
+        <TextLink href="/themes">Customize</TextLink>, copy the CSS, or install a <Code>theme-radius-*</Code> item.
         Nested frames stay concentric at every value.
       </>,
       <>

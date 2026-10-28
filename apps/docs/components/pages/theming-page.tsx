@@ -174,14 +174,14 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
               <>
                 Colours are named by role, and each surface has a matching <Code>-foreground</Code> token for text on it. Use
                 tokens in components, never palette colours (<Code>bg-zinc-100</Code>) or hex values. Every token&apos;s light and
-                dark value is on <TextLink href="/docs/colors">Customize</TextLink>.
+                dark value is on <TextLink href="/themes">Customize</TextLink>.
               </>
             }
             zh={
               <>
                 颜色按角色命名，每种表面都有一个配套的 <Code>-foreground</Code> 变量用于其上的文字。组件里请使用变量，不要使用调色板颜色（{" "}
                 <Code>bg-zinc-100</Code>）或十六进制值。每个变量的浅色与深色值见{" "}
-                <TextLink href="/docs/colors">自定义</TextLink>。
+                <TextLink href="/themes">自定义</TextLink>。
               </>
             }
           />
@@ -302,13 +302,13 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
           <T
             en={
               <>
-                For a brand colour, use the picker on <TextLink href="/docs/colors#accent">Customize</TextLink> to derive the eight
+                For a brand colour, use the picker on <TextLink href="/themes">Customize</TextLink> to derive the eight
                 roles and copy them.
               </>
             }
             zh={
               <>
-                要使用品牌色，请用 <TextLink href="/docs/colors#accent">自定义</TextLink> 中的选择器推导出这八个角色并复制。
+                要使用品牌色，请用 <TextLink href="/themes">自定义</TextLink> 中的选择器推导出这八个角色并复制。
               </>
             }
           />
@@ -425,7 +425,7 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
                 corners concentric, with the inner radius equal to the outer radius minus the padding between them. That is why{" "}
                 <Code>p-1</Code> menus (<Code>rounded-2xl</Code>) hold <Code>rounded-lg</Code> rows. Use <Code>rounded-full</Code>{" "}
                 only for shapes that are actually round. Sizes below are at the default <Code>0.5rem</Code>; try other
-                values on <TextLink href="/docs/colors#radius">Customize</TextLink>.
+                values on <TextLink href="/themes">Customize</TextLink>.
               </>
             }
             zh={
@@ -433,7 +433,7 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
                 每一级都是 <Code>--radius</Code> 的倍数，因此改动基准值，整个色阶都会跟随。没有一级会超过 <Code>--radius-max</Code>（16px）：
                 更大的圆角会把控件变成胶囊形，并把嵌套的部分推开。嵌套圆角要保持同心，内圆角等于外圆角减去两者之间的内边距。这也是{" "}
                 <Code>p-1</Code> 菜单（<Code>rounded-2xl</Code>）里放 <Code>rounded-lg</Code> 行的原因。<Code>rounded-full</Code>{" "}
-                只用于真正圆形的形状。下表尺寸基于默认的 <Code>0.5rem</Code>；可在 <TextLink href="/docs/colors#radius">自定义</TextLink> 中试用其他值。
+                只用于真正圆形的形状。下表尺寸基于默认的 <Code>0.5rem</Code>；可在 <TextLink href="/themes">自定义</TextLink> 中试用其他值。
               </>
             }
           />

@@ -19,7 +19,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/t
 
 import { categoryIcons, ComponentsIcon, guideIcons } from "./category-icons"
 import { DocsNav, normalizePath, sectionOf, type DocsSection, type NavGroup } from "./docs-nav"
-import { COMPONENTS_HREF, TEMPLATES_HREF, GUIDE_PAGES } from "./docs-pages"
+import { COMPONENTS_HREF, TEMPLATES_HREF, THEMES_HREF, GUIDE_PAGES } from "./docs-pages"
 import { LanguageToggle } from "./language-toggle"
 import { THEME_KEY } from "./theme-script"
 import { ThemeSync } from "./theme-sync"
@@ -86,6 +86,14 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
         keywords: ["components", "all", "gallery", "previews", "home"],
         onSelect: go(COMPONENTS_HREF),
       },
+      {
+        id: THEMES_HREF,
+        label: label("Customize"),
+        group: label("Getting started"),
+        icon: guideIcons[THEMES_HREF],
+        keywords: ["customize", "theme", "builder", "radius", "accent", "color", "colour", "oklch", "hue", "chroma", "css variables"],
+        onSelect: go(THEMES_HREF),
+      },
       ...groups.flatMap((g) =>
         g.items.map((i) => ({
           id: i.name,
@@ -105,7 +113,10 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
     { id: "docs", label: "Docs", href: "/docs" },
     { id: "components", label: "Components", href: COMPONENTS_HREF },
     { id: "templates", label: "Templates", href: TEMPLATES_HREF },
+    { id: "themes", label: "Customize", href: THEMES_HREF },
   ]
+  // The theme builder brings its own control column, so it gets the header without the sidebar.
+  const bare = section === "themes"
   const openSearch = React.useCallback(() => {
     setDrawerOpen(false)
     setSearchOpen(true)
@@ -167,6 +178,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
         </header>
 
         <div className="flex">
+          {!bare && (
           <aside
             // Fills the viewport under the header and sticks while the page scrolls.
             style={{ "--docs-aside-h": "calc(100svh - 3rem)" } as React.CSSProperties}
@@ -174,11 +186,16 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
           >
             <DocsNav groups={groups} pathname={pathname} section={section} onSearch={openSearch} searchShortcut={shortcut} />
           </aside>
+          )}
 
           <main className="min-w-0 flex-1">
-            <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
-              <div className="mx-auto w-full max-w-6xl">{children}</div>
-            </div>
+            {bare ? (
+              children
+            ) : (
+              <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+                <div className="mx-auto w-full max-w-6xl">{children}</div>
+              </div>
+            )}
           </main>
         </div>
 

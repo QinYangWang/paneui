@@ -21,6 +21,8 @@ import { ToolApproval, type ToolApprovalDecision, type ToolApprovalStatus } from
 import { TrendChart } from "@paneui/ui/components/trend-chart"
 import { useT, type Localized } from "@/lib/site-locale"
 
+import { cn } from "@paneui/ui/lib/utils"
+
 import { AccentControls } from "./features"
 import { Checklist, Composer, Messages, Usage } from "./pieces"
 import { useStill } from "./reveal"
@@ -289,19 +291,40 @@ function ChatCard() {
   )
 }
 
+/** The wall's cards in masonry columns: one on phones, two from sm, then three or four from xl. */
+export function WallGrid({ columns: count = 4, className }: { columns?: 3 | 4; className?: string }) {
+  const still = useStill()
+  const usage = <div key="usage" className="overflow-hidden rounded-xl bg-card shadow-raised"><Usage /></div>
+  const columns: React.ReactNode[][] =
+    count === 3
+      ? [
+          [<AgentCard key="agent" />, <FilesCard key="files" />, <NotifyCard key="notify" />],
+          [<ApprovalCard key="approval" />, <TrafficCard key="traffic" />, usage, <UsersCard key="users" />],
+          [<CommandCard key="command" />, <ScheduleCard key="schedule" />, <ChatCard key="chat" />, <Checklist key="checklist" live={!still} />],
+        ]
+      : [
+          [<AgentCard key="agent" />, <FilesCard key="files" />, <NotifyCard key="notify" />],
+          [<ApprovalCard key="approval" />, <TrafficCard key="traffic" />, usage],
+          [<CommandCard key="command" />, <ScheduleCard key="schedule" />],
+          [<ChatCard key="chat" />, <UsersCard key="users" />, <Checklist key="checklist" live={!still} />],
+        ]
+  return (
+    <div className={cn("grid w-full max-w-7xl grid-cols-1 items-start gap-4 sm:grid-cols-2", count === 3 ? "xl:grid-cols-3" : "xl:grid-cols-4", className)}>
+      {columns.map((col, i) => (
+        <div key={i} className="flex min-w-0 flex-col gap-4">
+          {col}
+        </div>
+      ))}
+    </div>
+  )
+}
+
 /**
  * The component wall: live components in four masonry columns, with the accent and radius
  * controls above. Changing either repaints every card at once.
  */
 export function Wall() {
   const t = useT()
-  const still = useStill()
-  const columns: React.ReactNode[][] = [
-    [<AgentCard key="agent" />, <FilesCard key="files" />, <NotifyCard key="notify" />],
-    [<ApprovalCard key="approval" />, <TrafficCard key="traffic" />, <div key="usage" className="overflow-hidden rounded-xl bg-card shadow-raised"><Usage /></div>],
-    [<CommandCard key="command" />, <ScheduleCard key="schedule" />],
-    [<ChatCard key="chat" />, <UsersCard key="users" />, <Checklist key="checklist" live={!still} />],
-  ]
   return (
     <section aria-labelledby="wall-title" className="flex flex-col items-center gap-8 px-4 sm:px-6">
       <div className="flex max-w-2xl flex-col items-center gap-3 text-center">
@@ -316,13 +339,7 @@ export function Wall() {
         </p>
       </div>
       <AccentControls />
-      <div className="grid w-full max-w-7xl grid-cols-1 items-start gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {columns.map((col, i) => (
-          <div key={i} className="flex min-w-0 flex-col gap-4">
-            {col}
-          </div>
-        ))}
-      </div>
+      <WallGrid />
     </section>
   )
 }
