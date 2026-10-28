@@ -339,5 +339,70 @@ function ThemeToggle({
   )
 }
 
-export { THEME_CHANGE_EVENT, ThemeToggle, getThemeScript, useTheme, useThemeToggle }
-export type { Theme, ThemeChangeDetail, ThemeMode, ThemeToggleProps, UseThemeOptions }
+type ThemeSwitchProps = Omit<React.ComponentProps<"div">, "children" | "onChange"> &
+  UseThemeToggleOptions & {
+    /** "binary" (default) shows light and dark; "tri" adds system. */
+    modes?: "binary" | "tri"
+  }
+
+/**
+ * Segmented light/dark (or light/dark/system) switch: one pill with a thumb that slides to the
+ * current mode. Same storage, events and reveal as ThemeToggle, so the two stay in sync.
+ */
+function ThemeSwitch({ className, storageKey, duration, onThemeChange, modes = "binary", ...props }: ThemeSwitchProps) {
+  const { theme: mode, resolvedTheme, setTheme } = useTheme({ storageKey, duration, onThemeChange })
+  const reduceMotion = useReducedMotion()
+  const { labels } = useLocale()
+  const thumbId = React.useId()
+  const options: { value: ThemeMode; label: string; Icon: typeof SunIcon }[] = [
+    { value: "light", label: labels.themeLight, Icon: SunIcon },
+    { value: "dark", label: labels.themeDark, Icon: MoonIcon },
+    ...(modes === "tri" ? [{ value: "system" as const, label: labels.themeSystem, Icon: MonitorIcon }] : []),
+  ]
+  const current = modes === "tri" ? mode : resolvedTheme
+  return (
+    <div
+      role="radiogroup"
+      aria-label={props["aria-label"] ?? labels.toggleTheme}
+      data-slot="theme-switch"
+      className={cn("inline-flex h-7 shrink-0 items-center gap-px rounded-full bg-secondary p-0.5", className)}
+      {...props}
+    >
+      {options.map(({ value, label, Icon }) => {
+        const checked = current === value
+        return (
+          <button
+            key={value}
+            type="button"
+            role="radio"
+            aria-checked={checked}
+            aria-label={label}
+            onClick={(event) => {
+              if (checked) return
+              const rect = event.currentTarget.getBoundingClientRect()
+              const origin = event.detail === 0 ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 } : { x: event.clientX, y: event.clientY }
+              setTheme(value, { origin })
+            }}
+            className={cn(
+              "relative grid h-full w-7 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+              checked && "text-foreground"
+            )}
+          >
+            {checked && (
+              <motion.span
+                layoutId={thumbId}
+                aria-hidden
+                transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 700, damping: 50, mass: 0.5 }}
+                className="absolute inset-0 rounded-full bg-background shadow-raised"
+              />
+            )}
+            <Icon size={14} className="relative" />
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+export { THEME_CHANGE_EVENT, ThemeSwitch, ThemeToggle, getThemeScript, useTheme, useThemeToggle }
+export type { Theme, ThemeChangeDetail, ThemeMode, ThemeSwitchProps, ThemeToggleProps, UseThemeOptions }
