@@ -1,0 +1,11 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import { SaasSettingsAppearanceRoute } from "@/components/pages/templates/saas-settings-route"
+import { siteNavGroups } from "@/lib/build"
+
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Appearance">
+  <SaasSettingsAppearanceRoute client:load site={site} />
+</Base>

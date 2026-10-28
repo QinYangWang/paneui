@@ -1,0 +1,83 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import ThemingPage, { type ThemingData } from "@/components/pages/theming-page"
+import { docNav, highlightAll, siteNavGroups } from "@/lib/build"
+
+const CSS_EXAMPLE = `:root {
+  --radius: 0.5rem;
+  --radius-max: 1rem;             /* no token goes past 16px */
+  --background: #fff;
+  --foreground: #000000df;        /* gray a12 */
+  --muted-foreground: #0000009b;  /* gray a11 */
+  --primary: #0090ff;             /* blue 9 */
+  --primary-hover: #0588f0;       /* blue 10 */
+  --primary-subtle: #008ff519;    /* blue a3 */
+  --ring: #0084e6a1;              /* blue a8 */
+  --border: #00000017;            /* gray a4 */
+  --shadow-lg: 0 0 0 0.5px #0000000f, 0 2px 3px -2px #0000000f, …;
+  /* … */
+}
+
+.dark {
+  --background: oklch(15% 0 0);
+  --card: #111;                   /* gray 1 */
+  --popover: oklch(25.2% 0 0);
+  --foreground: #ffffffed;        /* gray a12 */
+  --primary-hover: #3b9eff;       /* blue 10 */
+  --border: #ffffff1b;            /* gray a4 */
+  /* … */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-primary: var(--primary);
+  --radius-xl: min(calc(var(--radius) * 1.25), var(--radius-max));
+  --shadow-lg: var(--shadow-lg);
+  /* … */
+}`
+
+const DARK_SCRIPT = `// Inline in <head>, before paint, so the page never flashes the wrong theme.
+const mode = localStorage.getItem("theme") ?? "system"
+const dark = mode === "dark" || (mode === "system" && matchMedia("(prefers-color-scheme: dark)").matches)
+document.documentElement.classList.toggle("dark", dark)
+document.documentElement.style.colorScheme = dark ? "dark" : "light"`
+
+const ACCENT_RUNTIME = `/* Switch at runtime by setting data-accent on <html>: one block per mode swaps the eight roles */
+html[data-accent="violet"] {
+  --primary: #6e56cf;               /* violet 9 */
+  --primary-hover: #654dc4;         /* violet 10 */
+  --primary-active: #6550b9;        /* violet 11 */
+  --primary-foreground: #fff;
+  --primary-subtle: #4400ee0f;      /* violet a3 */
+  --primary-subtle-hover: #4300ff1b;
+  --primary-border: #3100fb35;      /* violet a6 */
+  --ring: #2b00d066;                /* violet a8 */
+}
+html[data-accent="violet"].dark {
+  --primary-hover: #7d66d9;
+  --primary-active: #baa7ff;
+  /* … */
+}`
+
+const NEW_TOKEN = `:root  { --info: oklch(0.6 0.12 230); }
+.dark  { --info: oklch(0.68 0.12 230); }
+
+@theme inline {
+  --color-info: var(--info);   /* → bg-info, text-info, ring-info/20 … */
+}`
+
+const code = await highlightAll(
+  { css: CSS_EXAMPLE, darkScript: DARK_SCRIPT, accentRuntime: ACCENT_RUNTIME, newToken: NEW_TOKEN },
+  { css: "css", darkScript: "js", accentRuntime: "css", newToken: "css" },
+)
+
+const data: ThemingData = {
+  nav: docNav("/docs/theming", ["components/pages/theming-page.tsx", "components/docs/theming-system.tsx"]),
+  code,
+}
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Theming">
+  <ThemingPage client:load site={site} data={data} />
+</Base>

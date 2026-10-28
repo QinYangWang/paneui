@@ -2,7 +2,7 @@ import type { Localized } from "@/lib/site-locale"
 
 import type * as React from "react"
 
-import { getPrevNext, lastUpdated } from "@/lib/docs"
+import type { DocNav } from "@/lib/doc-types"
 
 import { DocHeading } from "./doc-heading"
 import { codeContent, INLINE_CODE_CLS } from "./doc-inline"
@@ -33,26 +33,20 @@ export function Code({ children }: { children: React.ReactNode }) {
 
 
 /** The files a guide page is made from, for its "Last updated" date. */
-function guideSources(href: string) {
-  const page = href === "/docs" ? "app/docs/page.tsx" : `app${href}/page.tsx`
-  if (href === "/docs/skill") return [page, "skills/paneui-design", "components/docs/skill-examples.tsx"]
-  return [page]
-}
-
 /**
  * Layout for the "Getting started" pages: eyebrow, title, page actions and lede from
- * GUIDE_PAGES, the page body, previous / next in sidebar order with the last-updated date, and
+ * GUIDE_PAGES, the page body, previous / next in sidebar order with the last-updated date (`nav`,
+ * computed at build time by guideNav() in lib/build.ts), and
  * the "On this page" outline.
  */
-export function GuidePage({ href, toc, lede, children }: { href: string; toc?: TocEntry[]; lede?: React.ReactNode | Localized; children: React.ReactNode }) {
+export function GuidePage({ href, nav, toc, lede, children }: { href: string; nav: DocNav; toc?: TocEntry[]; lede?: React.ReactNode | Localized; children: React.ReactNode }) {
   const page = GUIDE_PAGES.find((p) => p.href === href)!
-  const { prev, next } = getPrevNext(href)
 
   return (
     <DocLayout toc={toc}>
       <DocHeader href={href} eyebrow="Getting started" eyebrowHref="/docs" title={page.title} lede={lede ?? page.description} />
       {children}
-      <DocFooter prev={prev} next={next} updated={lastUpdated(guideSources(href))} />
+      <DocFooter prev={nav.prev} next={nav.next} updated={nav.updated} />
     </DocLayout>
   )
 }

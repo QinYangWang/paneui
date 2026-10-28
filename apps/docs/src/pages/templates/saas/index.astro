@@ -1,0 +1,11 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import { SaasHomeRoute } from "@/components/pages/templates/saas-marketing-route"
+import { siteNavGroups } from "@/lib/build"
+
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Tessel: the coding agent that ships reviewed pull requests">
+  <SaasHomeRoute client:load site={site} />
+</Base>

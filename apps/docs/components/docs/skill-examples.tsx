@@ -27,13 +27,16 @@ import { IconChip } from "@paneui/ui/components/icon-chip"
 import { Input } from "@paneui/ui/components/input"
 import { Switch } from "@paneui/ui/components/switch"
 
+import { SKILL_CODE } from "./skill-example-code"
+
 /* eslint-disable shadcn/no-inline-styles -- the Avoid previews use inline values on purpose, where a class would be the thing the rule bans */
 
 /*
  * Recommended / Avoid pairs for /docs/skill, keyed by the rule title's slug in
- * skills/paneui-design/SKILL.md. "Avoid" previews break the rules on purpose, with
- * inline styles where a class would be the very thing the rule bans; the design
- * check allow-lists this file.
+ * skills/paneui-design/SKILL.md. Pairs shown as code come from skill-example-code.ts, which has no
+ * React, so the page frontmatter (src/pages/docs/skill.astro) can highlight them at build time.
+ * "Avoid" previews break the rules on purpose, with inline styles where a class would be the very
+ * thing the rule bans; the design check allow-lists this file.
  */
 
 export type SkillExample =
@@ -172,16 +175,7 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
       </div>
     ),
   },
-  "derive-every-radius-from-the-base-radius": {
-    kind: "code",
-    lang: "tsx",
-    good: `<div className="rounded-xl" />
-<div className="rounded-[calc(var(--radius)*0.75)]" />
-<div className="rounded-[min(calc(var(--radius)*2.8),var(--radius-max))]" />`,
-    bad: `<div className="rounded-[10px]" />
-<div style={{ borderRadius: 6 }} />
-<div className="rounded-[calc(var(--radius)*2.8)]" />  // passes the cap`,
-  },
+  "derive-every-radius-from-the-base-radius": { kind: "code", ...SKILL_CODE["derive-every-radius-from-the-base-radius"] },
   "use-the-ui-type-scale": {
     kind: "live",
     good: (
@@ -305,31 +299,8 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
       </Panel>
     ),
   },
-  "compose-the-library-don-t-restyle-it": {
-    kind: "code",
-    lang: "tsx",
-    good: `<Button variant="outline" size="sm">Export</Button>
-<Button className="w-full">Continue</Button>   // layout only`,
-    bad: `<Button className="h-10 rounded-full px-6 font-bold shadow-lg">
-  Export
-</Button>`,
-  },
-  "keep-a-menu-label-inside-its-group": {
-    kind: "code",
-    lang: "tsx",
-    good: `<MenuContent>
-  <MenuGroup>
-    <MenuLabel>Agent</MenuLabel>
-    <MenuItem>Code reviewer</MenuItem>
-    <MenuItem>Release notes</MenuItem>
-  </MenuGroup>
-</MenuContent>`,
-    bad: `<MenuContent>
-  <MenuLabel>Agent</MenuLabel>
-  <MenuItem>Code reviewer</MenuItem>
-  <MenuItem>Release notes</MenuItem>
-</MenuContent>`,
-  },
+  "compose-the-library-don-t-restyle-it": { kind: "code", ...SKILL_CODE["compose-the-library-don-t-restyle-it"] },
+  "keep-a-menu-label-inside-its-group": { kind: "code", ...SKILL_CODE["keep-a-menu-label-inside-its-group"] },
   "chevrons-for-folders-file-icons-for-files": {
     kind: "live",
     good: (
@@ -472,23 +443,8 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
       </Row>
     ),
   },
-  "transition-named-properties-briefly": {
-    kind: "code",
-    lang: "tsx",
-    good: `<div className="transition-[box-shadow,background-color] duration-150 ease-out hover:bg-secondary" />
-<Panel className="transition-[opacity,translate] duration-300" />`,
-    bad: `<div className="transition-all duration-500 hover:bg-secondary" />`,
-  },
-  "gate-movement-on-reduced-motion": {
-    kind: "code",
-    lang: "tsx",
-    good: `const reduce = useReducedMotion()
-<motion.div
-  initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12, filter: "blur(4px)" }}
-  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-/>`,
-    bad: `<motion.div initial={{ opacity: 0, y: 40, scale: 0.8 }} animate={{ opacity: 1, y: 0, scale: 1 }} />`,
-  },
+  "transition-named-properties-briefly": { kind: "code", ...SKILL_CODE["transition-named-properties-briefly"] },
+  "gate-movement-on-reduced-motion": { kind: "code", ...SKILL_CODE["gate-movement-on-reduced-motion"] },
   "show-a-ring-on-keyboard-focus": {
     kind: "live",
     good: (
@@ -531,23 +487,8 @@ export const SKILL_EXAMPLES: Record<string, SkillExample> = {
     good: <Lede title="Block Editor" text="Edits documents in blocks with slash commands." />,
     bad: <Lede title="Block Editor" text="A port of the editor everyone knows, inspired by its slash menu." />,
   },
-  "name-template-parts-apart-from-registry-items": {
-    kind: "code",
-    lang: "text",
-    good: `components/blog/parts/author-avatar.tsx
-components/vscode/parts/buffers.ts`,
-    bad: `components/blog/parts/avatar.tsx     # same name as @paneui/avatar
-components/vscode/parts/docs.ts       # same name as @paneui/docs`,
-  },
-  "run-the-upgrade-check-after-a-theme-update": {
-    kind: "code",
-    lang: "bash",
-    good: `npx shadcn@latest add @paneui/theme --overwrite
-npx shadcn@latest add @paneui/upgrade-check
-node scripts/paneui-upgrade-check.mjs --fix`,
-    bad: `npx shadcn@latest add @paneui/theme --overwrite
-# removed tokens stay in globals.css`,
-  },
+  "name-template-parts-apart-from-registry-items": { kind: "code", ...SKILL_CODE["name-template-parts-apart-from-registry-items"] },
+  "run-the-upgrade-check-after-a-theme-update": { kind: "code", ...SKILL_CODE["run-the-upgrade-check-after-a-theme-update"] },
 }
 
 function FloatingPanel({ surface }: { surface: string }) {
@@ -638,33 +579,7 @@ function Lede({ title, text }: { title: string; text: string }) {
 /**
  * Rules whose Recommended / Avoid pair is the one the skill ships in
  * skills/paneui-design/examples/<dir>/{good,bad}.tsx (shown as code; the design check's
- * --self-test keeps them honest).
+ * --self-test keeps them honest). Defined in skill-example-code.ts so the page frontmatter can
+ * read it without loading React.
  */
-export const SKILL_EXAMPLE_FILES: Record<string, string> = {
-  "native-colors": "native-colors",
-  "native-touch-target": "native-touch-target",
-  "native-font-scaling": "native-font-scaling",
-  "native-accessibility": "native-accessibility",
-  "native-radius": "native-radius",
-  "platform-boundary": "platform-boundary",
-
-  "give-every-target-24px-to-land-on": "hit-area",
-  "trim-the-icon-side-of-a-button": "optical-icon-padding",
-  "outline-images-with-a-neutral-hairline": "media-outline",
-  "cross-fade-icon-swaps": "icon-swap",
-  "transition-states-keyframe-one-offs": "keyframes-on-state",
-  "leave-quieter-than-you-arrive": "exit-subtle",
-  "recolour-icons-with-css-keep-their-stroke-and-grid": "icon-color",
-  "name-every-icon-only-button": "icon-button-label",
-  "match-the-icon-stroke-to-the-text-weight": "icon-weight",
-  "fill-the-active-glyph-where-there-s-no-row-fill": "nav-active-icon",
-  "align-text-to-the-reading-direction": "text-align-logical",
-}
-
-export function ruleSlug(title: string) {
-  return title
-    .toLowerCase()
-    .replace(/`/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
-}
+export { SKILL_CODE, SKILL_EXAMPLE_FILES, ruleSlug } from "./skill-example-code"

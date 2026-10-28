@@ -1,0 +1,16 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import DocsIntroPage, { type DocsIntroData } from "@/components/pages/docs-intro-page"
+import { docNav, siteNavGroups } from "@/lib/build"
+import { getGroups } from "@/lib/docs"
+
+const data: DocsIntroData = {
+  nav: docNav("/docs", ["components/pages/docs-intro-page.tsx"]),
+  groups: getGroups().map((g) => ({ category: g.category, count: g.items.length })),
+}
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Introduction">
+  <DocsIntroPage client:load site={site} data={data} />
+</Base>

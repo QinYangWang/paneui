@@ -13,6 +13,15 @@
       ],
       "@paneui/ui/*": [
         "../../packages/ui/src/*"
+      ],
+      "next/link": [
+        "./shims/next-link.tsx"
+      ],
+      "next/navigation": [
+        "./shims/next-navigation.tsx"
+      ],
+      "next/dynamic": [
+        "./shims/next-dynamic.tsx"
       ]
     }
   },

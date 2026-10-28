@@ -1,0 +1,28 @@
+---
+import fs from "node:fs"
+
+import Base from "@/src/layouts/Base.astro"
+import ColorsPage, { type ColorsData } from "@/components/pages/colors-page"
+import { docNav, siteNavGroups } from "@/lib/build"
+import { repoPath } from "@/lib/repo-path"
+import { ACCENT_VARS, DEFAULT_ACCENT, PRESET_THEMES } from "@/components/docs/accent-color"
+import { parseThemeTokens, type ParsedTheme } from "@/components/docs/theming-tokens"
+
+/** Light/dark values straight from the theme, read once at build time. */
+const theme: ParsedTheme = parseThemeTokens(fs.readFileSync(repoPath("packages/tokens/styles/globals.css"), "utf8"))
+// The generated presets mirror the accent roles on :root and .dark; flag drift in the build log.
+const preset = PRESET_THEMES[DEFAULT_ACCENT]
+if (ACCENT_VARS.some((k) => theme.light[k] !== preset.light[k] || theme.dark[k] !== preset.dark[k])) {
+  console.warn("[docs/colors] accent-presets.generated.ts no longer matches packages/tokens/styles/globals.css (run regen-theme)")
+}
+
+const data: ColorsData = {
+  nav: docNav("/docs/colors", ["components/pages/colors-page.tsx"]),
+  theme,
+}
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Customize">
+  <ColorsPage client:load site={site} data={data} />
+</Base>

@@ -1,0 +1,11 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import { SaasChangelogRoute } from "@/components/pages/templates/saas-marketing-route"
+import { siteNavGroups } from "@/lib/build"
+
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Changelog">
+  <SaasChangelogRoute client:load site={site} />
+</Base>

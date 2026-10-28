@@ -47,3 +47,10 @@ export type ComponentDoc = {
   /** Extra short paragraphs (accessibility, motion, tips) shown before API Reference. */
   notes?: { title: string; body: Localized }[]
 }
+
+/** Previous / next page in sidebar order and the last-updated date (ISO), computed at build time. */
+export type DocNav = {
+  prev?: { href: string; title: string; section: string }
+  next?: { href: string; title: string; section: string }
+  updated?: string
+}
