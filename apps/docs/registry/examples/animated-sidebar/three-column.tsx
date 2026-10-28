@@ -2,11 +2,7 @@
 
 import * as React from "react"
 
-import { siClaude } from "simple-icons"
-
 import { FolderIcon, GitBranchIcon, HistoryIcon, InboxIcon, SettingsIcon } from "@paneui/ui/icons"
-import { markOpenai } from "@paneui/ui/lib/brand-marks"
-import { BrandIcon } from "@paneui/ui/components/brand-icon"
 import {
   Sidebar,
   SidebarContent,
@@ -17,7 +13,6 @@ import {
   SidebarMenu,
   SidebarProvider,
   SidebarRail,
-  SidebarRailAvatar,
   SidebarRailGroup,
   SidebarRailItem,
   SidebarRailSpacer,
@@ -39,9 +34,11 @@ export default function AnimatedSidebarThreeColumn() {
   const current = SECTIONS[section]
   return (
     <TooltipProvider>
-      <SidebarProvider shortcut={null} className="h-96 w-full max-w-2xl gap-3">
+      <div className="h-96 w-full max-w-2xl overflow-hidden frame-3xl bg-background shadow-raised">
+      <SidebarProvider shortcut={null} className="h-full">
         <Sidebar
           aria-label="App"
+          variant="sidebar"
           rail={
             <SidebarRail aria-label="Sections">
               <SidebarRailGroup>
@@ -62,12 +59,6 @@ export default function AnimatedSidebarThreeColumn() {
               </SidebarRailGroup>
               <SidebarRailSpacer />
               <SidebarRailGroup>
-                <SidebarRailAvatar label="Codex" hint="connected" status="online">
-                  <BrandIcon icon={markOpenai} />
-                </SidebarRailAvatar>
-                <SidebarRailAvatar label="Claude Code" hint="not connected">
-                  <BrandIcon icon={siClaude} />
-                </SidebarRailAvatar>
                 <SidebarRailItem label="Settings" icon={<SettingsIcon />} shortcut="⌘," />
               </SidebarRailGroup>
             </SidebarRail>
@@ -84,11 +75,12 @@ export default function AnimatedSidebarThreeColumn() {
             </SidebarGroup>
           </SidebarContent>
         </Sidebar>
-        <SidebarInset className="items-start gap-2 rounded-2xl bg-muted/50 p-3 shadow-well">
+        <SidebarInset className="items-start gap-2 p-3">
           <SidebarTrigger />
           <p className="text-sm text-muted-foreground">{current.rows[row]}</p>
         </SidebarInset>
       </SidebarProvider>
+    </div>
     </TooltipProvider>
   )
 }
