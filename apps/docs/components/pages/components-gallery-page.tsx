@@ -40,7 +40,9 @@ export type ComponentsGalleryData = {
 }
 
 export default function ComponentsGalleryPage({ site, data }: { site: SiteProps; data: ComponentsGalleryData }) {
-  const { groups, total } = data
+  const { total } = data
+  // Templates have their own section in the header and sidebar.
+  const groups = data.groups.filter((g) => g.category !== "Templates")
   return (
     <SiteRoot {...site}>
     <div className="flex flex-col gap-12">

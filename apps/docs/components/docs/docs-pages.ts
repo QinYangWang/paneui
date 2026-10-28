@@ -54,4 +54,4 @@ export const GUIDE_PAGES = [
 
 /** The components overview (all live previews, by category). */
 export const COMPONENTS_HREF = "/docs/components"
-export const COMPONENTS_TITLE = "Overview"
+export const COMPONENTS_TITLE = "Components"

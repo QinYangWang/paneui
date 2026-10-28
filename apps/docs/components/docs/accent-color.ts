@@ -27,15 +27,17 @@ export type AccentTheme = { light: AccentVars; dark: AccentVars }
 export type PresetAccent = "blue" | "neutral" | "green" | "orange" | "rose" | "violet"
 
 /** The accent with no `data-accent` attribute: its roles are the ones on `:root` and `.dark`. */
-export const DEFAULT_ACCENT: PresetAccent = "blue"
+export const DEFAULT_ACCENT: PresetAccent = "neutral"
+/** The accent whose roles sit on :root and .dark (no `data-accent` attribute). */
+export const BASE_ACCENT: PresetAccent = "blue"
 
 /** Resolved roles of each preset, mirroring packages/tokens/styles/globals.css. */
 export const PRESET_THEMES: Record<PresetAccent, AccentTheme> = PRESET_ROLES
 
 /** Display names for the presets. */
 export const PRESET_LABELS: Record<PresetAccent, string> = {
-  blue: "Blue",
   neutral: "Neutral",
+  blue: "Blue",
   green: "Green",
   orange: "Orange",
   rose: "Rose",

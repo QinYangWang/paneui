@@ -27,9 +27,19 @@ export function normalizePath(pathname: string | null) {
   return pathname.replace(/\/+$/, "")
 }
 
+export type DocsSection = "docs" | "components" | "templates"
+
+/** The header section a path belongs to. */
+export function sectionOf(pathname: string, groups: NavGroup[]): DocsSection {
+  if (GUIDE_PAGES.some((g) => g.href === pathname)) return "docs"
+  if (groups.some((g) => g.category === "Templates" && g.items.some((i) => pathname === `/docs/${i.name}`))) return "templates"
+  return "components"
+}
+
 /**
- * Docs navigation on the grey band: flat rows under small captions (Sections, then each
- * component category, then Templates); the current row is a fill.
+ * Docs navigation on the grey band, one list per header section: Docs (the guides), Components
+ * (the overview, then each category) or Templates. Flat rows under small captions; the current
+ * row is a fill.
  */
 export function DocsNav({
   groups,
@@ -37,6 +47,7 @@ export function DocsNav({
   onSearch,
   searchShortcut,
   showSearch = false,
+  section,
   className,
 }: {
   groups: NavGroup[]
@@ -45,6 +56,8 @@ export function DocsNav({
   searchShortcut: string
   /** The drawer has no header search, so it shows the field. */
   showSearch?: boolean
+  /** Which list to show; matches the header link that is current. */
+  section: DocsSection
   className?: string
 }) {
   const t = useT()
@@ -71,22 +84,25 @@ export function DocsNav({
           {label("Search docs…")}
         </SidebarNavSearch>
       )}
-      <SidebarNavContent aria-label={label("Docs")} className="pt-3">
-        <SidebarNavSection level="label" label={label("Sections")}>
-          <SidebarNavList>
-            {link(GUIDE_PAGES[0].href, GUIDE_PAGES[0].title)}
-            {link(COMPONENTS_HREF, COMPONENTS_TITLE)}
-            {GUIDE_PAGES.slice(1).map((p) => link(p.href, p.title))}
-          </SidebarNavList>
-        </SidebarNavSection>
-
-        {components.map((g) => (
-          <SidebarNavSection key={g.category} level="label" label={label(g.category)}>
-            <SidebarNavList>{g.items.map((i) => link(`/docs/${i.name}`, i.title, newBadge(i.name)))}</SidebarNavList>
+      <SidebarNavContent aria-label={label(section === "docs" ? "Docs" : section === "templates" ? "Templates" : "Components")} className="pt-3">
+        {section === "docs" && (
+          <SidebarNavSection level="label" label={label("Getting started")}>
+            <SidebarNavList>{GUIDE_PAGES.map((p) => link(p.href, p.title))}</SidebarNavList>
           </SidebarNavSection>
-        ))}
+        )}
 
-        {templates.length > 0 && (
+        {section === "components" && (
+          <>
+            <SidebarNavList>{link(COMPONENTS_HREF, COMPONENTS_TITLE)}</SidebarNavList>
+            {components.map((g) => (
+              <SidebarNavSection key={g.category} level="label" label={label(g.category)}>
+                <SidebarNavList>{g.items.map((i) => link(`/docs/${i.name}`, i.title, newBadge(i.name)))}</SidebarNavList>
+              </SidebarNavSection>
+            ))}
+          </>
+        )}
+
+        {section === "templates" && (
           <SidebarNavSection level="label" label={label("Templates")}>
             <SidebarNavList>{templates.map((i) => link(`/docs/${i.name}`, i.title, newBadge(i.name)))}</SidebarNavList>
           </SidebarNavSection>

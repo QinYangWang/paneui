@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { customAccentStyle, DEFAULT_ACCENT } from "./accent-color"
+import { BASE_ACCENT, customAccentStyle } from "./accent-color"
 import { readAccentState, readCustomStyle, syncCustomStyle } from "./accent-store"
 import { applyRadius, readRadiusState } from "./radius-store"
 import { applyStyle, DEFAULT_STYLE, readStyle } from "./style-store"
@@ -88,7 +88,7 @@ function readStoredTheme(): RootTheme {
   const style = s === DEFAULT_STYLE ? null : s
   const radius = r.radius === "custom" && r.custom != null ? { radius: "custom", radiusValue: `${r.custom}rem` } : { radius: r.radius === "default" ? null : r.radius, radiusValue: null }
   if (accent === "custom" && custom) return { dark, accent, custom: customAccentStyle(custom), style, ...radius }
-  return { dark, accent: accent === DEFAULT_ACCENT ? null : accent, style, ...radius }
+  return { dark, accent: accent === BASE_ACCENT ? null : accent, style, ...radius }
 }
 
 /**
