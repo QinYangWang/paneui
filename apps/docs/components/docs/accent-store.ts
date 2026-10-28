@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { ACCENT_VARS, customAccentStyle, DEFAULT_ACCENT, deriveAccent, type AccentTheme, type PresetAccent } from "./accent-color"
+import { ACCENT_VARS, BASE_ACCENT, customAccentStyle, DEFAULT_ACCENT, deriveAccent, type AccentTheme, type PresetAccent } from "./accent-color"
 import { ACCENT_CHANGE_EVENT, ACCENT_KEY, ACCENTS, CUSTOM_ACCENT_KEY, CUSTOM_ACCENT_STYLE_ID } from "./theme-script"
 
 /** A custom accent as stored in localStorage[CUSTOM_ACCENT_KEY]. `v: 2` is the eight-role format. */
@@ -68,7 +68,7 @@ function applyToDocument({ accent, custom }: AccentState) {
     root.setAttribute("data-accent", "custom")
   } else {
     if (!custom) syncCustomStyle(document, null)
-    if (accent === DEFAULT_ACCENT) root.removeAttribute("data-accent")
+    if (accent === BASE_ACCENT) root.removeAttribute("data-accent")
     else root.setAttribute("data-accent", accent)
   }
 }

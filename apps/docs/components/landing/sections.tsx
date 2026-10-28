@@ -196,8 +196,8 @@ export function Figures({ codeHtml }: { codeHtml: string }) {
 }
 
 const ACCENT_LINES: Record<PresetAccent, Localized> = {
-  blue: { en: "The default. Calm and familiar.", zh: "默认。平静而熟悉。" },
-  neutral: { en: "Ink on paper, no hue at all.", zh: "纸上的墨色，没有色相。" },
+  blue: { en: "Calm and familiar.", zh: "平静而熟悉。" },
+  neutral: { en: "The default. Ink on paper, no hue.", zh: "默认。纸上的墨色，没有色相。" },
   green: { en: "Fresh, good for finance and health.", zh: "清新，适合金融和健康类应用。" },
   orange: { en: "Warm and lively.", zh: "温暖而活泼。" },
   rose: { en: "Soft, with a little edge.", zh: "柔和，带一点锋芒。" },

@@ -987,25 +987,15 @@ export const ClipboardListIcon = (p: IconProps) => (
 // recolour it; outside a theme it falls back to the text colour.
 const accent = { fill: "var(--primary, currentColor)" } as const;
 
-/** The PaneUI mark: four panes turning around a square. The top-right pane is the accent. */
+/** The PaneUI mark: an app window cut into a sidebar and a main pane, corners concentric with the frame. */
 export const PaneuiLogoIcon = (p: IconProps) => (
   <Icon {...p}>
-    <rect x="2" y="2" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
-    <rect x="15.25" y="2" width="6.75" height="11.75" rx="1.25" fill="currentColor" style={accent} />
-    <rect x="10.25" y="15.25" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
-    <rect x="2" y="10.25" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
+    <path fill="currentColor" fillRule="evenodd" d="M8 2H16A6 6 0 0 1 22 8V16A6 6 0 0 1 16 22H8A6 6 0 0 1 2 16V8A6 6 0 0 1 8 2Z M7 4.75H7A2.25 2.25 0 0 1 9.25 7V17A2.25 2.25 0 0 1 7 19.25H7A2.25 2.25 0 0 1 4.75 17V7A2.25 2.25 0 0 1 7 4.75Z M14.25 4.75H16A3.25 3.25 0 0 1 19.25 8V16A3.25 3.25 0 0 1 16 19.25H14.25A3.25 3.25 0 0 1 11 16V8A3.25 3.25 0 0 1 14.25 4.75Z" />
   </Icon>
 );
 
-/** The PaneUI mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
-export const PaneuiLogoMonoIcon = (p: IconProps) => (
-  <Icon {...p}>
-    <rect x="2" y="2" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
-    <rect x="15.25" y="2" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
-    <rect x="10.25" y="15.25" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
-    <rect x="2" y="10.25" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
-  </Icon>
-);
+/** The PaneUI mark in one colour (the mark is single-ink already; kept for existing imports). */
+export const PaneuiLogoMonoIcon = PaneuiLogoIcon;
 
 export const GithubIcon = (p: IconProps) => (
   <Icon {...p}>

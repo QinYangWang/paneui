@@ -19,16 +19,13 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/t
 
 
 import { categoryIcons, ComponentsIcon, guideIcons } from "./category-icons"
-import { DocsNav, normalizePath, type NavGroup } from "./docs-nav"
+import { DocsNav, normalizePath, sectionOf, type DocsSection, type NavGroup } from "./docs-nav"
 import { COMPONENTS_HREF, GUIDE_PAGES } from "./docs-pages"
 import { LanguageToggle } from "./language-toggle"
 import { THEME_KEY } from "./theme-script"
 import { ThemeSync } from "./theme-sync"
 
 const GITHUB_URL = "https://github.com/taimatsuorg/paneui"
-
-const isTemplate = (pathname: string, groups: NavGroup[]) =>
-  groups.some((g) => g.category === "Templates" && g.items.some((i) => pathname === `/docs/${i.name}`))
 
 const headerLink =
   "rounded-md px-2 py-1 text-ui text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 aria-[current=page]:text-foreground"
@@ -104,8 +101,13 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
   }, [groups, router, t, label])
 
   const shortcut = mac ? "⌘K" : "Ctrl K"
-  const docsActive = GUIDE_PAGES.some((g) => g.href === pathname)
-  const componentsActive = pathname === COMPONENTS_HREF || (pathname.startsWith("/docs/") && !docsActive && !isTemplate(pathname, groups))
+  const section = sectionOf(pathname, groups)
+  const firstTemplate = groups.find((g) => g.category === "Templates")?.items[0]
+  const headerLinks: { id: DocsSection; label: string; href: string }[] = [
+    { id: "docs", label: "Docs", href: "/docs" },
+    { id: "components", label: "Components", href: COMPONENTS_HREF },
+    ...(firstTemplate ? [{ id: "templates" as const, label: "Templates", href: `/docs/${firstTemplate.name}` }] : []),
+  ]
   const openSearch = React.useCallback(() => {
     setDrawerOpen(false)
     setSearchOpen(true)
@@ -121,38 +123,30 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
             <MenuIcon />
           </Button>
           <Brand />
-          <nav aria-label={label("Main")} className="ms-3 flex items-center max-md:hidden">
-            <Link href={COMPONENTS_HREF} aria-current={componentsActive ? "page" : undefined} className={headerLink}>
-              {label("Components")}
-            </Link>
+          <nav aria-label={label("Main")} className="ms-4 flex items-center gap-0.5 max-md:hidden">
+            {headerLinks.map((l) => (
+              <Link key={l.id} href={l.href} aria-current={section === l.id ? "page" : undefined} className={headerLink}>
+                {label(l.label)}
+              </Link>
+            ))}
           </nav>
 
-          {/* centred on the page, not between the side groups */}
-          <div className="pointer-events-none absolute inset-x-0 flex justify-center max-sm:hidden">
+          <div className="ms-auto flex items-center gap-1">
             <Button
               variant="secondary"
               size="sm"
               onClick={openSearch}
               aria-label={label("Search docs")}
               aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
-              // eslint-disable-next-line shadcn/no-restyle -- header search is a wide field-shaped button
-              className="pointer-events-auto w-64 justify-start ps-2 pe-1 text-muted-foreground lg:w-96"
+              // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a field (sm+)
+              className="me-1 w-7 justify-center px-0 text-muted-foreground sm:w-56 sm:justify-start sm:ps-2 sm:pe-1"
             >
               <SearchIcon />
-              <span>{label("Search docs…")}</span>
-              <Kbd size="sm" className="ms-auto">
+              <span className="hidden sm:inline">{label("Search docs…")}</span>
+              <Kbd size="sm" className="ms-auto hidden sm:inline-flex">
                 {shortcut}
               </Kbd>
             </Button>
-          </div>
-
-          <div className="relative ms-auto flex items-center gap-1">
-            <Button variant="ghost" size="icon-sm" onClick={openSearch} aria-label={label("Search docs")} className="sm:hidden">
-              <SearchIcon />
-            </Button>
-            <Link href="/docs" aria-current={docsActive ? "page" : undefined} className={cn(headerLink, "max-md:hidden")}>
-              {label("Docs")}
-            </Link>
             <Tooltip>
               <TooltipTrigger
                 render={
@@ -180,7 +174,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
             style={{ "--docs-aside-h": "calc(100svh - 3rem)" } as React.CSSProperties}
             className="sticky top-12 hidden h-(--docs-aside-h) w-64 shrink-0 flex-col bg-shell lg:flex"
           >
-            <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
+            <DocsNav groups={groups} pathname={pathname} section={section} onSearch={openSearch} searchShortcut={shortcut} />
           </aside>
 
           <main className="min-w-0 flex-1">
@@ -204,7 +198,14 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
                 PaneUI
               </DrawerTitle>
             </div>
-            <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} showSearch />
+            <nav aria-label={label("Main")} className="flex gap-1 px-3 pb-1">
+              {headerLinks.map((l) => (
+                <Link key={l.id} href={l.href} aria-current={section === l.id ? "page" : undefined} className={headerLink}>
+                  {label(l.label)}
+                </Link>
+              ))}
+            </nav>
+            <DocsNav groups={groups} pathname={pathname} section={section} onSearch={openSearch} searchShortcut={shortcut} showSearch />
           </DrawerContent>
         </Drawer>
 
