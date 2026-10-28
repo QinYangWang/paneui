@@ -1498,17 +1498,17 @@ export const ClipboardListIcon = (p: IconProps) => (
   </Icon>
 );
 
-/** The PaneUI mark: an app window cut into a sidebar and a main pane. */
+/** The PaneUI mark: a P whose bowl is an app window, cut into a sidebar and a main pane. */
 export const PaneuiLogoIcon = (p: IconProps) => (
   <Icon {...p} tones={["graphite", "silver"]}>
-    {(c) => <path fillRule="evenodd" d="M8 2H16A6 6 0 0 1 22 8V16A6 6 0 0 1 16 22H8A6 6 0 0 1 2 16V8A6 6 0 0 1 8 2Z M7 4.75H7A2.25 2.25 0 0 1 9.25 7V17A2.25 2.25 0 0 1 7 19.25H7A2.25 2.25 0 0 1 4.75 17V7A2.25 2.25 0 0 1 7 4.75Z M14.25 4.75H16A3.25 3.25 0 0 1 19.25 8V16A3.25 3.25 0 0 1 16 19.25H14.25A3.25 3.25 0 0 1 11 16V8A3.25 3.25 0 0 1 14.25 4.75Z" fill={c.f("graphite")} stroke={c.s("silver")} strokeWidth="0.6" />}
+    {(c) => <path fillRule="evenodd" d="M9 2H15A6 6 0 0 1 21 8V9.5A6 6 0 0 1 15 15.5H11.5A2 2 0 0 0 9.5 17.5V19A3 3 0 0 1 6.5 22H6A3 3 0 0 1 3 19V8A6 6 0 0 1 9 2Z M7.25 4.75H7.25A1.5 1.5 0 0 1 8.75 6.25V11.25A1.5 1.5 0 0 1 7.25 12.75H7.25A1.5 1.5 0 0 1 5.75 11.25V6.25A1.5 1.5 0 0 1 7.25 4.75Z M13.25 4.75H15.25A3 3 0 0 1 18.25 7.75V9.75A3 3 0 0 1 15.25 12.75H13.25A3 3 0 0 1 10.25 9.75V7.75A3 3 0 0 1 13.25 4.75Z" fill={c.f("graphite")} stroke={c.s("silver")} strokeWidth="0.6" />}
   </Icon>
 );
 
 /** The PaneUI mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
 export const PaneuiLogoMonoIcon = (p: IconProps) => (
   <Glyph {...p}>
-    <path fillRule="evenodd" d="M8 2H16A6 6 0 0 1 22 8V16A6 6 0 0 1 16 22H8A6 6 0 0 1 2 16V8A6 6 0 0 1 8 2Z M7 4.75H7A2.25 2.25 0 0 1 9.25 7V17A2.25 2.25 0 0 1 7 19.25H7A2.25 2.25 0 0 1 4.75 17V7A2.25 2.25 0 0 1 7 4.75Z M14.25 4.75H16A3.25 3.25 0 0 1 19.25 8V16A3.25 3.25 0 0 1 16 19.25H14.25A3.25 3.25 0 0 1 11 16V8A3.25 3.25 0 0 1 14.25 4.75Z" fill="currentColor" />
+    <path fillRule="evenodd" d="M9 2H15A6 6 0 0 1 21 8V9.5A6 6 0 0 1 15 15.5H11.5A2 2 0 0 0 9.5 17.5V19A3 3 0 0 1 6.5 22H6A3 3 0 0 1 3 19V8A6 6 0 0 1 9 2Z M7.25 4.75H7.25A1.5 1.5 0 0 1 8.75 6.25V11.25A1.5 1.5 0 0 1 7.25 12.75H7.25A1.5 1.5 0 0 1 5.75 11.25V6.25A1.5 1.5 0 0 1 7.25 4.75Z M13.25 4.75H15.25A3 3 0 0 1 18.25 7.75V9.75A3 3 0 0 1 15.25 12.75H13.25A3 3 0 0 1 10.25 9.75V7.75A3 3 0 0 1 13.25 4.75Z" fill="currentColor" />
   </Glyph>
 );
 
