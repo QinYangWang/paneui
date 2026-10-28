@@ -218,7 +218,7 @@ function CommandGroup({
     >
       <Tabs value={active.value} onValueChange={(v) => select(String(v))} className="gap-0">
         <div data-slot="command-group-header" className="flex h-10 items-center gap-2 border-b border-border/60 px-1.5">
-          <TabsList variant="ghost" size="sm" className="min-w-0 overflow-x-auto scrollbar-none">
+          <TabsList variant="ghost" size="sm" className="min-w-0 shrink overflow-x-auto scrollbar-none">
             {items.map((item) => (
               <TabsTab key={item.value} value={item.value} className="font-mono font-normal">
                 {item.label ?? item.value}
