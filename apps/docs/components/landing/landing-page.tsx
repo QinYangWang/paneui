@@ -1,26 +1,34 @@
 "use client"
 
+import Link from "next/link"
+
+import { ArrowRightIcon } from "@paneui/ui/icons"
+import { Button } from "@paneui/ui/components/button"
 import { LocaleProvider } from "@paneui/ui/components/locale-provider"
 import { useSiteLocale, useT } from "@/lib/site-locale"
 
-import { GetStarted, Install, Quote } from "./closing"
-import { Features } from "./features"
 import { Hero } from "./hero"
-import { Kinds } from "./kinds"
 import { LandingFooter, LandingHeader } from "./landing-chrome"
+import { Accents, Faq, Figures } from "./sections"
+import { Wall } from "./wall"
 
 import "./landing.css"
 
+/** One band of the page, split from the next by a hairline. */
+function Band({ children }: { children: React.ReactNode }) {
+  return <div className="border-b border-border py-20 sm:py-24">{children}</div>
+}
+
 /**
- * The homepage: a light, paper-toned page with a sky hero and pastel cards, each holding live
- * library components. It follows the site theme; dark mode swaps the scenery for night tones.
+ * The homepage, in bands: a centred hero with the install command, a wall of live components,
+ * numbered figures, the accents, and questions. It follows the site theme.
  */
-export function LandingPage({ count, codeHtml }: { count: number; codeHtml: string }) {
+export function LandingPage({ codeHtml }: { count: number; codeHtml: string }) {
   const locale = useSiteLocale()
   const t = useT()
   return (
     <LocaleProvider locale={locale}>
-      <div className="lp min-h-screen overflow-x-clip text-foreground">
+      <div className="lp min-h-screen overflow-x-clip bg-background text-foreground">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-card focus:p-3 focus-visible:ring-2 focus-visible:ring-ring/50"
@@ -28,16 +36,26 @@ export function LandingPage({ count, codeHtml }: { count: number; codeHtml: stri
           {t({ en: "Skip to content", zh: "跳转到内容" })}
         </a>
         <LandingHeader />
-        <main id="main" className="flex flex-col gap-24 pb-24 sm:gap-32 sm:pb-32">
+        <main id="main">
           <Hero />
-          <Install />
-          <Kinds count={count} />
-          <Quote>{t({ en: "“Every part of these windows is a live component. Press anything.”", zh: "「这些窗口里的每一块都是真实组件，随便点。」" })}</Quote>
-          <div className="flex flex-col gap-6 sm:gap-10">
-            <Features codeHtml={codeHtml} />
-          </div>
-          <Quote align="end">{t({ en: "“Made for apps people keep open all day.”", zh: "「为整天开着的应用而做。」" })}</Quote>
-          <GetStarted />
+          <Band>
+            <Wall />
+            <div className="mt-10 flex justify-center">
+              <Button variant="outline" nativeButton={false} render={<Link href="/docs/components" />}>
+                {t({ en: "Browse every component", zh: "浏览全部组件" })}
+                <ArrowRightIcon data-icon="inline-end" className="rtl:-scale-x-100" />
+              </Button>
+            </div>
+          </Band>
+          <Band>
+            <Figures codeHtml={codeHtml} />
+          </Band>
+          <Band>
+            <Accents />
+          </Band>
+          <Band>
+            <Faq />
+          </Band>
         </main>
         <LandingFooter />
       </div>

@@ -46,13 +46,30 @@ const iconInsetScope =
   "[&:has(>[data-slot=sidebar-nav-list]>[data-slot=sidebar-nav-item]>*>[data-slot=sidebar-nav-link-icon])]:[--sidebar-nav-inset:1.5rem] [&:has(>[data-slot=sidebar-nav-section]>[data-slot=sidebar-nav-section-label]_[data-slot=sidebar-nav-section-icon])]:[--sidebar-nav-inset:1.5rem]"
 const insetStart = "ps-[calc(0.5rem+var(--sidebar-nav-inset,0px))] pe-2"
 
-const sidebarNavVariants = cva("flex min-h-0 flex-1 flex-col", {
+const sidebarNavVariants = cva("group/sidebar-nav flex min-h-0 flex-1 flex-col", {
   variants: { variant: { default: "", fill: "bg-shell" } },
   defaultVariants: { variant: "default" },
 })
 
-function SidebarNav({ className, variant, ...props }: React.ComponentProps<"div"> & VariantProps<typeof sidebarNavVariants>) {
-  return <div data-slot="sidebar-nav" data-variant={variant ?? "default"} className={cn(sidebarNavVariants({ variant }), className)} {...props} />
+type SidebarNavProps = React.ComponentProps<"div"> &
+  VariantProps<typeof sidebarNavVariants> & {
+    /**
+     * How the current row shows. `bar` (default): a fill plus a 2px bar in the gutter.
+     * `fill`: a stronger fill only, with 32px rows, for a calm docs sidebar on a `fill` band.
+     */
+    indicator?: "bar" | "fill"
+  }
+
+function SidebarNav({ className, variant, indicator = "bar", ...props }: SidebarNavProps) {
+  return (
+    <div
+      data-slot="sidebar-nav"
+      data-variant={variant ?? "default"}
+      data-indicator={indicator}
+      className={cn(sidebarNavVariants({ variant }), className)}
+      {...props}
+    />
+  )
 }
 
 /** A field-shaped button that opens your search (a command palette). Its text defaults to the locale's "Search". */
@@ -111,8 +128,11 @@ type SidebarNavSectionProps = Omit<CollapsiblePrimitive.Root.Props, "children"> 
   label: React.ReactNode
   /** Muted count after the label. */
   count?: number
-  /** `section`: a top-level heading; `group`: a smaller muted heading inside a section. */
-  level?: "section" | "group"
+  /**
+   * `section`: a top-level heading; `group`: a folder-like heading inside a section;
+   * `label`: a small muted caption over flat rows (never folds).
+   */
+  level?: "section" | "group" | "label"
   /** A section with no toggle (always open). */
   collapsible?: boolean
   /** Makes the label a link to the section's own page; the chevron still folds it. */
@@ -129,7 +149,21 @@ type SidebarNavSectionProps = Omit<CollapsiblePrimitive.Root.Props, "children"> 
 }
 
 /** A labelled, collapsible block of rows. Open by default; control it with `open` / `onOpenChange` to persist it. */
-function SidebarNavSection({
+function SidebarNavSection(props: SidebarNavSectionProps) {
+  if (props.level !== "label") return <SidebarNavFoldSection {...props} />
+  const { label, count, className, children } = props
+  return (
+    <div data-slot="sidebar-nav-section" data-level="label" className={cn("flex flex-col gap-px", className)}>
+      <div data-slot="sidebar-nav-section-label" className={cn("flex h-7 items-center gap-1.5 text-ui-sm text-muted-foreground", insetStart)}>
+        <span className="truncate">{label}</span>
+        {count !== undefined && <span className="text-ui-xs text-muted-foreground/80 tabular-nums">{count}</span>}
+      </div>
+      <div className={cn("flex flex-col gap-px", iconInsetScope)}>{children}</div>
+    </div>
+  )
+}
+
+function SidebarNavFoldSection({
   label,
   count,
   level = "section",
@@ -328,13 +362,15 @@ function SidebarNavLink({ active = false, badge, icon, className, children, rend
           icon ? "px-2" : insetStart,
           "hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset",
           "aria-[current=page]:bg-secondary aria-[current=page]:font-medium aria-[current=page]:text-foreground",
+          // fill indicator: taller rows, a stronger fill on the band, no gutter bar
+          "group-data-[indicator=fill]/sidebar-nav:h-8 group-data-[indicator=fill]/sidebar-nav:hover:bg-foreground/5 group-data-[indicator=fill]/sidebar-nav:aria-[current=page]:bg-foreground/7",
           className
         ),
         children: (
           <>
             <span
               aria-hidden
-              className="absolute inset-y-1.5 start-[var(--sidebar-nav-bar,-0.5rem)] w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground"
+              className="absolute inset-y-1.5 start-[var(--sidebar-nav-bar,-0.5rem)] w-0.5 rounded-full bg-transparent group-aria-[current=page]/nav:bg-foreground group-data-[indicator=fill]/sidebar-nav:hidden"
             />
             {icon && (
               <span
@@ -363,4 +399,4 @@ function SidebarNavFooter({ className, ...props }: React.ComponentProps<"div">) 
 }
 
 export { SidebarNav, SidebarNavSearch, SidebarNavContent, SidebarNavSection, SidebarNavList, SidebarNavLink, SidebarNavFooter }
-export type { SidebarNavSectionProps, SidebarNavLinkProps }
+export type { SidebarNavProps, SidebarNavSectionProps, SidebarNavLinkProps }

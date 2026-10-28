@@ -33,6 +33,7 @@ export default {
 └── SidebarNavFooter`,
   examples: [
     { id: "fill", title: { en: "Filled surface", zh: "填充背景" } },
+    { id: "captions", title: { en: "Captions", zh: "分组标题" }, description: { en: "Use for long flat docs lists.", zh: "适合较长的扁平文档列表。" } },
     { id: "icons", title: { en: "Icons", zh: "图标" },  },
     { id: "icon-groups", title: { en: "Icons and Groups", zh: "图标与分组" },  },
     { id: "linked-groups", title: { en: "Linked Groups", zh: "分组链接" },  },
@@ -54,7 +55,7 @@ export default {
     },
   ],
   api: [
-    { name: "SidebarNav", extends: "div", description: { en: "Column that fills its container.", zh: "填满容器的纵向导航。" }, props: [{ name: "variant", type: '"default" | "fill"', default: '"default"', description: { en: "Use fill for an opaque shell surface.", zh: "使用 fill 显示不透明的侧栏背景。" } }] },
+    { name: "SidebarNav", extends: "div", description: { en: "Column that fills its container.", zh: "填满容器的纵向导航。" }, props: [{ name: "variant", type: '"default" | "fill"', default: '"default"', description: { en: "Use fill for an opaque shell surface.", zh: "使用 fill 显示不透明的侧栏背景。" } }, { name: "indicator", type: '"bar" | "fill"', default: '"bar"', description: { en: "`fill` marks the current row with a stronger fill only and uses 32px rows.", zh: "`fill` 仅用更深的填充标记当前行，并使用 32px 行高。" } }] },
     {
       name: "SidebarNavSearch",
       extends: "button",
@@ -72,7 +73,7 @@ export default {
       props: [
         { name: "label", type: "React.ReactNode", required: true, description: { en: "Heading text.", zh: "标题文字。" } },
         { name: "count", type: "number", description: { en: "Muted count after the label.", zh: "标签后的数量。" } },
-        { name: "level", type: `"section" | "group"`, default: `"section"`, description: { en: "`group` is a smaller muted heading inside a section.", zh: "`group` 为分区内较小的次级标题。" } },
+        { name: "level", type: `"section" | "group" | "label"`, default: `"section"`, description: { en: "`group` is a smaller muted heading inside a section; `label` is a small caption over flat rows that never folds.", zh: "`group` 为分区内较小的次级标题；`label` 为扁平行上方不折叠的小标题。" } },
         { name: "collapsible", type: "boolean", default: "true", description: { en: "`false` drops the toggle and keeps it open.", zh: "设为 `false` 后始终展开。" } },
         { name: "href", type: "string", description: { en: "Makes the label a link to the section's own page; the chevron beside it still folds the rows.", zh: "将标签设为分区页面的链接，旁边的箭头仍可折叠列表。" } },
         { name: "labelRender", type: "React.ReactElement | (props) => React.ReactElement", description: { en: "Renders the label link with your router's link, such as `<Link href=\"…\" />`.", zh: "使用路由链接渲染标签，例如 `<Link href=\"…\" />`。" } },
