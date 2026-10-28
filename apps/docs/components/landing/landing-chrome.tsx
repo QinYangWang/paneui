@@ -7,7 +7,6 @@ import { Button } from "@paneui/ui/components/button"
 import { ThemeToggle } from "@paneui/ui/components/theme-toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/tooltip"
 import { LanguageToggle } from "@/components/docs/language-toggle"
-import { ThemeControls } from "@/components/docs/theme-controls"
 import { THEME_KEY } from "@/components/docs/theme-script"
 import { useT, type Localized } from "@/lib/site-locale"
 
@@ -38,9 +37,6 @@ export function LandingHeader() {
           <Link href="/docs/components" className={navLink}>
             {t({ en: "Components", zh: "组件" })}
           </Link>
-          <a href="/native/" className={navLink}>
-            Native
-          </a>
         </nav>
         <div className="flex items-center gap-0.5">
           <Tooltip>
@@ -61,10 +57,7 @@ export function LandingHeader() {
             <TooltipContent side="bottom">GitHub</TooltipContent>
           </Tooltip>
           <LanguageToggle />
-          <ThemeControls className="hidden lg:flex" />
-          <span className="lg:hidden">
-            <ThemeToggle variant="ghost" storageKey={THEME_KEY} />
-          </span>
+          <ThemeToggle variant="ghost" storageKey={THEME_KEY} />
           <Button variant="inverse" shape="pill" size="lg" nativeButton={false} render={<Link href="/docs" />} className="ms-1.5 hidden sm:inline-flex">
             {t({ en: "Get started", zh: "开始使用" })}
           </Button>
@@ -77,7 +70,6 @@ export function LandingHeader() {
 const LINKS: { label: Localized; href: string; external?: boolean }[] = [
   { label: { en: "Docs", zh: "文档" }, href: "/docs" },
   { label: { en: "Components", zh: "组件" }, href: "/docs/components" },
-  { label: "Native", href: "/native/", external: true },
   { label: "GitHub", href: GITHUB_URL, external: true },
 ]
 

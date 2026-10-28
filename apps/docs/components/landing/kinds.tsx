@@ -3,7 +3,7 @@
 import * as React from "react"
 import { AnimatePresence, motion } from "motion/react"
 
-import { CalendarDaysIcon, ChatIcon, FileIcon, InboxIcon, PanelRightIcon, SettingsIcon, SmartphoneIcon, TableIcon, TypeIcon, UserIcon } from "@paneui/ui/icons"
+import { CalendarDaysIcon, ChatIcon, FileIcon, InboxIcon, PanelRightIcon, SettingsIcon, TableIcon, TypeIcon, UserIcon } from "@paneui/ui/icons"
 import { Button } from "@paneui/ui/components/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@paneui/ui/components/card"
 import { Checkbox } from "@paneui/ui/components/checkbox"
@@ -19,7 +19,7 @@ import { useT, type Localized } from "@/lib/site-locale"
 
 import { LandingBackdropLayer } from "./backdrop"
 import { Eyebrow } from "./parts"
-import { Checklist, Composer, Deploy, Messages, Phone, Requests } from "./pieces"
+import { Checklist, Composer, Deploy, Messages, Requests } from "./pieces"
 import { EASE, Reveal, useStill } from "./reveal"
 
 function FormsDemo() {
@@ -196,13 +196,12 @@ function OverlaysDemo() {
   )
 }
 
-type Kind = "forms" | "data" | "agent" | "overlays" | "native"
+type Kind = "forms" | "data" | "agent" | "overlays"
 const KINDS: { id: Kind; label: Localized; icon: React.ReactNode }[] = [
   { id: "forms", label: { en: "Forms", zh: "表单" }, icon: <TypeIcon /> },
   { id: "data", label: { en: "Data", zh: "数据" }, icon: <TableIcon /> },
   { id: "agent", label: { en: "Agent", zh: "助手" }, icon: <ChatIcon /> },
   { id: "overlays", label: { en: "Overlays", zh: "浮层" }, icon: <PanelRightIcon /> },
-  { id: "native", label: "Native", icon: <SmartphoneIcon /> },
 ]
 
 /** A row of kinds; each one swaps the live demo below it. */
@@ -254,7 +253,6 @@ export function Kinds({ count }: { count: number }) {
               {kind === "data" ? <DataDemo /> : null}
               {kind === "agent" ? <AgentDemo live={!still} /> : null}
               {kind === "overlays" ? <OverlaysDemo /> : null}
-              {kind === "native" ? <Phone className="w-full max-w-72" /> : null}
             </motion.div>
           </AnimatePresence>
         </div>

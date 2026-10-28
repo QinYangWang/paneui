@@ -37,7 +37,6 @@ const headerLinks: { label: string; href: string; externalApp?: boolean; isActiv
     href: COMPONENTS_HREF,
     isActive: (p, groups) => p === COMPONENTS_HREF || (p.startsWith("/docs/") && !GUIDE_PAGES.some((g) => g.href === p) && !isTemplate(p, groups)),
   },
-  { label: "Native", href: "/native/", externalApp: true, isActive: () => false },
   { label: "Templates", href: "/docs/components#templates", isActive: isTemplate },
 ]
 

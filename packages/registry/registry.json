@@ -2420,36 +2420,21 @@
       "name": "blog",
       "type": "registry:block",
       "title": "Personal Blog",
-      "description": "Personal blog with a post list and an article page.",
-      "dependencies": [
-        "motion",
-        "simple-icons"
-      ],
+      "description": "Personal blog with posts grouped by year.",
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/typeset",
-        "@paneui/badge",
-        "@paneui/button",
         "@paneui/icons",
-        "@paneui/input",
-        "@paneui/scroll-progress",
+        "@paneui/button",
+        "@paneui/menu",
         "@paneui/theme-toggle",
-        "@paneui/toast",
-        "@paneui/brand-icon",
-        "@paneui/code-block",
-        "@paneui/outline",
-        "@paneui/cover-art"
+        "@paneui/code-block"
       ],
       "files": [
         {
           "path": "apps/docs/registry/templates/blog/blog.tsx",
           "type": "registry:component",
           "target": "components/blog/blog.tsx"
-        },
-        {
-          "path": "apps/docs/registry/templates/blog/parts/author-avatar.tsx",
-          "type": "registry:component",
-          "target": "components/blog/parts/author-avatar.tsx"
         },
         {
           "path": "apps/docs/registry/templates/blog/parts/chrome.tsx",
@@ -2460,11 +2445,6 @@
           "path": "apps/docs/registry/templates/blog/parts/data.ts",
           "type": "registry:component",
           "target": "components/blog/parts/data.ts"
-        },
-        {
-          "path": "apps/docs/registry/templates/blog/parts/stagger.tsx",
-          "type": "registry:component",
-          "target": "components/blog/parts/stagger.tsx"
         },
         {
           "path": "apps/docs/registry/templates/blog/post.tsx",
@@ -2839,7 +2819,6 @@
       "registryDependencies": [
         "@paneui/theme",
         "@paneui/icons",
-        "@paneui/icon-chip",
         "@paneui/locale-provider"
       ],
       "files": [

@@ -30,13 +30,13 @@ export function LandingPage({ count, codeHtml }: { count: number; codeHtml: stri
         <LandingHeader />
         <main id="main" className="flex flex-col gap-24 pb-24 sm:gap-32 sm:pb-32">
           <Hero />
+          <Install />
           <Kinds count={count} />
           <Quote>{t({ en: "“Every part of these windows is a live component. Press anything.”", zh: "「这些窗口里的每一块都是真实组件，随便点。」" })}</Quote>
           <div className="flex flex-col gap-6 sm:gap-10">
             <Features codeHtml={codeHtml} />
           </div>
           <Quote align="end">{t({ en: "“Made for apps people keep open all day.”", zh: "「为整天开着的应用而做。」" })}</Quote>
-          <Install />
           <GetStarted />
         </main>
         <LandingFooter />
