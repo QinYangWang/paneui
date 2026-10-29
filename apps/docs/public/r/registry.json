@@ -1839,7 +1839,6 @@
         "https://paneui.dev/r/marquee.json",
         "https://paneui.dev/r/number-ticker.json",
         "https://paneui.dev/r/segmented-control.json",
-        "https://paneui.dev/r/shader-background.json",
         "https://paneui.dev/r/text-reveal.json",
         "https://paneui.dev/r/trend-chart.json",
         "https://paneui.dev/r/accent-picker.json",
@@ -2492,7 +2491,8 @@
         "https://paneui.dev/r/message-scroller.json",
         "https://paneui.dev/r/animated-sidebar.json",
         "https://paneui.dev/r/tooltip.json",
-        "https://paneui.dev/r/avatar-generator.json"
+        "https://paneui.dev/r/avatar-generator.json",
+        "https://paneui.dev/r/input-group.json"
       ],
       "files": [
         {
