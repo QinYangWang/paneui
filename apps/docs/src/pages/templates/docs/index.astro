@@ -1,0 +1,12 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import DocsTemplateRoute, { type DocsTemplateData } from "@/components/pages/templates/docs-route"
+import { siteNavGroups } from "@/lib/build"
+
+const data: DocsTemplateData = { layout: "classic" }
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Docs template">
+  <DocsTemplateRoute client:load site={site} data={data} />
+</Base>

@@ -255,6 +255,7 @@ function AppShellSidebar({
   mobileTitle,
   className,
   panelClassName,
+  rail,
   children,
   "aria-label": ariaLabel,
   ...props
@@ -296,6 +297,7 @@ function AppShellSidebar({
             "sticky top-(--app-shell-top) h-[calc(100svh-var(--app-shell-top))] self-start",
           className
         )}
+        rail={rail}
         {...props}
       >
         {children}
@@ -308,7 +310,7 @@ function AppShellSidebar({
             <SidebarProvider
               shortcut={null}
               className="min-h-0 flex-1 flex-col"
-              style={{ "--sidebar-width": "100%" } as React.CSSProperties}
+              style={{ "--sidebar-width": rail ? "calc(100% - var(--sidebar-rail-width))" : "100%" } as React.CSSProperties}
               // a link inside the drawer navigates, so the drawer has done its job
               onClickCapture={(e) => {
                 if ((e.target as HTMLElement).closest("a[href]")) setMobileOpen(false)
@@ -325,6 +327,7 @@ function AppShellSidebar({
                 aria-label={ariaLabel}
                 className="min-h-0 flex-1"
                 panelClassName="border-x-0 bg-transparent"
+                rail={rail}
               >
                 {children}
               </Sidebar>

@@ -1589,30 +1589,13 @@
       }
     },
     {
-      "name": "icons-puffy",
+      "name": "icons-emoji",
       "type": "registry:component",
-      "title": "Icons (puffy)",
-      "description": "Filled icons for interfaces.",
+      "title": "Icons (emoji)",
+      "description": "Full-colour glossy icons with the same names.",
       "files": [
         {
-          "path": "registry/web/icons/puffy/icons.tsx",
-          "type": "registry:component",
-          "target": "components/icons.tsx"
-        }
-      ],
-      "meta": {
-        "category": "Foundations",
-        "hidden": true
-      }
-    },
-    {
-      "name": "icons-outline",
-      "type": "registry:component",
-      "title": "Icons (outline)",
-      "description": "Outline icons for interfaces.",
-      "files": [
-        {
-          "path": "registry/web/icons/outline/icons.tsx",
+          "path": "registry/web/icons/emoji/icons.tsx",
           "type": "registry:component",
           "target": "components/icons.tsx"
         }
@@ -2104,7 +2087,6 @@
         "https://paneui.dev/r/dialog.json",
         "https://paneui.dev/r/drawer.json",
         "https://paneui.dev/r/file-tree.json",
-        "https://paneui.dev/r/icon-rail.json",
         "https://paneui.dev/r/input.json",
         "https://paneui.dev/r/loader.json",
         "https://paneui.dev/r/menu.json",
@@ -2118,7 +2100,8 @@
         "https://paneui.dev/r/tooltip.json",
         "https://paneui.dev/r/badge.json",
         "https://paneui.dev/r/brand-icon.json",
-        "https://paneui.dev/r/action-swap-blur.json"
+        "https://paneui.dev/r/action-swap-blur.json",
+        "https://paneui.dev/r/animated-sidebar.json"
       ],
       "files": [
         {
@@ -2235,7 +2218,6 @@
         "https://paneui.dev/r/edited-files-card.json",
         "https://paneui.dev/r/file-diff.json",
         "https://paneui.dev/r/file-tree.json",
-        "https://paneui.dev/r/icon-rail.json",
         "https://paneui.dev/r/input.json",
         "https://paneui.dev/r/label.json",
         "https://paneui.dev/r/loader.json",
@@ -2263,7 +2245,8 @@
         "https://paneui.dev/r/scroll-area.json",
         "https://paneui.dev/r/settings-section.json",
         "https://paneui.dev/r/code-block.json",
-        "https://paneui.dev/r/action-swap-blur.json"
+        "https://paneui.dev/r/action-swap-blur.json",
+        "https://paneui.dev/r/animated-sidebar.json"
       ],
       "files": [
         {
@@ -2437,36 +2420,21 @@
       "name": "blog",
       "type": "registry:block",
       "title": "Personal Blog",
-      "description": "Personal blog with a post list and an article page.",
-      "dependencies": [
-        "motion",
-        "simple-icons"
-      ],
+      "description": "Personal blog with posts grouped by year.",
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/typeset.json",
-        "https://paneui.dev/r/badge.json",
-        "https://paneui.dev/r/button.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/input.json",
-        "https://paneui.dev/r/scroll-progress.json",
+        "https://paneui.dev/r/button.json",
+        "https://paneui.dev/r/menu.json",
         "https://paneui.dev/r/theme-toggle.json",
-        "https://paneui.dev/r/toast.json",
-        "https://paneui.dev/r/brand-icon.json",
-        "https://paneui.dev/r/code-block.json",
-        "https://paneui.dev/r/outline.json",
-        "https://paneui.dev/r/cover-art.json"
+        "https://paneui.dev/r/code-block.json"
       ],
       "files": [
         {
           "path": "registry/web/templates/blog/blog.tsx",
           "type": "registry:component",
           "target": "components/blog/blog.tsx"
-        },
-        {
-          "path": "registry/web/templates/blog/parts/author-avatar.tsx",
-          "type": "registry:component",
-          "target": "components/blog/parts/author-avatar.tsx"
         },
         {
           "path": "registry/web/templates/blog/parts/chrome.tsx",
@@ -2477,11 +2445,6 @@
           "path": "registry/web/templates/blog/parts/data.ts",
           "type": "registry:component",
           "target": "components/blog/parts/data.ts"
-        },
-        {
-          "path": "registry/web/templates/blog/parts/stagger.tsx",
-          "type": "registry:component",
-          "target": "components/blog/parts/stagger.tsx"
         },
         {
           "path": "registry/web/templates/blog/post.tsx",
@@ -2856,7 +2819,6 @@
       "registryDependencies": [
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
-        "https://paneui.dev/r/icon-chip.json",
         "https://paneui.dev/r/locale-provider.json"
       ],
       "files": [
@@ -3964,6 +3926,7 @@
         "https://paneui.dev/r/theme.json",
         "https://paneui.dev/r/icons.json",
         "https://paneui.dev/r/button.json",
+        "https://paneui.dev/r/tabs.json",
         "https://paneui.dev/r/action-swap-blur.json",
         "https://paneui.dev/r/locale-provider.json"
       ],
@@ -5950,26 +5913,6 @@
       "files": [
         {
           "path": "registry/web/ui/tab-strip.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "category": "Navigation"
-      }
-    },
-    {
-      "name": "icon-rail",
-      "type": "registry:ui",
-      "title": "Icon Rail",
-      "description": "Narrow bar of icon buttons for switching between app sections.",
-      "registryDependencies": [
-        "https://paneui.dev/r/theme.json",
-        "https://paneui.dev/r/tooltip.json",
-        "https://paneui.dev/r/locale-provider.json"
-      ],
-      "files": [
-        {
-          "path": "registry/web/ui/icon-rail.tsx",
           "type": "registry:ui"
         }
       ],

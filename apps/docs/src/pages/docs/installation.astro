@@ -1,0 +1,23 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import InstallationPage, { type InstallationData } from "@/components/pages/installation-page"
+import { docNav, highlight, siteNavGroups } from "@/lib/build"
+import { REGISTRY_NAME, REGISTRY_URL } from "@/lib/site-constants"
+
+const USAGE = `import { Button } from "@/components/ui/button"
+
+export function Save() {
+  return <Button>Save changes</Button>
+}`
+
+const config = JSON.stringify({ registries: { [`@${REGISTRY_NAME}`]: REGISTRY_URL } }, null, 2)
+const data: InstallationData = {
+  nav: docNav("/docs/installation", ["components/pages/installation-page.tsx"]),
+  code: { config: await highlight(config, "json"), usage: await highlight(USAGE, "tsx") },
+}
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Installation">
+  <InstallationPage client:load site={site} data={data} />
+</Base>

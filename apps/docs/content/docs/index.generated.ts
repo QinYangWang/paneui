@@ -62,7 +62,6 @@ import d_funnel_chart from "./funnel-chart"
 import d_heat_calendar from "./heat-calendar"
 import d_hover_card from "./hover-card"
 import d_icon_chip from "./icon-chip"
-import d_icon_rail from "./icon-rail"
 import d_image_generation from "./image-generation"
 import d_input from "./input"
 import d_input_group from "./input-group"
@@ -225,7 +224,6 @@ export const docsContent: Record<string, ComponentDoc> = {
   "heat-calendar": d_heat_calendar,
   "hover-card": d_hover_card,
   "icon-chip": d_icon_chip,
-  "icon-rail": d_icon_rail,
   "image-generation": d_image_generation,
   "input": d_input,
   "input-group": d_input_group,

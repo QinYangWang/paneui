@@ -1,7 +1,7 @@
 {
   "$comment": "Design check settings for this repo (skills/paneui-design/scripts/check.mjs). nameHashes: words that must not appear in prose, stored hashed so this file doesn't name them; add one with --hash \"word\".",
   "ignore": [
-    "packages/ui/src/icons/outline/**",
+    "packages/ui/src/icons/emoji/**",
     "tooling/scripts/fixtures/**",
     "**/parts/code.ts"
   ],
@@ -53,7 +53,7 @@
     },
     {
       "rule": "radius-cap",
-      "file": "apps/docs/app/docs/theming/page.tsx",
+      "file": "apps/docs/components/pages/theming-page.tsx",
       "reason": "the radius table documents the 4xl/5xl aliases"
     },
     {
@@ -85,6 +85,11 @@
       "rule": "*",
       "file": "apps/docs/components/docs/skill-examples.tsx",
       "reason": "the Avoid previews on /docs/skill break the rules on purpose"
+    },
+    {
+      "rule": "*",
+      "file": "apps/docs/components/docs/skill-example-code.ts",
+      "reason": "the Avoid code samples on /docs/skill break the rules on purpose"
     },
     {
       "rule": "media-outline",

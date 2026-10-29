@@ -1,0 +1,27 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import DocsTemplateRoute, { type DocsTemplateData } from "@/components/pages/templates/docs-route"
+import { siteNavGroups } from "@/lib/build"
+import type { DocsLayout } from "@/registry/templates/docs/docs"
+
+/** Preview routes for the docs template's other layouts; /templates/docs is the classic one. */
+// The old route set `dynamicParams = false`: only these four layouts exist.
+export function getStaticPaths() {
+  // getStaticPaths is hoisted out of the frontmatter, so it cannot read LAYOUTS.
+  return [
+    { params: { layout: "notebook" }, props: { title: "Notebook" } },
+    { params: { layout: "flux" }, props: { title: "Flux" } },
+    { params: { layout: "spacious" }, props: { title: "Spacious" } },
+    { params: { layout: "home" }, props: { title: "Home" } },
+  ]
+}
+
+const { layout = "classic" } = Astro.params
+const { title } = Astro.props as { title: string }
+const data: DocsTemplateData = { layout: layout as DocsLayout }
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title={`Docs template · ${title}`}>
+  <DocsTemplateRoute client:load site={site} data={data} />
+</Base>

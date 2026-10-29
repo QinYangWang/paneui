@@ -1,6 +1,6 @@
 /**
  * Items added in the latest releases, newest first. The sidebar marks them "New" and its footer
- * links to the changelog entry. Keep in step with app/docs/changelog/page.tsx; drop entries
+ * links to the changelog entry. Keep in step with components/pages/changelog-page.tsx; drop entries
  * older than about two weeks.
  */
 export const WHATS_NEW = {

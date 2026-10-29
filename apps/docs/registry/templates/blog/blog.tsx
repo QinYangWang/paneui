@@ -1,132 +1,90 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
 
-import { ArrowRightIcon } from "@paneui/ui/icons"
-import { Badge } from "@paneui/ui/components/badge"
-import { Button } from "@paneui/ui/components/button"
+import { CodeIcon, MailIcon } from "@paneui/ui/icons"
 
-import { Avatar } from "./parts/author-avatar"
-import { BlogFooter, BlogHeader, Container, Newsletter } from "./parts/chrome"
-import { CoverArt } from "@paneui/ui/components/cover-art"
-import { author, posts } from "./parts/data"
-import { Stagger, StaggerItem } from "./parts/stagger"
+import { BlogTopBar, Container, TextLink } from "./parts/chrome"
+import { formatPostDate, groupPostsByYear, site, socials, type Social } from "./parts/data"
 
 export type BlogHrefs = { home: string; post: string }
 
-/** Personal blog home: intro, featured post, post list and newsletter. */
+const SOCIAL_ICONS = { code: CodeIcon, mail: MailIcon }
+
+function SocialLink({ social }: { social: Social }) {
+  const Icon = SOCIAL_ICONS[social.icon]
+  return (
+    <a
+      href={social.href}
+      rel="noreferrer"
+      className="inline-flex items-baseline gap-1 rounded-xs text-foreground underline decoration-border underline-offset-4 transition-colors duration-150 outline-none hover:decoration-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+    >
+      <Icon size={14} className="translate-y-0.5" />
+      {social.label}
+    </a>
+  )
+}
+
+/**
+ * Personal blog home: a short intro, the social row, then every post grouped by year.
+ * Links in the intro are underlined; list rows stay plain until hovered.
+ */
 export function BlogHome({ hrefs = { home: "/blog", post: "/blog/post" } }: { hrefs?: BlogHrefs }) {
-  const [featured, ...rest] = posts
+  const years = groupPostsByYear()
   return (
-    <div className="flex min-h-svh flex-col bg-background">
-      <BlogHeader homeHref={hrefs.home} />
-      <main className="flex-1">
-        <Container className="flex flex-col gap-20 py-16 sm:py-24">
-          <Stagger className="flex max-w-2xl flex-col items-start gap-6">
-            <StaggerItem className="flex items-center gap-4">
-              <Avatar name={author.name} size="lg" />
-              <Badge variant="success" size="sm">
-                <span aria-hidden className="size-1.5 rounded-full bg-success" />
-                Open to consulting
-              </Badge>
-            </StaggerItem>
-            <StaggerItem>
-              <h1 className="text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl sm:leading-none">
-                Notes on interfaces that feel calm.
-              </h1>
-            </StaggerItem>
-            <StaggerItem>
-              <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
-                I&apos;m {author.name}, a {author.role.toLowerCase()} in {author.location}. {author.bio}
-              </p>
-            </StaggerItem>
-          </Stagger>
+    <div className="bg-background">
+      <Container>
+        <BlogTopBar homeHref={hrefs.home} />
 
-          <section aria-labelledby="featured-title" className="flex flex-col gap-6">
-            <h2 id="featured-title" className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
-              Latest
-            </h2>
-            <Link
-              href={hrefs.post}
-              className="group grid grid-cols-1 overflow-hidden rounded-2xl bg-card shadow-raised transition-shadow duration-150 outline-none hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 md:grid-cols-2"
-            >
-              <CoverArt seed={featured.slug} className="aspect-video md:aspect-auto md:min-h-72" />
-              <div className="flex flex-col justify-between gap-6 p-6 sm:p-8">
-                <div className="flex flex-col gap-3">
-                  <PostMeta date={featured.date} minutes={featured.readingTime} />
-                  <h3 className="text-2xl leading-tight font-semibold tracking-tight text-balance">{featured.title}</h3>
-                  <p className="leading-relaxed text-pretty text-muted-foreground">{featured.excerpt}</p>
-                </div>
-                <div className="flex items-center justify-between gap-3">
-                  <Tags tags={featured.tags} />
-                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                    Read
-                    <ArrowRightIcon size={14} className="transition-transform duration-150 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
-                  </span>
-                </div>
-              </div>
-            </Link>
-          </section>
+        <main>
+          <h1 className="mb-3 text-base font-medium text-balance">{site.name}</h1>
 
-          <section aria-labelledby="all-title" className="flex flex-col gap-6">
-            <div className="flex items-baseline justify-between gap-3">
-              <h2 id="all-title" className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
-                All writing
-              </h2>
-              <span className="text-sm text-muted-foreground tabular-nums">{posts.length} posts</span>
-            </div>
-            <ul className="flex flex-col">
-              {rest.map((p) => (
-                <li key={p.slug} className="border-t border-border first:border-t-0">
-                  <Link
-                    href={hrefs.post}
-                    className="group -mx-4 grid grid-cols-1 gap-2 rounded-2xl px-4 py-5 transition-colors duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-6"
-                  >
-                    <time className="text-sm text-muted-foreground tabular-nums sm:pt-0.5">{p.date}</time>
-                    <div className="flex min-w-0 flex-col gap-2">
-                      <h3 className="text-lg leading-snug font-medium text-balance">{p.title}</h3>
-                      <p className="text-pretty text-muted-foreground">{p.excerpt}</p>
-                      <div className="flex flex-wrap items-center gap-3 pt-1">
-                        <Tags tags={p.tags} />
-                        <span className="text-xs text-muted-foreground tabular-nums">{p.readingTime} min read</span>
-                      </div>
-                    </div>
-                  </Link>
-                </li>
+          <div className="mb-10 flex flex-col gap-3 text-muted-foreground">
+            <p className="text-pretty">I write code, and I keep a record of it.</p>
+            <p className="text-pretty">Most of what lands here started as a note to myself. Some of it is still useful.</p>
+            <p className="text-pretty">
+              Start with <TextLink href="#">about this site</TextLink>, or browse{" "}
+              <TextLink href="#projects">the projects I&apos;m working on</TextLink>. The posts below are sample content you can
+              replace.
+            </p>
+            <p className="flex flex-wrap items-baseline gap-x-1.5">
+              <span>Elsewhere,</span>
+              {socials.map((social, i) => (
+                <React.Fragment key={social.label}>
+                  {i > 0 && <span aria-hidden>{i === socials.length - 1 ? "and" : ","}</span>}
+                  <SocialLink social={social} />
+                </React.Fragment>
               ))}
-            </ul>
-            <Button variant="secondary" className="self-start">
-              Browse the archive
-              <ArrowRightIcon className="rtl:-scale-x-100" data-icon="inline-end" />
-            </Button>
-          </section>
+            </p>
+          </div>
 
-          <Newsletter />
-        </Container>
-      </main>
-      <BlogFooter />
+          <div className="flex flex-col gap-8">
+            {years.map((group) => (
+              <section key={group.year} aria-labelledby={`year-${group.year}`} className="flex flex-col gap-3">
+                <h2 id={`year-${group.year}`} className="font-mono text-base font-normal text-balance text-muted-foreground">
+                  {group.year}
+                </h2>
+                <ul className="flex flex-col">
+                  {group.posts.map((post) => (
+                    <li key={post.slug} className="flex items-baseline gap-4 leading-6">
+                      <Link
+                        href={hrefs.post}
+                        className="min-w-0 wrap-anywhere rounded-xs transition-colors duration-150 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50"
+                      >
+                        {post.title}
+                      </Link>
+                      <time dateTime={post.date} className="ms-auto shrink-0 font-mono text-muted-foreground tabular-nums">
+                        {formatPostDate(post.date)}
+                      </time>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </main>
+      </Container>
     </div>
-  )
-}
-
-export function Tags({ tags }: { tags: string[] }) {
-  return (
-    <span className="flex flex-wrap gap-1.5">
-      {tags.map((t) => (
-        <Badge key={t} size="sm" variant="chip">
-          {t}
-        </Badge>
-      ))}
-    </span>
-  )
-}
-
-export function PostMeta({ date, minutes }: { date: string; minutes: number }) {
-  return (
-    <p className="flex items-center gap-2 text-sm text-muted-foreground tabular-nums">
-      <time>{date}</time>
-      <span aria-hidden>·</span>
-      <span>{minutes} min read</span>
-    </p>
   )
 }

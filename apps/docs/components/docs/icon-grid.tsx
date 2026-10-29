@@ -4,14 +4,13 @@ import * as React from "react"
 
 import * as Rounded from "@paneui/ui/icons"
 import { cn } from "@paneui/ui/lib/utils"
-import * as Outline from "@paneui/ui/icons/outline/icons"
-import * as Puffy from "@paneui/ui/icons/puffy/icons"
+import * as Emoji from "@paneui/ui/icons/emoji/icons"
 import { Input } from "@paneui/ui/components/input"
 import { SegmentedControl, SegmentedControlItem } from "@paneui/ui/components/segmented-control"
 
 type IconEntry = [string, (p: { size?: number }) => React.ReactElement]
 const entries = (set: object) => Object.entries(set).filter(([n]) => n.endsWith("Icon")) as IconEntry[]
-const SETS = { rounded: entries(Rounded), puffy: entries(Puffy), outline: entries(Outline) }
+const SETS = { rounded: entries(Rounded), emoji: entries(Emoji) }
 type Style = keyof typeof SETS
 
 export function IconGrid() {
@@ -26,8 +25,7 @@ export function IconGrid() {
         <Input placeholder={`Search ${all.length} icons…`} value={q} onChange={(e) => setQ(e.target.value)} className="max-w-xs" />
         <SegmentedControl value={style} onValueChange={(v) => setStyle(v as Style)} aria-label="Icon style">
           <SegmentedControlItem value="rounded">Rounded</SegmentedControlItem>
-          <SegmentedControlItem value="puffy">Puffy</SegmentedControlItem>
-          <SegmentedControlItem value="outline">Outline</SegmentedControlItem>
+          <SegmentedControlItem value="emoji">Emoji</SegmentedControlItem>
         </SegmentedControl>
       </div>
       <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-6">

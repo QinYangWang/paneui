@@ -7,6 +7,7 @@ export default {
     code: `<ThemeToggle />`,
   },
   examples: [
+    { id: "switch", title: { en: "Segmented Switch", zh: "分段切换" }, description: { en: "Use in a header where both modes should stay visible.", zh: "适合需要同时看到两种模式的顶栏。" } },
     {
       id: "tri-state",
       title: { en: "Light, Dark and System", zh: "浅色、深色与跟随系统" },
@@ -61,6 +62,16 @@ export default {
         { name: "modes", type: '"binary" | "tri"', default: '"binary"', description: { en: "`binary` flips light and dark. `tri` cycles light, dark and system and shows the stored choice (a monitor icon for system).", zh: "`binary` 翻转亮色和暗色。`tri` 循环亮色、暗色和系统，并显示存储的选择（系统为显示器图标）。" } },
       ],
       dataAttributes: [{ name: "data-mode", description: { en: "The current mode when `modes=\"tri\"`.", zh: "`modes=\"tri\"` 时的当前模式。" } }],
+    },
+    {
+      name: "ThemeSwitch",
+      description: { en: "Segmented pill with a sliding thumb; shares storage and events with ThemeToggle.", zh: "带滑动指示的分段胶囊；与 ThemeToggle 共用存储和事件。" },
+      extends: "div",
+      props: [
+        { name: "modes", type: '"binary" | "tri"', default: '"binary"', description: { en: "`tri` adds a system option.", zh: "`tri` 增加跟随系统选项。" } },
+        { name: "storageKey", type: "string", default: `"theme"`, description: { en: "`localStorage` key for the saved theme.", zh: "保存主题的 `localStorage` 键。" } },
+        { name: "duration", type: "number", default: "560", description: { en: "Reveal duration in ms.", zh: "显示持续时间，单位 ms。" } },
+      ],
     },
     {
       name: "useTheme",

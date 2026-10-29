@@ -62,7 +62,7 @@ Express every fix in the project's own system: Tailwind classes and theme tokens
   Check: `optical-icon-padding`; probe: `optical-padding`.
 - **Asymmetric glyphs** (play, arrows, stars) are corrected in the icon set's artwork, so they centre
   geometrically in the component. Don't add margins to nudge a house icon; fix the drawing (the
-  `puffy-icons` skill) if one looks off.
+  `paneui-icons` skill) if one looks off.
 
 ## Motion
 
@@ -110,11 +110,11 @@ Express every fix in the project's own system: Tailwind classes and theme tokens
   semibold or bold text. The tier is a context, not a per-glyph width: `icon-bold` (theme utility, sets
   `--icon-stroke-scale: 1.2`) on the text's element, or `weight="bold"` on one icon; `icon-regular` resets
   it. Titles, Badge, section labels and avatar initials carry `icon-bold`; Button stays regular because
-  its label is medium. Filled shapes (the puffy style, brand marks) keep their edge. Checks: `icon-weight`
+  its label is medium. Filled shapes (the emoji style, brand marks) keep their edge. Checks: `icon-weight`
   (a line icon whose nearest weighted text is semibold or bold, or a semibold class list styling
   `[&_svg]`, without the tier), `icon-stroke` (a `strokeWidth` on an instance).
 - **Outline at rest, filled when active, where there's no row fill.** Nav glyphs are outline; every one
-  has a `<Name>FilledIcon` pair drawn in each style (the puffy style is filled throughout, so its pair is
+  has a `<Name>FilledIcon` pair drawn in each style (the emoji style is filled throughout, so its pair is
   the same drawing). A tab bar has no row fill, so its active item swaps glyphs through `activeIcon`;
   sidebars and rails fill the active row and keep the outline glyph, since a fill plus a filled glyph says
   the same thing twice. Swap instantly (it's a tab switch); the colour changes too. Check:

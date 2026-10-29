@@ -13,7 +13,6 @@ export const galleryHeights: Record<string, number> = {
   "carousel": 284,
   "resizable": 352,
   "avatar-generator": 798,
-  "icon-rail": 448,
   "terminal-view": 384,
   "thread-list-item": 336,
   "agent-composer": 397,

@@ -36,7 +36,7 @@ New writes always use `paneui.json`:
 {
   "items": ["button", "card"],
   "theme": { "accent": "violet" },
-  "icons": "icons-outline"
+  "icons": "icons-emoji"
 }
 ```
 

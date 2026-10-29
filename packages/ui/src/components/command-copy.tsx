@@ -8,6 +8,7 @@ import { cn } from "@paneui/ui/lib/utils"
 import { ActionSwapBlurIcon } from "@paneui/ui/components/action-swap-blur"
 import { Button } from "@paneui/ui/components/button"
 import { useLocale } from "@paneui/ui/components/locale-provider"
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@paneui/ui/components/tabs"
 
 /*
  * One shell command on a bar with a copy button. The command scrolls sideways when it does not
@@ -19,6 +20,8 @@ const commandCopyVariants = cva("flex w-full min-w-0 items-center text-card-fore
     variant: {
       default: "bg-card shadow-raised",
       floating: "bg-card/80 shadow-xl backdrop-blur-xl",
+      /** Inside a `CommandGroup`: the group owns the frame, the row is just the command line. */
+      plain: "bg-transparent",
     },
     size: {
       // The ghost button sits 6px from the bar's edge, so its corners follow the bar's.
@@ -26,6 +29,10 @@ const commandCopyVariants = cva("flex w-full min-w-0 items-center text-card-fore
       lg: "h-14 gap-3 rounded-full ps-4 pe-2 text-ui-sm sm:ps-6 sm:text-ui-lg",
     },
   },
+  compoundVariants: [
+    // The group owns the frame, so its row keeps the height but takes no radius of its own.
+    { variant: "plain", size: "default", className: "h-10 gap-2 ps-3 pe-1.5 text-ui" },
+  ],
   defaultVariants: { variant: "default", size: "default" },
 })
 
@@ -118,4 +125,115 @@ function CommandCopy({
   )
 }
 
-export { CommandCopy, commandCopyVariants, type CommandCopyProps }
+type CommandGroupItem = { value: string; command: string; label?: string }
+
+type CommandGroupProps = Omit<React.ComponentProps<"div">, "onChange" | "defaultValue"> & {
+  /** One entry per variant of the command, in tab order. */
+  items: readonly CommandGroupItem[]
+  value?: string
+  defaultValue?: string
+  onValueChange?: (value: string) => void
+  /** Remember the picked tab in localStorage under this key and keep groups with the same key in sync. */
+  storageKey?: string
+  /** Glyph before the command; `null` hides it. */
+  prompt?: React.ReactNode
+}
+
+const STORAGE_EVENT = "command-group-change"
+
+/** Same-tab broadcast so every group with one storageKey switches together. */
+function readStored(key: string, values: readonly string[]) {
+  try {
+    const stored = localStorage.getItem(key)
+    return stored && values.includes(stored) ? stored : undefined
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * Tabs and command in one frame: the tab row is the bar's top line and the command sits under it.
+ * Tabs use the ghost variant (soft fill, no underline) and sit 6px in, concentric with the frame,
+ * so the two read as one control instead of a separate segmented track above a separate pill.
+ */
+function CommandGroup({
+  items,
+  value: valueProp,
+  defaultValue,
+  onValueChange,
+  storageKey,
+  prompt = "$",
+  className,
+  ...props
+}: CommandGroupProps) {
+  const values = React.useMemo(() => items.map((i) => i.value), [items])
+  const valuesKey = values.join("\u0000")
+  const [internal, setInternal] = React.useState(defaultValue ?? values[0])
+  const current = valueProp ?? (values.includes(internal ?? "") ? internal : values[0])
+  const active = items.find((i) => i.value === current) ?? items[0]
+
+  const select = React.useCallback(
+    (next: string, broadcast = true) => {
+      setInternal(next)
+      onValueChange?.(next)
+      if (!storageKey || !broadcast) return
+      try {
+        localStorage.setItem(storageKey, next)
+      } catch {
+        // storage can be unavailable (private mode, sandboxed iframes)
+      }
+      window.dispatchEvent(new CustomEvent(STORAGE_EVENT, { detail: { storageKey, value: next } }))
+    },
+    [onValueChange, storageKey]
+  )
+
+  // Restore the remembered tab and follow other groups that share the key.
+  React.useEffect(() => {
+    if (!storageKey) return
+    const known = valuesKey.split("\u0000")
+    const stored = readStored(storageKey, known)
+    if (stored) setInternal(stored)
+    const onCustom = (e: Event) => {
+      const detail = (e as CustomEvent<{ storageKey: string; value: string }>).detail
+      if (detail?.storageKey === storageKey && known.includes(detail.value)) setInternal(detail.value)
+    }
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === storageKey && e.newValue && known.includes(e.newValue)) setInternal(e.newValue)
+    }
+    window.addEventListener(STORAGE_EVENT, onCustom)
+    window.addEventListener("storage", onStorage)
+    return () => {
+      window.removeEventListener(STORAGE_EVENT, onCustom)
+      window.removeEventListener("storage", onStorage)
+    }
+  }, [storageKey, valuesKey])
+
+  if (!active) return null
+
+  return (
+    <div
+      data-slot="command-group"
+      className={cn("frame-xl frame-inset-1.5 overflow-hidden bg-card text-ui text-card-foreground shadow-raised", className)}
+      {...props}
+    >
+      <Tabs value={active.value} onValueChange={(v) => select(String(v))} className="gap-0">
+        <div data-slot="command-group-header" className="flex h-10 items-center gap-2 border-b border-border/60 px-1.5">
+          <TabsList variant="ghost" size="sm" className="min-w-0 shrink overflow-x-auto scrollbar-none">
+            {items.map((item) => (
+              <TabsTab key={item.value} value={item.value} className="font-mono font-normal">
+                {item.label ?? item.value}
+              </TabsTab>
+            ))}
+          </TabsList>
+        </div>
+        {items.map((item) => (
+          <TabsPanel key={item.value} value={item.value}>
+            <CommandCopy command={item.command} prompt={prompt} variant="plain" className="ps-3 pe-1.5" />
+          </TabsPanel>
+        ))}
+      </Tabs>
+    </div>
+  )
+}
+
+export { CommandCopy, CommandGroup, commandCopyVariants, type CommandCopyProps, type CommandGroupItem, type CommandGroupProps }

@@ -3,11 +3,10 @@
 import * as React from "react"
 import { siGithub } from "simple-icons"
 
-import { BotIcon, MenuIcon, SearchIcon } from "@paneui/ui/icons"
+import { MenuIcon, SearchIcon } from "@paneui/ui/icons"
 import { Badge } from "@paneui/ui/components/badge"
 import { BrandIcon } from "@paneui/ui/components/brand-icon"
 import { Button } from "@paneui/ui/components/button"
-import { IconChip } from "@paneui/ui/components/icon-chip"
 import { Kbd } from "@paneui/ui/components/kbd"
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@paneui/ui/components/navigation-menu"
 import { ThemeToggle } from "@paneui/ui/components/theme-toggle"
@@ -23,10 +22,7 @@ export const useDocsChrome = () => React.useContext(DocsChromeContext)
 
 export function Brand() {
   return (
-    <a href="#" className="flex shrink-0 items-center gap-2.5 rounded-full font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
-      <IconChip size="sm" tone="solid">
-        <BotIcon />
-      </IconChip>
+    <a href="#" className="flex shrink-0 items-center rounded-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
       <span>
         Tessel <span className="font-normal text-muted-foreground">Docs</span>
       </span>
