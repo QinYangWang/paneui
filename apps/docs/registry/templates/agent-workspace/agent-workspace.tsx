@@ -18,6 +18,7 @@ import {
   MoonIcon,
   PanelRightIcon,
   PlusIcon,
+  SearchIcon,
   SettingsIcon,
   SidebarIcon,
   TerminalSquareIcon,
@@ -29,6 +30,7 @@ import { Button } from "@paneui/ui/components/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@paneui/ui/components/dialog"
 import { Drawer, DrawerContent, DrawerTitle } from "@paneui/ui/components/drawer"
 import { FileDiff } from "@paneui/ui/components/file-diff"
+import { Kbd } from "@paneui/ui/components/kbd"
 import { SidebarRail, SidebarRailAvatar, SidebarRailGroup, SidebarRailItem, SidebarRailSpacer } from "@paneui/ui/components/animated-sidebar"
 import {
   ResizableHandle,
@@ -467,13 +469,49 @@ export function AgentWorkspace() {
       </div>
     ) : null
 
+  // No thread open: start one, or pick up one of the latest; both one click away.
+  const recent = threads.slice(0, 4)
   const emptyState = (
-    <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
-      <p className="text-ui text-muted-foreground">{state.connection === "connecting" ? "Connecting…" : "No thread open."}</p>
-      <Button variant="secondary" onClick={() => void newThread()} disabled={state.connection !== "ready"}>
-        <EditIcon data-icon="inline-start" />
-        New thread
-      </Button>
+    <div className="flex h-full items-center justify-center overflow-y-auto p-6">
+      <div className="flex w-full max-w-sm flex-col gap-6">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-ui-lg font-semibold text-balance">{state.connection === "connecting" ? "Connecting to the agent…" : "No thread open"}</h2>
+          <p className="text-ui text-pretty text-muted-foreground">
+            {state.connection === "ready" ? "Start a thread, or pick up where you left off." : `Threads open once ${agent.name} is connected.`}
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button onClick={() => void newThread()} disabled={state.connection !== "ready"}>
+            <EditIcon data-icon="inline-start" />
+            New thread
+            <Kbd className="ms-1">⌘N</Kbd>
+          </Button>
+          <Button variant="outline" onClick={() => setPaletteOpen(true)}>
+            <SearchIcon data-icon="inline-start" />
+            Search
+          </Button>
+        </div>
+        {recent.length > 0 && (
+          <div className="flex flex-col gap-1">
+            <h3 className="text-ui-sm font-medium text-muted-foreground">Recent</h3>
+            <ul aria-label="Recent threads" className="-mx-2 flex flex-col">
+              {recent.map((t) => (
+                <li key={t.sessionId}>
+                  <button
+                    type="button"
+                    onClick={() => show(t.sessionId)}
+                    className="flex h-8 w-full items-center gap-2 rounded-md px-2 text-start text-ui transition-colors duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 active:bg-secondary"
+                  >
+                    <ProviderIcon provider={t.provider} />
+                    <span className="min-w-0 flex-1 truncate">{t.title}</span>
+                    {t.pr && <span className="shrink-0 text-ui-sm text-muted-foreground tabular-nums">#{t.pr.number}</span>}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   )
 
@@ -495,6 +533,7 @@ export function AgentWorkspace() {
 
   return (
     <TooltipProvider>
+      <h1 className="sr-only">{threadOf(active)?.title ?? "Agent workspace"}</h1>
       {mobile ? (
         /* Phone layout: header (threads, tabs, new, panel), one full-width chat. */
         <div className="flex h-dvh w-full flex-col overflow-hidden bg-shell text-foreground">

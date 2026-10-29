@@ -2,11 +2,12 @@
 
 import * as React from "react"
 
-import { FolderIcon, GitPullRequestIcon, ShieldIcon } from "@paneui/ui/icons"
+import { FolderIcon, GitBranchIcon, GitPullRequestIcon, ShieldIcon } from "@paneui/ui/icons"
 import { AgentComposer, AgentComposerBanner } from "@paneui/ui/blocks/agent-composer/agent-composer"
 import { Loader } from "@paneui/ui/components/loader"
 import { MessageScroller } from "@paneui/ui/components/message-scroller"
 import { EffortPicker, ModelPicker, ModePicker } from "@paneui/ui/components/model-picker"
+import { Skeleton } from "@paneui/ui/components/skeleton"
 import { TodoList } from "@paneui/ui/components/todo-list"
 
 import { configByCategory, flatOptions, type AcpClient, type ClientState, type SessionState, type TimelineItem } from "../acp/client"
@@ -16,15 +17,50 @@ import { Timeline } from "./turn-timeline"
 
 const isRisky = (id: string, name: string) => /full|bypass|yolo|danger/i.test(`${id} ${name}`)
 
+/**
+ * A thread with no turns yet. The prompt sits at the foot of the column, just above the composer
+ * it points to, with the workspace and branch the agent will work in.
+ */
 function EmptyState({ thread, cwd }: { thread?: ThreadSummary; cwd: string }) {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 py-16 text-center">
-      <ProviderIcon provider={thread?.provider} className="size-8" />
+    <div className="flex flex-1 flex-col justify-end gap-2 pt-16 pb-2">
+      <ProviderIcon provider={thread?.provider} className="mb-2 size-6" />
       <h2 className="text-xl font-semibold tracking-tight text-balance">What should we work on?</h2>
-      <p className="flex items-center gap-1.5 text-ui text-muted-foreground">
-        <FolderIcon className="size-3.5" />
-        {cwd || "No workspace"}
+      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-ui text-muted-foreground">
+        <span className="flex min-w-0 items-center gap-1.5">
+          <FolderIcon className="size-3.5 shrink-0" />
+          <span className="truncate">{cwd || "No workspace"}</span>
+        </span>
+        {thread?.branch && (
+          <span className="flex min-w-0 items-center gap-1.5">
+            <GitBranchIcon className="size-3.5 shrink-0" />
+            <span className="truncate">{thread.branch}</span>
+          </span>
+        )}
       </p>
+    </div>
+  )
+}
+
+/**
+ * A thread on its way in: the shape of one turn (a prompt on the right, an answer on the left)
+ * on the timeline's own column, so nothing jumps when the replay lands.
+ */
+function ThreadSkeleton({ label }: { label: string }) {
+  return (
+    <div role="status" aria-label={label} className="flex flex-col gap-6 py-2">
+      <Skeleton className="h-10 w-3/5 self-end" />
+      <div className="flex flex-col gap-2.5">
+        <Skeleton className="h-3 w-24" />
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-11/12" />
+        <Skeleton className="h-3 w-4/6" />
+      </div>
+      <Skeleton shape="card" className="h-28 w-full" />
+      <div className="flex flex-col gap-2.5">
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-3/5" />
+      </div>
     </div>
   )
 }
@@ -63,8 +99,8 @@ export function ChatPane({
 
   if (!session) {
     return (
-      <div className="flex h-full items-center justify-center">
-        <Loader size="md" label="Loading thread" className="text-muted-foreground" />
+      <div className="mx-auto h-full w-full max-w-3xl overflow-hidden px-5 pt-5">
+        <ThreadSkeleton label="Loading thread" />
       </div>
     )
   }
@@ -108,14 +144,12 @@ export function ChatPane({
         key={session.id}
         className="min-h-0 flex-1"
         viewportClassName="scrollbar-thin"
-        contentClassName="mx-auto flex w-full max-w-3xl flex-col px-5 pt-5 pb-8"
+        contentClassName="mx-auto flex min-h-full w-full max-w-3xl flex-col px-5 pt-5 pb-8"
         jumpButton="icon"
         jumpLabel="Scroll to bottom"
       >
         {session.status === "loading" ? (
-          <div className="flex justify-center py-16">
-            <Loader size="md" label="Replaying thread" className="text-muted-foreground" />
-          </div>
+          <ThreadSkeleton label="Replaying thread" />
         ) : session.timeline.length === 0 ? (
           <EmptyState thread={thread} cwd={session.cwd} />
         ) : (
