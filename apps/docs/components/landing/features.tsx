@@ -21,6 +21,7 @@ import { Progress, ProgressLabel, ProgressValue } from "@paneui/ui/components/pr
 import { SegmentedControl, SegmentedControlItem } from "@paneui/ui/components/segmented-control"
 import { SwatchPicker } from "@paneui/ui/components/swatch-picker"
 import { Switch } from "@paneui/ui/components/switch"
+import { cn } from "@paneui/ui/lib/utils"
 import { PRESET_LABELS, PRESET_THEMES, type PresetAccent } from "@/components/docs/accent-color"
 import { setAccent, useAccentState } from "@/components/docs/accent-store"
 import { radiusValue, setRadius, useRadiusState, type RadiusChoice } from "@/components/docs/radius-store"
@@ -36,7 +37,7 @@ const RADIUS_SHORT: Record<(typeof RADII)[number], string> = { none: "0", sm: "S
 const isRadius = (v: unknown): v is RadiusChoice => v === "custom" || (RADII as readonly string[]).includes(v as string)
 const px = (rem: number) => Math.round(rem * 16)
 
-export function AccentControls() {
+export function AccentControls({ className }: { className?: string }) {
   const t = useT()
   const { accent } = useAccentState()
   const radius = useRadiusState()
@@ -46,7 +47,7 @@ export function AccentControls() {
     color: a === "neutral" ? "var(--foreground)" : PRESET_THEMES[a].light.primary,
   }))
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3">
+    <div className={cn("flex flex-wrap items-center gap-3", className)}>
       <div className="flex h-9 items-center rounded-full border border-border bg-card px-3">
         <SwatchPicker
           aria-label={t({ en: "Accent", zh: "主题色" })}
