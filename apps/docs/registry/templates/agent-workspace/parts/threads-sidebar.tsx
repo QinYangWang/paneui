@@ -5,7 +5,6 @@ import * as React from "react"
 import {
   CheckIcon,
   ChevronDownIcon,
-  ChevronRightIcon,
   EditIcon,
   SearchIcon,
   SettingsIcon,
@@ -14,9 +13,10 @@ import {
 import { Button } from "@paneui/ui/components/button"
 import { ScrollArea } from "@paneui/ui/components/scroll-area"
 import { Input } from "@paneui/ui/components/input"
+import { Kbd } from "@paneui/ui/components/kbd"
 import { Menu, MenuContent, MenuGroup, MenuItem, MenuLabel, MenuSeparator, MenuTrigger } from "@paneui/ui/components/menu"
 import { ThreadList, ThreadListGroup, ThreadListItem, type PullRequestStatus } from "@paneui/ui/components/thread-list-item"
-import { Tooltip, TooltipContent, TooltipKbd, TooltipTrigger } from "@paneui/ui/components/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/tooltip"
 
 import type { AgentConfig } from "./agents"
 import { ProviderIcon } from "./provider-icon"
@@ -131,18 +131,6 @@ export function ThreadsSidebar({
           />
           <TooltipContent side="bottom">Search threads</TooltipContent>
         </Tooltip>
-        <Tooltip>
-          <TooltipTrigger
-            render={
-              <Button variant="secondary" size="icon-sm" aria-label="New thread" onClick={onNewThread}>
-                <EditIcon />
-              </Button>
-            }
-          />
-          <TooltipContent side="bottom">
-            New thread <TooltipKbd>⌘N</TooltipKbd>
-          </TooltipContent>
-        </Tooltip>
       </div>
 
       <div className="flex shrink-0 flex-col gap-0.5 px-2">
@@ -164,15 +152,16 @@ export function ThreadsSidebar({
             />
           </div>
         )}
-        <Button variant="ghost" className="w-full justify-start" onClick={onNewThread}>
+        <Button variant="ghost" className="w-full justify-start" onClick={onNewThread} aria-keyshortcuts="Meta+N">
           <EditIcon data-icon="inline-start" className="text-muted-foreground" />
           <span className="font-normal">New thread</span>
+          <Kbd className="ms-auto">⌘N</Kbd>
         </Button>
         <div className="flex items-center justify-between">
           <Menu>
             <MenuTrigger render={<Button variant="ghost" size="sm" className="text-muted-foreground" />}>
               <span className="font-normal">{FILTERS.find((f) => f.id === filter)?.label}</span>
-              <ChevronRightIcon data-icon="inline-end" className="size-3 rtl:-scale-x-100" />
+              <ChevronDownIcon data-icon="inline-end" className="size-3" />
             </MenuTrigger>
             <MenuContent className="w-48">
               {FILTERS.map((f) => (
@@ -204,7 +193,21 @@ export function ThreadsSidebar({
 
       <ScrollArea className="min-h-0 flex-1" viewportClassName="px-2 pt-1 pb-3">
         {groups.length === 0 ? (
-          <p className="px-2 py-6 text-center text-ui text-pretty text-muted-foreground">No threads match.</p>
+          <div className="flex flex-col items-center gap-2 px-2 py-6 text-center">
+            <p className="text-ui text-pretty text-muted-foreground">{threads.length ? "No threads match." : "No threads yet."}</p>
+            {threads.length > 0 && (query || filter !== "all") && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setQuery("")
+                  setFilter("all")
+                }}
+              >
+                Clear search and filter
+              </Button>
+            )}
+          </div>
         ) : (
           <ThreadList>
             {groups.map(({ g, items }) => (

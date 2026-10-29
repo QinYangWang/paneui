@@ -18,7 +18,7 @@ import { FileTree, type FileTreeNode } from "@paneui/ui/components/file-tree"
 import { Input } from "@paneui/ui/components/input"
 import { ScrollArea } from "@paneui/ui/components/scroll-area"
 
-import { IconAction, SidebarHeader } from "./sidebar-header"
+import { IconAction, SidebarHeader, SectionLabel } from "./sidebar-header"
 import { basename, dirname, normalize, rel, ROOT, type Workspace } from "./workspace"
 
 type Status = "M" | "A" | "D"
@@ -219,7 +219,7 @@ export function Explorer({
         </IconAction>
       </SidebarHeader>
 
-      <div className="flex h-6 shrink-0 items-center px-3 text-ui-xs font-semibold tracking-wide text-muted-foreground uppercase">{ws.name}</div>
+      <SectionLabel>{ws.name}</SectionLabel>
 
       {edit && (
         <form
