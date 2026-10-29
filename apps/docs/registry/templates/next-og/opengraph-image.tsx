@@ -9,8 +9,8 @@ import { OgImage, ogImageContentType, ogImageSize } from "@paneui/ui/components/
  */
 
 const SITE = {
-  name: "Acme",
-  url: "acme.dev",
+  name: "Pane Studio",
+  url: "pane.studio",
   title: "Build the product, not the plumbing",
   description: "Components, templates and a theme for apps that ship this week.",
 }
