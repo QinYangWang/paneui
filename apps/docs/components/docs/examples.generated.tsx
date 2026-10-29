@@ -299,6 +299,7 @@ export const examples: Record<string, React.ComponentType> = {
   "message/animate-in": dynamic(() => import("@/registry/examples/message/animate-in"), { ssr: false }),
   "message/avatars": dynamic(() => import("@/registry/examples/message/avatars"), { ssr: false }),
   "message/compact": dynamic(() => import("@/registry/examples/message/compact"), { ssr: false }),
+  "message/flat": dynamic(() => import("@/registry/examples/message/flat"), { ssr: false }),
   "message/hover-actions": dynamic(() => import("@/registry/examples/message/hover-actions"), { ssr: false }),
   "message/system": dynamic(() => import("@/registry/examples/message/system"), { ssr: false }),
   "model-picker/composer-picker": dynamic(() => import("@/registry/examples/model-picker/composer-picker"), { ssr: false }),
