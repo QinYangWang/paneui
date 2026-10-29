@@ -31,11 +31,11 @@ export function LandingHeader() {
           PaneUI
         </Link>
         <nav aria-label={t({ en: "Main", zh: "主导航" })} className="ms-3 hidden items-center md:flex">
-          <Link href="/docs/components" className={navLink}>
-            {t({ en: "Components", zh: "组件" })}
-          </Link>
           <Link href="/docs" className={navLink}>
             {t({ en: "Docs", zh: "文档" })}
+          </Link>
+          <Link href="/docs/components" className={navLink}>
+            {t({ en: "Components", zh: "组件" })}
           </Link>
           <Link href="/docs/templates" className={navLink}>
             {t({ en: "Templates", zh: "模板" })}
