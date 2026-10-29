@@ -34,6 +34,7 @@ export default function CliPage({ site, data }: { site: SiteProps; data: CliData
     { name: "agent-workspace", what: { en: "The agent workspace with its ACP bridge server", zh: "带 ACP 桥接服务器的 agent 工作区" }, routes: ["app/page.tsx", "server/acp-bridge.mjs"] },
     { name: "docs", what: { en: "A docs site", zh: "一个文档站点" }, routes: ["app/docs/page.tsx"] },
     { name: "blog", what: { en: "A blog with a post page", zh: "带文章页的博客" }, routes: ["app/blog"] },
+    { name: "team-chat", what: { en: "Team chat with channels and threads", zh: "带频道和话题串的团队聊天" }, routes: ["app/page.tsx"] },
   ]
   const migrations: { version: string; changed: React.ReactNode; todo: React.ReactNode }[] = [
     {

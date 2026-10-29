@@ -10,7 +10,7 @@ import { LazyDemo } from "@/components/docs/lazy-demo"
 import { SiteRoot, type SiteProps } from "@/components/site/site-root"
 import { DocHeader } from "@/components/docs/doc-layout"
 
-const wide = new Set(["file-diff", "heat-calendar", "saas", "vscode", "agent-workspace", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
+const wide = new Set(["file-diff", "heat-calendar", "saas", "vscode", "team-chat", "agent-workspace", "docs", "blog", "chat", "prompt-bar", "recommendation-card", "task-row", "chat-app", "table", "table-editable", "table-async", "animated-sidebar", "candlestick-chart"])
 
 const CATEGORY_ZH: Record<string, string> = {
   Foundations: "基础",
