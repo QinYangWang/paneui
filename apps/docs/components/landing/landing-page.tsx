@@ -12,23 +12,23 @@ import { LandingFooter, LandingHeader } from "./landing-chrome"
 import { Accents, Faq, Figures } from "./sections"
 import { Wall } from "./wall"
 
-import "./landing.css"
 
-/** One band of the page, split from the next by a hairline. */
+/** One band of the page. Bands are told apart by space and by their composition, not by rules. */
 function Band({ children }: { children: React.ReactNode }) {
-  return <div className="border-b border-border py-20 sm:py-24">{children}</div>
+  return <div className="py-16 sm:py-20 lg:py-24">{children}</div>
 }
 
 /**
- * The homepage, in bands: a centred hero with the install command, a wall of live components,
- * numbered figures, the accents, and questions. It follows the site theme.
+ * The homepage on one frame: the hero (headline left, command and actions right), the wall of
+ * live components on a full-width tone band as its picture, a board of capabilities, the accents
+ * as a list beside a plate, and questions beside their heading. It follows the site theme.
  */
 export function LandingPage({ codeHtml }: { count: number; codeHtml: string }) {
   const locale = useSiteLocale()
   const t = useT()
   return (
     <LocaleProvider locale={locale}>
-      <div className="lp min-h-screen overflow-x-clip bg-background text-foreground">
+      <div className="min-h-screen overflow-x-clip bg-background text-foreground">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-card focus:p-3 focus-visible:ring-2 focus-visible:ring-ring/50"
@@ -38,15 +38,16 @@ export function LandingPage({ codeHtml }: { count: number; codeHtml: string }) {
         <LandingHeader />
         <main id="main">
           <Hero />
-          <Band>
-            <Wall />
-            <div className="mt-10 flex justify-center">
-              <Button variant="outline" nativeButton={false} render={<Link href="/docs/components" />}>
-                {t({ en: "Browse every component", zh: "浏览全部组件" })}
-                <ArrowRightIcon data-icon="inline-end" className="rtl:-scale-x-100" />
-              </Button>
-            </div>
-          </Band>
+          <Wall
+            footer={
+              <div>
+                <Button variant="outline" nativeButton={false} render={<Link href="/docs/components" />}>
+                  {t({ en: "Browse every component", zh: "浏览全部组件" })}
+                  <ArrowRightIcon data-icon="inline-end" className="rtl:-scale-x-100" />
+                </Button>
+              </div>
+            }
+          />
           <Band>
             <Figures codeHtml={codeHtml} />
           </Band>
