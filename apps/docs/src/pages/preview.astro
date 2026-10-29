@@ -1,0 +1,11 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import PreviewPage from "@/components/pages/preview-page"
+import { siteNavGroups } from "@/lib/build"
+
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Preview" noindex>
+  <PreviewPage client:load site={site} />
+</Base>

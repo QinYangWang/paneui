@@ -96,7 +96,7 @@ console.log(`registry-postbuild: ${changed} items rewritten (dependencies → ${
   for (const cat of cats) {
     lines.push(`## ${cat}`, "")
     for (const item of byCat.get(cat).sort((a, b) => a.name.localeCompare(b.name))) {
-      // Every visible item has a docs page (app/docs/[name]) and so a Markdown twin.
+      // Every visible item has a docs page (src/pages/docs/[name].astro) and so a Markdown twin.
       lines.push(`- [${item.title ?? item.name}](${base}/docs/${item.name}.md): ${item.description ?? ""} JSON: ${base}/r/${item.name}.json`)
     }
     lines.push("")

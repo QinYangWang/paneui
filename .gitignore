@@ -52,3 +52,6 @@ packages/*/dist/
 
 # duplicate copy the skills CLI makes (canonical: .agents/skills, linked from .claude/skills)
 /agent/
+
+# astro
+.astro/

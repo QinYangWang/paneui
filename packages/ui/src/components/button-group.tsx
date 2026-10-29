@@ -12,10 +12,12 @@ const buttonGroupVariants = cva(
   {
     variants: {
       orientation: {
+        // Siblings are matched by data-slot, not :first/:last-child: an open menu or popover inserts
+        // focus-guard spans beside its trigger, which would otherwise square the trigger's outer corners.
         horizontal:
-          "[&>*:not(:first-child)]:rounded-s-none [&>*:not(:last-child)]:rounded-e-none [&>[data-variant=outline]:not(:first-child)]:-ms-px [&>[data-slot=input]:not(:first-child)]:-ms-px",
+          "[&>[data-slot]~[data-slot]]:rounded-s-none [&>[data-slot]:has(~[data-slot])]:rounded-e-none [&>[data-variant=outline]~[data-slot]]:-ms-px [&>[data-slot]~[data-variant=outline]]:-ms-px [&>[data-slot]~[data-slot=input]]:-ms-px",
         vertical:
-          "flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none [&>[data-variant=outline]:not(:first-child)]:-mt-px",
+          "flex-col [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]:has(~[data-slot])]:rounded-b-none [&>[data-slot]~[data-variant=outline]]:-mt-px",
       },
     },
     defaultVariants: { orientation: "horizontal" },

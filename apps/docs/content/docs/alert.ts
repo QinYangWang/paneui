@@ -56,12 +56,12 @@ export default {
       description: { en: "Inline message surface that animates in and out.", zh: "内联消息表面，动画进入和退出。" },
       extends: "motion.div",
       props: [
-        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: { en: "`sm` uses 10px padding, a 14px radius and the 24px icon chip; `default` 14px, 18px and 32px.", zh: "`sm` 使用 10px 内边距、14px 半径和 24px 图标 chip；`default` 为 14px、18px 和 32px。" } },
+        { name: "size", type: `"sm" | "default"`, default: `"default"`, description: { en: "`sm` tightens the padding for cards, dialogs and forms.", zh: "`sm` 收紧内边距，用于卡片、对话框和表单。" } },
         {
           name: "variant",
           type: `"default" | "info" | "success" | "warning" | "destructive"`,
           default: `"default"`,
-          description: { en: "Background tint, icon chip tone and default icon.", zh: "背景着色、图标 chip 色调和默认图标。" },
+          description: { en: "Icon tint and default icon; destructive also tints the text.", zh: "图标颜色与默认图标；destructive 同时为文字着色。" },
         },
         { name: "open", type: "boolean", description: { en: "Controlled visibility. Hiding animates the alert out.", zh: "受控可见性。隐藏时警报动画退出。" } },
         { name: "defaultOpen", type: "boolean", default: "true", description: { en: "Visible on first render.", zh: "首次渲染时可见。" } },
@@ -84,7 +84,7 @@ export default {
     },
     {
       name: "AlertIcon",
-      description: { en: "An `IconChip` in the variant's tone. Renders the variant's default icon unless children are given.", zh: "变体色调中的 `IconChip`。除非给定 children，否则渲染变体的默认图标。" },
+      description: { en: "A 16px icon in the variant's tone. Renders the variant's default icon unless children are given.", zh: "变体颜色的 16px 图标。除非给定 children，否则渲染变体的默认图标。" },
       extends: "span",
       props: [{ name: "children", type: "ReactNode", description: { en: "Icon to show instead of the default.", zh: "要替代默认图标的图标。" } }],
     },

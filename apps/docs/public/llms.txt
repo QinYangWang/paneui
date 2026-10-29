@@ -118,7 +118,6 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [App Shell](https://paneui.dev/docs/app-shell.md): App frame with a collapsible sidebar and an inset content panel. JSON: https://paneui.dev/r/app-shell.json
 - [Breadcrumb](https://paneui.dev/docs/breadcrumb.md): Shows where the current page sits in the site hierarchy. JSON: https://paneui.dev/r/breadcrumb.json
 - [File Tree](https://paneui.dev/docs/file-tree.md): Browses files and folders in a keyboard-navigable tree. JSON: https://paneui.dev/r/file-tree.json
-- [Icon Rail](https://paneui.dev/docs/icon-rail.md): Narrow bar of icon buttons for switching between app sections. JSON: https://paneui.dev/r/icon-rail.json
 - [Menubar](https://paneui.dev/docs/menubar.md): Row of menus for a desktop app window. JSON: https://paneui.dev/r/menubar.json
 - [Navigation Menu](https://paneui.dev/docs/navigation-menu.md): Site navigation with panels of links. JSON: https://paneui.dev/r/navigation-menu.json
 - [Outline](https://paneui.dev/docs/outline.md): Follows your reading position in the page outline. JSON: https://paneui.dev/r/outline.json
@@ -237,7 +236,7 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 ## Templates
 
 - [Agent Workspace](https://paneui.dev/docs/agent-workspace.md): Chat with coding agents and review their work. JSON: https://paneui.dev/r/agent-workspace.json
-- [Personal Blog](https://paneui.dev/docs/blog.md): Personal blog with a post list and an article page. JSON: https://paneui.dev/r/blog.json
+- [Personal Blog](https://paneui.dev/docs/blog.md): Personal blog with posts grouped by year. JSON: https://paneui.dev/r/blog.json
 - [Docs Site](https://paneui.dev/docs/docs.md): Documentation site layout with search, navigation and a page outline. JSON: https://paneui.dev/r/docs.json
 - [SaaS](https://paneui.dev/docs/saas.md): Pages for a product website and dashboard. JSON: https://paneui.dev/r/saas.json
 - [Code Editor](https://paneui.dev/docs/vscode.md): Edit projects and run commands in the browser. JSON: https://paneui.dev/r/vscode.json

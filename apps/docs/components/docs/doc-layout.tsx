@@ -9,7 +9,7 @@ import { cn } from "@paneui/ui/lib/utils"
 import type { DocsPageRef } from "@/lib/docs"
 import { Card } from "@paneui/ui/components/card"
 import { Outline, OutlinePopover } from "@paneui/ui/components/outline"
-import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderEyebrow, PageHeaderTitle } from "@paneui/ui/components/page-header"
+import { PageHeader, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@paneui/ui/components/page-header"
 import { Separator } from "@paneui/ui/components/separator"
 
 import { toOutline, type TocEntry } from "./doc-toc"
@@ -21,8 +21,8 @@ export function markdownPath(href: string) {
 }
 
 /**
- * Page header: the section as a small eyebrow (linking to it), then the title with the page
- * actions beside it, then the lede and anything page-specific (badges, buttons).
+ * Page header: the title, the lede, then a row of page actions and anything page-specific
+ * (badges, buttons), closed by a hairline. `eyebrow` is kept for callers but not shown.
  */
 export function DocHeader({
   href,
@@ -39,25 +39,21 @@ export function DocHeader({
   lede?: React.ReactNode | Localized
   children?: React.ReactNode
 }) {
+  void eyebrow
+  void eyebrowHref
   return (
-    <PageHeader size="lg">
-      <PageHeaderEyebrow>
-        <Link
-          href={eyebrowHref}
-          className="rounded-sm font-medium transition-colors duration-150 outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
-        >
-          <LocalizedText text={eyebrow} />
-        </Link>
-      </PageHeaderEyebrow>
-      <PageHeaderContent>
-        <PageHeaderTitle><LocalizedText text={title} /></PageHeaderTitle>
-      </PageHeaderContent>
-      <PageHeaderActions>
+    <div data-slot="doc-header" className="flex flex-col gap-5 border-b border-border pb-6">
+      <PageHeader size="lg">
+        <PageHeaderContent>
+          <PageHeaderTitle><LocalizedText text={title} /></PageHeaderTitle>
+        </PageHeaderContent>
+        {lede && <PageHeaderDescription>{typeof lede === "object" && "en" in lede ? <LocalizedText text={lede} /> : typeof lede === "string" ? <LocalizedText text={lede} /> : lede}</PageHeaderDescription>}
+      </PageHeader>
+      <div className="flex flex-wrap items-center gap-2">
         <PageActions markdownPath={markdownPath(href)} pagePath={href === "/docs" ? "/docs/" : `${href}/`} title={title} />
-      </PageHeaderActions>
-      {lede && <PageHeaderDescription>{typeof lede === "object" && "en" in lede ? <LocalizedText text={lede} /> : typeof lede === "string" ? <LocalizedText text={lede} /> : lede}</PageHeaderDescription>}
-      {children && <div className="flex basis-full flex-col gap-3">{children}</div>}
-    </PageHeader>
+      </div>
+      {children && <div className="flex flex-col gap-3">{children}</div>}
+    </div>
   )
 }
 
@@ -82,7 +78,8 @@ function PageCard({ page, dir }: { page: DocsPageRef; dir: "prev" | "next" }) {
 }
 
 /** Previous and next page in sidebar order, then when the page's sources last changed. */
-export function DocFooter({ prev, next, updated }: { prev?: DocsPageRef; next?: DocsPageRef; updated?: Date }) {
+/** `updated` is an ISO date string (props cross the island boundary as JSON). */
+export function DocFooter({ prev, next, updated }: { prev?: DocsPageRef; next?: DocsPageRef; updated?: string }) {
   return (
     <footer data-md-skip className="flex flex-col gap-4">
       <Separator className="mb-2" />
@@ -92,7 +89,7 @@ export function DocFooter({ prev, next, updated }: { prev?: DocsPageRef; next?: 
       </nav>
       {updated && (
         <p className="text-ui-sm text-muted-foreground">
-          <LocalizedText text="Last updated" /> <LocalizedDate iso={updated.toISOString()} />
+          <LocalizedText text="Last updated" /> <LocalizedDate iso={updated} />
         </p>
       )}
     </footer>
@@ -110,8 +107,9 @@ export function DocLayout({ toc, wide, children }: { toc?: TocEntry[]; wide?: bo
     <div className="mx-auto flex max-w-6xl gap-12">
       <article className={cn("mx-auto flex min-w-0 flex-1 flex-col gap-10", wide ? "max-w-6xl" : "max-w-3xl")}>
         {hasToc && (
-          // Sticky under the header; on wide pages the button keeps a reading width.
-          <div data-md-skip className={cn("sticky top-12 z-30 -my-4 bg-background py-2", !wide && "xl:hidden")}>
+          // Sticky under the header. The band bleeds into the page gutters (px-5/8/10 in site-shell) so
+          // nothing scrolls past at its sides; on wide pages the button keeps a reading width.
+          <div data-md-skip className={cn("sticky top-12 z-30 -mx-5 -my-4 bg-background px-5 py-2 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10", !wide && "xl:hidden")}>
             <OutlinePopover items={toOutline(toc)} className={cn(wide && "max-w-sm")} />
           </div>
         )}

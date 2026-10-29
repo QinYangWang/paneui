@@ -1,17 +1,15 @@
 // Renders every *Icon export to a contact sheet (48px, 14px and 18px of each icon on dark).
-// Usage: node sheet.cjs [out.png] [filter] [--outline | --compare] [--light] [--from=N --count=M]
-//   default    the puffy set (packages/ui/src/icons/puffy/icons.tsx)
-//   --rounded  the rounded default set (packages/ui/src/icons/index.tsx)
-//   --outline  the generated outline set (packages/ui/src/icons/outline/icons.tsx)
-//   --compare  both, side by side per icon (puffy left, outline right)
+// Usage: node sheet.cjs [out.png] [filter] [--emoji | --compare] [--light] [--from=N --count=M]
+//   default    the rounded set (packages/ui/src/icons/index.tsx)
+//   --emoji    the emoji set (packages/ui/src/icons/emoji/icons.tsx)
+//   --compare  both, side by side per icon (rounded left, emoji right)
 //   filter     comma list of name substrings
 import * as React from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import { writeFileSync } from "node:fs"
 
-import * as P from "../../packages/ui/src/icons/puffy/icons"
 import * as R from "../../packages/ui/src/icons/index"
-import * as O from "../../packages/ui/src/icons/outline/icons"
+import * as E from "../../packages/ui/src/icons/emoji/icons"
 
 type C = React.ComponentType<{ size?: number }>
 const args = process.argv.slice(2)
@@ -19,12 +17,12 @@ const flags = args.filter((a) => a.startsWith("--"))
 const [outArg, filterArg] = args.filter((a) => !a.startsWith("--"))
 const out = outArg ?? "/workspace/work/iconrender/sheet.png"
 const filter = filterArg?.split(",")
-const mode = flags.includes("--compare") ? "compare" : flags.includes("--outline") ? "outline" : flags.includes("--rounded") ? "rounded" : "puffy"
+const mode = flags.includes("--compare") ? "compare" : flags.includes("--emoji") ? "emoji" : "rounded"
 const light = flags.includes("--light")
-const sets: Record<string, C>[] = (mode === "compare" ? [P, O] : mode === "outline" ? [O] : mode === "rounded" ? [R] : [P]) as unknown as Record<string, C>[]
+const sets: Record<string, C>[] = (mode === "compare" ? [R, E] : mode === "emoji" ? [E] : [R]) as unknown as Record<string, C>[]
 const num = (f: string) => Number(flags.find((a) => a.startsWith(`--${f}=`))?.split("=")[1] ?? NaN)
 const from = num("from") || 0, count = num("count") || Infinity
-const names = Object.keys(P)
+const names = Object.keys(R)
   .filter((k) => k.endsWith("Icon") && (!filter || filter.some((f) => k.toLowerCase().includes(f.toLowerCase()))))
   .slice(from, from + count)
 const sub = 72

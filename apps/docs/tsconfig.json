@@ -2,28 +2,35 @@
   "extends": "../../tooling/tsconfig/base.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "paths": {
       "@/*": [
         "./*"
       ],
       "@paneui/ui/*": [
         "../../packages/ui/src/*"
+      ],
+      "next/link": [
+        "./shims/next-link.tsx"
+      ],
+      "next/navigation": [
+        "./shims/next-navigation.tsx"
+      ],
+      "next/dynamic": [
+        "./shims/next-dynamic.tsx"
       ]
-    }
+    },
+    "types": [
+      "astro/client"
+    ]
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".astro/types.d.ts"
   ],
   "exclude": [
     "node_modules",
-    "out"
+    "out",
+    ".astro"
   ]
 }

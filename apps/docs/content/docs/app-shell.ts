@@ -57,8 +57,8 @@ import { SidebarContent, SidebarFooter, SidebarHeader, SidebarItem, SidebarMenu 
       title: { en: "Top Nav", zh: "顶部导航" },
     },
     {
-      id: "icon-rail",
-      title: { en: "Icon Rail", zh: "图标栏" },
+      id: "three-column",
+      title: { en: "Three Columns", zh: "三栏" },
     },
     {
       id: "header-actions",

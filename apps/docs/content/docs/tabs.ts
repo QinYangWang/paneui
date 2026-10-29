@@ -46,6 +46,7 @@ export default {
     },
     { id: "sizes", title: { en: "Sizes", zh: "尺寸" }, description: { en: "Match the toolbar the tabs sit in.", zh: "与所在工具栏的样式保持一致。" } },
     { id: "underline", title: { en: "Underline", zh: "下划线" }, description: { en: "Use for page-level sections, where a filled track would compete with the content.", zh: "适用于页面级分区。" } },
+    { id: "ghost", title: { en: "Ghost", zh: "无底" }, description: { en: "Use inside a card header, where the card already draws the edge.", zh: "用于卡片头部，边界由卡片提供。" } },
     {
       id: "rtl",
       title: { en: "RTL", zh: "从右到左" },
@@ -90,7 +91,7 @@ export default {
       extendsHref: "https://base-ui.com/react/components/tabs#list",
       props: [
         { name: "size", type: `"xs" | "sm" | "default" | "lg"`, default: `"default"`, description: { en: "Height 24 / 28 / 32 / 36px for the list, the Button heights. Applies to every tab.", zh: "列表高度 24 / 28 / 32 / 36px，对应 Button 高度。应用于每个标签。" } },
-        { name: "variant", type: `"default" | "underline"`, default: `"default"`, description: { en: "`default` is a raised indicator on a well; `underline` is a 2px bar on a hairline.", zh: "`default` 是凹槽上的凸起指示器；`underline` 是细线上的 2px 条。" } },
+        { name: "variant", type: `"default" | "underline" | "ghost"`, default: `"default"`, description: { en: "`default` is a raised indicator on a well; `underline` is a 2px bar on a hairline; `ghost` is a soft fill with no track.", zh: "`default` 是凹槽上的凸起指示器；`underline` 是细线上的 2px 条；`ghost` 是无轨道的柔和填充。" } },
         {
           name: "activateOnFocus",
           type: "boolean",

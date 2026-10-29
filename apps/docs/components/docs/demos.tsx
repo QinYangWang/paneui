@@ -147,7 +147,6 @@ import UserMenuDemo from "@/registry/examples/user-menu-demo"
 import DataTableDemo from "@/registry/examples/data-table-demo"
 import ResizableDemo from "@/registry/examples/resizable-demo"
 import TabStripDemo from "@/registry/examples/tab-strip-demo"
-import IconRailDemo from "@/registry/examples/icon-rail-demo"
 import TerminalViewDemo from "@/registry/examples/terminal-view-demo"
 import ThreadListItemDemo from "@/registry/examples/thread-list-item-demo"
 import TabBarDemo from "@/registry/examples/tab-bar-demo"
@@ -212,7 +211,6 @@ export const demos: Record<string, React.ComponentType> = {
   "data-table": DataTableDemo,
   "resizable": ResizableDemo,
   "tab-strip": TabStripDemo,
-  "icon-rail": IconRailDemo,
   "terminal-view": TerminalViewDemo,
   "thread-list-item": ThreadListItemDemo,
   "tab-bar": TabBarDemo,

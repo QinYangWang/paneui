@@ -1,0 +1,11 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import { SaasAnalyticsRoute } from "@/components/pages/templates/saas-dashboard-route"
+import { siteNavGroups } from "@/lib/build"
+
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Analytics">
+  <SaasAnalyticsRoute client:load site={site} />
+</Base>

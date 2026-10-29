@@ -11,6 +11,11 @@ export default {
   },
   examples: [
     {
+      id: "posts",
+      title: { en: "Social Posts", zh: "社交帖子" },
+      description: { en: "Use for testimonials.", zh: "适合展示用户评价。" },
+    },
+    {
       id: "vertical",
       title: { en: "Vertical", zh: "纵向" },
     },

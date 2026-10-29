@@ -1,0 +1,17 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import TemplatesOverviewPage, { type TemplateCard } from "@/components/pages/templates-overview-page"
+import { siteNavGroups } from "@/lib/build"
+import { getGroups } from "@/lib/docs"
+
+const templates: TemplateCard[] = (getGroups().find((g) => g.category === "Templates")?.items ?? []).map((i) => ({
+  name: i.name,
+  title: i.title,
+  description: i.summary,
+}))
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title="Templates">
+  <TemplatesOverviewPage client:load site={site} templates={templates} />
+</Base>

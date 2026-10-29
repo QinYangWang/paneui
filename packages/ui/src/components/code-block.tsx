@@ -256,7 +256,13 @@ function CodeBlock({
   return (
     <div
       data-slot="code-block"
-      className={cn("group/code relative overflow-hidden rounded-xl bg-code text-ui text-foreground shadow-raised", className)}
+      className={cn(
+        "group/code relative overflow-hidden rounded-xl bg-code text-ui text-foreground shadow-raised",
+        // Touch screens always show the floating copy button, so the code scrolls in the space
+        // left of it instead of sliding underneath.
+        !header && copyButton && "pointer-coarse:[&>[data-slot=scroll-area]]:me-11",
+        className
+      )}
       {...props}
     >
       {header && (
@@ -371,19 +377,19 @@ function CodeGroup({
     <div
       ref={rootRef}
       data-slot="code-group"
-      className={cn("group/code relative overflow-hidden rounded-xl bg-code text-ui text-foreground shadow-raised", className)}
+      className={cn("group/code relative frame-xl frame-inset-1.5 overflow-hidden bg-code text-ui text-foreground shadow-raised", className)}
       {...props}
     >
       <Tabs value={active.value} onValueChange={(v) => select(String(v))} className="gap-0">
         <div
           data-slot="code-group-header"
-          className="flex h-10 items-stretch gap-2 pr-1.5 pl-2 shadow-[inset_0_-1px_0_var(--border)]"
+          className="flex h-10 items-center gap-2 border-b border-border/60 px-1.5"
         >
-          <TabsList variant="underline" size="sm" className="min-w-0 items-stretch overflow-x-auto shadow-none [scrollbar-width:none]">
+          <TabsList variant="ghost" size="sm" className="min-w-0 shrink overflow-x-auto [scrollbar-width:none]">
             {tabs.map((t) => {
               const shownIcon = t.block.props.icon === false ? null : (t.block.props.icon ?? titleIcon(t.block.props.title, t.block.props.language))
               return (
-                <TabsTab key={t.value} value={t.value} className="h-full font-mono font-normal">
+                <TabsTab key={t.value} value={t.value} className="font-mono font-normal">
                   {shownIcon}
                   {t.label}
                 </TabsTab>
@@ -394,6 +400,7 @@ function CodeGroup({
           {copyable && (
             <span className="flex items-center">
               <CodeCopyButton
+                className="rounded-inner"
                 value={() => codeText(rootRef.current?.querySelector('[data-slot="tabs-panel"]:not([hidden]) [data-slot="code-block-content"]'))}
               />
             </span>

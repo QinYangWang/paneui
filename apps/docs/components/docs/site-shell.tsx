@@ -13,33 +13,21 @@ import { CommandPalette, type CommandPaletteItem } from "@paneui/ui/blocks/comma
 import { Button } from "@paneui/ui/components/button"
 import { Drawer, DrawerContent, DrawerTitle } from "@paneui/ui/components/drawer"
 import { Kbd } from "@paneui/ui/components/kbd"
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@paneui/ui/components/navigation-menu"
+import { ThemeSwitch } from "@paneui/ui/components/theme-toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/tooltip"
 
 
 import { categoryIcons, ComponentsIcon, guideIcons } from "./category-icons"
-import { DocsNav, normalizePath, type NavGroup } from "./docs-nav"
-import { COMPONENTS_HREF, GUIDE_PAGES } from "./docs-pages"
+import { DocsNav, normalizePath, sectionOf, type DocsSection, type NavGroup } from "./docs-nav"
+import { COMPONENTS_HREF, TEMPLATES_HREF, THEMES_HREF, GUIDE_PAGES } from "./docs-pages"
 import { LanguageToggle } from "./language-toggle"
-import { ThemeControls } from "./theme-controls"
+import { THEME_KEY } from "./theme-script"
 import { ThemeSync } from "./theme-sync"
 
 const GITHUB_URL = "https://github.com/taimatsuorg/paneui"
 
-const isTemplate = (pathname: string, groups: NavGroup[]) =>
-  groups.some((g) => g.category === "Templates" && g.items.some((i) => pathname === `/docs/${i.name}`))
-
-/** Header sections, mirroring the sidebar sections: Docs, Components, Templates. */
-const headerLinks: { label: string; href: string; externalApp?: boolean; isActive: (pathname: string, groups: NavGroup[]) => boolean }[] = [
-  { label: "Docs", href: "/docs", isActive: (p) => GUIDE_PAGES.some((g) => g.href === p) },
-  {
-    label: "Components",
-    href: COMPONENTS_HREF,
-    isActive: (p, groups) => p === COMPONENTS_HREF || (p.startsWith("/docs/") && !GUIDE_PAGES.some((g) => g.href === p) && !isTemplate(p, groups)),
-  },
-  { label: "Native", href: "/native/", externalApp: true, isActive: () => false },
-  { label: "Templates", href: "/docs/components#templates", isActive: isTemplate },
-]
+const headerLink =
+  "rounded-md px-2 py-1 text-ui text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 aria-[current=page]:text-foreground"
 
 function useIsMac() {
   const [mac, setMac] = React.useState(true)
@@ -98,6 +86,14 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
         keywords: ["components", "all", "gallery", "previews", "home"],
         onSelect: go(COMPONENTS_HREF),
       },
+      {
+        id: THEMES_HREF,
+        label: label("Customize"),
+        group: label("Getting started"),
+        icon: guideIcons[THEMES_HREF],
+        keywords: ["customize", "theme", "builder", "radius", "accent", "color", "colour", "oklch", "hue", "chroma", "css variables"],
+        onSelect: go(THEMES_HREF),
+      },
       ...groups.flatMap((g) =>
         g.items.map((i) => ({
           id: i.name,
@@ -112,6 +108,15 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
   }, [groups, router, t, label])
 
   const shortcut = mac ? "⌘K" : "Ctrl K"
+  const section = sectionOf(pathname, groups)
+  const headerLinks: { id: DocsSection; label: string; href: string }[] = [
+    { id: "docs", label: "Docs", href: "/docs" },
+    { id: "components", label: "Components", href: COMPONENTS_HREF },
+    { id: "templates", label: "Templates", href: TEMPLATES_HREF },
+    { id: "themes", label: "Customize", href: THEMES_HREF },
+  ]
+  // The theme builder brings its own control column, so it gets the header without the sidebar.
+  const bare = section === "themes"
   const openSearch = React.useCallback(() => {
     setDrawerOpen(false)
     setSearchOpen(true)
@@ -122,30 +127,20 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
       <div data-slot="docs-shell" className="min-h-svh bg-background text-foreground">
         {/* A theme, accent or radius picked in another tab applies here too (the header only follows theme and accent). */}
         <ThemeSync />
-        <header className="sticky top-0 z-40 flex h-12 items-center border-b border-border bg-background">
-          <div className="flex h-full shrink-0 items-center gap-1 ps-3 pe-2 lg:w-64 lg:ps-4">
-            <Button variant="ghost" size="icon-sm" aria-label={label("Open navigation")} onClick={() => setDrawerOpen(true)} className="lg:hidden">
-              <MenuIcon />
-            </Button>
-            <Brand />
-          </div>
+        <header className="sticky top-0 z-40 flex h-12 items-center gap-2 border-b border-border bg-background px-3 lg:px-4">
+          <Button variant="ghost" size="icon-sm" aria-label={label("Open navigation")} onClick={() => setDrawerOpen(true)} className="lg:hidden">
+            <MenuIcon />
+          </Button>
+          <Brand />
+          <nav aria-label={label("Main")} className="ms-4 flex items-center gap-0.5 max-md:hidden">
+            {headerLinks.map((l) => (
+              <Link key={l.id} href={l.href} aria-current={section === l.id ? "page" : undefined} className={headerLink}>
+                {label(l.label)}
+              </Link>
+            ))}
+          </nav>
 
-          <NavigationMenu aria-label={label("Main")} className="h-full max-md:hidden lg:ms-6">
-            <NavigationMenuList className="h-full items-stretch gap-1">
-              {headerLinks.map((l) => {
-                const active = l.isActive(pathname, groups)
-                return (
-                  <NavigationMenuItem key={l.label}>
-                    <NavigationMenuLink variant="tab" active={active} aria-current={active ? "page" : undefined} render={l.externalApp ? <a href={l.href} /> : <Link href={l.href} />}>
-                      {label(l.label)}
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                )
-              })}
-            </NavigationMenuList>
-          </NavigationMenu>
-
-          <div className="ms-auto flex items-center gap-1.5 pe-3 lg:pe-4">
+          <div className="ms-auto flex items-center gap-1">
             <Button
               variant="secondary"
               size="sm"
@@ -153,7 +148,7 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
               aria-label={label("Search docs")}
               aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
               // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a field (sm+)
-              className="w-7 justify-center px-0 text-muted-foreground sm:w-52 sm:justify-start sm:ps-2 sm:pe-2.5"
+              className="me-1 w-7 justify-center px-0 text-muted-foreground sm:w-56 sm:justify-start sm:ps-2 sm:pe-1"
             >
               <SearchIcon />
               <span className="hidden sm:inline">{label("Search docs…")}</span>
@@ -178,23 +173,29 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
               <TooltipContent side="bottom">GitHub</TooltipContent>
             </Tooltip>
             <LanguageToggle />
-            <ThemeControls />
+            <ThemeSwitch storageKey={THEME_KEY} className="ms-1" />
           </div>
         </header>
 
         <div className="flex">
+          {!bare && (
           <aside
             // Fills the viewport under the header and sticks while the page scrolls.
             style={{ "--docs-aside-h": "calc(100svh - 3rem)" } as React.CSSProperties}
-            className="sticky top-12 hidden h-(--docs-aside-h) w-64 shrink-0 flex-col border-e border-border lg:flex"
+            className="sticky top-12 hidden h-(--docs-aside-h) w-64 shrink-0 flex-col bg-shell lg:flex"
           >
-            <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
+            <DocsNav groups={groups} pathname={pathname} section={section} onSearch={openSearch} searchShortcut={shortcut} />
           </aside>
+          )}
 
           <main className="min-w-0 flex-1">
-            <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
-              <div className="mx-auto w-full max-w-6xl">{children}</div>
-            </div>
+            {bare ? (
+              children
+            ) : (
+              <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+                <div className="mx-auto w-full max-w-6xl">{children}</div>
+              </div>
+            )}
           </main>
         </div>
 
@@ -212,7 +213,14 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
                 PaneUI
               </DrawerTitle>
             </div>
-            <DocsNav groups={groups} pathname={pathname} onSearch={openSearch} searchShortcut={shortcut} />
+            <nav aria-label={label("Main")} className="flex gap-1 px-3 pb-1">
+              {headerLinks.map((l) => (
+                <Link key={l.id} href={l.href} aria-current={section === l.id ? "page" : undefined} className={headerLink}>
+                  {label(l.label)}
+                </Link>
+              ))}
+            </nav>
+            <DocsNav groups={groups} pathname={pathname} section={section} onSearch={openSearch} searchShortcut={shortcut} showSearch />
           </DrawerContent>
         </Drawer>
 

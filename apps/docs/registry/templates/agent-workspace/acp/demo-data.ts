@@ -27,7 +27,7 @@ export const DEMO_THREADS: DemoThread[] = [
   { sessionId: "sess_long_chat", title: "Check long-chat and multi-agent bug fixes", provider: "codex", repo: "workspace", pr: { number: 1523, status: "open" }, branch: "feat/fix-chat-reliability", group: "Recent" },
   { sessionId: "sess_scrollbar", title: "Scrollbar orizzontale indesiderata nella sidebar", provider: "codex", repo: "workspace", pr: { number: 1519, status: "open" }, branch: "feat/remove-unwanted-scrollbar", group: "Today" },
   { sessionId: "sess_screenshot", title: "Check if screenshot behavior is normal", provider: "claude", repo: "workspace", branch: "main", group: "Today" },
-  { sessionId: "sess_icons", title: "Sostituire icone search bar con il set puffy", provider: "claude", repo: "workspace", branch: "main", group: "Today" },
+  { sessionId: "sess_icons", title: "Sostituire icone search bar con il set emoji", provider: "claude", repo: "workspace", branch: "main", group: "Today" },
   { sessionId: "sess_spacing", title: "Aumentare spaziatura icone come archivio", provider: "claude", repo: "workspace", branch: "main", group: "Today" },
   { sessionId: "sess_shortcuts", title: "Personalizzazione shortcut con tastiera", provider: "codex", repo: "workspace", pr: { number: 1508, status: "merged" }, branch: "main", group: "Yesterday" },
   { sessionId: "sess_expiry", title: "Configurable expiry with 24h option", provider: "codex", repo: "workspace", pr: { number: 1507, status: "merged" }, branch: "feat/configurable-expiry", group: "Yesterday" },

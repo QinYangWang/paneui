@@ -8,8 +8,7 @@
  * path/circle/rect/ellipse only, no transforms, masks, clips or <g> styling;
  * every detail must survive at 16px.
  *
- * Other styles with the same exports: packages/ui/src/icons/puffy (filled,
- * 18x18) and packages/ui/src/icons/outline (generated from puffy).
+ * The other style with the same exports: packages/ui/src/icons/emoji (full-colour objects).
  *
  * Usage system (full version in notes/icon-usage.md):
  * - Nav / sidebar / palette icons: 16px, muted; active = foreground; bare.
@@ -988,25 +987,15 @@ export const ClipboardListIcon = (p: IconProps) => (
 // recolour it; outside a theme it falls back to the text colour.
 const accent = { fill: "var(--primary, currentColor)" } as const;
 
-/** The PaneUI mark: four panes turning around a square. The top-right pane is the accent. */
+/** The PaneUI mark: an app window whose sidebar and top-right pane read as a P. */
 export const PaneuiLogoIcon = (p: IconProps) => (
   <Icon {...p}>
-    <rect x="2" y="2" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
-    <rect x="15.25" y="2" width="6.75" height="11.75" rx="1.25" fill="currentColor" style={accent} />
-    <rect x="10.25" y="15.25" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
-    <rect x="2" y="10.25" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
+    <path fill="currentColor" fillRule="evenodd" d="M8 2H16A6 6 0 0 1 22 8V16A6 6 0 0 1 16 22H8A6 6 0 0 1 2 16V8A6 6 0 0 1 8 2Z M7.25 4.75H7.25A2.5 2.5 0 0 1 9.75 7.25V16.75A2.5 2.5 0 0 1 7.25 19.25H7.25A2.5 2.5 0 0 1 4.75 16.75V7.25A2.5 2.5 0 0 1 7.25 4.75Z M15 4.75H16A3.25 3.25 0 0 1 19.25 8V11A3.25 3.25 0 0 1 16 14.25H15A3.25 3.25 0 0 1 11.75 11V8A3.25 3.25 0 0 1 15 4.75Z" />
   </Icon>
 );
 
-/** The PaneUI mark in one colour, for single-ink places (a solid chip, print, a favicon mask). */
-export const PaneuiLogoMonoIcon = (p: IconProps) => (
-  <Icon {...p}>
-    <rect x="2" y="2" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
-    <rect x="15.25" y="2" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
-    <rect x="10.25" y="15.25" width="11.75" height="6.75" rx="1.25" fill="currentColor" />
-    <rect x="2" y="10.25" width="6.75" height="11.75" rx="1.25" fill="currentColor" />
-  </Icon>
-);
+/** The PaneUI mark in one colour (the mark is single-ink already; kept for existing imports). */
+export const PaneuiLogoMonoIcon = PaneuiLogoIcon;
 
 export const GithubIcon = (p: IconProps) => (
   <Icon {...p}>

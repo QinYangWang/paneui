@@ -4,10 +4,9 @@ import Link from "next/link"
 
 import { GithubIcon, PaneuiLogoIcon } from "@paneui/ui/icons"
 import { Button } from "@paneui/ui/components/button"
-import { ThemeToggle } from "@paneui/ui/components/theme-toggle"
+import { ThemeSwitch } from "@paneui/ui/components/theme-toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@paneui/ui/components/tooltip"
 import { LanguageToggle } from "@/components/docs/language-toggle"
-import { ThemeControls } from "@/components/docs/theme-controls"
 import { THEME_KEY } from "@/components/docs/theme-script"
 import { useT, type Localized } from "@/lib/site-locale"
 
@@ -15,34 +14,37 @@ import { useT, type Localized } from "@/lib/site-locale"
 export const GITHUB_URL = "https://github.com/taimatsuorg/paneui"
 
 const navLink =
-  "lp-display rounded-full px-3 py-1.5 text-lg text-foreground outline-none transition-colors duration-150 hover:bg-foreground/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+  "rounded-md px-2 py-1 text-ui text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
 
-/** A floating glass bar, the same on every scroll position. */
+/** A thin sticky bar: mark and two links on the left, GitHub, language, theme and Get started on the right. */
 export function LandingHeader() {
   const t = useT()
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5 sm:pt-5">
-      <div className="pointer-events-auto mx-auto flex h-14 max-w-5xl items-center justify-between gap-2 rounded-full bg-card/70 ps-5 pe-2 shadow-surface backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
+      <div className="mx-auto flex h-12 max-w-7xl items-center gap-2 px-4 sm:px-6">
         <Link
           href="/"
           aria-label={t({ en: "PaneUI home", zh: "PaneUI 首页" })}
-          className="flex items-center gap-2 rounded-sm text-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="flex items-center gap-2 rounded-sm text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
-          <PaneuiLogoIcon size={22} />
+          <PaneuiLogoIcon size={20} />
           PaneUI
         </Link>
-        <nav aria-label={t({ en: "Main", zh: "主导航" })} className="hidden items-center gap-1 md:flex">
+        <nav aria-label={t({ en: "Main", zh: "主导航" })} className="ms-3 hidden items-center md:flex">
           <Link href="/docs" className={navLink}>
             {t({ en: "Docs", zh: "文档" })}
           </Link>
           <Link href="/docs/components" className={navLink}>
             {t({ en: "Components", zh: "组件" })}
           </Link>
-          <a href="/native/" className={navLink}>
-            Native
-          </a>
+          <Link href="/docs/templates" className={navLink}>
+            {t({ en: "Templates", zh: "模板" })}
+          </Link>
+          <Link href="/themes" className={navLink}>
+            {t({ en: "Customize", zh: "自定义" })}
+          </Link>
         </nav>
-        <div className="flex items-center gap-0.5">
+        <div className="ms-auto flex items-center gap-1">
           <Tooltip>
             <TooltipTrigger
               render={
@@ -52,7 +54,6 @@ export function LandingHeader() {
                   nativeButton={false}
                   render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}
                   aria-label={t({ en: "GitHub repository", zh: "GitHub 仓库" })}
-                  className="hidden sm:inline-flex"
                 />
               }
             >
@@ -61,11 +62,8 @@ export function LandingHeader() {
             <TooltipContent side="bottom">GitHub</TooltipContent>
           </Tooltip>
           <LanguageToggle />
-          <ThemeControls className="hidden lg:flex" />
-          <span className="lg:hidden">
-            <ThemeToggle variant="ghost" storageKey={THEME_KEY} />
-          </span>
-          <Button variant="inverse" shape="pill" size="lg" nativeButton={false} render={<Link href="/docs" />} className="ms-1.5 hidden sm:inline-flex">
+          <ThemeSwitch storageKey={THEME_KEY} className="mx-1" />
+          <Button variant="secondary" size="sm" nativeButton={false} render={<Link href="/docs" />} className="max-sm:hidden">
             {t({ en: "Get started", zh: "开始使用" })}
           </Button>
         </div>
@@ -77,27 +75,27 @@ export function LandingHeader() {
 const LINKS: { label: Localized; href: string; external?: boolean }[] = [
   { label: { en: "Docs", zh: "文档" }, href: "/docs" },
   { label: { en: "Components", zh: "组件" }, href: "/docs/components" },
-  { label: "Native", href: "/native/", external: true },
+  { label: { en: "Templates", zh: "模板" }, href: "/docs/templates" },
+  { label: { en: "Customize", zh: "自定义" }, href: "/themes" },
   { label: "GitHub", href: GITHUB_URL, external: true },
 ]
 
-const footLink = "rounded-sm text-ui-lg text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+const footLink = "rounded-sm text-ui text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
 
 export function LandingFooter() {
   const t = useT()
   return (
-    <footer className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 pt-10 pb-12 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-      <span className="flex items-center gap-2 font-semibold">
-        <PaneuiLogoIcon size={18} />
-        PaneUI
-        <span className="ms-2 text-ui font-normal text-muted-foreground">{t({ en: "MIT License", zh: "MIT 许可" })}</span>
+    <footer className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <span className="flex items-center gap-2 text-ui text-muted-foreground">
+        <PaneuiLogoIcon size={16} className="text-foreground" />
+        {t({ en: "MIT License", zh: "MIT 许可" })}
       </span>
       <nav aria-label={t({ en: "Footer", zh: "页脚" })}>
-        <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
           {LINKS.map((link) => (
             <li key={link.href}>
               {link.external ? (
-                <a href={link.href} className={footLink} {...(link.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}>
+                <a href={link.href} className={footLink} target="_blank" rel="noreferrer">
                   {t(link.label)}
                 </a>
               ) : (

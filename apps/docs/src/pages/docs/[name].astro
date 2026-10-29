@@ -1,0 +1,76 @@
+---
+import Base from "@/src/layouts/Base.astro"
+import ComponentDocPage, {
+  type ComponentDocData,
+  type DocExampleData,
+  type DocFileData,
+} from "@/components/pages/component-doc-page"
+import { docNav, highlight, languageOf, siteNavGroups } from "@/lib/build"
+import { docSources, demoFile, getItem, getItems, readSource, SITE_URL } from "@/lib/docs"
+import { docsContent } from "@/content/docs/index.generated"
+import type { ComponentDoc } from "@/lib/doc-types"
+import { english } from "@/lib/site-copy"
+
+export function getStaticPaths() {
+  return getItems().map((entry) => ({ params: { name: entry.name } }))
+}
+
+const { name = "" } = Astro.params
+const found = getItem(name)
+if (!found) throw new Error(`Unknown docs page: ${name}`)
+const item = found
+
+const doc: ComponentDoc | undefined = docsContent[name]
+const isTemplate = item.category === "Templates"
+
+const read = (file: string) => readSource(file)
+
+// Every build-time read and highlight for the page, resolved to plain JSON before it crosses into the island.
+const usageFile = demoFile(name)
+const usageSource = read(usageFile)
+const demoLanguage = languageOf(usageFile)
+
+const files: DocFileData[] = await Promise.all(
+  item.files.map(async (file) => ({ path: file, language: languageOf(file), html: await highlight(read(file), languageOf(file)) }))
+)
+
+const examples: DocExampleData[] = await Promise.all(
+  (doc?.examples ?? []).map(async (ex) => {
+    const source = read(`apps/docs/registry/examples/${name}/${ex.id}.tsx`)
+    return { id: ex.id, title: ex.title, description: ex.description, html: await highlight(source, "tsx") }
+  })
+)
+
+const iconSkillSource = name === "icons" ? read("skills/paneui-icons/SKILL.md") : undefined
+
+const data: ComponentDocData = {
+  item: {
+    name: item.name,
+    title: item.title,
+    summary: item.summary,
+    category: item.category,
+    dependencies: item.dependencies,
+    registryDependencies: item.registryDependencies,
+  },
+  nav: docNav(`/docs/${name}`, docSources(name)),
+  isTemplate,
+  doc,
+  files,
+  usage: {
+    imports: doc ? await highlight(doc.usage.imports, "tsx") : undefined,
+    code: doc ? await highlight(doc.usage.code, "tsx") : undefined,
+    composition: doc?.composition ? await highlight(doc.composition, "text") : undefined,
+  },
+  examples,
+  demo: { html: await highlight(usageSource, demoLanguage), filename: `${name}-demo.tsx`, language: demoLanguage },
+  siteUrl: SITE_URL,
+  iconSkill: iconSkillSource
+    ? { text: iconSkillSource, html: await highlight(iconSkillSource, "markdown") }
+    : undefined,
+}
+const site = { pathname: Astro.url.pathname, groups: siteNavGroups() }
+---
+
+<Base title={item.title} description={english(item.summary)}>
+  <ComponentDocPage client:load site={site} data={data} />
+</Base>

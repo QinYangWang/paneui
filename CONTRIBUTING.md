@@ -25,7 +25,7 @@ workspace with its own lockfile — install it inside `apps/desktop/` if you nee
 | `packages/ui/src/icons/index.tsx` | Hand-drawn icon set; the outline set is generated from it |
 | `apps/docs/registry/examples/` | One demo per item, written as a consumer |
 | `apps/docs/content/docs/<name>.ts` | Docs page content (usage, composition, examples, API) |
-| `apps/docs/app/`, `apps/docs/components/docs/`, `apps/docs/components/landing/` | The docs site and landing page |
+| `apps/docs/src/pages/`, `apps/docs/components/pages/`, `apps/docs/components/docs/`, `apps/docs/components/landing/` | The docs site and landing page |
 | `packages/cli/` | The `paneui` CLI |
 | `skills/paneui-design/` | The design rules and the design check |
 | `tooling/scripts/` | Generation and audit scripts (`gen-docs.mjs`, `gen-docs-md.mjs`, `audit-radius.mjs`, …) |
@@ -43,9 +43,8 @@ workspace with its own lockfile — install it inside `apps/desktop/` if you nee
 5. Add the demo to `apps/docs/components/docs/demos.tsx`, run `node tooling/scripts/gen-docs.mjs`
    and commit the generated files.
 
-Never edit `packages/ui/src/icons/outline/icons.tsx` by hand; change
-`packages/ui/src/icons/index.tsx` or `tooling/scripts/icon-outline-overrides.mjs` and run
-`pnpm icons:gen`.
+Icons come in two hand-drawn styles with the same exports: `packages/ui/src/icons/index.tsx`
+(rounded) and `packages/ui/src/icons/emoji/icons.tsx` (emoji). Add a new icon to both.
 
 ## Design rules
 
@@ -58,6 +57,19 @@ pnpm design:check
 
 If a rule is wrong for a legitimate case, allow-list it in
 `paneui-design.config.json` with a reason instead of working around it.
+
+## Branches
+
+- `main` is the released line. Never commit or push to it directly; it only takes merges from `dev` (or a `hotfix/*` branch) through a pull request.
+- `dev` is the integration branch. Start every change from it and merge back through a pull request.
+- Name work branches by type: `feat/<topic>`, `fix/<topic>`, `docs/<topic>`, `chore/<topic>`, `hotfix/<topic>` (a hotfix branches from `main` and merges into both `main` and `dev`).
+- Delete a branch once it is merged. Keep `main`, `dev` and the deploy branch `gh-pages`.
+
+```bash
+git switch dev && git pull
+git switch -c feat/my-change
+# commit, then open a PR into dev
+```
 
 ## Checks before a PR
 
