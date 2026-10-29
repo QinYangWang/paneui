@@ -1839,7 +1839,6 @@
         "@paneui/marquee",
         "@paneui/number-ticker",
         "@paneui/segmented-control",
-        "@paneui/shader-background",
         "@paneui/text-reveal",
         "@paneui/trend-chart",
         "@paneui/accent-picker",
@@ -2492,7 +2491,8 @@
         "@paneui/message-scroller",
         "@paneui/animated-sidebar",
         "@paneui/tooltip",
-        "@paneui/avatar-generator"
+        "@paneui/avatar-generator",
+        "@paneui/input-group"
       ],
       "files": [
         {
