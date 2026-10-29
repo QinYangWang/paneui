@@ -147,12 +147,12 @@ export function SiteShell({ groups, children }: { groups: NavGroup[]; children: 
               onClick={openSearch}
               aria-label={label("Search docs")}
               aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
-              // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (mobile) to a field (sm+)
-              className="me-1 w-7 justify-center px-0 text-muted-foreground sm:w-56 sm:justify-start sm:ps-2 sm:pe-1"
+              // eslint-disable-next-line shadcn/no-restyle -- header search morphs from an icon button (below lg) to a field (lg+)
+              className="me-1 w-7 justify-center px-0 text-muted-foreground lg:w-56 lg:justify-start lg:ps-2 lg:pe-1"
             >
               <SearchIcon />
-              <span className="hidden sm:inline">{label("Search docs…")}</span>
-              <Kbd size="sm" className="ms-auto hidden sm:inline-flex">
+              <span className="hidden lg:inline">{label("Search docs…")}</span>
+              <Kbd size="sm" className="ms-auto hidden lg:inline-flex">
                 {shortcut}
               </Kbd>
             </Button>

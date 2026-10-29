@@ -45,7 +45,7 @@ export default function ComponentsGalleryPage({ site, data }: { site: SiteProps;
   const total = data.total - (data.groups.find((g) => g.category === "Templates")?.items.length ?? 0)
   return (
     <SiteRoot {...site}>
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-16">
       <DocHeader
         href="/docs/components"
         eyebrow="Docs"
@@ -55,31 +55,31 @@ export default function ComponentsGalleryPage({ site, data }: { site: SiteProps;
       />
       {groups.map((g, gi) => {
         return (
-          <section key={g.category} id={categorySlug(g.category)} className="flex scroll-mt-20 flex-col gap-5">
-            <h2 className="font-heading flex items-baseline gap-2 text-xl font-semibold text-balance">
+          <section key={g.category} id={categorySlug(g.category)} aria-labelledby={`${categorySlug(g.category)}-title`} className="flex scroll-mt-20 flex-col gap-6">
+            <h2 id={`${categorySlug(g.category)}-title`} className="font-heading flex items-baseline gap-2 text-2xl font-semibold tracking-tight text-balance">
               <T en={g.category} zh={CATEGORY_ZH[g.category] ?? g.category} />
-              <span className="text-ui font-normal text-muted-foreground tabular-nums">{g.items.length}</span>
+              <span className="text-ui font-normal tracking-normal text-muted-foreground tabular-nums">{g.items.length}</span>
             </h2>
-            <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+            <div className="grid grid-cols-1 gap-x-4 gap-y-8 xl:grid-cols-2">
               {g.items.map((item, index) => (
-                <div
-                  key={item.name}
-                  className={`group/gallery flex flex-col overflow-hidden frame-xl border border-border bg-card ${wide.has(item.name) ? "xl:col-span-2" : ""}`}
-                >
-                  {/* Cards carry the name and the preview only (copy-density rule 1). */}
+                // Cards carry the preview and the name only (copy-density rule 1): the preview on a filled
+                // tile one tone off the page, the name under it, the whole card one link target by its name.
+                <article key={item.name} className={`group/gallery flex min-w-0 flex-col gap-2.5 ${wide.has(item.name) ? "xl:col-span-2" : ""}`}>
+                  {/* Demos mount near the viewport and unmount when far away; see LazyDemo. */}
+                  <div className="flex flex-1 flex-col overflow-hidden frame-xl bg-shell">
+                    <LazyDemo name={item.name} eager={gi === 0 && index < 4} className="flex-1 border-b-0 bg-transparent" />
+                  </div>
                   <Link
                     href={`/docs/${item.name}`}
-                    className="flex items-center justify-between gap-3 border-b border-border px-4 py-3 text-ui font-medium outline-none hover:bg-secondary/60 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
+                    className="flex w-fit items-center gap-1.5 rounded-md px-1 text-ui-lg font-medium outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
                     {item.title}
                     <ArrowRightIcon
                       size={14}
-                      className="shrink-0 text-muted-foreground transition-transform group-hover/gallery:translate-x-0.5 group-hover/gallery:text-foreground rtl:-scale-x-100 rtl:group-hover/gallery:-translate-x-0.5"
+                      className="shrink-0 text-muted-foreground transition-transform duration-150 group-hover/gallery:translate-x-0.5 group-hover/gallery:text-foreground rtl:-scale-x-100 rtl:group-hover/gallery:-translate-x-0.5"
                     />
                   </Link>
-                  {/* Demos mount near the viewport and unmount when far away; see LazyDemo. */}
-                  <LazyDemo name={item.name} eager={gi === 0 && index < 4} className="flex-1 border-b-0 bg-shell" />
-                </div>
+                </article>
               ))}
             </div>
           </section>
