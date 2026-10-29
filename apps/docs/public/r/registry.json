@@ -2477,6 +2477,45 @@
       }
     },
     {
+      "name": "team-chat",
+      "type": "registry:block",
+      "title": "Team Chat",
+      "description": "Team chat with channels, direct messages and threads.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "https://paneui.dev/r/theme.json",
+        "https://paneui.dev/r/icons.json",
+        "https://paneui.dev/r/button.json",
+        "https://paneui.dev/r/message.json",
+        "https://paneui.dev/r/message-scroller.json",
+        "https://paneui.dev/r/animated-sidebar.json",
+        "https://paneui.dev/r/tooltip.json",
+        "https://paneui.dev/r/avatar-generator.json"
+      ],
+      "files": [
+        {
+          "path": "registry/web/templates/team-chat/team-chat.tsx",
+          "type": "registry:component",
+          "target": "components/team-chat/team-chat.tsx"
+        },
+        {
+          "path": "registry/web/templates/team-chat/parts/data.ts",
+          "type": "registry:component",
+          "target": "components/team-chat/parts/data.ts"
+        },
+        {
+          "path": "registry/web/templates/team-chat/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        }
+      ],
+      "meta": {
+        "category": "Templates"
+      }
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",

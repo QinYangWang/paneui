@@ -238,4 +238,5 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Personal Blog](https://paneui.dev/docs/blog.md): Personal blog with posts grouped by year. JSON: https://paneui.dev/r/blog.json
 - [Docs Site](https://paneui.dev/docs/docs.md): Documentation site layout with search, navigation and a page outline. JSON: https://paneui.dev/r/docs.json
 - [SaaS](https://paneui.dev/docs/saas.md): Pages for a product website and dashboard. JSON: https://paneui.dev/r/saas.json
+- [Team Chat](https://paneui.dev/docs/team-chat.md): Team chat with channels, direct messages and threads. JSON: https://paneui.dev/r/team-chat.json
 - [Code Editor](https://paneui.dev/docs/vscode.md): Edit projects and run commands in the browser. JSON: https://paneui.dev/r/vscode.json
