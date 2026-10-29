@@ -190,6 +190,7 @@ const VsCodePreview = () => <TemplatePreview name="vscode" />
 const AgentWorkspacePreview = () => <TemplatePreview name="agent-workspace" />
 const DocsTemplatePreview = () => <TemplatePreview name="docs" />
 const BlogPreview = () => <TemplatePreview name="blog" />
+const TeamChatPreview = () => <TemplatePreview name="team-chat" />
 
 export const demos: Record<string, React.ComponentType> = {
   "sparkline": SparklineDemo,
@@ -222,6 +223,7 @@ export const demos: Record<string, React.ComponentType> = {
   "agent-composer": AgentComposerDemo,
   saas: SaasPreview,
   vscode: VsCodePreview,
+  "team-chat": TeamChatPreview,
   terminal: TerminalDemo,
   "agent-workspace": AgentWorkspacePreview,
   docs: DocsTemplatePreview,

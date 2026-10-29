@@ -132,6 +132,7 @@ import d_table from "./table"
 import d_table_async from "./table-async"
 import d_table_editable from "./table-editable"
 import d_tabs from "./tabs"
+import d_team_chat from "./team-chat"
 import d_terminal from "./terminal"
 import d_terminal_view from "./terminal-view"
 import d_text_cascade from "./text-cascade"
@@ -294,6 +295,7 @@ export const docsContent: Record<string, ComponentDoc> = {
   "table-async": d_table_async,
   "table-editable": d_table_editable,
   "tabs": d_tabs,
+  "team-chat": d_team_chat,
   "terminal": d_terminal,
   "terminal-view": d_terminal_view,
   "text-cascade": d_text_cascade,

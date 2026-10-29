@@ -20,6 +20,7 @@ const DESCRIPTION_ZH: Record<string, string> = {
   "agent-workspace": "和编程智能体对话，审阅它们的改动。",
   docs: "带搜索、导航和页面大纲的文档站。",
   blog: "按年份归档文章的个人博客。",
+  "team-chat": "带频道、私信和话题串的团队聊天。",
 }
 
 /*
