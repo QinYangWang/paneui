@@ -14,7 +14,6 @@ Every docs page has a Markdown twin at the same path with `.md` (`/docs/button.m
 - [Introduction](https://paneui.dev/docs/index.md): React components you own and edit.
 - [Installation](https://paneui.dev/docs/installation.md): Install the theme, then add components.
 - [Theming](https://paneui.dev/docs/theming.md): Change the theme tokens.
-- [Customize](https://paneui.dev/docs/colors.md): Choose an accent and corner radius.
 - [CLI & registry](https://paneui.dev/docs/cli.md): Find, inspect and install components from the command line.
 - [Design skill](https://paneui.dev/docs/skill.md): Design rules and checks for consistent interfaces.
 - [Changelog](https://paneui.dev/docs/changelog.md): Updates to PaneUI.

@@ -17,6 +17,13 @@ type MessageSide = "start" | "end"
  */
 const MessageSideContext = React.createContext<MessageSide | null>(null)
 
+/**
+ * Layout of the surrounding `MessageList`. In `flat` lists bubbles drop their
+ * surface and render as plain text under the sender's name.
+ */
+type MessageVariant = "bubble" | "flat"
+const MessageVariantContext = React.createContext<MessageVariant>("bubble")
+
 /** Set when a bubble lives inside a group, so its joined corners tighten. */
 const MessageBubbleGroupContext = React.createContext<MessageSide | null>(null)
 
@@ -67,7 +74,9 @@ type MessageBubbleProps = useRender.ComponentProps<"div"> &
  */
 function MessageBubble({ className, tone, size, align, tail = true, render, ...props }: MessageBubbleProps) {
   const side = useMessageSide(align)
-  const grouped = React.useContext(MessageBubbleGroupContext) !== null
+  const flat = React.useContext(MessageVariantContext) === "flat"
+  const inGroup = React.useContext(MessageBubbleGroupContext) !== null
+  const grouped = inGroup && !flat
   const interactive = render !== undefined
 
   return useRender({
@@ -79,12 +88,15 @@ function MessageBubble({ className, tone, size, align, tail = true, render, ...p
         className: cn(
           messageBubbleVariants({ tone, size }),
           side === "end" ? "self-end" : "self-start",
-          tail && tone !== "ghost" && (side === "end" ? "rounded-br-md" : "rounded-bl-md"),
+          tail && !flat && tone !== "ghost" && (side === "end" ? "rounded-br-md" : "rounded-bl-md"),
           grouped && tone !== "ghost" && (side === "end"
               ? "[[data-slot=message-bubble]+&]:rounded-tr-md"
               : "[[data-slot=message-bubble]+&]:rounded-tl-md"),
           interactive &&
             "cursor-pointer text-start no-underline select-none active:scale-98",
+          flat &&
+            "self-start rounded-none bg-transparent px-0 py-0 text-ui-lg leading-relaxed shadow-none [&_a]:text-primary",
+          flat && (tone === "destructive" ? "text-destructive" : "text-foreground"),
           className
         ),
       },
@@ -193,7 +205,9 @@ export {
   MessageBubbleGroup,
   MessageBubbleCollapsible,
   MessageSideContext,
+  MessageVariantContext,
   messageBubbleVariants,
+  type MessageVariant,
   type MessageSide,
   type MessageBubbleProps,
 }
