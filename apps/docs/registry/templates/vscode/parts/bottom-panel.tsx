@@ -30,9 +30,9 @@ export type PanelTab = "problems" | "output" | "terminal"
 export type OutputLine = { time: number; text: string; level?: "info" | "error" }
 
 const SEVERITY = {
-  error: { icon: <XCircleIcon />, className: "text-destructive" },
-  warning: { icon: <WarningIcon />, className: "text-warning" },
-  info: { icon: <InfoIcon />, className: "text-primary" },
+  error: { icon: <XCircleIcon />, className: "text-destructive-text" },
+  warning: { icon: <WarningIcon />, className: "text-warning-text" },
+  info: { icon: <InfoIcon />, className: "text-primary-text" },
 } as const
 
 /* -------------------------------- terminals ------------------------------- */
@@ -59,7 +59,7 @@ function TerminalArea({ terms, visible, compact }: { terms: Terminals; visible: 
         <button
           type="button"
           onClick={() => terms.create()}
-          className="text-ui text-primary outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="text-ui text-primary-text outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           New terminal
         </button>
@@ -191,7 +191,7 @@ function OutputLog({ lines }: { lines: OutputLine[] }) {
     <ScrollArea className="h-full" viewportRef={ref} viewportClassName="px-4 py-2">
       <ol aria-label="Output" className="font-mono text-ui-sm leading-5">
         {lines.map((l, i) => (
-          <li key={i} className={cn("whitespace-pre-wrap", l.level === "error" ? "text-destructive" : "text-foreground")}>
+          <li key={i} className={cn("whitespace-pre-wrap", l.level === "error" ? "text-destructive-text" : "text-foreground")}>
             <span className="text-muted-foreground tabular-nums">[{new Date(l.time).toLocaleTimeString([], { hour12: false })}]</span> {l.text}
           </li>
         ))}

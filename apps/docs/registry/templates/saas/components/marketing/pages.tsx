@@ -93,7 +93,7 @@ export function PricingPage() {
                         return (
                           <td key={p.id} className="px-5 py-3">
                             {v === true ? (
-                              <CheckIcon size={16} className="text-primary" aria-label="Included" />
+                              <CheckIcon size={16} className="text-primary-text" aria-label="Included" />
                             ) : v === false ? (
                               <MinusIcon size={16} className="text-muted-foreground/60" aria-label="Not included" />
                             ) : (

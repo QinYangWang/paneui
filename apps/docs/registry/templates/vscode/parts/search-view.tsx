@@ -66,7 +66,7 @@ function Toggle({ label, pressed, onClick, children }: { label: string; pressed:
       onClick={onClick}
       className={cn(
         "flex h-5 min-w-5 items-center justify-center rounded-sm px-1 font-mono text-ui-xs text-muted-foreground transition-colors duration-150 outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
-        pressed && "bg-primary-subtle text-primary hover:bg-primary-subtle-hover hover:text-primary"
+        pressed && "bg-primary-subtle text-primary-text hover:bg-primary-subtle-hover hover:text-primary-text"
       )}
     >
       {children}
@@ -182,7 +182,7 @@ export function SearchView({
       </div>
 
       {pattern === "invalid" ? (
-        <p className="px-4 text-ui-sm text-destructive">That regular expression is not valid.</p>
+        <p className="px-4 text-ui-sm text-destructive-text">That regular expression is not valid.</p>
       ) : found ? (
         <p className="shrink-0 px-4 pb-1.5 text-ui-xs text-muted-foreground tabular-nums">
           {found.total === 0

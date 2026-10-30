@@ -13,9 +13,9 @@ import { IconAction, SectionLabel, SidebarHeader } from "./sidebar-header"
 import { abs, basename, dirname, type Workspace } from "./workspace"
 
 const STATUS: Record<"M" | "A" | "D", { label: string; className: string }> = {
-  M: { label: "Modified", className: "text-warning" },
-  A: { label: "Added", className: "text-success" },
-  D: { label: "Deleted", className: "text-destructive" },
+  M: { label: "Modified", className: "text-warning-text" },
+  A: { label: "Added", className: "text-success-text" },
+  D: { label: "Deleted", className: "text-destructive-text" },
 }
 
 /**

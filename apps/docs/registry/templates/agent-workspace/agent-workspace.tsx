@@ -461,7 +461,7 @@ export function AgentWorkspace() {
 
   const errorBanner =
     state.connection === "error" ? (
-      <div role="alert" className="flex items-center gap-2 border-b border-destructive-border bg-destructive-subtle px-4 py-2 text-ui text-destructive">
+      <div role="alert" className="flex items-center gap-2 border-b border-destructive-border bg-destructive-subtle px-4 py-2 text-ui text-destructive-text">
         <span className="min-w-0 flex-1 truncate">{state.error ?? "Disconnected"}</span>
         <Button variant="outline" size="xs" onClick={() => setSettingsOpen(true)}>
           Agent settings

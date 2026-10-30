@@ -24,9 +24,9 @@ import { basename, dirname, normalize, rel, ROOT, type Workspace } from "./works
 type Status = "M" | "A" | "D"
 
 const STATUS_CLASS: Record<Status, string> = {
-  M: "text-warning",
-  A: "text-success",
-  D: "text-destructive",
+  M: "text-warning-text",
+  A: "text-success-text",
+  D: "text-destructive-text",
 }
 
 /** Trailing slot of a row: its source-control letter, plus the path the context menu reads. */
@@ -60,7 +60,7 @@ function buildTree(ws: Workspace, changes: Map<string, Status>, dirty: Set<strin
       name: basename(f),
       type: "file",
       meta: <RowMeta path={f} status={changes.get(f)} dirty={dirty.has(f)} />,
-      className: changes.get(f) === "A" ? "text-success" : changes.get(f) === "M" ? "text-warning" : undefined,
+      className: changes.get(f) === "A" ? "text-success-text" : changes.get(f) === "M" ? "text-warning-text" : undefined,
     })
   const build = (dir: string): FileTreeNode[] =>
     (byDir.get(dir) ?? [])
@@ -252,7 +252,7 @@ export function Explorer({
             className="h-7"
           />
           {error && (
-            <p role="alert" className="px-0.5 text-ui-xs text-destructive">
+            <p role="alert" className="px-0.5 text-ui-xs text-destructive-text">
               {error}
             </p>
           )}

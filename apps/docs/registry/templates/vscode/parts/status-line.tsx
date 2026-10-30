@@ -75,9 +75,9 @@ export function StatusLine({
         {changes > 0 && "*"}
       </Item>
       <Item label={`${errors} errors, ${warnings} warnings`} onClick={onProblems}>
-        <XCircleIcon className={errors ? "text-destructive" : undefined} />
+        <XCircleIcon className={errors ? "text-destructive-text" : undefined} />
         {errors}
-        <WarningIcon className={cn("ml-1", warnings ? "text-warning" : undefined)} />
+        <WarningIcon className={cn("ml-1", warnings ? "text-warning-text" : undefined)} />
         {warnings}
       </Item>
       {remote && !compact && <Item label="Terminal connection">PTY</Item>}
