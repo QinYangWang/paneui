@@ -54,7 +54,7 @@ export function DocHeader({
         {lede && (
           <PageHeaderDescription>
             {/* The row is full width; the sentence keeps a reading measure. */}
-            <span className="block max-w-2xl">{typeof lede === "object" && "en" in lede ? <LocalizedText text={lede} /> : typeof lede === "string" ? <LocalizedText text={lede} /> : lede}</span>
+            <span className="block max-w-xl">{typeof lede === "object" && "en" in lede ? <LocalizedText text={lede} /> : typeof lede === "string" ? <LocalizedText text={lede} /> : lede}</span>
           </PageHeaderDescription>
         )}
       </PageHeader>
@@ -102,6 +102,9 @@ export function DocFooter({ prev, next, updated }: { prev?: DocsPageRef; next?: 
   )
 }
 
+/** Caps paragraphs and lists that aren't part of a component (no `data-slot` on them or between them and the article). */
+const PROSE_MEASURE = "[&_:is(p,ul,ol):not([data-slot],article_[data-slot]_*)]:max-w-xl"
+
 /**
  * Article plus outline on the content frame. The article hangs from the frame's left edge (the
  * same line the gallery and the overview pages start on) at a reading width; regular pages keep
@@ -114,7 +117,11 @@ export function DocLayout({ toc, wide, children }: { toc?: TocEntry[]; wide?: bo
   const rail = hasToc && !wide
   return (
     <div className={cn("grid grid-cols-1 gap-12", rail && "xl:grid-cols-[minmax(0,1fr)_12rem]")}>
-      <article className={cn("flex w-full min-w-0 flex-col gap-12", wide ? "max-w-6xl" : "max-w-3xl")}>
+      {/*
+        The column is 768px so previews, tables and code get the room; running prose (paragraphs and
+        lists outside any component) stops at a reading measure of about 70 characters.
+      */}
+      <article className={cn("flex w-full min-w-0 flex-col gap-12", wide ? "max-w-6xl" : "max-w-3xl", PROSE_MEASURE)}>
         {hasToc && (
           // Sticky under the header. The band bleeds into the page gutters (px-5/8/10 in site-shell) so
           // nothing scrolls past at its sides; on wide pages the button keeps a reading width.
