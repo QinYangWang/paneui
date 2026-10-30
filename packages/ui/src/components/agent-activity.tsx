@@ -132,9 +132,9 @@ const ACTION_ICON: Record<string, React.ComponentType<{ className?: string }>> =
 /* -------------------------------------------------------------------------- */
 
 function RowStatus({ status }: { status?: AgentActivityItemStatus }) {
-  if (status === "active") return <LoaderIcon className="size-3.5 shrink-0 animate-spin text-primary motion-reduce:animate-none" />
-  if (status === "error") return <XIcon className="size-3.5 shrink-0 text-destructive" />
-  if (status === "complete") return <CheckIcon className="size-3.5 shrink-0 text-success" />
+  if (status === "active") return <LoaderIcon className="size-3.5 shrink-0 animate-spin text-primary-text motion-reduce:animate-none" />
+  if (status === "error") return <XIcon className="size-3.5 shrink-0 text-destructive-text" />
+  if (status === "complete") return <CheckIcon className="size-3.5 shrink-0 text-success-text" />
   return null
 }
 
@@ -197,9 +197,9 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
           <span className="min-w-0 truncate font-mono text-ui-sm text-foreground/85">{item.target}</span>
           {item.additions || item.deletions ? (
             <span className="shrink-0 font-mono text-ui-xs tabular-nums">
-              {item.additions ? <span className="text-success">+{item.additions}</span> : null}
+              {item.additions ? <span className="text-success-text">+{item.additions}</span> : null}
               {item.additions && item.deletions ? " " : null}
-              {item.deletions ? <span className="text-destructive">−{item.deletions}</span> : null}
+              {item.deletions ? <span className="text-destructive-text">−{item.deletions}</span> : null}
             </span>
           ) : null}
           <span className="ml-auto">
@@ -217,9 +217,9 @@ function ActivityRow({ item }: { item: AgentActivityItem }) {
           aria-hidden
           className={cn(
             "grid size-3.5 shrink-0 place-items-center rounded-full shadow-[inset_0_0_0_1.5px_currentColor] [&_svg]:size-2.5",
-            item.status === "complete" && "bg-success text-success [&_svg]:text-white",
-            item.status === "active" && "text-primary",
-            item.status === "error" && "text-destructive",
+            item.status === "complete" && "bg-success text-success [&_svg]:text-success-foreground",
+            item.status === "active" && "text-primary-text",
+            item.status === "error" && "text-destructive-text",
             !item.status && "text-muted-foreground/50"
           )}
         >
@@ -285,7 +285,7 @@ function ActivityGroupView({
           aria-hidden
           className={cn(
             "relative grid size-5 shrink-0 place-items-center rounded-full bg-card shadow-chip [&_svg]:size-3",
-            group.active ? "text-primary" : group.error ? "text-destructive" : "text-muted-foreground"
+            group.active ? "text-primary-text" : group.error ? "text-destructive-text" : "text-muted-foreground"
           )}
         >
           <Icon />

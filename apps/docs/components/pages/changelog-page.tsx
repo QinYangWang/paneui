@@ -12,6 +12,29 @@ type Entry = { id: string; date: string; title: string; tag?: string; changes: R
 /* Newest first. Summarised from the repository history; dates are commit dates. */
 const ENTRIES: Entry[] = [
   {
+    id: "2026-10-30-colour-roles",
+    date: "October 30, 2026",
+    title: "Readable colour roles",
+    changes: [
+      <>
+        Theme 2.5: every label on a solid reaches 4.5:1, in both modes and every accent. The blue solid is darker, warning
+        keeps its orange with dark text, and the orange accent does the same.
+      </>,
+      <>
+        New roles: <Code>primary-text</Code> and <Code>destructive-text</Code>, <Code>success-text</Code>,{" "}
+        <Code>warning-text</Code> for coloured text and icons; an <Code>info</Code> set; <Code>fill-hover</Code>,{" "}
+        <Code>fill-active</Code> and <Code>fill-strong</Code> (<Code>secondary</Code>, <Code>muted</Code> and{" "}
+        <Code>accent</Code> now read them); <Code>border-control</Code> at 3:1; <Code>selection</Code>; and ten{" "}
+        <Code>tag-*</Code> colours with text, highlight and pill. Components use the <Code>-text</Code> roles for
+        coloured text. Every value is on <TextLink href="/themes">Customize</TextLink>.
+      </>,
+      <>
+        Reinstall <Code>theme</Code> and any <Code>theme-&lt;accent&gt;</Code> preset. Replace <Code>text-primary</Code> and{" "}
+        <Code>text-destructive</Code> on text with their <Code>-text</Code> roles.
+      </>,
+    ],
+  },
+  {
     id: "2026-10-28-emoji-icons-sidebar-rail",
     date: "October 28, 2026",
     title: "Emoji icons and a three-column sidebar",

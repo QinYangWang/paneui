@@ -223,7 +223,7 @@ function TodoList({
           </AnimatePresence>
         </span>
         {failed > 0 && (
-          <span className="rounded-full bg-destructive/12 px-1.5 py-0.5 text-ui-xs font-medium text-destructive tabular-nums">
+          <span className="rounded-full bg-destructive/12 px-1.5 py-0.5 text-ui-xs font-medium text-destructive-text tabular-nums">
             {labels.failedTasks(failed)}
           </span>
         )}
@@ -290,7 +290,7 @@ function TodoList({
                     <span
                       className={cn(
                         "shrink-0 pt-0.5 text-ui-sm text-muted-foreground tabular-nums",
-                        status === "failed" && "text-destructive"
+                        status === "failed" && "text-destructive-text"
                       )}
                     >
                       {item.meta}

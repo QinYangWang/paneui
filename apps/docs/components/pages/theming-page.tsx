@@ -54,15 +54,19 @@ const SWATCHES: { token: string; swatch: string }[] = [
   { token: "surface-standout", swatch: "bg-surface-standout" },
   { token: "primary", swatch: "bg-primary" },
   { token: "primary-subtle", swatch: "bg-primary-subtle" },
-  { token: "secondary", swatch: "bg-secondary" },
+  { token: "primary-text", swatch: "bg-primary-text" },
+  { token: "fill-hover", swatch: "bg-fill-hover" },
   { token: "muted-foreground", swatch: "bg-muted-foreground" },
   { token: "fg-tertiary", swatch: "bg-fg-tertiary" },
   { token: "border", swatch: "bg-border" },
   { token: "border-strong", swatch: "bg-border-strong" },
+  { token: "border-control", swatch: "bg-border-control" },
   { token: "ring", swatch: "bg-ring" },
   { token: "destructive", swatch: "bg-destructive" },
   { token: "success", swatch: "bg-success" },
   { token: "warning", swatch: "bg-warning" },
+  { token: "info", swatch: "bg-info" },
+  { token: "tag-blue-fill", swatch: "bg-tag-blue-fill" },
   { token: "chart-1…8", swatch: "bg-chart-1" },
   { token: "shell", swatch: "bg-shell" },
 ]
@@ -186,6 +190,24 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
             }
           />
         </p>
+        <p className="text-muted-foreground">
+          <T
+            en={
+              <>
+                Solids are for fills. For coloured text and icons use the <Code>-text</Code> role, such as{" "}
+                <Code>text-primary-text</Code> or <Code>text-destructive-text</Code>: it reaches 4.5:1 on the page and on its{" "}
+                <Code>-subtle</Code> wash in both modes. Labels and highlights take the <Code>tag-*</Code> colours.
+              </>
+            }
+            zh={
+              <>
+                实色只用于填充。彩色文字和图标请用 <Code>-text</Code> 角色，例如 <Code>text-primary-text</Code> 或{" "}
+                <Code>text-destructive-text</Code>：它在两种模式下对页面和自身的 <Code>-subtle</Code> 底色都达到 4.5:1。标签和高亮使用{" "}
+                <Code>tag-*</Code> 颜色。
+              </>
+            }
+          />
+        </p>
         {/* Swatches of the main roles; the Markdown copy points at the full list instead. */}
         <ul data-md-text="Every role, with its light and dark value, is listed on Customize." className="flex flex-wrap gap-2">
           {SWATCHES.map((s) => (
@@ -244,17 +266,19 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
           <T
             en={
               <>
-                The accent is eight role variables per mode, blue by default: <Code>primary</Code> and its{" "}
+                The accent is ten role variables per mode, blue by default: <Code>primary</Code> and its{" "}
                 <Code>-hover</Code>, <Code>-active</Code>, <Code>-foreground</Code>, <Code>-subtle</Code>,{" "}
-                <Code>-subtle-hover</Code> and <Code>-border</Code> variants, plus <Code>ring</Code>. Every preset reads the same
-                steps of its own 12-step scale, so surfaces, text and charts stay the same. Install one after the theme.
+                <Code>-subtle-hover</Code>, <Code>-border</Code> and <Code>-text</Code> variants, plus <Code>ring</Code> and{" "}
+                <Code>selection</Code>. Every preset meets the same contrast: 4.5:1 for the label on the solid and for{" "}
+                <Code>primary-text</Code>, 3:1 for the ring. Surfaces, text and charts stay the same. Install one after the theme.
               </>
             }
             zh={
               <>
-                主题色在每种模式下是八个角色变量，默认为蓝色：<Code>primary</Code> 及其 <Code>-hover</Code>、<Code>-active</Code>、{" "}
-                <Code>-foreground</Code>、<Code>-subtle</Code>、<Code>-subtle-hover</Code> 和 <Code>-border</Code> 变体，再加 <Code>ring</Code>。
-                每个预设都取用自己 12 级色阶中的相同几级，因此表面、文字和图表保持一致。请在主题之后安装一个预设。
+                主题色在每种模式下是十个角色变量，默认为蓝色：<Code>primary</Code> 及其 <Code>-hover</Code>、<Code>-active</Code>、{" "}
+                <Code>-foreground</Code>、<Code>-subtle</Code>、<Code>-subtle-hover</Code>、<Code>-border</Code> 和 <Code>-text</Code> 变体，再加{" "}
+                <Code>ring</Code> 和 <Code>selection</Code>。每个预设都满足相同的对比度：实色上的文字和 <Code>primary-text</Code> 达到 4.5:1，ring 达到 3:1。
+                表面、文字和图表保持一致。请在主题之后安装一个预设。
               </>
             }
           />
@@ -302,13 +326,13 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
           <T
             en={
               <>
-                For a brand colour, use the picker on <TextLink href="/themes">Customize</TextLink> to derive the eight
+                For a brand colour, use the picker on <TextLink href="/themes">Customize</TextLink> to derive the ten
                 roles and copy them.
               </>
             }
             zh={
               <>
-                要使用品牌色，请用 <TextLink href="/themes">自定义</TextLink> 中的选择器推导出这八个角色并复制。
+                要使用品牌色，请用 <TextLink href="/themes">自定义</TextLink> 中的选择器推导出这十个角色并复制。
               </>
             }
           />

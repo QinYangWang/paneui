@@ -185,7 +185,7 @@ function AgentCopyButton({
         />
         <CheckIcon
           className={cn(
-            "absolute text-success transition-[opacity,scale] duration-200",
+            "absolute text-success-text transition-[opacity,scale] duration-200",
             copied ? "scale-100 opacity-100" : "scale-50 opacity-0"
           )}
         />
@@ -209,9 +209,9 @@ const STATUS_LABEL: Record<ToolResultStatus, keyof LocaleLabels> = {
 }
 
 const STATUS_TONE: Record<ToolResultStatus, string> = {
-  running: "text-primary",
-  success: "text-success",
-  error: "text-destructive",
+  running: "text-primary-text",
+  success: "text-success-text",
+  error: "text-destructive-text",
   cancelled: "text-muted-foreground",
 }
 
@@ -401,11 +401,11 @@ function ToolResultOutput({
 }
 
 const METHOD_TONE: Record<string, string> = {
-  GET: "bg-primary/14 text-primary",
-  POST: "bg-success/12 text-success",
-  PUT: "bg-warning/14 text-warning",
-  PATCH: "bg-warning/14 text-warning",
-  DELETE: "bg-destructive/12 text-destructive",
+  GET: "bg-primary/14 text-primary-text",
+  POST: "bg-success/12 text-success-text",
+  PUT: "bg-warning/14 text-warning-text",
+  PATCH: "bg-warning/14 text-warning-text",
+  DELETE: "bg-destructive/12 text-destructive-text",
 }
 
 /** Request line plus response body, for `kind="request"` results. */
@@ -441,7 +441,7 @@ function ToolResultRequest({
             transition={{ duration: 0.25, ease: AGENT_EASE }}
             className={cn(
               "shrink-0 rounded-md px-1.5 py-0.5 text-ui-2xs font-semibold",
-              ok ? "bg-success/12 text-success" : "bg-destructive/12 text-destructive"
+              ok ? "bg-success/12 text-success-text" : "bg-destructive/12 text-destructive-text"
             )}
           >
             {statusCode}

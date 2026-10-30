@@ -231,7 +231,7 @@ export function ThemingAccent() {
                 <div className="flex h-8 flex-1 items-center rounded-lg bg-card px-3 text-ui text-muted-foreground shadow-well ring-2 ring-ring/50">
                   <T en="Focus ring" zh="焦点环" />
                 </div>
-                <span className="text-ui font-medium text-primary underline underline-offset-4">
+                <span className="text-ui font-medium text-primary-text underline underline-offset-4">
                   <T en="Link" zh="链接" />
                 </span>
                 <span className="flex items-center gap-1" title={t({ en: "Charts keep their own colours", zh: "图表保留各自的颜色" })}>

@@ -281,7 +281,7 @@ function SignupForm({
               exit={{ opacity: 0, height: 0 }}
               className="overflow-hidden"
             >
-              <span className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2 text-ui-sm text-destructive [&_svg]:size-4">
+              <span className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2 text-ui-sm text-destructive-text [&_svg]:size-4">
                 <AlertCircleIcon />
                 {formError}
               </span>
@@ -340,7 +340,7 @@ function FieldError({ id, error }: { id: string; error?: string }) {
           animate={{ opacity: 1, height: "auto", y: 0 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0, y: -4 }}
           transition={{ type: "spring", stiffness: 460, damping: 36 }}
-          className="overflow-hidden text-ui-sm text-destructive"
+          className="overflow-hidden text-ui-sm text-destructive-text"
         >
           {error}
         </motion.p>

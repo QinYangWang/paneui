@@ -195,9 +195,9 @@ function WorkSummaryStep({
     <>
       <span className="flex size-4 shrink-0 items-center justify-center [&_svg]:size-3.5">
         {status === "in_progress" ? (
-          <Loader variant="ring" size="sm" label={labels.inProgress} className="size-3.5 text-primary" />
+          <Loader variant="ring" size="sm" label={labels.inProgress} className="size-3.5 text-primary-text" />
         ) : status === "failed" ? (
-          <XIcon className="text-destructive" />
+          <XIcon className="text-destructive-text" />
         ) : (
           (icon ?? <Icon />)
         )}

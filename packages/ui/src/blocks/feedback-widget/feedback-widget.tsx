@@ -283,7 +283,7 @@ export function FeedbackWidget({
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="-mt-1 overflow-hidden text-ui-sm text-destructive"
+                        className="-mt-1 overflow-hidden text-ui-sm text-destructive-text"
                       >
                         {l10n.feedbackSendFailed}
                       </motion.p>
@@ -310,7 +310,7 @@ export function FeedbackWidget({
                       initial={reduce ? false : { scale: 0.25, rotate: -30 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: "spring", stiffness: 480, damping: 32 }}
-                      className="inline-flex size-11 items-center justify-center rounded-full bg-success text-white"
+                      className="inline-flex size-11 items-center justify-center rounded-full bg-success text-success-foreground"
                     >
                       <CheckIcon size={22} />
                     </motion.span>

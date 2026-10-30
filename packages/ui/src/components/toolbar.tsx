@@ -76,7 +76,7 @@ function ToolbarLink({ className, ...props }: ToolbarPrimitive.Link.Props) {
   return (
     <ToolbarPrimitive.Link
       data-slot="toolbar-link"
-      className={cn(toolbarItemClass, "text-primary hover:text-primary", className)}
+      className={cn(toolbarItemClass, "text-primary-text hover:text-primary-text", className)}
       {...props}
     />
   )

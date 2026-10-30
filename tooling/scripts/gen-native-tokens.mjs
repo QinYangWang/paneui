@@ -8,9 +8,15 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "packages/registry/registry.json"), "utf8"))
 const { cssVars } = manifest.items.find((item) => item.name === "theme")
 const roles = ["background", "foreground", "card", "card-foreground", "muted", "muted-foreground", "primary", "primary-hover", "primary-active", "primary-foreground", "secondary", "secondary-foreground", "border", "input", "ring", "destructive", "destructive-foreground", "success", "warning"]
+/** A role's value with `var(--other)` references followed inside the same mode. */
+const deref = (vars, role, depth = 0) => {
+  const value = vars[role]
+  const ref = /^var\(--([\w-]+)\)$/.exec(value ?? "")
+  return ref && depth < 8 ? deref(vars, ref[1], depth + 1) : value
+}
 const camel = (name) => name.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
 const colors = Object.fromEntries(["light", "dark"].map((mode) => [mode, Object.fromEntries(roles.map((role) => {
-  const value = cssVars[mode][role]
+  const value = deref(cssVars[mode], role)
   const { r, g, b, a } = parse(value)
   const channels = a < 1 ? [r, g, b, a] : [r, g, b]
   const hex = "#" + channels.map((n) => Math.round(clamp01(n) * 255).toString(16).padStart(2, "0")).join("")
@@ -36,7 +42,7 @@ function portable(value) {
   return "#" + (a < 1 ? [r, g, b, a] : [r, g, b]).map((n) => Math.round(clamp01(n) * 255).toString(16).padStart(2, "0")).join("")
 }
 const paperColors = Object.fromEntries(["light", "dark"].map((mode) => [mode,
-  Object.fromEntries(roles.map((role) => [camel(role), portable(paperVars[mode][role])]))
+  Object.fromEntries(roles.map((role) => [camel(role), portable(deref(paperVars[mode], role))]))
 ]))
 const baseRadius = parseFloat(paperVars.light.radius) * 16
 const cap = 16

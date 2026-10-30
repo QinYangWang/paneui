@@ -329,7 +329,7 @@ function StreamingResponse({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25, ease: AGENT_EASE }}
               role="alert"
-              className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2 text-ui text-destructive shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--destructive)_22%,transparent)]"
+              className="flex items-center gap-2 rounded-xl bg-destructive/10 px-3 py-2 text-ui text-destructive-text shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--destructive)_22%,transparent)]"
             >
               <AlertCircleIcon className="size-4 shrink-0" />
               <span className="flex-1">{errorMessage}</span>
@@ -364,10 +364,10 @@ function StreamingResponse({
               </AgentIconButton>
             ) : null}
             <AgentIconButton label={labels.goodResponse} pressed={feedback === "up"} onClick={() => toggleFeedback("up")}>
-              <ThumbsUpIcon className={cn(feedback === "up" && "text-success")} />
+              <ThumbsUpIcon className={cn(feedback === "up" && "text-success-text")} />
             </AgentIconButton>
             <AgentIconButton label={labels.badResponse} pressed={feedback === "down"} onClick={() => toggleFeedback("down")}>
-              <ThumbsDownIcon className={cn(feedback === "down" && "text-destructive")} />
+              <ThumbsDownIcon className={cn(feedback === "down" && "text-destructive-text")} />
             </AgentIconButton>
           </motion.div>
         ) : null}

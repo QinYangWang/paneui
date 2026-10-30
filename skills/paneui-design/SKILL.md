@@ -79,6 +79,7 @@ The neutral accent's solid is near-white in dark mode, so `text-white` disappear
 
 `bg-primary text-primary-foreground`, `bg-destructive text-destructive-foreground`. Hover a filled
 control to `bg-primary-hover`, press to `bg-primary-active`, never `/90`.
+Coloured text and icons off a solid use the `-text` role: `text-primary-text`, `text-destructive-text`.
 
 ### 3. Fill for state, surface for panels
 

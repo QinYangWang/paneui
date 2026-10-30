@@ -98,7 +98,7 @@ function groupOptions(options: PickerOption[]) {
 const triggerClass =
   // Shrinks (label truncates) instead of pushing the composer toolbar wider; the chevron side
   // keeps the 2px optical trim under the tighter padding.
-  "min-w-0 shrink px-2 has-data-[icon=inline-end]:pe-1.5 font-normal text-muted-foreground hover:text-foreground data-[tone=destructive]:text-destructive data-[tone=warning]:text-warning"
+  "min-w-0 shrink px-2 has-data-[icon=inline-end]:pe-1.5 font-normal text-muted-foreground hover:text-foreground data-[tone=destructive]:text-destructive-text data-[tone=warning]:text-warning-text"
 
 /** Trigger props and content shared by the menu and the searchable list. */
 function usePickerTrigger({ options, value, label, icon, placeholder, compact = false, className }: ComposerPickerProps) {
@@ -165,7 +165,7 @@ function ComposerPickerMenu(props: ComposerPickerProps) {
                   data-value={o.value}
                   disabled={o.disabled}
                   onClick={() => onValueChange?.(o.value)}
-                  className={cn(showDescriptions && o.description && "items-start py-1", o.tone === "warning" && "[&_svg]:text-warning", o.tone === "destructive" && "[&_svg]:text-destructive")}
+                  className={cn(showDescriptions && o.description && "items-start py-1", o.tone === "warning" && "[&_svg]:text-warning-text", o.tone === "destructive" && "[&_svg]:text-destructive-text")}
                 >
                   <OptionBody option={o} showDescription={showDescriptions} />
                   <span className="flex h-4.5 w-4 shrink-0 items-center justify-center">
@@ -254,7 +254,7 @@ function ComposerPickerSearch(props: ComposerPickerProps) {
                 {group.value && <ComboboxLabel>{group.value}</ComboboxLabel>}
                 <ComboboxPrimitive.Collection>
                   {(o: PickerOption) => (
-                    <ComboboxItem key={o.value} value={o} data-value={o.value} disabled={o.disabled} className={cn(showDescriptions && o.description && "items-start py-1", o.tone === "warning" && "[&_svg]:text-warning", o.tone === "destructive" && "[&_svg]:text-destructive")}>
+                    <ComboboxItem key={o.value} value={o} data-value={o.value} disabled={o.disabled} className={cn(showDescriptions && o.description && "items-start py-1", o.tone === "warning" && "[&_svg]:text-warning-text", o.tone === "destructive" && "[&_svg]:text-destructive-text")}>
                       <OptionBody option={o} showDescription={showDescriptions} />
                     </ComboboxItem>
                   )}

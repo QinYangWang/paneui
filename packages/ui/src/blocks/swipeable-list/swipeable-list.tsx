@@ -61,9 +61,9 @@ type SwipeableListProps = {
 const toneClass: Record<SwipeTone, string> = {
   neutral: "bg-muted text-foreground",
   primary: "bg-primary text-primary-foreground",
-  success: "bg-success text-white",
-  warning: "bg-warning text-black/80",
-  destructive: "bg-destructive text-white",
+  success: "bg-success text-success-foreground",
+  warning: "bg-warning text-warning-foreground",
+  destructive: "bg-destructive text-destructive-foreground",
 }
 
 /*

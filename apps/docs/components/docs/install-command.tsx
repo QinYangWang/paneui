@@ -70,7 +70,7 @@ const COPY_ITEMS = [
   {
     value: "copied",
     label: "Copied",
-    icon: <CheckIcon className="text-success" />,
+    icon: <CheckIcon className="text-success-text" />,
     ariaLabel: "Copied",
   },
 ] satisfies ActionSwapItem[]

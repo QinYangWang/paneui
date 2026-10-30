@@ -25,7 +25,7 @@ const buttonVariants = cva(
           "bg-transparent text-foreground shadow-[inset_0_0_0_1px_var(--border)] hover:bg-secondary aria-expanded:bg-secondary",
         ghost: "text-foreground hover:bg-secondary aria-expanded:bg-secondary",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive-hover",
-        link: "rounded-md text-primary underline-offset-4 hover:underline",
+        link: "rounded-md text-primary-text underline-offset-4 hover:underline",
         inverse: "bg-foreground text-background hover:bg-foreground/85",
         glass: "bg-card/70 text-foreground shadow-raised backdrop-blur-xl hover:bg-card aria-expanded:bg-card",
       },

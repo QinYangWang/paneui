@@ -47,7 +47,7 @@ const messageBubbleVariants = cva(
         muted: "bg-muted text-foreground shadow-well",
         outline: "bg-transparent text-foreground shadow-[inset_0_0_0_1px_var(--border)]",
         destructive:
-          "bg-destructive/10 text-destructive shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--destructive),transparent_70%)]",
+          "bg-destructive/10 text-destructive-text shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--destructive),transparent_70%)]",
         ghost: "bg-transparent px-0 py-0 text-foreground shadow-none",
       },
       size: {
@@ -95,8 +95,8 @@ function MessageBubble({ className, tone, size, align, tail = true, render, ...p
           interactive &&
             "cursor-pointer text-start no-underline select-none active:scale-98",
           flat &&
-            "self-start rounded-none bg-transparent px-0 py-0 text-ui-lg leading-relaxed shadow-none [&_a]:text-primary",
-          flat && (tone === "destructive" ? "text-destructive" : "text-foreground"),
+            "self-start rounded-none bg-transparent px-0 py-0 text-ui-lg leading-relaxed shadow-none [&_a]:text-primary-text",
+          flat && (tone === "destructive" ? "text-destructive-text" : "text-foreground"),
           className
         ),
       },
