@@ -115,7 +115,7 @@ function ThreadListItem({
       data-running={running || undefined}
       aria-current={active ? "true" : undefined}
       className={cn(
-        "group/thread flex w-full min-w-0 cursor-pointer flex-col gap-0.5 rounded-inner px-2 py-1.5 text-start outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-active:bg-foreground/6",
+        "group/thread flex w-full min-w-0 cursor-pointer flex-col gap-0.5 rounded-inner px-2 py-1.5 text-start outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring data-active:bg-foreground/6",
         // Room for the actions: always without `meta`, on touch screens (actions stay visible) with it.
         hasActions && (meta != null && meta !== false ? "pointer-coarse:pe-9" : "pe-9"),
         hasActions && "group-hover/thread-item:bg-secondary group-data-active/thread-item:bg-foreground/6",

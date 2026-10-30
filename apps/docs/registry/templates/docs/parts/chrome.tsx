@@ -23,7 +23,7 @@ export const useDocsChrome = () => React.useContext(DocsChromeContext)
 
 export function Brand() {
   return (
-    <a href="#" className="flex shrink-0 items-center rounded-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
+    <a href="#" className="flex shrink-0 items-center rounded-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring">
       <span>
         Tessel <span className="font-normal text-muted-foreground">Docs</span>
       </span>

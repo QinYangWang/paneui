@@ -17,7 +17,7 @@ export const GITHUB_URL = "https://github.com/taimatsuorg/paneui"
 export const FRAME = "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
 
 const navLink =
-  "rounded-md px-2 py-1 text-ui text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+  "rounded-md px-2 py-1 text-ui text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
 
 /** A plain sticky bar on the page's frame: mark and two links on the left, GitHub, language, theme and Get started on the right. */
 export function LandingHeader() {
@@ -28,7 +28,7 @@ export function LandingHeader() {
         <Link
           href="/"
           aria-label={t({ en: "PaneUI home", zh: "PaneUI 首页" })}
-          className="flex items-center gap-2 rounded-sm text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="flex items-center gap-2 rounded-sm text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <PaneuiLogoIcon size={20} />
           PaneUI
@@ -83,7 +83,7 @@ const LINKS: { label: Localized; href: string; external?: boolean }[] = [
   { label: "GitHub", href: GITHUB_URL, external: true },
 ]
 
-const footLink = "rounded-sm text-ui text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+const footLink = "rounded-sm text-ui text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
 
 /** The close: the mark set large on the frame's left edge, then the licence and the links on one row. */
 export function LandingFooter() {
@@ -93,7 +93,7 @@ export function LandingFooter() {
       <Link
         href="/"
         aria-label={t({ en: "PaneUI home", zh: "PaneUI 首页" })}
-        className="flex w-fit items-center gap-3 rounded-lg font-heading text-5xl font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring/50 sm:gap-4 sm:text-7xl"
+        className="flex w-fit items-center gap-3 rounded-lg font-heading text-5xl font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring sm:gap-4 sm:text-7xl"
       >
         <PaneuiLogoIcon size={56} className="size-11 sm:size-16" />
         PaneUI

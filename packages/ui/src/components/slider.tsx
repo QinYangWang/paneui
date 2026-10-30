@@ -166,7 +166,7 @@ function Slider<Value extends number | readonly number[]>({
               className={cn(
                 "group/thumb block rounded-full bg-card shadow-raised outline-none",
                 dims.thumb,
-                "transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] has-focus-visible:ring-2 has-focus-visible:ring-ring/50 motion-reduce:transition-none",
+                "transition-[scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] has-focus-visible:ring-2 has-focus-visible:ring-ring motion-reduce:transition-none",
                 contained ? "data-dragging:scale-95" : "hover:scale-110 data-dragging:scale-115"
               )}
             >

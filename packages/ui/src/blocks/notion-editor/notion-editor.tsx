@@ -40,7 +40,7 @@ export const editorContentClass = cn(
   // quote, divider, image
   "[&_blockquote]:my-2 [&_blockquote]:border-l-3 [&_blockquote]:border-foreground/80 [&_blockquote]:pl-4",
   "[&_hr]:my-4 [&_hr]:border-border [&_hr.ProseMirror-selectednode]:border-primary",
-  "[&_img]:my-2 [&_img]:max-w-full [&_img]:rounded-xl [&_img]:shadow-raised [&_img.ProseMirror-selectednode]:ring-2 [&_img.ProseMirror-selectednode]:ring-ring/50",
+  "[&_img]:my-2 [&_img]:max-w-full [&_img]:rounded-xl [&_img]:shadow-raised [&_img.ProseMirror-selectednode]:ring-2 [&_img.ProseMirror-selectednode]:ring-ring",
   // code
   "[&_pre]:my-2 [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:bg-code [&_pre]:px-4 [&_pre]:py-3 [&_pre]:font-mono [&_pre]:text-ui-sm [&_pre]:leading-relaxed [&_pre]:whitespace-pre [&_pre]:shadow-raised",
   "[&_:not(pre)>code]:rounded-md [&_:not(pre)>code]:bg-muted [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-[0.85em] [&_:not(pre)>code]:text-destructive-text",
@@ -65,7 +65,7 @@ export const editorContentClass = cn(
   "[&_mark]:rounded-sm [&_mark]:bg-chart-6/30 [&_mark]:box-decoration-clone [&_mark]:px-0.5 [&_mark]:text-inherit",
   "[&_code[data-type=mdx-inline]]:text-chart-3",
   // states
-  "[&_.ProseMirror-selectednode]:outline-none [&_[data-type=callout].ProseMirror-selectednode]:ring-2 [&_[data-type=callout].ProseMirror-selectednode]:ring-ring/50",
+  "[&_.ProseMirror-selectednode]:outline-none [&_[data-type=callout].ProseMirror-selectednode]:ring-2 [&_[data-type=callout].ProseMirror-selectednode]:ring-ring",
   "[&_.is-empty]:before:pointer-events-none [&_.is-empty]:before:float-left [&_.is-empty]:before:h-0 [&_.is-empty]:before:text-muted-foreground/60 [&_.is-empty]:before:content-[attr(data-placeholder)]",
   "[&_.ProseMirror-gapcursor]:after:border-foreground",
   // the block being dragged from the gutter grip

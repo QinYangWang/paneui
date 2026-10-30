@@ -183,7 +183,7 @@ function ImageGeneration({
                 <button
                   type="button"
                   onClick={onRetry}
-                  className="mt-1 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-card px-3 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50"
+                  className="mt-1 inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg bg-card px-3 text-ui-sm font-medium text-secondary-foreground shadow-raised transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <RefreshIcon className="size-3.5" />
                   {retryLabel}

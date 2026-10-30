@@ -152,7 +152,7 @@ function AgentIconButton({ className, label, pressed, ...props }: React.Componen
       data-slot="agent-icon-button"
       aria-pressed={pressed}
       className={cn(
-        "inline-grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow,scale] duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-pressed:bg-muted aria-pressed:text-foreground aria-pressed:shadow-chip [&_svg]:size-3.5",
+        "inline-grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow,scale] duration-150 outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 aria-pressed:bg-muted aria-pressed:text-foreground aria-pressed:shadow-chip [&_svg]:size-3.5",
         className
       )}
       {...props}
@@ -324,7 +324,7 @@ function ToolResult({
     >
       <CollapsiblePrimitive.Trigger
         data-slot="tool-result-trigger"
-        className="group/tool-result flex min-h-11 w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-start outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
+        className="group/tool-result flex min-h-11 w-full cursor-pointer items-center gap-2.5 px-3 py-2 text-start outline-none select-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
       >
         <IconChip size="sm" tone={status === "error" ? "destructive" : "neutral"}>
           {icon ?? <KindIcon />}

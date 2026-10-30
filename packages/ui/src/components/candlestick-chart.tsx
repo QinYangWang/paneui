@@ -186,7 +186,7 @@ function CandlestickChart({
         onPointerDown={updateFromPointer}
         onPointerLeave={() => setHover(null)}
         onBlur={() => setHover(null)}
-        className="relative w-full touch-pan-y rounded-xl outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50"
+        className="relative w-full touch-pan-y rounded-xl outline-none select-none focus-visible:ring-2 focus-visible:ring-ring"
         style={{ height }}
       >
         {width > 0 && (

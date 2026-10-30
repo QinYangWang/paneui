@@ -34,7 +34,7 @@ function useMessageSide(align?: MessageSide): MessageSide {
 }
 
 const messageBubbleVariants = cva(
-  "relative w-fit max-w-full rounded-3xl px-4 py-2.5 text-ui-lg leading-relaxed wrap-break-word transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none focus-visible:ring-2 focus-visible:ring-ring/50 [&_a]:underline [&_a]:underline-offset-2",
+  "relative w-fit max-w-full rounded-3xl px-4 py-2.5 text-ui-lg leading-relaxed wrap-break-word transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none focus-visible:ring-2 focus-visible:ring-ring [&_a]:underline [&_a]:underline-offset-2",
   {
     variants: {
       tone: {
@@ -185,7 +185,7 @@ function MessageBubbleCollapsible({
           aria-expanded={expanded}
           aria-controls={id}
           onClick={() => setExpanded((v) => !v)}
-          className="mt-1 inline-flex w-fit cursor-pointer items-center gap-1 rounded-full text-ui-sm font-medium opacity-75 outline-none hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="mt-1 inline-flex w-fit cursor-pointer items-center gap-1 rounded-full text-ui-sm font-medium opacity-75 outline-none hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring"
         >
           {expanded ? lessLabel : moreLabel}
           <ChevronDownIcon

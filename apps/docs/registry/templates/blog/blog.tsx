@@ -18,7 +18,7 @@ function SocialLink({ social }: { social: Social }) {
     <a
       href={social.href}
       rel="noreferrer"
-      className="inline-flex items-baseline gap-1 rounded-xs text-foreground underline decoration-border underline-offset-4 transition-colors duration-150 outline-none hover:decoration-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+      className="inline-flex items-baseline gap-1 rounded-xs text-foreground underline decoration-border underline-offset-4 transition-colors duration-150 outline-none hover:decoration-foreground focus-visible:ring-2 focus-visible:ring-ring"
     >
       <Icon size={14} className="translate-y-0.5" />
       {social.label}
@@ -80,7 +80,7 @@ export function BlogHome({ hrefs = { home: "/blog", post: "/blog/post" } }: { hr
                     <li key={post.slug}>
                       <Link
                         href={hrefs.post}
-                        className="flex items-baseline gap-4 rounded-md px-2 py-1.5 leading-6 transition-colors duration-150 outline-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50"
+                        className="flex items-baseline gap-4 rounded-md px-2 py-1.5 leading-6 transition-colors duration-150 outline-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring"
                       >
                         <span className="min-w-0 wrap-anywhere">{post.title}</span>
                         <time dateTime={post.date} className="ms-auto shrink-0 font-mono text-muted-foreground tabular-nums">

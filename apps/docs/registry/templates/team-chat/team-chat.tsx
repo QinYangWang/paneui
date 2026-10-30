@@ -231,7 +231,7 @@ function MessageRow({ message, grouped, handlers }: { message: ChatMessage; grou
           <button
             type="button"
             onClick={() => handlers.onOpenThread?.(message.id)}
-            className="-mx-1 mt-1 flex w-fit cursor-pointer items-center gap-2 rounded-md px-1 py-0.5 text-ui-sm outline-none hover:bg-card hover:shadow-raised focus-visible:ring-2 focus-visible:ring-ring/50"
+            className="-mx-1 mt-1 flex w-fit cursor-pointer items-center gap-2 rounded-md px-1 py-0.5 text-ui-sm outline-none hover:bg-card hover:shadow-raised focus-visible:ring-2 focus-visible:ring-ring"
           >
             <AvatarStack people={[...new Set(replies.map((r) => r.author))].map((id) => PEOPLE[id]!)} max={3} />
             <span className="font-medium text-primary-text">
@@ -315,7 +315,7 @@ function Composer({ placeholder, onSend, autoFocus }: { placeholder: string; onS
         e.preventDefault()
         send()
       }}
-      className="frame-xl frame-p-1 flex flex-col bg-card shadow-raised transition-shadow focus-within:ring-2 focus-within:ring-ring/40"
+      className="frame-xl frame-p-1 flex flex-col bg-card shadow-raised transition-shadow focus-within:ring-2 focus-within:ring-ring"
     >
       <textarea
         ref={ref}

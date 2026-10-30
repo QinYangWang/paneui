@@ -210,7 +210,7 @@ export function Accents() {
                   aria-pressed={selected}
                   onClick={() => setAccent(a)}
                   className={cn(
-                    "flex w-full cursor-pointer items-center gap-4 rounded-xl px-3 py-3 text-start outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50",
+                    "flex w-full cursor-pointer items-center gap-4 rounded-xl px-3 py-3 text-start outline-none transition-colors duration-150 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring",
                     selected && "bg-secondary"
                   )}
                 >

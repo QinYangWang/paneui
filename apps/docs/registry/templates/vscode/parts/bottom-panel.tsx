@@ -59,7 +59,7 @@ function TerminalArea({ terms, visible, compact }: { terms: Terminals; visible: 
         <button
           type="button"
           onClick={() => terms.create()}
-          className="text-ui text-primary-text outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="text-ui text-primary-text outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
         >
           New terminal
         </button>
@@ -116,7 +116,7 @@ function TerminalArea({ terms, visible, compact }: { terms: Terminals; visible: 
                     type="button"
                     aria-label={`Kill ${s.title}`}
                     onClick={() => terms.kill(id)}
-                    className="relative flex size-5 shrink-0 items-center justify-center rounded-sm text-muted-foreground opacity-0 after:absolute after:-inset-0.5 outline-none group-hover/term:opacity-100 hover:bg-foreground/8 hover:text-foreground focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/50"
+                    className="relative flex size-5 shrink-0 items-center justify-center rounded-sm text-muted-foreground opacity-0 after:absolute after:-inset-0.5 outline-none group-hover/term:opacity-100 hover:bg-foreground/8 hover:text-foreground focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <TrashIcon className="size-3" />
                   </button>
@@ -159,7 +159,7 @@ function ProblemsList({ problems, onOpen }: { problems: Problem[]; onOpen: (p: P
                     <button
                       type="button"
                       onClick={() => onOpen(p)}
-                      className="flex min-h-6 w-full items-center gap-2 rounded-sm py-0.5 pr-2 pl-7 text-start text-ui outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
+                      className="flex min-h-6 w-full items-center gap-2 rounded-sm py-0.5 pr-2 pl-7 text-start text-ui outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
                     >
                       <span className={cn("flex size-4 shrink-0 items-center justify-center [&_svg]:size-3.5", SEVERITY[p.severity].className)}>{SEVERITY[p.severity].icon}</span>
                       <span className="min-w-0 flex-1 truncate">{p.message}</span>

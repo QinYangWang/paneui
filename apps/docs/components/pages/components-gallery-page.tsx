@@ -71,7 +71,7 @@ export default function ComponentsGalleryPage({ site, data }: { site: SiteProps;
                   </div>
                   <Link
                     href={`/docs/${item.name}`}
-                    className="flex w-fit items-center gap-1.5 rounded-md px-1 text-ui-lg font-medium outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50"
+                    className="flex w-fit items-center gap-1.5 rounded-md px-1 text-ui-lg font-medium outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     {item.title}
                     <ArrowRightIcon

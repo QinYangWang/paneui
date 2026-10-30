@@ -189,7 +189,7 @@ export default function ThemesPage({ site, data }: { site: SiteProps; data: Them
                     aria-label={t(siteCopy(PRESET_LABELS[p]))}
                     title={t(siteCopy(PRESET_LABELS[p]))}
                     onClick={() => pickPreset(p)}
-                    className="grid size-8 cursor-pointer place-items-center rounded-full outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 aria-checked:ring-2 aria-checked:ring-foreground/70"
+                    className="grid size-8 cursor-pointer place-items-center rounded-full outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring aria-checked:ring-2 aria-checked:ring-foreground/70"
                   >
                     <span
                       aria-hidden

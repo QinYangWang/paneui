@@ -101,7 +101,7 @@ function ButtonView({ node, selected }: ReactNodeViewProps) {
           variant === "filled" && "text-white",
           variant === "outline" && "border-2 bg-transparent",
           variant === "link" && "h-auto px-0 underline underline-offset-4",
-          selected && "ring-2 ring-ring/50 ring-offset-2 ring-offset-card"
+          selected && "ring-2 ring-ring ring-offset-2 ring-offset-card"
         )}
         style={
           variant === "filled"
@@ -160,14 +160,14 @@ function ImageView({ node, selected }: ReactNodeViewProps) {
           src={src}
           alt={alt}
           style={{ width: `${width}%` }}
-          className={cn("block max-w-full rounded-lg media-outline", selected && "ring-2 ring-ring/50")}
+          className={cn("block max-w-full rounded-lg media-outline", selected && "ring-2 ring-ring")}
         />
       ) : (
         <div
           data-drag-handle
           className={cn(
             "flex h-32 w-full flex-col items-center justify-center gap-1.5 rounded-lg bg-muted text-ui text-muted-foreground shadow-well",
-            selected && "ring-2 ring-ring/50"
+            selected && "ring-2 ring-ring"
           )}
         >
           <ImageIcon className="size-5" />
@@ -219,13 +219,13 @@ function LogoView({ node, selected }: ReactNodeViewProps) {
           src={src}
           alt={l10n.logo}
           style={{ height: size }}
-          className={cn("block w-auto rounded-md media-outline", selected && "ring-2 ring-ring/50")}
+          className={cn("block w-auto rounded-md media-outline", selected && "ring-2 ring-ring")}
         />
       ) : (
         <div
           data-drag-handle
           style={{ width: size, height: size }}
-          className={cn("flex items-center justify-center rounded-lg bg-muted text-muted-foreground shadow-well", selected && "ring-2 ring-ring/50")}
+          className={cn("flex items-center justify-center rounded-lg bg-muted text-muted-foreground shadow-well", selected && "ring-2 ring-ring")}
         >
           <ImageIcon className="size-4" />
         </div>
@@ -433,7 +433,7 @@ function SectionView({ node, updateAttributes, editor }: ReactNodeViewProps) {
                 type="button"
                 aria-pressed={background === b}
                 onClick={() => updateAttributes({ background: b })}
-                className="h-5 cursor-pointer rounded-md px-1.5 capitalize outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 aria-pressed:bg-foreground/8 aria-pressed:text-foreground"
+                className="h-5 cursor-pointer rounded-md px-1.5 capitalize outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring aria-pressed:bg-foreground/8 aria-pressed:text-foreground"
               >
                 {b === "none" ? l10n.plain : b === "muted" ? l10n.sectionMuted : l10n.sectionBrand}
               </button>

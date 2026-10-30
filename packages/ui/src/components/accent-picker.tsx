@@ -168,7 +168,7 @@ function AccentPicker({ accents = ACCENTS, showLabels = false, className, ...pro
             value={a}
             aria-label={ACCENT_LABELS[a]}
             style={{ "--swatch": SWATCH[a], "--swatch-fg": SWATCH_FG[a] } as React.CSSProperties}
-            className="relative grid size-7 cursor-pointer place-items-center rounded-full bg-(--swatch) text-background outline-none ring-offset-2 ring-offset-background transition-[box-shadow] duration-150 after:absolute after:inset-0 after:rounded-full after:ring-1 after:ring-foreground/10 after:ring-inset focus-visible:ring-2 focus-visible:ring-ring/50 data-checked:ring-2 data-checked:ring-foreground/30"
+            className="relative grid size-7 cursor-pointer place-items-center rounded-full bg-(--swatch) text-background outline-none ring-offset-2 ring-offset-background transition-[box-shadow] duration-150 after:absolute after:inset-0 after:rounded-full after:ring-1 after:ring-foreground/10 after:ring-inset focus-visible:ring-2 focus-visible:ring-ring data-checked:ring-2 data-checked:ring-foreground/30"
           >
             <RadioPrimitive.Indicator className="flex transition-[opacity,scale] duration-150 data-ending-style:scale-50 data-ending-style:opacity-0 data-starting-style:scale-50 data-starting-style:opacity-0 [&_svg]:size-3.5">
               <CheckIcon className="text-(--swatch-fg)" />

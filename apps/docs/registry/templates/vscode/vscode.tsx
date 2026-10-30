@@ -626,7 +626,7 @@ function Shell({ ws, docs, host }: { ws: Workspace; docs: Docs; host?: VsCodeHos
               <button
                 type="button"
                 onClick={a.run}
-                className="flex h-8 w-full items-center justify-between gap-3 rounded-md px-2 text-start text-ui transition-colors duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 active:bg-secondary"
+                className="flex h-8 w-full items-center justify-between gap-3 rounded-md px-2 text-start text-ui transition-colors duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring active:bg-secondary"
               >
                 {a.label}
                 {a.keys && <Kbd>{a.keys}</Kbd>}

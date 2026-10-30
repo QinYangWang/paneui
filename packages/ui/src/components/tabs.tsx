@@ -38,7 +38,7 @@ const tabsListVariants = cva(
 )
 
 const tabsTabVariants = cva(
-  "inline-flex shrink-0 cursor-pointer items-center justify-center data-[orientation=vertical]:justify-start gap-1.5 font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 data-icon-only:aspect-square data-icon-only:px-0 [&_svg]:size-3.5 [&_svg]:shrink-0",
+  "inline-flex shrink-0 cursor-pointer items-center justify-center data-[orientation=vertical]:justify-start gap-1.5 font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-active:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 data-icon-only:aspect-square data-icon-only:px-0 [&_svg]:size-3.5 [&_svg]:shrink-0",
   {
     variants: {
       variant: { default: "", underline: "rounded-md", ghost: "rounded-inner" },
@@ -148,7 +148,7 @@ function TabsPanel({ className, typeset, ...props }: TabsPanelProps) {
     <TabsPrimitive.Panel
       data-slot="tabs-panel"
       data-typeset={typeset === true ? "" : typeset || undefined}
-      className={cn("outline-none focus-visible:ring-2 focus-visible:ring-ring/50", className)}
+      className={cn("outline-none focus-visible:ring-2 focus-visible:ring-ring", className)}
       {...props}
     />
   )

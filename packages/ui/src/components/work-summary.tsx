@@ -118,7 +118,7 @@ function WorkSummary({
         aria-controls={panelId}
         disabled={!hasSteps}
         onClick={() => setOpen(!open)}
-        className="group/ws -mx-1 flex h-6 w-fit cursor-pointer items-center gap-1 rounded-md px-1 text-ui text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-default"
+        className="group/ws -mx-1 flex h-6 w-fit cursor-pointer items-center gap-1 rounded-md px-1 text-ui text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default"
       >
         {running ? <TextShimmer className="tabular-nums">{text}</TextShimmer> : <span className="tabular-nums">{text}</span>}
         {hasSteps && (
@@ -220,7 +220,7 @@ function WorkSummaryStep({
           aria-expanded={open}
           aria-controls={panelId}
           onClick={() => setOpen(!open)}
-          className="group/step -mx-1 flex min-w-0 cursor-pointer items-center gap-2 rounded-md px-1 text-start text-ui text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="group/step -mx-1 flex min-w-0 cursor-pointer items-center gap-2 rounded-md px-1 text-start text-ui text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
         >
           {row}
           <ChevronRightIcon

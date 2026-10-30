@@ -500,7 +500,7 @@ export function AgentWorkspace() {
                   <button
                     type="button"
                     onClick={() => show(t.sessionId)}
-                    className="flex h-8 w-full items-center gap-2 rounded-md px-2 text-start text-ui transition-colors duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 active:bg-secondary"
+                    className="flex h-8 w-full items-center gap-2 rounded-md px-2 text-start text-ui transition-colors duration-150 outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring active:bg-secondary"
                   >
                     <ProviderIcon provider={t.provider} />
                     <span className="min-w-0 flex-1 truncate">{t.title}</span>

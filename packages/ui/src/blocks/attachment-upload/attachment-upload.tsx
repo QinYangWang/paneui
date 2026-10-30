@@ -69,7 +69,7 @@ export interface AttachmentUploadProps {
 
 const EASE = [0.22, 1, 0.36, 1] as const
 const iconButton =
-  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50"
+  "inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
 
 function formatBytes(bytes?: number) {
   if (bytes === undefined || !Number.isFinite(bytes) || bytes <= 0) return ""
@@ -278,7 +278,7 @@ function AttachmentRow({
           type="button"
           onClick={() => onPreview(item)}
           aria-label={l10n.previewNamed(item.name)}
-          className="relative size-11 shrink-0 cursor-zoom-in rounded-inner outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="relative size-11 shrink-0 cursor-zoom-in rounded-inner outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           {!previewing && <Thumb item={item} layout={!reduce} />}
         </button>
@@ -605,7 +605,7 @@ export function AttachmentUpload({
               inputRef.current?.click()
             }}
             className={cn(
-              "inline-flex shrink-0 cursor-pointer items-center gap-1 pr-3 pl-2 text-ui font-medium text-foreground transition-colors duration-150 ease-out outline-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none",
+              "inline-flex shrink-0 cursor-pointer items-center gap-1 pr-3 pl-2 text-ui font-medium text-foreground transition-colors duration-150 ease-out outline-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none",
               // empty state: a quiet secondary fill, still no ring of its own
               compact ? "h-8 rounded-inner" : "mt-1 h-8 rounded-lg bg-foreground/6 hover:bg-foreground/10"
             )}
