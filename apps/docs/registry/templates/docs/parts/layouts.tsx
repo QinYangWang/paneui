@@ -76,7 +76,7 @@ export function ClassicLayout() {
       <DocsHeader />
       <div className="flex min-w-0 flex-1">
         <SidebarColumn top="h-14" />
-        <div className="flex min-w-0 flex-1 justify-center gap-12 px-5 py-10 sm:px-8 lg:px-12">
+        <div className="flex min-w-0 flex-1 justify-center gap-12 px-4 py-10 sm:px-8 lg:px-12">
           <ArticleColumn outline="popover-narrow" />
           <aside className="sticky top-24 w-56 shrink-0 self-start max-xl:hidden">
             <Outline items={toc} activeLine={136} maxHeight="calc(100svh - 8rem)" />
@@ -93,14 +93,14 @@ export function NotebookLayout() {
     <div className="flex min-h-svh flex-col bg-background">
       <DocsHeader
         below={
-          <div className="scrollbar-none h-12 overflow-x-auto border-t border-border px-1 sm:px-2">
+          <div className="scrollbar-none h-12 overflow-x-auto border-t border-border px-1.5 sm:px-1.5">
             <SectionTabs current={CURRENT_SECTION} className="h-full" />
           </div>
         }
       />
       <div className="flex min-w-0 flex-1">
         <SidebarColumn section={CURRENT_SECTION} top="h-26" />
-        <div className="flex min-w-0 flex-1 justify-center gap-12 px-5 py-10 sm:px-8 lg:px-12">
+        <div className="flex min-w-0 flex-1 justify-center gap-12 px-4 py-10 sm:px-8 lg:px-12">
           <ArticleColumn outline="popover-narrow" outlineTop="top-26" />
           <aside className="sticky top-36 w-56 shrink-0 self-start max-xl:hidden">
             <Outline items={toc} activeLine={176} maxHeight="calc(100svh - 10.5rem)" />
@@ -115,7 +115,7 @@ export function NotebookLayout() {
 export function FluxLayout() {
   return (
     <div className="flex min-h-svh flex-col bg-background">
-      <div className="flex min-w-0 flex-1 justify-center px-5 pt-10 pb-32 sm:px-8">
+      <div className="flex min-w-0 flex-1 justify-center px-4 pt-10 pb-32 sm:px-8">
         <ArticleColumn />
       </div>
       {/* The bar is a plain surface at the article's measure: an opaque popover with the floating shadow, its controls inset 6px. */}
@@ -148,7 +148,7 @@ export function SpaciousLayout() {
   return (
     <div className="flex min-h-svh flex-col bg-background">
       <DocsHeader menu="always" />
-      <div className="flex min-w-0 flex-1 justify-center px-5 py-12 sm:px-8 lg:py-16">
+      <div className="flex min-w-0 flex-1 justify-center px-4 py-12 sm:px-8 lg:py-16">
         <ArticleColumn outline="popover" />
       </div>
     </div>
@@ -167,7 +167,7 @@ export function HomeLayout() {
       <DocsHeader menu="none">
         <SectionTabs className="h-14 max-lg:hidden" />
       </DocsHeader>
-      <main className="flex w-full flex-1 flex-col items-center px-5 sm:px-8">
+      <main className="flex w-full flex-1 flex-col items-center px-4 sm:px-8">
         <div className="grid w-full max-w-5xl grid-cols-1 items-center gap-10 py-12 sm:py-20 lg:grid-cols-12 lg:gap-12">
           <div className="flex min-w-0 flex-col items-start gap-6 lg:col-span-7">
             <Badge variant="primary">Tessel 2.4 · Approval policies</Badge>
@@ -226,7 +226,7 @@ export function HomeLayout() {
           </div>
         </section>
       </main>
-      <footer className="border-t border-border px-5 sm:px-8">
+      <footer className="border-t border-border px-4 sm:px-8">
         <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 py-6 text-sm text-muted-foreground">
           <Brand />
           <span>© 2026 Tessel Labs</span>

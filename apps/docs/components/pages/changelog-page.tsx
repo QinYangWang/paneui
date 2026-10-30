@@ -2,7 +2,7 @@
 
 import type * as React from "react"
 
-import { Code, GuideH2, GuidePage, TextLink } from "@/components/docs/guide-page"
+import { Code, GuideH2, GuidePage, GuideRow, TextLink } from "@/components/docs/guide-page"
 import { SiteRoot, type SiteProps } from "@/components/site/site-root"
 import type { DocNav } from "@/lib/doc-types"
 import { Badge } from "@paneui/ui/components/badge"
@@ -983,25 +983,32 @@ export default function ChangelogPage({ site, data }: { site: SiteProps; data: C
   return (
     <SiteRoot {...site}>
     <GuidePage href="/docs/changelog" nav={data.nav} toc={ENTRIES.map((e) => ({ id: e.id, title: e.title }))}>
-      {ENTRIES.map((e) => (
-        <section key={e.id} className="flex flex-col gap-3">
-          <div data-md-skip className="flex items-center gap-2 text-sm text-muted-foreground">
-            <time>{e.date}</time>
-            {e.tag && <Badge size="sm">{e.tag}</Badge>}
-          </div>
-          <GuideH2 id={e.id}>{e.title}</GuideH2>
-          <p hidden data-md-only>
-            <em>{e.tag ? `${e.date} · ${e.tag}` : e.date}</em>
-          </p>
-          <div className="typeset typeset-docs text-muted-foreground">
-            <ul>
-              {e.changes.map((c, i) => (
-                <li key={i}>{c}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ))}
+      {/* Date and tag in the left column, the release beside them: one reading column, scannable by date. */}
+      <div className="flex flex-col gap-12">
+        {ENTRIES.map((e) => (
+          <GuideRow
+            key={e.id}
+            label={
+              <div data-md-skip className="flex items-center gap-2 text-ui text-muted-foreground sm:sticky sm:top-20 sm:flex-col sm:items-start sm:gap-1.5 sm:pt-1">
+                <time>{e.date}</time>
+                {e.tag && <Badge size="sm">{e.tag}</Badge>}
+              </div>
+            }
+          >
+            <GuideH2 id={e.id}>{e.title}</GuideH2>
+            <p hidden data-md-only>
+              <em>{e.tag ? `${e.date} · ${e.tag}` : e.date}</em>
+            </p>
+            <div className="typeset typeset-docs text-muted-foreground">
+              <ul>
+                {e.changes.map((c, i) => (
+                  <li key={i}>{c}</li>
+                ))}
+              </ul>
+            </div>
+          </GuideRow>
+        ))}
+      </div>
     </GuidePage>
     </SiteRoot>
   )

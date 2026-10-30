@@ -491,21 +491,20 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
         <p className="text-muted-foreground">
           <T en="Components read these named levels, each built on the scale above." zh="组件读取这些具名级别，它们都建立在上面色阶之上。" />
         </p>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {/* The named levels in the same table as the scale, so the two read as one system and no grid cell is left empty. */}
+        <Table head={["", { en: "Class", zh: "类名" }, { en: "Use for", zh: "用途" }]}>
           {SHADOWS.map((s) => (
-            <div key={s.cls} className="flex items-start gap-3 rounded-xl p-3">
-              <span aria-hidden className={`block size-10 shrink-0 rounded-lg bg-card ${s.cls}`} />
-              <span className="flex min-w-0 flex-col gap-0.5">
-                <code data-md-after=":" className="font-mono text-xs text-foreground">
-                  {s.cls}
-                </code>
-                <span className="text-sm text-muted-foreground">
-                  <T en={s.use.en} zh={s.use.zh} />
-                </span>
-              </span>
-            </div>
+            <SimpleTableRow key={s.cls}>
+              <SimpleTableCell data-md-skip className="w-14">
+                <span aria-hidden className={`block size-8 rounded-lg bg-card ${s.cls}`} />
+              </SimpleTableCell>
+              <SimpleTableCell variant="code">{s.cls}</SimpleTableCell>
+              <SimpleTableCell>
+                <T en={s.use.en} zh={s.use.zh} />
+              </SimpleTableCell>
+            </SimpleTableRow>
           ))}
-        </div>
+        </Table>
       </section>
 
       <section className="flex flex-col gap-4">
