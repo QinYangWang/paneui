@@ -43,8 +43,8 @@ function ResourceIcon({ kind, className }: { kind: SidebarResourceKind; classNam
       size={16}
       className={cn(
         "shrink-0",
-        kind === "project" && "text-primary",
-        kind === "bookmark" && "text-warning",
+        kind === "project" && "text-primary-text",
+        kind === "bookmark" && "text-warning-text",
         (kind === "folder" || kind === "file") && "text-muted-foreground",
         className
       )}

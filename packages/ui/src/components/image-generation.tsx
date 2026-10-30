@@ -177,7 +177,7 @@ function ImageGeneration({
         {status === "error" ? (
           <div className="absolute inset-0 grid place-items-center p-6 text-center">
             <div className="flex flex-col items-center gap-2 text-ui text-muted-foreground">
-              <AlertCircleIcon className="size-5 text-destructive" />
+              <AlertCircleIcon className="size-5 text-destructive-text" />
               {errorText}
               {onRetry ? (
                 <button
@@ -206,13 +206,13 @@ function ImageGeneration({
               className="inline-flex h-6 items-center gap-1.5 rounded-full bg-popover/85 px-2 text-ui-xs font-medium text-popover-foreground shadow-chip backdrop-blur-md [&_svg]:size-3"
             >
               {complete ? (
-                <CheckIcon className="text-success" />
+                <CheckIcon className="text-success-text" />
               ) : status === "queued" ? (
                 <ClockIcon className="text-muted-foreground" />
               ) : status === "error" ? (
-                <AlertCircleIcon className="text-destructive" />
+                <AlertCircleIcon className="text-destructive-text" />
               ) : (
-                <SparklesIcon className="text-primary" />
+                <SparklesIcon className="text-primary-text" />
               )}
               {status === "queued" && queuePosition ? l10n.queuedPosition(queuePosition) : STATUS_TEXT[status]}
               {status === "generating" || status === "refining" ? (

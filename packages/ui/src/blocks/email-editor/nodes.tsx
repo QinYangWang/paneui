@@ -495,7 +495,7 @@ function LogicView({ node, updateAttributes, editor }: ReactNodeViewProps) {
       className="frame-xl frame-p-1 my-3 border border-dashed border-primary/40 frame-border"
     >
       <ContainerHeader>
-        {repeat ? <RefreshIcon className="text-primary" /> : <GitBranchIcon className="text-primary" />}
+        {repeat ? <RefreshIcon className="text-primary-text" /> : <GitBranchIcon className="text-primary-text" />}
         <span className="font-medium text-foreground">{repeat ? l10n.repeatForEach : l10n.showIf}</span>
         <VariableSelect
           editor={editor}
@@ -604,7 +604,7 @@ function VariableView({ node }: ReactNodeViewProps) {
     <NodeViewWrapper
       as="span"
       data-type="email-variable"
-      className="mx-px inline-flex items-center gap-0.5 rounded-md bg-primary-subtle px-1 align-baseline font-mono text-[0.85em] leading-normal text-foreground [&_svg]:text-primary"
+      className="mx-px inline-flex items-center gap-0.5 rounded-md bg-primary-subtle px-1 align-baseline font-mono text-[0.85em] leading-normal text-foreground [&_svg]:text-primary-text"
     >
       <BracesIcon className="size-3" />
       {id}

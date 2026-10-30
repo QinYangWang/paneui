@@ -271,7 +271,7 @@ function Citation({
           }
         }}
         className={cn(
-          "relative -top-[0.15em] mx-0.5 inline-flex h-[1.35em] min-w-[1.35em] cursor-pointer items-center justify-center rounded-full bg-muted px-1 align-baseline font-sans text-[0.68em] leading-none font-semibold text-muted-foreground tabular-nums no-underline shadow-chip transition-[color,background-color,box-shadow] duration-150 outline-none hover:bg-primary/14 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-primary/14 data-popup-open:text-primary",
+          "relative -top-[0.15em] mx-0.5 inline-flex h-[1.35em] min-w-[1.35em] cursor-pointer items-center justify-center rounded-full bg-muted px-1 align-baseline font-sans text-[0.68em] leading-none font-semibold text-muted-foreground tabular-nums no-underline shadow-chip transition-[color,background-color,box-shadow] duration-150 outline-none hover:bg-primary/14 hover:text-primary-text focus-visible:ring-2 focus-visible:ring-ring/50 data-popup-open:bg-primary/14 data-popup-open:text-primary-text",
           className
         )}
         {...props}
@@ -307,7 +307,7 @@ function Citation({
                     href={source.url}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="inline-flex shrink-0 items-center gap-0.5 rounded-full px-1.5 py-0.5 font-medium text-primary outline-none hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-ring/50"
+                    className="inline-flex shrink-0 items-center gap-0.5 rounded-full px-1.5 py-0.5 font-medium text-primary-text outline-none hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
                     {l10n.priceOpen}
                     <ArrowUpRightIcon className="size-3 rtl:-scale-x-100" />

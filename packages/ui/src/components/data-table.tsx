@@ -417,7 +417,7 @@ type FacetProps<T> = {
 }
 
 function FacetCount({ children }: { children: React.ReactNode }) {
-  return <span className="-mr-0.5 rounded-full bg-primary/14 px-1.5 text-ui-xs leading-4.5 font-medium text-primary tabular-nums">{children}</span>
+  return <span className="-mr-0.5 rounded-full bg-primary/14 px-1.5 text-ui-xs leading-4.5 font-medium text-primary-text tabular-nums">{children}</span>
 }
 
 /** One filter's options as checkbox rows, each with its row count. */

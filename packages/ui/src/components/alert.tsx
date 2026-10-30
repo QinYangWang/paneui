@@ -17,11 +17,11 @@ const alertVariants = cva(
     variants: {
       variant: {
         default: "border-border [&>[data-slot=alert-icon]]:text-foreground",
-        info: "border-border [&>[data-slot=alert-icon]]:text-primary",
-        success: "border-border [&>[data-slot=alert-icon]]:text-success",
-        warning: "border-border [&>[data-slot=alert-icon]]:text-warning",
+        info: "border-border [&>[data-slot=alert-icon]]:text-primary-text",
+        success: "border-border [&>[data-slot=alert-icon]]:text-success-text",
+        warning: "border-border [&>[data-slot=alert-icon]]:text-warning-text",
         destructive:
-          "border-border text-destructive [&>[data-slot=alert-icon]]:text-destructive [&_[data-slot=alert-description]]:text-destructive/80",
+          "border-border text-destructive-text [&>[data-slot=alert-icon]]:text-destructive-text [&_[data-slot=alert-description]]:text-destructive-text/80",
       },
       size: {
         sm: "gap-2.5 rounded-lg px-3 py-2.5 text-ui",

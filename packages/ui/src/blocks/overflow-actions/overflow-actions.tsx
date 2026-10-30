@@ -100,7 +100,7 @@ export function OverflowActions({
         s.action,
         item.iconOnly && "px-0",
         item.destructive
-          ? "text-destructive hover:bg-destructive/10"
+          ? "text-destructive-text hover:bg-destructive/10"
           : fromOverflow
             ? "text-muted-foreground hover:bg-accent hover:text-foreground"
             : "bg-card text-secondary-foreground shadow-raised hover:bg-accent hover:shadow-raised-hover"

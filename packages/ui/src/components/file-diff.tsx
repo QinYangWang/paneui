@@ -471,7 +471,7 @@ function FileDiff<A = undefined>({
         >
           {variant === "card" && <ChevronDownIcon className="size-4 shrink-0 -rotate-90 text-muted-foreground transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-panel-open/trigger:rotate-0 motion-reduce:transition-none" />}
           {streaming ? (
-            <Loader size="sm" label={labels.writingChanges} className="size-4 text-primary" />
+            <Loader size="sm" label={labels.writingChanges} className="size-4 text-primary-text" />
           ) : (
             <FileIcon className="size-4 shrink-0 text-muted-foreground" />
           )}
@@ -480,8 +480,8 @@ function FileDiff<A = undefined>({
             <span className="font-medium text-foreground">{base}</span>
           </span>
           <span className="flex shrink-0 items-center gap-1.5 font-mono text-ui-sm tabular-nums">
-            {additions > 0 && <span className="text-success">+{additions}</span>}
-            {deletions > 0 && <span className="text-destructive">−{deletions}</span>}
+            {additions > 0 && <span className="text-success-text">+{additions}</span>}
+            {deletions > 0 && <span className="text-destructive-text">−{deletions}</span>}
             <span className="sr-only">{labels.diffStats(additions, deletions)}</span>
             {variant === "card" && <DiffStat additions={additions} deletions={deletions} />}
           </span>

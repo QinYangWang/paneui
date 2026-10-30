@@ -199,7 +199,7 @@ function StatusMark({ status }: { status: AttachmentStatus }) {
           animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.25, filter: "blur(4px)" }}
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-          className="inline-flex size-4 items-center justify-center rounded-full bg-success/14 text-success"
+          className="inline-flex size-4 items-center justify-center rounded-full bg-success/14 text-success-text"
           aria-label={l10n.uploaded}
         >
           <CheckIcon size={10} />
@@ -212,7 +212,7 @@ function StatusMark({ status }: { status: AttachmentStatus }) {
           animate={reduce ? { opacity: 1 } : { x: [0, -3, 3, -2, 0], opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
-          className="inline-flex text-destructive"
+          className="inline-flex text-destructive-text"
           aria-label={l10n.toolFailed}
         >
           <AlertCircleIcon size={14} />
@@ -286,7 +286,7 @@ function AttachmentRow({
         <span
           className={cn(
             "inline-flex size-11 shrink-0 items-center justify-center rounded-inner transition-colors",
-            status === "error" ? "bg-destructive/8 text-destructive" : "bg-muted text-muted-foreground"
+            status === "error" ? "bg-destructive/8 text-destructive-text" : "bg-muted text-muted-foreground"
           )}
         >
           {item.kind === "link" ? <GlobeIcon size={18} /> : <FileIcon size={18} />}
@@ -312,7 +312,7 @@ function AttachmentRow({
           <StatusMark status={status} />
         </div>
         <span
-          className={cn("truncate text-ui-sm tabular-nums", status === "error" ? "text-destructive" : "text-muted-foreground")}
+          className={cn("truncate text-ui-sm tabular-nums", status === "error" ? "text-destructive-text" : "text-muted-foreground")}
         >
           {meta}
         </span>
@@ -569,7 +569,7 @@ export function AttachmentUpload({
             animate={reduce ? undefined : { y: dragging ? -3 : 0 }}
             className={cn(
               "inline-flex shrink-0 items-center justify-center transition-colors duration-150",
-              dragging ? "text-primary" : "text-muted-foreground"
+              dragging ? "text-primary-text" : "text-muted-foreground"
             )}
           >
             <UploadIcon size={compact ? 16 : 22} />

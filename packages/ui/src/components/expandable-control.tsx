@@ -218,7 +218,7 @@ function ExpandableChip({
                 className={cn(
                   "grid size-6 cursor-pointer place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-3.5",
                   actionTone === "destructive"
-                    ? "bg-destructive/12 text-destructive hover:bg-destructive hover:text-white"
+                    ? "bg-destructive/12 text-destructive-text hover:bg-destructive hover:text-white"
                     : "bg-muted text-muted-foreground shadow-well hover:text-foreground"
                 )}
               >

@@ -32,9 +32,9 @@ function StatusMark({ status }: { status: TaskStatus }) {
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
           className={cn(
             "inline-flex size-7 items-center justify-center rounded-full",
-            status === "done" && "bg-success text-white",
-            status === "failed" && "bg-destructive/14 text-destructive",
-            status === "running" && "bg-primary/14 text-primary",
+            status === "done" && "bg-success text-success-foreground",
+            status === "failed" && "bg-destructive/14 text-destructive-text",
+            status === "running" && "bg-primary/14 text-primary-text",
             status === "queued" && "bg-muted shadow-well"
           )}
         >

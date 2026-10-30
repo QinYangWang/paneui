@@ -160,7 +160,7 @@ function MorphSelectItem({ className, children, ...props }: SelectPrimitive.Item
       {...props}
     >
       <SelectPrimitive.ItemText className="flex flex-1 items-center gap-2 truncate">{children}</SelectPrimitive.ItemText>
-      <SelectPrimitive.ItemIndicator className="absolute right-2.5 flex text-primary">
+      <SelectPrimitive.ItemIndicator className="absolute right-2.5 flex text-primary-text">
         <CheckIcon />
       </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>

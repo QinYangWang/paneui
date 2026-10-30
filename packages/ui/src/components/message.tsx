@@ -336,7 +336,7 @@ function MessageReaction({
       }}
       className={cn(
         "inline-flex h-6 cursor-pointer items-center gap-1 rounded-full bg-foreground/5 px-2 text-ui-xs font-medium text-muted-foreground tabular-nums shadow-[inset_0_0_0_1px_transparent] transition-[background-color,color,box-shadow] duration-100 outline-none hover:bg-foreground/8 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
-        active && "bg-primary/10 text-primary shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary),transparent_60%)] hover:bg-primary/15 hover:text-primary",
+        active && "bg-primary/10 text-primary-text shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--primary),transparent_60%)] hover:bg-primary/15 hover:text-primary-text",
         className
       )}
       {...props}

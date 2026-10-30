@@ -537,7 +537,7 @@ function DateRangePickerGrid({
                         "data-preview-end:shadow-[inset_0_0_0_1.5px_var(--primary)] data-preview-end:hover:bg-primary/12",
                         "data-selected:bg-primary data-selected:font-semibold data-selected:text-primary-foreground data-selected:shadow-primary data-selected:hover:bg-primary",
                         "disabled:cursor-not-allowed disabled:text-muted-foreground/40 disabled:line-through disabled:hover:bg-transparent",
-                        "aria-[current=date]:not-data-selected:font-semibold aria-[current=date]:not-data-selected:text-primary",
+                        "aria-[current=date]:not-data-selected:font-semibold aria-[current=date]:not-data-selected:text-primary-text",
                         "motion-reduce:transition-none"
                       )}
                     >

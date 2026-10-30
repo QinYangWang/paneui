@@ -10,10 +10,10 @@ import { useLocale } from "@paneui/ui/components/locale-provider"
 type PullRequestStatus = "open" | "draft" | "merged" | "closed"
 
 const PR_TONE: Record<PullRequestStatus, string> = {
-  open: "text-success",
+  open: "text-success-text",
   draft: "text-muted-foreground",
   merged: "text-chart-3",
-  closed: "text-destructive",
+  closed: "text-destructive-text",
 }
 
 /** A list of threads (agent chats). Group rows with `ThreadListGroup`. */
@@ -127,7 +127,7 @@ function ThreadListItem({
     >
       <span className="flex w-full min-w-0 items-center gap-2">
         <span className="flex size-4 shrink-0 items-center justify-center text-muted-foreground group-data-active/thread:text-foreground [&_svg]:size-3.5">
-          {running ? <Loader variant="ring" size="sm" label={labels.working} className="size-3.5 text-primary" /> : icon}
+          {running ? <Loader variant="ring" size="sm" label={labels.working} className="size-3.5 text-primary-text" /> : icon}
         </span>
         <span className="min-w-0 flex-1 truncate text-ui text-foreground/90 group-data-active/thread:text-foreground">{title}</span>
         {unread && <span role="img" aria-label={labels.unread} className="size-1.5 shrink-0 rounded-full bg-primary" />}
