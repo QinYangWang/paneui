@@ -59,9 +59,10 @@ function Actions({ name }: { name: string }) {
 
 /**
  * One template: its screenshot (a link to the docs page) and a caption with the name, one line and
- * the two actions. `lead` sets the first template large, its caption beside the picture.
+ * the two actions. `lead` sets a template across both columns, its caption beside the picture;
+ * `mirror` puts that caption on the left.
  */
-function TemplateEntry({ tpl, lead }: { tpl: TemplateCard; lead?: boolean }) {
+function TemplateEntry({ tpl, lead, mirror }: { tpl: TemplateCard; lead?: boolean; mirror?: boolean }) {
   return (
     <article className={lead ? "grid grid-cols-1 gap-4 md:col-span-2 lg:grid-cols-12 lg:items-end lg:gap-10" : "flex flex-col gap-4"}>
       <Link
@@ -71,7 +72,7 @@ function TemplateEntry({ tpl, lead }: { tpl: TemplateCard; lead?: boolean }) {
       >
         <Shot name={tpl.name} title={tpl.title} />
       </Link>
-      <div className={lead ? "flex flex-col gap-4 lg:col-span-4" : "flex flex-col gap-3"}>
+      <div className={lead ? `flex flex-col gap-4 lg:col-span-4 ${mirror ? "lg:order-first" : ""}` : "flex flex-col gap-3"}>
         <div className="flex min-w-0 flex-col gap-1 px-1">
           <h2 className={lead ? "font-heading text-2xl font-semibold tracking-tight text-balance" : "text-lg font-semibold text-balance"}>
             <Link href={`/docs/${tpl.name}`} className="rounded-sm outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50">
@@ -92,6 +93,10 @@ function TemplateEntry({ tpl, lead }: { tpl: TemplateCard; lead?: boolean }) {
 
 export default function TemplatesOverviewPage({ site, templates }: { site: SiteProps; templates: TemplateCard[] }) {
   const [first, ...rest] = templates
+  // The grid is two columns from md. With an odd number left after the lead, the last template
+  // spans both columns too (caption on the other side), so the grid always ends on a full row.
+  const closing = rest.length % 2 === 1 ? rest[rest.length - 1] : undefined
+  const pairs = closing ? rest.slice(0, -1) : rest
   return (
     <SiteRoot {...site}>
       <div className="flex flex-col gap-12">
@@ -104,9 +109,10 @@ export default function TemplatesOverviewPage({ site, templates }: { site: SiteP
         />
         <div className="grid gap-x-6 gap-y-14 md:grid-cols-2">
           {first && <TemplateEntry tpl={first} lead />}
-          {rest.map((tpl) => (
+          {pairs.map((tpl) => (
             <TemplateEntry key={tpl.name} tpl={tpl} />
           ))}
+          {closing && <TemplateEntry tpl={closing} lead mirror />}
         </div>
       </div>
     </SiteRoot>
