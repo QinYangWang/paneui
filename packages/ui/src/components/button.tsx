@@ -14,7 +14,7 @@ import { cn } from "@paneui/ui/lib/utils"
 // since the round ends eat into the space beside the label. `inverse` and `glass` are for calls to
 // action on pictures and tinted sections; `xl` is the hero size.
 const buttonVariants = cva(
-  "group/button relative inline-flex shrink-0 cursor-pointer items-center justify-center rounded-control text-ui font-medium whitespace-nowrap transition-[box-shadow,background-color,color,opacity] duration-150 ease-out outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-64 aria-invalid:ring-2 aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='opacity-'])]:opacity-80 [&_[data-slot=kbd]]:rounded-[max(calc(var(--radius-control)-var(--spacing)*1.5),min(var(--radius-2xs),var(--radius-sm)))]",
+  "group/button relative inline-flex shrink-0 cursor-pointer items-center justify-center rounded-control text-ui font-medium whitespace-nowrap transition-[box-shadow,background-color,color,opacity] duration-150 ease-out outline-none select-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-64 aria-invalid:ring-2 aria-invalid:ring-destructive/30 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='opacity-'])]:opacity-80 [&_[data-slot=kbd]]:rounded-[max(calc(var(--radius-control)-var(--spacing)*1.5),min(var(--radius-2xs),var(--radius-sm)))]",
   {
     variants: {
       variant: {

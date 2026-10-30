@@ -48,7 +48,7 @@ function MorphSelectTrigger({ className, children, ...props }: SelectPrimitive.T
       data-slot="morph-select-trigger"
       className={cn(
         ROW,
-        "min-w-44 cursor-pointer rounded-xl bg-card shadow-raised transition-[box-shadow,background-color,opacity] duration-200 outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:opacity-50",
+        "min-w-44 cursor-pointer rounded-xl bg-card shadow-raised transition-[box-shadow,background-color,opacity] duration-200 outline-none select-none hover:bg-accent hover:shadow-raised-hover focus-visible:ring-2 focus-visible:ring-ring data-disabled:pointer-events-none data-disabled:opacity-50",
         className
       )}
       {...props}

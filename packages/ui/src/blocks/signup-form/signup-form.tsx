@@ -216,7 +216,7 @@ function SignupForm({
               aria-label={reveal ? l10n.hidePassword : l10n.showPassword}
               aria-pressed={reveal}
               disabled={done}
-              className="absolute top-1/2 right-1.5 flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 [&_svg]:size-4"
+              className="absolute top-1/2 right-1.5 flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring [&_svg]:size-4"
             >
               <AnimatePresence initial={false} mode="popLayout">
                 <motion.span

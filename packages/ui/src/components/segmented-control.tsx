@@ -38,7 +38,7 @@ const segmentedControlVariants = cva("relative inline-flex w-fit items-center ga
 })
 
 const segmentedControlItemVariants = cva(
-  "relative inline-flex cursor-pointer items-center select-none justify-center gap-1.5 font-medium whitespace-nowrap text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground active:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/50 data-checked:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 [&_svg]:size-3.5 [&_svg]:shrink-0",
+  "relative inline-flex cursor-pointer items-center select-none justify-center gap-1.5 font-medium whitespace-nowrap text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground active:bg-secondary focus-visible:ring-2 focus-visible:ring-ring data-checked:text-foreground data-disabled:pointer-events-none data-disabled:opacity-64 [&_svg]:size-3.5 [&_svg]:shrink-0",
   {
     variants: {
       size: {

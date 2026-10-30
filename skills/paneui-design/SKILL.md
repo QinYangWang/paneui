@@ -258,7 +258,7 @@ Popups enter from `scale-98` plus opacity; exits are shorter than entrances.
 
 Keyboard users need to see where they are; a hover style doesn't help them.
 
-`focus-visible:ring-2 focus-visible:ring-ring/50` on everything interactive. `outline-none` only with
+`focus-visible:ring-2 focus-visible:ring-ring` on everything interactive. `outline-none` only with
 that ring. Check every change in light and dark.
 
 ### 27. Let the preview explain

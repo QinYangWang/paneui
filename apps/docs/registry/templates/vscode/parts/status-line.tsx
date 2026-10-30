@@ -17,7 +17,7 @@ function StatusAction({ className, ...props }: React.ComponentProps<"button">) {
       type="button"
       className={cn(
         ITEM,
-        "cursor-default transition-colors duration-150 hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+        "cursor-default transition-colors duration-150 hover:bg-secondary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
         className
       )}
       {...props}

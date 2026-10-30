@@ -229,7 +229,7 @@ function skeletonWidth(row: number, col: number) {
 /* -------------------------------------------------------------------------- */
 
 const headerLabelClass =
-  "group/label flex h-full min-w-0 flex-1 items-center gap-1.5 rounded-lg px-3 text-ui-sm font-medium tracking-wide text-muted-foreground uppercase outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 data-[reorderable=true]:cursor-grab data-[dragging=true]:cursor-grabbing"
+  "group/label flex h-full min-w-0 flex-1 items-center gap-1.5 rounded-lg px-3 text-ui-sm font-medium tracking-wide text-muted-foreground uppercase outline-none select-none focus-visible:ring-2 focus-visible:ring-ring data-[reorderable=true]:cursor-grab data-[dragging=true]:cursor-grabbing"
 
 function SortIndicator({ direction }: { direction: SortDirection | null }) {
   if (!direction) {

@@ -14,7 +14,7 @@ const post = posts[0]
 const next = posts[1]
 
 const pagerLink =
-  "flex min-w-0 flex-col gap-1 rounded-md px-2 py-2 transition-colors duration-150 outline-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring/50"
+  "flex min-w-0 flex-col gap-1 rounded-md px-2 py-2 transition-colors duration-150 outline-none hover:bg-foreground/6 focus-visible:ring-2 focus-visible:ring-ring"
 
 /**
  * Blog post: breadcrumbs, title, date, the article in `typeset typeset-reading`, then a pager back

@@ -314,7 +314,7 @@ function ThemeToggle({
         }
       }}
       className={cn(
-        "relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
+        "relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden transition-[box-shadow,background-color,scale] duration-150 ease-out outline-none select-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
         variant === "ghost"
           ? "size-7 rounded-lg text-foreground hover:bg-secondary [&_svg]:opacity-80"
           : "size-8 rounded-full bg-card text-secondary-foreground shadow-raised hover:bg-accent hover:shadow-raised-hover",
@@ -384,7 +384,7 @@ function ThemeSwitch({ className, storageKey, duration, onThemeChange, modes = "
               setTheme(value, { origin })
             }}
             className={cn(
-              "relative grid h-full w-7 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+              "relative grid h-full w-7 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
               checked && "text-foreground"
             )}
           >

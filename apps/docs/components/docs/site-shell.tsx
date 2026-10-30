@@ -27,7 +27,7 @@ import { ThemeSync } from "./theme-sync"
 const GITHUB_URL = "https://github.com/taimatsuorg/paneui"
 
 const headerLink =
-  "rounded-md px-2 py-1 text-ui text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 aria-[current=page]:text-foreground"
+  "rounded-md px-2 py-1 text-ui text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring aria-[current=page]:text-foreground"
 
 function useIsMac() {
   const [mac, setMac] = React.useState(true)
@@ -40,7 +40,7 @@ function Brand() {
   return (
     <Link
       href="/"
-      className="-ms-1 flex h-8 items-center gap-2 rounded-lg ps-1 pe-2 text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+      className="-ms-1 flex h-8 items-center gap-2 rounded-lg ps-1 pe-2 text-ui-lg font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       <PaneuiLogoIcon size={20} className="text-foreground" />
       PaneUI

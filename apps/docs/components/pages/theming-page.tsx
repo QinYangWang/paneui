@@ -591,12 +591,12 @@ export default function ThemingPage({ site, data }: { site: SiteProps; data: The
             <T
               en={
                 <>
-                  Show focus with <Code>focus-visible:ring-2 focus-visible:ring-ring/50</Code>.
+                  Show focus with <Code>focus-visible:ring-2 focus-visible:ring-ring</Code>.
                 </>
               }
               zh={
                 <>
-                  焦点用 <Code>focus-visible:ring-2 focus-visible:ring-ring/50</Code> 表示。
+                  焦点用 <Code>focus-visible:ring-2 focus-visible:ring-ring</Code> 表示。
                 </>
               }
             />

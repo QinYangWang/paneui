@@ -68,14 +68,14 @@ function TemplateEntry({ tpl, lead, mirror }: { tpl: TemplateCard; lead?: boolea
       <Link
         href={`/docs/${tpl.name}`}
         aria-label={tpl.title}
-        className={`block overflow-hidden frame-xl bg-shell shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring/50 ${lead ? "lg:col-span-8" : ""}`}
+        className={`block overflow-hidden frame-xl bg-shell shadow-raised outline-none focus-visible:ring-2 focus-visible:ring-ring ${lead ? "lg:col-span-8" : ""}`}
       >
         <Shot name={tpl.name} title={tpl.title} />
       </Link>
       <div className={lead ? `flex flex-col gap-4 lg:col-span-4 ${mirror ? "lg:order-first" : ""}` : "flex flex-col gap-3"}>
         <div className="flex min-w-0 flex-col gap-1 px-1">
           <h2 className={lead ? "font-heading text-2xl font-semibold tracking-tight text-balance" : "text-lg font-semibold text-balance"}>
-            <Link href={`/docs/${tpl.name}`} className="rounded-sm outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring/50">
+            <Link href={`/docs/${tpl.name}`} className="rounded-sm outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring">
               {tpl.title}
             </Link>
           </h2>

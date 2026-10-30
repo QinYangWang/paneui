@@ -66,7 +66,7 @@ function CodeCopyButton({
         copy(typeof value === "function" ? value() : value)
       }}
       className={cn(
-        "relative grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 data-copied:text-success-text",
+        "relative grid size-7 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground transition-[background-color,color,scale] duration-150 ease-out outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-copied:text-success-text",
         className
       )}
       data-copied={copied || undefined}

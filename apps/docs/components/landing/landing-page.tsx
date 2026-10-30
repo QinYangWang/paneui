@@ -31,7 +31,7 @@ export function LandingPage({ codeHtml }: { count: number; codeHtml: string }) {
       <div className="min-h-screen overflow-x-clip bg-background text-foreground">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-card focus:p-3 focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-card focus:p-3 focus-visible:ring-2 focus-visible:ring-ring"
         >
           {t({ en: "Skip to content", zh: "跳转到内容" })}
         </a>

@@ -117,7 +117,7 @@ export const TOKEN_ROLES: TokenRole[] = [
       { name: "border-control", cls: "border-border-control", kind: "line" },
       { name: "input", cls: "border-input", kind: "line" },
       { name: "shell-border", cls: "border-shell-border", kind: "line" },
-      { name: "ring", cls: "ring-ring/50", kind: "line", note: "accent" },
+      { name: "ring", cls: "ring-ring", kind: "line", note: "accent" },
       { name: "scrollbar", cls: "var(--scrollbar)", kind: "fill" },
       { name: "scrollbar-hover", cls: "var(--scrollbar-hover)", kind: "fill" },
     ],

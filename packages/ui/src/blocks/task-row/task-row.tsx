@@ -70,7 +70,7 @@ export function TaskRow({
       data-status={status}
       onClick={onClick}
       className={cn(
-        "group/task flex w-full cursor-pointer items-center gap-3 rounded-2xl ps-3 pe-2.5 py-2.5 text-start transition-[background-color,box-shadow] outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring/50",
+        "group/task flex w-full cursor-pointer items-center gap-3 rounded-2xl ps-3 pe-2.5 py-2.5 text-start transition-[background-color,box-shadow] outline-none hover:bg-card focus-visible:ring-2 focus-visible:ring-ring",
         className
       )}
     >
