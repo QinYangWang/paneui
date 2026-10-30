@@ -51,7 +51,7 @@ export function AgentSkill({ name, skill, html }: { name: string; skill: string;
             }}
           >
             <ActionSwapBlurIcon value={copied ? "copied" : "copy"}>
-              {copied ? <CheckIcon data-icon="inline-start" className="text-success" /> : <CopyIcon data-icon="inline-start" />}
+              {copied ? <CheckIcon data-icon="inline-start" className="text-success-text" /> : <CopyIcon data-icon="inline-start" />}
             </ActionSwapBlurIcon>
             {t(copied ? { en: "Copied", zh: "已复制" } : { en: "Copy", zh: "复制" })}
           </Button>

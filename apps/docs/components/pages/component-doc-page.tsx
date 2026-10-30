@@ -116,7 +116,7 @@ function ApiPart({ part }: { part: PartDoc }) {
               <dt className="flex min-w-0 flex-wrap items-baseline justify-between gap-x-3 gap-y-1 font-mono text-xs">
                 <span className="min-w-0 break-all text-foreground">
                   {p.name}
-                  {p.required && <span className="text-destructive">*</span>}
+                  {p.required && <span className="text-destructive-text">*</span>}
                 </span>
                 {p.default && <span className="min-w-0 break-all text-muted-foreground">= {p.default}</span>}
               </dt>
@@ -145,7 +145,7 @@ function ApiPart({ part }: { part: PartDoc }) {
               <SimpleTableRow key={p.name}>
                 <SimpleTableCell variant="code">
                   {p.name}
-                  {p.required && <span className="text-destructive">*</span>}
+                  {p.required && <span className="text-destructive-text">*</span>}
                 </SimpleTableCell>
                 <SimpleTableCell variant="type">{p.type}</SimpleTableCell>
                 <SimpleTableCell variant="code-muted">

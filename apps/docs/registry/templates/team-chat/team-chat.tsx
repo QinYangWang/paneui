@@ -154,7 +154,7 @@ function RichText({ text }: { text: string }) {
       {parts.map((part, i) => {
         if (part.startsWith("@") && part.length > 1)
           return (
-            <span key={i} className="rounded-sm bg-primary/10 px-0.5 font-medium text-primary">
+            <span key={i} className="rounded-sm bg-primary/10 px-0.5 font-medium text-primary-text">
               {part}
             </span>
           )
@@ -234,7 +234,7 @@ function MessageRow({ message, grouped, handlers }: { message: ChatMessage; grou
             className="-mx-1 mt-1 flex w-fit cursor-pointer items-center gap-2 rounded-md px-1 py-0.5 text-ui-sm outline-none hover:bg-card hover:shadow-raised focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <AvatarStack people={[...new Set(replies.map((r) => r.author))].map((id) => PEOPLE[id]!)} max={3} />
-            <span className="font-medium text-primary">
+            <span className="font-medium text-primary-text">
               {replies.length} {replies.length === 1 ? "reply" : "replies"}
             </span>
             <span className="text-ui-xs text-muted-foreground">Last reply {formatTime(replies[replies.length - 1]!.at)}</span>
@@ -271,7 +271,7 @@ function Rows({ messages, handlers, newFrom }: { messages: ChatMessage[]; handle
           <React.Fragment key={m.id}>
             {isNew && (
               <MessageMarker>
-                <span className="text-primary">New</span>
+                <span className="text-primary-text">New</span>
               </MessageMarker>
             )}
             <MessageRow message={m} grouped={grouped} handlers={handlers} />

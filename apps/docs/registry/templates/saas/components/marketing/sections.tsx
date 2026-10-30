@@ -215,7 +215,7 @@ export function PlanCards({ cycle }: { cycle: Cycle }) {
                 <ul className="flex flex-col gap-2.5">
                   {p.perks.map((perk) => (
                     <li key={perk} className="flex items-start gap-2.5 text-sm">
-                      <CheckIcon size={16} className="mt-0.5 shrink-0 text-primary" />
+                      <CheckIcon size={16} className="mt-0.5 shrink-0 text-primary-text" />
                       {perk}
                     </li>
                   ))}

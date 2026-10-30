@@ -234,8 +234,8 @@ function groupRules(rules: SkillRule[]) {
 }
 
 const LABEL = {
-  good: { text: { en: "Recommended", zh: "推荐" }, icon: <CheckCircleIcon className="size-4 text-success" /> },
-  bad: { text: { en: "Avoid", zh: "避免" }, icon: <XCircleIcon className="size-4 text-destructive" /> },
+  good: { text: { en: "Recommended", zh: "推荐" }, icon: <CheckCircleIcon className="size-4 text-success-text" /> },
+  bad: { text: { en: "Avoid", zh: "避免" }, icon: <XCircleIcon className="size-4 text-destructive-text" /> },
 } as const
 
 /** `code` spans in a line of markdown as inline code. */

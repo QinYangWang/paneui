@@ -174,7 +174,7 @@ function ActivityCard() {
         <ol className="flex flex-col gap-4">
           {activity.map((a) => (
             <li key={a.id} className="flex gap-3">
-              <span aria-hidden className={`mt-0.5 shrink-0 [&_svg]:size-4 ${a.kind === "alert" ? "text-warning" : "text-muted-foreground"}`}>
+              <span aria-hidden className={`mt-0.5 shrink-0 [&_svg]:size-4 ${a.kind === "alert" ? "text-warning-text" : "text-muted-foreground"}`}>
                 {activityIcon[a.kind]}
               </span>
               <div className="flex min-w-0 flex-1 flex-col gap-0.5">

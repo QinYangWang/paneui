@@ -37,7 +37,7 @@ export function BrandMark({ className, href = "/", showName = true }: { classNam
       href={href}
       className={cn("flex items-center gap-2 rounded-lg font-semibold icon-bold outline-none focus-visible:ring-2 focus-visible:ring-ring/50", className)}
     >
-      <BotIcon size={18} className="text-primary" />
+      <BotIcon size={18} className="text-primary-text" />
       {showName ? <span>{brand.name}</span> : <span className="sr-only">{brand.name}</span>}
     </AppLink>
   )
